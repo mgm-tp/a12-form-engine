@@ -1,0 +1,40 @@
+plugins {
+    id 'java-platform'
+}
+
+description = 'Project files for the mgm A12 Form Engine Toolset and Libraries'
+
+javaPlatform {
+    allowDependencies()
+}
+
+dependencies {
+    // Import A12 Data Services BOM to align versions of A12 dependencies
+    api platform(a12Libs.dataservices.bom)
+
+    constraints {
+        // Shared commons libraries
+        api libs.slf4j.api
+        api libs.commons.io
+        api libs.commons.lang3
+        api libs.commons.collections4
+
+        // A12 dependencies
+        api project(':form-model')
+    }
+}
+
+publishing {
+    publications {
+        mavenBom(MavenPublication) {
+            from components.javaPlatform
+
+            artifactId = 'formengine-parent'
+
+            pom {
+                name = 'A12 Form Engine Parent'
+                packaging = 'pom'
+            }
+        }
+    }
+}

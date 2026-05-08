@@ -1,0 +1,204 @@
+{
+  "header": {
+    "id": "customization.custom-input-document",
+    "modelType": "document",
+    "modelVersion": "28.4.0",
+    "locales": [
+      {
+        "code": "en"
+      },
+      {
+        "code": "de"
+      }
+    ],
+    "labels": [],
+    "annotations": [
+      {
+        "name": "roles",
+        "value": "admin"
+      }
+    ],
+    "modelReferences": []
+  },
+  "content": {
+    "modelInfo": {
+      "name": "customization.custom-input-document",
+      "immutable": false
+    },
+    "modelConfig": {
+      "decimalSeparator": ".",
+      "timeZone": "UTC",
+      "conditionLanguage": {
+        "code": "en_US"
+      }
+    },
+    "modelRoot": {
+      "rootGroups": [
+        {
+          "type": "Group",
+          "id": "group_4a2ab",
+          "name": "root",
+          "Group": {
+            "repeatability": 1,
+            "elements": [
+              {
+                "type": "Field",
+                "id": "field_116f8",
+                "name": "stringField",
+                "Field": {
+                  "fieldType": {
+                    "type": "StringType"
+                  }
+                }
+              },
+              {
+                "type": "Field",
+                "id": "field_58e35",
+                "name": "stringFieldWithSuffix",
+                "Field": {
+                  "fieldType": {
+                    "type": "StringType"
+                  }
+                }
+              },
+              {
+                "type": "Field",
+                "id": "field_b5edc",
+                "name": "stringFieldWithValidationMessageBox",
+                "externalDescription": [
+                  {
+                    "locale": "en",
+                    "text": "Value must not be 'TEST' and should not start with 'AB'."
+                  },
+                  {
+                    "locale": "de",
+                    "text": "Wert darf nicht 'TEST' sein und sollte nicht mit 'AB' beginnen."
+                  }
+                ],
+                "Field": {
+                  "fieldType": {
+                    "type": "StringType"
+                  }
+                }
+              },
+              {
+                "type": "Field",
+                "id": "field_99a57",
+                "name": "stringFieldWithValidationTooltips",
+                "externalDescription": [
+                  {
+                    "locale": "en",
+                    "text": "Value must not be 'TEST' and should not start with 'AB'."
+                  },
+                  {
+                    "locale": "de",
+                    "text": "Wert darf nicht 'TEST' sein und sollte nicht mit 'AB' beginnen."
+                  }
+                ],
+                "Field": {
+                  "fieldType": {
+                    "type": "StringType"
+                  }
+                }
+              },
+              {
+                "type": "Field",
+                "id": "field_38798",
+                "name": "stringFieldWithHint",
+                "Field": {
+                  "fieldType": {
+                    "type": "StringType"
+                  }
+                }
+              },
+              {
+                "type": "Rule",
+                "id": "rule_b27a4",
+                "name": "rule1",
+                "Rule": {
+                  "errorEntityRelPath": "../stringFieldWithValidationMessageBox",
+                  "errorCode": "Error rule_b27a4",
+                  "errorCondition": "[stringFieldWithValidationMessageBox] == \"TEST\"",
+                  "severity": "ERROR",
+                  "errorMessage": [
+                    {
+                      "locale": "en",
+                      "text": "Value must not be 'TEST'."
+                    },
+                    {
+                      "locale": "de",
+                      "text": "Wert darf nicht 'TEST' sein."
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Rule",
+                "id": "rule_0d2ba",
+                "name": "rule3",
+                "Rule": {
+                  "errorEntityRelPath": "../stringFieldWithValidationTooltips",
+                  "errorCode": "Error rule_0d2ba",
+                  "errorCondition": "[stringFieldWithValidationTooltips] == \"TEST\"",
+                  "severity": "ERROR",
+                  "errorMessage": [
+                    {
+                      "locale": "en",
+                      "text": "Value must not be 'TEST'."
+                    },
+                    {
+                      "locale": "de",
+                      "text": "Wert darf nicht 'TEST' sein."
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Rule",
+                "id": "rule_ea456",
+                "name": "rule2",
+                "Rule": {
+                  "errorEntityRelPath": "../stringFieldWithValidationMessageBox",
+                  "errorCode": "Error rule_ea456",
+                  "errorCondition": "FieldFilled(stringFieldWithValidationMessageBox) AND RangeAsString(stringFieldWithValidationMessageBox, 1,2) == \"AB\"",
+                  "severity": "WARNING",
+                  "errorMessage": [
+                    {
+                      "locale": "en",
+                      "text": "Value should not start with AB."
+                    },
+                    {
+                      "locale": "de",
+                      "text": "Wert sollte nicht mit AB beginnen."
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Rule",
+                "id": "rule_80910",
+                "name": "rule4",
+                "Rule": {
+                  "errorEntityRelPath": "../stringFieldWithValidationTooltips",
+                  "errorCode": "Error rule_80910",
+                  "errorCondition": "FieldFilled(stringFieldWithValidationTooltips) AND RangeAsString(stringFieldWithValidationTooltips, 1,2) == \"AB\"",
+                  "severity": "WARNING",
+                  "errorMessage": [
+                    {
+                      "locale": "en",
+                      "text": "Value should not start with AB."
+                    },
+                    {
+                      "locale": "de",
+                      "text": "Wert sollte nicht mit AB beginnen."
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

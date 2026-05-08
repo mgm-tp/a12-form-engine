@@ -1,0 +1,63 @@
+{
+	"[asciidoc][markdown]": {
+		"editor.quickSuggestions": {
+			"comments": "off",
+			"strings": "off",
+			"other": "off"
+		},
+		"editor.wordWrap": "wordWrapColumn",
+		"editor.wordWrapColumn": 80
+	},
+	"editor.parameterHints.enabled": true,
+	"editor.rulers": [80, 120],
+	"importSorter.generalConfiguration.sortOnBeforeSave": true,
+	"importSorter.importStringConfiguration.hasSemicolon": true,
+	"importSorter.importStringConfiguration.maximumNumberOfImportExpressionsPerLine.count": 80,
+	"importSorter.importStringConfiguration.maximumNumberOfImportExpressionsPerLine.type": "newLineEachExpressionAfterCountLimitExceptIfOnlyOne",
+	"importSorter.importStringConfiguration.quoteMark": "double",
+	"importSorter.importStringConfiguration.tabType": "tab",
+	"importSorter.sortConfiguration.customOrderingRules.rules": [
+		{
+			"disableSort": true,
+			"orderLevel": 5,
+			"regex": "^$",
+			"type": "importMember"
+		},
+		{
+			"orderLevel": 10,
+			"regex": "^(assert|path|fs)"
+		},
+		{
+			"orderLevel": 15,
+			"regex": "^(?!(\\.|@com\\.mgmtp\\.a12))"
+		},
+		{
+			"orderLevel": 20,
+			"regex": "^[@]"
+		},
+		{
+			"orderLevel": 25,
+			"regex": "^\\.\\./\\."
+		},
+		{
+			"orderLevel": 30,
+			"regex": "^\\.\\."
+		},
+		{
+			"orderLevel": 35,
+			"regex": "^[.]"
+		}
+	],
+	"path-intellisense.extensionOnImport": false,
+	"testExplorer.mergeSuites": true,
+	"todo-tree.general.statusBar": "tags",
+	"typescript.format.enable": true,
+	"typescript.tsdk": "./node_modules/typescript/lib",
+	"typescript.validate.enable": true,
+	"typescript.preferences.importModuleSpecifierEnding": "js",
+	"[typescript][typescriptreact][jsonc]": {
+		"editor.formatOnSave": true,
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"editor.codeActionsOnSave": ["source.organizeImports", "source.fixAll.eslint"]
+}

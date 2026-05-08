@@ -1,0 +1,636 @@
+{
+  "header": {
+    "id": "repeat.add-document",
+    "modelType": "document",
+    "modelVersion": "28.4.0",
+    "locales": [
+      {
+        "code": "en"
+      }
+    ],
+    "labels": [],
+    "annotations": [
+      {
+        "name": "roles",
+        "value": "admin"
+      }
+    ],
+    "modelReferences": []
+  },
+  "content": {
+    "modelInfo": {
+      "name": "repeat.add-document",
+      "immutable": false
+    },
+    "modelConfig": {
+      "decimalSeparator": ".",
+      "timeZone": "UTC",
+      "conditionLanguage": {
+        "code": "en_US"
+      }
+    },
+    "modelRoot": {
+      "rootGroups": [
+        {
+          "type": "Group",
+          "id": "group_4245e",
+          "name": "rep",
+          "Group": {
+            "repeatability": 10,
+            "elements": [
+              {
+                "type": "Field",
+                "id": "field_451a0",
+                "name": "stringField",
+                "Field": {
+                  "fieldType": {
+                    "type": "StringType"
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "StringField"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Group",
+                "id": "group_5ea1a",
+                "name": "nestedRepInitialRows",
+                "Group": {
+                  "repeatability": 10,
+                  "elements": [
+                    {
+                      "type": "Field",
+                      "id": "field_ca7ad",
+                      "name": "stringField",
+                      "Field": {
+                        "fieldType": {
+                          "type": "StringType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "StringField"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_7b708",
+                      "name": "numberField",
+                      "Field": {
+                        "fieldType": {
+                          "type": "NumberType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "NumberField"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_1517d",
+                      "name": "computedField",
+                      "Field": {
+                        "fieldType": {
+                          "type": "NumberType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "Computed (NumberField + 10)"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Computation",
+                      "id": "computation_d1649",
+                      "name": "Computation_1",
+                      "Computation": {
+                        "computedFieldRelPath": "../computedField",
+                        "computationAlternatives": [
+                          {
+                            "operation": "[numberField] + 10",
+                            "precondition": "FieldFilled(numberField)"
+                          }
+                        ],
+                        "errorMessage": [
+                          {
+                            "locale": "en",
+                            "text": "error text for computation of Computation_1"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Group",
+                "id": "group_aa5c0",
+                "name": "nestedRep",
+                "Group": {
+                  "repeatability": 10,
+                  "elements": [
+                    {
+                      "type": "Field",
+                      "id": "field_b4141",
+                      "name": "stringField",
+                      "Field": {
+                        "fieldType": {
+                          "type": "StringType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "StringField"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_ecd97",
+                      "name": "numberField",
+                      "Field": {
+                        "fieldType": {
+                          "type": "NumberType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "NumberField"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_b4e34",
+                      "name": "computedField",
+                      "Field": {
+                        "fieldType": {
+                          "type": "NumberType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "Computed (NumberField + 10)"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Computation",
+                      "id": "computation_0ab2e",
+                      "name": "Computation_1",
+                      "Computation": {
+                        "computedFieldRelPath": "../computedField",
+                        "computationAlternatives": [
+                          {
+                            "operation": "[numberField] + 10",
+                            "precondition": "FieldFilled(numberField)"
+                          }
+                        ],
+                        "errorMessage": [
+                          {
+                            "locale": "en",
+                            "text": "error text for computation of Computation_1"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "Group",
+          "id": "group_fcb65",
+          "name": "repInitialValues",
+          "Group": {
+            "repeatability": 10,
+            "elements": [
+              {
+                "type": "Field",
+                "id": "field_076dc",
+                "name": "stringField",
+                "Field": {
+                  "fieldType": {
+                    "type": "StringType"
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "StringField"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Field",
+                "id": "field_360c2",
+                "name": "numberField",
+                "Field": {
+                  "fieldType": {
+                    "type": "NumberType"
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "NumberField"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Field",
+                "id": "field_ad61e",
+                "name": "booleanField",
+                "Field": {
+                  "fieldType": {
+                    "type": "BooleanType"
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "BooleanField"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Field",
+                "id": "field_cf153",
+                "name": "enumerationField",
+                "Field": {
+                  "fieldType": {
+                    "type": "EnumerationType",
+                    "EnumerationType": {
+                      "values": [
+                        {
+                          "value": "key_1",
+                          "label": [
+                            {
+                              "locale": "en",
+                              "text": "value1"
+                            }
+                          ]
+                        },
+                        {
+                          "value": "key_2",
+                          "label": [
+                            {
+                              "locale": "en",
+                              "text": "value2"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "EnumerationField"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Field",
+                "id": "field_40c7a",
+                "name": "computedField",
+                "Field": {
+                  "fieldType": {
+                    "type": "NumberType"
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "Computed (NumberField + 10)"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Computation",
+                "id": "computation_33c91",
+                "name": "Computation_1",
+                "Computation": {
+                  "computedFieldRelPath": "../computedField",
+                  "computationAlternatives": [
+                    {
+                      "operation": "[numberField] + 10",
+                      "precondition": "FieldFilled(numberField)"
+                    }
+                  ],
+                  "errorMessage": [
+                    {
+                      "locale": "en",
+                      "text": "error text for computation of Computation_1"
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "Group",
+          "id": "group_3de65",
+          "name": "repInitialValuesAndError",
+          "Group": {
+            "repeatability": 10,
+            "elements": [
+              {
+                "type": "Field",
+                "id": "field_8cb86",
+                "name": "stringField",
+                "Field": {
+                  "fieldType": {
+                    "type": "StringType"
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "StringField"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Field",
+                "id": "field_e0399",
+                "name": "numberField",
+                "Field": {
+                  "fieldType": {
+                    "type": "NumberType"
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "NumberField"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Field",
+                "id": "field_3cea1",
+                "name": "booleanField",
+                "Field": {
+                  "fieldType": {
+                    "type": "BooleanType"
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "BooleanField"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Field",
+                "id": "field_29116",
+                "name": "enumerationField",
+                "Field": {
+                  "fieldType": {
+                    "type": "EnumerationType",
+                    "EnumerationType": {
+                      "values": [
+                        {
+                          "value": "key_1",
+                          "label": [
+                            {
+                              "locale": "en",
+                              "text": "value1"
+                            }
+                          ]
+                        },
+                        {
+                          "value": "key_2",
+                          "label": [
+                            {
+                              "locale": "en",
+                              "text": "value2"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "EnumerationField"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Field",
+                "id": "field_0ecbb",
+                "name": "computedField",
+                "Field": {
+                  "fieldType": {
+                    "type": "NumberType"
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "Computed (NumberField + 10)"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Computation",
+                "id": "computation_6ccac",
+                "name": "Computation_1",
+                "Computation": {
+                  "computedFieldRelPath": "../computedField",
+                  "computationAlternatives": [
+                    {
+                      "operation": "[numberField] + 10",
+                      "precondition": "FieldFilled(numberField)"
+                    }
+                  ],
+                  "errorMessage": [
+                    {
+                      "locale": "en",
+                      "text": "error text for computation of Computation_1"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Rule",
+                "id": "rule_ddf82",
+                "name": "NewRule_1",
+                "Rule": {
+                  "errorEntityRelPath": "../computedField",
+                  "errorCode": "Error rule_ddf82",
+                  "errorCondition": "FieldFilled(computedField) And [computedField] < 42",
+                  "severity": "ERROR",
+                  "errorMessage": [
+                    {
+                      "locale": "en",
+                      "text": "Field should be bigger or equal to 42."
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "Group",
+          "id": "group_48cb1",
+          "name": "repPageSize",
+          "Group": {
+            "repeatability": 10,
+            "elements": [
+              {
+                "type": "Field",
+                "id": "field_0c6aa",
+                "name": "numberField",
+                "Field": {
+                  "fieldType": {
+                    "type": "NumberType"
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "NumberField"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Field",
+                "id": "field_12f2f",
+                "name": "stringField",
+                "Field": {
+                  "fieldType": {
+                    "type": "StringType"
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "StringField"
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "Group",
+          "id": "group_86b53",
+          "name": "repInfiniteScrolling",
+          "Group": {
+            "repeatability": 50,
+            "elements": [
+              {
+                "type": "Field",
+                "id": "field_ee12b",
+                "name": "numberField",
+                "Field": {
+                  "fieldType": {
+                    "type": "NumberType"
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "NumberField"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Field",
+                "id": "field_d93e4",
+                "name": "stringField",
+                "Field": {
+                  "fieldType": {
+                    "type": "StringType"
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "StringField"
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "Group",
+          "id": "group_f295c",
+          "name": "root",
+          "Group": {
+            "repeatability": 1,
+            "elements": [
+              {
+                "type": "Field",
+                "id": "field_f97f4",
+                "name": "masterField",
+                "Field": {
+                  "fieldType": {
+                    "type": "BooleanType"
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "Repeat readonly"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Group",
+                "id": "group_aad73",
+                "name": "repeatReadonlyByDependency",
+                "Group": {
+                  "repeatability": 5,
+                  "elements": [
+                    {
+                      "type": "Field",
+                      "id": "field_eb311",
+                      "name": "stringField",
+                      "Field": {
+                        "fieldType": {
+                          "type": "StringType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "StringField"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

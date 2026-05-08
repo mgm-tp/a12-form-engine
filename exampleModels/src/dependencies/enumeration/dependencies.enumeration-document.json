@@ -1,0 +1,369 @@
+{
+  "header": {
+    "id": "dependencies.enumeration-document",
+    "modelType": "document",
+    "modelVersion": "28.4.0",
+    "locales": [
+      {
+        "code": "de"
+      },
+      {
+        "code": "en"
+      }
+    ],
+    "labels": [],
+    "annotations": [
+      {
+        "name": "roles",
+        "value": "admin"
+      }
+    ],
+    "modelReferences": []
+  },
+  "content": {
+    "modelInfo": {
+      "name": "dependencies.enumeration-document",
+      "immutable": false
+    },
+    "modelConfig": {
+      "decimalSeparator": ".",
+      "timeZone": "UTC",
+      "conditionLanguage": {
+        "code": "en_US"
+      }
+    },
+    "typeDefinitions": [
+      {
+        "id": "typedef_ce6af5f8-64e8-495e-86e8-87e31af30d82",
+        "name": "Brand",
+        "fieldType": {
+          "type": "EnumerationType",
+          "EnumerationType": {
+            "values": [
+              {
+                "value": "MERCEDES",
+                "label": [
+                  {
+                    "locale": "de",
+                    "text": "Mercedes (de)"
+                  },
+                  {
+                    "locale": "en",
+                    "text": "Mercedes"
+                  }
+                ]
+              },
+              {
+                "value": "TOYOTA",
+                "label": [
+                  {
+                    "locale": "de",
+                    "text": "Toyota (de)"
+                  },
+                  {
+                    "locale": "en",
+                    "text": "Toyota"
+                  }
+                ]
+              },
+              {
+                "value": "VW",
+                "label": [
+                  {
+                    "locale": "de",
+                    "text": "VW (de)"
+                  },
+                  {
+                    "locale": "en",
+                    "text": "VW"
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      },
+      {
+        "id": "typedef_7c263850-b2cf-4bce-a21d-a4d6513c84cb",
+        "name": "Models",
+        "fieldType": {
+          "type": "EnumerationType",
+          "EnumerationType": {
+            "values": [
+              {
+                "value": "MERCEDES_A_CLASS",
+                "label": [
+                  {
+                    "locale": "de",
+                    "text": "A-Class (de)"
+                  },
+                  {
+                    "locale": "en",
+                    "text": "A-Class"
+                  }
+                ]
+              },
+              {
+                "value": "MERCEDES_E_CLASS",
+                "label": [
+                  {
+                    "locale": "de",
+                    "text": "E-Class (de)"
+                  },
+                  {
+                    "locale": "en",
+                    "text": "E-Class"
+                  }
+                ]
+              },
+              {
+                "value": "TOYOTA_COROLLA",
+                "label": [
+                  {
+                    "locale": "de",
+                    "text": "Corolla (de)"
+                  },
+                  {
+                    "locale": "en",
+                    "text": "Corolla"
+                  }
+                ]
+              },
+              {
+                "value": "TOYOTA_YARIS",
+                "label": [
+                  {
+                    "locale": "de",
+                    "text": "Yaris (de)"
+                  },
+                  {
+                    "locale": "en",
+                    "text": "Yaris"
+                  }
+                ]
+              },
+              {
+                "value": "VW_GOLF",
+                "label": [
+                  {
+                    "locale": "de",
+                    "text": "Golf (de)"
+                  },
+                  {
+                    "locale": "en",
+                    "text": "Golf"
+                  }
+                ]
+              },
+              {
+                "value": "VW_UP",
+                "label": [
+                  {
+                    "locale": "de",
+                    "text": "UP (de)"
+                  },
+                  {
+                    "locale": "en",
+                    "text": "UP"
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "modelRoot": {
+      "rootGroups": [
+        {
+          "type": "Group",
+          "id": "K32",
+          "name": "A12T_DependentEnumeration",
+          "Group": {
+            "repeatability": 1,
+            "elements": [
+              {
+                "type": "Field",
+                "id": "id11197",
+                "name": "Brand",
+                "Field": {
+                  "fieldType": {
+                    "type": "TypeDefType",
+                    "TypeDefType": {
+                      "typeDefinitionId": "typedef_ce6af5f8-64e8-495e-86e8-87e31af30d82"
+                    }
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "Brand"
+                    },
+                    {
+                      "locale": "de",
+                      "text": "Brand"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Field",
+                "id": "id11198",
+                "name": "Model",
+                "Field": {
+                  "fieldType": {
+                    "type": "TypeDefType",
+                    "TypeDefType": {
+                      "typeDefinitionId": "typedef_7c263850-b2cf-4bce-a21d-a4d6513c84cb"
+                    }
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "Model"
+                    },
+                    {
+                      "locale": "de",
+                      "text": "Model"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Field",
+                "id": "F1",
+                "name": "unconfigured_field",
+                "Field": {
+                  "fieldType": {
+                    "type": "StringType"
+                  }
+                }
+              },
+              {
+                "type": "Group",
+                "id": "K33",
+                "name": "Cars",
+                "Group": {
+                  "repeatability": 3,
+                  "elements": [
+                    {
+                      "type": "Field",
+                      "id": "id31999",
+                      "name": "Brand",
+                      "Field": {
+                        "fieldType": {
+                          "type": "TypeDefType",
+                          "TypeDefType": {
+                            "typeDefinitionId": "typedef_ce6af5f8-64e8-495e-86e8-87e31af30d82"
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "Brand"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "Brand"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "id32000",
+                      "name": "Model",
+                      "Field": {
+                        "fieldType": {
+                          "type": "TypeDefType",
+                          "TypeDefType": {
+                            "typeDefinitionId": "typedef_7c263850-b2cf-4bce-a21d-a4d6513c84cb"
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "Model"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "Model"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Group",
+                "id": "G34",
+                "name": "Restricted",
+                "Group": {
+                  "repeatability": 1,
+                  "elements": [
+                    {
+                      "type": "Field",
+                      "id": "F39",
+                      "name": "BrandRestriction",
+                      "Field": {
+                        "fieldType": {
+                          "type": "TypeDefType",
+                          "TypeDefType": {
+                            "typeDefinitionId": "typedef_ce6af5f8-64e8-495e-86e8-87e31af30d82"
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "de",
+                            "text": "Brand Restriction"
+                          },
+                          {
+                            "locale": "en",
+                            "text": "Brand Restriction"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Group",
+                      "id": "G38",
+                      "name": "Cars",
+                      "Group": {
+                        "repeatability": 3,
+                        "elements": [
+                          {
+                            "type": "Field",
+                            "id": "F40",
+                            "name": "Model",
+                            "Field": {
+                              "fieldType": {
+                                "type": "TypeDefType",
+                                "TypeDefType": {
+                                  "typeDefinitionId": "typedef_7c263850-b2cf-4bce-a21d-a4d6513c84cb"
+                                }
+                              },
+                              "label": [
+                                {
+                                  "locale": "en",
+                                  "text": "Model"
+                                },
+                                {
+                                  "locale": "de",
+                                  "text": "Model"
+                                }
+                              ]
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

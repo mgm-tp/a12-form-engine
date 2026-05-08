@@ -1,0 +1,557 @@
+{
+  "header": {
+    "id": "repeat.state-form",
+    "modelType": "form",
+    "modelVersion": "37.4.0",
+    "locales": [
+      {
+        "code": "en"
+      }
+    ],
+    "labels": [
+      {
+        "locale": "en",
+        "text": "Corrupting Repeat State"
+      }
+    ],
+    "annotations": [
+      {
+        "name": "roles",
+        "value": "admin"
+      }
+    ],
+    "modelReferences": [
+      {
+        "alias": "DM",
+        "modelType": "document",
+        "purpose": "data binding",
+        "reference": "repeat.state-document"
+      }
+    ]
+  },
+  "content": {
+    "subHeaderBox": {
+      "id": "subHeaderBox1",
+      "majorButtons": {
+        "button": [
+          {
+            "type": "NAVIGATION",
+            "id": "button-ecbf0",
+            "name": "full_and_partial_view",
+            "buttonStyling": {
+              "label": {
+                "type": "Multilingual",
+                "multilingualText": {
+                  "text": [
+                    {
+                      "locale": "en",
+                      "text": "Full and Partial View on Groups"
+                    }
+                  ]
+                }
+              },
+              "priority": "SECONDARY"
+            },
+            "target": "screen1",
+            "scope": "HIDDEN_IN_READONLY_MODE"
+          },
+          {
+            "type": "NAVIGATION",
+            "id": "button-29309",
+            "name": "clear_groups",
+            "buttonStyling": {
+              "label": {
+                "type": "Multilingual",
+                "multilingualText": {
+                  "text": [
+                    {
+                      "locale": "en",
+                      "text": "Clear Groups"
+                    }
+                  ]
+                }
+              },
+              "priority": "SECONDARY"
+            },
+            "target": "screen-9c378",
+            "scope": "HIDDEN_IN_READONLY_MODE"
+          },
+          {
+            "type": "NAVIGATION",
+            "id": "button-138f1",
+            "name": "exchange_repeats_with_same_view",
+            "buttonStyling": {
+              "label": {
+                "type": "Multilingual",
+                "multilingualText": {
+                  "text": [
+                    {
+                      "locale": "en",
+                      "text": "Exchange Repeats with same View"
+                    }
+                  ]
+                }
+              },
+              "priority": "SECONDARY"
+            },
+            "target": "screen-b73f0",
+            "scope": "HIDDEN_IN_READONLY_MODE"
+          }
+        ]
+      }
+    },
+    "footerBox": {
+      "id": "footerBox1"
+    },
+    "screens": [
+      {
+        "id": "screen1",
+        "name": "full_and_partial_view",
+        "title": {
+          "type": "Multilingual",
+          "multilingualText": {
+            "text": [
+              {
+                "locale": "en",
+                "text": "Full and Partial View on Groups"
+              }
+            ]
+          }
+        },
+        "screenElements": [
+          {
+            "type": "ControlGrid",
+            "id": "controlgrid-b43e8",
+            "name": "grid",
+            "row": [
+              {
+                "type": "Row",
+                "id": "row-9b8b7",
+                "cell": [
+                  {
+                    "type": "TextCell",
+                    "id": "textcell-5ef32",
+                    "offset": {
+                      "lg": 0
+                    },
+                    "span": {
+                      "lg": 1
+                    },
+                    "name": "description",
+                    "content": {
+                      "text": [
+                        {
+                          "locale": "en",
+                          "text": "<b>How to Reproduce</b>\n<ol>\n\t<li>Create in \"Full View\" a new row with (false, 'This should not be visible in \"Partial View\"')</li>\n\t<li>Create in \"Partial View\" a new row.</li>\n\t<li>Delete in \"Full View\" the last row.</li>\n</ol>\n\n<b>Expected:</b> \"Partial View\" is empty."
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            ],
+            "verticalAlignment": "BOTTOM"
+          },
+          {
+            "type": "InlineRepeat",
+            "id": "inlinerepeat-bbd65",
+            "name": "full_view",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "Full View"
+                  }
+                ]
+              }
+            },
+            "repeatOverviewColumn": [
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-d3c79",
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "elementRef": "F12"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-e31e2",
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "elementRef": "F11"
+              }
+            ],
+            "groupRef": "G10",
+            "enableAdd": true,
+            "enableRemove": true,
+            "enableReorder": false,
+            "enableCopy": false
+          },
+          {
+            "type": "InlineRepeat",
+            "id": "inlinerepeat-2246d",
+            "name": "partial_view",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "Partial View"
+                  }
+                ]
+              }
+            },
+            "filterExpression": "[editable] = \"true\"",
+            "repeatOverviewColumn": [
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-4ead1",
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "elementRef": "F11"
+              }
+            ],
+            "groupRef": "G10",
+            "enableAdd": true,
+            "enableRemove": true,
+            "enableReorder": false,
+            "enableCopy": false
+          }
+        ]
+      },
+      {
+        "id": "screen-9c378",
+        "name": "clear_groups",
+        "title": {
+          "type": "Multilingual",
+          "multilingualText": {
+            "text": [
+              {
+                "locale": "en",
+                "text": "Clear Groups"
+              }
+            ]
+          }
+        },
+        "screenElements": [
+          {
+            "type": "ControlGrid",
+            "id": "controlgrid-37d0a",
+            "name": "grid-1",
+            "row": [
+              {
+                "type": "Row",
+                "id": "row-5245c",
+                "cell": [
+                  {
+                    "type": "TextCell",
+                    "id": "textcell-6cc88",
+                    "offset": {
+                      "lg": 0
+                    },
+                    "span": {
+                      "lg": 1
+                    },
+                    "name": "description",
+                    "content": {
+                      "text": [
+                        {
+                          "locale": "en",
+                          "text": "<b>How to Reproduce</b>\n<ol>\n\t<li>Create in \"Repeat\" a new row.</li>\n\t<li>Select \"Clear\" in \"Master Field\".</li>\n</ol>\n\n<b>Expected:</b> No exception and a clear \"Repeat\"."
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            ],
+            "verticalAlignment": "BOTTOM"
+          },
+          {
+            "type": "ControlGrid",
+            "id": "controlgrid-84d4d",
+            "name": "grid-2",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "Controls"
+                  }
+                ]
+              }
+            },
+            "row": [
+              {
+                "type": "Row",
+                "id": "row-ffa72",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control-e65a2",
+                    "elementRef": "F3"
+                  }
+                ]
+              }
+            ],
+            "verticalAlignment": "BOTTOM"
+          },
+          {
+            "type": "InlineRepeat",
+            "id": "inlinerepeat-6448d",
+            "name": "repeat",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "Repeat"
+                  }
+                ]
+              }
+            },
+            "repeatOverviewColumn": [
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-94618",
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "elementRef": "F9"
+              }
+            ],
+            "groupRef": "G5",
+            "enableAdd": true,
+            "enableRemove": true,
+            "enableReorder": false,
+            "enableCopy": false
+          }
+        ]
+      },
+      {
+        "id": "screen-b73f0",
+        "name": "exchange_repeats_with_same_view",
+        "title": {
+          "type": "Multilingual",
+          "multilingualText": {
+            "text": [
+              {
+                "locale": "en",
+                "text": "Exchange Repeats with same View"
+              }
+            ]
+          }
+        },
+        "screenElements": [
+          {
+            "type": "ControlGrid",
+            "id": "controlgrid-61307",
+            "name": "grid-1",
+            "row": [
+              {
+                "type": "Row",
+                "id": "row-b8c19",
+                "cell": [
+                  {
+                    "type": "TextCell",
+                    "id": "textcell-7db6f",
+                    "offset": {
+                      "lg": 0
+                    },
+                    "span": {
+                      "lg": 1
+                    },
+                    "name": "description",
+                    "content": {
+                      "text": [
+                        {
+                          "locale": "en",
+                          "text": "<b>How to Reproduce</b>\n<ol>\n\t<li>Create in \"Repeat\" a new row .</li>\n\t<li>Added \"1\" into the \"Master Field\" and press tab.</li>\n\t<ul><li>You will see that the repeat is exchanged by another with the same data.</li></ul>\n\t<li>Delete the added row again.</li>\n</ol>\n\n<b>Expected:</b> No exception and a clear \"Repeat\"."
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            ],
+            "verticalAlignment": "BOTTOM"
+          },
+          {
+            "type": "ControlGrid",
+            "id": "controlgrid-c1207",
+            "name": "grid-2",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "Controls"
+                  }
+                ]
+              }
+            },
+            "row": [
+              {
+                "type": "Row",
+                "id": "row-0c667",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control-22f4d",
+                    "offset": {
+                      "lg": 0
+                    },
+                    "readonly": true,
+                    "elementRef": "F4",
+                    "dependentControls": {
+                      "screenElement": [
+                        {
+                          "idref": "section-8d57f",
+                          "masterValue": "0"
+                        },
+                        {
+                          "idref": "section-133de",
+                          "masterValue": "1"
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            ],
+            "verticalAlignment": "BOTTOM"
+          },
+          {
+            "type": "Section",
+            "id": "section-8d57f",
+            "name": "section1",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "Section View 1"
+                  }
+                ]
+              }
+            },
+            "screenElements": [
+              {
+                "type": "InlineRepeat",
+                "id": "inlinerepeat-1f2e0",
+                "name": "repeat",
+                "repeatOverviewColumn": [
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-a7d42",
+                    "width": 1,
+                    "sortable": false,
+                    "filterable": false,
+                    "preferredSorting": "ASC",
+                    "elementRef": "F7"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-e1e21",
+                    "width": 1,
+                    "sortable": false,
+                    "filterable": false,
+                    "preferredSorting": "ASC",
+                    "elementRef": "F8"
+                  }
+                ],
+                "groupRef": "G6",
+                "enableAdd": true,
+                "enableRemove": true,
+                "enableReorder": false,
+                "enableCopy": false
+              }
+            ]
+          },
+          {
+            "type": "Section",
+            "id": "section-133de",
+            "name": "section2",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "Section View 2"
+                  }
+                ]
+              }
+            },
+            "screenElements": [
+              {
+                "type": "InlineRepeat",
+                "id": "inlinerepeat-d9de5",
+                "name": "repeat",
+                "repeatOverviewColumn": [
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-5be74",
+                    "width": 1,
+                    "sortable": false,
+                    "filterable": false,
+                    "preferredSorting": "ASC",
+                    "elementRef": "F7"
+                  }
+                ],
+                "groupRef": "G6",
+                "enableAdd": true,
+                "enableRemove": true,
+                "enableReorder": false,
+                "enableCopy": false
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "fieldConfiguration": {
+      "field": [
+        {
+          "initialValue": "true",
+          "elementRef": "F12"
+        },
+        {
+          "readonly": true,
+          "elementRef": "F4"
+        }
+      ]
+    },
+    "groupConfiguration": {
+      "group": [
+        {
+          "dependentGroup": {
+            "masterField": "F3",
+            "case": [
+              {
+                "masterValue": "Clear",
+                "notRelevant": true
+              }
+            ]
+          },
+          "groupRef": "G5"
+        }
+      ]
+    },
+    "defaults": {}
+  }
+}

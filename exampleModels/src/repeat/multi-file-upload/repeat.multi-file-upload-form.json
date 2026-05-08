@@ -1,0 +1,5030 @@
+{
+  "header": {
+    "id": "repeat.multi-file-upload-form",
+    "modelType": "form",
+    "modelVersion": "37.4.0",
+    "locales": [
+      {
+        "code": "en"
+      },
+      {
+        "code": "de"
+      }
+    ],
+    "annotations": [
+      {
+        "name": "roles",
+        "value": "admin"
+      }
+    ],
+    "modelReferences": [
+      {
+        "alias": "DM",
+        "modelType": "document",
+        "purpose": "data binding",
+        "reference": "repeat.multi-file-upload-document"
+      }
+    ]
+  },
+  "content": {
+    "subHeaderBox": {
+      "id": "subHeaderBox1",
+      "majorButtons": {
+        "button": [
+          {
+            "type": "NAVIGATION",
+            "id": "button-0b932",
+            "name": "navGeneral",
+            "buttonStyling": {
+              "label": {
+                "type": "Multilingual",
+                "multilingualText": {
+                  "text": [
+                    {
+                      "locale": "en",
+                      "text": "General"
+                    },
+                    {
+                      "locale": "de",
+                      "text": "General"
+                    }
+                  ]
+                }
+              },
+              "priority": "SECONDARY"
+            },
+            "target": "screen1",
+            "scope": "HIDDEN_IN_READONLY_MODE"
+          },
+          {
+            "type": "NAVIGATION",
+            "id": "button-5b6ed",
+            "name": "navPaging",
+            "buttonStyling": {
+              "label": {
+                "type": "Multilingual",
+                "multilingualText": {
+                  "text": [
+                    {
+                      "locale": "en",
+                      "text": "Paging"
+                    },
+                    {
+                      "locale": "de",
+                      "text": "Paging"
+                    }
+                  ]
+                }
+              },
+              "priority": "SECONDARY"
+            },
+            "target": "screen-b1b04",
+            "scope": "HIDDEN_IN_READONLY_MODE"
+          },
+          {
+            "type": "NAVIGATION",
+            "id": "button-6b8d6",
+            "name": "navInfiniteScrolling",
+            "buttonStyling": {
+              "label": {
+                "type": "Multilingual",
+                "multilingualText": {
+                  "text": [
+                    {
+                      "locale": "en",
+                      "text": "Infinite Scrolling"
+                    },
+                    {
+                      "locale": "de",
+                      "text": "Infinite Scrolling"
+                    }
+                  ]
+                }
+              },
+              "priority": "SECONDARY"
+            },
+            "target": "screen-75c67",
+            "scope": "HIDDEN_IN_READONLY_MODE"
+          },
+          {
+            "type": "NAVIGATION",
+            "id": "button-9fde2",
+            "name": "navInitialValues",
+            "buttonStyling": {
+              "label": {
+                "type": "Multilingual",
+                "multilingualText": {
+                  "text": [
+                    {
+                      "locale": "en",
+                      "text": "Initial Values and Computations"
+                    },
+                    {
+                      "locale": "de",
+                      "text": "Initial Values and Computations"
+                    }
+                  ]
+                }
+              },
+              "priority": "SECONDARY"
+            },
+            "target": "screen-d29f8",
+            "scope": "HIDDEN_IN_READONLY_MODE"
+          },
+          {
+            "type": "NAVIGATION",
+            "id": "button-1f8f3",
+            "name": "navAccessibility",
+            "buttonStyling": {
+              "label": {
+                "type": "Multilingual",
+                "multilingualText": {
+                  "text": [
+                    {
+                      "locale": "en",
+                      "text": "Accessibility"
+                    },
+                    {
+                      "locale": "de",
+                      "text": "Accessibility"
+                    }
+                  ]
+                }
+              },
+              "priority": "SECONDARY"
+            },
+            "target": "screen-a7e72",
+            "scope": "HIDDEN_IN_READONLY_MODE"
+          }
+        ]
+      }
+    },
+    "footerBox": {
+      "id": "footerBox1"
+    },
+    "screens": [
+      {
+        "id": "screen1",
+        "name": "Screen1",
+        "screenElements": [
+          {
+            "type": "Section",
+            "id": "section-7dd0a",
+            "name": "Sec",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "Multi File Upload Repeat"
+                  },
+                  {
+                    "locale": "de",
+                    "text": "Multi File Upload Repeat"
+                  }
+                ]
+              }
+            },
+            "screenElements": [
+              {
+                "type": "InlineRepeat",
+                "id": "inlinerepeat-7fbe3",
+                "name": "inline-repeat-AttachmentCollection",
+                "title": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "Inline Repeat"
+                      },
+                      {
+                        "locale": "de",
+                        "text": "Inline Repeat"
+                      }
+                    ]
+                  }
+                },
+                "buttonLabels": {},
+                "confirmationTexts": {},
+                "repeatOverviewColumn": [
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-f45bf",
+                    "width": 0.5,
+                    "sortable": false,
+                    "filterable": false,
+                    "elementRef": "group_955ee",
+                    "exposition": "THUMBNAIL_OR_ICON"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-b28ca",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "original_filename"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "original_filename"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "sortable": true,
+                    "filterable": true,
+                    "preferredSorting": "ASC",
+                    "elementRef": "field_00719"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-9a7a7",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "internal_filename"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "internal_filename"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "sortable": true,
+                    "filterable": true,
+                    "preferredSorting": "ASC",
+                    "elementRef": "field_96397"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-4144a",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "attachment_id"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "attachment_id"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "sortable": true,
+                    "filterable": true,
+                    "preferredSorting": "ASC",
+                    "elementRef": "field_98602"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-3937a",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "size"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "size"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "sortable": true,
+                    "filterable": true,
+                    "preferredSorting": "ASC",
+                    "elementRef": "field_54eaa"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-a7544",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "mime_type"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "mime_type"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "sortable": true,
+                    "filterable": true,
+                    "preferredSorting": "ASC",
+                    "elementRef": "field_fdce5"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-76c85",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "category"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "category"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "sortable": true,
+                    "filterable": true,
+                    "preferredSorting": "ASC",
+                    "elementRef": "field_17369"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-3641b",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "description"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "description"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "sortable": true,
+                    "filterable": true,
+                    "preferredSorting": "ASC",
+                    "elementRef": "field_1286b"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-0b4d5",
+                    "width": 1,
+                    "sortable": true,
+                    "filterable": true,
+                    "preferredSorting": "ASC",
+                    "elementRef": "field_03314"
+                  }
+                ],
+                "groupRef": "group_8f492",
+                "enableAdd": false,
+                "enableRemove": true,
+                "enableReorder": false,
+                "enableCopy": false,
+                "multiFileUpload": true,
+                "multiFileUploadOptions": {
+                  "elementRef": "group_955ee",
+                  "enableDownload": true,
+                  "fileUploadDescription": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "Drop files here or click to"
+                      },
+                      {
+                        "locale": "de",
+                        "text": "Ziehe Dateien hierher oder klicke, um"
+                      }
+                    ]
+                  },
+                  "fileUploadButtonText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "Upload files"
+                      },
+                      {
+                        "locale": "de",
+                        "text": "Dateien hochzuladen"
+                      }
+                    ]
+                  },
+                  "fileUploadHelperText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "This is a super useful helper text, that's explaining very important things!"
+                      },
+                      {
+                        "locale": "de",
+                        "text": "Das ist ein super nützlicher Helper Text, der sehr wichtige Dinge erklärt!"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "type": "EmbeddedRepeat",
+                "id": "embeddedrepeat-f31d6",
+                "name": "embedded-repeat-AttachmentCollection",
+                "title": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "Embedded Repeat"
+                      },
+                      {
+                        "locale": "de",
+                        "text": "Embedded Repeat"
+                      }
+                    ]
+                  }
+                },
+                "repeatOverviewColumn": [
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-c8470",
+                    "width": 0.5,
+                    "sortable": false,
+                    "filterable": false,
+                    "elementRef": "group_955ee",
+                    "exposition": "THUMBNAIL_OR_ICON"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-e4b51",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "original_filename"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "original_filename"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "sortable": true,
+                    "filterable": true,
+                    "preferredSorting": "ASC",
+                    "elementRef": "field_00719"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-007c2",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "internal_filename"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "internal_filename"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "sortable": true,
+                    "filterable": true,
+                    "preferredSorting": "ASC",
+                    "elementRef": "field_96397"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-5799c",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "attachment_id"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "attachment_id"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "sortable": true,
+                    "filterable": true,
+                    "preferredSorting": "ASC",
+                    "elementRef": "field_98602"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-d0d40",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "size"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "size"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "sortable": true,
+                    "filterable": true,
+                    "preferredSorting": "ASC",
+                    "elementRef": "field_54eaa"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-f9a51",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "mime_type"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "mime_type"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "sortable": true,
+                    "filterable": true,
+                    "preferredSorting": "ASC",
+                    "elementRef": "field_fdce5"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-adedd",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "category"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "category"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "sortable": true,
+                    "filterable": true,
+                    "preferredSorting": "ASC",
+                    "elementRef": "field_17369"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-35021",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "description"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "description"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "sortable": true,
+                    "filterable": true,
+                    "preferredSorting": "ASC",
+                    "elementRef": "field_1286b"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-4a14b",
+                    "width": 1,
+                    "sortable": true,
+                    "filterable": true,
+                    "preferredSorting": "ASC",
+                    "elementRef": "field_03314"
+                  }
+                ],
+                "groupRef": "group_8f492",
+                "enableAdd": false,
+                "enableRemove": true,
+                "enableReorder": false,
+                "enableCopy": false,
+                "controlGrid": {
+                  "type": "ControlGrid",
+                  "id": "controlgrid-8609c",
+                  "name": "cg",
+                  "layout": {
+                    "lg": "3-3-3-3"
+                  },
+                  "row": [
+                    {
+                      "type": "Row",
+                      "id": "row-6e0f5",
+                      "cell": [
+                        {
+                          "type": "Control",
+                          "id": "control-8d058",
+                          "label": {
+                            "type": "Multilingual",
+                            "multilingualText": {
+                              "text": [
+                                {
+                                  "locale": "en",
+                                  "text": "Attachment01"
+                                },
+                                {
+                                  "locale": "de",
+                                  "text": "Attachment01"
+                                }
+                              ]
+                            }
+                          },
+                          "elementRef": "group_955ee"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "Row",
+                      "id": "row-39cc5",
+                      "cell": [
+                        {
+                          "type": "Control",
+                          "id": "control-dbbbf",
+                          "label": {
+                            "type": "Multilingual",
+                            "multilingualText": {
+                              "text": [
+                                {
+                                  "locale": "en",
+                                  "text": "original_filename"
+                                },
+                                {
+                                  "locale": "de",
+                                  "text": "original_filename"
+                                }
+                              ]
+                            }
+                          },
+                          "elementRef": "field_00719"
+                        },
+                        {
+                          "type": "Control",
+                          "id": "control-33b8d",
+                          "label": {
+                            "type": "Multilingual",
+                            "multilingualText": {
+                              "text": [
+                                {
+                                  "locale": "en",
+                                  "text": "internal_filename"
+                                },
+                                {
+                                  "locale": "de",
+                                  "text": "internal_filename"
+                                }
+                              ]
+                            }
+                          },
+                          "elementRef": "field_96397"
+                        },
+                        {
+                          "type": "Control",
+                          "id": "control-ac122",
+                          "label": {
+                            "type": "Multilingual",
+                            "multilingualText": {
+                              "text": [
+                                {
+                                  "locale": "en",
+                                  "text": "attachment_id"
+                                },
+                                {
+                                  "locale": "de",
+                                  "text": "attachment_id"
+                                }
+                              ]
+                            }
+                          },
+                          "elementRef": "field_98602"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "Row",
+                      "id": "row-74087",
+                      "cell": [
+                        {
+                          "type": "Control",
+                          "id": "control-d45bb",
+                          "label": {
+                            "type": "Multilingual",
+                            "multilingualText": {
+                              "text": [
+                                {
+                                  "locale": "en",
+                                  "text": "size"
+                                },
+                                {
+                                  "locale": "de",
+                                  "text": "size"
+                                }
+                              ]
+                            }
+                          },
+                          "elementRef": "field_54eaa"
+                        },
+                        {
+                          "type": "Control",
+                          "id": "control-862c5",
+                          "label": {
+                            "type": "Multilingual",
+                            "multilingualText": {
+                              "text": [
+                                {
+                                  "locale": "en",
+                                  "text": "mime_type"
+                                },
+                                {
+                                  "locale": "de",
+                                  "text": "mime_type"
+                                }
+                              ]
+                            }
+                          },
+                          "elementRef": "field_fdce5"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "Row",
+                      "id": "row-320be",
+                      "cell": [
+                        {
+                          "type": "Control",
+                          "id": "control-b68a2",
+                          "label": {
+                            "type": "Multilingual",
+                            "multilingualText": {
+                              "text": [
+                                {
+                                  "locale": "en",
+                                  "text": "category"
+                                },
+                                {
+                                  "locale": "de",
+                                  "text": "category"
+                                }
+                              ]
+                            }
+                          },
+                          "elementRef": "field_17369"
+                        },
+                        {
+                          "type": "Control",
+                          "id": "control-69552",
+                          "label": {
+                            "type": "Multilingual",
+                            "multilingualText": {
+                              "text": [
+                                {
+                                  "locale": "en",
+                                  "text": "description"
+                                },
+                                {
+                                  "locale": "de",
+                                  "text": "description"
+                                }
+                              ]
+                            }
+                          },
+                          "elementRef": "field_1286b"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "Row",
+                      "id": "row-34039",
+                      "cell": [
+                        {
+                          "type": "Control",
+                          "id": "control-bd156",
+                          "elementRef": "field_03314"
+                        },
+                        {
+                          "type": "Control",
+                          "id": "control-b97e0",
+                          "elementRef": "field_b320e"
+                        }
+                      ]
+                    }
+                  ],
+                  "verticalAlignment": "TOP"
+                },
+                "multiFileUpload": true,
+                "multiFileUploadOptions": {
+                  "elementRef": "group_955ee",
+                  "enableDownload": true,
+                  "fileUploadDescription": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "Drop files here or click to"
+                      },
+                      {
+                        "locale": "de",
+                        "text": "Ziehe Dateien hierher oder klicke, um"
+                      }
+                    ]
+                  },
+                  "hideFileUploadDescription": false,
+                  "fileUploadButtonText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "Upload files"
+                      },
+                      {
+                        "locale": "de",
+                        "text": "Dateien hochzuladen"
+                      }
+                    ]
+                  },
+                  "hideFileUploadButtonText": false,
+                  "fileUploadHelperText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "This is a super useful helper text, that's explaining very important things!"
+                      },
+                      {
+                        "locale": "de",
+                        "text": "Das ist ein super nützlicher Helper Text, der sehr wichtige Dinge erklärt!"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "type": "DetachedRepeat",
+                "id": "detachedrepeat-12ced",
+                "name": "detached-repeat-Repeatable",
+                "title": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "Detached Repeat with nested Repeats"
+                      },
+                      {
+                        "locale": "de",
+                        "text": "Detached Repeat with nested Repeats"
+                      }
+                    ]
+                  }
+                },
+                "repeatOverviewColumn": [
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-2d05d",
+                    "width": 1,
+                    "sortable": true,
+                    "filterable": true,
+                    "preferredSorting": "ASC",
+                    "elementRef": "field_0c503"
+                  }
+                ],
+                "groupRef": "group_bb6ae",
+                "enableAdd": true,
+                "enableRemove": true,
+                "enableReorder": false,
+                "enableCopy": false,
+                "detailScreen": {
+                  "id": "screen-702d0",
+                  "name": "detached-repeat-Repeatable-detail-screen",
+                  "screenElements": [
+                    {
+                      "type": "ControlGrid",
+                      "id": "controlgrid-16169",
+                      "name": "cg"
+                    },
+                    {
+                      "type": "InlineRepeat",
+                      "id": "inlinerepeat-738b7",
+                      "name": "inline-repeat-AttachmentCollection",
+                      "title": {
+                        "type": "Multilingual",
+                        "multilingualText": {
+                          "text": [
+                            {
+                              "locale": "en",
+                              "text": "Nested Inline Repeat"
+                            },
+                            {
+                              "locale": "de",
+                              "text": "Nested Inline Repeat"
+                            }
+                          ]
+                        }
+                      },
+                      "repeatOverviewColumn": [
+                        {
+                          "type": "FieldBasedRepeatOverviewColumn",
+                          "id": "fieldbasedrepeatoverviewcolumn-96a6b",
+                          "width": 0.5,
+                          "sortable": false,
+                          "filterable": false,
+                          "preferredSorting": "ASC",
+                          "elementRef": "attachment_401c0",
+                          "exposition": "THUMBNAIL_OR_ICON"
+                        },
+                        {
+                          "type": "FieldBasedRepeatOverviewColumn",
+                          "id": "fieldbasedrepeatoverviewcolumn-59022",
+                          "label": {
+                            "type": "Multilingual",
+                            "multilingualText": {
+                              "text": [
+                                {
+                                  "locale": "en",
+                                  "text": "original_filename"
+                                },
+                                {
+                                  "locale": "de",
+                                  "text": "original_filename"
+                                }
+                              ]
+                            }
+                          },
+                          "width": 1,
+                          "sortable": true,
+                          "filterable": true,
+                          "preferredSorting": "ASC",
+                          "elementRef": "attachmentField_5601c"
+                        },
+                        {
+                          "type": "FieldBasedRepeatOverviewColumn",
+                          "id": "fieldbasedrepeatoverviewcolumn-df50f",
+                          "label": {
+                            "type": "Multilingual",
+                            "multilingualText": {
+                              "text": [
+                                {
+                                  "locale": "en",
+                                  "text": "internal_filename"
+                                },
+                                {
+                                  "locale": "de",
+                                  "text": "internal_filename"
+                                }
+                              ]
+                            }
+                          },
+                          "width": 1,
+                          "sortable": true,
+                          "filterable": true,
+                          "preferredSorting": "ASC",
+                          "elementRef": "attachmentField_f888c"
+                        },
+                        {
+                          "type": "FieldBasedRepeatOverviewColumn",
+                          "id": "fieldbasedrepeatoverviewcolumn-84970",
+                          "label": {
+                            "type": "Multilingual",
+                            "multilingualText": {
+                              "text": [
+                                {
+                                  "locale": "en",
+                                  "text": "attachment_id"
+                                },
+                                {
+                                  "locale": "de",
+                                  "text": "attachment_id"
+                                }
+                              ]
+                            }
+                          },
+                          "width": 1,
+                          "sortable": true,
+                          "filterable": true,
+                          "preferredSorting": "ASC",
+                          "elementRef": "attachmentField_36fc0"
+                        },
+                        {
+                          "type": "FieldBasedRepeatOverviewColumn",
+                          "id": "fieldbasedrepeatoverviewcolumn-ee4b2",
+                          "label": {
+                            "type": "Multilingual",
+                            "multilingualText": {
+                              "text": [
+                                {
+                                  "locale": "en",
+                                  "text": "size"
+                                },
+                                {
+                                  "locale": "de",
+                                  "text": "size"
+                                }
+                              ]
+                            }
+                          },
+                          "width": 1,
+                          "sortable": true,
+                          "filterable": true,
+                          "preferredSorting": "ASC",
+                          "elementRef": "attachmentField_1d8b5"
+                        },
+                        {
+                          "type": "FieldBasedRepeatOverviewColumn",
+                          "id": "fieldbasedrepeatoverviewcolumn-43190",
+                          "label": {
+                            "type": "Multilingual",
+                            "multilingualText": {
+                              "text": [
+                                {
+                                  "locale": "en",
+                                  "text": "mime_type"
+                                },
+                                {
+                                  "locale": "de",
+                                  "text": "mime_type"
+                                }
+                              ]
+                            }
+                          },
+                          "width": 1,
+                          "sortable": true,
+                          "filterable": true,
+                          "preferredSorting": "ASC",
+                          "elementRef": "attachmentField_32c10"
+                        },
+                        {
+                          "type": "FieldBasedRepeatOverviewColumn",
+                          "id": "fieldbasedrepeatoverviewcolumn-33bf9",
+                          "label": {
+                            "type": "Multilingual",
+                            "multilingualText": {
+                              "text": [
+                                {
+                                  "locale": "en",
+                                  "text": "category"
+                                },
+                                {
+                                  "locale": "de",
+                                  "text": "category"
+                                }
+                              ]
+                            }
+                          },
+                          "width": 1,
+                          "sortable": true,
+                          "filterable": true,
+                          "preferredSorting": "ASC",
+                          "elementRef": "attachmentField_b8616"
+                        },
+                        {
+                          "type": "FieldBasedRepeatOverviewColumn",
+                          "id": "fieldbasedrepeatoverviewcolumn-aa9d6",
+                          "label": {
+                            "type": "Multilingual",
+                            "multilingualText": {
+                              "text": [
+                                {
+                                  "locale": "en",
+                                  "text": "description"
+                                },
+                                {
+                                  "locale": "de",
+                                  "text": "description"
+                                }
+                              ]
+                            }
+                          },
+                          "width": 1,
+                          "sortable": true,
+                          "filterable": true,
+                          "preferredSorting": "ASC",
+                          "elementRef": "attachmentField_3d11f"
+                        },
+                        {
+                          "type": "FieldBasedRepeatOverviewColumn",
+                          "id": "fieldbasedrepeatoverviewcolumn-b80cb",
+                          "width": 1,
+                          "sortable": true,
+                          "filterable": true,
+                          "preferredSorting": "ASC",
+                          "elementRef": "field_82cd3"
+                        }
+                      ],
+                      "groupRef": "group_57567",
+                      "enableAdd": false,
+                      "enableRemove": true,
+                      "enableReorder": false,
+                      "enableCopy": false,
+                      "multiFileUpload": true,
+                      "multiFileUploadOptions": {
+                        "elementRef": "attachment_401c0",
+                        "enableDownload": true,
+                        "fileUploadDescription": {
+                          "text": [
+                            {
+                              "locale": "en",
+                              "text": "Drop files here or click to"
+                            },
+                            {
+                              "locale": "de",
+                              "text": "Ziehe Dateien hierher oder klicke, um"
+                            }
+                          ]
+                        },
+                        "hideFileUploadDescription": false,
+                        "fileUploadButtonText": {
+                          "text": [
+                            {
+                              "locale": "en",
+                              "text": "Upload files"
+                            },
+                            {
+                              "locale": "de",
+                              "text": "Dateien hochzuladen"
+                            }
+                          ]
+                        },
+                        "hideFileUploadButtonText": false,
+                        "fileUploadHelperText": {
+                          "text": [
+                            {
+                              "locale": "en",
+                              "text": "This is a super useful helper text, that's explaining very important things!"
+                            },
+                            {
+                              "locale": "de",
+                              "text": "Das ist ein super nützlicher Helper Text, der sehr wichtige Dinge erklärt!"
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "type": "EmbeddedRepeat",
+                      "id": "embeddedrepeat-183b1",
+                      "name": "embedded-repeat-AttachmentCollection",
+                      "title": {
+                        "type": "Multilingual",
+                        "multilingualText": {
+                          "text": [
+                            {
+                              "locale": "en",
+                              "text": "Nested Embedded Repeat"
+                            },
+                            {
+                              "locale": "de",
+                              "text": "Nested Embedded Repeat"
+                            }
+                          ]
+                        }
+                      },
+                      "repeatOverviewColumn": [
+                        {
+                          "type": "FieldBasedRepeatOverviewColumn",
+                          "id": "fieldbasedrepeatoverviewcolumn-8b170",
+                          "width": 0.5,
+                          "sortable": false,
+                          "filterable": false,
+                          "preferredSorting": "ASC",
+                          "elementRef": "attachment_401c0",
+                          "exposition": "THUMBNAIL_OR_ICON"
+                        },
+                        {
+                          "type": "FieldBasedRepeatOverviewColumn",
+                          "id": "fieldbasedrepeatoverviewcolumn-2ba8a",
+                          "label": {
+                            "type": "Multilingual",
+                            "multilingualText": {
+                              "text": [
+                                {
+                                  "locale": "en",
+                                  "text": "original_filename"
+                                },
+                                {
+                                  "locale": "de",
+                                  "text": "original_filename"
+                                }
+                              ]
+                            }
+                          },
+                          "width": 1,
+                          "sortable": true,
+                          "filterable": true,
+                          "preferredSorting": "ASC",
+                          "elementRef": "attachmentField_5601c"
+                        },
+                        {
+                          "type": "FieldBasedRepeatOverviewColumn",
+                          "id": "fieldbasedrepeatoverviewcolumn-c68b7",
+                          "label": {
+                            "type": "Multilingual",
+                            "multilingualText": {
+                              "text": [
+                                {
+                                  "locale": "en",
+                                  "text": "internal_filename"
+                                },
+                                {
+                                  "locale": "de",
+                                  "text": "internal_filename"
+                                }
+                              ]
+                            }
+                          },
+                          "width": 1,
+                          "sortable": true,
+                          "filterable": true,
+                          "preferredSorting": "ASC",
+                          "elementRef": "attachmentField_f888c"
+                        },
+                        {
+                          "type": "FieldBasedRepeatOverviewColumn",
+                          "id": "fieldbasedrepeatoverviewcolumn-fb9da",
+                          "label": {
+                            "type": "Multilingual",
+                            "multilingualText": {
+                              "text": [
+                                {
+                                  "locale": "en",
+                                  "text": "attachment_id"
+                                },
+                                {
+                                  "locale": "de",
+                                  "text": "attachment_id"
+                                }
+                              ]
+                            }
+                          },
+                          "width": 1,
+                          "sortable": true,
+                          "filterable": true,
+                          "preferredSorting": "ASC",
+                          "elementRef": "attachmentField_36fc0"
+                        },
+                        {
+                          "type": "FieldBasedRepeatOverviewColumn",
+                          "id": "fieldbasedrepeatoverviewcolumn-e2d88",
+                          "label": {
+                            "type": "Multilingual",
+                            "multilingualText": {
+                              "text": [
+                                {
+                                  "locale": "en",
+                                  "text": "size"
+                                },
+                                {
+                                  "locale": "de",
+                                  "text": "size"
+                                }
+                              ]
+                            }
+                          },
+                          "width": 1,
+                          "sortable": true,
+                          "filterable": true,
+                          "preferredSorting": "ASC",
+                          "elementRef": "attachmentField_1d8b5"
+                        },
+                        {
+                          "type": "FieldBasedRepeatOverviewColumn",
+                          "id": "fieldbasedrepeatoverviewcolumn-cfa06",
+                          "label": {
+                            "type": "Multilingual",
+                            "multilingualText": {
+                              "text": [
+                                {
+                                  "locale": "en",
+                                  "text": "mime_type"
+                                },
+                                {
+                                  "locale": "de",
+                                  "text": "mime_type"
+                                }
+                              ]
+                            }
+                          },
+                          "width": 1,
+                          "sortable": true,
+                          "filterable": true,
+                          "preferredSorting": "ASC",
+                          "elementRef": "attachmentField_32c10"
+                        },
+                        {
+                          "type": "FieldBasedRepeatOverviewColumn",
+                          "id": "fieldbasedrepeatoverviewcolumn-d88cb",
+                          "label": {
+                            "type": "Multilingual",
+                            "multilingualText": {
+                              "text": [
+                                {
+                                  "locale": "en",
+                                  "text": "category"
+                                },
+                                {
+                                  "locale": "de",
+                                  "text": "category"
+                                }
+                              ]
+                            }
+                          },
+                          "width": 1,
+                          "sortable": true,
+                          "filterable": true,
+                          "preferredSorting": "ASC",
+                          "elementRef": "attachmentField_b8616"
+                        },
+                        {
+                          "type": "FieldBasedRepeatOverviewColumn",
+                          "id": "fieldbasedrepeatoverviewcolumn-94566",
+                          "label": {
+                            "type": "Multilingual",
+                            "multilingualText": {
+                              "text": [
+                                {
+                                  "locale": "en",
+                                  "text": "description"
+                                },
+                                {
+                                  "locale": "de",
+                                  "text": "description"
+                                }
+                              ]
+                            }
+                          },
+                          "width": 1,
+                          "sortable": true,
+                          "filterable": true,
+                          "preferredSorting": "ASC",
+                          "elementRef": "attachmentField_3d11f"
+                        },
+                        {
+                          "type": "FieldBasedRepeatOverviewColumn",
+                          "id": "fieldbasedrepeatoverviewcolumn-e7aed",
+                          "width": 1,
+                          "sortable": true,
+                          "filterable": true,
+                          "preferredSorting": "ASC",
+                          "elementRef": "field_82cd3"
+                        }
+                      ],
+                      "groupRef": "group_57567",
+                      "enableAdd": false,
+                      "enableRemove": true,
+                      "enableReorder": false,
+                      "enableCopy": false,
+                      "controlGrid": {
+                        "type": "ControlGrid",
+                        "id": "controlgrid-8de6b",
+                        "name": "cg",
+                        "layout": {
+                          "lg": "3-3-3-3"
+                        },
+                        "row": [
+                          {
+                            "type": "Row",
+                            "id": "row-4f259",
+                            "cell": [
+                              {
+                                "type": "Control",
+                                "id": "control-5e069",
+                                "label": {
+                                  "type": "Multilingual",
+                                  "multilingualText": {
+                                    "text": [
+                                      {
+                                        "locale": "en",
+                                        "text": "Attachment01"
+                                      },
+                                      {
+                                        "locale": "de",
+                                        "text": "Attachment01"
+                                      }
+                                    ]
+                                  }
+                                },
+                                "elementRef": "attachment_401c0"
+                              }
+                            ]
+                          },
+                          {
+                            "type": "Row",
+                            "id": "row-bbec3",
+                            "cell": [
+                              {
+                                "type": "Control",
+                                "id": "control-3b377",
+                                "label": {
+                                  "type": "Multilingual",
+                                  "multilingualText": {
+                                    "text": [
+                                      {
+                                        "locale": "en",
+                                        "text": "original_filename"
+                                      },
+                                      {
+                                        "locale": "de",
+                                        "text": "original_filename"
+                                      }
+                                    ]
+                                  }
+                                },
+                                "elementRef": "attachmentField_5601c"
+                              },
+                              {
+                                "type": "Control",
+                                "id": "control-e3a7d",
+                                "label": {
+                                  "type": "Multilingual",
+                                  "multilingualText": {
+                                    "text": [
+                                      {
+                                        "locale": "en",
+                                        "text": "internal_filename"
+                                      },
+                                      {
+                                        "locale": "de",
+                                        "text": "internal_filename"
+                                      }
+                                    ]
+                                  }
+                                },
+                                "elementRef": "attachmentField_f888c"
+                              },
+                              {
+                                "type": "Control",
+                                "id": "control-f8ee6",
+                                "label": {
+                                  "type": "Multilingual",
+                                  "multilingualText": {
+                                    "text": [
+                                      {
+                                        "locale": "en",
+                                        "text": "attachment_id"
+                                      },
+                                      {
+                                        "locale": "de",
+                                        "text": "attachment_id"
+                                      }
+                                    ]
+                                  }
+                                },
+                                "elementRef": "attachmentField_36fc0"
+                              }
+                            ]
+                          },
+                          {
+                            "type": "Row",
+                            "id": "row-71d58",
+                            "cell": [
+                              {
+                                "type": "Control",
+                                "id": "control-86266",
+                                "label": {
+                                  "type": "Multilingual",
+                                  "multilingualText": {
+                                    "text": [
+                                      {
+                                        "locale": "en",
+                                        "text": "size"
+                                      },
+                                      {
+                                        "locale": "de",
+                                        "text": "size"
+                                      }
+                                    ]
+                                  }
+                                },
+                                "elementRef": "attachmentField_1d8b5"
+                              },
+                              {
+                                "type": "Control",
+                                "id": "control-b4bba",
+                                "label": {
+                                  "type": "Multilingual",
+                                  "multilingualText": {
+                                    "text": [
+                                      {
+                                        "locale": "en",
+                                        "text": "mime_type"
+                                      },
+                                      {
+                                        "locale": "de",
+                                        "text": "mime_type"
+                                      }
+                                    ]
+                                  }
+                                },
+                                "elementRef": "attachmentField_32c10"
+                              }
+                            ]
+                          },
+                          {
+                            "type": "Row",
+                            "id": "row-12bf2",
+                            "cell": [
+                              {
+                                "type": "Control",
+                                "id": "control-87607",
+                                "label": {
+                                  "type": "Multilingual",
+                                  "multilingualText": {
+                                    "text": [
+                                      {
+                                        "locale": "en",
+                                        "text": "category"
+                                      },
+                                      {
+                                        "locale": "de",
+                                        "text": "category"
+                                      }
+                                    ]
+                                  }
+                                },
+                                "elementRef": "attachmentField_b8616"
+                              },
+                              {
+                                "type": "Control",
+                                "id": "control-2d792",
+                                "label": {
+                                  "type": "Multilingual",
+                                  "multilingualText": {
+                                    "text": [
+                                      {
+                                        "locale": "en",
+                                        "text": "description"
+                                      },
+                                      {
+                                        "locale": "de",
+                                        "text": "description"
+                                      }
+                                    ]
+                                  }
+                                },
+                                "elementRef": "attachmentField_3d11f"
+                              }
+                            ]
+                          },
+                          {
+                            "type": "Row",
+                            "id": "row-4b227",
+                            "cell": [
+                              {
+                                "type": "Control",
+                                "id": "control-28537",
+                                "elementRef": "field_82cd3"
+                              },
+                              {
+                                "type": "Control",
+                                "id": "control-f78fc",
+                                "elementRef": "field_eb49f"
+                              }
+                            ]
+                          }
+                        ],
+                        "verticalAlignment": "TOP"
+                      },
+                      "multiFileUpload": true,
+                      "multiFileUploadOptions": {
+                        "elementRef": "attachment_401c0",
+                        "enableDownload": true,
+                        "fileUploadDescription": {
+                          "text": [
+                            {
+                              "locale": "en",
+                              "text": "Drop files here or click to"
+                            },
+                            {
+                              "locale": "de",
+                              "text": "Ziehe Dateien hierher oder klicke, um"
+                            }
+                          ]
+                        },
+                        "hideFileUploadDescription": false,
+                        "fileUploadButtonText": {
+                          "text": [
+                            {
+                              "locale": "en",
+                              "text": "Upload files"
+                            },
+                            {
+                              "locale": "de",
+                              "text": "Dateien hochzuladen"
+                            }
+                          ]
+                        },
+                        "hideFileUploadButtonText": false,
+                        "fileUploadHelperText": {
+                          "text": [
+                            {
+                              "locale": "en",
+                              "text": "This is a super useful helper text, that's explaining very important things!"
+                            },
+                            {
+                              "locale": "de",
+                              "text": "Das ist ein super nützlicher Helper Text, der sehr wichtige Dinge erklärt!"
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "screen-b1b04",
+        "name": "Screen2",
+        "screenElements": [
+          {
+            "type": "Section",
+            "id": "section-0be46",
+            "name": "SecPaging",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "Multi File Upload Repeat with Paging"
+                  },
+                  {
+                    "locale": "de",
+                    "text": "Multi File Upload Repeat with Paging"
+                  }
+                ]
+              }
+            },
+            "screenElements": [
+              {
+                "type": "InlineRepeat",
+                "id": "inlinerepeat-a46bf",
+                "name": "inline-repeat-AttachmentCollection",
+                "title": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "Inline Repeat"
+                      },
+                      {
+                        "locale": "de",
+                        "text": "Inline Repeat"
+                      }
+                    ]
+                  }
+                },
+                "repeatOverviewColumn": [
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-08a0a",
+                    "width": 0.5,
+                    "sortable": false,
+                    "filterable": false,
+                    "elementRef": "group_955ee",
+                    "exposition": "THUMBNAIL_OR_ICON"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-13b1f",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "original_filename"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "original_filename"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "sortable": true,
+                    "filterable": true,
+                    "preferredSorting": "ASC",
+                    "elementRef": "field_00719"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-7cbc0",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "internal_filename"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "internal_filename"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "sortable": true,
+                    "filterable": true,
+                    "preferredSorting": "ASC",
+                    "elementRef": "field_96397"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-96f02",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "attachment_id"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "attachment_id"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "sortable": true,
+                    "filterable": true,
+                    "preferredSorting": "ASC",
+                    "elementRef": "field_98602"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-94969",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "size"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "size"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "sortable": true,
+                    "filterable": true,
+                    "preferredSorting": "ASC",
+                    "elementRef": "field_54eaa"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-f784a",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "mime_type"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "mime_type"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "sortable": true,
+                    "filterable": true,
+                    "preferredSorting": "ASC",
+                    "elementRef": "field_fdce5"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-7585b",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "category"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "category"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "sortable": true,
+                    "filterable": true,
+                    "preferredSorting": "ASC",
+                    "elementRef": "field_17369"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-75795",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "description"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "description"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "sortable": true,
+                    "filterable": true,
+                    "preferredSorting": "ASC",
+                    "elementRef": "field_1286b"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-b016a",
+                    "width": 1,
+                    "sortable": true,
+                    "filterable": true,
+                    "preferredSorting": "ASC",
+                    "elementRef": "field_03314"
+                  }
+                ],
+                "groupRef": "group_8f492",
+                "enableAdd": false,
+                "enableRemove": true,
+                "enableReorder": false,
+                "enableCopy": false,
+                "pageSize": 2,
+                "multiFileUpload": true,
+                "multiFileUploadOptions": {
+                  "elementRef": "group_955ee",
+                  "enableDownload": true,
+                  "fileUploadDescription": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "Drop files here or click to"
+                      },
+                      {
+                        "locale": "de",
+                        "text": "Ziehe Dateien hierher oder klicke, um"
+                      }
+                    ]
+                  },
+                  "hideFileUploadDescription": false,
+                  "fileUploadButtonText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "Upload files"
+                      },
+                      {
+                        "locale": "de",
+                        "text": "Dateien hochzuladen"
+                      }
+                    ]
+                  },
+                  "hideFileUploadButtonText": false,
+                  "fileUploadHelperText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "This is a super useful helper text, that's explaining very important things!"
+                      },
+                      {
+                        "locale": "de",
+                        "text": "Das ist ein super nützlicher Helper Text, der sehr wichtige Dinge erklärt!"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "type": "EmbeddedRepeat",
+                "id": "embeddedrepeat-9aed5",
+                "name": "embedded-repeat-AttachmentCollection",
+                "title": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "Embedded Repeat"
+                      },
+                      {
+                        "locale": "de",
+                        "text": "Embedded Repeat"
+                      }
+                    ]
+                  }
+                },
+                "repeatOverviewColumn": [
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-5b85e",
+                    "width": 0.5,
+                    "sortable": false,
+                    "filterable": false,
+                    "elementRef": "group_955ee",
+                    "exposition": "THUMBNAIL_OR_ICON"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-595c2",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "original_filename"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "original_filename"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "sortable": true,
+                    "filterable": true,
+                    "preferredSorting": "ASC",
+                    "elementRef": "field_00719"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-4df7c",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "internal_filename"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "internal_filename"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "sortable": true,
+                    "filterable": true,
+                    "preferredSorting": "ASC",
+                    "elementRef": "field_96397"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-1cc36",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "attachment_id"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "attachment_id"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "sortable": true,
+                    "filterable": true,
+                    "preferredSorting": "ASC",
+                    "elementRef": "field_98602"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-da83f",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "size"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "size"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "sortable": true,
+                    "filterable": true,
+                    "preferredSorting": "ASC",
+                    "elementRef": "field_54eaa"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-1ffc0",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "mime_type"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "mime_type"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "sortable": true,
+                    "filterable": true,
+                    "preferredSorting": "ASC",
+                    "elementRef": "field_fdce5"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-ca619",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "category"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "category"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "sortable": true,
+                    "filterable": true,
+                    "preferredSorting": "ASC",
+                    "elementRef": "field_17369"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-ac057",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "description"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "description"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "sortable": true,
+                    "filterable": true,
+                    "preferredSorting": "ASC",
+                    "elementRef": "field_1286b"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-98fd1",
+                    "width": 1,
+                    "sortable": true,
+                    "filterable": true,
+                    "preferredSorting": "ASC",
+                    "elementRef": "field_03314"
+                  }
+                ],
+                "groupRef": "group_8f492",
+                "enableAdd": false,
+                "enableRemove": true,
+                "enableReorder": false,
+                "enableCopy": false,
+                "pageSize": 2,
+                "controlGrid": {
+                  "type": "ControlGrid",
+                  "id": "controlgrid-77e2d",
+                  "name": "cg",
+                  "layout": {
+                    "lg": "3-3-3-3"
+                  },
+                  "row": [
+                    {
+                      "type": "Row",
+                      "id": "row-ce515",
+                      "cell": [
+                        {
+                          "type": "Control",
+                          "id": "control-c6b5a",
+                          "label": {
+                            "type": "Multilingual",
+                            "multilingualText": {
+                              "text": [
+                                {
+                                  "locale": "en",
+                                  "text": "Attachment01"
+                                },
+                                {
+                                  "locale": "de",
+                                  "text": "Attachment01"
+                                }
+                              ]
+                            }
+                          },
+                          "elementRef": "group_955ee"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "Row",
+                      "id": "row-8a0b6",
+                      "cell": [
+                        {
+                          "type": "Control",
+                          "id": "control-17de5",
+                          "label": {
+                            "type": "Multilingual",
+                            "multilingualText": {
+                              "text": [
+                                {
+                                  "locale": "en",
+                                  "text": "original_filename"
+                                },
+                                {
+                                  "locale": "de",
+                                  "text": "original_filename"
+                                }
+                              ]
+                            }
+                          },
+                          "elementRef": "field_00719"
+                        },
+                        {
+                          "type": "Control",
+                          "id": "control-06012",
+                          "label": {
+                            "type": "Multilingual",
+                            "multilingualText": {
+                              "text": [
+                                {
+                                  "locale": "en",
+                                  "text": "internal_filename"
+                                },
+                                {
+                                  "locale": "de",
+                                  "text": "internal_filename"
+                                }
+                              ]
+                            }
+                          },
+                          "elementRef": "field_96397"
+                        },
+                        {
+                          "type": "Control",
+                          "id": "control-ed85f",
+                          "label": {
+                            "type": "Multilingual",
+                            "multilingualText": {
+                              "text": [
+                                {
+                                  "locale": "en",
+                                  "text": "attachment_id"
+                                },
+                                {
+                                  "locale": "de",
+                                  "text": "attachment_id"
+                                }
+                              ]
+                            }
+                          },
+                          "elementRef": "field_98602"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "Row",
+                      "id": "row-0364f",
+                      "cell": [
+                        {
+                          "type": "Control",
+                          "id": "control-d9c96",
+                          "label": {
+                            "type": "Multilingual",
+                            "multilingualText": {
+                              "text": [
+                                {
+                                  "locale": "en",
+                                  "text": "size"
+                                },
+                                {
+                                  "locale": "de",
+                                  "text": "size"
+                                }
+                              ]
+                            }
+                          },
+                          "elementRef": "field_54eaa"
+                        },
+                        {
+                          "type": "Control",
+                          "id": "control-31ca7",
+                          "label": {
+                            "type": "Multilingual",
+                            "multilingualText": {
+                              "text": [
+                                {
+                                  "locale": "en",
+                                  "text": "mime_type"
+                                },
+                                {
+                                  "locale": "de",
+                                  "text": "mime_type"
+                                }
+                              ]
+                            }
+                          },
+                          "elementRef": "field_fdce5"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "Row",
+                      "id": "row-bdb32",
+                      "cell": [
+                        {
+                          "type": "Control",
+                          "id": "control-a43ba",
+                          "label": {
+                            "type": "Multilingual",
+                            "multilingualText": {
+                              "text": [
+                                {
+                                  "locale": "en",
+                                  "text": "category"
+                                },
+                                {
+                                  "locale": "de",
+                                  "text": "category"
+                                }
+                              ]
+                            }
+                          },
+                          "elementRef": "field_17369"
+                        },
+                        {
+                          "type": "Control",
+                          "id": "control-c64d6",
+                          "label": {
+                            "type": "Multilingual",
+                            "multilingualText": {
+                              "text": [
+                                {
+                                  "locale": "en",
+                                  "text": "description"
+                                },
+                                {
+                                  "locale": "de",
+                                  "text": "description"
+                                }
+                              ]
+                            }
+                          },
+                          "elementRef": "field_1286b"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "Row",
+                      "id": "row-e4a7a",
+                      "cell": [
+                        {
+                          "type": "Control",
+                          "id": "control-8a34f",
+                          "elementRef": "field_03314"
+                        },
+                        {
+                          "type": "Control",
+                          "id": "control-8b79e",
+                          "elementRef": "field_b320e"
+                        }
+                      ]
+                    }
+                  ],
+                  "verticalAlignment": "TOP"
+                },
+                "multiFileUpload": true,
+                "multiFileUploadOptions": {
+                  "elementRef": "group_955ee",
+                  "enableDownload": true,
+                  "fileUploadDescription": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "Drop files here or click to"
+                      },
+                      {
+                        "locale": "de",
+                        "text": "Ziehe Dateien hierher oder klicke, um"
+                      }
+                    ]
+                  },
+                  "hideFileUploadDescription": false,
+                  "fileUploadButtonText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "Upload files"
+                      },
+                      {
+                        "locale": "de",
+                        "text": "Dateien hochzuladen"
+                      }
+                    ]
+                  },
+                  "hideFileUploadButtonText": false,
+                  "fileUploadHelperText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "This is a super useful helper text, that's explaining very important things!"
+                      },
+                      {
+                        "locale": "de",
+                        "text": "Das ist ein super nützlicher Helper Text, der sehr wichtige Dinge erklärt!"
+                      }
+                    ]
+                  }
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "screen-75c67",
+        "name": "Screen3",
+        "screenElements": [
+          {
+            "type": "Section",
+            "id": "section-79e0f",
+            "name": "SecInfiniteScrolling",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "Multi File Upload Repeat with Infinite Scrolling"
+                  },
+                  {
+                    "locale": "de",
+                    "text": "Multi File Upload Repeat with Infinite Scrolling"
+                  }
+                ]
+              }
+            },
+            "screenElements": [
+              {
+                "type": "InlineRepeat",
+                "id": "inlinerepeat-4f19f",
+                "name": "inline-repeat-AttachmentCollection",
+                "title": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "Inline Repeat"
+                      },
+                      {
+                        "locale": "de",
+                        "text": "Inline Repeat"
+                      }
+                    ]
+                  }
+                },
+                "repeatOverviewColumn": [
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-2e448",
+                    "width": 0.5,
+                    "sortable": false,
+                    "filterable": false,
+                    "elementRef": "group_955ee",
+                    "exposition": "THUMBNAIL_OR_ICON"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-67120",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "original_filename"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "original_filename"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "sortable": true,
+                    "filterable": true,
+                    "preferredSorting": "ASC",
+                    "elementRef": "field_00719"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-3c078",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "internal_filename"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "internal_filename"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "sortable": true,
+                    "filterable": true,
+                    "preferredSorting": "ASC",
+                    "elementRef": "field_96397"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-caed7",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "attachment_id"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "attachment_id"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "sortable": true,
+                    "filterable": true,
+                    "preferredSorting": "ASC",
+                    "elementRef": "field_98602"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-6777d",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "size"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "size"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "sortable": true,
+                    "filterable": true,
+                    "preferredSorting": "ASC",
+                    "elementRef": "field_54eaa"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-afeb9",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "mime_type"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "mime_type"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "sortable": true,
+                    "filterable": true,
+                    "preferredSorting": "ASC",
+                    "elementRef": "field_fdce5"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-d5c82",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "category"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "category"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "sortable": true,
+                    "filterable": true,
+                    "preferredSorting": "ASC",
+                    "elementRef": "field_17369"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-348a4",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "description"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "description"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "sortable": true,
+                    "filterable": true,
+                    "preferredSorting": "ASC",
+                    "elementRef": "field_1286b"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-51412",
+                    "width": 1,
+                    "sortable": true,
+                    "filterable": true,
+                    "preferredSorting": "ASC",
+                    "elementRef": "field_03314"
+                  }
+                ],
+                "groupRef": "group_8f492",
+                "enableAdd": false,
+                "enableRemove": true,
+                "enableReorder": false,
+                "enableCopy": false,
+                "infiniteScrolling": true,
+                "tableStyle": {
+                  "rowHeight": 50,
+                  "actionColumnWidth": 1,
+                  "tableHeight": 300
+                },
+                "multiFileUpload": true,
+                "multiFileUploadOptions": {
+                  "elementRef": "group_955ee",
+                  "enableDownload": true,
+                  "fileUploadDescription": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "Drop files here or click to"
+                      },
+                      {
+                        "locale": "de",
+                        "text": "Ziehe Dateien hierher oder klicke, um"
+                      }
+                    ]
+                  },
+                  "hideFileUploadDescription": false,
+                  "fileUploadButtonText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "Upload files"
+                      },
+                      {
+                        "locale": "de",
+                        "text": "Dateien hochzuladen"
+                      }
+                    ]
+                  },
+                  "hideFileUploadButtonText": false,
+                  "fileUploadHelperText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "This is a super useful helper text, that's explaining very important things!"
+                      },
+                      {
+                        "locale": "de",
+                        "text": "Das ist ein super nützlicher Helper Text, der sehr wichtige Dinge erklärt!"
+                      }
+                    ]
+                  }
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "screen-d29f8",
+        "name": "Screen4",
+        "screenElements": [
+          {
+            "type": "Section",
+            "id": "section-0adac",
+            "name": "SecInitialValues",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "Multi File Upload Repeat with initial values"
+                  },
+                  {
+                    "locale": "de",
+                    "text": "Multi File Upload Repeat with initial values"
+                  }
+                ]
+              }
+            },
+            "screenElements": [
+              {
+                "type": "InlineRepeat",
+                "id": "inlinerepeat-5619e",
+                "name": "inline-repeat-AttachmentCollection_InitialValues",
+                "title": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "Inline Repeat"
+                      },
+                      {
+                        "locale": "de",
+                        "text": "Inline Repeat"
+                      }
+                    ]
+                  }
+                },
+                "repeatOverviewColumn": [
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-c3138",
+                    "width": 0.5,
+                    "sortable": false,
+                    "filterable": false,
+                    "preferredSorting": "ASC",
+                    "elementRef": "attachment_2cb08",
+                    "exposition": "THUMBNAIL_OR_ICON"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-bff72",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "original_filename"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "original_filename"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "sortable": false,
+                    "filterable": false,
+                    "preferredSorting": "ASC",
+                    "elementRef": "attachmentField_31592"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-01be4",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "internal_filename"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "internal_filename"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "sortable": false,
+                    "filterable": false,
+                    "preferredSorting": "ASC",
+                    "elementRef": "attachmentField_bca2d"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-91155",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "attachment_id"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "attachment_id"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "sortable": false,
+                    "filterable": false,
+                    "preferredSorting": "ASC",
+                    "elementRef": "attachmentField_fecd2"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-e04d3",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "size"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "size"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "sortable": false,
+                    "filterable": false,
+                    "preferredSorting": "ASC",
+                    "elementRef": "attachmentField_08d25"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-ac65b",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "mime_type"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "mime_type"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "sortable": false,
+                    "filterable": false,
+                    "preferredSorting": "ASC",
+                    "elementRef": "attachmentField_08cff"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-7074b",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "category"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "category"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "sortable": false,
+                    "filterable": false,
+                    "preferredSorting": "ASC",
+                    "elementRef": "attachmentField_a70a0"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-32e5e",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "description"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "description"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "sortable": false,
+                    "filterable": false,
+                    "preferredSorting": "ASC",
+                    "elementRef": "attachmentField_bab6a"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-4d871",
+                    "width": 1,
+                    "sortable": false,
+                    "filterable": false,
+                    "preferredSorting": "ASC",
+                    "elementRef": "field_deb9a"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-d3ac6",
+                    "width": 1,
+                    "sortable": false,
+                    "filterable": false,
+                    "preferredSorting": "ASC",
+                    "elementRef": "field_602a3"
+                  }
+                ],
+                "groupRef": "group_a0626",
+                "enableAdd": false,
+                "enableRemove": true,
+                "enableReorder": false,
+                "enableCopy": false,
+                "multiFileUpload": true,
+                "multiFileUploadOptions": {
+                  "elementRef": "attachment_2cb08",
+                  "enableDownload": true,
+                  "fileUploadDescription": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "Drop files here or click to"
+                      },
+                      {
+                        "locale": "de",
+                        "text": "Ziehe Dateien hierher oder klicke, um"
+                      }
+                    ]
+                  },
+                  "hideFileUploadDescription": false,
+                  "fileUploadButtonText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "Upload files"
+                      },
+                      {
+                        "locale": "de",
+                        "text": "Dateien hochzuladen"
+                      }
+                    ]
+                  },
+                  "hideFileUploadButtonText": false,
+                  "fileUploadHelperText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "This is a super useful helper text, that's explaining very important things!"
+                      },
+                      {
+                        "locale": "de",
+                        "text": "Das ist ein super nützlicher Helper Text, der sehr wichtige Dinge erklärt!"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "type": "EmbeddedRepeat",
+                "id": "embeddedrepeat-951be",
+                "name": "embedded-repeat-AttachmentCollection_InitialValues",
+                "title": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "Embedded Repeat"
+                      },
+                      {
+                        "locale": "de",
+                        "text": "Embedded Repeat"
+                      }
+                    ]
+                  }
+                },
+                "repeatOverviewColumn": [
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-c2633",
+                    "width": 0.5,
+                    "sortable": false,
+                    "filterable": false,
+                    "preferredSorting": "ASC",
+                    "elementRef": "attachment_2cb08",
+                    "exposition": "THUMBNAIL_OR_ICON"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-e74b3",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "original_filename"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "original_filename"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "sortable": false,
+                    "filterable": false,
+                    "preferredSorting": "ASC",
+                    "elementRef": "attachmentField_31592"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-a276b",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "internal_filename"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "internal_filename"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "sortable": false,
+                    "filterable": false,
+                    "preferredSorting": "ASC",
+                    "elementRef": "attachmentField_bca2d"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-6add7",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "attachment_id"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "attachment_id"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "sortable": false,
+                    "filterable": false,
+                    "preferredSorting": "ASC",
+                    "elementRef": "attachmentField_fecd2"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-76a7f",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "size"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "size"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "sortable": false,
+                    "filterable": false,
+                    "preferredSorting": "ASC",
+                    "elementRef": "attachmentField_08d25"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-c5975",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "mime_type"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "mime_type"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "sortable": false,
+                    "filterable": false,
+                    "preferredSorting": "ASC",
+                    "elementRef": "attachmentField_08cff"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-f751f",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "category"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "category"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "sortable": false,
+                    "filterable": false,
+                    "preferredSorting": "ASC",
+                    "elementRef": "attachmentField_a70a0"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-a9846",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "description"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "description"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "sortable": false,
+                    "filterable": false,
+                    "preferredSorting": "ASC",
+                    "elementRef": "attachmentField_bab6a"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-53a2a",
+                    "width": 1,
+                    "sortable": false,
+                    "filterable": false,
+                    "preferredSorting": "ASC",
+                    "elementRef": "field_deb9a"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-65dda",
+                    "width": 1,
+                    "sortable": false,
+                    "filterable": false,
+                    "preferredSorting": "ASC",
+                    "elementRef": "field_602a3"
+                  }
+                ],
+                "groupRef": "group_a0626",
+                "enableAdd": false,
+                "enableRemove": true,
+                "enableReorder": false,
+                "enableCopy": false,
+                "controlGrid": {
+                  "type": "ControlGrid",
+                  "id": "controlgrid-83302",
+                  "name": "cg",
+                  "layout": {
+                    "lg": "3-3-3-3"
+                  },
+                  "row": [
+                    {
+                      "type": "Row",
+                      "id": "row-039fd",
+                      "cell": [
+                        {
+                          "type": "Control",
+                          "id": "control-513a6",
+                          "label": {
+                            "type": "Multilingual",
+                            "multilingualText": {
+                              "text": [
+                                {
+                                  "locale": "en",
+                                  "text": "Attachment01"
+                                },
+                                {
+                                  "locale": "de",
+                                  "text": "Attachment01"
+                                }
+                              ]
+                            }
+                          },
+                          "elementRef": "attachment_2cb08"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "Row",
+                      "id": "row-c30e0",
+                      "cell": [
+                        {
+                          "type": "Control",
+                          "id": "control-eb21f",
+                          "label": {
+                            "type": "Multilingual",
+                            "multilingualText": {
+                              "text": [
+                                {
+                                  "locale": "en",
+                                  "text": "original_filename"
+                                },
+                                {
+                                  "locale": "de",
+                                  "text": "original_filename"
+                                }
+                              ]
+                            }
+                          },
+                          "elementRef": "attachmentField_31592"
+                        },
+                        {
+                          "type": "Control",
+                          "id": "control-3f6f4",
+                          "label": {
+                            "type": "Multilingual",
+                            "multilingualText": {
+                              "text": [
+                                {
+                                  "locale": "en",
+                                  "text": "internal_filename"
+                                },
+                                {
+                                  "locale": "de",
+                                  "text": "internal_filename"
+                                }
+                              ]
+                            }
+                          },
+                          "elementRef": "attachmentField_bca2d"
+                        },
+                        {
+                          "type": "Control",
+                          "id": "control-dc663",
+                          "label": {
+                            "type": "Multilingual",
+                            "multilingualText": {
+                              "text": [
+                                {
+                                  "locale": "en",
+                                  "text": "attachment_id"
+                                },
+                                {
+                                  "locale": "de",
+                                  "text": "attachment_id"
+                                }
+                              ]
+                            }
+                          },
+                          "elementRef": "attachmentField_fecd2"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "Row",
+                      "id": "row-5e490",
+                      "cell": [
+                        {
+                          "type": "Control",
+                          "id": "control-77f03",
+                          "label": {
+                            "type": "Multilingual",
+                            "multilingualText": {
+                              "text": [
+                                {
+                                  "locale": "en",
+                                  "text": "size"
+                                },
+                                {
+                                  "locale": "de",
+                                  "text": "size"
+                                }
+                              ]
+                            }
+                          },
+                          "elementRef": "attachmentField_08d25"
+                        },
+                        {
+                          "type": "Control",
+                          "id": "control-fe814",
+                          "label": {
+                            "type": "Multilingual",
+                            "multilingualText": {
+                              "text": [
+                                {
+                                  "locale": "en",
+                                  "text": "mime_type"
+                                },
+                                {
+                                  "locale": "de",
+                                  "text": "mime_type"
+                                }
+                              ]
+                            }
+                          },
+                          "elementRef": "attachmentField_08cff"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "Row",
+                      "id": "row-a66a5",
+                      "cell": [
+                        {
+                          "type": "Control",
+                          "id": "control-f7c36",
+                          "label": {
+                            "type": "Multilingual",
+                            "multilingualText": {
+                              "text": [
+                                {
+                                  "locale": "en",
+                                  "text": "category"
+                                },
+                                {
+                                  "locale": "de",
+                                  "text": "category"
+                                }
+                              ]
+                            }
+                          },
+                          "elementRef": "attachmentField_a70a0"
+                        },
+                        {
+                          "type": "Control",
+                          "id": "control-57852",
+                          "label": {
+                            "type": "Multilingual",
+                            "multilingualText": {
+                              "text": [
+                                {
+                                  "locale": "en",
+                                  "text": "description"
+                                },
+                                {
+                                  "locale": "de",
+                                  "text": "description"
+                                }
+                              ]
+                            }
+                          },
+                          "elementRef": "attachmentField_bab6a"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "Row",
+                      "id": "row-ade28",
+                      "cell": [
+                        {
+                          "type": "Control",
+                          "id": "control-b8359",
+                          "elementRef": "field_40722"
+                        },
+                        {
+                          "type": "Control",
+                          "id": "control-a94aa",
+                          "elementRef": "field_deb9a"
+                        },
+                        {
+                          "type": "Control",
+                          "id": "control-f060f",
+                          "elementRef": "field_602a3"
+                        }
+                      ]
+                    }
+                  ],
+                  "verticalAlignment": "TOP"
+                },
+                "multiFileUpload": true,
+                "multiFileUploadOptions": {
+                  "elementRef": "attachment_2cb08",
+                  "enableDownload": true,
+                  "fileUploadDescription": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "Drop files here or click to"
+                      },
+                      {
+                        "locale": "de",
+                        "text": "Ziehe Dateien hierher oder klicke, um"
+                      }
+                    ]
+                  },
+                  "hideFileUploadDescription": false,
+                  "fileUploadButtonText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "Upload files"
+                      },
+                      {
+                        "locale": "de",
+                        "text": "Dateien hochzuladen"
+                      }
+                    ]
+                  },
+                  "hideFileUploadButtonText": false,
+                  "fileUploadHelperText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "This is a super useful helper text, that's explaining very important things!"
+                      },
+                      {
+                        "locale": "de",
+                        "text": "Das ist ein super nützlicher Helper Text, der sehr wichtige Dinge erklärt!"
+                      }
+                    ]
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "type": "Section",
+            "id": "section-846ab",
+            "name": "SecInitialValuesAndError",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "Multi File Upload Repeat with Initial Values and Error"
+                  },
+                  {
+                    "locale": "de",
+                    "text": "Multi File Upload Repeat with Initial Values and Error"
+                  }
+                ]
+              }
+            },
+            "screenElements": [
+              {
+                "type": "InlineRepeat",
+                "id": "inlinerepeat-7ccf6",
+                "name": "inline-repeat-AttachmentCollection_InitialValuesAndError",
+                "title": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "Inline Repeat"
+                      },
+                      {
+                        "locale": "de",
+                        "text": "Inline Repeat"
+                      }
+                    ]
+                  }
+                },
+                "repeatOverviewColumn": [
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-112c4",
+                    "width": 0.5,
+                    "sortable": false,
+                    "filterable": false,
+                    "preferredSorting": "ASC",
+                    "elementRef": "attachment_837fb",
+                    "exposition": "THUMBNAIL_OR_ICON"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-36a8a",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "original_filename"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "original_filename"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "sortable": true,
+                    "filterable": true,
+                    "preferredSorting": "ASC",
+                    "elementRef": "attachmentField_bf145"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-902d2",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "internal_filename"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "internal_filename"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "sortable": true,
+                    "filterable": true,
+                    "preferredSorting": "ASC",
+                    "elementRef": "attachmentField_3eb0d"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-a5e28",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "attachment_id"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "attachment_id"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "sortable": true,
+                    "filterable": true,
+                    "preferredSorting": "ASC",
+                    "elementRef": "attachmentField_da73b"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-a486a",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "size"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "size"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "sortable": true,
+                    "filterable": true,
+                    "preferredSorting": "ASC",
+                    "elementRef": "attachmentField_cc21d"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-d0614",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "mime_type"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "mime_type"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "sortable": true,
+                    "filterable": true,
+                    "preferredSorting": "ASC",
+                    "elementRef": "attachmentField_0543d"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-c2496",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "category"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "category"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "sortable": true,
+                    "filterable": true,
+                    "preferredSorting": "ASC",
+                    "elementRef": "attachmentField_d2b2b"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-8973c",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "description"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "description"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "sortable": true,
+                    "filterable": true,
+                    "preferredSorting": "ASC",
+                    "elementRef": "attachmentField_175b0"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-8c029",
+                    "width": 1,
+                    "sortable": true,
+                    "filterable": true,
+                    "preferredSorting": "ASC",
+                    "elementRef": "field_8b46f"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-0ece9",
+                    "width": 1,
+                    "sortable": true,
+                    "filterable": true,
+                    "preferredSorting": "ASC",
+                    "readonly": true,
+                    "elementRef": "field_b266e"
+                  }
+                ],
+                "groupRef": "group_845c8",
+                "enableAdd": false,
+                "enableRemove": true,
+                "enableReorder": false,
+                "enableCopy": false,
+                "multiFileUpload": true,
+                "multiFileUploadOptions": {
+                  "elementRef": "attachment_837fb",
+                  "enableDownload": true,
+                  "fileUploadDescription": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "Drop files here or click to"
+                      },
+                      {
+                        "locale": "de",
+                        "text": "Ziehe Dateien hierher oder klicke, um"
+                      }
+                    ]
+                  },
+                  "fileUploadButtonText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "Upload files"
+                      },
+                      {
+                        "locale": "de",
+                        "text": "Dateien hochzuladen"
+                      }
+                    ]
+                  },
+                  "fileUploadHelperText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "This is a super useful helper text, that's explaining very important things!"
+                      },
+                      {
+                        "locale": "de",
+                        "text": "Das ist ein super nützlicher Helper Text, der sehr wichtige Dinge erklärt!"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "type": "EmbeddedRepeat",
+                "id": "embeddedrepeat-01cf7",
+                "name": "embedded-repeat-AttachmentCollection_InitialValuesAndError",
+                "title": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "Embedded Repeat"
+                      },
+                      {
+                        "locale": "de",
+                        "text": "Embedded Repeat"
+                      }
+                    ]
+                  }
+                },
+                "repeatOverviewColumn": [
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-4f118",
+                    "width": 0.5,
+                    "sortable": false,
+                    "filterable": false,
+                    "preferredSorting": "ASC",
+                    "elementRef": "attachment_837fb",
+                    "exposition": "THUMBNAIL_OR_ICON"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-29ea8",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "original_filename"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "original_filename"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "sortable": true,
+                    "filterable": true,
+                    "preferredSorting": "ASC",
+                    "elementRef": "attachmentField_bf145"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-33605",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "internal_filename"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "internal_filename"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "sortable": true,
+                    "filterable": true,
+                    "preferredSorting": "ASC",
+                    "elementRef": "attachmentField_3eb0d"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-1c460",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "attachment_id"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "attachment_id"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "sortable": true,
+                    "filterable": true,
+                    "preferredSorting": "ASC",
+                    "elementRef": "attachmentField_da73b"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-bc543",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "size"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "size"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "sortable": true,
+                    "filterable": true,
+                    "preferredSorting": "ASC",
+                    "elementRef": "attachmentField_cc21d"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-54bfd",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "mime_type"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "mime_type"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "sortable": true,
+                    "filterable": true,
+                    "preferredSorting": "ASC",
+                    "elementRef": "attachmentField_0543d"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-df243",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "category"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "category"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "sortable": true,
+                    "filterable": true,
+                    "preferredSorting": "ASC",
+                    "elementRef": "attachmentField_d2b2b"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-2bb8e",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "description"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "description"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "sortable": true,
+                    "filterable": true,
+                    "preferredSorting": "ASC",
+                    "elementRef": "attachmentField_175b0"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-91fbd",
+                    "width": 1,
+                    "sortable": true,
+                    "filterable": true,
+                    "preferredSorting": "ASC",
+                    "elementRef": "field_8b46f"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-53f3b",
+                    "width": 1,
+                    "sortable": true,
+                    "filterable": true,
+                    "preferredSorting": "ASC",
+                    "elementRef": "field_b266e"
+                  }
+                ],
+                "groupRef": "group_845c8",
+                "enableAdd": false,
+                "enableRemove": true,
+                "enableReorder": false,
+                "enableCopy": false,
+                "controlGrid": {
+                  "type": "ControlGrid",
+                  "id": "controlgrid-6a2b2",
+                  "name": "cg",
+                  "layout": {
+                    "lg": "3-3-3-3"
+                  },
+                  "row": [
+                    {
+                      "type": "Row",
+                      "id": "row-30db3",
+                      "cell": [
+                        {
+                          "type": "Control",
+                          "id": "control-4631f",
+                          "label": {
+                            "type": "Multilingual",
+                            "multilingualText": {
+                              "text": [
+                                {
+                                  "locale": "en",
+                                  "text": "Attachment01"
+                                },
+                                {
+                                  "locale": "de",
+                                  "text": "Attachment01"
+                                }
+                              ]
+                            }
+                          },
+                          "elementRef": "attachment_837fb"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "Row",
+                      "id": "row-f3661",
+                      "cell": [
+                        {
+                          "type": "Control",
+                          "id": "control-0fd06",
+                          "label": {
+                            "type": "Multilingual",
+                            "multilingualText": {
+                              "text": [
+                                {
+                                  "locale": "en",
+                                  "text": "original_filename"
+                                },
+                                {
+                                  "locale": "de",
+                                  "text": "original_filename"
+                                }
+                              ]
+                            }
+                          },
+                          "elementRef": "attachmentField_bf145"
+                        },
+                        {
+                          "type": "Control",
+                          "id": "control-45667",
+                          "label": {
+                            "type": "Multilingual",
+                            "multilingualText": {
+                              "text": [
+                                {
+                                  "locale": "en",
+                                  "text": "internal_filename"
+                                },
+                                {
+                                  "locale": "de",
+                                  "text": "internal_filename"
+                                }
+                              ]
+                            }
+                          },
+                          "elementRef": "attachmentField_3eb0d"
+                        },
+                        {
+                          "type": "Control",
+                          "id": "control-3be3c",
+                          "label": {
+                            "type": "Multilingual",
+                            "multilingualText": {
+                              "text": [
+                                {
+                                  "locale": "en",
+                                  "text": "attachment_id"
+                                },
+                                {
+                                  "locale": "de",
+                                  "text": "attachment_id"
+                                }
+                              ]
+                            }
+                          },
+                          "elementRef": "attachmentField_da73b"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "Row",
+                      "id": "row-6aa83",
+                      "cell": [
+                        {
+                          "type": "Control",
+                          "id": "control-debf0",
+                          "label": {
+                            "type": "Multilingual",
+                            "multilingualText": {
+                              "text": [
+                                {
+                                  "locale": "en",
+                                  "text": "size"
+                                },
+                                {
+                                  "locale": "de",
+                                  "text": "size"
+                                }
+                              ]
+                            }
+                          },
+                          "elementRef": "attachmentField_cc21d"
+                        },
+                        {
+                          "type": "Control",
+                          "id": "control-62431",
+                          "label": {
+                            "type": "Multilingual",
+                            "multilingualText": {
+                              "text": [
+                                {
+                                  "locale": "en",
+                                  "text": "mime_type"
+                                },
+                                {
+                                  "locale": "de",
+                                  "text": "mime_type"
+                                }
+                              ]
+                            }
+                          },
+                          "elementRef": "attachmentField_0543d"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "Row",
+                      "id": "row-c6bc7",
+                      "cell": [
+                        {
+                          "type": "Control",
+                          "id": "control-d8e8f",
+                          "label": {
+                            "type": "Multilingual",
+                            "multilingualText": {
+                              "text": [
+                                {
+                                  "locale": "en",
+                                  "text": "category"
+                                },
+                                {
+                                  "locale": "de",
+                                  "text": "category"
+                                }
+                              ]
+                            }
+                          },
+                          "elementRef": "attachmentField_d2b2b"
+                        },
+                        {
+                          "type": "Control",
+                          "id": "control-f2903",
+                          "label": {
+                            "type": "Multilingual",
+                            "multilingualText": {
+                              "text": [
+                                {
+                                  "locale": "en",
+                                  "text": "description"
+                                },
+                                {
+                                  "locale": "de",
+                                  "text": "description"
+                                }
+                              ]
+                            }
+                          },
+                          "elementRef": "attachmentField_175b0"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "Row",
+                      "id": "row-be911",
+                      "cell": [
+                        {
+                          "type": "Control",
+                          "id": "control-a7a18",
+                          "elementRef": "field_8b46f"
+                        },
+                        {
+                          "type": "Control",
+                          "id": "control-8e26e",
+                          "elementRef": "field_b266e"
+                        }
+                      ]
+                    }
+                  ],
+                  "verticalAlignment": "TOP"
+                },
+                "multiFileUpload": true,
+                "multiFileUploadOptions": {
+                  "elementRef": "attachment_837fb",
+                  "enableDownload": true,
+                  "fileUploadDescription": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "Drop files here or click to"
+                      },
+                      {
+                        "locale": "de",
+                        "text": "Ziehe Dateien hierher oder klicke, um"
+                      }
+                    ]
+                  },
+                  "fileUploadButtonText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "Upload files"
+                      },
+                      {
+                        "locale": "de",
+                        "text": "Dateien hochzuladen"
+                      }
+                    ]
+                  },
+                  "fileUploadHelperText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "This is a super useful helper text, that's explaining very important things!"
+                      },
+                      {
+                        "locale": "de",
+                        "text": "Das ist ein super nützlicher Helper Text, der sehr wichtige Dinge erklärt!"
+                      }
+                    ]
+                  }
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "screen-a7e72",
+        "name": "Screen5",
+        "screenElements": [
+          {
+            "type": "Section",
+            "id": "section-0162f",
+            "name": "SecAccessibility",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "Multi File Upload Repeat with hidden description and button text"
+                  },
+                  {
+                    "locale": "de",
+                    "text": "Multi File Upload Repeat with hidden description and button text"
+                  }
+                ]
+              }
+            },
+            "screenElements": [
+              {
+                "type": "InlineRepeat",
+                "id": "inlinerepeat-1ade7",
+                "name": "inline-repeat-AttachmentCollection",
+                "title": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "Inline Repeat"
+                      },
+                      {
+                        "locale": "de",
+                        "text": "Inline Repeat"
+                      }
+                    ]
+                  }
+                },
+                "repeatOverviewColumn": [
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-a2735",
+                    "width": 0.5,
+                    "sortable": false,
+                    "filterable": false,
+                    "preferredSorting": "ASC",
+                    "elementRef": "group_955ee",
+                    "exposition": "THUMBNAIL_OR_ICON"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-72ccd",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "original_filename"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "original_filename"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "sortable": true,
+                    "filterable": true,
+                    "preferredSorting": "ASC",
+                    "elementRef": "field_00719"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-c0409",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "internal_filename"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "internal_filename"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "sortable": true,
+                    "filterable": true,
+                    "preferredSorting": "ASC",
+                    "elementRef": "field_96397"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-8879a",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "attachment_id"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "attachment_id"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "sortable": true,
+                    "filterable": true,
+                    "preferredSorting": "ASC",
+                    "elementRef": "field_98602"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-e8a13",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "size"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "size"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "sortable": true,
+                    "filterable": true,
+                    "preferredSorting": "ASC",
+                    "elementRef": "field_54eaa"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-b8806",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "mime_type"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "mime_type"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "sortable": true,
+                    "filterable": true,
+                    "preferredSorting": "ASC",
+                    "elementRef": "field_fdce5"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-25a44",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "category"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "category"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "sortable": true,
+                    "filterable": true,
+                    "preferredSorting": "ASC",
+                    "elementRef": "field_17369"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-cfb17",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "description"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "description"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "sortable": true,
+                    "filterable": true,
+                    "preferredSorting": "ASC",
+                    "elementRef": "field_1286b"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-e244e",
+                    "width": 1,
+                    "sortable": true,
+                    "filterable": true,
+                    "preferredSorting": "ASC",
+                    "elementRef": "field_03314"
+                  }
+                ],
+                "groupRef": "group_8f492",
+                "enableAdd": false,
+                "enableRemove": true,
+                "enableReorder": false,
+                "enableCopy": false,
+                "multiFileUpload": true,
+                "multiFileUploadOptions": {
+                  "elementRef": "group_955ee",
+                  "enableDownload": true,
+                  "fileUploadDescription": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "Drop files here or click to"
+                      },
+                      {
+                        "locale": "de",
+                        "text": "Ziehe Dateien hierher oder klicke, um"
+                      }
+                    ]
+                  },
+                  "hideFileUploadDescription": true,
+                  "fileUploadButtonText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "Upload files"
+                      },
+                      {
+                        "locale": "de",
+                        "text": "Dateien hochzuladen"
+                      }
+                    ]
+                  },
+                  "hideFileUploadButtonText": true,
+                  "fileUploadHelperText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "This is a super useful helper text, that's explaining very important things!"
+                      },
+                      {
+                        "locale": "de",
+                        "text": "Das ist ein super nützlicher Helper Text, der sehr wichtige Dinge erklärt!"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "type": "EmbeddedRepeat",
+                "id": "embeddedrepeat-d740d",
+                "name": "embedded-repeat-AttachmentCollection",
+                "title": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "Embedded Repeat"
+                      },
+                      {
+                        "locale": "de",
+                        "text": "Embedded Repeat"
+                      }
+                    ]
+                  }
+                },
+                "repeatOverviewColumn": [
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-a4b1c",
+                    "width": 0.5,
+                    "sortable": false,
+                    "filterable": false,
+                    "preferredSorting": "ASC",
+                    "elementRef": "group_955ee",
+                    "exposition": "THUMBNAIL_OR_ICON"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-1b81c",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "original_filename"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "original_filename"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "sortable": true,
+                    "filterable": true,
+                    "preferredSorting": "ASC",
+                    "elementRef": "field_00719"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-f6540",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "internal_filename"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "internal_filename"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "sortable": true,
+                    "filterable": true,
+                    "preferredSorting": "ASC",
+                    "elementRef": "field_96397"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-6955c",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "attachment_id"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "attachment_id"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "sortable": true,
+                    "filterable": true,
+                    "preferredSorting": "ASC",
+                    "elementRef": "field_98602"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-b3072",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "size"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "size"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "sortable": true,
+                    "filterable": true,
+                    "preferredSorting": "ASC",
+                    "elementRef": "field_54eaa"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-151dc",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "mime_type"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "mime_type"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "sortable": true,
+                    "filterable": true,
+                    "preferredSorting": "ASC",
+                    "elementRef": "field_fdce5"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-51c51",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "category"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "category"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "sortable": true,
+                    "filterable": true,
+                    "preferredSorting": "ASC",
+                    "elementRef": "field_17369"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-a35d6",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "description"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "description"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "sortable": true,
+                    "filterable": true,
+                    "preferredSorting": "ASC",
+                    "elementRef": "field_1286b"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-50b14",
+                    "width": 1,
+                    "sortable": true,
+                    "filterable": true,
+                    "preferredSorting": "ASC",
+                    "elementRef": "field_03314"
+                  }
+                ],
+                "groupRef": "group_8f492",
+                "enableAdd": false,
+                "enableRemove": true,
+                "enableReorder": false,
+                "enableCopy": false,
+                "controlGrid": {
+                  "type": "ControlGrid",
+                  "id": "controlgrid-56eeb",
+                  "name": "cg",
+                  "layout": {
+                    "lg": "3-3-3-3"
+                  },
+                  "row": [
+                    {
+                      "type": "Row",
+                      "id": "row-23976",
+                      "cell": [
+                        {
+                          "type": "Control",
+                          "id": "control-db522",
+                          "elementRef": "group_955ee"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "Row",
+                      "id": "row-02fdd",
+                      "cell": [
+                        {
+                          "type": "Control",
+                          "id": "control-ea61a",
+                          "label": {
+                            "type": "Multilingual",
+                            "multilingualText": {
+                              "text": [
+                                {
+                                  "locale": "en",
+                                  "text": "original_filename"
+                                },
+                                {
+                                  "locale": "de",
+                                  "text": "original_filename"
+                                }
+                              ]
+                            }
+                          },
+                          "elementRef": "field_00719"
+                        },
+                        {
+                          "type": "Control",
+                          "id": "control-31b0f",
+                          "label": {
+                            "type": "Multilingual",
+                            "multilingualText": {
+                              "text": [
+                                {
+                                  "locale": "en",
+                                  "text": "internal_filename"
+                                },
+                                {
+                                  "locale": "de",
+                                  "text": "internal_filename"
+                                }
+                              ]
+                            }
+                          },
+                          "elementRef": "field_96397"
+                        },
+                        {
+                          "type": "Control",
+                          "id": "control-ba35b",
+                          "label": {
+                            "type": "Multilingual",
+                            "multilingualText": {
+                              "text": [
+                                {
+                                  "locale": "en",
+                                  "text": "attachment_id"
+                                },
+                                {
+                                  "locale": "de",
+                                  "text": "attachment_id"
+                                }
+                              ]
+                            }
+                          },
+                          "elementRef": "field_98602"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "Row",
+                      "id": "row-dd059",
+                      "cell": [
+                        {
+                          "type": "Control",
+                          "id": "control-cc21d",
+                          "label": {
+                            "type": "Multilingual",
+                            "multilingualText": {
+                              "text": [
+                                {
+                                  "locale": "en",
+                                  "text": "size"
+                                },
+                                {
+                                  "locale": "de",
+                                  "text": "size"
+                                }
+                              ]
+                            }
+                          },
+                          "elementRef": "field_54eaa"
+                        },
+                        {
+                          "type": "Control",
+                          "id": "control-8b55e",
+                          "label": {
+                            "type": "Multilingual",
+                            "multilingualText": {
+                              "text": [
+                                {
+                                  "locale": "en",
+                                  "text": "mime_type"
+                                },
+                                {
+                                  "locale": "de",
+                                  "text": "mime_type"
+                                }
+                              ]
+                            }
+                          },
+                          "elementRef": "field_fdce5"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "Row",
+                      "id": "row-fcf7e",
+                      "cell": [
+                        {
+                          "type": "Control",
+                          "id": "control-84ea4",
+                          "label": {
+                            "type": "Multilingual",
+                            "multilingualText": {
+                              "text": [
+                                {
+                                  "locale": "en",
+                                  "text": "category"
+                                },
+                                {
+                                  "locale": "de",
+                                  "text": "category"
+                                }
+                              ]
+                            }
+                          },
+                          "elementRef": "field_17369"
+                        },
+                        {
+                          "type": "Control",
+                          "id": "control-07baa",
+                          "label": {
+                            "type": "Multilingual",
+                            "multilingualText": {
+                              "text": [
+                                {
+                                  "locale": "en",
+                                  "text": "description"
+                                },
+                                {
+                                  "locale": "de",
+                                  "text": "description"
+                                }
+                              ]
+                            }
+                          },
+                          "elementRef": "field_1286b"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "Row",
+                      "id": "row-a041f",
+                      "cell": [
+                        {
+                          "type": "Control",
+                          "id": "control-ee175",
+                          "elementRef": "field_03314"
+                        },
+                        {
+                          "type": "Control",
+                          "id": "control-8a13f",
+                          "elementRef": "field_b320e"
+                        }
+                      ]
+                    }
+                  ],
+                  "verticalAlignment": "TOP"
+                },
+                "multiFileUpload": true,
+                "multiFileUploadOptions": {
+                  "elementRef": "group_955ee",
+                  "enableDownload": true,
+                  "fileUploadDescription": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "Drop files here or click to"
+                      },
+                      {
+                        "locale": "de",
+                        "text": "Ziehe Dateien hierher oder klicke, um"
+                      }
+                    ]
+                  },
+                  "hideFileUploadDescription": true,
+                  "fileUploadButtonText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "Upload files"
+                      },
+                      {
+                        "locale": "de",
+                        "text": "Dateien hochzuladen"
+                      }
+                    ]
+                  },
+                  "hideFileUploadButtonText": true,
+                  "fileUploadHelperText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "This is a super useful helper text, that's explaining very important things!"
+                      },
+                      {
+                        "locale": "de",
+                        "text": "Das ist ein super nützlicher Helper Text, der sehr wichtige Dinge erklärt!"
+                      }
+                    ]
+                  }
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "fieldConfiguration": {
+      "field": [
+        {
+          "elementRef": "group_955ee",
+          "attachmentConfig": {
+            "accept": "image/*"
+          }
+        },
+        {
+          "initialValue": "42",
+          "elementRef": "field_deb9a"
+        },
+        {
+          "initialValue": "42",
+          "elementRef": "field_8b46f"
+        }
+      ]
+    },
+    "groupConfiguration": {},
+    "defaults": {}
+  }
+}

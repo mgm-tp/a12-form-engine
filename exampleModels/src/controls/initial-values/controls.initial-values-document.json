@@ -1,0 +1,966 @@
+{
+  "header": {
+    "id": "controls.initial-values-document",
+    "modelType": "document",
+    "modelVersion": "28.4.0",
+    "locales": [
+      {
+        "code": "en"
+      },
+      {
+        "code": "de"
+      }
+    ],
+    "labels": [],
+    "annotations": [
+      {
+        "name": "roles",
+        "value": "admin"
+      }
+    ],
+    "modelReferences": []
+  },
+  "content": {
+    "modelInfo": {
+      "name": "controls.initial-values-document",
+      "immutable": false
+    },
+    "modelConfig": {
+      "decimalSeparator": ".",
+      "timeZone": "UTC",
+      "conditionLanguage": {
+        "code": "en_US"
+      }
+    },
+    "modelRoot": {
+      "rootGroups": [
+        {
+          "type": "Group",
+          "id": "group_cb34b",
+          "name": "rootGroup",
+          "Group": {
+            "repeatability": 1,
+            "elements": [
+              {
+                "type": "Group",
+                "id": "group_15f43",
+                "name": "withInitialValues",
+                "Group": {
+                  "repeatability": 1,
+                  "elements": [
+                    {
+                      "type": "Field",
+                      "id": "field_9a3c8",
+                      "name": "StringField",
+                      "Field": {
+                        "fieldType": {
+                          "type": "StringType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "StringField"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "StringField"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_f5bce",
+                      "name": "NumberField",
+                      "Field": {
+                        "fieldType": {
+                          "type": "NumberType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "NumberField"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "NumberField"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "fieldimpl_dea96",
+                      "name": "BooleanFieldTrue",
+                      "Field": {
+                        "fieldType": {
+                          "type": "BooleanType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "BooleanField"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "BooleanField"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "fieldimpl_fd45a",
+                      "name": "BooleanFieldFalse",
+                      "Field": {
+                        "fieldType": {
+                          "type": "BooleanType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "BooleanFieldFalse"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "BooleanFieldFalse"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "fieldimpl_9348f",
+                      "name": "BooleanFieldNoInitialValue",
+                      "Field": {
+                        "fieldType": {
+                          "type": "BooleanType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "BooleanFieldNoInitialValue"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "BooleanFieldNoInitialValue"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "fieldimpl_e6538",
+                      "name": "DateField",
+                      "Field": {
+                        "fieldType": {
+                          "type": "DateType",
+                          "DateType": {
+                            "format": "yyyy-MM-dd"
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "DateField"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "DateField"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "fieldimpl_f1be1",
+                      "name": "DateTimeField",
+                      "Field": {
+                        "fieldType": {
+                          "type": "DateTimeType",
+                          "DateTimeType": {
+                            "format": "yyyy-MM-dd'T'HH:mm:ss"
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "DateTimeField"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "DateTimeField"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "fieldimpl_7233b",
+                      "name": "TimeField",
+                      "Field": {
+                        "fieldType": {
+                          "type": "TimeType",
+                          "TimeType": {
+                            "format": "HH:mm:ss"
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "TimeField"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "TimeField"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "fieldimpl_77295",
+                      "name": "EnumerationField",
+                      "Field": {
+                        "fieldType": {
+                          "type": "EnumerationType",
+                          "EnumerationType": {
+                            "values": [
+                              {
+                                "value": "key_1",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "value_1"
+                                  },
+                                  {
+                                    "locale": "de",
+                                    "text": "wert_1"
+                                  }
+                                ]
+                              },
+                              {
+                                "value": "key_2",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "value_2"
+                                  },
+                                  {
+                                    "locale": "de",
+                                    "text": "wert_2"
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "EnumerationField"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "EnumerationField"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "fieldimpl_7fb78",
+                      "name": "ConfirmField",
+                      "Field": {
+                        "fieldType": {
+                          "type": "ConfirmType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "ConfirmField"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "ConfirmField"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Group",
+                "id": "groupimpl_c41d3",
+                "name": "withoutInitialValues",
+                "Group": {
+                  "repeatability": 1,
+                  "elements": [
+                    {
+                      "type": "Field",
+                      "id": "fieldimpl_fc198",
+                      "name": "StringField",
+                      "Field": {
+                        "fieldType": {
+                          "type": "StringType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "StringField"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "StringField"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "fieldimpl_dbcea",
+                      "name": "NumberField",
+                      "Field": {
+                        "fieldType": {
+                          "type": "NumberType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "NumberField"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "NumberField"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "fieldimpl_3d6c1",
+                      "name": "BooleanField",
+                      "Field": {
+                        "fieldType": {
+                          "type": "BooleanType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "BooleanField"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "BooleanField"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "fieldimpl_827e7",
+                      "name": "DateField",
+                      "Field": {
+                        "fieldType": {
+                          "type": "DateType",
+                          "DateType": {
+                            "format": "yyyy-MM-dd"
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "DateField"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "DateField"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "fieldimpl_7384d",
+                      "name": "DateTimeField",
+                      "Field": {
+                        "fieldType": {
+                          "type": "DateTimeType",
+                          "DateTimeType": {
+                            "format": "yyyy-MM-dd'T'HH:mm:ss"
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "DateTimeField"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "DateTimeField"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "fieldimpl_97052",
+                      "name": "TimeField",
+                      "Field": {
+                        "fieldType": {
+                          "type": "TimeType",
+                          "TimeType": {
+                            "format": "HH:mm:ss"
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "TimeField"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "TimeField"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "fieldimpl_986db",
+                      "name": "EnumerationField",
+                      "Field": {
+                        "fieldType": {
+                          "type": "EnumerationType",
+                          "EnumerationType": {
+                            "values": [
+                              {
+                                "value": "key_1",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "value_1"
+                                  },
+                                  {
+                                    "locale": "de",
+                                    "text": "wert_1"
+                                  }
+                                ]
+                              },
+                              {
+                                "value": "key_2",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "value_2"
+                                  },
+                                  {
+                                    "locale": "de",
+                                    "text": "wert_2"
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "EnumerationField"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "EnumerationField"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "fieldimpl_60048",
+                      "name": "ConfirmField",
+                      "Field": {
+                        "fieldType": {
+                          "type": "ConfirmType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "ConfirmField"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "ConfirmField"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Group",
+                "id": "groupimpl_bbcfb",
+                "name": "repeatableGroupWithInitialValues",
+                "Group": {
+                  "repeatability": 5,
+                  "elements": [
+                    {
+                      "type": "Field",
+                      "id": "fieldimpl_0979f",
+                      "name": "StringField",
+                      "Field": {
+                        "fieldType": {
+                          "type": "StringType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "StringField"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "StringField"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "fieldimpl_adb9e",
+                      "name": "NumberField",
+                      "Field": {
+                        "fieldType": {
+                          "type": "NumberType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "NumberField"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "NumberField"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "fieldimpl_229a3",
+                      "name": "BooleanField",
+                      "Field": {
+                        "fieldType": {
+                          "type": "BooleanType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "BooleanField"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "BooleanField"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "fieldimpl_908d1",
+                      "name": "BooleanFieldFalse",
+                      "Field": {
+                        "fieldType": {
+                          "type": "BooleanType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "BooleanFieldFalse"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "BooleanFieldFalse"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "fieldimpl_04cf8",
+                      "name": "BooleanFieldNoInitialValue",
+                      "Field": {
+                        "fieldType": {
+                          "type": "BooleanType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "BooleanFieldNoInitialValue"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "BooleanFieldNoInitialValue"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "fieldimpl_3e731",
+                      "name": "DateField",
+                      "Field": {
+                        "fieldType": {
+                          "type": "DateType",
+                          "DateType": {
+                            "format": "yyyy-MM-dd"
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "DateField"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "DateField"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "fieldimpl_dccc4",
+                      "name": "DateTimeField",
+                      "Field": {
+                        "fieldType": {
+                          "type": "DateTimeType",
+                          "DateTimeType": {
+                            "format": "yyyy-MM-dd'T'HH:mm:ss"
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "DateTimeField"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "DateTimeField"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "fieldimpl_317bf",
+                      "name": "TimeField",
+                      "Field": {
+                        "fieldType": {
+                          "type": "TimeType",
+                          "TimeType": {
+                            "format": "HH:mm:ss"
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "TimeField"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "TimeField"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "fieldimpl_90aca",
+                      "name": "EnumerationField",
+                      "Field": {
+                        "fieldType": {
+                          "type": "EnumerationType",
+                          "EnumerationType": {
+                            "values": [
+                              {
+                                "value": "key_1",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "value_1"
+                                  },
+                                  {
+                                    "locale": "de",
+                                    "text": "wert_1"
+                                  }
+                                ]
+                              },
+                              {
+                                "value": "key_2",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "value_2"
+                                  },
+                                  {
+                                    "locale": "de",
+                                    "text": "wert_2"
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "EnumerationField"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "EnumerationField"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "fieldimpl_a8338",
+                      "name": "ConfirmField",
+                      "Field": {
+                        "fieldType": {
+                          "type": "ConfirmType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "ConfirmField"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "ConfirmField"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Group",
+                "id": "group_f6916",
+                "name": "repeatableGroupWithoutInitialValues",
+                "Group": {
+                  "repeatability": 5,
+                  "elements": [
+                    {
+                      "type": "Field",
+                      "id": "fieldimpl_9fb98",
+                      "name": "StringField",
+                      "Field": {
+                        "fieldType": {
+                          "type": "StringType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "StringField"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "StringField"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "fieldimpl_358b1",
+                      "name": "NumberField",
+                      "Field": {
+                        "fieldType": {
+                          "type": "NumberType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "NumberField"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "NumberField"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "fieldimpl_9ccab",
+                      "name": "BooleanField",
+                      "Field": {
+                        "fieldType": {
+                          "type": "BooleanType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "BooleanField"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "BooleanField"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "fieldimpl_e6a17",
+                      "name": "DateField",
+                      "Field": {
+                        "fieldType": {
+                          "type": "DateType",
+                          "DateType": {
+                            "format": "yyyy-MM-dd"
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "DateField"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "DateField"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "fieldimpl_3d9c0",
+                      "name": "DateTimeField",
+                      "Field": {
+                        "fieldType": {
+                          "type": "DateTimeType",
+                          "DateTimeType": {
+                            "format": "yyyy-MM-dd'T'HH:mm:ss"
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "DateTimeField"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "DateTimeField"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "fieldimpl_7a732",
+                      "name": "TimeField",
+                      "Field": {
+                        "fieldType": {
+                          "type": "TimeType",
+                          "TimeType": {
+                            "format": "HH:mm:ss"
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "TimeField"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "TimeField"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "fieldimpl_48e33",
+                      "name": "EnumerationField",
+                      "Field": {
+                        "fieldType": {
+                          "type": "EnumerationType",
+                          "EnumerationType": {
+                            "values": [
+                              {
+                                "value": "key_1",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "value_1"
+                                  },
+                                  {
+                                    "locale": "de",
+                                    "text": "wert_1"
+                                  }
+                                ]
+                              },
+                              {
+                                "value": "key_2",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "value_2"
+                                  },
+                                  {
+                                    "locale": "de",
+                                    "text": "wert_2"
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "EnumerationField"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "EnumerationField"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "fieldimpl_6dd61",
+                      "name": "ConfirmField",
+                      "Field": {
+                        "fieldType": {
+                          "type": "ConfirmType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "ConfirmField"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "ConfirmField"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

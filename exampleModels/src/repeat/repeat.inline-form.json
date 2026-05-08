@@ -1,0 +1,3703 @@
+{
+  "header": {
+    "id": "repeat.inline-form",
+    "modelType": "form",
+    "modelVersion": "37.4.0",
+    "locales": [
+      {
+        "code": "en"
+      },
+      {
+        "code": "de"
+      }
+    ],
+    "annotations": [
+      {
+        "name": "roles",
+        "value": "admin"
+      }
+    ],
+    "modelReferences": [
+      {
+        "alias": "DM",
+        "modelType": "document",
+        "purpose": "data binding",
+        "reference": "repeat-document"
+      }
+    ]
+  },
+  "content": {
+    "subHeaderBox": {
+      "id": "subHeaderBox1",
+      "majorButtons": {
+        "button": [
+          {
+            "type": "NAVIGATION",
+            "id": "button-2eacb",
+            "name": "nav1",
+            "buttonStyling": {
+              "label": {
+                "type": "Multilingual",
+                "multilingualText": {
+                  "text": [
+                    {
+                      "locale": "en",
+                      "text": "General"
+                    },
+                    {
+                      "locale": "de",
+                      "text": "General"
+                    }
+                  ]
+                }
+              },
+              "priority": "SECONDARY"
+            },
+            "target": "screen1",
+            "scope": "HIDDEN_IN_READONLY_MODE"
+          },
+          {
+            "type": "NAVIGATION",
+            "id": "button-6533a",
+            "name": "nav2",
+            "buttonStyling": {
+              "label": {
+                "type": "Multilingual",
+                "multilingualText": {
+                  "text": [
+                    {
+                      "locale": "en",
+                      "text": "Initial Values"
+                    },
+                    {
+                      "locale": "de",
+                      "text": "Initial Values"
+                    }
+                  ]
+                }
+              },
+              "priority": "SECONDARY"
+            },
+            "target": "screen-f5dcf",
+            "scope": "HIDDEN_IN_READONLY_MODE"
+          },
+          {
+            "type": "NAVIGATION",
+            "id": "button-8e43d",
+            "name": "nav4",
+            "buttonStyling": {
+              "label": {
+                "type": "Multilingual",
+                "multilingualText": {
+                  "text": [
+                    {
+                      "locale": "en",
+                      "text": "Field Expositions"
+                    },
+                    {
+                      "locale": "de",
+                      "text": "Field Expositions"
+                    }
+                  ]
+                }
+              },
+              "priority": "SECONDARY"
+            },
+            "target": "screen-0c399",
+            "scope": "HIDDEN_IN_READONLY_MODE"
+          },
+          {
+            "type": "NAVIGATION",
+            "id": "button-f8bb3",
+            "name": "nav5",
+            "buttonStyling": {
+              "label": {
+                "type": "Multilingual",
+                "multilingualText": {
+                  "text": [
+                    {
+                      "locale": "en",
+                      "text": "Date Options"
+                    },
+                    {
+                      "locale": "de",
+                      "text": "Date Options"
+                    }
+                  ]
+                }
+              },
+              "priority": "SECONDARY"
+            },
+            "target": "screen-eea9e",
+            "scope": "HIDDEN_IN_READONLY_MODE"
+          },
+          {
+            "type": "NAVIGATION",
+            "id": "button-f13ca",
+            "name": "nav6",
+            "buttonStyling": {
+              "label": {
+                "type": "Multilingual",
+                "multilingualText": {
+                  "text": [
+                    {
+                      "locale": "en",
+                      "text": "Column Properties"
+                    },
+                    {
+                      "locale": "de",
+                      "text": "Column Properties"
+                    }
+                  ]
+                }
+              },
+              "priority": "SECONDARY"
+            },
+            "target": "screen-b9ab1",
+            "scope": "HIDDEN_IN_READONLY_MODE"
+          },
+          {
+            "type": "NAVIGATION",
+            "id": "button-ebaaf",
+            "name": "nav7",
+            "buttonStyling": {
+              "label": {
+                "type": "Multilingual",
+                "multilingualText": {
+                  "text": [
+                    {
+                      "locale": "en",
+                      "text": "Row Actions"
+                    },
+                    {
+                      "locale": "de",
+                      "text": "Row Actions"
+                    }
+                  ]
+                }
+              },
+              "priority": "SECONDARY"
+            },
+            "target": "screen-2da3d",
+            "scope": "ALWAYS"
+          },
+          {
+            "type": "NAVIGATION",
+            "id": "button-a7495",
+            "name": "nav8",
+            "buttonStyling": {
+              "label": {
+                "type": "Multilingual",
+                "multilingualText": {
+                  "text": [
+                    {
+                      "locale": "en",
+                      "text": "Paging"
+                    },
+                    {
+                      "locale": "de",
+                      "text": "Paging"
+                    }
+                  ]
+                }
+              },
+              "priority": "SECONDARY"
+            },
+            "target": "screen-00068",
+            "scope": "ALWAYS"
+          },
+          {
+            "type": "NAVIGATION",
+            "id": "button-0216a",
+            "name": "nav9",
+            "buttonStyling": {
+              "label": {
+                "type": "Multilingual",
+                "multilingualText": {
+                  "text": [
+                    {
+                      "locale": "en",
+                      "text": "Table Style"
+                    }
+                  ]
+                }
+              },
+              "priority": "SECONDARY"
+            },
+            "target": "screen-4af26",
+            "scope": "ALWAYS"
+          }
+        ]
+      }
+    },
+    "footerBox": {
+      "id": "footerBox1"
+    },
+    "screens": [
+      {
+        "id": "screen1",
+        "name": "SortingAndFiltering",
+        "title": {
+          "type": "Multilingual",
+          "multilingualText": {
+            "text": [
+              {
+                "locale": "en",
+                "text": "Sorting And Filtering"
+              }
+            ]
+          }
+        },
+        "screenElements": [
+          {
+            "type": "Section",
+            "id": "section-e7620",
+            "name": "sec1",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "Inline Repeat with all DataTypes"
+                  }
+                ]
+              }
+            },
+            "screenElements": [
+              {
+                "type": "ControlGrid",
+                "id": "controlgrid-80aad",
+                "name": "cg1",
+                "row": [
+                  {
+                    "type": "Row",
+                    "id": "row-32567",
+                    "cell": [
+                      {
+                        "type": "ExpressionCell",
+                        "id": "expressioncell-ac2ac",
+                        "offset": {
+                          "lg": 0
+                        },
+                        "span": {
+                          "lg": 1
+                        },
+                        "name": "expression",
+                        "expression": "\"* DefaultSorting: L1_String ASC\""
+                      }
+                    ]
+                  }
+                ],
+                "verticalAlignment": "BOTTOM"
+              },
+              {
+                "type": "InlineRepeat",
+                "id": "inlinerepeat-da601",
+                "name": "inline-repeat-Nested_L1",
+                "repeatOverviewColumn": [
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-2c388",
+                    "width": 1,
+                    "sortable": true,
+                    "filterable": true,
+                    "pinDirection": "LEFT",
+                    "preferredSorting": "ASC",
+                    "elementRef": "F18"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-adcda",
+                    "width": 1,
+                    "sortable": true,
+                    "filterable": true,
+                    "pinDirection": "LEFT",
+                    "preferredSorting": "ASC",
+                    "elementRef": "F19"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-1ccd0",
+                    "width": 1,
+                    "sortable": true,
+                    "filterable": true,
+                    "preferredSorting": "ASC",
+                    "elementRef": "F22"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-577a0",
+                    "width": 1,
+                    "sortable": true,
+                    "filterable": true,
+                    "preferredSorting": "ASC",
+                    "elementRef": "field_54333"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-07a2d",
+                    "width": 1,
+                    "sortable": true,
+                    "filterable": true,
+                    "preferredSorting": "ASC",
+                    "elementRef": "F25"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn_13619",
+                    "width": 1,
+                    "filterable": true,
+                    "filterExposition": "STRING",
+                    "elementRef": "field_baa9e"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-2f3cf",
+                    "width": 1,
+                    "sortable": true,
+                    "filterable": true,
+                    "preferredSorting": "ASC",
+                    "datePickerConfig": {
+                      "absolute": false,
+                      "preselectionYear": 0
+                    },
+                    "elementRef": "F24"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-83fe7",
+                    "width": 1,
+                    "sortable": true,
+                    "filterable": true,
+                    "preferredSorting": "ASC",
+                    "elementRef": "field_299e0"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-444a6",
+                    "width": 1,
+                    "sortable": true,
+                    "filterable": true,
+                    "preferredSorting": "ASC",
+                    "elementRef": "field_e1f20"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-39b72",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "L1_DateRange (with InterpretationOfYear)"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "L1_DateRange (with InterpretationOfYear)"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "sortable": true,
+                    "filterable": true,
+                    "preferredSorting": "ASC",
+                    "datePickerConfig": {
+                      "absolute": false,
+                      "preselectionYear": 0
+                    },
+                    "elementRef": "field_2b892"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-98625",
+                    "width": 1,
+                    "sortable": true,
+                    "filterable": true,
+                    "pinDirection": "RIGHT",
+                    "preferredSorting": "ASC",
+                    "datePickerConfig": {
+                      "absolute": false,
+                      "preselectionYear": 0
+                    },
+                    "elementRef": "field_d5c68"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-35944",
+                    "width": 1,
+                    "sortable": true,
+                    "filterable": true,
+                    "pinDirection": "RIGHT",
+                    "preferredSorting": "DESC",
+                    "elementRef": "field_ba608"
+                  },
+                  {
+                    "type": "ExpressionRepeatOverviewColumn",
+                    "id": "expressionrepeatoverviewcolumn-4ed39",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "L1_Expression"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "L1_Expression"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "sortable": true,
+                    "filterable": true,
+                    "preferredSorting": "ASC",
+                    "name": "L1_Expression",
+                    "expression": "case [L1_String] != \"\" {\"**\" [L1_String] \"** ➡ \"} [L1_Number]"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-e6e66",
+                    "width": 1,
+                    "sortable": true,
+                    "filterable": true,
+                    "preferredSorting": "ASC",
+                    "elementRef": "field_53f1d"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-96d91",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "L1_MultiSelect"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "sortable": false,
+                    "filterable": true,
+                    "preferredSorting": "ASC",
+                    "elementRef": "group_48bf7"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-59e72",
+                    "width": 1,
+                    "sortable": false,
+                    "filterable": true,
+                    "preferredSorting": "ASC",
+                    "elementRef": "field_73578"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-ece70",
+                    "width": 1,
+                    "sortable": true,
+                    "filterable": true,
+                    "preferredSorting": "ASC",
+                    "elementRef": "field_09aea"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn_6da8e",
+                    "width": 1,
+                    "filterable": true,
+                    "filterExposition": "FULL",
+                    "elementRef": "field_7d034"
+                  }
+                ],
+                "initialSorting": "fieldbasedrepeatoverviewcolumn-2c388",
+                "rowActionGroup": {
+                  "action": [
+                    {
+                      "buttonStyling": {
+                        "label": {
+                          "type": "Multilingual",
+                          "multilingualText": {
+                            "text": [
+                              {
+                                "locale": "en",
+                                "text": "Event"
+                              },
+                              {
+                                "locale": "de",
+                                "text": "Event"
+                              }
+                            ]
+                          }
+                        },
+                        "icon": {
+                          "name": "cloud"
+                        },
+                        "labelHidden": true
+                      },
+                      "event": "event",
+                      "confirmation": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "Custom row action clicked"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "Custom row action clicked"
+                          }
+                        ]
+                      },
+                      "scope": "ALWAYS"
+                    }
+                  ]
+                },
+                "groupRef": "G15",
+                "enableAdd": true,
+                "enableRemove": true,
+                "enableReorder": true,
+                "enableCopy": false,
+                "pageSize": 2
+              }
+            ]
+          },
+          {
+            "type": "Section",
+            "id": "section-b725a",
+            "name": "sec2",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "Readonly Inline Repeat"
+                  }
+                ]
+              }
+            },
+            "screenElements": [
+              {
+                "type": "InlineRepeat",
+                "id": "inlinerepeat-5d3b7",
+                "name": "inline-repeat-Nested_L1_ReadOnly",
+                "title": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "No readonly presentation"
+                      }
+                    ]
+                  }
+                },
+                "readonly": true,
+                "repeatOverviewColumn": [
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-6fbdc",
+                    "width": 1,
+                    "sortable": true,
+                    "filterable": true,
+                    "pinDirection": "LEFT",
+                    "preferredSorting": "ASC",
+                    "elementRef": "F18"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-21068",
+                    "width": 1,
+                    "sortable": true,
+                    "filterable": true,
+                    "pinDirection": "LEFT",
+                    "preferredSorting": "ASC",
+                    "elementRef": "F19"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-f5d36",
+                    "width": 1,
+                    "sortable": true,
+                    "filterable": true,
+                    "preferredSorting": "ASC",
+                    "elementRef": "F22"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-8e544",
+                    "width": 1,
+                    "sortable": true,
+                    "filterable": true,
+                    "preferredSorting": "ASC",
+                    "datePickerConfig": {
+                      "absolute": false,
+                      "preselectionYear": 0
+                    },
+                    "elementRef": "F24"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-fc457",
+                    "width": 1,
+                    "sortable": true,
+                    "filterable": true,
+                    "preferredSorting": "ASC",
+                    "elementRef": "field_299e0"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-7ca6f",
+                    "width": 1,
+                    "sortable": true,
+                    "filterable": true,
+                    "preferredSorting": "ASC",
+                    "elementRef": "field_e1f20"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-80644",
+                    "width": 1,
+                    "sortable": true,
+                    "filterable": true,
+                    "preferredSorting": "ASC",
+                    "elementRef": "F25"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-104c5",
+                    "width": 1,
+                    "sortable": true,
+                    "filterable": true,
+                    "pinDirection": "RIGHT",
+                    "preferredSorting": "ASC",
+                    "datePickerConfig": {
+                      "absolute": false,
+                      "preselectionYear": 0
+                    },
+                    "elementRef": "field_d5c68"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-6263e",
+                    "width": 1,
+                    "sortable": true,
+                    "filterable": true,
+                    "pinDirection": "RIGHT",
+                    "preferredSorting": "ASC",
+                    "elementRef": "field_ba608"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-82607",
+                    "width": 1,
+                    "sortable": false,
+                    "filterable": false,
+                    "preferredSorting": "ASC",
+                    "elementRef": "field_54333"
+                  },
+                  {
+                    "type": "ExpressionRepeatOverviewColumn",
+                    "id": "expressionrepeatoverviewcolumn-69de4",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "L1_Expression"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "L1_Expression"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "sortable": true,
+                    "filterable": true,
+                    "preferredSorting": "ASC",
+                    "name": "L1_Expression",
+                    "expression": "case [L1_String] != \"\" {\"**\" [L1_String] \"** ➡ \"} [L1_Number]"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-05aa3",
+                    "width": 1,
+                    "sortable": true,
+                    "filterable": true,
+                    "preferredSorting": "ASC",
+                    "elementRef": "field_53f1d"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-0870d",
+                    "width": 1,
+                    "sortable": false,
+                    "filterable": false,
+                    "preferredSorting": "ASC",
+                    "elementRef": "field_73578"
+                  }
+                ],
+                "initialSorting": "expressionrepeatoverviewcolumn-69de4",
+                "groupRef": "G15",
+                "enableAdd": true,
+                "enableRemove": true,
+                "enableReorder": true,
+                "enableCopy": true,
+                "pageSize": 3
+              },
+              {
+                "type": "InlineRepeat",
+                "id": "inlinerepeat-6c974",
+                "name": "inline-repeat-Nested_L1_ReadOnlyTextOutput",
+                "title": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "Readonly presentation = Text Output"
+                      }
+                    ]
+                  }
+                },
+                "readonly": true,
+                "repeatOverviewColumn": [
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-4ab0a",
+                    "width": 1,
+                    "sortable": true,
+                    "filterable": true,
+                    "pinDirection": "RIGHT",
+                    "preferredSorting": "ASC",
+                    "datePickerConfig": {
+                      "absolute": false,
+                      "preselectionYear": 0
+                    },
+                    "elementRef": "field_d5c68"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-179d4",
+                    "width": 1,
+                    "sortable": true,
+                    "filterable": true,
+                    "pinDirection": "RIGHT",
+                    "preferredSorting": "ASC",
+                    "elementRef": "field_ba608"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-6b5fa",
+                    "width": 1,
+                    "sortable": true,
+                    "filterable": true,
+                    "preferredSorting": "ASC",
+                    "elementRef": "F22"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-17302",
+                    "width": 1,
+                    "sortable": true,
+                    "filterable": true,
+                    "preferredSorting": "ASC",
+                    "datePickerConfig": {
+                      "absolute": false,
+                      "preselectionYear": 0
+                    },
+                    "elementRef": "F24"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-ad9bd",
+                    "width": 1,
+                    "sortable": true,
+                    "filterable": true,
+                    "preferredSorting": "ASC",
+                    "elementRef": "field_299e0"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-8e9b1",
+                    "width": 1,
+                    "sortable": true,
+                    "filterable": true,
+                    "preferredSorting": "ASC",
+                    "elementRef": "field_e1f20"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-130fa",
+                    "width": 1,
+                    "sortable": true,
+                    "filterable": true,
+                    "preferredSorting": "ASC",
+                    "elementRef": "F25"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-34b7c",
+                    "width": 1,
+                    "sortable": false,
+                    "filterable": false,
+                    "preferredSorting": "ASC",
+                    "elementRef": "field_54333"
+                  },
+                  {
+                    "type": "ExpressionRepeatOverviewColumn",
+                    "id": "expressionrepeatoverviewcolumn-e85ff",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "L1_Expression"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "L1_Expression"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "sortable": true,
+                    "filterable": true,
+                    "preferredSorting": "ASC",
+                    "name": "L1_Expression",
+                    "expression": "case [L1_String] != \"\" {\"**\" [L1_String] \"** ➡ \"} [L1_Number]"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-7b56b",
+                    "width": 1,
+                    "sortable": true,
+                    "filterable": true,
+                    "preferredSorting": "ASC",
+                    "elementRef": "field_53f1d"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-727e8",
+                    "width": 1,
+                    "sortable": false,
+                    "filterable": false,
+                    "preferredSorting": "ASC",
+                    "elementRef": "field_73578"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-41038",
+                    "width": 1,
+                    "sortable": true,
+                    "filterable": true,
+                    "pinDirection": "LEFT",
+                    "preferredSorting": "ASC",
+                    "elementRef": "F18"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-7be8f",
+                    "width": 1,
+                    "sortable": true,
+                    "filterable": true,
+                    "pinDirection": "LEFT",
+                    "preferredSorting": "ASC",
+                    "elementRef": "F19"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-e4d70",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "L1_MultiSelect"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "sortable": false,
+                    "filterable": false,
+                    "preferredSorting": "ASC",
+                    "elementRef": "group_48bf7"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-1c3fb",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "L1_MultiSelect (comma separated)"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "sortable": false,
+                    "filterable": false,
+                    "preferredSorting": "ASC",
+                    "readonly": true,
+                    "elementRef": "group_48bf7",
+                    "showCommaSeparated": true
+                  }
+                ],
+                "groupRef": "G15",
+                "enableAdd": true,
+                "enableRemove": true,
+                "enableReorder": true,
+                "enableCopy": true,
+                "pageSize": 3,
+                "readonlyPresentation": "TEXT"
+              }
+            ]
+          },
+          {
+            "type": "Section",
+            "id": "section-7e1da",
+            "name": "sec3",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "Output"
+                  }
+                ]
+              }
+            },
+            "screenElements": [
+              {
+                "type": "InlineRepeat",
+                "id": "inlinerepeat-5afe0",
+                "name": "inline-repeat-Nested_L1",
+                "repeatOverviewColumn": [
+                  {
+                    "type": "ExpressionRepeatOverviewColumn",
+                    "id": "expressionrepeatoverviewcolumn-10c78",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "L1_String"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "sortable": false,
+                    "filterable": false,
+                    "preferredSorting": "ASC",
+                    "name": "L1_String",
+                    "expression": "[L1_String]"
+                  },
+                  {
+                    "type": "ExpressionRepeatOverviewColumn",
+                    "id": "expressionrepeatoverviewcolumn-d06e5",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "L1_Number"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "sortable": false,
+                    "filterable": false,
+                    "preferredSorting": "ASC",
+                    "name": "L1_Number",
+                    "expression": "[L1_Number]"
+                  },
+                  {
+                    "type": "ExpressionRepeatOverviewColumn",
+                    "id": "expressionrepeatoverviewcolumn-b13cf",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "L1_Boolean"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "sortable": false,
+                    "filterable": false,
+                    "preferredSorting": "ASC",
+                    "name": "L1_Boolean",
+                    "expression": "[L1_Boolean]"
+                  },
+                  {
+                    "type": "ExpressionRepeatOverviewColumn",
+                    "id": "expressionrepeatoverviewcolumn-46219",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "L1_Confirm"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "sortable": false,
+                    "filterable": false,
+                    "preferredSorting": "ASC",
+                    "name": "L1_Confirm",
+                    "expression": "[L1_Confirm]"
+                  },
+                  {
+                    "type": "ExpressionRepeatOverviewColumn",
+                    "id": "expressionrepeatoverviewcolumn-c7da0",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "L1_Enumeration"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "sortable": false,
+                    "filterable": false,
+                    "preferredSorting": "ASC",
+                    "name": "L1_Enumeration",
+                    "expression": "[L1_Enumeration]"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn_3e0fa",
+                    "width": 1,
+                    "filterable": true,
+                    "filterExposition": "STRING",
+                    "elementRef": "field_baa9e"
+                  },
+                  {
+                    "type": "ExpressionRepeatOverviewColumn",
+                    "id": "expressionrepeatoverviewcolumn-ee4c1",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "L1_Date"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "sortable": false,
+                    "filterable": false,
+                    "preferredSorting": "ASC",
+                    "name": "L1_Date",
+                    "expression": "[L1_Date]"
+                  },
+                  {
+                    "type": "ExpressionRepeatOverviewColumn",
+                    "id": "expressionrepeatoverviewcolumn-9b9ac",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "L1_DateFragment"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "sortable": false,
+                    "filterable": false,
+                    "preferredSorting": "ASC",
+                    "name": "L1_DateFragment",
+                    "expression": "[L1_DateFragment]"
+                  },
+                  {
+                    "type": "ExpressionRepeatOverviewColumn",
+                    "id": "expressionrepeatoverviewcolumn-8621e",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "L1_DateTime"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "sortable": false,
+                    "filterable": false,
+                    "preferredSorting": "ASC",
+                    "name": "L1_DateTime",
+                    "expression": "[L1_DateTime]"
+                  },
+                  {
+                    "type": "ExpressionRepeatOverviewColumn",
+                    "id": "expressionrepeatoverviewcolumn-8962e",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "L1_Time"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "sortable": false,
+                    "filterable": false,
+                    "preferredSorting": "ASC",
+                    "name": "L1_Time",
+                    "expression": "[L1_Time]"
+                  },
+                  {
+                    "type": "ExpressionRepeatOverviewColumn",
+                    "id": "expressionrepeatoverviewcolumn-0a1b3",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "L1_Expression"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "L1_Expression"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "sortable": true,
+                    "filterable": true,
+                    "preferredSorting": "ASC",
+                    "name": "L1_Expression",
+                    "expression": "case [L1_String] != \"\" {\"**\" [L1_String] \"** ➡ \"} [L1_Number]"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-71d4c",
+                    "width": 1,
+                    "sortable": true,
+                    "filterable": true,
+                    "preferredSorting": "ASC",
+                    "elementRef": "field_53f1d"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-300ca",
+                    "width": 1,
+                    "sortable": false,
+                    "filterable": false,
+                    "preferredSorting": "ASC",
+                    "elementRef": "field_73578"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn_8bfea",
+                    "elementRef": "field_09aea"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn_c115f",
+                    "width": 1,
+                    "filterable": true,
+                    "filterExposition": "FULL",
+                    "elementRef": "field_7d034"
+                  }
+                ],
+                "groupRef": "G15",
+                "enableAdd": true,
+                "enableRemove": true
+              }
+            ]
+          },
+          {
+            "type": "Section",
+            "id": "section-9988f",
+            "name": "sec4",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "Inline Repeat with page size 2"
+                  }
+                ]
+              }
+            },
+            "screenElements": [
+              {
+                "type": "InlineRepeat",
+                "id": "inlinerepeat-38ab5",
+                "name": "inline-repeat-Nested_L6",
+                "repeatOverviewColumn": [
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-0e783",
+                    "width": 1,
+                    "sortable": false,
+                    "filterable": false,
+                    "preferredSorting": "ASC",
+                    "elementRef": "fieldimpl_24358"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-503ff",
+                    "width": 1,
+                    "sortable": false,
+                    "filterable": false,
+                    "preferredSorting": "ASC",
+                    "elementRef": "fieldimpl_85949"
+                  }
+                ],
+                "groupRef": "group_ee0b7",
+                "enableAdd": true,
+                "enableRemove": true,
+                "enableReorder": true,
+                "enableCopy": true,
+                "pageSize": 2
+              },
+              {
+                "type": "ControlGrid",
+                "id": "controlgrid-1bf61",
+                "name": "summary",
+                "row": [
+                  {
+                    "type": "Row",
+                    "id": "row-a3b95",
+                    "cell": [
+                      {
+                        "type": "Control",
+                        "id": "control-b5433",
+                        "readonly": true,
+                        "elementRef": "field_6d23f"
+                      }
+                    ]
+                  }
+                ],
+                "verticalAlignment": "BOTTOM"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "screen-f5dcf",
+        "name": "InitialValues",
+        "title": {
+          "type": "Multilingual",
+          "multilingualText": {
+            "text": [
+              {
+                "locale": "en",
+                "text": "Inline-Repeat with initial values"
+              }
+            ]
+          }
+        },
+        "screenElements": [
+          {
+            "type": "Section",
+            "id": "section-49e2d",
+            "name": "sec3",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "Inline-Repeat with initial values"
+                  }
+                ]
+              }
+            },
+            "screenElements": [
+              {
+                "type": "InlineRepeat",
+                "id": "inlinerepeat-27104",
+                "name": "inline-repeat-Nested_L2",
+                "repeatOverviewColumn": [
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-0209a",
+                    "width": 1,
+                    "sortable": false,
+                    "filterable": false,
+                    "pinDirection": "LEFT",
+                    "preferredSorting": "ASC",
+                    "elementRef": "fieldimpl_7e29a"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-3aa97",
+                    "width": 1,
+                    "sortable": false,
+                    "filterable": false,
+                    "pinDirection": "LEFT",
+                    "preferredSorting": "ASC",
+                    "elementRef": "fieldimpl_67739"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-74419",
+                    "width": 1,
+                    "sortable": false,
+                    "filterable": false,
+                    "preferredSorting": "ASC",
+                    "elementRef": "fieldimpl_123fa"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-abfcc",
+                    "width": 1,
+                    "sortable": false,
+                    "filterable": false,
+                    "preferredSorting": "ASC",
+                    "datePickerConfig": {
+                      "absolute": false,
+                      "preselectionYear": 0
+                    },
+                    "elementRef": "fieldimpl_6bfe6"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-0b4e7",
+                    "width": 1,
+                    "sortable": false,
+                    "filterable": false,
+                    "preferredSorting": "ASC",
+                    "elementRef": "fieldimpl_b7333"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-f8a2c",
+                    "width": 1,
+                    "sortable": false,
+                    "filterable": false,
+                    "pinDirection": "RIGHT",
+                    "preferredSorting": "ASC",
+                    "datePickerConfig": {
+                      "absolute": false,
+                      "preselectionYear": 0
+                    },
+                    "elementRef": "fieldimpl_41ca2"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-c8520",
+                    "width": 1,
+                    "sortable": false,
+                    "filterable": false,
+                    "pinDirection": "RIGHT",
+                    "preferredSorting": "ASC",
+                    "elementRef": "fieldimpl_f2d77"
+                  }
+                ],
+                "groupRef": "groupimpl_54c38",
+                "enableAdd": true,
+                "enableRemove": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "screen-0c399",
+        "name": "FieldExpositions",
+        "title": {
+          "type": "Multilingual",
+          "multilingualText": {
+            "text": [
+              {
+                "locale": "en",
+                "text": "Field Expositions"
+              }
+            ]
+          }
+        },
+        "screenElements": [
+          {
+            "type": "Section",
+            "id": "section-c5d30",
+            "name": "String",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "String"
+                  }
+                ]
+              }
+            },
+            "screenElements": [
+              {
+                "type": "InlineRepeat",
+                "id": "inlinerepeat-210b6",
+                "name": "inline-repeat-Nested_L3",
+                "repeatOverviewColumn": [
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-94400",
+                    "width": 1,
+                    "sortable": false,
+                    "filterable": false,
+                    "preferredSorting": "ASC",
+                    "elementRef": "field_04b7d"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-1558f",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "L3_TextArea with Auto Expand"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "L3_TextArea mit Auto Expand"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "sortable": false,
+                    "filterable": false,
+                    "preferredSorting": "ASC",
+                    "autoExpand": true,
+                    "elementRef": "field_04b7d"
+                  }
+                ],
+                "groupRef": "groupimpl_77762",
+                "enableAdd": true,
+                "enableRemove": true
+              }
+            ]
+          },
+          {
+            "type": "Section",
+            "id": "section-660bf",
+            "name": "Number",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "Number"
+                  }
+                ]
+              }
+            },
+            "screenElements": [
+              {
+                "type": "InlineRepeat",
+                "id": "inlinerepeat-20b55",
+                "name": "inline-repeat-Nested_L4",
+                "repeatOverviewColumn": [
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-7652e",
+                    "width": 1,
+                    "sortable": false,
+                    "filterable": false,
+                    "preferredSorting": "ASC",
+                    "elementRef": "fieldimpl_7ef64"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-3ae49",
+                    "width": 1,
+                    "sortable": false,
+                    "filterable": false,
+                    "preferredSorting": "ASC",
+                    "elementRef": "fieldimpl_7962e"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-a763b",
+                    "width": 1,
+                    "sortable": false,
+                    "filterable": false,
+                    "preferredSorting": "ASC",
+                    "elementRef": "fieldimpl_53712"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-8bd0d",
+                    "width": 1,
+                    "sortable": false,
+                    "filterable": false,
+                    "preferredSorting": "ASC",
+                    "elementRef": "fieldimpl_f795d"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-8f489",
+                    "width": 1,
+                    "sortable": false,
+                    "filterable": false,
+                    "preferredSorting": "ASC",
+                    "elementRef": "field_87cb7"
+                  }
+                ],
+                "groupRef": "groupimpl_091f2",
+                "enableAdd": true,
+                "enableRemove": true
+              }
+            ]
+          },
+          {
+            "type": "Section",
+            "id": "section-92c92",
+            "name": "Enumeration",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "Enumeration"
+                  }
+                ]
+              }
+            },
+            "screenElements": [
+              {
+                "type": "InlineRepeat",
+                "id": "inlinerepeat-cd962",
+                "name": "inline-repeat-Nested_L5",
+                "repeatOverviewColumn": [
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-348d3",
+                    "width": 1,
+                    "sortable": false,
+                    "filterable": false,
+                    "preferredSorting": "ASC",
+                    "elementRef": "fieldimpl_f55dc"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-5106b",
+                    "width": 1,
+                    "sortable": false,
+                    "filterable": false,
+                    "preferredSorting": "ASC",
+                    "elementRef": "fieldimpl_743e3"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-0bb9e",
+                    "width": 1,
+                    "sortable": false,
+                    "filterable": false,
+                    "preferredSorting": "ASC",
+                    "elementRef": "fieldimpl_22286"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-820db",
+                    "width": 1,
+                    "sortable": false,
+                    "filterable": false,
+                    "preferredSorting": "ASC",
+                    "elementRef": "fieldimpl_4ce38"
+                  }
+                ],
+                "groupRef": "groupimpl_32c7e",
+                "enableAdd": true,
+                "enableRemove": true
+              }
+            ]
+          },
+          {
+            "type": "Section",
+            "id": "section-12ae4",
+            "name": "Boolean",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "Boolean"
+                  }
+                ]
+              }
+            },
+            "screenElements": [
+              {
+                "type": "InlineRepeat",
+                "id": "inlinerepeat-ba215",
+                "name": "inline-repeat-Nested_L6",
+                "repeatOverviewColumn": [
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-2aa34",
+                    "width": 1,
+                    "sortable": false,
+                    "filterable": false,
+                    "preferredSorting": "ASC",
+                    "elementRef": "F22"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-2ae21",
+                    "width": 1,
+                    "sortable": false,
+                    "filterable": false,
+                    "preferredSorting": "ASC",
+                    "elementRef": "F_23"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-3bf12",
+                    "width": 1,
+                    "sortable": false,
+                    "filterable": false,
+                    "preferredSorting": "ASC",
+                    "elementRef": "F_24"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-4de03",
+                    "width": 1,
+                    "sortable": false,
+                    "filterable": false,
+                    "preferredSorting": "ASC",
+                    "elementRef": "F_25"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn_25ffa",
+                    "width": 1,
+                    "sortable": false,
+                    "filterable": false,
+                    "preferredSorting": "ASC",
+                    "elementRef": "field_27389"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn_f404d",
+                    "width": 1,
+                    "sortable": false,
+                    "filterable": false,
+                    "preferredSorting": "ASC",
+                    "elementRef": "field_a5458"
+                  }
+                ],
+                "groupRef": "G15",
+                "enableAdd": true,
+                "enableRemove": true
+              }
+            ]
+          },
+          {
+            "type": "Section",
+            "id": "section-40be8",
+            "name": "MultiSelect",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "MultiSelect"
+                  }
+                ]
+              }
+            },
+            "screenElements": [
+              {
+                "type": "InlineRepeat",
+                "id": "inlinerepeat-6bdb1",
+                "name": "inline-repeat-Nested_L8",
+                "repeatOverviewColumn": [
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-a680c",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "L8_MultiSelect_AutoComplete"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "sortable": false,
+                    "filterable": false,
+                    "preferredSorting": "ASC",
+                    "elementRef": "group_0d088"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-aac4f",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "L8_MultiSelect_Full"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "sortable": false,
+                    "filterable": false,
+                    "preferredSorting": "ASC",
+                    "elementRef": "groupimpl_d06df"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-c30ee",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "L8_MultiSelect_Inline"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "sortable": false,
+                    "filterable": false,
+                    "preferredSorting": "ASC",
+                    "elementRef": "groupimpl_9f769"
+                  }
+                ],
+                "groupRef": "group_c596f",
+                "enableAdd": true,
+                "enableRemove": true
+              }
+            ]
+          },
+          {
+            "type": "Section",
+            "id": "section_f22a9",
+            "name": "Confirm",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "Confirm"
+                  }
+                ]
+              }
+            },
+            "screenElements": [
+              {
+                "type": "InlineRepeat",
+                "id": "inlinerepeat_9d16c",
+                "name": "Nested_L10_Repeat",
+                "repeatOverviewColumn": [
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn_159b3",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "L10_Confirm_Default"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "elementRef": "field_98754"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn_b1d34",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "L10_Confirm_Checkbox"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "elementRef": "field_756a9"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn_b566b",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "L10_Confirm_Switch"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "elementRef": "field_d426d"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn_40f77",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "L10_Confirm_SwitchWithValues"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "elementRef": "field_8db73"
+                  }
+                ],
+                "groupRef": "group_f9ce8",
+                "enableAdd": true,
+                "enableRemove": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "screen-eea9e",
+        "name": "DateOptions",
+        "title": {
+          "type": "Multilingual",
+          "multilingualText": {
+            "text": [
+              {
+                "locale": "en",
+                "text": "Date Options"
+              }
+            ]
+          }
+        },
+        "screenElements": [
+          {
+            "type": "InlineRepeat",
+            "id": "inlinerepeat-5ccd7",
+            "name": "inline-repeat-Nested_L1",
+            "repeatOverviewColumn": [
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-a7ea8",
+                "label": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "[2010-2020], Preselected: 2018"
+                      }
+                    ]
+                  }
+                },
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "datePickerConfig": {
+                  "minYear": 2010,
+                  "maxYear": 2020,
+                  "absolute": true,
+                  "preselectionYear": 2018
+                },
+                "elementRef": "F24"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-f75c0",
+                "label": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "[2010-2020], Preselected: 2018"
+                      }
+                    ]
+                  }
+                },
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "datePickerConfig": {
+                  "minYear": 2010,
+                  "maxYear": 2020,
+                  "absolute": true,
+                  "preselectionYear": 2018
+                },
+                "elementRef": "field_d5c68"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-93b6a",
+                "label": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "[-10, +10], Preselected: +1"
+                      }
+                    ]
+                  }
+                },
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "datePickerConfig": {
+                  "minYear": -10,
+                  "maxYear": 5,
+                  "absolute": false,
+                  "preselectionYear": 1
+                },
+                "elementRef": "F24"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-e4746",
+                "label": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "[-10, +10], Preseelcted: -1"
+                      }
+                    ]
+                  }
+                },
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "datePickerConfig": {
+                  "minYear": -10,
+                  "maxYear": 5,
+                  "absolute": false,
+                  "preselectionYear": -1
+                },
+                "elementRef": "field_d5c68"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-a0c87",
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "elementRef": "field_ba608"
+              }
+            ],
+            "groupRef": "G15",
+            "enableAdd": true,
+            "enableRemove": true,
+            "enableReorder": true,
+            "enableCopy": true
+          }
+        ]
+      },
+      {
+        "id": "screen-b9ab1",
+        "name": "ColumnProperties",
+        "title": {
+          "type": "Multilingual",
+          "multilingualText": {
+            "text": [
+              {
+                "locale": "en",
+                "text": "Column Properties"
+              }
+            ]
+          }
+        },
+        "screenElements": [
+          {
+            "type": "Section",
+            "id": "section-67677",
+            "name": "sec1",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "Pinning"
+                  }
+                ]
+              }
+            },
+            "screenElements": [
+              {
+                "type": "InlineRepeat",
+                "id": "inlinerepeat-a44be",
+                "name": "inline-repeat-Nested_L1",
+                "repeatOverviewColumn": [
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-75664",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "Left1"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "sortable": false,
+                    "filterable": false,
+                    "pinDirection": "LEFT",
+                    "preferredSorting": "ASC",
+                    "elementRef": "F18"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-abb7c",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "Left2"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "sortable": false,
+                    "filterable": false,
+                    "pinDirection": "LEFT",
+                    "preferredSorting": "ASC",
+                    "elementRef": "F18"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-03a0f",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "None1"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "sortable": false,
+                    "filterable": false,
+                    "preferredSorting": "ASC",
+                    "elementRef": "F18"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-6dc91",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "None2"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "sortable": false,
+                    "filterable": false,
+                    "preferredSorting": "ASC",
+                    "elementRef": "F18"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-bb84e",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "Right1"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "sortable": false,
+                    "filterable": false,
+                    "pinDirection": "RIGHT",
+                    "preferredSorting": "ASC",
+                    "elementRef": "F18"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-150ee",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "Right2"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "sortable": false,
+                    "filterable": false,
+                    "pinDirection": "RIGHT",
+                    "preferredSorting": "ASC",
+                    "elementRef": "F18"
+                  }
+                ],
+                "groupRef": "G15",
+                "enableAdd": true,
+                "enableRemove": true
+              }
+            ]
+          },
+          {
+            "type": "Section",
+            "id": "section-2db84",
+            "name": "sec2",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "Column Width"
+                  }
+                ]
+              }
+            },
+            "screenElements": [
+              {
+                "type": "InlineRepeat",
+                "id": "inlinerepeat-b99b2",
+                "name": "inline-repeat-Nested_L1",
+                "repeatOverviewColumn": [
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-b7cc3",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "4.0"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 4,
+                    "sortable": false,
+                    "filterable": false,
+                    "preferredSorting": "ASC",
+                    "elementRef": "F18"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-5f880",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "2.6"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 2.6,
+                    "sortable": false,
+                    "filterable": false,
+                    "preferredSorting": "ASC",
+                    "elementRef": "F18"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-d4db8",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "0.5"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 0.5,
+                    "sortable": false,
+                    "filterable": false,
+                    "preferredSorting": "ASC",
+                    "elementRef": "F18"
+                  }
+                ],
+                "groupRef": "G15",
+                "enableAdd": true,
+                "enableRemove": true
+              }
+            ]
+          },
+          {
+            "type": "Section",
+            "id": "section-405dc",
+            "name": "sec3",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "Readonly"
+                  },
+                  {
+                    "locale": "de",
+                    "text": "Readonly"
+                  }
+                ]
+              }
+            },
+            "screenElements": [
+              {
+                "type": "InlineRepeat",
+                "id": "inlinerepeat-80d4c",
+                "name": "inline-repeat-Nested_L1",
+                "repeatOverviewColumn": [
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-fc50f",
+                    "width": 1,
+                    "sortable": false,
+                    "filterable": false,
+                    "preferredSorting": "ASC",
+                    "elementRef": "F18"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-7a504",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "Readonly L1_String"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "sortable": false,
+                    "filterable": false,
+                    "preferredSorting": "ASC",
+                    "readonly": true,
+                    "elementRef": "F18"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-63a22",
+                    "width": 1,
+                    "sortable": false,
+                    "filterable": false,
+                    "preferredSorting": "ASC",
+                    "elementRef": "F18"
+                  }
+                ],
+                "groupRef": "G15",
+                "enableAdd": true,
+                "enableRemove": true
+              }
+            ]
+          },
+          {
+            "type": "Section",
+            "id": "section-a8312",
+            "name": "sec5",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "Resizable Columns"
+                  },
+                  {
+                    "locale": "de",
+                    "text": "Resizable Columns"
+                  }
+                ]
+              }
+            },
+            "screenElements": [
+              {
+                "type": "InlineRepeat",
+                "id": "inlinerepeat-67b37",
+                "name": "inline-repeat-Nested_L1",
+                "repeatOverviewColumn": [
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-bba63",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "String1"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "sortable": false,
+                    "filterable": false,
+                    "preferredSorting": "ASC",
+                    "elementRef": "F18"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-3e3b0",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "Boolean"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "sortable": false,
+                    "filterable": false,
+                    "preferredSorting": "ASC",
+                    "elementRef": "F22"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-2a1a7",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "String2 (Initial Width: 3)"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 3,
+                    "sortable": false,
+                    "filterable": false,
+                    "preferredSorting": "ASC",
+                    "fixedWidth": false,
+                    "elementRef": "F18"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-60427",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "String3"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "sortable": false,
+                    "filterable": false,
+                    "preferredSorting": "ASC",
+                    "fixedWidth": false,
+                    "elementRef": "F18"
+                  }
+                ],
+                "groupRef": "G15",
+                "enableAdd": true,
+                "enableRemove": true,
+                "enableReorder": false,
+                "enableCopy": false,
+                "enableColumnsResize": true
+              }
+            ]
+          },
+          {
+            "type": "Section",
+            "id": "section-67840",
+            "name": "sec6",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "Fixed Width"
+                  },
+                  {
+                    "locale": "de",
+                    "text": "Fixed Width"
+                  }
+                ]
+              }
+            },
+            "screenElements": [
+              {
+                "type": "InlineRepeat",
+                "id": "inlinerepeat-c2740",
+                "name": "inline-repeat-Nested_L1",
+                "repeatOverviewColumn": [
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-5b7bf",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "L1_String (fixed width)"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "sortable": false,
+                    "filterable": false,
+                    "preferredSorting": "ASC",
+                    "fixedWidth": true,
+                    "elementRef": "F18"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-5a516",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "L1_MultiSelect (fixed Width)"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "sortable": false,
+                    "filterable": false,
+                    "preferredSorting": "ASC",
+                    "fixedWidth": true,
+                    "elementRef": "group_48bf7"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-86d8f",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "L1_Time (no fixed width)"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "sortable": false,
+                    "filterable": false,
+                    "preferredSorting": "ASC",
+                    "elementRef": "field_ba608"
+                  }
+                ],
+                "groupRef": "G15",
+                "enableAdd": true,
+                "enableRemove": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "screen-2da3d",
+        "name": "RowActions",
+        "title": {
+          "type": "Multilingual",
+          "multilingualText": {
+            "text": [
+              {
+                "locale": "en",
+                "text": "Custom Row Actions"
+              },
+              {
+                "locale": "de",
+                "text": "Custom Row Actions"
+              }
+            ]
+          }
+        },
+        "screenElements": [
+          {
+            "type": "InlineRepeat",
+            "id": "inlinerepeat-ba2fc",
+            "name": "inline-repeat-1",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "Custom Row Actions without confirmation message"
+                  },
+                  {
+                    "locale": "de",
+                    "text": "Benutzerdefinierte Row Actions ohne Bestätigungsdialog"
+                  }
+                ]
+              }
+            },
+            "repeatOverviewColumn": [
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-62e98",
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "elementRef": "field_b7d43"
+              }
+            ],
+            "rowActionGroup": {
+              "action": [
+                {
+                  "buttonStyling": {
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "AllRowAction"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "AllRowAction"
+                          }
+                        ]
+                      }
+                    },
+                    "icon": {
+                      "name": "format_align_left"
+                    },
+                    "labelHidden": true
+                  },
+                  "event": "AllRowAction",
+                  "scope": "ALWAYS"
+                },
+                {
+                  "buttonStyling": {
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "EditRowAction"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "EditRowAction"
+                          }
+                        ]
+                      }
+                    },
+                    "icon": {
+                      "name": "format_align_center"
+                    },
+                    "labelHidden": true
+                  },
+                  "event": "EditRowAction",
+                  "scope": "HIDDEN_IN_READONLY_MODE"
+                },
+                {
+                  "buttonStyling": {
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "ReadonlyRowAction"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "ReadonlyRowAction"
+                          }
+                        ]
+                      }
+                    },
+                    "icon": {
+                      "name": "format_align_right"
+                    },
+                    "labelHidden": true
+                  },
+                  "event": "ReadonlyRowAction",
+                  "scope": "HIDDEN_IN_EDIT_MODE"
+                },
+                {
+                  "buttonStyling": {
+                    "icon": {
+                      "name": "eco"
+                    }
+                  },
+                  "event": "rowActionWithIcon",
+                  "scope": "ALWAYS"
+                },
+                {
+                  "buttonStyling": {
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "Edit"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "v"
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  "event": "rowActionWithLabel",
+                  "scope": "ALWAYS"
+                },
+                {
+                  "buttonStyling": {
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "RowActionWithIconAndLabel"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "Show"
+                          }
+                        ]
+                      }
+                    },
+                    "icon": {
+                      "name": "visibility"
+                    },
+                    "labelHidden": true
+                  },
+                  "event": "rowActionWithIconAndLabel",
+                  "scope": "ALWAYS"
+                }
+              ]
+            },
+            "groupRef": "group_b2fbd",
+            "enableAdd": true,
+            "enableRemove": true,
+            "enableReorder": false,
+            "enableCopy": false
+          },
+          {
+            "type": "InlineRepeat",
+            "id": "inlinerepeat-f2134",
+            "name": "inline-repeat-2",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "Custom Row Actions with confirmation message"
+                  },
+                  {
+                    "locale": "de",
+                    "text": "Benutzerdefinierte Row Actions mit Bestätigungsdialog"
+                  }
+                ]
+              }
+            },
+            "repeatOverviewColumn": [
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-236aa",
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "elementRef": "field_b7d43"
+              }
+            ],
+            "rowActionGroup": {
+              "action": [
+                {
+                  "buttonStyling": {
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "AllRowAction"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "AllRowAction"
+                          }
+                        ]
+                      }
+                    },
+                    "icon": {
+                      "name": "format_align_left"
+                    },
+                    "labelHidden": true
+                  },
+                  "event": "AllRowAction",
+                  "confirmation": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "Really?"
+                      },
+                      {
+                        "locale": "de",
+                        "text": "Wirklich?"
+                      }
+                    ]
+                  },
+                  "scope": "ALWAYS"
+                },
+                {
+                  "buttonStyling": {
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "EditRowAction"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "EditRowAction"
+                          }
+                        ]
+                      }
+                    },
+                    "icon": {
+                      "name": "format_align_center"
+                    },
+                    "labelHidden": true
+                  },
+                  "event": "EditRowAction",
+                  "confirmation": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "Really?"
+                      },
+                      {
+                        "locale": "de",
+                        "text": "Wirklich?"
+                      }
+                    ]
+                  },
+                  "scope": "HIDDEN_IN_READONLY_MODE"
+                },
+                {
+                  "buttonStyling": {
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "ReadonlyRowAction"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "ReadonlyRowAction"
+                          }
+                        ]
+                      }
+                    },
+                    "icon": {
+                      "name": "format_align_right"
+                    },
+                    "labelHidden": true
+                  },
+                  "event": "ReadonlyRowAction",
+                  "confirmation": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "Really?"
+                      },
+                      {
+                        "locale": "de",
+                        "text": "Wirklich?"
+                      }
+                    ]
+                  },
+                  "scope": "HIDDEN_IN_EDIT_MODE"
+                },
+                {
+                  "buttonStyling": {
+                    "icon": {
+                      "name": "eco"
+                    }
+                  },
+                  "event": "ConfirmationWithIcon",
+                  "confirmation": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "Really?"
+                      },
+                      {
+                        "locale": "de",
+                        "text": "Wirklich?"
+                      }
+                    ]
+                  },
+                  "confirmationDialogTitle": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "Confirmation Title"
+                      },
+                      {
+                        "locale": "de",
+                        "text": "Confirmation Titel"
+                      }
+                    ]
+                  },
+                  "scope": "ALWAYS"
+                },
+                {
+                  "buttonStyling": {
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "Edit"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "Edit"
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  "event": "ConfirmationWithLabel",
+                  "confirmation": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "Really?"
+                      },
+                      {
+                        "locale": "de",
+                        "text": "Wirklich?"
+                      }
+                    ]
+                  },
+                  "scope": "ALWAYS"
+                },
+                {
+                  "buttonStyling": {
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "ConfirmationWithIconAndLabel"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "ConfirmationWithIconAndLabel"
+                          }
+                        ]
+                      }
+                    },
+                    "icon": {
+                      "name": "visibility"
+                    },
+                    "labelHidden": true
+                  },
+                  "event": "ConfirmationWithIconAndLabel",
+                  "confirmation": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "Really?"
+                      },
+                      {
+                        "locale": "de",
+                        "text": "Wirklich?"
+                      }
+                    ]
+                  },
+                  "scope": "ALWAYS"
+                },
+                {
+                  "buttonStyling": {
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "ConfirmationWithTitle"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "ConfirmationWithTitle"
+                          }
+                        ]
+                      }
+                    },
+                    "icon": {
+                      "name": "cloud"
+                    },
+                    "labelHidden": true
+                  },
+                  "event": "ConfirmationWithTitle",
+                  "confirmation": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "Really?"
+                      },
+                      {
+                        "locale": "de",
+                        "text": "Wirklich?"
+                      }
+                    ]
+                  },
+                  "confirmationDialogTitle": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "Confirmation Title"
+                      },
+                      {
+                        "locale": "de",
+                        "text": "Confirmation Titel"
+                      }
+                    ]
+                  },
+                  "scope": "ALWAYS"
+                },
+                {
+                  "buttonStyling": {
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "Confirmation Label"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "Confirmation Label"
+                          }
+                        ]
+                      }
+                    },
+                    "icon": {
+                      "name": "help"
+                    },
+                    "labelHidden": true
+                  },
+                  "event": "ConfirmationWithoutTitle",
+                  "confirmation": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "Really?"
+                      },
+                      {
+                        "locale": "de",
+                        "text": "Wirklich?"
+                      }
+                    ]
+                  },
+                  "scope": "ALWAYS"
+                }
+              ]
+            },
+            "groupRef": "group_b2fbd",
+            "enableAdd": true,
+            "enableRemove": true,
+            "enableReorder": false,
+            "enableCopy": false
+          }
+        ]
+      },
+      {
+        "id": "screen-00068",
+        "name": "Paging",
+        "title": {
+          "type": "Multilingual",
+          "multilingualText": {
+            "text": [
+              {
+                "locale": "en",
+                "text": "Paging"
+              },
+              {
+                "locale": "de",
+                "text": "Paging"
+              }
+            ]
+          }
+        },
+        "screenElements": [
+          {
+            "type": "InlineRepeat",
+            "id": "inlinerepeat-004ba",
+            "name": "inline-repeat-paging",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "inline repeat with pageSize 3 and repeatability 10"
+                  },
+                  {
+                    "locale": "de",
+                    "text": "inline repeat mit pageSize 3 und Wiederholbarkeit 10"
+                  }
+                ]
+              }
+            },
+            "repeatOverviewColumn": [
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-1fb13",
+                "width": 3,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "elementRef": "F18"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-a7c05",
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "elementRef": "F22"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-cb0f3",
+                "width": 3,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "elementRef": "F25"
+              }
+            ],
+            "groupRef": "G15",
+            "enableAdd": true,
+            "enableRemove": true,
+            "enableReorder": false,
+            "enableCopy": false,
+            "pageSize": 3
+          }
+        ]
+      },
+      {
+        "id": "screen-4af26",
+        "name": "TableStyle",
+        "screenElements": [
+          {
+            "type": "InlineRepeat",
+            "id": "inlinerepeat-6abf5",
+            "name": "inline-repeat-Nested_L1",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "Inline Repeat with actionColumnWidth = 1.0 and rowHeight = 80"
+                  }
+                ]
+              }
+            },
+            "repeatOverviewColumn": [
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-696fb",
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "elementRef": "F18"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-9b585",
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "elementRef": "F19"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-0e81a",
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "elementRef": "F22"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-45a7a",
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "elementRef": "field_54333"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-22ff7",
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "elementRef": "F24"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-95f2a",
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "elementRef": "field_299e0"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-f35b4",
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "elementRef": "field_e1f20"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-c7a46",
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "elementRef": "F25"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-6491a",
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "elementRef": "field_d5c68"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-081cd",
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "elementRef": "field_ba608"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-6bfe1",
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "elementRef": "group_48bf7"
+              }
+            ],
+            "groupRef": "G15",
+            "enableAdd": true,
+            "enableRemove": true,
+            "enableReorder": false,
+            "enableCopy": false,
+            "tableStyle": {
+              "rowHeight": 80,
+              "actionColumnWidth": 1
+            }
+          },
+          {
+            "type": "InlineRepeat",
+            "id": "inlinerepeat-decda",
+            "name": "inline-repeat-Nested_L1-readonly",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "Inline Repeat with actionColumnWidth = 1.0 and rowHeight = 80 (readonly, text output)"
+                  }
+                ]
+              }
+            },
+            "readonly": true,
+            "repeatOverviewColumn": [
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-a0a00",
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "elementRef": "F18"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-8945d",
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "elementRef": "field_54333"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-ef567",
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "elementRef": "F19"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-65ce4",
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "elementRef": "F22"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-d5caa",
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "elementRef": "F24"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-dd906",
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "elementRef": "field_299e0"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-446a2",
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "elementRef": "field_e1f20"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-502be",
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "elementRef": "F25"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-56540",
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "elementRef": "field_d5c68"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-e5343",
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "elementRef": "field_ba608"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-03ca1",
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "elementRef": "group_48bf7"
+              },
+              {
+                "type": "ExpressionRepeatOverviewColumn",
+                "id": "expressionrepeatoverviewcolumn-cd07d",
+                "label": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "L1_Expression"
+                      }
+                    ]
+                  }
+                },
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "name": "e1",
+                "expression": "case [L1_String] != \"\" {\"**\" [L1_String] \"** ➡ \"} [L1_Number]"
+              }
+            ],
+            "groupRef": "G15",
+            "enableAdd": true,
+            "enableRemove": true,
+            "enableReorder": false,
+            "enableCopy": false,
+            "tableStyle": {
+              "rowHeight": 80,
+              "actionColumnWidth": 1
+            },
+            "readonlyPresentation": "TEXT"
+          }
+        ]
+      }
+    ],
+    "fieldConfiguration": {
+      "field": [
+        {
+          "exposition": "CHECKBOX",
+          "elementRef": "F22"
+        },
+        {
+          "exposition": "CHECKBOX",
+          "elementRef": "F_23"
+        },
+        {
+          "exposition": "SWITCH",
+          "elementRef": "F_24"
+        },
+        {
+          "exposition": "SWITCH_WITH_VALUES",
+          "elementRef": "F_25"
+        },
+        {
+          "label": {
+            "type": "Multilingual",
+            "multilingualText": {
+              "text": [
+                {
+                  "locale": "en",
+                  "text": "L1_Enumeration"
+                },
+                {
+                  "locale": "de",
+                  "text": "L1_Enumeration"
+                }
+              ]
+            }
+          },
+          "elementRef": "F25"
+        },
+        {
+          "initialValue": "Initial Value for TextArea",
+          "exposition": "AREA",
+          "elementRef": "fieldimpl_7e29a"
+        },
+        {
+          "initialValue": "42",
+          "elementRef": "fieldimpl_67739"
+        },
+        {
+          "initialValue": "true",
+          "exposition": "CHECKBOX",
+          "elementRef": "fieldimpl_123fa"
+        },
+        {
+          "initialValue": "2019-05-13",
+          "elementRef": "fieldimpl_6bfe6"
+        },
+        {
+          "initialValue": "V2",
+          "exposition": "AUTOCOMPLETE",
+          "elementRef": "fieldimpl_b7333"
+        },
+        {
+          "initialValue": "2019-05-13T11:20:00",
+          "elementRef": "fieldimpl_41ca2"
+        },
+        {
+          "initialValue": "11:20:00",
+          "elementRef": "fieldimpl_f2d77"
+        },
+        {
+          "initialValue": "TextArea",
+          "exposition": "AREA",
+          "elementRef": "field_04b7d"
+        },
+        {
+          "exposition": "INLINE",
+          "elementRef": "fieldimpl_4ce38"
+        },
+        {
+          "exposition": "COMPACT",
+          "elementRef": "fieldimpl_f55dc"
+        },
+        {
+          "exposition": "AUTOCOMPLETE",
+          "elementRef": "fieldimpl_743e3"
+        },
+        {
+          "exposition": "FULL",
+          "elementRef": "fieldimpl_22286"
+        },
+        {
+          "suffix": {
+            "text": [
+              {
+                "locale": "en",
+                "text": "EUR"
+              },
+              {
+                "locale": "de",
+                "text": "EUR"
+              }
+            ]
+          },
+          "initialValue": "42",
+          "elementRef": "fieldimpl_7ef64"
+        },
+        {
+          "suffix": {
+            "text": [
+              {
+                "locale": "en",
+                "text": "EUR"
+              },
+              {
+                "locale": "de",
+                "text": "EUR"
+              }
+            ]
+          },
+          "initialValue": "42.12",
+          "elementRef": "fieldimpl_7962e"
+        },
+        {
+          "suffix": {
+            "text": [
+              {
+                "locale": "en",
+                "text": "%"
+              },
+              {
+                "locale": "de",
+                "text": "%"
+              }
+            ]
+          },
+          "initialValue": "42.00",
+          "elementRef": "fieldimpl_53712"
+        },
+        {
+          "suffix": {
+            "text": [
+              {
+                "locale": "en",
+                "text": "‰"
+              },
+              {
+                "locale": "de",
+                "text": "‰"
+              }
+            ]
+          },
+          "initialValue": "42.00",
+          "elementRef": "fieldimpl_f795d"
+        },
+        {
+          "exposition": "INLINE",
+          "elementRef": "group_48bf7"
+        },
+        {
+          "label": {
+            "type": "Multilingual",
+            "multilingualText": {
+              "text": [
+                {
+                  "locale": "en",
+                  "text": "L1_ExtEnumeration"
+                },
+                {
+                  "locale": "de",
+                  "text": "L1_ExtEnumeration"
+                }
+              ]
+            }
+          },
+          "externalEnumeration": {
+            "src": "config"
+          },
+          "elementRef": "field_09aea"
+        },
+        {
+          "exposition": "CHECKBOX",
+          "elementRef": "field_756a9"
+        },
+        {
+          "exposition": "SWITCH",
+          "elementRef": "field_d426d"
+        },
+        {
+          "exposition": "SWITCH_WITH_VALUES",
+          "elementRef": "field_8db73"
+        },
+        {
+          "exposition": "FULL",
+          "elementRef": "field_27389"
+        },
+        {
+          "exposition": "INLINE",
+          "elementRef": "field_a5458"
+        },
+        {
+          "externalEnumeration": {
+            "src": "config"
+          },
+          "elementRef": "field_7d034"
+        }
+      ]
+    },
+    "groupConfiguration": {},
+    "defaults": {}
+  }
+}

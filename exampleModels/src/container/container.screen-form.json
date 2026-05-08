@@ -1,0 +1,190 @@
+{
+  "header": {
+    "id": "container.screen-form",
+    "modelType": "form",
+    "modelVersion": "37.4.0",
+    "locales": [
+      {
+        "code": "de"
+      },
+      {
+        "code": "en"
+      }
+    ],
+    "annotations": [
+      {
+        "name": "roles",
+        "value": "admin"
+      }
+    ],
+    "modelReferences": [
+      {
+        "alias": "container-document",
+        "modelType": "document",
+        "purpose": "data binding",
+        "reference": "container-document"
+      }
+    ]
+  },
+  "content": {
+    "subHeaderBox": {
+      "id": "subHeaderBox1",
+      "majorButtons": {
+        "button": [
+          {
+            "type": "NAVIGATION",
+            "id": "button_8c4a9",
+            "name": "navScreenWithDetachedRepeat",
+            "buttonStyling": {
+              "label": {
+                "type": "Multilingual",
+                "multilingualText": {
+                  "text": [
+                    {
+                      "locale": "de",
+                      "text": "screenWithDetachedRepeat"
+                    },
+                    {
+                      "locale": "en",
+                      "text": "screenWithDetachedRepeat"
+                    }
+                  ]
+                }
+              }
+            },
+            "target": "screen_03180",
+            "scope": "HIDDEN_IN_READONLY_MODE"
+          },
+          {
+            "type": "NAVIGATION",
+            "id": "button_4c33f",
+            "name": "navTopLevelScreen",
+            "buttonStyling": {
+              "label": {
+                "type": "Multilingual",
+                "multilingualText": {
+                  "text": [
+                    {
+                      "locale": "de",
+                      "text": "topLevelScreen"
+                    },
+                    {
+                      "locale": "en",
+                      "text": "topLevelScreen"
+                    }
+                  ]
+                }
+              }
+            },
+            "target": "screen_3cae9",
+            "scope": "HIDDEN_IN_READONLY_MODE"
+          }
+        ]
+      }
+    },
+    "footerBox": {
+      "id": "footerBox1"
+    },
+    "screens": [
+      {
+        "id": "screen_03180",
+        "name": "screenWithDetachedRepeat",
+        "screenElements": [
+          {
+            "type": "DetachedRepeat",
+            "id": "detachedrepeat_e1587",
+            "name": "repeat-r1",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "de",
+                    "text": "DetachedRepeat r1"
+                  },
+                  {
+                    "locale": "en",
+                    "text": "DetachedRepeat r1"
+                  }
+                ]
+              }
+            },
+            "repeatOverviewColumn": [
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn_53a22",
+                "label": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "de",
+                        "text": "dummy"
+                      },
+                      {
+                        "locale": "en",
+                        "text": "dummy"
+                      }
+                    ]
+                  }
+                },
+                "width": 1,
+                "elementRef": "F6"
+              }
+            ],
+            "groupRef": "G4",
+            "enableAdd": true,
+            "enableRemove": true,
+            "detailScreen": {
+              "id": "screen_3b5ce",
+              "name": "repeat-r1-detail-screen",
+              "screenElements": [
+                {
+                  "type": "ControlGrid",
+                  "id": "controlgrid_d75c5",
+                  "name": "cg",
+                  "row": [
+                    {
+                      "type": "Row",
+                      "id": "row_137ae",
+                      "cell": [
+                        {
+                          "type": "Control",
+                          "id": "control_0faef",
+                          "label": {
+                            "type": "Multilingual",
+                            "multilingualText": {
+                              "text": [
+                                {
+                                  "locale": "de",
+                                  "text": "dummy"
+                                },
+                                {
+                                  "locale": "en",
+                                  "text": "dummy"
+                                }
+                              ]
+                            }
+                          },
+                          "elementRef": "F6"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "screen_3cae9",
+        "name": "topLevelScreen",
+        "screenElements": []
+      }
+    ],
+    "fieldConfiguration": {},
+    "groupConfiguration": {},
+    "defaults": {}
+  }
+}

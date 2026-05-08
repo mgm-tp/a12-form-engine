@@ -1,0 +1,66 @@
+////
+SPDX-License-Identifier: EUPL-1.2 OR LicenseRef-commercial
+
+Copyright (c) 2012-2026 mgm technology partners GmbH
+
+Dual License
+------------
+This source file is part of the mgm A12 Platform and available under
+a choice of two different licenses:
+
+1. Open-Source License – EUPL v1.2
+   You may redistribute and/or modify this file under the terms of the
+   European Union Public License, version 1.2 - see https://eupl.eu/.
+
+2. Commercial License
+   Alternatively, you may obtain a commercial license from
+   mgm technology partners GmbH, that permits use of this software
+   under different terms (including support and maintenance services).
+
+   Please contact a12-license@mgm-tp.com for more information.
+
+You must select and comply with exactly one of the above license options.
+
+Warranty Disclaimer (applies to either option)
+----------------------------------------------
+THIS SOFTWARE IS PROVIDED "AS IS" AND WITHOUT WARRANTY OF ANY KIND,
+WHETHER EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NON-INFRINGEMENT, EXCEPT WHERE SUCH DISCLAIMERS ARE HELD TO BE
+LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
+////
+
+= Migration Instructions
+
+The following sections contain migration instructions, starting from Form Engine 37.0.0 (2024.06) to the latest version. For the migration from older versions, please refer to the Form Engine documentation of A12 version 2024.06.
+
+[NOTE]
+====
+The complete list of changes for the A12 Form Engine can be found in the https://geta12.com/#/releases/releases-overview/form-engine[changelog,role=external,window=_blank].
+====
+
+== General Migration
+
+Before starting with the component migration, please have a look at the link:/docs/overall/migration_guide/index.html[Migration to latest A12] chapter about general upgrade steps.
+
+[#migration_form-model]
+== Form Model Migration
+
+To migrate your Form Models, first install or update the migration tool with
+[source,bash]
+----
+npm install -g @com.mgmtp.a12.formengine/formengine-model-migration
+----
+
+Then run the following command to perform the migration:
+[source,bash]
+----
+formengine-model-migration <path to form model file> -b
+----
+
+Note that if the given path points to a directory instead, it will be searched recursively for Form Models to migrate. In case you do not have your Form Models under version control, you can set the optional `-b` flag to create backups of your models. Use the `-h` flag to display all available options.
+
+[WARNING]
+====
+It is essential that only valid models are migrated, e.g. models that do not contain consistency problems. Migrating models with problems might lead to undefined behavior.
+====

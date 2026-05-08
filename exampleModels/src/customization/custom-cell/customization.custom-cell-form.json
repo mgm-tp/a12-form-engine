@@ -1,0 +1,128 @@
+{
+  "header": {
+    "id": "customization.custom-cell-form",
+    "modelType": "form",
+    "modelVersion": "37.4.0",
+    "locales": [
+      {
+        "code": "en"
+      },
+      {
+        "code": "de"
+      }
+    ],
+    "labels": [
+      {
+        "locale": "en",
+        "text": "Custom Cell"
+      },
+      {
+        "locale": "de",
+        "text": "Benutzerdefinierte Cell"
+      }
+    ],
+    "annotations": [
+      {
+        "name": "roles",
+        "value": "admin"
+      }
+    ],
+    "modelReferences": [
+      {
+        "alias": "customization.custom-cell-document",
+        "modelType": "document",
+        "purpose": "data binding",
+        "reference": "customization.custom-cell-document"
+      }
+    ]
+  },
+  "content": {
+    "subHeaderBox": {
+      "id": "subHeaderBox1"
+    },
+    "footerBox": {
+      "id": "footerBox1"
+    },
+    "screens": [
+      {
+        "id": "screen_54380",
+        "name": "Screen 1",
+        "title": {
+          "type": "Multilingual",
+          "multilingualText": {
+            "text": [
+              {
+                "locale": "en",
+                "text": "Custom Cell"
+              },
+              {
+                "locale": "de",
+                "text": "Benutzerdefinierte Cell"
+              }
+            ]
+          }
+        },
+        "screenElements": [
+          {
+            "type": "ControlGrid",
+            "id": "controlgrid_e02b8",
+            "name": "cg",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "Control Grid"
+                  },
+                  {
+                    "locale": "de",
+                    "text": "Control Grid"
+                  }
+                ]
+              }
+            },
+            "row": [
+              {
+                "type": "Row",
+                "id": "row_e6856",
+                "name": "r1",
+                "title": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "Row For Custom Cell"
+                      },
+                      {
+                        "locale": "de",
+                        "text": "Zeile Für Benutzerdefinierte Zelle"
+                      }
+                    ]
+                  }
+                },
+                "cell": [
+                  {
+                    "type": "CustomCell",
+                    "id": "customcell_09ea7",
+                    "annotations": [
+                      {
+                        "name": "custom cell annotation name",
+                        "value": "custom cell annotation value"
+                      }
+                    ],
+                    "name": "Custom Cell"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "fieldConfiguration": {},
+    "groupConfiguration": {},
+    "defaults": {}
+  }
+}

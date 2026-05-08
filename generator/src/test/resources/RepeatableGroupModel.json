@@ -1,0 +1,93 @@
+{
+  "header": {
+    "id": "RepeatableGroupModel",
+    "modelType": "document",
+    "modelVersion": "28.4.0",
+    "locales": [
+      {
+        "code": "en"
+      }
+    ],
+    "labels": [],
+    "annotations": [],
+    "modelReferences": []
+  },
+  "content": {
+    "modelInfo": {
+      "name": "RepeatableGroupModel",
+      "immutable": false
+    },
+    "modelConfig": {
+      "decimalSeparator": ".",
+      "timeZone": "UTC",
+      "conditionLanguage": {
+        "code": "en_US"
+      }
+    },
+    "modelRoot": {
+      "rootGroups": [
+        {
+          "type": "Group",
+          "id": "group_388b0",
+          "name": "TopLevelRepeatable",
+          "Group": {
+            "repeatability": 100,
+            "elements": [
+              {
+                "type": "Field",
+                "id": "field_14b82",
+                "name": "aField",
+                "Field": {
+                  "fieldType": {
+                    "type": "StringType"
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "aField"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Field",
+                "id": "field_0932b",
+                "name": "bField",
+                "Field": {
+                  "fieldType": {
+                    "type": "DateType",
+                    "DateType": {
+                      "format": "yyyy-MM-dd"
+                    }
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "bField"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Field",
+                "id": "field_5c589",
+                "name": "cField",
+                "Field": {
+                  "fieldType": {
+                    "type": "NumberType"
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "cField"
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

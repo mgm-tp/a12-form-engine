@@ -1,0 +1,276 @@
+{
+  "header": {
+    "id": "dependencies.element-computations-document",
+    "modelType": "document",
+    "modelVersion": "28.4.0",
+    "locales": [
+      {
+        "code": "en"
+      }
+    ],
+    "labels": [],
+    "annotations": [
+      {
+        "name": "roles",
+        "value": "admin"
+      }
+    ],
+    "modelReferences": []
+  },
+  "content": {
+    "modelInfo": {
+      "name": "dependencies.element-computations-document",
+      "immutable": false,
+      "comment": "This model contains computated field that will trigger dependent elements that will trigger computations."
+    },
+    "modelConfig": {
+      "decimalSeparator": ".",
+      "timeZone": "UTC",
+      "conditionLanguage": {
+        "code": "en_US"
+      }
+    },
+    "modelRoot": {
+      "rootGroups": [
+        {
+          "type": "Group",
+          "id": "group_d5f07",
+          "name": "root",
+          "Group": {
+            "repeatability": 1,
+            "elements": [
+              {
+                "type": "Field",
+                "id": "field_404ed",
+                "name": "input_field",
+                "Field": {
+                  "fieldType": {
+                    "type": "BooleanType"
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "Input"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Rule",
+                "id": "rule_23b02",
+                "name": "NewRule_1",
+                "Rule": {
+                  "errorEntityRelPath": "../input_field",
+                  "errorCode": "Error rule_23b02",
+                  "errorCondition": "[input_field] == False",
+                  "severity": "WARNING",
+                  "errorMessage": [
+                    {
+                      "locale": "en",
+                      "text": "The value should be true."
+                    }
+                  ],
+                  "guiPatterns": {
+                    "dynamicEnumeration": "false"
+                  }
+                }
+              },
+              {
+                "type": "Field",
+                "id": "field_a42db",
+                "name": "computation_field_1",
+                "Field": {
+                  "fieldType": {
+                    "type": "BooleanType"
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "Computation (1)"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Rule",
+                "id": "rule_33ea9",
+                "name": "NewRule_2",
+                "Rule": {
+                  "errorEntityRelPath": "../computation_field_1",
+                  "errorCode": "Error rule_33ea9",
+                  "errorCondition": "[computation_field_1] == False",
+                  "severity": "WARNING",
+                  "errorMessage": [
+                    {
+                      "locale": "en",
+                      "text": "The value should be true."
+                    }
+                  ],
+                  "guiPatterns": {
+                    "dynamicEnumeration": "false"
+                  }
+                }
+              },
+              {
+                "type": "Computation",
+                "id": "computation_43fd0",
+                "name": "computation_1",
+                "Computation": {
+                  "computedFieldRelPath": "../computation_field_1",
+                  "computationAlternatives": [
+                    {
+                      "operation": "True",
+                      "precondition": "FieldFilled(input_field) \nAnd [input_field] == True"
+                    },
+                    {
+                      "operation": "False",
+                      "precondition": "FieldFilled(input_field) \nAnd [input_field] == False"
+                    }
+                  ],
+                  "errorMessage": [
+                    {
+                      "locale": "en",
+                      "text": "error text for computation of computation_1"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Field",
+                "id": "field_668f6",
+                "name": "dependent_field_1",
+                "Field": {
+                  "fieldType": {
+                    "type": "BooleanType"
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "Dependent (1)"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Rule",
+                "id": "rule_86105",
+                "name": "NewRule_3",
+                "Rule": {
+                  "errorEntityRelPath": "../dependent_field_1",
+                  "errorCode": "Error rule_86105",
+                  "errorCondition": "[dependent_field_1] == False",
+                  "severity": "WARNING",
+                  "errorMessage": [
+                    {
+                      "locale": "en",
+                      "text": "The value should be true."
+                    }
+                  ],
+                  "guiPatterns": {
+                    "dynamicEnumeration": "false"
+                  }
+                }
+              },
+              {
+                "type": "Field",
+                "id": "field_431a6",
+                "name": "computation_field_2",
+                "Field": {
+                  "fieldType": {
+                    "type": "BooleanType"
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "Computation (2)"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Rule",
+                "id": "rule_15d84",
+                "name": "NewRule_4",
+                "Rule": {
+                  "errorEntityRelPath": "../computation_field_2",
+                  "errorCode": "Error rule_15d84",
+                  "errorCondition": "[computation_field_2] == False",
+                  "severity": "WARNING",
+                  "errorMessage": [
+                    {
+                      "locale": "en",
+                      "text": "The value should be true."
+                    }
+                  ],
+                  "guiPatterns": {
+                    "dynamicEnumeration": "false"
+                  }
+                }
+              },
+              {
+                "type": "Computation",
+                "id": "computation_98ded",
+                "name": "computation_2",
+                "Computation": {
+                  "computedFieldRelPath": "../computation_field_2",
+                  "computationAlternatives": [
+                    {
+                      "operation": "True",
+                      "precondition": "FieldFilled(dependent_field_1) \nAnd [dependent_field_1] == True"
+                    },
+                    {
+                      "operation": "False",
+                      "precondition": "FieldFilled(dependent_field_1) \nAnd [dependent_field_1] == False"
+                    }
+                  ],
+                  "errorMessage": [
+                    {
+                      "locale": "en",
+                      "text": "error text for computation of computation_2"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Field",
+                "id": "field_4fc95",
+                "name": "dependent_field_2",
+                "Field": {
+                  "fieldType": {
+                    "type": "BooleanType"
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "Dependent (2)"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Rule",
+                "id": "rule_2ffc8",
+                "name": "NewRule_5",
+                "Rule": {
+                  "errorEntityRelPath": "../dependent_field_2",
+                  "errorCode": "Error rule_2ffc8",
+                  "errorCondition": "[dependent_field_2] == False",
+                  "severity": "WARNING",
+                  "errorMessage": [
+                    {
+                      "locale": "en",
+                      "text": "The value should be true."
+                    }
+                  ],
+                  "guiPatterns": {
+                    "dynamicEnumeration": "false"
+                  }
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

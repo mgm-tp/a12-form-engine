@@ -1,0 +1,121 @@
+{
+  "header": {
+    "id": "multiple.picus",
+    "modelType": "document",
+    "modelVersion": "28.4.0",
+    "locales": [
+      {
+        "code": "en"
+      }
+    ],
+    "labels": [],
+    "annotations": [],
+    "modelReferences": [
+      {
+        "alias": "baseGroup.picus.json",
+        "modelType": "document",
+        "purpose": "include",
+        "reference": "baseGroup.picus"
+      },
+      {
+        "alias": "control-grid.picus.json",
+        "modelType": "document",
+        "purpose": "include",
+        "reference": "control-grid.picus"
+      }
+    ]
+  },
+  "content": {
+    "modelInfo": {
+      "name": "multiple.picus",
+      "immutable": false
+    },
+    "modelConfig": {
+      "decimalSeparator": ".",
+      "timeZone": "UTC",
+      "conditionLanguage": {
+        "code": "en_US"
+      }
+    },
+    "modelRoot": {
+      "rootGroups": [
+        {
+          "type": "Group",
+          "id": "group_91947",
+          "name": "cgGroup",
+          "Group": {
+            "repeatability": 1,
+            "elements": [
+              {
+                "type": "Group",
+                "id": "include_05759",
+                "name": "base",
+                "Group": {
+                  "repeatability": 1,
+                  "modelAlias": "control-grid.picus.json"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "Group",
+          "id": "group_9edb7",
+          "name": "drGroup",
+          "Group": {
+            "repeatability": 1,
+            "elements": [
+              {
+                "type": "Group",
+                "id": "include_18bda",
+                "name": "baseGroup",
+                "Group": {
+                  "repeatability": 1000,
+                  "modelAlias": "baseGroup.picus.json"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "Group",
+          "id": "group_86bca",
+          "name": "irGroup",
+          "Group": {
+            "repeatability": 1,
+            "elements": [
+              {
+                "type": "Group",
+                "id": "include_271a8",
+                "name": "baseGroup",
+                "Group": {
+                  "repeatability": 1000,
+                  "modelAlias": "baseGroup.picus.json"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "Group",
+          "id": "group_673ee",
+          "name": "erGroup",
+          "Group": {
+            "repeatability": 1,
+            "elements": [
+              {
+                "type": "Group",
+                "id": "include_b95f3",
+                "name": "baseGroup",
+                "Group": {
+                  "repeatability": 1000,
+                  "modelAlias": "baseGroup.picus.json"
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

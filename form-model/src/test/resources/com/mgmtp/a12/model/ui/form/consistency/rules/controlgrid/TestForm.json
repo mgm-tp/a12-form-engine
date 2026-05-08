@@ -1,0 +1,337 @@
+{
+  "header": {
+    "id": "TestForm",
+    "modelType": "form",
+    "modelVersion": "37.4.0",
+    "locales": [
+      {
+        "code": "en"
+      }
+    ],
+    "annotations": [
+      {
+        "name": "roles",
+        "value": "admin"
+      }
+    ],
+    "modelReferences": [
+      {
+        "alias": "DM",
+        "modelType": "document",
+        "purpose": "data binding",
+        "reference": "TestModel"
+      }
+    ]
+  },
+  "content": {
+    "subHeaderBox": {
+      "id": "subHeaderBox1"
+    },
+    "footerBox": {
+      "id": "footerBox1"
+    },
+    "screens": [
+      {
+        "id": "screen1",
+        "name": "Screen1",
+        "screenElements": [
+          {
+            "type": "ControlGrid",
+            "id": "controlgrid-578d6",
+            "name": "cg",
+            "row": [
+              {
+                "type": "Row",
+                "id": "row-05c14",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control-07fd5",
+                    "elementRef": "field_74fbb"
+                  }
+                ]
+              },
+              {
+                "type": "Row",
+                "id": "row-d94d6",
+                "cell": [
+                  {
+                    "type": "ExpressionCell",
+                    "id": "expressioncell-70de7",
+                    "offset": {
+                      "lg": 0
+                    },
+                    "span": {
+                      "lg": 1
+                    },
+                    "name": "expr-1",
+                    "expression": "kontext(base)\n\t[TestField]\n}",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "expr-1"
+                          }
+                        ]
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "Row",
+                "id": "row-e8f2c",
+                "cell": [
+                  {
+                    "type": "ExpressionCell",
+                    "id": "expressioncell-6260f",
+                    "offset": {
+                      "lg": 0
+                    },
+                    "span": {
+                      "lg": 1
+                    },
+                    "name": "expr-2",
+                    "expression": "[TestField]",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "expr-2"
+                          }
+                        ]
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "Row",
+                "id": "row-20396",
+                "cell": [
+                  {
+                    "type": "ExpressionCell",
+                    "id": "expressioncell-a0977",
+                    "offset": {
+                      "lg": 0
+                    },
+                    "span": {
+                      "lg": 1
+                    },
+                    "name": "expr-3",
+                    "expression": "kontext(base) {\n\t[GloballyAttachedFile]\n}",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "expr-3"
+                          }
+                        ]
+                      }
+                    }
+                  }
+                ]
+              }
+            ],
+            "verticalAlignment": "BOTTOM"
+          },
+          {
+            "type": "DetachedRepeat",
+            "id": "inlinerepeat-de879",
+            "name": "detached-repeat-RepGroup",
+            "repeatOverviewColumn": [
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-e4dba",
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "elementRef": "field_02db7"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-d6d9a",
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "elementRef": "field_0c460"
+              },
+              {
+                "type": "ExpressionRepeatOverviewColumn",
+                "id": "expressionrepeatoverviewcolumn-d1443",
+                "label": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "dr-expr-1"
+                      }
+                    ]
+                  }
+                },
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "name": "dr-expr-1",
+                "expression": "[FieldA] \" #\" [FieldB]"
+              }
+            ],
+            "groupRef": "group_f8ef7",
+            "enableAdd": true,
+            "enableRemove": true,
+            "enableReorder": false,
+            "enableCopy": false,
+            "detailScreen": {
+              "id": "screen-3734c",
+              "name": "inline-repeat-RepGroup-detail-screen",
+              "screenElements": [
+                {
+                  "type": "ControlGrid",
+                  "id": "controlgrid-136b2",
+                  "name": "cg-dr",
+                  "row": [
+                    {
+                      "type": "Row",
+                      "id": "row-7e279",
+                      "cell": [
+                        {
+                          "type": "Control",
+                          "id": "control-5cd67",
+                          "elementRef": "field_02db7"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "Row",
+                      "id": "row-8f4d6",
+                      "cell": [
+                        {
+                          "type": "Control",
+                          "id": "control-541b9",
+                          "elementRef": "field_0c460"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "Row",
+                      "id": "row-58b5b",
+                      "cell": [
+                        {
+                          "type": "ExpressionCell",
+                          "id": "expressioncell-3fd93",
+                          "offset": {
+                            "lg": 0
+                          },
+                          "span": {
+                            "lg": 1
+                          },
+                          "name": "dr-expr-2",
+                          "expression": "kontext(base)\n\tkontext(RepGroup) {\n\t\t[FieldA] \" #\" [FieldB]\n\t}\n}",
+                          "label": {
+                            "type": "Multilingual",
+                            "multilingualText": {
+                              "text": [
+                                {
+                                  "locale": "en",
+                                  "text": "dr-expr-2"
+                                }
+                              ]
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "type": "Row",
+                      "id": "row-88a4d",
+                      "cell": [
+                        {
+                          "type": "ExpressionCell",
+                          "id": "expressioncell-7e256",
+                          "offset": {
+                            "lg": 0
+                          },
+                          "span": {
+                            "lg": 1
+                          },
+                          "name": "dr-expr-3",
+                          "expression": "[RepeatedlyAttachedFile]",
+                          "label": {
+                            "type": "Multilingual",
+                            "multilingualText": {
+                              "text": [
+                                {
+                                  "locale": "en",
+                                  "text": "dr-expr-3"
+                                }
+                              ]
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "type": "Row",
+                      "id": "row-e76f8",
+                      "cell": [
+                        {
+                          "type": "ExpressionCell",
+                          "id": "expressioncell-6978b",
+                          "offset": {
+                            "lg": 0
+                          },
+                          "span": {
+                            "lg": 1
+                          },
+                          "name": "dr-expr-4",
+                          "expression": "[FieldC]",
+                          "label": {
+                            "type": "Multilingual",
+                            "multilingualText": {
+                              "text": [
+                                {
+                                  "locale": "en",
+                                  "text": "dr-expr-4"
+                                }
+                              ]
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "type": "Row",
+                      "id": "row_b6847",
+                      "cell": [
+                        {
+                          "type": "ExpressionCell",
+                          "id": "expressioncell_a9d34",
+                          "name": "dr-expr-5",
+                          "expression": "case [FieldA] = \"A\" {\n    [DoesNotExist] \" StaticString\"\n}\n"
+                        }
+                      ]
+                    }
+                  ],
+                  "verticalAlignment": "BOTTOM"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "fieldConfiguration": {},
+    "groupConfiguration": {},
+    "defaults": {}
+  }
+}

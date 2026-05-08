@@ -1,0 +1,498 @@
+{
+  "header": {
+    "id": "controls.date-timezone-form",
+    "modelType": "form",
+    "modelVersion": "37.4.0",
+    "locales": [
+      {
+        "code": "en"
+      }
+    ],
+    "annotations": [
+      {
+        "name": "roles",
+        "value": "admin"
+      }
+    ],
+    "modelReferences": [
+      {
+        "alias": "DM",
+        "modelType": "document",
+        "purpose": "data binding",
+        "reference": "controls.date-timezone-document"
+      }
+    ]
+  },
+  "content": {
+    "subHeaderBox": {
+      "id": "subHeaderBox1"
+    },
+    "footerBox": {
+      "id": "footerBox1"
+    },
+    "screens": [
+      {
+        "id": "screen1",
+        "name": "Screen1",
+        "screenElements": [
+          {
+            "type": "Section",
+            "id": "section-43b55",
+            "name": "sec",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "Date Controls with timezone \"Europe/Berlin\""
+                  }
+                ]
+              }
+            },
+            "screenElements": [
+              {
+                "type": "ControlGrid",
+                "id": "controlgrid-eb0f5",
+                "name": "cg",
+                "layout": {
+                  "lg": "4-4-4"
+                },
+                "row": [
+                  {
+                    "type": "Row",
+                    "id": "row-a9c84",
+                    "cell": [
+                      {
+                        "type": "Control",
+                        "id": "control-adacc",
+                        "label": {
+                          "type": "Multilingual",
+                          "multilingualText": {
+                            "text": [
+                              {
+                                "locale": "en",
+                                "text": "Date"
+                              }
+                            ]
+                          }
+                        },
+                        "elementRef": "field_dad3a"
+                      },
+                      {
+                        "type": "Control",
+                        "id": "control-eccb8",
+                        "label": {
+                          "type": "Multilingual",
+                          "multilingualText": {
+                            "text": [
+                              {
+                                "locale": "en",
+                                "text": "Date [2010-2030], Preselected: 2020"
+                              }
+                            ]
+                          }
+                        },
+                        "datePickerConfig": {
+                          "minYear": 2010,
+                          "maxYear": 2030,
+                          "absolute": true,
+                          "preselectionYear": 2020
+                        },
+                        "elementRef": "field_90e2a"
+                      },
+                      {
+                        "type": "Control",
+                        "id": "control-4daec",
+                        "label": {
+                          "type": "Multilingual",
+                          "multilingualText": {
+                            "text": [
+                              {
+                                "locale": "en",
+                                "text": "Date [-10, +10], Preselected: +1"
+                              }
+                            ]
+                          }
+                        },
+                        "datePickerConfig": {
+                          "minYear": -10,
+                          "maxYear": 10,
+                          "absolute": false,
+                          "preselectionYear": 1
+                        },
+                        "elementRef": "field_86c05"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "Row",
+                    "id": "row-382ec",
+                    "cell": [
+                      {
+                        "type": "Control",
+                        "id": "control-c86a5",
+                        "label": {
+                          "type": "Multilingual",
+                          "multilingualText": {
+                            "text": [
+                              {
+                                "locale": "en",
+                                "text": "DateTime"
+                              }
+                            ]
+                          }
+                        },
+                        "elementRef": "field_a7c8f"
+                      },
+                      {
+                        "type": "Control",
+                        "id": "control-f9a99",
+                        "label": {
+                          "type": "Multilingual",
+                          "multilingualText": {
+                            "text": [
+                              {
+                                "locale": "en",
+                                "text": "DateTime [2010-2030], Preselected: 2020"
+                              }
+                            ]
+                          }
+                        },
+                        "datePickerConfig": {
+                          "minYear": 2010,
+                          "maxYear": 2030,
+                          "absolute": true,
+                          "preselectionYear": 2020
+                        },
+                        "elementRef": "field_3635c"
+                      },
+                      {
+                        "type": "Control",
+                        "id": "control-89c42",
+                        "label": {
+                          "type": "Multilingual",
+                          "multilingualText": {
+                            "text": [
+                              {
+                                "locale": "en",
+                                "text": "DateTime [-10, +10], Preselected: +1"
+                              }
+                            ]
+                          }
+                        },
+                        "datePickerConfig": {
+                          "minYear": -10,
+                          "maxYear": 10,
+                          "absolute": false,
+                          "preselectionYear": 1
+                        },
+                        "elementRef": "field_47155"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "Row",
+                    "id": "row-b0c37",
+                    "cell": [
+                      {
+                        "type": "Control",
+                        "id": "control-7956a",
+                        "label": {
+                          "type": "Multilingual",
+                          "multilingualText": {
+                            "text": [
+                              {
+                                "locale": "en",
+                                "text": "Time"
+                              }
+                            ]
+                          }
+                        },
+                        "elementRef": "field_b9631"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "Row",
+                    "id": "row-ba408",
+                    "cell": [
+                      {
+                        "type": "Control",
+                        "id": "control-f7120",
+                        "label": {
+                          "type": "Multilingual",
+                          "multilingualText": {
+                            "text": [
+                              {
+                                "locale": "en",
+                                "text": "DateFragment with format YYYY"
+                              }
+                            ]
+                          }
+                        },
+                        "elementRef": "field_ae184"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "Row",
+                    "id": "row-8f48c",
+                    "cell": [
+                      {
+                        "type": "Control",
+                        "id": "control-ca60d",
+                        "label": {
+                          "type": "Multilingual",
+                          "multilingualText": {
+                            "text": [
+                              {
+                                "locale": "en",
+                                "text": "DateRange"
+                              }
+                            ]
+                          }
+                        },
+                        "elementRef": "field_c28ce"
+                      },
+                      {
+                        "type": "Control",
+                        "id": "control-abbf0",
+                        "label": {
+                          "type": "Multilingual",
+                          "multilingualText": {
+                            "text": [
+                              {
+                                "locale": "en",
+                                "text": "DateRange [2010-2030], Preselected: 2020"
+                              }
+                            ]
+                          }
+                        },
+                        "datePickerConfig": {
+                          "minYear": 2010,
+                          "maxYear": 2030,
+                          "absolute": true,
+                          "preselectionYear": 2020
+                        },
+                        "elementRef": "field_c6309"
+                      },
+                      {
+                        "type": "Control",
+                        "id": "control-50d1b",
+                        "label": {
+                          "type": "Multilingual",
+                          "multilingualText": {
+                            "text": [
+                              {
+                                "locale": "en",
+                                "text": "DateRange [-10, +10], Preselected: +1"
+                              }
+                            ]
+                          }
+                        },
+                        "datePickerConfig": {
+                          "minYear": -10,
+                          "maxYear": 10,
+                          "absolute": false,
+                          "preselectionYear": 1
+                        },
+                        "elementRef": "field_4ca4c"
+                      }
+                    ]
+                  }
+                ],
+                "verticalAlignment": "TOP"
+              },
+              {
+                "type": "InlineRepeat",
+                "id": "inlinerepeat-42157",
+                "name": "inline-repeat-repeatable",
+                "title": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "Repeat"
+                      }
+                    ]
+                  }
+                },
+                "repeatOverviewColumn": [
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-09bdf",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "Date"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "sortable": true,
+                    "filterable": true,
+                    "preferredSorting": "ASC",
+                    "datePickerConfig": {
+                      "absolute": false,
+                      "preselectionYear": 0
+                    },
+                    "elementRef": "field_979a8"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-ecd0a",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "DateTime"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "sortable": true,
+                    "filterable": true,
+                    "preferredSorting": "ASC",
+                    "datePickerConfig": {
+                      "absolute": false,
+                      "preselectionYear": 0
+                    },
+                    "elementRef": "field_d7147"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-8669f",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "Time"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "sortable": true,
+                    "filterable": true,
+                    "preferredSorting": "ASC",
+                    "elementRef": "field_eae95"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-d3cf8",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "DateFragment with format YYYY"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "sortable": true,
+                    "filterable": true,
+                    "preferredSorting": "ASC",
+                    "elementRef": "field_b4752"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-8567b",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "DateRange"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "sortable": true,
+                    "filterable": true,
+                    "preferredSorting": "ASC",
+                    "datePickerConfig": {
+                      "absolute": false,
+                      "preselectionYear": 0
+                    },
+                    "elementRef": "field_dbfcf"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-ffd98",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "DateRange with interpretationOfYear FROM"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "sortable": true,
+                    "filterable": true,
+                    "preferredSorting": "ASC",
+                    "datePickerConfig": {
+                      "absolute": false,
+                      "preselectionYear": 0
+                    },
+                    "elementRef": "field_b8a2f"
+                  }
+                ],
+                "groupRef": "group_659b6",
+                "enableAdd": true,
+                "enableRemove": true
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "fieldConfiguration": {
+      "field": [
+        {
+          "hint": {
+            "text": [
+              {
+                "locale": "en",
+                "text": "Date must be in the future"
+              }
+            ]
+          },
+          "elementRef": "field_dad3a"
+        },
+        {
+          "hint": {
+            "text": [
+              {
+                "locale": "en",
+                "text": "Datetime must be in the future"
+              }
+            ]
+          },
+          "elementRef": "field_a7c8f"
+        }
+      ]
+    },
+    "groupConfiguration": {},
+    "defaults": {}
+  }
+}

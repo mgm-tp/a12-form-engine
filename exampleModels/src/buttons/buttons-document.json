@@ -1,0 +1,229 @@
+{
+  "header": {
+    "id": "buttons-document",
+    "modelType": "document",
+    "modelVersion": "28.4.0",
+    "locales": [
+      {
+        "code": "de"
+      },
+      {
+        "code": "en"
+      }
+    ],
+    "labels": [],
+    "annotations": [
+      {
+        "name": "roles",
+        "value": "admin"
+      }
+    ],
+    "modelReferences": []
+  },
+  "content": {
+    "modelInfo": {
+      "name": "buttons-document",
+      "immutable": false
+    },
+    "modelConfig": {
+      "decimalSeparator": ".",
+      "timeZone": "UTC",
+      "conditionLanguage": {
+        "code": "en_US"
+      }
+    },
+    "modelRoot": {
+      "rootGroups": [
+        {
+          "type": "Group",
+          "id": "K42",
+          "name": "A12T_Buttons",
+          "Group": {
+            "repeatability": 1,
+            "elements": [
+              {
+                "type": "Field",
+                "id": "id41088",
+                "name": "NumberField",
+                "Field": {
+                  "fieldType": {
+                    "type": "NumberType",
+                    "NumberType": {
+                      "minValue": 0
+                    }
+                  }
+                }
+              },
+              {
+                "type": "Rule",
+                "id": "rule_1c1f1",
+                "name": "WarningRule",
+                "Rule": {
+                  "errorEntityRelPath": "../NumberField",
+                  "errorCode": "Error rule_1c1f1",
+                  "errorCondition": "FieldFilled(NumberField) AND [NumberField] < 42",
+                  "severity": "WARNING",
+                  "errorMessage": [
+                    {
+                      "locale": "de",
+                      "text": "$NumberField$ should be bigger or equal to 42."
+                    },
+                    {
+                      "locale": "en",
+                      "text": "$NumberField$ sollte größer gleich 42 sein."
+                    }
+                  ],
+                  "guiPatterns": {
+                    "dynamicEnumeration": "false"
+                  }
+                }
+              },
+              {
+                "type": "Field",
+                "id": "field_70e40",
+                "name": "BooleanField",
+                "Field": {
+                  "fieldType": {
+                    "type": "BooleanType"
+                  },
+                  "label": [
+                    {
+                      "locale": "de",
+                      "text": "Deaktviere require"
+                    },
+                    {
+                      "locale": "en",
+                      "text": "Disable required"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Field",
+                "id": "id41089",
+                "name": "RequiredField",
+                "Field": {
+                  "fieldType": {
+                    "type": "StringType"
+                  }
+                }
+              },
+              {
+                "type": "Rule",
+                "id": "id4207",
+                "name": "RequiredRule",
+                "Rule": {
+                  "errorEntityRelPath": "../RequiredField",
+                  "errorCode": "4711",
+                  "errorCondition": "(FieldNotFilled(BooleanField) or [BooleanField] == False) and FieldNotFilled(RequiredField)",
+                  "severity": "ERROR",
+                  "errorMessage": [
+                    {
+                      "locale": "en",
+                      "text": "Required"
+                    },
+                    {
+                      "locale": "de",
+                      "text": "Notwendig"
+                    }
+                  ],
+                  "guiPatterns": {
+                    "dynamicEnumeration": "false"
+                  }
+                }
+              },
+              {
+                "type": "Rule",
+                "id": "rule_452f2",
+                "name": "WarningRuleForString",
+                "Rule": {
+                  "errorEntityRelPath": "../RequiredField",
+                  "errorCode": "Error rule_452f2",
+                  "errorCondition": "FieldFilled(RequiredField) AND RangeAsString(RequiredField, 1,1) != \"A\"",
+                  "severity": "WARNING",
+                  "errorMessage": [
+                    {
+                      "locale": "en",
+                      "text": "$RequiredField$ should start with the letter \"A\""
+                    },
+                    {
+                      "locale": "de",
+                      "text": "$RequiredField$ sollte mit dem Buchstaben \"A\" beginnen."
+                    }
+                  ],
+                  "guiPatterns": {
+                    "dynamicEnumeration": "false"
+                  }
+                }
+              },
+              {
+                "type": "Rule",
+                "id": "rule_452f3",
+                "name": "InfoRuleForString",
+                "Rule": {
+                  "errorEntityRelPath": "../RequiredField",
+                  "errorCode": "Error rule_452f3",
+                  "errorCondition": "FieldFilled(RequiredField) AND RangeAsString(RequiredField, 1,2) == \"AB\"",
+                  "severity": "INFO",
+                  "errorMessage": [
+                    {
+                      "locale": "en",
+                      "text": "$RequiredField$ starts with the letters \"AB\"."
+                    },
+                    {
+                      "locale": "de",
+                      "text": "$RequiredField$ fängt mit den Buchstaben \"AB\" an."
+                    }
+                  ],
+                  "guiPatterns": {
+                    "dynamicEnumeration": "false"
+                  }
+                }
+              },
+              {
+                "type": "Group",
+                "id": "G43",
+                "name": "Group",
+                "Group": {
+                  "repeatability": 2,
+                  "elements": [
+                    {
+                      "type": "Field",
+                      "id": "F44",
+                      "name": "GroupField",
+                      "Field": {
+                        "fieldType": {
+                          "type": "StringType"
+                        }
+                      }
+                    },
+                    {
+                      "type": "Group",
+                      "id": "groupimpl_a44ba",
+                      "name": "Group2",
+                      "Group": {
+                        "repeatability": 2,
+                        "elements": [
+                          {
+                            "type": "Field",
+                            "id": "fieldimpl_1f3bb",
+                            "name": "GroupField",
+                            "Field": {
+                              "fieldType": {
+                                "type": "StringType"
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

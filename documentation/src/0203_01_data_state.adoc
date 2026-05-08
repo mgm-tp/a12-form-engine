@@ -1,0 +1,96 @@
+////
+SPDX-License-Identifier: EUPL-1.2 OR LicenseRef-commercial
+
+Copyright (c) 2012-2026 mgm technology partners GmbH
+
+Dual License
+------------
+This source file is part of the mgm A12 Platform and available under
+a choice of two different licenses:
+
+1. Open-Source License – EUPL v1.2
+   You may redistribute and/or modify this file under the terms of the
+   European Union Public License, version 1.2 - see https://eupl.eu/.
+
+2. Commercial License
+   Alternatively, you may obtain a commercial license from
+   mgm technology partners GmbH, that permits use of this software
+   under different terms (including support and maintenance services).
+
+   Please contact a12-license@mgm-tp.com for more information.
+
+You must select and comply with exactly one of the above license options.
+
+Warranty Disclaimer (applies to either option)
+----------------------------------------------
+THIS SOFTWARE IS PROVIDED "AS IS" AND WITHOUT WARRANTY OF ANY KIND,
+WHETHER EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NON-INFRINGEMENT, EXCEPT WHERE SUCH DISCLAIMERS ARE HELD TO BE
+LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
+////
+
+[#form-engine_state_data-state]
+= Data State
+
+The data state contains information about the <<form-engine_state_data-state_document,document>> and the <<form-engine_state_data-state_dirty-state,dirty state>> of the document.
+
+[#form-engine_state_data-state_document]
+== Document
+
+The document is the central object of interest in the Form Engine. The entire purpose of the Form Engine is to mutate a single document.
+
+The same data document object is stored and mutated in-memory – even across different Screens of a form.
+
+Almost all user and API activities lead to changes of field values or custom type values (e.g. attachments) and nesting structures (groups). However, the document must always be changed through the supplied Redux actions in order to ensure proper conversion and validation.
+
+The current UI representation of the Form Engine is mainly controlled by field values – either directly by the values shown in inputs or indirectly by "dependencies" (see link:/docs/SME/sme-fm-ba-docs/index.html[Form Model Editor documentation,window=_blank] for details about dependencies).
+
+The values in the document are stored as JavaScript data types, i.e. `string`, `number`, `boolean`, `Date` or `object`, depending on the A12 Document Model types:
+
+|===
+|A12 Type |JavaScript Type
+
+|Boolean |boolean
+|Confirm |true
+|Custom |object
+|Date |Date with time set to 00:00:00
+|Date Time |Date with milliseconds set to 000
+|Time |Date with date 1970-01-01
+|Date Fragment |Date with time set to 00:00:00 and missing parts taken from 2000-01-01 (or <baseYear>-01-01, if a base year is set in the Document Model) 
+|Enumeration |string (codes)
+|Number |number
+|String |string
+|===
+
+Absent values are either not stored or represented by the JavaScript `null` value. A not stored value is treated as `null`.
+
+[WARNING]
+====
+JavaScript `Date` values are always stored in the time zone, that is specified in the Document Model. You must take this into account when calculating with dates.
+====
+
+=== Input Controls
+
+The user can only change value in the document by using input controls. For String, Date/Time (input controls), and Number fields, the value is written when the input contains a parse-able value (according to Kernel basic type check) and the user leaves the input ("on blur"). For Boolean, Enumeration, and Date/Time (pickers), the value is written when the user selects or changes any value.
+
+For custom types this behavior is similar but a group will change instead of a field. For an attachment this will happen after its successful upload.
+
+=== Repeats
+
+For Detached Repeat and Inline Repeats, all value changes and row operations (add, move, remove) are directly applied to the document. This has also implications on the validation behavior, because the validation is always conducted on the current document (or parts of it). See validation behavior for details.
+
+Detached Repeat Detail Screens provide a cancel option to undo changes that are done within this Screen. For this, the Form Engine keeps backups of the document, which then are used to rollback the changes. In case of nested Repeats, each Repeat holds its own backup. Therefore, canceling changes in a Repeat Detail Screen will undo all changes made after entering the Detail Screen, including changes applied to nested Repeats and *changes made by API*.
+
+=== API Behavior
+
+Applications can change the document, but they must use the provided engine actions to ensure proper updates of the UI state. By default, every single change event triggers validation and computation.
+
+If you want to change multiple values at once, you must call validation and computations yourself using the A12 kernel-facade API. After that, you must update the Form Engine data and validation state.
+
+[#form-engine_state_data-state_dirty-state]
+== Dirty State
+
+The data dirty state signals that the document has changed in the past. It is initialized with false and will turn true, when a value changes on a top-level Screen or when changes on a Detached Repeat Detail Screen are committed. The default behavior will never change the value back to false even when the document is later changed back to the initial one and technically the data is not dirty any longer. However, it is possible to set the value with the Command `setDataDirty(dirty: boolean)`.
+
+Changes on a Detached Repeat Detail Screen, that are not committed yet, are tracked by a separate dirty state for the Screen (see <<form-engine_state_ui-state_form-location_dirty-state,Dirty State>>).

@@ -1,0 +1,1361 @@
+{
+  "header": {
+    "id": "computation-validation.partial-document",
+    "modelType": "document",
+    "modelVersion": "28.4.0",
+    "locales": [
+      {
+        "code": "en"
+      },
+      {
+        "code": "de"
+      }
+    ],
+    "labels": [],
+    "annotations": [
+      {
+        "name": "roles",
+        "value": "admin"
+      }
+    ],
+    "modelReferences": []
+  },
+  "content": {
+    "modelInfo": {
+      "name": "computation-validation.partial-document",
+      "immutable": false
+    },
+    "modelConfig": {
+      "decimalSeparator": ".",
+      "timeZone": "UTC",
+      "conditionLanguage": {
+        "code": "en_US"
+      }
+    },
+    "modelRoot": {
+      "rootGroups": [
+        {
+          "type": "Group",
+          "id": "group_9ffea",
+          "name": "validation",
+          "Group": {
+            "repeatability": 1,
+            "elements": [
+              {
+                "type": "Group",
+                "id": "group_5f73a",
+                "name": "visibleFields",
+                "Group": {
+                  "repeatability": 1,
+                  "elements": [
+                    {
+                      "type": "Field",
+                      "id": "field_19791",
+                      "name": "masterBoolean",
+                      "Field": {
+                        "fieldType": {
+                          "type": "BooleanType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "Master Boolean"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_13731",
+                      "name": "requiredString",
+                      "Field": {
+                        "fieldType": {
+                          "type": "StringType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "Required String Field"
+                          }
+                        ],
+                        "requirednessConfig": {
+                          "mode": "absoluteOrRelativeToNextRepAncestor"
+                        }
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_b1f1e",
+                      "name": "numberField",
+                      "Field": {
+                        "fieldType": {
+                          "type": "NumberType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "Number Field 1"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Rule",
+                      "id": "rule_e5dc8",
+                      "name": "NewRule_1",
+                      "Rule": {
+                        "errorEntityRelPath": "../numberField",
+                        "errorCode": "Error rule_e5dc8",
+                        "errorCondition": "FieldFilled(numberField) and [numberField ]< 42",
+                        "severity": "ERROR",
+                        "errorMessage": [
+                          {
+                            "locale": "en",
+                            "text": "Field should be bigger or equal to 42"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "Feld sollte größer oder gleich 42 sein"
+                          }
+                        ],
+                        "guiPatterns": {
+                          "dynamicEnumeration": "false"
+                        }
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "fieldimpl_f6d80",
+                      "name": "numberField2",
+                      "Field": {
+                        "fieldType": {
+                          "type": "NumberType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "Number Field 2"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_dd598",
+                      "name": "masterEnum",
+                      "Field": {
+                        "fieldType": {
+                          "type": "EnumerationType",
+                          "EnumerationType": {
+                            "values": [
+                              {
+                                "value": "showSecIRGroup1",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "show inline repeat for repeatableGroup1"
+                                  },
+                                  {
+                                    "locale": "de",
+                                    "text": "zeige inline repeat für repeatableGroup1"
+                                  }
+                                ]
+                              },
+                              {
+                                "value": "showSecERGroup1",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "show embedded repeat for repeatableGroup1"
+                                  },
+                                  {
+                                    "locale": "de",
+                                    "text": "zeige embedded repeat für repeatableGroup1"
+                                  }
+                                ]
+                              },
+                              {
+                                "value": "showMCS",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "show mcs"
+                                  },
+                                  {
+                                    "locale": "de",
+                                    "text": "zeige mcs"
+                                  }
+                                ]
+                              },
+                              {
+                                "value": "showCG",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "show control grid"
+                                  },
+                                  {
+                                    "locale": "de",
+                                    "text": "zeige control grid"
+                                  }
+                                ]
+                              },
+                              {
+                                "value": "showSecERGroup2",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "show embedded repeat for repeatableGroup2"
+                                  },
+                                  {
+                                    "locale": "de",
+                                    "text": "zeige embedded repeat für repeatableGroup2"
+                                  }
+                                ]
+                              }
+                            ],
+                            "categories": []
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "masterEnum"
+                          },
+                          {
+                            "locale": "de",
+                            "text": ""
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_20618",
+                      "name": "masterEnum2",
+                      "Field": {
+                        "fieldType": {
+                          "type": "EnumerationType",
+                          "EnumerationType": {
+                            "values": [
+                              {
+                                "value": "hideColumn",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "hide column"
+                                  },
+                                  {
+                                    "locale": "de",
+                                    "text": "verstecke spalte"
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "masterEnum2"
+                          },
+                          {
+                            "locale": "de",
+                            "text": ""
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_aac68",
+                      "name": "dependentGroupMaster",
+                      "Field": {
+                        "fieldType": {
+                          "type": "BooleanType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "Hide repeatableGroup1"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Group",
+                "id": "group_b2c1c",
+                "name": "repeatableGroup1",
+                "Group": {
+                  "repeatability": 5,
+                  "elements": [
+                    {
+                      "type": "Field",
+                      "id": "field_bd91a",
+                      "name": "requiredString",
+                      "Field": {
+                        "fieldType": {
+                          "type": "StringType",
+                          "StringType": {
+                            "maxLength": 7
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "Required String"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Rule",
+                      "id": "rule_71145",
+                      "name": "filledNotFilled",
+                      "Rule": {
+                        "errorEntityRelPath": "../requiredString",
+                        "errorCode": "Error rule_71145",
+                        "errorCondition": "GroupFilled(RuleGroup) AND FieldNotFilled(requiredString)",
+                        "severity": "ERROR",
+                        "errorMessage": [
+                          {
+                            "locale": "en",
+                            "text": "This field should be filled!"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "Dieses Feld sollte gefüllt sein!"
+                          }
+                        ],
+                        "guiPatterns": {
+                          "dynamicEnumeration": "false"
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Group",
+                "id": "group_f8a98",
+                "name": "repeatableGroup2",
+                "Group": {
+                  "repeatability": 5,
+                  "elements": [
+                    {
+                      "type": "Field",
+                      "id": "field_33b7c",
+                      "name": "stringField",
+                      "Field": {
+                        "fieldType": {
+                          "type": "StringType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "String Field"
+                          }
+                        ],
+                        "requirednessConfig": {
+                          "mode": "absoluteOrRelativeToNextRepAncestor"
+                        }
+                      }
+                    },
+                    {
+                      "type": "Group",
+                      "id": "group_ac411",
+                      "name": "nestedRepeatableGroup",
+                      "Group": {
+                        "repeatability": 5,
+                        "elements": [
+                          {
+                            "type": "Field",
+                            "id": "fieldimpl_4d504",
+                            "name": "requiredString",
+                            "Field": {
+                              "fieldType": {
+                                "type": "StringType"
+                              },
+                              "label": [
+                                {
+                                  "locale": "en",
+                                  "text": "Required String"
+                                }
+                              ]
+                            }
+                          },
+                          {
+                            "type": "Rule",
+                            "id": "ruleimpl_a83ef",
+                            "name": "filledNotFilled",
+                            "Rule": {
+                              "errorEntityRelPath": "../requiredString",
+                              "errorCode": "Error rule_71145",
+                              "errorCondition": "GroupFilled(RuleGroup) AND FieldNotFilled(requiredString)",
+                              "severity": "ERROR",
+                              "errorMessage": [
+                                {
+                                  "locale": "en",
+                                  "text": "This field should be filled!"
+                                },
+                                {
+                                  "locale": "de",
+                                  "text": "Dieses Feld sollte gefüllt sein!"
+                                }
+                              ],
+                              "guiPatterns": {
+                                "dynamicEnumeration": "false"
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_4d8ad",
+                      "name": "localMaster",
+                      "Field": {
+                        "fieldType": {
+                          "type": "EnumerationType",
+                          "EnumerationType": {
+                            "values": [
+                              {
+                                "value": "hideField",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "hideField"
+                                  },
+                                  {
+                                    "locale": "de",
+                                    "text": "hideField"
+                                  }
+                                ]
+                              },
+                              {
+                                "value": "hideGroup",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "hideGroup"
+                                  },
+                                  {
+                                    "locale": "de",
+                                    "text": "hideGroup"
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "localMaster"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_d944b",
+                      "name": "localDependentHidden",
+                      "Field": {
+                        "fieldType": {
+                          "type": "StringType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "localDependentHidden"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Group",
+                      "id": "group_5ffba",
+                      "name": "nestedNonRepeatableGroup",
+                      "Group": {
+                        "repeatability": 1,
+                        "elements": [
+                          {
+                            "type": "Field",
+                            "id": "field_0c5db",
+                            "name": "stringField",
+                            "Field": {
+                              "fieldType": {
+                                "type": "StringType"
+                              },
+                              "label": [
+                                {
+                                  "locale": "en",
+                                  "text": "stringField"
+                                }
+                              ]
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Group",
+                "id": "groupimpl_a543f",
+                "name": "repeatableGroup3",
+                "Group": {
+                  "repeatability": 5,
+                  "elements": [
+                    {
+                      "type": "Field",
+                      "id": "fieldimpl_1de29",
+                      "name": "requiredString",
+                      "Field": {
+                        "fieldType": {
+                          "type": "StringType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "Required String"
+                          }
+                        ],
+                        "requirednessConfig": {
+                          "mode": "absoluteOrRelativeToNextRepAncestor"
+                        }
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_209ec",
+                      "name": "invisibleRequiredField",
+                      "Field": {
+                        "fieldType": {
+                          "type": "StringType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": ""
+                          },
+                          {
+                            "locale": "de",
+                            "text": ""
+                          }
+                        ],
+                        "requirednessConfig": {
+                          "mode": "absoluteOrRelativeToNextRepAncestor"
+                        }
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_ec683",
+                      "name": "requireFieldOnlyShownInErTable",
+                      "Field": {
+                        "fieldType": {
+                          "type": "StringType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "Required Field"
+                          },
+                          {
+                            "locale": "de",
+                            "text": ""
+                          }
+                        ],
+                        "requirednessConfig": {
+                          "mode": "absoluteOrRelativeToNextRepAncestor"
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Group",
+                "id": "group_5e671",
+                "name": "rulesWithMultipleFields",
+                "Group": {
+                  "repeatability": 1,
+                  "elements": [
+                    {
+                      "type": "Field",
+                      "id": "field_4bd57",
+                      "name": "enumerationField",
+                      "Field": {
+                        "fieldType": {
+                          "type": "EnumerationType",
+                          "EnumerationType": {
+                            "values": [
+                              {
+                                "value": "key_1",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "yes"
+                                  },
+                                  {
+                                    "locale": "de",
+                                    "text": "ja"
+                                  }
+                                ]
+                              },
+                              {
+                                "value": "key_2",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "no"
+                                  },
+                                  {
+                                    "locale": "de",
+                                    "text": "nein"
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "Date required"
+                          },
+                          {
+                            "locale": "de",
+                            "text": ""
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_dc7aa",
+                      "name": "dateField",
+                      "Field": {
+                        "fieldType": {
+                          "type": "DateType",
+                          "DateType": {
+                            "format": "yyyy-MM-dd"
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "Date"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Rule",
+                      "id": "rule_70cec",
+                      "name": "rule_date_required",
+                      "Rule": {
+                        "errorEntityRelPath": "../dateField",
+                        "errorCode": "Error rule_70cec",
+                        "errorCondition": "FieldFilled(enumerationField) And [enumerationField] == \"key_1\" AND FieldNotFilled(dateField)",
+                        "severity": "ERROR",
+                        "errorMessage": [
+                          {
+                            "locale": "en",
+                            "text": "Date is required, if \"yes\" is selected in field \"$enumerationField$\""
+                          },
+                          {
+                            "locale": "de",
+                            "text": "Date is required, if \"yes\" is selected in field \"$enumerationField$\""
+                          }
+                        ],
+                        "guiPatterns": {
+                          "dynamicEnumeration": "false"
+                        }
+                      }
+                    },
+                    {
+                      "type": "Group",
+                      "id": "group_7737d",
+                      "name": "repGroup",
+                      "Group": {
+                        "repeatability": 5,
+                        "indexFieldName": "numberField",
+                        "elements": [
+                          {
+                            "type": "Field",
+                            "id": "field_b4e28",
+                            "name": "numberField",
+                            "Field": {
+                              "fieldType": {
+                                "type": "NumberType"
+                              },
+                              "requirednessConfig": {
+                                "mode": "absoluteOrRelativeToNextRepAncestor"
+                              }
+                            }
+                          },
+                          {
+                            "type": "Field",
+                            "id": "field_168be",
+                            "name": "stringField",
+                            "Field": {
+                              "fieldType": {
+                                "type": "StringType"
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Group",
+                "id": "group_8d069",
+                "name": "errorMessages",
+                "Group": {
+                  "repeatability": 1,
+                  "elements": [
+                    {
+                      "type": "Group",
+                      "id": "group_3821e",
+                      "name": "labelReferencedInMessage",
+                      "Group": {
+                        "repeatability": 1,
+                        "elements": [
+                          {
+                            "type": "Field",
+                            "id": "field_487bc",
+                            "name": "NumberField",
+                            "Field": {
+                              "fieldType": {
+                                "type": "NumberType",
+                                "NumberType": {
+                                  "minFractionalDigits": 2,
+                                  "maxFractionalDigits": 2
+                                }
+                              },
+                              "label": [
+                                {
+                                  "locale": "en",
+                                  "text": "NumberField"
+                                },
+                                {
+                                  "locale": "de",
+                                  "text": "NumberField"
+                                }
+                              ]
+                            }
+                          },
+                          {
+                            "type": "Rule",
+                            "id": "rule_14230",
+                            "name": "ruleLabel",
+                            "Rule": {
+                              "errorEntityRelPath": "../NumberField",
+                              "errorCode": "Error rule_14230",
+                              "errorCondition": "[NumberField] != 42",
+                              "severity": "ERROR",
+                              "errorMessage": [
+                                {
+                                  "locale": "en",
+                                  "text": "$NumberField$ does not contain the correct value!"
+                                },
+                                {
+                                  "locale": "de",
+                                  "text": "$NumberField$ enthält nicht den korrekten Wert!"
+                                }
+                              ],
+                              "guiPatterns": {
+                                "dynamicEnumeration": "false"
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Group",
+                      "id": "group_db55c",
+                      "name": "valueReferencedInMessage",
+                      "Group": {
+                        "repeatability": 1,
+                        "elements": [
+                          {
+                            "type": "Field",
+                            "id": "fieldimpl_e1ce8",
+                            "name": "NumberField",
+                            "Field": {
+                              "fieldType": {
+                                "type": "NumberType",
+                                "NumberType": {
+                                  "minFractionalDigits": 2,
+                                  "maxFractionalDigits": 2
+                                }
+                              },
+                              "label": [
+                                {
+                                  "locale": "en",
+                                  "text": "NumberField"
+                                },
+                                {
+                                  "locale": "de",
+                                  "text": "NumberField"
+                                }
+                              ]
+                            }
+                          },
+                          {
+                            "type": "Rule",
+                            "id": "rule_79943",
+                            "name": "ruleValue",
+                            "Rule": {
+                              "errorEntityRelPath": "../NumberField",
+                              "errorCode": "Error rule_79943",
+                              "errorCondition": "[NumberField] != 42",
+                              "severity": "ERROR",
+                              "errorMessage": [
+                                {
+                                  "locale": "en",
+                                  "text": "$NumberField.value$ is not the answer!"
+                                },
+                                {
+                                  "locale": "de",
+                                  "text": "$NumberField.value$ ist nicht die Antwort!"
+                                }
+                              ],
+                              "guiPatterns": {
+                                "dynamicEnumeration": "false"
+                              }
+                            }
+                          },
+                          {
+                            "type": "Field",
+                            "id": "field_bb747",
+                            "name": "DateField1",
+                            "Field": {
+                              "fieldType": {
+                                "type": "DateType",
+                                "DateType": {
+                                  "format": "yyyy-MM-dd"
+                                }
+                              },
+                              "label": [
+                                {
+                                  "locale": "en",
+                                  "text": "DateField1"
+                                },
+                                {
+                                  "locale": "de",
+                                  "text": "DateField1"
+                                }
+                              ]
+                            }
+                          },
+                          {
+                            "type": "Rule",
+                            "id": "rule_ad5ff",
+                            "name": "ruleValueDate",
+                            "Rule": {
+                              "errorEntityRelPath": "../DateField1",
+                              "errorCode": "Error rule_ad5ff",
+                              "errorCondition": "[DateField1] != Today",
+                              "severity": "ERROR",
+                              "errorMessage": [
+                                {
+                                  "locale": "en",
+                                  "text": "$DateField1.value$ is not today."
+                                },
+                                {
+                                  "locale": "de",
+                                  "text": "$DateField1.value$ ist nicht heute."
+                                }
+                              ],
+                              "guiPatterns": {
+                                "dynamicEnumeration": "false"
+                              }
+                            }
+                          },
+                          {
+                            "type": "Field",
+                            "id": "fieldimpl_60dcf",
+                            "name": "DateTimeField1",
+                            "Field": {
+                              "fieldType": {
+                                "type": "DateTimeType",
+                                "DateTimeType": {
+                                  "format": "yyyy-MM-dd'T'HH:mm:ss"
+                                }
+                              },
+                              "label": [
+                                {
+                                  "locale": "en",
+                                  "text": "DateTimeField1"
+                                },
+                                {
+                                  "locale": "de",
+                                  "text": "DateTimeField1"
+                                }
+                              ]
+                            }
+                          },
+                          {
+                            "type": "Rule",
+                            "id": "ruleimpl_fef9f",
+                            "name": "ruleValueDateTime",
+                            "Rule": {
+                              "errorEntityRelPath": "../DateTimeField1",
+                              "errorCode": "Error rule_79943",
+                              "errorCondition": "DateFromDateTime(DateTimeField1) != Today",
+                              "severity": "ERROR",
+                              "errorMessage": [
+                                {
+                                  "locale": "en",
+                                  "text": "$DateTimeField1.value$ is not today."
+                                },
+                                {
+                                  "locale": "de",
+                                  "text": "$DateTimeField1.value$ ist nicht heute."
+                                }
+                              ],
+                              "guiPatterns": {
+                                "dynamicEnumeration": "false"
+                              }
+                            }
+                          },
+                          {
+                            "type": "Field",
+                            "id": "fieldimpl_4dbde",
+                            "name": "TimeField1",
+                            "Field": {
+                              "fieldType": {
+                                "type": "TimeType",
+                                "TimeType": {
+                                  "format": "HH:mm:ss"
+                                }
+                              },
+                              "label": [
+                                {
+                                  "locale": "en",
+                                  "text": "TimeField1"
+                                },
+                                {
+                                  "locale": "de",
+                                  "text": "TimeField1"
+                                }
+                              ]
+                            }
+                          },
+                          {
+                            "type": "Rule",
+                            "id": "ruleimpl_130a8",
+                            "name": "ruleValueTime",
+                            "Rule": {
+                              "errorEntityRelPath": "../TimeField1",
+                              "errorCode": "Error rule_79943",
+                              "errorCondition": "[TimeField1] != Time(\"07\", \"30\", \"00\")",
+                              "severity": "ERROR",
+                              "errorMessage": [
+                                {
+                                  "locale": "en",
+                                  "text": "$TimeField1.value$ is not 07:30"
+                                },
+                                {
+                                  "locale": "de",
+                                  "text": "$TimeField1.value$ ist nicht 07:30"
+                                }
+                              ],
+                              "guiPatterns": {
+                                "dynamicEnumeration": "false"
+                              }
+                            }
+                          },
+                          {
+                            "type": "Field",
+                            "id": "fieldimpl_a255d",
+                            "name": "DateRangeField1",
+                            "Field": {
+                              "fieldType": {
+                                "type": "DateRangeType",
+                                "DateRangeType": {
+                                  "format": "yyyy-MM-dd",
+                                  "rangeSeparator": "/"
+                                }
+                              },
+                              "label": [
+                                {
+                                  "locale": "en",
+                                  "text": "DateRangeField1"
+                                },
+                                {
+                                  "locale": "de",
+                                  "text": "DateRangeField1"
+                                }
+                              ]
+                            }
+                          },
+                          {
+                            "type": "Rule",
+                            "id": "ruleimpl_91236",
+                            "name": "ruleValueDateRange",
+                            "Rule": {
+                              "errorEntityRelPath": "../DateRangeField1",
+                              "errorCode": "Error rule_79943",
+                              "errorCondition": "StartOfDateRange(DateRangeField1) != Date(\"01\", \"01\", \"2022\") OR EndOfDateRange(DateRangeField1) != Date(\"31\", \"12\", \"2022\")",
+                              "severity": "ERROR",
+                              "errorMessage": [
+                                {
+                                  "locale": "en",
+                                  "text": "$DateRangeField1.value$ is not 01/01/2022-12/31/2022"
+                                },
+                                {
+                                  "locale": "de",
+                                  "text": "$DateRangeField1.value$ ist nicht 01/01/2022-12/31/2022"
+                                }
+                              ],
+                              "guiPatterns": {
+                                "dynamicEnumeration": "false"
+                              }
+                            }
+                          },
+                          {
+                            "type": "Field",
+                            "id": "field_de1eb",
+                            "name": "EnumerationField",
+                            "Field": {
+                              "fieldType": {
+                                "type": "EnumerationType",
+                                "EnumerationType": {
+                                  "values": [
+                                    {
+                                      "value": "key_1",
+                                      "label": [
+                                        {
+                                          "locale": "en",
+                                          "text": "Value 1"
+                                        },
+                                        {
+                                          "locale": "de",
+                                          "text": "Wert 1"
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "value": "key_2",
+                                      "label": [
+                                        {
+                                          "locale": "en",
+                                          "text": "Value 2"
+                                        },
+                                        {
+                                          "locale": "de",
+                                          "text": "Wert 2"
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "value": "key_3",
+                                      "label": [
+                                        {
+                                          "locale": "en",
+                                          "text": "Value 3"
+                                        },
+                                        {
+                                          "locale": "de",
+                                          "text": "Wert 3"
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              },
+                              "label": [
+                                {
+                                  "locale": "en",
+                                  "text": "EnumerationField"
+                                },
+                                {
+                                  "locale": "de",
+                                  "text": "EnumerationField"
+                                }
+                              ]
+                            }
+                          },
+                          {
+                            "type": "Rule",
+                            "id": "ruleimpl_83ccb",
+                            "name": "ruleValueEnumeration",
+                            "Rule": {
+                              "errorEntityRelPath": "../EnumerationField",
+                              "errorCode": "Error rule_79943",
+                              "errorCondition": "[EnumerationField] != \"key_2\"",
+                              "severity": "ERROR",
+                              "errorMessage": [
+                                {
+                                  "locale": "en",
+                                  "text": "$EnumerationField.value$ is not the answer!"
+                                },
+                                {
+                                  "locale": "de",
+                                  "text": "$EnumerationField.value$ ist nicht die Antwort!"
+                                }
+                              ],
+                              "guiPatterns": {
+                                "dynamicEnumeration": "false"
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Field",
+                "id": "field_9067a",
+                "name": "errorField",
+                "Field": {
+                  "fieldType": {
+                    "type": "BooleanType"
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "errorField"
+                    },
+                    {
+                      "locale": "de",
+                      "text": ""
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Rule",
+                "id": "rule_39a7f",
+                "name": "NewRule_1",
+                "Rule": {
+                  "errorEntityRelPath": "../errorField",
+                  "errorCode": "Error rule_39a7f",
+                  "errorCondition": "FieldFilled(errorField) And [errorField] == True And NumberOfFilledGroups(repeatableGroup1*) < 2",
+                  "severity": "ERROR",
+                  "errorMessage": [
+                    {
+                      "locale": "en",
+                      "text": "Error"
+                    },
+                    {
+                      "locale": "de",
+                      "text": "Error"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Group",
+                "id": "group_341b5",
+                "name": "indexedControls",
+                "Group": {
+                  "repeatability": 1,
+                  "elements": [
+                    {
+                      "type": "Field",
+                      "id": "field_ba439",
+                      "name": "showRepeats",
+                      "Field": {
+                        "fieldType": {
+                          "type": "BooleanType"
+                        }
+                      }
+                    },
+                    {
+                      "type": "Group",
+                      "id": "group_dc9d7",
+                      "name": "repeatableGroup1",
+                      "Group": {
+                        "repeatability": 5,
+                        "indexFieldName": "indexField",
+                        "elements": [
+                          {
+                            "type": "Field",
+                            "id": "field_55cdd",
+                            "name": "indexField",
+                            "Field": {
+                              "fieldType": {
+                                "type": "StringType"
+                              }
+                            }
+                          },
+                          {
+                            "type": "Field",
+                            "id": "field_c9909",
+                            "name": "numberField",
+                            "Field": {
+                              "fieldType": {
+                                "type": "NumberType"
+                              }
+                            }
+                          },
+                          {
+                            "type": "Rule",
+                            "id": "rule_4affb",
+                            "name": "parallelIteration",
+                            "Rule": {
+                              "errorEntityRelPath": "../numberField",
+                              "errorCode": "Error rule_4affb",
+                              "errorCondition": "FieldFilled(numberField)\nAnd FieldFilled(../repeatableGroup2/numberField)\nAnd [numberField] != [../repeatableGroup2/numberField]",
+                              "severity": "ERROR",
+                              "errorMessage": [
+                                {
+                                  "locale": "en",
+                                  "text": "The values of Number1 and Number2 are not equal for index \"$index(indexField).value$\"."
+                                },
+                                {
+                                  "locale": "de",
+                                  "text": "The values of Number1 and Number2 are not equal for index \"$index(indexField).value$\"."
+                                }
+                              ]
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Group",
+                      "id": "group_d3664",
+                      "name": "repeatableGroup2",
+                      "Group": {
+                        "repeatability": 5,
+                        "indexFieldName": "indexField",
+                        "elements": [
+                          {
+                            "type": "Field",
+                            "id": "field_12206",
+                            "name": "indexField",
+                            "Field": {
+                              "fieldType": {
+                                "type": "StringType"
+                              }
+                            }
+                          },
+                          {
+                            "type": "Field",
+                            "id": "field_ea44f",
+                            "name": "numberField",
+                            "Field": {
+                              "fieldType": {
+                                "type": "NumberType"
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Group",
+                "id": "group_78a15",
+                "name": "rulesWithAsterisks",
+                "Group": {
+                  "repeatability": 1,
+                  "elements": [
+                    {
+                      "type": "Field",
+                      "id": "field_629ba",
+                      "name": "masterField",
+                      "Field": {
+                        "fieldType": {
+                          "type": "ConfirmType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "Hide Inline and Embedded Repeat"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Group",
+                      "id": "group_bda6a",
+                      "name": "repeatableGroup",
+                      "Group": {
+                        "repeatability": 5,
+                        "elements": [
+                          {
+                            "type": "Field",
+                            "id": "field_1459c",
+                            "name": "SetNumberNonRelevant",
+                            "Field": {
+                              "fieldType": {
+                                "type": "ConfirmType"
+                              },
+                              "label": [
+                                {
+                                  "locale": "en",
+                                  "text": "Set number field as non-relevant"
+                                }
+                              ]
+                            }
+                          },
+                          {
+                            "type": "Field",
+                            "id": "field_6c870",
+                            "name": "numberField",
+                            "Field": {
+                              "fieldType": {
+                                "type": "NumberType"
+                              },
+                              "label": [
+                                {
+                                  "locale": "en",
+                                  "text": "Number Field"
+                                }
+                              ]
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Rule",
+                      "id": "rule_c7c4c",
+                      "name": "numberOfDifferentValues",
+                      "Rule": {
+                        "errorEntityRelPath": "../repeatableGroup/numberField",
+                        "errorCode": "Error rule_c7c4c",
+                        "errorCondition": "NumberOfDifferentValues(repeatableGroup*/numberField) < 3",
+                        "severity": "ERROR",
+                        "errorMessage": [
+                          {
+                            "locale": "en",
+                            "text": "There need to be at least 3 different numbers."
+                          },
+                          {
+                            "locale": "de",
+                            "text": "Es müssen mindestens 3 unterschiedliche Zahlen angegeben werden."
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

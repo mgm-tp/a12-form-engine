@@ -1,0 +1,645 @@
+{
+  "header": {
+    "id": "controls.autofill-document",
+    "modelType": "document",
+    "modelVersion": "28.4.0",
+    "locales": [
+      {
+        "code": "en"
+      },
+      {
+        "code": "de"
+      }
+    ],
+    "labels": [
+      {
+        "locale": "de",
+        "text": "Rechnung"
+      },
+      {
+        "locale": "en",
+        "text": "Invoice"
+      }
+    ],
+    "annotations": [
+      {
+        "name": "comment",
+        "value": "Standard Training Example"
+      },
+      {
+        "name": "roles",
+        "value": "admin"
+      }
+    ],
+    "modelReferences": []
+  },
+  "content": {
+    "modelInfo": {
+      "name": "controls.autofill-document",
+      "immutable": false,
+      "comment": "model based on the invoice training exercise"
+    },
+    "modelConfig": {
+      "decimalSeparator": ".",
+      "timeZone": "UTC",
+      "conditionLanguage": {
+        "code": "en_US"
+      }
+    },
+    "typeDefinitions": [
+      {
+        "id": "typedef_f51e7e93-5571-48f4-98d9-02de29a60604",
+        "name": "producttype",
+        "fieldType": {
+          "type": "EnumerationType",
+          "EnumerationType": {
+            "values": [
+              {
+                "value": "BB",
+                "label": [
+                  {
+                    "locale": "en",
+                    "text": "BB (bread and buns)"
+                  },
+                  {
+                    "locale": "de",
+                    "text": "BB (Brot und Brötchen)"
+                  }
+                ]
+              },
+              {
+                "value": "Deko",
+                "label": [
+                  {
+                    "locale": "en",
+                    "text": "Decoration"
+                  },
+                  {
+                    "locale": "de",
+                    "text": "Dekoration"
+                  }
+                ]
+              },
+              {
+                "value": "Troso",
+                "label": [
+                  {
+                    "locale": "en",
+                    "text": "Troso (dry goods)"
+                  },
+                  {
+                    "locale": "de",
+                    "text": "Troso (Trockensortiment)"
+                  }
+                ]
+              },
+              {
+                "value": "FF",
+                "label": [
+                  {
+                    "locale": "en",
+                    "text": "Fresh meat"
+                  },
+                  {
+                    "locale": "de",
+                    "text": "FF (Frisch Fleisch)"
+                  }
+                ]
+              },
+              {
+                "value": "Geschirr",
+                "label": [
+                  {
+                    "locale": "en",
+                    "text": "Dishes"
+                  },
+                  {
+                    "locale": "de",
+                    "text": "Geschirr"
+                  }
+                ]
+              },
+              {
+                "value": "HiFi",
+                "label": [
+                  {
+                    "locale": "en",
+                    "text": "HiFi (High Fidelity)"
+                  },
+                  {
+                    "locale": "de",
+                    "text": "HiFi (High Fidelity)"
+                  }
+                ]
+              },
+              {
+                "value": "Mopro",
+                "label": [
+                  {
+                    "locale": "en",
+                    "text": "Dairy product"
+                  },
+                  {
+                    "locale": "de",
+                    "text": "MoPro (Molkereiprodukte)"
+                  }
+                ]
+              },
+              {
+                "value": "ObstGemuese",
+                "label": [
+                  {
+                    "locale": "en",
+                    "text": "F&V (fruit and vegetables)"
+                  },
+                  {
+                    "locale": "de",
+                    "text": "O&G (Obst und Gemüse)"
+                  }
+                ]
+              },
+              {
+                "value": "Tiko",
+                "label": [
+                  {
+                    "locale": "en",
+                    "text": "FroFo (frozen food)"
+                  },
+                  {
+                    "locale": "de",
+                    "text": "Tiko (Tiefkühlkost)"
+                  }
+                ]
+              }
+            ],
+            "categories": [
+              {
+                "name": "cat",
+                "values": [
+                  "Food",
+                  "Non-Food",
+                  "Food",
+                  "Food",
+                  "Non-Food",
+                  "Non-Food",
+                  "Food",
+                  "Food",
+                  "Food"
+                ],
+                "description": "Food oder Nonfood"
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "modelRoot": {
+      "rootGroups": [
+        {
+          "type": "Group",
+          "id": "G2",
+          "name": "invoice",
+          "externalDescription": [
+            {
+              "locale": "en",
+              "text": "Invoice"
+            },
+            {
+              "locale": "de",
+              "text": "Rechnung"
+            }
+          ],
+          "Group": {
+            "repeatability": 1,
+            "elements": [
+              {
+                "type": "Group",
+                "id": "G3",
+                "name": "addresses",
+                "externalDescription": [
+                  {
+                    "locale": "en",
+                    "text": "adress"
+                  },
+                  {
+                    "locale": "de",
+                    "text": "Adresse"
+                  }
+                ],
+                "Group": {
+                  "repeatability": 1,
+                  "elements": [
+                    {
+                      "type": "Group",
+                      "id": "G12",
+                      "name": "billing_address",
+                      "Group": {
+                        "repeatability": 1,
+                        "elements": [
+                          {
+                            "type": "Field",
+                            "id": "F22",
+                            "name": "form_of_address",
+                            "annotations": [
+                              {
+                                "name": "enable_approximate_match_search",
+                                "value": "true"
+                              }
+                            ],
+                            "Field": {
+                              "fieldType": {
+                                "type": "EnumerationType",
+                                "EnumerationType": {
+                                  "values": [
+                                    {
+                                      "value": "mr",
+                                      "label": [
+                                        {
+                                          "locale": "en",
+                                          "text": "Mr"
+                                        },
+                                        {
+                                          "locale": "de",
+                                          "text": "Herr"
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "value": "mrs",
+                                      "label": [
+                                        {
+                                          "locale": "en",
+                                          "text": "Mrs"
+                                        },
+                                        {
+                                          "locale": "de",
+                                          "text": "Frau"
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              },
+                              "label": [
+                                {
+                                  "locale": "en",
+                                  "text": "Form of address"
+                                },
+                                {
+                                  "locale": "de",
+                                  "text": "Anrede"
+                                }
+                              ]
+                            }
+                          },
+                          {
+                            "type": "Field",
+                            "id": "F13",
+                            "name": "firstname",
+                            "annotations": [
+                              {
+                                "name": "enable_approximate_match_search",
+                                "value": "true"
+                              }
+                            ],
+                            "Field": {
+                              "fieldType": {
+                                "type": "StringType"
+                              },
+                              "label": [
+                                {
+                                  "locale": "en",
+                                  "text": "First name"
+                                },
+                                {
+                                  "locale": "de",
+                                  "text": "Vorname"
+                                }
+                              ]
+                            }
+                          },
+                          {
+                            "type": "Field",
+                            "id": "F14",
+                            "name": "lastname",
+                            "annotations": [
+                              {
+                                "name": "enable_approximate_match_search",
+                                "value": "true"
+                              }
+                            ],
+                            "Field": {
+                              "fieldType": {
+                                "type": "StringType"
+                              },
+                              "label": [
+                                {
+                                  "locale": "de",
+                                  "text": "Nachname"
+                                },
+                                {
+                                  "locale": "en",
+                                  "text": "Surname"
+                                }
+                              ]
+                            }
+                          },
+                          {
+                            "type": "Field",
+                            "id": "F15",
+                            "name": "company",
+                            "annotations": [
+                              {
+                                "name": "enable_approximate_match_search",
+                                "value": "true"
+                              }
+                            ],
+                            "Field": {
+                              "fieldType": {
+                                "type": "StringType"
+                              },
+                              "label": [
+                                {
+                                  "locale": "de",
+                                  "text": "Firmenname"
+                                },
+                                {
+                                  "locale": "en",
+                                  "text": "Company name"
+                                }
+                              ]
+                            }
+                          },
+                          {
+                            "type": "Field",
+                            "id": "F16",
+                            "name": "street",
+                            "annotations": [
+                              {
+                                "name": "enable_approximate_match_search",
+                                "value": "true"
+                              }
+                            ],
+                            "Field": {
+                              "fieldType": {
+                                "type": "StringType"
+                              },
+                              "label": [
+                                {
+                                  "locale": "en",
+                                  "text": "Street"
+                                },
+                                {
+                                  "locale": "de",
+                                  "text": "Straße"
+                                }
+                              ]
+                            }
+                          },
+                          {
+                            "type": "Field",
+                            "id": "F24",
+                            "name": "nr",
+                            "annotations": [
+                              {
+                                "name": "enable_approximate_match_search",
+                                "value": "true"
+                              }
+                            ],
+                            "Field": {
+                              "fieldType": {
+                                "type": "StringType",
+                                "StringType": {
+                                  "errorMessage": [
+                                    {
+                                      "locale": "de",
+                                      "text": "Bitte geben eine Hausnummer ein. Adresszusätze a-j sind zulässig."
+                                    },
+                                    {
+                                      "locale": "en",
+                                      "text": "Please enter number. Address additions a-j are permitted."
+                                    }
+                                  ],
+                                  "pattern": "[0-9]+([A-Ja-j]?)"
+                                }
+                              },
+                              "label": [
+                                {
+                                  "locale": "de",
+                                  "text": "Hausnummer"
+                                },
+                                {
+                                  "locale": "en",
+                                  "text": "Number"
+                                }
+                              ]
+                            }
+                          },
+                          {
+                            "type": "Field",
+                            "id": "F17",
+                            "name": "zip",
+                            "annotations": [
+                              {
+                                "name": "enable_approximate_match_search",
+                                "value": "true"
+                              }
+                            ],
+                            "Field": {
+                              "fieldType": {
+                                "type": "StringType",
+                                "StringType": {
+                                  "errorMessage": [
+                                    {
+                                      "locale": "en",
+                                      "text": "Pleaser enter a five-digit zip code."
+                                    },
+                                    {
+                                      "locale": "de",
+                                      "text": "Bitte geben Sie eine fünf-stellige Postleitzahl an."
+                                    }
+                                  ],
+                                  "pattern": "[0-9]{5}"
+                                }
+                              },
+                              "label": [
+                                {
+                                  "locale": "de",
+                                  "text": "Postleizahl"
+                                },
+                                {
+                                  "locale": "en",
+                                  "text": "Zip code"
+                                }
+                              ]
+                            }
+                          },
+                          {
+                            "type": "Field",
+                            "id": "F18",
+                            "name": "city",
+                            "annotations": [
+                              {
+                                "name": "enable_approximate_match_search",
+                                "value": "true"
+                              }
+                            ],
+                            "Field": {
+                              "fieldType": {
+                                "type": "StringType"
+                              },
+                              "label": [
+                                {
+                                  "locale": "de",
+                                  "text": "Stadt"
+                                },
+                                {
+                                  "locale": "en",
+                                  "text": "City"
+                                }
+                              ]
+                            }
+                          },
+                          {
+                            "type": "Rule",
+                            "id": "R61",
+                            "name": "names_together",
+                            "Rule": {
+                              "errorEntityRelPath": "../firstname",
+                              "errorCode": "Error R61",
+                              "errorCondition": "FieldsNotCollectivelyFilled(firstname, lastname)",
+                              "severity": "ERROR",
+                              "errorMessage": [
+                                {
+                                  "locale": "en",
+                                  "text": "$firstname$ and $lastname$ must be filled together."
+                                },
+                                {
+                                  "locale": "de",
+                                  "text": "$firstname$ und $lastname$ müssen gemeinsam angegeben werden."
+                                }
+                              ],
+                              "guiPatterns": {
+                                "dynamicEnumeration": "false"
+                              }
+                            }
+                          },
+                          {
+                            "type": "Rule",
+                            "id": "R62",
+                            "name": "names_or_company",
+                            "Rule": {
+                              "errorEntityRelPath": "../firstname",
+                              "errorCode": "Error R62",
+                              "errorCondition": "FieldNotFilled(company) And FieldsNotCollectivelyFilled(firstname, lastname)",
+                              "severity": "ERROR",
+                              "errorMessage": [
+                                {
+                                  "locale": "en",
+                                  "text": "You either need to enter a company name or your complete name."
+                                },
+                                {
+                                  "locale": "de",
+                                  "text": "Bitte geben sie entweder eine Firma oder ihren vollständigen Namen an."
+                                }
+                              ],
+                              "guiPatterns": {
+                                "dynamicEnumeration": "false"
+                              }
+                            }
+                          },
+                          {
+                            "type": "Rule",
+                            "id": "R82",
+                            "name": "req_names_or_company",
+                            "Rule": {
+                              "errorEntityRelPath": "../firstname",
+                              "errorCode": "Error R82",
+                              "errorCondition": "FieldNotFilled(firstname) and FieldNotFilled(lastname) and FieldNotFilled(company)",
+                              "severity": "ERROR",
+                              "errorMessage": [
+                                {
+                                  "locale": "en",
+                                  "text": "Please enter either your full name or a company name."
+                                },
+                                {
+                                  "locale": "de",
+                                  "text": "Bitte geben Sie entweder Ihren vollständigen Namen oder den einer Firma an."
+                                }
+                              ],
+                              "guiPatterns": {
+                                "dynamicEnumeration": "false"
+                              }
+                            }
+                          },
+                          {
+                            "type": "Field",
+                            "id": "field_be452",
+                            "name": "name_overview",
+                            "annotations": [
+                              {
+                                "name": "enable_approximate_match_search",
+                                "value": "true"
+                              }
+                            ],
+                            "Field": {
+                              "fieldType": {
+                                "type": "StringType"
+                              },
+                              "label": [
+                                {
+                                  "locale": "en",
+                                  "text": "Name"
+                                },
+                                {
+                                  "locale": "de",
+                                  "text": "Name"
+                                }
+                              ]
+                            }
+                          },
+                          {
+                            "type": "Computation",
+                            "id": "computation_f1b7b",
+                            "name": "displayname",
+                            "Computation": {
+                              "computedFieldRelPath": "../name_overview",
+                              "computationAlternatives": [
+                                {
+                                  "operation": "[firstname] + \" \" + [lastname] + \", \" + [company]",
+                                  "precondition": "AllFieldsFilled(firstname, lastname, company)"
+                                },
+                                {
+                                  "operation": "[firstname] + \" \" + [lastname]",
+                                  "precondition": "AllFieldsFilled(firstname,lastname) and FieldNotFilled(company)"
+                                },
+                                {
+                                  "operation": "[company]",
+                                  "precondition": "FieldFilled(company) and FieldNotFilled(firstname) and FieldNotFilled(lastname)"
+                                }
+                              ],
+                              "errorMessage": [
+                                {
+                                  "locale": "en",
+                                  "text": "error text for computation of displayname"
+                                },
+                                {
+                                  "locale": "de",
+                                  "text": "error text for computation of displayname"
+                                }
+                              ]
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

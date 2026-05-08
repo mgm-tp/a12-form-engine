@@ -1,0 +1,2448 @@
+{
+  "header": {
+    "id": "repeat-document",
+    "modelType": "document",
+    "modelVersion": "28.4.0",
+    "locales": [
+      {
+        "code": "en"
+      },
+      {
+        "code": "de"
+      }
+    ],
+    "labels": [],
+    "annotations": [
+      {
+        "name": "roles",
+        "value": "admin"
+      }
+    ],
+    "modelReferences": []
+  },
+  "content": {
+    "modelInfo": {
+      "name": "repeat-document",
+      "baseYear": 2022,
+      "immutable": false
+    },
+    "modelConfig": {
+      "timeZone": "UTC",
+      "decimalSeparator": ".",
+      "conditionLanguage": {
+        "code": "en_US"
+      }
+    },
+    "typeDefinitions": [
+      {
+        "id": "typedef_39af9fb3-3fce-462b-82d5-9cda92389b24",
+        "name": "L1_Byte",
+        "fieldType": {
+          "type": "StringType",
+          "StringType": {
+            "errorMessage": [
+              {
+                "locale": "en",
+                "text": "This is no byte."
+              },
+              {
+                "locale": "de",
+                "text": "Dies ist kein Byte."
+              }
+            ],
+            "pattern": "[01]{8}"
+          }
+        }
+      }
+    ],
+    "modelRoot": {
+      "rootGroups": [
+        {
+          "type": "Group",
+          "id": "G14",
+          "name": "Root",
+          "Group": {
+            "repeatability": 1,
+            "elements": [
+              {
+                "type": "Field",
+                "id": "F32",
+                "name": "L0_Bool",
+                "Field": {
+                  "fieldType": {
+                    "type": "BooleanType"
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "L0_Bool"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Field",
+                "id": "field_0632a",
+                "name": "L0_Number",
+                "Field": {
+                  "fieldType": {
+                    "type": "NumberType"
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "L0_Number"
+                    },
+                    {
+                      "locale": "de",
+                      "text": "L0_Number"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Rule",
+                "id": "rule_79b7d",
+                "name": "L0_Number_Rule",
+                "Rule": {
+                  "errorEntityRelPath": "../L0_Number",
+                  "errorCode": "Error rule_79b7d",
+                  "errorCondition": "FieldFilled(L0_Number) and [L0_Number] != 42",
+                  "severity": "ERROR",
+                  "errorMessage": [
+                    {
+                      "locale": "en",
+                      "text": "L0_Number must be 42, if filled."
+                    },
+                    {
+                      "locale": "de",
+                      "text": "L0_Number muss 42 oder leer sein."
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Rule",
+                "id": "rule_7117d",
+                "name": "L0_Number_Warning",
+                "Rule": {
+                  "errorEntityRelPath": "../L0_Number",
+                  "errorCode": "Error rule_7117d",
+                  "errorCondition": "FieldFilled(L0_Number) And [L0_Number] < 0",
+                  "severity": "WARNING",
+                  "errorMessage": [
+                    {
+                      "locale": "en",
+                      "text": "Should be postive!"
+                    },
+                    {
+                      "locale": "de",
+                      "text": "Should be postive!"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Rule",
+                "id": "rule_885a5",
+                "name": "L1_Rule",
+                "Rule": {
+                  "errorEntityRelPath": "../Nested_L1/L1_Number",
+                  "errorCode": "Error rule_885a5",
+                  "errorCondition": "GroupFilled(Nested_L1) AND FieldNotFilled(Nested_L1/L1_Number) AND FieldNotFilled(Nested_L1/L1_Enumeration)",
+                  "severity": "ERROR",
+                  "errorMessage": [
+                    {
+                      "locale": "en",
+                      "text": "$L1_Number$ or $L1_Enumeration$ should be filled"
+                    },
+                    {
+                      "locale": "de",
+                      "text": "$L1_Number$ oder $L1_Enumeration$ sollten gefüllt sein"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Field",
+                "id": "field_d3de6",
+                "name": "L0_String",
+                "Field": {
+                  "fieldType": {
+                    "type": "StringType",
+                    "StringType": {
+                      "maxLength": 5
+                    }
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "L0_String"
+                    },
+                    {
+                      "locale": "de",
+                      "text": "L0_String"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Field",
+                "id": "field_6d23f",
+                "name": "L6_Number_Sum",
+                "Field": {
+                  "fieldType": {
+                    "type": "NumberType"
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "L6_Number_Sum"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Group",
+                "id": "G15",
+                "name": "Nested_L1",
+                "Group": {
+                  "repeatability": 10,
+                  "elements": [
+                    {
+                      "type": "Field",
+                      "id": "F18",
+                      "name": "L1_String",
+                      "Field": {
+                        "fieldType": {
+                          "type": "StringType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "L1_String"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "F19",
+                      "name": "L1_Number",
+                      "Field": {
+                        "fieldType": {
+                          "type": "NumberType",
+                          "NumberType": {
+                            "maxFractionalDigits": 2,
+                            "leadingZerosAllowed": true
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "L1_Number"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Rule",
+                      "id": "ruleimpl_4ad39",
+                      "name": "error_L1_Number",
+                      "Rule": {
+                        "errorEntityRelPath": "../L1_Number",
+                        "errorCode": "Error rule_9baf7",
+                        "errorCondition": "FieldFilled(L1_Number) And [L1_Number] < 42",
+                        "severity": "ERROR",
+                        "errorMessage": [
+                          {
+                            "locale": "en",
+                            "text": "Should be bigger than 42!"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "Should be bigger than 42!"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "F22",
+                      "name": "L1_Boolean",
+                      "Field": {
+                        "fieldType": {
+                          "type": "BooleanType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "L1_Boolean"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "F_23",
+                      "name": "L1_Boolean2",
+                      "Field": {
+                        "fieldType": {
+                          "type": "BooleanType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "L1_Boolean2"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "F_24",
+                      "name": "L1_Boolean3",
+                      "Field": {
+                        "fieldType": {
+                          "type": "BooleanType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "L1_Boolean3"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "F_25",
+                      "name": "L1_Boolean4",
+                      "Field": {
+                        "fieldType": {
+                          "type": "BooleanType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "L1_Boolean4"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_27389",
+                      "name": "L1_Boolean5",
+                      "Field": {
+                        "fieldType": {
+                          "type": "BooleanType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "L1_Boolean5"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_a5458",
+                      "name": "L1_Boolean6",
+                      "Field": {
+                        "fieldType": {
+                          "type": "BooleanType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "L1_Boolean6"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_54333",
+                      "name": "L1_Confirm",
+                      "Field": {
+                        "fieldType": {
+                          "type": "ConfirmType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "L1_Confirm"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "F24",
+                      "name": "L1_Date",
+                      "Field": {
+                        "fieldType": {
+                          "type": "DateType",
+                          "DateType": {
+                            "format": "yyyy-MM-dd"
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "L1_Date"
+                          }
+                        ],
+                        "requirednessConfig": {
+                          "mode": "absoluteOrRelativeToNextRepAncestor"
+                        }
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_299e0",
+                      "name": "L1_DateFragment",
+                      "Field": {
+                        "fieldType": {
+                          "type": "DateFragmentType",
+                          "DateFragmentType": {
+                            "formatOfFragment": "yyyy"
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "L1_DateFragment"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_e1f20",
+                      "name": "L1_DateRange",
+                      "Field": {
+                        "fieldType": {
+                          "type": "DateRangeType",
+                          "DateRangeType": {
+                            "format": "yyyy-MM-dd",
+                            "rangeSeparator": "/"
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "L1_DateRange"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_2b892",
+                      "name": "L1_DateRange_InterpretationOfYear",
+                      "Field": {
+                        "fieldType": {
+                          "type": "DateRangeType",
+                          "DateRangeType": {
+                            "format": "MM-dd",
+                            "rangeSeparator": "/",
+                            "interpretationOfYear": "FROM"
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "L1_DateRange_InterpretationOfYear"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "F25",
+                      "name": "L1_Enumeration",
+                      "Field": {
+                        "fieldType": {
+                          "type": "EnumerationType",
+                          "EnumerationType": {
+                            "values": [
+                              {
+                                "value": "V1",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "red"
+                                  },
+                                  {
+                                    "locale": "de",
+                                    "text": "rot"
+                                  }
+                                ]
+                              },
+                              {
+                                "value": "V2",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "yellow"
+                                  },
+                                  {
+                                    "locale": "de",
+                                    "text": "gelb"
+                                  }
+                                ]
+                              },
+                              {
+                                "value": "V3",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "green"
+                                  },
+                                  {
+                                    "locale": "de",
+                                    "text": "grün"
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "L1_Enumeration"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_baa9e",
+                      "name": "L1_Enumeration_FilterExpositionString",
+                      "Field": {
+                        "fieldType": {
+                          "type": "EnumerationType",
+                          "EnumerationType": {
+                            "values": [
+                              {
+                                "value": "V1",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "red"
+                                  },
+                                  {
+                                    "locale": "de",
+                                    "text": "rot"
+                                  }
+                                ]
+                              },
+                              {
+                                "value": "V2",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "yellow"
+                                  },
+                                  {
+                                    "locale": "de",
+                                    "text": "gelb"
+                                  }
+                                ]
+                              },
+                              {
+                                "value": "V3",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "green"
+                                  },
+                                  {
+                                    "locale": "de",
+                                    "text": "grün"
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "L1_Enumeration_FilterExpositionString"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "L1_Enumeration_FilterExpositionString"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_d5c68",
+                      "name": "L1_DateTime",
+                      "Field": {
+                        "fieldType": {
+                          "type": "DateTimeType",
+                          "DateTimeType": {
+                            "format": "yyyy-MM-dd'T'HH:mm:ss"
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "L1_DateTime"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_ba608",
+                      "name": "L1_Time",
+                      "Field": {
+                        "fieldType": {
+                          "type": "TimeType",
+                          "TimeType": {
+                            "format": "HH:mm:ss"
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "L1_Time"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_53f1d",
+                      "name": "L1_Byte",
+                      "Field": {
+                        "fieldType": {
+                          "type": "TypeDefType",
+                          "TypeDefType": {
+                            "typeDefinitionId": "typedef_39af9fb3-3fce-462b-82d5-9cda92389b24"
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "L1_Byte"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "L1_Byte"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_73578",
+                      "name": "L1_Custom",
+                      "Field": {
+                        "fieldType": {
+                          "type": "CustomFieldType",
+                          "CustomFieldType": {
+                            "name": "Test"
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "L1_Custom"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "L1_Custom"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_09aea",
+                      "name": "L1_ExternalEnumeration",
+                      "Field": {
+                        "fieldType": {
+                          "type": "StringType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "L1_ExtEnumeration"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "L1_ExtEnumeration"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_7d034",
+                      "name": "L1_ExternalEnumeration_FilterExpositionFull",
+                      "Field": {
+                        "fieldType": {
+                          "type": "StringType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "L1_ExtEnumeration_FilterExpositionFull"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "L1_ExtEnumeration_FilterExpositionFull"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Group",
+                      "id": "group_48bf7",
+                      "name": "L1_MultiSelect",
+                      "Group": {
+                        "repeatability": 999999,
+                        "usageType": "multi-select",
+                        "elements": [
+                          {
+                            "type": "Field",
+                            "id": "field_75582",
+                            "name": "value",
+                            "Field": {
+                              "fieldType": {
+                                "type": "EnumerationType",
+                                "EnumerationType": {
+                                  "values": [
+                                    {
+                                      "value": "V1",
+                                      "label": [
+                                        {
+                                          "locale": "en",
+                                          "text": "Value 1"
+                                        },
+                                        {
+                                          "locale": "de",
+                                          "text": "Wert 1"
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "value": "V2",
+                                      "label": [
+                                        {
+                                          "locale": "en",
+                                          "text": "Value 2"
+                                        },
+                                        {
+                                          "locale": "de",
+                                          "text": "Wert 2"
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "value": "V3",
+                                      "label": [
+                                        {
+                                          "locale": "en",
+                                          "text": "Value 3"
+                                        },
+                                        {
+                                          "locale": "de",
+                                          "text": "Value 3"
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              },
+                              "label": [
+                                {
+                                  "locale": "en",
+                                  "text": ""
+                                },
+                                {
+                                  "locale": "de",
+                                  "text": ""
+                                }
+                              ],
+                              "requirednessConfig": {
+                                "mode": "absoluteOrRelativeToNextRepAncestor"
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Group",
+                      "id": "group_1c11c",
+                      "name": "L1_Attachment",
+                      "Group": {
+                        "repeatability": 1,
+                        "usageType": "attachment",
+                        "elements": [
+                          {
+                            "type": "Field",
+                            "id": "field_0b7ee",
+                            "name": "original_filename",
+                            "Field": {
+                              "fieldType": {
+                                "type": "StringType"
+                              }
+                            }
+                          },
+                          {
+                            "type": "Field",
+                            "id": "field_3d1b1",
+                            "name": "internal_filename",
+                            "Field": {
+                              "fieldType": {
+                                "type": "StringType"
+                              }
+                            }
+                          },
+                          {
+                            "type": "Field",
+                            "id": "field_0d1e5",
+                            "name": "content",
+                            "Field": {
+                              "fieldType": {
+                                "type": "StringType",
+                                "StringType": {
+                                  "lineBreaksPermitted": true,
+                                  "noValueValidation": true
+                                }
+                              }
+                            }
+                          },
+                          {
+                            "type": "Field",
+                            "id": "field_37632",
+                            "name": "attachment_id",
+                            "Field": {
+                              "fieldType": {
+                                "type": "StringType"
+                              }
+                            }
+                          },
+                          {
+                            "type": "Field",
+                            "id": "field_adeed",
+                            "name": "size",
+                            "Field": {
+                              "fieldType": {
+                                "type": "NumberType"
+                              }
+                            }
+                          },
+                          {
+                            "type": "Field",
+                            "id": "field_e791a",
+                            "name": "mime_type",
+                            "Field": {
+                              "fieldType": {
+                                "type": "StringType"
+                              }
+                            }
+                          },
+                          {
+                            "type": "Field",
+                            "id": "field_e4ae0",
+                            "name": "category",
+                            "Field": {
+                              "fieldType": {
+                                "type": "StringType"
+                              }
+                            }
+                          },
+                          {
+                            "type": "Field",
+                            "id": "field_72145",
+                            "name": "description",
+                            "Field": {
+                              "fieldType": {
+                                "type": "StringType"
+                              }
+                            }
+                          },
+                          {
+                            "type": "Rule",
+                            "id": "rule_d2350",
+                            "name": "AttachmentInternalFilenameRequired",
+                            "Rule": {
+                              "errorEntityRelPath": "../internal_filename",
+                              "errorCode": "Errorrule_d2350",
+                              "errorCondition": "GroupFilled(RuleGroup) and FieldNotFilled(internal_filename)",
+                              "severity": "ERROR",
+                              "errorMessage": [
+                                {
+                                  "locale": "en",
+                                  "text": "Internal Error: Field $internal_filename$ of customType attachment is not filled."
+                                },
+                                {
+                                  "locale": "de",
+                                  "text": "Internal Error: Field $internal_filename$ of customType attachment is not filled."
+                                }
+                              ]
+                            }
+                          },
+                          {
+                            "type": "Rule",
+                            "id": "rule_02079",
+                            "name": "AttachmentMimeTypeRequired",
+                            "Rule": {
+                              "errorEntityRelPath": "../mime_type",
+                              "errorCode": "Errorrule_02079",
+                              "errorCondition": "GroupFilled(RuleGroup) and FieldNotFilled(mime_type)",
+                              "severity": "ERROR",
+                              "errorMessage": [
+                                {
+                                  "locale": "en",
+                                  "text": "Internal Error: Field $mime_type$ of customType attachment is not filled."
+                                },
+                                {
+                                  "locale": "de",
+                                  "text": "Internal Error: Field $mime_type$ of customType attachment is not filled."
+                                }
+                              ]
+                            }
+                          },
+                          {
+                            "type": "Rule",
+                            "id": "rule_205fd",
+                            "name": "AttachmentIdOrContentFilled",
+                            "Rule": {
+                              "errorEntityRelPath": "../content",
+                              "errorCode": "Errorrule_205fd",
+                              "errorCondition": "GroupFilled(RuleGroup) and NotExactlyOneFieldFilled(attachment_id, content)",
+                              "severity": "ERROR",
+                              "errorMessage": [
+                                {
+                                  "locale": "en",
+                                  "text": "Internal Error: Either attachment_id or content must be filled in a customType attachment, but not both."
+                                },
+                                {
+                                  "locale": "de",
+                                  "text": "Internal Error: Either attachment_id or content must be filled in a customType attachment, but not both."
+                                }
+                              ]
+                            }
+                          },
+                          {
+                            "type": "Rule",
+                            "id": "rule_a8100",
+                            "name": "SizeOfContentFilled",
+                            "Rule": {
+                              "errorEntityRelPath": "../content",
+                              "errorCode": "Errorrule_a8100",
+                              "errorCondition": "FieldFilled(content) and FieldNotFilled(size)",
+                              "severity": "ERROR",
+                              "errorMessage": [
+                                {
+                                  "locale": "en",
+                                  "text": "Internal Error: If the content is filled, the size must be also filled."
+                                },
+                                {
+                                  "locale": "de",
+                                  "text": "Internal Error: If the content is filled, the size must be also filled."
+                                }
+                              ]
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Group",
+                      "id": "G16",
+                      "name": "Nested_L2",
+                      "Group": {
+                        "repeatability": 3,
+                        "elements": [
+                          {
+                            "type": "Field",
+                            "id": "F27",
+                            "name": "L2_String",
+                            "Field": {
+                              "fieldType": {
+                                "type": "StringType"
+                              },
+                              "label": [
+                                {
+                                  "locale": "en",
+                                  "text": "L2_String"
+                                }
+                              ]
+                            }
+                          },
+                          {
+                            "type": "Field",
+                            "id": "F28",
+                            "name": "L2_Number",
+                            "Field": {
+                              "fieldType": {
+                                "type": "NumberType"
+                              },
+                              "label": [
+                                {
+                                  "locale": "en",
+                                  "text": "L2_Number"
+                                }
+                              ]
+                            }
+                          },
+                          {
+                            "type": "Field",
+                            "id": "F29",
+                            "name": "L2_Boolean",
+                            "Field": {
+                              "fieldType": {
+                                "type": "BooleanType"
+                              },
+                              "label": [
+                                {
+                                  "locale": "en",
+                                  "text": "L2_Boolean"
+                                }
+                              ]
+                            }
+                          },
+                          {
+                            "type": "Field",
+                            "id": "F30",
+                            "name": "L2_Date",
+                            "Field": {
+                              "fieldType": {
+                                "type": "DateType",
+                                "DateType": {
+                                  "format": "yyyy-MM-dd"
+                                }
+                              },
+                              "label": [
+                                {
+                                  "locale": "en",
+                                  "text": "L2_Date"
+                                }
+                              ]
+                            }
+                          },
+                          {
+                            "type": "Field",
+                            "id": "F31",
+                            "name": "L2_Enumeration",
+                            "Field": {
+                              "fieldType": {
+                                "type": "EnumerationType",
+                                "EnumerationType": {
+                                  "values": [
+                                    {
+                                      "value": "V1",
+                                      "label": [
+                                        {
+                                          "locale": "en",
+                                          "text": "V1"
+                                        },
+                                        {
+                                          "locale": "de",
+                                          "text": "V1"
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "value": "V2",
+                                      "label": [
+                                        {
+                                          "locale": "en",
+                                          "text": "V2"
+                                        },
+                                        {
+                                          "locale": "de",
+                                          "text": "V2"
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              },
+                              "label": [
+                                {
+                                  "locale": "en",
+                                  "text": "L2_Enumeration"
+                                },
+                                {
+                                  "locale": "de",
+                                  "text": ""
+                                }
+                              ]
+                            }
+                          },
+                          {
+                            "type": "Field",
+                            "id": "fieldimpl_15bac",
+                            "name": "L2_DateTime",
+                            "Field": {
+                              "fieldType": {
+                                "type": "DateTimeType",
+                                "DateTimeType": {
+                                  "format": "yyyy-MM-dd'T'HH:mm:ss"
+                                }
+                              },
+                              "label": [
+                                {
+                                  "locale": "en",
+                                  "text": "L2_DateTime"
+                                }
+                              ]
+                            }
+                          },
+                          {
+                            "type": "Field",
+                            "id": "fieldimpl_9c502",
+                            "name": "L2_Time",
+                            "Field": {
+                              "fieldType": {
+                                "type": "TimeType",
+                                "TimeType": {
+                                  "format": "HH:mm:ss"
+                                }
+                              },
+                              "label": [
+                                {
+                                  "locale": "en",
+                                  "text": "L2_Time"
+                                }
+                              ]
+                            }
+                          },
+                          {
+                            "type": "Group",
+                            "id": "group_dd1db",
+                            "name": "L2_Attachment",
+                            "Group": {
+                              "repeatability": 1,
+                              "usageType": "attachment",
+                              "elements": [
+                                {
+                                  "type": "Field",
+                                  "id": "field_f246c",
+                                  "name": "original_filename",
+                                  "Field": {
+                                    "fieldType": {
+                                      "type": "StringType"
+                                    }
+                                  }
+                                },
+                                {
+                                  "type": "Field",
+                                  "id": "field_05e0b",
+                                  "name": "internal_filename",
+                                  "Field": {
+                                    "fieldType": {
+                                      "type": "StringType"
+                                    }
+                                  }
+                                },
+                                {
+                                  "type": "Field",
+                                  "id": "field_0f111",
+                                  "name": "content",
+                                  "Field": {
+                                    "fieldType": {
+                                      "type": "StringType",
+                                      "StringType": {
+                                        "lineBreaksPermitted": true,
+                                        "noValueValidation": true
+                                      }
+                                    }
+                                  }
+                                },
+                                {
+                                  "type": "Field",
+                                  "id": "field_076fc",
+                                  "name": "attachment_id",
+                                  "Field": {
+                                    "fieldType": {
+                                      "type": "StringType"
+                                    }
+                                  }
+                                },
+                                {
+                                  "type": "Field",
+                                  "id": "field_c2f11",
+                                  "name": "size",
+                                  "Field": {
+                                    "fieldType": {
+                                      "type": "NumberType"
+                                    }
+                                  }
+                                },
+                                {
+                                  "type": "Field",
+                                  "id": "field_15daa",
+                                  "name": "mime_type",
+                                  "Field": {
+                                    "fieldType": {
+                                      "type": "StringType"
+                                    }
+                                  }
+                                },
+                                {
+                                  "type": "Field",
+                                  "id": "field_75bd0",
+                                  "name": "category",
+                                  "Field": {
+                                    "fieldType": {
+                                      "type": "StringType"
+                                    }
+                                  }
+                                },
+                                {
+                                  "type": "Field",
+                                  "id": "field_2f2d6",
+                                  "name": "description",
+                                  "Field": {
+                                    "fieldType": {
+                                      "type": "StringType"
+                                    }
+                                  }
+                                },
+                                {
+                                  "type": "Rule",
+                                  "id": "rule_061b8",
+                                  "name": "AttachmentInternalFilenameRequired",
+                                  "Rule": {
+                                    "errorEntityRelPath": "../internal_filename",
+                                    "errorCode": "Errorrule_061b8",
+                                    "errorCondition": "GroupFilled(RuleGroup) and FieldNotFilled(internal_filename)",
+                                    "severity": "ERROR",
+                                    "errorMessage": [
+                                      {
+                                        "locale": "en",
+                                        "text": "Internal Error: Field $internal_filename$ of customType attachment is not filled."
+                                      },
+                                      {
+                                        "locale": "de",
+                                        "text": "Internal Error: Field $internal_filename$ of customType attachment is not filled."
+                                      }
+                                    ]
+                                  }
+                                },
+                                {
+                                  "type": "Rule",
+                                  "id": "rule_ef6d7",
+                                  "name": "AttachmentMimeTypeRequired",
+                                  "Rule": {
+                                    "errorEntityRelPath": "../mime_type",
+                                    "errorCode": "Errorrule_ef6d7",
+                                    "errorCondition": "GroupFilled(RuleGroup) and FieldNotFilled(mime_type)",
+                                    "severity": "ERROR",
+                                    "errorMessage": [
+                                      {
+                                        "locale": "en",
+                                        "text": "Internal Error: Field $mime_type$ of customType attachment is not filled."
+                                      },
+                                      {
+                                        "locale": "de",
+                                        "text": "Internal Error: Field $mime_type$ of customType attachment is not filled."
+                                      }
+                                    ]
+                                  }
+                                },
+                                {
+                                  "type": "Rule",
+                                  "id": "rule_11fcc",
+                                  "name": "AttachmentIdOrContentFilled",
+                                  "Rule": {
+                                    "errorEntityRelPath": "../content",
+                                    "errorCode": "Errorrule_11fcc",
+                                    "errorCondition": "GroupFilled(RuleGroup) and NotExactlyOneFieldFilled(attachment_id, content)",
+                                    "severity": "ERROR",
+                                    "errorMessage": [
+                                      {
+                                        "locale": "en",
+                                        "text": "Internal Error: Either attachment_id or content must be filled in a customType attachment, but not both."
+                                      },
+                                      {
+                                        "locale": "de",
+                                        "text": "Internal Error: Either attachment_id or content must be filled in a customType attachment, but not both."
+                                      }
+                                    ]
+                                  }
+                                },
+                                {
+                                  "type": "Rule",
+                                  "id": "rule_bbd67",
+                                  "name": "SizeOfContentFilled",
+                                  "Rule": {
+                                    "errorEntityRelPath": "../content",
+                                    "errorCode": "Errorrule_bbd67",
+                                    "errorCondition": "FieldFilled(content) and FieldNotFilled(size)",
+                                    "severity": "ERROR",
+                                    "errorMessage": [
+                                      {
+                                        "locale": "en",
+                                        "text": "Internal Error: If the content is filled, the size must be also filled."
+                                      },
+                                      {
+                                        "locale": "de",
+                                        "text": "Internal Error: If the content is filled, the size must be also filled."
+                                      }
+                                    ]
+                                  }
+                                }
+                              ]
+                            }
+                          },
+                          {
+                            "type": "Group",
+                            "id": "group_d452b",
+                            "name": "L2_MultiSelect",
+                            "Group": {
+                              "repeatability": 999999,
+                              "usageType": "multi-select",
+                              "elements": [
+                                {
+                                  "type": "Field",
+                                  "id": "field_f92c4",
+                                  "name": "value",
+                                  "Field": {
+                                    "fieldType": {
+                                      "type": "EnumerationType",
+                                      "EnumerationType": {
+                                        "values": [
+                                          {
+                                            "value": "key1",
+                                            "label": [
+                                              {
+                                                "locale": "en",
+                                                "text": "value1"
+                                              },
+                                              {
+                                                "locale": "de",
+                                                "text": "key1"
+                                              }
+                                            ]
+                                          },
+                                          {
+                                            "value": "key2",
+                                            "label": [
+                                              {
+                                                "locale": "en",
+                                                "text": "value2"
+                                              },
+                                              {
+                                                "locale": "de",
+                                                "text": "key2"
+                                              }
+                                            ]
+                                          }
+                                        ]
+                                      }
+                                    },
+                                    "label": [
+                                      {
+                                        "locale": "en",
+                                        "text": ""
+                                      },
+                                      {
+                                        "locale": "de",
+                                        "text": ""
+                                      }
+                                    ],
+                                    "requirednessConfig": {
+                                      "mode": "absoluteOrRelativeToNextRepAncestor"
+                                    }
+                                  }
+                                }
+                              ]
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Group",
+                      "id": "G17",
+                      "name": "Nested_L2b",
+                      "Group": {
+                        "repeatability": 5,
+                        "elements": [
+                          {
+                            "type": "Field",
+                            "id": "F47",
+                            "name": "L2b_String",
+                            "Field": {
+                              "fieldType": {
+                                "type": "StringType"
+                              },
+                              "label": [
+                                {
+                                  "locale": "en",
+                                  "text": "L2b_String"
+                                }
+                              ]
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Group",
+                "id": "groupimpl_54c38",
+                "name": "Nested_L2",
+                "Group": {
+                  "repeatability": 3,
+                  "elements": [
+                    {
+                      "type": "Field",
+                      "id": "fieldimpl_7e29a",
+                      "name": "L2_String",
+                      "Field": {
+                        "fieldType": {
+                          "type": "StringType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "L2_String"
+                          }
+                        ],
+                        "requirednessConfig": {
+                          "mode": "absoluteOrRelativeToNextRepAncestor"
+                        }
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "fieldimpl_67739",
+                      "name": "L2_Number",
+                      "Field": {
+                        "fieldType": {
+                          "type": "NumberType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "L2_Number"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "fieldimpl_123fa",
+                      "name": "L2_Boolean",
+                      "Field": {
+                        "fieldType": {
+                          "type": "BooleanType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "L2_Boolean"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "fieldimpl_6bfe6",
+                      "name": "L2_Date",
+                      "Field": {
+                        "fieldType": {
+                          "type": "DateType",
+                          "DateType": {
+                            "format": "yyyy-MM-dd"
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "L2_Date"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "fieldimpl_b7333",
+                      "name": "L2_Enumeration",
+                      "Field": {
+                        "fieldType": {
+                          "type": "EnumerationType",
+                          "EnumerationType": {
+                            "values": [
+                              {
+                                "value": "V1",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "Value 1"
+                                  },
+                                  {
+                                    "locale": "de",
+                                    "text": "Value 1"
+                                  }
+                                ]
+                              },
+                              {
+                                "value": "V2",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "Value 2"
+                                  },
+                                  {
+                                    "locale": "de",
+                                    "text": "Value 2"
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "L2_Enumeration"
+                          },
+                          {
+                            "locale": "de",
+                            "text": ""
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "fieldimpl_41ca2",
+                      "name": "L2_DateTime",
+                      "Field": {
+                        "fieldType": {
+                          "type": "DateTimeType",
+                          "DateTimeType": {
+                            "format": "yyyy-MM-dd'T'HH:mm:ss"
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "L2_DateTime"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "fieldimpl_f2d77",
+                      "name": "L2_Time",
+                      "Field": {
+                        "fieldType": {
+                          "type": "TimeType",
+                          "TimeType": {
+                            "format": "HH:mm:ss"
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "L2_Time"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Group",
+                "id": "groupimpl_77762",
+                "name": "Nested_L3",
+                "Group": {
+                  "repeatability": 3,
+                  "elements": [
+                    {
+                      "type": "Field",
+                      "id": "field_04b7d",
+                      "name": "L3_String",
+                      "Field": {
+                        "fieldType": {
+                          "type": "StringType",
+                          "StringType": {
+                            "lineBreaksPermitted": true
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "L3_TextArea"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_92c54",
+                      "name": "L3_String_Secret",
+                      "Field": {
+                        "fieldType": {
+                          "type": "StringType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "L3_Secret"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "L3_Secret"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Group",
+                "id": "groupimpl_091f2",
+                "name": "Nested_L4",
+                "Group": {
+                  "repeatability": 3,
+                  "elements": [
+                    {
+                      "type": "Field",
+                      "id": "fieldimpl_7ef64",
+                      "name": "L4_Number_Amount",
+                      "Field": {
+                        "fieldType": {
+                          "type": "NumberType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "L4_Number_Amount"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "fieldimpl_7962e",
+                      "name": "L4_Number_Amount_With_Cent",
+                      "Field": {
+                        "fieldType": {
+                          "type": "NumberType",
+                          "NumberType": {
+                            "minFractionalDigits": 2,
+                            "maxFractionalDigits": 2
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "L4_Number_Amount_With_Cent"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "fieldimpl_53712",
+                      "name": "L4_Number_Percent",
+                      "Field": {
+                        "fieldType": {
+                          "type": "NumberType",
+                          "NumberType": {
+                            "minFractionalDigits": 2,
+                            "maxFractionalDigits": 2
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "L4_Number_Percent"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "fieldimpl_f795d",
+                      "name": "L4_Number_Permille",
+                      "Field": {
+                        "fieldType": {
+                          "type": "NumberType",
+                          "NumberType": {
+                            "minFractionalDigits": 2,
+                            "maxFractionalDigits": 2
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "L4_Number_Permille"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_87cb7",
+                      "name": "L4_Number_With_Leading_Zeros_Allowed",
+                      "Field": {
+                        "fieldType": {
+                          "type": "NumberType",
+                          "NumberType": {
+                            "maxFractionalDigits": 2,
+                            "leadingZerosAllowed": true
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "L4_Number_With_Leading_Zeros_Allowed"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Group",
+                "id": "groupimpl_32c7e",
+                "name": "Nested_L5",
+                "Group": {
+                  "repeatability": 3,
+                  "elements": [
+                    {
+                      "type": "Field",
+                      "id": "fieldimpl_f55dc",
+                      "name": "L5_Enumeration_Compact",
+                      "Field": {
+                        "fieldType": {
+                          "type": "EnumerationType",
+                          "EnumerationType": {
+                            "values": [
+                              {
+                                "value": "V1",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "Value 1"
+                                  },
+                                  {
+                                    "locale": "de",
+                                    "text": "Value 1"
+                                  }
+                                ]
+                              },
+                              {
+                                "value": "V2",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "Value 2"
+                                  },
+                                  {
+                                    "locale": "de",
+                                    "text": "Value 2"
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "L5_Enumeration_Compact"
+                          },
+                          {
+                            "locale": "de",
+                            "text": ""
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "fieldimpl_743e3",
+                      "name": "L5_Enumeration_AutoComplete",
+                      "Field": {
+                        "fieldType": {
+                          "type": "EnumerationType",
+                          "EnumerationType": {
+                            "values": [
+                              {
+                                "value": "V1",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "Value 1"
+                                  },
+                                  {
+                                    "locale": "de",
+                                    "text": "Value 1"
+                                  }
+                                ]
+                              },
+                              {
+                                "value": "V2",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "Value 2"
+                                  },
+                                  {
+                                    "locale": "de",
+                                    "text": "Value 2"
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "L5_Enumeration_AutoComplete"
+                          },
+                          {
+                            "locale": "de",
+                            "text": ""
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "fieldimpl_22286",
+                      "name": "L5_Enumeration_Full",
+                      "Field": {
+                        "fieldType": {
+                          "type": "EnumerationType",
+                          "EnumerationType": {
+                            "values": [
+                              {
+                                "value": "V1",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "Value 1"
+                                  },
+                                  {
+                                    "locale": "de",
+                                    "text": "Value 1"
+                                  }
+                                ]
+                              },
+                              {
+                                "value": "V2",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "Value 2"
+                                  },
+                                  {
+                                    "locale": "de",
+                                    "text": "Value 2"
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "L5_Enumeration_Full"
+                          },
+                          {
+                            "locale": "de",
+                            "text": ""
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "fieldimpl_4ce38",
+                      "name": "L5_Enumeration_Inline",
+                      "Field": {
+                        "fieldType": {
+                          "type": "EnumerationType",
+                          "EnumerationType": {
+                            "values": [
+                              {
+                                "value": "V1",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "Value 1"
+                                  },
+                                  {
+                                    "locale": "de",
+                                    "text": "Value 1"
+                                  }
+                                ]
+                              },
+                              {
+                                "value": "V2",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "Value 2"
+                                  },
+                                  {
+                                    "locale": "de",
+                                    "text": "Value 2"
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "L5_Enumeration_Inline"
+                          },
+                          {
+                            "locale": "de",
+                            "text": ""
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Group",
+                "id": "group_ee0b7",
+                "name": "Nested_L6",
+                "Group": {
+                  "repeatability": 3,
+                  "elements": [
+                    {
+                      "type": "Group",
+                      "id": "group_b4e93",
+                      "name": "nestedGroup",
+                      "Group": {
+                        "repeatability": 1,
+                        "elements": [
+                          {
+                            "type": "Field",
+                            "id": "fieldimpl_24358",
+                            "name": "L6_String",
+                            "Field": {
+                              "fieldType": {
+                                "type": "StringType"
+                              },
+                              "label": [
+                                {
+                                  "locale": "en",
+                                  "text": "L6_String"
+                                }
+                              ]
+                            }
+                          },
+                          {
+                            "type": "Field",
+                            "id": "fieldimpl_85949",
+                            "name": "L6_Number",
+                            "Field": {
+                              "fieldType": {
+                                "type": "NumberType"
+                              },
+                              "label": [
+                                {
+                                  "locale": "en",
+                                  "text": "L6_Number"
+                                }
+                              ]
+                            }
+                          },
+                          {
+                            "type": "Rule",
+                            "id": "rule_4b82f",
+                            "name": "L6_Rule",
+                            "Rule": {
+                              "errorEntityRelPath": "../L6_Number",
+                              "errorCode": "Error rule_4b82f",
+                              "errorCondition": "FieldFilled(L6_Number) And [L6_Number] < 42",
+                              "severity": "ERROR",
+                              "errorMessage": [
+                                {
+                                  "locale": "en",
+                                  "text": "$L6_Number.value$ < 42"
+                                },
+                                {
+                                  "locale": "de",
+                                  "text": "$L6_Number.value$ < 42"
+                                }
+                              ]
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Group",
+                "id": "group_b2fbd",
+                "name": "Nested_L7",
+                "Group": {
+                  "repeatability": 2,
+                  "elements": [
+                    {
+                      "type": "Field",
+                      "id": "field_b7d43",
+                      "name": "L7_String",
+                      "Field": {
+                        "fieldType": {
+                          "type": "StringType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "Field"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "Feld"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Computation",
+                "id": "computation_ab8a3",
+                "name": "SumUp_L6_Number",
+                "Computation": {
+                  "computedFieldRelPath": "../L6_Number_Sum",
+                  "computationAlternatives": [
+                    {
+                      "operation": "Sum(Nested_L6*/nestedGroup/L6_Number)",
+                      "precondition": "AtLeastOneGroupFilled(Nested_L6*)"
+                    },
+                    {
+                      "operation": "0",
+                      "precondition": "NoGroupFilled(Nested_L6*)"
+                    }
+                  ],
+                  "errorMessage": [
+                    {
+                      "locale": "en",
+                      "text": "error text for computation of SumUp_L6_Number"
+                    },
+                    {
+                      "locale": "de",
+                      "text": "error text for computation of SumUp_L6_Number"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Group",
+                "id": "group_c596f",
+                "name": "Nested_L8",
+                "Group": {
+                  "repeatability": 5,
+                  "elements": [
+                    {
+                      "type": "Group",
+                      "id": "group_0d088",
+                      "name": "L8_MultiSelect_AutoComplete",
+                      "Group": {
+                        "repeatability": 999999,
+                        "usageType": "multi-select",
+                        "elements": [
+                          {
+                            "type": "Field",
+                            "id": "field_14271",
+                            "name": "value",
+                            "Field": {
+                              "fieldType": {
+                                "type": "EnumerationType",
+                                "EnumerationType": {
+                                  "values": [
+                                    {
+                                      "value": "key1",
+                                      "label": [
+                                        {
+                                          "locale": "en",
+                                          "text": "Red"
+                                        },
+                                        {
+                                          "locale": "de",
+                                          "text": "Rot"
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "value": "key2",
+                                      "label": [
+                                        {
+                                          "locale": "en",
+                                          "text": "Green"
+                                        },
+                                        {
+                                          "locale": "de",
+                                          "text": "Grün"
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "value": "key3",
+                                      "label": [
+                                        {
+                                          "locale": "en",
+                                          "text": "Blue"
+                                        },
+                                        {
+                                          "locale": "de",
+                                          "text": "Blau"
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              },
+                              "label": [
+                                {
+                                  "locale": "en",
+                                  "text": ""
+                                },
+                                {
+                                  "locale": "de",
+                                  "text": ""
+                                }
+                              ],
+                              "requirednessConfig": {
+                                "mode": "absoluteOrRelativeToNextRepAncestor"
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Group",
+                      "id": "groupimpl_d06df",
+                      "name": "L8_MultiSelect_Full",
+                      "Group": {
+                        "repeatability": 999999,
+                        "usageType": "multi-select",
+                        "elements": [
+                          {
+                            "type": "Field",
+                            "id": "fieldimpl_1405c",
+                            "name": "value",
+                            "Field": {
+                              "fieldType": {
+                                "type": "EnumerationType",
+                                "EnumerationType": {
+                                  "values": [
+                                    {
+                                      "value": "key1",
+                                      "label": [
+                                        {
+                                          "locale": "en",
+                                          "text": "Red"
+                                        },
+                                        {
+                                          "locale": "de",
+                                          "text": "Rot"
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "value": "key2",
+                                      "label": [
+                                        {
+                                          "locale": "en",
+                                          "text": "Green"
+                                        },
+                                        {
+                                          "locale": "de",
+                                          "text": "Grün"
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "value": "key3",
+                                      "label": [
+                                        {
+                                          "locale": "en",
+                                          "text": "Blue"
+                                        },
+                                        {
+                                          "locale": "de",
+                                          "text": "Blau"
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              },
+                              "label": [
+                                {
+                                  "locale": "en",
+                                  "text": ""
+                                },
+                                {
+                                  "locale": "de",
+                                  "text": ""
+                                }
+                              ],
+                              "requirednessConfig": {
+                                "mode": "absoluteOrRelativeToNextRepAncestor"
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Group",
+                      "id": "groupimpl_9f769",
+                      "name": "L8_MultiSelect_Inline",
+                      "Group": {
+                        "repeatability": 999999,
+                        "usageType": "multi-select",
+                        "elements": [
+                          {
+                            "type": "Field",
+                            "id": "fieldimpl_fb9d1",
+                            "name": "value",
+                            "Field": {
+                              "fieldType": {
+                                "type": "EnumerationType",
+                                "EnumerationType": {
+                                  "values": [
+                                    {
+                                      "value": "key1",
+                                      "label": [
+                                        {
+                                          "locale": "en",
+                                          "text": "Red"
+                                        },
+                                        {
+                                          "locale": "de",
+                                          "text": "Rot"
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "value": "key2",
+                                      "label": [
+                                        {
+                                          "locale": "en",
+                                          "text": "Green"
+                                        },
+                                        {
+                                          "locale": "de",
+                                          "text": "Grün"
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "value": "key3",
+                                      "label": [
+                                        {
+                                          "locale": "en",
+                                          "text": "Blue"
+                                        },
+                                        {
+                                          "locale": "de",
+                                          "text": "Blau"
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              },
+                              "label": [
+                                {
+                                  "locale": "en",
+                                  "text": ""
+                                },
+                                {
+                                  "locale": "de",
+                                  "text": ""
+                                }
+                              ],
+                              "requirednessConfig": {
+                                "mode": "absoluteOrRelativeToNextRepAncestor"
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Group",
+                "id": "group_0346d",
+                "name": "Nested_L9",
+                "Group": {
+                  "repeatability": 5,
+                  "elements": [
+                    {
+                      "type": "Field",
+                      "id": "field_af402",
+                      "name": "L9_String",
+                      "Field": {
+                        "fieldType": {
+                          "type": "StringType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "L9_String"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "L9_String"
+                          }
+                        ],
+                        "requirednessConfig": {
+                          "mode": "absoluteOrRelativeToNextRepAncestor"
+                        }
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_9a5d4",
+                      "name": "L9_Number",
+                      "Field": {
+                        "fieldType": {
+                          "type": "NumberType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "L9_Number"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "L9_Number"
+                          }
+                        ],
+                        "requirednessConfig": {
+                          "mode": "absoluteOrRelativeToNextRepAncestor"
+                        }
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_88e26",
+                      "name": "L9_Invisble",
+                      "internalDescription": [
+                        {
+                          "locale": "en",
+                          "text": "Field to test that partial validation is only executed for visible fields."
+                        }
+                      ],
+                      "Field": {
+                        "fieldType": {
+                          "type": "StringType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "L9_Invisble"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "L9_Invisble"
+                          }
+                        ],
+                        "requirednessConfig": {
+                          "mode": "absoluteOrRelativeToNextRepAncestor"
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Group",
+                "id": "group_f9ce8",
+                "name": "Nested_L10",
+                "Group": {
+                  "repeatability": 3,
+                  "elements": [
+                    {
+                      "type": "Field",
+                      "id": "field_98754",
+                      "name": "L10_Confirm_Default",
+                      "Field": {
+                        "fieldType": {
+                          "type": "ConfirmType"
+                        }
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_756a9",
+                      "name": "L10_Confirm_Checkbox",
+                      "Field": {
+                        "fieldType": {
+                          "type": "ConfirmType"
+                        }
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_d426d",
+                      "name": "L10_Confirm_Switch",
+                      "Field": {
+                        "fieldType": {
+                          "type": "ConfirmType"
+                        }
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_8db73",
+                      "name": "L10_Confirm_SwitchWithValues",
+                      "Field": {
+                        "fieldType": {
+                          "type": "ConfirmType"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

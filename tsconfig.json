@@ -1,0 +1,23 @@
+{
+	"include": [
+		".pnpmfile.mjs",
+		"eslint.config.ts",
+		"prettier.config.ts",
+		"./scripts/validateA12Peers.ts"
+	],
+	"compilerOptions": {
+		"allowJs": true,
+		"checkJs": true,
+		"noEmit": true,
+		"resolveJsonModule": true,
+		"module": "NodeNext",
+		"lib": ["ESNext"],
+		"strictNullChecks": true,
+		"types": ["node"],
+		"paths": {
+			// eslint provides its own types, but some dependencies pull in @types/eslint, which causes conflicts
+			// therefore we force type resolution here
+			"eslint": ["./node_modules/eslint"]
+		}
+	}
+}

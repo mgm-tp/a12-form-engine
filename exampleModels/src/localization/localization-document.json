@@ -1,0 +1,1461 @@
+{
+  "header": {
+    "id": "localization-document",
+    "modelType": "document",
+    "modelVersion": "28.4.0",
+    "locales": [
+      {
+        "code": "en"
+      },
+      {
+        "code": "de"
+      },
+      {
+        "code": "en_EN"
+      },
+      {
+        "code": "de_DE"
+      }
+    ],
+    "labels": [],
+    "annotations": [
+      {
+        "name": "roles",
+        "value": "admin"
+      }
+    ],
+    "modelReferences": []
+  },
+  "content": {
+    "modelInfo": {
+      "name": "localization-document",
+      "immutable": false
+    },
+    "modelConfig": {
+      "decimalSeparator": ".",
+      "timeZone": "UTC",
+      "conditionLanguage": {
+        "code": "en_US"
+      }
+    },
+    "modelRoot": {
+      "rootGroups": [
+        {
+          "type": "Group",
+          "id": "G2",
+          "name": "root",
+          "Group": {
+            "repeatability": 1,
+            "elements": [
+              {
+                "type": "Field",
+                "id": "F4",
+                "name": "stringfield",
+                "externalDescription": [
+                  {
+                    "locale": "de",
+                    "text": "DocumentModelHint.de"
+                  },
+                  {
+                    "locale": "en",
+                    "text": "DocumentModelHint.en"
+                  }
+                ],
+                "internalDescription": [
+                  {
+                    "locale": "en",
+                    "text": "test"
+                  },
+                  {
+                    "locale": "de",
+                    "text": "test"
+                  }
+                ],
+                "Field": {
+                  "fieldType": {
+                    "type": "StringType"
+                  },
+                  "label": [
+                    {
+                      "locale": "de",
+                      "text": "DocumentModelLabel.de"
+                    },
+                    {
+                      "locale": "en",
+                      "text": "DocumentModelLabel.en"
+                    }
+                  ],
+                  "requirednessConfig": {
+                    "mode": "absoluteOrRelativeToNextRepAncestor"
+                  }
+                }
+              },
+              {
+                "type": "Field",
+                "id": "F5",
+                "name": "numberfield",
+                "externalDescription": [
+                  {
+                    "locale": "de",
+                    "text": "DocumentModelHint.de"
+                  },
+                  {
+                    "locale": "en",
+                    "text": "DocumentModelHint.en"
+                  }
+                ],
+                "internalDescription": [
+                  {
+                    "locale": "en",
+                    "text": "tes\r\ntest2"
+                  },
+                  {
+                    "locale": "de",
+                    "text": "tes\r\ntest2"
+                  }
+                ],
+                "Field": {
+                  "fieldType": {
+                    "type": "NumberType"
+                  },
+                  "label": [
+                    {
+                      "locale": "de",
+                      "text": "DocumentModelLabel.de"
+                    },
+                    {
+                      "locale": "en",
+                      "text": "DocumentModelLabel.en"
+                    }
+                  ],
+                  "requirednessConfig": {
+                    "mode": "absoluteOrRelativeToNextRepAncestor"
+                  }
+                }
+              },
+              {
+                "type": "Field",
+                "id": "F6",
+                "name": "booleanfield",
+                "externalDescription": [
+                  {
+                    "locale": "de",
+                    "text": "DocumentModelHint.de"
+                  },
+                  {
+                    "locale": "en",
+                    "text": "DocumentModelHint.en"
+                  }
+                ],
+                "Field": {
+                  "fieldType": {
+                    "type": "BooleanType"
+                  },
+                  "label": [
+                    {
+                      "locale": "de",
+                      "text": "DocumentModelLabel.de"
+                    },
+                    {
+                      "locale": "en",
+                      "text": "DocumentModelLabel.en"
+                    }
+                  ],
+                  "requirednessConfig": {
+                    "mode": "absoluteOrRelativeToNextRepAncestor"
+                  }
+                }
+              },
+              {
+                "type": "Field",
+                "id": "F7",
+                "name": "datefield",
+                "externalDescription": [
+                  {
+                    "locale": "de",
+                    "text": "DocumentModelHint.de"
+                  },
+                  {
+                    "locale": "en",
+                    "text": "DocumentModelHint.en"
+                  }
+                ],
+                "Field": {
+                  "fieldType": {
+                    "type": "DateType",
+                    "DateType": {
+                      "format": "yyyy-MM-dd"
+                    }
+                  },
+                  "label": [
+                    {
+                      "locale": "de",
+                      "text": "DocumentModelLabel.de"
+                    },
+                    {
+                      "locale": "en",
+                      "text": "DocumentModelLabel.en"
+                    }
+                  ],
+                  "requirednessConfig": {
+                    "mode": "absoluteOrRelativeToNextRepAncestor"
+                  }
+                }
+              },
+              {
+                "type": "Field",
+                "id": "F8",
+                "name": "enumerationfield_compact",
+                "externalDescription": [
+                  {
+                    "locale": "de",
+                    "text": "DocumentModelHint.de"
+                  },
+                  {
+                    "locale": "en",
+                    "text": "DocumentModelHint.en"
+                  }
+                ],
+                "Field": {
+                  "fieldType": {
+                    "type": "EnumerationType",
+                    "EnumerationType": {
+                      "values": [
+                        {
+                          "value": "V1",
+                          "label": [
+                            {
+                              "locale": "en",
+                              "text": "DocumentModelValue1.en"
+                            },
+                            {
+                              "locale": "de",
+                              "text": "DocumentModelValue1.de"
+                            },
+                            {
+                              "locale": "en_EN",
+                              "text": "DocumentModelValue1.en"
+                            },
+                            {
+                              "locale": "de_DE",
+                              "text": "DocumentModelValue1.de"
+                            }
+                          ]
+                        },
+                        {
+                          "value": "V2",
+                          "label": [
+                            {
+                              "locale": "en",
+                              "text": "DocumentModelValue2.en"
+                            },
+                            {
+                              "locale": "de",
+                              "text": "DocumentModelValue2.de"
+                            },
+                            {
+                              "locale": "en_EN",
+                              "text": "DocumentModelValue2.en"
+                            },
+                            {
+                              "locale": "de_DE",
+                              "text": "DocumentModelValue2.de"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  "label": [
+                    {
+                      "locale": "de",
+                      "text": "DocumentModelLabel.de"
+                    },
+                    {
+                      "locale": "en",
+                      "text": "DocumentModelLabel.en"
+                    }
+                  ],
+                  "requirednessConfig": {
+                    "mode": "absoluteOrRelativeToNextRepAncestor"
+                  }
+                }
+              },
+              {
+                "type": "Field",
+                "id": "F22",
+                "name": "enumerationfield_full",
+                "externalDescription": [
+                  {
+                    "locale": "de",
+                    "text": "DocumentModelHint.de"
+                  },
+                  {
+                    "locale": "en",
+                    "text": "DocumentModelHint.en"
+                  }
+                ],
+                "Field": {
+                  "fieldType": {
+                    "type": "EnumerationType",
+                    "EnumerationType": {
+                      "values": [
+                        {
+                          "value": "V1",
+                          "label": [
+                            {
+                              "locale": "en",
+                              "text": "DocumentModelValue1.en"
+                            },
+                            {
+                              "locale": "de",
+                              "text": "DocumentModelValue1.de"
+                            },
+                            {
+                              "locale": "en_EN",
+                              "text": "DocumentModelValue1.en"
+                            },
+                            {
+                              "locale": "de_DE",
+                              "text": "DocumentModelValue1.de"
+                            }
+                          ]
+                        },
+                        {
+                          "value": "V2",
+                          "label": [
+                            {
+                              "locale": "en",
+                              "text": "DocumentModelValue2.en"
+                            },
+                            {
+                              "locale": "de",
+                              "text": "DocumentModelValue2.de"
+                            },
+                            {
+                              "locale": "en_EN",
+                              "text": "DocumentModelValue2.en"
+                            },
+                            {
+                              "locale": "de_DE",
+                              "text": "DocumentModelValue2.de"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  "label": [
+                    {
+                      "locale": "de",
+                      "text": "DocumentModelLabel.de"
+                    },
+                    {
+                      "locale": "en",
+                      "text": "DocumentModelLabel.en"
+                    }
+                  ],
+                  "requirednessConfig": {
+                    "mode": "absoluteOrRelativeToNextRepAncestor"
+                  }
+                }
+              },
+              {
+                "type": "Field",
+                "id": "field_760a5",
+                "name": "confirmField",
+                "externalDescription": [
+                  {
+                    "locale": "en",
+                    "text": "DocumentModelHint.en"
+                  },
+                  {
+                    "locale": "de",
+                    "text": "DocumentModelHint.de"
+                  }
+                ],
+                "Field": {
+                  "fieldType": {
+                    "type": "ConfirmType"
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "DocumentModelLabel.en"
+                    },
+                    {
+                      "locale": "de",
+                      "text": "DocumentModelLabel.de"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Field",
+                "id": "F14",
+                "name": "stringfield_empty",
+                "Field": {
+                  "fieldType": {
+                    "type": "StringType"
+                  },
+                  "requirednessConfig": {
+                    "mode": "absoluteOrRelativeToNextRepAncestor"
+                  }
+                }
+              },
+              {
+                "type": "Field",
+                "id": "F15",
+                "name": "numberfield_empty",
+                "Field": {
+                  "fieldType": {
+                    "type": "NumberType"
+                  },
+                  "requirednessConfig": {
+                    "mode": "absoluteOrRelativeToNextRepAncestor"
+                  }
+                }
+              },
+              {
+                "type": "Field",
+                "id": "F16",
+                "name": "booleanfield_empty",
+                "Field": {
+                  "fieldType": {
+                    "type": "BooleanType"
+                  },
+                  "requirednessConfig": {
+                    "mode": "absoluteOrRelativeToNextRepAncestor"
+                  }
+                }
+              },
+              {
+                "type": "Field",
+                "id": "F17",
+                "name": "datefield_empty",
+                "Field": {
+                  "fieldType": {
+                    "type": "DateType",
+                    "DateType": {
+                      "format": "yyyy-MM-dd"
+                    }
+                  },
+                  "requirednessConfig": {
+                    "mode": "absoluteOrRelativeToNextRepAncestor"
+                  }
+                }
+              },
+              {
+                "type": "Field",
+                "id": "F18",
+                "name": "enumerationfield_empty_compact",
+                "Field": {
+                  "fieldType": {
+                    "type": "EnumerationType",
+                    "EnumerationType": {
+                      "values": [
+                        {
+                          "value": "V1",
+                          "label": [
+                            {
+                              "locale": "en",
+                              "text": "DocumentModelValue1.en"
+                            },
+                            {
+                              "locale": "de",
+                              "text": "DocumentModelValue1.de"
+                            },
+                            {
+                              "locale": "en_EN",
+                              "text": "DocumentModelValue1.en"
+                            },
+                            {
+                              "locale": "de_DE",
+                              "text": "DocumentModelValue1.de"
+                            }
+                          ]
+                        },
+                        {
+                          "value": "V2",
+                          "label": [
+                            {
+                              "locale": "en",
+                              "text": "DocumentModelValue2.en"
+                            },
+                            {
+                              "locale": "de",
+                              "text": "DocumentModelValue2.de"
+                            },
+                            {
+                              "locale": "en_EN",
+                              "text": "DocumentModelValue2.en"
+                            },
+                            {
+                              "locale": "de_DE",
+                              "text": "DocumentModelValue2.de"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  "requirednessConfig": {
+                    "mode": "absoluteOrRelativeToNextRepAncestor"
+                  }
+                }
+              },
+              {
+                "type": "Field",
+                "id": "F23",
+                "name": "enumerationfield_empty_full",
+                "Field": {
+                  "fieldType": {
+                    "type": "EnumerationType",
+                    "EnumerationType": {
+                      "values": [
+                        {
+                          "value": "V1",
+                          "label": [
+                            {
+                              "locale": "en",
+                              "text": "DocumentModelValue1.en"
+                            },
+                            {
+                              "locale": "de",
+                              "text": "DocumentModelValue1.de"
+                            },
+                            {
+                              "locale": "en_EN",
+                              "text": "DocumentModelValue1.en"
+                            },
+                            {
+                              "locale": "de_DE",
+                              "text": "DocumentModelValue1.de"
+                            }
+                          ]
+                        },
+                        {
+                          "value": "V2",
+                          "label": [
+                            {
+                              "locale": "en",
+                              "text": "DocumentModelValue2.en"
+                            },
+                            {
+                              "locale": "de",
+                              "text": "DocumentModelValue2.de"
+                            },
+                            {
+                              "locale": "en_EN",
+                              "text": "DocumentModelValue2.en"
+                            },
+                            {
+                              "locale": "de_DE",
+                              "text": "DocumentModelValue2.de"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  "requirednessConfig": {
+                    "mode": "absoluteOrRelativeToNextRepAncestor"
+                  }
+                }
+              },
+              {
+                "type": "Field",
+                "id": "field_934ee",
+                "name": "confirmField_empty",
+                "Field": {
+                  "fieldType": {
+                    "type": "ConfirmType"
+                  },
+                  "requirednessConfig": {
+                    "mode": "absoluteOrRelativeToNextRepAncestor"
+                  }
+                }
+              },
+              {
+                "type": "Field",
+                "id": "F24",
+                "name": "stringfield_COPY",
+                "externalDescription": [
+                  {
+                    "locale": "de",
+                    "text": "DocumentModelHint.de"
+                  },
+                  {
+                    "locale": "en",
+                    "text": "DocumentModelHint.en"
+                  }
+                ],
+                "Field": {
+                  "fieldType": {
+                    "type": "StringType"
+                  },
+                  "label": [
+                    {
+                      "locale": "de",
+                      "text": "DocumentModelLabel.de"
+                    },
+                    {
+                      "locale": "en",
+                      "text": "DocumentModelLabel.en"
+                    }
+                  ],
+                  "requirednessConfig": {
+                    "mode": "absoluteOrRelativeToNextRepAncestor"
+                  }
+                }
+              },
+              {
+                "type": "Field",
+                "id": "F25",
+                "name": "numberfield_COPY",
+                "externalDescription": [
+                  {
+                    "locale": "de",
+                    "text": "DocumentModelHint.de"
+                  },
+                  {
+                    "locale": "en",
+                    "text": "DocumentModelHint.en"
+                  }
+                ],
+                "Field": {
+                  "fieldType": {
+                    "type": "NumberType"
+                  },
+                  "label": [
+                    {
+                      "locale": "de",
+                      "text": "DocumentModelLabel.de"
+                    },
+                    {
+                      "locale": "en",
+                      "text": "DocumentModelLabel.en"
+                    }
+                  ],
+                  "requirednessConfig": {
+                    "mode": "absoluteOrRelativeToNextRepAncestor"
+                  }
+                }
+              },
+              {
+                "type": "Field",
+                "id": "F26",
+                "name": "booleanfield_COPY",
+                "externalDescription": [
+                  {
+                    "locale": "de",
+                    "text": "DocumentModelHint.de"
+                  },
+                  {
+                    "locale": "en",
+                    "text": "DocumentModelHint.en"
+                  }
+                ],
+                "Field": {
+                  "fieldType": {
+                    "type": "BooleanType"
+                  },
+                  "label": [
+                    {
+                      "locale": "de",
+                      "text": "DocumentModelLabel.de"
+                    },
+                    {
+                      "locale": "en",
+                      "text": "DocumentModelLabel.en"
+                    }
+                  ],
+                  "requirednessConfig": {
+                    "mode": "absoluteOrRelativeToNextRepAncestor"
+                  }
+                }
+              },
+              {
+                "type": "Field",
+                "id": "F27",
+                "name": "datefield_COPY",
+                "externalDescription": [
+                  {
+                    "locale": "de",
+                    "text": "DocumentModelHint.de"
+                  },
+                  {
+                    "locale": "en",
+                    "text": "DocumentModelHint.en"
+                  }
+                ],
+                "Field": {
+                  "fieldType": {
+                    "type": "DateType",
+                    "DateType": {
+                      "format": "yyyy-MM-dd"
+                    }
+                  },
+                  "label": [
+                    {
+                      "locale": "de",
+                      "text": "DocumentModelLabel.de"
+                    },
+                    {
+                      "locale": "en",
+                      "text": "DocumentModelLabel.en"
+                    }
+                  ],
+                  "requirednessConfig": {
+                    "mode": "absoluteOrRelativeToNextRepAncestor"
+                  }
+                }
+              },
+              {
+                "type": "Field",
+                "id": "F28",
+                "name": "enumerationfield_compact_COPY",
+                "externalDescription": [
+                  {
+                    "locale": "de",
+                    "text": "DocumentModelHint.de"
+                  },
+                  {
+                    "locale": "en",
+                    "text": "DocumentModelHint.en"
+                  }
+                ],
+                "Field": {
+                  "fieldType": {
+                    "type": "EnumerationType",
+                    "EnumerationType": {
+                      "values": [
+                        {
+                          "value": "V1",
+                          "label": [
+                            {
+                              "locale": "en",
+                              "text": "DocumentModelValue1.en"
+                            },
+                            {
+                              "locale": "de",
+                              "text": "DocumentModelValue1.de"
+                            },
+                            {
+                              "locale": "en_EN",
+                              "text": "DocumentModelValue1.en"
+                            },
+                            {
+                              "locale": "de_DE",
+                              "text": "DocumentModelValue1.de"
+                            }
+                          ]
+                        },
+                        {
+                          "value": "V2",
+                          "label": [
+                            {
+                              "locale": "en",
+                              "text": "DocumentModelValue2.en"
+                            },
+                            {
+                              "locale": "de",
+                              "text": "DocumentModelValue2.de"
+                            },
+                            {
+                              "locale": "en_EN",
+                              "text": "DocumentModelValue2.en"
+                            },
+                            {
+                              "locale": "de_DE",
+                              "text": "DocumentModelValue2.de"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  "label": [
+                    {
+                      "locale": "de",
+                      "text": "DocumentModelLabel.de"
+                    },
+                    {
+                      "locale": "en",
+                      "text": "DocumentModelLabel.en"
+                    }
+                  ],
+                  "requirednessConfig": {
+                    "mode": "absoluteOrRelativeToNextRepAncestor"
+                  }
+                }
+              },
+              {
+                "type": "Field",
+                "id": "F29",
+                "name": "enumerationfield_full_COPY",
+                "externalDescription": [
+                  {
+                    "locale": "de",
+                    "text": "DocumentModelHint.de"
+                  },
+                  {
+                    "locale": "en",
+                    "text": "DocumentModelHint.en"
+                  }
+                ],
+                "Field": {
+                  "fieldType": {
+                    "type": "EnumerationType",
+                    "EnumerationType": {
+                      "values": [
+                        {
+                          "value": "V1",
+                          "label": [
+                            {
+                              "locale": "en",
+                              "text": "DocumentModelValue1.en"
+                            },
+                            {
+                              "locale": "de",
+                              "text": "DocumentModelValue1.de"
+                            },
+                            {
+                              "locale": "en_EN",
+                              "text": "DocumentModelValue1.en"
+                            },
+                            {
+                              "locale": "de_DE",
+                              "text": "DocumentModelValue1.de"
+                            }
+                          ]
+                        },
+                        {
+                          "value": "V2",
+                          "label": [
+                            {
+                              "locale": "en",
+                              "text": "DocumentModelValue2.en"
+                            },
+                            {
+                              "locale": "de",
+                              "text": "DocumentModelValue2.de"
+                            },
+                            {
+                              "locale": "en_EN",
+                              "text": "DocumentModelValue2.en"
+                            },
+                            {
+                              "locale": "de_DE",
+                              "text": "DocumentModelValue2.de"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  "label": [
+                    {
+                      "locale": "de",
+                      "text": "DocumentModelLabel.de"
+                    },
+                    {
+                      "locale": "en",
+                      "text": "DocumentModelLabel.en"
+                    }
+                  ],
+                  "requirednessConfig": {
+                    "mode": "absoluteOrRelativeToNextRepAncestor"
+                  }
+                }
+              },
+              {
+                "type": "Field",
+                "id": "field_c968f",
+                "name": "confirmField_COPY",
+                "Field": {
+                  "fieldType": {
+                    "type": "ConfirmType"
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "DocumentModelLabel.en"
+                    },
+                    {
+                      "locale": "de",
+                      "text": "DocumentModelLabel.de"
+                    }
+                  ],
+                  "requirednessConfig": {
+                    "mode": "absoluteOrRelativeToNextRepAncestor"
+                  }
+                }
+              },
+              {
+                "type": "Field",
+                "id": "field_b5f8c",
+                "name": "stringfield_optional",
+                "Field": {
+                  "fieldType": {
+                    "type": "StringType"
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "DocumentModelLabel.en"
+                    },
+                    {
+                      "locale": "de",
+                      "text": "DocumentModelLabel.de"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Field",
+                "id": "field_b5f8d",
+                "name": "stringfield_optional_formatted",
+                "Field": {
+                  "fieldType": {
+                    "type": "StringType"
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "DocumentModelLabel.en"
+                    },
+                    {
+                      "locale": "de",
+                      "text": "DocumentModelLabel.de"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Group",
+                "id": "group_3e287",
+                "name": "multiSelect_empty",
+                "Group": {
+                  "repeatability": 999999,
+                  "usageType": "multi-select",
+                  "elements": [
+                    {
+                      "type": "Field",
+                      "id": "field_4237d",
+                      "name": "value",
+                      "Field": {
+                        "fieldType": {
+                          "type": "EnumerationType",
+                          "EnumerationType": {
+                            "values": [
+                              {
+                                "value": "key1",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "DocumentModelValue1.en"
+                                  },
+                                  {
+                                    "locale": "de",
+                                    "text": "DocumentModelValue1.de"
+                                  },
+                                  {
+                                    "locale": "en_EN",
+                                    "text": "DocumentModelValue1.en"
+                                  },
+                                  {
+                                    "locale": "de_DE",
+                                    "text": "DocumentModelValue1.de"
+                                  }
+                                ]
+                              },
+                              {
+                                "value": "key2",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "DocumentModelValue2.en"
+                                  },
+                                  {
+                                    "locale": "de",
+                                    "text": "DocumentModelValue2.de"
+                                  },
+                                  {
+                                    "locale": "en_EN",
+                                    "text": "DocumentModelValue2.en"
+                                  },
+                                  {
+                                    "locale": "de_DE",
+                                    "text": "DocumentModelValue2.de"
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        },
+                        "requirednessConfig": {
+                          "mode": "absoluteOrRelativeToNextRepAncestor"
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Group",
+                "id": "group_95c98",
+                "name": "multiSelect",
+                "Group": {
+                  "repeatability": 999999,
+                  "usageType": "multi-select",
+                  "elements": [
+                    {
+                      "type": "Field",
+                      "id": "field_6beb3",
+                      "name": "value",
+                      "Field": {
+                        "fieldType": {
+                          "type": "EnumerationType",
+                          "EnumerationType": {
+                            "values": [
+                              {
+                                "value": "key1",
+                                "label": []
+                              },
+                              {
+                                "value": "key2",
+                                "label": []
+                              }
+                            ]
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "DocumentModelLabel.en"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "DocumentModelLabel.de"
+                          }
+                        ],
+                        "requirednessConfig": {
+                          "mode": "absoluteOrRelativeToNextRepAncestor"
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Group",
+                "id": "group_c462e",
+                "name": "multiSelect_COPY",
+                "Group": {
+                  "repeatability": 999999,
+                  "usageType": "multi-select",
+                  "elements": [
+                    {
+                      "type": "Field",
+                      "id": "field_177ec",
+                      "name": "value",
+                      "Field": {
+                        "fieldType": {
+                          "type": "EnumerationType",
+                          "EnumerationType": {
+                            "values": [
+                              {
+                                "value": "key1",
+                                "label": []
+                              },
+                              {
+                                "value": "key2",
+                                "label": []
+                              }
+                            ]
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "DocumentModelLabel.en"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "DocumentModelLabel.de"
+                          }
+                        ],
+                        "requirednessConfig": {
+                          "mode": "absoluteOrRelativeToNextRepAncestor"
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Group",
+                "id": "G105",
+                "name": "repeat",
+                "Group": {
+                  "repeatability": 3,
+                  "elements": [
+                    {
+                      "type": "Field",
+                      "id": "F107",
+                      "name": "F1",
+                      "externalDescription": [
+                        {
+                          "locale": "de",
+                          "text": "DocumentModelHint.de"
+                        },
+                        {
+                          "locale": "en",
+                          "text": "DocumentModelHint.en"
+                        }
+                      ],
+                      "Field": {
+                        "fieldType": {
+                          "type": "StringType"
+                        },
+                        "label": [
+                          {
+                            "locale": "de",
+                            "text": "DocumentModelLabel.de"
+                          },
+                          {
+                            "locale": "en",
+                            "text": "DocumentModelLabel.en"
+                          }
+                        ],
+                        "requirednessConfig": {
+                          "mode": "absoluteOrRelativeToNextRepAncestor"
+                        }
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "F108",
+                      "name": "F2",
+                      "externalDescription": [
+                        {
+                          "locale": "de",
+                          "text": "DocumentModelHint.de"
+                        },
+                        {
+                          "locale": "en",
+                          "text": "DocumentModelHint.en"
+                        }
+                      ],
+                      "Field": {
+                        "fieldType": {
+                          "type": "StringType"
+                        },
+                        "label": [
+                          {
+                            "locale": "de",
+                            "text": "DocumentModelLabel.de"
+                          },
+                          {
+                            "locale": "en",
+                            "text": "DocumentModelLabel.en"
+                          }
+                        ],
+                        "requirednessConfig": {
+                          "mode": "absoluteOrRelativeToNextRepAncestor"
+                        }
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_c7353",
+                      "name": "F3",
+                      "Field": {
+                        "fieldType": {
+                          "type": "StringType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "DocumentModelLabel.en"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "DocumentModelLabel.de"
+                          }
+                        ],
+                        "requirednessConfig": {
+                          "mode": "absoluteOrRelativeToNextRepAncestor"
+                        }
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_4ebce",
+                      "name": "stringfield_empty",
+                      "Field": {
+                        "fieldType": {
+                          "type": "StringType"
+                        }
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_7b890",
+                      "name": "stringfield",
+                      "Field": {
+                        "fieldType": {
+                          "type": "StringType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "DocumentModelLabel.en"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "DocumentModelLabel.de"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "fieldimpl_d9cee",
+                      "name": "stringfield_COPY",
+                      "Field": {
+                        "fieldType": {
+                          "type": "StringType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "DocumentModelLabel.en"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "DocumentModelLabel.de"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Group",
+                      "id": "multi-select_31649",
+                      "name": "multiSelect",
+                      "Group": {
+                        "repeatability": 999999,
+                        "usageType": "multi-select",
+                        "elements": [
+                          {
+                            "type": "Field",
+                            "id": "multiSelectChild_0d1bf",
+                            "name": "value",
+                            "Field": {
+                              "fieldType": {
+                                "type": "EnumerationType",
+                                "EnumerationType": {
+                                  "values": [
+                                    {
+                                      "value": "key1",
+                                      "label": []
+                                    },
+                                    {
+                                      "value": "key2",
+                                      "label": []
+                                    }
+                                  ]
+                                }
+                              },
+                              "label": [
+                                {
+                                  "locale": "en",
+                                  "text": "DocumentModelLabel.en"
+                                },
+                                {
+                                  "locale": "de",
+                                  "text": "DocumentModelLabel.de"
+                                }
+                              ],
+                              "requirednessConfig": {
+                                "mode": "absoluteOrRelativeToNextRepAncestor"
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Group",
+                "id": "group_96d3a",
+                "name": "errorMessages",
+                "Group": {
+                  "repeatability": 1,
+                  "elements": [
+                    {
+                      "type": "Field",
+                      "id": "fieldimpl_e9372",
+                      "name": "stringfield1",
+                      "externalDescription": [
+                        {
+                          "locale": "de",
+                          "text": "DocumentModelHint.de"
+                        },
+                        {
+                          "locale": "en",
+                          "text": "DocumentModelHint.en"
+                        }
+                      ],
+                      "Field": {
+                        "fieldType": {
+                          "type": "StringType"
+                        },
+                        "label": [
+                          {
+                            "locale": "de",
+                            "text": "DocumentModelLabel.de"
+                          },
+                          {
+                            "locale": "en",
+                            "text": "DocumentModelLabel.en"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "fieldimpl_08246",
+                      "name": "stringfield2",
+                      "externalDescription": [
+                        {
+                          "locale": "de",
+                          "text": "DocumentModelHint.de"
+                        },
+                        {
+                          "locale": "en",
+                          "text": "DocumentModelHint.en"
+                        }
+                      ],
+                      "Field": {
+                        "fieldType": {
+                          "type": "StringType"
+                        },
+                        "label": [
+                          {
+                            "locale": "de",
+                            "text": "DocumentModelLabel.de"
+                          },
+                          {
+                            "locale": "en",
+                            "text": "DocumentModelLabel.en"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "fieldimpl_3a7f8",
+                      "name": "stringfield3",
+                      "externalDescription": [
+                        {
+                          "locale": "de",
+                          "text": "DocumentModelHint.de"
+                        },
+                        {
+                          "locale": "en",
+                          "text": "DocumentModelHint.en"
+                        }
+                      ],
+                      "Field": {
+                        "fieldType": {
+                          "type": "StringType"
+                        },
+                        "label": [
+                          {
+                            "locale": "de",
+                            "text": "DocumentModelLabel.de"
+                          },
+                          {
+                            "locale": "en",
+                            "text": "DocumentModelLabel.en"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Rule",
+                      "id": "rule_1393a",
+                      "name": "requiredRuleForStringField1",
+                      "Rule": {
+                        "errorEntityRelPath": "../stringfield1",
+                        "errorCode": "Error rule_1393a",
+                        "errorCondition": "FieldNotFilled(stringfield1)",
+                        "severity": "ERROR",
+                        "errorMessage": [
+                          {
+                            "locale": "en",
+                            "text": "Field $stringfield1$ is required."
+                          },
+                          {
+                            "locale": "de",
+                            "text": "Feld $stringfield1$ ist ein Pflichtfeld."
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Rule",
+                      "id": "ruleimpl_626d1",
+                      "name": "requiredRuleForStringField2",
+                      "Rule": {
+                        "errorEntityRelPath": "../stringfield2",
+                        "errorCode": "Error rule_1393a",
+                        "errorCondition": "FieldNotFilled(stringfield2)",
+                        "severity": "ERROR",
+                        "errorMessage": [
+                          {
+                            "locale": "en",
+                            "text": "Field $stringfield2$ is required."
+                          },
+                          {
+                            "locale": "de",
+                            "text": "Feld $stringfield2$ ist ein Pflichtfeld."
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Rule",
+                      "id": "ruleimpl_bacf1",
+                      "name": "requiredRuleForStringField3",
+                      "Rule": {
+                        "errorEntityRelPath": "../stringfield3",
+                        "errorCode": "Error rule_1393a",
+                        "errorCondition": "FieldNotFilled(stringfield3)",
+                        "severity": "ERROR",
+                        "errorMessage": [
+                          {
+                            "locale": "en",
+                            "text": "Field $stringfield3$ is required."
+                          },
+                          {
+                            "locale": "de",
+                            "text": "Feld $stringfield3$ ist ein Pflichtfeld."
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

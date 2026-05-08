@@ -1,0 +1,124 @@
+{
+  "header": {
+    "id": "person-document",
+    "modelType": "document",
+    "modelVersion": "28.4.0",
+    "locales": [
+      {
+        "code": "en"
+      }
+    ],
+    "annotations": [
+      {
+        "name": "roles",
+        "value": "admin"
+      }
+    ],
+    "modelReferences": [
+      {
+        "alias": "address-document",
+        "modelType": "document",
+        "purpose": "include",
+        "reference": "address-document"
+      }
+    ]
+  },
+  "content": {
+    "modelInfo": {
+      "name": "person-document"
+    },
+    "modelConfig": {
+      "decimalSeparator": ".",
+      "timeZone": "UTC",
+      "conditionLanguage": {
+        "code": "en_US"
+      }
+    },
+    "modelRoot": {
+      "rootGroups": [
+        {
+          "type": "Group",
+          "id": "group_6e795",
+          "name": "person",
+          "Group": {
+            "label": [
+              {
+                "locale": "en",
+                "text": "Person"
+              }
+            ],
+            "repeatability": 1,
+            "elements": [
+              {
+                "type": "Field",
+                "id": "field_bbd56",
+                "name": "firstName",
+                "Field": {
+                  "fieldType": {
+                    "type": "StringType"
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "First Name"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Field",
+                "id": "field_38ab9",
+                "name": "lastName",
+                "Field": {
+                  "fieldType": {
+                    "type": "StringType"
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "Last Name"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Field",
+                "id": "field_82668",
+                "name": "age",
+                "Field": {
+                  "fieldType": {
+                    "type": "NumberType"
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "Age"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Group",
+                "id": "include_c1f6f",
+                "name": "homeAddress",
+                "Group": {
+                  "repeatability": 1,
+                  "modelAlias": "address-document"
+                }
+              },
+              {
+                "type": "Group",
+                "id": "include_135f6",
+                "name": "workAddress",
+                "Group": {
+                  "repeatability": 1,
+                  "modelAlias": "address-document"
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

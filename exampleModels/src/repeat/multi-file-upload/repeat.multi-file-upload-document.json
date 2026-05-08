@@ -1,0 +1,1125 @@
+{
+  "header": {
+    "id": "repeat.multi-file-upload-document",
+    "modelType": "document",
+    "modelVersion": "28.4.0",
+    "locales": [
+      {
+        "code": "en"
+      },
+      {
+        "code": "de"
+      }
+    ],
+    "labels": [],
+    "annotations": [
+      {
+        "name": "roles",
+        "value": "admin"
+      }
+    ],
+    "modelReferences": []
+  },
+  "content": {
+    "modelInfo": {
+      "name": "repeat.multi-file-upload-document"
+    },
+    "modelConfig": {
+      "decimalSeparator": ".",
+      "timeZone": "UTC",
+      "conditionLanguage": {
+        "code": "en_US"
+      }
+    },
+    "modelRoot": {
+      "rootGroups": [
+        {
+          "type": "Group",
+          "id": "group_73cfe",
+          "name": "Root",
+          "Group": {
+            "repeatability": 1,
+            "elements": [
+              {
+                "type": "Group",
+                "id": "group_8f492",
+                "name": "AttachmentCollection",
+                "Group": {
+                  "repeatability": 10,
+                  "elements": [
+                    {
+                      "type": "Group",
+                      "id": "group_955ee",
+                      "name": "Attachment01",
+                      "Group": {
+                        "repeatability": 1,
+                        "usageType": "attachment",
+                        "elements": [
+                          {
+                            "type": "Field",
+                            "id": "field_00719",
+                            "name": "original_filename",
+                            "Field": {
+                              "fieldType": {
+                                "type": "StringType"
+                              }
+                            }
+                          },
+                          {
+                            "type": "Field",
+                            "id": "field_96397",
+                            "name": "internal_filename",
+                            "Field": {
+                              "fieldType": {
+                                "type": "StringType"
+                              }
+                            }
+                          },
+                          {
+                            "type": "Field",
+                            "id": "field_152c5",
+                            "name": "content",
+                            "Field": {
+                              "fieldType": {
+                                "type": "StringType",
+                                "StringType": {
+                                  "lineBreaksPermitted": true,
+                                  "noValueValidation": true
+                                }
+                              }
+                            }
+                          },
+                          {
+                            "type": "Field",
+                            "id": "field_98602",
+                            "name": "attachment_id",
+                            "Field": {
+                              "fieldType": {
+                                "type": "StringType"
+                              }
+                            }
+                          },
+                          {
+                            "type": "Field",
+                            "id": "field_54eaa",
+                            "name": "size",
+                            "Field": {
+                              "fieldType": {
+                                "type": "NumberType"
+                              }
+                            }
+                          },
+                          {
+                            "type": "Field",
+                            "id": "field_fdce5",
+                            "name": "mime_type",
+                            "Field": {
+                              "fieldType": {
+                                "type": "StringType"
+                              }
+                            }
+                          },
+                          {
+                            "type": "Field",
+                            "id": "field_17369",
+                            "name": "category",
+                            "Field": {
+                              "fieldType": {
+                                "type": "StringType"
+                              }
+                            }
+                          },
+                          {
+                            "type": "Field",
+                            "id": "field_1286b",
+                            "name": "description",
+                            "Field": {
+                              "fieldType": {
+                                "type": "StringType"
+                              }
+                            }
+                          },
+                          {
+                            "type": "Rule",
+                            "id": "rule_f4f49",
+                            "name": "AttachmentInternalFilenameRequired",
+                            "Rule": {
+                              "errorEntityRelPath": "../internal_filename",
+                              "errorCode": "Error rule_f4f49",
+                              "errorCondition": "GroupFilled(RuleGroup) and FieldNotFilled(internal_filename)",
+                              "severity": "ERROR",
+                              "errorMessage": [
+                                {
+                                  "locale": "en",
+                                  "text": "Internal Error: Field internal_filename of customType attachment is not filled."
+                                },
+                                {
+                                  "locale": "de",
+                                  "text": "Internal Error: Field internal_filename of customType attachment is not filled."
+                                }
+                              ]
+                            }
+                          },
+                          {
+                            "type": "Rule",
+                            "id": "rule_ed81f",
+                            "name": "AttachmentMimeTypeRequired",
+                            "Rule": {
+                              "errorEntityRelPath": "../mime_type",
+                              "errorCode": "Error rule_ed81f",
+                              "errorCondition": "GroupFilled(RuleGroup) and FieldNotFilled(mime_type)",
+                              "severity": "ERROR",
+                              "errorMessage": [
+                                {
+                                  "locale": "en",
+                                  "text": "Internal Error: Field mime_type of customType attachment is not filled."
+                                },
+                                {
+                                  "locale": "de",
+                                  "text": "Internal Error: Field mime_type of customType attachment is not filled."
+                                }
+                              ]
+                            }
+                          },
+                          {
+                            "type": "Rule",
+                            "id": "rule_0cd81",
+                            "name": "AttachmentIdOrContentFilled",
+                            "Rule": {
+                              "errorEntityRelPath": "../content",
+                              "errorCode": "Error rule_0cd81",
+                              "errorCondition": "GroupFilled(RuleGroup) and NotExactlyOneFieldFilled(attachment_id, content)",
+                              "severity": "ERROR",
+                              "errorMessage": [
+                                {
+                                  "locale": "en",
+                                  "text": "Internal Error: Either attachment_id or content must be filled in a customType attachment, but not both."
+                                },
+                                {
+                                  "locale": "de",
+                                  "text": "Internal Error: Either attachment_id or content must be filled in a customType attachment, but not both."
+                                }
+                              ]
+                            }
+                          },
+                          {
+                            "type": "Rule",
+                            "id": "rule_ad21a",
+                            "name": "SizeOfContentFilled",
+                            "Rule": {
+                              "errorEntityRelPath": "../content",
+                              "errorCode": "Error rule_ad21a",
+                              "errorCondition": "FieldFilled(content) and FieldNotFilled(size)",
+                              "severity": "ERROR",
+                              "errorMessage": [
+                                {
+                                  "locale": "en",
+                                  "text": "Internal Error: If the content is filled, the size must be also filled."
+                                },
+                                {
+                                  "locale": "de",
+                                  "text": "Internal Error: If the content is filled, the size must be also filled."
+                                }
+                              ]
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_03314",
+                      "name": "StringField",
+                      "Field": {
+                        "fieldType": {
+                          "type": "StringType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "Additional StringField"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "Additional StringField"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_b320e",
+                      "name": "NumberField",
+                      "Field": {
+                        "fieldType": {
+                          "type": "NumberType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "Additional NumberField"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "Additional NumberField"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Group",
+                "id": "group_a0626",
+                "name": "AttachmentCollection_InitialValues",
+                "Group": {
+                  "repeatability": 10,
+                  "elements": [
+                    {
+                      "type": "Group",
+                      "id": "attachment_2cb08",
+                      "name": "Attachment01",
+                      "Group": {
+                        "repeatability": 1,
+                        "usageType": "attachment",
+                        "elements": [
+                          {
+                            "type": "Field",
+                            "id": "attachmentField_31592",
+                            "name": "original_filename",
+                            "Field": {
+                              "fieldType": {
+                                "type": "StringType"
+                              }
+                            }
+                          },
+                          {
+                            "type": "Field",
+                            "id": "attachmentField_bca2d",
+                            "name": "internal_filename",
+                            "Field": {
+                              "fieldType": {
+                                "type": "StringType"
+                              }
+                            }
+                          },
+                          {
+                            "type": "Field",
+                            "id": "attachmentField_6b1e6",
+                            "name": "content",
+                            "Field": {
+                              "fieldType": {
+                                "type": "StringType",
+                                "StringType": {
+                                  "lineBreaksPermitted": true,
+                                  "noValueValidation": true
+                                }
+                              }
+                            }
+                          },
+                          {
+                            "type": "Field",
+                            "id": "attachmentField_fecd2",
+                            "name": "attachment_id",
+                            "Field": {
+                              "fieldType": {
+                                "type": "StringType"
+                              }
+                            }
+                          },
+                          {
+                            "type": "Field",
+                            "id": "attachmentField_08d25",
+                            "name": "size",
+                            "Field": {
+                              "fieldType": {
+                                "type": "NumberType"
+                              }
+                            }
+                          },
+                          {
+                            "type": "Field",
+                            "id": "attachmentField_08cff",
+                            "name": "mime_type",
+                            "Field": {
+                              "fieldType": {
+                                "type": "StringType"
+                              }
+                            }
+                          },
+                          {
+                            "type": "Field",
+                            "id": "attachmentField_a70a0",
+                            "name": "category",
+                            "Field": {
+                              "fieldType": {
+                                "type": "StringType"
+                              }
+                            }
+                          },
+                          {
+                            "type": "Field",
+                            "id": "attachmentField_bab6a",
+                            "name": "description",
+                            "Field": {
+                              "fieldType": {
+                                "type": "StringType"
+                              }
+                            }
+                          },
+                          {
+                            "type": "Rule",
+                            "id": "attachmentRule_5825b",
+                            "name": "AttachmentInternalFilenameRequired",
+                            "Rule": {
+                              "errorEntityRelPath": "../internal_filename",
+                              "errorCode": "Error attachmentRule_5825b",
+                              "errorCondition": "GroupFilled(RuleGroup) and FieldNotFilled(internal_filename)",
+                              "severity": "ERROR",
+                              "errorMessage": [
+                                {
+                                  "locale": "en",
+                                  "text": "Internal Error: Field internal_filename of customType attachment is not filled."
+                                },
+                                {
+                                  "locale": "de",
+                                  "text": "Internal Error: Field internal_filename of customType attachment is not filled."
+                                }
+                              ]
+                            }
+                          },
+                          {
+                            "type": "Rule",
+                            "id": "attachmentRule_1e9ef",
+                            "name": "AttachmentMimeTypeRequired",
+                            "Rule": {
+                              "errorEntityRelPath": "../mime_type",
+                              "errorCode": "Error attachmentRule_1e9ef",
+                              "errorCondition": "GroupFilled(RuleGroup) and FieldNotFilled(mime_type)",
+                              "severity": "ERROR",
+                              "errorMessage": [
+                                {
+                                  "locale": "en",
+                                  "text": "Internal Error: Field mime_type of customType attachment is not filled."
+                                },
+                                {
+                                  "locale": "de",
+                                  "text": "Internal Error: Field mime_type of customType attachment is not filled."
+                                }
+                              ]
+                            }
+                          },
+                          {
+                            "type": "Rule",
+                            "id": "attachmentRule_c6283",
+                            "name": "AttachmentIdOrContentFilled",
+                            "Rule": {
+                              "errorEntityRelPath": "../content",
+                              "errorCode": "Error attachmentRule_c6283",
+                              "errorCondition": "GroupFilled(RuleGroup) and NotExactlyOneFieldFilled(attachment_id, content)",
+                              "severity": "ERROR",
+                              "errorMessage": [
+                                {
+                                  "locale": "en",
+                                  "text": "Internal Error: Either attachment_id or content must be filled in a customType attachment, but not both."
+                                },
+                                {
+                                  "locale": "de",
+                                  "text": "Internal Error: Either attachment_id or content must be filled in a customType attachment, but not both."
+                                }
+                              ]
+                            }
+                          },
+                          {
+                            "type": "Rule",
+                            "id": "attachmentRule_aabbc",
+                            "name": "SizeOfContentFilled",
+                            "Rule": {
+                              "errorEntityRelPath": "../content",
+                              "errorCode": "Error attachmentRule_aabbc",
+                              "errorCondition": "FieldFilled(content) and FieldNotFilled(size)",
+                              "severity": "ERROR",
+                              "errorMessage": [
+                                {
+                                  "locale": "en",
+                                  "text": "Internal Error: If the content is filled, the size must be also filled."
+                                },
+                                {
+                                  "locale": "de",
+                                  "text": "Internal Error: If the content is filled, the size must be also filled."
+                                }
+                              ]
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_40722",
+                      "name": "StringField",
+                      "Field": {
+                        "fieldType": {
+                          "type": "StringType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "Additional StringField"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "Additional StringField"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_deb9a",
+                      "name": "NumberField",
+                      "Field": {
+                        "fieldType": {
+                          "type": "NumberType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "Additional NumberField"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "Additional NumberField"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_602a3",
+                      "name": "ComputedField",
+                      "Field": {
+                        "fieldType": {
+                          "type": "NumberType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "Computed Field"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "Computed Field"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Computation",
+                      "id": "computation_42971",
+                      "name": "Computation",
+                      "Computation": {
+                        "computedFieldRelPath": "../ComputedField",
+                        "computationAlternatives": [
+                          {
+                            "operation": "[NumberField] * 10",
+                            "precondition": "FieldFilled(NumberField)"
+                          }
+                        ],
+                        "errorMessage": [
+                          {
+                            "locale": "en",
+                            "text": "error text for computation of Computation"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "error text for computation of Computation"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Group",
+                "id": "group_845c8",
+                "name": "AttachmentCollection_InitialValuesAndError",
+                "Group": {
+                  "repeatability": 10,
+                  "elements": [
+                    {
+                      "type": "Group",
+                      "id": "attachment_837fb",
+                      "name": "Attachment01",
+                      "Group": {
+                        "repeatability": 1,
+                        "usageType": "attachment",
+                        "elements": [
+                          {
+                            "type": "Field",
+                            "id": "attachmentField_bf145",
+                            "name": "original_filename",
+                            "Field": {
+                              "fieldType": {
+                                "type": "StringType"
+                              }
+                            }
+                          },
+                          {
+                            "type": "Field",
+                            "id": "attachmentField_3eb0d",
+                            "name": "internal_filename",
+                            "Field": {
+                              "fieldType": {
+                                "type": "StringType"
+                              }
+                            }
+                          },
+                          {
+                            "type": "Field",
+                            "id": "attachmentField_522a3",
+                            "name": "content",
+                            "Field": {
+                              "fieldType": {
+                                "type": "StringType",
+                                "StringType": {
+                                  "lineBreaksPermitted": true,
+                                  "noValueValidation": true
+                                }
+                              }
+                            }
+                          },
+                          {
+                            "type": "Field",
+                            "id": "attachmentField_da73b",
+                            "name": "attachment_id",
+                            "Field": {
+                              "fieldType": {
+                                "type": "StringType"
+                              }
+                            }
+                          },
+                          {
+                            "type": "Field",
+                            "id": "attachmentField_cc21d",
+                            "name": "size",
+                            "Field": {
+                              "fieldType": {
+                                "type": "NumberType"
+                              }
+                            }
+                          },
+                          {
+                            "type": "Field",
+                            "id": "attachmentField_0543d",
+                            "name": "mime_type",
+                            "Field": {
+                              "fieldType": {
+                                "type": "StringType"
+                              }
+                            }
+                          },
+                          {
+                            "type": "Field",
+                            "id": "attachmentField_d2b2b",
+                            "name": "category",
+                            "Field": {
+                              "fieldType": {
+                                "type": "StringType"
+                              }
+                            }
+                          },
+                          {
+                            "type": "Field",
+                            "id": "attachmentField_175b0",
+                            "name": "description",
+                            "Field": {
+                              "fieldType": {
+                                "type": "StringType"
+                              }
+                            }
+                          },
+                          {
+                            "type": "Rule",
+                            "id": "attachmentRule_1df5b",
+                            "name": "AttachmentInternalFilenameRequired",
+                            "Rule": {
+                              "errorEntityRelPath": "../internal_filename",
+                              "errorCode": "Error attachmentRule_1df5b",
+                              "errorCondition": "GroupFilled(RuleGroup) and FieldNotFilled(internal_filename)",
+                              "severity": "ERROR",
+                              "errorMessage": [
+                                {
+                                  "locale": "en",
+                                  "text": "Internal Error: Field internal_filename of customType attachment is not filled."
+                                },
+                                {
+                                  "locale": "de",
+                                  "text": "Internal Error: Field internal_filename of customType attachment is not filled."
+                                }
+                              ]
+                            }
+                          },
+                          {
+                            "type": "Rule",
+                            "id": "attachmentRule_1d8fb",
+                            "name": "AttachmentMimeTypeRequired",
+                            "Rule": {
+                              "errorEntityRelPath": "../mime_type",
+                              "errorCode": "Error attachmentRule_1d8fb",
+                              "errorCondition": "GroupFilled(RuleGroup) and FieldNotFilled(mime_type)",
+                              "severity": "ERROR",
+                              "errorMessage": [
+                                {
+                                  "locale": "en",
+                                  "text": "Internal Error: Field mime_type of customType attachment is not filled."
+                                },
+                                {
+                                  "locale": "de",
+                                  "text": "Internal Error: Field mime_type of customType attachment is not filled."
+                                }
+                              ]
+                            }
+                          },
+                          {
+                            "type": "Rule",
+                            "id": "attachmentRule_8f117",
+                            "name": "AttachmentIdOrContentFilled",
+                            "Rule": {
+                              "errorEntityRelPath": "../content",
+                              "errorCode": "Error attachmentRule_8f117",
+                              "errorCondition": "GroupFilled(RuleGroup) and NotExactlyOneFieldFilled(attachment_id, content)",
+                              "severity": "ERROR",
+                              "errorMessage": [
+                                {
+                                  "locale": "en",
+                                  "text": "Internal Error: Either attachment_id or content must be filled in a customType attachment, but not both."
+                                },
+                                {
+                                  "locale": "de",
+                                  "text": "Internal Error: Either attachment_id or content must be filled in a customType attachment, but not both."
+                                }
+                              ]
+                            }
+                          },
+                          {
+                            "type": "Rule",
+                            "id": "attachmentRule_75a9c",
+                            "name": "SizeOfContentFilled",
+                            "Rule": {
+                              "errorEntityRelPath": "../content",
+                              "errorCode": "Error attachmentRule_75a9c",
+                              "errorCondition": "FieldFilled(content) and FieldNotFilled(size)",
+                              "severity": "ERROR",
+                              "errorMessage": [
+                                {
+                                  "locale": "en",
+                                  "text": "Internal Error: If the content is filled, the size must be also filled."
+                                },
+                                {
+                                  "locale": "de",
+                                  "text": "Internal Error: If the content is filled, the size must be also filled."
+                                }
+                              ]
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_6c07e",
+                      "name": "StringField",
+                      "Field": {
+                        "fieldType": {
+                          "type": "StringType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "Additional StringField"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "Additional StringField"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_8b46f",
+                      "name": "NumberField",
+                      "Field": {
+                        "fieldType": {
+                          "type": "NumberType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "Additional NumberField"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "Additional NumberField"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_b266e",
+                      "name": "ComputedField",
+                      "Field": {
+                        "fieldType": {
+                          "type": "NumberType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "Computed Field"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "Computed Field"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Computation",
+                      "id": "computation_7fbcc",
+                      "name": "Computation",
+                      "Computation": {
+                        "computedFieldRelPath": "../ComputedField",
+                        "computationAlternatives": [
+                          {
+                            "operation": "[NumberField] * 10",
+                            "precondition": "FieldFilled(NumberField)"
+                          }
+                        ],
+                        "errorMessage": [
+                          {
+                            "locale": "en",
+                            "text": "error text for computation of Computation"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "error text for computation of Computation"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Rule",
+                      "id": "rule_38106",
+                      "name": "Validation",
+                      "Rule": {
+                        "errorEntityRelPath": "../ComputedField",
+                        "errorCode": "Error rule_38106",
+                        "errorCondition": "FieldFilled(ComputedField) AND [ComputedField] > 99",
+                        "severity": "ERROR",
+                        "errorMessage": [
+                          {
+                            "locale": "en",
+                            "text": "Only values below 100 are allowed"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "Nur Werte unter 100 sind erlaubt"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Rule",
+                      "id": "rule_1834d",
+                      "name": "Max1MB",
+                      "Rule": {
+                        "errorEntityRelPath": "../Attachment01/size",
+                        "errorCode": "Error rule_1834d",
+                        "errorCondition": "FieldFilled(Attachment01/size) and [Attachment01/size] > 1024*1024",
+                        "severity": "ERROR",
+                        "errorMessage": [
+                          {
+                            "locale": "en",
+                            "text": "max size is 1mb"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "maximale Größe 1mb"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Group",
+                "id": "group_bb6ae",
+                "name": "Repeatable",
+                "Group": {
+                  "repeatability": 10,
+                  "elements": [
+                    {
+                      "type": "Group",
+                      "id": "group_57567",
+                      "name": "AttachmentCollection",
+                      "Group": {
+                        "repeatability": 10,
+                        "elements": [
+                          {
+                            "type": "Group",
+                            "id": "attachment_401c0",
+                            "name": "Attachment01",
+                            "Group": {
+                              "repeatability": 1,
+                              "usageType": "attachment",
+                              "elements": [
+                                {
+                                  "type": "Field",
+                                  "id": "attachmentField_5601c",
+                                  "name": "original_filename",
+                                  "Field": {
+                                    "fieldType": {
+                                      "type": "StringType"
+                                    }
+                                  }
+                                },
+                                {
+                                  "type": "Field",
+                                  "id": "attachmentField_f888c",
+                                  "name": "internal_filename",
+                                  "Field": {
+                                    "fieldType": {
+                                      "type": "StringType"
+                                    }
+                                  }
+                                },
+                                {
+                                  "type": "Field",
+                                  "id": "attachmentField_218f3",
+                                  "name": "content",
+                                  "Field": {
+                                    "fieldType": {
+                                      "type": "StringType",
+                                      "StringType": {
+                                        "lineBreaksPermitted": true,
+                                        "noValueValidation": true
+                                      }
+                                    }
+                                  }
+                                },
+                                {
+                                  "type": "Field",
+                                  "id": "attachmentField_36fc0",
+                                  "name": "attachment_id",
+                                  "Field": {
+                                    "fieldType": {
+                                      "type": "StringType"
+                                    }
+                                  }
+                                },
+                                {
+                                  "type": "Field",
+                                  "id": "attachmentField_1d8b5",
+                                  "name": "size",
+                                  "Field": {
+                                    "fieldType": {
+                                      "type": "NumberType"
+                                    }
+                                  }
+                                },
+                                {
+                                  "type": "Field",
+                                  "id": "attachmentField_32c10",
+                                  "name": "mime_type",
+                                  "Field": {
+                                    "fieldType": {
+                                      "type": "StringType"
+                                    }
+                                  }
+                                },
+                                {
+                                  "type": "Field",
+                                  "id": "attachmentField_b8616",
+                                  "name": "category",
+                                  "Field": {
+                                    "fieldType": {
+                                      "type": "StringType"
+                                    }
+                                  }
+                                },
+                                {
+                                  "type": "Field",
+                                  "id": "attachmentField_3d11f",
+                                  "name": "description",
+                                  "Field": {
+                                    "fieldType": {
+                                      "type": "StringType"
+                                    }
+                                  }
+                                },
+                                {
+                                  "type": "Rule",
+                                  "id": "attachmentRule_bdd3e",
+                                  "name": "AttachmentInternalFilenameRequired",
+                                  "Rule": {
+                                    "errorEntityRelPath": "../internal_filename",
+                                    "errorCode": "Error attachmentRule_bdd3e",
+                                    "errorCondition": "GroupFilled(RuleGroup) and FieldNotFilled(internal_filename)",
+                                    "severity": "ERROR",
+                                    "errorMessage": [
+                                      {
+                                        "locale": "en",
+                                        "text": "Internal Error: Field internal_filename of customType attachment is not filled."
+                                      },
+                                      {
+                                        "locale": "de",
+                                        "text": "Internal Error: Field internal_filename of customType attachment is not filled."
+                                      }
+                                    ]
+                                  }
+                                },
+                                {
+                                  "type": "Rule",
+                                  "id": "attachmentRule_c53fd",
+                                  "name": "AttachmentMimeTypeRequired",
+                                  "Rule": {
+                                    "errorEntityRelPath": "../mime_type",
+                                    "errorCode": "Error attachmentRule_c53fd",
+                                    "errorCondition": "GroupFilled(RuleGroup) and FieldNotFilled(mime_type)",
+                                    "severity": "ERROR",
+                                    "errorMessage": [
+                                      {
+                                        "locale": "en",
+                                        "text": "Internal Error: Field mime_type of customType attachment is not filled."
+                                      },
+                                      {
+                                        "locale": "de",
+                                        "text": "Internal Error: Field mime_type of customType attachment is not filled."
+                                      }
+                                    ]
+                                  }
+                                },
+                                {
+                                  "type": "Rule",
+                                  "id": "attachmentRule_befe2",
+                                  "name": "AttachmentIdOrContentFilled",
+                                  "Rule": {
+                                    "errorEntityRelPath": "../content",
+                                    "errorCode": "Error attachmentRule_befe2",
+                                    "errorCondition": "GroupFilled(RuleGroup) and NotExactlyOneFieldFilled(attachment_id, content)",
+                                    "severity": "ERROR",
+                                    "errorMessage": [
+                                      {
+                                        "locale": "en",
+                                        "text": "Internal Error: Either attachment_id or content must be filled in a customType attachment, but not both."
+                                      },
+                                      {
+                                        "locale": "de",
+                                        "text": "Internal Error: Either attachment_id or content must be filled in a customType attachment, but not both."
+                                      }
+                                    ]
+                                  }
+                                },
+                                {
+                                  "type": "Rule",
+                                  "id": "attachmentRule_623f5",
+                                  "name": "SizeOfContentFilled",
+                                  "Rule": {
+                                    "errorEntityRelPath": "../content",
+                                    "errorCode": "Error attachmentRule_623f5",
+                                    "errorCondition": "FieldFilled(content) and FieldNotFilled(size)",
+                                    "severity": "ERROR",
+                                    "errorMessage": [
+                                      {
+                                        "locale": "en",
+                                        "text": "Internal Error: If the content is filled, the size must be also filled."
+                                      },
+                                      {
+                                        "locale": "de",
+                                        "text": "Internal Error: If the content is filled, the size must be also filled."
+                                      }
+                                    ]
+                                  }
+                                }
+                              ]
+                            }
+                          },
+                          {
+                            "type": "Field",
+                            "id": "field_82cd3",
+                            "name": "StringField",
+                            "Field": {
+                              "fieldType": {
+                                "type": "StringType"
+                              },
+                              "label": [
+                                {
+                                  "locale": "en",
+                                  "text": "Additional StringField"
+                                },
+                                {
+                                  "locale": "de",
+                                  "text": "Additional StringField"
+                                }
+                              ]
+                            }
+                          },
+                          {
+                            "type": "Field",
+                            "id": "field_eb49f",
+                            "name": "NumberField",
+                            "Field": {
+                              "fieldType": {
+                                "type": "NumberType"
+                              },
+                              "label": [
+                                {
+                                  "locale": "en",
+                                  "text": "Additional NumberField"
+                                },
+                                {
+                                  "locale": "de",
+                                  "text": "Additional NumberField"
+                                }
+                              ]
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_0c503",
+                      "name": "StringField",
+                      "Field": {
+                        "fieldType": {
+                          "type": "StringType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "StringField"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "StringField"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

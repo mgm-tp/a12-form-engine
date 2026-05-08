@@ -1,0 +1,82 @@
+buildscript {
+    apply from: rootProject.file('scripts/buildscript-platforms.gradle')
+
+    dependencies {
+        classpath a12Libs.kernel.tool.model.migration
+        classpath libs.logback.classic
+    }
+}
+
+plugins {
+    alias(a12Plugins.plugins.prepare.models)
+}
+
+dependencies {
+    // A12 LIBRARIES - using versions from platforms (defined in root build.gradle)
+    api a12Libs.base.model.api
+    api a12Libs.base.model.consistency
+    api a12Libs.base.model.marshalling
+
+    api a12Libs.kernel.md.model
+    api a12Libs.kernel.md.document.api
+    api a12Libs.kernel.md.facade
+
+    api a12Libs.dataservices.core.metadata
+
+    // THIRD PARTY LIBRARIES
+    api libs.jackson.core
+    api libs.jackson.annotations
+    api libs.jackson.databind
+    api libs.commons.io
+    api libs.commons.lang3
+    api libs.commons.collections4
+    api libs.slf4j.api
+    api libs.metainf.services
+    annotationProcessor libs.metainf.services
+    api libs.commons.cli
+    api libs.nashorn.core
+    compileOnly libs.lombok
+    annotationProcessor libs.lombok
+
+    // TESTING
+    testImplementation libs.testng
+    testImplementation libs.hamcrest
+    testImplementation libs.jsonassert
+    testRuntimeOnly libs.logback.classic
+    testCompileOnly libs.lombok
+    testAnnotationProcessor libs.lombok
+}
+
+prepareModels {
+    inputDir = layout.projectDir.dir("./src/test/resources")
+}
+
+tasks.named('migrateDocumentModels') {
+    args = ["-skipUniqueIdCheck", "-o", "."]
+}
+
+// Copy expression parser JS file during resource processing
+tasks.register('copyExpressionParser', Copy) {
+    dependsOn(rootProject.tasks.named('installDependencies'))
+
+    from layout.projectDirectory.file('../core/node_modules/@com.mgmtp.a12.expression/expression-core/dist/parser.js')
+    into layout.buildDirectory.dir('resources/main/resources')
+}
+
+tasks.named('processResources') {
+    dependsOn(tasks.named('copyExpressionParser'))
+}
+
+description = 'interfaces and classes for JSON-based form model'
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            artifactId = 'formengine-model'
+
+            pom {
+                name = 'Form Model'
+            }
+        }
+    }
+}

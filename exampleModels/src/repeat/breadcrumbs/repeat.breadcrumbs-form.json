@@ -1,0 +1,170 @@
+{
+  "header": {
+    "id": "repeat.breadcrumbs-form",
+    "modelType": "form",
+    "modelVersion": "37.4.0",
+    "locales": [
+      {
+        "code": "en"
+      }
+    ],
+    "modelReferences": [
+      {
+        "alias": "DM",
+        "modelType": "document",
+        "purpose": "data binding",
+        "reference": "repeat.breadcrumbs-document"
+      }
+    ],
+    "annotations": [
+      {
+        "name": "roles",
+        "value": "admin"
+      }
+    ]
+  },
+  "content": {
+    "subHeaderBox": {
+      "id": "subHeaderBox1"
+    },
+    "footerBox": {
+      "id": "footerBox1"
+    },
+    "screens": [
+      {
+        "id": "screen-0-no-label",
+        "name": "Screen",
+        "screenElements": [
+          {
+            "type": "DetachedRepeat",
+            "id": "detachedrepeat-93f96",
+            "name": "1",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "Level 1"
+                  }
+                ]
+              }
+            },
+            "groupRef": "G15",
+            "enableAdd": true,
+            "enableRemove": true,
+            "enableReorder": false,
+            "enableCopy": false,
+            "detailScreen": {
+              "id": "screen-1-label",
+              "name": "ScreenWithLabel",
+              "screenElements": [
+                {
+                  "type": "DetachedRepeat",
+                  "id": "detachedrepeat-758c2",
+                  "name": "1.1",
+                  "title": {
+                    "type": "Multilingual",
+                    "multilingualText": {
+                      "text": [
+                        {
+                          "locale": "en",
+                          "text": "Level 2"
+                        }
+                      ]
+                    }
+                  },
+                  "groupRef": "G16",
+                  "enableAdd": true,
+                  "enableRemove": true,
+                  "enableReorder": false,
+                  "enableCopy": false,
+                  "detailScreen": {
+                    "id": "screen-2-label",
+                    "name": "ScreenWithLabel",
+                    "screenElements": []
+                  }
+                },
+                {
+                  "type": "DetachedRepeat",
+                  "id": "detachedrepeat-7139b",
+                  "name": "1.2",
+                  "groupRef": "G16",
+                  "enableAdd": true,
+                  "enableRemove": true,
+                  "enableReorder": false,
+                  "enableCopy": false,
+                  "detailScreen": {
+                    "id": "screen-3-no-label",
+                    "name": "ScreenWithoutLabel",
+                    "screenElements": []
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "type": "DetachedRepeat",
+            "id": "detachedrepeat-dac21",
+            "name": "2",
+            "groupRef": "G15",
+            "enableAdd": true,
+            "enableRemove": true,
+            "enableReorder": false,
+            "enableCopy": false,
+            "detailScreen": {
+              "id": "screen-4-no-label",
+              "name": "ScreenWithoutLabel",
+              "screenElements": [
+                {
+                  "type": "DetachedRepeat",
+                  "id": "detachedrepeat-8bf07",
+                  "name": "2.1",
+                  "title": {
+                    "type": "Multilingual",
+                    "multilingualText": {
+                      "text": [
+                        {
+                          "locale": "en",
+                          "text": "Level 2"
+                        }
+                      ]
+                    }
+                  },
+                  "groupRef": "G16",
+                  "enableAdd": true,
+                  "enableRemove": true,
+                  "enableReorder": false,
+                  "enableCopy": false,
+                  "detailScreen": {
+                    "id": "screen-5-label",
+                    "name": "ScreenWithLabel",
+                    "screenElements": []
+                  }
+                },
+                {
+                  "type": "DetachedRepeat",
+                  "id": "detachedrepeat-04b74",
+                  "name": "2.2",
+                  "groupRef": "G16",
+                  "enableAdd": true,
+                  "enableRemove": true,
+                  "enableReorder": false,
+                  "enableCopy": false,
+                  "detailScreen": {
+                    "id": "screen-6-no-label",
+                    "name": "ScreenWithoutLabel",
+                    "screenElements": []
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "fieldConfiguration": {},
+    "groupConfiguration": {},
+    "defaults": {}
+  }
+}

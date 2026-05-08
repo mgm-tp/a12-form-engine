@@ -1,0 +1,2435 @@
+{
+  "header": {
+    "id": "dependencies.field-form",
+    "modelType": "form",
+    "modelVersion": "37.4.0",
+    "locales": [
+      {
+        "code": "en"
+      }
+    ],
+    "annotations": [
+      {
+        "name": "roles",
+        "value": "admin"
+      }
+    ],
+    "modelReferences": [
+      {
+        "alias": "dependencies.field-document",
+        "modelType": "document",
+        "purpose": "data binding",
+        "reference": "dependencies.field-document"
+      }
+    ]
+  },
+  "content": {
+    "subHeaderBox": {
+      "id": "subHeaderBox1",
+      "minorButtons": {
+        "button": [
+          {
+            "type": "NAVIGATION",
+            "id": "button_cb8da",
+            "name": "screen1",
+            "buttonStyling": {
+              "label": {
+                "type": "Multilingual",
+                "multilingualText": {
+                  "text": [
+                    {
+                      "locale": "en",
+                      "text": "Standard cases"
+                    }
+                  ]
+                }
+              }
+            },
+            "target": "screen_be36a",
+            "scope": "HIDDEN_IN_READONLY_MODE"
+          },
+          {
+            "type": "NAVIGATION",
+            "id": "button_a21a0",
+            "name": "screen2",
+            "buttonStyling": {
+              "label": {
+                "type": "Multilingual",
+                "multilingualText": {
+                  "text": [
+                    {
+                      "locale": "en",
+                      "text": "Repeatable targets"
+                    }
+                  ]
+                }
+              }
+            },
+            "target": "screen_c76ca",
+            "scope": "HIDDEN_IN_READONLY_MODE"
+          },
+          {
+            "type": "NAVIGATION",
+            "id": "button_c7047",
+            "name": "screen3",
+            "buttonStyling": {
+              "label": {
+                "type": "Multilingual",
+                "multilingualText": {
+                  "text": [
+                    {
+                      "locale": "en",
+                      "text": "Field value & granularity"
+                    }
+                  ]
+                }
+              }
+            },
+            "target": "screen_7771d",
+            "scope": "HIDDEN_IN_READONLY_MODE"
+          },
+          {
+            "type": "NAVIGATION",
+            "id": "button_aa257",
+            "name": "screen4",
+            "buttonStyling": {
+              "label": {
+                "type": "Multilingual",
+                "multilingualText": {
+                  "text": [
+                    {
+                      "locale": "en",
+                      "text": "Chains"
+                    }
+                  ]
+                }
+              }
+            },
+            "target": "screen_94b2f",
+            "scope": "HIDDEN_IN_READONLY_MODE"
+          },
+          {
+            "type": "NAVIGATION",
+            "id": "button_2d386",
+            "name": "screen5",
+            "buttonStyling": {
+              "label": {
+                "type": "Multilingual",
+                "multilingualText": {
+                  "text": [
+                    {
+                      "locale": "en",
+                      "text": "Chains & Repeatable Groups"
+                    }
+                  ]
+                }
+              }
+            },
+            "target": "screen_e01a1",
+            "scope": "HIDDEN_IN_READONLY_MODE"
+          }
+        ]
+      }
+    },
+    "footerBox": {
+      "id": "footerBox1"
+    },
+    "screens": [
+      {
+        "id": "screen_be36a",
+        "name": "Screen 1",
+        "title": {
+          "type": "Multilingual",
+          "multilingualText": {
+            "text": [
+              {
+                "locale": "en",
+                "text": "Dep Field (Standard)"
+              }
+            ]
+          }
+        },
+        "screenElements": [
+          {
+            "type": "ControlGrid",
+            "id": "controlgrid_8d01c",
+            "name": "cg1",
+            "layout": {
+              "lg": "4-4-4"
+            },
+            "row": [
+              {
+                "type": "Row",
+                "id": "row_cd26d",
+                "name": "header1",
+                "title": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "Dependencies setting constant field values"
+                      }
+                    ]
+                  }
+                },
+                "cell": [
+                  {
+                    "type": "TextCell",
+                    "id": "textcell_a00f6",
+                    "name": "col1-header1",
+                    "content": {
+                      "text": [
+                        {
+                          "locale": "en",
+                          "text": "<b>Trigger Field</b>"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "type": "TextCell",
+                    "id": "textcell_3ce63",
+                    "name": "col2-header1",
+                    "content": {
+                      "text": [
+                        {
+                          "locale": "en",
+                          "text": "<b>Target Field</b>"
+                        }
+                      ]
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "Row",
+                "id": "row_4dedd",
+                "name": "row1",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control_4cdb9",
+                    "elementRef": "field_62104"
+                  },
+                  {
+                    "type": "Control",
+                    "id": "control_11ef5",
+                    "elementRef": "field_7d12d"
+                  }
+                ]
+              },
+              {
+                "type": "Row",
+                "id": "row_04f24",
+                "name": "row2",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control_15552",
+                    "elementRef": "field_121c5"
+                  },
+                  {
+                    "type": "Control",
+                    "id": "control_b6724",
+                    "elementRef": "field_5aa8e"
+                  }
+                ]
+              },
+              {
+                "type": "Row",
+                "id": "row_3be95",
+                "name": "row3",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control_b379e",
+                    "elementRef": "field_93452"
+                  },
+                  {
+                    "type": "Control",
+                    "id": "control_d8146",
+                    "elementRef": "field_718a9"
+                  }
+                ]
+              },
+              {
+                "type": "Row",
+                "id": "row_916ad",
+                "name": "intermediate_row",
+                "title": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "Referenced field value"
+                      }
+                    ]
+                  }
+                },
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control_c3597",
+                    "offset": {
+                      "lg": 1
+                    },
+                    "span": {
+                      "lg": 2
+                    },
+                    "elementRef": "field_66ef1"
+                  }
+                ]
+              },
+              {
+                "type": "Row",
+                "id": "row_28f6b",
+                "name": "header2",
+                "title": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "Dependencies setting values from referenced fields"
+                      }
+                    ]
+                  }
+                },
+                "cell": [
+                  {
+                    "type": "TextCell",
+                    "id": "textcell_eb83b",
+                    "name": "col1-header2",
+                    "content": {
+                      "text": [
+                        {
+                          "locale": "en",
+                          "text": "<b>Trigger Field</b>"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "type": "TextCell",
+                    "id": "textcell_80de9",
+                    "name": "col2-header2",
+                    "content": {
+                      "text": [
+                        {
+                          "locale": "en",
+                          "text": "<b>Referenced Field</b>"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "type": "TextCell",
+                    "id": "textcell_420bd",
+                    "name": "col3-header2",
+                    "content": {
+                      "text": [
+                        {
+                          "locale": "en",
+                          "text": "<b>Target Field</b>"
+                        }
+                      ]
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "Row",
+                "id": "row_21e49",
+                "name": "row4",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control_32fee",
+                    "elementRef": "field_ed3a5"
+                  },
+                  {
+                    "type": "Control",
+                    "id": "control_59239",
+                    "elementRef": "field_6063d"
+                  },
+                  {
+                    "type": "Control",
+                    "id": "control_29f7f",
+                    "elementRef": "field_0d924"
+                  }
+                ]
+              },
+              {
+                "type": "Row",
+                "id": "row_75787",
+                "name": "row5",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control_e349b",
+                    "elementRef": "field_78959"
+                  },
+                  {
+                    "type": "Control",
+                    "id": "control_ca5b2",
+                    "elementRef": "field_4bdd1"
+                  },
+                  {
+                    "type": "Control",
+                    "id": "control_495de",
+                    "elementRef": "field_fd4bc"
+                  }
+                ]
+              },
+              {
+                "type": "Row",
+                "id": "row_02a03",
+                "name": "row6",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control_6dfff",
+                    "elementRef": "field_dca36"
+                  },
+                  {
+                    "type": "Control",
+                    "id": "control_ab5b6",
+                    "elementRef": "field_4b3e5"
+                  },
+                  {
+                    "type": "Control",
+                    "id": "control_21ed3",
+                    "elementRef": "field_cae6a"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "EmbeddedRepeat",
+            "id": "embeddedrepeat_2b54b",
+            "name": "repeat-list",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "Dependencies for repeatable fields"
+                  }
+                ]
+              }
+            },
+            "repeatOverviewColumn": [
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn_07e08",
+                "elementRef": "field_d370a"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn_fcecb",
+                "elementRef": "field_dbb39"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn_bdd4d",
+                "elementRef": "field_f3458"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn_6ef18",
+                "elementRef": "field_0466e"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn_663d8",
+                "elementRef": "field_6bce4"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn_20884",
+                "elementRef": "field_72441"
+              }
+            ],
+            "groupRef": "group_7c149",
+            "enableAdd": true,
+            "enableRemove": true,
+            "controlGrid": {
+              "type": "ControlGrid",
+              "id": "controlgrid_5a1f6",
+              "name": "cg",
+              "layout": {
+                "lg": "4-4-4"
+              },
+              "row": [
+                {
+                  "type": "Row",
+                  "id": "row_32cc8",
+                  "name": "header1",
+                  "title": {
+                    "type": "Multilingual",
+                    "multilingualText": {
+                      "text": [
+                        {
+                          "locale": "en",
+                          "text": "Dependencies setting constant field values"
+                        }
+                      ]
+                    }
+                  },
+                  "cell": [
+                    {
+                      "type": "TextCell",
+                      "id": "textcell_a426a",
+                      "name": "col1-header1",
+                      "content": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "<b>Trigger Field</b>"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "TextCell",
+                      "id": "textcell_a8272",
+                      "name": "col2-header1",
+                      "content": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "<b>Target Field</b>"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                },
+                {
+                  "type": "Row",
+                  "id": "row_e88e5",
+                  "cell": [
+                    {
+                      "type": "Control",
+                      "id": "control_ba967",
+                      "elementRef": "field_9ce0e"
+                    },
+                    {
+                      "type": "Control",
+                      "id": "control_8ad1f",
+                      "elementRef": "field_d370a"
+                    }
+                  ]
+                },
+                {
+                  "type": "Row",
+                  "id": "row_d62f6",
+                  "cell": [
+                    {
+                      "type": "Control",
+                      "id": "control_14d7a",
+                      "elementRef": "field_84f28"
+                    },
+                    {
+                      "type": "Control",
+                      "id": "control_ff4aa",
+                      "elementRef": "field_dbb39"
+                    }
+                  ]
+                },
+                {
+                  "type": "Row",
+                  "id": "row_a3235",
+                  "cell": [
+                    {
+                      "type": "Control",
+                      "id": "control_448b4",
+                      "elementRef": "field_57d8e"
+                    },
+                    {
+                      "type": "Control",
+                      "id": "control_439c7",
+                      "elementRef": "field_f3458"
+                    }
+                  ]
+                },
+                {
+                  "type": "Row",
+                  "id": "row_6b60a",
+                  "name": "intermediate_row",
+                  "title": {
+                    "type": "Multilingual",
+                    "multilingualText": {
+                      "text": [
+                        {
+                          "locale": "en",
+                          "text": "Referenced field value"
+                        }
+                      ]
+                    }
+                  },
+                  "cell": [
+                    {
+                      "type": "Control",
+                      "id": "control_ed0df",
+                      "offset": {
+                        "lg": 1
+                      },
+                      "span": {
+                        "lg": 2
+                      },
+                      "elementRef": "field_f0441"
+                    }
+                  ]
+                },
+                {
+                  "type": "Row",
+                  "id": "row_acef7",
+                  "name": "header2",
+                  "title": {
+                    "type": "Multilingual",
+                    "multilingualText": {
+                      "text": [
+                        {
+                          "locale": "en",
+                          "text": "Dependencies setting values from referenced fields"
+                        }
+                      ]
+                    }
+                  },
+                  "cell": [
+                    {
+                      "type": "TextCell",
+                      "id": "textcell_089dd",
+                      "name": "col1-header2",
+                      "content": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "<b>Trigger Field</b>"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "TextCell",
+                      "id": "textcell_b78b2",
+                      "name": "col2-header2",
+                      "content": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "<b>Referenced Field</b>"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "TextCell",
+                      "id": "textcell_e5797",
+                      "name": "col3-header2",
+                      "content": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "<b>Target Field</b>"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                },
+                {
+                  "type": "Row",
+                  "id": "row_a4753",
+                  "name": "row4",
+                  "cell": [
+                    {
+                      "type": "Control",
+                      "id": "control_0362e",
+                      "elementRef": "field_76f1c"
+                    },
+                    {
+                      "type": "Control",
+                      "id": "control_166fa",
+                      "elementRef": "field_f2d1c"
+                    },
+                    {
+                      "type": "Control",
+                      "id": "control_9f03c",
+                      "elementRef": "field_0466e"
+                    }
+                  ]
+                },
+                {
+                  "type": "Row",
+                  "id": "row_8990b",
+                  "name": "row5",
+                  "cell": [
+                    {
+                      "type": "Control",
+                      "id": "control_d8d13",
+                      "elementRef": "field_2223b"
+                    },
+                    {
+                      "type": "Control",
+                      "id": "control_8d07d",
+                      "elementRef": "field_608a6"
+                    },
+                    {
+                      "type": "Control",
+                      "id": "control_c0081",
+                      "elementRef": "field_6bce4"
+                    }
+                  ]
+                },
+                {
+                  "type": "Row",
+                  "id": "row_cc4e4",
+                  "name": "row6",
+                  "cell": [
+                    {
+                      "type": "Control",
+                      "id": "control_f4fe1",
+                      "elementRef": "field_22cd2"
+                    },
+                    {
+                      "type": "Control",
+                      "id": "control_93d9f",
+                      "elementRef": "field_a6db6"
+                    },
+                    {
+                      "type": "Control",
+                      "id": "control_cd942",
+                      "elementRef": "field_72441"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "screen_c76ca",
+        "name": "Screen2",
+        "title": {
+          "type": "Multilingual",
+          "multilingualText": {
+            "text": [
+              {
+                "locale": "en",
+                "text": "Dep. Field (to many)"
+              }
+            ]
+          }
+        },
+        "screenElements": [
+          {
+            "type": "ControlGrid",
+            "id": "controlgrid_f6d33",
+            "name": "cg1",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "Trigger Fields"
+                  }
+                ]
+              }
+            },
+            "layout": {
+              "lg": "4-4-4"
+            },
+            "row": [
+              {
+                "type": "Row",
+                "id": "row_58b94",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control_72123",
+                    "elementRef": "field_553db"
+                  },
+                  {
+                    "type": "Control",
+                    "id": "control_489be",
+                    "elementRef": "field_934a4"
+                  },
+                  {
+                    "type": "Control",
+                    "id": "control_bbfd8",
+                    "elementRef": "field_78bb4"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "InlineRepeat",
+            "id": "inlinerepeat_dac50",
+            "name": "repeat-rep",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "Dependent Fields in Repeat"
+                  }
+                ]
+              }
+            },
+            "repeatOverviewColumn": [
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn_6ae84",
+                "elementRef": "field_c6eee"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn_c8595",
+                "elementRef": "field_affba"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn_09d60",
+                "elementRef": "field_eebd9"
+              }
+            ],
+            "groupRef": "group_4a21c",
+            "enableAdd": true,
+            "enableRemove": true
+          }
+        ]
+      },
+      {
+        "id": "screen_7771d",
+        "name": "Screen3",
+        "title": {
+          "type": "Multilingual",
+          "multilingualText": {
+            "text": [
+              {
+                "locale": "en",
+                "text": "Dep. Field (different granularities)"
+              }
+            ]
+          }
+        },
+        "screenElements": [
+          {
+            "type": "ControlGrid",
+            "id": "controlgrid_9fb4a",
+            "name": "cg-intro",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "Triggers"
+                  }
+                ]
+              }
+            },
+            "layout": {
+              "lg": "3-3-3-3"
+            },
+            "row": [
+              {
+                "type": "Row",
+                "id": "row_356cb",
+                "name": "description",
+                "cell": [
+                  {
+                    "type": "TextCell",
+                    "id": "textcell_c20e8",
+                    "span": {
+                      "lg": 4
+                    },
+                    "name": "description",
+                    "content": {
+                      "text": [
+                        {
+                          "locale": "en",
+                          "text": "There are currently five cases to consider for dependent fields with referenced fields when a nesting of repeatable groups is present:\n<ol>\n<li>master, referenced field and dependent field all belong to the same granularity (but potentially different non-repeatable groups)</li>\n<li>master field and referenced field are located higher than dependent field</li>\n<li>master field is located higher than both referenced and dependent field</li>\n<li>master field is located highest, then referenced field and then dependent field</li>\n<li>referenced field is located highest, then master field and then dependent field</li>\n</ol>\nMaster, referenced and dependent field are numbered according to above case listing to indicate their relation to these cases."
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "ControlGrid",
+            "id": "controlgrid_527f4",
+            "name": "cg1",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "Case #1"
+                  }
+                ]
+              }
+            },
+            "layout": {
+              "lg": "4-4-4"
+            },
+            "row": [
+              {
+                "type": "Row",
+                "id": "row_fd30f",
+                "name": "case1",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control_0e7dd",
+                    "elementRef": "field_c32ef"
+                  },
+                  {
+                    "type": "Control",
+                    "id": "control_9fd54",
+                    "elementRef": "field_2105b"
+                  },
+                  {
+                    "type": "Control",
+                    "id": "control_a5ede",
+                    "elementRef": "field_eaaad"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "Section",
+            "id": "section_050df",
+            "name": "case2",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "Case #2"
+                  }
+                ]
+              }
+            },
+            "screenElements": [
+              {
+                "type": "ControlGrid",
+                "id": "controlgrid_ecdeb",
+                "name": "cg2",
+                "layout": {
+                  "lg": "4-4-4"
+                },
+                "row": [
+                  {
+                    "type": "Row",
+                    "id": "row_0012c",
+                    "cell": [
+                      {
+                        "type": "Control",
+                        "id": "control_bdb3d",
+                        "elementRef": "field_b99f9"
+                      },
+                      {
+                        "type": "Control",
+                        "id": "control_81822",
+                        "elementRef": "field_078e4"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "InlineRepeat",
+                "id": "inlinerepeat_17803",
+                "name": "repeat-rep2",
+                "title": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "repeatable fields"
+                      }
+                    ]
+                  }
+                },
+                "repeatOverviewColumn": [
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn_7c9bc",
+                    "width": 1,
+                    "elementRef": "field_e8ab2"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn_bd25b",
+                    "elementRef": "field_51044"
+                  }
+                ],
+                "groupRef": "group_ff6db",
+                "enableAdd": true,
+                "enableRemove": true
+              }
+            ]
+          },
+          {
+            "type": "Section",
+            "id": "section_52a30",
+            "name": "case3",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "Case #3"
+                  }
+                ]
+              }
+            },
+            "screenElements": [
+              {
+                "type": "ControlGrid",
+                "id": "controlgrid_d00bd",
+                "name": "cg3",
+                "layout": {
+                  "lg": "4-4-4"
+                },
+                "row": [
+                  {
+                    "type": "Row",
+                    "id": "row_88779",
+                    "cell": [
+                      {
+                        "type": "Control",
+                        "id": "control_d71e9",
+                        "elementRef": "field_2de32"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "InlineRepeat",
+                "id": "inlinerepeat_bb2c5",
+                "name": "repeat-rep3",
+                "title": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "repeatable fields"
+                      }
+                    ]
+                  }
+                },
+                "repeatOverviewColumn": [
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn_70e48",
+                    "width": 1,
+                    "elementRef": "field_3bf14"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn_9b638",
+                    "elementRef": "field_33aa6"
+                  }
+                ],
+                "groupRef": "group_ff2e3",
+                "enableAdd": true,
+                "enableRemove": true
+              }
+            ]
+          },
+          {
+            "type": "Section",
+            "id": "section_483b3",
+            "name": "case4",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "Case #4"
+                  }
+                ]
+              }
+            },
+            "screenElements": [
+              {
+                "type": "ControlGrid",
+                "id": "controlgrid_95d42",
+                "name": "cg4",
+                "layout": {
+                  "lg": "4-4-4"
+                },
+                "row": [
+                  {
+                    "type": "Row",
+                    "id": "row_91967",
+                    "cell": [
+                      {
+                        "type": "Control",
+                        "id": "control_da2e6",
+                        "elementRef": "field_19e82"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "DetachedRepeat",
+                "id": "detachedrepeat_2f60f",
+                "name": "repeat-rep4",
+                "title": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "repeatable fields"
+                      }
+                    ]
+                  }
+                },
+                "repeatOverviewColumn": [
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn_9c0f3",
+                    "elementRef": "field_17048"
+                  },
+                  {
+                    "type": "ExpressionRepeatOverviewColumn",
+                    "id": "expressionrepeatoverviewcolumn_02131",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "Target field values"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "name": "expr-column",
+                    "expression": "kontext(nested_rep4) {\n    [targetField4]\n\n}"
+                  }
+                ],
+                "groupRef": "group_2e9b2",
+                "enableAdd": true,
+                "enableRemove": true,
+                "detailScreen": {
+                  "id": "screen_50d06",
+                  "name": "repeat-rep4-detail-screen",
+                  "screenElements": [
+                    {
+                      "type": "ControlGrid",
+                      "id": "controlgrid_f886c",
+                      "name": "cg",
+                      "row": [
+                        {
+                          "type": "Row",
+                          "id": "row_92cd1",
+                          "cell": [
+                            {
+                              "type": "Control",
+                              "id": "control_d7201",
+                              "elementRef": "field_17048"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "InlineRepeat",
+                      "id": "inlinerepeat_89f6d",
+                      "name": "repeat-nested_rep4",
+                      "repeatOverviewColumn": [
+                        {
+                          "type": "FieldBasedRepeatOverviewColumn",
+                          "id": "fieldbasedrepeatoverviewcolumn_ef5b0",
+                          "elementRef": "field_044b5"
+                        }
+                      ],
+                      "groupRef": "group_ac8e9",
+                      "enableAdd": true,
+                      "enableRemove": true
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "type": "Section",
+            "id": "section_e5cb1",
+            "name": "case5",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "Case #5"
+                  }
+                ]
+              }
+            },
+            "screenElements": [
+              {
+                "type": "ControlGrid",
+                "id": "controlgrid_2aa7e",
+                "name": "cg5",
+                "layout": {
+                  "lg": "4-4-4"
+                },
+                "row": [
+                  {
+                    "type": "Row",
+                    "id": "row_0ab3e",
+                    "cell": [
+                      {
+                        "type": "Control",
+                        "id": "control_3b172",
+                        "elementRef": "field_e12f6"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "DetachedRepeat",
+                "id": "detachedrepeat_bdc76",
+                "name": "repeat-rep5",
+                "title": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "repeatable fields"
+                      }
+                    ]
+                  }
+                },
+                "repeatOverviewColumn": [
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn_c6377",
+                    "elementRef": "field_b01c5"
+                  },
+                  {
+                    "type": "ExpressionRepeatOverviewColumn",
+                    "id": "expressionrepeatoverviewcolumn_6fa2b",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "Target field values"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "name": "target-fields",
+                    "expression": "kontext(nested_rep5) {\n    [targetField5]\n\n}"
+                  }
+                ],
+                "groupRef": "group_026d8",
+                "enableAdd": true,
+                "enableRemove": true,
+                "detailScreen": {
+                  "id": "screen_014c5",
+                  "name": "repeat-rep5-detail-screen",
+                  "screenElements": [
+                    {
+                      "type": "ControlGrid",
+                      "id": "controlgrid_03546",
+                      "name": "cg",
+                      "row": [
+                        {
+                          "type": "Row",
+                          "id": "row_5acb9",
+                          "cell": [
+                            {
+                              "type": "Control",
+                              "id": "control_69f7c",
+                              "elementRef": "field_b01c5"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "InlineRepeat",
+                      "id": "inlinerepeat_44764",
+                      "name": "repeat-nested_rep5",
+                      "repeatOverviewColumn": [
+                        {
+                          "type": "FieldBasedRepeatOverviewColumn",
+                          "id": "fieldbasedrepeatoverviewcolumn_e3e41",
+                          "elementRef": "field_750f5"
+                        }
+                      ],
+                      "groupRef": "group_38e8c",
+                      "enableAdd": true,
+                      "enableRemove": true
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "screen_94b2f",
+        "name": "Screen4",
+        "title": {
+          "type": "Multilingual",
+          "multilingualText": {
+            "text": [
+              {
+                "locale": "en",
+                "text": "Chains"
+              }
+            ]
+          }
+        },
+        "screenElements": [
+          {
+            "type": "ControlGrid",
+            "id": "controlgrid_1d6ec",
+            "name": "cg1",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "Dependent Fields"
+                  }
+                ]
+              }
+            },
+            "layout": {
+              "lg": "4-4-4"
+            },
+            "row": [
+              {
+                "type": "Row",
+                "id": "row_79d42",
+                "name": "text",
+                "cell": [
+                  {
+                    "type": "TextCell",
+                    "id": "textcell_b12fd",
+                    "span": {
+                      "lg": 3
+                    },
+                    "name": "description",
+                    "content": {
+                      "text": [
+                        {
+                          "locale": "en",
+                          "text": "These fields are chained via dependent field value dependencies.\nChecking the first field, should update the following fields."
+                        }
+                      ]
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "Row",
+                "id": "row_a5893",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control_e51db",
+                    "elementRef": "field_63557"
+                  },
+                  {
+                    "type": "Control",
+                    "id": "control_b1b3a",
+                    "elementRef": "field_7ee4d"
+                  },
+                  {
+                    "type": "Control",
+                    "id": "control_1711d",
+                    "elementRef": "field_5a234"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "ControlGrid",
+            "id": "controlgrid_6ee87",
+            "name": "cg2",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "Dependent Field & Enumeration"
+                  }
+                ]
+              }
+            },
+            "layout": {
+              "lg": "3-3-3-3"
+            },
+            "row": [
+              {
+                "type": "Row",
+                "id": "row_477e7",
+                "name": "text",
+                "cell": [
+                  {
+                    "type": "TextCell",
+                    "id": "textcell_200f2",
+                    "span": {
+                      "lg": 4
+                    },
+                    "name": "description",
+                    "content": {
+                      "text": [
+                        {
+                          "locale": "en",
+                          "text": "These fields are chained via dependent field and dependent enumeration dependencies.\nChecking the first field, should update the following fields."
+                        }
+                      ]
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "Row",
+                "id": "row_58cf8",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control_f069f",
+                    "elementRef": "field_7dbb9"
+                  },
+                  {
+                    "type": "Control",
+                    "id": "control_dc55e",
+                    "elementRef": "field_3babd"
+                  },
+                  {
+                    "type": "Control",
+                    "id": "control_02065",
+                    "elementRef": "field_e4de6"
+                  },
+                  {
+                    "type": "Control",
+                    "id": "control_f2086",
+                    "elementRef": "field_5efef"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "ControlGrid",
+            "id": "controlgrid_d004d",
+            "name": "cg3",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "Dependent Field & Computation"
+                  }
+                ]
+              }
+            },
+            "layout": {
+              "lg": "4-4-4"
+            },
+            "row": [
+              {
+                "type": "Row",
+                "id": "row_9e442",
+                "name": "text",
+                "cell": [
+                  {
+                    "type": "TextCell",
+                    "id": "textcell_a82d5",
+                    "span": {
+                      "lg": 3
+                    },
+                    "name": "description",
+                    "content": {
+                      "text": [
+                        {
+                          "locale": "en",
+                          "text": "These fields are chained via dependent field  and computation.\nChecking the first field, should update the following fields."
+                        }
+                      ]
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "Row",
+                "id": "row_bf4e5",
+                "title": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "Init by dependent field"
+                      }
+                    ]
+                  }
+                },
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control_3e9e0",
+                    "elementRef": "field_6ec6c"
+                  },
+                  {
+                    "type": "Control",
+                    "id": "control_38f0a",
+                    "elementRef": "field_cb1d6"
+                  },
+                  {
+                    "type": "Control",
+                    "id": "control_3f3d6",
+                    "elementRef": "field_6b51c"
+                  }
+                ]
+              },
+              {
+                "type": "Row",
+                "id": "row_0039f",
+                "title": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "init by computation"
+                      }
+                    ]
+                  }
+                },
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control_882e3",
+                    "elementRef": "field_3780a"
+                  },
+                  {
+                    "type": "Control",
+                    "id": "control_9a59e",
+                    "elementRef": "field_801b5"
+                  },
+                  {
+                    "type": "Control",
+                    "id": "control_96fbb",
+                    "elementRef": "field_65908"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "screen_e01a1",
+        "name": "Screen5",
+        "title": {
+          "type": "Multilingual",
+          "multilingualText": {
+            "text": [
+              {
+                "locale": "en",
+                "text": "Chains & Repeatable Groups"
+              }
+            ]
+          }
+        },
+        "screenElements": [
+          {
+            "type": "ControlGrid",
+            "id": "controlgrid_b6944",
+            "name": "cg",
+            "layout": {
+              "lg": "4-4-4"
+            },
+            "row": [
+              {
+                "type": "Row",
+                "id": "row_c3afd",
+                "name": "desc",
+                "cell": [
+                  {
+                    "type": "TextCell",
+                    "id": "textcell_aee25",
+                    "name": "description",
+                    "content": {
+                      "text": [
+                        {
+                          "locale": "en",
+                          "text": "This chain of dependencies and computations broadcasts a set of value changes via dependent field, dependent enumeration and computations into multiple levels of nested repeatable groups.\n\nChecking the init field should set field values up to the target field in the fourth level of nesting. Expected result:\n<ol>\n<li>Level 0: init = true</li>\n<li>Level 1: depField = 100</li>\n<li>Level 2: compField = value02</li>\n<li>Level 3: depEnum = depValue02</li>\n<li>Level 4: targetField = 123</li>\n</ol>"
+                        }
+                      ]
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "Row",
+                "id": "row_3a5b9",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control_86203",
+                    "elementRef": "field_c9884"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "DetachedRepeat",
+            "id": "detachedrepeat_36b03",
+            "name": "repeat-level1",
+            "repeatOverviewColumn": [
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn_8cc6d",
+                "elementRef": "field_2c719"
+              },
+              {
+                "type": "ExpressionRepeatOverviewColumn",
+                "id": "expressionrepeatoverviewcolumn_a6b87",
+                "label": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "Nested values"
+                      }
+                    ]
+                  }
+                },
+                "width": 1,
+                "name": "nestedValueExpression",
+                "expression": "kontext(level2) {\n    \"**\" [compField] \"**\"\n    \n    kontext(level3) {\n      \".._\" [depEnum] \"_: \"   \n\n      kontext(level4) {\n        \".... \"[targetField]\n        \n      }\n    }\n    \n}"
+              }
+            ],
+            "groupRef": "group_c43a7",
+            "enableAdd": true,
+            "enableRemove": true,
+            "enableCopy": true,
+            "detailScreen": {
+              "id": "screen_2d6d3",
+              "name": "repeat-level1-detail-screen",
+              "screenElements": [
+                {
+                  "type": "ControlGrid",
+                  "id": "controlgrid_75040",
+                  "name": "cg",
+                  "row": [
+                    {
+                      "type": "Row",
+                      "id": "row_35dd9",
+                      "cell": [
+                        {
+                          "type": "Control",
+                          "id": "control_3f2ed",
+                          "elementRef": "field_2c719"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "DetachedRepeat",
+                  "id": "detachedrepeat_c08aa",
+                  "name": "repeat-level2",
+                  "repeatOverviewColumn": [
+                    {
+                      "type": "FieldBasedRepeatOverviewColumn",
+                      "id": "fieldbasedrepeatoverviewcolumn_2f68b",
+                      "elementRef": "field_f0443"
+                    },
+                    {
+                      "type": "ExpressionRepeatOverviewColumn",
+                      "id": "expressionrepeatoverviewcolumn_bb2ad",
+                      "label": {
+                        "type": "Multilingual",
+                        "multilingualText": {
+                          "text": [
+                            {
+                              "locale": "en",
+                              "text": "Nested Values"
+                            }
+                          ]
+                        }
+                      },
+                      "width": 1,
+                      "name": "nestedValuesExpression",
+                      "expression": "kontext(level3) {\n    [depEnum] \": \"      \n  kontext(level4, delimiter = \",\") {\n    [targetField]\n  }\n\n}"
+                    }
+                  ],
+                  "groupRef": "group_739f1",
+                  "enableAdd": true,
+                  "enableRemove": true,
+                  "detailScreen": {
+                    "id": "screen_d3eab",
+                    "name": "repeat-level2-detail-screen",
+                    "screenElements": [
+                      {
+                        "type": "ControlGrid",
+                        "id": "controlgrid_680ff",
+                        "name": "cg",
+                        "row": [
+                          {
+                            "type": "Row",
+                            "id": "row_184b0",
+                            "cell": [
+                              {
+                                "type": "Control",
+                                "id": "control_0589b",
+                                "elementRef": "field_f0443"
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "type": "DetachedRepeat",
+                        "id": "detachedrepeat_4d126",
+                        "name": "repeat-level3",
+                        "repeatOverviewColumn": [
+                          {
+                            "type": "FieldBasedRepeatOverviewColumn",
+                            "id": "fieldbasedrepeatoverviewcolumn_c0f65",
+                            "elementRef": "field_c07f9"
+                          },
+                          {
+                            "type": "ExpressionRepeatOverviewColumn",
+                            "id": "expressionrepeatoverviewcolumn_a2c1e",
+                            "label": {
+                              "type": "Multilingual",
+                              "multilingualText": {
+                                "text": [
+                                  {
+                                    "locale": "en",
+                                    "text": "Nested values"
+                                  }
+                                ]
+                              }
+                            },
+                            "width": 1,
+                            "name": "targetFieldExpression",
+                            "expression": "kontext(level4) {\n    [targetField]\n\n}"
+                          }
+                        ],
+                        "groupRef": "group_8d01c",
+                        "enableAdd": true,
+                        "enableRemove": true,
+                        "detailScreen": {
+                          "id": "screen_ae528",
+                          "name": "repeat-level3-detail-screen",
+                          "screenElements": [
+                            {
+                              "type": "ControlGrid",
+                              "id": "controlgrid_2ea6c",
+                              "name": "cg",
+                              "row": [
+                                {
+                                  "type": "Row",
+                                  "id": "row_0a9b3",
+                                  "cell": [
+                                    {
+                                      "type": "Control",
+                                      "id": "control_24548",
+                                      "elementRef": "field_c07f9"
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "type": "InlineRepeat",
+                              "id": "inlinerepeat_17a46",
+                              "name": "repeat-level4",
+                              "repeatOverviewColumn": [
+                                {
+                                  "type": "FieldBasedRepeatOverviewColumn",
+                                  "id": "fieldbasedrepeatoverviewcolumn_870c3",
+                                  "elementRef": "field_6fb0a"
+                                }
+                              ],
+                              "groupRef": "group_aa2cc",
+                              "enableAdd": true,
+                              "enableRemove": true
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "fieldConfiguration": {
+      "field": [
+        {
+          "dependentField": {
+            "masterField": "field_62104",
+            "case": [
+              {
+                "masterValue": null,
+                "value": ""
+              },
+              {
+                "masterValue": "a",
+                "value": "1"
+              },
+              {
+                "masterValue": "b",
+                "value": "10"
+              },
+              {
+                "masterValue": "c",
+                "value": "100"
+              }
+            ]
+          },
+          "elementRef": "field_7d12d"
+        },
+        {
+          "dependentField": {
+            "masterField": "field_121c5",
+            "case": [
+              {
+                "masterValue": "false",
+                "value": ""
+              },
+              {
+                "masterValue": "true",
+                "value": "50"
+              }
+            ]
+          },
+          "elementRef": "field_5aa8e"
+        },
+        {
+          "dependentField": {
+            "masterField": "field_93452",
+            "case": [
+              {
+                "masterValue": null,
+                "value": ""
+              },
+              {
+                "masterValue": "true",
+                "value": "75"
+              }
+            ]
+          },
+          "elementRef": "field_718a9"
+        },
+        {
+          "dependentField": {
+            "masterField": "field_ed3a5",
+            "case": [
+              {
+                "masterValue": null,
+                "value": ""
+              },
+              {
+                "masterValue": "one",
+                "fieldRef": "field_6063d"
+              },
+              {
+                "masterValue": "three",
+                "fieldRef": "field_6063d"
+              },
+              {
+                "masterValue": "two",
+                "fieldRef": "field_66ef1"
+              }
+            ]
+          },
+          "elementRef": "field_0d924"
+        },
+        {
+          "dependentField": {
+            "masterField": "field_78959",
+            "case": [
+              {
+                "masterValue": "false",
+                "fieldRef": "field_66ef1"
+              },
+              {
+                "masterValue": "true",
+                "fieldRef": "field_4bdd1"
+              }
+            ]
+          },
+          "elementRef": "field_fd4bc"
+        },
+        {
+          "dependentField": {
+            "masterField": "field_dca36",
+            "case": [
+              {
+                "masterValue": null,
+                "fieldRef": "field_66ef1"
+              },
+              {
+                "masterValue": "true",
+                "fieldRef": "field_4b3e5"
+              }
+            ]
+          },
+          "elementRef": "field_cae6a"
+        },
+        {
+          "initialValue": "test",
+          "elementRef": "field_6063d"
+        },
+        {
+          "initialValue": "test2",
+          "elementRef": "field_4bdd1"
+        },
+        {
+          "initialValue": "test3",
+          "elementRef": "field_4b3e5"
+        },
+        {
+          "initialValue": "asdf",
+          "elementRef": "field_66ef1"
+        },
+        {
+          "dependentField": {
+            "masterField": "field_84f28",
+            "case": [
+              {
+                "masterValue": "false",
+                "value": ""
+              },
+              {
+                "masterValue": "true",
+                "value": "50"
+              }
+            ]
+          },
+          "elementRef": "field_dbb39"
+        },
+        {
+          "dependentField": {
+            "masterField": "field_57d8e",
+            "case": [
+              {
+                "masterValue": null,
+                "value": ""
+              },
+              {
+                "masterValue": "true",
+                "value": "75"
+              }
+            ]
+          },
+          "elementRef": "field_f3458"
+        },
+        {
+          "dependentField": {
+            "masterField": "field_9ce0e",
+            "case": [
+              {
+                "masterValue": null,
+                "value": ""
+              },
+              {
+                "masterValue": "a",
+                "value": "1"
+              },
+              {
+                "masterValue": "b",
+                "value": "10"
+              },
+              {
+                "masterValue": "c",
+                "value": "100"
+              }
+            ]
+          },
+          "elementRef": "field_d370a"
+        },
+        {
+          "initialValue": "asdf",
+          "elementRef": "field_f0441"
+        },
+        {
+          "initialValue": "test",
+          "elementRef": "field_f2d1c"
+        },
+        {
+          "dependentField": {
+            "masterField": "field_76f1c",
+            "case": [
+              {
+                "masterValue": null,
+                "value": ""
+              },
+              {
+                "masterValue": "one",
+                "fieldRef": "field_f2d1c"
+              },
+              {
+                "masterValue": "three",
+                "fieldRef": "field_f2d1c"
+              },
+              {
+                "masterValue": "two",
+                "fieldRef": "field_f0441"
+              }
+            ]
+          },
+          "elementRef": "field_0466e"
+        },
+        {
+          "initialValue": "test2",
+          "elementRef": "field_608a6"
+        },
+        {
+          "dependentField": {
+            "masterField": "field_2223b",
+            "case": [
+              {
+                "masterValue": "false",
+                "fieldRef": "field_66ef1"
+              },
+              {
+                "masterValue": "true",
+                "fieldRef": "field_608a6"
+              }
+            ]
+          },
+          "elementRef": "field_6bce4"
+        },
+        {
+          "initialValue": "test3",
+          "elementRef": "field_a6db6"
+        },
+        {
+          "dependentField": {
+            "masterField": "field_22cd2",
+            "case": [
+              {
+                "masterValue": null,
+                "fieldRef": "field_66ef1"
+              },
+              {
+                "masterValue": "true",
+                "fieldRef": "field_a6db6"
+              }
+            ]
+          },
+          "elementRef": "field_72441"
+        },
+        {
+          "dependentField": {
+            "masterField": "field_553db",
+            "case": [
+              {
+                "masterValue": null,
+                "value": ""
+              },
+              {
+                "masterValue": "a",
+                "value": "1"
+              },
+              {
+                "masterValue": "b",
+                "value": "10"
+              },
+              {
+                "masterValue": "c",
+                "value": "100"
+              }
+            ]
+          },
+          "elementRef": "field_c6eee"
+        },
+        {
+          "dependentField": {
+            "masterField": "field_934a4",
+            "case": [
+              {
+                "masterValue": "false",
+                "value": ""
+              },
+              {
+                "masterValue": "true",
+                "value": "50"
+              }
+            ]
+          },
+          "elementRef": "field_affba"
+        },
+        {
+          "dependentField": {
+            "masterField": "field_78bb4",
+            "case": [
+              {
+                "masterValue": null,
+                "value": ""
+              },
+              {
+                "masterValue": "true",
+                "value": "75"
+              }
+            ]
+          },
+          "elementRef": "field_eebd9"
+        },
+        {
+          "initialValue": "case #1 value",
+          "elementRef": "field_2105b"
+        },
+        {
+          "initialValue": "case 2 value",
+          "elementRef": "field_078e4"
+        },
+        {
+          "initialValue": "some value",
+          "elementRef": "field_e8ab2"
+        },
+        {
+          "initialValue": "case #3 value",
+          "elementRef": "field_3bf14"
+        },
+        {
+          "initialValue": "case #4 value",
+          "elementRef": "field_17048"
+        },
+        {
+          "dependentField": {
+            "masterField": "field_b01c5",
+            "case": [
+              {
+                "masterValue": "false",
+                "value": ""
+              },
+              {
+                "masterValue": "true",
+                "fieldRef": "field_e12f6"
+              }
+            ]
+          },
+          "elementRef": "field_750f5"
+        },
+        {
+          "initialValue": "case #5 value",
+          "elementRef": "field_e12f6"
+        },
+        {
+          "dependentField": {
+            "masterField": "field_c32ef",
+            "case": [
+              {
+                "masterValue": "false",
+                "value": ""
+              },
+              {
+                "masterValue": "true",
+                "fieldRef": "field_2105b"
+              }
+            ]
+          },
+          "elementRef": "field_eaaad"
+        },
+        {
+          "dependentField": {
+            "masterField": "field_b99f9",
+            "case": [
+              {
+                "masterValue": "false",
+                "value": ""
+              },
+              {
+                "masterValue": "true",
+                "fieldRef": "field_078e4"
+              }
+            ]
+          },
+          "elementRef": "field_51044"
+        },
+        {
+          "dependentField": {
+            "masterField": "field_2de32",
+            "case": [
+              {
+                "masterValue": "false",
+                "value": ""
+              },
+              {
+                "masterValue": "true",
+                "fieldRef": "field_3bf14"
+              }
+            ]
+          },
+          "elementRef": "field_33aa6"
+        },
+        {
+          "dependentField": {
+            "masterField": "field_19e82",
+            "case": [
+              {
+                "masterValue": "false",
+                "value": ""
+              },
+              {
+                "masterValue": "true",
+                "fieldRef": "field_17048"
+              }
+            ]
+          },
+          "elementRef": "field_044b5"
+        },
+        {
+          "dependentField": {
+            "masterField": "field_63557",
+            "case": [
+              {
+                "masterValue": "false",
+                "value": "a"
+              },
+              {
+                "masterValue": "true",
+                "value": "b"
+              }
+            ]
+          },
+          "elementRef": "field_7ee4d"
+        },
+        {
+          "dependentField": {
+            "masterField": "field_7ee4d",
+            "case": [
+              {
+                "masterValue": null,
+                "value": ""
+              },
+              {
+                "masterValue": "a",
+                "value": "50"
+              },
+              {
+                "masterValue": "b",
+                "value": "100"
+              }
+            ]
+          },
+          "elementRef": "field_5a234"
+        },
+        {
+          "dependentField": {
+            "masterField": "field_7dbb9",
+            "case": [
+              {
+                "masterValue": "false",
+                "value": "a"
+              },
+              {
+                "masterValue": "true",
+                "value": "b"
+              }
+            ]
+          },
+          "elementRef": "field_3babd"
+        },
+        {
+          "dependentEnumeration": {
+            "masterField": "field_3babd",
+            "constraint": [
+              {
+                "masterValue": "a",
+                "valueForMasterChange": "one",
+                "constraintValues": [
+                  {
+                    "value": "one"
+                  }
+                ]
+              },
+              {
+                "masterValue": "b",
+                "valueForMasterChange": "two",
+                "constraintValues": [
+                  {
+                    "value": "two"
+                  }
+                ]
+              }
+            ]
+          },
+          "elementRef": "field_e4de6"
+        },
+        {
+          "dependentField": {
+            "masterField": "field_e4de6",
+            "case": [
+              {
+                "masterValue": null,
+                "value": ""
+              },
+              {
+                "masterValue": "one",
+                "value": "50"
+              },
+              {
+                "masterValue": "two",
+                "value": "100"
+              }
+            ]
+          },
+          "elementRef": "field_5efef"
+        },
+        {
+          "dependentField": {
+            "masterField": "field_6ec6c",
+            "case": [
+              {
+                "masterValue": "false",
+                "value": "a"
+              },
+              {
+                "masterValue": "true",
+                "value": "b"
+              }
+            ]
+          },
+          "elementRef": "field_cb1d6"
+        },
+        {
+          "dependentField": {
+            "masterField": "field_801b5",
+            "case": [
+              {
+                "masterValue": null,
+                "value": ""
+              },
+              {
+                "masterValue": "a",
+                "value": "50"
+              }
+            ]
+          },
+          "elementRef": "field_65908"
+        },
+        {
+          "dependentField": {
+            "masterField": "field_c9884",
+            "case": [
+              {
+                "masterValue": "false",
+                "value": "0"
+              },
+              {
+                "masterValue": "true",
+                "value": "100"
+              }
+            ]
+          },
+          "elementRef": "field_2c719"
+        },
+        {
+          "dependentEnumeration": {
+            "masterField": "field_f0443",
+            "constraint": [
+              {
+                "masterValue": "value01",
+                "valueForMasterChange": "depValue01",
+                "constraintValues": [
+                  {
+                    "value": "depValue01"
+                  }
+                ]
+              },
+              {
+                "masterValue": "value02",
+                "valueForMasterChange": "depValue02",
+                "constraintValues": [
+                  {
+                    "value": "depValue02"
+                  }
+                ]
+              }
+            ]
+          },
+          "elementRef": "field_c07f9"
+        }
+      ]
+    },
+    "groupConfiguration": {
+      "group": [
+        {
+          "groupRef": "group_4a21c",
+          "numberOfInitialRows": 5
+        },
+        {
+          "groupRef": "group_ff6db",
+          "numberOfInitialRows": 3
+        },
+        {
+          "groupRef": "group_ff2e3",
+          "numberOfInitialRows": 1
+        },
+        {
+          "groupRef": "group_ac8e9",
+          "numberOfInitialRows": 3
+        },
+        {
+          "groupRef": "group_38e8c",
+          "numberOfInitialRows": 3
+        },
+        {
+          "groupRef": "group_aa2cc",
+          "numberOfInitialRows": 3
+        }
+      ]
+    },
+    "defaults": {}
+  }
+}

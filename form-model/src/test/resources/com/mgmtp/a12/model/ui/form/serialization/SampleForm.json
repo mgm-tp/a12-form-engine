@@ -1,0 +1,65 @@
+{
+  "header": {
+    "id": "SampleForm",
+    "modelType": "form",
+    "modelVersion": "37.4.0",
+    "locales": [
+      {
+        "code": "en"
+      }
+    ],
+    "modelReferences": [
+      {
+        "alias": "DM",
+        "modelType": "document",
+        "purpose": "data binding",
+        "reference": "DocModel"
+      }
+    ]
+  },
+  "content": {
+    "subHeaderBox": {
+      "id": "SH1"
+    },
+    "footerBox": {
+      "id": "F2"
+    },
+    "screens": [
+      {
+        "id": "S3",
+        "name": "SampleScreen",
+        "screenElements": [
+          {
+            "type": "Section",
+            "id": "Sec4",
+            "name": "SampleSection",
+            "screenElements": [
+              {
+                "type": "ControlGrid",
+                "id": "CG5",
+                "name": "SampleControlGrid",
+                "row": [
+                  {
+                    "type": "Row",
+                    "id": "R6",
+                    "cell": [
+                      {
+                        "type": "Control",
+                        "id": "Control7",
+                        "elementRef": "F2"
+                      }
+                    ]
+                  }
+                ],
+                "verticalAlignment": "BOTTOM"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "fieldConfiguration": {},
+    "groupConfiguration": {},
+    "defaults": {}
+  }
+}

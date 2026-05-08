@@ -1,0 +1,99 @@
+{
+  "header": {
+    "id": "customization.custom-screen-element-form",
+    "modelType": "form",
+    "modelVersion": "37.4.0",
+    "locales": [
+      {
+        "code": "en"
+      },
+      {
+        "code": "de"
+      }
+    ],
+    "labels": [
+      {
+        "locale": "en",
+        "text": "Custom Screen Element"
+      },
+      {
+        "locale": "de",
+        "text": "Benutzerdefiniertes Screen Element"
+      }
+    ],
+    "annotations": [
+      {
+        "name": "roles",
+        "value": "admin"
+      }
+    ],
+    "modelReferences": [
+      {
+        "alias": "customization.custom-element-document",
+        "modelType": "document",
+        "purpose": "data binding",
+        "reference": "customization.custom-screen-element-document"
+      }
+    ]
+  },
+  "content": {
+    "subHeaderBox": {
+      "id": "subHeaderBox1"
+    },
+    "footerBox": {
+      "id": "footerBox1"
+    },
+    "screens": [
+      {
+        "id": "screen_3c746",
+        "name": "Screen 1",
+        "screenElements": [
+          {
+            "type": "CustomScreenElement",
+            "id": "customScreenElement-08e23",
+            "name": "customScreenElementTestName",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "Custom Screen Element With Default Height"
+                  },
+                  {
+                    "locale": "de",
+                    "text": "Benutzerdefinierter Screen Element Mit Standardhöhe"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "type": "CustomScreenElement",
+            "id": "customScreenElement-08e24",
+            "name": "Custom Screen Element",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "Custom Screen Element Title"
+                  },
+                  {
+                    "locale": "de",
+                    "text": "Benutzerdefinierter Screen Element Titel"
+                  }
+                ]
+              }
+            },
+            "height": 150
+          }
+        ]
+      }
+    ],
+    "fieldConfiguration": {},
+    "groupConfiguration": {},
+    "defaults": {}
+  }
+}

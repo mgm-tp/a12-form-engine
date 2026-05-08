@@ -1,0 +1,405 @@
+{
+  "header": {
+    "id": "table-cm",
+    "modelType": "content",
+    "modelVersion": "0.8.0",
+    "locales": [
+      {
+        "code": "en"
+      }
+    ],
+    "labels": [],
+    "annotations": [
+      {
+        "name": "roles",
+        "value": "CMS_contentManager,CMS_contentReader"
+      }
+    ],
+    "modelReferences": [
+      {
+        "purpose": "document-model-for-content-model",
+        "modelType": "document",
+        "alias": "DM",
+        "reference": "table-dm"
+      }
+    ]
+  },
+  "content": {
+    "configuration": {
+      "namespaceVersions": {
+        "com.mgmtp.a12.contentengine": "0.9.0"
+      }
+    },
+    "root": {
+      "id": "dd4c8345",
+      "namespace": "com.mgmtp.a12.contentengine",
+      "type": "Box",
+      "props": {
+        "style": {
+          "display": "flex",
+          "width": "100%",
+          "height": "fit-content",
+          "flexDirection": "column",
+          "padding": "8px",
+          "margin": "0px",
+          "gap": "8px",
+          "backgroundRepeat": "no-repeat"
+        }
+      },
+      "children": [
+        {
+          "id": "c481337a",
+          "namespace": "com.mgmtp.a12.contentengine",
+          "type": "Heading",
+          "props": {
+            "tree": {
+              "root": {
+                "children": [
+                  {
+                    "children": [
+                      {
+                        "detail": 0,
+                        "format": 0,
+                        "mode": "normal",
+                        "style": "",
+                        "text": "Weather Data Collection",
+                        "type": "text",
+                        "version": 1
+                      }
+                    ],
+                    "direction": "ltr",
+                    "format": "",
+                    "indent": 0,
+                    "type": "heading",
+                    "version": 1,
+                    "tag": "h3"
+                  }
+                ],
+                "direction": "ltr",
+                "format": "",
+                "indent": 0,
+                "type": "root",
+                "version": 1
+              }
+            },
+            "html": "<h1 class=\"editor-heading-h1\" dir=\"ltr\"><span style=\"white-space: pre-wrap;\">Weather Data Collection</span></h1>"
+          }
+        },
+        {
+          "id": "Table-281a75b6",
+          "namespace": "com.mgmtp.a12.contentengine",
+          "type": "Table",
+          "props": {
+            "columns": [
+              {
+                "id": "a208104d",
+                "width": 2
+              },
+              {
+                "id": "34f736f2",
+                "width": 2
+              },
+              {
+                "id": "a4c7ea64",
+                "width": 2
+              },
+              {
+                "id": "eff32242",
+                "label": "ID",
+                "width": 2
+              },
+              {
+                "id": "fe4eb6d2",
+                "width": 1,
+                "pinning": "right",
+                "actionColumn": true
+              }
+            ],
+            "enableColumnsResizing": true
+          },
+          "children": [
+            {
+              "id": "TableHead-380648fc",
+              "namespace": "com.mgmtp.a12.contentengine",
+              "type": "TableHead",
+              "props": {},
+              "children": [
+                {
+                  "id": "TableHeadRow-dd878477",
+                  "namespace": "com.mgmtp.a12.contentengine",
+                  "type": "TableHeadRow",
+                  "props": {},
+                  "children": [
+                    {
+                      "id": "TableHeadCell-ced0f24",
+                      "namespace": "com.mgmtp.a12.contentengine",
+                      "type": "TableHeadCell",
+                      "props": {
+                        "content": "Date"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": "TableHeadCell-f8467f6d",
+                      "namespace": "com.mgmtp.a12.contentengine",
+                      "type": "TableHeadCell",
+                      "props": {
+                        "content": "Temp. Low"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": "TableHeadCell-7e484116",
+                      "namespace": "com.mgmtp.a12.contentengine",
+                      "type": "TableHeadCell",
+                      "props": {
+                        "content": "Temp. High"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": "TableHeadCell-4218877b",
+                      "namespace": "com.mgmtp.a12.contentengine",
+                      "type": "TableHeadCell",
+                      "props": {
+                        "content": "Precipitation"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": "TableHeadCell-cc0eae7d",
+                      "namespace": "com.mgmtp.a12.contentengine",
+                      "type": "TableHeadCell",
+                      "props": {},
+                      "children": []
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "TableBody-52aab4d3",
+              "namespace": "com.mgmtp.a12.contentengine",
+              "type": "TableBody",
+              "props": {},
+              "children": [
+                {
+                  "id": "Group-264ab449",
+                  "namespace": "com.mgmtp.a12.contentengine",
+                  "type": "Group",
+                  "props": {
+                    "groupId": "group_3db43"
+                  },
+                  "children": [
+                    {
+                      "id": "TableBodyRow-b9ec537f",
+                      "namespace": "com.mgmtp.a12.contentengine",
+                      "type": "TableBodyRow",
+                      "props": {},
+                      "children": [
+                        {
+                          "id": "TableBodyCell-c3eae5c1",
+                          "namespace": "com.mgmtp.a12.contentengine",
+                          "type": "TableBodyCell",
+                          "props": {},
+                          "children": [
+                            {
+                              "id": "control-datepicker-date",
+                              "namespace": "com.mgmtp.a12.formengine",
+                              "type": "DatePicker",
+                              "props": {
+                                "elementId": "field_2ca8a",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "Date"
+                                  }
+                                ],
+                                "hideLabel": true
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "id": "TableBodyCell-49e38660",
+                          "namespace": "com.mgmtp.a12.contentengine",
+                          "type": "TableBodyCell",
+                          "props": {},
+                          "children": [
+                            {
+                              "id": "control-temp-low",
+                              "namespace": "com.mgmtp.a12.formengine",
+                              "type": "TextLine",
+                              "props": {
+                                "elementId": "field_123e7",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "Temp. Low"
+                                  }
+                                ],
+                                "hideLabel": true
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "id": "TableBodyCell-4d3ebf8e",
+                          "namespace": "com.mgmtp.a12.contentengine",
+                          "type": "TableBodyCell",
+                          "props": {},
+                          "children": [
+                            {
+                              "id": "control-temp-high",
+                              "namespace": "com.mgmtp.a12.formengine",
+                              "type": "TextLine",
+                              "props": {
+                                "elementId": "field_7bbfc",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "Temp. High"
+                                  }
+                                ],
+                                "hideLabel": true
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "id": "TableBodyCell-4bbeec9f",
+                          "namespace": "com.mgmtp.a12.contentengine",
+                          "type": "TableBodyCell",
+                          "props": {},
+                          "children": [
+                            {
+                              "id": "control-multiSelect-precipitation",
+                              "namespace": "com.mgmtp.a12.formengine",
+                              "type": "MultiSelect",
+                              "props": {
+                                "elementId": "group_ad0af",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "Precipitation"
+                                  }
+                                ],
+                                "hideLabel": true
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "id": "TableBodyCell-9f93475c",
+                          "namespace": "com.mgmtp.a12.contentengine",
+                          "type": "TableBodyCell",
+                          "props": {},
+                          "children": [
+                            {
+                              "id": "ButtonGroup-226cc151",
+                              "namespace": "com.mgmtp.a12.contentengine",
+                              "type": "ButtonGroup",
+                              "props": {},
+                              "children": [
+                                {
+                                  "id": "Button-9f125f79",
+                                  "namespace": "com.mgmtp.a12.contentengine",
+                                  "type": "Button",
+                                  "props": {
+                                    "label": "",
+                                    "primary": false,
+                                    "icon": {
+                                      "theme": "filled",
+                                      "name": "delete"
+                                    },
+                                    "destructive": true,
+                                    "onClick": {
+                                      "id": "DeleteRowAction-b86d9faf",
+                                      "namespace": "com.mgmtp.a12.contentengine",
+                                      "type": "DeleteRowAction",
+                                      "props": {},
+                                      "children": []
+                                    }
+                                  },
+                                  "children": []
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "TableFoot-a1b044c6",
+              "namespace": "com.mgmtp.a12.contentengine",
+              "type": "TableFoot",
+              "props": {},
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "ButtonGroupContainer-394ff660",
+          "namespace": "com.mgmtp.a12.contentengine",
+          "type": "ButtonGroupContainer",
+          "props": {
+            "style": {
+              "alignItems": "center"
+            }
+          },
+          "children": [
+            {
+              "id": "ButtonGroup-ef02c1de",
+              "namespace": "com.mgmtp.a12.contentengine",
+              "type": "ButtonGroup",
+              "props": {
+                "alignment": "left"
+              },
+              "children": [
+                {
+                  "id": "Button-e4e99d09",
+                  "namespace": "com.mgmtp.a12.contentengine",
+                  "type": "Button",
+                  "props": {
+                    "label": "Add Row",
+                    "onClick": {
+                      "id": "AddRowAction-95087cd9",
+                      "namespace": "com.mgmtp.a12.contentengine",
+                      "type": "AddRowAction",
+                      "props": {
+                        "groupId": "group_3db43"
+                      },
+                      "children": []
+                    },
+                    "icon": {
+                      "theme": "filled",
+                      "name": "add"
+                    },
+                    "labelHidden": false,
+                    "vertical": false,
+                    "primary": false,
+                    "invert": false
+                  },
+                  "children": []
+                }
+              ]
+            },
+            {
+              "id": "ButtonGroup-3bf56ff3",
+              "namespace": "com.mgmtp.a12.contentengine",
+              "type": "ButtonGroup",
+              "props": {
+                "alignment": "right"
+              },
+              "children": []
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

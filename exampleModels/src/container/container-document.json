@@ -1,0 +1,294 @@
+{
+  "header": {
+    "id": "container-document",
+    "modelType": "document",
+    "modelVersion": "28.4.0",
+    "locales": [
+      {
+        "code": "de"
+      },
+      {
+        "code": "en"
+      }
+    ],
+    "labels": [],
+    "annotations": [
+      {
+        "name": "roles",
+        "value": "admin"
+      }
+    ],
+    "modelReferences": []
+  },
+  "content": {
+    "modelInfo": {
+      "name": "container-document",
+      "immutable": false
+    },
+    "modelConfig": {
+      "decimalSeparator": ".",
+      "timeZone": "UTC",
+      "conditionLanguage": {
+        "code": "en_US"
+      }
+    },
+    "modelRoot": {
+      "rootGroups": [
+        {
+          "type": "Group",
+          "id": "G2",
+          "name": "g1",
+          "Group": {
+            "repeatability": 1,
+            "elements": [
+              {
+                "type": "Field",
+                "id": "F3",
+                "name": "nolabel",
+                "Field": {
+                  "fieldType": {
+                    "type": "StringType"
+                  }
+                }
+              },
+              {
+                "type": "Field",
+                "id": "F4",
+                "name": "withlabel",
+                "Field": {
+                  "fieldType": {
+                    "type": "StringType"
+                  }
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "Group",
+          "id": "group_05af3",
+          "name": "rootGroup",
+          "Group": {
+            "repeatability": 1,
+            "elements": [
+              {
+                "type": "Field",
+                "id": "field_55aca",
+                "name": "stringField",
+                "Field": {
+                  "fieldType": {
+                    "type": "StringType"
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "StringField"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Field",
+                "id": "field_4200c",
+                "name": "booleanField",
+                "Field": {
+                  "fieldType": {
+                    "type": "BooleanType"
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "BooelanField"
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "Group",
+          "id": "G3",
+          "name": "groupForSection",
+          "Group": {
+            "repeatability": 1,
+            "elements": [
+              {
+                "type": "Field",
+                "id": "F10",
+                "name": "master",
+                "Field": {
+                  "fieldType": {
+                    "type": "BooleanType"
+                  }
+                }
+              },
+              {
+                "type": "Group",
+                "id": "G4",
+                "name": "r1",
+                "Group": {
+                  "repeatability": 10,
+                  "elements": [
+                    {
+                      "type": "Field",
+                      "id": "F6",
+                      "name": "dummy",
+                      "Field": {
+                        "fieldType": {
+                          "type": "StringType"
+                        }
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "F11",
+                      "name": "required_dummy",
+                      "Field": {
+                        "fieldType": {
+                          "type": "StringType"
+                        },
+                        "requirednessConfig": {
+                          "mode": "absoluteOrRelativeToNextRepAncestor"
+                        }
+                      }
+                    },
+                    {
+                      "type": "Group",
+                      "id": "G5",
+                      "name": "r2",
+                      "Group": {
+                        "repeatability": 10,
+                        "elements": [
+                          {
+                            "type": "Field",
+                            "id": "F8",
+                            "name": "dummy",
+                            "Field": {
+                              "fieldType": {
+                                "type": "StringType"
+                              }
+                            }
+                          },
+                          {
+                            "type": "Group",
+                            "id": "G6",
+                            "name": "r3",
+                            "Group": {
+                              "repeatability": 10,
+                              "elements": [
+                                {
+                                  "type": "Field",
+                                  "id": "F9",
+                                  "name": "dummy",
+                                  "Field": {
+                                    "fieldType": {
+                                      "type": "StringType"
+                                    }
+                                  }
+                                }
+                              ]
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "Group",
+          "id": "G20",
+          "name": "groupForMCS",
+          "Group": {
+            "repeatability": 1,
+            "elements": [
+              {
+                "type": "Field",
+                "id": "F12",
+                "name": "StringField",
+                "Field": {
+                  "fieldType": {
+                    "type": "StringType"
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "Field"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Group",
+                "id": "G21",
+                "name": "NewGroup_2",
+                "Group": {
+                  "repeatability": 99,
+                  "elements": [
+                    {
+                      "type": "Field",
+                      "id": "F61",
+                      "name": "NumberField",
+                      "Field": {
+                        "fieldType": {
+                          "type": "NumberType"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "Group",
+          "id": "group_1ac14",
+          "name": "groupForVerticalAlignment",
+          "Group": {
+            "repeatability": 1,
+            "elements": [
+              {
+                "type": "Field",
+                "id": "field_c57fb",
+                "name": "stringField1",
+                "Field": {
+                  "fieldType": {
+                    "type": "StringType"
+                  }
+                }
+              },
+              {
+                "type": "Field",
+                "id": "fieldimpl_bf8bf",
+                "name": "stringField2",
+                "Field": {
+                  "fieldType": {
+                    "type": "StringType",
+                    "StringType": {
+                      "lineBreaksPermitted": true
+                    }
+                  }
+                }
+              },
+              {
+                "type": "Field",
+                "id": "fieldimpl_3b246",
+                "name": "stringField3",
+                "Field": {
+                  "fieldType": {
+                    "type": "StringType"
+                  }
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

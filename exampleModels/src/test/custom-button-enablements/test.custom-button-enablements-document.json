@@ -1,0 +1,1370 @@
+{
+  "header": {
+    "id": "test.custom-button-enablements-document",
+    "modelType": "document",
+    "modelVersion": "28.4.0",
+    "locales": [
+      {
+        "code": "en"
+      },
+      {
+        "code": "de"
+      }
+    ],
+    "labels": [],
+    "annotations": [
+      {
+        "name": "roles",
+        "value": "admin"
+      }
+    ],
+    "modelReferences": []
+  },
+  "content": {
+    "modelInfo": {
+      "name": "test.custom-button-enablements-document",
+      "immutable": false
+    },
+    "modelConfig": {
+      "decimalSeparator": ".",
+      "timeZone": "UTC",
+      "conditionLanguage": {
+        "code": "en_US"
+      }
+    },
+    "modelRoot": {
+      "rootGroups": [
+        {
+          "type": "Group",
+          "id": "group_8b17e",
+          "name": "root",
+          "Group": {
+            "repeatability": 1,
+            "elements": [
+              {
+                "type": "Field",
+                "id": "field_d1fdc",
+                "name": "disableButtons",
+                "Field": {
+                  "fieldType": {
+                    "type": "EnumerationType",
+                    "EnumerationType": {
+                      "values": [
+                        {
+                          "value": "disable",
+                          "label": [
+                            {
+                              "locale": "en",
+                              "text": "Disable"
+                            },
+                            {
+                              "locale": "de",
+                              "text": "Disable"
+                            }
+                          ]
+                        },
+                        {
+                          "value": "enable",
+                          "label": [
+                            {
+                              "locale": "en",
+                              "text": "Enable"
+                            },
+                            {
+                              "locale": "de",
+                              "text": "Enable"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "Activation State"
+                    },
+                    {
+                      "locale": "de",
+                      "text": "Activation State"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Field",
+                "id": "field_5209d",
+                "name": "hideButtons",
+                "Field": {
+                  "fieldType": {
+                    "type": "EnumerationType",
+                    "EnumerationType": {
+                      "values": [
+                        {
+                          "value": "hidden",
+                          "label": [
+                            {
+                              "locale": "en",
+                              "text": "Hide"
+                            },
+                            {
+                              "locale": "de",
+                              "text": "Verstecken"
+                            }
+                          ]
+                        },
+                        {
+                          "value": "show",
+                          "label": [
+                            {
+                              "locale": "en",
+                              "text": "Show"
+                            },
+                            {
+                              "locale": "de",
+                              "text": "Anzeigen"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "Set visibility"
+                    },
+                    {
+                      "locale": "de",
+                      "text": "Sichtbarkeit setzen"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Field",
+                "id": "field_eb801",
+                "name": "anyField",
+                "Field": {
+                  "fieldType": {
+                    "type": "StringType"
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "Field1"
+                    },
+                    {
+                      "locale": "de",
+                      "text": "Field1"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Field",
+                "id": "field_22dcc",
+                "name": "disableRowActionForAllRows",
+                "Field": {
+                  "fieldType": {
+                    "type": "EnumerationType",
+                    "EnumerationType": {
+                      "values": [
+                        {
+                          "value": "defaultButton/copy",
+                          "label": [
+                            {
+                              "locale": "en",
+                              "text": "Copy"
+                            },
+                            {
+                              "locale": "de",
+                              "text": "Copy"
+                            }
+                          ]
+                        },
+                        {
+                          "value": "defaultButton/delete",
+                          "label": [
+                            {
+                              "locale": "en",
+                              "text": "Delete"
+                            },
+                            {
+                              "locale": "de",
+                              "text": "Delete"
+                            }
+                          ]
+                        },
+                        {
+                          "value": "defaultButton/move",
+                          "label": [
+                            {
+                              "locale": "en",
+                              "text": "Move"
+                            },
+                            {
+                              "locale": "de",
+                              "text": "Move"
+                            }
+                          ]
+                        },
+                        {
+                          "value": "custom_event",
+                          "label": [
+                            {
+                              "locale": "en",
+                              "text": "Custom Event"
+                            },
+                            {
+                              "locale": "de",
+                              "text": "Custom Event"
+                            }
+                          ]
+                        },
+                        {
+                          "value": "custom_event_with_confirmation",
+                          "label": [
+                            {
+                              "locale": "en",
+                              "text": "Custom Event (with confirmation)"
+                            },
+                            {
+                              "locale": "de",
+                              "text": "Custom Event (with confirmation)"
+                            }
+                          ]
+                        },
+                        {
+                          "value": "custom_event_hidden_in_edit_mode",
+                          "label": [
+                            {
+                              "locale": "en",
+                              "text": "Custom Event (Hidden in edit mode)"
+                            },
+                            {
+                              "locale": "de",
+                              "text": "Custom Event (Hidden in edit mode)"
+                            }
+                          ]
+                        },
+                        {
+                          "value": "custom_event_hidden_in_ro_mode",
+                          "label": [
+                            {
+                              "locale": "en",
+                              "text": "Custom Event (Hidden in readonly mode)"
+                            },
+                            {
+                              "locale": "de",
+                              "text": "Custom Event (Hidden in readonly mode)"
+                            }
+                          ]
+                        },
+                        {
+                          "value": "custom_event_disabled_in_edit_mode",
+                          "label": [
+                            {
+                              "locale": "en",
+                              "text": "Custom Event (Disabled in edit mode)"
+                            },
+                            {
+                              "locale": "de",
+                              "text": "Custom Event (Disabled in edit mode)"
+                            }
+                          ]
+                        },
+                        {
+                          "value": "custom_event_disabled_in_ro_mode",
+                          "label": [
+                            {
+                              "locale": "en",
+                              "text": "Custom Event (Disabled in readonly mode)"
+                            },
+                            {
+                              "locale": "de",
+                              "text": "Custom Event (Disabled in readonly mode)"
+                            }
+                          ]
+                        },
+                        {
+                          "value": "defaultButton/edit",
+                          "label": [
+                            {
+                              "locale": "en",
+                              "text": "Edit"
+                            },
+                            {
+                              "locale": "de",
+                              "text": "Edit"
+                            }
+                          ]
+                        },
+                        {
+                          "value": "defaultButton/add",
+                          "label": [
+                            {
+                              "locale": "en",
+                              "text": "Add"
+                            },
+                            {
+                              "locale": "de",
+                              "text": "Add"
+                            }
+                          ]
+                        },
+                        {
+                          "value": "defaultButton/download",
+                          "label": [
+                            {
+                              "locale": "en",
+                              "text": "Download"
+                            },
+                            {
+                              "locale": "de",
+                              "text": "Download"
+                            }
+                          ]
+                        }
+                      ],
+                      "categories": []
+                    }
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "Row action button to disable for all rows"
+                    },
+                    {
+                      "locale": "de",
+                      "text": "Row action button to disable for all rows"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Field",
+                "id": "field_718d6",
+                "name": "shouldHide",
+                "Field": {
+                  "fieldType": {
+                    "type": "BooleanType"
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "Hide"
+                    },
+                    {
+                      "locale": "de",
+                      "text": "Hide"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Field",
+                "id": "field_a7cf7",
+                "name": "hideRowActionForAllRows",
+                "Field": {
+                  "fieldType": {
+                    "type": "EnumerationType",
+                    "EnumerationType": {
+                      "values": [
+                        {
+                          "value": "defaultButton/copy",
+                          "label": [
+                            {
+                              "locale": "en",
+                              "text": "Copy"
+                            },
+                            {
+                              "locale": "de",
+                              "text": "Copy"
+                            }
+                          ]
+                        },
+                        {
+                          "value": "defaultButton/delete",
+                          "label": [
+                            {
+                              "locale": "en",
+                              "text": "Delete"
+                            },
+                            {
+                              "locale": "de",
+                              "text": "Delete"
+                            }
+                          ]
+                        },
+                        {
+                          "value": "defaultButton/move",
+                          "label": [
+                            {
+                              "locale": "en",
+                              "text": "Move"
+                            },
+                            {
+                              "locale": "de",
+                              "text": "Move"
+                            }
+                          ]
+                        },
+                        {
+                          "value": "custom_event",
+                          "label": [
+                            {
+                              "locale": "en",
+                              "text": "Custom Event"
+                            },
+                            {
+                              "locale": "de",
+                              "text": "Custom Event"
+                            }
+                          ]
+                        },
+                        {
+                          "value": "custom_event_with_confirmation",
+                          "label": [
+                            {
+                              "locale": "en",
+                              "text": "Custom Event (with confirmation)"
+                            },
+                            {
+                              "locale": "de",
+                              "text": "Custom Event (with confirmation)"
+                            }
+                          ]
+                        },
+                        {
+                          "value": "custom_event_hidden_in_edit_mode",
+                          "label": [
+                            {
+                              "locale": "en",
+                              "text": "Custom Event (Hidden in edit mode)"
+                            },
+                            {
+                              "locale": "de",
+                              "text": "Custom Event (Hidden in edit mode)"
+                            }
+                          ]
+                        },
+                        {
+                          "value": "custom_event_hidden_in_ro_mode",
+                          "label": [
+                            {
+                              "locale": "en",
+                              "text": "Custom Event (Hidden in readonly mode)"
+                            },
+                            {
+                              "locale": "de",
+                              "text": "Custom Event (Hidden in readonly mode)"
+                            }
+                          ]
+                        },
+                        {
+                          "value": "custom_event_disabled_in_edit_mode",
+                          "label": [
+                            {
+                              "locale": "en",
+                              "text": "Custom Event (Disabled in edit mode)"
+                            },
+                            {
+                              "locale": "de",
+                              "text": "Custom Event (Disabled in edit mode)"
+                            }
+                          ]
+                        },
+                        {
+                          "value": "custom_event_disabled_in_ro_mode",
+                          "label": [
+                            {
+                              "locale": "en",
+                              "text": "Custom Event (Disabled in readonly mode)"
+                            },
+                            {
+                              "locale": "de",
+                              "text": "Custom Event (Disabled in readonly mode)"
+                            }
+                          ]
+                        },
+                        {
+                          "value": "defaultButton/edit",
+                          "label": [
+                            {
+                              "locale": "en",
+                              "text": "Edit"
+                            },
+                            {
+                              "locale": "de",
+                              "text": "Edit"
+                            }
+                          ]
+                        },
+                        {
+                          "value": "defaultButton/add",
+                          "label": [
+                            {
+                              "locale": "en",
+                              "text": "Add"
+                            },
+                            {
+                              "locale": "de",
+                              "text": "Add"
+                            }
+                          ]
+                        },
+                        {
+                          "value": "defaultButton/download",
+                          "label": [
+                            {
+                              "locale": "en",
+                              "text": "Download"
+                            },
+                            {
+                              "locale": "de",
+                              "text": "Download"
+                            }
+                          ]
+                        }
+                      ],
+                      "categories": []
+                    }
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "Row action button to hide for all rows"
+                    },
+                    {
+                      "locale": "de",
+                      "text": "Row action button to hide for all rows"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Group",
+                "id": "group_4bb2d",
+                "name": "repeatableGroupInlineRepeat",
+                "Group": {
+                  "repeatability": 5,
+                  "elements": [
+                    {
+                      "type": "Field",
+                      "id": "field_2dd33",
+                      "name": "anyField",
+                      "Field": {
+                        "fieldType": {
+                          "type": "StringType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "Field"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "Field"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_c9965",
+                      "name": "shouldDisable",
+                      "Field": {
+                        "fieldType": {
+                          "type": "BooleanType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "Disable"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "Disable"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_28f4b",
+                      "name": "disableRowAction",
+                      "Field": {
+                        "fieldType": {
+                          "type": "EnumerationType",
+                          "EnumerationType": {
+                            "values": [
+                              {
+                                "value": "defaultButton/copy",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "Copy"
+                                  },
+                                  {
+                                    "locale": "de",
+                                    "text": "Copy"
+                                  }
+                                ]
+                              },
+                              {
+                                "value": "defaultButton/delete",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "Delete"
+                                  },
+                                  {
+                                    "locale": "de",
+                                    "text": "Delete"
+                                  }
+                                ]
+                              },
+                              {
+                                "value": "defaultButton/move",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "Move"
+                                  },
+                                  {
+                                    "locale": "de",
+                                    "text": "Move"
+                                  }
+                                ]
+                              },
+                              {
+                                "value": "custom_event",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "Custom Event"
+                                  },
+                                  {
+                                    "locale": "de",
+                                    "text": "Custom Event"
+                                  }
+                                ]
+                              },
+                              {
+                                "value": "custom_event_with_confirmation",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "Custom Event (with confirmation)"
+                                  },
+                                  {
+                                    "locale": "de",
+                                    "text": "Custom Event (with confirmation)"
+                                  }
+                                ]
+                              },
+                              {
+                                "value": "custom_event_hidden_in_edit_mode",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "Custom Event (Hidden in edit mode)"
+                                  },
+                                  {
+                                    "locale": "de",
+                                    "text": "Custom Event (Hidden in edit mode)"
+                                  }
+                                ]
+                              },
+                              {
+                                "value": "custom_event_hidden_in_ro_mode",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "Custom Event (Hidden in readonly mode)"
+                                  },
+                                  {
+                                    "locale": "de",
+                                    "text": "Custom Event (Hidden in readonly mode)"
+                                  }
+                                ]
+                              },
+                              {
+                                "value": "custom_event_disabled_in_edit_mode",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "Custom Event (Disabled in edit mode)"
+                                  },
+                                  {
+                                    "locale": "de",
+                                    "text": "Custom Event (Disabled in edit mode)"
+                                  }
+                                ]
+                              },
+                              {
+                                "value": "custom_event_disabled_in_ro_mode",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "Custom Event (Disabled in readonly mode)"
+                                  },
+                                  {
+                                    "locale": "de",
+                                    "text": "Custom Event (Disabled in readonly mode)"
+                                  }
+                                ]
+                              }
+                            ],
+                            "categories": []
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "Row Action Button to disable/enable"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "Row Action Button to disable/enable"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_43577",
+                      "name": "shouldHide",
+                      "Field": {
+                        "fieldType": {
+                          "type": "BooleanType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "Hide"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "Hide"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_f3c4c",
+                      "name": "hideRowAction",
+                      "Field": {
+                        "fieldType": {
+                          "type": "EnumerationType",
+                          "EnumerationType": {
+                            "values": [
+                              {
+                                "value": "defaultButton/copy",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "Copy"
+                                  },
+                                  {
+                                    "locale": "de",
+                                    "text": "Copy"
+                                  }
+                                ]
+                              },
+                              {
+                                "value": "defaultButton/delete",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "Delete"
+                                  },
+                                  {
+                                    "locale": "de",
+                                    "text": "Delete"
+                                  }
+                                ]
+                              },
+                              {
+                                "value": "defaultButton/move",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "Move"
+                                  },
+                                  {
+                                    "locale": "de",
+                                    "text": "Move"
+                                  }
+                                ]
+                              },
+                              {
+                                "value": "custom_event",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "Custom Event"
+                                  },
+                                  {
+                                    "locale": "de",
+                                    "text": "Custom Event"
+                                  }
+                                ]
+                              },
+                              {
+                                "value": "custom_event_with_confirmation",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "Custom (with confirmation)"
+                                  },
+                                  {
+                                    "locale": "de",
+                                    "text": "Custom (with confirmation)"
+                                  }
+                                ]
+                              },
+                              {
+                                "value": "custom_event_hidden_in_edit_mode",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "Custom Event (Hidden in edit mode)"
+                                  },
+                                  {
+                                    "locale": "de",
+                                    "text": "Custom Event (Hidden in edit mode)"
+                                  }
+                                ]
+                              },
+                              {
+                                "value": "custom_event_hidden_in_ro_mode",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "Custom Event (Hidden in readonly mode)"
+                                  },
+                                  {
+                                    "locale": "de",
+                                    "text": "Custom Event (Hidden in readonly mode)"
+                                  }
+                                ]
+                              },
+                              {
+                                "value": "custom_event_disabled_in_edit_mode",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "Custom Event (Disabled in edit mode)"
+                                  },
+                                  {
+                                    "locale": "de",
+                                    "text": "Custom Event (Disabled in edit mode)"
+                                  }
+                                ]
+                              },
+                              {
+                                "value": "custom_event_disabled_in_ro_mode",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "Custom Event (Disabled in readonly mode)"
+                                  },
+                                  {
+                                    "locale": "de",
+                                    "text": "Custom Event (Disabled in readonly mode)"
+                                  }
+                                ]
+                              }
+                            ],
+                            "categories": []
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "Row Action Button to hide/show"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "Row Action Button to hide/show"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Group",
+                "id": "group_e4662",
+                "name": "repeatableGroupDetachedRepeat",
+                "Group": {
+                  "repeatability": 5,
+                  "elements": [
+                    {
+                      "type": "Field",
+                      "id": "field_64f3f",
+                      "name": "anyField",
+                      "Field": {
+                        "fieldType": {
+                          "type": "StringType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "Field"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "Field"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_4708e",
+                      "name": "disableDetachedRepeatButtons",
+                      "Field": {
+                        "fieldType": {
+                          "type": "EnumerationType",
+                          "EnumerationType": {
+                            "values": [
+                              {
+                                "value": "defaultButton/cancel_detached_repeat",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "Cancel"
+                                  },
+                                  {
+                                    "locale": "de",
+                                    "text": "Cancel"
+                                  }
+                                ]
+                              },
+                              {
+                                "value": "defaultButton/commit_detached_repeat",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "Commit"
+                                  },
+                                  {
+                                    "locale": "de",
+                                    "text": "Commit"
+                                  }
+                                ]
+                              }
+                            ],
+                            "alphabeticalSorting": true
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "Disable detached repeat button"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "Disable detached repeat button"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_75862",
+                      "name": "hideDetachedRepeatButtons",
+                      "Field": {
+                        "fieldType": {
+                          "type": "EnumerationType",
+                          "EnumerationType": {
+                            "values": [
+                              {
+                                "value": "defaultButton/cancel_detached_repeat",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "Cancel"
+                                  },
+                                  {
+                                    "locale": "de",
+                                    "text": "Cancel"
+                                  }
+                                ]
+                              },
+                              {
+                                "value": "defaultButton/commit_detached_repeat",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "Commit"
+                                  },
+                                  {
+                                    "locale": "de",
+                                    "text": "Commit"
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "Hide detached repeat button"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "Hide detached repeat button"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Group",
+                "id": "group_c4d99",
+                "name": "repeatGroupEmbeddedRepeat",
+                "Group": {
+                  "repeatability": 5,
+                  "elements": [
+                    {
+                      "type": "Field",
+                      "id": "field_c3cdf",
+                      "name": "anyField",
+                      "Field": {
+                        "fieldType": {
+                          "type": "StringType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "Field"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "Field"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_64da3",
+                      "name": "hideEdit",
+                      "Field": {
+                        "fieldType": {
+                          "type": "BooleanType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "Hide Edit"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "Hide Edit"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Group",
+                "id": "group_51a1f",
+                "name": "repeatableGroupAttachmentCollection",
+                "Group": {
+                  "repeatability": 5,
+                  "elements": [
+                    {
+                      "type": "Field",
+                      "id": "field_50628",
+                      "name": "anyField",
+                      "Field": {
+                        "fieldType": {
+                          "type": "StringType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "Field"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "Field"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_c7c4c",
+                      "name": "disableRowAction",
+                      "Field": {
+                        "fieldType": {
+                          "type": "EnumerationType",
+                          "EnumerationType": {
+                            "values": [
+                              {
+                                "value": "defaultButton/download",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "Download"
+                                  },
+                                  {
+                                    "locale": "de",
+                                    "text": "Download"
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "Row Action Button to disable/enable"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "Row Action Button to disable/enable"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_48c0d",
+                      "name": "hideRowAction",
+                      "Field": {
+                        "fieldType": {
+                          "type": "EnumerationType",
+                          "EnumerationType": {
+                            "values": [
+                              {
+                                "value": "defaultButton/download",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "Download"
+                                  },
+                                  {
+                                    "locale": "de",
+                                    "text": "Download"
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "Row Action Button to hide/show"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "Row Action Button to hide/show"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Group",
+                      "id": "group_63864",
+                      "name": "Attachment",
+                      "Group": {
+                        "repeatability": 1,
+                        "usageType": "attachment",
+                        "elements": [
+                          {
+                            "type": "Field",
+                            "id": "field_f0a1b",
+                            "name": "original_filename",
+                            "Field": {
+                              "fieldType": {
+                                "type": "StringType"
+                              }
+                            }
+                          },
+                          {
+                            "type": "Field",
+                            "id": "field_2f185",
+                            "name": "internal_filename",
+                            "Field": {
+                              "fieldType": {
+                                "type": "StringType"
+                              }
+                            }
+                          },
+                          {
+                            "type": "Field",
+                            "id": "field_510e4",
+                            "name": "content",
+                            "Field": {
+                              "fieldType": {
+                                "type": "StringType",
+                                "StringType": {
+                                  "lineBreaksPermitted": true,
+                                  "noValueValidation": true
+                                }
+                              }
+                            }
+                          },
+                          {
+                            "type": "Field",
+                            "id": "field_b9e5b",
+                            "name": "attachment_id",
+                            "Field": {
+                              "fieldType": {
+                                "type": "StringType"
+                              }
+                            }
+                          },
+                          {
+                            "type": "Field",
+                            "id": "field_a1355",
+                            "name": "size",
+                            "Field": {
+                              "fieldType": {
+                                "type": "NumberType"
+                              }
+                            }
+                          },
+                          {
+                            "type": "Field",
+                            "id": "field_f44b1",
+                            "name": "mime_type",
+                            "Field": {
+                              "fieldType": {
+                                "type": "StringType"
+                              }
+                            }
+                          },
+                          {
+                            "type": "Field",
+                            "id": "field_16999",
+                            "name": "category",
+                            "Field": {
+                              "fieldType": {
+                                "type": "StringType"
+                              }
+                            }
+                          },
+                          {
+                            "type": "Field",
+                            "id": "field_b2490",
+                            "name": "description",
+                            "Field": {
+                              "fieldType": {
+                                "type": "StringType"
+                              }
+                            }
+                          },
+                          {
+                            "type": "Rule",
+                            "id": "rule_d0933",
+                            "name": "AttachmentInternalFilenameRequired",
+                            "Rule": {
+                              "errorEntityRelPath": "../internal_filename",
+                              "errorCode": "Error rule_d0933",
+                              "errorCondition": "GroupFilled(RuleGroup) and FieldNotFilled(internal_filename)",
+                              "severity": "ERROR",
+                              "errorMessage": [
+                                {
+                                  "locale": "en",
+                                  "text": "Internal Error: Field internal_filename of customType attachment is not filled."
+                                },
+                                {
+                                  "locale": "de",
+                                  "text": "Internal Error: Field internal_filename of customType attachment is not filled."
+                                }
+                              ]
+                            }
+                          },
+                          {
+                            "type": "Rule",
+                            "id": "rule_bafee",
+                            "name": "AttachmentMimeTypeRequired",
+                            "Rule": {
+                              "errorEntityRelPath": "../mime_type",
+                              "errorCode": "Error rule_bafee",
+                              "errorCondition": "GroupFilled(RuleGroup) and FieldNotFilled(mime_type)",
+                              "severity": "ERROR",
+                              "errorMessage": [
+                                {
+                                  "locale": "en",
+                                  "text": "Internal Error: Field mime_type of customType attachment is not filled."
+                                },
+                                {
+                                  "locale": "de",
+                                  "text": "Internal Error: Field mime_type of customType attachment is not filled."
+                                }
+                              ]
+                            }
+                          },
+                          {
+                            "type": "Rule",
+                            "id": "rule_7417b",
+                            "name": "AttachmentIdOrContentFilled",
+                            "Rule": {
+                              "errorEntityRelPath": "../content",
+                              "errorCode": "Error rule_7417b",
+                              "errorCondition": "GroupFilled(RuleGroup) and NotExactlyOneFieldFilled(attachment_id, content)",
+                              "severity": "ERROR",
+                              "errorMessage": [
+                                {
+                                  "locale": "en",
+                                  "text": "Internal Error: Either attachment_id or content must be filled in a customType attachment, but not both."
+                                },
+                                {
+                                  "locale": "de",
+                                  "text": "Internal Error: Either attachment_id or content must be filled in a customType attachment, but not both."
+                                }
+                              ]
+                            }
+                          },
+                          {
+                            "type": "Rule",
+                            "id": "rule_75bc0",
+                            "name": "SizeOfContentFilled",
+                            "Rule": {
+                              "errorEntityRelPath": "../content",
+                              "errorCode": "Error rule_75bc0",
+                              "errorCondition": "FieldFilled(content) and FieldNotFilled(size)",
+                              "severity": "ERROR",
+                              "errorMessage": [
+                                {
+                                  "locale": "en",
+                                  "text": "Internal Error: If the content is filled, the size must be also filled."
+                                },
+                                {
+                                  "locale": "de",
+                                  "text": "Internal Error: If the content is filled, the size must be also filled."
+                                }
+                              ]
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

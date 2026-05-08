@@ -1,0 +1,178 @@
+{
+  "header": {
+    "id": "validation-cm",
+    "modelType": "content",
+    "modelVersion": "0.8.0",
+    "locales": [
+      {
+        "code": "en"
+      }
+    ],
+    "labels": [],
+    "annotations": [
+      {
+        "name": "roles",
+        "value": "CMS_contentManager,CMS_contentReader"
+      }
+    ],
+    "modelReferences": [
+      {
+        "purpose": "document-model-for-content-model",
+        "modelType": "document",
+        "alias": "DM",
+        "reference": "validation-dm"
+      }
+    ]
+  },
+  "content": {
+    "configuration": {
+      "namespaceVersions": {
+        "com.mgmtp.a12.contentengine": "0.9.0"
+      }
+    },
+    "root": {
+      "id": "dd4c8345",
+      "namespace": "com.mgmtp.a12.contentengine",
+      "type": "Box",
+      "props": {
+        "style": {
+          "display": "flex",
+          "width": "100%",
+          "height": "fit-content",
+          "flexDirection": "column",
+          "padding": "8px",
+          "margin": "0px",
+          "gap": "8px",
+          "backgroundRepeat": "no-repeat"
+        }
+      },
+      "children": [
+        {
+          "id": "c481337a",
+          "namespace": "com.mgmtp.a12.contentengine",
+          "type": "Heading",
+          "props": {
+            "tree": {
+              "root": {
+                "children": [
+                  {
+                    "children": [
+                      {
+                        "detail": 0,
+                        "format": 0,
+                        "mode": "normal",
+                        "style": "",
+                        "text": "Expressions",
+                        "type": "text",
+                        "version": 1
+                      }
+                    ],
+                    "direction": "ltr",
+                    "format": "",
+                    "indent": 0,
+                    "type": "heading",
+                    "version": 1,
+                    "tag": "h1"
+                  }
+                ],
+                "direction": "ltr",
+                "format": "",
+                "indent": 0,
+                "type": "root",
+                "version": 1
+              }
+            },
+            "html": "<h1 class=\"editor-heading-h1\" dir=\"ltr\"><span style=\"white-space: pre-wrap;\">Validation</span></h1>"
+          }
+        },
+        {
+          "id": "eaf42fca",
+          "namespace": "com.mgmtp.a12.contentengine",
+          "type": "Box",
+          "props": {
+            "style": {
+              "display": "flex",
+              "width": "100%",
+              "height": "fit-content",
+              "flexDirection": "column",
+              "padding": "8px",
+              "margin": "0px",
+              "gap": "8px",
+              "backgroundRepeat": "no-repeat"
+            }
+          },
+          "children": [
+            {
+              "id": "controlgrid-test",
+              "namespace": "com.mgmtp.a12.contentengine",
+              "type": "Grid",
+              "props": {},
+              "children": [
+                {
+                  "id": "row-2",
+                  "namespace": "com.mgmtp.a12.contentengine",
+                  "type": "GridRow",
+                  "props": {},
+                  "children": [
+                    {
+                      "id": "control-2a",
+                      "namespace": "com.mgmtp.a12.contentengine",
+                      "type": "GridColumn",
+                      "props": {},
+                      "children": [
+                        {
+                          "id": "control-first-name",
+                          "namespace": "com.mgmtp.a12.formengine",
+                          "type": "TextLine",
+                          "props": {
+                            "elementId": "field_8e081",
+                            "label": [
+                              {
+                                "locale": "en",
+                                "text": "first name"
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "row-9",
+                  "namespace": "com.mgmtp.a12.contentengine",
+                  "type": "GridRow",
+                  "props": {},
+                  "children": [
+                    {
+                      "id": "control-9a",
+                      "namespace": "com.mgmtp.a12.contentengine",
+                      "type": "GridColumn",
+                      "props": {},
+                      "children": [
+                        {
+                          "id": "control-last-name",
+                          "namespace": "com.mgmtp.a12.formengine",
+                          "type": "TextLine",
+                          "props": {
+                            "elementId": "field_8c40d",
+                            "label": [
+                              {
+                                "locale": "en",
+                                "text": "last name"
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

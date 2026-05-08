@@ -1,0 +1,156 @@
+{
+  "header": {
+    "id": "customization.custom-widget-document",
+    "modelType": "document",
+    "modelVersion": "28.4.0",
+    "locales": [
+      {
+        "code": "en"
+      },
+      {
+        "code": "de"
+      }
+    ],
+    "labels": [],
+    "annotations": [
+      {
+        "name": "roles",
+        "value": "admin"
+      }
+    ],
+    "modelReferences": []
+  },
+  "content": {
+    "modelInfo": {
+      "name": "customization.custom-widget-document",
+      "immutable": false
+    },
+    "modelConfig": {
+      "decimalSeparator": ".",
+      "timeZone": "UTC",
+      "conditionLanguage": {
+        "code": "en_US"
+      }
+    },
+    "modelRoot": {
+      "rootGroups": [
+        {
+          "type": "Group",
+          "id": "group_34db3",
+          "name": "root",
+          "Group": {
+            "repeatability": 1,
+            "elements": [
+              {
+                "type": "Field",
+                "id": "field_057ab",
+                "name": "stringFieldWithHelperText",
+                "Field": {
+                  "fieldType": {
+                    "type": "StringType"
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "Text line with an additional button (showing a helper text)"
+                    },
+                    {
+                      "locale": "de",
+                      "text": "Text line with an additional button (showing a helper text)"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Field",
+                "id": "field_8e029",
+                "name": "stringFieldWithClearButton",
+                "Field": {
+                  "fieldType": {
+                    "type": "StringType"
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "Text line with an additional Clear button"
+                    },
+                    {
+                      "locale": "de",
+                      "text": "Text line with an additional Clear button"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Field",
+                "id": "field_42984",
+                "name": "stringField",
+                "Field": {
+                  "fieldType": {
+                    "type": "StringType"
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "Text line without customization"
+                    },
+                    {
+                      "locale": "de",
+                      "text": "Text line without customization"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Field",
+                "id": "field_c15c5",
+                "name": "dateFieldRestricted",
+                "Field": {
+                  "fieldType": {
+                    "type": "DateType",
+                    "DateType": {
+                      "format": "yyyy-MM-dd"
+                    }
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "Date input with a customized date picker (restricted to the next 14 days)"
+                    },
+                    {
+                      "locale": "de",
+                      "text": "Date input with a customized date picker (restricted to the next 14 days)"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Field",
+                "id": "field_9ee7d",
+                "name": "dateField",
+                "Field": {
+                  "fieldType": {
+                    "type": "DateType",
+                    "DateType": {
+                      "format": "yyyy-MM-dd"
+                    }
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "Date input without customization"
+                    },
+                    {
+                      "locale": "de",
+                      "text": "Date input without customization"
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

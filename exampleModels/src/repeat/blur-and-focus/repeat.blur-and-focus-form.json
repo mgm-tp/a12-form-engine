@@ -1,0 +1,574 @@
+{
+  "header": {
+    "id": "repeat.blur-and-focus-form",
+    "modelType": "form",
+    "modelVersion": "37.4.0",
+    "locales": [
+      {
+        "code": "en"
+      }
+    ],
+    "annotations": [
+      {
+        "name": "roles",
+        "value": "admin"
+      }
+    ],
+    "modelReferences": [
+      {
+        "alias": "DM",
+        "modelType": "document",
+        "purpose": "data binding",
+        "reference": "repeat.blur-and-focus-document"
+      }
+    ]
+  },
+  "content": {
+    "subHeaderBox": {
+      "id": "subHeaderBox1"
+    },
+    "footerBox": {
+      "id": "footerBox1"
+    },
+    "screens": [
+      {
+        "id": "screen1",
+        "name": "Screen1",
+        "screenElements": [
+          {
+            "type": "ControlGrid",
+            "id": "controlgrid-999fe",
+            "name": "cg1",
+            "layout": {
+              "lg": "4-4-4"
+            },
+            "row": [
+              {
+                "type": "Row",
+                "id": "row-af25b",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control-e3a29",
+                    "elementRef": "field_30aa3"
+                  }
+                ]
+              }
+            ],
+            "verticalAlignment": "BOTTOM"
+          },
+          {
+            "type": "InlineRepeat",
+            "id": "inlinerepeat-97f35",
+            "name": "inline-repeat",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "Inline Repeat"
+                  }
+                ]
+              }
+            },
+            "repeatOverviewColumn": [
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-0d9da",
+                "width": 1,
+                "sortable": true,
+                "filterable": true,
+                "preferredSorting": "ASC",
+                "elementRef": "field_ea294"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-688b7",
+                "width": 1,
+                "sortable": true,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "elementRef": "field_7229e"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-1a108",
+                "width": 1,
+                "sortable": true,
+                "filterable": true,
+                "preferredSorting": "ASC",
+                "elementRef": "fieldimpl_c2f86"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-42842",
+                "width": 1,
+                "sortable": true,
+                "filterable": true,
+                "preferredSorting": "ASC",
+                "elementRef": "fieldimpl_6110d"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-0bb9f",
+                "width": 1,
+                "sortable": true,
+                "filterable": true,
+                "preferredSorting": "ASC",
+                "datePickerConfig": {
+                  "absolute": false,
+                  "preselectionYear": 0
+                },
+                "elementRef": "field_43f56"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-710df",
+                "width": 1,
+                "sortable": true,
+                "filterable": true,
+                "preferredSorting": "ASC",
+                "datePickerConfig": {
+                  "absolute": false,
+                  "preselectionYear": 0
+                },
+                "elementRef": "fieldimpl_564bf"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-37a66",
+                "width": 1,
+                "sortable": true,
+                "filterable": true,
+                "preferredSorting": "ASC",
+                "elementRef": "fieldimpl_216bb"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-ea816",
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "elementRef": "group_ac2b1"
+              }
+            ],
+            "groupRef": "group_4d59f",
+            "enableAdd": true,
+            "enableRemove": true,
+            "enableReorder": false,
+            "enableCopy": false,
+            "pageSize": 2
+          },
+          {
+            "type": "DetachedRepeat",
+            "id": "detachedrepeat-d162f",
+            "name": "detached-repeat",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "Detached Repeat"
+                  }
+                ]
+              }
+            },
+            "repeatOverviewColumn": [
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-0f4e6",
+                "width": 1,
+                "sortable": true,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "elementRef": "field_ea294"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-1d934",
+                "width": 1,
+                "sortable": true,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "elementRef": "field_7229e"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-58a81",
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "elementRef": "fieldimpl_c2f86"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-18c4e",
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "elementRef": "fieldimpl_6110d"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-0b4ad",
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "elementRef": "field_43f56"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-7b4fb",
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "elementRef": "fieldimpl_564bf"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-8a185",
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "elementRef": "fieldimpl_216bb"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-e6439",
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "elementRef": "group_ac2b1"
+              }
+            ],
+            "groupRef": "group_4d59f",
+            "enableAdd": true,
+            "enableRemove": true,
+            "enableReorder": false,
+            "enableCopy": false,
+            "pageSize": 2,
+            "detailScreen": {
+              "id": "screen-b38f4",
+              "name": "detached-repeat-detail-screen",
+              "screenElements": [
+                {
+                  "type": "ControlGrid",
+                  "id": "controlgrid-bc772",
+                  "name": "cg",
+                  "row": [
+                    {
+                      "type": "Row",
+                      "id": "row-4ce6e",
+                      "cell": [
+                        {
+                          "type": "Control",
+                          "id": "control-13374",
+                          "elementRef": "field_ea294"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "Row",
+                      "id": "row-1dc5c",
+                      "cell": [
+                        {
+                          "type": "Control",
+                          "id": "control-2578c",
+                          "elementRef": "field_7229e"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "Row",
+                      "id": "row-23c7f",
+                      "cell": [
+                        {
+                          "type": "Control",
+                          "id": "control-7b4f8",
+                          "elementRef": "fieldimpl_c2f86"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "Row",
+                      "id": "row-ff253",
+                      "cell": [
+                        {
+                          "type": "Control",
+                          "id": "control-34a34",
+                          "elementRef": "fieldimpl_6110d"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "Row",
+                      "id": "row-09863",
+                      "cell": [
+                        {
+                          "type": "Control",
+                          "id": "control-99d36",
+                          "elementRef": "field_43f56"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "Row",
+                      "id": "row-28f57",
+                      "cell": [
+                        {
+                          "type": "Control",
+                          "id": "control-df299",
+                          "elementRef": "fieldimpl_564bf"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "Row",
+                      "id": "row-617f2",
+                      "cell": [
+                        {
+                          "type": "Control",
+                          "id": "control-f6452",
+                          "elementRef": "fieldimpl_216bb"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "Row",
+                      "id": "row-805fa",
+                      "cell": [
+                        {
+                          "type": "Control",
+                          "id": "control-a35f2",
+                          "elementRef": "group_ac2b1"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "type": "EmbeddedRepeat",
+            "id": "embeddedrepeat-6bd83",
+            "name": "embedded-repeat",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "Embedded Repeat"
+                  }
+                ]
+              }
+            },
+            "repeatOverviewColumn": [
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-37b6d",
+                "width": 1,
+                "sortable": true,
+                "filterable": true,
+                "preferredSorting": "ASC",
+                "elementRef": "field_ea294"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-c0a3e",
+                "width": 1,
+                "sortable": true,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "elementRef": "field_7229e"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-4482c",
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "elementRef": "fieldimpl_c2f86"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-518ae",
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "elementRef": "fieldimpl_6110d"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-ad2c3",
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "elementRef": "field_43f56"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-674f4",
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "elementRef": "fieldimpl_564bf"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-3cfbf",
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "elementRef": "fieldimpl_216bb"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-3695c",
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "elementRef": "group_ac2b1"
+              }
+            ],
+            "groupRef": "group_4d59f",
+            "enableAdd": true,
+            "enableRemove": true,
+            "enableReorder": false,
+            "enableCopy": false,
+            "pageSize": 2,
+            "controlGrid": {
+              "type": "ControlGrid",
+              "id": "controlgrid-49277",
+              "name": "cg",
+              "row": [
+                {
+                  "type": "Row",
+                  "id": "row-57bdb",
+                  "cell": [
+                    {
+                      "type": "Control",
+                      "id": "control-788f2",
+                      "elementRef": "field_ea294"
+                    }
+                  ]
+                },
+                {
+                  "type": "Row",
+                  "id": "row-17b5a",
+                  "cell": [
+                    {
+                      "type": "Control",
+                      "id": "control-7f090",
+                      "elementRef": "field_7229e"
+                    }
+                  ]
+                },
+                {
+                  "type": "Row",
+                  "id": "row-60868",
+                  "cell": [
+                    {
+                      "type": "Control",
+                      "id": "control-a0fb8",
+                      "elementRef": "fieldimpl_c2f86"
+                    }
+                  ]
+                },
+                {
+                  "type": "Row",
+                  "id": "row-dc378",
+                  "cell": [
+                    {
+                      "type": "Control",
+                      "id": "control-b9f29",
+                      "elementRef": "fieldimpl_6110d"
+                    }
+                  ]
+                },
+                {
+                  "type": "Row",
+                  "id": "row-0b550",
+                  "cell": [
+                    {
+                      "type": "Control",
+                      "id": "control-65b4f",
+                      "elementRef": "field_43f56"
+                    }
+                  ]
+                },
+                {
+                  "type": "Row",
+                  "id": "row-ca23b",
+                  "cell": [
+                    {
+                      "type": "Control",
+                      "id": "control-fda4a",
+                      "elementRef": "fieldimpl_564bf"
+                    }
+                  ]
+                },
+                {
+                  "type": "Row",
+                  "id": "row-1429c",
+                  "cell": [
+                    {
+                      "type": "Control",
+                      "id": "control-e85fc",
+                      "elementRef": "fieldimpl_216bb"
+                    }
+                  ]
+                },
+                {
+                  "type": "Row",
+                  "id": "row-a798d",
+                  "cell": [
+                    {
+                      "type": "Control",
+                      "id": "control-2a479",
+                      "elementRef": "group_ac2b1"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "fieldConfiguration": {
+      "field": [
+        {
+          "initialValue": "Teststring",
+          "elementRef": "field_ea294"
+        },
+        {
+          "exposition": "CHECKBOX",
+          "elementRef": "fieldimpl_c2f86"
+        },
+        {
+          "exposition": "AUTOCOMPLETE",
+          "elementRef": "fieldimpl_6110d"
+        }
+      ]
+    },
+    "groupConfiguration": {},
+    "defaults": {}
+  }
+}

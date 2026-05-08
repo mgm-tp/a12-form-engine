@@ -1,0 +1,174 @@
+{
+  "header": {
+    "id": "dependency-fm",
+    "modelType": "form",
+    "modelVersion": "37.4.0",
+    "locales": [
+      {
+        "code": "en"
+      }
+    ],
+    "modelReferences": [
+      {
+        "alias": "dependency-dm",
+        "modelType": "document",
+        "purpose": "data binding",
+        "reference": "dependency-dm"
+      }
+    ]
+  },
+  "content": {
+    "subHeaderBox": {
+      "id": "subheader"
+    },
+    "footerBox": {
+      "id": "footer"
+    },
+    "fieldConfiguration": {
+      "field": [
+        {
+          "initialValue": "5",
+          "elementRef": "field_123e7"
+        },
+        {
+          "initialValue": "15",
+          "elementRef": "field_7bbfc"
+        },
+        {
+          "dependentField": {
+            "masterField": "field_36430",
+            "case": [
+              {
+                "masterValue": "false",
+                "value": "trigger field was set to false"
+              },
+              {
+                "masterValue": "true",
+                "value": "trigger field was set to true"
+              },
+              {
+                "masterValue": "",
+                "value": "trigger field was removed"
+              }
+            ]
+          },
+          "elementRef": "field_288cd"
+        },
+        {
+          "dependentField": {
+            "masterField": "field_ae8e6",
+            "case": [
+              {
+                "masterValue": "true",
+                "notRelevant": true
+              }
+            ]
+          },
+          "elementRef": "field_794b7"
+        },
+        {
+          "dependentEnumeration": {
+            "masterField": "field_e13f6",
+            "constraint": [
+              {
+                "masterValue": null,
+                "constraintValues": [
+                  {
+                    "value": "beef"
+                  },
+                  {
+                    "value": "pork"
+                  },
+                  {
+                    "value": "lamb"
+                  },
+                  {
+                    "value": "shrimp"
+                  },
+                  {
+                    "value": "tuna"
+                  },
+                  {
+                    "value": "salmon"
+                  },
+                  {
+                    "value": "pea"
+                  },
+                  {
+                    "value": "soy"
+                  },
+                  {
+                    "value": "wheat"
+                  }
+                ]
+              },
+              {
+                "masterValue": "meat",
+                "constraintValues": [
+                  {
+                    "value": "beef"
+                  },
+                  {
+                    "value": "pork"
+                  },
+                  {
+                    "value": "lamb"
+                  }
+                ],
+                "valueForMasterChange": "beef"
+              },
+              {
+                "masterValue": "seafood",
+                "constraintValues": [
+                  {
+                    "value": "shrimp"
+                  },
+                  {
+                    "value": "tuna"
+                  },
+                  {
+                    "value": "salmon"
+                  }
+                ],
+                "valueForMasterChange": "shrimp"
+              },
+              {
+                "masterValue": "plant",
+                "constraintValues": [
+                  {
+                    "value": "pea"
+                  },
+                  {
+                    "value": "soy"
+                  },
+                  {
+                    "value": "wheat"
+                  }
+                ],
+                "valueForMasterChange": "pea"
+              }
+            ]
+          },
+          "elementRef": "field_d6416"
+        }
+      ]
+    },
+    "groupConfiguration": {
+      "group": [
+        {
+          "dependentGroup": {
+            "masterField": "field_d1b14",
+            "case": [
+              {
+                "masterValue": "true",
+                "notRelevant": true
+              }
+            ]
+          },
+          "groupRef": "group_4f9a3"
+        }
+      ]
+    },
+    "defaults": {}
+  }
+}

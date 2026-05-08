@@ -1,0 +1,346 @@
+{
+  "header": {
+    "id": "customization.custom-control-form",
+    "modelType": "form",
+    "modelVersion": "37.4.0",
+    "locales": [
+      {
+        "code": "en"
+      },
+      {
+        "code": "de"
+      }
+    ],
+    "labels": [
+      {
+        "locale": "en",
+        "text": "Custom control"
+      },
+      {
+        "locale": "de",
+        "text": "Custom control"
+      }
+    ],
+    "annotations": [
+      {
+        "name": "roles",
+        "value": "admin"
+      }
+    ],
+    "modelReferences": [
+      {
+        "alias": "DM",
+        "modelType": "document",
+        "purpose": "data binding",
+        "reference": "customization.custom-control-document"
+      }
+    ]
+  },
+  "content": {
+    "subHeaderBox": {
+      "id": "subHeaderBox1"
+    },
+    "footerBox": {
+      "id": "footerBox1"
+    },
+    "screens": [
+      {
+        "id": "screen1",
+        "name": "Screen1",
+        "screenElements": [
+          {
+            "type": "ControlGrid",
+            "id": "controlgrid-02185",
+            "name": "cg0",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "Information"
+                  },
+                  {
+                    "locale": "de",
+                    "text": "Information"
+                  }
+                ]
+              }
+            },
+            "row": [
+              {
+                "type": "Row",
+                "id": "row-ee3e9",
+                "cell": [
+                  {
+                    "type": "TextCell",
+                    "id": "textcell-065a0",
+                    "offset": {
+                      "lg": 0
+                    },
+                    "span": {
+                      "lg": 1
+                    },
+                    "name": "text1",
+                    "content": {
+                      "text": [
+                        {
+                          "locale": "en",
+                          "text": "This model uses a custom form model map to render a custom control.\n<br/>\nThe code uses some helper functions which are available in the form-engine.\n<br/>\nYou can check out the code of the devapp to see how the implementation looks like."
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            ],
+            "verticalAlignment": "TOP"
+          },
+          {
+            "type": "ControlGrid",
+            "id": "controlgrid-954a7",
+            "name": "cg1",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "Custom control"
+                  }
+                ]
+              }
+            },
+            "row": [
+              {
+                "type": "Row",
+                "id": "row-b33af",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control-3ec01",
+                    "annotations": [
+                      {
+                        "name": "type",
+                        "value": "customControl"
+                      }
+                    ],
+                    "offset": {
+                      "lg": 0
+                    },
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "Number Field with suffix"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "Zahlen Feld mit Suffix"
+                          }
+                        ]
+                      }
+                    },
+                    "elementRef": "field_c4d07"
+                  }
+                ]
+              },
+              {
+                "type": "Row",
+                "id": "row-92f4c",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control-eae93",
+                    "annotations": [
+                      {
+                        "name": "type",
+                        "value": "customControl"
+                      }
+                    ],
+                    "offset": {
+                      "lg": 0
+                    },
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "Number Field with validation message box"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "Zahlenfeld mit Validierungs Message Box"
+                          }
+                        ]
+                      }
+                    },
+                    "elementRef": "field_79007"
+                  }
+                ]
+              },
+              {
+                "type": "Row",
+                "id": "row-38969",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control-50e24",
+                    "annotations": [
+                      {
+                        "name": "type",
+                        "value": "customControl"
+                      }
+                    ],
+                    "offset": {
+                      "lg": 0
+                    },
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "Number Field with validation tooltips"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "Zahlen Feld mit validation tooltips"
+                          }
+                        ]
+                      }
+                    },
+                    "messageExposition": "TOOLTIP",
+                    "elementRef": "field_a4576"
+                  }
+                ]
+              },
+              {
+                "type": "Row",
+                "id": "row-f17b6",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control-88ef6",
+                    "annotations": [
+                      {
+                        "name": "type",
+                        "value": "customControl"
+                      }
+                    ],
+                    "offset": {
+                      "lg": 0
+                    },
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "Number Field with a hint"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "Zahlen Feld mit einem Hinweis"
+                          }
+                        ]
+                      }
+                    },
+                    "hint": {
+                      "text": [
+                        {
+                          "locale": "en",
+                          "text": "This is a hint"
+                        },
+                        {
+                          "locale": "de",
+                          "text": "Dies ist ein Hinweis"
+                        }
+                      ]
+                    },
+                    "elementRef": "field_8c9bf"
+                  }
+                ]
+              },
+              {
+                "type": "Row",
+                "id": "row-452d8",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control-77c68",
+                    "annotations": [
+                      {
+                        "name": "type",
+                        "value": "customControl"
+                      }
+                    ],
+                    "offset": {
+                      "lg": 0
+                    },
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "Number Field with a Placeholder"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "Zahlen Feld mit einem Placeholder"
+                          }
+                        ]
+                      }
+                    },
+                    "elementRef": "field_534e8"
+                  }
+                ]
+              }
+            ],
+            "verticalAlignment": "TOP"
+          }
+        ]
+      }
+    ],
+    "fieldConfiguration": {
+      "field": [
+        {
+          "placeholder": {
+            "text": [
+              {
+                "locale": "en",
+                "text": "Select a value"
+              },
+              {
+                "locale": "de",
+                "text": "Wählen Sie einen Wert aus"
+              }
+            ]
+          },
+          "elementRef": "field_534e8"
+        },
+        {
+          "suffix": {
+            "text": [
+              {
+                "locale": "en",
+                "text": "m²"
+              },
+              {
+                "locale": "de",
+                "text": "m²"
+              }
+            ]
+          },
+          "elementRef": "field_c4d07"
+        }
+      ]
+    },
+    "groupConfiguration": {},
+    "defaults": {}
+  }
+}

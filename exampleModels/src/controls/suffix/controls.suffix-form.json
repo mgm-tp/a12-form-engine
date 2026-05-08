@@ -1,0 +1,742 @@
+{
+  "header": {
+    "id": "controls.suffix-form",
+    "modelType": "form",
+    "modelVersion": "37.4.0",
+    "locales": [
+      {
+        "code": "en"
+      },
+      {
+        "code": "de"
+      }
+    ],
+    "annotations": [
+      {
+        "name": "roles",
+        "value": "admin"
+      }
+    ],
+    "modelReferences": [
+      {
+        "alias": "DM",
+        "modelType": "document",
+        "purpose": "data binding",
+        "reference": "controls.suffix-document"
+      }
+    ]
+  },
+  "content": {
+    "amountSuffix": {
+      "type": "static",
+      "value": "global amount suffix"
+    },
+    "subHeaderBox": {
+      "id": "subHeaderBox1"
+    },
+    "footerBox": {
+      "id": "footerBox1"
+    },
+    "screens": [
+      {
+        "id": "screen1",
+        "name": "Screen1",
+        "screenElements": [
+          {
+            "type": "Section",
+            "id": "section-20136",
+            "name": "suffixFromFce",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "suffix from field configuration"
+                  },
+                  {
+                    "locale": "de",
+                    "text": "Suffix aus Field configuration"
+                  }
+                ]
+              }
+            },
+            "screenElements": [
+              {
+                "type": "ControlGrid",
+                "id": "controlgrid-d6295",
+                "name": "cg_number_none",
+                "title": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "Control Grid"
+                      },
+                      {
+                        "locale": "de",
+                        "text": "Control Grid"
+                      }
+                    ]
+                  }
+                },
+                "layout": {
+                  "lg": "4-4-4"
+                },
+                "row": [
+                  {
+                    "type": "Row",
+                    "id": "row-79b42",
+                    "cell": [
+                      {
+                        "type": "Control",
+                        "id": "control-88e8e",
+                        "offset": {
+                          "lg": 0
+                        },
+                        "label": {
+                          "type": "Multilingual",
+                          "multilingualText": {
+                            "text": [
+                              {
+                                "locale": "en",
+                                "text": "without suffix"
+                              },
+                              {
+                                "locale": "de",
+                                "text": "ohne Suffix"
+                              }
+                            ]
+                          }
+                        },
+                        "elementRef": "fieldimpl_553eb"
+                      },
+                      {
+                        "type": "Control",
+                        "id": "control-66ca7",
+                        "offset": {
+                          "lg": 0
+                        },
+                        "label": {
+                          "type": "Multilingual",
+                          "multilingualText": {
+                            "text": [
+                              {
+                                "locale": "en",
+                                "text": "with suffix"
+                              },
+                              {
+                                "locale": "de",
+                                "text": "mit Suffix"
+                              }
+                            ]
+                          }
+                        },
+                        "elementRef": "fieldimpl_aad64"
+                      },
+                      {
+                        "type": "Control",
+                        "id": "control-308b1",
+                        "offset": {
+                          "lg": 0
+                        },
+                        "label": {
+                          "type": "Multilingual",
+                          "multilingualText": {
+                            "text": [
+                              {
+                                "locale": "en",
+                                "text": "with truncated suffix"
+                              },
+                              {
+                                "locale": "de",
+                                "text": "mit gekürztem Suffix"
+                              }
+                            ]
+                          }
+                        },
+                        "truncateSuffix": true,
+                        "elementRef": "fieldimpl_aad64"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "Row",
+                    "id": "row-57df9",
+                    "cell": [
+                      {
+                        "type": "Control",
+                        "id": "control-f4469",
+                        "offset": {
+                          "lg": 0
+                        },
+                        "label": {
+                          "type": "Multilingual",
+                          "multilingualText": {
+                            "text": [
+                              {
+                                "locale": "en",
+                                "text": "Number with permille"
+                              },
+                              {
+                                "locale": "de",
+                                "text": "Zahl mit Permille"
+                              }
+                            ]
+                          }
+                        },
+                        "elementRef": "fieldimpl_66c23"
+                      }
+                    ]
+                  }
+                ],
+                "verticalAlignment": "BOTTOM"
+              },
+              {
+                "type": "InlineRepeat",
+                "id": "inlinerepeat-abe00",
+                "name": "inline-repeat",
+                "title": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "Inline Repeat"
+                      },
+                      {
+                        "locale": "de",
+                        "text": "Inline Repeat"
+                      }
+                    ]
+                  }
+                },
+                "repeatOverviewColumn": [
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-0983a",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "without suffix"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "ohne Suffix"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "sortable": false,
+                    "filterable": false,
+                    "preferredSorting": "ASC",
+                    "elementRef": "field_3a43c"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-57e2f",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "with suffix"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "mit Suffix"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "sortable": false,
+                    "filterable": false,
+                    "preferredSorting": "ASC",
+                    "elementRef": "fieldimpl_15246"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-3cb3a",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "with truncated suffix"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "mit gekürztem Suffix"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "sortable": false,
+                    "filterable": false,
+                    "preferredSorting": "ASC",
+                    "truncateSuffix": true,
+                    "elementRef": "fieldimpl_15246"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-c85e9",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "multilingual suffix"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "mehrsprachiger Suffix"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "sortable": false,
+                    "filterable": false,
+                    "preferredSorting": "ASC",
+                    "elementRef": "fieldimpl_b4f44"
+                  }
+                ],
+                "groupRef": "group_4cdfb",
+                "enableAdd": true,
+                "enableRemove": true,
+                "enableReorder": false,
+                "enableCopy": false
+              },
+              {
+                "type": "DetachedRepeat",
+                "id": "detachedrepeat-1d8d7",
+                "name": "detached-repeat",
+                "title": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "Detached Repeat"
+                      },
+                      {
+                        "locale": "de",
+                        "text": "Detached Repeat"
+                      }
+                    ]
+                  }
+                },
+                "repeatOverviewColumn": [
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-c0040",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "without suffix"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "ohne Suffix"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "sortable": false,
+                    "filterable": false,
+                    "preferredSorting": "ASC",
+                    "elementRef": "field_3a43c"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-c8f6a",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "with suffix"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "mit Suffix"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "sortable": false,
+                    "filterable": false,
+                    "preferredSorting": "ASC",
+                    "elementRef": "fieldimpl_15246"
+                  }
+                ],
+                "groupRef": "group_4cdfb",
+                "enableAdd": true,
+                "enableRemove": true,
+                "enableReorder": false,
+                "enableCopy": false,
+                "detailScreen": {
+                  "id": "screen-2d8a8",
+                  "name": "detached-repeat-number_none-detail-screen",
+                  "screenElements": [
+                    {
+                      "type": "ControlGrid",
+                      "id": "controlgrid-dfa81",
+                      "name": "cg",
+                      "row": [
+                        {
+                          "type": "Row",
+                          "id": "row-62824",
+                          "cell": [
+                            {
+                              "type": "Control",
+                              "id": "control-5f39e",
+                              "elementRef": "field_3a43c"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "Row",
+                          "id": "row-9ee2b",
+                          "cell": [
+                            {
+                              "type": "Control",
+                              "id": "control-5d6af",
+                              "elementRef": "fieldimpl_15246"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "Row",
+                          "id": "row-50741",
+                          "cell": [
+                            {
+                              "type": "Control",
+                              "id": "control-bfe69",
+                              "offset": {
+                                "lg": 0
+                              },
+                              "truncateSuffix": true,
+                              "elementRef": "fieldimpl_15246"
+                            }
+                          ]
+                        }
+                      ],
+                      "verticalAlignment": "BOTTOM"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "EmbeddedRepeat",
+                "id": "embeddedrepeat-16ca4",
+                "name": "embedded-repeat",
+                "title": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "Embedded Repeat"
+                      },
+                      {
+                        "locale": "de",
+                        "text": "Embedded Repeat"
+                      }
+                    ]
+                  }
+                },
+                "repeatOverviewColumn": [
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-62e5a",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "without suffix"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "ohne Suffix"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "sortable": false,
+                    "filterable": false,
+                    "preferredSorting": "ASC",
+                    "elementRef": "field_3a43c"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-dc2cc",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "with suffix"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "mit Suffix"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "sortable": false,
+                    "filterable": false,
+                    "preferredSorting": "ASC",
+                    "elementRef": "fieldimpl_15246"
+                  }
+                ],
+                "groupRef": "group_4cdfb",
+                "enableAdd": true,
+                "enableRemove": true,
+                "enableReorder": false,
+                "enableCopy": false,
+                "controlGrid": {
+                  "type": "ControlGrid",
+                  "id": "controlgrid-ae3d5",
+                  "name": "cg",
+                  "row": [
+                    {
+                      "type": "Row",
+                      "id": "row-3d2f4",
+                      "cell": [
+                        {
+                          "type": "Control",
+                          "id": "control-f9bdf",
+                          "elementRef": "field_3a43c"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "Row",
+                      "id": "row-087a7",
+                      "cell": [
+                        {
+                          "type": "Control",
+                          "id": "control-63ca9",
+                          "offset": {
+                            "lg": 0
+                          },
+                          "elementRef": "fieldimpl_15246"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "Row",
+                      "id": "row-fd973",
+                      "cell": [
+                        {
+                          "type": "Control",
+                          "id": "control-9e71a",
+                          "offset": {
+                            "lg": 0
+                          },
+                          "truncateSuffix": true,
+                          "elementRef": "fieldimpl_15246"
+                        }
+                      ]
+                    }
+                  ],
+                  "verticalAlignment": "BOTTOM"
+                }
+              }
+            ]
+          },
+          {
+            "type": "ControlGrid",
+            "id": "controlgrid-7af0a",
+            "name": "cg_translated_units",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "Multilingual Suffix"
+                  },
+                  {
+                    "locale": "de",
+                    "text": "Mehrsprachiger Suffix"
+                  }
+                ]
+              }
+            },
+            "row": [
+              {
+                "type": "Row",
+                "id": "row-ab526",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control-bff09",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "amount with suffix for all locales"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "Menge mit Suffix für alle Locales"
+                          }
+                        ]
+                      }
+                    },
+                    "elementRef": "fieldimpl_0722c"
+                  }
+                ]
+              },
+              {
+                "type": "Row",
+                "id": "row-ab527",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control-bff0a",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "amount with suffix only for Locale 'en', uses global amount suffix fallback otherwise"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "Menge mit Suffix nur für Locale 'en', nutzt sonst global amount suffix als Fallback"
+                          }
+                        ]
+                      }
+                    },
+                    "elementRef": "fieldimpl_0722d"
+                  }
+                ]
+              }
+            ],
+            "verticalAlignment": "TOP"
+          }
+        ]
+      }
+    ],
+    "fieldConfiguration": {
+      "field": [
+        {
+          "suffix": {
+            "text": [
+              {
+                "locale": "en",
+                "text": "mmol/l"
+              },
+              {
+                "locale": "de",
+                "text": "mmol/l"
+              }
+            ]
+          },
+          "elementRef": "fieldimpl_aad64"
+        },
+        {
+          "suffix": {
+            "text": [
+              {
+                "locale": "en",
+                "text": "mmol/l"
+              },
+              {
+                "locale": "de",
+                "text": "mmol/l"
+              }
+            ]
+          },
+          "elementRef": "fieldimpl_15246"
+        },
+        {
+          "suffix": {
+            "text": [
+              {
+                "locale": "en",
+                "text": "‰"
+              },
+              {
+                "locale": "de",
+                "text": "‰"
+              }
+            ]
+          },
+          "elementRef": "fieldimpl_66c23"
+        },
+        {
+          "suffix": {
+            "text": [
+              {
+                "locale": "en",
+                "text": "Unit"
+              },
+              {
+                "locale": "de",
+                "text": "Maßeinheit"
+              }
+            ]
+          },
+          "elementRef": "fieldimpl_0722c"
+        },
+        {
+          "suffix": {
+            "text": [
+              {
+                "locale": "en",
+                "text": "Unit"
+              }
+            ]
+          },
+          "elementRef": "fieldimpl_0722d"
+        },
+        {
+          "suffix": {
+            "text": [
+              {
+                "locale": "en",
+                "text": "Unit"
+              },
+              {
+                "locale": "de",
+                "text": "Maßeinheit"
+              }
+            ]
+          },
+          "elementRef": "fieldimpl_b4f44"
+        }
+      ]
+    },
+    "groupConfiguration": {},
+    "defaults": {}
+  }
+}

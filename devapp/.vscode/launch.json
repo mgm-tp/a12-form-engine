@@ -1,0 +1,34 @@
+{
+	"version": "0.2.0",
+	"configurations": [
+		{
+			"type": "chrome",
+			"request": "launch",
+			"name": "Launch (chromium)",
+			"url": "http://localhost:14000",
+			"webRoot": "${workspaceFolder}",
+			"linux": {
+				"runtimeExecutable": "/snap/bin/chromium"
+			},
+			"runtimeArgs": [
+				"--remote-debugging-port=9222",
+				"--new-window",
+				"--disable-background-networking",
+				"--user-data-dir=${userHome}/.vscode/chrome"
+			]
+		},
+		{
+			"type": "chrome",
+			"request": "launch",
+			"name": "Launch (chrome)",
+			"url": "http://localhost:14000",
+			"webRoot": "${workspaceFolder}",
+			"runtimeArgs": [
+				"--remote-debugging-port=9222",
+				"--new-window",
+				"--disable-background-networking",
+				"--profile-directory=debug-profile"
+			]
+		}
+	]
+}

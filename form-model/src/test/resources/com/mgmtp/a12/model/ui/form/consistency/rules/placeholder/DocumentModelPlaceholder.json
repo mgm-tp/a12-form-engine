@@ -1,0 +1,1070 @@
+{
+  "header": {
+    "id": "DocumentModelPlaceholder",
+    "modelType": "document",
+    "modelVersion": "28.4.0",
+    "locales": [
+      {
+        "code": "en"
+      }
+    ],
+    "labels": [],
+    "annotations": [],
+    "modelReferences": []
+  },
+  "content": {
+    "modelInfo": {
+      "name": "DocumentModelPlaceholder",
+      "immutable": false
+    },
+    "modelConfig": {
+      "decimalSeparator": ".",
+      "timeZone": "UTC",
+      "conditionLanguage": {
+        "code": "en_US"
+      }
+    },
+    "typeDefinitions": [
+      {
+        "id": "typedef_cf56a39a-1999-4d15-b226-b388a008ee81",
+        "name": "typeDefString",
+        "fieldType": {
+          "type": "StringType"
+        }
+      },
+      {
+        "id": "typedef_ac5b32b8-0d0d-4300-a027-5e7ea40004ec",
+        "name": "typeDefBoolean",
+        "fieldType": {
+          "type": "BooleanType"
+        }
+      }
+    ],
+    "modelRoot": {
+      "rootGroups": [
+        {
+          "type": "Group",
+          "id": "group_f29d5",
+          "name": "rootGroup",
+          "Group": {
+            "repeatability": 1,
+            "elements": [
+              {
+                "type": "Field",
+                "id": "field_ac7ba",
+                "name": "stringField",
+                "Field": {
+                  "fieldType": {
+                    "type": "StringType"
+                  }
+                }
+              },
+              {
+                "type": "Field",
+                "id": "field_71478",
+                "name": "stringFieldArea",
+                "Field": {
+                  "fieldType": {
+                    "type": "StringType"
+                  }
+                }
+              },
+              {
+                "type": "Field",
+                "id": "fieldimpl_c91f2",
+                "name": "numberField",
+                "Field": {
+                  "fieldType": {
+                    "type": "NumberType"
+                  }
+                }
+              },
+              {
+                "type": "Field",
+                "id": "fieldimpl_73387",
+                "name": "booleanField",
+                "Field": {
+                  "fieldType": {
+                    "type": "BooleanType"
+                  }
+                }
+              },
+              {
+                "type": "Field",
+                "id": "field_91bc4",
+                "name": "booleanFieldSwitch",
+                "Field": {
+                  "fieldType": {
+                    "type": "BooleanType"
+                  }
+                }
+              },
+              {
+                "type": "Field",
+                "id": "fieldimpl_f536a",
+                "name": "dateField",
+                "Field": {
+                  "fieldType": {
+                    "type": "DateType",
+                    "DateType": {
+                      "format": "yyyy-MM-dd"
+                    }
+                  }
+                }
+              },
+              {
+                "type": "Field",
+                "id": "fieldimpl_5f5ab",
+                "name": "dateTimeField",
+                "Field": {
+                  "fieldType": {
+                    "type": "DateTimeType",
+                    "DateTimeType": {
+                      "format": "yyyy-MM-dd'T'HH:mm:ss"
+                    }
+                  }
+                }
+              },
+              {
+                "type": "Field",
+                "id": "fieldimpl_1ccbe",
+                "name": "timeField",
+                "Field": {
+                  "fieldType": {
+                    "type": "TimeType",
+                    "TimeType": {
+                      "format": "HH:mm:ss"
+                    }
+                  }
+                }
+              },
+              {
+                "type": "Field",
+                "id": "field_2b51b",
+                "name": "dateFragmentField",
+                "Field": {
+                  "fieldType": {
+                    "type": "DateFragmentType",
+                    "DateFragmentType": {
+                      "formatOfFragment": "yyyy"
+                    }
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": ""
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Field",
+                "id": "field_c923f",
+                "name": "dateRangeField",
+                "Field": {
+                  "fieldType": {
+                    "type": "DateRangeType",
+                    "DateRangeType": {
+                      "format": "yyyy-MM-dd",
+                      "rangeSeparator": "/"
+                    }
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": ""
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Field",
+                "id": "fieldimpl_feaa7",
+                "name": "enumerationField",
+                "Field": {
+                  "fieldType": {
+                    "type": "EnumerationType",
+                    "EnumerationType": {
+                      "values": [
+                        {
+                          "value": "NEW_VALUE_1",
+                          "label": []
+                        },
+                        {
+                          "value": "NEW_VALUE_2",
+                          "label": []
+                        }
+                      ]
+                    }
+                  }
+                }
+              },
+              {
+                "type": "Field",
+                "id": "fieldimpl_90bce",
+                "name": "enumerationFieldInline",
+                "Field": {
+                  "fieldType": {
+                    "type": "EnumerationType",
+                    "EnumerationType": {
+                      "values": [
+                        {
+                          "value": "NEW_VALUE_1",
+                          "label": []
+                        },
+                        {
+                          "value": "NEW_VALUE_2",
+                          "label": []
+                        }
+                      ]
+                    }
+                  }
+                }
+              },
+              {
+                "type": "Field",
+                "id": "fieldimpl_824de",
+                "name": "enumerationFieldFull",
+                "Field": {
+                  "fieldType": {
+                    "type": "EnumerationType",
+                    "EnumerationType": {
+                      "values": [
+                        {
+                          "value": "NEW_VALUE_1",
+                          "label": []
+                        },
+                        {
+                          "value": "NEW_VALUE_2",
+                          "label": []
+                        }
+                      ]
+                    }
+                  }
+                }
+              },
+              {
+                "type": "Field",
+                "id": "fieldimpl_47ecb",
+                "name": "enumerationFieldAutoComplete",
+                "Field": {
+                  "fieldType": {
+                    "type": "EnumerationType",
+                    "EnumerationType": {
+                      "values": [
+                        {
+                          "value": "NEW_VALUE_1",
+                          "label": []
+                        },
+                        {
+                          "value": "NEW_VALUE_2",
+                          "label": []
+                        }
+                      ]
+                    }
+                  }
+                }
+              },
+              {
+                "type": "Field",
+                "id": "fieldimpl_61f05",
+                "name": "confirmField",
+                "Field": {
+                  "fieldType": {
+                    "type": "ConfirmType"
+                  }
+                }
+              },
+              {
+                "type": "Field",
+                "id": "field_629f7",
+                "name": "customField",
+                "Field": {
+                  "fieldType": {
+                    "type": "CustomFieldType",
+                    "CustomFieldType": {
+                      "name": "EMail"
+                    }
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": ""
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Field",
+                "id": "fieldimpl_80b40",
+                "name": "typeDefString",
+                "Field": {
+                  "fieldType": {
+                    "type": "TypeDefType",
+                    "TypeDefType": {
+                      "typeDefinitionId": "typedef_cf56a39a-1999-4d15-b226-b388a008ee81"
+                    }
+                  }
+                }
+              },
+              {
+                "type": "Field",
+                "id": "fieldimpl_cf2d4",
+                "name": "typeDefBoolean",
+                "Field": {
+                  "fieldType": {
+                    "type": "TypeDefType",
+                    "TypeDefType": {
+                      "typeDefinitionId": "typedef_ac5b32b8-0d0d-4300-a027-5e7ea40004ec"
+                    }
+                  }
+                }
+              },
+              {
+                "type": "Group",
+                "id": "group_9f18b",
+                "name": "attachment",
+                "Group": {
+                  "repeatability": 1,
+                  "usageType": "attachment",
+                  "elements": [
+                    {
+                      "type": "Field",
+                      "id": "field_d72f4",
+                      "name": "original_filename",
+                      "Field": {
+                        "fieldType": {
+                          "type": "StringType"
+                        }
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_37993",
+                      "name": "internal_filename",
+                      "Field": {
+                        "fieldType": {
+                          "type": "StringType"
+                        }
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_08915",
+                      "name": "content",
+                      "Field": {
+                        "fieldType": {
+                          "type": "StringType",
+                          "StringType": {
+                            "lineBreaksPermitted": true,
+                            "noValueValidation": true
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_90e87",
+                      "name": "attachment_id",
+                      "Field": {
+                        "fieldType": {
+                          "type": "StringType"
+                        }
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_48ce8",
+                      "name": "size",
+                      "Field": {
+                        "fieldType": {
+                          "type": "NumberType"
+                        }
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_e2184",
+                      "name": "mime_type",
+                      "Field": {
+                        "fieldType": {
+                          "type": "StringType"
+                        }
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_3e520",
+                      "name": "category",
+                      "Field": {
+                        "fieldType": {
+                          "type": "StringType"
+                        }
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_4ca84",
+                      "name": "description",
+                      "Field": {
+                        "fieldType": {
+                          "type": "StringType"
+                        }
+                      }
+                    },
+                    {
+                      "type": "Rule",
+                      "id": "rule_8d982",
+                      "name": "AttachmentInternalFilenameRequired",
+                      "Rule": {
+                        "errorEntityRelPath": "../internal_filename",
+                        "errorCode": "Errorrule_8d982",
+                        "errorCondition": "GroupFilled(RuleGroup) and FieldNotFilled(internal_filename)",
+                        "severity": "ERROR",
+                        "errorMessage": [
+                          {
+                            "locale": "en",
+                            "text": "Internal Error: Field $internal_filename$ of customType attachment is not filled."
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Rule",
+                      "id": "rule_90eb7",
+                      "name": "AttachmentMimeTypeRequired",
+                      "Rule": {
+                        "errorEntityRelPath": "../mime_type",
+                        "errorCode": "Errorrule_90eb7",
+                        "errorCondition": "GroupFilled(RuleGroup) and FieldNotFilled(mime_type)",
+                        "severity": "ERROR",
+                        "errorMessage": [
+                          {
+                            "locale": "en",
+                            "text": "Internal Error: Field $mime_type$ of customType attachment is not filled."
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Rule",
+                      "id": "rule_12840",
+                      "name": "AttachmentIdOrContentFilled",
+                      "Rule": {
+                        "errorEntityRelPath": "../content",
+                        "errorCode": "Errorrule_12840",
+                        "errorCondition": "GroupFilled(RuleGroup) and NotExactlyOneFieldFilled(attachment_id, content)",
+                        "severity": "ERROR",
+                        "errorMessage": [
+                          {
+                            "locale": "en",
+                            "text": "Internal Error: Either attachment_id or content must be filled in a customType attachment, but not both."
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Rule",
+                      "id": "rule_b034e",
+                      "name": "SizeOfContentFilled",
+                      "Rule": {
+                        "errorEntityRelPath": "../content",
+                        "errorCode": "Errorrule_b034e",
+                        "errorCondition": "FieldFilled(content) and FieldNotFilled(size)",
+                        "severity": "ERROR",
+                        "errorMessage": [
+                          {
+                            "locale": "en",
+                            "text": "Internal Error: If the content is filled, the size must be also filled."
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Group",
+                "id": "group_b8baf",
+                "name": "multiSelectAutoComplete",
+                "Group": {
+                  "repeatability": 999999,
+                  "usageType": "multi-select",
+                  "elements": [
+                    {
+                      "type": "Field",
+                      "id": "field_076de",
+                      "name": "value",
+                      "Field": {
+                        "fieldType": {
+                          "type": "EnumerationType",
+                          "EnumerationType": {
+                            "values": [
+                              {
+                                "value": "key1",
+                                "label": []
+                              },
+                              {
+                                "value": "key2",
+                                "label": []
+                              }
+                            ]
+                          }
+                        },
+                        "requirednessConfig": {
+                          "mode": "absoluteOrRelativeToNextRepAncestor"
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Group",
+                "id": "groupimpl_9f693",
+                "name": "multiSelectInline",
+                "Group": {
+                  "repeatability": 999999,
+                  "usageType": "multi-select",
+                  "elements": [
+                    {
+                      "type": "Field",
+                      "id": "fieldimpl_85208",
+                      "name": "value",
+                      "Field": {
+                        "fieldType": {
+                          "type": "EnumerationType",
+                          "EnumerationType": {
+                            "values": [
+                              {
+                                "value": "key1",
+                                "label": []
+                              },
+                              {
+                                "value": "key2",
+                                "label": []
+                              }
+                            ]
+                          }
+                        },
+                        "requirednessConfig": {
+                          "mode": "absoluteOrRelativeToNextRepAncestor"
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Group",
+                "id": "groupimpl_1bda1",
+                "name": "multiSelectFull",
+                "Group": {
+                  "repeatability": 999999,
+                  "usageType": "multi-select",
+                  "elements": [
+                    {
+                      "type": "Field",
+                      "id": "fieldimpl_9ceda",
+                      "name": "value",
+                      "Field": {
+                        "fieldType": {
+                          "type": "EnumerationType",
+                          "EnumerationType": {
+                            "values": [
+                              {
+                                "value": "key1",
+                                "label": []
+                              },
+                              {
+                                "value": "key2",
+                                "label": []
+                              }
+                            ]
+                          }
+                        },
+                        "requirednessConfig": {
+                          "mode": "absoluteOrRelativeToNextRepAncestor"
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Group",
+                "id": "group_a26c8",
+                "name": "repeatableGroup",
+                "Group": {
+                  "repeatability": 5,
+                  "elements": [
+                    {
+                      "type": "Field",
+                      "id": "fieldimpl_6a8ae",
+                      "name": "stringField",
+                      "Field": {
+                        "fieldType": {
+                          "type": "StringType"
+                        }
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_7bc09",
+                      "name": "stringFieldArea",
+                      "Field": {
+                        "fieldType": {
+                          "type": "StringType"
+                        }
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "fieldimpl_69429",
+                      "name": "numberField",
+                      "Field": {
+                        "fieldType": {
+                          "type": "NumberType"
+                        }
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "fieldimpl_07160",
+                      "name": "booleanField",
+                      "Field": {
+                        "fieldType": {
+                          "type": "BooleanType"
+                        }
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "fieldimpl_a63bb",
+                      "name": "dateField",
+                      "Field": {
+                        "fieldType": {
+                          "type": "DateType",
+                          "DateType": {
+                            "format": "yyyy-MM-dd"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "fieldimpl_9a56e",
+                      "name": "dateTimeField",
+                      "Field": {
+                        "fieldType": {
+                          "type": "DateTimeType",
+                          "DateTimeType": {
+                            "format": "yyyy-MM-dd'T'HH:mm:ss"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "fieldimpl_7a1b6",
+                      "name": "timeField",
+                      "Field": {
+                        "fieldType": {
+                          "type": "TimeType",
+                          "TimeType": {
+                            "format": "HH:mm:ss"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_9d162",
+                      "name": "dateFragmentField",
+                      "Field": {
+                        "fieldType": {
+                          "type": "DateFragmentType",
+                          "DateFragmentType": {
+                            "formatOfFragment": "yyyy"
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": ""
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_53c41",
+                      "name": "dateRangeField",
+                      "Field": {
+                        "fieldType": {
+                          "type": "DateRangeType",
+                          "DateRangeType": {
+                            "format": "yyyy-MM-dd",
+                            "rangeSeparator": "/"
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": ""
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "fieldimpl_6879d",
+                      "name": "enumerationField",
+                      "Field": {
+                        "fieldType": {
+                          "type": "EnumerationType",
+                          "EnumerationType": {
+                            "values": [
+                              {
+                                "value": "NEW_VALUE_1",
+                                "label": []
+                              },
+                              {
+                                "value": "NEW_VALUE_2",
+                                "label": []
+                              }
+                            ]
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "fieldimpl_058c7",
+                      "name": "enumerationFieldInline",
+                      "Field": {
+                        "fieldType": {
+                          "type": "EnumerationType",
+                          "EnumerationType": {
+                            "values": [
+                              {
+                                "value": "NEW_VALUE_1",
+                                "label": []
+                              },
+                              {
+                                "value": "NEW_VALUE_2",
+                                "label": []
+                              }
+                            ]
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "fieldimpl_281eb",
+                      "name": "enumerationFieldFull",
+                      "Field": {
+                        "fieldType": {
+                          "type": "EnumerationType",
+                          "EnumerationType": {
+                            "values": [
+                              {
+                                "value": "NEW_VALUE_1",
+                                "label": []
+                              },
+                              {
+                                "value": "NEW_VALUE_2",
+                                "label": []
+                              }
+                            ]
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "fieldimpl_60c07",
+                      "name": "enumerationFieldAutoComplete",
+                      "Field": {
+                        "fieldType": {
+                          "type": "EnumerationType",
+                          "EnumerationType": {
+                            "values": [
+                              {
+                                "value": "NEW_VALUE_1",
+                                "label": []
+                              },
+                              {
+                                "value": "NEW_VALUE_2",
+                                "label": []
+                              }
+                            ]
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "fieldimpl_2b8b7",
+                      "name": "confirmField",
+                      "Field": {
+                        "fieldType": {
+                          "type": "ConfirmType"
+                        }
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_faece",
+                      "name": "customField",
+                      "Field": {
+                        "fieldType": {
+                          "type": "CustomFieldType",
+                          "CustomFieldType": {
+                            "name": "Test"
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": ""
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "fieldimpl_aded2",
+                      "name": "typeDefString",
+                      "Field": {
+                        "fieldType": {
+                          "type": "TypeDefType",
+                          "TypeDefType": {
+                            "typeDefinitionId": "typedef_cf56a39a-1999-4d15-b226-b388a008ee81"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "fieldimpl_8385a",
+                      "name": "typeDefBoolean",
+                      "Field": {
+                        "fieldType": {
+                          "type": "TypeDefType",
+                          "TypeDefType": {
+                            "typeDefinitionId": "typedef_ac5b32b8-0d0d-4300-a027-5e7ea40004ec"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "type": "Group",
+                      "id": "groupimpl_3b904",
+                      "name": "attachment",
+                      "Group": {
+                        "repeatability": 1,
+                        "usageType": "attachment",
+                        "elements": [
+                          {
+                            "type": "Field",
+                            "id": "fieldimpl_b7ca6",
+                            "name": "original_filename",
+                            "Field": {
+                              "fieldType": {
+                                "type": "StringType"
+                              }
+                            }
+                          },
+                          {
+                            "type": "Field",
+                            "id": "fieldimpl_61933",
+                            "name": "internal_filename",
+                            "Field": {
+                              "fieldType": {
+                                "type": "StringType"
+                              }
+                            }
+                          },
+                          {
+                            "type": "Field",
+                            "id": "fieldimpl_bd968",
+                            "name": "content",
+                            "Field": {
+                              "fieldType": {
+                                "type": "StringType",
+                                "StringType": {
+                                  "lineBreaksPermitted": true,
+                                  "noValueValidation": true
+                                }
+                              }
+                            }
+                          },
+                          {
+                            "type": "Field",
+                            "id": "fieldimpl_5ae6c",
+                            "name": "attachment_id",
+                            "Field": {
+                              "fieldType": {
+                                "type": "StringType"
+                              }
+                            }
+                          },
+                          {
+                            "type": "Field",
+                            "id": "fieldimpl_b75d8",
+                            "name": "size",
+                            "Field": {
+                              "fieldType": {
+                                "type": "NumberType"
+                              }
+                            }
+                          },
+                          {
+                            "type": "Field",
+                            "id": "fieldimpl_c9e9c",
+                            "name": "mime_type",
+                            "Field": {
+                              "fieldType": {
+                                "type": "StringType"
+                              }
+                            }
+                          },
+                          {
+                            "type": "Field",
+                            "id": "fieldimpl_5056d",
+                            "name": "category",
+                            "Field": {
+                              "fieldType": {
+                                "type": "StringType"
+                              }
+                            }
+                          },
+                          {
+                            "type": "Field",
+                            "id": "fieldimpl_f28fc",
+                            "name": "description",
+                            "Field": {
+                              "fieldType": {
+                                "type": "StringType"
+                              }
+                            }
+                          },
+                          {
+                            "type": "Rule",
+                            "id": "ruleimpl_4d91e",
+                            "name": "AttachmentInternalFilenameRequired",
+                            "Rule": {
+                              "errorEntityRelPath": "../internal_filename",
+                              "errorCode": "Errorrule_8d982",
+                              "errorCondition": "GroupFilled(RuleGroup) and FieldNotFilled(internal_filename)",
+                              "severity": "ERROR",
+                              "errorMessage": [
+                                {
+                                  "locale": "en",
+                                  "text": "Internal Error: Field $internal_filename$ of customType attachment is not filled."
+                                }
+                              ]
+                            }
+                          },
+                          {
+                            "type": "Rule",
+                            "id": "ruleimpl_5795b",
+                            "name": "AttachmentMimeTypeRequired",
+                            "Rule": {
+                              "errorEntityRelPath": "../mime_type",
+                              "errorCode": "Errorrule_90eb7",
+                              "errorCondition": "GroupFilled(RuleGroup) and FieldNotFilled(mime_type)",
+                              "severity": "ERROR",
+                              "errorMessage": [
+                                {
+                                  "locale": "en",
+                                  "text": "Internal Error: Field $mime_type$ of customType attachment is not filled."
+                                }
+                              ]
+                            }
+                          },
+                          {
+                            "type": "Rule",
+                            "id": "ruleimpl_d2d72",
+                            "name": "AttachmentIdOrContentFilled",
+                            "Rule": {
+                              "errorEntityRelPath": "../content",
+                              "errorCode": "Errorrule_12840",
+                              "errorCondition": "GroupFilled(RuleGroup) and NotExactlyOneFieldFilled(attachment_id, content)",
+                              "severity": "ERROR",
+                              "errorMessage": [
+                                {
+                                  "locale": "en",
+                                  "text": "Internal Error: Either attachment_id or content must be filled in a customType attachment, but not both."
+                                }
+                              ]
+                            }
+                          },
+                          {
+                            "type": "Rule",
+                            "id": "ruleimpl_5a1c8",
+                            "name": "SizeOfContentFilled",
+                            "Rule": {
+                              "errorEntityRelPath": "../content",
+                              "errorCode": "Errorrule_b034e",
+                              "errorCondition": "FieldFilled(content) and FieldNotFilled(size)",
+                              "severity": "ERROR",
+                              "errorMessage": [
+                                {
+                                  "locale": "en",
+                                  "text": "Internal Error: If the content is filled, the size must be also filled."
+                                }
+                              ]
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Group",
+                      "id": "groupimpl_1c03a",
+                      "name": "multiSelectAutoComplete",
+                      "Group": {
+                        "repeatability": 999999,
+                        "usageType": "multi-select",
+                        "elements": [
+                          {
+                            "type": "Field",
+                            "id": "fieldimpl_5088a",
+                            "name": "value",
+                            "Field": {
+                              "fieldType": {
+                                "type": "EnumerationType",
+                                "EnumerationType": {
+                                  "values": [
+                                    {
+                                      "value": "key1",
+                                      "label": []
+                                    },
+                                    {
+                                      "value": "key2",
+                                      "label": []
+                                    }
+                                  ]
+                                }
+                              },
+                              "requirednessConfig": {
+                                "mode": "absoluteOrRelativeToNextRepAncestor"
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

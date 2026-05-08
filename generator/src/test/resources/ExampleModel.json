@@ -1,0 +1,838 @@
+{
+  "header": {
+    "id": "ExampleModel",
+    "modelType": "document",
+    "modelVersion": "28.4.0",
+    "locales": [
+      {
+        "code": "en"
+      },
+      {
+        "code": "de"
+      }
+    ],
+    "labels": [],
+    "annotations": [],
+    "modelReferences": []
+  },
+  "content": {
+    "modelInfo": {
+      "name": "ExampleModel",
+      "immutable": false,
+      "comment": "this model was just created for example use"
+    },
+    "modelConfig": {
+      "decimalSeparator": ".",
+      "timeZone": "UTC",
+      "conditionLanguage": {
+        "code": "en_US"
+      }
+    },
+    "typeDefinitions": [
+      {
+        "id": "typedef_8434ec9a-c6f2-47f7-a575-70b10edc5fde",
+        "name": "PostalCode",
+        "fieldType": {
+          "type": "StringType",
+          "StringType": {
+            "errorMessage": [
+              {
+                "locale": "de",
+                "text": "Die angegebene Postleitzahl ist ungültig."
+              },
+              {
+                "locale": "en",
+                "text": "This is not a valid postal code."
+              }
+            ],
+            "pattern": "[0-9]{5}"
+          }
+        }
+      },
+      {
+        "id": "typedef_b41048de-e54f-4d79-ad2e-8dca36277464",
+        "name": "ValidColors",
+        "fieldType": {
+          "type": "EnumerationType",
+          "EnumerationType": {
+            "values": [
+              {
+                "value": "BLACK",
+                "label": [
+                  {
+                    "locale": "en",
+                    "text": "black"
+                  },
+                  {
+                    "locale": "de",
+                    "text": "Schwarz"
+                  }
+                ]
+              },
+              {
+                "value": "BLUE",
+                "label": [
+                  {
+                    "locale": "en",
+                    "text": "blue"
+                  },
+                  {
+                    "locale": "de",
+                    "text": "Blau"
+                  }
+                ]
+              },
+              {
+                "value": "GREEN",
+                "label": [
+                  {
+                    "locale": "en",
+                    "text": "green"
+                  },
+                  {
+                    "locale": "de",
+                    "text": "Grün"
+                  }
+                ]
+              },
+              {
+                "value": "RED",
+                "label": [
+                  {
+                    "locale": "en",
+                    "text": "red"
+                  },
+                  {
+                    "locale": "de",
+                    "text": "Rot"
+                  }
+                ]
+              },
+              {
+                "value": "WHITE",
+                "label": [
+                  {
+                    "locale": "en",
+                    "text": "white"
+                  },
+                  {
+                    "locale": "de",
+                    "text": "Weiß"
+                  }
+                ]
+              },
+              {
+                "value": "YELLOW",
+                "label": [
+                  {
+                    "locale": "en",
+                    "text": "yellow"
+                  },
+                  {
+                    "locale": "de",
+                    "text": "Gelb"
+                  }
+                ]
+              }
+            ],
+            "errorMessage": [
+              {
+                "locale": "de",
+                "text": "Fehler in $field$"
+              },
+              {
+                "locale": "en",
+                "text": "error in $field$"
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "modelRoot": {
+      "rootGroups": [
+        {
+          "type": "Group",
+          "id": "G2",
+          "name": "BaseGroup",
+          "Group": {
+            "repeatability": 1,
+            "elements": [
+              {
+                "type": "Field",
+                "id": "F5",
+                "name": "ExampleField",
+                "Field": {
+                  "fieldType": {
+                    "type": "StringType"
+                  },
+                  "label": [
+                    {
+                      "locale": "de",
+                      "text": "String Beispiel"
+                    },
+                    {
+                      "locale": "en",
+                      "text": "Example String"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Rule",
+                "id": "R8",
+                "name": "ExampleRule",
+                "Rule": {
+                  "errorEntityRelPath": "../ExampleField",
+                  "errorCode": "Error R8",
+                  "errorCondition": "FieldNotFilled(ExampleField)",
+                  "severity": "ERROR",
+                  "errorMessage": [
+                    {
+                      "locale": "de",
+                      "text": "Das Feld darf nicht leer sein."
+                    },
+                    {
+                      "locale": "en",
+                      "text": "The field must be filled."
+                    }
+                  ],
+                  "guiPatterns": {
+                    "dynamicEnumeration": "false"
+                  }
+                }
+              },
+              {
+                "type": "Group",
+                "id": "G21",
+                "name": "RepeatableGroup",
+                "Group": {
+                  "repeatability": 20,
+                  "elements": [
+                    {
+                      "type": "Field",
+                      "id": "F22",
+                      "name": "Aaa",
+                      "Field": {
+                        "fieldType": {
+                          "type": "StringType"
+                        }
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "F23",
+                      "name": "Bbb",
+                      "Field": {
+                        "fieldType": {
+                          "type": "StringType"
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Group",
+                "id": "G1007",
+                "name": "Attachment",
+                "Group": {
+                  "repeatability": 1,
+                  "usageType": "attachment",
+                  "elements": [
+                    {
+                      "type": "Field",
+                      "id": "F1008",
+                      "name": "original_filename",
+                      "Field": {
+                        "fieldType": {
+                          "type": "StringType"
+                        }
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "F1009",
+                      "name": "internal_filename",
+                      "Field": {
+                        "fieldType": {
+                          "type": "StringType"
+                        }
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "F1010",
+                      "name": "content",
+                      "Field": {
+                        "fieldType": {
+                          "type": "StringType",
+                          "StringType": {
+                            "lineBreaksPermitted": true,
+                            "noValueValidation": true
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "F1011",
+                      "name": "attachment_id",
+                      "Field": {
+                        "fieldType": {
+                          "type": "StringType"
+                        }
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "F1012",
+                      "name": "size",
+                      "Field": {
+                        "fieldType": {
+                          "type": "NumberType"
+                        }
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "F1013",
+                      "name": "mime_type",
+                      "Field": {
+                        "fieldType": {
+                          "type": "StringType"
+                        }
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "F1014",
+                      "name": "category",
+                      "Field": {
+                        "fieldType": {
+                          "type": "StringType"
+                        }
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "F1015",
+                      "name": "description",
+                      "Field": {
+                        "fieldType": {
+                          "type": "StringType"
+                        }
+                      }
+                    },
+                    {
+                      "type": "Rule",
+                      "id": "R1016",
+                      "name": "AttachmentInternalFilenameRequired",
+                      "Rule": {
+                        "errorEntityRelPath": "../internal_filename",
+                        "errorCode": "ErrorR1016",
+                        "errorCondition": "GroupFilled(RuleGroup) and FieldNotFilled(internal_filename)",
+                        "severity": "ERROR",
+                        "errorMessage": [
+                          {
+                            "locale": "en",
+                            "text": "Internal Error: Field $internal_filename$ of customType attachment is not filled."
+                          },
+                          {
+                            "locale": "de",
+                            "text": "Internal Error: Field $internal_filename$ of customType attachment is not filled."
+                          }
+                        ],
+                        "guiPatterns": {
+                          "dynamicEnumeration": "false"
+                        }
+                      }
+                    },
+                    {
+                      "type": "Rule",
+                      "id": "R1017",
+                      "name": "AttachmentMimeTypeRequired",
+                      "Rule": {
+                        "errorEntityRelPath": "../mime_type",
+                        "errorCode": "ErrorR1017",
+                        "errorCondition": "GroupFilled(RuleGroup) and FieldNotFilled(mime_type)",
+                        "severity": "ERROR",
+                        "errorMessage": [
+                          {
+                            "locale": "en",
+                            "text": "Internal Error: Field $mime_type$ of customType attachment is not filled."
+                          },
+                          {
+                            "locale": "de",
+                            "text": "Internal Error: Field $mime_type$ of customType attachment is not filled."
+                          }
+                        ],
+                        "guiPatterns": {
+                          "dynamicEnumeration": "false"
+                        }
+                      }
+                    },
+                    {
+                      "type": "Rule",
+                      "id": "R1018",
+                      "name": "AttachmentIdOrContentFilled",
+                      "Rule": {
+                        "errorEntityRelPath": "../attachment_id",
+                        "errorCode": "ErrorR1018",
+                        "errorCondition": "GroupFilled(RuleGroup) and NotExactlyOneFieldFilled(attachment_id, content)",
+                        "severity": "ERROR",
+                        "errorMessage": [
+                          {
+                            "locale": "en",
+                            "text": "Internal Error: Either attachment_id or content must be filled in a customType attachment, but not both."
+                          },
+                          {
+                            "locale": "de",
+                            "text": "Internal Error: Either attachment_id or content must be filled in a customType attachment, but not both."
+                          }
+                        ],
+                        "guiPatterns": {
+                          "dynamicEnumeration": "false"
+                        }
+                      }
+                    },
+                    {
+                      "type": "Rule",
+                      "id": "R1019",
+                      "name": "SizeOfContentFilled",
+                      "Rule": {
+                        "errorEntityRelPath": "../size",
+                        "errorCode": "ErrorR1019",
+                        "errorCondition": "FieldFilled(content) and FieldNotFilled(size)",
+                        "severity": "ERROR",
+                        "errorMessage": [
+                          {
+                            "locale": "en",
+                            "text": "Internal Error: If the content is filled, the size must be also filled."
+                          },
+                          {
+                            "locale": "de",
+                            "text": "Internal Error: If the content is filled, the size must be also filled."
+                          }
+                        ],
+                        "guiPatterns": {
+                          "dynamicEnumeration": "false"
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Group",
+                "id": "G1008",
+                "name": "MultiSelect",
+                "Group": {
+                  "repeatability": 999999,
+                  "usageType": "multi-select",
+                  "elements": [
+                    {
+                      "type": "Field",
+                      "id": "field_6d2c7",
+                      "name": "value",
+                      "Field": {
+                        "fieldType": {
+                          "type": "EnumerationType",
+                          "EnumerationType": {
+                            "values": [
+                              {
+                                "value": "key1",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "Value 1"
+                                  },
+                                  {
+                                    "locale": "de",
+                                    "text": "Wert 1"
+                                  }
+                                ]
+                              },
+                              {
+                                "value": "key2",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "Value 2"
+                                  },
+                                  {
+                                    "locale": "de",
+                                    "text": "Wert 2"
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        },
+                        "requirednessConfig": {
+                          "mode": "absoluteOrRelativeToNextRepAncestor"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "Group",
+          "id": "G9",
+          "name": "FieldTypes",
+          "Group": {
+            "repeatability": 1,
+            "elements": [
+              {
+                "type": "Field",
+                "id": "F10",
+                "name": "SampleString",
+                "Field": {
+                  "fieldType": {
+                    "type": "StringType",
+                    "StringType": {
+                      "lineBreaksPermitted": true
+                    }
+                  },
+                  "label": [
+                    {
+                      "locale": "de",
+                      "text": "Bemerkungen"
+                    },
+                    {
+                      "locale": "en",
+                      "text": "Comments"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Field",
+                "id": "F11",
+                "name": "SampleNumber",
+                "Field": {
+                  "fieldType": {
+                    "type": "NumberType",
+                    "NumberType": {
+                      "minFractionalDigits": 2,
+                      "maxFractionalDigits": 2,
+                      "minValue": 1,
+                      "maxValue": 10000,
+                      "trait": "amount"
+                    }
+                  },
+                  "label": [
+                    {
+                      "locale": "de",
+                      "text": "Geldbetrag"
+                    },
+                    {
+                      "locale": "en",
+                      "text": "Amount"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Field",
+                "id": "F21",
+                "name": "SampleNumberPercent",
+                "Field": {
+                  "fieldType": {
+                    "type": "NumberType",
+                    "NumberType": {
+                      "trait": "percent"
+                    }
+                  },
+                  "label": [
+                    {
+                      "locale": "de",
+                      "text": "Prozent"
+                    },
+                    {
+                      "locale": "en",
+                      "text": "percent"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Field",
+                "id": "F24",
+                "name": "SampleNumberPermille",
+                "Field": {
+                  "fieldType": {
+                    "type": "NumberType",
+                    "NumberType": {
+                      "trait": "permille"
+                    }
+                  },
+                  "label": [
+                    {
+                      "locale": "de",
+                      "text": "Promille"
+                    },
+                    {
+                      "locale": "en",
+                      "text": "permille"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Field",
+                "id": "F12",
+                "name": "SampleBoolean",
+                "Field": {
+                  "fieldType": {
+                    "type": "BooleanType"
+                  },
+                  "label": [
+                    {
+                      "locale": "de",
+                      "text": "Wahr/Falsch"
+                    },
+                    {
+                      "locale": "en",
+                      "text": "True/False"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Field",
+                "id": "F13",
+                "name": "SampleEnumeration",
+                "Field": {
+                  "fieldType": {
+                    "type": "EnumerationType",
+                    "EnumerationType": {
+                      "values": [
+                        {
+                          "value": "ONE",
+                          "label": [
+                            {
+                              "locale": "en",
+                              "text": "one"
+                            },
+                            {
+                              "locale": "de",
+                              "text": "Eins"
+                            }
+                          ]
+                        },
+                        {
+                          "value": "TWO",
+                          "label": [
+                            {
+                              "locale": "en",
+                              "text": "two"
+                            },
+                            {
+                              "locale": "de",
+                              "text": "Zwo"
+                            }
+                          ]
+                        },
+                        {
+                          "value": "THREE",
+                          "label": [
+                            {
+                              "locale": "en",
+                              "text": "three"
+                            },
+                            {
+                              "locale": "de",
+                              "text": "Drei"
+                            }
+                          ]
+                        },
+                        {
+                          "value": "FIVE",
+                          "label": [
+                            {
+                              "locale": "en",
+                              "text": "five"
+                            },
+                            {
+                              "locale": "de",
+                              "text": "Fünf"
+                            }
+                          ]
+                        }
+                      ],
+                      "errorMessage": [
+                        {
+                          "locale": "de",
+                          "text": "Fehler in $field$"
+                        },
+                        {
+                          "locale": "en",
+                          "text": "error in $field$"
+                        }
+                      ]
+                    }
+                  },
+                  "label": [
+                    {
+                      "locale": "de",
+                      "text": "Auswahl"
+                    },
+                    {
+                      "locale": "en",
+                      "text": "Options"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Field",
+                "id": "F14",
+                "name": "SampleDate",
+                "Field": {
+                  "fieldType": {
+                    "type": "DateType",
+                    "DateType": {
+                      "format": "yyyy-MM-dd"
+                    }
+                  },
+                  "label": [
+                    {
+                      "locale": "de",
+                      "text": "Datum"
+                    },
+                    {
+                      "locale": "en",
+                      "text": "Date"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Field",
+                "id": "F15",
+                "name": "SampleTypeDefinition",
+                "Field": {
+                  "fieldType": {
+                    "type": "TypeDefType",
+                    "TypeDefType": {
+                      "typeDefinitionId": "typedef_b41048de-e54f-4d79-ad2e-8dca36277464"
+                    }
+                  },
+                  "label": [
+                    {
+                      "locale": "de",
+                      "text": "Typdefinition"
+                    },
+                    {
+                      "locale": "en",
+                      "text": "Type Definition"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Group",
+                "id": "G17",
+                "name": "SubGroup",
+                "Group": {
+                  "repeatability": 10,
+                  "elements": [
+                    {
+                      "type": "Field",
+                      "id": "F18",
+                      "name": "A",
+                      "Field": {
+                        "fieldType": {
+                          "type": "StringType"
+                        }
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "F19",
+                      "name": "B",
+                      "Field": {
+                        "fieldType": {
+                          "type": "StringType"
+                        }
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "F20",
+                      "name": "C",
+                      "Field": {
+                        "fieldType": {
+                          "type": "StringType"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "Group",
+          "id": "I16_G2",
+          "name": "IncludeGroup",
+          "Group": {
+            "repeatability": 1,
+            "elements": [
+              {
+                "type": "Field",
+                "id": "I16_F5",
+                "name": "ExampleField",
+                "Field": {
+                  "fieldType": {
+                    "type": "StringType"
+                  },
+                  "label": [
+                    {
+                      "locale": "de",
+                      "text": "String Beispiel"
+                    },
+                    {
+                      "locale": "en",
+                      "text": "Example String"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Rule",
+                "id": "I16_R8",
+                "name": "ExampleRule",
+                "Rule": {
+                  "errorEntityRelPath": "../ExampleField",
+                  "errorCode": "Error R8",
+                  "errorCondition": "FieldNotFilled(ExampleField)",
+                  "severity": "ERROR",
+                  "errorMessage": [
+                    {
+                      "locale": "de",
+                      "text": "Das Feld darf nicht leer sein."
+                    },
+                    {
+                      "locale": "en",
+                      "text": "The field must be filled."
+                    }
+                  ],
+                  "guiPatterns": {
+                    "dynamicEnumeration": "false"
+                  }
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

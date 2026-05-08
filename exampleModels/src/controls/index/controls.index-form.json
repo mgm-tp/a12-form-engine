@@ -1,0 +1,2025 @@
+{
+  "header": {
+    "id": "controls.index-form",
+    "modelType": "form",
+    "modelVersion": "37.4.0",
+    "locales": [
+      {
+        "code": "en"
+      }
+    ],
+    "labels": [
+      {
+        "locale": "en",
+        "text": "Control with Index"
+      }
+    ],
+    "annotations": [
+      {
+        "name": "roles",
+        "value": "admin"
+      }
+    ],
+    "modelReferences": [
+      {
+        "alias": "DM",
+        "modelType": "document",
+        "purpose": "data binding",
+        "reference": "controls.index-document"
+      }
+    ]
+  },
+  "content": {
+    "subHeaderBox": {
+      "id": "subHeaderBox1",
+      "majorButtons": {
+        "button": [
+          {
+            "type": "NAVIGATION",
+            "id": "button-55f1d",
+            "name": "Screen1",
+            "buttonStyling": {
+              "label": {
+                "type": "Multilingual",
+                "multilingualText": {
+                  "text": [
+                    {
+                      "locale": "en",
+                      "text": "Basic"
+                    }
+                  ]
+                }
+              },
+              "priority": "SECONDARY"
+            },
+            "target": "screen1",
+            "scope": "ALWAYS"
+          },
+          {
+            "type": "NAVIGATION",
+            "id": "button-a6b63",
+            "name": "Screen2",
+            "buttonStyling": {
+              "label": {
+                "type": "Multilingual",
+                "multilingualText": {
+                  "text": [
+                    {
+                      "locale": "en",
+                      "text": "Initial Value"
+                    }
+                  ]
+                }
+              },
+              "priority": "SECONDARY"
+            },
+            "target": "screen-4d3fa",
+            "scope": "ALWAYS"
+          },
+          {
+            "type": "NAVIGATION",
+            "id": "button-5bee4",
+            "name": "Screen3",
+            "buttonStyling": {
+              "label": {
+                "type": "Multilingual",
+                "multilingualText": {
+                  "text": [
+                    {
+                      "locale": "en",
+                      "text": "Nested"
+                    }
+                  ]
+                }
+              },
+              "priority": "SECONDARY"
+            },
+            "target": "screen-c5f66",
+            "scope": "ALWAYS"
+          },
+          {
+            "type": "NAVIGATION",
+            "id": "button-263b3",
+            "name": "Screen4",
+            "buttonStyling": {
+              "label": {
+                "type": "Multilingual",
+                "multilingualText": {
+                  "text": [
+                    {
+                      "locale": "en",
+                      "text": "Nested and Initial Value"
+                    }
+                  ]
+                }
+              },
+              "priority": "SECONDARY"
+            },
+            "target": "screen-f98fa",
+            "scope": "ALWAYS"
+          },
+          {
+            "type": "NAVIGATION",
+            "id": "button-1895d",
+            "name": "Screen5",
+            "buttonStyling": {
+              "label": {
+                "type": "Multilingual",
+                "multilingualText": {
+                  "text": [
+                    {
+                      "locale": "en",
+                      "text": "All Field Types"
+                    }
+                  ]
+                }
+              },
+              "priority": "SECONDARY"
+            },
+            "target": "screen-00c7c",
+            "scope": "ALWAYS"
+          }
+        ]
+      }
+    },
+    "footerBox": {
+      "id": "footerBox1"
+    },
+    "screens": [
+      {
+        "id": "screen1",
+        "name": "Screen1",
+        "title": {
+          "type": "Multilingual",
+          "multilingualText": {
+            "text": [
+              {
+                "locale": "en",
+                "text": "Basic"
+              }
+            ]
+          }
+        },
+        "screenElements": [
+          {
+            "type": "ControlGrid",
+            "id": "controlgrid-c11d6",
+            "name": "grid",
+            "row": [
+              {
+                "type": "Row",
+                "id": "row-cb426",
+                "cell": [
+                  {
+                    "type": "TextCell",
+                    "id": "textcell-81e51",
+                    "name": "description",
+                    "content": {
+                      "text": [
+                        {
+                          "locale": "en",
+                          "text": "This screen shows the behavior of the control with index on a top screen. <br /><br />\n\nIf a control changes and the referenced row does not exist, then the correspondig row is created otherwise it is updated. <br/>\nIf the index type is numeric, then every row, that does not exist before the given numeric index, is created as well."
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            ],
+            "verticalAlignment": "TOP"
+          },
+          {
+            "type": "Section",
+            "id": "section-0d5cf",
+            "name": "applicant",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "Applicant (semantic index: applicant is true)"
+                  }
+                ]
+              }
+            },
+            "screenElements": [
+              {
+                "type": "ControlGrid",
+                "id": "controlgrid-3c40c",
+                "name": "grid",
+                "row": [
+                  {
+                    "type": "Row",
+                    "id": "row-9187d",
+                    "cell": [
+                      {
+                        "type": "Control",
+                        "id": "control-79b6d",
+                        "elementRef": "field_a16d5",
+                        "index": {
+                          "type": "SEMANTIC",
+                          "value": "true"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "type": "Row",
+                    "id": "row-ed18e",
+                    "cell": [
+                      {
+                        "type": "Control",
+                        "id": "control-a7a18",
+                        "elementRef": "field_6f9f9",
+                        "index": {
+                          "type": "SEMANTIC",
+                          "value": "true"
+                        }
+                      }
+                    ]
+                  }
+                ],
+                "verticalAlignment": "TOP"
+              }
+            ]
+          },
+          {
+            "type": "Section",
+            "id": "section-ae0ab",
+            "name": "other",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "Other (semantic index: applicant is false)"
+                  }
+                ]
+              }
+            },
+            "screenElements": [
+              {
+                "type": "ControlGrid",
+                "id": "controlgrid-41e4d",
+                "name": "grid",
+                "row": [
+                  {
+                    "type": "Row",
+                    "id": "row-cd7ae",
+                    "cell": [
+                      {
+                        "type": "Control",
+                        "id": "control-3ec79",
+                        "elementRef": "field_a16d5",
+                        "index": {
+                          "type": "SEMANTIC",
+                          "value": "false"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "type": "Row",
+                    "id": "row-e2e0c",
+                    "cell": [
+                      {
+                        "type": "Control",
+                        "id": "control-e552f",
+                        "elementRef": "field_6f9f9",
+                        "index": {
+                          "type": "SEMANTIC",
+                          "value": "false"
+                        }
+                      }
+                    ]
+                  }
+                ],
+                "verticalAlignment": "TOP"
+              }
+            ]
+          },
+          {
+            "type": "Section",
+            "id": "section-df5d2",
+            "name": "first_contact",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "First Contact (numeric index: 1)"
+                  }
+                ]
+              }
+            },
+            "screenElements": [
+              {
+                "type": "ControlGrid",
+                "id": "controlgrid-0c0e8",
+                "name": "grid",
+                "row": [
+                  {
+                    "type": "Row",
+                    "id": "row-78e63",
+                    "cell": [
+                      {
+                        "type": "Control",
+                        "id": "control-fb92e",
+                        "elementRef": "field_a16d5",
+                        "index": {
+                          "type": "NUMERIC",
+                          "value": "1"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "type": "Row",
+                    "id": "row-e4535",
+                    "cell": [
+                      {
+                        "type": "Control",
+                        "id": "control-ae882",
+                        "elementRef": "field_6f9f9",
+                        "index": {
+                          "type": "NUMERIC",
+                          "value": "1"
+                        }
+                      }
+                    ]
+                  }
+                ],
+                "verticalAlignment": "TOP"
+              }
+            ]
+          },
+          {
+            "type": "Section",
+            "id": "section-921f6",
+            "name": "second_contact",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "Second Contact (numeric index: 2)"
+                  }
+                ]
+              }
+            },
+            "screenElements": [
+              {
+                "type": "ControlGrid",
+                "id": "controlgrid-fee47",
+                "name": "grid",
+                "row": [
+                  {
+                    "type": "Row",
+                    "id": "row-cca92",
+                    "cell": [
+                      {
+                        "type": "Control",
+                        "id": "control-db541",
+                        "elementRef": "field_a16d5",
+                        "index": {
+                          "type": "NUMERIC",
+                          "value": "2"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "type": "Row",
+                    "id": "row-0b269",
+                    "cell": [
+                      {
+                        "type": "Control",
+                        "id": "control-e8f46",
+                        "elementRef": "field_6f9f9",
+                        "index": {
+                          "type": "NUMERIC",
+                          "value": "2"
+                        }
+                      }
+                    ]
+                  }
+                ],
+                "verticalAlignment": "TOP"
+              }
+            ]
+          },
+          {
+            "type": "InlineRepeat",
+            "id": "inlinerepeat-7dbd1",
+            "name": "inline-repeat-contacts",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "Contact Overview (The fields above as inline repeat)"
+                  }
+                ]
+              }
+            },
+            "repeatOverviewColumn": [
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-a5d56",
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "elementRef": "field_c0223"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-f759f",
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "elementRef": "field_a16d5"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-6c90e",
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "elementRef": "field_6f9f9"
+              }
+            ],
+            "groupRef": "group_8b152",
+            "enableAdd": false,
+            "enableRemove": true,
+            "enableReorder": true,
+            "enableCopy": false
+          }
+        ]
+      },
+      {
+        "id": "screen-4d3fa",
+        "name": "Screen2",
+        "title": {
+          "type": "Multilingual",
+          "multilingualText": {
+            "text": [
+              {
+                "locale": "en",
+                "text": "Initial Value"
+              }
+            ]
+          }
+        },
+        "screenElements": [
+          {
+            "type": "ControlGrid",
+            "id": "controlgrid-5f5fd",
+            "name": "grid",
+            "row": [
+              {
+                "type": "Row",
+                "id": "row-adb26",
+                "cell": [
+                  {
+                    "type": "TextCell",
+                    "id": "textcell-e1ac7",
+                    "name": "description",
+                    "content": {
+                      "text": [
+                        {
+                          "locale": "en",
+                          "text": "This screen show the same as the \"Basic\" screen with the difference that the rows also include initial values. <br /><br />\n\nIf a row that is used by a control with index has some initial values, then these rows will be created for every semantic and numeric index."
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            ],
+            "verticalAlignment": "TOP"
+          },
+          {
+            "type": "Section",
+            "id": "section-0ea73",
+            "name": "applicant",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "Applicant (semantic index: applicant is true)"
+                  }
+                ]
+              }
+            },
+            "screenElements": [
+              {
+                "type": "ControlGrid",
+                "id": "controlgrid-7994d",
+                "name": "grid",
+                "row": [
+                  {
+                    "type": "Row",
+                    "id": "row-4b93f",
+                    "cell": [
+                      {
+                        "type": "Control",
+                        "id": "control-116de",
+                        "elementRef": "field_a146a",
+                        "index": {
+                          "type": "SEMANTIC",
+                          "value": "true"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "type": "Row",
+                    "id": "row-f91a5",
+                    "cell": [
+                      {
+                        "type": "Control",
+                        "id": "control-49884",
+                        "elementRef": "field_66ecb",
+                        "index": {
+                          "type": "SEMANTIC",
+                          "value": "true"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "type": "Row",
+                    "id": "row-46ba7",
+                    "cell": [
+                      {
+                        "type": "Control",
+                        "id": "control-9249b",
+                        "elementRef": "field_8c582",
+                        "index": {
+                          "type": "SEMANTIC",
+                          "value": "true"
+                        }
+                      }
+                    ]
+                  }
+                ],
+                "verticalAlignment": "TOP"
+              }
+            ]
+          },
+          {
+            "type": "Section",
+            "id": "section-5ce84",
+            "name": "other",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "Other (semantic index: applicant is false)"
+                  }
+                ]
+              }
+            },
+            "screenElements": [
+              {
+                "type": "ControlGrid",
+                "id": "controlgrid-1125f",
+                "name": "grid",
+                "row": [
+                  {
+                    "type": "Row",
+                    "id": "row-29867",
+                    "cell": [
+                      {
+                        "type": "Control",
+                        "id": "control-1de29",
+                        "elementRef": "field_a146a",
+                        "index": {
+                          "type": "SEMANTIC",
+                          "value": "false"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "type": "Row",
+                    "id": "row-ba57b",
+                    "cell": [
+                      {
+                        "type": "Control",
+                        "id": "control-f804a",
+                        "elementRef": "field_66ecb",
+                        "index": {
+                          "type": "SEMANTIC",
+                          "value": "false"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "type": "Row",
+                    "id": "row-f5c7c",
+                    "cell": [
+                      {
+                        "type": "Control",
+                        "id": "control-426c0",
+                        "elementRef": "field_8c582",
+                        "index": {
+                          "type": "SEMANTIC",
+                          "value": "false"
+                        }
+                      }
+                    ]
+                  }
+                ],
+                "verticalAlignment": "TOP"
+              }
+            ]
+          },
+          {
+            "type": "Section",
+            "id": "section-caf2e",
+            "name": "first_contact",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "First Contact (numeric index: 1)"
+                  }
+                ]
+              }
+            },
+            "screenElements": [
+              {
+                "type": "ControlGrid",
+                "id": "controlgrid-e8bb8",
+                "name": "grid",
+                "row": [
+                  {
+                    "type": "Row",
+                    "id": "row-8f7b3",
+                    "cell": [
+                      {
+                        "type": "Control",
+                        "id": "control-0a3f3",
+                        "elementRef": "field_a146a",
+                        "index": {
+                          "type": "NUMERIC",
+                          "value": "1"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "type": "Row",
+                    "id": "row-c14ae",
+                    "cell": [
+                      {
+                        "type": "Control",
+                        "id": "control-d5167",
+                        "elementRef": "field_66ecb",
+                        "index": {
+                          "type": "NUMERIC",
+                          "value": "1"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "type": "Row",
+                    "id": "row-a64a2",
+                    "cell": [
+                      {
+                        "type": "Control",
+                        "id": "control-b3d24",
+                        "elementRef": "field_8c582",
+                        "index": {
+                          "type": "NUMERIC",
+                          "value": "1"
+                        }
+                      }
+                    ]
+                  }
+                ],
+                "verticalAlignment": "TOP"
+              }
+            ]
+          },
+          {
+            "type": "Section",
+            "id": "section-ebcb7",
+            "name": "second_contact",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "Second Contact (numeric index: 2)"
+                  }
+                ]
+              }
+            },
+            "screenElements": [
+              {
+                "type": "ControlGrid",
+                "id": "controlgrid-32ca6",
+                "name": "grid",
+                "row": [
+                  {
+                    "type": "Row",
+                    "id": "row-b7421",
+                    "cell": [
+                      {
+                        "type": "Control",
+                        "id": "control-c8fb1",
+                        "elementRef": "field_a146a",
+                        "index": {
+                          "type": "NUMERIC",
+                          "value": "2"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "type": "Row",
+                    "id": "row-5051d",
+                    "cell": [
+                      {
+                        "type": "Control",
+                        "id": "control-34ed0",
+                        "elementRef": "field_66ecb",
+                        "index": {
+                          "type": "NUMERIC",
+                          "value": "2"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "type": "Row",
+                    "id": "row-3fb08",
+                    "cell": [
+                      {
+                        "type": "Control",
+                        "id": "control-609a0",
+                        "elementRef": "field_8c582",
+                        "index": {
+                          "type": "NUMERIC",
+                          "value": "2"
+                        }
+                      }
+                    ]
+                  }
+                ],
+                "verticalAlignment": "TOP"
+              }
+            ]
+          },
+          {
+            "type": "InlineRepeat",
+            "id": "inlinerepeat-5f0be",
+            "name": "inline-repeat-contacts_with_children_count",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "Contact Overview (The fields above as inline repeat)"
+                  }
+                ]
+              }
+            },
+            "repeatOverviewColumn": [
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-d5460",
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "elementRef": "field_52634"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-53758",
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "elementRef": "field_a146a"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-0bddb",
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "elementRef": "field_66ecb"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-31ae4",
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "elementRef": "field_8c582"
+              }
+            ],
+            "groupRef": "group_7193b",
+            "enableAdd": false,
+            "enableRemove": true,
+            "enableReorder": true,
+            "enableCopy": false
+          }
+        ]
+      },
+      {
+        "id": "screen-c5f66",
+        "name": "Screen3",
+        "title": {
+          "type": "Multilingual",
+          "multilingualText": {
+            "text": [
+              {
+                "locale": "en",
+                "text": "Nested Control With Index"
+              }
+            ]
+          }
+        },
+        "screenElements": [
+          {
+            "type": "ControlGrid",
+            "id": "controlgrid-b321e",
+            "name": "grid",
+            "row": [
+              {
+                "type": "Row",
+                "id": "row-d50f9",
+                "cell": [
+                  {
+                    "type": "TextCell",
+                    "id": "textcell-de43e",
+                    "name": "description",
+                    "content": {
+                      "text": [
+                        {
+                          "locale": "en",
+                          "text": "This screen shows the same as the \"Basic\" screen with the difference that the screen is nested into a detached repeat."
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            ],
+            "verticalAlignment": "TOP"
+          },
+          {
+            "type": "DetachedRepeat",
+            "id": "detachedrepeat-9950b",
+            "name": "detached-repeat-nesting",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "Controls with index are used in this repeat"
+                  }
+                ]
+              }
+            },
+            "groupRef": "group_1be0d",
+            "enableAdd": true,
+            "enableRemove": true,
+            "enableReorder": false,
+            "enableCopy": false,
+            "defaultRowAction": {
+              "event": "edit"
+            },
+            "detailScreen": {
+              "id": "screen-a5b59",
+              "name": "detached-repeat-nesting-detail-screen",
+              "screenElements": [
+                {
+                  "type": "Section",
+                  "id": "section-85564",
+                  "name": "applicant",
+                  "title": {
+                    "type": "Multilingual",
+                    "multilingualText": {
+                      "text": [
+                        {
+                          "locale": "en",
+                          "text": "Applicant (semantic index: applicant is true)"
+                        }
+                      ]
+                    }
+                  },
+                  "screenElements": [
+                    {
+                      "type": "ControlGrid",
+                      "id": "controlgrid-ca6e0",
+                      "name": "grid",
+                      "row": [
+                        {
+                          "type": "Row",
+                          "id": "row-a2f46",
+                          "cell": [
+                            {
+                              "type": "Control",
+                              "id": "control-3da99",
+                              "elementRef": "field_48be9",
+                              "index": {
+                                "type": "SEMANTIC",
+                                "value": "true"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "type": "Row",
+                          "id": "row-0a133",
+                          "cell": [
+                            {
+                              "type": "Control",
+                              "id": "control-c6fdc",
+                              "elementRef": "field_d696b",
+                              "index": {
+                                "type": "SEMANTIC",
+                                "value": "true"
+                              }
+                            }
+                          ]
+                        }
+                      ],
+                      "verticalAlignment": "TOP"
+                    }
+                  ]
+                },
+                {
+                  "type": "Section",
+                  "id": "section-dcb2f",
+                  "name": "other",
+                  "title": {
+                    "type": "Multilingual",
+                    "multilingualText": {
+                      "text": [
+                        {
+                          "locale": "en",
+                          "text": "Other (semantic index: applicant is false)"
+                        }
+                      ]
+                    }
+                  },
+                  "screenElements": [
+                    {
+                      "type": "ControlGrid",
+                      "id": "controlgrid-c98e2",
+                      "name": "grid",
+                      "row": [
+                        {
+                          "type": "Row",
+                          "id": "row-fd5f1",
+                          "cell": [
+                            {
+                              "type": "Control",
+                              "id": "control-1791e",
+                              "elementRef": "field_48be9",
+                              "index": {
+                                "type": "SEMANTIC",
+                                "value": "false"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "type": "Row",
+                          "id": "row-a7705",
+                          "cell": [
+                            {
+                              "type": "Control",
+                              "id": "control-2f25a",
+                              "elementRef": "field_d696b",
+                              "index": {
+                                "type": "SEMANTIC",
+                                "value": "false"
+                              }
+                            }
+                          ]
+                        }
+                      ],
+                      "verticalAlignment": "TOP"
+                    }
+                  ]
+                },
+                {
+                  "type": "Section",
+                  "id": "section-c340e",
+                  "name": "first_contact",
+                  "title": {
+                    "type": "Multilingual",
+                    "multilingualText": {
+                      "text": [
+                        {
+                          "locale": "en",
+                          "text": "First Contact (numeric index: 1)"
+                        }
+                      ]
+                    }
+                  },
+                  "screenElements": [
+                    {
+                      "type": "ControlGrid",
+                      "id": "controlgrid-8fe50",
+                      "name": "grid",
+                      "row": [
+                        {
+                          "type": "Row",
+                          "id": "row-f9917",
+                          "cell": [
+                            {
+                              "type": "Control",
+                              "id": "control-b8125",
+                              "elementRef": "field_48be9",
+                              "index": {
+                                "type": "NUMERIC",
+                                "value": "1"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "type": "Row",
+                          "id": "row-61422",
+                          "cell": [
+                            {
+                              "type": "Control",
+                              "id": "control-79935",
+                              "elementRef": "field_d696b",
+                              "index": {
+                                "type": "NUMERIC",
+                                "value": "1"
+                              }
+                            }
+                          ]
+                        }
+                      ],
+                      "verticalAlignment": "TOP"
+                    }
+                  ]
+                },
+                {
+                  "type": "Section",
+                  "id": "section-4d866",
+                  "name": "second_contact",
+                  "title": {
+                    "type": "Multilingual",
+                    "multilingualText": {
+                      "text": [
+                        {
+                          "locale": "en",
+                          "text": "Second Contact (numeric index: 2)"
+                        }
+                      ]
+                    }
+                  },
+                  "screenElements": [
+                    {
+                      "type": "ControlGrid",
+                      "id": "controlgrid-d9559",
+                      "name": "grid",
+                      "row": [
+                        {
+                          "type": "Row",
+                          "id": "row-efd19",
+                          "cell": [
+                            {
+                              "type": "Control",
+                              "id": "control-1e800",
+                              "elementRef": "field_48be9",
+                              "index": {
+                                "type": "NUMERIC",
+                                "value": "2"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "type": "Row",
+                          "id": "row-89b5e",
+                          "cell": [
+                            {
+                              "type": "Control",
+                              "id": "control-a1fad",
+                              "elementRef": "field_d696b",
+                              "index": {
+                                "type": "NUMERIC",
+                                "value": "2"
+                              }
+                            }
+                          ]
+                        }
+                      ],
+                      "verticalAlignment": "TOP"
+                    }
+                  ]
+                },
+                {
+                  "type": "InlineRepeat",
+                  "id": "inlinerepeat-08d64",
+                  "name": "inline-repeat-contacts",
+                  "title": {
+                    "type": "Multilingual",
+                    "multilingualText": {
+                      "text": [
+                        {
+                          "locale": "en",
+                          "text": "Contact Overview (The fields above as inline repeat)"
+                        }
+                      ]
+                    }
+                  },
+                  "repeatOverviewColumn": [
+                    {
+                      "type": "FieldBasedRepeatOverviewColumn",
+                      "id": "fieldbasedrepeatoverviewcolumn-478d7",
+                      "width": 1,
+                      "sortable": false,
+                      "filterable": false,
+                      "preferredSorting": "ASC",
+                      "elementRef": "field_172fd"
+                    },
+                    {
+                      "type": "FieldBasedRepeatOverviewColumn",
+                      "id": "fieldbasedrepeatoverviewcolumn-d16b6",
+                      "width": 1,
+                      "sortable": false,
+                      "filterable": false,
+                      "preferredSorting": "ASC",
+                      "elementRef": "field_48be9"
+                    },
+                    {
+                      "type": "FieldBasedRepeatOverviewColumn",
+                      "id": "fieldbasedrepeatoverviewcolumn-4a304",
+                      "width": 1,
+                      "sortable": false,
+                      "filterable": false,
+                      "preferredSorting": "ASC",
+                      "elementRef": "field_d696b"
+                    }
+                  ],
+                  "groupRef": "group_a391d",
+                  "enableAdd": true,
+                  "enableRemove": true,
+                  "enableReorder": false,
+                  "enableCopy": false
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "screen-f98fa",
+        "name": "Screen4",
+        "title": {
+          "type": "Multilingual",
+          "multilingualText": {
+            "text": [
+              {
+                "locale": "en",
+                "text": "Nested and Initial Values"
+              }
+            ]
+          }
+        },
+        "screenElements": [
+          {
+            "type": "ControlGrid",
+            "id": "controlgrid-367a3",
+            "name": "grid",
+            "row": [
+              {
+                "type": "Row",
+                "id": "row-93417",
+                "cell": [
+                  {
+                    "type": "TextCell",
+                    "id": "textcell-a55a5",
+                    "name": "description",
+                    "content": {
+                      "text": [
+                        {
+                          "locale": "en",
+                          "text": "This screen shows the same as the \"Initial Value\" screen with the difference that the screen is nested into a detached repeat."
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            ],
+            "verticalAlignment": "TOP"
+          },
+          {
+            "type": "DetachedRepeat",
+            "id": "detachedrepeat-15395",
+            "name": "detached-repeat-nesting",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "Controls with index are used in this repeat"
+                  }
+                ]
+              }
+            },
+            "groupRef": "group_1be0d",
+            "enableAdd": true,
+            "enableRemove": true,
+            "enableReorder": false,
+            "enableCopy": false,
+            "defaultRowAction": {
+              "event": "edit"
+            },
+            "detailScreen": {
+              "id": "screen-b137f",
+              "name": "detached-repeat-nesting-detail-screen",
+              "screenElements": [
+                {
+                  "type": "Section",
+                  "id": "section-ac328",
+                  "name": "applicant",
+                  "title": {
+                    "type": "Multilingual",
+                    "multilingualText": {
+                      "text": [
+                        {
+                          "locale": "en",
+                          "text": "Applicant (semantic index: applicant is true)"
+                        }
+                      ]
+                    }
+                  },
+                  "screenElements": [
+                    {
+                      "type": "ControlGrid",
+                      "id": "controlgrid-3a65c",
+                      "name": "grid",
+                      "row": [
+                        {
+                          "type": "Row",
+                          "id": "row-5ac98",
+                          "cell": [
+                            {
+                              "type": "Control",
+                              "id": "control-1a4d0",
+                              "elementRef": "field_443f8",
+                              "index": {
+                                "type": "SEMANTIC",
+                                "value": "true"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "type": "Row",
+                          "id": "row-19cd9",
+                          "cell": [
+                            {
+                              "type": "Control",
+                              "id": "control-f9243",
+                              "elementRef": "field_773b1",
+                              "index": {
+                                "type": "SEMANTIC",
+                                "value": "true"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "type": "Row",
+                          "id": "row-ba5ac",
+                          "cell": [
+                            {
+                              "type": "Control",
+                              "id": "control-52bad",
+                              "elementRef": "field_f32b2",
+                              "index": {
+                                "type": "SEMANTIC",
+                                "value": "true"
+                              }
+                            }
+                          ]
+                        }
+                      ],
+                      "verticalAlignment": "TOP"
+                    }
+                  ]
+                },
+                {
+                  "type": "Section",
+                  "id": "section-59658",
+                  "name": "other",
+                  "title": {
+                    "type": "Multilingual",
+                    "multilingualText": {
+                      "text": [
+                        {
+                          "locale": "en",
+                          "text": "Other (semantic index: applicant is false)"
+                        }
+                      ]
+                    }
+                  },
+                  "screenElements": [
+                    {
+                      "type": "ControlGrid",
+                      "id": "controlgrid-dacdf",
+                      "name": "grid",
+                      "row": [
+                        {
+                          "type": "Row",
+                          "id": "row-db0c0",
+                          "cell": [
+                            {
+                              "type": "Control",
+                              "id": "control-6a9ac",
+                              "elementRef": "field_443f8",
+                              "index": {
+                                "type": "SEMANTIC",
+                                "value": "false"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "type": "Row",
+                          "id": "row-e3951",
+                          "cell": [
+                            {
+                              "type": "Control",
+                              "id": "control-93f57",
+                              "elementRef": "field_773b1",
+                              "index": {
+                                "type": "SEMANTIC",
+                                "value": "false"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "type": "Row",
+                          "id": "row-50006",
+                          "cell": [
+                            {
+                              "type": "Control",
+                              "id": "control-ca2f3",
+                              "elementRef": "field_f32b2",
+                              "index": {
+                                "type": "SEMANTIC",
+                                "value": "false"
+                              }
+                            }
+                          ]
+                        }
+                      ],
+                      "verticalAlignment": "TOP"
+                    }
+                  ]
+                },
+                {
+                  "type": "Section",
+                  "id": "section-2a794",
+                  "name": "first_contact",
+                  "title": {
+                    "type": "Multilingual",
+                    "multilingualText": {
+                      "text": [
+                        {
+                          "locale": "en",
+                          "text": "First Contact (numeric index: 1)"
+                        }
+                      ]
+                    }
+                  },
+                  "screenElements": [
+                    {
+                      "type": "ControlGrid",
+                      "id": "controlgrid-f0447",
+                      "name": "grid",
+                      "row": [
+                        {
+                          "type": "Row",
+                          "id": "row-6f6a9",
+                          "cell": [
+                            {
+                              "type": "Control",
+                              "id": "control-81233",
+                              "elementRef": "field_443f8",
+                              "index": {
+                                "type": "NUMERIC",
+                                "value": "1"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "type": "Row",
+                          "id": "row-7818a",
+                          "cell": [
+                            {
+                              "type": "Control",
+                              "id": "control-5eb3e",
+                              "elementRef": "field_773b1",
+                              "index": {
+                                "type": "NUMERIC",
+                                "value": "1"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "type": "Row",
+                          "id": "row-3ec8c",
+                          "cell": [
+                            {
+                              "type": "Control",
+                              "id": "control-bf8e8",
+                              "elementRef": "field_f32b2",
+                              "index": {
+                                "type": "NUMERIC",
+                                "value": "1"
+                              }
+                            }
+                          ]
+                        }
+                      ],
+                      "verticalAlignment": "TOP"
+                    }
+                  ]
+                },
+                {
+                  "type": "Section",
+                  "id": "section-0419e",
+                  "name": "second_contact",
+                  "title": {
+                    "type": "Multilingual",
+                    "multilingualText": {
+                      "text": [
+                        {
+                          "locale": "en",
+                          "text": "Second Contact (numeric index: 2)"
+                        }
+                      ]
+                    }
+                  },
+                  "screenElements": [
+                    {
+                      "type": "ControlGrid",
+                      "id": "controlgrid-e6553",
+                      "name": "grid",
+                      "row": [
+                        {
+                          "type": "Row",
+                          "id": "row-6884d",
+                          "cell": [
+                            {
+                              "type": "Control",
+                              "id": "control-002fe",
+                              "elementRef": "field_443f8",
+                              "index": {
+                                "type": "NUMERIC",
+                                "value": "2"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "type": "Row",
+                          "id": "row-8356e",
+                          "cell": [
+                            {
+                              "type": "Control",
+                              "id": "control-5d2ea",
+                              "elementRef": "field_773b1",
+                              "index": {
+                                "type": "NUMERIC",
+                                "value": "2"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "type": "Row",
+                          "id": "row-b80b0",
+                          "cell": [
+                            {
+                              "type": "Control",
+                              "id": "control-a9b73",
+                              "elementRef": "field_f32b2",
+                              "index": {
+                                "type": "NUMERIC",
+                                "value": "2"
+                              }
+                            }
+                          ]
+                        }
+                      ],
+                      "verticalAlignment": "TOP"
+                    }
+                  ]
+                },
+                {
+                  "type": "InlineRepeat",
+                  "id": "inlinerepeat-48f59",
+                  "name": "inline-repeat-contacts_with_children_count",
+                  "title": {
+                    "type": "Multilingual",
+                    "multilingualText": {
+                      "text": [
+                        {
+                          "locale": "en",
+                          "text": "Contact Overview (The fields above as inline repeat)"
+                        }
+                      ]
+                    }
+                  },
+                  "repeatOverviewColumn": [
+                    {
+                      "type": "FieldBasedRepeatOverviewColumn",
+                      "id": "fieldbasedrepeatoverviewcolumn-072cf",
+                      "width": 1,
+                      "sortable": false,
+                      "filterable": false,
+                      "preferredSorting": "ASC",
+                      "elementRef": "field_23f45"
+                    },
+                    {
+                      "type": "FieldBasedRepeatOverviewColumn",
+                      "id": "fieldbasedrepeatoverviewcolumn-86449",
+                      "width": 1,
+                      "sortable": false,
+                      "filterable": false,
+                      "preferredSorting": "ASC",
+                      "elementRef": "field_443f8"
+                    },
+                    {
+                      "type": "FieldBasedRepeatOverviewColumn",
+                      "id": "fieldbasedrepeatoverviewcolumn-3f39f",
+                      "width": 1,
+                      "sortable": false,
+                      "filterable": false,
+                      "preferredSorting": "ASC",
+                      "elementRef": "field_773b1"
+                    },
+                    {
+                      "type": "FieldBasedRepeatOverviewColumn",
+                      "id": "fieldbasedrepeatoverviewcolumn-41624",
+                      "width": 1,
+                      "sortable": false,
+                      "filterable": false,
+                      "preferredSorting": "ASC",
+                      "elementRef": "field_f32b2"
+                    }
+                  ],
+                  "groupRef": "group_faa70",
+                  "enableAdd": false,
+                  "enableRemove": true,
+                  "enableReorder": true,
+                  "enableCopy": false
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "screen-00c7c",
+        "name": "Screen5",
+        "title": {
+          "type": "Multilingual",
+          "multilingualText": {
+            "text": [
+              {
+                "locale": "en",
+                "text": "All Field Types"
+              }
+            ]
+          }
+        },
+        "screenElements": [
+          {
+            "type": "ControlGrid",
+            "id": "controlgrid-c0f5b",
+            "name": "grid",
+            "row": [
+              {
+                "type": "Row",
+                "id": "row-a496c",
+                "cell": [
+                  {
+                    "type": "TextCell",
+                    "id": "textcell-70d97",
+                    "name": "description",
+                    "content": {
+                      "text": [
+                        {
+                          "locale": "en",
+                          "text": "This screen shows that controls with index works for every field type."
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            ],
+            "verticalAlignment": "TOP"
+          },
+          {
+            "type": "Section",
+            "id": "section-760ed",
+            "name": "second_contact",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "Second Contact (numeric index: 2)"
+                  }
+                ]
+              }
+            },
+            "screenElements": [
+              {
+                "type": "ControlGrid",
+                "id": "controlgrid-cd5db",
+                "name": "grid",
+                "row": [
+                  {
+                    "type": "Row",
+                    "id": "row-df06a",
+                    "cell": [
+                      {
+                        "type": "Control",
+                        "id": "control-c5d93",
+                        "elementRef": "field_2b3bb",
+                        "index": {
+                          "type": "NUMERIC",
+                          "value": "2"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "type": "Row",
+                    "id": "row-49797",
+                    "cell": [
+                      {
+                        "type": "Control",
+                        "id": "control-fb52b",
+                        "elementRef": "field_30ae6",
+                        "index": {
+                          "type": "NUMERIC",
+                          "value": "2"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "type": "Row",
+                    "id": "row-f7e3b",
+                    "cell": [
+                      {
+                        "type": "Control",
+                        "id": "control-1d927",
+                        "elementRef": "field_fda0c",
+                        "index": {
+                          "type": "NUMERIC",
+                          "value": "2"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "type": "Row",
+                    "id": "row-2479c",
+                    "cell": [
+                      {
+                        "type": "Control",
+                        "id": "control-cfca7",
+                        "elementRef": "field_56709",
+                        "index": {
+                          "type": "NUMERIC",
+                          "value": "2"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "type": "Row",
+                    "id": "row-aaff4",
+                    "cell": [
+                      {
+                        "type": "Control",
+                        "id": "control-ec8c6",
+                        "elementRef": "field_b0653",
+                        "index": {
+                          "type": "NUMERIC",
+                          "value": "2"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "type": "Row",
+                    "id": "row-86f92",
+                    "cell": [
+                      {
+                        "type": "Control",
+                        "id": "control-91460",
+                        "elementRef": "field_456be",
+                        "index": {
+                          "type": "NUMERIC",
+                          "value": "2"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "type": "Row",
+                    "id": "row-51f36",
+                    "cell": [
+                      {
+                        "type": "Control",
+                        "id": "control-c9323",
+                        "elementRef": "field_3d99b",
+                        "index": {
+                          "type": "NUMERIC",
+                          "value": "2"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "type": "Row",
+                    "id": "row-a3557",
+                    "cell": [
+                      {
+                        "type": "Control",
+                        "id": "control-518f3",
+                        "elementRef": "field_a1807",
+                        "index": {
+                          "type": "NUMERIC",
+                          "value": "2"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "type": "Row",
+                    "id": "row-6f401",
+                    "cell": [
+                      {
+                        "type": "Control",
+                        "id": "control-a486b",
+                        "elementRef": "field_d21ee",
+                        "index": {
+                          "type": "NUMERIC",
+                          "value": "2"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "type": "Row",
+                    "id": "row-a4b43",
+                    "cell": [
+                      {
+                        "type": "Control",
+                        "id": "control-af3c4",
+                        "label": {
+                          "type": "Multilingual",
+                          "multilingualText": {
+                            "text": [
+                              {
+                                "locale": "en",
+                                "text": "Photo"
+                              }
+                            ]
+                          }
+                        },
+                        "elementRef": "group_7fed5",
+                        "index": {
+                          "type": "NUMERIC",
+                          "value": "2"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "type": "Row",
+                    "id": "row-f337b",
+                    "cell": [
+                      {
+                        "type": "Control",
+                        "id": "control-0f50b",
+                        "label": {
+                          "type": "Multilingual",
+                          "multilingualText": {
+                            "text": [
+                              {
+                                "locale": "en",
+                                "text": "Known Issues"
+                              }
+                            ]
+                          }
+                        },
+                        "elementRef": "group_cdf39",
+                        "index": {
+                          "type": "NUMERIC",
+                          "value": "2"
+                        }
+                      }
+                    ]
+                  }
+                ],
+                "verticalAlignment": "TOP"
+              }
+            ]
+          },
+          {
+            "type": "InlineRepeat",
+            "id": "inlinerepeat-ad945",
+            "name": "inline-repeat-contacts_with_all_field_types",
+            "repeatOverviewColumn": [
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-004fe",
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "elementRef": "field_2b3bb"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-30248",
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "elementRef": "field_30ae6"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-b3843",
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "elementRef": "field_fda0c"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-31a9e",
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "elementRef": "field_56709"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-52703",
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "elementRef": "field_b0653"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-9c76e",
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "elementRef": "field_456be"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-90c52",
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "elementRef": "field_3d99b"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-86c46",
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "elementRef": "field_d21ee"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-d916b",
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "elementRef": "field_a1807"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-bb259",
+                "label": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "Photo"
+                      }
+                    ]
+                  }
+                },
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "elementRef": "group_7fed5"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-3eb80",
+                "label": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "Known Issues"
+                      }
+                    ]
+                  }
+                },
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "elementRef": "group_cdf39"
+              }
+            ],
+            "groupRef": "group_bd50e",
+            "enableAdd": false,
+            "enableRemove": true,
+            "enableReorder": false,
+            "enableCopy": false
+          }
+        ]
+      }
+    ],
+    "fieldConfiguration": {
+      "field": [
+        {
+          "initialValue": "0",
+          "elementRef": "field_8c582"
+        },
+        {
+          "initialValue": "0",
+          "elementRef": "field_f32b2"
+        }
+      ]
+    },
+    "groupConfiguration": {},
+    "defaults": {}
+  }
+}

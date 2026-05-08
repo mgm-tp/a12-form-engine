@@ -1,0 +1,877 @@
+{
+  "header": {
+    "id": "controls.datecontrol-options-document",
+    "modelType": "document",
+    "modelVersion": "28.4.0",
+    "locales": [
+      {
+        "code": "en"
+      },
+      {
+        "code": "de"
+      }
+    ],
+    "labels": [],
+    "annotations": [
+      {
+        "name": "roles",
+        "value": "admin"
+      }
+    ],
+    "modelReferences": []
+  },
+  "content": {
+    "modelInfo": {
+      "name": "controls.datecontrol-options-document",
+      "immutable": false,
+      "baseYear": 2020
+    },
+    "modelConfig": {
+      "decimalSeparator": ".",
+      "timeZone": "UTC",
+      "conditionLanguage": {
+        "code": "en_US"
+      }
+    },
+    "modelRoot": {
+      "rootGroups": [
+        {
+          "type": "Group",
+          "id": "G2",
+          "name": "Test",
+          "Group": {
+            "repeatability": 1,
+            "elements": [
+              {
+                "type": "Field",
+                "id": "F3",
+                "name": "dateField",
+                "Field": {
+                  "fieldType": {
+                    "type": "DateType",
+                    "DateType": {
+                      "format": "yyyy-MM-dd"
+                    }
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "Date with preselected year +2 and year range [-10 : +10]"
+                    },
+                    {
+                      "locale": "de",
+                      "text": "Datum mit vorselektierem Jahr +2 und Jahresbreich [-10 : +10]"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Field",
+                "id": "F4",
+                "name": "dateTimeField",
+                "Field": {
+                  "fieldType": {
+                    "type": "DateTimeType",
+                    "DateTimeType": {
+                      "format": "yyyy-MM-dd'T'HH:mm:ss"
+                    }
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "Date and Time with preselected year 2010 and year range [2010-2020]"
+                    },
+                    {
+                      "locale": "de",
+                      "text": "Datum und Zeit mit vorselektiertem Jahr 2010 und Jahresbereich [2010-2020]"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Field",
+                "id": "F5",
+                "name": "dateField2",
+                "Field": {
+                  "fieldType": {
+                    "type": "DateType",
+                    "DateType": {
+                      "format": "yyyy-MM-dd"
+                    }
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "Date with preselected year +2"
+                    },
+                    {
+                      "locale": "de",
+                      "text": "Datum mit vorselektiertem Jahr +2"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Group",
+                "id": "G7",
+                "name": "Repeat_Group",
+                "Group": {
+                  "repeatability": 5,
+                  "elements": [
+                    {
+                      "type": "Field",
+                      "id": "F9",
+                      "name": "dateField",
+                      "Field": {
+                        "fieldType": {
+                          "type": "DateType",
+                          "DateType": {
+                            "format": "yyyy-MM-dd"
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "Date with preselected year +2 and year range [-10 : +10]"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "Datum mit vorselektiertem Jahr +2 und Jahresbereich [-10 : +10]"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "F10",
+                      "name": "dateTimeField",
+                      "Field": {
+                        "fieldType": {
+                          "type": "DateTimeType",
+                          "DateTimeType": {
+                            "format": "yyyy-MM-dd'T'HH:mm:ss"
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "Date and Time with preselected year 2015 and year rage [2010-2020] "
+                          },
+                          {
+                            "locale": "de",
+                            "text": "Datum und Zeit mit vorselektiertem Jahr 2015 und Jahresbereich [2010-2020]"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "F11",
+                      "name": "dateTimeField2",
+                      "Field": {
+                        "fieldType": {
+                          "type": "DateTimeType",
+                          "DateTimeType": {
+                            "format": "yyyy-MM-dd'T'HH:mm:ss"
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "Date and Time with preselected year -2"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "Datum und Zeit mit vorselektiertem Jahr -2"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "Group",
+          "id": "group_20539",
+          "name": "partiallyKnownDates",
+          "Group": {
+            "repeatability": 1,
+            "elements": [
+              {
+                "type": "Field",
+                "id": "field_4a5b5",
+                "name": "dateFieldDayOptional",
+                "Field": {
+                  "fieldType": {
+                    "type": "DateType",
+                    "DateType": {
+                      "format": "yyyy-MM-dd",
+                      "datePrecision": "DAY_OPTIONAL"
+                    }
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "Day optional"
+                    },
+                    {
+                      "locale": "de",
+                      "text": "Tag optional"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Field",
+                "id": "field_ad8be",
+                "name": "dateFieldMonthOptional",
+                "Field": {
+                  "fieldType": {
+                    "type": "DateType",
+                    "DateType": {
+                      "format": "yyyy-MM-dd",
+                      "datePrecision": "MONTH_OPTIONAL"
+                    }
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "Month optional"
+                    },
+                    {
+                      "locale": "de",
+                      "text": "Monat optional"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Field",
+                "id": "field_3bdb8",
+                "name": "dateFieldYearOptional",
+                "Field": {
+                  "fieldType": {
+                    "type": "DateType",
+                    "DateType": {
+                      "format": "yyyy-MM-dd",
+                      "datePrecision": "YEAR_OPTIONAL"
+                    }
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "Year optional"
+                    },
+                    {
+                      "locale": "de",
+                      "text": "Jahr optional"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Group",
+                "id": "group_21373",
+                "name": "Repeat_Group",
+                "Group": {
+                  "repeatability": 5,
+                  "elements": [
+                    {
+                      "type": "Field",
+                      "id": "field_6597d",
+                      "name": "dateFieldDayOptional",
+                      "Field": {
+                        "fieldType": {
+                          "type": "DateType",
+                          "DateType": {
+                            "format": "yyyy-MM-dd",
+                            "datePrecision": "DAY_OPTIONAL"
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "Day optional"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "Tag optional"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_cec01",
+                      "name": "dateFieldMonthOptional",
+                      "Field": {
+                        "fieldType": {
+                          "type": "DateType",
+                          "DateType": {
+                            "format": "yyyy-MM-dd",
+                            "datePrecision": "MONTH_OPTIONAL"
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "Month optional"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "Monat optional"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_3c6f4",
+                      "name": "dateFieldYearOptional",
+                      "Field": {
+                        "fieldType": {
+                          "type": "DateType",
+                          "DateType": {
+                            "format": "yyyy-MM-dd",
+                            "datePrecision": "YEAR_OPTIONAL"
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "Year optional"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "Jahr optional"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "Group",
+          "id": "group_18e40",
+          "name": "DateFragments",
+          "Group": {
+            "repeatability": 1,
+            "elements": [
+              {
+                "type": "Field",
+                "id": "field_da4fc",
+                "name": "dateFragmentFieldyyyy",
+                "Field": {
+                  "fieldType": {
+                    "type": "DateFragmentType",
+                    "DateFragmentType": {
+                      "formatOfFragment": "yyyy"
+                    }
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "Date Fragment with format yyyy"
+                    },
+                    {
+                      "locale": "de",
+                      "text": "Datumsfragment mit Format yyyy"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Field",
+                "id": "field_102d7",
+                "name": "dateFragmentFieldMM",
+                "Field": {
+                  "fieldType": {
+                    "type": "DateFragmentType",
+                    "DateFragmentType": {
+                      "formatOfFragment": "MM"
+                    }
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "Date Fragment with format MM"
+                    },
+                    {
+                      "locale": "de",
+                      "text": "Datumsfragment mit Format MM"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Field",
+                "id": "field_8f164",
+                "name": "dateFragmentFieldyyyyMM",
+                "Field": {
+                  "fieldType": {
+                    "type": "DateFragmentType",
+                    "DateFragmentType": {
+                      "formatOfFragment": "yyyy-MM"
+                    }
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "Date Fragment with format yyyy-MM"
+                    },
+                    {
+                      "locale": "de",
+                      "text": "Datumsfragment mit Format yyyy-MM"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Field",
+                "id": "field_9b736",
+                "name": "dateFragmentFieldMMdd",
+                "Field": {
+                  "fieldType": {
+                    "type": "DateFragmentType",
+                    "DateFragmentType": {
+                      "formatOfFragment": "MM-dd"
+                    }
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "Date Fragment with format MM-dd"
+                    },
+                    {
+                      "locale": "de",
+                      "text": "Datumsfragment mit Format MM-dd"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Group",
+                "id": "group_eff20",
+                "name": "Repeat_Group",
+                "Group": {
+                  "repeatability": 5,
+                  "elements": [
+                    {
+                      "type": "Field",
+                      "id": "field_5d183",
+                      "name": "dateFragmentFieldyyyy",
+                      "Field": {
+                        "fieldType": {
+                          "type": "DateFragmentType",
+                          "DateFragmentType": {
+                            "formatOfFragment": "yyyy"
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "Date Fragment with format yyyy"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "Datumsfragment mit Format yyyy"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_966e8",
+                      "name": "dateFragmentFieldMM",
+                      "Field": {
+                        "fieldType": {
+                          "type": "DateFragmentType",
+                          "DateFragmentType": {
+                            "formatOfFragment": "MM"
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "Date Fragment with format MM"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "Datumsfragment mit Format MM"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_5d2ee",
+                      "name": "dateFragmentFieldyyyyMM",
+                      "Field": {
+                        "fieldType": {
+                          "type": "DateFragmentType",
+                          "DateFragmentType": {
+                            "formatOfFragment": "yyyy-MM"
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "Date Fragment with format yyyy-MM"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "Datumsfragment mit Format yyyy-MM"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_d9d72",
+                      "name": "dateFragmentFieldMMdd",
+                      "Field": {
+                        "fieldType": {
+                          "type": "DateFragmentType",
+                          "DateFragmentType": {
+                            "formatOfFragment": "MM-dd"
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "Date Fragment with format MM-dd"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "Datumsfragment mit Format MM-dd"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "Group",
+          "id": "group_51c4a",
+          "name": "DateRanges",
+          "Group": {
+            "repeatability": 1,
+            "elements": [
+              {
+                "type": "Field",
+                "id": "field_a17fb",
+                "name": "dateRangeFieldyyyyMMdd",
+                "Field": {
+                  "fieldType": {
+                    "type": "DateRangeType",
+                    "DateRangeType": {
+                      "format": "yyyy-MM-dd",
+                      "rangeSeparator": "/"
+                    }
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "Date Range with format yyyy-MM-dd"
+                    },
+                    {
+                      "locale": "de",
+                      "text": "Date Range mit Format yyyy-MM-dd"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Field",
+                "id": "field_7c4a0",
+                "name": "dateRangeFieldyyyy",
+                "Field": {
+                  "fieldType": {
+                    "type": "DateRangeType",
+                    "DateRangeType": {
+                      "format": "yyyy",
+                      "rangeSeparator": "/"
+                    }
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "Date Range with format yyyy"
+                    },
+                    {
+                      "locale": "de",
+                      "text": "Date Range mit Format yyyy"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Field",
+                "id": "field_d2acf",
+                "name": "dateRangeFieldMM",
+                "Field": {
+                  "fieldType": {
+                    "type": "DateRangeType",
+                    "DateRangeType": {
+                      "format": "MM",
+                      "rangeSeparator": "/"
+                    }
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "Date Range with format MM"
+                    },
+                    {
+                      "locale": "de",
+                      "text": "Date Range mit Format MM"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Field",
+                "id": "field_86d52",
+                "name": "dateRangeFieldyyyyMM",
+                "Field": {
+                  "fieldType": {
+                    "type": "DateRangeType",
+                    "DateRangeType": {
+                      "format": "yyyy-MM",
+                      "rangeSeparator": "/"
+                    }
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "Date Range with format yyyy-MM"
+                    },
+                    {
+                      "locale": "de",
+                      "text": "Date Range mit Format yyyy-MM"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Field",
+                "id": "field_f425a",
+                "name": "dateRangeFieldMMdd",
+                "Field": {
+                  "fieldType": {
+                    "type": "DateRangeType",
+                    "DateRangeType": {
+                      "format": "MM-dd",
+                      "rangeSeparator": "/"
+                    }
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "Date Range with format MM-dd"
+                    },
+                    {
+                      "locale": "de",
+                      "text": "Date Range mit Format MM-dd"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Field",
+                "id": "field_c0dce",
+                "name": "dateRangeFieldMMddInterpretationOfYear",
+                "Field": {
+                  "fieldType": {
+                    "type": "DateRangeType",
+                    "DateRangeType": {
+                      "format": "MM-dd",
+                      "rangeSeparator": "/",
+                      "interpretationOfYear": "FROM"
+                    }
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "Date Range with format MM-dd and interpretationOfYear FROM"
+                    },
+                    {
+                      "locale": "de",
+                      "text": "Date Range mit Format MM-dd und interpretationOfYear FROM"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Group",
+                "id": "group_de053",
+                "name": "Repeat_Group",
+                "Group": {
+                  "repeatability": 5,
+                  "elements": [
+                    {
+                      "type": "Field",
+                      "id": "field_661b1",
+                      "name": "dateRangeFieldyyyyMMdd",
+                      "Field": {
+                        "fieldType": {
+                          "type": "DateRangeType",
+                          "DateRangeType": {
+                            "format": "yyyy-MM-dd",
+                            "rangeSeparator": "/"
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "Date Range with format yyyy-MM-dd"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "Date Range mit Format yyyy-MM-dd"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_c24ed",
+                      "name": "dateRangeFieldyyyy",
+                      "Field": {
+                        "fieldType": {
+                          "type": "DateRangeType",
+                          "DateRangeType": {
+                            "format": "yyyy",
+                            "rangeSeparator": "/"
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "Date Range with format yyyy"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "Date Range mit Format yyyy"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_18415",
+                      "name": "dateRangeFieldMM",
+                      "Field": {
+                        "fieldType": {
+                          "type": "DateRangeType",
+                          "DateRangeType": {
+                            "format": "MM",
+                            "rangeSeparator": "/"
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "Date Range with format MM"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "Date Range mit Format MM"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_1a50a",
+                      "name": "dateRangeFieldyyyyMM",
+                      "Field": {
+                        "fieldType": {
+                          "type": "DateRangeType",
+                          "DateRangeType": {
+                            "format": "yyyy-MM",
+                            "rangeSeparator": "/"
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "Date Range with format yyyy-MM"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "Date Range mit Format yyyy-MM"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_35953",
+                      "name": "dateRangeFieldMMdd",
+                      "Field": {
+                        "fieldType": {
+                          "type": "DateRangeType",
+                          "DateRangeType": {
+                            "format": "MM-dd",
+                            "rangeSeparator": "/"
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "Date Range with format MM-dd"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "Date Range mit Format MM-dd"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_d8cd7",
+                      "name": "dateRangeFieldMMddInterpretationOfYear",
+                      "Field": {
+                        "fieldType": {
+                          "type": "DateRangeType",
+                          "DateRangeType": {
+                            "format": "MM-dd",
+                            "rangeSeparator": "/",
+                            "interpretationOfYear": "FROM"
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "Date Range with format MM-dd and interpretationOfYear FROM"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "Date Range mit Format MM-dd und interpretationOfYear FROM"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

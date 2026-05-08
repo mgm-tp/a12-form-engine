@@ -1,0 +1,817 @@
+{
+  "header": {
+    "id": "controls.expressions-form",
+    "modelType": "form",
+    "modelVersion": "37.4.0",
+    "locales": [
+      {
+        "code": "en"
+      },
+      {
+        "code": "de"
+      }
+    ],
+    "annotations": [
+      {
+        "name": "roles",
+        "value": "admin"
+      }
+    ],
+    "modelReferences": [
+      {
+        "alias": "DM",
+        "modelType": "document",
+        "purpose": "data binding",
+        "reference": "controls.expressions-document"
+      }
+    ]
+  },
+  "content": {
+    "subHeaderBox": {
+      "id": "subHeaderBox"
+    },
+    "footerBox": {
+      "id": "footerBox"
+    },
+    "screens": [
+      {
+        "id": "screen",
+        "name": "Expressions Sample Screen",
+        "title": {
+          "type": "Multilingual",
+          "multilingualText": {
+            "text": [
+              {
+                "locale": "en",
+                "text": "Expressions Sample Screen"
+              }
+            ]
+          }
+        },
+        "screenElements": [
+          {
+            "type": "Section",
+            "id": "section-8c8f",
+            "name": "Screen 0",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "Document Model Field Types"
+                  }
+                ]
+              }
+            },
+            "screenElements": [
+              {
+                "type": "ControlGrid",
+                "id": "controlgrid-9833",
+                "name": "String",
+                "title": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "Expression String"
+                      }
+                    ]
+                  }
+                },
+                "layout": {
+                  "lg": "12"
+                },
+                "row": [
+                  {
+                    "type": "Row",
+                    "id": "row-0a230",
+                    "cell": [
+                      {
+                        "type": "ExpressionCell",
+                        "id": "expressionCell-83438",
+                        "offset": {
+                          "lg": 0
+                        },
+                        "span": {
+                          "lg": 1
+                        },
+                        "name": "expression",
+                        "expression": "kontext(RootGroup){\n\tkontext(ContactGroup){\n[Name] \" **\" [Surname] \"** [\" [Gender] \"]\" \"  \"\n\t\tcase [Married] = \"true\" {\n\t\t\t(en:\"(married)\", de:\"(verheiratet)\")\n\t\t}\n\t\tcase [Married] = \"false\" {\n\t\t\t(en:\"(not married)\", de:\"(nicht verheiratet)\")\n\t\t}\n\t\t\n\t\t\n\t\tcase [ShowCosts] = \"true\" {\n(en:\"Costs\", de:\"Kosten\") \": \" [Costs] \" \"  [ShowCosts]\n\t\t}\n\t\tkontext(Children) {\n\n\"* \" [Name]\n\t\t}\"  \"\n\n\"  \"\n\n\t}\n}",
+                        "label": {
+                          "type": "Multilingual",
+                          "multilingualText": {
+                            "text": [
+                              {
+                                "locale": "de",
+                                "text": "Expression (deu)"
+                              },
+                              {
+                                "locale": "en",
+                                "text": "Expression (eng)"
+                              }
+                            ]
+                          }
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "type": "Row",
+                    "id": "row-1asd1",
+                    "cell": [
+                      {
+                        "type": "ExpressionCell",
+                        "id": "expressionCell-65483",
+                        "offset": {
+                          "lg": 0
+                        },
+                        "span": {
+                          "lg": 1
+                        },
+                        "name": "expression-2",
+                        "expression": "kontext(RootGroup){ kontext(ContactGroup){ [Name] } }",
+                        "label": {
+                          "type": "Multilingual",
+                          "multilingualText": {
+                            "text": [
+                              {
+                                "locale": "de",
+                                "text": "Expression (deu)"
+                              },
+                              {
+                                "locale": "en",
+                                "text": "Expression (eng)"
+                              }
+                            ]
+                          }
+                        }
+                      }
+                    ]
+                  }
+                ],
+                "verticalAlignment": "BOTTOM"
+              }
+            ]
+          },
+          {
+            "type": "DetachedRepeat",
+            "id": "detachedrepeat-c12a4",
+            "name": "DetachedRepeat",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "Detached Repeat"
+                  }
+                ]
+              }
+            },
+            "repeatOverviewColumn": [
+              {
+                "type": "ExpressionRepeatOverviewColumn",
+                "id": "expressionOverviewColumn-1",
+                "label": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "Preview"
+                      },
+                      {
+                        "locale": "de",
+                        "text": "Vorschau"
+                      }
+                    ]
+                  }
+                },
+                "name": "Preview",
+                "expression": "[Name] \" **\" [Surname] \"** [\" [Gender] \"]\" \"  \"\n\n[ShowCosts]\n\ncase [ShowCosts] = \"true\" {\n\t(en:\"Costs\", de:\"Kosten\") \": \" [Costs]\n}\nkontext(Children) {\n\n\t\"* \" [Name]\n}"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldOverviewColumn-1",
+                "elementRef": "F17"
+              }
+            ],
+            "groupRef": "G10",
+            "enableAdd": true,
+            "enableRemove": true,
+            "enableReorder": true,
+            "detailScreen": {
+              "id": "screen-c5866",
+              "name": "Details",
+              "screenElements": [
+                {
+                  "type": "ControlGrid",
+                  "id": "controlgrid-f1380",
+                  "name": "Grid",
+                  "layout": {
+                    "lg": "12"
+                  },
+                  "row": [
+                    {
+                      "type": "Row",
+                      "id": "row-7179f",
+                      "cell": [
+                        {
+                          "type": "Control",
+                          "id": "control-7be13",
+                          "elementRef": "F6"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "Row",
+                      "id": "row-8d789",
+                      "name": "(Spillover 1)",
+                      "cell": [
+                        {
+                          "type": "Control",
+                          "id": "control-222c1",
+                          "elementRef": "F5"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "Row",
+                      "id": "row-8787b",
+                      "cell": [
+                        {
+                          "type": "Control",
+                          "id": "control-18c77",
+                          "elementRef": "F18"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "Row",
+                      "id": "row-db93c",
+                      "cell": [
+                        {
+                          "type": "Control",
+                          "id": "control-11cc3",
+                          "elementRef": "field_456ac"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "Row",
+                      "id": "row-c8129",
+                      "cell": [
+                        {
+                          "type": "Control",
+                          "id": "control-bd701",
+                          "elementRef": "F17"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "Row",
+                      "id": "row-2d965",
+                      "name": "(Spillover 2)",
+                      "cell": [
+                        {
+                          "type": "Control",
+                          "id": "control-e7f5a",
+                          "offset": {
+                            "lg": 0
+                          },
+                          "elementRef": "F7"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "Row",
+                      "id": "row-140c5",
+                      "cell": [
+                        {
+                          "type": "ExpressionCell",
+                          "id": "expressioncell-9cb00",
+                          "offset": {
+                            "lg": 0
+                          },
+                          "span": {
+                            "lg": 1
+                          },
+                          "name": "expr",
+                          "expression": "[Costs]",
+                          "label": {
+                            "type": "Multilingual",
+                            "multilingualText": {
+                              "text": [
+                                {
+                                  "locale": "en",
+                                  "text": "Costs (expression)"
+                                },
+                                {
+                                  "locale": "de",
+                                  "text": "Kosten (Expression)"
+                                }
+                              ]
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "type": "Row",
+                      "id": "row-099fc",
+                      "cell": [
+                        {
+                          "type": "ExpressionCell",
+                          "id": "expressioncell-15773",
+                          "offset": {
+                            "lg": 0
+                          },
+                          "span": {
+                            "lg": 1
+                          },
+                          "name": "cond-expr",
+                          "expression": "case [ShowCosts] = \"true\" {\n\n\n\n\t(en:\"Costs\", de:\"Kosten\") \": \" [Costs]\n\n\n\n}",
+                          "label": {
+                            "type": "Multilingual",
+                            "multilingualText": {
+                              "text": [
+                                {
+                                  "locale": "en",
+                                  "text": "Costs  (conditional expression)"
+                                },
+                                {
+                                  "locale": "de",
+                                  "text": "nur Kosten (konditionelle Expression)"
+                                }
+                              ]
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  ],
+                  "verticalAlignment": "BOTTOM"
+                },
+                {
+                  "type": "DetachedRepeat",
+                  "id": "detachedrepeat-5a500",
+                  "name": "Children",
+                  "repeatOverviewColumn": [
+                    {
+                      "type": "ExpressionRepeatOverviewColumn",
+                      "id": "expressionOverviewColumn-2",
+                      "name": "Preview",
+                      "expression": "[Name]"
+                    }
+                  ],
+                  "groupRef": "G11",
+                  "enableAdd": true,
+                  "enableRemove": true,
+                  "enableReorder": true,
+                  "detailScreen": {
+                    "id": "screen-8cd5c",
+                    "name": "Details",
+                    "screenElements": [
+                      {
+                        "type": "ControlGrid",
+                        "id": "controlgrid-52963",
+                        "name": "GridChildren",
+                        "row": [
+                          {
+                            "type": "Row",
+                            "id": "row-379e3",
+                            "cell": [
+                              {
+                                "type": "Control",
+                                "id": "control-6e428",
+                                "elementRef": "F14"
+                              }
+                            ]
+                          }
+                        ],
+                        "verticalAlignment": "BOTTOM"
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "type": "InlineRepeat",
+            "id": "inlinerepeat-c12a4",
+            "name": "InlineRepeat",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "Inline Repeat"
+                  }
+                ]
+              }
+            },
+            "repeatOverviewColumn": [
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldOverviewColumn-1234",
+                "elementRef": "F7"
+              },
+              {
+                "type": "ExpressionRepeatOverviewColumn",
+                "id": "expressionOverviewColumn-ir-1",
+                "label": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "Costs (expression)"
+                      },
+                      {
+                        "locale": "de",
+                        "text": "Kosten (Expression)"
+                      }
+                    ]
+                  }
+                },
+                "name": "expr",
+                "expression": "[Costs]"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldOverviewColumn-ir-1",
+                "elementRef": "F17"
+              },
+              {
+                "type": "ExpressionRepeatOverviewColumn",
+                "id": "expressionOverviewColumn-ir-2",
+                "label": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "Costs (conditional expression)"
+                      },
+                      {
+                        "locale": "de",
+                        "text": "nur Kosten (konditionelle Expression)"
+                      }
+                    ]
+                  }
+                },
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "name": "cond-expr",
+                "expression": "case [ShowCosts] = \"true\" {\n\t(en:\"Costs\", de:\"Kosten\") \": \" [Costs]\n}"
+              }
+            ],
+            "groupRef": "G10",
+            "enableAdd": true,
+            "enableRemove": true,
+            "enableReorder": true
+          },
+          {
+            "type": "EmbeddedRepeat",
+            "id": "detachedrepeat-e8a09",
+            "name": "EmbeddedRepeat",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "Embedded Repeat"
+                  }
+                ]
+              }
+            },
+            "repeatOverviewColumn": [
+              {
+                "type": "ExpressionRepeatOverviewColumn",
+                "id": "expressionrepeatoverviewcolumn-98a3c",
+                "label": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "Preview"
+                      },
+                      {
+                        "locale": "de",
+                        "text": "Vorschau"
+                      }
+                    ]
+                  }
+                },
+                "name": "Preview",
+                "expression": "[Name] \" **\" [Surname] \"** [\" [Gender] \"]\" \"  \"\n\n[ShowCosts]\n\ncase [ShowCosts] = \"true\" {\n\t(en:\"Costs\", de:\"Kosten\") \": \" [Costs]\n}\nkontext(Children) {\n\n\t\"* \" [Name]\n}"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-67b16",
+                "elementRef": "F17"
+              }
+            ],
+            "groupRef": "G10",
+            "enableAdd": true,
+            "enableRemove": true,
+            "enableReorder": true,
+            "enableCopy": false,
+            "controlGrid": {
+              "type": "ControlGrid",
+              "id": "controlgrid-130ac",
+              "name": "Grid",
+              "layout": {
+                "lg": "12"
+              },
+              "row": [
+                {
+                  "type": "Row",
+                  "id": "row-dc526",
+                  "cell": [
+                    {
+                      "type": "Control",
+                      "id": "control-4f7c8",
+                      "elementRef": "F6"
+                    }
+                  ]
+                },
+                {
+                  "type": "Row",
+                  "id": "row-a6360",
+                  "name": "(Spillover 1)",
+                  "cell": [
+                    {
+                      "type": "Control",
+                      "id": "control-46d28",
+                      "elementRef": "F5"
+                    }
+                  ]
+                },
+                {
+                  "type": "Row",
+                  "id": "row-e0010",
+                  "cell": [
+                    {
+                      "type": "Control",
+                      "id": "control-d8b1e",
+                      "elementRef": "F18"
+                    }
+                  ]
+                },
+                {
+                  "type": "Row",
+                  "id": "row-2fe28",
+                  "cell": [
+                    {
+                      "type": "Control",
+                      "id": "control-f900c",
+                      "elementRef": "F17"
+                    }
+                  ]
+                },
+                {
+                  "type": "Row",
+                  "id": "row-52abf",
+                  "name": "(Spillover 2)",
+                  "cell": [
+                    {
+                      "type": "Control",
+                      "id": "control-bd187",
+                      "offset": {
+                        "lg": 0
+                      },
+                      "elementRef": "F7"
+                    }
+                  ]
+                },
+                {
+                  "type": "Row",
+                  "id": "row-9a1d1",
+                  "cell": [
+                    {
+                      "type": "ExpressionCell",
+                      "id": "expressioncell-21b42",
+                      "offset": {
+                        "lg": 0
+                      },
+                      "span": {
+                        "lg": 1
+                      },
+                      "name": "expr",
+                      "expression": "[Costs]",
+                      "label": {
+                        "type": "Multilingual",
+                        "multilingualText": {
+                          "text": [
+                            {
+                              "locale": "en",
+                              "text": "Costs (expression)"
+                            },
+                            {
+                              "locale": "de",
+                              "text": "Kosten (Expression)"
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  ]
+                },
+                {
+                  "type": "Row",
+                  "id": "row-4a7a5",
+                  "cell": [
+                    {
+                      "type": "ExpressionCell",
+                      "id": "expressioncell-8152d",
+                      "offset": {
+                        "lg": 0
+                      },
+                      "span": {
+                        "lg": 1
+                      },
+                      "name": "cond-expr",
+                      "expression": "case [ShowCosts] = \"true\" {\n\n\t(en:\"Costs\", de:\"Kosten\") \": \" [Costs]\n\n}",
+                      "label": {
+                        "type": "Multilingual",
+                        "multilingualText": {
+                          "text": [
+                            {
+                              "locale": "en",
+                              "text": "Costs (conditional expression)"
+                            },
+                            {
+                              "locale": "de",
+                              "text": "nur Kosten (konditionelle Expression)"
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  ]
+                }
+              ],
+              "verticalAlignment": "BOTTOM"
+            }
+          }
+        ]
+      }
+    ],
+    "fieldConfiguration": {
+      "field": [
+        {
+          "label": {
+            "type": "Multilingual",
+            "multilingualText": {
+              "text": [
+                {
+                  "locale": "en",
+                  "text": "Name"
+                }
+              ]
+            }
+          },
+          "elementRef": "F6"
+        },
+        {
+          "label": {
+            "type": "Multilingual",
+            "multilingualText": {
+              "text": [
+                {
+                  "locale": "en",
+                  "text": "Surname"
+                }
+              ]
+            }
+          },
+          "elementRef": "F5"
+        },
+        {
+          "suffix": {
+            "text": [
+              {
+                "locale": "en",
+                "text": "EUR"
+              },
+              {
+                "locale": "de",
+                "text": "EUR"
+              }
+            ]
+          },
+          "label": {
+            "type": "Multilingual",
+            "multilingualText": {
+              "text": [
+                {
+                  "locale": "en",
+                  "text": "Costs"
+                }
+              ]
+            }
+          },
+          "elementRef": "F7"
+        },
+        {
+          "exposition": "CHECKBOX",
+          "elementRef": "F17"
+        },
+        {
+          "label": {
+            "type": "Multilingual",
+            "multilingualText": {
+              "text": [
+                {
+                  "locale": "en",
+                  "text": "Name"
+                }
+              ]
+            }
+          },
+          "elementRef": "F14"
+        }
+      ]
+    },
+    "groupConfiguration": {},
+    "defaults": {
+      "buttonLabels": {
+        "ADD": {
+          "text": [
+            {
+              "locale": "en",
+              "text": "add"
+            }
+          ]
+        },
+        "COMMIT_ADD": {
+          "text": [
+            {
+              "locale": "en",
+              "text": "commit"
+            }
+          ]
+        },
+        "APPLY": {
+          "text": [
+            {
+              "locale": "en",
+              "text": "apply changes"
+            }
+          ]
+        },
+        "EDIT": {
+          "text": [
+            {
+              "locale": "en",
+              "text": "edit"
+            }
+          ]
+        },
+        "REMOVE": {
+          "text": [
+            {
+              "locale": "en",
+              "text": "remove"
+            }
+          ]
+        },
+        "VIEW": {
+          "text": [
+            {
+              "locale": "en",
+              "text": "open"
+            }
+          ]
+        },
+        "CANCEL": {
+          "text": [
+            {
+              "locale": "en",
+              "text": "cancel"
+            }
+          ]
+        },
+        "RETURN": {
+          "text": [
+            {
+              "locale": "en",
+              "text": "return"
+            }
+          ]
+        },
+        "UP": {},
+        "DOWN": {}
+      }
+    }
+  }
+}

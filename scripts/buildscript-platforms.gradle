@@ -1,0 +1,29 @@
+/**
+ * Buildscript platform definitions for A12 dependencies.
+ *
+ * Apply this script INSIDE your buildscript block, BEFORE the dependencies block:
+ *
+ *     buildscript {
+ *         apply from: rootProject.file('scripts/buildscript-platforms.gradle')
+ *
+ *         dependencies {
+ *             // platforms are already applied, just add your dependencies
+ *             classpath a12Libs.kernel.tool.model.migration
+ *         }
+ *     }
+ *
+ * This automatically adds kernel-bom and dataservices-bom as platforms.
+ */
+
+// Read versions from gradle.ext which is set in settings.gradle
+final def a12Versions = gradle.ext.a12Versions
+
+final def dataservicesBomCoords = "com.mgmtp.a12.dataservices:dataservices-parent:${a12Versions.dataservices}"
+
+// Add platforms to the project's buildscript classpath configuration
+// Note: When this script is applied inside a buildscript block, 'buildscript' refers to the
+// script file's own buildscript. We need to access the project's buildscript directly.
+project.buildscript.dependencies {
+    classpath platform(dataservicesBomCoords)
+}
+

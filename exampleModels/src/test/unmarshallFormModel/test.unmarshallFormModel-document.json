@@ -1,0 +1,418 @@
+{
+  "header": {
+    "id": "test.unmarshallFormModel-document",
+    "modelType": "document",
+    "modelVersion": "28.4.0",
+    "locales": [
+      {
+        "code": "en"
+      }
+    ],
+    "labels": [],
+    "annotations": [
+      {
+        "name": "roles",
+        "value": "admin"
+      }
+    ],
+    "modelReferences": []
+  },
+  "content": {
+    "modelInfo": {
+      "name": "test.unmarshallFormModel-document",
+      "immutable": false
+    },
+    "modelConfig": {
+      "timeZone": "UTC",
+      "decimalSeparator": ".",
+      "conditionLanguage": {
+        "code": "en_US"
+      }
+    },
+    "modelRoot": {
+      "rootGroups": [
+        {
+          "type": "Group",
+          "id": "group_a2dab",
+          "name": "rootGroup",
+          "Group": {
+            "repeatability": 1,
+            "elements": [
+              {
+                "type": "Field",
+                "id": "field_8119f",
+                "name": "F0",
+                "Field": {
+                  "fieldType": {
+                    "type": "StringType"
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "F0"
+                    }
+                  ],
+                  "requirednessConfig": {
+                    "mode": "absoluteOrRelativeToNextRepAncestor"
+                  }
+                }
+              },
+              {
+                "type": "Field",
+                "id": "field_d57eb",
+                "name": "F1",
+                "Field": {
+                  "fieldType": {
+                    "type": "StringType"
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "F1"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Group",
+                "id": "group_74f7a",
+                "name": "nestedGroup",
+                "Group": {
+                  "repeatability": 1,
+                  "elements": [
+                    {
+                      "type": "Field",
+                      "id": "field_03135",
+                      "name": "F2",
+                      "Field": {
+                        "fieldType": {
+                          "type": "StringType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "F2"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "fieldimpl_2ecf3",
+                      "name": "F3",
+                      "Field": {
+                        "fieldType": {
+                          "type": "StringType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "F3"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Group",
+                "id": "group_2fe8c",
+                "name": "repeatableGroup",
+                "Group": {
+                  "repeatability": 5,
+                  "elements": [
+                    {
+                      "type": "Field",
+                      "id": "field_c5907",
+                      "name": "F4",
+                      "Field": {
+                        "fieldType": {
+                          "type": "StringType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "F4"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "fieldimpl_31278",
+                      "name": "F5",
+                      "Field": {
+                        "fieldType": {
+                          "type": "StringType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "F5"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Group",
+                "id": "groupimpl_c3ca6",
+                "name": "repeatableGroup2",
+                "Group": {
+                  "repeatability": 5,
+                  "elements": [
+                    {
+                      "type": "Field",
+                      "id": "fieldimpl_a9853",
+                      "name": "F4",
+                      "Field": {
+                        "fieldType": {
+                          "type": "StringType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "F4"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "fieldimpl_1ce44",
+                      "name": "F5",
+                      "Field": {
+                        "fieldType": {
+                          "type": "StringType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "F5"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Group",
+                "id": "group_86d79",
+                "name": "groupForFieldConfiguration",
+                "Group": {
+                  "repeatability": 1,
+                  "elements": [
+                    {
+                      "type": "Field",
+                      "id": "field_85aa6",
+                      "name": "MasterField1",
+                      "Field": {
+                        "fieldType": {
+                          "type": "EnumerationType",
+                          "EnumerationType": {
+                            "values": [
+                              {
+                                "value": "key_1",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "Hide F6"
+                                  }
+                                ]
+                              },
+                              {
+                                "value": "key_2",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "Hide  G1"
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "MasterField1"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_e970a",
+                      "name": "F6",
+                      "Field": {
+                        "fieldType": {
+                          "type": "StringType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "F6"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Group",
+                      "id": "group_2b14f",
+                      "name": "G1",
+                      "Group": {
+                        "repeatability": 1,
+                        "elements": [
+                          {
+                            "type": "Field",
+                            "id": "field_d70d0",
+                            "name": "F7",
+                            "Field": {
+                              "fieldType": {
+                                "type": "StringType"
+                              },
+                              "label": [
+                                {
+                                  "locale": "en",
+                                  "text": "F7 (inside G1)"
+                                }
+                              ]
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Group",
+                "id": "group_158e0",
+                "name": "groupForIndexedControl",
+                "Group": {
+                  "repeatability": 5,
+                  "indexFieldName": "IndexField",
+                  "elements": [
+                    {
+                      "type": "Field",
+                      "id": "field_6914f",
+                      "name": "IndexField",
+                      "Field": {
+                        "fieldType": {
+                          "type": "NumberType"
+                        }
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_bb5a6",
+                      "name": "MasterEnum",
+                      "Field": {
+                        "fieldType": {
+                          "type": "EnumerationType",
+                          "EnumerationType": {
+                            "values": [
+                              {
+                                "value": "SHOW_CG",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "Show Control Grid"
+                                  }
+                                ]
+                              },
+                              {
+                                "value": "SHOW_SEC",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "Show Section"
+                                  }
+                                ]
+                              },
+                              {
+                                "value": "SHOW_MCS",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "Show Multi Column Section"
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_33dfc",
+                      "name": "Number",
+                      "Field": {
+                        "fieldType": {
+                          "type": "NumberType"
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Field",
+                "id": "fieldimpl_1c4cc",
+                "name": "MasterField2",
+                "Field": {
+                  "fieldType": {
+                    "type": "BooleanType"
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "MasterField2"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Field",
+                "id": "field_68b69",
+                "name": "amountSuffixEnum",
+                "Field": {
+                  "fieldType": {
+                    "type": "EnumerationType",
+                    "EnumerationType": {
+                      "values": [
+                        {
+                          "value": "€",
+                          "label": [
+                            {
+                              "locale": "en",
+                              "text": "€"
+                            }
+                          ]
+                        },
+                        {
+                          "value": "$",
+                          "label": [
+                            {
+                              "locale": "en",
+                              "text": "$"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

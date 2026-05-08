@@ -1,0 +1,165 @@
+{
+  "header": {
+    "id": "repeat.validation-document",
+    "modelType": "document",
+    "modelVersion": "28.4.0",
+    "locales": [
+      {
+        "code": "en"
+      },
+      {
+        "code": "de"
+      }
+    ],
+    "labels": [],
+    "annotations": [
+      {
+        "name": "roles",
+        "value": "admin"
+      }
+    ],
+    "modelReferences": []
+  },
+  "content": {
+    "modelInfo": {
+      "name": "repeat.validation-document",
+      "immutable": false
+    },
+    "modelConfig": {
+      "decimalSeparator": ".",
+      "timeZone": "UTC",
+      "conditionLanguage": {
+        "code": "en_US"
+      }
+    },
+    "modelRoot": {
+      "rootGroups": [
+        {
+          "type": "Group",
+          "id": "group_621b3",
+          "name": "root",
+          "Group": {
+            "repeatability": 1,
+            "elements": [
+              {
+                "type": "Field",
+                "id": "field_cb801",
+                "name": "requiredField",
+                "Field": {
+                  "fieldType": {
+                    "type": "StringType"
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "Required"
+                    },
+                    {
+                      "locale": "de",
+                      "text": "Required"
+                    }
+                  ],
+                  "requirednessConfig": {
+                    "mode": "absoluteOrRelativeToNextRepAncestor"
+                  }
+                }
+              },
+              {
+                "type": "Group",
+                "id": "group_69ded",
+                "name": "repGroup1",
+                "Group": {
+                  "repeatability": 10,
+                  "indexFieldName": "indexField",
+                  "elements": [
+                    {
+                      "type": "Field",
+                      "id": "field_ba11c",
+                      "name": "indexField",
+                      "Field": {
+                        "fieldType": {
+                          "type": "StringType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "Index Field"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "Index Field"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_24edd",
+                      "name": "numberField1",
+                      "Field": {
+                        "fieldType": {
+                          "type": "NumberType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "Number Field 1"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "Number Field 1"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_04535",
+                      "name": "numberField2",
+                      "Field": {
+                        "fieldType": {
+                          "type": "NumberType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "Number Field 2"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "Number Field 2"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Rule",
+                "id": "rule_7d1c4",
+                "name": "NewRule_1",
+                "Rule": {
+                  "errorEntityRelPath": "../repGroup1/numberField1",
+                  "errorCode": "Error rule_7d1c4",
+                  "errorCondition": "GroupFilled(repGroup1) and FieldNotFilled(repGroup1/numberField1) and FieldNotFilled(repGroup1/numberField2)",
+                  "severity": "ERROR",
+                  "errorMessage": [
+                    {
+                      "locale": "en",
+                      "text": "numberField1 or numberField2 should be filled"
+                    },
+                    {
+                      "locale": "de",
+                      "text": "numberField1 oder numberField2 sollten gefüllt sein"
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

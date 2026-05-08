@@ -1,0 +1,172 @@
+{
+  "header": {
+    "id": "errorTypes-dm",
+    "modelType": "document",
+    "modelVersion": "28.4.0",
+    "locales": [
+      {
+        "code": "en"
+      }
+    ],
+    "labels": [],
+    "annotations": [],
+    "modelReferences": []
+  },
+  "content": {
+    "modelInfo": {
+      "name": "errorTypes-dm",
+      "immutable": false
+    },
+    "modelConfig": {
+      "timeZone": "UTC",
+      "decimalSeparator": ".",
+      "conditionLanguage": {
+        "code": "en_US"
+      }
+    },
+    "modelRoot": {
+      "rootGroups": [
+        {
+          "type": "Group",
+          "id": "group_a980d",
+          "name": "errorTypes",
+          "Group": {
+            "repeatability": 1,
+            "elements": [
+              {
+                "type": "Field",
+                "id": "field_214db",
+                "name": "parseError",
+                "Field": {
+                  "fieldType": {
+                    "type": "NumberType"
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "parseError"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Field",
+                "id": "field_f203a",
+                "name": "fieldConstraintError",
+                "Field": {
+                  "fieldType": {
+                    "type": "StringType",
+                    "StringType": {
+                      "errorMessage": [
+                        {
+                          "locale": "en",
+                          "text": "pattern: [xyz]+"
+                        }
+                      ],
+                      "pattern": "[xyz]+"
+                    }
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "fieldConstraintError"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Field",
+                "id": "field_e9c3f",
+                "name": "operand",
+                "Field": {
+                  "fieldType": {
+                    "type": "NumberType"
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "operand"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Field",
+                "id": "field_942da",
+                "name": "computationResult",
+                "Field": {
+                  "fieldType": {
+                    "type": "NumberType",
+                    "NumberType": {
+                      "minValue": 0,
+                      "maxValue": 10
+                    }
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "computationResult"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Computation",
+                "id": "computation_32757",
+                "name": "computeResult",
+                "Computation": {
+                  "computedFieldRelPath": "../computationResult",
+                  "computationAlternatives": [
+                    {
+                      "operation": "10 * [operand]",
+                      "precondition": "GroupFilled(RuleGroup) and FieldFilled(operand)"
+                    }
+                  ],
+                  "errorMessage": [
+                    {
+                      "locale": "en",
+                      "text": "error text for computation of computeResult"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Field",
+                "id": "field_4067e",
+                "name": "ruleError",
+                "Field": {
+                  "fieldType": {
+                    "type": "StringType"
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "ruleError"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Rule",
+                "id": "rule_0895a",
+                "name": "mayNotBeError",
+                "Rule": {
+                  "errorEntityRelPath": "../ruleError",
+                  "errorCode": "Error rule_0895a",
+                  "errorCondition": "GroupFilled(RuleGroup) and FieldFilled(ruleError) and [ruleError] == \"error\"",
+                  "severity": "ERROR",
+                  "errorMessage": [
+                    {
+                      "locale": "en",
+                      "text": "The field may not contain the string 'error'."
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,110 @@
+{
+  "header": {
+    "id": "InvalidContextWithoutFieldReferenceTestForm",
+    "modelType": "form",
+    "modelVersion": "37.4.0",
+    "locales": [
+      {
+        "code": "en"
+      },
+      {
+        "code": "de"
+      }
+    ],
+    "modelReferences": [
+      {
+        "alias": "LabelTestDocument",
+        "modelType": "document",
+        "purpose": "data binding",
+        "reference": "LabelTestDocument"
+      }
+    ]
+  },
+  "content": {
+    "subHeaderBox": {
+      "id": "subHeaderBox1"
+    },
+    "footerBox": {
+      "id": "footerBox1"
+    },
+    "screens": [
+      {
+        "id": "screen_6afaf",
+        "name": "screen",
+        "screenElements": [
+          {
+            "type": "Section",
+            "id": "section_340ad",
+            "name": "section",
+            "screenElements": [
+              {
+                "type": "ControlGrid",
+                "id": "controlgrid_3b52e",
+                "name": "grid",
+                "row": [
+                  {
+                    "type": "Row",
+                    "id": "row_35348",
+                    "cell": [
+                      {
+                        "type": "Control",
+                        "id": "control_2ebc3",
+                        "elementRef": "field_fedc8"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "Section",
+            "id": "section_52628",
+            "name": "testElements",
+            "title": {
+              "type": "Expression",
+              "expressionText": "kontext(does_not_exist) {\n    case [numberField] = \"0\" {\"Static Text\"}\n    case [stringField] = \"\" {\"ANOTHER ONE\"}\n}"
+            },
+            "screenElements": [
+              {
+                "type": "ControlGrid",
+                "id": "controlgrid_59610",
+                "name": "testGrid",
+                "title": {
+                  "type": "Expression",
+                  "expressionText": "kontext(root) {\n    case [does_not_exist] = \"0\" {\"Static Text\"}\n}"
+                },
+                "row": [
+                  {
+                    "type": "Row",
+                    "id": "row_e2abe",
+                    "cell": [
+                      {
+                        "type": "Control",
+                        "id": "control_c4158",
+                        "elementRef": "field_ef8c7"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "fieldConfiguration": {
+      "field": [
+        {
+          "label": {
+            "type": "Expression",
+            "expressionText": "kontext(does_not_exist) {\n    \"Static Text\"\n}"
+          },
+          "elementRef": "field_ef8c7"
+        }
+      ]
+    },
+    "groupConfiguration": {},
+    "defaults": {}
+  }
+}

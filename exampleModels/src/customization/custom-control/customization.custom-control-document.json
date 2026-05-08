@@ -1,0 +1,260 @@
+{
+  "header": {
+    "id": "customization.custom-control-document",
+    "modelType": "document",
+    "modelVersion": "28.4.0",
+    "locales": [
+      {
+        "code": "en"
+      },
+      {
+        "code": "de"
+      }
+    ],
+    "labels": [],
+    "annotations": [
+      {
+        "name": "roles",
+        "value": "admin"
+      }
+    ],
+    "modelReferences": []
+  },
+  "content": {
+    "modelInfo": {
+      "name": "customization.custom-control-document",
+      "immutable": false
+    },
+    "modelConfig": {
+      "decimalSeparator": ".",
+      "timeZone": "UTC",
+      "conditionLanguage": {
+        "code": "en_US"
+      }
+    },
+    "modelRoot": {
+      "rootGroups": [
+        {
+          "type": "Group",
+          "id": "group_4a2ab",
+          "name": "root",
+          "Group": {
+            "repeatability": 1,
+            "elements": [
+              {
+                "type": "Field",
+                "id": "field_534e8",
+                "name": "numberField",
+                "Field": {
+                  "fieldType": {
+                    "type": "NumberType"
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": ""
+                    },
+                    {
+                      "locale": "de",
+                      "text": ""
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Field",
+                "id": "field_c4d07",
+                "name": "numberFieldWithSuffix",
+                "Field": {
+                  "fieldType": {
+                    "type": "NumberType"
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": ""
+                    },
+                    {
+                      "locale": "de",
+                      "text": ""
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Field",
+                "id": "field_79007",
+                "name": "numberFieldWithValidationMessageBox",
+                "externalDescription": [
+                  {
+                    "locale": "en",
+                    "text": "Error when value is smaller than 5.\r\nWarning when value is smaller than 8."
+                  },
+                  {
+                    "locale": "de",
+                    "text": "Fehler wenn Wert kleiner 5 ist.\r\nWarnung wenn Fehler kleiner 8 ist."
+                  }
+                ],
+                "Field": {
+                  "fieldType": {
+                    "type": "NumberType",
+                    "NumberType": {
+                      "minValue": 5
+                    }
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": ""
+                    },
+                    {
+                      "locale": "de",
+                      "text": ""
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Rule",
+                "id": "rule_e3cb5",
+                "name": "rule1",
+                "Rule": {
+                  "errorEntityRelPath": "../numberFieldWithValidationMessageBox",
+                  "errorCode": "Error rule_e3cb5",
+                  "errorCondition": "FieldFilled(numberFieldWithValidationMessageBox) And [numberFieldWithValidationMessageBox] < 5",
+                  "severity": "ERROR",
+                  "errorMessage": [
+                    {
+                      "locale": "en",
+                      "text": "Only value greater or equal to 5 are allowed."
+                    },
+                    {
+                      "locale": "de",
+                      "text": "Nur Werte größer gleich 5 sind erlaubt."
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Rule",
+                "id": "rule_3c64b",
+                "name": "rule2",
+                "Rule": {
+                  "errorEntityRelPath": "../numberFieldWithValidationMessageBox",
+                  "errorCode": "Error rule_e3cb5",
+                  "errorCondition": "FieldFilled(numberFieldWithValidationMessageBox) And [numberFieldWithValidationMessageBox] < 8",
+                  "severity": "WARNING",
+                  "errorMessage": [
+                    {
+                      "locale": "en",
+                      "text": "Value should be bigger or equal 8."
+                    },
+                    {
+                      "locale": "de",
+                      "text": "Wert sollte größer gleich 8 sein."
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Field",
+                "id": "field_a4576",
+                "name": "numberFieldWithValidationTooltips",
+                "externalDescription": [
+                  {
+                    "locale": "en",
+                    "text": "Error when value is smaller than 5.\r\nWarning when value is smaller than 8."
+                  },
+                  {
+                    "locale": "de",
+                    "text": "Fehler wenn Wert kleiner 5 ist.\r\nWarnung wenn Wert kleiner 8 ist."
+                  }
+                ],
+                "Field": {
+                  "fieldType": {
+                    "type": "NumberType",
+                    "NumberType": {
+                      "minValue": 5
+                    }
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": ""
+                    },
+                    {
+                      "locale": "de",
+                      "text": ""
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Rule",
+                "id": "rule_1eb17",
+                "name": "rule3",
+                "Rule": {
+                  "errorEntityRelPath": "../numberFieldWithValidationTooltips",
+                  "errorCode": "Error rule_e3cb5",
+                  "errorCondition": "FieldFilled(numberFieldWithValidationTooltips) And [numberFieldWithValidationTooltips] < 5",
+                  "severity": "ERROR",
+                  "errorMessage": [
+                    {
+                      "locale": "en",
+                      "text": "Only value greater or equal to 5 are allowed."
+                    },
+                    {
+                      "locale": "de",
+                      "text": "Nur Werte größer gleich 5 sind erlaubt."
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Rule",
+                "id": "rule_fd4d0",
+                "name": "rule4",
+                "Rule": {
+                  "errorEntityRelPath": "../numberFieldWithValidationTooltips",
+                  "errorCode": "Error rule_e3cb5",
+                  "errorCondition": "FieldFilled(numberFieldWithValidationTooltips) And [numberFieldWithValidationTooltips] < 8",
+                  "severity": "WARNING",
+                  "errorMessage": [
+                    {
+                      "locale": "en",
+                      "text": "Value should be bigger or equal 8."
+                    },
+                    {
+                      "locale": "de",
+                      "text": "Wert sollte größer gleich 8 sein."
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Field",
+                "id": "field_8c9bf",
+                "name": "numberFieldWithHint",
+                "Field": {
+                  "fieldType": {
+                    "type": "NumberType"
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": ""
+                    },
+                    {
+                      "locale": "de",
+                      "text": ""
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,18 @@
+{
+	"version": "0.2.0",
+	"configurations": [
+		{
+			"type": "chrome",
+			"request": "launch",
+			"name": "Launch (chrome)",
+			"url": "http://localhost:14000",
+			"webRoot": "${workspaceFolder}/devapp",
+			"runtimeArgs": [
+				"--remote-debugging-port=9222",
+				"--new-window",
+				"--disable-background-networking",
+				"--profile-directory=debug-profile"
+			]
+		}
+	]
+}

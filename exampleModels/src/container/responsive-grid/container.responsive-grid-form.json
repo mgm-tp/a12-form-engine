@@ -1,0 +1,658 @@
+{
+  "header": {
+    "id": "container.responsive-grid-form",
+    "modelType": "form",
+    "modelVersion": "37.4.0",
+    "locales": [
+      {
+        "code": "en"
+      }
+    ],
+    "annotations": [
+      {
+        "name": "roles",
+        "value": "admin"
+      }
+    ],
+    "modelReferences": [
+      {
+        "alias": "DM",
+        "modelType": "document",
+        "purpose": "data binding",
+        "reference": "container.responsive-grid-document"
+      }
+    ]
+  },
+  "content": {
+    "subHeaderBox": {
+      "id": "subHeaderBox1"
+    },
+    "footerBox": {
+      "id": "footerBox1"
+    },
+    "screens": [
+      {
+        "id": "screen1",
+        "name": "Screen1",
+        "screenElements": [
+          {
+            "type": "ControlGrid",
+            "id": "controlgrid-a5781",
+            "name": "cgExplanation",
+            "row": [
+              {
+                "type": "Row",
+                "id": "row-12a04",
+                "cell": [
+                  {
+                    "type": "TextCell",
+                    "id": "textcell-cef04",
+                    "name": "explanationText",
+                    "content": {
+                      "text": [
+                        {
+                          "locale": "en",
+                          "text": "This model demonstates the responsive layout feature of the Control Grid and the Multi Column Section.\n<br/>\nFor different horizontal space situations (large, medium, small, extra small) different grid layouts can be shown. For large, medium and small these layouts have the same number of columns but the column widths can be modeled per layout. The extra small layout has always one column using the full width.\n<br/>\nOffset and span can be configured per layout for the Control Grid Cells."
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            ],
+            "verticalAlignment": "TOP"
+          },
+          {
+            "type": "Section",
+            "id": "section-0e0a9",
+            "name": "sResponsiveControlGrid",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "Responsive Control Grid"
+                  }
+                ]
+              }
+            },
+            "screenElements": [
+              {
+                "type": "ControlGrid",
+                "id": "controlgrid-e8c96",
+                "name": "cg",
+                "layout": {
+                  "lg": "3-3-6",
+                  "md": "5-7-12",
+                  "sm": "3-8-4"
+                },
+                "row": [
+                  {
+                    "type": "Row",
+                    "id": "row-599b0",
+                    "name": "r1",
+                    "title": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "row 1"
+                          }
+                        ]
+                      }
+                    },
+                    "cell": [
+                      {
+                        "type": "Control",
+                        "id": "control-3e09e",
+                        "label": {
+                          "type": "Multilingual",
+                          "multilingualText": {
+                            "text": [
+                              {
+                                "locale": "en",
+                                "text": "F1"
+                              }
+                            ]
+                          }
+                        },
+                        "elementRef": "field_e3aeb"
+                      },
+                      {
+                        "type": "Control",
+                        "id": "control-a4ac5",
+                        "label": {
+                          "type": "Multilingual",
+                          "multilingualText": {
+                            "text": [
+                              {
+                                "locale": "en",
+                                "text": "F2"
+                              }
+                            ]
+                          }
+                        },
+                        "elementRef": "field_ac1f3"
+                      },
+                      {
+                        "type": "Control",
+                        "id": "control-13e78",
+                        "label": {
+                          "type": "Multilingual",
+                          "multilingualText": {
+                            "text": [
+                              {
+                                "locale": "en",
+                                "text": "F3"
+                              }
+                            ]
+                          }
+                        },
+                        "elementRef": "field_0d186"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "Row",
+                    "id": "row-316bd",
+                    "name": "r2",
+                    "title": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "row 2"
+                          }
+                        ]
+                      }
+                    },
+                    "cell": [
+                      {
+                        "type": "Control",
+                        "id": "control-291b3",
+                        "offset": {
+                          "lg": 1
+                        },
+                        "span": {
+                          "lg": 1,
+                          "md": 2
+                        },
+                        "label": {
+                          "type": "Multilingual",
+                          "multilingualText": {
+                            "text": [
+                              {
+                                "locale": "en",
+                                "text": "F4"
+                              }
+                            ]
+                          }
+                        },
+                        "elementRef": "field_0c9bf"
+                      },
+                      {
+                        "type": "Control",
+                        "id": "control-27a93",
+                        "span": {
+                          "lg": 1,
+                          "sm": 2
+                        },
+                        "label": {
+                          "type": "Multilingual",
+                          "multilingualText": {
+                            "text": [
+                              {
+                                "locale": "en",
+                                "text": "F5"
+                              }
+                            ]
+                          }
+                        },
+                        "elementRef": "field_2ee07"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "Row",
+                    "id": "row-e0e0c",
+                    "name": "r3",
+                    "title": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "row 3"
+                          }
+                        ]
+                      }
+                    },
+                    "cell": [
+                      {
+                        "type": "Control",
+                        "id": "control-40c14",
+                        "offset": {
+                          "lg": 0,
+                          "md": 1,
+                          "sm": 1
+                        },
+                        "span": {
+                          "lg": 3
+                        },
+                        "label": {
+                          "type": "Multilingual",
+                          "multilingualText": {
+                            "text": [
+                              {
+                                "locale": "en",
+                                "text": "F6"
+                              }
+                            ]
+                          }
+                        },
+                        "elementRef": "field_30627"
+                      }
+                    ]
+                  }
+                ],
+                "verticalAlignment": "TOP"
+              }
+            ]
+          },
+          {
+            "type": "Section",
+            "id": "section-24d6d",
+            "name": "sResponsiveMultiColumnSection",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "Responsive Multi Column Section"
+                  }
+                ]
+              }
+            },
+            "screenElements": [
+              {
+                "type": "MultiColumnSection",
+                "id": "multicolumnsection-92065",
+                "name": "mcs",
+                "layout": {
+                  "lg": "3-6-3",
+                  "md": "2-2-8",
+                  "sm": "12-6-6"
+                },
+                "screenElements": [
+                  {
+                    "type": "ControlGrid",
+                    "id": "controlgrid-999a3",
+                    "name": "cg1",
+                    "title": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "1st column"
+                          }
+                        ]
+                      }
+                    },
+                    "row": [
+                      {
+                        "type": "Row",
+                        "id": "row-3064c",
+                        "cell": [
+                          {
+                            "type": "Control",
+                            "id": "control-40a18",
+                            "elementRef": "field_30627"
+                          }
+                        ]
+                      }
+                    ],
+                    "verticalAlignment": "TOP"
+                  },
+                  {
+                    "type": "ControlGrid",
+                    "id": "controlgrid-ac8ba",
+                    "name": "cg2",
+                    "title": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "2nd column"
+                          }
+                        ]
+                      }
+                    },
+                    "row": [
+                      {
+                        "type": "Row",
+                        "id": "row-0a51f",
+                        "cell": [
+                          {
+                            "type": "Control",
+                            "id": "control-1140b",
+                            "elementRef": "field_4f853"
+                          }
+                        ]
+                      }
+                    ],
+                    "verticalAlignment": "TOP"
+                  },
+                  {
+                    "type": "ControlGrid",
+                    "id": "controlgrid-d95ad",
+                    "name": "cg3",
+                    "title": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "3rd column"
+                          }
+                        ]
+                      }
+                    },
+                    "row": [
+                      {
+                        "type": "Row",
+                        "id": "row-0d70f",
+                        "cell": [
+                          {
+                            "type": "Control",
+                            "id": "control-85253",
+                            "elementRef": "field_28525"
+                          }
+                        ]
+                      }
+                    ],
+                    "verticalAlignment": "TOP"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "Section",
+            "id": "section-230bf",
+            "name": "sFallback",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "Fallback"
+                  }
+                ]
+              }
+            },
+            "screenElements": [
+              {
+                "type": "ControlGrid",
+                "id": "controlgrid-d8e5e",
+                "name": "cgExplanationFallback",
+                "row": [
+                  {
+                    "type": "Row",
+                    "id": "row-ab2d1",
+                    "cell": [
+                      {
+                        "type": "TextCell",
+                        "id": "textcell-d70fd",
+                        "name": "textExplanationFallback",
+                        "content": {
+                          "text": [
+                            {
+                              "locale": "en",
+                              "text": "If for a certain horizontal space situation no layout is given, the next available wider layout is used as fallback."
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                ],
+                "verticalAlignment": "TOP"
+              },
+              {
+                "type": "ControlGrid",
+                "id": "controlgrid-ad1d0",
+                "name": "cg1",
+                "title": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "Control Grid with layout lg only (7-2-3)"
+                      }
+                    ]
+                  }
+                },
+                "layout": {
+                  "lg": "7-2-3"
+                },
+                "row": [
+                  {
+                    "type": "Row",
+                    "id": "row-0bf80",
+                    "name": "r",
+                    "cell": [
+                      {
+                        "type": "Control",
+                        "id": "control-3dcb8",
+                        "elementRef": "field_e3aeb"
+                      },
+                      {
+                        "type": "Control",
+                        "id": "control-0182a",
+                        "elementRef": "field_ac1f3"
+                      },
+                      {
+                        "type": "Control",
+                        "id": "control-6f6d7",
+                        "elementRef": "field_0d186"
+                      }
+                    ]
+                  }
+                ],
+                "verticalAlignment": "TOP"
+              },
+              {
+                "type": "ControlGrid",
+                "id": "controlgrid-94cbf",
+                "name": "cg2",
+                "title": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "Control Grid with layouts lg (5-3-2-2) and sm (6-6-3-9)"
+                      }
+                    ]
+                  }
+                },
+                "layout": {
+                  "lg": "5-3-2-2",
+                  "sm": "6-6-3-9"
+                },
+                "row": [
+                  {
+                    "type": "Row",
+                    "id": "row-73689",
+                    "name": "r",
+                    "cell": [
+                      {
+                        "type": "Control",
+                        "id": "control-13b5a",
+                        "elementRef": "field_0c9bf"
+                      },
+                      {
+                        "type": "Control",
+                        "id": "control-f001e",
+                        "elementRef": "field_2ee07"
+                      },
+                      {
+                        "type": "Control",
+                        "id": "control-b40c4",
+                        "elementRef": "field_30627"
+                      },
+                      {
+                        "type": "Control",
+                        "id": "control-dad38",
+                        "elementRef": "field_4f853"
+                      }
+                    ]
+                  }
+                ],
+                "verticalAlignment": "TOP"
+              },
+              {
+                "type": "ControlGrid",
+                "id": "controlgrid-ed145",
+                "name": "cg3",
+                "title": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "Control Grid with layouts lg (1-6-5) and md (8-4-12)"
+                      }
+                    ]
+                  }
+                },
+                "layout": {
+                  "lg": "1-6-5",
+                  "md": "8-4-12"
+                },
+                "row": [
+                  {
+                    "type": "Row",
+                    "id": "row-c1b8b",
+                    "name": "r",
+                    "cell": [
+                      {
+                        "type": "Control",
+                        "id": "control-82ac1",
+                        "elementRef": "field_e3aeb"
+                      },
+                      {
+                        "type": "Control",
+                        "id": "control-c71e9",
+                        "elementRef": "field_ac1f3"
+                      },
+                      {
+                        "type": "Control",
+                        "id": "control-1fe7c",
+                        "elementRef": "field_0d186"
+                      }
+                    ]
+                  }
+                ],
+                "verticalAlignment": "TOP"
+              },
+              {
+                "type": "MultiColumnSection",
+                "id": "multicolumnsection-1aa95",
+                "name": "mcs",
+                "title": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "Multi Column Section with layouts lg (2-10) and sm (8-4)"
+                      }
+                    ]
+                  }
+                },
+                "layout": {
+                  "lg": "2-10",
+                  "sm": "8-4"
+                },
+                "screenElements": [
+                  {
+                    "type": "ControlGrid",
+                    "id": "controlgrid-d17db",
+                    "name": "cg1",
+                    "title": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "1st column"
+                          }
+                        ]
+                      }
+                    },
+                    "row": [
+                      {
+                        "type": "Row",
+                        "id": "row-45bc0",
+                        "cell": [
+                          {
+                            "type": "Control",
+                            "id": "control-ea6c5",
+                            "elementRef": "field_28525"
+                          }
+                        ]
+                      }
+                    ],
+                    "verticalAlignment": "TOP"
+                  },
+                  {
+                    "type": "ControlGrid",
+                    "id": "controlgrid-c54e1",
+                    "name": "cg2",
+                    "title": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "2nd column"
+                          }
+                        ]
+                      }
+                    },
+                    "row": [
+                      {
+                        "type": "Row",
+                        "id": "row-7959a",
+                        "cell": [
+                          {
+                            "type": "Control",
+                            "id": "control-0d376",
+                            "elementRef": "field_0c9bf"
+                          }
+                        ]
+                      }
+                    ],
+                    "verticalAlignment": "TOP"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "fieldConfiguration": {},
+    "groupConfiguration": {},
+    "defaults": {}
+  }
+}

@@ -1,0 +1,67 @@
+////
+SPDX-License-Identifier: EUPL-1.2 OR LicenseRef-commercial
+
+Copyright (c) 2012-2026 mgm technology partners GmbH
+
+Dual License
+------------
+This source file is part of the mgm A12 Platform and available under
+a choice of two different licenses:
+
+1. Open-Source License – EUPL v1.2
+   You may redistribute and/or modify this file under the terms of the
+   European Union Public License, version 1.2 - see https://eupl.eu/.
+
+2. Commercial License
+   Alternatively, you may obtain a commercial license from
+   mgm technology partners GmbH, that permits use of this software
+   under different terms (including support and maintenance services).
+
+   Please contact a12-license@mgm-tp.com for more information.
+
+You must select and comply with exactly one of the above license options.
+
+Warranty Disclaimer (applies to either option)
+----------------------------------------------
+THIS SOFTWARE IS PROVIDED "AS IS" AND WITHOUT WARRANTY OF ANY KIND,
+WHETHER EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NON-INFRINGEMENT, EXCEPT WHERE SUCH DISCLAIMERS ARE HELD TO BE
+LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
+////
+
+[#form-engine_accessibility_support]
+= Accessibility Support
+
+== Structure
+
+ARIA roles and levels are used to provide a clear and accessible HTML structure of the form.
+
+To make clear that the Form Engine displays a form, its content box has the respective role "form" and an aria-label which will have the localized label of the model.
+
+Titles displayed in the Form Engine have an aria-level and the role "heading".
+The aria-level of the Form Engine's content box title can be defined in the engine configuration. It should reflect the hierarchy level of the Form Engine within the whole application. It is also the base aria-level from which the aria-levels of deeper nested titles are derived.
+
+The structure inside a form is created by the structuring elements of the Form Model like sections or control grids. If labels are defined on those elements, the resulting titles receive an aria-level and the role "heading". The aria-level increases with the nesting level of elements with visible titles. This means also that using such elements just for structuring and not providing a label will not increase the aria-level for further nested elements. Furthermore, to prevent a conflicting parallel structure, no HTML header tags are used for the element titles.
+
+== Inputs
+
+To make input fields accessible, the labels are connected to the respective inputs via the "for"-attribute.
+
+The labels can be modeled visually hidden, but still readable for screen readers for the following components:
+
+* String Control - single line
+* String Control - text area
+* Number Control
+* Boolean Control
+* Confirm Control
+* Date Control
+* DateTime Control
+* Time Control
+* Enum Control - compact
+* Enum Control - full
+* Enum Control - inline
+* Enum Control - autocomplete
+* Attachment Control
+* Inline Repeat:
+** All Controls from above (label is always hidden)

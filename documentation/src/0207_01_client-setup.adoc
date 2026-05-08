@@ -1,0 +1,63 @@
+////
+SPDX-License-Identifier: EUPL-1.2 OR LicenseRef-commercial
+
+Copyright (c) 2012-2026 mgm technology partners GmbH
+
+Dual License
+------------
+This source file is part of the mgm A12 Platform and available under
+a choice of two different licenses:
+
+1. Open-Source License – EUPL v1.2
+   You may redistribute and/or modify this file under the terms of the
+   European Union Public License, version 1.2 - see https://eupl.eu/.
+
+2. Commercial License
+   Alternatively, you may obtain a commercial license from
+   mgm technology partners GmbH, that permits use of this software
+   under different terms (including support and maintenance services).
+
+   Please contact a12-license@mgm-tp.com for more information.
+
+You must select and comply with exactly one of the above license options.
+
+Warranty Disclaimer (applies to either option)
+----------------------------------------------
+THIS SOFTWARE IS PROVIDED "AS IS" AND WITHOUT WARRANTY OF ANY KIND,
+WHETHER EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NON-INFRINGEMENT, EXCEPT WHERE SUCH DISCLAIMERS ARE HELD TO BE
+LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
+////
+
+[#form-engine_integration_client_setup]
+= Client Integration
+
+This part will explain the steps which are necessary to use the Form Engine in a Client application using the Form Engine Client extension.
+
+A basic understanding of Client concepts is required. Details can be found in the link:/docs/CLIENT/client-documentation-bundle/index.html[Client Documentation,window=_blank].
+
+The extension provides different view components:
+
+* `FormEngineViews.FormEngine`: A connected component that consists of a composition of the FormEngineRenderer, the ContentBoxRenderer and the ScrollHandler. The view can be customized by providing the engine configuration props and the props of the components in the composition.
+* `FormEngineViews.FormEngineTpl`: The same as the FormEngine component above, except it is not connected. It is meant to be connected to the redux store by yourself, which gives you more possibilities to customize. The chapter <<form-engine_integration_client_customization,Customization>> contains more information about how to connect the engine.
+* `FormEngineViews.ScrollHandler`: A connected ScrollHandler component that can be used for a custom Form Engine composition. This view can be used to activate the scrolling behavior. It is not needed if you use the standard `FormEngineViews.FormEngine`, but in case you connect the Form Engine yourself you need to wrap the `ScrollHandler` around it.
+
+It also comes with middlewares, sagas, and DataReducers to store and modify the state of the Form Engine correctly in the Client environment.
+
+== Appsetup
+
+The following steps are necessary in the appsetup to integrate the extension:
+
+* call `createFormEngineMiddlewares` and add the returned middlewares to the `additionalMiddlewares`
++
+[NOTE]
+====
+If you need to customize your middlewares (like setting up an external enumeration provider), you have to pass your `MiddlewareOptions` directly. Do not call `createEngineMiddlewares` separately, as the engine middlewares need to be wrapped to receive the correct state. `createFormEngineMiddlewares` does this automatically.
+====
++
+* add `formEngineSagas` to the `customSagas`
+* add `formEngineDataReducers` to the activity DataReducers
+* add a new instance of a `PlatformSingleDocumentDataLoader` to the `dataHandlers` in order to load single documents from a data services backend
+
+Please refer to the API documentation to get further information about the different parts.

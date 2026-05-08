@@ -1,0 +1,97 @@
+{
+  "header": {
+    "id": "TestFormNoCases",
+    "modelType": "form",
+    "modelVersion": "37.4.0",
+    "locales": [
+      {
+        "code": "en"
+      }
+    ],
+    "annotations": [
+      {
+        "name": "roles",
+        "value": "admin"
+      }
+    ],
+    "modelReferences": [
+      {
+        "alias": "document-model",
+        "modelType": "document",
+        "purpose": "data binding",
+        "reference": "document-model"
+      }
+    ]
+  },
+  "content": {
+    "subHeaderBox": {
+      "id": "subHeaderBox1"
+    },
+    "footerBox": {
+      "id": "footerBox1"
+    },
+    "screens": [
+      {
+        "id": "screen1",
+        "name": "Screen1",
+        "screenElements": [
+          {
+            "type": "ControlGrid",
+            "id": "controlgrid_1",
+            "name": "cg1",
+            "row": [
+              {
+                "type": "Row",
+                "id": "row_1",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control_enum",
+                    "elementRef": "field_enum"
+                  }
+                ]
+              },
+              {
+                "type": "Row",
+                "id": "row_2",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control_target",
+                    "hideCondition": {
+                      "masterField": "field_enum"
+                    },
+                    "elementRef": "field_target"
+                  }
+                ]
+              },
+              {
+                "type": "Row",
+                "id": "row_3",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control_valid",
+                    "hideCondition": {
+                      "masterField": "field_enum",
+                      "cases": [
+                        {
+                          "masterValue": "option1"
+                        }
+                      ]
+                    },
+                    "elementRef": "field_string"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "fieldConfiguration": {},
+    "groupConfiguration": {},
+    "defaults": {}
+  }
+}
+

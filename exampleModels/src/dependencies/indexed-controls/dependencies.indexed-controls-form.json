@@ -1,0 +1,574 @@
+{
+  "header": {
+    "id": "dependencies.indexed-controls-form",
+    "modelType": "form",
+    "modelVersion": "37.4.0",
+    "locales": [
+      {
+        "code": "en"
+      }
+    ],
+    "annotations": [
+      {
+        "name": "roles",
+        "value": "admin"
+      }
+    ],
+    "modelReferences": [
+      {
+        "alias": "dependencies.indexed-controls-document",
+        "modelType": "document",
+        "purpose": "data binding",
+        "reference": "dependencies.indexed-controls-document"
+      }
+    ]
+  },
+  "content": {
+    "subHeaderBox": {
+      "id": "subHeaderBox"
+    },
+    "footerBox": {
+      "id": "footerBox"
+    },
+    "screens": [
+      {
+        "id": "screen-c19a2",
+        "name": "Screen 1",
+        "screenElements": [
+          {
+            "type": "Section",
+            "id": "section_7a2b2",
+            "name": "secNumeric",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "Numeric Index"
+                  }
+                ]
+              }
+            },
+            "screenElements": [
+              {
+                "type": "ControlGrid",
+                "id": "controlgrid_bdceb",
+                "name": "cgMaster",
+                "row": [
+                  {
+                    "type": "Row",
+                    "id": "row_7b838",
+                    "cell": [
+                      {
+                        "type": "Control",
+                        "id": "control_ff804",
+                        "elementRef": "field_f04bf"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "InlineRepeat",
+                "id": "inlinerepeat_29b03",
+                "name": "repeat",
+                "title": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "Repeat"
+                      }
+                    ]
+                  }
+                },
+                "repeatOverviewColumn": [
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn_6266b",
+                    "elementRef": "field_6611e"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-f1a68",
+                    "elementRef": "field_cff9b"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn_90a95",
+                    "elementRef": "field_26a6e"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn_5ae13",
+                    "elementRef": "field_211c0"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn_f36ce",
+                    "elementRef": "field_447a5"
+                  }
+                ],
+                "groupRef": "group_6f21e",
+                "enableAdd": true,
+                "enableRemove": true
+              },
+              {
+                "type": "ControlGrid",
+                "id": "controlgrid_ff3b5",
+                "name": "cg",
+                "title": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "Indexed Controls"
+                      }
+                    ]
+                  }
+                },
+                "layout": {
+                  "lg": "6-6"
+                },
+                "row": [
+                  {
+                    "type": "Row",
+                    "id": "row_6c11a",
+                    "cell": [
+                      {
+                        "type": "Control",
+                        "id": "control_63ca5",
+                        "label": {
+                          "type": "Multilingual",
+                          "multilingualText": {
+                            "text": [
+                              {
+                                "locale": "en",
+                                "text": "Dependent Field (Numeric index = 2)"
+                              }
+                            ]
+                          }
+                        },
+                        "elementRef": "field_cff9b",
+                        "index": {
+                          "type": "NUMERIC",
+                          "value": "2"
+                        }
+                      },
+                      {
+                        "type": "Control",
+                        "id": "control_b18b5",
+                        "label": {
+                          "type": "Multilingual",
+                          "multilingualText": {
+                            "text": [
+                              {
+                                "locale": "en",
+                                "text": "Field from dependent Group (Numeric index = 2)"
+                              }
+                            ]
+                          }
+                        },
+                        "elementRef": "field_26a6e",
+                        "index": {
+                          "type": "NUMERIC",
+                          "value": "2"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "type": "Row",
+                    "id": "row_a093e",
+                    "cell": [
+                      {
+                        "type": "Control",
+                        "id": "control_fbbb4",
+                        "label": {
+                          "type": "Multilingual",
+                          "multilingualText": {
+                            "text": [
+                              {
+                                "locale": "en",
+                                "text": "Dependent Field (Master outside, Numeric index = 2)"
+                              }
+                            ]
+                          }
+                        },
+                        "elementRef": "field_211c0",
+                        "index": {
+                          "type": "NUMERIC",
+                          "value": "2"
+                        }
+                      },
+                      {
+                        "type": "Control",
+                        "id": "control_747a0",
+                        "label": {
+                          "type": "Multilingual",
+                          "multilingualText": {
+                            "text": [
+                              {
+                                "locale": "en",
+                                "text": "Field from dependent Group (Master outside, Numeric index = 2)"
+                              }
+                            ]
+                          }
+                        },
+                        "elementRef": "field_447a5",
+                        "index": {
+                          "type": "NUMERIC",
+                          "value": "2"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "Section",
+            "id": "section_32914",
+            "name": "secSemantic",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "Semantic Index"
+                  }
+                ]
+              }
+            },
+            "screenElements": [
+              {
+                "type": "ControlGrid",
+                "id": "controlgrid_fbcac",
+                "name": "cgMaster",
+                "row": [
+                  {
+                    "type": "Row",
+                    "id": "row_dcdd3",
+                    "cell": [
+                      {
+                        "type": "Control",
+                        "id": "control_f1162",
+                        "elementRef": "field_bb303"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "InlineRepeat",
+                "id": "inlinerepeat_c27ad",
+                "name": "repeat",
+                "title": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "Repeat"
+                      }
+                    ]
+                  }
+                },
+                "repeatOverviewColumn": [
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn_4eafb",
+                    "elementRef": "field_dcbc5"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn_0f726",
+                    "elementRef": "field_7eb36"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn_0cabd",
+                    "elementRef": "field_7c009"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn_6ff20",
+                    "elementRef": "field_c41fc"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn_bf33b",
+                    "elementRef": "field_52c54"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn_63288",
+                    "elementRef": "field_24639"
+                  }
+                ],
+                "groupRef": "group_c8467",
+                "enableAdd": true,
+                "enableRemove": true
+              },
+              {
+                "type": "ControlGrid",
+                "id": "controlgrid_043e4",
+                "name": "cg",
+                "title": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "Indexed Controls"
+                      }
+                    ]
+                  }
+                },
+                "layout": {
+                  "lg": "6-6"
+                },
+                "row": [
+                  {
+                    "type": "Row",
+                    "id": "row_245c2",
+                    "cell": [
+                      {
+                        "type": "Control",
+                        "id": "control_14b9b",
+                        "label": {
+                          "type": "Multilingual",
+                          "multilingualText": {
+                            "text": [
+                              {
+                                "locale": "en",
+                                "text": "Dependent Field (Semantic index = \"b\")"
+                              }
+                            ]
+                          }
+                        },
+                        "elementRef": "field_7c009",
+                        "index": {
+                          "type": "SEMANTIC",
+                          "value": "b"
+                        }
+                      },
+                      {
+                        "type": "Control",
+                        "id": "control_b4575",
+                        "label": {
+                          "type": "Multilingual",
+                          "multilingualText": {
+                            "text": [
+                              {
+                                "locale": "en",
+                                "text": "Field from dependent Group (Semantic index = \"b\")"
+                              }
+                            ]
+                          }
+                        },
+                        "elementRef": "field_c41fc",
+                        "index": {
+                          "type": "SEMANTIC",
+                          "value": "b"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "type": "Row",
+                    "id": "row_114da",
+                    "cell": [
+                      {
+                        "type": "Control",
+                        "id": "control_88559",
+                        "label": {
+                          "type": "Multilingual",
+                          "multilingualText": {
+                            "text": [
+                              {
+                                "locale": "en",
+                                "text": "Dependent Field (Master outside, Semantic index = \"b\")"
+                              }
+                            ]
+                          }
+                        },
+                        "elementRef": "field_52c54",
+                        "index": {
+                          "type": "SEMANTIC",
+                          "value": "b"
+                        }
+                      },
+                      {
+                        "type": "Control",
+                        "id": "control_05a04",
+                        "label": {
+                          "type": "Multilingual",
+                          "multilingualText": {
+                            "text": [
+                              {
+                                "locale": "en",
+                                "text": "Field from dependent Group (Master outside, Semantic index = \"b\")"
+                              }
+                            ]
+                          }
+                        },
+                        "elementRef": "field_24639",
+                        "index": {
+                          "type": "SEMANTIC",
+                          "value": "b"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "fieldConfiguration": {
+      "field": [
+        {
+          "dependentField": {
+            "masterField": "field_f04bf",
+            "case": [
+              {
+                "masterValue": "nonRelevant",
+                "notRelevant": true
+              },
+              {
+                "masterValue": "readonly",
+                "readonly": true
+              }
+            ]
+          },
+          "elementRef": "field_211c0"
+        },
+        {
+          "dependentField": {
+            "masterField": "field_6611e",
+            "case": [
+              {
+                "masterValue": "nonRelevant",
+                "notRelevant": true
+              },
+              {
+                "masterValue": "readonly",
+                "readonly": true
+              }
+            ]
+          },
+          "elementRef": "field_cff9b"
+        },
+        {
+          "dependentField": {
+            "masterField": "field_7eb36",
+            "case": [
+              {
+                "masterValue": "nonRelevant",
+                "notRelevant": true
+              },
+              {
+                "masterValue": "readonly",
+                "readonly": true
+              }
+            ]
+          },
+          "elementRef": "field_7c009"
+        },
+        {
+          "dependentField": {
+            "masterField": "field_bb303",
+            "case": [
+              {
+                "masterValue": "nonRelevant",
+                "notRelevant": true
+              },
+              {
+                "masterValue": "readonly",
+                "readonly": true
+              }
+            ]
+          },
+          "elementRef": "field_52c54"
+        }
+      ]
+    },
+    "groupConfiguration": {
+      "group": [
+        {
+          "dependentGroup": {
+            "masterField": "field_6611e",
+            "case": [
+              {
+                "masterValue": "nonRelevant",
+                "notRelevant": true
+              },
+              {
+                "masterValue": "readonly",
+                "readonly": true
+              }
+            ]
+          },
+          "groupRef": "group_fc38a"
+        },
+        {
+          "dependentGroup": {
+            "masterField": "field_f04bf",
+            "case": [
+              {
+                "masterValue": "nonRelevant",
+                "notRelevant": true
+              },
+              {
+                "masterValue": "readonly",
+                "readonly": true
+              }
+            ]
+          },
+          "groupRef": "group_30701"
+        },
+        {
+          "dependentGroup": {
+            "masterField": "field_7eb36",
+            "case": [
+              {
+                "masterValue": "nonRelevant",
+                "notRelevant": true
+              },
+              {
+                "masterValue": "readonly",
+                "readonly": true
+              }
+            ]
+          },
+          "groupRef": "group_2e827"
+        },
+        {
+          "dependentGroup": {
+            "masterField": "field_bb303",
+            "case": [
+              {
+                "masterValue": "nonRelevant",
+                "notRelevant": true
+              },
+              {
+                "masterValue": "readonly",
+                "readonly": true
+              }
+            ]
+          },
+          "groupRef": "group_126f3"
+        }
+      ]
+    },
+    "defaults": {}
+  }
+}

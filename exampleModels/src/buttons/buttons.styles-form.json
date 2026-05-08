@@ -1,0 +1,599 @@
+{
+  "header": {
+    "id": "buttons.styles-form",
+    "modelType": "form",
+    "modelVersion": "37.4.0",
+    "locales": [
+      {
+        "code": "en"
+      }
+    ],
+    "labels": [
+      {
+        "locale": "en",
+        "text": ""
+      }
+    ],
+    "modelReferences": [
+      {
+        "alias": "DM",
+        "modelType": "document",
+        "purpose": "data binding",
+        "reference": "buttons-document"
+      }
+    ],
+    "annotations": [
+      {
+        "name": "roles",
+        "value": "admin"
+      }
+    ]
+  },
+  "content": {
+    "styles": [
+      {
+        "name": "s1"
+      },
+      {
+        "name": "s2"
+      },
+      {
+        "name": "h_floatLeft"
+      },
+      {
+        "name": "h_floatRight"
+      }
+    ],
+    "subHeaderBox": {
+      "id": "subHeaderBox1",
+      "majorButtons": {
+        "button": [
+          {
+            "type": "EVENT",
+            "id": "button-61fea",
+            "name": "primary",
+            "buttonStyling": {
+              "label": {
+                "type": "Multilingual",
+                "multilingualText": {
+                  "text": [
+                    {
+                      "locale": "en",
+                      "text": "Primary"
+                    }
+                  ]
+                }
+              },
+              "priority": "PRIMARY"
+            },
+            "event": "submission",
+            "scope": "HIDDEN_IN_READONLY_MODE"
+          },
+          {
+            "type": "EVENT",
+            "id": "button-ad8f9",
+            "name": "secondary",
+            "buttonStyling": {
+              "label": {
+                "type": "Multilingual",
+                "multilingualText": {
+                  "text": [
+                    {
+                      "locale": "en",
+                      "text": "Secondary"
+                    }
+                  ]
+                }
+              },
+              "priority": "SECONDARY"
+            },
+            "scope": "HIDDEN_IN_READONLY_MODE"
+          },
+          {
+            "type": "EVENT",
+            "id": "button-4cf11",
+            "name": "primaryDestructive",
+            "buttonStyling": {
+              "label": {
+                "type": "Multilingual",
+                "multilingualText": {
+                  "text": [
+                    {
+                      "locale": "en",
+                      "text": "Primary Destructive"
+                    }
+                  ]
+                }
+              },
+              "priority": "PRIMARY",
+              "destructive": true
+            },
+            "scope": "HIDDEN_IN_READONLY_MODE"
+          },
+          {
+            "type": "EVENT",
+            "id": "button-1959c",
+            "name": "secondaryDestructive",
+            "buttonStyling": {
+              "label": {
+                "type": "Multilingual",
+                "multilingualText": {
+                  "text": [
+                    {
+                      "locale": "en",
+                      "text": "Secondary Destructive"
+                    }
+                  ]
+                }
+              },
+              "priority": "SECONDARY",
+              "destructive": true
+            },
+            "scope": "HIDDEN_IN_READONLY_MODE"
+          },
+          {
+            "type": "EVENT",
+            "id": "button-61feb",
+            "name": "withStyle",
+            "buttonStyling": {
+              "label": {
+                "type": "Multilingual",
+                "multilingualText": {
+                  "text": [
+                    {
+                      "locale": "en",
+                      "text": "With style"
+                    }
+                  ]
+                }
+              },
+              "priority": "PRIMARY",
+              "style": [
+                {
+                  "name": "s1"
+                },
+                {
+                  "name": "s2"
+                }
+              ]
+            },
+            "event": "submission",
+            "scope": "HIDDEN_IN_READONLY_MODE"
+          }
+        ]
+      }
+    },
+    "footerBox": {
+      "id": "footerBox1",
+      "majorButtons": {
+        "button": [
+          {
+            "type": "EVENT",
+            "id": "button-9055d",
+            "name": "primary",
+            "buttonStyling": {
+              "label": {
+                "type": "Multilingual",
+                "multilingualText": {
+                  "text": [
+                    {
+                      "locale": "en",
+                      "text": "Primary"
+                    }
+                  ]
+                }
+              },
+              "priority": "PRIMARY"
+            },
+            "event": "submission",
+            "scope": "HIDDEN_IN_READONLY_MODE"
+          },
+          {
+            "type": "EVENT",
+            "id": "button-da7b8",
+            "name": "secondary",
+            "buttonStyling": {
+              "label": {
+                "type": "Multilingual",
+                "multilingualText": {
+                  "text": [
+                    {
+                      "locale": "en",
+                      "text": "Secondary"
+                    }
+                  ]
+                }
+              },
+              "priority": "SECONDARY"
+            },
+            "scope": "HIDDEN_IN_READONLY_MODE"
+          },
+          {
+            "type": "EVENT",
+            "id": "button-1da0b",
+            "name": "primaryDestructive",
+            "buttonStyling": {
+              "label": {
+                "type": "Multilingual",
+                "multilingualText": {
+                  "text": [
+                    {
+                      "locale": "en",
+                      "text": "Primary Destructive"
+                    }
+                  ]
+                }
+              },
+              "priority": "PRIMARY",
+              "destructive": true
+            },
+            "scope": "HIDDEN_IN_READONLY_MODE"
+          },
+          {
+            "type": "NAVIGATION",
+            "id": "button-e312c",
+            "name": "secondaryDestructive",
+            "buttonStyling": {
+              "label": {
+                "type": "Multilingual",
+                "multilingualText": {
+                  "text": [
+                    {
+                      "locale": "en",
+                      "text": "Secondary Destructive"
+                    }
+                  ]
+                }
+              },
+              "priority": "SECONDARY",
+              "destructive": true
+            },
+            "target": "screen1",
+            "scope": "HIDDEN_IN_READONLY_MODE"
+          }
+        ]
+      }
+    },
+    "screens": [
+      {
+        "id": "screen1",
+        "name": "Screen1",
+        "screenElements": [
+          {
+            "type": "ButtonPanel",
+            "id": "buttonpanel-e5bb4",
+            "name": "ButtonPanel",
+            "button": [
+              {
+                "type": "EVENT",
+                "id": "button-7032b",
+                "name": "primary",
+                "buttonStyling": {
+                  "label": {
+                    "type": "Multilingual",
+                    "multilingualText": {
+                      "text": [
+                        {
+                          "locale": "en",
+                          "text": "Primary"
+                        }
+                      ]
+                    }
+                  },
+                  "priority": "PRIMARY"
+                },
+                "scope": "HIDDEN_IN_READONLY_MODE"
+              },
+              {
+                "type": "EVENT",
+                "id": "button-63010",
+                "name": "secondary",
+                "buttonStyling": {
+                  "label": {
+                    "type": "Multilingual",
+                    "multilingualText": {
+                      "text": [
+                        {
+                          "locale": "en",
+                          "text": "Secondary"
+                        }
+                      ]
+                    }
+                  },
+                  "priority": "SECONDARY"
+                },
+                "event": "submission",
+                "scope": "HIDDEN_IN_READONLY_MODE"
+              },
+              {
+                "type": "NAVIGATION",
+                "id": "button-78893",
+                "name": "primaryDestructive",
+                "buttonStyling": {
+                  "label": {
+                    "type": "Multilingual",
+                    "multilingualText": {
+                      "text": [
+                        {
+                          "locale": "en",
+                          "text": "Primary Destructive"
+                        }
+                      ]
+                    }
+                  },
+                  "priority": "PRIMARY",
+                  "destructive": true
+                },
+                "target": "screen1",
+                "scope": "HIDDEN_IN_READONLY_MODE"
+              },
+              {
+                "type": "EVENT",
+                "id": "button-5c81b",
+                "name": "secondaryDestructive",
+                "buttonStyling": {
+                  "label": {
+                    "type": "Multilingual",
+                    "multilingualText": {
+                      "text": [
+                        {
+                          "locale": "en",
+                          "text": "Secondary Destructive"
+                        }
+                      ]
+                    }
+                  },
+                  "priority": "SECONDARY",
+                  "destructive": true
+                },
+                "event": "submission",
+                "scope": "HIDDEN_IN_READONLY_MODE"
+              }
+            ]
+          },
+          {
+            "type": "Section",
+            "id": "section-faa45",
+            "name": "ButtonPanels",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "ButtonPanels"
+                  }
+                ]
+              }
+            },
+            "screenElements": [
+              {
+                "type": "ControlGrid",
+                "id": "controlgrid-fc5a9",
+                "name": "Grid",
+                "row": [
+                  {
+                    "type": "Row",
+                    "id": "row-60b96",
+                    "cell": [
+                      {
+                        "type": "TextCell",
+                        "id": "textcell-09ad2",
+                        "span": {
+                          "lg": 1
+                        },
+                        "name": "Informations",
+                        "content": {
+                          "text": [
+                            {
+                              "locale": "en",
+                              "text": "This model contains three button panels. One has no style, another is left and the last is right aligned."
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                ],
+                "verticalAlignment": "BOTTOM"
+              },
+              {
+                "type": "ButtonPanel",
+                "id": "buttonpanel-2b4dc",
+                "name": "ButtonPanelWithoutStyle",
+                "title": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "ButtonPanel (without style)"
+                      }
+                    ]
+                  }
+                },
+                "button": [
+                  {
+                    "type": "EVENT",
+                    "id": "button-3b5ab",
+                    "name": "event",
+                    "buttonStyling": {
+                      "label": {
+                        "type": "Multilingual",
+                        "multilingualText": {
+                          "text": [
+                            {
+                              "locale": "en",
+                              "text": "event"
+                            }
+                          ]
+                        }
+                      },
+                      "priority": "PRIMARY"
+                    },
+                    "event": "event",
+                    "scope": "HIDDEN_IN_READONLY_MODE"
+                  },
+                  {
+                    "type": "EVENT",
+                    "id": "button-848a7",
+                    "name": "submit",
+                    "buttonStyling": {
+                      "label": {
+                        "type": "Multilingual",
+                        "multilingualText": {
+                          "text": [
+                            {
+                              "locale": "en",
+                              "text": "submit"
+                            }
+                          ]
+                        }
+                      },
+                      "priority": "PRIMARY"
+                    },
+                    "event": "submission-submission",
+                    "scope": "HIDDEN_IN_READONLY_MODE"
+                  }
+                ]
+              },
+              {
+                "type": "ButtonPanel",
+                "id": "buttonpanel-eea01",
+                "name": "ButtonPanelLeft",
+                "title": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "ButtonPanel (Left)"
+                      }
+                    ]
+                  }
+                },
+                "style": [
+                  {
+                    "name": "h_floatLeft"
+                  }
+                ],
+                "button": [
+                  {
+                    "type": "EVENT",
+                    "id": "button-a6fc9",
+                    "name": "event",
+                    "buttonStyling": {
+                      "label": {
+                        "type": "Multilingual",
+                        "multilingualText": {
+                          "text": [
+                            {
+                              "locale": "en",
+                              "text": "event"
+                            }
+                          ]
+                        }
+                      },
+                      "priority": "PRIMARY"
+                    },
+                    "event": "event",
+                    "scope": "HIDDEN_IN_READONLY_MODE"
+                  },
+                  {
+                    "type": "EVENT",
+                    "id": "button-4b626",
+                    "name": "submit",
+                    "buttonStyling": {
+                      "label": {
+                        "type": "Multilingual",
+                        "multilingualText": {
+                          "text": [
+                            {
+                              "locale": "en",
+                              "text": "submit"
+                            }
+                          ]
+                        }
+                      },
+                      "priority": "PRIMARY"
+                    },
+                    "event": "submission-submission",
+                    "scope": "HIDDEN_IN_READONLY_MODE"
+                  }
+                ]
+              },
+              {
+                "type": "ButtonPanel",
+                "id": "buttonpanel-1b7fb",
+                "name": "ButtonPanelRight",
+                "title": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "ButtonPanel (Right)"
+                      }
+                    ]
+                  }
+                },
+                "style": [
+                  {
+                    "name": "h_floatRight"
+                  }
+                ],
+                "button": [
+                  {
+                    "type": "EVENT",
+                    "id": "button-e9b2e",
+                    "name": "event",
+                    "buttonStyling": {
+                      "label": {
+                        "type": "Multilingual",
+                        "multilingualText": {
+                          "text": [
+                            {
+                              "locale": "en",
+                              "text": "event"
+                            }
+                          ]
+                        }
+                      },
+                      "priority": "PRIMARY"
+                    },
+                    "event": "event",
+                    "scope": "HIDDEN_IN_READONLY_MODE"
+                  },
+                  {
+                    "type": "EVENT",
+                    "id": "button-acad3",
+                    "name": "submit",
+                    "buttonStyling": {
+                      "label": {
+                        "type": "Multilingual",
+                        "multilingualText": {
+                          "text": [
+                            {
+                              "locale": "en",
+                              "text": "submit"
+                            }
+                          ]
+                        }
+                      },
+                      "priority": "PRIMARY"
+                    },
+                    "event": "submission-submission",
+                    "scope": "HIDDEN_IN_READONLY_MODE"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "fieldConfiguration": {},
+    "groupConfiguration": {},
+    "defaults": {}
+  }
+}

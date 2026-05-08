@@ -1,0 +1,53 @@
+{
+  "name": "@com.mgmtp.a12.formengine/formengine-model-migration",
+  "version": "38.5.0-SNAPSHOT",
+  "description": "form model migration CLI tool",
+  "author": "mgm technology partners",
+  "license": "(EUPL-1.2 OR LicenseRef-commercial)",
+  "type": "module",
+  "scripts": {
+    "clean": "rimraf ./target ./lib cyclonedx.json",
+    "build": "pnpm run \"/^compile:[a-z]*$/\"",
+    "compile:typescript": "devtools per-env",
+    "compile:typescript:production": "migration-tool-utils compile",
+    "compile:typescript:development": "migration-tool-utils compile --no-schema",
+    "test:coverage": "c8 mocha",
+    "test": "mocha",
+    "typescript": "tsc --project ./tsconfig.dev.json",
+    "watch": "tsc --project ./tsconfig.dev.json --watch"
+  },
+  "bin": "lib/main/cli.js",
+  "devDependencies": {
+    "@com.mgmtp.a12.base/base-model-api": "catalog:a12",
+    "@com.mgmtp.a12.devtools/build-tools": "catalog:a12",
+    "@com.mgmtp.a12.devtools/tsconfig": "catalog:a12",
+    "@com.mgmtp.a12.migrationtool/migrationtool-utils": "catalog:a12",
+    "@com.mgmtp.a12.utils/utils-localization": "catalog:a12",
+    "@types/mocha": "catalog:",
+    "@types/node": "catalog:",
+    "mocha": "catalog:",
+    "c8": "catalog:",
+    "rimraf": "catalog:",
+    "source-map-support": "catalog:",
+    "typescript": "catalog:"
+  },
+  "dependencies": {
+    "@com.mgmtp.a12.migrationtool/migrationtool-core": "catalog:a12"
+  },
+  "files": [
+    "lib",
+    "!lib/test",
+    "src",
+    "!src/test",
+    "cyclonedx.json",
+    "NOTICE",
+    "THIRD_PARTY_NOTICES",
+    "licenses"
+  ],
+  "exports": {
+    ".": "./lib/main/api.js",
+    "./lib/*": "./lib/*.js",
+    "./lib/*.js": "./lib/*.js"
+  },
+  "types": "lib/main/api.d.ts"
+}

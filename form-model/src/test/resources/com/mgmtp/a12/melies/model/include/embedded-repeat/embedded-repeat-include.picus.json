@@ -1,0 +1,74 @@
+{
+  "header": {
+    "id": "embedded-repeat-include.picus",
+    "modelType": "document",
+    "modelVersion": "28.4.0",
+    "locales": [
+      {
+        "code": "en"
+      }
+    ],
+    "labels": [],
+    "annotations": [],
+    "modelReferences": [
+      {
+        "alias": "baseGroup.picus.json",
+        "modelType": "document",
+        "purpose": "include",
+        "reference": "baseGroup.picus"
+      }
+    ]
+  },
+  "content": {
+    "modelInfo": {
+      "name": "embedded-repeat-include.picus",
+      "immutable": false
+    },
+    "modelConfig": {
+      "decimalSeparator": ".",
+      "timeZone": "UTC",
+      "conditionLanguage": {
+        "code": "en_US"
+      }
+    },
+    "modelRoot": {
+      "rootGroups": [
+        {
+          "type": "Group",
+          "id": "include_4d484",
+          "name": "baseGroup",
+          "Group": {
+            "repeatability": 1000,
+            "modelAlias": "baseGroup.picus.json"
+          }
+        },
+        {
+          "type": "Group",
+          "id": "group_264f2",
+          "name": "additionalGroup",
+          "Group": {
+            "repeatability": 1,
+            "elements": [
+              {
+                "type": "Field",
+                "id": "field_dd3c4",
+                "name": "additionalField",
+                "Field": {
+                  "fieldType": {
+                    "type": "StringType"
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "Additional Field"
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

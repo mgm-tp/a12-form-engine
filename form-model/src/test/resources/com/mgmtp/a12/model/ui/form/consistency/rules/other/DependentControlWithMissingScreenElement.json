@@ -1,0 +1,104 @@
+{
+  "header": {
+    "id": "DependentControlWithMissingScreenElement",
+    "modelType": "form",
+    "modelVersion": "37.4.0",
+    "locales": [
+      {
+        "code": "en"
+      }
+    ],
+    "annotations": [
+      {
+        "name": "roles",
+        "value": "admin"
+      }
+    ],
+    "modelReferences": [
+      {
+        "alias": "DependentControl-document",
+        "modelType": "document",
+        "purpose": "data binding",
+        "reference": "DependentControl-document"
+      }
+    ]
+  },
+  "content": {
+    "subHeaderBox": {
+      "id": "subHeaderBox1"
+    },
+    "footerBox": {
+      "id": "footerBox1"
+    },
+    "screens": [
+      {
+        "id": "screen_a46b7",
+        "name": "Screen 1",
+        "screenElements": [
+          {
+            "type": "ControlGrid",
+            "id": "controlgrid_cea93",
+            "name": "cg",
+            "row": [
+              {
+                "type": "Row",
+                "id": "row_89150",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control_eadf7",
+                    "elementRef": "field_18797",
+                    "dependentControls": {
+                      "screenElement": [
+                        {
+                          "idref": "section_d6b5c",
+                          "masterValue": "true"
+                        }
+                      ]
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "Row",
+                "id": "row_4eabf",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control_d74a3",
+                    "elementRef": "field_695a8",
+                    "dependentControls": {
+                      "screenElement": [
+                        {
+                          "idref": "section_ba979",
+                          "masterValue": "true"
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "Section",
+            "id": "section_ba979",
+            "name": "sec"
+          }
+        ]
+      }
+    ],
+    "fieldConfiguration": {
+      "field": [
+        {
+          "elementRef": "field_18797"
+        },
+        {
+          "elementRef": "field_695a8"
+        }
+      ]
+    },
+    "groupConfiguration": {},
+    "defaults": {}
+  }
+}

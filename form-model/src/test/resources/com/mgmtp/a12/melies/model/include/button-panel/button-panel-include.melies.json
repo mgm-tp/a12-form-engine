@@ -1,0 +1,47 @@
+{
+  "header": {
+    "id": "button-panel-include.melies",
+    "modelType": "form",
+    "modelVersion": "37.4.0",
+    "locales": [
+      {
+        "code": "en"
+      }
+    ],
+    "modelReferences": [
+      {
+        "alias": "DM",
+        "modelType": "document",
+        "purpose": "data binding",
+        "reference": "button-panel.picus"
+      }
+    ]
+  },
+  "content": {
+    "subHeaderBox": {
+      "id": "subHeaderBox1"
+    },
+    "footerBox": {
+      "id": "footerBox1"
+    },
+    "screens": [
+      {
+        "id": "screen1",
+        "name": "Screen1",
+        "screenElements": [
+          {
+            "type": "ButtonPanel",
+            "id": "buttonpanel-c6cd1",
+            "name": "include-a-bp",
+            "includeId": "buttonpanel-c6cd1",
+            "formModelRef": "button-panel.melies",
+            "hostDocumentModelPath": "/"
+          }
+        ]
+      }
+    ],
+    "fieldConfiguration": {},
+    "groupConfiguration": {},
+    "defaults": {}
+  }
+}

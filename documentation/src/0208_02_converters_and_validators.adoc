@@ -1,0 +1,47 @@
+////
+SPDX-License-Identifier: EUPL-1.2 OR LicenseRef-commercial
+
+Copyright (c) 2012-2026 mgm technology partners GmbH
+
+Dual License
+------------
+This source file is part of the mgm A12 Platform and available under
+a choice of two different licenses:
+
+1. Open-Source License – EUPL v1.2
+   You may redistribute and/or modify this file under the terms of the
+   European Union Public License, version 1.2 - see https://eupl.eu/.
+
+2. Commercial License
+   Alternatively, you may obtain a commercial license from
+   mgm technology partners GmbH, that permits use of this software
+   under different terms (including support and maintenance services).
+
+   Please contact a12-license@mgm-tp.com for more information.
+
+You must select and comply with exactly one of the above license options.
+
+Warranty Disclaimer (applies to either option)
+----------------------------------------------
+THIS SOFTWARE IS PROVIDED "AS IS" AND WITHOUT WARRANTY OF ANY KIND,
+WHETHER EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NON-INFRINGEMENT, EXCEPT WHERE SUCH DISCLAIMERS ARE HELD TO BE
+LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
+////
+
+[#form-engine_tutorials_conversion_and_validation]
+= Conversion and Validation
+
+== Custom Converter
+
+This section is about how you can change the default behavior of the converter.
+
+The conversion functionality is provided by the utils-localization library of A12. It contains a conversion API that can be customized in various ways that are described by the respective documentation of this library.
+
+For the integration into the Form Engine, a key aspect must be considered: A customized conversion must always be provided to both Form Engine view and Form Engine middlewares.
+
+On the view level (i.e. for react components), this is automatically achieved by providing the respective `LocalizerContext` that wraps the client and/or Form Engine components.
+A customized conversion object would need to be passed to this context.
+
+The same customized conversion object also needs to be passed to the Form Engine middlewares within the `MiddlewareOptions` parameter to the `createEngineMiddlewares` factory function.

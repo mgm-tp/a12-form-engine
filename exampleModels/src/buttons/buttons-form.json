@@ -1,0 +1,2885 @@
+{
+  "header": {
+    "id": "buttons-form",
+    "modelType": "form",
+    "modelVersion": "37.4.0",
+    "locales": [
+      {
+        "code": "en"
+      }
+    ],
+    "labels": [
+      {
+        "locale": "en",
+        "text": "Button Navigation"
+      }
+    ],
+    "annotations": [
+      {
+        "name": "roles",
+        "value": "admin"
+      }
+    ],
+    "modelReferences": [
+      {
+        "alias": "buttons-document",
+        "modelType": "document",
+        "purpose": "data binding",
+        "reference": "buttons-document"
+      }
+    ]
+  },
+  "content": {
+    "styles": [
+      {
+        "name": "button__secondary"
+      }
+    ],
+    "subHeaderBox": {
+      "id": "subHeaderBox",
+      "minorButtons": {
+        "button": [
+          {
+            "type": "EVENT",
+            "id": "button-3f18a",
+            "name": "event4",
+            "buttonStyling": {
+              "label": {
+                "type": "Multilingual",
+                "multilingualText": {
+                  "text": [
+                    {
+                      "locale": "en",
+                      "text": "Event 4"
+                    }
+                  ]
+                }
+              },
+              "priority": "PRIMARY"
+            },
+            "event": "Event 4",
+            "validation": "full",
+            "scope": "HIDDEN_IN_READONLY_MODE"
+          },
+          {
+            "type": "EVENT",
+            "id": "button-3f17a",
+            "name": "event5",
+            "buttonStyling": {
+              "label": {
+                "type": "Multilingual",
+                "multilingualText": {
+                  "text": [
+                    {
+                      "locale": "en",
+                      "text": "Event 5"
+                    }
+                  ]
+                }
+              },
+              "priority": "SECONDARY"
+            },
+            "event": "Event 5",
+            "scope": "HIDDEN_IN_READONLY_MODE"
+          }
+        ]
+      },
+      "majorButtons": {
+        "button": [
+          {
+            "type": "NAVIGATION",
+            "id": "button-8665a",
+            "name": "Screen 1",
+            "buttonStyling": {
+              "label": {
+                "type": "Multilingual",
+                "multilingualText": {
+                  "text": [
+                    {
+                      "locale": "en",
+                      "text": "Screen 1"
+                    }
+                  ]
+                }
+              },
+              "priority": "SECONDARY"
+            },
+            "target": "screen-1",
+            "validation": "partial",
+            "scope": "ALWAYS"
+          },
+          {
+            "type": "NAVIGATION",
+            "id": "button-70c01",
+            "name": "Screen 2",
+            "buttonStyling": {
+              "label": {
+                "type": "Multilingual",
+                "multilingualText": {
+                  "text": [
+                    {
+                      "locale": "en",
+                      "text": "Screen 2"
+                    }
+                  ]
+                }
+              },
+              "priority": "SECONDARY"
+            },
+            "target": "screen-2",
+            "validation": "partial",
+            "scope": "HIDDEN_IN_READONLY_MODE"
+          },
+          {
+            "type": "NAVIGATION",
+            "id": "button-44685",
+            "name": "Screen 3",
+            "buttonStyling": {
+              "label": {
+                "type": "Multilingual",
+                "multilingualText": {
+                  "text": [
+                    {
+                      "locale": "en",
+                      "text": "Screen with Long Text"
+                    }
+                  ]
+                }
+              },
+              "priority": "SECONDARY"
+            },
+            "target": "screen-68b7a",
+            "scope": "HIDDEN_IN_READONLY_MODE"
+          },
+          {
+            "type": "NAVIGATION",
+            "id": "button-f5eef",
+            "name": "IconButtons",
+            "buttonStyling": {
+              "label": {
+                "type": "Multilingual",
+                "multilingualText": {
+                  "text": [
+                    {
+                      "locale": "en",
+                      "text": "Icon Buttons"
+                    }
+                  ]
+                }
+              },
+              "icon": {
+                "name": "face"
+              },
+              "priority": "SECONDARY",
+              "labelHidden": true
+            },
+            "target": "screen-b7f98",
+            "scope": "HIDDEN_IN_READONLY_MODE"
+          },
+          {
+            "type": "NAVIGATION",
+            "id": "button_517fb",
+            "name": "IconThemes",
+            "buttonStyling": {
+              "label": {
+                "type": "Multilingual",
+                "multilingualText": {
+                  "text": [
+                    {
+                      "locale": "en",
+                      "text": "Icon Themes"
+                    }
+                  ]
+                }
+              },
+              "icon": {
+                "name": "style",
+                "theme": "outlined"
+              }
+            },
+            "target": "screen_3171a",
+            "scope": "HIDDEN_IN_READONLY_MODE"
+          },
+          {
+            "type": "EVENT",
+            "id": "button-3f18e",
+            "name": "Event 1",
+            "buttonStyling": {
+              "label": {
+                "type": "Multilingual",
+                "multilingualText": {
+                  "text": [
+                    {
+                      "locale": "en",
+                      "text": "Event 1"
+                    }
+                  ]
+                }
+              },
+              "priority": "PRIMARY"
+            },
+            "event": "Event1",
+            "validation": "full",
+            "scope": "HIDDEN_IN_READONLY_MODE"
+          },
+          {
+            "type": "EVENT",
+            "id": "button-35e02",
+            "name": "Event 2",
+            "buttonStyling": {
+              "label": {
+                "type": "Multilingual",
+                "multilingualText": {
+                  "text": [
+                    {
+                      "locale": "en",
+                      "text": "Event 2"
+                    }
+                  ]
+                }
+              },
+              "priority": "PRIMARY"
+            },
+            "event": "Event2",
+            "validation": "partial",
+            "scope": "ALWAYS"
+          },
+          {
+            "type": "EVENT",
+            "id": "button-a39c3",
+            "name": "Event 3",
+            "buttonStyling": {
+              "label": {
+                "type": "Multilingual",
+                "multilingualText": {
+                  "text": [
+                    {
+                      "locale": "en",
+                      "text": "Event 3"
+                    }
+                  ]
+                }
+              },
+              "priority": "PRIMARY"
+            },
+            "event": "Event3",
+            "scope": "HIDDEN_IN_READONLY_MODE"
+          },
+          {
+            "type": "EVENT",
+            "id": "button-15628",
+            "name": "Event 6",
+            "buttonStyling": {
+              "label": {
+                "type": "Multilingual",
+                "multilingualText": {
+                  "text": [
+                    {
+                      "locale": "en",
+                      "text": "Header"
+                    }
+                  ]
+                }
+              },
+              "priority": "SECONDARY"
+            },
+            "event": "subHeaderButtonEvent",
+            "scope": "HIDDEN_IN_READONLY_MODE"
+          },
+          {
+            "type": "NAVIGATION",
+            "id": "button_b9d86",
+            "name": "AriaLabel",
+            "buttonStyling": {
+              "label": {
+                "type": "Multilingual",
+                "multilingualText": {
+                  "text": [
+                    {
+                      "locale": "en",
+                      "text": "Aria Label"
+                    }
+                  ]
+                }
+              }
+            },
+            "target": "screen_25927",
+            "scope": "HIDDEN_IN_READONLY_MODE"
+          },
+          {
+            "type": "NAVIGATION",
+            "id": "button_591c1",
+            "name": "MenuScreenFallback",
+            "buttonStyling": {
+              "icon": {
+                "name": "face_retouching_natural",
+                "theme": "filled"
+              },
+              "labelHidden": true
+            },
+            "target": "screen_944c6",
+            "scope": "HIDDEN_IN_READONLY_MODE"
+          }
+        ]
+      }
+    },
+    "footerBox": {
+      "id": "footerBox",
+      "minorButtons": {
+        "button": [
+          {
+            "type": "EVENT",
+            "id": "button-031ec",
+            "name": "Event 4",
+            "buttonStyling": {
+              "label": {
+                "type": "Multilingual",
+                "multilingualText": {
+                  "text": [
+                    {
+                      "locale": "en",
+                      "text": "MinorFooter"
+                    }
+                  ]
+                }
+              },
+              "icon": {
+                "name": "edit_outline",
+                "theme": "custom"
+              },
+              "priority": "PRIMARY",
+              "labelHidden": true
+            },
+            "event": "minorFooterButtonEvent",
+            "scope": "HIDDEN_IN_READONLY_MODE"
+          }
+        ]
+      },
+      "majorButtons": {
+        "button": [
+          {
+            "type": "EVENT",
+            "id": "button-e33e6",
+            "name": "Event 5",
+            "buttonStyling": {
+              "label": {
+                "type": "Multilingual",
+                "multilingualText": {
+                  "text": [
+                    {
+                      "locale": "en",
+                      "text": "MajorFooter"
+                    }
+                  ]
+                }
+              },
+              "priority": "SECONDARY"
+            },
+            "event": "majorFooterButtonEvent",
+            "scope": "HIDDEN_IN_READONLY_MODE"
+          },
+          {
+            "type": "NAVIGATION",
+            "id": "button-f8216",
+            "name": "Next (Full)",
+            "buttonStyling": {
+              "label": {
+                "type": "Multilingual",
+                "multilingualText": {
+                  "text": [
+                    {
+                      "locale": "en",
+                      "text": "Next (Full Validation)"
+                    }
+                  ]
+                }
+              },
+              "priority": "SECONDARY"
+            },
+            "target": "#next",
+            "validation": "full",
+            "scope": "HIDDEN_IN_READONLY_MODE"
+          }
+        ]
+      }
+    },
+    "screens": [
+      {
+        "id": "screen-1",
+        "name": "Screen1",
+        "title": {
+          "type": "Multilingual",
+          "multilingualText": {
+            "text": [
+              {
+                "locale": "en",
+                "text": "Screen 1"
+              }
+            ]
+          }
+        },
+        "subHeaderBox": {
+          "id": "sh1",
+          "minorButtons": {
+            "button": [
+              {
+                "type": "EVENT",
+                "id": "button-3c18e",
+                "name": "eventMinorScreen",
+                "buttonStyling": {
+                  "label": {
+                    "type": "Multilingual",
+                    "multilingualText": {
+                      "text": [
+                        {
+                          "locale": "en",
+                          "text": "Event Minor Screen1"
+                        }
+                      ]
+                    }
+                  },
+                  "priority": "PRIMARY"
+                },
+                "event": "eventMinorScreen",
+                "scope": "HIDDEN_IN_READONLY_MODE"
+              }
+            ]
+          },
+          "majorButtons": {
+            "button": [
+              {
+                "type": "EVENT",
+                "id": "button-786ac",
+                "name": "Event 1",
+                "buttonStyling": {
+                  "label": {
+                    "type": "Multilingual",
+                    "multilingualText": {
+                      "text": [
+                        {
+                          "locale": "en",
+                          "text": "Screen1Header"
+                        }
+                      ]
+                    }
+                  },
+                  "priority": "PRIMARY"
+                },
+                "event": "Event1",
+                "scope": "HIDDEN_IN_READONLY_MODE"
+              },
+              {
+                "type": "NAVIGATION",
+                "id": "button-49926",
+                "name": "navigation",
+                "buttonStyling": {
+                  "label": {
+                    "type": "Multilingual",
+                    "multilingualText": {
+                      "text": [
+                        {
+                          "locale": "en",
+                          "text": "Nav1"
+                        }
+                      ]
+                    }
+                  },
+                  "priority": "SECONDARY"
+                },
+                "target": "#next",
+                "scope": "HIDDEN_IN_READONLY_MODE"
+              }
+            ]
+          }
+        },
+        "footerBox": {
+          "id": "f1",
+          "minorButtons": {
+            "button": [
+              {
+                "type": "NAVIGATION",
+                "id": "screen-1-next",
+                "name": "nav1",
+                "buttonStyling": {
+                  "label": {
+                    "type": "Multilingual",
+                    "multilingualText": {
+                      "text": [
+                        {
+                          "locale": "en",
+                          "text": "Next"
+                        }
+                      ]
+                    }
+                  },
+                  "priority": "PRIMARY"
+                },
+                "target": "#next",
+                "scope": "HIDDEN_IN_READONLY_MODE"
+              },
+              {
+                "type": "NAVIGATION",
+                "id": "screen-1-next-validate",
+                "name": "nav2",
+                "buttonStyling": {
+                  "label": {
+                    "type": "Multilingual",
+                    "multilingualText": {
+                      "text": [
+                        {
+                          "locale": "en",
+                          "text": "Next (validate)"
+                        }
+                      ]
+                    }
+                  },
+                  "priority": "PRIMARY"
+                },
+                "target": "#next",
+                "validation": "partial",
+                "scope": "HIDDEN_IN_READONLY_MODE"
+              },
+              {
+                "type": "NAVIGATION",
+                "id": "screen-1-previous",
+                "name": "nav3",
+                "buttonStyling": {
+                  "label": {
+                    "type": "Multilingual",
+                    "multilingualText": {
+                      "text": [
+                        {
+                          "locale": "en",
+                          "text": "Previous (should not be rendered)"
+                        }
+                      ]
+                    }
+                  },
+                  "priority": "SECONDARY"
+                },
+                "target": "#previous",
+                "scope": "HIDDEN_IN_READONLY_MODE"
+              },
+              {
+                "type": "NAVIGATION",
+                "id": "screen-1-goto-screen-2",
+                "name": "nav4",
+                "buttonStyling": {
+                  "label": {
+                    "type": "Multilingual",
+                    "multilingualText": {
+                      "text": [
+                        {
+                          "locale": "en",
+                          "text": "Screen 2"
+                        }
+                      ]
+                    }
+                  },
+                  "priority": "SECONDARY"
+                },
+                "target": "screen-2",
+                "scope": "HIDDEN_IN_READONLY_MODE"
+              },
+              {
+                "type": "NAVIGATION",
+                "id": "screen-1-goto-screen-2-validate",
+                "name": "nav5",
+                "buttonStyling": {
+                  "label": {
+                    "type": "Multilingual",
+                    "multilingualText": {
+                      "text": [
+                        {
+                          "locale": "en",
+                          "text": "Screen 2 (validate)"
+                        }
+                      ]
+                    }
+                  },
+                  "priority": "SECONDARY"
+                },
+                "target": "screen-2",
+                "validation": "partial",
+                "scope": "HIDDEN_IN_READONLY_MODE"
+              },
+              {
+                "type": "EVENT",
+                "id": "button-c0600",
+                "name": "Event 4",
+                "buttonStyling": {
+                  "label": {
+                    "type": "Multilingual",
+                    "multilingualText": {
+                      "text": [
+                        {
+                          "locale": "en",
+                          "text": "Screen1MinorFooter"
+                        }
+                      ]
+                    }
+                  },
+                  "priority": "SECONDARY"
+                },
+                "event": "submission",
+                "scope": "HIDDEN_IN_READONLY_MODE"
+              }
+            ]
+          },
+          "majorButtons": {
+            "button": [
+              {
+                "type": "EVENT",
+                "id": "button-dc7d1",
+                "name": "Event 3",
+                "buttonStyling": {
+                  "label": {
+                    "type": "Multilingual",
+                    "multilingualText": {
+                      "text": [
+                        {
+                          "locale": "en",
+                          "text": "Screen1MajorFooter"
+                        }
+                      ]
+                    }
+                  },
+                  "priority": "PRIMARY"
+                },
+                "event": "Event3",
+                "scope": "HIDDEN_IN_READONLY_MODE"
+              }
+            ]
+          }
+        },
+        "screenElements": [
+          {
+            "type": "ControlGrid",
+            "id": "cg1",
+            "name": "CG1",
+            "row": [
+              {
+                "type": "Row",
+                "id": "cg1-r1",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "c1",
+                    "elementRef": "id41088"
+                  }
+                ]
+              }
+            ],
+            "verticalAlignment": "BOTTOM"
+          },
+          {
+            "type": "ButtonPanel",
+            "id": "buttonpanel-77985",
+            "name": "bp",
+            "button": [
+              {
+                "type": "EVENT",
+                "id": "button-689b8",
+                "name": "eventButton",
+                "buttonStyling": {
+                  "label": {
+                    "type": "Multilingual",
+                    "multilingualText": {
+                      "text": [
+                        {
+                          "locale": "en",
+                          "text": "event 4"
+                        }
+                      ]
+                    }
+                  },
+                  "priority": "SECONDARY"
+                },
+                "event": "event",
+                "scope": "HIDDEN_IN_READONLY_MODE"
+              },
+              {
+                "type": "NAVIGATION",
+                "id": "button-4516a",
+                "name": "navigationButton",
+                "buttonStyling": {
+                  "label": {
+                    "type": "Multilingual",
+                    "multilingualText": {
+                      "text": [
+                        {
+                          "locale": "en",
+                          "text": "Screen2"
+                        }
+                      ]
+                    }
+                  },
+                  "priority": "SECONDARY"
+                },
+                "target": "screen-2",
+                "scope": "HIDDEN_IN_READONLY_MODE"
+              }
+            ]
+          },
+          {
+            "type": "DetachedRepeat",
+            "id": "detachedrepeat-f7f50",
+            "name": "Repeat",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "Detached Repeat"
+                  }
+                ]
+              }
+            },
+            "repeatOverviewColumn": [
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldOverviewColumn-1",
+                "elementRef": "F44"
+              }
+            ],
+            "groupRef": "G43",
+            "enableAdd": true,
+            "enableRemove": true,
+            "enableReorder": true,
+            "detailScreen": {
+              "id": "screen-acf21",
+              "name": "Details",
+              "screenElements": [
+                {
+                  "type": "ControlGrid",
+                  "id": "controlgrid-6efea",
+                  "name": "Grid",
+                  "row": [
+                    {
+                      "type": "Row",
+                      "id": "row-cb20a",
+                      "cell": [
+                        {
+                          "type": "Control",
+                          "id": "control-a0734",
+                          "elementRef": "F44"
+                        }
+                      ]
+                    }
+                  ],
+                  "verticalAlignment": "BOTTOM"
+                },
+                {
+                  "type": "ButtonPanel",
+                  "id": "buttonpanel-6cbce",
+                  "name": "bp2",
+                  "button": [
+                    {
+                      "type": "EVENT",
+                      "id": "button-18526",
+                      "name": "eventButton",
+                      "buttonStyling": {
+                        "label": {
+                          "type": "Multilingual",
+                          "multilingualText": {
+                            "text": [
+                              {
+                                "locale": "en",
+                                "text": "event 5"
+                              }
+                            ]
+                          }
+                        },
+                        "priority": "SECONDARY"
+                      },
+                      "scope": "HIDDEN_IN_READONLY_MODE"
+                    },
+                    {
+                      "type": "NAVIGATION",
+                      "id": "button-6e890",
+                      "name": "navigationButton",
+                      "buttonStyling": {
+                        "label": {
+                          "type": "Multilingual",
+                          "multilingualText": {
+                            "text": [
+                              {
+                                "locale": "en",
+                                "text": "Screen1"
+                              }
+                            ]
+                          }
+                        },
+                        "priority": "SECONDARY"
+                      },
+                      "target": "screen-1",
+                      "scope": "HIDDEN_IN_READONLY_MODE"
+                    }
+                  ]
+                },
+                {
+                  "type": "EmbeddedRepeat",
+                  "id": "embeddedrepeat-dc254",
+                  "name": "embedded-repeat-Group2",
+                  "title": {
+                    "type": "Multilingual",
+                    "multilingualText": {
+                      "text": [
+                        {
+                          "locale": "en",
+                          "text": "Nested Embedded Repeat"
+                        }
+                      ]
+                    }
+                  },
+                  "repeatOverviewColumn": [
+                    {
+                      "type": "FieldBasedRepeatOverviewColumn",
+                      "id": "fieldbasedrepeatoverviewcolumn-bb23e",
+                      "width": 1,
+                      "sortable": false,
+                      "filterable": false,
+                      "preferredSorting": "ASC",
+                      "elementRef": "fieldimpl_1f3bb"
+                    }
+                  ],
+                  "groupRef": "groupimpl_a44ba",
+                  "enableAdd": true,
+                  "enableRemove": true,
+                  "enableReorder": false,
+                  "enableCopy": false,
+                  "controlGrid": {
+                    "type": "ControlGrid",
+                    "id": "controlgrid-de6dc",
+                    "name": "embedded-repeat-Group2-control-grid",
+                    "row": [
+                      {
+                        "type": "Row",
+                        "id": "row-82394",
+                        "cell": [
+                          {
+                            "type": "Control",
+                            "id": "control-a68d5",
+                            "elementRef": "fieldimpl_1f3bb"
+                          }
+                        ]
+                      }
+                    ],
+                    "verticalAlignment": "BOTTOM"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "type": "EmbeddedRepeat",
+            "id": "embeddedrepeat-27cf2",
+            "name": "Embedded-Repeat",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "Embedded Repeat"
+                  }
+                ]
+              }
+            },
+            "repeatOverviewColumn": [
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-3a256",
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "elementRef": "F44"
+              }
+            ],
+            "groupRef": "G43",
+            "enableAdd": true,
+            "enableRemove": true,
+            "enableReorder": false,
+            "enableCopy": false,
+            "controlGrid": {
+              "type": "ControlGrid",
+              "id": "controlgrid-9ea7c",
+              "name": "embedded-repeat-Group-control-grid",
+              "row": [
+                {
+                  "type": "Row",
+                  "id": "row-a3799",
+                  "cell": [
+                    {
+                      "type": "Control",
+                      "id": "control-0b884",
+                      "elementRef": "F44"
+                    }
+                  ]
+                }
+              ],
+              "verticalAlignment": "BOTTOM"
+            }
+          }
+        ]
+      },
+      {
+        "id": "screen-2",
+        "name": "Screen2",
+        "title": {
+          "type": "Multilingual",
+          "multilingualText": {
+            "text": [
+              {
+                "locale": "en",
+                "text": "Screen 2"
+              }
+            ]
+          }
+        },
+        "subHeaderBox": {
+          "id": "headerfooter-1de46",
+          "majorButtons": {
+            "button": [
+              {
+                "type": "EVENT",
+                "id": "button-04dcf",
+                "name": "Event 7",
+                "buttonStyling": {
+                  "label": {
+                    "type": "Multilingual",
+                    "multilingualText": {
+                      "text": [
+                        {
+                          "locale": "en",
+                          "text": "Screen2Header"
+                        }
+                      ]
+                    }
+                  },
+                  "priority": "SECONDARY"
+                },
+                "event": "submission",
+                "scope": "HIDDEN_IN_READONLY_MODE"
+              }
+            ]
+          }
+        },
+        "footerBox": {
+          "id": "f2",
+          "minorButtons": {
+            "button": [
+              {
+                "type": "EVENT",
+                "id": "button-dbef8",
+                "name": "Event 5",
+                "buttonStyling": {
+                  "label": {
+                    "type": "Multilingual",
+                    "multilingualText": {
+                      "text": [
+                        {
+                          "locale": "en",
+                          "text": "Screen2MinorFooter"
+                        }
+                      ]
+                    }
+                  },
+                  "priority": "SECONDARY"
+                },
+                "scope": "HIDDEN_IN_READONLY_MODE"
+              }
+            ]
+          },
+          "majorButtons": {
+            "button": [
+              {
+                "type": "NAVIGATION",
+                "id": "screen-2-next",
+                "name": "nav1",
+                "buttonStyling": {
+                  "label": {
+                    "type": "Multilingual",
+                    "multilingualText": {
+                      "text": [
+                        {
+                          "locale": "en",
+                          "text": "Next (should not be rendered)"
+                        }
+                      ]
+                    }
+                  },
+                  "priority": "SECONDARY"
+                },
+                "target": "#next",
+                "scope": "HIDDEN_IN_READONLY_MODE"
+              },
+              {
+                "type": "NAVIGATION",
+                "id": "screen-2-previous",
+                "name": "nav2",
+                "buttonStyling": {
+                  "label": {
+                    "type": "Multilingual",
+                    "multilingualText": {
+                      "text": [
+                        {
+                          "locale": "en",
+                          "text": "Previous"
+                        }
+                      ]
+                    }
+                  },
+                  "priority": "SECONDARY"
+                },
+                "target": "#previous",
+                "scope": "HIDDEN_IN_READONLY_MODE"
+              },
+              {
+                "type": "NAVIGATION",
+                "id": "screen-2-previous-validate",
+                "name": "nav3",
+                "buttonStyling": {
+                  "label": {
+                    "type": "Multilingual",
+                    "multilingualText": {
+                      "text": [
+                        {
+                          "locale": "en",
+                          "text": "Previous (validate)"
+                        }
+                      ]
+                    }
+                  },
+                  "priority": "SECONDARY"
+                },
+                "target": "#previous",
+                "validation": "partial",
+                "scope": "HIDDEN_IN_READONLY_MODE"
+              },
+              {
+                "type": "NAVIGATION",
+                "id": "screen-2-goto-screen-1",
+                "name": "nav4",
+                "buttonStyling": {
+                  "label": {
+                    "type": "Multilingual",
+                    "multilingualText": {
+                      "text": [
+                        {
+                          "locale": "en",
+                          "text": "Screen 1"
+                        }
+                      ]
+                    }
+                  },
+                  "priority": "SECONDARY"
+                },
+                "target": "screen-1",
+                "scope": "HIDDEN_IN_READONLY_MODE"
+              },
+              {
+                "type": "NAVIGATION",
+                "id": "screen-2-goto-screen-1-validate",
+                "name": "nav5",
+                "buttonStyling": {
+                  "label": {
+                    "type": "Multilingual",
+                    "multilingualText": {
+                      "text": [
+                        {
+                          "locale": "en",
+                          "text": "Screen 1 (validate)"
+                        }
+                      ]
+                    }
+                  },
+                  "priority": "SECONDARY"
+                },
+                "target": "screen-1",
+                "validation": "partial",
+                "scope": "HIDDEN_IN_READONLY_MODE"
+              },
+              {
+                "type": "EVENT",
+                "id": "button-8b143",
+                "name": "Event 6",
+                "buttonStyling": {
+                  "label": {
+                    "type": "Multilingual",
+                    "multilingualText": {
+                      "text": [
+                        {
+                          "locale": "en",
+                          "text": "Screen2MajorFooter"
+                        }
+                      ]
+                    }
+                  },
+                  "priority": "SECONDARY"
+                },
+                "scope": "HIDDEN_IN_READONLY_MODE"
+              }
+            ]
+          }
+        },
+        "screenElements": [
+          {
+            "type": "ControlGrid",
+            "id": "cg2",
+            "name": "CG2",
+            "row": [
+              {
+                "type": "Row",
+                "id": "row-ff0c4",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control-fa6ae",
+                    "elementRef": "field_70e40"
+                  }
+                ]
+              },
+              {
+                "type": "Row",
+                "id": "cg2-r1",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "c2",
+                    "elementRef": "id41089"
+                  }
+                ]
+              }
+            ],
+            "verticalAlignment": "BOTTOM"
+          }
+        ]
+      },
+      {
+        "id": "screen-68b7a",
+        "name": "Screen3",
+        "screenElements": [
+          {
+            "type": "ControlGrid",
+            "id": "controlgrid-5a463",
+            "name": "cg1",
+            "row": [
+              {
+                "type": "Row",
+                "id": "row-1945f",
+                "cell": [
+                  {
+                    "type": "TextCell",
+                    "id": "textcell-51afe",
+                    "offset": {
+                      "lg": 0
+                    },
+                    "span": {
+                      "lg": 1
+                    },
+                    "name": "longText",
+                    "content": {
+                      "text": [
+                        {
+                          "locale": "en",
+                          "text": "<b> When coming via a navigation button the screen should be scrolled up and this text should be visible. </b>\n</br>\nPariatur cupidatat proident sint dolore id velit culpa ipsum. Laborum aliqua consectetur proident ea aliqua non labore dolore eiusmod. Excepteur irure ad dolore Lorem. Enim irure non labore quis dolor dolor nisi voluptate velit eiusmod nisi adipisicing. Consequat exercitation sit irure Lorem qui sint incididunt ullamco consectetur aute nulla. Minim pariatur incididunt dolor veniam irure deserunt sunt cillum mollit ullamco. Consequat nisi do ad in et minim occaecat nisi nulla in elit esse. Irure sit veniam amet non voluptate voluptate ad dolor eiusmod aute consectetur ullamco proident. Nostrud nisi cillum adipisicing occaecat. Fugiat sint ea anim fugiat et qui cupidatat aute et. Eiusmod cupidatat ex reprehenderit occaecat in id proident consequat Lorem est laboris aliquip id nulla. Ipsum sit tempor aute sit velit laborum est. Laborum consectetur cupidatat ut quis nulla aute. Consectetur labore est ex ad commodo occaecat dolor sint excepteur. Duis laborum velit Lorem id fugiat ea aliquip nisi irure. Nisi ipsum mollit magna quis irure ipsum eiusmod fugiat nulla consequat. Culpa ad dolor laborum ullamco esse ullamco dolor velit et non quis veniam pariatur. Ex ut quis amet amet. Ut velit adipisicing commodo amet do veniam ut minim ad aute culpa deserunt. Eu cupidatat anim duis labore reprehenderit cillum excepteur. Ad ipsum eiusmod sunt duis deserunt quis cupidatat mollit voluptate. Magna excepteur do ex aliquip ullamco nisi enim ullamco in Lorem. Nulla tempor exercitation voluptate ad fugiat Lorem reprehenderit. Reprehenderit cillum laborum non reprehenderit elit consectetur aute irure sit. Nisi non qui voluptate aliquip qui anim dolor sit cupidatat nisi. Officia exercitation culpa nostrud do adipisicing fugiat. Nulla consequat mollit ut quis exercitation sint ullamco incididunt voluptate adipisicing exercitation dolore. Aute id irure irure eiusmod do duis tempor magna deserunt pariatur consectetur incididunt labore. Anim velit et sint labore consectetur non esse veniam. Duis cupidatat ex magna culpa pariatur consectetur nisi fugiat aliqua id quis cupidatat pariatur aute. Sit eu reprehenderit enim veniam consectetur amet proident Lorem ipsum nostrud ipsum dolor aliquip. Proident minim excepteur culpa aliquip elit aliquip. Sit enim ut sunt enim et excepteur. Adipisicing in nulla id ad eu ad do mollit consectetur. Nostrud exercitation nostrud sit culpa aliquip dolor sint incididunt fugiat magna qui. Ullamco laboris ipsum adipisicing qui exercitation occaecat. Veniam sit commodo commodo duis laboris minim aliqua officia quis veniam minim Lorem. Labore irure sint aute veniam ut non ad. Voluptate laboris minim nisi aliquip ut. Fugiat amet excepteur Lorem deserunt enim nostrud Lorem labore laborum Lorem velit commodo quis officia. Ad minim cupidatat anim eiusmod enim ut laborum adipisicing dolor cupidatat veniam veniam. Amet occaecat culpa fugiat nisi cillum irure nisi sit qui irure duis est nostrud dolore. Dolore incididunt laborum voluptate amet et ut nostrud incididunt eu nisi. Commodo occaecat excepteur eu ipsum veniam labore ad mollit enim ex nulla cillum nisi et. Incididunt sit consequat amet consequat nisi do incididunt laborum anim excepteur. Non occaecat magna irure eiusmod nisi eu sint labore ipsum occaecat. Consectetur enim fugiat fugiat anim. In esse reprehenderit ex duis. Do in occaecat nostrud dolore ex tempor magna pariatur enim. Magna laboris pariatur consectetur esse labore est et sit nostrud dolor irure. Qui id officia ea excepteur laboris nisi excepteur incididunt. Culpa et est laborum irure exercitation. Et voluptate adipisicing occaecat proident id nulla. Nostrud eiusmod sit officia enim voluptate minim. Cillum voluptate ullamco eiusmod ad est. Ut anim officia quis velit minim laboris magna deserunt proident. Do duis deserunt non adipisicing ex enim quis. Esse dolore occaecat enim id labore qui labore tempor veniam ea do exercitation id ipsum. Consequat in incididunt est voluptate anim. Dolore officia qui esse do tempor sit aliqua. Sit ex consectetur qui dolor minim esse cupidatat. Do deserunt anim minim in laboris exercitation quis qui laboris. Non qui elit sint laboris ut irure exercitation. Ad culpa adipisicing sint exercitation amet. Et anim nisi ullamco in eiusmod labore est duis elit duis irure cupidatat eu. Ut nostrud culpa id excepteur voluptate dolore do do nisi. Aliqua laborum cupidatat deserunt voluptate nostrud aute proident ullamco irure sint. Laboris consectetur cillum deserunt deserunt adipisicing aliqua enim esse aliquip et magna ex sunt magna. Excepteur est dolor aliquip non. Pariatur sint ea voluptate cillum exercitation do veniam qui labore. Excepteur sit do aute nulla adipisicing exercitation irure in dolor veniam. Laboris nostrud Lorem consectetur aliquip non fugiat commodo. Duis adipisicing enim ad enim non duis ipsum. Lorem ea ex dolore nostrud laboris magna. Et deserunt commodo elit mollit consequat eiusmod amet dolor. Ut reprehenderit mollit in proident et dolore minim ex veniam exercitation. Aute incididunt esse laboris nulla. Ipsum fugiat commodo adipisicing minim aliqua. Occaecat magna proident aliquip officia ad qui dolor elit irure dolore ullamco. Est adipisicing nulla ullamco reprehenderit dolore amet anim et commodo laboris elit amet. Officia est ut irure laborum dolor ex magna. Cillum dolore Lorem aliquip aliquip. Nostrud do mollit dolore minim nostrud eiusmod minim. Reprehenderit culpa id ipsum laborum mollit dolor officia ea incididunt reprehenderit dolor laborum consequat consectetur. Laborum nostrud eiusmod non ad. Voluptate veniam irure officia ea ad amet nostrud sunt aliquip amet pariatur non. Incididunt Lorem laborum nostrud elit reprehenderit laboris ex proident ut anim. Elit elit ex velit magna laboris elit consectetur minim amet aute. Sit irure nostrud consectetur reprehenderit voluptate ipsum id nisi cillum dolore commodo. Minim culpa id ad ut eu ex sunt minim occaecat dolor tempor veniam esse adipisicing. Velit occaecat minim in qui dolore exercitation. Velit aute reprehenderit laborum laborum in esse qui. Irure dolore adipisicing exercitation amet nisi consectetur. Aute ullamco laborum voluptate magna duis esse anim tempor ipsum quis commodo labore ea. Cupidatat non mollit aute laboris ipsum duis commodo proident nisi quis anim excepteur eiusmod reprehenderit. Ea do ea nisi sunt irure anim fugiat adipisicing mollit ipsum quis magna. Proident ut non id deserunt aliqua commodo. Occaecat velit laboris dolore in veniam velit amet sit. Irure qui nostrud irure non ipsum ea elit consequat. Ex ipsum dolore eu excepteur eu irure. Nulla consequat mollit commodo id ex nostrud aute. Mollit proident sit laborum sit cillum officia aute irure dolor ut exercitation eu ad. Incididunt deserunt tempor sunt ipsum pariatur cupidatat duis ipsum deserunt do minim. Aute officia aute ad ad esse veniam officia ipsum. Consequat enim velit Lorem do anim enim nulla id et irure adipisicing consectetur dolore laborum. Quis adipisicing minim Lorem nisi mollit. Voluptate cupidatat anim ullamco enim. Mollit est Lorem minim cupidatat aliqua dolor deserunt commodo ex. Duis qui qui incididunt nisi adipisicing. Magna ad deserunt ea culpa. Proident minim aliquip irure culpa dolor aliquip sit sint laboris amet amet voluptate eiusmod. Irure dolor qui nulla aliqua fugiat irure. Excepteur sint ad nisi esse cupidatat in nulla ut minim dolore incididunt aute. Incididunt ullamco laboris labore minim commodo voluptate. Fugiat adipisicing ex ex do voluptate nostrud irure excepteur laborum laboris laboris. Duis eiusmod eiusmod occaecat proident ad aliquip laborum do consectetur cillum. Sunt aliquip proident veniam occaecat amet voluptate anim Lorem. Magna elit proident consequat aliquip deserunt adipisicing. Voluptate aute ipsum eiusmod laborum laborum aute est Lorem consectetur ipsum tempor. Do deserunt pariatur anim aute ut dolore veniam laboris veniam elit magna consectetur labore culpa. Incididunt consequat nostrud dolore consectetur. Ad id nostrud tempor elit velit dolor dolor labore irure. Enim ex sint consequat velit. Minim occaecat eu ad ex qui id dolor deserunt duis excepteur veniam irure est nisi. Mollit cillum aliqua esse ullamco minim ut aliqua consequat irure nisi nulla Lorem quis incididunt. Laborum cillum culpa velit sunt cillum dolor voluptate sit ut commodo. Lorem officia excepteur cupidatat voluptate tempor nostrud deserunt pariatur. Non qui non do mollit veniam commodo commodo elit proident pariatur cupidatat velit. Incididunt cillum ad aute laborum qui ea id incididunt eu duis anim consequat mollit. Duis id dolore officia ea. Culpa proident laboris Lorem dolor excepteur ea reprehenderit. Excepteur laboris sunt nostrud labore nulla dolore dolore laboris. Id mollit elit ullamco commodo eu cillum ullamco. Culpa eu et aute veniam qui excepteur laboris occaecat et amet laborum commodo deserunt. Qui veniam officia cupidatat enim sint adipisicing. Laboris quis commodo dolor sunt anim voluptate ea cillum aliqua nostrud nisi. Aute velit ullamco dolore pariatur labore amet minim voluptate qui anim. Velit sint est in velit laboris do veniam dolore pariatur. Dolore mollit nulla nulla exercitation duis ad Lorem cillum ea. Eu non voluptate laborum incididunt aliquip in mollit ad sit. Et pariatur fugiat est incididunt incididunt occaecat tempor mollit anim. Nulla ut occaecat ex ut. Aute officia ut consectetur exercitation culpa ea ex amet enim mollit veniam pariatur irure velit. Enim culpa incididunt ullamco nostrud do proident. Pariatur veniam culpa nulla fugiat ad qui tempor consectetur ex esse nulla. Do reprehenderit fugiat pariatur exercitation aute ea eiusmod ipsum. Sunt magna minim nisi pariatur in cupidatat esse enim mollit commodo ex cupidatat non pariatur. Ea ipsum consequat duis laboris mollit tempor ad amet exercitation deserunt ex. Reprehenderit consectetur qui veniam eu nulla excepteur do commodo consequat. Aute aliqua commodo aliqua nulla cillum et pariatur velit exercitation cillum anim elit. Cupidatat deserunt nostrud aliquip velit consequat sint Lorem pariatur qui consectetur. Nulla deserunt laboris esse excepteur elit incididunt aliqua nostrud. Voluptate dolor Lorem exercitation anim exercitation id in excepteur labore mollit consectetur irure. Laborum consectetur nisi excepteur id pariatur proident dolore fugiat aliquip in voluptate tempor dolor. Lorem voluptate nisi elit adipisicing amet qui sunt commodo velit sunt deserunt Lorem aliqua et. In minim adipisicing ea reprehenderit esse dolor cupidatat nulla velit esse amet dolor. Ex nulla aliqua dolor id Lorem mollit sit labore. Cillum occaecat ad aute veniam cillum reprehenderit incididunt do esse nostrud tempor. Laboris enim nisi aliquip veniam aliquip id qui aliqua duis enim enim excepteur ut laboris. Nisi nostrud eiusmod ad est ea veniam. Aliquip veniam minim quis ad deserunt est voluptate. Aliqua magna ipsum elit est tempor culpa non dolore amet in. Non sunt aute aliquip ipsum do commodo est id mollit labore amet aute sunt magna. Qui adipisicing anim culpa eiusmod tempor exercitation nostrud. Est cillum commodo enim et aliqua nisi aute aute. Sint voluptate mollit nisi elit ea sint ipsum nulla eiusmod voluptate nisi deserunt. Amet sit qui laboris exercitation irure sint duis est ipsum anim laboris eiusmod duis qui. Ut laboris Lorem do nulla exercitation cillum velit ut laboris sint ex amet veniam. Et ad incididunt reprehenderit duis cillum excepteur elit deserunt adipisicing minim proident aliquip ea. Labore nostrud consequat proident sunt nostrud mollit in cupidatat duis elit do sit. Enim ullamco elit quis officia non sunt sunt incididunt adipisicing ex do officia ut. Aute nisi aute est aute proident aute labore id est irure ut reprehenderit dolor ad. Non sit fugiat enim tempor. Ea eu sunt sunt incididunt veniam duis dolore qui incididunt non ea culpa. Exercitation deserunt mollit ad exercitation ipsum et. Minim tempor adipisicing et quis proident aute. Nulla sunt commodo ipsum nostrud qui Lorem in elit sit ut pariatur tempor. Occaecat Lorem nulla duis dolore elit voluptate consequat anim reprehenderit. Deserunt consectetur nulla et sint eu commodo. Ut et esse fugiat est. Minim nulla ex ut enim. Lorem nulla occaecat nostrud excepteur culpa sit duis qui mollit aute non quis elit ullamco. Ipsum sunt aute voluptate deserunt consequat sint. Veniam esse voluptate velit ex consequat incididunt et voluptate excepteur. Commodo aute ullamco cupidatat sunt ea elit ea. Cillum et minim qui voluptate velit anim reprehenderit elit non deserunt amet. Ex aliquip ullamco laboris officia ullamco incididunt esse magna eiusmod. Aliquip occaecat dolor sit consectetur. Occaecat pariatur dolor ullamco ut laborum nostrud. Enim dolor cillum aliquip aliqua voluptate aliquip amet aliqua labore exercitation. Est qui exercitation sit consequat nostrud magna veniam laboris qui adipisicing consectetur velit. Non velit ipsum fugiat ad aliquip aliqua magna voluptate culpa quis culpa. Laboris laboris non Lorem nisi aute mollit enim ut culpa do adipisicing aliqua id. Amet deserunt deserunt irure pariatur occaecat consequat velit ut esse pariatur. Mollit qui aute ea ea consequat et ea. Adipisicing qui laboris amet proident laborum ipsum est anim. Excepteur Lorem incididunt sunt proident Lorem sint consequat laborum voluptate consequat consectetur tempor. Ad in irure voluptate et dolor exercitation. Incididunt tempor sit minim mollit veniam magna. Laboris irure quis esse dolor."
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            ],
+            "verticalAlignment": "TOP"
+          }
+        ]
+      },
+      {
+        "id": "screen-b7f98",
+        "name": "IconButtons",
+        "subHeaderBox": {
+          "id": "headerfooter_57c9d",
+          "majorButtons": {
+            "button": [
+              {
+                "type": "NAVIGATION",
+                "id": "button_53a9e",
+                "name": "nav-label-description",
+                "buttonStyling": {
+                  "label": {
+                    "type": "Multilingual",
+                    "multilingualText": {
+                      "text": [
+                        {
+                          "locale": "en",
+                          "text": "Nav LD"
+                        }
+                      ]
+                    }
+                  },
+                  "description": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "Nav LD Description"
+                      }
+                    ]
+                  }
+                },
+                "target": "screen-b7f98",
+                "scope": "HIDDEN_IN_READONLY_MODE"
+              },
+              {
+                "type": "NAVIGATION",
+                "id": "button_340a0",
+                "name": "nav-label",
+                "buttonStyling": {
+                  "label": {
+                    "type": "Multilingual",
+                    "multilingualText": {
+                      "text": [
+                        {
+                          "locale": "en",
+                          "text": "Nav L"
+                        }
+                      ]
+                    }
+                  }
+                },
+                "target": "screen-b7f98",
+                "scope": "HIDDEN_IN_READONLY_MODE"
+              },
+              {
+                "type": "NAVIGATION",
+                "id": "button_c73ca",
+                "name": "nav-description",
+                "buttonStyling": {
+                  "description": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "Nav D Description"
+                      }
+                    ]
+                  }
+                },
+                "target": "screen-b7f98",
+                "scope": "HIDDEN_IN_READONLY_MODE"
+              },
+              {
+                "type": "NAVIGATION",
+                "id": "button_fa3fb",
+                "name": "nav-noLabel-noDescription",
+                "target": "screen-b7f98",
+                "scope": "HIDDEN_IN_READONLY_MODE"
+              },
+              {
+                "type": "NAVIGATION",
+                "id": "button_7ef40",
+                "name": "nav-label-icon",
+                "buttonStyling": {
+                  "label": {
+                    "type": "Multilingual",
+                    "multilingualText": {
+                      "text": [
+                        {
+                          "locale": "en",
+                          "text": "Nav LI"
+                        }
+                      ]
+                    }
+                  },
+                  "icon": {
+                    "name": "face"
+                  }
+                },
+                "target": "screen-b7f98",
+                "scope": "HIDDEN_IN_READONLY_MODE"
+              },
+              {
+                "type": "NAVIGATION",
+                "id": "button_c2766",
+                "name": "nav-noLabel-icon",
+                "buttonStyling": {
+                  "icon": {
+                    "name": "face"
+                  }
+                },
+                "target": "screen-b7f98",
+                "scope": "HIDDEN_IN_READONLY_MODE"
+              },
+              {
+                "type": "NAVIGATION",
+                "id": "button_bf690",
+                "name": "nav-label-description-labelHidden",
+                "buttonStyling": {
+                  "label": {
+                    "type": "Multilingual",
+                    "multilingualText": {
+                      "text": [
+                        {
+                          "locale": "en",
+                          "text": "Nav LDIH"
+                        }
+                      ]
+                    }
+                  },
+                  "description": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "Nav LDIH Description"
+                      }
+                    ]
+                  },
+                  "icon": {
+                    "name": "face"
+                  },
+                  "labelHidden": true
+                },
+                "target": "screen-b7f98",
+                "scope": "HIDDEN_IN_READONLY_MODE"
+              },
+              {
+                "type": "NAVIGATION",
+                "id": "button_a63eb",
+                "name": "nav-label-labelHidden",
+                "buttonStyling": {
+                  "label": {
+                    "type": "Multilingual",
+                    "multilingualText": {
+                      "text": [
+                        {
+                          "locale": "en",
+                          "text": "Nav LIH"
+                        }
+                      ]
+                    }
+                  },
+                  "icon": {
+                    "name": "face"
+                  },
+                  "labelHidden": true
+                },
+                "target": "screen-b7f98",
+                "scope": "HIDDEN_IN_READONLY_MODE"
+              },
+              {
+                "type": "NAVIGATION",
+                "id": "button_d1d19",
+                "name": "nav-description-labelHidden",
+                "buttonStyling": {
+                  "description": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "Nav DIH Description"
+                      }
+                    ]
+                  },
+                  "icon": {
+                    "name": "face"
+                  },
+                  "labelHidden": true
+                },
+                "target": "screen-b7f98",
+                "scope": "HIDDEN_IN_READONLY_MODE"
+              },
+              {
+                "type": "NAVIGATION",
+                "id": "button_09523",
+                "name": "nav-noLabel-noDescription-labelHidden",
+                "buttonStyling": {
+                  "icon": {
+                    "name": "face"
+                  },
+                  "labelHidden": true
+                },
+                "target": "screen-b7f98",
+                "scope": "HIDDEN_IN_READONLY_MODE"
+              }
+            ]
+          }
+        },
+        "screenElements": [
+          {
+            "type": "ControlGrid",
+            "id": "controlgrid_130ba",
+            "name": "cgDescription",
+            "row": [
+              {
+                "type": "Row",
+                "id": "row_029c9",
+                "cell": [
+                  {
+                    "type": "TextCell",
+                    "id": "textcell_f293c",
+                    "name": "screenDescription",
+                    "content": {
+                      "text": [
+                        {
+                          "locale": "en",
+                          "text": "<strong>Legend for menu items:</strong>\n<br/>\nL = Label\n<br/>\nD = Description\n<br/>\nI = Icon\n<br/>\nH = Label hidden"
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "Section",
+            "id": "section_f4fd1",
+            "name": "labelHidden-false",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "Buttons with labelHidden = false"
+                  }
+                ]
+              }
+            },
+            "screenElements": [
+              {
+                "type": "ButtonPanel",
+                "id": "buttonpanel_8997c",
+                "name": "buttons-label-description",
+                "title": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "Buttons with label and description"
+                      }
+                    ]
+                  }
+                },
+                "button": [
+                  {
+                    "type": "EVENT",
+                    "id": "button_3e0ce",
+                    "name": "EventButton",
+                    "buttonStyling": {
+                      "label": {
+                        "type": "Multilingual",
+                        "multilingualText": {
+                          "text": [
+                            {
+                              "locale": "en",
+                              "text": "Event Button"
+                            }
+                          ]
+                        }
+                      },
+                      "description": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "Event Button Description"
+                          }
+                        ]
+                      }
+                    },
+                    "event": "event1",
+                    "scope": "HIDDEN_IN_READONLY_MODE"
+                  },
+                  {
+                    "type": "NAVIGATION",
+                    "id": "button_7633d",
+                    "name": "navButton",
+                    "buttonStyling": {
+                      "label": {
+                        "type": "Multilingual",
+                        "multilingualText": {
+                          "text": [
+                            {
+                              "locale": "en",
+                              "text": "Navigation Button"
+                            }
+                          ]
+                        }
+                      },
+                      "description": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "Navigation Button Description"
+                          }
+                        ]
+                      }
+                    },
+                    "target": "#previous",
+                    "scope": "HIDDEN_IN_READONLY_MODE"
+                  },
+                  {
+                    "type": "NAVIGATION",
+                    "id": "button_14a6d",
+                    "name": "navButtonFallback",
+                    "buttonStyling": {
+                      "label": {
+                        "type": "Multilingual",
+                        "multilingualText": {
+                          "text": [
+                            {
+                              "locale": "en",
+                              "text": "Navigation Button (Fallback)"
+                            }
+                          ]
+                        }
+                      },
+                      "description": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "Navigation Button Description"
+                          }
+                        ]
+                      }
+                    },
+                    "target": "screen_944c6",
+                    "scope": "HIDDEN_IN_READONLY_MODE"
+                  }
+                ]
+              },
+              {
+                "type": "ButtonPanel",
+                "id": "buttonpanel-a8fbb",
+                "name": "buttons-label",
+                "title": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "Buttons with label"
+                      }
+                    ]
+                  }
+                },
+                "button": [
+                  {
+                    "type": "EVENT",
+                    "id": "button-1c278",
+                    "name": "eventButton",
+                    "buttonStyling": {
+                      "label": {
+                        "type": "Multilingual",
+                        "multilingualText": {
+                          "text": [
+                            {
+                              "locale": "en",
+                              "text": "Event Button"
+                            }
+                          ]
+                        }
+                      },
+                      "priority": "SECONDARY"
+                    },
+                    "event": "button1_event",
+                    "scope": "HIDDEN_IN_READONLY_MODE"
+                  },
+                  {
+                    "type": "NAVIGATION",
+                    "id": "button-345b8",
+                    "name": "navButton",
+                    "buttonStyling": {
+                      "label": {
+                        "type": "Multilingual",
+                        "multilingualText": {
+                          "text": [
+                            {
+                              "locale": "en",
+                              "text": "Navigation Button"
+                            }
+                          ]
+                        }
+                      },
+                      "priority": "SECONDARY"
+                    },
+                    "target": "#previous",
+                    "scope": "HIDDEN_IN_READONLY_MODE"
+                  },
+                  {
+                    "type": "NAVIGATION",
+                    "id": "button_ce232",
+                    "name": "navButtonFallback",
+                    "buttonStyling": {
+                      "label": {
+                        "type": "Multilingual",
+                        "multilingualText": {
+                          "text": [
+                            {
+                              "locale": "en",
+                              "text": "Navigation Button (Fallback)"
+                            }
+                          ]
+                        }
+                      },
+                      "priority": "SECONDARY"
+                    },
+                    "target": "screen_944c6",
+                    "scope": "HIDDEN_IN_READONLY_MODE"
+                  }
+                ]
+              },
+              {
+                "type": "ButtonPanel",
+                "id": "buttonpanel_b281c",
+                "name": "buttons-description",
+                "title": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "Buttons with description"
+                      }
+                    ]
+                  }
+                },
+                "button": [
+                  {
+                    "type": "EVENT",
+                    "id": "button_55e77",
+                    "name": "eventButton",
+                    "buttonStyling": {
+                      "description": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "Event Button Description"
+                          }
+                        ]
+                      }
+                    },
+                    "event": "event1",
+                    "validation": "partial",
+                    "scope": "HIDDEN_IN_READONLY_MODE"
+                  },
+                  {
+                    "type": "NAVIGATION",
+                    "id": "button_bdf04",
+                    "name": "navButton",
+                    "buttonStyling": {
+                      "description": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "Navigation Button Description"
+                          }
+                        ]
+                      }
+                    },
+                    "target": "#previous",
+                    "scope": "HIDDEN_IN_READONLY_MODE"
+                  },
+                  {
+                    "type": "NAVIGATION",
+                    "id": "button_01649",
+                    "name": "navButtonFallback",
+                    "buttonStyling": {
+                      "description": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "Navigation Button Description"
+                          }
+                        ]
+                      }
+                    },
+                    "target": "screen_944c6",
+                    "scope": "HIDDEN_IN_READONLY_MODE"
+                  }
+                ]
+              },
+              {
+                "type": "ButtonPanel",
+                "id": "buttonpanel_1dd1a",
+                "name": "buttons-noLabel-noDescription",
+                "title": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "Buttons without label and without description"
+                      }
+                    ]
+                  }
+                },
+                "button": [
+                  {
+                    "type": "EVENT",
+                    "id": "button_1abb5",
+                    "name": "eventButton",
+                    "event": "event1",
+                    "scope": "HIDDEN_IN_READONLY_MODE"
+                  },
+                  {
+                    "type": "NAVIGATION",
+                    "id": "button_747f4",
+                    "name": "navButton",
+                    "target": "#previous",
+                    "scope": "HIDDEN_IN_READONLY_MODE"
+                  },
+                  {
+                    "type": "NAVIGATION",
+                    "id": "button_e5503",
+                    "name": "navButtonFallback",
+                    "target": "screen_944c6",
+                    "scope": "HIDDEN_IN_READONLY_MODE"
+                  }
+                ]
+              },
+              {
+                "type": "ButtonPanel",
+                "id": "buttonpanel-d63d0",
+                "name": "buttons-label-icon",
+                "title": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "Buttons with label and icon"
+                      }
+                    ]
+                  }
+                },
+                "button": [
+                  {
+                    "type": "EVENT",
+                    "id": "button-59779",
+                    "name": "eventButton",
+                    "buttonStyling": {
+                      "label": {
+                        "type": "Multilingual",
+                        "multilingualText": {
+                          "text": [
+                            {
+                              "locale": "en",
+                              "text": "Event Button"
+                            }
+                          ]
+                        }
+                      },
+                      "icon": {
+                        "name": "beach_access"
+                      },
+                      "priority": "SECONDARY"
+                    },
+                    "event": "button1_event",
+                    "scope": "HIDDEN_IN_READONLY_MODE"
+                  },
+                  {
+                    "type": "NAVIGATION",
+                    "id": "button-6cdeb",
+                    "name": "navButton",
+                    "buttonStyling": {
+                      "label": {
+                        "type": "Multilingual",
+                        "multilingualText": {
+                          "text": [
+                            {
+                              "locale": "en",
+                              "text": "Navigation Button"
+                            }
+                          ]
+                        }
+                      },
+                      "icon": {
+                        "name": "face"
+                      },
+                      "priority": "SECONDARY"
+                    },
+                    "target": "#previous",
+                    "scope": "HIDDEN_IN_READONLY_MODE"
+                  },
+                  {
+                    "type": "NAVIGATION",
+                    "id": "button_1427a",
+                    "name": "navButtonFallback",
+                    "buttonStyling": {
+                      "label": {
+                        "type": "Multilingual",
+                        "multilingualText": {
+                          "text": [
+                            {
+                              "locale": "en",
+                              "text": "Navigation Button (Fallback)"
+                            }
+                          ]
+                        }
+                      },
+                      "icon": {
+                        "name": "face_retouching_natural",
+                        "theme": "filled"
+                      },
+                      "priority": "SECONDARY"
+                    },
+                    "target": "screen_944c6",
+                    "scope": "HIDDEN_IN_READONLY_MODE"
+                  }
+                ]
+              },
+              {
+                "type": "ButtonPanel",
+                "id": "buttonpanel-0ad7d",
+                "name": "buttons-noLabel-icon",
+                "title": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "Buttons without label and with icon"
+                      }
+                    ]
+                  }
+                },
+                "button": [
+                  {
+                    "type": "EVENT",
+                    "id": "button-8ab04",
+                    "name": "eventButton",
+                    "buttonStyling": {
+                      "icon": {
+                        "name": "beach_access"
+                      },
+                      "priority": "SECONDARY"
+                    },
+                    "event": "button1_event",
+                    "scope": "HIDDEN_IN_READONLY_MODE"
+                  },
+                  {
+                    "type": "NAVIGATION",
+                    "id": "button-7b06a",
+                    "name": "navButton",
+                    "buttonStyling": {
+                      "icon": {
+                        "name": "face"
+                      },
+                      "priority": "SECONDARY"
+                    },
+                    "target": "#previous",
+                    "scope": "HIDDEN_IN_READONLY_MODE"
+                  },
+                  {
+                    "type": "NAVIGATION",
+                    "id": "button_027a3",
+                    "name": "navButtonFallback",
+                    "buttonStyling": {
+                      "icon": {
+                        "name": "face_retouching_natural",
+                        "theme": "filled"
+                      },
+                      "priority": "SECONDARY"
+                    },
+                    "target": "screen_944c6",
+                    "scope": "HIDDEN_IN_READONLY_MODE"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "Section",
+            "id": "section_a7f9a",
+            "name": "labelHidden-true",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "Buttons with labelHidden = true (icon mandatory)"
+                  }
+                ]
+              }
+            },
+            "screenElements": [
+              {
+                "type": "ButtonPanel",
+                "id": "buttonpanel_900b2",
+                "name": "buttons-label-description",
+                "title": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "Buttons with label and description"
+                      }
+                    ]
+                  }
+                },
+                "button": [
+                  {
+                    "type": "EVENT",
+                    "id": "button_90e38",
+                    "name": "eventButton",
+                    "buttonStyling": {
+                      "label": {
+                        "type": "Multilingual",
+                        "multilingualText": {
+                          "text": [
+                            {
+                              "locale": "en",
+                              "text": "Event Button"
+                            }
+                          ]
+                        }
+                      },
+                      "description": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "Event Button Description"
+                          }
+                        ]
+                      },
+                      "icon": {
+                        "name": "beach_access"
+                      },
+                      "labelHidden": true
+                    },
+                    "event": "event1",
+                    "scope": "HIDDEN_IN_READONLY_MODE"
+                  },
+                  {
+                    "type": "NAVIGATION",
+                    "id": "button_1bc35",
+                    "name": "navButton",
+                    "buttonStyling": {
+                      "label": {
+                        "type": "Multilingual",
+                        "multilingualText": {
+                          "text": [
+                            {
+                              "locale": "en",
+                              "text": "Navigation Button"
+                            }
+                          ]
+                        }
+                      },
+                      "description": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "Navigation Button Description"
+                          }
+                        ]
+                      },
+                      "icon": {
+                        "name": "face"
+                      },
+                      "labelHidden": true
+                    },
+                    "target": "#previous",
+                    "scope": "HIDDEN_IN_READONLY_MODE"
+                  },
+                  {
+                    "type": "NAVIGATION",
+                    "id": "button_a6a04",
+                    "name": "navButtonFallback",
+                    "buttonStyling": {
+                      "label": {
+                        "type": "Multilingual",
+                        "multilingualText": {
+                          "text": [
+                            {
+                              "locale": "en",
+                              "text": "Navigation Button (Fallback)"
+                            }
+                          ]
+                        }
+                      },
+                      "description": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "Navigation Button Description"
+                          }
+                        ]
+                      },
+                      "icon": {
+                        "name": "face_retouching_natural",
+                        "theme": "filled"
+                      },
+                      "labelHidden": true
+                    },
+                    "target": "screen_944c6",
+                    "scope": "HIDDEN_IN_READONLY_MODE"
+                  }
+                ]
+              },
+              {
+                "type": "ButtonPanel",
+                "id": "buttonpanel-6832d",
+                "name": "buttons-label",
+                "title": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "Buttons with label"
+                      }
+                    ]
+                  }
+                },
+                "button": [
+                  {
+                    "type": "EVENT",
+                    "id": "button-890bf",
+                    "name": "eventButton",
+                    "buttonStyling": {
+                      "label": {
+                        "type": "Multilingual",
+                        "multilingualText": {
+                          "text": [
+                            {
+                              "locale": "en",
+                              "text": "Event Button"
+                            }
+                          ]
+                        }
+                      },
+                      "icon": {
+                        "name": "beach_access"
+                      },
+                      "priority": "SECONDARY",
+                      "labelHidden": true
+                    },
+                    "event": "button1_event",
+                    "scope": "HIDDEN_IN_READONLY_MODE"
+                  },
+                  {
+                    "type": "NAVIGATION",
+                    "id": "button-9599d",
+                    "name": "navButton",
+                    "buttonStyling": {
+                      "label": {
+                        "type": "Multilingual",
+                        "multilingualText": {
+                          "text": [
+                            {
+                              "locale": "en",
+                              "text": "Navigation Button"
+                            }
+                          ]
+                        }
+                      },
+                      "icon": {
+                        "name": "face"
+                      },
+                      "priority": "SECONDARY",
+                      "labelHidden": true
+                    },
+                    "target": "#previous",
+                    "scope": "HIDDEN_IN_READONLY_MODE"
+                  },
+                  {
+                    "type": "NAVIGATION",
+                    "id": "button_610e4",
+                    "name": "navButtonFallback",
+                    "buttonStyling": {
+                      "label": {
+                        "type": "Multilingual",
+                        "multilingualText": {
+                          "text": [
+                            {
+                              "locale": "en",
+                              "text": "Navigation Button (Fallback)"
+                            }
+                          ]
+                        }
+                      },
+                      "icon": {
+                        "name": "face_retouching_natural",
+                        "theme": "filled"
+                      },
+                      "priority": "SECONDARY",
+                      "labelHidden": true
+                    },
+                    "target": "screen_944c6",
+                    "scope": "HIDDEN_IN_READONLY_MODE"
+                  }
+                ]
+              },
+              {
+                "type": "ButtonPanel",
+                "id": "buttonpanel_7deaa",
+                "name": "buttons-description",
+                "title": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "Buttons with description"
+                      }
+                    ]
+                  }
+                },
+                "button": [
+                  {
+                    "type": "EVENT",
+                    "id": "button_f09d1",
+                    "name": "eventButton",
+                    "buttonStyling": {
+                      "description": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "Event Button Description"
+                          }
+                        ]
+                      },
+                      "icon": {
+                        "name": "beach_access"
+                      },
+                      "labelHidden": true
+                    },
+                    "event": "event1",
+                    "scope": "HIDDEN_IN_READONLY_MODE"
+                  },
+                  {
+                    "type": "NAVIGATION",
+                    "id": "button_3a509",
+                    "name": "navButton",
+                    "buttonStyling": {
+                      "description": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "Navigation Button Description"
+                          }
+                        ]
+                      },
+                      "icon": {
+                        "name": "face"
+                      },
+                      "labelHidden": true
+                    },
+                    "target": "#previous",
+                    "scope": "HIDDEN_IN_READONLY_MODE"
+                  },
+                  {
+                    "type": "NAVIGATION",
+                    "id": "button_b15a2",
+                    "name": "navButtonFallback",
+                    "buttonStyling": {
+                      "description": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "Navigation Button Description"
+                          }
+                        ]
+                      },
+                      "icon": {
+                        "name": "face_retouching_natural",
+                        "theme": "filled"
+                      },
+                      "labelHidden": true
+                    },
+                    "target": "screen_944c6",
+                    "scope": "HIDDEN_IN_READONLY_MODE"
+                  }
+                ]
+              },
+              {
+                "type": "ButtonPanel",
+                "id": "buttonpanel_5ebe9",
+                "name": "buttons-noLabel-noDescription",
+                "title": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "Buttons without label and without description"
+                      }
+                    ]
+                  }
+                },
+                "button": [
+                  {
+                    "type": "EVENT",
+                    "id": "button_6b921",
+                    "name": "eventButton",
+                    "buttonStyling": {
+                      "icon": {
+                        "name": "beach_access"
+                      },
+                      "labelHidden": true
+                    },
+                    "scope": "HIDDEN_IN_READONLY_MODE"
+                  },
+                  {
+                    "type": "NAVIGATION",
+                    "id": "button_5df56",
+                    "name": "navButton",
+                    "buttonStyling": {
+                      "icon": {
+                        "name": "face"
+                      },
+                      "labelHidden": true
+                    },
+                    "target": "#previous",
+                    "scope": "HIDDEN_IN_READONLY_MODE"
+                  },
+                  {
+                    "type": "NAVIGATION",
+                    "id": "button_cfb23",
+                    "name": "navButtonFallback",
+                    "buttonStyling": {
+                      "icon": {
+                        "name": "face_retouching_natural",
+                        "theme": "filled"
+                      },
+                      "labelHidden": true
+                    },
+                    "target": "screen_944c6",
+                    "scope": "HIDDEN_IN_READONLY_MODE"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "screen_3171a",
+        "name": "IconThemes",
+        "subHeaderBox": {
+          "id": "headerfooter_75393",
+          "majorButtons": {
+            "button": [
+              {
+                "type": "NAVIGATION",
+                "id": "button_a5ffe",
+                "name": "menuItemFilled",
+                "buttonStyling": {
+                  "label": {
+                    "type": "Multilingual",
+                    "multilingualText": {
+                      "text": [
+                        {
+                          "locale": "en",
+                          "text": "filled"
+                        }
+                      ]
+                    }
+                  },
+                  "icon": {
+                    "name": "lightbulb"
+                  }
+                },
+                "target": "screen_3171a",
+                "scope": "HIDDEN_IN_READONLY_MODE"
+              },
+              {
+                "type": "NAVIGATION",
+                "id": "button_eb240",
+                "name": "menuItemOutlined",
+                "buttonStyling": {
+                  "label": {
+                    "type": "Multilingual",
+                    "multilingualText": {
+                      "text": [
+                        {
+                          "locale": "en",
+                          "text": "outlined"
+                        }
+                      ]
+                    }
+                  },
+                  "icon": {
+                    "name": "lightbulb",
+                    "theme": "outlined"
+                  }
+                },
+                "target": "screen_3171a",
+                "scope": "HIDDEN_IN_READONLY_MODE"
+              },
+              {
+                "type": "NAVIGATION",
+                "id": "button_69df1",
+                "name": "menuItemCustom",
+                "buttonStyling": {
+                  "label": {
+                    "type": "Multilingual",
+                    "multilingualText": {
+                      "text": [
+                        {
+                          "locale": "en",
+                          "text": "custom"
+                        }
+                      ]
+                    }
+                  },
+                  "icon": {
+                    "name": "and",
+                    "theme": "custom"
+                  }
+                },
+                "target": "screen_3171a",
+                "scope": "HIDDEN_IN_READONLY_MODE"
+              }
+            ]
+          }
+        },
+        "screenElements": [
+          {
+            "type": "ButtonPanel",
+            "id": "buttonpanel_e42eb",
+            "name": "navButtons",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "Navigation Buttons"
+                  }
+                ]
+              }
+            },
+            "button": [
+              {
+                "type": "NAVIGATION",
+                "id": "button_05397",
+                "name": "navButtonFilled",
+                "buttonStyling": {
+                  "label": {
+                    "type": "Multilingual",
+                    "multilingualText": {
+                      "text": [
+                        {
+                          "locale": "en",
+                          "text": "filled"
+                        }
+                      ]
+                    }
+                  },
+                  "icon": {
+                    "name": "lightbulb"
+                  }
+                },
+                "target": "screen_3171a",
+                "scope": "HIDDEN_IN_READONLY_MODE"
+              },
+              {
+                "type": "NAVIGATION",
+                "id": "button_8ce0c",
+                "name": "navButtonOutlined",
+                "buttonStyling": {
+                  "label": {
+                    "type": "Multilingual",
+                    "multilingualText": {
+                      "text": [
+                        {
+                          "locale": "en",
+                          "text": "outlined"
+                        }
+                      ]
+                    }
+                  },
+                  "icon": {
+                    "name": "lightbulb",
+                    "theme": "outlined"
+                  }
+                },
+                "target": "screen_3171a",
+                "scope": "HIDDEN_IN_READONLY_MODE"
+              },
+              {
+                "type": "NAVIGATION",
+                "id": "button_90758",
+                "name": "navButtonCustom",
+                "buttonStyling": {
+                  "label": {
+                    "type": "Multilingual",
+                    "multilingualText": {
+                      "text": [
+                        {
+                          "locale": "en",
+                          "text": "custom"
+                        }
+                      ]
+                    }
+                  },
+                  "icon": {
+                    "name": "and",
+                    "theme": "custom"
+                  }
+                },
+                "target": "screen_3171a",
+                "scope": "HIDDEN_IN_READONLY_MODE"
+              }
+            ]
+          },
+          {
+            "type": "ButtonPanel",
+            "id": "buttonpanel_43b12",
+            "name": "eventButtons",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "Event Buttons"
+                  }
+                ]
+              }
+            },
+            "button": [
+              {
+                "type": "EVENT",
+                "id": "button_78770",
+                "name": "eventButtonFilled",
+                "buttonStyling": {
+                  "label": {
+                    "type": "Multilingual",
+                    "multilingualText": {
+                      "text": [
+                        {
+                          "locale": "en",
+                          "text": "filled"
+                        }
+                      ]
+                    }
+                  },
+                  "icon": {
+                    "name": "local_shipping"
+                  }
+                },
+                "event": "event1",
+                "scope": "HIDDEN_IN_READONLY_MODE"
+              },
+              {
+                "type": "EVENT",
+                "id": "button_bb73c",
+                "name": "eventButtonOutlined",
+                "buttonStyling": {
+                  "label": {
+                    "type": "Multilingual",
+                    "multilingualText": {
+                      "text": [
+                        {
+                          "locale": "en",
+                          "text": "outlined"
+                        }
+                      ]
+                    }
+                  },
+                  "icon": {
+                    "name": "local_shipping",
+                    "theme": "outlined"
+                  }
+                },
+                "event": "event1",
+                "scope": "HIDDEN_IN_READONLY_MODE"
+              },
+              {
+                "type": "EVENT",
+                "id": "button_d582c",
+                "name": "eventButtonCustom",
+                "buttonStyling": {
+                  "label": {
+                    "type": "Multilingual",
+                    "multilingualText": {
+                      "text": [
+                        {
+                          "locale": "en",
+                          "text": "custom"
+                        }
+                      ]
+                    }
+                  },
+                  "icon": {
+                    "name": "unpin",
+                    "theme": "custom"
+                  }
+                },
+                "event": "event1",
+                "scope": "HIDDEN_IN_READONLY_MODE"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "screen_25927",
+        "name": "AriaLabel",
+        "subHeaderBox": {
+          "id": "headerfooter_d73ef",
+          "majorButtons": {
+            "button": [
+              {
+                "type": "NAVIGATION",
+                "id": "button_72be1",
+                "name": "navLabelDescription",
+                "buttonStyling": {
+                  "label": {
+                    "type": "Multilingual",
+                    "multilingualText": {
+                      "text": [
+                        {
+                          "locale": "en",
+                          "text": "label"
+                        }
+                      ]
+                    }
+                  },
+                  "description": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "description"
+                      }
+                    ]
+                  }
+                },
+                "target": "screen_25927",
+                "scope": "HIDDEN_IN_READONLY_MODE"
+              },
+              {
+                "type": "NAVIGATION",
+                "id": "button_345b1",
+                "name": "navLabel",
+                "buttonStyling": {
+                  "label": {
+                    "type": "Multilingual",
+                    "multilingualText": {
+                      "text": [
+                        {
+                          "locale": "en",
+                          "text": "label"
+                        }
+                      ]
+                    }
+                  }
+                },
+                "target": "screen_25927",
+                "scope": "HIDDEN_IN_READONLY_MODE"
+              },
+              {
+                "type": "NAVIGATION",
+                "id": "button_08119",
+                "name": "navDescription",
+                "buttonStyling": {
+                  "description": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "description"
+                      }
+                    ]
+                  },
+                  "icon": {
+                    "name": "square",
+                    "theme": "outlined"
+                  }
+                },
+                "target": "screen_25927",
+                "scope": "HIDDEN_IN_READONLY_MODE"
+              },
+              {
+                "type": "NAVIGATION",
+                "id": "button_281ae",
+                "name": "navFallbackLabelDescription",
+                "buttonStyling": {
+                  "description": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "description"
+                      }
+                    ]
+                  }
+                },
+                "target": "screen_944c6",
+                "scope": "HIDDEN_IN_READONLY_MODE"
+              },
+              {
+                "type": "NAVIGATION",
+                "id": "button_8b2e4",
+                "name": "navFallbackLabel",
+                "target": "screen_944c6",
+                "scope": "HIDDEN_IN_READONLY_MODE"
+              }
+            ]
+          }
+        },
+        "screenElements": [
+          {
+            "type": "ButtonPanel",
+            "id": "buttonpanel_cad01",
+            "name": "navButtons",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "Navigation Buttons"
+                  }
+                ]
+              }
+            },
+            "button": [
+              {
+                "type": "NAVIGATION",
+                "id": "button_62be1",
+                "name": "navLabelDescription",
+                "buttonStyling": {
+                  "label": {
+                    "type": "Multilingual",
+                    "multilingualText": {
+                      "text": [
+                        {
+                          "locale": "en",
+                          "text": "label"
+                        }
+                      ]
+                    }
+                  },
+                  "description": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "description"
+                      }
+                    ]
+                  }
+                },
+                "target": "screen_25927",
+                "scope": "HIDDEN_IN_READONLY_MODE"
+              },
+              {
+                "type": "NAVIGATION",
+                "id": "button_a45b1",
+                "name": "navLabel",
+                "buttonStyling": {
+                  "label": {
+                    "type": "Multilingual",
+                    "multilingualText": {
+                      "text": [
+                        {
+                          "locale": "en",
+                          "text": "label"
+                        }
+                      ]
+                    }
+                  }
+                },
+                "target": "screen_25927",
+                "scope": "HIDDEN_IN_READONLY_MODE"
+              },
+              {
+                "type": "NAVIGATION",
+                "id": "button_b8119",
+                "name": "navDescription",
+                "buttonStyling": {
+                  "description": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "description"
+                      }
+                    ]
+                  },
+                  "icon": {
+                    "name": "square",
+                    "theme": "outlined"
+                  }
+                },
+                "target": "screen_25927",
+                "scope": "HIDDEN_IN_READONLY_MODE"
+              },
+              {
+                "type": "NAVIGATION",
+                "id": "button_181ae",
+                "name": "navFallbackLabelDescription",
+                "buttonStyling": {
+                  "description": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "description"
+                      }
+                    ]
+                  }
+                },
+                "target": "screen_944c6",
+                "scope": "HIDDEN_IN_READONLY_MODE"
+              },
+              {
+                "type": "NAVIGATION",
+                "id": "button_eb2e4",
+                "name": "navFallbackLabel",
+                "target": "screen_944c6",
+                "scope": "HIDDEN_IN_READONLY_MODE"
+              }
+            ]
+          },
+          {
+            "type": "ButtonPanel",
+            "id": "buttonpanel_fe9c0",
+            "name": "eventButtons",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "Event Buttons"
+                  }
+                ]
+              }
+            },
+            "button": [
+              {
+                "type": "EVENT",
+                "id": "button_6c961",
+                "name": "eventLabelDescription",
+                "buttonStyling": {
+                  "label": {
+                    "type": "Multilingual",
+                    "multilingualText": {
+                      "text": [
+                        {
+                          "locale": "en",
+                          "text": "label"
+                        }
+                      ]
+                    }
+                  },
+                  "description": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "description"
+                      }
+                    ]
+                  }
+                },
+                "event": "e1",
+                "scope": "HIDDEN_IN_READONLY_MODE"
+              },
+              {
+                "type": "EVENT",
+                "id": "button_df0d8",
+                "name": "eventLabel",
+                "buttonStyling": {
+                  "label": {
+                    "type": "Multilingual",
+                    "multilingualText": {
+                      "text": [
+                        {
+                          "locale": "en",
+                          "text": "label"
+                        }
+                      ]
+                    }
+                  }
+                },
+                "event": "e1",
+                "scope": "HIDDEN_IN_READONLY_MODE"
+              },
+              {
+                "type": "EVENT",
+                "id": "button_b0e19",
+                "name": "eventDescription",
+                "buttonStyling": {
+                  "description": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "description"
+                      }
+                    ]
+                  },
+                  "icon": {
+                    "name": "hexagon",
+                    "theme": "outlined"
+                  }
+                },
+                "event": "e1",
+                "scope": "HIDDEN_IN_READONLY_MODE"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "screen_944c6",
+        "name": "ScreenWithTitleAsFallback",
+        "title": {
+          "type": "Multilingual",
+          "multilingualText": {
+            "text": [
+              {
+                "locale": "en",
+                "text": "fallback"
+              }
+            ]
+          }
+        },
+        "screenElements": []
+      },
+      {
+        "id": "screen_7d040",
+        "name": "LastScreen",
+        "screenElements": []
+      }
+    ],
+    "fieldConfiguration": {
+      "field": [
+        {
+          "label": {
+            "type": "Multilingual",
+            "multilingualText": {
+              "text": [
+                {
+                  "locale": "en",
+                  "text": "NumberField"
+                }
+              ]
+            }
+          },
+          "elementRef": "id41088"
+        },
+        {
+          "label": {
+            "type": "Multilingual",
+            "multilingualText": {
+              "text": [
+                {
+                  "locale": "en",
+                  "text": "RequiredField"
+                }
+              ]
+            }
+          },
+          "elementRef": "id41089"
+        }
+      ]
+    },
+    "groupConfiguration": {},
+    "defaults": {},
+    "hideConfirmationSummary": true
+  }
+}

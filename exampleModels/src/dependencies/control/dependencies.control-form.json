@@ -1,0 +1,4413 @@
+{
+  "header": {
+    "id": "dependencies.control-form",
+    "modelType": "form",
+    "modelVersion": "37.4.0",
+    "locales": [
+      {
+        "code": "en"
+      }
+    ],
+    "annotations": [
+      {
+        "name": "roles",
+        "value": "admin"
+      }
+    ],
+    "modelReferences": [
+      {
+        "alias": "dependencies.control-document",
+        "modelType": "document",
+        "purpose": "data binding",
+        "reference": "dependencies.control-document"
+      }
+    ]
+  },
+  "content": {
+    "subHeaderBox": {
+      "id": "subHeaderBox",
+      "majorButtons": {
+        "button": [
+          {
+            "type": "NAVIGATION",
+            "id": "button-1fd5b",
+            "name": "screen1",
+            "buttonStyling": {
+              "label": {
+                "type": "Multilingual",
+                "multilingualText": {
+                  "text": [
+                    {
+                      "locale": "en",
+                      "text": "Sections"
+                    }
+                  ]
+                }
+              },
+              "priority": "PRIMARY"
+            },
+            "target": "screen-fd253",
+            "scope": "ALWAYS"
+          },
+          {
+            "type": "NAVIGATION",
+            "id": "button-461e0",
+            "name": "screen2",
+            "buttonStyling": {
+              "label": {
+                "type": "Multilingual",
+                "multilingualText": {
+                  "text": [
+                    {
+                      "locale": "en",
+                      "text": "Multi Column Sections"
+                    }
+                  ]
+                }
+              },
+              "priority": "PRIMARY"
+            },
+            "target": "screen-fd252",
+            "scope": "ALWAYS"
+          },
+          {
+            "type": "NAVIGATION",
+            "id": "button-61026",
+            "name": "screen3",
+            "buttonStyling": {
+              "label": {
+                "type": "Multilingual",
+                "multilingualText": {
+                  "text": [
+                    {
+                      "locale": "en",
+                      "text": "Control Grid"
+                    }
+                  ]
+                }
+              },
+              "priority": "SECONDARY"
+            },
+            "target": "screen-df793",
+            "scope": "HIDDEN_IN_READONLY_MODE"
+          },
+          {
+            "type": "NAVIGATION",
+            "id": "button_c136c",
+            "name": "screen4",
+            "buttonStyling": {
+              "label": {
+                "type": "Multilingual",
+                "multilingualText": {
+                  "text": [
+                    {
+                      "locale": "en",
+                      "text": "Custom Screen Element"
+                    }
+                  ]
+                }
+              },
+              "priority": "SECONDARY"
+            },
+            "target": "screen_66dfa",
+            "scope": "HIDDEN_IN_READONLY_MODE"
+          }
+        ]
+      }
+    },
+    "footerBox": {
+      "id": "footerBox"
+    },
+    "screens": [
+      {
+        "id": "screen-fd253",
+        "name": "Screen1",
+        "screenElements": [
+          {
+            "type": "ControlGrid",
+            "id": "controlgrid-c8981",
+            "name": "cg_single_bool",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "[1] Trigger Control is a Boolean"
+                  }
+                ]
+              }
+            },
+            "row": [
+              {
+                "type": "Row",
+                "id": "row-399e2",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control-19141",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "Trigger"
+                          }
+                        ]
+                      }
+                    },
+                    "elementRef": "F4",
+                    "dependentControls": {
+                      "screenElement": [
+                        {
+                          "idref": "section_109ed",
+                          "masterValue": null
+                        },
+                        {
+                          "idref": "section-5d63b",
+                          "masterValue": "false"
+                        },
+                        {
+                          "idref": "section-b3d46",
+                          "masterValue": "true"
+                        }
+                      ]
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "Row",
+                "id": "row-afe53",
+                "cell": [
+                  {
+                    "type": "ExpressionCell",
+                    "id": "expressioncell-7f0ed",
+                    "name": "description",
+                    "expression": "\"\n* **null:** Only Section 1.0 is shown.\n* **false:** Only Section 1.1 is shown.\n* **true:** Only Section 1.2 is shown.\n\"",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "Description"
+                          }
+                        ]
+                      }
+                    }
+                  }
+                ]
+              }
+            ],
+            "verticalAlignment": "BOTTOM"
+          },
+          {
+            "type": "Section",
+            "id": "section-5d63b",
+            "name": "cg_single_bool_sec1",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "[1.1] Section"
+                  }
+                ]
+              }
+            },
+            "screenElements": [
+              {
+                "type": "ControlGrid",
+                "id": "controlgrid-8c776",
+                "name": "grid",
+                "row": [
+                  {
+                    "type": "Row",
+                    "id": "row-39922",
+                    "cell": [
+                      {
+                        "type": "TextCell",
+                        "id": "textcell-de2b8",
+                        "offset": {
+                          "lg": 0
+                        },
+                        "span": {
+                          "lg": 1
+                        },
+                        "name": "context",
+                        "content": {
+                          "text": [
+                            {
+                              "locale": "en",
+                              "text": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                ],
+                "verticalAlignment": "BOTTOM"
+              }
+            ]
+          },
+          {
+            "type": "Section",
+            "id": "section-b3d46",
+            "name": "cg_single_bool_sec2",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "[1.2] Section"
+                  }
+                ]
+              }
+            },
+            "screenElements": [
+              {
+                "type": "ControlGrid",
+                "id": "controlgrid-6f185",
+                "name": "grid",
+                "row": [
+                  {
+                    "type": "Row",
+                    "id": "row-149e1",
+                    "cell": [
+                      {
+                        "type": "TextCell",
+                        "id": "textcell-edfba",
+                        "offset": {
+                          "lg": 0
+                        },
+                        "span": {
+                          "lg": 1
+                        },
+                        "name": "context",
+                        "content": {
+                          "text": [
+                            {
+                              "locale": "en",
+                              "text": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                ],
+                "verticalAlignment": "BOTTOM"
+              }
+            ]
+          },
+          {
+            "type": "Section",
+            "id": "section_109ed",
+            "name": "cg_single_bool_sec3",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "[1.0] Section"
+                  }
+                ]
+              }
+            },
+            "screenElements": [
+              {
+                "type": "ControlGrid",
+                "id": "controlgrid_eb4d2",
+                "name": "grid",
+                "row": [
+                  {
+                    "type": "Row",
+                    "id": "row_b6148",
+                    "cell": [
+                      {
+                        "type": "TextCell",
+                        "id": "textcell_81572",
+                        "offset": {
+                          "lg": 0
+                        },
+                        "span": {
+                          "lg": 1
+                        },
+                        "name": "context",
+                        "content": {
+                          "text": [
+                            {
+                              "locale": "en",
+                              "text": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                ],
+                "verticalAlignment": "BOTTOM"
+              }
+            ]
+          },
+          {
+            "type": "ControlGrid",
+            "id": "controlgrid-b988b",
+            "name": "cg_single_confirm",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "[2] Trigger Control is a Confirm"
+                  }
+                ]
+              }
+            },
+            "row": [
+              {
+                "type": "Row",
+                "id": "row-dab45",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control-49ddf",
+                    "elementRef": "field_83376",
+                    "dependentControls": {
+                      "screenElement": [
+                        {
+                          "idref": "section-404e5",
+                          "masterValue": null
+                        },
+                        {
+                          "idref": "section-153dc",
+                          "masterValue": "true"
+                        }
+                      ]
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "Row",
+                "id": "row-dc464",
+                "cell": [
+                  {
+                    "type": "ExpressionCell",
+                    "id": "expressioncell-71bbc",
+                    "offset": {
+                      "lg": 0
+                    },
+                    "span": {
+                      "lg": 1
+                    },
+                    "name": "description",
+                    "expression": "\"\n* **null:** Section 2.1 is shown and Section 2.2 is not shown.\n* **true:** Section 2.1 is not shown and Section 2.2 is shown.\n\"",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "Description"
+                          }
+                        ]
+                      }
+                    }
+                  }
+                ]
+              }
+            ],
+            "verticalAlignment": "BOTTOM"
+          },
+          {
+            "type": "MultiColumnSection",
+            "id": "section-404e5",
+            "name": "cg_single_confirm_sec1",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "[2.1] Section"
+                  }
+                ]
+              }
+            },
+            "layout": {
+              "lg": "12"
+            },
+            "screenElements": [
+              {
+                "type": "ControlGrid",
+                "id": "controlgrid-07199",
+                "name": "grid",
+                "row": [
+                  {
+                    "type": "Row",
+                    "id": "row-28ba1",
+                    "cell": [
+                      {
+                        "type": "TextCell",
+                        "id": "textcell-69c0c",
+                        "offset": {
+                          "lg": 0
+                        },
+                        "span": {
+                          "lg": 1
+                        },
+                        "name": "context",
+                        "content": {
+                          "text": [
+                            {
+                              "locale": "en",
+                              "text": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                ],
+                "verticalAlignment": "BOTTOM"
+              }
+            ]
+          },
+          {
+            "type": "MultiColumnSection",
+            "id": "section-153dc",
+            "name": "cg_single_confirm_sec2",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "[2.2] Section"
+                  }
+                ]
+              }
+            },
+            "layout": {
+              "lg": "12"
+            },
+            "screenElements": [
+              {
+                "type": "ControlGrid",
+                "id": "controlgrid-848ff",
+                "name": "grid",
+                "row": [
+                  {
+                    "type": "Row",
+                    "id": "row-87a72",
+                    "cell": [
+                      {
+                        "type": "TextCell",
+                        "id": "textcell-d0a29",
+                        "offset": {
+                          "lg": 0
+                        },
+                        "span": {
+                          "lg": 1
+                        },
+                        "name": "context",
+                        "content": {
+                          "text": [
+                            {
+                              "locale": "en",
+                              "text": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                ],
+                "verticalAlignment": "BOTTOM"
+              }
+            ]
+          },
+          {
+            "type": "ControlGrid",
+            "id": "controlgrid-37fb9",
+            "name": "cg_single_enum",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "[3] Trigger Control is an Enumeration"
+                  }
+                ]
+              }
+            },
+            "row": [
+              {
+                "type": "Row",
+                "id": "row-2bcb4",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control-01bfg",
+                    "offset": {
+                      "lg": 0
+                    },
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "Trigger"
+                          }
+                        ]
+                      }
+                    },
+                    "hint": {},
+                    "elementRef": "F5",
+                    "dependentControls": {
+                      "screenElement": [
+                        {
+                          "idref": "section-4af745",
+                          "masterValue": null
+                        },
+                        {
+                          "idref": "section-48445",
+                          "masterValue": null
+                        },
+                        {
+                          "idref": "section-73dc7",
+                          "masterValue": null
+                        },
+                        {
+                          "idref": "section-73dc7",
+                          "masterValue": "V0"
+                        },
+                        {
+                          "idref": "section-73dc7",
+                          "masterValue": "V1"
+                        },
+                        {
+                          "idref": "section-48445",
+                          "masterValue": "V2"
+                        },
+                        {
+                          "idref": "section-4af745",
+                          "masterValue": "V3"
+                        }
+                      ]
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "Row",
+                "id": "row-55919",
+                "cell": [
+                  {
+                    "type": "ExpressionCell",
+                    "id": "expressioncell-76b14",
+                    "offset": {
+                      "lg": 0
+                    },
+                    "span": {
+                      "lg": 1
+                    },
+                    "name": "description",
+                    "expression": "\"\n* **null:** All sections (3.1, 3.2, and 3.3) are shown.\n* **V0:** Only section 3.1 is shown.\n* **V1:** Only section 3.1 is shown.\n* **V2:** Only section 3.2 is shown.\n* **V3:** Only section 3.3 is shown.\n\"",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "Description"
+                          }
+                        ]
+                      }
+                    }
+                  }
+                ]
+              }
+            ],
+            "verticalAlignment": "BOTTOM"
+          },
+          {
+            "type": "Section",
+            "id": "section-73dc7",
+            "name": "cg_single_enum_sec1",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "[3.1] Section"
+                  }
+                ]
+              }
+            },
+            "screenElements": [
+              {
+                "type": "ControlGrid",
+                "id": "controlgrid-ff756",
+                "name": "grid",
+                "row": [
+                  {
+                    "type": "Row",
+                    "id": "row-9bff4",
+                    "cell": [
+                      {
+                        "type": "TextCell",
+                        "id": "textcell-ea196",
+                        "offset": {
+                          "lg": 0
+                        },
+                        "span": {
+                          "lg": 1
+                        },
+                        "name": "context",
+                        "content": {
+                          "text": [
+                            {
+                              "locale": "en",
+                              "text": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                ],
+                "verticalAlignment": "BOTTOM"
+              }
+            ]
+          },
+          {
+            "type": "MultiColumnSection",
+            "id": "section-48445",
+            "name": "cg_single_enum_sec2",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "[3.2] Section"
+                  }
+                ]
+              }
+            },
+            "layout": {
+              "lg": "12"
+            },
+            "screenElements": [
+              {
+                "type": "ControlGrid",
+                "id": "controlgrid-b5233",
+                "name": "grid",
+                "row": [
+                  {
+                    "type": "Row",
+                    "id": "row-a45cr",
+                    "cell": [
+                      {
+                        "type": "TextCell",
+                        "id": "textcell-7d6a9",
+                        "offset": {
+                          "lg": 0
+                        },
+                        "span": {
+                          "lg": 1
+                        },
+                        "name": "context",
+                        "content": {
+                          "text": [
+                            {
+                              "locale": "en",
+                              "text": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                ],
+                "verticalAlignment": "BOTTOM"
+              }
+            ]
+          },
+          {
+            "type": "Section",
+            "id": "section-4af745",
+            "name": "cg_single_enum_sec3",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "[3.3] Section"
+                  }
+                ]
+              }
+            },
+            "screenElements": [
+              {
+                "type": "ControlGrid",
+                "id": "controlgrid-2fe0e",
+                "name": "grid",
+                "row": [
+                  {
+                    "type": "Row",
+                    "id": "row-ddc17",
+                    "cell": [
+                      {
+                        "type": "TextCell",
+                        "id": "textcell-cb9dc",
+                        "offset": {
+                          "lg": 0
+                        },
+                        "span": {
+                          "lg": 1
+                        },
+                        "name": "context",
+                        "content": {
+                          "text": [
+                            {
+                              "locale": "en",
+                              "text": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                ],
+                "verticalAlignment": "BOTTOM"
+              }
+            ]
+          },
+          {
+            "type": "ControlGrid",
+            "id": "controlgrid-00ff3",
+            "name": "cg_cascade",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "[4] Trigger Control"
+                  }
+                ]
+              }
+            },
+            "row": [
+              {
+                "type": "Row",
+                "id": "row-d27d8",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control-308d7",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "Trigger"
+                          }
+                        ]
+                      }
+                    },
+                    "elementRef": "F9",
+                    "dependentControls": {
+                      "screenElement": [
+                        {
+                          "idref": "section-92da4",
+                          "masterValue": "true"
+                        }
+                      ]
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "Row",
+                "id": "row-d20d4",
+                "cell": [
+                  {
+                    "type": "ExpressionCell",
+                    "id": "expressioncell-335ee",
+                    "offset": {
+                      "lg": 0
+                    },
+                    "span": {
+                      "lg": 1
+                    },
+                    "name": "description",
+                    "expression": "\"\n* **false:** Multi column section 4.1 is not shown.\n* **true:** Multi column section 4.1 is shown.\n\"",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "Description"
+                          }
+                        ]
+                      }
+                    }
+                  }
+                ]
+              }
+            ],
+            "verticalAlignment": "BOTTOM"
+          },
+          {
+            "type": "Section",
+            "id": "section-92da4",
+            "name": "sec_cascade0",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "[4.1] Section"
+                  }
+                ]
+              }
+            },
+            "screenElements": [
+              {
+                "type": "Section",
+                "id": "section-180ec",
+                "name": "wrapper",
+                "screenElements": [
+                  {
+                    "type": "ControlGrid",
+                    "id": "controlgrid-5fd42",
+                    "name": "cg_cascade1",
+                    "title": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "[4.1.1] Nested Trigger Control"
+                          }
+                        ]
+                      }
+                    },
+                    "row": [
+                      {
+                        "type": "Row",
+                        "id": "row-a14f1",
+                        "cell": [
+                          {
+                            "type": "Control",
+                            "id": "control-6b6d9",
+                            "label": {
+                              "type": "Multilingual",
+                              "multilingualText": {
+                                "text": [
+                                  {
+                                    "locale": "en",
+                                    "text": "Trigger"
+                                  }
+                                ]
+                              }
+                            },
+                            "elementRef": "F18",
+                            "dependentControls": {
+                              "screenElement": [
+                                {
+                                  "idref": "section-771b8",
+                                  "masterValue": "true"
+                                }
+                              ]
+                            }
+                          }
+                        ]
+                      },
+                      {
+                        "type": "Row",
+                        "id": "row-f064g",
+                        "cell": [
+                          {
+                            "type": "ExpressionCell",
+                            "id": "expressioncell-4b082",
+                            "offset": {
+                              "lg": 0
+                            },
+                            "span": {
+                              "lg": 1
+                            },
+                            "name": "description",
+                            "expression": "\"\n* **false:** Multi column section 4.1.2 is not shown.\n* **true:** Multi column section 4.1.2 is not shown.\n\"",
+                            "label": {
+                              "type": "Multilingual",
+                              "multilingualText": {
+                                "text": [
+                                  {
+                                    "locale": "en",
+                                    "text": "Description"
+                                  }
+                                ]
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    ],
+                    "verticalAlignment": "BOTTOM"
+                  },
+                  {
+                    "type": "Section",
+                    "id": "section-771b8",
+                    "name": "sec_cascade1",
+                    "title": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "[4.1.2] Section"
+                          }
+                        ]
+                      }
+                    },
+                    "screenElements": [
+                      {
+                        "type": "ControlGrid",
+                        "id": "controlgrid-02a6b",
+                        "name": "grid",
+                        "row": [
+                          {
+                            "type": "Row",
+                            "id": "row-edce4",
+                            "cell": [
+                              {
+                                "type": "TextCell",
+                                "id": "textcell-ee312",
+                                "offset": {
+                                  "lg": 0
+                                },
+                                "span": {
+                                  "lg": 1
+                                },
+                                "name": "context",
+                                "content": {
+                                  "text": [
+                                    {
+                                      "locale": "en",
+                                      "text": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
+                                    }
+                                  ]
+                                }
+                              }
+                            ]
+                          }
+                        ],
+                        "verticalAlignment": "BOTTOM"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "ControlGrid",
+            "id": "controlgrid-811f2",
+            "name": "cg_combined",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "[5] Trigger Controls"
+                  }
+                ]
+              }
+            },
+            "row": [
+              {
+                "type": "Row",
+                "id": "row-7bcch",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control-518c5",
+                    "offset": {
+                      "lg": 0
+                    },
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "Trigger 1"
+                          }
+                        ]
+                      }
+                    },
+                    "elementRef": "F12",
+                    "dependentControls": {
+                      "screenElement": [
+                        {
+                          "idref": "section-00602",
+                          "masterValue": "true"
+                        }
+                      ]
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "Row",
+                "id": "row-3bffe",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control-d8804",
+                    "offset": {
+                      "lg": 0
+                    },
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "Trigger 2"
+                          }
+                        ]
+                      }
+                    },
+                    "elementRef": "F17",
+                    "dependentControls": {
+                      "screenElement": [
+                        {
+                          "idref": "section-00602",
+                          "masterValue": "true"
+                        }
+                      ]
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "Row",
+                "id": "row-18824",
+                "cell": [
+                  {
+                    "type": "ExpressionCell",
+                    "id": "expressioncell-c4f6c",
+                    "offset": {
+                      "lg": 0
+                    },
+                    "span": {
+                      "lg": 1
+                    },
+                    "name": "description",
+                    "expression": "\"Multi column section 5.1 will be shown if both triggers are true.\"",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "Description"
+                          }
+                        ]
+                      }
+                    }
+                  }
+                ]
+              }
+            ],
+            "verticalAlignment": "BOTTOM"
+          },
+          {
+            "type": "Section",
+            "id": "section-00602",
+            "name": "cg_combined_sec",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "[5.1] Section"
+                  }
+                ]
+              }
+            },
+            "screenElements": [
+              {
+                "type": "ControlGrid",
+                "id": "controlgrid-1045c",
+                "name": "grid",
+                "row": [
+                  {
+                    "type": "Row",
+                    "id": "row-0d2fe",
+                    "cell": [
+                      {
+                        "type": "TextCell",
+                        "id": "textcell-d95e2",
+                        "offset": {
+                          "lg": 0
+                        },
+                        "span": {
+                          "lg": 1
+                        },
+                        "name": "context",
+                        "content": {
+                          "text": [
+                            {
+                              "locale": "en",
+                              "text": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                ],
+                "verticalAlignment": "BOTTOM"
+              }
+            ]
+          },
+          {
+            "type": "ControlGrid",
+            "id": "controlgrid_8c332",
+            "name": "cg_numeric_index",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "[6] Trigger Control has a Numeric Index"
+                  }
+                ]
+              }
+            },
+            "row": [
+              {
+                "type": "Row",
+                "id": "row_42dee",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control_fd4d3",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "Trigger"
+                          }
+                        ]
+                      }
+                    },
+                    "elementRef": "fieldimpl_2e3b6",
+                    "index": {
+                      "type": "NUMERIC",
+                      "value": "1"
+                    },
+                    "dependentControls": {
+                      "screenElement": [
+                        {
+                          "idref": "section_fb9f6",
+                          "masterValue": "false"
+                        },
+                        {
+                          "idref": "section_bc495",
+                          "masterValue": "true"
+                        }
+                      ]
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "Row",
+                "id": "row_8c893",
+                "cell": [
+                  {
+                    "type": "ExpressionCell",
+                    "id": "expressioncell_f6747",
+                    "name": "description",
+                    "expression": "\"\n* **false:** Section 6.1 is shown and Section 6.2 is not shown.\n* **true:** Section 6.1 is not shown and Section 6.2 is shown.\n\"",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "Description"
+                          }
+                        ]
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "Section",
+            "id": "section_fb9f6",
+            "name": "cg_numeric_index_sec1",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "[6.1] Section"
+                  }
+                ]
+              }
+            },
+            "screenElements": [
+              {
+                "type": "ControlGrid",
+                "id": "controlgrid_0e65e",
+                "name": "grid",
+                "row": [
+                  {
+                    "type": "Row",
+                    "id": "row_bdf51",
+                    "cell": [
+                      {
+                        "type": "TextCell",
+                        "id": "textcell_faaa1",
+                        "offset": {
+                          "lg": 0
+                        },
+                        "span": {
+                          "lg": 1
+                        },
+                        "name": "context",
+                        "content": {
+                          "text": [
+                            {
+                              "locale": "en",
+                              "text": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                ],
+                "verticalAlignment": "BOTTOM"
+              }
+            ]
+          },
+          {
+            "type": "Section",
+            "id": "section_bc495",
+            "name": "cg_numeric_index_sec2",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "[6.2] Section"
+                  }
+                ]
+              }
+            },
+            "screenElements": [
+              {
+                "type": "ControlGrid",
+                "id": "controlgrid_1d6b1",
+                "name": "grid",
+                "row": [
+                  {
+                    "type": "Row",
+                    "id": "row_2b830",
+                    "cell": [
+                      {
+                        "type": "TextCell",
+                        "id": "textcell_43414",
+                        "offset": {
+                          "lg": 0
+                        },
+                        "span": {
+                          "lg": 1
+                        },
+                        "name": "context",
+                        "content": {
+                          "text": [
+                            {
+                              "locale": "en",
+                              "text": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                ],
+                "verticalAlignment": "BOTTOM"
+              }
+            ]
+          },
+          {
+            "type": "ControlGrid",
+            "id": "controlgrid_9cd1b",
+            "name": "cg_semantic_index",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "[7] Trigger Control has a Semantic Index"
+                  }
+                ]
+              }
+            },
+            "row": [
+              {
+                "type": "Row",
+                "id": "row_b6754",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control_08f33",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "Trigger"
+                          }
+                        ]
+                      }
+                    },
+                    "elementRef": "fieldimpl_2e3b6",
+                    "index": {
+                      "type": "SEMANTIC",
+                      "value": "2"
+                    },
+                    "dependentControls": {
+                      "screenElement": [
+                        {
+                          "idref": "section_f0cbc",
+                          "masterValue": "false"
+                        },
+                        {
+                          "idref": "section_d0ce2",
+                          "masterValue": "true"
+                        }
+                      ]
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "Row",
+                "id": "row_709f9",
+                "cell": [
+                  {
+                    "type": "ExpressionCell",
+                    "id": "expressioncell_5383b",
+                    "name": "description",
+                    "expression": "\"\n* **false:** Section 7.1 is shown and Section 7.2 is not shown.\n* **true:** Section 7.1 is not shown and Section 7.2 is shown.\n\"",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "Description"
+                          }
+                        ]
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "Section",
+            "id": "section_f0cbc",
+            "name": "cg_semantic_index_sec1",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "[7.1] Section"
+                  }
+                ]
+              }
+            },
+            "screenElements": [
+              {
+                "type": "ControlGrid",
+                "id": "controlgrid_d1e22",
+                "name": "grid",
+                "row": [
+                  {
+                    "type": "Row",
+                    "id": "row_f630a",
+                    "cell": [
+                      {
+                        "type": "TextCell",
+                        "id": "textcell_f54f7",
+                        "offset": {
+                          "lg": 0
+                        },
+                        "span": {
+                          "lg": 1
+                        },
+                        "name": "context",
+                        "content": {
+                          "text": [
+                            {
+                              "locale": "en",
+                              "text": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                ],
+                "verticalAlignment": "BOTTOM"
+              }
+            ]
+          },
+          {
+            "type": "Section",
+            "id": "section_d0ce2",
+            "name": "cg_semantic_index_sec2",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "[7.2] Section"
+                  }
+                ]
+              }
+            },
+            "screenElements": [
+              {
+                "type": "ControlGrid",
+                "id": "controlgrid_617ed",
+                "name": "grid",
+                "row": [
+                  {
+                    "type": "Row",
+                    "id": "row_395c3",
+                    "cell": [
+                      {
+                        "type": "TextCell",
+                        "id": "textcell_f21fe",
+                        "offset": {
+                          "lg": 0
+                        },
+                        "span": {
+                          "lg": 1
+                        },
+                        "name": "context",
+                        "content": {
+                          "text": [
+                            {
+                              "locale": "en",
+                              "text": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                ],
+                "verticalAlignment": "BOTTOM"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "screen-fd252",
+        "name": "Screen2",
+        "screenElements": [
+          {
+            "type": "ControlGrid",
+            "id": "controlgrid-c8980",
+            "name": "cg_single_bool",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "[1] Trigger Control is a Boolean"
+                  }
+                ]
+              }
+            },
+            "row": [
+              {
+                "type": "Row",
+                "id": "row-399e1",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control-19142",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "Trigger"
+                          }
+                        ]
+                      }
+                    },
+                    "elementRef": "F4",
+                    "dependentControls": {
+                      "screenElement": [
+                        {
+                          "idref": "section_09e09",
+                          "masterValue": null
+                        },
+                        {
+                          "idref": "section-5d63a",
+                          "masterValue": "false"
+                        },
+                        {
+                          "idref": "section-b3d45",
+                          "masterValue": "true"
+                        }
+                      ]
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "Row",
+                "id": "row-afe52",
+                "cell": [
+                  {
+                    "type": "ExpressionCell",
+                    "id": "expressioncell-7f0dd",
+                    "name": "description",
+                    "expression": "\"\n* **null:** Only Multi column section 1.0 is shown.\n* **false:** Only Multi column section 1.1 is shown.\n* **true:** Only Multi column section 1.2 is shown.\n\"",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "Description"
+                          }
+                        ]
+                      }
+                    }
+                  }
+                ]
+              }
+            ],
+            "verticalAlignment": "BOTTOM"
+          },
+          {
+            "type": "Section",
+            "id": "section-5d63a",
+            "name": "cg_single_bool_mcs1",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "[1.1] Multi Column Section"
+                  }
+                ]
+              }
+            },
+            "screenElements": [
+              {
+                "type": "ControlGrid",
+                "id": "controlgrid-8c775",
+                "name": "grid",
+                "row": [
+                  {
+                    "type": "Row",
+                    "id": "row-39921",
+                    "cell": [
+                      {
+                        "type": "TextCell",
+                        "id": "textcell-de2b7",
+                        "offset": {
+                          "lg": 0
+                        },
+                        "span": {
+                          "lg": 1
+                        },
+                        "name": "context",
+                        "content": {
+                          "text": [
+                            {
+                              "locale": "en",
+                              "text": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                ],
+                "verticalAlignment": "BOTTOM"
+              }
+            ]
+          },
+          {
+            "type": "Section",
+            "id": "section-b3d45",
+            "name": "cg_single_bool_msc2",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "[1.2] Multi Column Section"
+                  }
+                ]
+              }
+            },
+            "screenElements": [
+              {
+                "type": "ControlGrid",
+                "id": "controlgrid-6f184",
+                "name": "grid",
+                "row": [
+                  {
+                    "type": "Row",
+                    "id": "row-149e0",
+                    "cell": [
+                      {
+                        "type": "TextCell",
+                        "id": "textcell-ecfba",
+                        "offset": {
+                          "lg": 0
+                        },
+                        "span": {
+                          "lg": 1
+                        },
+                        "name": "context",
+                        "content": {
+                          "text": [
+                            {
+                              "locale": "en",
+                              "text": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                ],
+                "verticalAlignment": "BOTTOM"
+              }
+            ]
+          },
+          {
+            "type": "Section",
+            "id": "section_09e09",
+            "name": "cg_single_bool_msc3",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "[1.0] Multi Column Section"
+                  }
+                ]
+              }
+            },
+            "screenElements": [
+              {
+                "type": "ControlGrid",
+                "id": "controlgrid_6044b",
+                "name": "grid",
+                "row": [
+                  {
+                    "type": "Row",
+                    "id": "row_f29c1",
+                    "cell": [
+                      {
+                        "type": "TextCell",
+                        "id": "textcell_370a7",
+                        "offset": {
+                          "lg": 0
+                        },
+                        "span": {
+                          "lg": 1
+                        },
+                        "name": "context",
+                        "content": {
+                          "text": [
+                            {
+                              "locale": "en",
+                              "text": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                ],
+                "verticalAlignment": "BOTTOM"
+              }
+            ]
+          },
+          {
+            "type": "ControlGrid",
+            "id": "controlgrid-b987b",
+            "name": "cg_single_confirm",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "[2] Trigger Control is a Confirm"
+                  }
+                ]
+              }
+            },
+            "row": [
+              {
+                "type": "Row",
+                "id": "row-dab4d",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control-49dde",
+                    "elementRef": "field_83376",
+                    "dependentControls": {
+                      "screenElement": [
+                        {
+                          "idref": "section-404e4",
+                          "masterValue": null
+                        },
+                        {
+                          "idref": "section-153db",
+                          "masterValue": "true"
+                        }
+                      ]
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "Row",
+                "id": "row-dc463",
+                "cell": [
+                  {
+                    "type": "ExpressionCell",
+                    "id": "expressioncell-71bbb",
+                    "offset": {
+                      "lg": 0
+                    },
+                    "span": {
+                      "lg": 1
+                    },
+                    "name": "description",
+                    "expression": "\"\n* **null:** Multi column section 2.1 is shown and Multi column section 2.2 is not shown.\n* **true:** Multi column section 2.1 is not shown and Multi column section 2.2 is shown.\n\"",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "Description"
+                          }
+                        ]
+                      }
+                    }
+                  }
+                ]
+              }
+            ],
+            "verticalAlignment": "BOTTOM"
+          },
+          {
+            "type": "MultiColumnSection",
+            "id": "section-404e4",
+            "name": "cg_single_confirm_mcs1",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "[2.1] Multi Column Section"
+                  }
+                ]
+              }
+            },
+            "layout": {
+              "lg": "12"
+            },
+            "screenElements": [
+              {
+                "type": "ControlGrid",
+                "id": "controlgrid-07198",
+                "name": "grid",
+                "row": [
+                  {
+                    "type": "Row",
+                    "id": "row-28ba0",
+                    "cell": [
+                      {
+                        "type": "TextCell",
+                        "id": "textcell-69c0b",
+                        "offset": {
+                          "lg": 0
+                        },
+                        "span": {
+                          "lg": 1
+                        },
+                        "name": "context",
+                        "content": {
+                          "text": [
+                            {
+                              "locale": "en",
+                              "text": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                ],
+                "verticalAlignment": "BOTTOM"
+              }
+            ]
+          },
+          {
+            "type": "MultiColumnSection",
+            "id": "section-153db",
+            "name": "cg_single_confirm_msc2",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "[2.2] Multi Column Section"
+                  }
+                ]
+              }
+            },
+            "layout": {
+              "lg": "12"
+            },
+            "screenElements": [
+              {
+                "type": "ControlGrid",
+                "id": "controlgrid-848fe",
+                "name": "grid",
+                "row": [
+                  {
+                    "type": "Row",
+                    "id": "row-87a70",
+                    "cell": [
+                      {
+                        "type": "TextCell",
+                        "id": "textcell-d0a27",
+                        "offset": {
+                          "lg": 0
+                        },
+                        "span": {
+                          "lg": 1
+                        },
+                        "name": "context",
+                        "content": {
+                          "text": [
+                            {
+                              "locale": "en",
+                              "text": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                ],
+                "verticalAlignment": "BOTTOM"
+              }
+            ]
+          },
+          {
+            "type": "ControlGrid",
+            "id": "controlgrid-37fa8",
+            "name": "cg_single_enum",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "[3] Trigger Control is an Enumeration"
+                  }
+                ]
+              }
+            },
+            "row": [
+              {
+                "type": "Row",
+                "id": "row-2bcb2",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control-01bf5",
+                    "offset": {
+                      "lg": 0
+                    },
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "Trigger"
+                          }
+                        ]
+                      }
+                    },
+                    "hint": {},
+                    "elementRef": "F5",
+                    "dependentControls": {
+                      "screenElement": [
+                        {
+                          "idref": "section-4af74",
+                          "masterValue": null
+                        },
+                        {
+                          "idref": "section-48444",
+                          "masterValue": null
+                        },
+                        {
+                          "idref": "section-73dc6",
+                          "masterValue": null
+                        },
+                        {
+                          "idref": "section-73dc6",
+                          "masterValue": "V0"
+                        },
+                        {
+                          "idref": "section-73dc6",
+                          "masterValue": "V1"
+                        },
+                        {
+                          "idref": "section-48444",
+                          "masterValue": "V2"
+                        },
+                        {
+                          "idref": "section-4af74",
+                          "masterValue": "V3"
+                        }
+                      ]
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "Row",
+                "id": "row-55918",
+                "cell": [
+                  {
+                    "type": "ExpressionCell",
+                    "id": "expressioncell-76b13",
+                    "offset": {
+                      "lg": 0
+                    },
+                    "span": {
+                      "lg": 1
+                    },
+                    "name": "description",
+                    "expression": "\"\n* **null:** All multi column sections (3.1, 3.2, and 3.3) are shown.\n* **V0:** Only multi column section 3.1 is shown.\n* **V1:** Only multi column section 3.1 is shown.\n* **V2:** Only multi column section 3.2 is shown.\n* **V3:** Only multi column section 3.3 is shown.\n\"",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "Description"
+                          }
+                        ]
+                      }
+                    }
+                  }
+                ]
+              }
+            ],
+            "verticalAlignment": "BOTTOM"
+          },
+          {
+            "type": "Section",
+            "id": "section-73dc6",
+            "name": "cg_single_enum_msc1",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "[3.1] Multi Column Section"
+                  }
+                ]
+              }
+            },
+            "screenElements": [
+              {
+                "type": "ControlGrid",
+                "id": "controlgrid-ff754",
+                "name": "grid",
+                "row": [
+                  {
+                    "type": "Row",
+                    "id": "row-9bffd",
+                    "cell": [
+                      {
+                        "type": "TextCell",
+                        "id": "textcell-ea195",
+                        "offset": {
+                          "lg": 0
+                        },
+                        "span": {
+                          "lg": 1
+                        },
+                        "name": "context",
+                        "content": {
+                          "text": [
+                            {
+                              "locale": "en",
+                              "text": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                ],
+                "verticalAlignment": "BOTTOM"
+              }
+            ]
+          },
+          {
+            "type": "MultiColumnSection",
+            "id": "section-48444",
+            "name": "cg_single_enum_msc2",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "[3.2] Multi Column Section"
+                  }
+                ]
+              }
+            },
+            "layout": {
+              "lg": "12"
+            },
+            "screenElements": [
+              {
+                "type": "ControlGrid",
+                "id": "controlgrid-b5232",
+                "name": "grid",
+                "row": [
+                  {
+                    "type": "Row",
+                    "id": "row-a45ce",
+                    "cell": [
+                      {
+                        "type": "TextCell",
+                        "id": "textcell-7d6a7",
+                        "offset": {
+                          "lg": 0
+                        },
+                        "span": {
+                          "lg": 1
+                        },
+                        "name": "context",
+                        "content": {
+                          "text": [
+                            {
+                              "locale": "en",
+                              "text": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                ],
+                "verticalAlignment": "BOTTOM"
+              }
+            ]
+          },
+          {
+            "type": "MultiColumnSection",
+            "id": "section-4af74",
+            "name": "cg_single_enum_msc3",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "[3.3] Multi Column Section"
+                  }
+                ]
+              }
+            },
+            "layout": {
+              "lg": "12"
+            },
+            "screenElements": [
+              {
+                "type": "ControlGrid",
+                "id": "controlgrid-2fe0d",
+                "name": "grid",
+                "row": [
+                  {
+                    "type": "Row",
+                    "id": "row-ddc16",
+                    "cell": [
+                      {
+                        "type": "TextCell",
+                        "id": "textcell-cb8dc",
+                        "offset": {
+                          "lg": 0
+                        },
+                        "span": {
+                          "lg": 1
+                        },
+                        "name": "context",
+                        "content": {
+                          "text": [
+                            {
+                              "locale": "en",
+                              "text": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                ],
+                "verticalAlignment": "BOTTOM"
+              }
+            ]
+          },
+          {
+            "type": "ControlGrid",
+            "id": "controlgrid-00ff2",
+            "name": "cg_cascade",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "[4] Trigger Control"
+                  }
+                ]
+              }
+            },
+            "row": [
+              {
+                "type": "Row",
+                "id": "row-d27c8",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control-308d6",
+                    "offset": {
+                      "lg": 0
+                    },
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "Trigger"
+                          }
+                        ]
+                      }
+                    },
+                    "elementRef": "F9",
+                    "dependentControls": {
+                      "screenElement": [
+                        {
+                          "idref": "section-92da3",
+                          "masterValue": "true"
+                        }
+                      ]
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "Row",
+                "id": "row-d20d6",
+                "cell": [
+                  {
+                    "type": "ExpressionCell",
+                    "id": "expressioncell-335ce",
+                    "offset": {
+                      "lg": 0
+                    },
+                    "span": {
+                      "lg": 1
+                    },
+                    "name": "description",
+                    "expression": "\"\n* **false:** Multi column section 4.1 is not shown.\n* **true:** Multi column section 4.1 is shown.\n\"",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "Description"
+                          }
+                        ]
+                      }
+                    }
+                  }
+                ]
+              }
+            ],
+            "verticalAlignment": "BOTTOM"
+          },
+          {
+            "type": "Section",
+            "id": "section-92da3",
+            "name": "msc_cascade0",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "[4.1] Multi Column Section"
+                  }
+                ]
+              }
+            },
+            "screenElements": [
+              {
+                "type": "Section",
+                "id": "section-180eb",
+                "name": "wrapper",
+                "screenElements": [
+                  {
+                    "type": "ControlGrid",
+                    "id": "controlgrid-5fd40",
+                    "name": "cg_cascade1",
+                    "title": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "[4.1.1] Nested Trigger Control"
+                          }
+                        ]
+                      }
+                    },
+                    "row": [
+                      {
+                        "type": "Row",
+                        "id": "row-a14f0",
+                        "cell": [
+                          {
+                            "type": "Control",
+                            "id": "control-6b6d8",
+                            "offset": {
+                              "lg": 0
+                            },
+                            "label": {
+                              "type": "Multilingual",
+                              "multilingualText": {
+                                "text": [
+                                  {
+                                    "locale": "en",
+                                    "text": "Trigger"
+                                  }
+                                ]
+                              }
+                            },
+                            "elementRef": "F18",
+                            "dependentControls": {
+                              "screenElement": [
+                                {
+                                  "idref": "section-771b9",
+                                  "masterValue": "true"
+                                }
+                              ]
+                            }
+                          }
+                        ]
+                      },
+                      {
+                        "type": "Row",
+                        "id": "row-f064f",
+                        "cell": [
+                          {
+                            "type": "ExpressionCell",
+                            "id": "expressioncell-4b081",
+                            "offset": {
+                              "lg": 0
+                            },
+                            "span": {
+                              "lg": 1
+                            },
+                            "name": "description",
+                            "expression": "\"\n* **false:** Multi column section 4.1.2 is not shown.\n* **true:** Multi column section 4.1.2 is not shown.\n\"",
+                            "label": {
+                              "type": "Multilingual",
+                              "multilingualText": {
+                                "text": [
+                                  {
+                                    "locale": "en",
+                                    "text": "Description"
+                                  }
+                                ]
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    ],
+                    "verticalAlignment": "BOTTOM"
+                  },
+                  {
+                    "type": "Section",
+                    "id": "section-771b9",
+                    "name": "msc_cascade1",
+                    "title": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "[4.1.2] Multi Column Section"
+                          }
+                        ]
+                      }
+                    },
+                    "screenElements": [
+                      {
+                        "type": "ControlGrid",
+                        "id": "controlgrid-02a5b",
+                        "name": "grid",
+                        "row": [
+                          {
+                            "type": "Row",
+                            "id": "row-edce5",
+                            "cell": [
+                              {
+                                "type": "TextCell",
+                                "id": "textcell-ee311",
+                                "offset": {
+                                  "lg": 0
+                                },
+                                "span": {
+                                  "lg": 1
+                                },
+                                "name": "context",
+                                "content": {
+                                  "text": [
+                                    {
+                                      "locale": "en",
+                                      "text": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
+                                    }
+                                  ]
+                                }
+                              }
+                            ]
+                          }
+                        ],
+                        "verticalAlignment": "BOTTOM"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "ControlGrid",
+            "id": "controlgrid-811f1",
+            "name": "cg_combined",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "[5] Trigger Controls"
+                  }
+                ]
+              }
+            },
+            "row": [
+              {
+                "type": "Row",
+                "id": "row-7bccf",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control-518c4",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "Trigger 1"
+                          }
+                        ]
+                      }
+                    },
+                    "elementRef": "F12",
+                    "dependentControls": {
+                      "screenElement": [
+                        {
+                          "idref": "section-00601",
+                          "masterValue": "true"
+                        }
+                      ]
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "Row",
+                "id": "row-3bffa",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control-d8803",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "Trigger 2"
+                          }
+                        ]
+                      }
+                    },
+                    "elementRef": "F17",
+                    "dependentControls": {
+                      "screenElement": [
+                        {
+                          "idref": "section-00601",
+                          "masterValue": "true"
+                        }
+                      ]
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "Row",
+                "id": "row-18823",
+                "cell": [
+                  {
+                    "type": "ExpressionCell",
+                    "id": "expressioncell-c4f6a",
+                    "offset": {
+                      "lg": 0
+                    },
+                    "span": {
+                      "lg": 1
+                    },
+                    "name": "description",
+                    "expression": "\"Multi column section 5.1 will be shown if both triggers are true.\"",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "Description"
+                          }
+                        ]
+                      }
+                    }
+                  }
+                ]
+              }
+            ],
+            "verticalAlignment": "BOTTOM"
+          },
+          {
+            "type": "Section",
+            "id": "section-00601",
+            "name": "cg_combined_msc",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "[5.1] Multi Column Section"
+                  }
+                ]
+              }
+            },
+            "screenElements": [
+              {
+                "type": "ControlGrid",
+                "id": "controlgrid-2045c",
+                "name": "grid",
+                "row": [
+                  {
+                    "type": "Row",
+                    "id": "row-0d2fd",
+                    "cell": [
+                      {
+                        "type": "TextCell",
+                        "id": "textcell-c95e2",
+                        "offset": {
+                          "lg": 0
+                        },
+                        "span": {
+                          "lg": 1
+                        },
+                        "name": "context",
+                        "content": {
+                          "text": [
+                            {
+                              "locale": "en",
+                              "text": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                ],
+                "verticalAlignment": "BOTTOM"
+              }
+            ]
+          },
+          {
+            "type": "ControlGrid",
+            "id": "controlgrid_8c333",
+            "name": "cg_numeric_index",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "[6] Trigger Control has a Numeric Index"
+                  }
+                ]
+              }
+            },
+            "row": [
+              {
+                "type": "Row",
+                "id": "row_42def",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control_fd4d4",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "Trigger"
+                          }
+                        ]
+                      }
+                    },
+                    "elementRef": "fieldimpl_2e3b6",
+                    "index": {
+                      "type": "NUMERIC",
+                      "value": "1"
+                    },
+                    "dependentControls": {
+                      "screenElement": [
+                        {
+                          "idref": "multicolumnsection_7d9db",
+                          "masterValue": "false"
+                        },
+                        {
+                          "idref": "multicolumnsection_1d4fd",
+                          "masterValue": "true"
+                        }
+                      ]
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "Row",
+                "id": "row_d7e96",
+                "cell": [
+                  {
+                    "type": "ExpressionCell",
+                    "id": "expressioncell_5b5ee",
+                    "name": "description",
+                    "expression": "\"\n* **false:** Multi Column Section 6.1 is shown and Multi Column Section 6.2 is not shown.\n* **true:** Multi Column Section 6.1 is not shown and Multi Column Section 6.2 is shown.\n\"",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "Description"
+                          }
+                        ]
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "MultiColumnSection",
+            "id": "multicolumnsection_7d9db",
+            "name": "cg_numeric_index_mcs1",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "[6.1] Multi Column Section"
+                  }
+                ]
+              }
+            },
+            "layout": {
+              "lg": "12"
+            },
+            "screenElements": [
+              {
+                "type": "ControlGrid",
+                "id": "controlgrid_5a8b7",
+                "name": "grid",
+                "row": [
+                  {
+                    "type": "Row",
+                    "id": "row_0ecf1",
+                    "cell": [
+                      {
+                        "type": "TextCell",
+                        "id": "textcell_cae5a",
+                        "offset": {
+                          "lg": 0
+                        },
+                        "span": {
+                          "lg": 1
+                        },
+                        "name": "context",
+                        "content": {
+                          "text": [
+                            {
+                              "locale": "en",
+                              "text": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                ],
+                "verticalAlignment": "BOTTOM"
+              }
+            ]
+          },
+          {
+            "type": "MultiColumnSection",
+            "id": "multicolumnsection_1d4fd",
+            "name": "cg_numeric_index_mcs2",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "[6.2] Multi Column Section"
+                  }
+                ]
+              }
+            },
+            "layout": {
+              "lg": "12"
+            },
+            "screenElements": [
+              {
+                "type": "ControlGrid",
+                "id": "controlgrid_8b7af",
+                "name": "grid",
+                "row": [
+                  {
+                    "type": "Row",
+                    "id": "row_4ebec",
+                    "cell": [
+                      {
+                        "type": "TextCell",
+                        "id": "textcell_85154",
+                        "offset": {
+                          "lg": 0
+                        },
+                        "span": {
+                          "lg": 1
+                        },
+                        "name": "context",
+                        "content": {
+                          "text": [
+                            {
+                              "locale": "en",
+                              "text": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                ],
+                "verticalAlignment": "BOTTOM"
+              }
+            ]
+          },
+          {
+            "type": "ControlGrid",
+            "id": "controlgrid_9cd1c",
+            "name": "cg_semantic_index",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "[7] Trigger Control has a Semantic Index"
+                  }
+                ]
+              }
+            },
+            "row": [
+              {
+                "type": "Row",
+                "id": "row_b6755",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control_08f34",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "Trigger"
+                          }
+                        ]
+                      }
+                    },
+                    "elementRef": "fieldimpl_2e3b6",
+                    "index": {
+                      "type": "SEMANTIC",
+                      "value": "2"
+                    },
+                    "dependentControls": {
+                      "screenElement": [
+                        {
+                          "idref": "multicolumnsection_857ab",
+                          "masterValue": "false"
+                        },
+                        {
+                          "idref": "multicolumnsection_bd78b",
+                          "masterValue": "true"
+                        }
+                      ]
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "Row",
+                "id": "row_5b957",
+                "cell": [
+                  {
+                    "type": "ExpressionCell",
+                    "id": "expressioncell_4e0f4",
+                    "name": "description",
+                    "expression": "\"\n* **false:** Multi Column Section 7.1 is shown and Multi Column Section 7.2 is not shown.\n* **true:** Multi Column Section 7.1 is not shown and Multi Column Section 7.2 is shown.\n\"",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "Description"
+                          }
+                        ]
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "MultiColumnSection",
+            "id": "multicolumnsection_857ab",
+            "name": "cg_semantic_index_mcs1",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "[7.1] Multi Column Section"
+                  }
+                ]
+              }
+            },
+            "layout": {
+              "lg": "12"
+            },
+            "screenElements": [
+              {
+                "type": "ControlGrid",
+                "id": "controlgrid_e25f3",
+                "name": "grid",
+                "row": [
+                  {
+                    "type": "Row",
+                    "id": "row_5582e",
+                    "cell": [
+                      {
+                        "type": "TextCell",
+                        "id": "textcell_046a9",
+                        "offset": {
+                          "lg": 0
+                        },
+                        "span": {
+                          "lg": 1
+                        },
+                        "name": "context",
+                        "content": {
+                          "text": [
+                            {
+                              "locale": "en",
+                              "text": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                ],
+                "verticalAlignment": "BOTTOM"
+              }
+            ]
+          },
+          {
+            "type": "MultiColumnSection",
+            "id": "multicolumnsection_bd78b",
+            "name": "cg_semantic_index_mcs2",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "[7.2] Multi Column Section"
+                  }
+                ]
+              }
+            },
+            "layout": {
+              "lg": "12"
+            },
+            "screenElements": [
+              {
+                "type": "ControlGrid",
+                "id": "controlgrid_86900",
+                "name": "grid",
+                "row": [
+                  {
+                    "type": "Row",
+                    "id": "row_a2b6e",
+                    "cell": [
+                      {
+                        "type": "TextCell",
+                        "id": "textcell_fcdb3",
+                        "offset": {
+                          "lg": 0
+                        },
+                        "span": {
+                          "lg": 1
+                        },
+                        "name": "context",
+                        "content": {
+                          "text": [
+                            {
+                              "locale": "en",
+                              "text": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                ],
+                "verticalAlignment": "BOTTOM"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "screen-df793",
+        "name": "Screen3",
+        "screenElements": [
+          {
+            "type": "ControlGrid",
+            "id": "controlgrid-cbf6f",
+            "name": "cg_single_bool",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "[1] Trigger Control is a Boolean"
+                  }
+                ]
+              }
+            },
+            "row": [
+              {
+                "type": "Row",
+                "id": "row-58eae",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control-f9ff7",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "Trigger"
+                          }
+                        ]
+                      }
+                    },
+                    "elementRef": "F4",
+                    "dependentControls": {
+                      "screenElement": [
+                        {
+                          "idref": "controlgrid_e6d78",
+                          "masterValue": null
+                        },
+                        {
+                          "idref": "controlgrid-dc6ac",
+                          "masterValue": "false"
+                        },
+                        {
+                          "idref": "controlgrid-deaf0",
+                          "masterValue": "true"
+                        }
+                      ]
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "Row",
+                "id": "row-8ce29",
+                "cell": [
+                  {
+                    "type": "ExpressionCell",
+                    "id": "expressioncell-d225b",
+                    "name": "description",
+                    "expression": "\"\n* **null:** Only Control Grid 1.0 is shown.\n* **false:** Only Control Grid 1.1 is shown.\n* **true:** Only Control Grid 1.2 is shown.\n\"",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "Description"
+                          }
+                        ]
+                      }
+                    }
+                  }
+                ]
+              }
+            ],
+            "verticalAlignment": "BOTTOM"
+          },
+          {
+            "type": "ControlGrid",
+            "id": "controlgrid-dc6ac",
+            "name": "cg_single_bool_cg1",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "[1.1] Control Grid"
+                  }
+                ]
+              }
+            },
+            "row": [
+              {
+                "type": "Row",
+                "id": "row-cf9ee",
+                "cell": [
+                  {
+                    "type": "TextCell",
+                    "id": "textcell-9ecda",
+                    "offset": {
+                      "lg": 0
+                    },
+                    "span": {
+                      "lg": 1
+                    },
+                    "name": "context",
+                    "content": {
+                      "text": [
+                        {
+                          "locale": "en",
+                          "text": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            ],
+            "verticalAlignment": "BOTTOM"
+          },
+          {
+            "type": "ControlGrid",
+            "id": "controlgrid-deaf0",
+            "name": "cg_single_bool_cg2",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "[1.2] Control Grid"
+                  }
+                ]
+              }
+            },
+            "row": [
+              {
+                "type": "Row",
+                "id": "row-e23d5",
+                "cell": [
+                  {
+                    "type": "TextCell",
+                    "id": "textcell-16e39",
+                    "offset": {
+                      "lg": 0
+                    },
+                    "span": {
+                      "lg": 1
+                    },
+                    "name": "context",
+                    "content": {
+                      "text": [
+                        {
+                          "locale": "en",
+                          "text": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            ],
+            "verticalAlignment": "BOTTOM"
+          },
+          {
+            "type": "ControlGrid",
+            "id": "controlgrid_e6d78",
+            "name": "cg_single_bool_cg3",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "[1.0] Control Grid"
+                  }
+                ]
+              }
+            },
+            "row": [
+              {
+                "type": "Row",
+                "id": "row_30ec3",
+                "cell": [
+                  {
+                    "type": "TextCell",
+                    "id": "textcell_6c8c8",
+                    "offset": {
+                      "lg": 0
+                    },
+                    "span": {
+                      "lg": 1
+                    },
+                    "name": "context",
+                    "content": {
+                      "text": [
+                        {
+                          "locale": "en",
+                          "text": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            ],
+            "verticalAlignment": "BOTTOM"
+          },
+          {
+            "type": "ControlGrid",
+            "id": "controlgrid-c82e9",
+            "name": "cg_single_confirm",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "[2] Trigger Control is a Confirm"
+                  }
+                ]
+              }
+            },
+            "row": [
+              {
+                "type": "Row",
+                "id": "row-190c7",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control-28037",
+                    "elementRef": "field_83376",
+                    "dependentControls": {
+                      "screenElement": [
+                        {
+                          "idref": "controlgrid-ee3df",
+                          "masterValue": null
+                        },
+                        {
+                          "idref": "controlgrid-777d3",
+                          "masterValue": "true"
+                        }
+                      ]
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "Row",
+                "id": "row-cf9f6",
+                "cell": [
+                  {
+                    "type": "ExpressionCell",
+                    "id": "expressioncell-fa836",
+                    "offset": {
+                      "lg": 0
+                    },
+                    "span": {
+                      "lg": 1
+                    },
+                    "name": "description",
+                    "expression": "\"\n* **null:** Control Grid 2.1 is shown and Control Grid 2.2 is not shown.\n* **true:** Control Grid 2.1 is not shown and Control Grid 2.2 is shown.\n\"",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "Description"
+                          }
+                        ]
+                      }
+                    }
+                  }
+                ]
+              }
+            ],
+            "verticalAlignment": "BOTTOM"
+          },
+          {
+            "type": "ControlGrid",
+            "id": "controlgrid-ee3df",
+            "name": "cg_single_confirm_cg1",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "[2.1] Control Grid"
+                  }
+                ]
+              }
+            },
+            "row": [
+              {
+                "type": "Row",
+                "id": "row-f7e0a",
+                "cell": [
+                  {
+                    "type": "TextCell",
+                    "id": "textcell-92952",
+                    "offset": {
+                      "lg": 0
+                    },
+                    "span": {
+                      "lg": 1
+                    },
+                    "name": "context",
+                    "content": {
+                      "text": [
+                        {
+                          "locale": "en",
+                          "text": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            ],
+            "verticalAlignment": "BOTTOM"
+          },
+          {
+            "type": "ControlGrid",
+            "id": "controlgrid-777d3",
+            "name": "cg_single_confirm_cg2",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "[2.2] Control Grid"
+                  }
+                ]
+              }
+            },
+            "row": [
+              {
+                "type": "Row",
+                "id": "row-6edde",
+                "cell": [
+                  {
+                    "type": "TextCell",
+                    "id": "textcell-de914",
+                    "offset": {
+                      "lg": 0
+                    },
+                    "span": {
+                      "lg": 1
+                    },
+                    "name": "context",
+                    "content": {
+                      "text": [
+                        {
+                          "locale": "en",
+                          "text": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            ],
+            "verticalAlignment": "BOTTOM"
+          },
+          {
+            "type": "ControlGrid",
+            "id": "controlgrid-e56d8",
+            "name": "cg_single_enum",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "[3] Trigger Control is an Enumeration"
+                  }
+                ]
+              }
+            },
+            "row": [
+              {
+                "type": "Row",
+                "id": "row-2d425",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control-c814b",
+                    "offset": {
+                      "lg": 0
+                    },
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "Trigger"
+                          }
+                        ]
+                      }
+                    },
+                    "hint": {},
+                    "elementRef": "F5",
+                    "dependentControls": {
+                      "screenElement": [
+                        {
+                          "idref": "controlgrid-6182a",
+                          "masterValue": null
+                        },
+                        {
+                          "idref": "controlgrid-8b631",
+                          "masterValue": null
+                        },
+                        {
+                          "idref": "controlgrid-f8049",
+                          "masterValue": null
+                        },
+                        {
+                          "idref": "controlgrid-f8049",
+                          "masterValue": "V0"
+                        },
+                        {
+                          "idref": "controlgrid-f8049",
+                          "masterValue": "V1"
+                        },
+                        {
+                          "idref": "controlgrid-8b631",
+                          "masterValue": "V2"
+                        },
+                        {
+                          "idref": "controlgrid-6182a",
+                          "masterValue": "V3"
+                        }
+                      ]
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "Row",
+                "id": "row-3b7ec",
+                "cell": [
+                  {
+                    "type": "ExpressionCell",
+                    "id": "expressioncell-6b0bd",
+                    "offset": {
+                      "lg": 0
+                    },
+                    "span": {
+                      "lg": 1
+                    },
+                    "name": "description",
+                    "expression": "\"\n* **null:** All multi column sections (3.1, 3.2, and 3.3) are shown.\n* **V0:** Only multi column section 3.1 is shown.\n* **V1:** Only multi column section 3.1 is shown.\n* **V2:** Only multi column section 3.2 is shown.\n* **V3:** Only multi column section 3.3 is shown.\n\"",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "Description"
+                          }
+                        ]
+                      }
+                    }
+                  }
+                ]
+              }
+            ],
+            "verticalAlignment": "BOTTOM"
+          },
+          {
+            "type": "ControlGrid",
+            "id": "controlgrid-f8049",
+            "name": "cg_single_enum_cg1",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "[3.1] Control Grid"
+                  }
+                ]
+              }
+            },
+            "row": [
+              {
+                "type": "Row",
+                "id": "row-e5902",
+                "cell": [
+                  {
+                    "type": "TextCell",
+                    "id": "textcell-cce3b",
+                    "offset": {
+                      "lg": 0
+                    },
+                    "span": {
+                      "lg": 1
+                    },
+                    "name": "context",
+                    "content": {
+                      "text": [
+                        {
+                          "locale": "en",
+                          "text": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            ],
+            "verticalAlignment": "BOTTOM"
+          },
+          {
+            "type": "ControlGrid",
+            "id": "controlgrid-8b631",
+            "name": "cg_single_enum_cg2",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "[3.2] Control Grid"
+                  }
+                ]
+              }
+            },
+            "row": [
+              {
+                "type": "Row",
+                "id": "row-ebe27",
+                "cell": [
+                  {
+                    "type": "TextCell",
+                    "id": "textcell-ee29b",
+                    "offset": {
+                      "lg": 0
+                    },
+                    "span": {
+                      "lg": 1
+                    },
+                    "name": "context",
+                    "content": {
+                      "text": [
+                        {
+                          "locale": "en",
+                          "text": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            ],
+            "verticalAlignment": "BOTTOM"
+          },
+          {
+            "type": "ControlGrid",
+            "id": "controlgrid-6182a",
+            "name": "cg_single_enum_cg3",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "[3.3] Control Grid"
+                  }
+                ]
+              }
+            },
+            "row": [
+              {
+                "type": "Row",
+                "id": "row-7b760",
+                "cell": [
+                  {
+                    "type": "TextCell",
+                    "id": "textcell-0d97e",
+                    "offset": {
+                      "lg": 0
+                    },
+                    "span": {
+                      "lg": 1
+                    },
+                    "name": "context",
+                    "content": {
+                      "text": [
+                        {
+                          "locale": "en",
+                          "text": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            ],
+            "verticalAlignment": "BOTTOM"
+          },
+          {
+            "type": "ControlGrid",
+            "id": "controlgrid-59959",
+            "name": "cg_combined",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "[5] Trigger Controls"
+                  }
+                ]
+              }
+            },
+            "row": [
+              {
+                "type": "Row",
+                "id": "row-72c6a",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control-0f733",
+                    "offset": {
+                      "lg": 0
+                    },
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "Trigger 1"
+                          }
+                        ]
+                      }
+                    },
+                    "elementRef": "F12",
+                    "dependentControls": {
+                      "screenElement": [
+                        {
+                          "idref": "controlgrid-fd200",
+                          "masterValue": "true"
+                        }
+                      ]
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "Row",
+                "id": "row-5c910",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control-16cf0",
+                    "offset": {
+                      "lg": 0
+                    },
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "Trigger 2"
+                          }
+                        ]
+                      }
+                    },
+                    "elementRef": "F17",
+                    "dependentControls": {
+                      "screenElement": [
+                        {
+                          "idref": "controlgrid-fd200",
+                          "masterValue": "true"
+                        }
+                      ]
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "Row",
+                "id": "row-7cbe9",
+                "cell": [
+                  {
+                    "type": "ExpressionCell",
+                    "id": "expressioncell-04137",
+                    "offset": {
+                      "lg": 0
+                    },
+                    "span": {
+                      "lg": 1
+                    },
+                    "name": "description",
+                    "expression": "\"Multi column section 5.1 will be shown if both triggers are true.\"",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "Description"
+                          }
+                        ]
+                      }
+                    }
+                  }
+                ]
+              }
+            ],
+            "verticalAlignment": "BOTTOM"
+          },
+          {
+            "type": "ControlGrid",
+            "id": "controlgrid-fd200",
+            "name": "cg_combine_cg",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "[5.1] Control Grid"
+                  }
+                ]
+              }
+            },
+            "row": [
+              {
+                "type": "Row",
+                "id": "row-9a71e",
+                "cell": [
+                  {
+                    "type": "TextCell",
+                    "id": "textcell-5dc7a",
+                    "offset": {
+                      "lg": 0
+                    },
+                    "span": {
+                      "lg": 1
+                    },
+                    "name": "context",
+                    "content": {
+                      "text": [
+                        {
+                          "locale": "en",
+                          "text": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            ],
+            "verticalAlignment": "BOTTOM"
+          },
+          {
+            "type": "ControlGrid",
+            "id": "controlgrid_8c334",
+            "name": "cg_numeric_index",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "[6] Trigger Control has a Numeric Index"
+                  }
+                ]
+              }
+            },
+            "row": [
+              {
+                "type": "Row",
+                "id": "row_42dea",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control_fd4d5",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "Trigger"
+                          }
+                        ]
+                      }
+                    },
+                    "elementRef": "fieldimpl_2e3b6",
+                    "index": {
+                      "type": "NUMERIC",
+                      "value": "1"
+                    },
+                    "dependentControls": {
+                      "screenElement": [
+                        {
+                          "idref": "controlgrid_17863",
+                          "masterValue": "false"
+                        },
+                        {
+                          "idref": "controlgrid_eb5d2",
+                          "masterValue": "true"
+                        }
+                      ]
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "Row",
+                "id": "row_fa585",
+                "cell": [
+                  {
+                    "type": "ExpressionCell",
+                    "id": "expressioncell_bead4",
+                    "name": "description",
+                    "expression": "\"\n* **false:** Control Grid 5.1 is shown and Control Grid 5.2 is not shown.\n* **true:** Control Grid 5.1 is not shown and Control Grid 5.2 is shown.\n\"",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "Description"
+                          }
+                        ]
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "ControlGrid",
+            "id": "controlgrid_17863",
+            "name": "cg_numeric_index_cg1",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "[6.1] Control Grid"
+                  }
+                ]
+              }
+            },
+            "row": [
+              {
+                "type": "Row",
+                "id": "row_249ae",
+                "cell": [
+                  {
+                    "type": "TextCell",
+                    "id": "textcell_6fcb2",
+                    "offset": {
+                      "lg": 0
+                    },
+                    "span": {
+                      "lg": 1
+                    },
+                    "name": "context",
+                    "content": {
+                      "text": [
+                        {
+                          "locale": "en",
+                          "text": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "ControlGrid",
+            "id": "controlgrid_eb5d2",
+            "name": "cg_numeric_index_cg2",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "[6.2] Control Grid"
+                  }
+                ]
+              }
+            },
+            "row": [
+              {
+                "type": "Row",
+                "id": "row_cdfb0",
+                "cell": [
+                  {
+                    "type": "TextCell",
+                    "id": "textcell_636b6",
+                    "offset": {
+                      "lg": 0
+                    },
+                    "span": {
+                      "lg": 1
+                    },
+                    "name": "context",
+                    "content": {
+                      "text": [
+                        {
+                          "locale": "en",
+                          "text": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "ControlGrid",
+            "id": "controlgrid_9cd1d",
+            "name": "cg_semantic_index",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "[7] Trigger Control has a Semantic Index"
+                  }
+                ]
+              }
+            },
+            "row": [
+              {
+                "type": "Row",
+                "id": "row_b6756",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control_08f35",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "Trigger"
+                          }
+                        ]
+                      }
+                    },
+                    "elementRef": "fieldimpl_2e3b6",
+                    "index": {
+                      "type": "SEMANTIC",
+                      "value": "2"
+                    },
+                    "dependentControls": {
+                      "screenElement": [
+                        {
+                          "idref": "controlgrid_cbae3",
+                          "masterValue": "false"
+                        },
+                        {
+                          "idref": "controlgrid_46f3f",
+                          "masterValue": "true"
+                        }
+                      ]
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "Row",
+                "id": "row_0c915",
+                "cell": [
+                  {
+                    "type": "ExpressionCell",
+                    "id": "expressioncell_82ffc",
+                    "name": "description",
+                    "expression": "\"\n* **false:** Control Grid 6.1 is shown and Control Grid 6.2 is not shown.\n* **true:** Control Grid 6.1 is not shown and Control Grid 6.2 is shown.\n\"",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "Description"
+                          }
+                        ]
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "ControlGrid",
+            "id": "controlgrid_cbae3",
+            "name": "cg_semantic_index_cg1",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "[7.1] Control Grid"
+                  }
+                ]
+              }
+            },
+            "row": [
+              {
+                "type": "Row",
+                "id": "row_889db",
+                "cell": [
+                  {
+                    "type": "TextCell",
+                    "id": "textcell_b5a48",
+                    "offset": {
+                      "lg": 0
+                    },
+                    "span": {
+                      "lg": 1
+                    },
+                    "name": "context",
+                    "content": {
+                      "text": [
+                        {
+                          "locale": "en",
+                          "text": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "ControlGrid",
+            "id": "controlgrid_46f3f",
+            "name": "cg_semantic_index_cg2",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "[7.2] Control Grid"
+                  }
+                ]
+              }
+            },
+            "row": [
+              {
+                "type": "Row",
+                "id": "row_fe469",
+                "cell": [
+                  {
+                    "type": "TextCell",
+                    "id": "textcell_d177d",
+                    "offset": {
+                      "lg": 0
+                    },
+                    "span": {
+                      "lg": 1
+                    },
+                    "name": "context",
+                    "content": {
+                      "text": [
+                        {
+                          "locale": "en",
+                          "text": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "screen_66dfa",
+        "name": "Screen4",
+        "screenElements": [
+          {
+            "type": "ControlGrid",
+            "id": "controlgrid_b500d",
+            "name": "cg_single_bool",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "[1] Trigger Control is a Boolean"
+                  }
+                ]
+              }
+            },
+            "row": [
+              {
+                "type": "Row",
+                "id": "row_b9377",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control_2f8a4",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "Trigger"
+                          }
+                        ]
+                      }
+                    },
+                    "elementRef": "F4",
+                    "dependentControls": {
+                      "screenElement": [
+                        {
+                          "idref": "customscreenelement_b17d2",
+                          "masterValue": null
+                        },
+                        {
+                          "idref": "customscreenelement_26429",
+                          "masterValue": "false"
+                        },
+                        {
+                          "idref": "customscreenelement_c4a02",
+                          "masterValue": "true"
+                        }
+                      ]
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "Row",
+                "id": "row_bb200",
+                "cell": [
+                  {
+                    "type": "ExpressionCell",
+                    "id": "expressioncell_767d8",
+                    "name": "description",
+                    "expression": "\"\n* **null:** Only Custom Screen Element 1.0 is shown.\n* **false:** Only Custom Screen Element 1.1 is shown.\n* **true:** Only Custom Screen Element 1.2 is shown.\n\"",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "Description"
+                          }
+                        ]
+                      }
+                    }
+                  }
+                ]
+              }
+            ],
+            "verticalAlignment": "BOTTOM"
+          },
+          {
+            "type": "CustomScreenElement",
+            "id": "customscreenelement_26429",
+            "name": "cg_single_bool_cse1",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "[1.1] Custom Screen Element"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "type": "CustomScreenElement",
+            "id": "customscreenelement_c4a02",
+            "name": "cg_single_bool_cse2",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "[1.2] Custom Screen Element"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "type": "CustomScreenElement",
+            "id": "customscreenelement_b17d2",
+            "name": "cg_single_bool_cse3",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "[1.0] Custom Screen Element"
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "fieldConfiguration": {
+      "field": [
+        {
+          "label": {
+            "type": "Multilingual",
+            "multilingualText": {
+              "text": [
+                {
+                  "locale": "en",
+                  "text": "bool"
+                }
+              ]
+            }
+          },
+          "initialValue": "false",
+          "elementRef": "F4"
+        },
+        {
+          "label": {
+            "type": "Multilingual",
+            "multilingualText": {
+              "text": [
+                {
+                  "locale": "en",
+                  "text": "enum"
+                }
+              ]
+            }
+          },
+          "exposition": "COMPACT",
+          "elementRef": "F5"
+        },
+        {
+          "label": {
+            "type": "Multilingual",
+            "multilingualText": {
+              "text": [
+                {
+                  "locale": "en",
+                  "text": "bool_cascade0"
+                }
+              ]
+            }
+          },
+          "elementRef": "F9"
+        },
+        {
+          "label": {
+            "type": "Multilingual",
+            "multilingualText": {
+              "text": [
+                {
+                  "locale": "en",
+                  "text": "bool0"
+                }
+              ]
+            }
+          },
+          "elementRef": "F12"
+        },
+        {
+          "label": {
+            "type": "Multilingual",
+            "multilingualText": {
+              "text": [
+                {
+                  "locale": "en",
+                  "text": "bool1"
+                }
+              ]
+            }
+          },
+          "elementRef": "F17"
+        },
+        {
+          "label": {
+            "type": "Multilingual",
+            "multilingualText": {
+              "text": [
+                {
+                  "locale": "en",
+                  "text": "bool_cascade1"
+                }
+              ]
+            }
+          },
+          "elementRef": "F18"
+        }
+      ]
+    },
+    "groupConfiguration": {},
+    "defaults": {
+      "buttonLabels": {
+        "ADD": {
+          "text": [
+            {
+              "locale": "en",
+              "text": "add"
+            }
+          ]
+        },
+        "COMMIT_ADD": {
+          "text": [
+            {
+              "locale": "en",
+              "text": "commit"
+            }
+          ]
+        },
+        "APPLY": {
+          "text": [
+            {
+              "locale": "en",
+              "text": "apply changes"
+            }
+          ]
+        },
+        "EDIT": {
+          "text": [
+            {
+              "locale": "en",
+              "text": "edit"
+            }
+          ]
+        },
+        "REMOVE": {
+          "text": [
+            {
+              "locale": "en",
+              "text": "remove"
+            }
+          ]
+        },
+        "VIEW": {
+          "text": [
+            {
+              "locale": "en",
+              "text": "open"
+            }
+          ]
+        },
+        "CANCEL": {
+          "text": [
+            {
+              "locale": "en",
+              "text": "cancel"
+            }
+          ]
+        },
+        "RETURN": {
+          "text": [
+            {
+              "locale": "en",
+              "text": "return"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

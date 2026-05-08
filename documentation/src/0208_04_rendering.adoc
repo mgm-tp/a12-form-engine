@@ -1,0 +1,134 @@
+////
+SPDX-License-Identifier: EUPL-1.2 OR LicenseRef-commercial
+
+Copyright (c) 2012-2026 mgm technology partners GmbH
+
+Dual License
+------------
+This source file is part of the mgm A12 Platform and available under
+a choice of two different licenses:
+
+1. Open-Source License – EUPL v1.2
+   You may redistribute and/or modify this file under the terms of the
+   European Union Public License, version 1.2 - see https://eupl.eu/.
+
+2. Commercial License
+   Alternatively, you may obtain a commercial license from
+   mgm technology partners GmbH, that permits use of this software
+   under different terms (including support and maintenance services).
+
+   Please contact a12-license@mgm-tp.com for more information.
+
+You must select and comply with exactly one of the above license options.
+
+Warranty Disclaimer (applies to either option)
+----------------------------------------------
+THIS SOFTWARE IS PROVIDED "AS IS" AND WITHOUT WARRANTY OF ANY KIND,
+WHETHER EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NON-INFRINGEMENT, EXCEPT WHERE SUCH DISCLAIMERS ARE HELD TO BE
+LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
+////
+
+[#form-engine_tutorials_rendering]
+= Rendering
+
+This chapter contains examples of how the rendering can be customized using the `FormModelMap` or `WidgetMap`. The Form Engine internally uses default variants of those maps but you can provide your own map implementations containing your customizations as Form Engine props. Then these will be used in place of the default ones.
+
+The `FormModelMap` allows customizations on the level of Form Model elements. You can use it, when you want to render something completely custom in place of a whole Form Model element and not just want to change some details.
+
+The `WidgetMap` enables you to customize the rendering on a low level by providing a way to replace the React components provided by the Widgets library and used in the Form Engine rendering with your custom widgets. You can use it when you want to change the details of the rendering of Form Model elements or even non-model elements like the content box.
+
+== Customizing Specific Elements
+
+In most cases you want to change only certain instances of an element. This could be e.g. only the input rendered for a certain field. To achieve this, you should use the annotations that can be defined for specific Form Model elements in the modeling tool.
+
+You can e.g. add an annotation with a certain name to a specific control. Then you could only render your custom component for elements that have an annotation with this name. Otherwise the default component would be rendered.
+
+[NOTE]
+====
+If you want to use model-level information inside the WidgetMap, you can wrap a React context around the respective element in the FormModelMap.
+====
+
+Next to the name, you can also define an annotation value. The value is not required but could be used to further customize the custom component with specific prop values, which could be encoded in the annotation value.
+
+== FormModelMap
+
+This example creates a custom `FormModelMap`, which renders instead of a section an image, if the FormModel element contains a special annotation.
+
+[source,tsx]
+----
+include::assets/typescript/form-engine/tutorials/rendering/custom-section.tsx[tags=content]
+----
+
+To register your custom `FormModelMap` you need to put it in your `Config`. It is mandatory to spread the `DefaultFormModelMap` into the map object. In the tutorial <<form-engine_tutorials_configuration_options,Configuration Options>> is an example about how to adapt and use a custom `Config`.
+
+[NOTE]
+====
+Although the menu entries in the form sub header navigation menu are created based on the navigation buttons placed in the Form Model and Screen sub header boxes, it is not possible to customize those menu entries using the 'NavigationButton' entry of the Form Model map.
+====
+[NOTE]
+====
+The Form Model Map entry _FieldOverviewColumn_ is only used in _Inline Repeats_. A customization of such field overview columns in _Detached Repeats_ and _Embedded Repeats_ is currently not possible.
+====
+
+[#form-engine_tutorials_rendering_enablements]
+=== Enablement of Custom Form Model Elements
+
+To take into account, if a custom Form Model element should be hidden, disabled or read-only, you can check the corresponding status using the following API functions:
+
+* Enablements.isDisabled
+* Enablements.isHidden
+* Enablements.isReadonly
+
+In the above example of a custom section these functions could be used to hide the rendered image, if the section should be hidden (e.g. by using a dependent control). The following code shows how to achieve this behavior:
+
+[source,tsx]
+----
+include::assets/typescript/form-engine/tutorials/rendering/custom-section-with-enablement.tsx[tags=content]
+----
+
+== WidgetMap
+
+In this example a custom `WidgetMap` is created, which renders an additional button next to the `TextLineStateless` widget, if the corresponding FormModel element contains a special annotation.
+
+[source,tsx]
+----
+include::assets/typescript/form-engine/tutorials/rendering/custom-widget.tsx[tags=content]
+----
+It is mandatory to spread the `DefaultWidgetMap` into the map object.
+
+To access the annotation of the FormModel element, it is necessary to provide a custom context, which makes this information available to the widget. This `CustomInputContext` has to be wrapped around the associated entry in the `FormModelMap`. Therefore it is necessary to register both maps - the custom `WidgetMap` and the custom `FormModelMap` - in your `Config`.
+
+If you do not need to access the FormModel element, you can omit the additional context and the `FormModelMap`.
+
+[NOTE]
+====
+The customization of a widget will only take effect, if the widget is rendered directly by the Form Engine. For example, the `TextLineStateless` widget renders a `Label` widget internally. This `Label` cannot be customized by providing your own `Label` widget in the map, but only through the corresponding property of the containing widget - in this case the `TextLineStateless`.
+====
+
+== Input Customization
+
+If you want to customize an input you can either overwrite the `Control` or `FieldOverviewColumn` entry in the `FormModelMap` or you overwrite individual widgets in the `WidgetMap`.
+
+The Form Engine provides API functions to simplify the customization of inputs.
+
+The following selectors exist currently:
+
+* `UiStateSelectors.InputLocalization.labelLocalizables`
+* `UiStateSelectors.InputLocalization.placeholderLocalizables`
+* `UiStateSelectors.InputLocalization.hintLocalizables`
+* `UiStateSelectors.InputLocalization.helperTextLocalizables`
+* `UiStateSelectors.InputLocalization.suffixTextLocalizables`
+* `ModelSelectors.FormModelSelectors.suffix`
+
+Please refer to the link:assets/typedoc/index.html[API documentation] for details about Input Localization and Form Model Selectors.
+
+In addition to the selectors we provide the React component `ValidationMessages` which renders either a single validation message or a list of messages. This component can be set at the respective widget prop to render the validation message container.
+Furthermore, you can use `renderTooltips`, which renders an error, warning, and hint tooltip depending on the given input.
+
+You can find in-depth examples in the devapp directory of the Form Engine repository under:
+
+* `devapp\src\customizations\custom-control.tsx`
+* `devapp\src\customizations\custom-input-as-widget.tsx`
+* `devapp\src\customizations\custom-widgets.tsx`

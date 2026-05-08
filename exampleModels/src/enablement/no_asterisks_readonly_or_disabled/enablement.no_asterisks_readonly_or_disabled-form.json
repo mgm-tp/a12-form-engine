@@ -1,0 +1,301 @@
+{
+  "header": {
+    "id": "enablement.no_asterisks_readonly_or_disabled-form",
+    "modelType": "form",
+    "modelVersion": "37.4.0",
+    "locales": [
+      {
+        "code": "en"
+      }
+    ],
+    "labels": [
+      {
+        "locale": "en",
+        "text": "Don't show asterisks on required fields when they are readonly or disabled"
+      }
+    ],
+    "annotations": [
+      {
+        "name": "roles",
+        "value": "admin"
+      }
+    ],
+    "modelReferences": [
+      {
+        "alias": "enablement.no_asterisks_readonly_or_disabled-document",
+        "modelType": "document",
+        "purpose": "data binding",
+        "reference": "enablement.no_asterisks_readonly_or_disabled-document"
+      }
+    ]
+  },
+  "content": {
+    "subHeaderBox": {
+      "id": "subHeaderBox1"
+    },
+    "footerBox": {
+      "id": "footerBox1"
+    },
+    "screens": [
+      {
+        "id": "screen_9dc72",
+        "name": "Screen 1",
+        "screenElements": [
+          {
+            "type": "Section",
+            "id": "section_45c5e",
+            "name": "Introduction",
+            "screenElements": [
+              {
+                "type": "ControlGrid",
+                "id": "controlgrid_bb7e6",
+                "name": "CG",
+                "row": [
+                  {
+                    "type": "Row",
+                    "id": "row_14ffc",
+                    "cell": [
+                      {
+                        "type": "TextCell",
+                        "id": "textcell_cc51a",
+                        "name": "IntroductionText",
+                        "decoration": "INFO",
+                        "content": {
+                          "text": [
+                            {
+                              "locale": "en",
+                              "text": "This example shows the different constellations between required fields and the readonly/disabled state. <br/>\nHow the readonly state for the  individual fields was or can be triggered is explained by their label.<br/>\nThe disabled state can be triggered using the sidebar."
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "MultiColumnSection",
+            "id": "multicolumnsection_00351",
+            "name": "FieldsAndSelection",
+            "layout": {
+              "lg": "6-6"
+            },
+            "screenElements": [
+              {
+                "type": "ControlGrid",
+                "id": "controlgrid_7d15b",
+                "name": "CG",
+                "title": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "Required Fields"
+                      }
+                    ]
+                  }
+                },
+                "row": [
+                  {
+                    "type": "Row",
+                    "id": "row_35faa",
+                    "cell": [
+                      {
+                        "type": "Control",
+                        "id": "control_d89b7",
+                        "elementRef": "field_870cb"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "Row",
+                    "id": "row_a17a3",
+                    "cell": [
+                      {
+                        "type": "Control",
+                        "id": "control_9a6fb",
+                        "elementRef": "field_a93b3"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "Row",
+                    "id": "row_baef9",
+                    "cell": [
+                      {
+                        "type": "Control",
+                        "id": "control_9e377",
+                        "readonly": true,
+                        "elementRef": "field_f56e5"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "Row",
+                    "id": "row_0363a",
+                    "cell": [
+                      {
+                        "type": "Control",
+                        "id": "control_4d511",
+                        "elementRef": "field_5c076"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "ControlGrid",
+                "id": "controlgrid_c9999",
+                "name": "Selection",
+                "title": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "Readonly Controls"
+                      }
+                    ]
+                  }
+                },
+                "row": [
+                  {
+                    "type": "Row",
+                    "id": "row_80af9",
+                    "cell": [
+                      {
+                        "type": "Control",
+                        "id": "control_58aa0",
+                        "elementRef": "field_7245c"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "Row",
+                    "id": "row_9dc24",
+                    "cell": [
+                      {
+                        "type": "Control",
+                        "id": "control_f0524",
+                        "elementRef": "field_833e7"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "ControlGrid",
+            "id": "controlgrid_394d8",
+            "name": "ReadonlyCG",
+            "readonly": true,
+            "layout": {
+              "lg": "6"
+            },
+            "row": [
+              {
+                "type": "Row",
+                "id": "row_fa314",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control_990ac",
+                    "elementRef": "field_4309c"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "InlineRepeat",
+            "id": "inlinerepeat_0337e",
+            "name": "Group_Repeat",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "Required Overview Columns"
+                  }
+                ]
+              }
+            },
+            "repeatOverviewColumn": [
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn_3cc5a",
+                "elementRef": "field_870cb"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn_30f2e",
+                "elementRef": "field_a93b3"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn_e4948",
+                "width": 1,
+                "readonly": true,
+                "elementRef": "field_f56e5"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn_a9a94",
+                "elementRef": "field_5c076"
+              }
+            ],
+            "groupRef": "group_ccbdb",
+            "enableAdd": false,
+            "enableRemove": false
+          }
+        ]
+      }
+    ],
+    "fieldConfiguration": {
+      "field": [
+        {
+          "dependentField": {
+            "masterField": "field_7245c",
+            "case": [
+              {
+                "masterValue": "true",
+                "readonly": true
+              }
+            ]
+          },
+          "elementRef": "field_870cb"
+        },
+        {
+          "initialValue": "true",
+          "elementRef": "field_7245c"
+        },
+        {
+          "initialValue": "true",
+          "elementRef": "field_833e7"
+        }
+      ]
+    },
+    "groupConfiguration": {
+      "group": [
+        {
+          "dependentGroup": {
+            "masterField": "field_833e7",
+            "case": [
+              {
+                "masterValue": "true",
+                "readonly": true
+              }
+            ]
+          },
+          "groupRef": "group_9a834"
+        }
+      ]
+    },
+    "defaults": {}
+  }
+}

@@ -1,0 +1,184 @@
+{
+  "header": {
+    "id": "MarkdownExpressionModel",
+    "modelType": "form",
+    "modelVersion": "37.4.0",
+    "locales": [
+      {
+        "code": "en"
+      }
+    ],
+    "labels": [
+      {
+        "text": "New Project Template",
+        "locale": "en"
+      }
+    ],
+    "modelReferences": [
+      {
+        "alias": "DM",
+        "modelType": "document",
+        "purpose": "data binding",
+        "reference": "PicusModel"
+      }
+    ],
+    "annotations": [
+      {
+        "name": "roles",
+        "value": "admin"
+      }
+    ]
+  },
+  "content": {
+    "subHeaderBox": {
+      "id": "subHeaderBox"
+    },
+    "footerBox": {
+      "id": "footerBox"
+    },
+    "screens": [
+      {
+        "id": "screen1",
+        "name": "Screen1",
+        "title": {
+          "type": "Multilingual",
+          "multilingualText": {
+            "text": [
+              {
+                "locale": "en",
+                "text": "New Project - Sample Screen"
+              }
+            ]
+          }
+        },
+        "screenElements": [
+          {
+            "type": "DetachedRepeat",
+            "id": "detachedrepeat-c1bd9",
+            "name": "dr1",
+            "repeatOverviewColumn": [
+              {
+                "type": "ExpressionRepeatOverviewColumn",
+                "id": "expressionOverviewColumn-1",
+                "label": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "expr1"
+                      }
+                    ]
+                  }
+                },
+                "name": "expr1",
+                "expression": "abcde \"  \"\nfghij \"  \"\n#bold blubb"
+              }
+            ],
+            "groupRef": "G3",
+            "enableAdd": true,
+            "enableRemove": true,
+            "enableReorder": true,
+            "detailScreen": {
+              "id": "screen-5ec06",
+              "name": "Details",
+              "screenElements": [
+                {
+                  "type": "ControlGrid",
+                  "id": "controlgrid-830a2",
+                  "name": "cg2",
+                  "row": [
+                    {
+                      "type": "Row",
+                      "id": "row-a49d2",
+                      "cell": [
+                        {
+                          "type": "Control",
+                          "id": "control-8dfa1",
+                          "elementRef": "F5"
+                        }
+                      ]
+                    }
+                  ],
+                  "verticalAlignment": "BOTTOM"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "fieldConfiguration": {},
+    "groupConfiguration": {},
+    "defaults": {
+      "buttonLabels": {
+        "ADD": {
+          "text": [
+            {
+              "locale": "en",
+              "text": "add"
+            }
+          ]
+        },
+        "COMMIT_ADD": {
+          "text": [
+            {
+              "locale": "en",
+              "text": "commit"
+            }
+          ]
+        },
+        "APPLY": {
+          "text": [
+            {
+              "locale": "en",
+              "text": "apply changes"
+            }
+          ]
+        },
+        "EDIT": {
+          "text": [
+            {
+              "locale": "en",
+              "text": "edit"
+            }
+          ]
+        },
+        "REMOVE": {
+          "text": [
+            {
+              "locale": "en",
+              "text": "remove"
+            }
+          ]
+        },
+        "VIEW": {
+          "text": [
+            {
+              "locale": "en",
+              "text": "open"
+            }
+          ]
+        },
+        "CANCEL": {
+          "text": [
+            {
+              "locale": "en",
+              "text": "cancel"
+            }
+          ]
+        },
+        "RETURN": {
+          "text": [
+            {
+              "locale": "en",
+              "text": "return"
+            }
+          ]
+        },
+        "UP": {},
+        "DOWN": {}
+      }
+    }
+  }
+}

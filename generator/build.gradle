@@ -1,0 +1,17 @@
+buildscript {
+    apply from: rootProject.file('scripts/buildscript-platforms.gradle')
+
+    dependencies {
+        classpath a12Libs.kernel.tool.model.migration
+        classpath libs.logback.classic
+    }
+}
+
+plugins {
+    alias(a12Plugins.plugins.prepare.models)
+}
+
+prepareModels {
+    inputDir = layout.projectDirectory.dir('src/test/resources')
+    outputDir = layout.buildDirectory.dir('models')
+}

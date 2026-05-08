@@ -1,0 +1,28 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Compile",
+			"type": "shell",
+			"command": "node --run typescript",
+			"group": "build",
+			"problemMatcher": "$tsc",
+			"presentation": {
+				"echo": false,
+				"reveal": "never"
+			}
+		},
+		{
+			"label": "Compile (watch)",
+			"type": "shell",
+			"command": "node --run watch",
+			"group": "build",
+			"isBackground": true,
+			"problemMatcher": "$tsc-watch",
+			"presentation": {
+				"echo": false,
+				"reveal": "never"
+			}
+		}
+	]
+}

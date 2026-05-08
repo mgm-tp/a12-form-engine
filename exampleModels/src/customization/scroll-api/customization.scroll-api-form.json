@@ -1,0 +1,138 @@
+{
+  "header": {
+    "id": "customization.scroll-api-form",
+    "modelType": "form",
+    "modelVersion": "37.4.0",
+    "locales": [
+      {
+        "code": "de"
+      },
+      {
+        "code": "en"
+      }
+    ],
+    "annotations": [
+      {
+        "name": "roles",
+        "value": "admin"
+      }
+    ],
+    "modelReferences": [
+      {
+        "alias": "DM",
+        "modelType": "document",
+        "purpose": "data binding",
+        "reference": "customization.scroll-api-document"
+      }
+    ]
+  },
+  "content": {
+    "subHeaderBox": {
+      "id": "subHeaderBox1",
+      "majorButtons": {
+        "button": [
+          {
+            "type": "EVENT",
+            "id": "button-9e83a",
+            "name": "scroll-to-top",
+            "buttonStyling": {
+              "label": {
+                "type": "Multilingual",
+                "multilingualText": {
+                  "text": [
+                    {
+                      "locale": "de",
+                      "text": "scroll-to-top"
+                    },
+                    {
+                      "locale": "en",
+                      "text": "scroll-to-top"
+                    }
+                  ]
+                }
+              },
+              "priority": "SECONDARY"
+            },
+            "event": "scroll-to-top",
+            "scope": "ALWAYS"
+          }
+        ]
+      }
+    },
+    "footerBox": {
+      "id": "footerBox1"
+    },
+    "screens": [
+      {
+        "id": "screen1",
+        "name": "Screen1",
+        "screenElements": [
+          {
+            "type": "ControlGrid",
+            "id": "controlgrid-512c7",
+            "name": "cg",
+            "row": [
+              {
+                "type": "Row",
+                "id": "row-294c3",
+                "cell": [
+                  {
+                    "type": "TextCell",
+                    "id": "textcell-2d2cf",
+                    "name": "description",
+                    "content": {
+                      "text": [
+                        {
+                          "locale": "en",
+                          "text": "Click the scroll-to-top button to scroll to top.\n\nThe remaining text is only here to enforce the vertical scrollbar.\n\n<br><br>dummy<br><br>dummy<br><br>dummy<br><br>dummy<br><br>dummy<br><br>dummy<br><br>dummy<br><br>dummy<br><br>dummy<br><br>dummy<br><br>dummy<br><br>dummy<br><br>dummy<br><br>dummy<br><br>dummy<br><br>dummy<br><br>dummy<br><br>dummy<br><br>dummy<br><br>dummy<br><br>dummy<br><br>dummy<br><br>dummy<br><br>dummy<br><br>dummy<br><br>dummy<br><br>dummy<br><br>dummy<br><br>dummy<br><br>dummy<br><br>dummy<br><br>dummy<br><br>dummy<br><br>dummy<br><br>dummy<br><br>dummy"
+                        }
+                      ]
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "Row",
+                "id": "row_4beea",
+                "name": "Focus Element",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control_abcd9",
+                    "elementRef": "field_13ec5"
+                  }
+                ]
+              }
+            ],
+            "verticalAlignment": "TOP"
+          }
+        ],
+        "initiallyFocusedElementId": "control_abcd9"
+      }
+    ],
+    "fieldConfiguration": {
+      "field": [
+        {
+          "label": {
+            "type": "Multilingual",
+            "multilingualText": {
+              "text": [
+                {
+                  "locale": "de",
+                  "text": "Dieses Feld ist als initiallyFocusedElementId modelliert"
+                },
+                {
+                  "locale": "en",
+                  "text": "This control field is modeled as initiallyFocusedElementId"
+                }
+              ]
+            }
+          },
+          "elementRef": "field_13ec5"
+        }
+      ]
+    },
+    "groupConfiguration": {},
+    "defaults": {}
+  }
+}

@@ -1,0 +1,358 @@
+{
+  "header": {
+    "id": "customization.custom-conditions-form",
+    "modelType": "form",
+    "modelVersion": "37.4.0",
+    "locales": [
+      {
+        "code": "en"
+      }
+    ],
+    "annotations": [
+      {
+        "name": "roles",
+        "value": "admin"
+      }
+    ],
+    "modelReferences": [
+      {
+        "alias": "DM",
+        "modelType": "document",
+        "purpose": "data binding",
+        "reference": "customization.custom-conditions-document"
+      }
+    ]
+  },
+  "content": {
+    "subHeaderBox": {
+      "id": "subHeaderBox1"
+    },
+    "footerBox": {
+      "id": "footerBox1"
+    },
+    "screens": [
+      {
+        "id": "screen1",
+        "name": "Screen1",
+        "screenElements": [
+          {
+            "type": "ControlGrid",
+            "id": "controlgrid-47d47",
+            "name": "cg-1",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "Custom Condition Example"
+                  }
+                ]
+              }
+            },
+            "row": [
+              {
+                "type": "Row",
+                "id": "row-e9f74",
+                "cell": [
+                  {
+                    "type": "TextCell",
+                    "id": "textcell-00ad0",
+                    "offset": {
+                      "lg": 0
+                    },
+                    "span": {
+                      "lg": 1
+                    },
+                    "name": "text-1",
+                    "content": {
+                      "text": [
+                        {
+                          "locale": "en",
+                          "text": "Fill \"abc\" into below field and the custom condition should fire."
+                        }
+                      ]
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "Row",
+                "id": "row-85100",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control-e2b82",
+                    "offset": {
+                      "lg": 0
+                    },
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "Sample Field"
+                          }
+                        ]
+                      }
+                    },
+                    "elementRef": "field_72492"
+                  }
+                ]
+              }
+            ],
+            "verticalAlignment": "BOTTOM"
+          },
+          {
+            "type": "ControlGrid",
+            "id": "controlgrid-18f52",
+            "name": "cg-2",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "Custom Condition Example with Computations"
+                  }
+                ]
+              }
+            },
+            "row": [
+              {
+                "type": "Row",
+                "id": "row-9d31d",
+                "cell": [
+                  {
+                    "type": "TextCell",
+                    "id": "textcell-a61d2",
+                    "name": "text-1",
+                    "content": {
+                      "text": [
+                        {
+                          "locale": "en",
+                          "text": "Fill \"abc\" into below field and the custom condition should fire for the computed field."
+                        }
+                      ]
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "Row",
+                "id": "row-87ded",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control-51535",
+                    "elementRef": "field_a46a3"
+                  }
+                ]
+              },
+              {
+                "type": "Row",
+                "id": "row-a86a1",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control-1ac9c",
+                    "elementRef": "field_9f867"
+                  }
+                ]
+              }
+            ],
+            "verticalAlignment": "BOTTOM"
+          },
+          {
+            "type": "ControlGrid",
+            "id": "controlgrid-56698",
+            "name": "cg-3",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "Custom Condition Example for MultiSelects"
+                  }
+                ]
+              }
+            },
+            "row": [
+              {
+                "type": "Row",
+                "id": "row-4e6df",
+                "cell": [
+                  {
+                    "type": "TextCell",
+                    "id": "textcell-17a3d",
+                    "name": "text-1",
+                    "content": {
+                      "text": [
+                        {
+                          "locale": "en",
+                          "text": "Check the first entry in below field and the custom condition should fire."
+                        }
+                      ]
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "Row",
+                "id": "row-a8e7b",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control-c8fc6",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "MultiSelect"
+                          }
+                        ]
+                      }
+                    },
+                    "elementRef": "group_e9d30"
+                  }
+                ]
+              }
+            ],
+            "verticalAlignment": "BOTTOM"
+          },
+          {
+            "type": "ControlGrid",
+            "id": "controlgrid-45ba2",
+            "name": "cg-4",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "Custom Condition Example for Dependencies"
+                  }
+                ]
+              }
+            },
+            "row": [
+              {
+                "type": "Row",
+                "id": "row-ff4a9",
+                "cell": [
+                  {
+                    "type": "TextCell",
+                    "id": "textcell-cdf73",
+                    "name": "text-1",
+                    "content": {
+                      "text": [
+                        {
+                          "locale": "en",
+                          "text": "Check the boolean field, which should set the value 'abc' in the string field. Afterwards the custom condition should fire."
+                        }
+                      ]
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "Row",
+                "id": "row-e71a5",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control-69f46",
+                    "elementRef": "field_cbc37"
+                  }
+                ]
+              },
+              {
+                "type": "Row",
+                "id": "row-e7a9f",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control-8b532",
+                    "elementRef": "field_df912"
+                  }
+                ]
+              }
+            ],
+            "verticalAlignment": "BOTTOM"
+          },
+          {
+            "type": "ControlGrid",
+            "id": "controlgrid-4992d",
+            "name": "cg-5",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "Custom Condition Example for Attachment"
+                  }
+                ]
+              }
+            },
+            "row": [
+              {
+                "type": "Row",
+                "id": "row-edcfe",
+                "cell": [
+                  {
+                    "type": "TextCell",
+                    "id": "textcell-a5fa0",
+                    "name": "text-1",
+                    "content": {
+                      "text": [
+                        {
+                          "locale": "en",
+                          "text": "Upload a file with the name 'abc.png' and the custom condition should fire."
+                        }
+                      ]
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "Row",
+                "id": "row-92d47",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control-c5e3e",
+                    "elementRef": "group_78413"
+                  }
+                ]
+              }
+            ],
+            "verticalAlignment": "BOTTOM"
+          }
+        ]
+      }
+    ],
+    "fieldConfiguration": {
+      "field": [
+        {
+          "dependentField": {
+            "masterField": "field_cbc37",
+            "case": [
+              {
+                "masterValue": "true",
+                "value": "abc"
+              }
+            ]
+          },
+          "elementRef": "field_df912"
+        }
+      ]
+    },
+    "groupConfiguration": {},
+    "defaults": {}
+  }
+}

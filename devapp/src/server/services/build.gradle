@@ -1,0 +1,56 @@
+buildscript {
+    dependencies {
+        classpath platform(a12Libs.dataservices.bom)
+        classpath 'org.springframework.boot:spring-boot-gradle-plugin'
+    }
+}
+
+plugins {
+    id 'java'
+}
+
+// Apply the spring boot plugin with the version resolved in the buildscript dependencies
+apply plugin: 'org.springframework.boot'
+
+dependencies {
+    // A12 Dataservices
+    implementation a12Libs.dataservices.server.app
+}
+
+layout.buildDirectory = file('../../../dist/server')
+
+tasks.register("_clean", Delete) {
+    delete layout.buildDirectory
+}
+clean.dependsOn(tasks.named('_clean'))
+
+springBoot {
+    mainClass = 'com.mgmtp.a12.formengine.devapp.FormEngineDevappServerApplication'
+}
+
+bootJar {
+    archiveBaseName = 'form-engine-devapp'
+    includeEmptyDirs = false
+
+    from('./rpcRequests') {
+        include '*.json'
+        into '/BOOT-INF/classes/devapp/rpcRequests'
+    }
+
+    from('../../../dist/models') {
+        include '*.json'
+        into '/BOOT-INF/classes/devapp/models'
+    }
+}
+
+tasks.register("runJar", JavaExec) {
+    dependsOn(tasks.named('bootJar'))
+
+    workingDir = new File("${projectDir.path}/../../../")
+
+    systemProperty 'server.port', '14001'
+    systemProperty 'server.data.location', './dist/server/data'
+
+    mainClass = '-jar'
+    args bootJar.archiveFile.get().toString()
+}

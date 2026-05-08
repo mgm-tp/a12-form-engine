@@ -1,0 +1,287 @@
+{
+  "header": {
+    "id": "TestModel",
+    "modelType": "document",
+    "modelVersion": "28.4.0",
+    "locales": [
+      {
+        "code": "en"
+      }
+    ],
+    "labels": [],
+    "annotations": [],
+    "modelReferences": []
+  },
+  "content": {
+    "modelInfo": {
+      "name": "TestModel",
+      "immutable": false
+    },
+    "modelConfig": {
+      "decimalSeparator": ".",
+      "timeZone": "UTC",
+      "conditionLanguage": {
+        "code": "en_US"
+      }
+    },
+    "typeDefinitions": [
+      {
+        "id": "typedef_fc8aa9d2-8796-47e3-9d5b-99d9935b39ed",
+        "name": "TypeDefStrinWithAutocomplete",
+        "fieldType": {
+          "type": "StringType"
+        }
+      },
+      {
+        "id": "typedef_136e4ad4-86dc-4907-9d2c-f3211db96ed2",
+        "name": "TypeDefCustom",
+        "fieldType": {
+          "type": "CustomFieldType",
+          "CustomFieldType": {
+            "name": "CustomTypeDef"
+          }
+        }
+      },
+      {
+        "id": "typedef_5c2a65dc-d59c-4a0f-b497-add5f9a798e4",
+        "name": "TypeDefNumber",
+        "fieldType": {
+          "type": "NumberType"
+        }
+      }
+    ],
+    "modelRoot": {
+      "rootGroups": [
+        {
+          "type": "Group",
+          "id": "group_95a2f",
+          "name": "root",
+          "Group": {
+            "repeatability": 1,
+            "elements": [
+              {
+                "type": "Field",
+                "id": "field_e0e10",
+                "name": "field1",
+                "Field": {
+                  "fieldType": {
+                    "type": "StringType"
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": ""
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Group",
+                "id": "group_fc257",
+                "name": "repeat1",
+                "Group": {
+                  "repeatability": 2,
+                  "elements": [
+                    {
+                      "type": "Field",
+                      "id": "field_4810c",
+                      "name": "field2",
+                      "Field": {
+                        "fieldType": {
+                          "type": "StringType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": ""
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Group",
+                      "id": "group_fa909",
+                      "name": "repeat3",
+                      "Group": {
+                        "repeatability": 2,
+                        "elements": [
+                          {
+                            "type": "Field",
+                            "id": "field_30af7",
+                            "name": "field3",
+                            "Field": {
+                              "fieldType": {
+                                "type": "StringType"
+                              },
+                              "label": [
+                                {
+                                  "locale": "en",
+                                  "text": ""
+                                }
+                              ]
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Group",
+                "id": "group_4d36a",
+                "name": "repeat2",
+                "Group": {
+                  "repeatability": 2,
+                  "elements": [
+                    {
+                      "type": "Field",
+                      "id": "field_c2fe7",
+                      "name": "field4",
+                      "Field": {
+                        "fieldType": {
+                          "type": "StringType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": ""
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Group",
+                "id": "group_9b463",
+                "name": "repeat4",
+                "Group": {
+                  "repeatability": 2,
+                  "indexFieldName": "field5",
+                  "elements": [
+                    {
+                      "type": "Field",
+                      "id": "field_014fb",
+                      "name": "field5",
+                      "Field": {
+                        "fieldType": {
+                          "type": "StringType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": ""
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Field",
+                "id": "field_69868",
+                "name": "numberField",
+                "Field": {
+                  "fieldType": {
+                    "type": "NumberType"
+                  }
+                }
+              },
+              {
+                "type": "Field",
+                "id": "field_31657",
+                "name": "dateField",
+                "Field": {
+                  "fieldType": {
+                    "type": "DateType",
+                    "DateType": {
+                      "format": "yyyy-MM-dd"
+                    }
+                  }
+                }
+              },
+              {
+                "type": "Field",
+                "id": "field_890c8",
+                "name": "dateTimeField",
+                "Field": {
+                  "fieldType": {
+                    "type": "DateTimeType",
+                    "DateTimeType": {
+                      "format": "yyyy-MM-dd'T'HH:mm:ss"
+                    }
+                  }
+                }
+              },
+              {
+                "type": "Field",
+                "id": "field_b8cd9",
+                "name": "booleanField",
+                "Field": {
+                  "fieldType": {
+                    "type": "BooleanType"
+                  }
+                }
+              },
+              {
+                "type": "Field",
+                "id": "field_238fe",
+                "name": "TypeDefString",
+                "Field": {
+                  "fieldType": {
+                    "type": "TypeDefType",
+                    "TypeDefType": {
+                      "typeDefinitionId": "typedef_fc8aa9d2-8796-47e3-9d5b-99d9935b39ed"
+                    }
+                  }
+                }
+              },
+              {
+                "type": "Field",
+                "id": "field_3f32e",
+                "name": "CustomField",
+                "Field": {
+                  "fieldType": {
+                    "type": "CustomFieldType",
+                    "CustomFieldType": {
+                      "name": "CustomStringField"
+                    }
+                  }
+                }
+              },
+              {
+                "type": "Field",
+                "id": "field_c01c2",
+                "name": "TypeDefCustom",
+                "Field": {
+                  "fieldType": {
+                    "type": "TypeDefType",
+                    "TypeDefType": {
+                      "typeDefinitionId": "typedef_136e4ad4-86dc-4907-9d2c-f3211db96ed2"
+                    }
+                  }
+                }
+              },
+              {
+                "type": "Field",
+                "id": "field_17778",
+                "name": "TypeDefNumber",
+                "Field": {
+                  "fieldType": {
+                    "type": "TypeDefType",
+                    "TypeDefType": {
+                      "typeDefinitionId": "typedef_5c2a65dc-d59c-4a0f-b497-add5f9a798e4"
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

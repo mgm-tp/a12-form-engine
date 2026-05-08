@@ -1,0 +1,330 @@
+////
+SPDX-License-Identifier: EUPL-1.2 OR LicenseRef-commercial
+
+Copyright (c) 2012-2026 mgm technology partners GmbH
+
+Dual License
+------------
+This source file is part of the mgm A12 Platform and available under
+a choice of two different licenses:
+
+1. Open-Source License – EUPL v1.2
+   You may redistribute and/or modify this file under the terms of the
+   European Union Public License, version 1.2 - see https://eupl.eu/.
+
+2. Commercial License
+   Alternatively, you may obtain a commercial license from
+   mgm technology partners GmbH, that permits use of this software
+   under different terms (including support and maintenance services).
+
+   Please contact a12-license@mgm-tp.com for more information.
+
+You must select and comply with exactly one of the above license options.
+
+Warranty Disclaimer (applies to either option)
+----------------------------------------------
+THIS SOFTWARE IS PROVIDED "AS IS" AND WITHOUT WARRANTY OF ANY KIND,
+WHETHER EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NON-INFRINGEMENT, EXCEPT WHERE SUCH DISCLAIMERS ARE HELD TO BE
+LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
+////
+
+= 2025.06
+
+== Breaking Changes
+
+=== Integration of Dependencies
+The versions of the A12 dependencies have been increased. Please see documentation of the respective components for further migration instructions.
+
+=== UIState Slice Is Now Created On-Demand
+
+Until now, the Form Engine initialized the default DataHolder of a pushed activity with a slice that holds the default UIState. Since this release, the Form Engine reducer will resolve the UIState itself when it doesn't exist yet.
+As a result, this means that when opening a new form, querying the redux state for the UIState slice will return `undefined` (until an action reaches the reducer that will actually set something in there).
+
+In case you have custom reducers that expect the UIState to exist, make sure to handle this case by creating the default UIState yourself like so:
+
+[source,tsx]
+----
+import { createUIState } from "@com.mgmtp.a12.formengine/formengine-core/lib/back-end/store/index.js";
+
+export const myReducer: ActivityReducers.DataReducer = {
+	reduce(dhs, action, defaultDh) {
+
+		// when necessary
+		createUIState(/* partial ui state */)
+	}
+};
+----
+
+=== Typing For EngineStore.SortingState Was Changed
+
+The property `orderPath` of the interface `EngineStore.SortingState` was changed from `string` to `ModelPath`. This change was done to prevent runtime errors due to passing of arbitrary strings (that are not valid ModelPaths).
+Additionally, it aligns the typing of the state with the typing of the action that sets it, `Events.Repeat.sortingChange`.
+
+In case you are affected by this change (for example when setting up a custom initial UI state), use the `ModelPath` API to create a valid path like so:
+
+[source,tsx]
+----
+// old
+orderPath: "form/model/path/to/sorted/column"
+
+// new
+import { ModelPath } from "@com.mgmtp.a12.base/base-model-api/lib/main/model";
+
+orderPath: ModelPath.fromString("form/model/path/to/sorted/column")
+----
+
+In case your code already used a `ModelPath` before, and you had to convert it into a `string`, you can remove the conversion entirely.
+
+=== Import For CorrectionModeItem Was Changed
+
+The import for the type `CorrectionModeItem` was changed to resolve a dependency cycle. If necessary, update your import path accordingly:
+
+[source,tsx]
+----
+// old
+import { CorrectionModeItem } from "@com.mgmtp.a12.formengine/formengine-core/lib/view/internal/components/form-engine/correction-mode/CorrectionModeItem";
+
+// new
+import { CorrectionModeItem } from "@com.mgmtp.a12.formengine/formengine-core/lib/back-end/store";
+----
+
+==== Codemod command
+
+A codemod command is provided to rewrite the affected import statements. Make sure to review the changes after running it.
+
+To run the command, run `npx @com.mgmtp.a12.formengine/formengine-codemod moveCorrectionModeItem <tsConfigDirectory>`.
+
+=== Type-Only Exports Are Now Marked As Such
+
+A12 Form Engine now correctly exports all type-only APIs using the `type` keyword, which can improve bundling. While there is no change in functionality, this may be a breaking change for some of your import statements, depending on how you create type aliases.
+
+Consider the following example:
+
+[source,tsx]
+----
+import { DispatchConfiguration } from "@com.mgmtp.a12.formengine/formengine-core/lib/view";
+
+// creating a type alias
+type RepeatConfig = DispatchConfiguration.Repeat;
+
+// different syntax, same result!
+import RepeatConfig = DispatchConfiguration.Repeat
+----
+
+Using the second syntax (creating a type alias via the `import` keyword) will not work anymore for the following APIs:
+
+[source,tsx]
+----
+import { DispatchConfiguration, FormModelMap } from "@com.mgmtp.a12.formengine/formengine-core/lib/view";
+----
+
+To migrate these cases, simply use the first syntax instead (creating a type alias via the `type` keyword).
+
+==== Codemod command
+
+A codemod command is provided to rewrite all affected import statements. Make sure to review the changes after running it.
+
+To run the command, run `npx @com.mgmtp.a12.formengine/formengine-codemod imports <tsConfigDirectory>`.
+
+=== EnableLegacyBooleanHandling Removed
+
+Following its deprecation, the flag `enableLegacyBooleanHandling` was removed without replacement. As a consequence, Boolean values will now use three-value logic (true, false and null). For two-value logic, use Confirms instead.
+
+Please also refer to its link:/docs/2024.06/ext0/FORM_ENGINE/formengine-documentation-bundle/index.html#_boolean_value_handling[deprecation note,role=external,window=_blank] for migration instructions.
+
+=== PlatformSingleDocumentDataProvider Uses Query API By Default
+
+The `PlatformSingleDocumentDataProvider` now uses the link:/docs/DATA_SERVICES/dataservices-documentation-src/index.html#_query_api[Query API of A12 Data Services] by default. Consequently, the experimental option to enable it was removed. If necessary, simply remove it from your configuration.
+
+=== React 19
+
+We dropped the support for React 18 and older and now require React 19 as our peerDependency. This means you have to perform the React 19 migration, which is described in great detail in the official link:https://react.dev/blog/2024/04/25/react-19-upgrade-guide[React 19 Upgrade Guide]. They have codemods that should make the transition straightforward.
+
+Additionally, we have decided to not also include a Redux update, to minimize the migration effort. The "react-redux" library does not have React 19 as a peerDependency, but still works fine with it. One solution is to override the dependency in your package.json. You also have to update the corresponding "@types/react-redux" typings to at least 7.1.34.
+
+[source,json]
+----
+{
+	"overrides": {
+		"react-redux": {
+			"react": "^19"
+		}
+	},
+	"devDependencies": {
+		"@types/react-redux": 7.1.34
+	}
+}
+----
+
+=== Drop Java 17 Support
+
+The java libraries of A12 Form Engine are now compiled with and for Java 21.
+
+=== Embedded Attachments API removed
+
+Following its deprecation, the `embeddedAttachmentLoader` (and corresponding localization keys) was removed without a direct replacement. Instead, consider using the `platformAttachmentLoader` or writing your own `AttachmentLoader` implementation.
+
+==== Restoring Embedded Attachments via Customization
+
+[WARNING]
+====
+Embedding attachments in documents directly (e.g. by using base64 encoding) can lead to performance problems (depending on the file size).
+====
+
+While not recommended, the functionality of embedding attachments into documents can technically be restored by using the new `SelectorMap` customization API of the Form Engine.
+Generally, the following steps need to be taken:
+
+* Implement an `AttachmentLoader` that embeds files directly into the document (for example, by encoding files into base64 strings). An example for this can be found in the Devapp of the Form Engine.
+
+[source,tsx]
+----
+import { formEngineSagas } from "@com.mgmtp.a12.formengine/formengine-core/lib/client-extensions";
+
+const customEmbeddedAttachmentLoader = /* impl here */
+
+// when registering sagas in your application setup
+formEngineSagas({
+	attachmentLoader: customEmbeddedAttachmentLoader
+})
+----
+
+* In your own `SelectorMap`, customize the `attachmentThumbnail` selector to read thumbnails from the attachment itself instead of looking into the state.
+
+[source,tsx]
+----
+import {
+	DefaultSelectorMap,
+	type SelectorMap
+} from "@com.mgmtp.a12.formengine/formengine-core/lib/view";
+
+// like for the WidgetMap, make sure to always spread the default map!
+export const CustomSelectorMap: SelectorMap = {
+	...DefaultSelectorMap,
+	attachmentThumbnail(attachment) {
+		return state =>
+			attachment.content?.startsWith("data:image/")
+				? attachment.content
+				: undefined;
+	}
+};
+----
+By default, the thumbnail selector assumes that thumbnails for attachments can be queried from the state by their id.
+Since we customized the AttachmentLoader to encode the binary data into the attachment group itself (as a data URI inside the content field), we can just extract that field.
+
+Note that only data URIs for images are actually returned to prevent broken image errors (the browser can not display non-image data inside an image tag).
+
+* Customize the FormEngine view component and pass your `SelectorMap` (in the same way as `WidgetMap` or `FormModelMap`).
+
+[source,tsx]
+----
+import { FormEngineViews } from "@com.mgmtp.a12.formengine/formengine-core/lib/client-extensions";
+
+const customConfig: Partial<Config> = {
+	selectorMap: CustomSelectorMap,
+	
+	// WidgetMap, FormModelMap and more...
+};
+
+function CustomFormEngine(props: View) {
+	return (
+		<FormEngineViews.FormEngine {...props} {...customConfig} />
+	);
+}
+----
+
+=== AttachmentLoader interface changed
+
+Previously, deleting attachments was implemented as "uploading a null file", causing the implementers of the `uploadFiles` method to specifically handle `null` values.
+Now, the `AttachmentLoader` interface was changed to better support deletion of attachments. Specifically:
+
+- the `uploadFiles` method does not allow uploading `null` anymore, only `File` objects.
+- a new, optional method `deleteFile` method is introduced that can be implemented if necessary.
+
+[NOTE]
+====
+Note that the actual value change in the document is not influenced by implementing the `deleteFile` method!
+Regardless of whether that method exists or not, deleting an attachment in the Form Engine will *always* trigger a value change that sets an empty attachment object into the document.
+
+Logic implemented in `deleteFile` is only intended for "deletion requests" to a server.
+====
+
+==== Migration path
+
+The migration effort depends on whether your `AttachmentLoader` implementation needs to handle attachment deletion (e.g. by performing a request).
+
+If not, remove any logic from your `uploadFiles` method that handles `null` values. The Form Engine will only call `uploadFiles` when actually uploading something, so the file parameter will always be a javascript `File` object.
+If your `AttachmentLoader` previously handled `null` values in any other way (e.g. performing some request like `/api/delete`), move this logic to the new `deleteFile` method instead.
+
+=== Remove option to customize engineStateSelector in Form Engine middlewares
+
+With Form Engine 37.0.0, we link:/docs/2024.06/ext0/FORM_ENGINE/formengine-documentation-bundle/index.html#_enginestateselector_api[deprecated, role=external,window=_blank] the customization of the Form Engine middlewares with a custom engineStateSelector. This API is now removed without replacement as it was broken and became obsolete since the Form Engine now depends on Client. The FormEngineSelectors itself are not deprecated or removed.
+
+=== Remove unused Events.restoreBackup action
+
+This action was removed since it had no effect in the Form Engine. If you dispatched it, check if it was used in sagas, middlewares or reducers on your side and potentially copy the action. If not, it can be removed.
+
+=== Hidden texts changed for Attachment Input 
+
+In the past the Attachment input received hidden texts for different parts of the input component. These texts always contained the name of the uploaded file, so that it can be read by the screen reader.
+
+To improve accessibility the text was changed to either
+
+- "Download <File Name>" or
+- "Replace <File Name>"
+
+depending on the default action of the input. Furthermore, these texts are now provided via
+
+- the `title` property of the `DefaultFileUpload` widget (if the exposition is set to "File Preview")
+- the `title` property of the link in the `DefaultFileUpload` widget (if the exposition is set to "Compact")
+
+In the past they were set on multiple separate properties at the same time. The following table gives an overview of how the properties have changed:
+
+[cols="h,1,1,1,1"]
+|===
+|Widget |Property |Before |After (Exposition: File Preview) |After (Exposition: Compact)
+
+|ResponsiveImageContainer
+|alt
+|*<File Name>*
+|empty string
+|empty string
+
+|
+|title
+|*<File Name>*
+|_not used_
+|_not used_
+
+|DefaultFileUpload
+|placeholderIconTitle
+|*<File Name>*
+|_not used_
+|_not used_
+
+|
+|title
+|_not used_
+|*Action hint + <File Name>*
+|empty string
+
+|
+|fileOptions.linkProps.title
+|_not used_
+|_not used_
+|*Action hint + <File Name>*
+
+|===
+
+If you are customizing the affected properties of either the `ResponsiveImageContainer` or the `DefaultFileUpload` widget, please check whether your custom implementation needs to be adapted.
+
+=== Migration to ESM
+
+The npm artifacts `@com.mgmtp.a12.formengine/formengine-core`, `@com.mgmtp.a12.formengine/formengine-model-migration` and `@com.mgmtp.a12.formengine/form-model-generator` were migrated from CommonJS to link:https://nodejs.org/api/esm.html#modules-ecmascript-modules[ESM]. When using Node `22.12+` and modern build tools, there should be no changes necessary to your bundler setup. 
+
+Migrating your own application to ESM is not required, but recommended. Consult the documentation of your bundler for specifics.
+
+=== Updating to ES2024
+
+The javascript output of the npm artifacts was updated from `ES2020` to `ES2024` to be able to use latest language features. When using supported browsers, there is no change necessary. If support for older browsers is required, make sure to include necessary polyfills.

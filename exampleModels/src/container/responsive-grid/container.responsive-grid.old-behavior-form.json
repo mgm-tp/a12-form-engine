@@ -1,0 +1,230 @@
+{
+  "header": {
+    "id": "container.responsive-grid.old-behavior-form",
+    "modelType": "form",
+    "modelVersion": "37.4.0",
+    "locales": [
+      {
+        "code": "en"
+      }
+    ],
+    "annotations": [
+      {
+        "name": "roles",
+        "value": "admin"
+      }
+    ],
+    "modelReferences": [
+      {
+        "alias": "DM",
+        "modelType": "document",
+        "purpose": "data binding",
+        "reference": "container.responsive-grid-document"
+      }
+    ]
+  },
+  "content": {
+    "subHeaderBox": {
+      "id": "subHeaderBox1"
+    },
+    "footerBox": {
+      "id": "footerBox1"
+    },
+    "screens": [
+      {
+        "id": "screen1",
+        "name": "Screen1",
+        "screenElements": [
+          {
+            "type": "ControlGrid",
+            "id": "controlgrid-e693c",
+            "name": "cgExplanation",
+            "row": [
+              {
+                "type": "Row",
+                "id": "row-9e888",
+                "cell": [
+                  {
+                    "type": "TextCell",
+                    "id": "textcell-c477b",
+                    "name": "explanation",
+                    "content": {
+                      "text": [
+                        {
+                          "locale": "en",
+                          "text": "This model shows the old responsive behavior of the layout grid.\n<br/>\nWhen the horizontal space gets smaller, the cell size and wrapping behaves in a certain way. In the past this behavior was determined by a lookup table. \n<br/>\nIn this model the behavior was \"baked\" into the model by writing the lookup table results into the grid layout configuration.\n<br/>\nThis can also be achived during the migration from form model version 30.0.0 to 31.0.0."
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            ],
+            "verticalAlignment": "TOP"
+          },
+          {
+            "type": "ControlGrid",
+            "id": "controlgrid-e6987",
+            "name": "cg1",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "control grid 1"
+                  }
+                ]
+              }
+            },
+            "layout": {
+              "lg": "3-3-6",
+              "md": "6-6-6",
+              "sm": "6-6-12"
+            },
+            "row": [
+              {
+                "type": "Row",
+                "id": "row-5dbf5",
+                "name": "row",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control-dd411",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "lg: 3, md: 6, sm: 6"
+                          }
+                        ]
+                      }
+                    },
+                    "elementRef": "field_e3aeb"
+                  },
+                  {
+                    "type": "Control",
+                    "id": "control-d82d2",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "lg: 3, md: 6, sm: 6"
+                          }
+                        ]
+                      }
+                    },
+                    "elementRef": "field_ac1f3"
+                  },
+                  {
+                    "type": "Control",
+                    "id": "control-63009",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "lg: 6, md: 6, sm: 12"
+                          }
+                        ]
+                      }
+                    },
+                    "elementRef": "field_0d186"
+                  }
+                ]
+              }
+            ],
+            "verticalAlignment": "TOP"
+          },
+          {
+            "type": "ControlGrid",
+            "id": "controlgrid-d3519",
+            "name": "cg2",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "control grid 2"
+                  }
+                ]
+              }
+            },
+            "layout": {
+              "lg": "5-3-4",
+              "md": "6-6-4",
+              "sm": "12-6-6"
+            },
+            "row": [
+              {
+                "type": "Row",
+                "id": "row-a3790",
+                "name": "row",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control-89920",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "lg: 5, md: 6, sm: 12"
+                          }
+                        ]
+                      }
+                    },
+                    "elementRef": "field_0c9bf"
+                  },
+                  {
+                    "type": "Control",
+                    "id": "control-69d41",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "lg: 3, md: 6, sm: 6"
+                          }
+                        ]
+                      }
+                    },
+                    "elementRef": "field_2ee07"
+                  },
+                  {
+                    "type": "Control",
+                    "id": "control-4c490",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "lg: 4, md: 4, sm: 6"
+                          }
+                        ]
+                      }
+                    },
+                    "elementRef": "field_30627"
+                  }
+                ]
+              }
+            ],
+            "verticalAlignment": "TOP"
+          }
+        ]
+      }
+    ],
+    "fieldConfiguration": {},
+    "groupConfiguration": {},
+    "defaults": {}
+  }
+}

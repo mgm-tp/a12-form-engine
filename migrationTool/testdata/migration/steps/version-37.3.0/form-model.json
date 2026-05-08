@@ -1,0 +1,270 @@
+{
+  "header": {
+    "id": "form-model",
+    "modelType": "form",
+    "modelVersion": "37.2.1",
+    "locales": [
+      {
+        "code": "en"
+      }
+    ],
+    "annotations": [
+      {
+        "name": "do-not-migrate",
+        "value": ""
+      },
+      {
+        "name": "roles",
+        "value": "admin"
+      }
+    ],
+    "modelReferences": [
+      {
+        "alias": "DM",
+        "modelType": "document",
+        "purpose": "data binding",
+        "reference": "document-model"
+      }
+    ]
+  },
+  "content": {
+    "subHeaderBox": {
+      "id": "subHeaderBox"
+    },
+    "footerBox": {
+      "id": "footerBox"
+    },
+    "screens": [
+      {
+        "id": "screen",
+        "name": "Screen #1",
+        "title": {
+          "type": "Multilingual",
+          "multilingualText": {
+            "text": [
+              {
+                "locale": "en",
+                "text": "Screen #1"
+              }
+            ]
+          }
+        },
+        "screenElements": [
+          {
+            "type": "ControlGrid",
+            "id": "controlgrid_4f2c1",
+            "name": "cg",
+            "layout": {
+              "lg": "3-3-3-3"
+            },
+            "row": [
+              {
+                "type": "Row",
+                "id": "row_bb5a3",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control_cd82a",
+                    "elementRef": "field_00598"
+                  },
+                  {
+                    "type": "Control",
+                    "id": "control_da0f9",
+                    "hideCondition": {
+                      "masterField": "field_00598",
+                      "cases": [
+                        {
+                          "masterValue": "true"
+                        }
+                      ]
+                    },
+                    "elementRef": "field_07891",
+                    "readonlyPresentation": "TEXT"
+                  },
+                  {
+                    "type": "Control",
+                    "id": "control_54501",
+                    "readonly": true,
+                    "messageExposition": "TOOLTIP",
+                    "elementRef": "field_f9808",
+                    "tooltipsOnTop": true,
+                    "readonlyPresentation": "INPUT"
+                  },
+                  {
+                    "type": "Control",
+                    "id": "control_7a7dc",
+                    "elementRef": "field_b852e"
+                  }
+                ]
+              },
+              {
+                "type": "Row",
+                "id": "row_850f8",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control_d3201",
+                    "elementRef": "field_ad212"
+                  },
+                  {
+                    "type": "Control",
+                    "id": "control_e76a2",
+                    "elementRef": "field_46f75"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "InlineRepeat",
+            "id": "inlinerepeat_a2ac7",
+            "name": "repeat-group1",
+            "repeatOverviewColumn": [
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn_637bd",
+                "elementRef": "field_99669"
+              }
+            ],
+            "groupRef": "group_9de86",
+            "enableAdd": true,
+            "enableRemove": true
+          },
+          {
+            "type": "InlineRepeat",
+            "id": "inlinerepeat_0a9bd",
+            "name": "repeat-group3",
+            "repeatOverviewColumn": [
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn_0fa8d",
+                "elementRef": "field_6777e"
+              }
+            ],
+            "groupRef": "group_1e048",
+            "enableAdd": true,
+            "enableRemove": true
+          }
+        ]
+      }
+    ],
+    "fieldConfiguration": {
+      "field": [
+        {
+          "initialValue": "true",
+          "exposition": "SWITCH_WITH_VALUES",
+          "elementRef": "field_00598"
+        },
+        {
+          "initialValue": "123",
+          "dependentField": {
+            "masterField": "field_00598",
+            "case": [
+              {
+                "masterValue": "true",
+                "notRelevant": true
+              }
+            ]
+          },
+          "elementRef": "field_07891"
+        },
+        {
+          "initialValue": "false",
+          "dependentField": {
+            "masterField": "field_00598",
+            "case": [
+              {
+                "masterValue": "false",
+                "notRelevant": true
+              }
+            ]
+          },
+          "elementRef": "field_f9808"
+        },
+        {
+          "suffix": {
+            "text": [
+              {
+                "locale": "en",
+                "text": "€"
+              }
+            ]
+          },
+          "initialValue": "1000000",
+          "dependentField": {
+            "masterField": "field_00598",
+            "case": [
+              {
+                "masterValue": "true",
+                "readonly": true,
+                "value": "1000000"
+              }
+            ]
+          },
+          "elementRef": "field_b852e"
+        },
+        {
+          "dependentField": {
+            "masterField": "field_00598",
+            "case": [
+              {
+                "masterValue": "false",
+                "value": "123"
+              },
+              {
+                "masterValue": "true",
+                "value": ""
+              }
+            ]
+          },
+          "elementRef": "field_14208"
+        }
+      ]
+    },
+    "groupConfiguration": {
+      "group": [
+        {
+          "dependentGroup": {
+            "masterField": "field_00598",
+            "case": [
+              {
+                "masterValue": "true",
+                "notRelevant": true
+              }
+            ]
+          },
+          "groupRef": "group_9de86"
+        },
+        {
+          "dependentGroup": {
+            "masterField": "field_00598",
+            "case": [
+              {
+                "masterValue": "false",
+                "notRelevant": true
+              }
+            ]
+          },
+          "groupRef": "group_78275"
+        },
+        {
+          "dependentGroup": {
+            "masterField": "field_00598",
+            "case": [
+              {
+                "masterValue": "false",
+                "notRelevant": true
+              },
+              {
+                "masterValue": "true",
+                "readonly": true
+              }
+            ]
+          },
+          "groupRef": "group_ff43c"
+        }
+      ]
+    },
+    "defaults": {}
+  }
+}

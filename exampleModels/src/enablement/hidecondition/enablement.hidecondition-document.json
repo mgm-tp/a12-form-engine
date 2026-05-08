@@ -1,0 +1,1089 @@
+{
+  "header": {
+    "id": "enablement.hidecondition-document",
+    "modelType": "document",
+    "modelVersion": "28.4.0",
+    "locales": [
+      {
+        "code": "en"
+      },
+      {
+        "code": "de"
+      }
+    ],
+    "annotations": [
+      {
+        "name": "roles",
+        "value": "admin"
+      }
+    ],
+    "modelReferences": []
+  },
+  "content": {
+    "modelInfo": {
+      "name": "enablement.hidecondition-document",
+      "immutable": false
+    },
+    "modelConfig": {
+      "decimalSeparator": ".",
+      "timeZone": "UTC",
+      "conditionLanguage": {
+        "code": "en_US"
+      }
+    },
+    "modelRoot": {
+      "rootGroups": [
+        {
+          "type": "Group",
+          "id": "group_17378",
+          "name": "root",
+          "Group": {
+            "repeatability": 1,
+            "elements": [
+              {
+                "type": "Group",
+                "id": "group_8241d",
+                "name": "masterFieldTypes",
+                "Group": {
+                  "repeatability": 1,
+                  "elements": [
+                    {
+                      "type": "Field",
+                      "id": "field_3e051",
+                      "name": "booleanMaster",
+                      "Field": {
+                        "fieldType": {
+                          "type": "BooleanType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "boolean master"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "boolean master"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_2c8ea",
+                      "name": "confirmMaster",
+                      "Field": {
+                        "fieldType": {
+                          "type": "ConfirmType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "confirm master"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "confirm master"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_d8c3d",
+                      "name": "enumMaster",
+                      "Field": {
+                        "fieldType": {
+                          "type": "EnumerationType",
+                          "EnumerationType": {
+                            "values": [
+                              {
+                                "value": "blue",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "blue"
+                                  },
+                                  {
+                                    "locale": "de",
+                                    "text": "Blau"
+                                  }
+                                ]
+                              },
+                              {
+                                "value": "green",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "green"
+                                  },
+                                  {
+                                    "locale": "de",
+                                    "text": "Grün"
+                                  }
+                                ]
+                              },
+                              {
+                                "value": "red",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "red"
+                                  },
+                                  {
+                                    "locale": "de",
+                                    "text": "Rot"
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "enumeration master"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "enumeration master"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Group",
+                "id": "group_96966",
+                "name": "fieldsForMasterTypes",
+                "Group": {
+                  "repeatability": 1,
+                  "elements": [
+                    {
+                      "type": "Field",
+                      "id": "field_0a1d3",
+                      "name": "fieldForBooleanMaster",
+                      "Field": {
+                        "fieldType": {
+                          "type": "StringType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "field for boolean master"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "Feld für boolean master"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_4a47c",
+                      "name": "fieldForConfirmMaster",
+                      "Field": {
+                        "fieldType": {
+                          "type": "StringType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "field for confirm master"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "Feld für confirm master"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_1d95d",
+                      "name": "fieldForEnumMaster",
+                      "Field": {
+                        "fieldType": {
+                          "type": "StringType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "field for enumeration master"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "Feld für enumeration master"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Group",
+                "id": "group_bdefb",
+                "name": "masterFieldsForElements",
+                "Group": {
+                  "repeatability": 1,
+                  "elements": [
+                    {
+                      "type": "Field",
+                      "id": "field_82bdc",
+                      "name": "masterForSection",
+                      "Field": {
+                        "fieldType": {
+                          "type": "ConfirmType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "master for Section"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "master für Section"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_ab8eb",
+                      "name": "masterForMultiColumnSection",
+                      "Field": {
+                        "fieldType": {
+                          "type": "ConfirmType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "master for Multi Column Section"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "master für Multi Column Section"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_73ac9",
+                      "name": "masterForControlGrid",
+                      "Field": {
+                        "fieldType": {
+                          "type": "ConfirmType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "master for Control Grid"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "master für Control Grid"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_ac6d7",
+                      "name": "masterForButtonPanel",
+                      "Field": {
+                        "fieldType": {
+                          "type": "ConfirmType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "master for Button Panel"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "master für Button Panel"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_b91cc",
+                      "name": "masterForInlineRepeat",
+                      "Field": {
+                        "fieldType": {
+                          "type": "ConfirmType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "master for Inline Repeat"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "master für Inline Repeat"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_ecdbd",
+                      "name": "masterForDetachedRepeat",
+                      "Field": {
+                        "fieldType": {
+                          "type": "ConfirmType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "master for Detached Repeat"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "master für Detached Repeat"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_4d329",
+                      "name": "masterForEmbeddedRepeat",
+                      "Field": {
+                        "fieldType": {
+                          "type": "ConfirmType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "master for Embedded Repeat"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "master für Embedded Repeat"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_81f0a",
+                      "name": "masterForCustomScreenElement",
+                      "Field": {
+                        "fieldType": {
+                          "type": "ConfirmType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "master for Custom Screen Element"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "master für Custom Screen Element"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_ee078",
+                      "name": "masterForRow",
+                      "Field": {
+                        "fieldType": {
+                          "type": "ConfirmType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "master for Row"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "master für Row"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_ed2aa",
+                      "name": "masterForControl",
+                      "Field": {
+                        "fieldType": {
+                          "type": "ConfirmType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "master for Control"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "master für Control"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_12c58",
+                      "name": "masterForControlWithIndex",
+                      "Field": {
+                        "fieldType": {
+                          "type": "ConfirmType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "master for Control with index"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "master für Control mit Index"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_09464",
+                      "name": "masterForMultiSelectControl",
+                      "Field": {
+                        "fieldType": {
+                          "type": "ConfirmType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "master for Multi Select Control"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "master für Multi Select Control"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_74581",
+                      "name": "masterForControlWithValidationRule",
+                      "Field": {
+                        "fieldType": {
+                          "type": "ConfirmType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "master for Control"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "master für Control"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_9c2b0",
+                      "name": "masterForTextCell",
+                      "Field": {
+                        "fieldType": {
+                          "type": "ConfirmType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "master for Text Cell"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "master für Text Cell"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_366c9",
+                      "name": "masterForExpressionCell",
+                      "Field": {
+                        "fieldType": {
+                          "type": "ConfirmType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "master for Expression Cell"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "master für Expression Cell"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_93bb0",
+                      "name": "masterForCustomCell",
+                      "Field": {
+                        "fieldType": {
+                          "type": "ConfirmType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "master for Custom Cell"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "master für Custom Cell"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_4ab40",
+                      "name": "masterForFieldColumn",
+                      "Field": {
+                        "fieldType": {
+                          "type": "ConfirmType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "master for Field Column"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "master für Field Column"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_83ca3",
+                      "name": "masterForExpressionColumn",
+                      "Field": {
+                        "fieldType": {
+                          "type": "ConfirmType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "master for Expression Column"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "master für Expression Column"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Group",
+                "id": "group_e1d97",
+                "name": "fieldsForElements",
+                "Group": {
+                  "repeatability": 1,
+                  "elements": [
+                    {
+                      "type": "Field",
+                      "id": "field_b40c9",
+                      "name": "stringField",
+                      "Field": {
+                        "fieldType": {
+                          "type": "StringType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "string"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "Zeichenkette"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_95adc",
+                      "name": "numberField",
+                      "Field": {
+                        "fieldType": {
+                          "type": "NumberType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "number"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "Zahl"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Group",
+                      "id": "group_e892e",
+                      "name": "multiSelect",
+                      "Group": {
+                        "repeatability": 999999,
+                        "usageType": "multi-select",
+                        "elements": [
+                          {
+                            "type": "Field",
+                            "id": "field_51b80",
+                            "name": "value",
+                            "Field": {
+                              "fieldType": {
+                                "type": "EnumerationType",
+                                "EnumerationType": {
+                                  "values": [
+                                    {
+                                      "value": "blue",
+                                      "label": [
+                                        {
+                                          "locale": "en",
+                                          "text": "blue"
+                                        },
+                                        {
+                                          "locale": "de",
+                                          "text": "Blau"
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "value": "green",
+                                      "label": [
+                                        {
+                                          "locale": "en",
+                                          "text": "green"
+                                        },
+                                        {
+                                          "locale": "de",
+                                          "text": "Grün"
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "value": "red",
+                                      "label": [
+                                        {
+                                          "locale": "en",
+                                          "text": "red"
+                                        },
+                                        {
+                                          "locale": "de",
+                                          "text": "Rot"
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              },
+                              "label": [
+                                {
+                                  "locale": "en",
+                                  "text": "multi select"
+                                },
+                                {
+                                  "locale": "de",
+                                  "text": "Mehrfachauswahl"
+                                }
+                              ],
+                              "requirednessConfig": {
+                                "mode": "absoluteOrRelativeToNextRepAncestor"
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_10a14",
+                      "name": "fieldForValidationRule",
+                      "Field": {
+                        "fieldType": {
+                          "type": "NumberType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "field that has to contain 42"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "Feld, das 42 enthalten muss"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Rule",
+                      "id": "rule_82bf2",
+                      "name": "ruleForFieldWithRule",
+                      "Rule": {
+                        "errorEntityRelPath": "../fieldForValidationRule",
+                        "errorCode": "Error rule_82bf2",
+                        "errorCondition": "FieldFilled(fieldForValidationRule)\nAnd [fieldForValidationRule] != 42",
+                        "severity": "ERROR",
+                        "errorMessage": [
+                          {
+                            "locale": "en",
+                            "text": "The field has to contain 42."
+                          },
+                          {
+                            "locale": "de",
+                            "text": "Das Feld muss 42 enthalten."
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_a03bd",
+                      "name": "otherStringField",
+                      "Field": {
+                        "fieldType": {
+                          "type": "StringType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "other string"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "andere Zeichenkette"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Group",
+                      "id": "group_9dec1",
+                      "name": "attachment",
+                      "Group": {
+                        "repeatability": 1,
+                        "usageType": "attachment",
+                        "elements": [
+                          {
+                            "type": "Field",
+                            "id": "field_3d2c0",
+                            "name": "original_filename",
+                            "Field": {
+                              "fieldType": {
+                                "type": "StringType"
+                              }
+                            }
+                          },
+                          {
+                            "type": "Field",
+                            "id": "field_76935",
+                            "name": "internal_filename",
+                            "Field": {
+                              "fieldType": {
+                                "type": "StringType"
+                              }
+                            }
+                          },
+                          {
+                            "type": "Field",
+                            "id": "field_0cfa8",
+                            "name": "content",
+                            "Field": {
+                              "fieldType": {
+                                "type": "StringType",
+                                "StringType": {
+                                  "lineBreaksPermitted": true,
+                                  "noValueValidation": true
+                                }
+                              }
+                            }
+                          },
+                          {
+                            "type": "Field",
+                            "id": "field_98663",
+                            "name": "attachment_id",
+                            "Field": {
+                              "fieldType": {
+                                "type": "StringType"
+                              }
+                            }
+                          },
+                          {
+                            "type": "Field",
+                            "id": "field_4111d",
+                            "name": "size",
+                            "Field": {
+                              "fieldType": {
+                                "type": "NumberType"
+                              }
+                            }
+                          },
+                          {
+                            "type": "Field",
+                            "id": "field_ce0f7",
+                            "name": "mime_type",
+                            "Field": {
+                              "fieldType": {
+                                "type": "StringType"
+                              }
+                            }
+                          },
+                          {
+                            "type": "Field",
+                            "id": "field_a3ffd",
+                            "name": "category",
+                            "Field": {
+                              "fieldType": {
+                                "type": "StringType"
+                              }
+                            }
+                          },
+                          {
+                            "type": "Field",
+                            "id": "field_ae1ec",
+                            "name": "description",
+                            "Field": {
+                              "fieldType": {
+                                "type": "StringType"
+                              }
+                            }
+                          },
+                          {
+                            "type": "Rule",
+                            "id": "rule_d56ae",
+                            "name": "AttachmentInternalFilenameRequired",
+                            "Rule": {
+                              "errorEntityRelPath": "../internal_filename",
+                              "errorCode": "Error rule_d56ae",
+                              "errorCondition": "GroupFilled(RuleGroup) and FieldNotFilled(internal_filename)",
+                              "severity": "ERROR",
+                              "errorMessage": [
+                                {
+                                  "locale": "en",
+                                  "text": "Internal Error: Field internal_filename of customType attachment is not filled."
+                                },
+                                {
+                                  "locale": "de",
+                                  "text": "Internal Error: Field internal_filename of customType attachment is not filled."
+                                }
+                              ]
+                            }
+                          },
+                          {
+                            "type": "Rule",
+                            "id": "rule_85e10",
+                            "name": "AttachmentMimeTypeRequired",
+                            "Rule": {
+                              "errorEntityRelPath": "../mime_type",
+                              "errorCode": "Error rule_85e10",
+                              "errorCondition": "GroupFilled(RuleGroup) and FieldNotFilled(mime_type)",
+                              "severity": "ERROR",
+                              "errorMessage": [
+                                {
+                                  "locale": "en",
+                                  "text": "Internal Error: Field mime_type of customType attachment is not filled."
+                                },
+                                {
+                                  "locale": "de",
+                                  "text": "Internal Error: Field mime_type of customType attachment is not filled."
+                                }
+                              ]
+                            }
+                          },
+                          {
+                            "type": "Rule",
+                            "id": "rule_b721c",
+                            "name": "AttachmentIdOrContentFilled",
+                            "Rule": {
+                              "errorEntityRelPath": "../content",
+                              "errorCode": "Error rule_b721c",
+                              "errorCondition": "GroupFilled(RuleGroup) and NotExactlyOneFieldFilled(attachment_id, content)",
+                              "severity": "ERROR",
+                              "errorMessage": [
+                                {
+                                  "locale": "en",
+                                  "text": "Internal Error: Either attachment_id or content must be filled in a customType attachment, but not both."
+                                },
+                                {
+                                  "locale": "de",
+                                  "text": "Internal Error: Either attachment_id or content must be filled in a customType attachment, but not both."
+                                }
+                              ]
+                            }
+                          },
+                          {
+                            "type": "Rule",
+                            "id": "rule_dbc42",
+                            "name": "SizeOfContentFilled",
+                            "Rule": {
+                              "errorEntityRelPath": "../content",
+                              "errorCode": "Error rule_dbc42",
+                              "errorCondition": "FieldFilled(content) and FieldNotFilled(size)",
+                              "severity": "ERROR",
+                              "errorMessage": [
+                                {
+                                  "locale": "en",
+                                  "text": "Internal Error: If the content is filled, the size must be also filled."
+                                },
+                                {
+                                  "locale": "de",
+                                  "text": "Internal Error: If the content is filled, the size must be also filled."
+                                }
+                              ]
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Group",
+                "id": "group_ee700",
+                "name": "repeatableGroup",
+                "Group": {
+                  "repeatability": 10,
+                  "elements": [
+                    {
+                      "type": "Field",
+                      "id": "field_0abc3",
+                      "name": "stringField",
+                      "Field": {
+                        "fieldType": {
+                          "type": "StringType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "string"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "Zeichenkette"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_bee0c",
+                      "name": "numberField",
+                      "Field": {
+                        "fieldType": {
+                          "type": "NumberType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "number"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "Zahl"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_22c78",
+                      "name": "masterForColumnInGroup",
+                      "Field": {
+                        "fieldType": {
+                          "type": "ConfirmType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "master for Column within repeatable Group"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "master für eine Column innerhalb der wiederholbaren Gruppe"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Group",
+                "id": "group_bd8d0",
+                "name": "repeatableGroupForIndexedControl",
+                "Group": {
+                  "repeatability": 10,
+                  "elements": [
+                    {
+                      "type": "Field",
+                      "id": "field_69265",
+                      "name": "fieldForIndexedControl",
+                      "Field": {
+                        "fieldType": {
+                          "type": "StringType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "Control with index"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "Control mit Index"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_6e1dc",
+                      "name": "indexedMasterForIndexControl",
+                      "Field": {
+                        "fieldType": {
+                          "type": "ConfirmType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "master with index for Control with index"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "master mit Index für Control mit Index"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

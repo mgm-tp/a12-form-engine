@@ -1,0 +1,575 @@
+{
+  "header": {
+    "id": "messageGroup-dm",
+    "modelType": "document",
+    "modelVersion": "28.4.0",
+    "locales": [
+      {
+        "code": "en"
+      }
+    ],
+    "labels": [],
+    "annotations": [],
+    "modelReferences": []
+  },
+  "content": {
+    "modelInfo": {
+      "name": "messageGroup-dm",
+      "immutable": false
+    },
+    "modelConfig": {
+      "timeZone": "UTC",
+      "decimalSeparator": ".",
+      "conditionLanguage": {
+        "code": "en_US"
+      }
+    },
+    "modelRoot": {
+      "rootGroups": [
+        {
+          "type": "Group",
+          "id": "group_157e2",
+          "name": "messageGroup",
+          "Group": {
+            "repeatability": 1,
+            "elements": [
+              {
+                "type": "Group",
+                "id": "group_f5025",
+                "name": "fields",
+                "Group": {
+                  "repeatability": 1,
+                  "elements": [
+                    {
+                      "type": "Field",
+                      "id": "field_fdad5",
+                      "name": "a",
+                      "Field": {
+                        "fieldType": {
+                          "type": "NumberType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "A"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_15724",
+                      "name": "b",
+                      "Field": {
+                        "fieldType": {
+                          "type": "NumberType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "B"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Group",
+                "id": "group_4bb0c",
+                "name": "groups",
+                "Group": {
+                  "repeatability": 1,
+                  "elements": [
+                    {
+                      "type": "Field",
+                      "id": "field_0d15b",
+                      "name": "a",
+                      "Field": {
+                        "fieldType": {
+                          "type": "NumberType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "A"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_836d3",
+                      "name": "b",
+                      "Field": {
+                        "fieldType": {
+                          "type": "NumberType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "B"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Group",
+                "id": "group_ae080",
+                "name": "rules",
+                "Group": {
+                  "repeatability": 1,
+                  "elements": [
+                    {
+                      "type": "Field",
+                      "id": "field_27c6d",
+                      "name": "preconditionField",
+                      "Field": {
+                        "fieldType": {
+                          "type": "ConfirmType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "Precondition Field"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_d3564",
+                      "name": "failingField",
+                      "Field": {
+                        "fieldType": {
+                          "type": "NumberType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "Failing Field"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Rule",
+                      "id": "rule_6b6b7",
+                      "name": "errorOne",
+                      "Rule": {
+                        "errorEntityRelPath": "../failingField",
+                        "errorCode": "Error rule_6b6b7",
+                        "errorCondition": "FieldFilled(preconditionField) and FieldFilled(failingField) and [failingField] != 42",
+                        "severity": "ERROR",
+                        "errorMessage": [
+                          {
+                            "locale": "en",
+                            "text": "Rule Error 1: Failing Field must be 42"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Rule",
+                      "id": "rule_7ecbb",
+                      "name": "errorTwo",
+                      "Rule": {
+                        "errorEntityRelPath": "../failingField",
+                        "errorCode": "Error rule_7ecbb",
+                        "errorCondition": "FieldFilled(preconditionField) and FieldFilled(failingField) and [failingField] != 42",
+                        "severity": "ERROR",
+                        "errorMessage": [
+                          {
+                            "locale": "en",
+                            "text": "Rule Error 2: Failing Field must be 42"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Group",
+                "id": "group_f981a",
+                "name": "formalErrors",
+                "Group": {
+                  "repeatability": 1,
+                  "elements": [
+                    {
+                      "type": "Field",
+                      "id": "field_6cf82",
+                      "name": "preconditionField",
+                      "Field": {
+                        "fieldType": {
+                          "type": "ConfirmType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "Precondition Field"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_47a1b",
+                      "name": "failingField",
+                      "Field": {
+                        "fieldType": {
+                          "type": "NumberType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "Failing Field"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Rule",
+                      "id": "rule_7ef4f",
+                      "name": "errorOne",
+                      "Rule": {
+                        "errorEntityRelPath": "../failingField",
+                        "errorCode": "Error rule_7ef4f",
+                        "errorCondition": "FieldFilled(preconditionField) and FieldFilled(failingField) and [failingField] != 42",
+                        "severity": "ERROR",
+                        "errorMessage": [
+                          {
+                            "locale": "en",
+                            "text": "Rule Error 1: Failing Field must be 42"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Group",
+                "id": "group_e91af",
+                "name": "autoCollection",
+                "Group": {
+                  "repeatability": 1,
+                  "elements": [
+                    {
+                      "type": "Field",
+                      "id": "field_ab99b",
+                      "name": "a",
+                      "Field": {
+                        "fieldType": {
+                          "type": "NumberType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "A"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_7921f",
+                      "name": "b",
+                      "Field": {
+                        "fieldType": {
+                          "type": "NumberType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "B"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_d6952",
+                      "name": "c",
+                      "Field": {
+                        "fieldType": {
+                          "type": "NumberType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "C"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Group",
+                "id": "group_50253",
+                "name": "jumpLinks",
+                "Group": {
+                  "repeatability": 1,
+                  "elements": [
+                    {
+                      "type": "Field",
+                      "id": "field_4d2eb",
+                      "name": "preconditionField",
+                      "Field": {
+                        "fieldType": {
+                          "type": "ConfirmType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "Precondition Field (Label from DM)"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_e129d",
+                      "name": "failingField",
+                      "Field": {
+                        "fieldType": {
+                          "type": "NumberType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "Failing Field"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Rule",
+                      "id": "rule_bbc97",
+                      "name": "errorOne",
+                      "Rule": {
+                        "errorEntityRelPath": "../failingField",
+                        "errorCode": "Error rule_bbc97",
+                        "errorCondition": "FieldFilled(preconditionField) and FieldFilled(failingField) and [failingField] != 42",
+                        "severity": "ERROR",
+                        "errorMessage": [
+                          {
+                            "locale": "en",
+                            "text": "Rule Error 1: Failing Field must be 42"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Group",
+                "id": "group_90395",
+                "name": "repeatableFields",
+                "Group": {
+                  "repeatability": 1,
+                  "elements": [
+                    {
+                      "type": "Group",
+                      "id": "group_1c3a9",
+                      "name": "repeatable",
+                      "Group": {
+                        "repeatability": 5,
+                        "elements": [
+                          {
+                            "type": "Field",
+                            "id": "field_f92cb",
+                            "name": "a",
+                            "Field": {
+                              "fieldType": {
+                                "type": "NumberType"
+                              },
+                              "label": [
+                                {
+                                  "locale": "en",
+                                  "text": "A"
+                                }
+                              ]
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Rule",
+                      "id": "rule_640a3",
+                      "name": "ruleOnRepeatableGroup",
+                      "Rule": {
+                        "errorEntityRelPath": "../repeatable/a",
+                        "errorCode": "Error rule_640a3",
+                        "errorCondition": "NotAllFieldsFilled(repeatable*/a)",
+                        "severity": "ERROR",
+                        "errorMessage": [
+                          {
+                            "locale": "en",
+                            "text": "All fields must be filled."
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Group",
+                "id": "group_4be4e",
+                "name": "Severity",
+                "Group": {
+                  "repeatability": 1,
+                  "elements": [
+                    {
+                      "type": "Field",
+                      "id": "field_3bed1",
+                      "name": "preconditionField",
+                      "Field": {
+                        "fieldType": {
+                          "type": "ConfirmType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "Precondition Field"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_7f342",
+                      "name": "a",
+                      "Field": {
+                        "fieldType": {
+                          "type": "NumberType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "A"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Rule",
+                      "id": "rule_636de",
+                      "name": "error1",
+                      "Rule": {
+                        "errorEntityRelPath": "../a",
+                        "errorCode": "Error rule_636de",
+                        "errorCondition": "FieldFilled(preconditionField) and FieldNotFilled(a)",
+                        "severity": "ERROR",
+                        "errorMessage": [
+                          {
+                            "locale": "en",
+                            "text": "A needs to be filled."
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Rule",
+                      "id": "rule_6a8fa",
+                      "name": "error2",
+                      "Rule": {
+                        "errorEntityRelPath": "../a",
+                        "errorCode": "Error rule_6a8fa",
+                        "errorCondition": "FieldFilled(preconditionField) and FieldNotFilled(a)",
+                        "severity": "ERROR",
+                        "errorMessage": [
+                          {
+                            "locale": "en",
+                            "text": "A needs to be filled."
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Rule",
+                      "id": "rule_1d91c",
+                      "name": "warning1",
+                      "Rule": {
+                        "errorEntityRelPath": "../a",
+                        "errorCode": "Error rule_1d91c",
+                        "errorCondition": "FieldFilled(preconditionField) and FieldNotFilled(a)",
+                        "severity": "WARNING",
+                        "errorMessage": [
+                          {
+                            "locale": "en",
+                            "text": "A needs to be filled."
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Rule",
+                      "id": "rule_ef946",
+                      "name": "warning2",
+                      "Rule": {
+                        "errorEntityRelPath": "../a",
+                        "errorCode": "Error rule_ef946",
+                        "errorCondition": "FieldFilled(preconditionField) and FieldNotFilled(a)",
+                        "severity": "WARNING",
+                        "errorMessage": [
+                          {
+                            "locale": "en",
+                            "text": "A needs to be filled."
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Rule",
+                      "id": "rule_4726f",
+                      "name": "info1",
+                      "Rule": {
+                        "errorEntityRelPath": "../a",
+                        "errorCode": "Error rule_4726f",
+                        "errorCondition": "FieldFilled(preconditionField) and FieldNotFilled(a)",
+                        "severity": "INFO",
+                        "errorMessage": [
+                          {
+                            "locale": "en",
+                            "text": "A needs to be filled."
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Rule",
+                      "id": "rule_3a60d",
+                      "name": "info2",
+                      "Rule": {
+                        "errorEntityRelPath": "../a",
+                        "errorCode": "Error rule_3a60d",
+                        "errorCondition": "FieldFilled(preconditionField) and FieldNotFilled(a)",
+                        "severity": "INFO",
+                        "errorMessage": [
+                          {
+                            "locale": "en",
+                            "text": "A needs to be filled."
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

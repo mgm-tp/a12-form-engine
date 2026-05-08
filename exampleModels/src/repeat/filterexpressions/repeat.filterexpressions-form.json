@@ -1,0 +1,2334 @@
+{
+  "header": {
+    "id": "repeat.filterexpressions-form",
+    "modelType": "form",
+    "modelVersion": "37.4.0",
+    "locales": [
+      {
+        "code": "en"
+      }
+    ],
+    "labels": [
+      {
+        "locale": "en",
+        "text": "Filter Expressions"
+      }
+    ],
+    "annotations": [
+      {
+        "name": "roles",
+        "value": "admin"
+      }
+    ],
+    "modelReferences": [
+      {
+        "alias": "DM",
+        "modelType": "document",
+        "purpose": "data binding",
+        "reference": "repeat.filterexpressions-document"
+      }
+    ]
+  },
+  "content": {
+    "subHeaderBox": {
+      "id": "subHeaderBox",
+      "majorButtons": {
+        "button": [
+          {
+            "type": "NAVIGATION",
+            "id": "button-c8f71",
+            "name": "nav1",
+            "buttonStyling": {
+              "label": {
+                "type": "Multilingual",
+                "multilingualText": {
+                  "text": [
+                    {
+                      "locale": "en",
+                      "text": "Detached Repeat"
+                    }
+                  ]
+                }
+              },
+              "priority": "SECONDARY"
+            },
+            "target": "screen1",
+            "scope": "HIDDEN_IN_READONLY_MODE"
+          },
+          {
+            "type": "NAVIGATION",
+            "id": "button-56c72",
+            "name": "nav2",
+            "buttonStyling": {
+              "label": {
+                "type": "Multilingual",
+                "multilingualText": {
+                  "text": [
+                    {
+                      "locale": "en",
+                      "text": "Embedded Repeat"
+                    }
+                  ]
+                }
+              },
+              "priority": "SECONDARY"
+            },
+            "target": "screen-f1cee",
+            "scope": "HIDDEN_IN_READONLY_MODE"
+          }
+        ]
+      }
+    },
+    "footerBox": {
+      "id": "footerBox"
+    },
+    "screens": [
+      {
+        "id": "screen1",
+        "name": "DetachedRepeat",
+        "screenElements": [
+          {
+            "type": "Section",
+            "id": "section-d502f",
+            "name": "sec1",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "Detached Repeat"
+                  }
+                ]
+              }
+            },
+            "screenElements": [
+              {
+                "type": "DetachedRepeat",
+                "id": "detachedrepeat-0f91e",
+                "name": "All Contacts",
+                "title": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "All contacts"
+                      }
+                    ]
+                  }
+                },
+                "repeatOverviewColumn": [
+                  {
+                    "type": "ExpressionRepeatOverviewColumn",
+                    "id": "expressionOverviewColumn-1",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "Name"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "name": "Name",
+                    "expression": "[Name]"
+                  }
+                ],
+                "groupRef": "G3",
+                "enableAdd": true,
+                "enableRemove": true,
+                "enableReorder": true,
+                "detailScreen": {
+                  "id": "screen-fc104",
+                  "name": "Details",
+                  "screenElements": [
+                    {
+                      "type": "ControlGrid",
+                      "id": "controlgrid-4f47e",
+                      "name": "Details",
+                      "row": [
+                        {
+                          "type": "Row",
+                          "id": "row-c27bb",
+                          "cell": [
+                            {
+                              "type": "Control",
+                              "id": "control-458e9",
+                              "elementRef": "F4"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "Row",
+                          "id": "row_5dac4",
+                          "cell": [
+                            {
+                              "type": "Control",
+                              "id": "control_2d63d",
+                              "elementRef": "field_135b9"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "Row",
+                          "id": "row-38238",
+                          "cell": [
+                            {
+                              "type": "Control",
+                              "id": "control-38273",
+                              "elementRef": "field_41d9e"
+                            }
+                          ]
+                        }
+                      ],
+                      "verticalAlignment": "BOTTOM"
+                    },
+                    {
+                      "type": "DetachedRepeat",
+                      "id": "detachedrepeat-f5db6",
+                      "name": "Telephone",
+                      "title": {
+                        "type": "Multilingual",
+                        "multilingualText": {
+                          "text": [
+                            {
+                              "locale": "en",
+                              "text": "Telephone"
+                            }
+                          ]
+                        }
+                      },
+                      "repeatOverviewColumn": [
+                        {
+                          "type": "ExpressionRepeatOverviewColumn",
+                          "id": "expressionOverviewColumn-2",
+                          "label": {
+                            "type": "Multilingual",
+                            "multilingualText": {
+                              "text": [
+                                {
+                                  "locale": "en",
+                                  "text": "Number"
+                                }
+                              ]
+                            }
+                          },
+                          "name": "Number",
+                          "expression": "[Number]"
+                        }
+                      ],
+                      "groupRef": "G6",
+                      "enableAdd": true,
+                      "enableRemove": true,
+                      "enableReorder": true,
+                      "detailScreen": {
+                        "id": "screen-87444",
+                        "name": "Details",
+                        "screenElements": [
+                          {
+                            "type": "ControlGrid",
+                            "id": "controlgrid-fc72c",
+                            "name": "Numbers",
+                            "row": [
+                              {
+                                "type": "Row",
+                                "id": "row-20e50",
+                                "cell": [
+                                  {
+                                    "type": "Control",
+                                    "id": "control-61973",
+                                    "elementRef": "F7"
+                                  }
+                                ]
+                              },
+                              {
+                                "type": "Row",
+                                "id": "row-5e1d3",
+                                "cell": [
+                                  {
+                                    "type": "Control",
+                                    "id": "control-266a1",
+                                    "elementRef": "F5"
+                                  }
+                                ]
+                              }
+                            ],
+                            "verticalAlignment": "BOTTOM"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "DetachedRepeat",
+                "id": "detachedrepeat-ac2f2",
+                "name": "Contacts",
+                "title": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "Contacts with non-private numbers"
+                      }
+                    ]
+                  }
+                },
+                "filterExpression": "kontext(Telephone) { [Private] } = \"false\"",
+                "repeatOverviewColumn": [
+                  {
+                    "type": "ExpressionRepeatOverviewColumn",
+                    "id": "expressionOverviewColumn-3",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "Name"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "name": "Name",
+                    "expression": "[Name]"
+                  }
+                ],
+                "groupRef": "G3",
+                "enableAdd": true,
+                "enableRemove": true,
+                "enableReorder": true,
+                "detailScreen": {
+                  "id": "screen-7eb2d",
+                  "name": "Details",
+                  "screenElements": [
+                    {
+                      "type": "ControlGrid",
+                      "id": "controlgrid_d422e",
+                      "name": "Details",
+                      "row": [
+                        {
+                          "type": "Row",
+                          "id": "row_531e6",
+                          "cell": [
+                            {
+                              "type": "Control",
+                              "id": "control_b0e19",
+                              "elementRef": "F4"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "Row",
+                          "id": "row_e0a58",
+                          "cell": [
+                            {
+                              "type": "Control",
+                              "id": "control_7c540",
+                              "elementRef": "field_135b9"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "Row",
+                          "id": "row_740bf",
+                          "cell": [
+                            {
+                              "type": "Control",
+                              "id": "control_0c77a",
+                              "elementRef": "field_41d9e"
+                            }
+                          ]
+                        }
+                      ],
+                      "verticalAlignment": "BOTTOM"
+                    },
+                    {
+                      "type": "DetachedRepeat",
+                      "id": "detachedrepeat_ba238",
+                      "name": "Telephone",
+                      "title": {
+                        "type": "Multilingual",
+                        "multilingualText": {
+                          "text": [
+                            {
+                              "locale": "en",
+                              "text": "Telephone"
+                            }
+                          ]
+                        }
+                      },
+                      "repeatOverviewColumn": [
+                        {
+                          "type": "ExpressionRepeatOverviewColumn",
+                          "id": "expressionrepeatoverviewcolumn_c0aae",
+                          "label": {
+                            "type": "Multilingual",
+                            "multilingualText": {
+                              "text": [
+                                {
+                                  "locale": "en",
+                                  "text": "Number"
+                                }
+                              ]
+                            }
+                          },
+                          "name": "Number",
+                          "expression": "[Number]"
+                        }
+                      ],
+                      "groupRef": "G6",
+                      "enableAdd": true,
+                      "enableRemove": true,
+                      "enableReorder": true,
+                      "detailScreen": {
+                        "id": "screen_6dfb9",
+                        "name": "Details",
+                        "screenElements": [
+                          {
+                            "type": "ControlGrid",
+                            "id": "controlgrid_d1fdc",
+                            "name": "Numbers",
+                            "row": [
+                              {
+                                "type": "Row",
+                                "id": "row_26202",
+                                "cell": [
+                                  {
+                                    "type": "Control",
+                                    "id": "control_309ed",
+                                    "elementRef": "F7"
+                                  }
+                                ]
+                              },
+                              {
+                                "type": "Row",
+                                "id": "row_3060b",
+                                "cell": [
+                                  {
+                                    "type": "Control",
+                                    "id": "control_1e0f1",
+                                    "elementRef": "F5"
+                                  }
+                                ]
+                              }
+                            ],
+                            "verticalAlignment": "BOTTOM"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "DetachedRepeat",
+                "id": "detachedrepeat-aa9dc",
+                "name": "Private Contacts",
+                "title": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "Contacts with private numbers"
+                      }
+                    ]
+                  }
+                },
+                "filterExpression": "kontext(Telephone){ [Private] } = \"true\"",
+                "repeatOverviewColumn": [
+                  {
+                    "type": "ExpressionRepeatOverviewColumn",
+                    "id": "expressionOverviewColumn-5",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "Name"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "name": "Name",
+                    "expression": "[Name]"
+                  }
+                ],
+                "groupRef": "G3",
+                "enableAdd": true,
+                "enableRemove": true,
+                "enableReorder": true,
+                "detailScreen": {
+                  "id": "screen-e8435",
+                  "name": "Details",
+                  "screenElements": [
+                    {
+                      "type": "ControlGrid",
+                      "id": "controlgrid_a9ae8",
+                      "name": "Details",
+                      "row": [
+                        {
+                          "type": "Row",
+                          "id": "row_51ab5",
+                          "cell": [
+                            {
+                              "type": "Control",
+                              "id": "control_3b146",
+                              "elementRef": "F4"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "Row",
+                          "id": "row_1d712",
+                          "cell": [
+                            {
+                              "type": "Control",
+                              "id": "control_dd100",
+                              "elementRef": "field_135b9"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "Row",
+                          "id": "row_38f8f",
+                          "cell": [
+                            {
+                              "type": "Control",
+                              "id": "control_3f6bd",
+                              "elementRef": "field_41d9e"
+                            }
+                          ]
+                        }
+                      ],
+                      "verticalAlignment": "BOTTOM"
+                    },
+                    {
+                      "type": "DetachedRepeat",
+                      "id": "detachedrepeat_5faf7",
+                      "name": "Telephone",
+                      "title": {
+                        "type": "Multilingual",
+                        "multilingualText": {
+                          "text": [
+                            {
+                              "locale": "en",
+                              "text": "Telephone"
+                            }
+                          ]
+                        }
+                      },
+                      "repeatOverviewColumn": [
+                        {
+                          "type": "ExpressionRepeatOverviewColumn",
+                          "id": "expressionrepeatoverviewcolumn_f5767",
+                          "label": {
+                            "type": "Multilingual",
+                            "multilingualText": {
+                              "text": [
+                                {
+                                  "locale": "en",
+                                  "text": "Number"
+                                }
+                              ]
+                            }
+                          },
+                          "name": "Number",
+                          "expression": "[Number]"
+                        }
+                      ],
+                      "groupRef": "G6",
+                      "enableAdd": true,
+                      "enableRemove": true,
+                      "enableReorder": true,
+                      "detailScreen": {
+                        "id": "screen_ecaf3",
+                        "name": "Details",
+                        "screenElements": [
+                          {
+                            "type": "ControlGrid",
+                            "id": "controlgrid_334c8",
+                            "name": "Numbers",
+                            "row": [
+                              {
+                                "type": "Row",
+                                "id": "row_96132",
+                                "cell": [
+                                  {
+                                    "type": "Control",
+                                    "id": "control_8e707",
+                                    "elementRef": "F7"
+                                  }
+                                ]
+                              },
+                              {
+                                "type": "Row",
+                                "id": "row_f1285",
+                                "cell": [
+                                  {
+                                    "type": "Control",
+                                    "id": "control_b62e1",
+                                    "elementRef": "F5"
+                                  }
+                                ]
+                              }
+                            ],
+                            "verticalAlignment": "BOTTOM"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "DetachedRepeat",
+                "id": "detachedrepeat-de078",
+                "name": "Contacts with Empty Number",
+                "title": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "Contacts with empty number"
+                      }
+                    ]
+                  }
+                },
+                "filterExpression": "kontext(Telephone){ [Number] } = \"\"",
+                "repeatOverviewColumn": [
+                  {
+                    "type": "ExpressionRepeatOverviewColumn",
+                    "id": "expressionOverviewColumn-7",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "Name"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "name": "Name",
+                    "expression": "[Name]"
+                  }
+                ],
+                "groupRef": "G3",
+                "enableAdd": true,
+                "enableRemove": true,
+                "enableReorder": true,
+                "detailScreen": {
+                  "id": "screen-5f150",
+                  "name": "Details",
+                  "screenElements": [
+                    {
+                      "type": "ControlGrid",
+                      "id": "controlgrid_ceab8",
+                      "name": "Details",
+                      "row": [
+                        {
+                          "type": "Row",
+                          "id": "row_15a67",
+                          "cell": [
+                            {
+                              "type": "Control",
+                              "id": "control_eea88",
+                              "elementRef": "F4"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "Row",
+                          "id": "row_67a2c",
+                          "cell": [
+                            {
+                              "type": "Control",
+                              "id": "control_ebdab",
+                              "elementRef": "field_135b9"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "Row",
+                          "id": "row_7d462",
+                          "cell": [
+                            {
+                              "type": "Control",
+                              "id": "control_66eda",
+                              "elementRef": "field_41d9e"
+                            }
+                          ]
+                        }
+                      ],
+                      "verticalAlignment": "BOTTOM"
+                    },
+                    {
+                      "type": "DetachedRepeat",
+                      "id": "detachedrepeat_dd721",
+                      "name": "Telephone",
+                      "title": {
+                        "type": "Multilingual",
+                        "multilingualText": {
+                          "text": [
+                            {
+                              "locale": "en",
+                              "text": "Telephone"
+                            }
+                          ]
+                        }
+                      },
+                      "repeatOverviewColumn": [
+                        {
+                          "type": "ExpressionRepeatOverviewColumn",
+                          "id": "expressionrepeatoverviewcolumn_1fa91",
+                          "label": {
+                            "type": "Multilingual",
+                            "multilingualText": {
+                              "text": [
+                                {
+                                  "locale": "en",
+                                  "text": "Number"
+                                }
+                              ]
+                            }
+                          },
+                          "name": "Number",
+                          "expression": "[Number]"
+                        }
+                      ],
+                      "groupRef": "G6",
+                      "enableAdd": true,
+                      "enableRemove": true,
+                      "enableReorder": true,
+                      "detailScreen": {
+                        "id": "screen_c9fab",
+                        "name": "Details",
+                        "screenElements": [
+                          {
+                            "type": "ControlGrid",
+                            "id": "controlgrid_d7438",
+                            "name": "Numbers",
+                            "row": [
+                              {
+                                "type": "Row",
+                                "id": "row_b358c",
+                                "cell": [
+                                  {
+                                    "type": "Control",
+                                    "id": "control_6ddb4",
+                                    "elementRef": "F7"
+                                  }
+                                ]
+                              },
+                              {
+                                "type": "Row",
+                                "id": "row_88834",
+                                "cell": [
+                                  {
+                                    "type": "Control",
+                                    "id": "control_8eadc",
+                                    "elementRef": "F5"
+                                  }
+                                ]
+                              }
+                            ],
+                            "verticalAlignment": "BOTTOM"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "DetachedRepeat",
+                "id": "detachedrepeat_fb69e",
+                "name": "Contacts with Number",
+                "title": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "Contacts with non-empty number"
+                      }
+                    ]
+                  }
+                },
+                "filterExpression": "kontext(Telephone){ [Number] } != \"\"",
+                "repeatOverviewColumn": [
+                  {
+                    "type": "ExpressionRepeatOverviewColumn",
+                    "id": "expressionrepeatoverviewcolumn_9789a",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "Name"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "name": "Name",
+                    "expression": "[Name]"
+                  }
+                ],
+                "groupRef": "G3",
+                "enableAdd": true,
+                "enableRemove": true,
+                "enableReorder": true,
+                "detailScreen": {
+                  "id": "screen_0b556",
+                  "name": "Details",
+                  "screenElements": [
+                    {
+                      "type": "ControlGrid",
+                      "id": "controlgrid_e06a1",
+                      "name": "Details",
+                      "row": [
+                        {
+                          "type": "Row",
+                          "id": "row_b546b",
+                          "cell": [
+                            {
+                              "type": "Control",
+                              "id": "control_8001c",
+                              "elementRef": "F4"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "Row",
+                          "id": "row_feda6",
+                          "cell": [
+                            {
+                              "type": "Control",
+                              "id": "control_d5ec4",
+                              "elementRef": "field_135b9"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "Row",
+                          "id": "row_3faaf",
+                          "cell": [
+                            {
+                              "type": "Control",
+                              "id": "control_65739",
+                              "elementRef": "field_41d9e"
+                            }
+                          ]
+                        }
+                      ],
+                      "verticalAlignment": "BOTTOM"
+                    },
+                    {
+                      "type": "DetachedRepeat",
+                      "id": "detachedrepeat_02a65",
+                      "name": "Telephone",
+                      "title": {
+                        "type": "Multilingual",
+                        "multilingualText": {
+                          "text": [
+                            {
+                              "locale": "en",
+                              "text": "Telephone"
+                            }
+                          ]
+                        }
+                      },
+                      "repeatOverviewColumn": [
+                        {
+                          "type": "ExpressionRepeatOverviewColumn",
+                          "id": "expressionrepeatoverviewcolumn_615a7",
+                          "label": {
+                            "type": "Multilingual",
+                            "multilingualText": {
+                              "text": [
+                                {
+                                  "locale": "en",
+                                  "text": "Number"
+                                }
+                              ]
+                            }
+                          },
+                          "name": "Number",
+                          "expression": "[Number]"
+                        }
+                      ],
+                      "groupRef": "G6",
+                      "enableAdd": true,
+                      "enableRemove": true,
+                      "enableReorder": true,
+                      "detailScreen": {
+                        "id": "screen_e1a18",
+                        "name": "Details",
+                        "screenElements": [
+                          {
+                            "type": "ControlGrid",
+                            "id": "controlgrid_960b4",
+                            "name": "Numbers",
+                            "row": [
+                              {
+                                "type": "Row",
+                                "id": "row_b6f3c",
+                                "cell": [
+                                  {
+                                    "type": "Control",
+                                    "id": "control_f9121",
+                                    "elementRef": "F7"
+                                  }
+                                ]
+                              },
+                              {
+                                "type": "Row",
+                                "id": "row_7be3b",
+                                "cell": [
+                                  {
+                                    "type": "Control",
+                                    "id": "control_8c4db",
+                                    "elementRef": "F5"
+                                  }
+                                ]
+                              }
+                            ],
+                            "verticalAlignment": "BOTTOM"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "DetachedRepeat",
+                "id": "detachedrepeat-cf132",
+                "name": "Contacts: Advertisement allowed",
+                "title": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "Contacts: Advertisement allowed"
+                      }
+                    ]
+                  }
+                },
+                "filterExpression": "kontext(Advertisement) { [advertisementAllowed] } = \"true\"",
+                "repeatOverviewColumn": [
+                  {
+                    "type": "ExpressionRepeatOverviewColumn",
+                    "id": "expressionrepeatoverviewcolumn-5c645",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "Name"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "sortable": false,
+                    "filterable": false,
+                    "preferredSorting": "ASC",
+                    "name": "Name",
+                    "expression": "[Name]"
+                  }
+                ],
+                "groupRef": "G3",
+                "enableAdd": true,
+                "enableRemove": true,
+                "enableReorder": false,
+                "enableCopy": false,
+                "detailScreen": {
+                  "id": "screen-5f7fa",
+                  "name": "Details",
+                  "screenElements": [
+                    {
+                      "type": "ControlGrid",
+                      "id": "controlgrid_bb480",
+                      "name": "Details",
+                      "row": [
+                        {
+                          "type": "Row",
+                          "id": "row_86692",
+                          "cell": [
+                            {
+                              "type": "Control",
+                              "id": "control_b5692",
+                              "elementRef": "F4"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "Row",
+                          "id": "row_c8a63",
+                          "cell": [
+                            {
+                              "type": "Control",
+                              "id": "control_4f83d",
+                              "elementRef": "field_135b9"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "Row",
+                          "id": "row_ee450",
+                          "cell": [
+                            {
+                              "type": "Control",
+                              "id": "control_e158e",
+                              "elementRef": "field_41d9e"
+                            }
+                          ]
+                        }
+                      ],
+                      "verticalAlignment": "BOTTOM"
+                    },
+                    {
+                      "type": "DetachedRepeat",
+                      "id": "detachedrepeat_ed6be",
+                      "name": "Telephone",
+                      "title": {
+                        "type": "Multilingual",
+                        "multilingualText": {
+                          "text": [
+                            {
+                              "locale": "en",
+                              "text": "Telephone"
+                            }
+                          ]
+                        }
+                      },
+                      "repeatOverviewColumn": [
+                        {
+                          "type": "ExpressionRepeatOverviewColumn",
+                          "id": "expressionrepeatoverviewcolumn_6f483",
+                          "label": {
+                            "type": "Multilingual",
+                            "multilingualText": {
+                              "text": [
+                                {
+                                  "locale": "en",
+                                  "text": "Number"
+                                }
+                              ]
+                            }
+                          },
+                          "name": "Number",
+                          "expression": "[Number]"
+                        }
+                      ],
+                      "groupRef": "G6",
+                      "enableAdd": true,
+                      "enableRemove": true,
+                      "enableReorder": true,
+                      "detailScreen": {
+                        "id": "screen_eede9",
+                        "name": "Details",
+                        "screenElements": [
+                          {
+                            "type": "ControlGrid",
+                            "id": "controlgrid_c593c",
+                            "name": "Numbers",
+                            "row": [
+                              {
+                                "type": "Row",
+                                "id": "row_e4c06",
+                                "cell": [
+                                  {
+                                    "type": "Control",
+                                    "id": "control_ef8b1",
+                                    "elementRef": "F7"
+                                  }
+                                ]
+                              },
+                              {
+                                "type": "Row",
+                                "id": "row_e3bb3",
+                                "cell": [
+                                  {
+                                    "type": "Control",
+                                    "id": "control_b9f37",
+                                    "elementRef": "F5"
+                                  }
+                                ]
+                              }
+                            ],
+                            "verticalAlignment": "BOTTOM"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "DetachedRepeat",
+                "id": "detachedrepeat-49911",
+                "name": "Contacts: Advertisement not allowed",
+                "title": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "Contacts: Advertisement not allowed"
+                      }
+                    ]
+                  }
+                },
+                "filterExpression": "kontext(Advertisement) { [advertisementAllowed] } = \"false\"",
+                "repeatOverviewColumn": [
+                  {
+                    "type": "ExpressionRepeatOverviewColumn",
+                    "id": "expressionrepeatoverviewcolumn-10dac",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "Name"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "sortable": false,
+                    "filterable": false,
+                    "preferredSorting": "ASC",
+                    "name": "Name",
+                    "expression": "[Name]"
+                  }
+                ],
+                "groupRef": "G3",
+                "enableAdd": true,
+                "enableRemove": true,
+                "enableReorder": false,
+                "enableCopy": false,
+                "detailScreen": {
+                  "id": "screen-af9b4",
+                  "name": "Details",
+                  "screenElements": [
+                    {
+                      "type": "ControlGrid",
+                      "id": "controlgrid_c273d",
+                      "name": "Details",
+                      "row": [
+                        {
+                          "type": "Row",
+                          "id": "row_642e7",
+                          "cell": [
+                            {
+                              "type": "Control",
+                              "id": "control_1d895",
+                              "elementRef": "F4"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "Row",
+                          "id": "row_fbbdf",
+                          "cell": [
+                            {
+                              "type": "Control",
+                              "id": "control_a5ab3",
+                              "elementRef": "field_135b9"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "Row",
+                          "id": "row_790a6",
+                          "cell": [
+                            {
+                              "type": "Control",
+                              "id": "control_df4ab",
+                              "elementRef": "field_41d9e"
+                            }
+                          ]
+                        }
+                      ],
+                      "verticalAlignment": "BOTTOM"
+                    },
+                    {
+                      "type": "DetachedRepeat",
+                      "id": "detachedrepeat_71063",
+                      "name": "Telephone",
+                      "title": {
+                        "type": "Multilingual",
+                        "multilingualText": {
+                          "text": [
+                            {
+                              "locale": "en",
+                              "text": "Telephone"
+                            }
+                          ]
+                        }
+                      },
+                      "repeatOverviewColumn": [
+                        {
+                          "type": "ExpressionRepeatOverviewColumn",
+                          "id": "expressionrepeatoverviewcolumn_ac0c9",
+                          "label": {
+                            "type": "Multilingual",
+                            "multilingualText": {
+                              "text": [
+                                {
+                                  "locale": "en",
+                                  "text": "Number"
+                                }
+                              ]
+                            }
+                          },
+                          "name": "Number",
+                          "expression": "[Number]"
+                        }
+                      ],
+                      "groupRef": "G6",
+                      "enableAdd": true,
+                      "enableRemove": true,
+                      "enableReorder": true,
+                      "detailScreen": {
+                        "id": "screen_ce5f1",
+                        "name": "Details",
+                        "screenElements": [
+                          {
+                            "type": "ControlGrid",
+                            "id": "controlgrid_de6f1",
+                            "name": "Numbers",
+                            "row": [
+                              {
+                                "type": "Row",
+                                "id": "row_36088",
+                                "cell": [
+                                  {
+                                    "type": "Control",
+                                    "id": "control_8b76d",
+                                    "elementRef": "F7"
+                                  }
+                                ]
+                              },
+                              {
+                                "type": "Row",
+                                "id": "row_53f32",
+                                "cell": [
+                                  {
+                                    "type": "Control",
+                                    "id": "control_c19ef",
+                                    "elementRef": "F5"
+                                  }
+                                ]
+                              }
+                            ],
+                            "verticalAlignment": "BOTTOM"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "DetachedRepeat",
+                "id": "detachedrepeat_94389",
+                "name": "Male contacts",
+                "title": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "Male contacts"
+                      }
+                    ]
+                  }
+                },
+                "filterExpression": "[gender] = \"male\"",
+                "repeatOverviewColumn": [
+                  {
+                    "type": "ExpressionRepeatOverviewColumn",
+                    "id": "expressionrepeatoverviewcolumn_d5f1d",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "Name"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "name": "Name",
+                    "expression": "[Name]"
+                  }
+                ],
+                "groupRef": "G3",
+                "enableAdd": true,
+                "enableRemove": true,
+                "enableReorder": true,
+                "detailScreen": {
+                  "id": "screen_a04cb",
+                  "name": "Details",
+                  "screenElements": [
+                    {
+                      "type": "ControlGrid",
+                      "id": "controlgrid_7d0af",
+                      "name": "Details",
+                      "row": [
+                        {
+                          "type": "Row",
+                          "id": "row_bd139",
+                          "cell": [
+                            {
+                              "type": "Control",
+                              "id": "control_3250d",
+                              "elementRef": "F4"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "Row",
+                          "id": "row_285bb",
+                          "cell": [
+                            {
+                              "type": "Control",
+                              "id": "control_aa6b1",
+                              "elementRef": "field_135b9"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "Row",
+                          "id": "row_cf974",
+                          "cell": [
+                            {
+                              "type": "Control",
+                              "id": "control_1d105",
+                              "elementRef": "field_41d9e"
+                            }
+                          ]
+                        }
+                      ],
+                      "verticalAlignment": "BOTTOM"
+                    },
+                    {
+                      "type": "DetachedRepeat",
+                      "id": "detachedrepeat_56983",
+                      "name": "Telephone",
+                      "title": {
+                        "type": "Multilingual",
+                        "multilingualText": {
+                          "text": [
+                            {
+                              "locale": "en",
+                              "text": "Telephone"
+                            }
+                          ]
+                        }
+                      },
+                      "repeatOverviewColumn": [
+                        {
+                          "type": "ExpressionRepeatOverviewColumn",
+                          "id": "expressionrepeatoverviewcolumn_dd483",
+                          "label": {
+                            "type": "Multilingual",
+                            "multilingualText": {
+                              "text": [
+                                {
+                                  "locale": "en",
+                                  "text": "Number"
+                                }
+                              ]
+                            }
+                          },
+                          "name": "Number",
+                          "expression": "[Number]"
+                        }
+                      ],
+                      "groupRef": "G6",
+                      "enableAdd": true,
+                      "enableRemove": true,
+                      "enableReorder": true,
+                      "detailScreen": {
+                        "id": "screen_8376e",
+                        "name": "Details",
+                        "screenElements": [
+                          {
+                            "type": "ControlGrid",
+                            "id": "controlgrid_43857",
+                            "name": "Numbers",
+                            "row": [
+                              {
+                                "type": "Row",
+                                "id": "row_0b716",
+                                "cell": [
+                                  {
+                                    "type": "Control",
+                                    "id": "control_ed60f",
+                                    "elementRef": "F7"
+                                  }
+                                ]
+                              },
+                              {
+                                "type": "Row",
+                                "id": "row_30b05",
+                                "cell": [
+                                  {
+                                    "type": "Control",
+                                    "id": "control_8c86b",
+                                    "elementRef": "F5"
+                                  }
+                                ]
+                              }
+                            ],
+                            "verticalAlignment": "BOTTOM"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "DetachedRepeat",
+                "id": "detachedrepeat_815c5",
+                "name": "Female contacts",
+                "title": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "Female contacts"
+                      }
+                    ]
+                  }
+                },
+                "filterExpression": "[gender] = \"female\"",
+                "repeatOverviewColumn": [
+                  {
+                    "type": "ExpressionRepeatOverviewColumn",
+                    "id": "expressionrepeatoverviewcolumn_f3e00",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "Name"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "name": "Name",
+                    "expression": "[Name]"
+                  }
+                ],
+                "groupRef": "G3",
+                "enableAdd": true,
+                "enableRemove": true,
+                "enableReorder": true,
+                "detailScreen": {
+                  "id": "screen_96123",
+                  "name": "Details",
+                  "screenElements": [
+                    {
+                      "type": "ControlGrid",
+                      "id": "controlgrid_82907",
+                      "name": "Details",
+                      "row": [
+                        {
+                          "type": "Row",
+                          "id": "row_1e287",
+                          "cell": [
+                            {
+                              "type": "Control",
+                              "id": "control_5e3b8",
+                              "elementRef": "F4"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "Row",
+                          "id": "row_6cc33",
+                          "cell": [
+                            {
+                              "type": "Control",
+                              "id": "control_cbccd",
+                              "elementRef": "field_135b9"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "Row",
+                          "id": "row_3b211",
+                          "cell": [
+                            {
+                              "type": "Control",
+                              "id": "control_f6fe7",
+                              "elementRef": "field_41d9e"
+                            }
+                          ]
+                        }
+                      ],
+                      "verticalAlignment": "BOTTOM"
+                    },
+                    {
+                      "type": "DetachedRepeat",
+                      "id": "detachedrepeat_bc905",
+                      "name": "Telephone",
+                      "title": {
+                        "type": "Multilingual",
+                        "multilingualText": {
+                          "text": [
+                            {
+                              "locale": "en",
+                              "text": "Telephone"
+                            }
+                          ]
+                        }
+                      },
+                      "repeatOverviewColumn": [
+                        {
+                          "type": "ExpressionRepeatOverviewColumn",
+                          "id": "expressionrepeatoverviewcolumn_ee841",
+                          "label": {
+                            "type": "Multilingual",
+                            "multilingualText": {
+                              "text": [
+                                {
+                                  "locale": "en",
+                                  "text": "Number"
+                                }
+                              ]
+                            }
+                          },
+                          "name": "Number",
+                          "expression": "[Number]"
+                        }
+                      ],
+                      "groupRef": "G6",
+                      "enableAdd": true,
+                      "enableRemove": true,
+                      "enableReorder": true,
+                      "detailScreen": {
+                        "id": "screen_5a231",
+                        "name": "Details",
+                        "screenElements": [
+                          {
+                            "type": "ControlGrid",
+                            "id": "controlgrid_94929",
+                            "name": "Numbers",
+                            "row": [
+                              {
+                                "type": "Row",
+                                "id": "row_cbd48",
+                                "cell": [
+                                  {
+                                    "type": "Control",
+                                    "id": "control_7c47f",
+                                    "elementRef": "F7"
+                                  }
+                                ]
+                              },
+                              {
+                                "type": "Row",
+                                "id": "row_eaf19",
+                                "cell": [
+                                  {
+                                    "type": "Control",
+                                    "id": "control_e0658",
+                                    "elementRef": "F5"
+                                  }
+                                ]
+                              }
+                            ],
+                            "verticalAlignment": "BOTTOM"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "screen-f1cee",
+        "name": "EmbeddedRepeat",
+        "screenElements": [
+          {
+            "type": "Section",
+            "id": "section-5335b",
+            "name": "sec1",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "Embedded Repeats"
+                  }
+                ]
+              }
+            },
+            "screenElements": [
+              {
+                "type": "EmbeddedRepeat",
+                "id": "embeddedrepeat-ca873",
+                "name": "All Contacts",
+                "title": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "All contacts"
+                      }
+                    ]
+                  }
+                },
+                "repeatOverviewColumn": [
+                  {
+                    "type": "ExpressionRepeatOverviewColumn",
+                    "id": "expressionrepeatoverviewcolumn-e86d5",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "Name"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "name": "Name",
+                    "expression": "[Name]"
+                  }
+                ],
+                "groupRef": "G3",
+                "enableAdd": true,
+                "enableRemove": true,
+                "enableReorder": true,
+                "enableCopy": false,
+                "controlGrid": {
+                  "type": "ControlGrid",
+                  "id": "controlgrid-fbea0",
+                  "name": "cg",
+                  "row": [
+                    {
+                      "type": "Row",
+                      "id": "row-6cb53",
+                      "cell": [
+                        {
+                          "type": "Control",
+                          "id": "control-60713",
+                          "elementRef": "F4"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "Row",
+                      "id": "row_07d11",
+                      "cell": [
+                        {
+                          "type": "Control",
+                          "id": "control_53339",
+                          "elementRef": "field_135b9"
+                        }
+                      ]
+                    }
+                  ],
+                  "verticalAlignment": "BOTTOM"
+                }
+              },
+              {
+                "type": "EmbeddedRepeat",
+                "id": "embeddedrepeat-82a4b",
+                "name": "Contacts",
+                "title": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "Contacts with non-private numbers"
+                      }
+                    ]
+                  }
+                },
+                "filterExpression": "kontext(Telephone) { [Private] } = \"false\"",
+                "repeatOverviewColumn": [
+                  {
+                    "type": "ExpressionRepeatOverviewColumn",
+                    "id": "expressionrepeatoverviewcolumn-ddd55",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "Name"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "name": "Name",
+                    "expression": "[Name]"
+                  }
+                ],
+                "groupRef": "G3",
+                "enableAdd": true,
+                "enableRemove": true,
+                "enableReorder": true,
+                "enableCopy": false,
+                "controlGrid": {
+                  "type": "ControlGrid",
+                  "id": "controlgrid-b274c",
+                  "name": "cg",
+                  "row": [
+                    {
+                      "type": "Row",
+                      "id": "row-1d820",
+                      "cell": [
+                        {
+                          "type": "Control",
+                          "id": "control-08e16",
+                          "elementRef": "F4"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "Row",
+                      "id": "row_d3d00",
+                      "cell": [
+                        {
+                          "type": "Control",
+                          "id": "control_beee7",
+                          "elementRef": "field_135b9"
+                        }
+                      ]
+                    }
+                  ],
+                  "verticalAlignment": "BOTTOM"
+                }
+              },
+              {
+                "type": "EmbeddedRepeat",
+                "id": "embeddedrepeat-de813",
+                "name": "Private Contacts",
+                "title": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "Contacts with private numbers"
+                      }
+                    ]
+                  }
+                },
+                "filterExpression": "kontext(Telephone){ [Private] } = \"true\"",
+                "repeatOverviewColumn": [
+                  {
+                    "type": "ExpressionRepeatOverviewColumn",
+                    "id": "expressionrepeatoverviewcolumn-613c2",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "Name"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "name": "Name",
+                    "expression": "[Name]"
+                  }
+                ],
+                "groupRef": "G3",
+                "enableAdd": true,
+                "enableRemove": true,
+                "enableReorder": true,
+                "enableCopy": false,
+                "controlGrid": {
+                  "type": "ControlGrid",
+                  "id": "controlgrid-96ab0",
+                  "name": "cg",
+                  "row": [
+                    {
+                      "type": "Row",
+                      "id": "row-908ca",
+                      "cell": [
+                        {
+                          "type": "Control",
+                          "id": "control-8c792",
+                          "elementRef": "F4"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "Row",
+                      "id": "row_f7eca",
+                      "cell": [
+                        {
+                          "type": "Control",
+                          "id": "control_bbc1d",
+                          "elementRef": "field_135b9"
+                        }
+                      ]
+                    }
+                  ],
+                  "verticalAlignment": "BOTTOM"
+                }
+              },
+              {
+                "type": "EmbeddedRepeat",
+                "id": "embeddedrepeat-f3086",
+                "name": "Contacts with Empty Number",
+                "title": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "Contacts with empty number"
+                      }
+                    ]
+                  }
+                },
+                "filterExpression": "kontext(Telephone){ [Number] } = \"\"",
+                "repeatOverviewColumn": [
+                  {
+                    "type": "ExpressionRepeatOverviewColumn",
+                    "id": "expressionrepeatoverviewcolumn-93d32",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "Name"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "name": "Name",
+                    "expression": "[Name]"
+                  }
+                ],
+                "groupRef": "G3",
+                "enableAdd": true,
+                "enableRemove": true,
+                "enableReorder": true,
+                "enableCopy": false,
+                "controlGrid": {
+                  "type": "ControlGrid",
+                  "id": "controlgrid-1649d",
+                  "name": "cg",
+                  "row": [
+                    {
+                      "type": "Row",
+                      "id": "row-ec0ac",
+                      "cell": [
+                        {
+                          "type": "Control",
+                          "id": "control-3db4d",
+                          "elementRef": "F4"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "Row",
+                      "id": "row_c627c",
+                      "cell": [
+                        {
+                          "type": "Control",
+                          "id": "control_9dca2",
+                          "elementRef": "field_135b9"
+                        }
+                      ]
+                    }
+                  ],
+                  "verticalAlignment": "BOTTOM"
+                }
+              },
+              {
+                "type": "EmbeddedRepeat",
+                "id": "embeddedrepeat_0f37b",
+                "name": "Contacts with Number",
+                "title": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "Contacts with non-empty number"
+                      }
+                    ]
+                  }
+                },
+                "filterExpression": "kontext(Telephone){ [Number] } != \"\"",
+                "repeatOverviewColumn": [
+                  {
+                    "type": "ExpressionRepeatOverviewColumn",
+                    "id": "expressionrepeatoverviewcolumn_e3bf0",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "Name"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "name": "Name",
+                    "expression": "[Name]"
+                  }
+                ],
+                "groupRef": "G3",
+                "enableAdd": true,
+                "enableRemove": true,
+                "enableReorder": true,
+                "controlGrid": {
+                  "type": "ControlGrid",
+                  "id": "controlgrid_055bd",
+                  "name": "cg",
+                  "row": [
+                    {
+                      "type": "Row",
+                      "id": "row_7a714",
+                      "cell": [
+                        {
+                          "type": "Control",
+                          "id": "control_5ad04",
+                          "elementRef": "F4"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "Row",
+                      "id": "row_d9de4",
+                      "cell": [
+                        {
+                          "type": "Control",
+                          "id": "control_850b2",
+                          "elementRef": "field_135b9"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "EmbeddedRepeat",
+                "id": "embeddedrepeat_84902",
+                "name": "Contacts: Advertisement not allowed",
+                "title": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "Contacts: Advertisement not allowed"
+                      }
+                    ]
+                  }
+                },
+                "filterExpression": "kontext(Advertisement) { [advertisementAllowed] } = \"false\"",
+                "repeatOverviewColumn": [
+                  {
+                    "type": "ExpressionRepeatOverviewColumn",
+                    "id": "expressionrepeatoverviewcolumn_78bb0",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "Name"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "sortable": false,
+                    "filterable": false,
+                    "preferredSorting": "ASC",
+                    "name": "Name",
+                    "expression": "[Name]"
+                  }
+                ],
+                "groupRef": "G3",
+                "enableAdd": true,
+                "enableRemove": true,
+                "enableReorder": false,
+                "enableCopy": false,
+                "controlGrid": {
+                  "type": "ControlGrid",
+                  "id": "controlgrid_881c0",
+                  "name": "cg",
+                  "row": [
+                    {
+                      "type": "Row",
+                      "id": "row_44bf9",
+                      "cell": [
+                        {
+                          "type": "Control",
+                          "id": "control_1ab80",
+                          "elementRef": "F4"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "Row",
+                      "id": "row_fd934",
+                      "cell": [
+                        {
+                          "type": "Control",
+                          "id": "control_d4497",
+                          "elementRef": "field_135b9"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "EmbeddedRepeat",
+                "id": "embeddedrepeat_36712",
+                "name": "Contacts: Advertisement allowed",
+                "title": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "Contacts: Advertisement allowed"
+                      }
+                    ]
+                  }
+                },
+                "filterExpression": "kontext(Advertisement) { [advertisementAllowed] } = \"true\"",
+                "repeatOverviewColumn": [
+                  {
+                    "type": "ExpressionRepeatOverviewColumn",
+                    "id": "expressionrepeatoverviewcolumn_67cd9",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "Name"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "sortable": false,
+                    "filterable": false,
+                    "preferredSorting": "ASC",
+                    "name": "Name",
+                    "expression": "[Name]"
+                  }
+                ],
+                "groupRef": "G3",
+                "enableAdd": true,
+                "enableRemove": true,
+                "enableReorder": false,
+                "enableCopy": false,
+                "controlGrid": {
+                  "type": "ControlGrid",
+                  "id": "controlgrid_40be5",
+                  "name": "cg",
+                  "row": [
+                    {
+                      "type": "Row",
+                      "id": "row_205a6",
+                      "cell": [
+                        {
+                          "type": "Control",
+                          "id": "control_f81b7",
+                          "elementRef": "F4"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "Row",
+                      "id": "row_ceb1f",
+                      "cell": [
+                        {
+                          "type": "Control",
+                          "id": "control_01151",
+                          "elementRef": "field_135b9"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "EmbeddedRepeat",
+                "id": "embeddedrepeat_39e3c",
+                "name": "Male contacts",
+                "title": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "Male contacts"
+                      }
+                    ]
+                  }
+                },
+                "filterExpression": "[gender] = \"male\"",
+                "repeatOverviewColumn": [
+                  {
+                    "type": "ExpressionRepeatOverviewColumn",
+                    "id": "expressionrepeatoverviewcolumn_7200a",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "Name"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "name": "Name",
+                    "expression": "[Name]"
+                  }
+                ],
+                "groupRef": "G3",
+                "enableAdd": true,
+                "enableRemove": true,
+                "enableReorder": true,
+                "controlGrid": {
+                  "type": "ControlGrid",
+                  "id": "controlgrid_b4ba6",
+                  "name": "cg",
+                  "row": [
+                    {
+                      "type": "Row",
+                      "id": "row_abf03",
+                      "cell": [
+                        {
+                          "type": "Control",
+                          "id": "control_cecf8",
+                          "elementRef": "F4"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "Row",
+                      "id": "row_314ef",
+                      "cell": [
+                        {
+                          "type": "Control",
+                          "id": "control_bc939",
+                          "elementRef": "field_135b9"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "EmbeddedRepeat",
+                "id": "embeddedrepeat_cb093",
+                "name": "Female contacts",
+                "title": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "Female contacts"
+                      }
+                    ]
+                  }
+                },
+                "filterExpression": "[gender] = \"female\"",
+                "repeatOverviewColumn": [
+                  {
+                    "type": "ExpressionRepeatOverviewColumn",
+                    "id": "expressionrepeatoverviewcolumn_2a104",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "Name"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "name": "Name",
+                    "expression": "[Name]"
+                  }
+                ],
+                "groupRef": "G3",
+                "enableAdd": true,
+                "enableRemove": true,
+                "enableReorder": true,
+                "controlGrid": {
+                  "type": "ControlGrid",
+                  "id": "controlgrid_71fd1",
+                  "name": "cg",
+                  "row": [
+                    {
+                      "type": "Row",
+                      "id": "row_8b6a6",
+                      "cell": [
+                        {
+                          "type": "Control",
+                          "id": "control_47649",
+                          "elementRef": "F4"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "Row",
+                      "id": "row_b4085",
+                      "cell": [
+                        {
+                          "type": "Control",
+                          "id": "control_1a9d8",
+                          "elementRef": "field_135b9"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "fieldConfiguration": {
+      "field": [
+        {
+          "exposition": "CHECKBOX",
+          "elementRef": "F5"
+        }
+      ]
+    },
+    "groupConfiguration": {},
+    "defaults": {
+      "buttonLabels": {
+        "ADD": {
+          "text": [
+            {
+              "locale": "en",
+              "text": "add"
+            }
+          ]
+        },
+        "COMMIT_ADD": {
+          "text": [
+            {
+              "locale": "en",
+              "text": "commit"
+            }
+          ]
+        },
+        "APPLY": {
+          "text": [
+            {
+              "locale": "en",
+              "text": "apply changes"
+            }
+          ]
+        },
+        "EDIT": {
+          "text": [
+            {
+              "locale": "en",
+              "text": "edit"
+            }
+          ]
+        },
+        "REMOVE": {
+          "text": [
+            {
+              "locale": "en",
+              "text": "remove"
+            }
+          ]
+        },
+        "VIEW": {
+          "text": [
+            {
+              "locale": "en",
+              "text": "open"
+            }
+          ]
+        },
+        "CANCEL": {
+          "text": [
+            {
+              "locale": "en",
+              "text": "cancel"
+            }
+          ]
+        },
+        "RETURN": {
+          "text": [
+            {
+              "locale": "en",
+              "text": "return"
+            }
+          ]
+        },
+        "UP": {},
+        "DOWN": {}
+      }
+    }
+  }
+}

@@ -1,0 +1,17 @@
+{
+	"require": [
+		"source-map-support/register",
+		"./scripts/mocha/environment.js",
+		"./scripts/mocha/svg-loader.js",
+		"./lib/test/hooks.js"
+	],
+	"timeout": 60000,
+	"ui": "bdd",
+	"sort": true,
+	"forbidOnly": true,
+	"reporter": "./scripts/mocha/reporter.cjs",
+	"spec": [
+		"./lib/test/**/*.spec.js",
+		"./lib/test/**/*.test.js"
+	]
+}

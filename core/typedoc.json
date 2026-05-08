@@ -1,0 +1,20 @@
+{
+	"$schema": "https://typedoc.org/schema.json",
+	"name": "Form-Engine API Documentation",
+	"readme": "./resources/typedoc/README.md",
+	"out": "../documentation/src/assets/typedoc",
+	"entryPoints": [
+		"./src/models",
+		"./src/view",
+		"./src/back-end/localization",
+		"./src/back-end/store",
+		"./src/back-end/services/external-enumeration-provider.ts",
+		"./src/client-extensions"
+	],
+	"intentionallyNotExported": [
+		"ParsedFilterNode" // interface for jison, runtime-only property of form-model
+	],
+	"excludeExternals": true,
+	"excludePrivate": true,
+	"excludeProtected": false
+}

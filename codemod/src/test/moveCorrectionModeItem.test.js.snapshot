@@ -1,0 +1,12 @@
+exports[`codemod.recipes.moveCorrectionModeItem > does not rewrite unrelated imports from FE > should migrate other.ts correctly 1`] = `
+import { Events } from "@com.mgmtp.a12.formengine/formengine-core/lib/back-end/store/index.js";
+import { FormEngineActions } from "@com.mgmtp.a12.formengine/formengine-core/lib/client-extensions";
+import type { WidgetMap } from "@com.mgmtp.a12.formengine/formengine-core/lib/view";
+
+`;
+
+exports[`codemod.recipes.moveCorrectionModeItem > rewrites import for CorrectionModeItem correctly > should migrate normal.ts correctly 1`] = `
+import { CorrectionModeItem } from "@com.mgmtp.a12.formengine/formengine-core/lib/back-end/store";
+import { CorrectionModeItem as EsmItem } from "@com.mgmtp.a12.formengine/formengine-core/lib/back-end/store/index.js";
+
+`;

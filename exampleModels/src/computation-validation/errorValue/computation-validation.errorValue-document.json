@@ -1,0 +1,115 @@
+{
+  "header": {
+    "id": "computation-validation.errorValue-document",
+    "modelType": "document",
+    "modelVersion": "28.4.0",
+    "locales": [
+      {
+        "code": "en"
+      }
+    ],
+    "labels": [],
+    "annotations": [
+      {
+        "name": "roles",
+        "value": "admin"
+      }
+    ],
+    "modelReferences": []
+  },
+  "content": {
+    "modelInfo": {
+      "name": "computation-validation.errorValue-document",
+      "immutable": false
+    },
+    "modelConfig": {
+      "decimalSeparator": ".",
+      "timeZone": "UTC",
+      "conditionLanguage": {
+        "code": "en_US"
+      }
+    },
+    "modelRoot": {
+      "rootGroups": [
+        {
+          "type": "Group",
+          "id": "G2",
+          "name": "Root",
+          "Group": {
+            "repeatability": 1,
+            "elements": [
+              {
+                "type": "Field",
+                "id": "F1",
+                "name": "aNumber",
+                "Field": {
+                  "fieldType": {
+                    "type": "NumberType"
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "aNumber"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Field",
+                "id": "F2",
+                "name": "aString",
+                "Field": {
+                  "fieldType": {
+                    "type": "StringType"
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "aString"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Field",
+                "id": "F3",
+                "name": "aBool",
+                "Field": {
+                  "fieldType": {
+                    "type": "BooleanType"
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "aBool"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Rule",
+                "id": "rule_bba8e",
+                "name": "AtLeastOneFilled",
+                "Rule": {
+                  "errorEntityRelPath": "../aString",
+                  "errorCode": "Error rule_bba8e",
+                  "errorCondition": "GroupFilled(RuleGroup) and NoFieldFilled(aNumber, aString)",
+                  "severity": "ERROR",
+                  "errorMessage": [
+                    {
+                      "locale": "en",
+                      "text": "At least one must be filled: aNumber or aString"
+                    }
+                  ],
+                  "guiPatterns": {
+                    "dynamicEnumeration": "false"
+                  }
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

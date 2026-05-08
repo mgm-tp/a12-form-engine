@@ -1,0 +1,84 @@
+{
+  "header": {
+    "id": "NestedGroups",
+    "modelType": "document",
+    "modelVersion": "28.4.0",
+    "locales": [
+      {
+        "code": "en"
+      }
+    ],
+    "annotations": [],
+    "modelReferences": []
+  },
+  "content": {
+    "modelInfo": {
+      "name": "NestedGroups"
+    },
+    "modelConfig": {
+      "decimalSeparator": ".",
+      "timeZone": "UTC",
+      "conditionLanguage": {
+        "code": "en_US"
+      }
+    },
+    "modelRoot": {
+      "rootGroups": [
+        {
+          "type": "Group",
+          "id": "group_1700c",
+          "name": "TopLevelGroup",
+          "Group": {
+            "repeatability": 1,
+            "elements": [
+              {
+                "type": "Group",
+                "id": "group_6a2c5",
+                "name": "NestedGroup",
+                "Group": {
+                  "repeatability": 1
+                }
+              },
+              {
+                "type": "Field",
+                "id": "field_dfd57",
+                "name": "SomeField",
+                "Field": {
+                  "fieldType": {
+                    "type": "StringType"
+                  }
+                }
+              },
+              {
+                "type": "Group",
+                "id": "group_d6680",
+                "name": "NestedGroupWithLabel",
+                "Group": {
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "Group label"
+                    }
+                  ],
+                  "repeatability": 1,
+                  "elements": [
+                    {
+                      "type": "Field",
+                      "id": "field_ebcf8",
+                      "name": "SomeField",
+                      "Field": {
+                        "fieldType": {
+                          "type": "StringType"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

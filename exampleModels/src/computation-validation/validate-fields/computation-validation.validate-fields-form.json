@@ -1,0 +1,687 @@
+{
+  "header": {
+    "id": "computation-validation.validate-fields-form",
+    "modelType": "form",
+    "modelVersion": "37.4.0",
+    "locales": [
+      {
+        "code": "en"
+      }
+    ],
+    "annotations": [
+      {
+        "name": "roles",
+        "value": "admin"
+      }
+    ],
+    "modelReferences": [
+      {
+        "alias": "DM",
+        "modelType": "document",
+        "purpose": "data binding",
+        "reference": "computation-validation.validate-fields-document"
+      }
+    ]
+  },
+  "content": {
+    "subHeaderBox": {
+      "id": "subHeaderBox1"
+    },
+    "footerBox": {
+      "id": "footerBox1"
+    },
+    "screens": [
+      {
+        "id": "screen1",
+        "name": "Screen1",
+        "screenElements": [
+          {
+            "type": "Section",
+            "id": "section_c5aed",
+            "name": "sectionEnum",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "Field Value Change"
+                  }
+                ]
+              }
+            },
+            "screenElements": [
+              {
+                "type": "ControlGrid",
+                "id": "controlgrid-c53c2",
+                "name": "cg",
+                "layout": {
+                  "lg": "3-3-3-3"
+                },
+                "row": [
+                  {
+                    "type": "Row",
+                    "id": "row-32a9e",
+                    "name": "desc-row",
+                    "cell": [
+                      {
+                        "type": "TextCell",
+                        "id": "textcell-ce819",
+                        "span": {
+                          "lg": 2
+                        },
+                        "name": "test case description",
+                        "content": {
+                          "text": [
+                            {
+                              "locale": "en",
+                              "text": "<p>In this test case the form validation should highlight modeling issues that occur when document and form model contradict each other.</p>\n<p>That is why the master field in the following form is connected to the other fields using the different kinds of dependencies:</p>\n<ul>\n<li>dependent field</li>\n<li>dependent enumeration</li>\n<li>dependent group</li>\n</ul>\n<p>Thus, whenever the master field changes the connected fields are changed as well.</p>\n<p>Any such change to the master field is validated and this validation should take all changed fields and their interconnection via validation rules into account.</p>\n<p>How to test</p>\n<ul>\n<li>When selecting 'A' everything should be fine.</li>\n<li>When selecting 'B' or 'C' a number of validation errors should immediately be presented since the validation rules in the document model are in conflict with the dependencies in the form model.\n<ul>\n<li>The selection of B should make slave, numField, stringField and Error Field invalid. The errors for numField and stringField will only be shown immediately if their values were not empty before selecting B.</li>\n<li>The selection of C should make only slave and numField invalid.</li>\n</ul>\n</li>\n</ul>"
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "type": "Row",
+                    "id": "row-91a6d",
+                    "cell": [
+                      {
+                        "type": "Control",
+                        "id": "control-e5682",
+                        "elementRef": "field_0e6c7"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "Row",
+                    "id": "row-74e7a",
+                    "cell": [
+                      {
+                        "type": "Control",
+                        "id": "control-2d41f",
+                        "elementRef": "field_aecd0"
+                      },
+                      {
+                        "type": "Control",
+                        "id": "control-d68e2",
+                        "elementRef": "field_a4193"
+                      },
+                      {
+                        "type": "Control",
+                        "id": "control-7268f",
+                        "elementRef": "field_3324a"
+                      },
+                      {
+                        "type": "Control",
+                        "id": "control_60087",
+                        "label": {
+                          "type": "Multilingual",
+                          "multilingualText": {
+                            "text": [
+                              {
+                                "locale": "en",
+                                "text": "Error Field (not relevant unless master is \"b\")"
+                              }
+                            ]
+                          }
+                        },
+                        "elementRef": "field_2a2ca"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "Row",
+                    "id": "row-8d8d1",
+                    "title": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "dependent group"
+                          }
+                        ]
+                      }
+                    },
+                    "cell": [
+                      {
+                        "type": "Control",
+                        "id": "control-0f8af",
+                        "offset": {
+                          "lg": 0
+                        },
+                        "elementRef": "field_68365"
+                      }
+                    ]
+                  }
+                ],
+                "verticalAlignment": "MIDDLE"
+              }
+            ]
+          },
+          {
+            "type": "Section",
+            "id": "section_ff136",
+            "name": "sectionMultiSelect",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "Multi Select Value Change"
+                  }
+                ]
+              }
+            },
+            "screenElements": [
+              {
+                "type": "ControlGrid",
+                "id": "controlgrid_dba08",
+                "name": "cg",
+                "layout": {
+                  "lg": "4-4-4"
+                },
+                "row": [
+                  {
+                    "type": "Row",
+                    "id": "row_c081e",
+                    "name": "desc-row",
+                    "cell": [
+                      {
+                        "type": "TextCell",
+                        "id": "textcell_aa136",
+                        "span": {
+                          "lg": 2
+                        },
+                        "name": "test case description",
+                        "content": {
+                          "text": [
+                            {
+                              "locale": "en",
+                              "text": "<p>Initially, the control for Error Field should not be shown.</p>\n<p>Selecting a value for the Multi Select should immediately show Error Field with a validation error.</p>\n<p>De-selecting all values from the Multi Select should set Error Field back to non-relevant.</p>"
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "type": "Row",
+                    "id": "row_63162",
+                    "cell": [
+                      {
+                        "type": "Control",
+                        "id": "control_395dd",
+                        "label": {
+                          "type": "Multilingual",
+                          "multilingualText": {
+                            "text": [
+                              {
+                                "locale": "en",
+                                "text": "Multi Select"
+                              }
+                            ]
+                          }
+                        },
+                        "elementRef": "group_ab87f"
+                      },
+                      {
+                        "type": "Control",
+                        "id": "control_9d5fa",
+                        "elementRef": "field_3db33"
+                      },
+                      {
+                        "type": "Control",
+                        "id": "control_5263f",
+                        "label": {
+                          "type": "Multilingual",
+                          "multilingualText": {
+                            "text": [
+                              {
+                                "locale": "en",
+                                "text": "Error Field (not relevant unless Multi Select is filled)"
+                              }
+                            ]
+                          }
+                        },
+                        "elementRef": "field_eab6d"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "Section",
+            "id": "section_49408",
+            "name": "sectionAttachment",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "Attachment Value Change"
+                  }
+                ]
+              }
+            },
+            "screenElements": [
+              {
+                "type": "ControlGrid",
+                "id": "controlgrid_c9277",
+                "name": "cg",
+                "layout": {
+                  "lg": "4-4-4"
+                },
+                "row": [
+                  {
+                    "type": "Row",
+                    "id": "row_8b948",
+                    "name": "desc-row",
+                    "cell": [
+                      {
+                        "type": "TextCell",
+                        "id": "textcell_6f062",
+                        "span": {
+                          "lg": 2
+                        },
+                        "name": "test case description",
+                        "content": {
+                          "text": [
+                            {
+                              "locale": "en",
+                              "text": "<p>Initially, the control for Error Field should not be shown.</p>\n<p>Uploading an attachment should immediately show Error Field with a validation error.</p>\n<p>Removing the attachment should set Error Field back to non-relevant.</p>"
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "type": "Row",
+                    "id": "row_0e241",
+                    "cell": [
+                      {
+                        "type": "Control",
+                        "id": "control_fd70c",
+                        "label": {
+                          "type": "Multilingual",
+                          "multilingualText": {
+                            "text": [
+                              {
+                                "locale": "en",
+                                "text": "Attachment"
+                              }
+                            ]
+                          }
+                        },
+                        "elementRef": "group_f0fc3"
+                      },
+                      {
+                        "type": "Control",
+                        "id": "control_cb3aa",
+                        "elementRef": "field_1eae4"
+                      },
+                      {
+                        "type": "Control",
+                        "id": "control_d7664",
+                        "label": {
+                          "type": "Multilingual",
+                          "multilingualText": {
+                            "text": [
+                              {
+                                "locale": "en",
+                                "text": "Error Field (not relevant unless an attachment has been uploaded)"
+                              }
+                            ]
+                          }
+                        },
+                        "elementRef": "field_257a3"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "Section",
+            "id": "section_3d64b",
+            "name": "sectionMultiFileUpload",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "Multi File Upload"
+                  }
+                ]
+              }
+            },
+            "screenElements": [
+              {
+                "type": "ControlGrid",
+                "id": "controlgrid_80800",
+                "name": "cgDescription",
+                "layout": {
+                  "lg": "4-4-4"
+                },
+                "row": [
+                  {
+                    "type": "Row",
+                    "id": "row_06c25",
+                    "name": "desc-row",
+                    "cell": [
+                      {
+                        "type": "TextCell",
+                        "id": "textcell_46af4",
+                        "span": {
+                          "lg": 2
+                        },
+                        "name": "test case description",
+                        "content": {
+                          "text": [
+                            {
+                              "locale": "en",
+                              "text": "<p>Initially, the control for Error Field should not be shown.</p>\n<p>Uploading exactly one file in the multi file upload should immediately show Error Field with a validation error.</p>\n<p>Uploading additional files or removing all files should set Error Field back to non-relevant.</p>"
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "InlineRepeat",
+                "id": "inlinerepeat_4fe21",
+                "name": "attachmentCollection_Repeat",
+                "title": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "Multi File Upload Repeat"
+                      }
+                    ]
+                  }
+                },
+                "repeatOverviewColumn": [
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn_e623e",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "File Name"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "readonly": true,
+                    "elementRef": "field_295fc",
+                    "readonlyPresentation": "TEXT"
+                  }
+                ],
+                "groupRef": "group_5a828",
+                "enableAdd": false,
+                "enableRemove": true,
+                "multiFileUpload": true,
+                "multiFileUploadOptions": {
+                  "elementRef": "group_b6504"
+                }
+              },
+              {
+                "type": "ControlGrid",
+                "id": "controlgrid_6579a",
+                "name": "cg",
+                "layout": {
+                  "lg": "4-4-4"
+                },
+                "row": [
+                  {
+                    "type": "Row",
+                    "id": "row_cb1dc",
+                    "cell": [
+                      {
+                        "type": "Control",
+                        "id": "control_e8885",
+                        "elementRef": "field_962d1"
+                      },
+                      {
+                        "type": "Control",
+                        "id": "control_fb504",
+                        "label": {
+                          "type": "Multilingual",
+                          "multilingualText": {
+                            "text": [
+                              {
+                                "locale": "en",
+                                "text": "Error Field (not relevant unless exactly one file has been uploaded)"
+                              }
+                            ]
+                          }
+                        },
+                        "elementRef": "field_88d79"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "fieldConfiguration": {
+      "field": [
+        {
+          "exposition": "COMPACT",
+          "dependentEnumeration": {
+            "masterField": "field_0e6c7",
+            "constraint": [
+              {
+                "masterValue": "a",
+                "constraintValues": [
+                  {
+                    "value": "d"
+                  },
+                  {
+                    "value": "e"
+                  },
+                  {
+                    "value": "f"
+                  }
+                ],
+                "valueForMasterChange": "d"
+              },
+              {
+                "masterValue": "b",
+                "constraintValues": [
+                  {
+                    "value": "e"
+                  },
+                  {
+                    "value": "f"
+                  }
+                ],
+                "valueForMasterChange": "e"
+              },
+              {
+                "masterValue": "c",
+                "constraintValues": [
+                  {
+                    "value": "f"
+                  }
+                ],
+                "valueForMasterChange": "f"
+              }
+            ]
+          },
+          "elementRef": "field_aecd0"
+        },
+        {
+          "dependentField": {
+            "masterField": "field_0e6c7",
+            "case": [
+              {
+                "masterValue": "a",
+                "value": "666"
+              },
+              {
+                "masterValue": "b",
+                "value": ""
+              },
+              {
+                "masterValue": "c",
+                "value": "123"
+              }
+            ]
+          },
+          "elementRef": "field_a4193"
+        },
+        {
+          "exposition": "SWITCH",
+          "dependentField": {
+            "masterField": "field_0e6c7",
+            "case": [
+              {
+                "masterValue": "a",
+                "value": "true"
+              },
+              {
+                "masterValue": "c",
+                "value": "true"
+              }
+            ]
+          },
+          "elementRef": "field_3324a"
+        },
+        {
+          "dependentField": {
+            "masterField": "field_0e6c7",
+            "case": [
+              {
+                "masterValue": "a",
+                "value": "abc"
+              },
+              {
+                "masterValue": "b",
+                "value": ""
+              },
+              {
+                "masterValue": "c",
+                "value": "abc"
+              }
+            ]
+          },
+          "elementRef": "field_68365"
+        },
+        {
+          "dependentField": {
+            "masterField": "field_0e6c7",
+            "case": [
+              {
+                "masterValue": null,
+                "notRelevant": true
+              },
+              {
+                "masterValue": "a",
+                "notRelevant": true
+              },
+              {
+                "masterValue": "b",
+                "value": "Error"
+              },
+              {
+                "masterValue": "c",
+                "notRelevant": true
+              }
+            ]
+          },
+          "elementRef": "field_2a2ca"
+        },
+        {
+          "dependentField": {
+            "masterField": "field_3db33",
+            "case": [
+              {
+                "masterValue": null,
+                "notRelevant": true
+              },
+              {
+                "masterValue": "empty",
+                "notRelevant": true
+              },
+              {
+                "masterValue": "filled",
+                "value": "Error"
+              }
+            ]
+          },
+          "elementRef": "field_eab6d"
+        },
+        {
+          "dependentField": {
+            "masterField": "field_1eae4",
+            "case": [
+              {
+                "masterValue": null,
+                "notRelevant": true
+              },
+              {
+                "masterValue": "empty",
+                "notRelevant": true
+              },
+              {
+                "masterValue": "filled",
+                "value": "Error"
+              }
+            ]
+          },
+          "elementRef": "field_257a3"
+        },
+        {
+          "dependentField": {
+            "masterField": "field_962d1",
+            "case": [
+              {
+                "masterValue": null,
+                "notRelevant": true
+              },
+              {
+                "masterValue": "empty",
+                "notRelevant": true
+              },
+              {
+                "masterValue": "one",
+                "value": "Error"
+              },
+              {
+                "masterValue": "three",
+                "notRelevant": true
+              },
+              {
+                "masterValue": "two",
+                "notRelevant": true
+              }
+            ]
+          },
+          "elementRef": "field_88d79"
+        }
+      ]
+    },
+    "groupConfiguration": {},
+    "defaults": {}
+  }
+}

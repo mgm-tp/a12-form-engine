@@ -1,0 +1,74 @@
+{
+  "header": {
+    "id": "control-grid-include.picus",
+    "modelType": "document",
+    "modelVersion": "28.4.0",
+    "locales": [
+      {
+        "code": "en"
+      }
+    ],
+    "labels": [],
+    "annotations": [],
+    "modelReferences": [
+      {
+        "alias": "control-grid.picus.json",
+        "modelType": "document",
+        "purpose": "include",
+        "reference": "control-grid.picus"
+      }
+    ]
+  },
+  "content": {
+    "modelInfo": {
+      "name": "control-grid-include.picus",
+      "immutable": false
+    },
+    "modelConfig": {
+      "decimalSeparator": ".",
+      "timeZone": "UTC",
+      "conditionLanguage": {
+        "code": "en_US"
+      }
+    },
+    "modelRoot": {
+      "rootGroups": [
+        {
+          "type": "Group",
+          "id": "group_320c5",
+          "name": "host",
+          "Group": {
+            "repeatability": 1,
+            "elements": [
+              {
+                "type": "Field",
+                "id": "field_6b43b",
+                "name": "testField",
+                "Field": {
+                  "fieldType": {
+                    "type": "StringType"
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "Test Field (Host)"
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "Group",
+          "id": "include_f4f58",
+          "name": "base",
+          "Group": {
+            "repeatability": 1,
+            "modelAlias": "control-grid.picus.json"
+          }
+        }
+      ]
+    }
+  }
+}

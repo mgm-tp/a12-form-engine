@@ -1,0 +1,437 @@
+{
+  "header": {
+    "id": "enablement.readonly.readonly-presentation-form",
+    "modelType": "form",
+    "modelVersion": "37.4.0",
+    "locales": [
+      {
+        "code": "en"
+      }
+    ],
+    "annotations": [
+      {
+        "name": "roles",
+        "value": "admin"
+      }
+    ],
+    "modelReferences": [
+      {
+        "alias": "DM",
+        "modelType": "document",
+        "purpose": "data binding",
+        "reference": "enablement.readonly-document"
+      }
+    ]
+  },
+  "content": {
+    "subHeaderBox": {
+      "id": "subHeaderBox1"
+    },
+    "footerBox": {
+      "id": "footerBox1"
+    },
+    "screens": [
+      {
+        "id": "screen1",
+        "name": "Screen1",
+        "screenElements": [
+          {
+            "type": "Section",
+            "id": "section-da419",
+            "name": "secControl",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "Control"
+                  }
+                ]
+              }
+            },
+            "screenElements": [
+              {
+                "type": "ControlGrid",
+                "id": "controlgrid-73b39",
+                "name": "cg0",
+                "row": [
+                  {
+                    "type": "Row",
+                    "id": "row-34914",
+                    "cell": [
+                      {
+                        "type": "TextCell",
+                        "id": "textcell-51a41",
+                        "offset": {
+                          "lg": 0
+                        },
+                        "span": {
+                          "lg": 1
+                        },
+                        "name": "text1",
+                        "content": {
+                          "text": [
+                            {
+                              "locale": "en",
+                              "text": "Model Setting: Text Output readonly presentation"
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "type": "Row",
+                    "id": "row-42cb2",
+                    "cell": [
+                      {
+                        "type": "Control",
+                        "id": "control-84a75",
+                        "elementRef": "field_acc6b"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "Row",
+                    "id": "row-4b4e5",
+                    "cell": [
+                      {
+                        "type": "Control",
+                        "id": "control-8a623",
+                        "offset": {
+                          "lg": 0
+                        },
+                        "label": {
+                          "type": "Multilingual",
+                          "multilingualText": {
+                            "text": [
+                              {
+                                "locale": "en",
+                                "text": "Input readonly presentation (overwrites the model setting)"
+                              }
+                            ]
+                          }
+                        },
+                        "elementRef": "fieldimpl_08f9e",
+                        "readonlyPresentation": "INPUT"
+                      }
+                    ]
+                  }
+                ],
+                "verticalAlignment": "BOTTOM"
+              },
+              {
+                "type": "ControlGrid",
+                "id": "controlgrid-a1552",
+                "name": "cg1",
+                "title": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "Control Grid with Input Readonly Presentation  (overwrites the model setting)"
+                      }
+                    ]
+                  }
+                },
+                "row": [
+                  {
+                    "type": "Row",
+                    "id": "row-149e1",
+                    "cell": [
+                      {
+                        "type": "Control",
+                        "id": "control-bb561",
+                        "elementRef": "field_acc6b"
+                      }
+                    ]
+                  }
+                ],
+                "readonlyPresentation": "INPUT",
+                "verticalAlignment": "BOTTOM"
+              }
+            ]
+          },
+          {
+            "type": "Section",
+            "id": "section-3238b",
+            "name": "secRepeat",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "Field Overview Column"
+                  }
+                ]
+              }
+            },
+            "screenElements": [
+              {
+                "type": "ControlGrid",
+                "id": "controlgrid-5ec54",
+                "name": "cg0",
+                "row": [
+                  {
+                    "type": "Row",
+                    "id": "row-15820",
+                    "cell": [
+                      {
+                        "type": "TextCell",
+                        "id": "textcell-97f7d",
+                        "offset": {
+                          "lg": 0
+                        },
+                        "span": {
+                          "lg": 1
+                        },
+                        "name": "text1",
+                        "content": {
+                          "text": [
+                            {
+                              "locale": "en",
+                              "text": "Model Setting: Text Output readonly presentation"
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                ],
+                "verticalAlignment": "BOTTOM"
+              },
+              {
+                "type": "InlineRepeat",
+                "id": "inlinerepeat-c515e",
+                "name": "inline-repeat-repeatableGroup",
+                "title": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "No readonly presentation set for the columns or the repeat"
+                      }
+                    ]
+                  }
+                },
+                "repeatOverviewColumn": [
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-ffa99",
+                    "width": 1,
+                    "sortable": false,
+                    "filterable": false,
+                    "preferredSorting": "ASC",
+                    "elementRef": "fieldimpl_97d64"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-edfe8",
+                    "width": 1,
+                    "sortable": false,
+                    "filterable": false,
+                    "preferredSorting": "ASC",
+                    "elementRef": "fieldimpl_ae7cb"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-2d0a0",
+                    "width": 1,
+                    "sortable": false,
+                    "filterable": false,
+                    "preferredSorting": "ASC",
+                    "elementRef": "fieldimpl_16c3f"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-b7430",
+                    "width": 1,
+                    "sortable": false,
+                    "filterable": false,
+                    "preferredSorting": "ASC",
+                    "elementRef": "fieldimpl_6cdc2"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-66f29",
+                    "width": 1,
+                    "sortable": false,
+                    "filterable": false,
+                    "preferredSorting": "ASC",
+                    "elementRef": "group_50ba7"
+                  }
+                ],
+                "groupRef": "group_6442e",
+                "enableAdd": true,
+                "enableRemove": true,
+                "enableReorder": false,
+                "enableCopy": false
+              },
+              {
+                "type": "InlineRepeat",
+                "id": "inlinerepeat-fe2d1",
+                "name": "inline-repeat-repeatableGroup-ReadonlyPresentationInput",
+                "title": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "Input Readonly Presentation set for the repeat (overwrites the model setting)"
+                      }
+                    ]
+                  }
+                },
+                "repeatOverviewColumn": [
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-23725",
+                    "width": 1,
+                    "sortable": false,
+                    "filterable": false,
+                    "preferredSorting": "ASC",
+                    "elementRef": "fieldimpl_97d64"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-da275",
+                    "width": 1,
+                    "sortable": false,
+                    "filterable": false,
+                    "preferredSorting": "ASC",
+                    "elementRef": "fieldimpl_ae7cb"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-dc1c3",
+                    "width": 1,
+                    "sortable": false,
+                    "filterable": false,
+                    "preferredSorting": "ASC",
+                    "elementRef": "fieldimpl_16c3f"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-87a76",
+                    "width": 1,
+                    "sortable": false,
+                    "filterable": false,
+                    "preferredSorting": "ASC",
+                    "elementRef": "fieldimpl_6cdc2"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-534f5",
+                    "width": 1,
+                    "sortable": false,
+                    "filterable": false,
+                    "preferredSorting": "ASC",
+                    "elementRef": "group_50ba7"
+                  }
+                ],
+                "groupRef": "group_6442e",
+                "enableAdd": true,
+                "enableRemove": true,
+                "enableReorder": false,
+                "enableCopy": false,
+                "readonlyPresentation": "INPUT"
+              },
+              {
+                "type": "InlineRepeat",
+                "id": "inlinerepeat-d1b9a",
+                "name": "inline-repeat-repeatableGroup-NoReadonlyPresentation",
+                "title": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "Input readonly presentation set for the individual columns (overwrites the model setting)"
+                      }
+                    ]
+                  }
+                },
+                "repeatOverviewColumn": [
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-bc88e",
+                    "width": 1,
+                    "sortable": false,
+                    "filterable": false,
+                    "preferredSorting": "ASC",
+                    "elementRef": "fieldimpl_97d64",
+                    "readonlyPresentation": "INPUT"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-cbe13",
+                    "width": 1,
+                    "sortable": false,
+                    "filterable": false,
+                    "preferredSorting": "ASC",
+                    "elementRef": "fieldimpl_ae7cb",
+                    "readonlyPresentation": "INPUT"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-341fb",
+                    "width": 1,
+                    "sortable": false,
+                    "filterable": false,
+                    "preferredSorting": "ASC",
+                    "elementRef": "fieldimpl_16c3f",
+                    "readonlyPresentation": "INPUT"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-0949d",
+                    "width": 1,
+                    "sortable": false,
+                    "filterable": false,
+                    "preferredSorting": "ASC",
+                    "datePickerConfig": {
+                      "absolute": false,
+                      "preselectionYear": 0
+                    },
+                    "elementRef": "fieldimpl_6cdc2",
+                    "readonlyPresentation": "INPUT"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-3922d",
+                    "width": 1,
+                    "sortable": false,
+                    "filterable": false,
+                    "preferredSorting": "ASC",
+                    "elementRef": "group_50ba7"
+                  }
+                ],
+                "groupRef": "group_6442e",
+                "enableAdd": true,
+                "enableRemove": true,
+                "enableReorder": false,
+                "enableCopy": false
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "fieldConfiguration": {
+      "field": [
+        {
+          "exposition": "CHECKBOX",
+          "elementRef": "fieldimpl_16c3f"
+        }
+      ]
+    },
+    "groupConfiguration": {},
+    "defaults": {},
+    "readonlyPresentation": "TEXT",
+    "inlineRepeatReadonlyPresentation": "TEXT"
+  }
+}

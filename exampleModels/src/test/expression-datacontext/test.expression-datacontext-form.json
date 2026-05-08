@@ -1,0 +1,761 @@
+{
+  "header": {
+    "id": "test.expression-datacontext-form",
+    "modelType": "form",
+    "modelVersion": "37.4.0",
+    "locales": [
+      {
+        "code": "en"
+      }
+    ],
+    "labels": [
+      {
+        "locale": "en",
+        "text": "ExpressionTest"
+      }
+    ],
+    "annotations": [
+      {
+        "name": "roles",
+        "value": "admin"
+      }
+    ],
+    "modelReferences": [
+      {
+        "alias": "DM",
+        "modelType": "document",
+        "purpose": "data binding",
+        "reference": "test.expression-datacontext-document"
+      }
+    ]
+  },
+  "content": {
+    "subtitle": {
+      "type": "Expression",
+      "expressionText": "\"GlobalSubtitle [\" kontext(root) {[field1]} \"]\""
+    },
+    "subHeaderBox": {
+      "id": "subHeaderBox1",
+      "majorButtons": {
+        "button": [
+          {
+            "type": "EVENT",
+            "id": "button-c981a",
+            "name": "event-button",
+            "buttonStyling": {
+              "label": {
+                "type": "Expression",
+                "expressionText": "\"GlobalSubHeaderEventButton [\" kontext(root){[field1]} \"]\""
+              },
+              "priority": "SECONDARY"
+            },
+            "scope": "HIDDEN_IN_READONLY_MODE"
+          },
+          {
+            "type": "EVENT",
+            "id": "button-a0306",
+            "name": "navigation-button",
+            "buttonStyling": {
+              "label": {
+                "type": "Expression",
+                "expressionText": "\"GlobalSubHeaderNavButton [\" kontext(root){[field1]} \"]\""
+              },
+              "priority": "SECONDARY"
+            },
+            "scope": "HIDDEN_IN_READONLY_MODE"
+          }
+        ]
+      }
+    },
+    "footerBox": {
+      "id": "footerBox1",
+      "minorButtons": {
+        "button": [
+          {
+            "type": "EVENT",
+            "id": "button-431e1",
+            "name": "button",
+            "buttonStyling": {
+              "label": {
+                "type": "Expression",
+                "expressionText": "\"GlobalMinorFooterButton [\" kontext(root){[field1]} \"]\""
+              },
+              "priority": "SECONDARY"
+            },
+            "scope": "HIDDEN_IN_READONLY_MODE"
+          }
+        ]
+      },
+      "majorButtons": {
+        "button": [
+          {
+            "type": "EVENT",
+            "id": "button-8d020",
+            "name": "button",
+            "buttonStyling": {
+              "label": {
+                "type": "Expression",
+                "expressionText": "\"GlobalMajorFooterButton [\" kontext(root){[field1]} \"]\""
+              },
+              "priority": "SECONDARY"
+            },
+            "scope": "HIDDEN_IN_READONLY_MODE"
+          }
+        ]
+      }
+    },
+    "screens": [
+      {
+        "id": "screen1",
+        "name": "Screen1",
+        "title": {
+          "type": "Expression",
+          "expressionText": "\"Screen [\" kontext(root){[field1]} \"]\""
+        },
+        "subHeaderBox": {
+          "id": "headerfooter-cb599",
+          "majorButtons": {
+            "button": [
+              {
+                "type": "EVENT",
+                "id": "button-586a6",
+                "name": "event-button",
+                "buttonStyling": {
+                  "label": {
+                    "type": "Expression",
+                    "expressionText": "\"ScreenSubHeaderBoxEventButton [\" kontext(root){[field1]} \"]\""
+                  },
+                  "priority": "SECONDARY"
+                },
+                "scope": "HIDDEN_IN_READONLY_MODE"
+              },
+              {
+                "type": "NAVIGATION",
+                "id": "button-79609",
+                "name": "navigation-button",
+                "buttonStyling": {
+                  "label": {
+                    "type": "Expression",
+                    "expressionText": "\"ScreenSubHeaderBoxNavButton [\" kontext(root){[field1]} \"]\""
+                  },
+                  "priority": "SECONDARY"
+                },
+                "target": "screen1",
+                "scope": "HIDDEN_IN_READONLY_MODE"
+              }
+            ]
+          }
+        },
+        "footerBox": {
+          "id": "headerfooter-faee6",
+          "minorButtons": {
+            "button": [
+              {
+                "type": "EVENT",
+                "id": "button-a3d4f",
+                "name": "button",
+                "buttonStyling": {
+                  "label": {
+                    "type": "Expression",
+                    "expressionText": "\"ScreenFooterBoxMinorButton [\" kontext(root){[field1]} \"]\""
+                  },
+                  "priority": "SECONDARY"
+                },
+                "scope": "HIDDEN_IN_READONLY_MODE"
+              }
+            ]
+          },
+          "majorButtons": {
+            "button": [
+              {
+                "type": "EVENT",
+                "id": "button-2caa4",
+                "name": "button",
+                "buttonStyling": {
+                  "label": {
+                    "type": "Expression",
+                    "expressionText": "\"ScreenFooterBoxMajorButton [\" kontext(root){[field1]} \"]\""
+                  },
+                  "priority": "SECONDARY"
+                },
+                "scope": "HIDDEN_IN_READONLY_MODE"
+              }
+            ]
+          }
+        },
+        "screenElements": [
+          {
+            "type": "MultiColumnSection",
+            "id": "multicolumnsection-6c5bf",
+            "name": "mcs",
+            "title": {
+              "type": "Expression",
+              "expressionText": "\"MultiColumnSection [\" kontext(root){[field1]} \"]\""
+            },
+            "layout": {
+              "lg": "6-6"
+            },
+            "screenElements": [
+              {
+                "type": "Section",
+                "id": "section-c7658",
+                "name": "section",
+                "title": {
+                  "type": "Expression",
+                  "expressionText": "\"Section [\" kontext(root){[field1]} \"]\""
+                },
+                "collapsible": true,
+                "screenElements": [
+                  {
+                    "type": "ControlGrid",
+                    "id": "controlgrid-51fd2",
+                    "name": "cg",
+                    "title": {
+                      "type": "Expression",
+                      "expressionText": "\"ControlGrid [\" kontext(root){[field1]} \"]\""
+                    },
+                    "layout": {
+                      "lg": "6-6"
+                    },
+                    "row": [
+                      {
+                        "type": "Row",
+                        "id": "row-bf6e5",
+                        "title": {
+                          "type": "Expression",
+                          "expressionText": "\"Row [\" kontext(root){[field1]} \"]\""
+                        },
+                        "cell": [
+                          {
+                            "type": "Control",
+                            "id": "control-b601a",
+                            "span": {
+                              "lg": 2
+                            },
+                            "label": {
+                              "type": "Expression",
+                              "expressionText": "\"Control [\" kontext(root){[field1]} \"]\""
+                            },
+                            "elementRef": "field_005e7"
+                          }
+                        ]
+                      }
+                    ],
+                    "verticalAlignment": "TOP"
+                  }
+                ]
+              },
+              {
+                "type": "ButtonPanel",
+                "id": "buttonpanel-c7038",
+                "name": "bp",
+                "title": {
+                  "type": "Expression",
+                  "expressionText": "\"ButtonPanel [\" kontext(root){[field1]} \"]\""
+                },
+                "button": [
+                  {
+                    "type": "EVENT",
+                    "id": "button-dc514",
+                    "name": "button",
+                    "buttonStyling": {
+                      "label": {
+                        "type": "Expression",
+                        "expressionText": "\"Button [\" kontext(root){[field1]} \"]\""
+                      },
+                      "priority": "SECONDARY"
+                    },
+                    "scope": "HIDDEN_IN_READONLY_MODE"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "DetachedRepeat",
+            "id": "detachedrepeat-416b4",
+            "name": "detached-repeat1",
+            "title": {
+              "type": "Expression",
+              "expressionText": "\"DetachedRepeat [\" kontext(root){[field1]} \"]\""
+            },
+            "buttonLabels": {},
+            "confirmationTexts": {},
+            "repeatOverviewColumn": [
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-252f2",
+                "label": {
+                  "type": "Expression",
+                  "expressionText": "\"FieldColumnHeader [\" kontext(root){[field1]} \"]\""
+                },
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "elementRef": "field_9e47b"
+              },
+              {
+                "type": "ExpressionRepeatOverviewColumn",
+                "id": "expressionrepeatoverviewcolumn-eb042",
+                "label": {
+                  "type": "Expression",
+                  "expressionText": "\"ExpressionColumnHeader [\" kontext(root){[field1]} \"]\""
+                },
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "name": "expression",
+                "expression": "\"ExpressionColumnCell [\" kontext(wrapper1){[field2]} \"]\""
+              }
+            ],
+            "rowActionGroup": {
+              "action": [
+                {
+                  "buttonStyling": {
+                    "label": {
+                      "type": "Expression",
+                      "expressionText": "\"RowAction [\" kontext(wrapper1){[field2]} \"]\""
+                    }
+                  },
+                  "event": "event",
+                  "scope": "ALWAYS"
+                }
+              ]
+            },
+            "groupRef": "group_6f399",
+            "enableAdd": true,
+            "enableRemove": true,
+            "enableReorder": false,
+            "enableCopy": false,
+            "detailScreen": {
+              "id": "screen-8a1c6",
+              "name": "detached-repeat1-detail-screen",
+              "title": {
+                "type": "Expression",
+                "expressionText": "\"DetachedRepeatScreen [\" kontext(root){[field1]} \"]\""
+              },
+              "screenElements": [
+                {
+                  "type": "MultiColumnSection",
+                  "id": "multicolumnsection-5bb8a",
+                  "name": "mcs",
+                  "title": {
+                    "type": "Expression",
+                    "expressionText": "\"MultiColumnSection [\" kontext(wrapper1){[field2]} \"]\""
+                  },
+                  "layout": {
+                    "lg": "6-6"
+                  },
+                  "screenElements": [
+                    {
+                      "type": "Section",
+                      "id": "section-4859b",
+                      "name": "section",
+                      "title": {
+                        "type": "Expression",
+                        "expressionText": "\"Section [\" kontext(wrapper1){[field2]} \"]\""
+                      },
+                      "screenElements": [
+                        {
+                          "type": "ControlGrid",
+                          "id": "controlgrid-eca6d",
+                          "name": "cg",
+                          "title": {
+                            "type": "Expression",
+                            "expressionText": "\"ControlGrid [\" kontext(wrapper1){[field2]} \"]\""
+                          },
+                          "layout": {
+                            "lg": "6-6"
+                          },
+                          "row": [
+                            {
+                              "type": "Row",
+                              "id": "row-84902",
+                              "title": {
+                                "type": "Expression",
+                                "expressionText": "\"Row [\" kontext(wrapper1){[field2]} \"]\""
+                              },
+                              "cell": [
+                                {
+                                  "type": "Control",
+                                  "id": "control-1f5df",
+                                  "span": {
+                                    "lg": 2
+                                  },
+                                  "label": {
+                                    "type": "Expression",
+                                    "expressionText": "\"Control [\" kontext(wrapper1){[field2]} \"]\""
+                                  },
+                                  "elementRef": "field_9e47b"
+                                }
+                              ]
+                            }
+                          ],
+                          "verticalAlignment": "TOP"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "ButtonPanel",
+                      "id": "buttonpanel-aaabf",
+                      "name": "bp",
+                      "title": {
+                        "type": "Expression",
+                        "expressionText": "\"ButtonPanel [\" kontext(wrapper1){[field2]} \"]\""
+                      },
+                      "button": [
+                        {
+                          "type": "EVENT",
+                          "id": "button-ca860",
+                          "name": "button",
+                          "buttonStyling": {
+                            "label": {
+                              "type": "Expression",
+                              "expressionText": "\"Button [\" kontext(wrapper1){[field2]} \"]\""
+                            },
+                            "priority": "SECONDARY"
+                          },
+                          "scope": "HIDDEN_IN_READONLY_MODE"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "DetachedRepeat",
+                  "id": "detachedrepeat-23501",
+                  "name": "detached-repeat2",
+                  "title": {
+                    "type": "Expression",
+                    "expressionText": "\"DetachedRepeat [\" kontext(wrapper1){[field2]} \"]\""
+                  },
+                  "buttonLabels": {},
+                  "confirmationTexts": {},
+                  "repeatOverviewColumn": [
+                    {
+                      "type": "FieldBasedRepeatOverviewColumn",
+                      "id": "fieldbasedrepeatoverviewcolumn-e2443",
+                      "label": {
+                        "type": "Expression",
+                        "expressionText": "\"FieldColumnHeader [\" kontext(wrapper1){[field2]} \"]\""
+                      },
+                      "width": 1,
+                      "sortable": false,
+                      "filterable": false,
+                      "preferredSorting": "ASC",
+                      "elementRef": "field_62aba"
+                    },
+                    {
+                      "type": "ExpressionRepeatOverviewColumn",
+                      "id": "expressionrepeatoverviewcolumn-ba145",
+                      "label": {
+                        "type": "Expression",
+                        "expressionText": "\"ExpressionColumnHeader [\" kontext(wrapper1){[field2]} \"]\""
+                      },
+                      "width": 1,
+                      "sortable": false,
+                      "filterable": false,
+                      "preferredSorting": "ASC",
+                      "name": "expression",
+                      "expression": "\"ExpressionColumnCell [\" kontext(wrapper2){[field3]} \"]\""
+                    }
+                  ],
+                  "rowActionGroup": {
+                    "action": [
+                      {
+                        "buttonStyling": {
+                          "label": {
+                            "type": "Expression",
+                            "expressionText": "\"RowAction [\" kontext(wrapper2){[field3]} \"]\""
+                          }
+                        },
+                        "event": "event",
+                        "scope": "ALWAYS"
+                      }
+                    ]
+                  },
+                  "groupRef": "group_6af8a",
+                  "enableAdd": true,
+                  "enableRemove": true,
+                  "enableReorder": false,
+                  "enableCopy": false,
+                  "detailScreen": {
+                    "id": "screen-46e4a",
+                    "name": "detached-repeat2-detail-screen",
+                    "title": {
+                      "type": "Expression",
+                      "expressionText": "\"DetachedRepeatScreen [\" kontext(wrapper1){[field2]} \"]\""
+                    },
+                    "screenElements": [
+                      {
+                        "type": "MultiColumnSection",
+                        "id": "multicolumnsection-0a0b3",
+                        "name": "mcs",
+                        "title": {
+                          "type": "Expression",
+                          "expressionText": "\"MultiColumnSection [\" kontext(wrapper2){[field3]} \"]\""
+                        },
+                        "layout": {
+                          "lg": "6-6"
+                        },
+                        "screenElements": [
+                          {
+                            "type": "Section",
+                            "id": "section-17230",
+                            "name": "section",
+                            "title": {
+                              "type": "Expression",
+                              "expressionText": "\"Section [\" kontext(wrapper2){[field3]} \"]\""
+                            },
+                            "screenElements": [
+                              {
+                                "type": "ControlGrid",
+                                "id": "controlgrid-e7e6b",
+                                "name": "cg",
+                                "title": {
+                                  "type": "Expression",
+                                  "expressionText": "\"ControlGrid [\" kontext(wrapper2){[field3]} \"]\""
+                                },
+                                "layout": {
+                                  "lg": "6-6"
+                                },
+                                "row": [
+                                  {
+                                    "type": "Row",
+                                    "id": "row-3cb24",
+                                    "title": {
+                                      "type": "Expression",
+                                      "expressionText": "\"Row [\" kontext(wrapper2){[field3]} \"]\""
+                                    },
+                                    "cell": [
+                                      {
+                                        "type": "Control",
+                                        "id": "control-92d3b",
+                                        "span": {
+                                          "lg": 2
+                                        },
+                                        "label": {
+                                          "type": "Expression",
+                                          "expressionText": "\"Control [\" kontext(wrapper2){[field3]} \"]\""
+                                        },
+                                        "elementRef": "field_62aba"
+                                      }
+                                    ]
+                                  }
+                                ],
+                                "verticalAlignment": "TOP"
+                              }
+                            ]
+                          },
+                          {
+                            "type": "ButtonPanel",
+                            "id": "buttonpanel-0c03b",
+                            "name": "bp",
+                            "title": {
+                              "type": "Expression",
+                              "expressionText": "\"ButtonPanel [\" kontext(wrapper2){[field3]} \"]\""
+                            },
+                            "button": [
+                              {
+                                "type": "EVENT",
+                                "id": "button-a750a",
+                                "name": "button",
+                                "buttonStyling": {
+                                  "label": {
+                                    "type": "Expression",
+                                    "expressionText": "\"Button [\" kontext(wrapper2){[field3]} \"]\""
+                                  },
+                                  "priority": "SECONDARY"
+                                },
+                                "scope": "HIDDEN_IN_READONLY_MODE"
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "type": "EmbeddedRepeat",
+                        "id": "embeddedrepeat-689e8",
+                        "name": "embedded-repeat3",
+                        "title": {
+                          "type": "Expression",
+                          "expressionText": "\"EmbeddedRepeat [\" kontext(wrapper2){[field3]} \"]\""
+                        },
+                        "repeatOverviewColumn": [
+                          {
+                            "type": "FieldBasedRepeatOverviewColumn",
+                            "id": "fieldbasedrepeatoverviewcolumn-5b9df",
+                            "label": {
+                              "type": "Expression",
+                              "expressionText": "\"FieldColumnHeader [\" kontext(wrapper2){[field3]} \"]\""
+                            },
+                            "width": 1,
+                            "sortable": false,
+                            "filterable": false,
+                            "preferredSorting": "ASC",
+                            "elementRef": "field_6625f"
+                          },
+                          {
+                            "type": "ExpressionRepeatOverviewColumn",
+                            "id": "expressionrepeatoverviewcolumn-7ad9a",
+                            "label": {
+                              "type": "Expression",
+                              "expressionText": "\"ExpressionColumnHeader [\" kontext(wrapper2){[field3]} \"]\""
+                            },
+                            "width": 1,
+                            "sortable": false,
+                            "filterable": false,
+                            "preferredSorting": "ASC",
+                            "name": "expression",
+                            "expression": "\"ExpressionColumnCell [\" [field4] \"]\""
+                          }
+                        ],
+                        "rowActionGroup": {
+                          "action": [
+                            {
+                              "buttonStyling": {
+                                "label": {
+                                  "type": "Expression",
+                                  "expressionText": "\"RowAction [\" [field4] \"]\""
+                                }
+                              },
+                              "event": "event",
+                              "scope": "ALWAYS"
+                            }
+                          ]
+                        },
+                        "groupRef": "group_17d37",
+                        "enableAdd": true,
+                        "enableRemove": true,
+                        "enableReorder": false,
+                        "enableCopy": false,
+                        "controlGrid": {
+                          "type": "ControlGrid",
+                          "id": "controlgrid-22280",
+                          "name": "cg",
+                          "title": {
+                            "type": "Expression",
+                            "expressionText": "\"ControlGrid [\" [field4] \"]\""
+                          },
+                          "layout": {
+                            "lg": "6-6"
+                          },
+                          "row": [
+                            {
+                              "type": "Row",
+                              "id": "row-28b1f",
+                              "title": {
+                                "type": "Expression",
+                                "expressionText": "\"Row [\" [field4] \"]\""
+                              },
+                              "cell": [
+                                {
+                                  "type": "Control",
+                                  "id": "control-ddb24",
+                                  "label": {
+                                    "type": "Expression",
+                                    "expressionText": "\"Control [\" [field4] \"]\""
+                                  },
+                                  "elementRef": "field_6625f"
+                                }
+                              ]
+                            }
+                          ],
+                          "verticalAlignment": "TOP"
+                        }
+                      },
+                      {
+                        "type": "InlineRepeat",
+                        "id": "inlinerepeat-2a493",
+                        "name": "inline-repeat3",
+                        "title": {
+                          "type": "Expression",
+                          "expressionText": "\"InlineRepeat [\" kontext(wrapper2){[field3]} \"]\""
+                        },
+                        "repeatOverviewColumn": [
+                          {
+                            "type": "FieldBasedRepeatOverviewColumn",
+                            "id": "fieldbasedrepeatoverviewcolumn-46ecf",
+                            "label": {
+                              "type": "Expression",
+                              "expressionText": "\"FieldColumnHeader [\" kontext(wrapper2){[field3]} \"]\""
+                            },
+                            "width": 1,
+                            "sortable": false,
+                            "filterable": false,
+                            "preferredSorting": "ASC",
+                            "elementRef": "field_6625f"
+                          },
+                          {
+                            "type": "ExpressionRepeatOverviewColumn",
+                            "id": "expressionrepeatoverviewcolumn-ad594",
+                            "label": {
+                              "type": "Expression",
+                              "expressionText": "\"ExpressionColumnHeader [\" kontext(wrapper2){[field3]} \"]\""
+                            },
+                            "width": 1,
+                            "sortable": false,
+                            "filterable": false,
+                            "preferredSorting": "ASC",
+                            "name": "expression",
+                            "expression": "\"ExpressionColumnCell [\" [field4] \"]\""
+                          }
+                        ],
+                        "rowActionGroup": {
+                          "action": [
+                            {
+                              "buttonStyling": {
+                                "label": {
+                                  "type": "Expression",
+                                  "expressionText": "\"RowAction [\" [field4] \"]\""
+                                }
+                              },
+                              "event": "event",
+                              "scope": "ALWAYS"
+                            }
+                          ]
+                        },
+                        "groupRef": "group_17d37",
+                        "enableAdd": true,
+                        "enableRemove": true,
+                        "enableReorder": false,
+                        "enableCopy": false
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "fieldConfiguration": {
+      "field": [
+        {
+          "initialValue": "field4",
+          "elementRef": "field_6625f"
+        },
+        {
+          "initialValue": "field1",
+          "elementRef": "field_005e7"
+        },
+        {
+          "initialValue": "field2",
+          "elementRef": "field_9e47b"
+        },
+        {
+          "initialValue": "field3",
+          "elementRef": "field_62aba"
+        }
+      ]
+    },
+    "groupConfiguration": {},
+    "defaults": {
+      "buttonLabels": {},
+      "confirmationTexts": {}
+    }
+  }
+}

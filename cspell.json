@@ -1,0 +1,59 @@
+{
+	"version": "0.2",
+	"language": "en",
+	"ignoreRegExpList": [
+		"/from\\s+(['\"])\\S+(['\"])/", // import statements (TS)
+		"/import\\s(static\\s)?\\S+/", // import statements (Java, Groovy)
+		"/package\\s\\S+/", // package declaration (Java, Groovy)
+		"/(include|image)::\\S+/", // asciidoc file/image includes
+		"/link:\\S+/", // asciidoc (external) links
+		"/<<\\S+(,.*)?>>/", // asciidoc cross-references
+		"/:\\S+:\\s\\S+/", // asciidoc attributes (e.g. :sourcedir:})
+		"/\\[#\\S+\\]/", // asciidoc section anchors
+		"-{4}\n((.|\n)*?)-{4}\n", // asciidoc code blocks
+		"/@com\\.mgmtp\\.a12\\.\\S+/", // A12 package names
+		"/\/\/ nosemgrep:.*/" // comment to disable semgrep rules
+	],
+	"ignorePaths": [
+		"**/*.json",
+		"**/*.gradle",
+		"**/*.xml",
+		"**/*.csv",
+		"**/*.yaml",
+		"**/*.yml",
+		"**/*.patch",
+		"**/*.png",
+		"**/*.jpg",
+		"**/*.svg",
+		"**/*.gif",
+		"**/*.code-workspace",
+		"**/.editorconfig",
+		"**/.asciidoctorconfig",
+		"**/.gitignore",
+		"**/.dockerignore",
+		"documentation/scripts/convert.ts",
+		"documentation/scripts/asciidoctor.d.ts"
+	],
+	"ignoreWords": [
+		"-expandedrow" // part of HTML id
+	],
+	"words": [
+		"mgmtp",
+		"osgi",
+		"localizable",
+		"localizables",
+		"actioncontentbox",
+		"navigationcontentboxcontext",
+		"codemod",
+		"codemods",
+		"devapp",
+		"enablements",
+		"appsetup",
+		"unmarshall",
+		"unmarshalling",
+		"typeguard",
+		"formengine"
+	],
+	"useGitignore": true,
+	"flagWords": ["wether->whether"]
+}

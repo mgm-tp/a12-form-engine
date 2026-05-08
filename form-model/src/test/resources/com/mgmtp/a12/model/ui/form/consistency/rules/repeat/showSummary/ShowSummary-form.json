@@ -1,0 +1,209 @@
+{
+  "header": {
+    "id": "ShowSummary-form",
+    "modelType": "form",
+    "modelVersion": "37.4.0",
+    "locales": [
+      {
+        "code": "en"
+      }
+    ],
+    "annotations": [
+      {
+        "name": "roles",
+        "value": "admin"
+      }
+    ],
+    "modelReferences": [
+      {
+        "alias": "DM",
+        "modelType": "document",
+        "purpose": "data binding",
+        "reference": "ShowSummary-document"
+      }
+    ]
+  },
+  "content": {
+    "subHeaderBox": {
+      "id": "subHeaderBox1"
+    },
+    "footerBox": {
+      "id": "footerBox1"
+    },
+    "screens": [
+      {
+        "id": "screen_78fc5",
+        "name": "screen1",
+        "screenElements": [
+          {
+            "type": "InlineRepeat",
+            "id": "ir-1",
+            "name": "ir",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "IR"
+                  }
+                ]
+              }
+            },
+            "repeatOverviewColumn": [
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "string-column-1",
+                "elementRef": "field_f8879",
+                "showSummary": true
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn_36a1b",
+                "elementRef": "field_a5d08",
+                "showSummary": true
+              }
+            ],
+            "groupRef": "group_9a9b0",
+            "enableAdd": true,
+            "enableRemove": true
+          },
+          {
+            "type": "DetachedRepeat",
+            "id": "dr-1",
+            "name": "dr",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "DR"
+                  }
+                ]
+              }
+            },
+            "repeatOverviewColumn": [
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "string-column-2",
+                "elementRef": "field_628ad",
+                "showSummary": true
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn_81879",
+                "elementRef": "field_3a2a2",
+                "showSummary": true
+              }
+            ],
+            "groupRef": "group_cfc06",
+            "enableAdd": true,
+            "enableRemove": true,
+            "detailScreen": {
+              "id": "screen_ab32c",
+              "name": "repeat-repeat2-detail-screen",
+              "screenElements": [
+                {
+                  "type": "ControlGrid",
+                  "id": "controlgrid_e5d6e",
+                  "name": "cg",
+                  "row": [
+                    {
+                      "type": "Row",
+                      "id": "row_f0b8a",
+                      "cell": [
+                        {
+                          "type": "Control",
+                          "id": "control_5a437",
+                          "elementRef": "field_628ad"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "Row",
+                      "id": "row_a92ee",
+                      "cell": [
+                        {
+                          "type": "Control",
+                          "id": "control_850ae",
+                          "elementRef": "field_3a2a2"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "type": "EmbeddedRepeat",
+            "id": "er-1",
+            "name": "er",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "ER"
+                  }
+                ]
+              }
+            },
+            "repeatOverviewColumn": [
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "string-column-3",
+                "elementRef": "field_611d8",
+                "showSummary": true
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn_503ae",
+                "elementRef": "field_d51aa",
+                "showSummary": true
+              }
+            ],
+            "groupRef": "group_f5754",
+            "enableAdd": true,
+            "enableRemove": true,
+            "controlGrid": {
+              "type": "ControlGrid",
+              "id": "controlgrid_cb821",
+              "name": "cg",
+              "row": [
+                {
+                  "type": "Row",
+                  "id": "row_e9bb6",
+                  "cell": [
+                    {
+                      "type": "Control",
+                      "id": "control_bbc9b",
+                      "elementRef": "field_611d8"
+                    }
+                  ]
+                },
+                {
+                  "type": "Row",
+                  "id": "row_7dd94",
+                  "cell": [
+                    {
+                      "type": "Control",
+                      "id": "control_e2519",
+                      "elementRef": "field_d51aa"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "fieldConfiguration": {},
+    "groupConfiguration": {},
+    "defaults": {},
+    "inlineRepeatReadonlyPresentation": "TEXT"
+  }
+}

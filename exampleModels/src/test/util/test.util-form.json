@@ -1,0 +1,260 @@
+{
+  "header": {
+    "id": "test.util-form",
+    "modelType": "form",
+    "modelVersion": "37.4.0",
+    "locales": [
+      {
+        "code": "en"
+      }
+    ],
+    "modelReferences": [
+      {
+        "alias": "DM",
+        "modelType": "document",
+        "purpose": "data binding",
+        "reference": "test.util-document"
+      }
+    ],
+    "annotations": [
+      {
+        "name": "roles",
+        "value": "admin"
+      }
+    ]
+  },
+  "content": {
+    "subHeaderBox": {
+      "id": "subHeaderBox1"
+    },
+    "footerBox": {
+      "id": "footerBox1"
+    },
+    "screens": [
+      {
+        "id": "screen1",
+        "name": "Screen1",
+        "title": {
+          "type": "Multilingual",
+          "multilingualText": {
+            "text": [
+              {
+                "locale": "en",
+                "text": "model utils"
+              }
+            ]
+          }
+        },
+        "screenElements": [
+          {
+            "type": "ControlGrid",
+            "id": "controlgrid-12123",
+            "name": "cg",
+            "row": [
+              {
+                "type": "Row",
+                "id": "row-59c34",
+                "cell": [
+                  {
+                    "type": "TextCell",
+                    "id": "textcell-97633",
+                    "offset": {
+                      "lg": 0
+                    },
+                    "span": {
+                      "lg": 1
+                    },
+                    "name": "explanation",
+                    "content": {
+                      "text": [
+                        {
+                          "locale": "en",
+                          "text": "This model is used for tests of internal model util functions."
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            ],
+            "verticalAlignment": "BOTTOM"
+          },
+          {
+            "type": "ControlGrid",
+            "id": "controlgrid-01d53",
+            "name": "cgFieldInitialValue",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "group with field with initial value"
+                  }
+                ]
+              }
+            },
+            "row": [
+              {
+                "type": "Row",
+                "id": "row-8aa78",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control-87ea1",
+                    "offset": {
+                      "lg": 0
+                    },
+                    "elementRef": "field_d9005"
+                  }
+                ]
+              }
+            ],
+            "verticalAlignment": "BOTTOM"
+          },
+          {
+            "type": "ControlGrid",
+            "id": "controlgrid-b2586",
+            "name": "cgFieldWithoutInitialValue",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "group with field without initial value"
+                  }
+                ]
+              }
+            },
+            "row": [
+              {
+                "type": "Row",
+                "id": "row-22349",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control-323be",
+                    "elementRef": "field_f76ac"
+                  }
+                ]
+              }
+            ],
+            "verticalAlignment": "BOTTOM"
+          },
+          {
+            "type": "ControlGrid",
+            "id": "controlgrid-ee56a",
+            "name": "cgNonRepeatableSubgroup",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "group with non-repeatable subgroup"
+                  }
+                ]
+              }
+            },
+            "row": [
+              {
+                "type": "Row",
+                "id": "row-a6267",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control-f1ec7",
+                    "offset": {
+                      "lg": 0
+                    },
+                    "elementRef": "field_4e8fe"
+                  }
+                ]
+              }
+            ],
+            "verticalAlignment": "BOTTOM"
+          },
+          {
+            "type": "DetachedRepeat",
+            "id": "detachedrepeat-7d679",
+            "name": "detached-repeat-repeatableGroupWithNonRepeatableSubgroup",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "repeatable group with non-repeatable subgroup"
+                  }
+                ]
+              }
+            },
+            "repeatOverviewColumn": [
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-61f25",
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "elementRef": "field_45ef2"
+              }
+            ],
+            "groupRef": "group_d9213",
+            "enableAdd": true,
+            "enableRemove": true,
+            "enableReorder": false,
+            "enableCopy": false,
+            "detailScreen": {
+              "id": "screen-dec45",
+              "name": "detached-repeat-repeatableGroupWithNonRepeatableSubgroup-detail-screen",
+              "screenElements": [
+                {
+                  "type": "ControlGrid",
+                  "id": "controlgrid-35752",
+                  "name": "cgNonRepeatableSubgroup",
+                  "row": [
+                    {
+                      "type": "Row",
+                      "id": "row-2c4ca",
+                      "cell": [
+                        {
+                          "type": "Control",
+                          "id": "control-fcfc2",
+                          "offset": {
+                            "lg": 0
+                          },
+                          "elementRef": "field_45ef2"
+                        }
+                      ]
+                    }
+                  ],
+                  "verticalAlignment": "BOTTOM"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "fieldConfiguration": {
+      "field": [
+        {
+          "initialValue": "abc",
+          "elementRef": "field_d9005"
+        },
+        {
+          "initialValue": "abc",
+          "elementRef": "field_4e8fe"
+        },
+        {
+          "initialValue": "abc",
+          "elementRef": "field_45ef2"
+        }
+      ]
+    },
+    "groupConfiguration": {},
+    "defaults": {}
+  }
+}

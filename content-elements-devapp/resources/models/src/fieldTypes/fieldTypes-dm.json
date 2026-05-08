@@ -1,0 +1,529 @@
+{
+  "header": {
+    "id": "fieldTypes-dm",
+    "modelType": "document",
+    "modelVersion": "28.4.0",
+    "locales": [
+      {
+        "code": "en"
+      }
+    ],
+    "labels": [],
+    "annotations": [],
+    "modelReferences": []
+  },
+  "content": {
+    "modelInfo": {
+      "name": "fieldTypes-dm",
+      "immutable": false
+    },
+    "modelConfig": {
+      "timeZone": "UTC",
+      "decimalSeparator": ".",
+      "conditionLanguage": {
+        "code": "en_US"
+      }
+    },
+    "modelRoot": {
+      "rootGroups": [
+        {
+          "type": "Group",
+          "id": "group_99f5e",
+          "name": "fieldTypes",
+          "Group": {
+            "repeatability": 1,
+            "elements": [
+              {
+                "type": "Field",
+                "id": "field_25470",
+                "name": "stringField",
+                "Field": {
+                  "fieldType": {
+                    "type": "StringType"
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "stringField"
+                    }
+                  ],
+                  "requirednessConfig": {
+                    "mode": "absoluteOrRelativeToNextRepAncestor"
+                  }
+                }
+              },
+              {
+                "type": "Field",
+                "id": "field_87a35",
+                "name": "textField",
+                "Field": {
+                  "fieldType": {
+                    "type": "StringType",
+                    "StringType": {
+                      "lineBreaksPermitted": true
+                    }
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "textField"
+                    }
+                  ],
+                  "requirednessConfig": {
+                    "mode": "absoluteOrRelativeToNextRepAncestor"
+                  }
+                }
+              },
+              {
+                "type": "Field",
+                "id": "field_190ad",
+                "name": "stringFieldHintList",
+                "Field": {
+                  "fieldType": {
+                    "type": "StringType",
+                    "StringType": {
+                      "hintList": [
+                        {
+                          "locale": "en",
+                          "values": [
+                            "ABC",
+                            "DEF",
+                            "GHI"
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "stringField"
+                    }
+                  ],
+                  "requirednessConfig": {
+                    "mode": "absoluteOrRelativeToNextRepAncestor"
+                  }
+                }
+              },
+              {
+                "type": "Field",
+                "id": "field_36be8",
+                "name": "booleanField",
+                "Field": {
+                  "fieldType": {
+                    "type": "BooleanType"
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "booleanField"
+                    }
+                  ],
+                  "requirednessConfig": {
+                    "mode": "absoluteOrRelativeToNextRepAncestor"
+                  }
+                }
+              },
+              {
+                "type": "Field",
+                "id": "field_5672c",
+                "name": "confirmField",
+                "Field": {
+                  "fieldType": {
+                    "type": "ConfirmType"
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "confirmField"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Field",
+                "id": "field_15165",
+                "name": "dateField",
+                "Field": {
+                  "fieldType": {
+                    "type": "DateType",
+                    "DateType": {
+                      "format": "yyyy-MM-dd"
+                    }
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "dateField"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Field",
+                "id": "field_c228b",
+                "name": "numberField",
+                "Field": {
+                  "fieldType": {
+                    "type": "NumberType"
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "numberField"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Field",
+                "id": "field_38427",
+                "name": "dateTimeField",
+                "Field": {
+                  "fieldType": {
+                    "type": "DateTimeType",
+                    "DateTimeType": {
+                      "format": "yyyy-MM-dd'T'HH:mm:ss"
+                    }
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "dateTimeField"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Field",
+                "id": "field_3ebad",
+                "name": "timeField",
+                "Field": {
+                  "fieldType": {
+                    "type": "TimeType",
+                    "TimeType": {
+                      "format": "HH:mm:ss"
+                    }
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "timeField"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Field",
+                "id": "field_e141d",
+                "name": "dateFragmentField",
+                "Field": {
+                  "fieldType": {
+                    "type": "DateFragmentType",
+                    "DateFragmentType": {
+                      "formatOfFragment": "MM-dd"
+                    }
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "dateFragmentField (Month + Day)"
+                    }
+                  ],
+                  "helperText": [
+                    {
+                      "locale": "en",
+                      "text": "Month + Day"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Field",
+                "id": "field_5c7c9",
+                "name": "dateRangeField",
+                "Field": {
+                  "fieldType": {
+                    "type": "DateRangeType",
+                    "DateRangeType": {
+                      "format": "yyyy-MM-dd",
+                      "rangeSeparator": "/"
+                    }
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "dateRangeField"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Field",
+                "id": "field_e0a16",
+                "name": "enumField",
+                "Field": {
+                  "fieldType": {
+                    "type": "EnumerationType",
+                    "EnumerationType": {
+                      "values": [
+                        {
+                          "value": "red",
+                          "label": [
+                            {
+                              "locale": "en",
+                              "text": "red"
+                            }
+                          ]
+                        },
+                        {
+                          "value": "blue",
+                          "label": [
+                            {
+                              "locale": "en",
+                              "text": "blue"
+                            }
+                          ]
+                        },
+                        {
+                          "value": "yellow",
+                          "label": [
+                            {
+                              "locale": "en",
+                              "text": "yellow"
+                            }
+                          ]
+                        },
+                        {
+                          "value": "green",
+                          "label": [
+                            {
+                              "locale": "en",
+                              "text": "green"
+                            }
+                          ]
+                        },
+                        {
+                          "value": "white",
+                          "label": [
+                            {
+                              "locale": "en",
+                              "text": "white"
+                            }
+                          ]
+                        },
+                        {
+                          "value": "black",
+                          "label": [
+                            {
+                              "locale": "en",
+                              "text": "black"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "enumField"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Field",
+                "id": "field_bd192",
+                "name": "customField",
+                "Field": {
+                  "fieldType": {
+                    "type": "CustomFieldType",
+                    "CustomFieldType": {
+                      "name": "customType1",
+                      "displayName": "customType1"
+                    }
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "customField"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Group",
+                "id": "group_c31e0",
+                "name": "multiSelect",
+                "Group": {
+                  "repeatability": 999999,
+                  "usageType": "multi-select",
+                  "elements": [
+                    {
+                      "type": "Field",
+                      "id": "field_26b2e",
+                      "name": "value",
+                      "Field": {
+                        "fieldType": {
+                          "type": "EnumerationType",
+                          "EnumerationType": {
+                            "values": [
+                              {
+                                "value": "a",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "a"
+                                  }
+                                ]
+                              },
+                              {
+                                "value": "b",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "b"
+                                  }
+                                ]
+                              },
+                              {
+                                "value": "c",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "c"
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "Multi Select"
+                          }
+                        ],
+                        "helperText": [
+                          {
+                            "locale": "en",
+                            "text": "Enter 3 values to produce an error."
+                          }
+                        ],
+                        "requirednessConfig": {
+                          "mode": "absoluteOrRelativeToNextRepAncestor"
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Group",
+                "id": "multi-select_e3a6f",
+                "name": "multiSelect_forCheckboxGroup",
+                "Group": {
+                  "repeatability": 999999,
+                  "usageType": "multi-select",
+                  "elements": [
+                    {
+                      "type": "Field",
+                      "id": "multiSelectChild_4860d",
+                      "name": "value",
+                      "Field": {
+                        "fieldType": {
+                          "type": "EnumerationType",
+                          "EnumerationType": {
+                            "values": [
+                              {
+                                "value": "a",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "a"
+                                  }
+                                ]
+                              },
+                              {
+                                "value": "b",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "b"
+                                  }
+                                ]
+                              },
+                              {
+                                "value": "c",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "c"
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "Multi Select for Checkbox Group"
+                          }
+                        ],
+                        "helperText": [
+                          {
+                            "locale": "en",
+                            "text": "Enter 3 values to produce an error."
+                          }
+                        ],
+                        "requirednessConfig": {
+                          "mode": "absoluteOrRelativeToNextRepAncestor"
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Rule",
+                "id": "rule_b3eb5",
+                "name": "MaxAmountMultiSelectFieldStatements",
+                "Rule": {
+                  "errorEntityRelPath": "../multiSelect/value",
+                  "errorCode": "Error rule_b3eb5",
+                  "errorCondition": "NumberOfFilledGroups(multiSelect*) > 2",
+                  "severity": "ERROR",
+                  "errorMessage": [
+                    {
+                      "locale": "en",
+                      "text": "Indication of more than 2 options is illegal."
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Rule",
+                "id": "rule_a2fcf",
+                "name": "MaxAmountMultiSelectFieldStatements_forCheckboxGroup",
+                "Rule": {
+                  "errorEntityRelPath": "../multiSelect_forCheckboxGroup/value",
+                  "errorCode": "Error rule_a2fcf",
+                  "errorCondition": "NumberOfFilledGroups(multiSelect_forCheckboxGroup*) > 2",
+                  "severity": "ERROR",
+                  "errorMessage": [
+                    {
+                      "locale": "en",
+                      "text": "Indication of more than 2 options is illegal."
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

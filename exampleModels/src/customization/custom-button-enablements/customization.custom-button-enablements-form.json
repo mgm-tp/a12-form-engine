@@ -1,0 +1,380 @@
+{
+  "header": {
+    "id": "customization.custom-button-enablements-form",
+    "modelType": "form",
+    "modelVersion": "37.4.0",
+    "locales": [
+      {
+        "code": "en"
+      }
+    ],
+    "annotations": [
+      {
+        "name": "roles",
+        "value": "admin"
+      }
+    ],
+    "modelReferences": [
+      {
+        "alias": "DM",
+        "modelType": "document",
+        "purpose": "data binding",
+        "reference": "customization.custom-button-enablements-document"
+      }
+    ]
+  },
+  "content": {
+    "subHeaderBox": {
+      "id": "subHeaderBox1",
+      "majorButtons": {
+        "button": [
+          {
+            "type": "NAVIGATION",
+            "id": "button-e3a92",
+            "name": "buttonNavScreen1",
+            "buttonStyling": {
+              "label": {
+                "type": "Multilingual",
+                "multilingualText": {
+                  "text": [
+                    {
+                      "locale": "en",
+                      "text": "Custom Button Enablements"
+                    }
+                  ]
+                }
+              },
+              "priority": "SECONDARY"
+            },
+            "target": "screen1",
+            "scope": "HIDDEN_IN_READONLY_MODE"
+          },
+          {
+            "type": "NAVIGATION",
+            "id": "button-a704e",
+            "name": "buttonNavScreen2",
+            "buttonStyling": {
+              "label": {
+                "type": "Multilingual",
+                "multilingualText": {
+                  "text": [
+                    {
+                      "locale": "en",
+                      "text": "Children"
+                    }
+                  ]
+                }
+              },
+              "priority": "SECONDARY"
+            },
+            "target": "screen-73694",
+            "scope": "HIDDEN_IN_READONLY_MODE"
+          }
+        ]
+      }
+    },
+    "footerBox": {
+      "id": "footerBox1",
+      "majorButtons": {
+        "button": [
+          {
+            "type": "EVENT",
+            "id": "button-a88d2",
+            "name": "submit",
+            "buttonStyling": {
+              "label": {
+                "type": "Multilingual",
+                "multilingualText": {
+                  "text": [
+                    {
+                      "locale": "en",
+                      "text": "Submit"
+                    }
+                  ]
+                }
+              },
+              "priority": "SECONDARY"
+            },
+            "event": "event_submit",
+            "scope": "HIDDEN_IN_READONLY_MODE"
+          }
+        ]
+      }
+    },
+    "screens": [
+      {
+        "id": "screen1",
+        "name": "Screen1",
+        "screenElements": [
+          {
+            "type": "ControlGrid",
+            "id": "controlgrid-f1103",
+            "name": "cg-docu",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "Documentation"
+                  }
+                ]
+              }
+            },
+            "layout": {
+              "lg": "6-6"
+            },
+            "row": [
+              {
+                "type": "Row",
+                "id": "row-6260e",
+                "cell": [
+                  {
+                    "type": "TextCell",
+                    "id": "textcell-37a6f",
+                    "name": "text",
+                    "content": {
+                      "text": [
+                        {
+                          "locale": "en",
+                          "text": "This as an example of how to use the button enablement maps to disable/enable and hide/show event, navigation and row action buttons. \n<br/>\nThe creation of the map is done as custom code and can be checked out in the devapp example-code (<i>devapp\\src\\customizations\\custom-button-enablement.tsx</i>)\n<br/>\nThe example shows the following\n<ul>\n<li>An event-button in the footer called \"Submit\", which is only enabled when the form is dirty.\n</li>\n<li>\nA custom delete button which is only shown in the first row and hidden in all others. Additonally, the default delete button is hidden in the first row.\n</li>\n<li>\nA copy button which is not enabled in the model but shown anyway as configured in the enablement map\n</li>\n<li>\nA commit button in the detached-repeat detail screen, which is only enabled if the checkbox \"Data Complete\" is checked\n</li>\n<li>\nAn initially disabled navigation button to the second screen as menu entry \"children\" in the sub header, which is only enabled if the checkbox \"children\" is checked\n</li>\n</ul>\n<br/>\nPlease refer to the form-engine documentation for more information about how to construct these enablement maps."
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            ],
+            "verticalAlignment": "TOP"
+          },
+          {
+            "type": "ControlGrid",
+            "id": "controlgrid-f6c9f",
+            "name": "cg",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "Person"
+                  }
+                ]
+              }
+            },
+            "row": [
+              {
+                "type": "Row",
+                "id": "row-59e51",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control-b340a",
+                    "elementRef": "field_77045"
+                  }
+                ]
+              },
+              {
+                "type": "Row",
+                "id": "row-00e03",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control-e317f",
+                    "elementRef": "field_91c46"
+                  }
+                ]
+              },
+              {
+                "type": "Row",
+                "id": "row-47ace",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control-de8a5",
+                    "elementRef": "field_794cb"
+                  }
+                ]
+              }
+            ],
+            "verticalAlignment": "TOP"
+          },
+          {
+            "type": "DetachedRepeat",
+            "id": "detachedrepeat-2d3ab",
+            "name": "detached-repeat-addresses",
+            "repeatOverviewColumn": [
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-af908",
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "elementRef": "field_6d08f"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-690c8",
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "elementRef": "field_38816"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-a14f7",
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "elementRef": "field_794ce"
+              }
+            ],
+            "rowActionGroup": {
+              "action": [
+                {
+                  "buttonStyling": {
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "Delete"
+                          }
+                        ]
+                      }
+                    },
+                    "icon": {
+                      "name": "delete_forever"
+                    },
+                    "labelHidden": true
+                  },
+                  "event": "custom_delete",
+                  "scope": "ALWAYS"
+                }
+              ]
+            },
+            "groupRef": "group_a3e5c",
+            "enableAdd": true,
+            "enableRemove": true,
+            "enableReorder": false,
+            "enableCopy": false,
+            "detailScreen": {
+              "id": "screen-416f2",
+              "name": "detached-repeat-addresses-detail-screen",
+              "screenElements": [
+                {
+                  "type": "ControlGrid",
+                  "id": "controlgrid-1078c",
+                  "name": "cg",
+                  "row": [
+                    {
+                      "type": "Row",
+                      "id": "row-31e16",
+                      "cell": [
+                        {
+                          "type": "Control",
+                          "id": "control-fd890",
+                          "elementRef": "field_6d08f"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "Row",
+                      "id": "row-002d7",
+                      "cell": [
+                        {
+                          "type": "Control",
+                          "id": "control-5ce36",
+                          "elementRef": "field_38816"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "Row",
+                      "id": "row-6e875",
+                      "cell": [
+                        {
+                          "type": "Control",
+                          "id": "control-4fbac",
+                          "elementRef": "field_794ce"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "screen-73694",
+        "name": "Screen2",
+        "screenElements": [
+          {
+            "type": "InlineRepeat",
+            "id": "inlinerepeat-12fe3",
+            "name": "inline-repeat-children_group",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "Children"
+                  }
+                ]
+              }
+            },
+            "repeatOverviewColumn": [
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-56aed",
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "elementRef": "field_3defd"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-f2396",
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "elementRef": "field_71cc6"
+              }
+            ],
+            "groupRef": "group_a3204",
+            "enableAdd": true,
+            "enableRemove": true,
+            "enableReorder": false,
+            "enableCopy": false
+          }
+        ]
+      }
+    ],
+    "fieldConfiguration": {},
+    "groupConfiguration": {
+      "group": [
+        {
+          "dependentGroup": {
+            "masterField": "field_794cb",
+            "case": [
+              {
+                "masterValue": "false"
+              }
+            ]
+          },
+          "groupRef": "group_a3204"
+        }
+      ]
+    },
+    "defaults": {}
+  }
+}

@@ -1,0 +1,218 @@
+////
+SPDX-License-Identifier: EUPL-1.2 OR LicenseRef-commercial
+
+Copyright (c) 2012-2026 mgm technology partners GmbH
+
+Dual License
+------------
+This source file is part of the mgm A12 Platform and available under
+a choice of two different licenses:
+
+1. Open-Source License – EUPL v1.2
+   You may redistribute and/or modify this file under the terms of the
+   European Union Public License, version 1.2 - see https://eupl.eu/.
+
+2. Commercial License
+   Alternatively, you may obtain a commercial license from
+   mgm technology partners GmbH, that permits use of this software
+   under different terms (including support and maintenance services).
+
+   Please contact a12-license@mgm-tp.com for more information.
+
+You must select and comply with exactly one of the above license options.
+
+Warranty Disclaimer (applies to either option)
+----------------------------------------------
+THIS SOFTWARE IS PROVIDED "AS IS" AND WITHOUT WARRANTY OF ANY KIND,
+WHETHER EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NON-INFRINGEMENT, EXCEPT WHERE SUCH DISCLAIMERS ARE HELD TO BE
+LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
+////
+
+[#form-engine_state_ui-state]
+= UI State
+
+== Dirty State
+
+The UI dirty state signals that UI contained data that was not directly synchronized with the document. This applies to conversion errors where the syntactically incorrect value cannot be written back into the document. The default behavior never changes the value back to false even when the conversion error is resolved. However, it is possible to set the value with the Command `setUIDirty(dirty: boolean)`.
+
+In addition, if the option `earlyDetectDirtyControl` is enabled and some value is touched (changed but not submitted), the UI dirty state will turn also true.
+
+== Validation State
+
+The sum of all validation (and conversion) errors that are present in the current Screen resembles the validation state.
+
+Each message refers to an "error element". The error element defines the repeatability to which the message refers. The message also contains the element where the message is displayed inside the form.
+
+Every validation message belongs to a validation rule that can be triggered by the referred elements.
+
+=== UI
+
+For the following descriptions, note that the visibility of individual fields is dependent on multiple aspects:
+
+* Their container elements being visible and not collapsed (sections)
+
+* Field and group dependencies that can declare the field or one of its parent groups as _not relevant_. Non-relevant elements are hidden and not considered for validation.
+
+* The control of the field being located on a different screen than the currently selected one.
+
+From within the UI, the validation state can be changed in several ways:
+
+* Changing a Field value: A single field is validated. All changes resulting from computations and/or dependencies for this field that are visible on the current Screen will also be validated. The validation results for all validated fields are replaced in the validation state.
+
+* Leaving a repeat row: All currently visible fields of the row are validated. The validation results for these fields are replaced in the validation state.
+
+* Leaving a repeat: All currently visible fields of the repeat rows are validated. The validation results for these fields are replaced in the validation state.
+
+* Triggering an event/navigation button:
+** With partial validation: All currently visible fields on the Screen are validated. The validation results for these fields are replaced in the validation state.
+** With full validation: All relevant fields in the document are validated, independently of their visibility in the UI. The result replaces the previous validation state.
+
+[NOTE]
+====
+Because validation after a field value change only considers the visible fields, field changes that violate for example a validation rule will not result in an error for that field, if it is currently not visible, e.g. when a dependent field changes on another Screen.
+However, if a changed field contained validation messages, they will be cleared, even if the field is not visible on the current Screen.
+====
+
+=== API
+
+Full validation is triggered by events.
+
+See (<<form-engine_validation-computation,Validation and Computation>>) for API functions related to validation.
+
+== Form Location State
+
+The current visible form segment and the corresponding repeatable element inside the document define the form location. The repeatable element is only relevant for Detached Repeat Detail Screens.
+
+The repeat state stored for the form location contains the data-related ui state of the location's repeats, including:
+
+* the current page of the repeat
+* information about a new row
+* information about the expanded embedded repeat row
+
+
+The form location can be thought as a path of `(form segment, index)` tuples.
+
+To distinguish between existing rows and rows being created you have to evaluate the `RepeatState` of the `Repeat`.
+You can do this by using the following code:
+
+[source,tsx]
+----
+include::assets/typescript/form-engine/examples/newRow.ts[tags=content]
+----
+
+The default location is the first top level Screen of the form.
+
+When changing the underlying data externally and the current location is inside a Detached Repeat, you must ensure that the location is still valid. The location will not be reset.
+
+[NOTE]
+====
+In correction mode the form location is empty.
+====
+
+=== UI
+
+When navigating between top level Screens using navigation buttons, a respective event-action is dispatched.
+
+When entering a Detached Repeat Detail Screen, a new path element is added to the form location, consisting of the path to the Detached Repeat's Detail Screen and the row index.
+
+When leaving a Detached Repeat by applying or canceling the change, the last path element is removed from the form location.
+
+=== API
+
+The current Screen location can be set by command-actions. This allows to change to a top level Screen by name as well as Detached Repeat Detail Screens. Note: In case of manual Screen changes you have to take care of the UI state yourself. This may include e.g. backups and validation state.
+
+Screen change intents from the UI are signaled to the store by event-actions. You can also emit the same events to "remote control" the engine.
+
+
+[#form-engine_state_ui-state_form-location_dirty-state]
+=== Dirty State
+
+The dirty state of the current form location indicates that some data in the current Screen changed. It will only be set for Detached Repeat Detail Screens and will turn true, when a value changes on the Screen itself or when changes on a nested Detail Screen are committed. The default behavior never sets the value to false even when the changes are reverted. However, it is possible to set the value with the command `changeScreenState`.
+
+This information is used in Detached Repeat Detail Screens to evaluate the enablement of the commit button and whether dirty handling is necessary when clicking the cancel button:
+
+* *_Commit button_:* If the Screen is not dirty and `detachedRepeatCommitButtonEnablement` is set to "HIDDEN" or "DISABLED" in the Form Model, the commit button will be rendered as hidden or disabled. If the Screen is dirty, the commit button will be shown and enabled.
+
+* *_Cancel button_:* If the Screen is dirty, there will be a confirmation dialog when leaving the Detail Screen via the cancel button. This behavior can be disabled in the engine configuration by setting `disableDirtyHandlingForDetachedRepeat` to true.
+
+[NOTE]
+====
+The dirty state of the current form location is only set for Detached Repeat Detail Screens.
+====
+
+== Repeat State
+
+The repeat state stores the data-independent ui state of all repeats of the form.
+
+=== UI
+
+In the ui this ui state can be changed via various ui elements:
+
+* The sorting state can be changed by clicking on the header of a sortable repeat column.
+* The filter row can be opened via a filter button in the header.
+* The filters itself can be edited via the inputs of the filter row.
+
+
+=== API
+
+The data-independent repeat state of a single repeat or for all repeats can be set by command-actions.
+
+== Enablement State
+
+[WARNING]
+====
+These settings must not be used to enforce authorization or any kind of system security.
+====
+
+The Form Engine UI as a whole can be set
+
+* `editable` or `readonly`: In readonly mode, the data document can be browsed but not changed
+* `enabled` or `disabled`: In disabled mode, all interaction (even browsing) is suppressed
+
+The combination of these states form the global enablement state.
+
+=== Models
+
+* Model elements that support the readonly flag can be (statically) set readonly.
+* Readonly and hidden (due to not being relevant) can be set dynamically depending on a field’s value using dependent element. See section <<form-engine_rendering,Rendering>> for the behavior of container components and Repeats.
+
+=== UI
+
+There is some special UI behavior regarding the readonly state:
+
+* *_Repeats_:* No rows can be added, removed, moved, or cloned. Repeat rows can be opened but not altered in any way.
+* *_Buttons_:* Buttons are hidden, except they are configured with "show readonly" in the model.
+
+=== API
+
+The global state can be set by command-actions.
+
+== Section State
+
+The rendered form can contain collapsible sections in its various Screens and its nested Repeat structures. The initial collapsed state of such a section is defined in the Form Model, but the user can toggle the collapsed state.
+
+The EngineState contains a map to keep track of the current collapsed state of all collapsible sections.
+
+Performing a full validation on the form might reveal to the user that the form contains an invalid field. In the validation bar above the form, links are provided to jump to the different instances of this invalid field.
+Such a field instance could be hidden inside a currently collapsed section. When the user clicks on the link, the "correction mode" is entered and the form location is changed to the position of the value. Therefore, the section map is backed up and a special section map is used in order to ensure that the input of the field instance is shown by expanding all relevant collapsible sections.
+When leaving the correction mode, the original section state is restored from the backup.
+
+== Correction Mode and Validation Bar State
+
+These states are not directly related to the validation state. They represent rather the UI state of the components that treat the validation state.
+
+The correction mode state is only given in correction mode. It contains a backup of the last form location state before entering the correction mode as well as the information whether the correction mode screen has to be displayed.
+
+The validation bar state contains information related to the validation bar expansion and last shown issue.
+
+[NOTE]
+====
+In mobile mode (phone) the correction mode state will never show the correction mode screen. Therefore, the value will always be false. For further information please refer to the <<form-engine_validation-computation_validation,Validation>> section.
+====
+
+[NOTE]
+====
+For more information on how to set initial values for the ui state please refer to <<form-engine_integration_client_customization_initial-ui-slice>>.
+====

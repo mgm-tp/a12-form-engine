@@ -1,0 +1,307 @@
+{
+  "header": {
+    "id": "customization.custom-widget-form",
+    "modelType": "form",
+    "modelVersion": "37.4.0",
+    "locales": [
+      {
+        "code": "en"
+      }
+    ],
+    "annotations": [
+      {
+        "name": "roles",
+        "value": "admin"
+      }
+    ],
+    "modelReferences": [
+      {
+        "alias": "DM",
+        "modelType": "document",
+        "purpose": "data binding",
+        "reference": "customization.custom-widget-document"
+      }
+    ]
+  },
+  "content": {
+    "subHeaderBox": {
+      "id": "subHeaderBox"
+    },
+    "footerBox": {
+      "id": "footerBox"
+    },
+    "screens": [
+      {
+        "id": "screen-1",
+        "name": "Screen1",
+        "title": {
+          "type": "Multilingual",
+          "multilingualText": {
+            "text": [
+              {
+                "locale": "en",
+                "text": "Screen 1"
+              }
+            ]
+          }
+        },
+        "screenElements": [
+          {
+            "type": "ControlGrid",
+            "id": "controlgrid-6adf8",
+            "name": "cg0",
+            "row": [
+              {
+                "type": "Row",
+                "id": "row-519e2",
+                "cell": [
+                  {
+                    "type": "TextCell",
+                    "id": "textcell-32084",
+                    "name": "textIntroduction",
+                    "content": {
+                      "text": [
+                        {
+                          "locale": "en",
+                          "text": "This is an example of how to customize widgets by providing your own widget map.<br/>\nThe map has to defined in custom code and is then registered in the Form Engine Config through the property <i>widgetMap</i>.<br/>\nThe code for creating the map can be found here: <i>devapp\\src\\customizations\\custom-widgets.tsx</i><br/><br/>\nThe control grid and controls, that contain custom widgets, were assigned special annotations in the form model.<br/>\nThese annotations are then used in the custom widget map to determine, if the customization should be applied to this instance of the widget or not."
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            ],
+            "verticalAlignment": "TOP"
+          },
+          {
+            "type": "ControlGrid",
+            "id": "controlgrid-8baf0",
+            "name": "cg",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "Control-Grid with tooltip in title"
+                  }
+                ]
+              }
+            },
+            "annotations": [
+              {
+                "name": "tooltip",
+                "value": "Today is the:"
+              }
+            ],
+            "row": [
+              {
+                "type": "Row",
+                "id": "row-0e5c9",
+                "cell": [
+                  {
+                    "type": "TextCell",
+                    "id": "textcell-f205e",
+                    "name": "textControlGrid",
+                    "content": {
+                      "text": [
+                        {
+                          "locale": "en",
+                          "text": "This control grid contains an additional tooltip in its title.<br/>\nThe tooltip is added by customizing the <i>addons</i> property of the <i>Typography.Headline</i>"
+                        }
+                      ]
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "Row",
+                "id": "row-b8424",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control-9023d",
+                    "annotations": [
+                      {
+                        "name": "showHelpText"
+                      }
+                    ],
+                    "elementRef": "field_057ab"
+                  }
+                ]
+              },
+              {
+                "type": "Row",
+                "id": "row-ed319",
+                "cell": [
+                  {
+                    "type": "TextCell",
+                    "id": "textcell-9183a",
+                    "name": "textHelperText",
+                    "content": {
+                      "text": [
+                        {
+                          "locale": "en",
+                          "text": "This text line was customized by adding an additional button to the tooltips, that opens a modal dialog with a helper text.<br/>\nThis is achieved by adding this button the <i>addonAfter</i> property of the <i>TextLineStateless</i> widget."
+                        }
+                      ]
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "Row",
+                "id": "row-360c7",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control-9dc63",
+                    "annotations": [
+                      {
+                        "name": "showClearButton"
+                      }
+                    ],
+                    "hint": {},
+                    "elementRef": "field_8e029"
+                  }
+                ]
+              },
+              {
+                "type": "Row",
+                "id": "row-1355e",
+                "cell": [
+                  {
+                    "type": "TextCell",
+                    "id": "textcell-a5c6f",
+                    "name": "textClearButton",
+                    "content": {
+                      "text": [
+                        {
+                          "locale": "en",
+                          "text": "This text line contains a custom clear button.<br/>\nThis can be achieved by connecting the <i>TextLineStateless</i> widget to the  Redux store and adding a button to the <i>suffixes</i> property.<br/>\nThis button dispatches an action to set the corresponding value in the document to <i>null</i>."
+                        }
+                      ]
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "Row",
+                "id": "row-7a457",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control-f4ae0",
+                    "annotations": [
+                      {
+                        "name": "restrictToNext14Days"
+                      }
+                    ],
+                    "datePickerConfig": {
+                      "absolute": false,
+                      "preselectionYear": 0
+                    },
+                    "elementRef": "field_c15c5"
+                  }
+                ]
+              },
+              {
+                "type": "Row",
+                "id": "row-3228f",
+                "cell": [
+                  {
+                    "type": "TextCell",
+                    "id": "textcell-fa912",
+                    "name": "textDatePicker",
+                    "content": {
+                      "text": [
+                        {
+                          "locale": "en",
+                          "text": "The date picker of this date input has been restricted to the next 14 days.<br/>\nThis can be done by adding the property <i>disabledDays</i> to the <i>Datepicker</i> properties and specifying the desired range of days."
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            ],
+            "verticalAlignment": "TOP"
+          },
+          {
+            "type": "ControlGrid",
+            "id": "controlgrid-ceaa2",
+            "name": "cg2",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "Control-Grid without customization"
+                  }
+                ]
+              }
+            },
+            "row": [
+              {
+                "type": "Row",
+                "id": "row-91306",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control-6e5a4",
+                    "elementRef": "field_42984"
+                  }
+                ]
+              },
+              {
+                "type": "Row",
+                "id": "row-f46f5",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control-760ab",
+                    "elementRef": "field_9ee7d"
+                  }
+                ]
+              }
+            ],
+            "verticalAlignment": "TOP"
+          }
+        ]
+      }
+    ],
+    "fieldConfiguration": {
+      "field": [
+        {
+          "hint": {},
+          "elementRef": "field_42984"
+        },
+        {
+          "hint": {
+            "text": [
+              {
+                "locale": "en",
+                "text": "Some hint"
+              }
+            ]
+          },
+          "elementRef": "field_057ab"
+        },
+        {
+          "hint": {
+            "text": [
+              {
+                "locale": "en",
+                "text": "This is some hint"
+              }
+            ]
+          },
+          "elementRef": "field_8e029"
+        }
+      ]
+    },
+    "groupConfiguration": {},
+    "defaults": {}
+  }
+}

@@ -1,0 +1,137 @@
+////
+SPDX-License-Identifier: EUPL-1.2 OR LicenseRef-commercial
+
+Copyright (c) 2012-2026 mgm technology partners GmbH
+
+Dual License
+------------
+This source file is part of the mgm A12 Platform and available under
+a choice of two different licenses:
+
+1. Open-Source License – EUPL v1.2
+   You may redistribute and/or modify this file under the terms of the
+   European Union Public License, version 1.2 - see https://eupl.eu/.
+
+2. Commercial License
+   Alternatively, you may obtain a commercial license from
+   mgm technology partners GmbH, that permits use of this software
+   under different terms (including support and maintenance services).
+
+   Please contact a12-license@mgm-tp.com for more information.
+
+You must select and comply with exactly one of the above license options.
+
+Warranty Disclaimer (applies to either option)
+----------------------------------------------
+THIS SOFTWARE IS PROVIDED "AS IS" AND WITHOUT WARRANTY OF ANY KIND,
+WHETHER EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NON-INFRINGEMENT, EXCEPT WHERE SUCH DISCLAIMERS ARE HELD TO BE
+LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
+////
+
+[#form-engine_attachments]
+= Attachments
+
+To be able to work with Attachments, the Form Engine provides the AttachmentLoader API for up- and downloading files.
+When utilizing attachments in your form models, an implementation of this interface must be provided to the Form Engine sagas within your application setup.
+
+[NOTE]
+====
+Without passing a loader, trying to work with attachments in your form models will log an error message and ignore any actions.
+====
+
+== Setup
+
+To configure working with attachments, simply pass a loader implementation in the `FormEngineSagaOptions` when setting up the Form Engine Sagas like so:
+[source,tsx]
+----
+
+// or use the default implementation 'platformAttachmentLoader'
+const yourAttachmentLoaderImplementation: AttachmentLoader = /* your impl here */
+
+ApplicationFactories.createApplicationSetup({
+    // ...other props
+    customSagas: [
+        // ...other sagas
+        ...formEngineSagas({ attachmentLoader: yourAttachmentLoaderImplementation }),
+    ]
+});
+----
+
+== AttachmentLoader
+
+The `AttachmentLoader` interface provides a way to define how files are turned into `Attachment` objects during upload and how download links are created from `Attachment` objects during download.
+[source,tsx]
+----
+export interface AttachmentLoader {
+	uploadFiles(
+		files: AttachmentFile[],
+		documentDescriptor: DocumentDescriptor,
+		abortSignal: AbortSignal
+	): Promise<(Attachment | Localizable)[]>;
+
+	retrieveDownloadLink(attachment: Attachment, documentDescriptor: DocumentDescriptor): Promise<string>;
+}
+----
+
+=== Uploading Files
+Apart from the JS file objects that should be uploaded and their corresponding document path, the loader has also access to the id of the current document of the Form Engine and the corresponding model name.
+It also receives an `AbortSignal`, which can be passed to any fetch call, allowing an upload request to be cancelable. However, you could also choose to omit this signal on purpose, effectively disabling the ability to cancel a request at all.
+
+This method should always resolve to a list of either:
+
+* an `Attachment` object OR
+* a `Localizable` object describing why the upload failed
+
+=== Retrieving the Download Link
+Note that the loader is responsible for _retrieving_ the download link for a given attachment. The internal Form Engine saga will then trigger the actual download from it.
+In the same way as for uploading, this method also gets access to the document id and model name, in case your retrieval logic depends on them.
+
+This method should resolve to a string which points to a downloadable resource.
+
+[NOTE]
+====
+It is important that your loader always resolves to a list with the same length as the given input list. For example, if your own upload logic fails to upload a specific file, in the list, it must not be omitted in the result list. Instead, an error Localizable should be created for it.
+====
+
+Please note that the Form Engine provides some default error keys for attachments already, which can be found in the <<form-engine_resourceKeys,RESOURCE_KEYS>>. When using the platform loader, the Form Engine will use the error information returned by the server to create the Localizable, if it exists. For unknown errors, a fallback Localizable will be used.
+
+== Default AttachmentLoader Implementations
+
+By default, the Form Engine offers an implementations of an `AttachmentLoader` that uploads files to an A12 Services backend.
+
+This loader will perform JSON RPC requests when uploading files and returns `Attachment` objects containing ids which reference the uploaded files. Because of this behavior, this mode of attachment handling is also called "reference mode".
+For downloading attachments, this implies that the loader must initiate another request to the backend to fetch the download link.
+
+== Functionality
+
+When interacting with the attachments UI in the form, the Form Engine will dispatch actions, which are then handled by an internal saga registered as part of the Form Engine Sagas.
+This saga will then call the `AttachmentLoader` implementation and afterwards dispatch the correct value change (based on whether single or multiple files were uploaded, or if there were any errors returned by the loader).
+
+== Selecting the DocumentDescriptor
+By default, the Form Engine saga tries to extract the id and the model name from the document inside the default DataHolder of the form activity directly. To customize this, this selector can be overwritten like this:
+[source,tsx]
+----
+ApplicationFactories.createApplicationSetup({
+    customSagas: [
+		// other sagas...
+        ...formEngineSagas({ 
+			documentDescriptorSelector(
+				state: object,
+				activityId: string,
+				documentPath: EntityInstancePath
+			) {
+				// your custom logic
+
+				return {
+					documentModelName: "",
+					documentId: ""
+				}
+			}
+		})
+    ]
+});
+----
+
+The selector gets the id of the activity and the path to the attachment and should return the correct metadata for the document that contains it.

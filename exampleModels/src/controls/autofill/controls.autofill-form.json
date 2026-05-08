@@ -1,0 +1,340 @@
+{
+  "header": {
+    "id": "controls.autofill-form",
+    "modelType": "form",
+    "modelVersion": "37.4.0",
+    "locales": [
+      {
+        "code": "en"
+      },
+      {
+        "code": "de"
+      }
+    ],
+    "labels": [
+      {
+        "locale": "en",
+        "text": "Address"
+      },
+      {
+        "locale": "de",
+        "text": "Adresse"
+      }
+    ],
+    "annotations": [
+      {
+        "name": "roles",
+        "value": "admin"
+      }
+    ],
+    "modelReferences": [
+      {
+        "alias": "DM",
+        "modelType": "document",
+        "purpose": "data binding",
+        "reference": "controls.autofill-document"
+      }
+    ]
+  },
+  "content": {
+    "amountSuffix": {
+      "type": "static",
+      "value": "€"
+    },
+    "subHeaderBox": {
+      "id": "subHeaderBox1"
+    },
+    "footerBox": {
+      "id": "footerBox1",
+      "majorButtons": {
+        "button": [
+          {
+            "type": "EVENT",
+            "id": "button-92931",
+            "name": "cancel",
+            "buttonStyling": {
+              "label": {
+                "type": "Multilingual",
+                "multilingualText": {
+                  "text": [
+                    {
+                      "locale": "en",
+                      "text": "Cancel"
+                    },
+                    {
+                      "locale": "de",
+                      "text": "Abbrechen"
+                    }
+                  ]
+                }
+              },
+              "priority": "SECONDARY",
+              "destructive": true
+            },
+            "event": "event_cancel",
+            "scope": "HIDDEN_IN_READONLY_MODE"
+          },
+          {
+            "type": "EVENT",
+            "id": "button-85ab3",
+            "name": "save",
+            "buttonStyling": {
+              "label": {
+                "type": "Multilingual",
+                "multilingualText": {
+                  "text": [
+                    {
+                      "locale": "en",
+                      "text": "Save"
+                    },
+                    {
+                      "locale": "de",
+                      "text": "Speichern"
+                    }
+                  ]
+                }
+              },
+              "icon": {
+                "name": "shopping_cart"
+              },
+              "priority": "PRIMARY"
+            },
+            "event": "event_save",
+            "validation": "full",
+            "scope": "HIDDEN_IN_READONLY_MODE"
+          }
+        ]
+      }
+    },
+    "screens": [
+      {
+        "id": "screen-9ecf7",
+        "name": "address",
+        "screenElements": [
+          {
+            "type": "Section",
+            "id": "section-fc573",
+            "name": "adresses",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "Addresses"
+                  },
+                  {
+                    "locale": "de",
+                    "text": "Adressen"
+                  }
+                ]
+              }
+            },
+            "screenElements": [
+              {
+                "type": "Section",
+                "id": "section-2013b",
+                "name": "billing_address",
+                "title": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "Billing address"
+                      },
+                      {
+                        "locale": "de",
+                        "text": "Rechnungsadresse"
+                      }
+                    ]
+                  }
+                },
+                "screenElements": [
+                  {
+                    "type": "ControlGrid",
+                    "id": "controlgrid-95f39",
+                    "name": "billing_address Controls",
+                    "layout": {
+                      "lg": "6-6",
+                      "md": "12-12"
+                    },
+                    "row": [
+                      {
+                        "type": "Row",
+                        "id": "row-b249f",
+                        "cell": [
+                          {
+                            "type": "Control",
+                            "id": "control-87652",
+                            "elementRef": "F22"
+                          },
+                          {
+                            "type": "Control",
+                            "id": "control-ddf4e",
+                            "elementRef": "field_be452"
+                          }
+                        ]
+                      },
+                      {
+                        "type": "Row",
+                        "id": "row-0e6fb",
+                        "cell": [
+                          {
+                            "type": "Control",
+                            "id": "control-cfc2b",
+                            "offset": {
+                              "lg": 0
+                            },
+                            "hint": {},
+                            "elementRef": "F13"
+                          },
+                          {
+                            "type": "Control",
+                            "id": "control-df094",
+                            "elementRef": "F14"
+                          }
+                        ]
+                      },
+                      {
+                        "type": "Row",
+                        "id": "row-b6feb",
+                        "cell": [
+                          {
+                            "type": "Control",
+                            "id": "control-409a1",
+                            "span": {
+                              "lg": 2
+                            },
+                            "elementRef": "F15"
+                          }
+                        ]
+                      }
+                    ],
+                    "verticalAlignment": "BOTTOM"
+                  },
+                  {
+                    "type": "ControlGrid",
+                    "id": "controlgrid-5fd08",
+                    "name": "address",
+                    "layout": {
+                      "lg": "4-2-2-4",
+                      "md": "8-4-4-8",
+                      "sm": "12-12-12-12"
+                    },
+                    "row": [
+                      {
+                        "type": "Row",
+                        "id": "row-18cfa",
+                        "cell": [
+                          {
+                            "type": "Control",
+                            "id": "control-9e09a",
+                            "elementRef": "F16"
+                          },
+                          {
+                            "type": "Control",
+                            "id": "control-b2c69",
+                            "offset": {
+                              "lg": 0
+                            },
+                            "elementRef": "F24"
+                          },
+                          {
+                            "type": "Control",
+                            "id": "control-e9d52",
+                            "elementRef": "F17"
+                          },
+                          {
+                            "type": "Control",
+                            "id": "control-48722",
+                            "elementRef": "F18"
+                          }
+                        ]
+                      }
+                    ],
+                    "verticalAlignment": "TOP"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "fieldConfiguration": {
+      "field": [
+        {
+          "exposition": "COMPACT",
+          "elementRef": "F22"
+        },
+        {
+          "hint": {},
+          "elementRef": "F13"
+        }
+      ]
+    },
+    "groupConfiguration": {},
+    "defaults": {
+      "buttonLabels": {
+        "ADD": {
+          "text": [
+            {
+              "locale": "de",
+              "text": "hinzufügen"
+            },
+            {
+              "locale": "en",
+              "text": "add"
+            }
+          ]
+        },
+        "COMMIT_ADD": {
+          "text": [
+            {
+              "locale": "en",
+              "text": "commit"
+            },
+            {
+              "locale": "de",
+              "text": "hinzufügen"
+            }
+          ]
+        },
+        "APPLY": {
+          "text": [
+            {
+              "locale": "en",
+              "text": "commit change"
+            },
+            {
+              "locale": "de",
+              "text": "Änderung hinzufügen"
+            }
+          ]
+        }
+      },
+      "confirmationTexts": {
+        "REMOVE": {
+          "title": {
+            "text": [
+              {
+                "locale": "de",
+                "text": "Löschen bestätigen"
+              }
+            ]
+          },
+          "message": {
+            "text": [
+              {
+                "locale": "de",
+                "text": "Wollen Sie diesen Eintrag wirklich löschen?"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "readonlyPresentation": "INPUT"
+  }
+}

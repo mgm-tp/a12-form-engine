@@ -1,0 +1,91 @@
+{
+  "header": {
+    "id": "validation-dm",
+    "modelType": "document",
+    "modelVersion": "28.4.0",
+    "locales": [
+      {
+        "code": "en"
+      }
+    ],
+    "labels": [],
+    "annotations": [],
+    "modelReferences": []
+  },
+  "content": {
+    "modelInfo": {
+      "name": "validation-dm",
+      "immutable": false
+    },
+    "modelConfig": {
+      "timeZone": "UTC",
+      "decimalSeparator": ".",
+      "conditionLanguage": {
+        "code": "en_US"
+      }
+    },
+    "modelRoot": {
+      "rootGroups": [
+        {
+          "type": "Group",
+          "id": "group_8f9ef",
+          "name": "validation",
+          "Group": {
+            "repeatability": 1,
+            "elements": [
+              {
+                "type": "Field",
+                "id": "field_8e081",
+                "name": "firstName",
+                "Field": {
+                  "fieldType": {
+                    "type": "StringType"
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "first name"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Rule",
+                "id": "rule_ed78a",
+                "name": "noMoreMaxMustermann",
+                "Rule": {
+                  "errorEntityRelPath": "../firstName",
+                  "errorCode": "Error rule_ed78a",
+                  "errorCondition": "AllFieldsFilled(firstName, lastName) and [firstName] == \"Max\" and [lastName]==\"Mustermann\"",
+                  "severity": "ERROR",
+                  "errorMessage": [
+                    {
+                      "locale": "en",
+                      "text": "Be more creative! \"Max Mustermann\" is too simple."
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Field",
+                "id": "field_8c40d",
+                "name": "lastName",
+                "Field": {
+                  "fieldType": {
+                    "type": "StringType"
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "last name"
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,197 @@
+{
+  "header": {
+    "id": "without-issues.test-fm",
+    "modelType": "form",
+    "modelVersion": "37.4.0",
+    "locales": [
+      {
+        "code": "en"
+      }
+    ],
+    "modelReferences": [
+      {
+        "alias": "without-issues.test-dm",
+        "modelType": "document",
+        "purpose": "data binding",
+        "reference": "without-issues.test-dm"
+      }
+    ]
+  },
+  "content": {
+    "subHeaderBox": {
+      "id": "subHeaderBox1"
+    },
+    "footerBox": {
+      "id": "footerBox1"
+    },
+    "screens": [
+      {
+        "id": "screen_3dfee",
+        "name": "Screen 1",
+        "screenElements": [
+          {
+            "type": "ControlGrid",
+            "id": "controlgrid_671bf",
+            "name": "cg",
+            "layout": {
+              "lg": "3-3-3-3"
+            },
+            "row": [
+              {
+                "type": "Row",
+                "id": "row_b133a",
+                "title": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "chain of value dependency and computation"
+                      }
+                    ]
+                  }
+                },
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control_bf20c",
+                    "elementRef": "field_6e2b4"
+                  },
+                  {
+                    "type": "Control",
+                    "id": "control_66bfc",
+                    "elementRef": "field_7edd2"
+                  },
+                  {
+                    "type": "Control",
+                    "id": "control_2a218",
+                    "elementRef": "field_b100d"
+                  }
+                ]
+              },
+              {
+                "type": "Row",
+                "id": "row_5524c",
+                "title": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "enter \"fire\" into operand, a computation triggers a change to notRelevant"
+                      }
+                    ]
+                  }
+                },
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control_a8143",
+                    "elementRef": "field_879a7"
+                  },
+                  {
+                    "type": "Control",
+                    "id": "control_75686",
+                    "elementRef": "field_94263"
+                  },
+                  {
+                    "type": "Control",
+                    "id": "control_78862",
+                    "elementRef": "field_ea772"
+                  }
+                ]
+              },
+              {
+                "type": "Row",
+                "id": "row_a8088",
+                "title": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "trigger controls a notRelevant dependency, \"hello\" activates an independent computation"
+                      }
+                    ]
+                  }
+                },
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control_7f429",
+                    "elementRef": "field_cf39f"
+                  },
+                  {
+                    "type": "Control",
+                    "id": "control_39262",
+                    "elementRef": "field_7c38b"
+                  },
+                  {
+                    "type": "Control",
+                    "id": "control_fe733",
+                    "elementRef": "field_c9177"
+                  },
+                  {
+                    "type": "Control",
+                    "id": "control_f6939",
+                    "elementRef": "field_a73b8"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "fieldConfiguration": {
+      "field": [
+        {
+          "dependentField": {
+            "masterField": "field_6e2b4",
+            "case": [
+              {
+                "masterValue": null,
+                "value": ""
+              },
+              {
+                "masterValue": "true",
+                "value": "123"
+              }
+            ]
+          },
+          "elementRef": "field_7edd2"
+        },
+        {
+          "dependentField": {
+            "masterField": "field_94263",
+            "case": [
+              {
+                "masterValue": "true",
+                "notRelevant": true
+              }
+            ]
+          },
+          "elementRef": "field_ea772"
+        },
+        {
+          "dependentField": {
+            "masterField": "field_cf39f",
+            "case": [
+              {
+                "masterValue": null,
+                "notRelevant": true
+              },
+              {
+                "masterValue": "false",
+                "notRelevant": true
+              }
+            ]
+          },
+          "elementRef": "field_7c38b"
+        }
+      ]
+    },
+    "groupConfiguration": {},
+    "defaults": {}
+  }
+}

@@ -1,0 +1,315 @@
+{
+  "header": {
+    "id": "buttons.customMiddleware-form",
+    "modelType": "form",
+    "modelVersion": "37.4.0",
+    "locales": [
+      {
+        "code": "en"
+      }
+    ],
+    "modelReferences": [
+      {
+        "alias": "DM",
+        "modelType": "document",
+        "purpose": "data binding",
+        "reference": "buttons-document"
+      }
+    ],
+    "annotations": [
+      {
+        "name": "roles",
+        "value": "admin"
+      }
+    ]
+  },
+  "content": {
+    "subHeaderBox": {
+      "id": "subHeaderBox1",
+      "majorButtons": {
+        "button": [
+          {
+            "type": "NAVIGATION",
+            "id": "button-00219",
+            "name": "nav1",
+            "buttonStyling": {
+              "label": {
+                "type": "Multilingual",
+                "multilingualText": {
+                  "text": [
+                    {
+                      "locale": "en",
+                      "text": "Screen1"
+                    }
+                  ]
+                }
+              },
+              "priority": "SECONDARY"
+            },
+            "target": "screen1",
+            "scope": "HIDDEN_IN_READONLY_MODE"
+          }
+        ]
+      }
+    },
+    "footerBox": {
+      "id": "footerBox1"
+    },
+    "screens": [
+      {
+        "id": "screen1",
+        "name": "Screen1",
+        "screenElements": [
+          {
+            "type": "ControlGrid",
+            "id": "controlgrid-3f7b6",
+            "name": "cg1",
+            "row": [
+              {
+                "type": "Row",
+                "id": "row-7c5f3",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control-0ccb3",
+                    "elementRef": "id41088"
+                  }
+                ]
+              }
+            ],
+            "verticalAlignment": "BOTTOM"
+          },
+          {
+            "type": "Section",
+            "id": "section-4e56f",
+            "name": "sec1",
+            "screenElements": [
+              {
+                "type": "ButtonPanel",
+                "id": "buttonpanel-7cb74",
+                "name": "bp1",
+                "title": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "The following Event-Buttons will be handled by a middleware, which will than dispatch navigation actions."
+                      }
+                    ]
+                  }
+                },
+                "button": [
+                  {
+                    "type": "EVENT",
+                    "id": "button-f5f92",
+                    "name": "next",
+                    "buttonStyling": {
+                      "label": {
+                        "type": "Multilingual",
+                        "multilingualText": {
+                          "text": [
+                            {
+                              "locale": "en",
+                              "text": "Next"
+                            }
+                          ]
+                        }
+                      },
+                      "priority": "SECONDARY"
+                    },
+                    "event": "next",
+                    "scope": "HIDDEN_IN_READONLY_MODE"
+                  },
+                  {
+                    "type": "EVENT",
+                    "id": "button-7f4e2",
+                    "name": "previous",
+                    "buttonStyling": {
+                      "label": {
+                        "type": "Multilingual",
+                        "multilingualText": {
+                          "text": [
+                            {
+                              "locale": "en",
+                              "text": "Previous"
+                            }
+                          ]
+                        }
+                      },
+                      "priority": "SECONDARY"
+                    },
+                    "event": "previous",
+                    "scope": "HIDDEN_IN_READONLY_MODE"
+                  },
+                  {
+                    "type": "EVENT",
+                    "id": "button-326f4",
+                    "name": "goto",
+                    "buttonStyling": {
+                      "label": {
+                        "type": "Multilingual",
+                        "multilingualText": {
+                          "text": [
+                            {
+                              "locale": "en",
+                              "text": "GoTo Screen2"
+                            }
+                          ]
+                        }
+                      },
+                      "priority": "SECONDARY"
+                    },
+                    "event": "screen-33c0e",
+                    "scope": "HIDDEN_IN_READONLY_MODE"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "screen-33c0e",
+        "name": "Screen2",
+        "screenElements": [
+          {
+            "type": "ControlGrid",
+            "id": "controlgrid-4e0bc",
+            "name": "cg2",
+            "row": [
+              {
+                "type": "Row",
+                "id": "row-98c9e",
+                "cell": [
+                  {
+                    "type": "TextCell",
+                    "id": "textcell-0128c",
+                    "offset": {
+                      "lg": 0
+                    },
+                    "span": {
+                      "lg": 1
+                    },
+                    "name": "text1",
+                    "content": {
+                      "text": [
+                        {
+                          "locale": "en",
+                          "text": "Screen 2"
+                        }
+                      ]
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "Row",
+                "id": "row-e77e7",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control-1a6f4",
+                    "elementRef": "id41089"
+                  }
+                ]
+              }
+            ],
+            "verticalAlignment": "BOTTOM"
+          },
+          {
+            "type": "Section",
+            "id": "section-3206f",
+            "name": "sec1",
+            "screenElements": [
+              {
+                "type": "ButtonPanel",
+                "id": "buttonpanel-3b07c",
+                "name": "bp1",
+                "title": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "The following Event-Buttons will be handled by a middleware, which will than dispatch navigation actions."
+                      }
+                    ]
+                  }
+                },
+                "button": [
+                  {
+                    "type": "EVENT",
+                    "id": "button-dd1f7",
+                    "name": "next",
+                    "buttonStyling": {
+                      "label": {
+                        "type": "Multilingual",
+                        "multilingualText": {
+                          "text": [
+                            {
+                              "locale": "en",
+                              "text": "Next"
+                            }
+                          ]
+                        }
+                      },
+                      "priority": "SECONDARY"
+                    },
+                    "event": "next",
+                    "scope": "HIDDEN_IN_READONLY_MODE"
+                  },
+                  {
+                    "type": "EVENT",
+                    "id": "button-1f0b0",
+                    "name": "previous",
+                    "buttonStyling": {
+                      "label": {
+                        "type": "Multilingual",
+                        "multilingualText": {
+                          "text": [
+                            {
+                              "locale": "en",
+                              "text": "Previous"
+                            }
+                          ]
+                        }
+                      },
+                      "priority": "SECONDARY"
+                    },
+                    "event": "previous",
+                    "scope": "HIDDEN_IN_READONLY_MODE"
+                  },
+                  {
+                    "type": "EVENT",
+                    "id": "button-fd0cb",
+                    "name": "goto",
+                    "buttonStyling": {
+                      "label": {
+                        "type": "Multilingual",
+                        "multilingualText": {
+                          "text": [
+                            {
+                              "locale": "en",
+                              "text": "GoTo Screen1"
+                            }
+                          ]
+                        }
+                      },
+                      "priority": "SECONDARY"
+                    },
+                    "event": "screen1",
+                    "scope": "HIDDEN_IN_READONLY_MODE"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "fieldConfiguration": {},
+    "groupConfiguration": {},
+    "defaults": {}
+  }
+}

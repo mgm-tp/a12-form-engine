@@ -1,0 +1,757 @@
+{
+  "header": {
+    "id": "fieldTypes-cm",
+    "modelType": "content",
+    "modelVersion": "0.8.0",
+    "locales": [
+      {
+        "code": "en"
+      }
+    ],
+    "labels": [],
+    "annotations": [
+      {
+        "name": "roles",
+        "value": "CMS_contentManager,CMS_contentReader"
+      }
+    ],
+    "modelReferences": [
+      {
+        "purpose": "document-model-for-content-model",
+        "modelType": "document",
+        "alias": "DM",
+        "reference": "fieldTypes-dm"
+      }
+    ]
+  },
+  "content": {
+    "configuration": {
+      "namespaceVersions": {
+        "com.mgmtp.a12.contentengine": "0.9.0"
+      }
+    },
+    "root": {
+      "id": "dd4c8345",
+      "namespace": "com.mgmtp.a12.contentengine",
+      "type": "Box",
+      "props": {
+        "style": {
+          "display": "flex",
+          "width": "100%",
+          "height": "fit-content",
+          "flexDirection": "column",
+          "padding": "8px",
+          "margin": "0px",
+          "gap": "8px",
+          "backgroundRepeat": "no-repeat"
+        }
+      },
+      "children": [
+        {
+          "id": "c481337a",
+          "namespace": "com.mgmtp.a12.contentengine",
+          "type": "Heading",
+          "props": {
+            "tree": {
+              "root": {
+                "children": [
+                  {
+                    "children": [
+                      {
+                        "detail": 0,
+                        "format": 0,
+                        "mode": "normal",
+                        "style": "",
+                        "text": "Tax Declaration Overview",
+                        "type": "text",
+                        "version": 1
+                      }
+                    ],
+                    "direction": "ltr",
+                    "format": "",
+                    "indent": 0,
+                    "type": "heading",
+                    "version": 1,
+                    "tag": "h1"
+                  }
+                ],
+                "direction": "ltr",
+                "format": "",
+                "indent": 0,
+                "type": "root",
+                "version": 1
+              }
+            },
+            "html": "<h1 class=\"editor-heading-h1\" dir=\"ltr\"><span style=\"white-space: pre-wrap;\">Field Types</span></h1>"
+          }
+        },
+        {
+          "id": "eaf42fca",
+          "namespace": "com.mgmtp.a12.contentengine",
+          "type": "Box",
+          "props": {
+            "style": {
+              "display": "flex",
+              "width": "100%",
+              "height": "fit-content",
+              "flexDirection": "column",
+              "padding": "8px",
+              "margin": "0px",
+              "gap": "8px",
+              "backgroundRepeat": "no-repeat"
+            }
+          },
+          "children": [
+            {
+              "id": "messagegroup-test",
+              "namespace": "com.mgmtp.a12.formengine",
+              "type": "MessageGroupContainer",
+              "props": {
+                "fields": [],
+                "groups": [
+                  "group_99f5e"
+                ],
+                "rules": [],
+                "ignoreFormalErrors": false
+              },
+              "children": [
+                {
+                  "id": "controlgrid-test",
+                  "namespace": "com.mgmtp.a12.contentengine",
+                  "type": "Grid",
+                  "props": {},
+                  "children": [
+                    {
+                      "id": "row-0",
+                      "namespace": "com.mgmtp.a12.contentengine",
+                      "type": "GridRow",
+                      "props": {},
+                      "children": [
+                        {
+                          "id": "column-0",
+                          "namespace": "com.mgmtp.a12.contentengine",
+                          "type": "GridColumn",
+                          "props": {},
+                          "children": [
+                            {
+                              "id": "message-group-display-12345",
+                              "namespace": "com.mgmtp.a12.formengine",
+                              "type": "MessageGroupDisplay",
+                              "props": {
+                                "prefixFormalErrors": true
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": "row-1",
+                      "namespace": "com.mgmtp.a12.contentengine",
+                      "type": "GridRow",
+                      "props": {},
+                      "children": [
+                        {
+                          "id": "column-1",
+                          "namespace": "com.mgmtp.a12.contentengine",
+                          "type": "GridColumn",
+                          "props": {},
+                          "children": [
+                            {
+                              "id": "control-textline-string",
+                              "namespace": "com.mgmtp.a12.formengine",
+                              "type": "TextLine",
+                              "props": {
+                                "elementId": "field_25470",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "String - TextLine"
+                                  }
+                                ]
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": "row-2",
+                      "namespace": "com.mgmtp.a12.contentengine",
+                      "type": "GridRow",
+                      "props": {},
+                      "children": [
+                        {
+                          "id": "control-2a",
+                          "namespace": "com.mgmtp.a12.contentengine",
+                          "type": "GridColumn",
+                          "props": {},
+                          "children": [
+                            {
+                              "id": "control-textline-number",
+                              "namespace": "com.mgmtp.a12.formengine",
+                              "type": "TextLine",
+                              "props": {
+                                "elementId": "field_c228b",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "Number - TextLine"
+                                  }
+                                ]
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": "row-3",
+                      "namespace": "com.mgmtp.a12.contentengine",
+                      "type": "GridRow",
+                      "props": {},
+                      "children": [
+                        {
+                          "id": "control-3a",
+                          "namespace": "com.mgmtp.a12.contentengine",
+                          "type": "GridColumn",
+                          "props": {},
+                          "children": [
+                            {
+                              "id": "control-textarea-string",
+                              "namespace": "com.mgmtp.a12.formengine",
+                              "type": "TextArea",
+                              "props": {
+                                "elementId": "field_87a35",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "String - TextArea"
+                                  }
+                                ]
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": "row-4",
+                      "namespace": "com.mgmtp.a12.contentengine",
+                      "type": "GridRow",
+                      "props": {},
+                      "children": [
+                        {
+                          "id": "control-4a",
+                          "namespace": "com.mgmtp.a12.contentengine",
+                          "type": "GridColumn",
+                          "props": {},
+                          "children": [
+                            {
+                              "id": "control-autocomplete-string-hintlist",
+                              "namespace": "com.mgmtp.a12.formengine",
+                              "type": "AutoComplete",
+                              "props": {
+                                "elementId": "field_190ad",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "String with Hint List - Autocomplete"
+                                  }
+                                ]
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": "row-5",
+                      "namespace": "com.mgmtp.a12.contentengine",
+                      "type": "GridRow",
+                      "props": {},
+                      "children": [
+                        {
+                          "id": "control-5a",
+                          "namespace": "com.mgmtp.a12.contentengine",
+                          "type": "GridColumn",
+                          "props": {},
+                          "children": [
+                            {
+                              "id": "control-checkbox-boolean",
+                              "namespace": "com.mgmtp.a12.formengine",
+                              "type": "Checkbox",
+                              "props": {
+                                "elementId": "field_36be8",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "Boolean - Checkbox"
+                                  }
+                                ]
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": "row-6",
+                      "namespace": "com.mgmtp.a12.contentengine",
+                      "type": "GridRow",
+                      "props": {},
+                      "children": [
+                        {
+                          "id": "control-6a",
+                          "namespace": "com.mgmtp.a12.contentengine",
+                          "type": "GridColumn",
+                          "props": {},
+                          "children": [
+                            {
+                              "id": "control-checkbox-confirm",
+                              "namespace": "com.mgmtp.a12.formengine",
+                              "type": "Checkbox",
+                              "props": {
+                                "elementId": "field_5672c",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "Confirm - Checkbox"
+                                  }
+                                ]
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": "row-7",
+                      "namespace": "com.mgmtp.a12.contentengine",
+                      "type": "GridRow",
+                      "props": {},
+                      "children": [
+                        {
+                          "id": "control-7a",
+                          "namespace": "com.mgmtp.a12.contentengine",
+                          "type": "GridColumn",
+                          "props": {},
+                          "children": [
+                            {
+                              "id": "control-switch-boolean",
+                              "namespace": "com.mgmtp.a12.formengine",
+                              "type": "Switch",
+                              "props": {
+                                "elementId": "field_36be8",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "Boolean - Switch"
+                                  }
+                                ]
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": "row-8",
+                      "namespace": "com.mgmtp.a12.contentengine",
+                      "type": "GridRow",
+                      "props": {},
+                      "children": [
+                        {
+                          "id": "control-8a",
+                          "namespace": "com.mgmtp.a12.contentengine",
+                          "type": "GridColumn",
+                          "props": {},
+                          "children": [
+                            {
+                              "id": "control-switch-confirm",
+                              "namespace": "com.mgmtp.a12.formengine",
+                              "type": "Switch",
+                              "props": {
+                                "elementId": "field_5672c",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "Confirm - Switch"
+                                  }
+                                ]
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": "row-9",
+                      "namespace": "com.mgmtp.a12.contentengine",
+                      "type": "GridRow",
+                      "props": {},
+                      "children": [
+                        {
+                          "id": "control-9a",
+                          "namespace": "com.mgmtp.a12.contentengine",
+                          "type": "GridColumn",
+                          "props": {},
+                          "children": [
+                            {
+                              "id": "control-radio-boolean",
+                              "namespace": "com.mgmtp.a12.formengine",
+                              "type": "Radio",
+                              "props": {
+                                "elementId": "field_36be8",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "Boolean - Radio"
+                                  }
+                                ]
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": "row-10",
+                      "namespace": "com.mgmtp.a12.contentengine",
+                      "type": "GridRow",
+                      "props": {},
+                      "children": [
+                        {
+                          "id": "control-10a",
+                          "namespace": "com.mgmtp.a12.contentengine",
+                          "type": "GridColumn",
+                          "props": {},
+                          "children": [
+                            {
+                              "id": "control-select-boolean",
+                              "namespace": "com.mgmtp.a12.formengine",
+                              "type": "Select",
+                              "props": {
+                                "elementId": "field_36be8",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "Boolean - Select"
+                                  }
+                                ]
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": "row-11",
+                      "namespace": "com.mgmtp.a12.contentengine",
+                      "type": "GridRow",
+                      "props": {},
+                      "children": [
+                        {
+                          "id": "control-11a",
+                          "namespace": "com.mgmtp.a12.contentengine",
+                          "type": "GridColumn",
+                          "props": {},
+                          "children": [
+                            {
+                              "id": "control-datepicker-date",
+                              "namespace": "com.mgmtp.a12.formengine",
+                              "type": "DatePicker",
+                              "props": {
+                                "elementId": "field_15165",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "Date - DatePicker"
+                                  }
+                                ]
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": "row-12",
+                      "namespace": "com.mgmtp.a12.contentengine",
+                      "type": "GridRow",
+                      "props": {},
+                      "children": [
+                        {
+                          "id": "control-12a",
+                          "namespace": "com.mgmtp.a12.contentengine",
+                          "type": "GridColumn",
+                          "props": {},
+                          "children": [
+                            {
+                              "id": "control-datepicker-dateTime",
+                              "namespace": "com.mgmtp.a12.formengine",
+                              "type": "DatePicker",
+                              "props": {
+                                "elementId": "field_38427",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "DateTime - DatePicker"
+                                  }
+                                ]
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": "row-13",
+                      "namespace": "com.mgmtp.a12.contentengine",
+                      "type": "GridRow",
+                      "props": {},
+                      "children": [
+                        {
+                          "id": "control-13a",
+                          "namespace": "com.mgmtp.a12.contentengine",
+                          "type": "GridColumn",
+                          "props": {},
+                          "children": [
+                            {
+                              "id": "control-datepicker-time",
+                              "namespace": "com.mgmtp.a12.formengine",
+                              "type": "DatePicker",
+                              "props": {
+                                "elementId": "field_3ebad",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "Time - DatePicker"
+                                  }
+                                ]
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": "row-14",
+                      "namespace": "com.mgmtp.a12.contentengine",
+                      "type": "GridRow",
+                      "props": {},
+                      "children": [
+                        {
+                          "id": "control-14a",
+                          "namespace": "com.mgmtp.a12.contentengine",
+                          "type": "GridColumn",
+                          "props": {},
+                          "children": [
+                            {
+                              "id": "control-datepicker-dateFragment",
+                              "namespace": "com.mgmtp.a12.formengine",
+                              "type": "DatePicker",
+                              "props": {
+                                "elementId": "field_e141d",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "DateFragment - DatePicker"
+                                  }
+                                ]
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": "row-15",
+                      "namespace": "com.mgmtp.a12.contentengine",
+                      "type": "GridRow",
+                      "props": {},
+                      "children": [
+                        {
+                          "id": "control-15a",
+                          "namespace": "com.mgmtp.a12.contentengine",
+                          "type": "GridColumn",
+                          "props": {},
+                          "children": [
+                            {
+                              "id": "control-datepicker-dateRange",
+                              "namespace": "com.mgmtp.a12.formengine",
+                              "type": "DatePicker",
+                              "props": {
+                                "elementId": "field_5c7c9",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "DateRange - DatePicker"
+                                  }
+                                ]
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": "row-16",
+                      "namespace": "com.mgmtp.a12.contentengine",
+                      "type": "GridRow",
+                      "props": {},
+                      "children": [
+                        {
+                          "id": "control-16a",
+                          "namespace": "com.mgmtp.a12.contentengine",
+                          "type": "GridColumn",
+                          "props": {},
+                          "children": [
+                            {
+                              "id": "control-select-enumeration",
+                              "namespace": "com.mgmtp.a12.formengine",
+                              "type": "Select",
+                              "props": {
+                                "elementId": "field_e0a16",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "Enumeration - Select"
+                                  }
+                                ]
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": "row-17",
+                      "namespace": "com.mgmtp.a12.contentengine",
+                      "type": "GridRow",
+                      "props": {},
+                      "children": [
+                        {
+                          "id": "control-17a",
+                          "namespace": "com.mgmtp.a12.contentengine",
+                          "type": "GridColumn",
+                          "props": {},
+                          "children": [
+                            {
+                              "id": "control-autoComplete-enumeration",
+                              "namespace": "com.mgmtp.a12.formengine",
+                              "type": "AutoComplete",
+                              "props": {
+                                "elementId": "field_e0a16",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "Enumeration - AutoComplete"
+                                  }
+                                ]
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": "row-18",
+                      "namespace": "com.mgmtp.a12.contentengine",
+                      "type": "GridRow",
+                      "props": {},
+                      "children": [
+                        {
+                          "id": "control-18a",
+                          "namespace": "com.mgmtp.a12.contentengine",
+                          "type": "GridColumn",
+                          "props": {},
+                          "children": [
+                            {
+                              "id": "control-radio-enumeration",
+                              "namespace": "com.mgmtp.a12.formengine",
+                              "type": "Radio",
+                              "props": {
+                                "elementId": "field_e0a16",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "Enumeration - Radio"
+                                  }
+                                ]
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": "row-19",
+                      "namespace": "com.mgmtp.a12.contentengine",
+                      "type": "GridRow",
+                      "props": {},
+                      "children": [
+                        {
+                          "id": "control-19a",
+                          "namespace": "com.mgmtp.a12.contentengine",
+                          "type": "GridColumn",
+                          "props": {},
+                          "children": [
+                            {
+                              "id": "control-multiSelect-multiSelect",
+                              "namespace": "com.mgmtp.a12.formengine",
+                              "type": "MultiSelect",
+                              "props": {
+                                "elementId": "group_c31e0",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "MultiSelect - MultiSelect"
+                                  }
+                                ]
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": "row-20",
+                      "namespace": "com.mgmtp.a12.contentengine",
+                      "type": "GridRow",
+                      "props": {},
+                      "children": [
+                        {
+                          "id": "control-20a",
+                          "namespace": "com.mgmtp.a12.contentengine",
+                          "type": "GridColumn",
+                          "props": {},
+                          "children": [
+                            {
+                              "id": "control-checkboxGroup-multiSelect",
+                              "namespace": "com.mgmtp.a12.formengine",
+                              "type": "CheckboxGroup",
+                              "props": {
+                                "elementId": "multi-select_e3a6f",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "MultiSelect - CheckboxGroup"
+                                  }
+                                ]
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

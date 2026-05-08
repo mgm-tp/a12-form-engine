@@ -1,0 +1,112 @@
+{
+  "header": {
+    "id": "ProductFormWithValidLabelEvent",
+    "modelType": "form",
+    "modelVersion": "37.4.0",
+    "locales": [
+      {
+        "code": "en"
+      }
+    ],
+    "modelReferences": [
+      {
+        "alias": "DM",
+        "modelType": "document",
+        "purpose": "data binding",
+        "reference": "ProductDomain"
+      }
+    ],
+    "annotations": [
+      {
+        "name": "roles",
+        "value": "admin"
+      }
+    ]
+  },
+  "content": {
+    "subHeaderBox": {
+      "id": "subHeaderBox1"
+    },
+    "footerBox": {
+      "id": "footerBox1"
+    },
+    "screens": [
+      {
+        "id": "screen1",
+        "name": "Screen1",
+        "screenElements": [
+          {
+            "type": "DetachedRepeat",
+            "id": "detachedrepeat-36cc9",
+            "name": "detachedRepeat",
+            "repeatOverviewColumn": [
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-fae82",
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "elementRef": "F6"
+              }
+            ],
+            "rowActionGroup": {
+              "action": [
+                {
+                  "buttonStyling": {
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "label"
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  "event": "event",
+                  "scope": "ALWAYS"
+                }
+              ]
+            },
+            "groupRef": "G4",
+            "enableAdd": true,
+            "enableRemove": true,
+            "enableReorder": false,
+            "enableCopy": false,
+            "detailScreen": {
+              "id": "screen-15eff",
+              "name": "Details",
+              "screenElements": [
+                {
+                  "type": "ControlGrid",
+                  "id": "controlgrid-f6d56",
+                  "name": "Cg",
+                  "row": [
+                    {
+                      "type": "Row",
+                      "id": "row-aadb4",
+                      "cell": [
+                        {
+                          "type": "Control",
+                          "id": "control-71c9a",
+                          "elementRef": "F6"
+                        }
+                      ]
+                    }
+                  ],
+                  "verticalAlignment": "BOTTOM"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "fieldConfiguration": {},
+    "groupConfiguration": {},
+    "defaults": {}
+  }
+}

@@ -1,0 +1,10 @@
+{
+	"extends": "@com.mgmtp.a12.devtools/tsconfig",
+	"exclude": ["node_modules", "lib", "target"],
+	"include": ["src/index.ts", "src/main/ts", "src/test/ts"],
+	"compilerOptions": {
+		"outDir": "./lib",
+		"types": ["node", "mocha"],
+		"skipLibCheck": true
+	}
+}

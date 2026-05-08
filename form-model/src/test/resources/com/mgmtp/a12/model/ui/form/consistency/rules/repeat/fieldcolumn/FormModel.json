@@ -1,0 +1,197 @@
+{
+  "header": {
+    "id": "FormModel",
+    "modelType": "form",
+    "modelVersion": "37.4.0",
+    "locales": [
+      {
+        "code": "en"
+      }
+    ],
+    "labels": [
+      {
+        "locale": "en",
+        "text": "FormModel"
+      }
+    ],
+    "modelReferences": [
+      {
+        "alias": "DM",
+        "modelType": "document",
+        "purpose": "data binding",
+        "reference": "DocumentModel"
+      }
+    ],
+    "annotations": [
+      {
+        "name": "roles",
+        "value": "admin"
+      }
+    ]
+  },
+  "content": {
+    "styles": [
+      {
+        "name": "foo"
+      },
+      {
+        "name": "bar"
+      }
+    ],
+    "subHeaderBox": {
+      "id": "sh"
+    },
+    "footerBox": {
+      "id": "footer"
+    },
+    "screens": [
+      {
+        "id": "screen-1",
+        "name": "screen-1",
+        "screenElements": [
+          {
+            "type": "InlineRepeat",
+            "id": "ir-0",
+            "name": "ir-0",
+            "repeatOverviewColumn": [
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "foc-1",
+                "elementRef": "F1"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "foc-2",
+                "elementRef": "F2"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "foc-3",
+                "elementRef": "F3"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "foc-4",
+                "elementRef": "F4"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "foc-5",
+                "elementRef": "F5"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "foc-6",
+                "elementRef": "F6"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-9daed",
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "elementRef": "group_b7007"
+              }
+            ],
+            "groupRef": "G3",
+            "enableAdd": true,
+            "enableRemove": true
+          },
+          {
+            "type": "DetachedRepeat",
+            "id": "dr-1",
+            "name": "dr-1",
+            "repeatOverviewColumn": [
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "foc-00",
+                "elementRef": "F2"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-b0866",
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "elementRef": "group_b7007"
+              }
+            ],
+            "groupRef": "G3",
+            "enableAdd": true,
+            "enableRemove": true,
+            "detailScreen": {
+              "id": "dr-1-screen",
+              "name": "dr-1-screen",
+              "screenElements": [
+                {
+                  "type": "ControlGrid",
+                  "id": "dr-1-cg",
+                  "name": "dr-1-cg",
+                  "row": [
+                    {
+                      "type": "Row",
+                      "id": "dr-1-row",
+                      "cell": [
+                        {
+                          "type": "Control",
+                          "id": "c-1",
+                          "elementRef": "F2"
+                        }
+                      ]
+                    }
+                  ],
+                  "verticalAlignment": "BOTTOM"
+                },
+                {
+                  "type": "InlineRepeat",
+                  "id": "ir-2",
+                  "name": "ir-2",
+                  "repeatOverviewColumn": [
+                    {
+                      "type": "FieldBasedRepeatOverviewColumn",
+                      "id": "foc-7",
+                      "elementRef": "F1"
+                    },
+                    {
+                      "type": "FieldBasedRepeatOverviewColumn",
+                      "id": "foc-8",
+                      "elementRef": "F2"
+                    },
+                    {
+                      "type": "FieldBasedRepeatOverviewColumn",
+                      "id": "foc-9",
+                      "elementRef": "F3"
+                    },
+                    {
+                      "type": "FieldBasedRepeatOverviewColumn",
+                      "id": "foc-10",
+                      "elementRef": "F4"
+                    },
+                    {
+                      "type": "FieldBasedRepeatOverviewColumn",
+                      "id": "foc-11",
+                      "elementRef": "F5"
+                    },
+                    {
+                      "type": "FieldBasedRepeatOverviewColumn",
+                      "id": "foc-12",
+                      "elementRef": "F6"
+                    }
+                  ],
+                  "groupRef": "G4",
+                  "enableAdd": true,
+                  "enableRemove": true
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "fieldConfiguration": {},
+    "groupConfiguration": {},
+    "defaults": {}
+  }
+}

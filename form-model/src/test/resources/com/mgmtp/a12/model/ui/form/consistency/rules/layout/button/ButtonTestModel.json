@@ -1,0 +1,136 @@
+{
+  "header": {
+    "id": "ButtonTestModel",
+    "modelType": "form",
+    "modelVersion": "37.4.0",
+    "locales": [
+      {
+        "code": "en"
+      }
+    ],
+    "modelReferences": [
+      {
+        "alias": "DM",
+        "modelType": "document",
+        "purpose": "data binding",
+        "reference": "EmptyTestModel"
+      }
+    ],
+    "annotations": [
+      {
+        "name": "roles",
+        "value": "admin"
+      }
+    ]
+  },
+  "content": {
+    "subHeaderBox": {
+      "id": "subHeaderBox1"
+    },
+    "footerBox": {
+      "id": "footerBox1"
+    },
+    "screens": [
+      {
+        "id": "screen1",
+        "name": "Screen1",
+        "screenElements": [
+          {
+            "type": "ButtonPanel",
+            "id": "buttonpanel-fee62",
+            "name": "ButtonPanel",
+            "button": [
+              {
+                "type": "EVENT",
+                "id": "button-29590",
+                "name": "EventButton1",
+                "buttonStyling": {
+                  "priority": "SECONDARY"
+                },
+                "event": "event",
+                "scope": "HIDDEN_IN_READONLY_MODE"
+              },
+              {
+                "type": "EVENT",
+                "id": "button-ebafb",
+                "name": "EventButton2",
+                "buttonStyling": {
+                  "priority": "SECONDARY"
+                },
+                "event": "event",
+                "validation": "partial",
+                "scope": "HIDDEN_IN_READONLY_MODE"
+              },
+              {
+                "type": "EVENT",
+                "id": "button-ebaec",
+                "name": "EventButton3",
+                "buttonStyling": {
+                  "priority": "SECONDARY"
+                },
+                "event": "event",
+                "validation": "full",
+                "scope": "HIDDEN_IN_READONLY_MODE"
+              },
+              {
+                "type": "EVENT",
+                "id": "button-dbaeb",
+                "name": "EventButton4",
+                "buttonStyling": {
+                  "priority": "SECONDARY"
+                },
+                "event": "event",
+                "scope": "HIDDEN_IN_READONLY_MODE"
+              },
+              {
+                "type": "NAVIGATION",
+                "id": "button-6046e",
+                "name": "NavigationButton1",
+                "buttonStyling": {
+                  "priority": "SECONDARY"
+                },
+                "target": "screen1",
+                "scope": "HIDDEN_IN_READONLY_MODE"
+              },
+              {
+                "type": "NAVIGATION",
+                "id": "button-eaaeb",
+                "name": "NavigationButton2",
+                "buttonStyling": {
+                  "priority": "SECONDARY"
+                },
+                "target": "screen1",
+                "validation": "partial",
+                "scope": "HIDDEN_IN_READONLY_MODE"
+              },
+              {
+                "type": "NAVIGATION",
+                "id": "button-ebadb",
+                "name": "NavigationButton3",
+                "buttonStyling": {
+                  "priority": "SECONDARY"
+                },
+                "target": "screen1",
+                "validation": "full",
+                "scope": "HIDDEN_IN_READONLY_MODE"
+              },
+              {
+                "type": "NAVIGATION",
+                "id": "button-ebaea",
+                "name": "NavigationButton4",
+                "buttonStyling": {
+                  "priority": "SECONDARY"
+                },
+                "target": "screen1",
+                "scope": "HIDDEN_IN_READONLY_MODE"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "fieldConfiguration": {},
+    "groupConfiguration": {},
+    "defaults": {}
+  }
+}

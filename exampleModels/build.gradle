@@ -1,0 +1,131 @@
+import com.mgmtp.a12.devtools.gradle.plugins.buildutils.tasks.LeadingBuildTask
+import com.mgmtp.a12.gradle.utils.ModelHelper
+import groovy.json.JsonBuilder
+
+import java.nio.file.Path
+import java.nio.file.Paths
+
+import static groovy.io.FileType.FILES
+
+buildscript {
+    apply from: rootProject.file('scripts/buildscript-platforms.gradle')
+
+    dependencies {
+        classpath a12Libs.build.utilities
+        classpath a12Libs.kernel.md.model
+        classpath a12Libs.kernel.md.facade
+        classpath a12Libs.kernel.tool.model.migration
+        classpath libs.logback.classic
+    }
+}
+
+plugins {
+    alias(a12Plugins.plugins.prepare.models)
+}
+
+prepareModels {
+    outputDir = layout.buildDirectory.dir('models')
+
+    eachFileAction.set({ details ->
+        details.path = ModelHelper.isFormModel(details.file) ? details.name : "../data/${details.name}"
+    } as Action)
+}
+
+tasks.named('jar') {
+    enabled = false
+}
+
+tasks.named('clean') {
+    delete layout.buildDirectory
+    delete layout.projectDirectory.dir('target')
+}
+
+tasks.register('generateFormModelList') {
+    dependsOn(tasks.named('prepareModels'))
+
+    final def outputFile = layout.buildDirectory.file('modelIndex/index.json')
+    outputs.file outputFile
+
+    final def basePath = layout.projectDirectory.dir('src').getAsFile().path
+    final Path pathBase = Paths.get(basePath)
+
+    final def formslist = ['groups': []]
+    final int fileEndingLength = '-form.json'.length()
+
+    new File(basePath).eachDir { final dir ->
+        dir.traverse(type: FILES) {
+            if (dir.name == 'debug') {
+                if (ModelHelper.isFormModel(it)) {
+                    def group = formslist.groups.find { it.name == 'debug' }
+                    if (group == null) {
+                        group = ['name': 'debug', 'forms': []]
+                        formslist.groups.add(group)
+                    }
+                    group.forms.add(it.name.substring(0, it.name.length() - '.json'.length()).replace('.', ''))
+
+                    inputs.file it
+                }
+            } else {
+                if (it.name.endsWith('-form.json')) {
+                    final Path pathRelative = pathBase.relativize(Paths.get(it.path))
+                    final String groupName = pathRelative.getParent().toString().replace('/', '.').replace('\\', '.')
+
+                    def group = formslist.groups.find { it.name == groupName }
+                    if (group == null) {
+                        group = ['name': groupName, 'forms': []]
+                        formslist.groups.add(group)
+                    }
+                    group.forms.add(it.name.substring(groupName.length(), it.name.length() - fileEndingLength).replace('.', ''))
+
+                    inputs.file it
+                }
+            }
+        }
+    }
+
+    doLast {
+        formslist.groups.sort { it.name }
+        outputFile.get().asFile.write(new JsonBuilder(formslist).toPrettyString())
+    }
+}
+
+tasks.register('generateInstances') {
+    final def inputFiles = fileTree(dir: prepareModels.inputDir, include: '*/**.json')
+    inputs.files inputFiles.filter { !ModelHelper.isFormModel(it) }
+
+    final def outputFile = file('build/data/instances.json')
+    outputs.file outputFile
+
+    doLast {
+        def dataList = [:]
+
+        inputFiles.filter { ModelHelper.isDocumentModel(it) }.each { file ->
+            final def dataFiles = fileTree(dir: file.parentFile, include: '*.json').filter { !ModelHelper.isDocumentModel(it) && !ModelHelper.isFormModel(it) }
+            dataList[file.name.replaceAll(/\.json$/, '')] = dataFiles.collect { it.name }
+        }
+
+        outputFile.write(new JsonBuilder(dataList).toString())
+    }
+}
+
+tasks.register('copyModelsForDevapp', LeadingBuildTask) {
+    dependsOn(project(':modelGraph').tasks.named('assemble'))
+
+    final String devappDirectory = project.file('../devapp')
+
+    doLast {
+        execCommandLine(['node', '--run', 'init']) {
+            workingDir devappDirectory
+        }
+    }
+}
+
+tasks.named('assemble') {
+    dependsOn(tasks.named('generateFormModelList'), tasks.named('generateInstances'))
+}
+
+tasks.register('onlyBuildModels') {
+    dependsOn(tasks.named('copyModelsForDevapp'))
+    description = 'This only converts models'
+    group = 'development'
+}

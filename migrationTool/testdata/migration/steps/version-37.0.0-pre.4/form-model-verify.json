@@ -1,0 +1,83 @@
+{
+  "header": {
+    "id": "form-model",
+    "modelType": "form",
+    "modelVersion": "37.0.0-pre.4",
+    "locales": [
+      {
+        "code": "en"
+      }
+    ],
+    "annotations": [
+      {
+        "name": "do-not-migrate"
+      },
+      {
+        "name": "roles",
+        "value": "admin"
+      }
+    ],
+    "modelReferences": [
+      {
+        "alias": "document-model",
+        "modelType": "document",
+        "purpose": "data binding",
+        "reference": "document-model"
+      }
+    ]
+  },
+  "content": {
+    "subHeaderBox": {
+      "id": "subHeaderBox1"
+    },
+    "footerBox": {
+      "id": "footerBox1"
+    },
+    "screens": [
+      {
+        "id": "screen_cf14f",
+        "name": "Screen 1",
+        "screenElements": [
+          {
+            "type": "ControlGrid",
+            "id": "controlgrid_5edce",
+            "name": "cg",
+            "row": [
+              {
+                "type": "Row",
+                "id": "row_e1ab6",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control_d19b1",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "Field"
+                          }
+                        ]
+                      }
+                    },
+                    "elementRef": "field_272da"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "fieldConfiguration": {
+      "field": [
+        {
+          "elementRef": "field_272da"
+        }
+      ]
+    },
+    "groupConfiguration": {},
+    "defaults": {}
+  }
+}

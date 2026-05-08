@@ -1,0 +1,50 @@
+{
+	"version": "0.2.0",
+	"configurations": [
+		{
+			"type": "node",
+			"request": "launch",
+			"name": "Run CLI",
+			"cwd": "${workspaceFolder}",
+			"program": "${workspaceFolder}/lib/main/cli.js",
+			"args": ["./testdata/migration/steps/version-31.1.0/form-model.json"],
+			"sourceMaps": true,
+			"outFiles": ["${workspaceFolder}/lib/**/*"]
+		},
+		{
+			"type": "node",
+			"request": "launch",
+			"name": "Debug Tests",
+			"program": "${workspaceRoot}/node_modules/mocha/bin/_mocha",
+			"args": [
+				"--config ./.mocharc.json",
+				"--reporter",
+				"spec",
+				"--colors",
+				"--timeout=0",
+				"${workspaceRoot}/lib/test/**/*.@(test|spec).js?(x)"
+			],
+			"env": {
+				"NODE_ENV": "development",
+				"TS_NODE_PROJECT": "./tsconfig.json"
+			},
+			"sourceMaps": true,
+			"outFiles": ["${workspaceFolder}/lib/**/*"],
+			"resolveSourceMapLocations": [
+				"${workspaceFolder}/lib/**",
+				"${workspaceFolder}/../node_modules/.pnpm/@com.mgmtp.a12*/**"
+			]
+		},
+		{
+			// this config is used by Mocha Test Explorer (when running tests via sidebar)
+			"type": "node",
+			"request": "attach",
+			"name": "mocha-explorer-debug-config",
+			"continueOnAttach": true,
+			"resolveSourceMapLocations": [
+				"${workspaceFolder}/lib/**",
+				"${workspaceFolder}/../node_modules/.pnpm/@com.mgmtp.a12*/**"
+			]
+		}
+	]
+}

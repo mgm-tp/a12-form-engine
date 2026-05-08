@@ -1,0 +1,103 @@
+////
+SPDX-License-Identifier: EUPL-1.2 OR LicenseRef-commercial
+
+Copyright (c) 2012-2026 mgm technology partners GmbH
+
+Dual License
+------------
+This source file is part of the mgm A12 Platform and available under
+a choice of two different licenses:
+
+1. Open-Source License – EUPL v1.2
+   You may redistribute and/or modify this file under the terms of the
+   European Union Public License, version 1.2 - see https://eupl.eu/.
+
+2. Commercial License
+   Alternatively, you may obtain a commercial license from
+   mgm technology partners GmbH, that permits use of this software
+   under different terms (including support and maintenance services).
+
+   Please contact a12-license@mgm-tp.com for more information.
+
+You must select and comply with exactly one of the above license options.
+
+Warranty Disclaimer (applies to either option)
+----------------------------------------------
+THIS SOFTWARE IS PROVIDED "AS IS" AND WITHOUT WARRANTY OF ANY KIND,
+WHETHER EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NON-INFRINGEMENT, EXCEPT WHERE SUCH DISCLAIMERS ARE HELD TO BE
+LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
+////
+
+= Localization
+
+The Form Engine uses the A12 localization API. This enables extending and overriding the default texts that the Form Engine brings via their corresponding localization keys.
+
+[WARNING]
+====
+The Form Engine only provides default texts for `en` and `de`. For every other locale it is necessary to provide the texts on your own. This can be achieved by providing the texts in the models or by using the A12 localization API.
+====
+
+== Localizer
+
+It is possible to provide your own `Localizer` to the Form Engine.
+
+The custom localizer function must be passed to the Form Engine middlewares via the `MiddlewareOptions` as a `Provider<Localizer>` function. Furthermore, the Form Engine expects a surrounding `LocalizerContext` react context which then also provides this `Localizer` to the Form Engine react components.
+
+Finally, when the `defaultConverter` from the Form Engine default API is used to create a `Converter`, it must also receive a `Provider<Localizer>` function as a parameter.
+
+== Keys
+
+[#form-engine_resourceKeys]
+=== Static Resource Keys
+
+For most static resources like validation bar texts the keys are provided by the constant `RESOURCE_KEYS` which is located in `back-end/localization`. This constant provides the keys as well as the documentation of their usage.
+
+==== Attachment Error Keys
+
+The only static keys, that are not defined in `RESOURCE_KEYS`, are the keys for attachment errors that might happen during uploading when using the platform loader implementation. These keys are defined in the Data Services repository (please refer to the link:/docs/DATA_SERVICES/dataservices-documentation-src/index.html#link-references[API documentation] of Data Services for more information).
+
+=== Model Element Keys
+
+For model element like controls and fields the keys are dynamically generated. Therefore, no constant exists that provides the keys. However, the schema for generating this kind of key is:
+
+[cols="2a,5a"]
+|===
+|Element |Key
+
+|Content Box Title|`uiModel.{model-name}.header.label`
+|Bread Crumbs, Validation Bar Elements, Section|`uiModel.{model-name}.({path-to-element})+.title`
+|Button Label, Expression Cell|`uiModel.{model-name}.({path-to-element})+.label`
+|Button Description|`uiModel.{model-name}.({path-to-element})+.description`
+|Text Cell|`uiModel.{model-name}.({path-to-element})+.content`
+|Button Label (of built-in buttons) |`uiModel.{model-name}.({path-to-element})+.buttonLabel.{type}` +
+
+`uiModel.{model-name}.defaults.buttonLabel.{type}` +
+
+Type is one of the values of `FormModel.RepeatButtonLabelEnum` in lower case.
+|Control Label|`uiModel.{model-name}.({form-model-path-to-element})+.label` +
+
+`documentModel.label.{model-name}.({document-model-path-to-element})+`
+|Control Hint|`uiModel.{model-name}.({form-model-path-to-element})+.hint` +
+
+`documentModel.hint.{model-name}.({document-model-path-to-element})+`
+|Row Action Label|`uiModel.{model-name}.({form-model-path-to-element})+.rowActions.{event}.label`
+|Row Action Description|`uiModel.{model-name}.({form-model-path-to-element})+.rowActions.{event}.description`
+|Row Action Confirmation|`uiModel.{model-name}.({form-model-path-to-element})+.rowActions.{event}.confirmation`
+|Row Action Confirmation Title|`uiModel.{model-name}.({form-model-path-to-element})+.rowActions.{event}.confirmationTitle`
+|Overview Column Title|`uiModel.{model-name}.({form-model-path-to-element})+.label` +
+
+`documentModel.label.{model-name}.({document-model-path-to-element})+`
+|Overview Column Hint|`uiModel.{model-name}.({form-model-path-to-element})+.hint` +
+
+`documentModel.hint.{model-name}.({document-model-path-to-element})+`
+| Multi File Upload Description | `uiModel.{model-name}.({form-model-path-to-element})+.multiFileUpload.description`
+| Multi File Upload Button Text | `uiModel.{model-name}.({form-model-path-to-element})+.multiFileUpload.buttonText`
+| Multi File Upload Helper Text | `uiModel.{model-name}.({form-model-path-to-element})+.multiFileUpload.helperText`
+|Boolean Label for Boolean Filter, +
+Boolean Label for Confirm Filter|`documentModel.{model-name}.({path-to-element})+.{value}` +
+`{{value}}`
+|Enumeration Label for Enumeration Filter|`documentModel.enumValues.{model-name}.({path-to-element})+.{enumeration-value}`
+| Suffix | `documentModel.{model-name}.{path-to-element}+.suffix`
+|===

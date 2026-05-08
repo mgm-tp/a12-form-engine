@@ -1,0 +1,181 @@
+{
+  "header": {
+    "id": "FormModelCyclicDependencies",
+    "modelType": "form",
+    "modelVersion": "37.4.0",
+    "locales": [
+      {
+        "code": "en"
+      }
+    ],
+    "modelReferences": [
+      {
+        "alias": "DM",
+        "modelType": "document",
+        "purpose": "data binding",
+        "reference": "sample-picus"
+      }
+    ],
+    "annotations": [
+      {
+        "name": "roles",
+        "value": "admin"
+      }
+    ]
+  },
+  "content": {
+    "subHeaderBox": {
+      "id": "subHeaderBox"
+    },
+    "footerBox": {
+      "id": "footerBox"
+    },
+    "screens": [],
+    "fieldConfiguration": {
+      "field": [
+        {
+          "dependentField": {
+            "masterField": "F2",
+            "case": [
+              {
+                "masterValue": "1",
+                "value": "A"
+              },
+              {
+                "masterValue": "2",
+                "value": "B"
+              }
+            ]
+          },
+          "elementRef": "F1"
+        },
+        {
+          "dependentField": {
+            "masterField": "F1",
+            "case": [
+              {
+                "masterValue": "A",
+                "value": "2"
+              },
+              {
+                "masterValue": "B",
+                "value": "1"
+              }
+            ]
+          },
+          "elementRef": "F2"
+        },
+        {
+          "dependentField": {
+            "masterField": "I2",
+            "case": [
+              {
+                "masterValue": "1",
+                "value": "A"
+              },
+              {
+                "masterValue": "2",
+                "value": "B"
+              }
+            ]
+          },
+          "elementRef": "I1"
+        },
+        {
+          "dependentField": {
+            "masterField": "I3",
+            "case": [
+              {
+                "masterValue": "X",
+                "value": "2"
+              },
+              {
+                "masterValue": "Y",
+                "value": "1"
+              }
+            ]
+          },
+          "elementRef": "I2"
+        },
+        {
+          "dependentField": {
+            "masterField": "I1",
+            "case": [
+              {
+                "masterValue": "B",
+                "value": "X"
+              }
+            ]
+          },
+          "elementRef": "I3"
+        },
+        {
+          "dependentField": {
+            "masterField": "X2",
+            "case": [
+              {
+                "masterValue": "1",
+                "value": "A"
+              },
+              {
+                "masterValue": "2",
+                "value": "B"
+              }
+            ]
+          },
+          "elementRef": "X1"
+        },
+        {
+          "dependentField": {
+            "masterField": "X1",
+            "case": [
+              {
+                "masterValue": "A",
+                "value": "3"
+              },
+              {
+                "masterValue": "B",
+                "value": "4"
+              }
+            ]
+          },
+          "elementRef": "X2"
+        },
+        {
+          "dependentField": {
+            "masterField": "R2",
+            "case": [
+              {
+                "masterValue": "1",
+                "value": "A"
+              },
+              {
+                "masterValue": "2",
+                "fieldRef": "R3"
+              }
+            ]
+          },
+          "elementRef": "R1"
+        },
+        {
+          "dependentField": {
+            "masterField": "R1",
+            "case": [
+              {
+                "masterValue": "A",
+                "value": "2"
+              },
+              {
+                "masterValue": "B",
+                "value": "1"
+              }
+            ]
+          },
+          "elementRef": "R2"
+        }
+      ]
+    },
+    "groupConfiguration": {},
+    "defaults": {}
+  }
+}

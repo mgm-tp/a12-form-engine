@@ -1,0 +1,88 @@
+{
+  "header": {
+    "id": "without-computation.test-fm",
+    "modelType": "form",
+    "modelVersion": "37.4.0",
+    "locales": [
+      {
+        "code": "en"
+      }
+    ],
+    "modelReferences": [
+      {
+        "alias": "without-computation.test-dm",
+        "modelType": "document",
+        "purpose": "data binding",
+        "reference": "without-computation.test-dm"
+      }
+    ]
+  },
+  "content": {
+    "subHeaderBox": {
+      "id": "subHeaderBox1"
+    },
+    "footerBox": {
+      "id": "footerBox1"
+    },
+    "screens": [
+      {
+        "id": "screen_3dfee",
+        "name": "Screen 1",
+        "screenElements": [
+          {
+            "type": "ControlGrid",
+            "id": "controlgrid_671bf",
+            "name": "cg",
+            "layout": {
+              "lg": "6-6"
+            },
+            "row": [
+              {
+                "type": "Row",
+                "id": "row_b133a",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control_6b67f",
+                    "elementRef": "field_cf39f"
+                  },
+                  {
+                    "type": "Control",
+                    "id": "control_08353",
+                    "elementRef": "field_7c38b"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "fieldConfiguration": {
+      "field": [
+        {
+          "dependentField": {
+            "masterField": "field_cf39f",
+            "case": [
+              {
+                "masterValue": null,
+                "notRelevant": true
+              },
+              {
+                "masterValue": "false",
+                "notRelevant": true
+              },
+              {
+                "masterValue": "true",
+                "value": "123"
+              }
+            ]
+          },
+          "elementRef": "field_7c38b"
+        }
+      ]
+    },
+    "groupConfiguration": {},
+    "defaults": {}
+  }
+}

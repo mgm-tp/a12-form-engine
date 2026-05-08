@@ -1,0 +1,1194 @@
+{
+  "header": {
+    "id": "computation-validation.computation-document",
+    "modelType": "document",
+    "modelVersion": "28.4.0",
+    "locales": [
+      {
+        "code": "de"
+      },
+      {
+        "code": "en"
+      }
+    ],
+    "labels": [],
+    "annotations": [
+      {
+        "name": "roles",
+        "value": "admin"
+      }
+    ],
+    "modelReferences": []
+  },
+  "content": {
+    "modelInfo": {
+      "name": "computation-validation.computation-document",
+      "immutable": false
+    },
+    "modelConfig": {
+      "decimalSeparator": ".",
+      "timeZone": "UTC",
+      "conditionLanguage": {
+        "code": "en_US"
+      }
+    },
+    "modelRoot": {
+      "rootGroups": [
+        {
+          "type": "Group",
+          "id": "G1",
+          "name": "root",
+          "Group": {
+            "repeatability": 1,
+            "elements": [
+              {
+                "type": "Group",
+                "id": "G2",
+                "name": "NonRep",
+                "Group": {
+                  "repeatability": 1,
+                  "elements": [
+                    {
+                      "type": "Field",
+                      "id": "F1",
+                      "name": "FieldA",
+                      "Field": {
+                        "fieldType": {
+                          "type": "NumberType",
+                          "NumberType": {
+                            "maxFractionalDigits": 4,
+                            "minValue": 0
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "de",
+                            "text": "A"
+                          },
+                          {
+                            "locale": "en",
+                            "text": "A"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "F2",
+                      "name": "FieldB",
+                      "Field": {
+                        "fieldType": {
+                          "type": "NumberType",
+                          "NumberType": {
+                            "maxFractionalDigits": 4
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "de",
+                            "text": "B"
+                          },
+                          {
+                            "locale": "en",
+                            "text": "B"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "F3",
+                      "name": "FieldC",
+                      "externalDescription": [
+                        {
+                          "locale": "de",
+                          "text": "Muss positiv sein"
+                        },
+                        {
+                          "locale": "en",
+                          "text": "Must be positive"
+                        }
+                      ],
+                      "Field": {
+                        "fieldType": {
+                          "type": "NumberType",
+                          "NumberType": {
+                            "maxFractionalDigits": 4
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "de",
+                            "text": "A + B"
+                          },
+                          {
+                            "locale": "en",
+                            "text": "A + B"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "F18",
+                      "name": "FieldG",
+                      "Field": {
+                        "fieldType": {
+                          "type": "NumberType",
+                          "NumberType": {
+                            "maxFractionalDigits": 4,
+                            "maxValue": 10
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "de",
+                            "text": "A - B"
+                          },
+                          {
+                            "locale": "en",
+                            "text": "A - B"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Computation",
+                      "id": "R1",
+                      "name": "CalculateSumNonRep",
+                      "Computation": {
+                        "computedFieldRelPath": "../FieldC",
+                        "computationAlternatives": [
+                          {
+                            "operation": "[FieldA] + [FieldB]",
+                            "precondition": "AllFieldsFilled(FieldA, FieldB)"
+                          }
+                        ],
+                        "errorMessage": [
+                          {
+                            "locale": "de",
+                            "text": "error text for computation of CalculateSumNonRep"
+                          },
+                          {
+                            "locale": "en",
+                            "text": "error text for computation of CalculateSumNonRep"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Rule",
+                      "id": "R11",
+                      "name": "ResultNotPositive",
+                      "Rule": {
+                        "errorEntityRelPath": "../FieldC",
+                        "errorCode": "Error R11",
+                        "errorCondition": "FieldFilled(FieldC) and [FieldC] <= 0",
+                        "severity": "ERROR",
+                        "errorMessage": [
+                          {
+                            "locale": "de",
+                            "text": "Wert muss positiv sein $FieldC.value$"
+                          },
+                          {
+                            "locale": "en",
+                            "text": "Value must be positive $FieldC.value$"
+                          }
+                        ],
+                        "guiPatterns": {
+                          "dynamicEnumeration": "false"
+                        }
+                      }
+                    },
+                    {
+                      "type": "Computation",
+                      "id": "C19",
+                      "name": "CalculateDifferenceNonRep",
+                      "Computation": {
+                        "computedFieldRelPath": "../FieldG",
+                        "computationAlternatives": [
+                          {
+                            "operation": "[FieldA] - [FieldB]",
+                            "precondition": "FieldFilled(FieldA) \nAnd FieldFilled(FieldA)"
+                          }
+                        ],
+                        "errorMessage": [
+                          {
+                            "locale": "de",
+                            "text": "error text for computation of CalculateDifferenceNonRep"
+                          },
+                          {
+                            "locale": "en",
+                            "text": "error text for computation of CalculateDifferenceNonRep"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_cf1b3",
+                      "name": "ResultDivision",
+                      "Field": {
+                        "fieldType": {
+                          "type": "NumberType",
+                          "NumberType": {
+                            "maxFractionalDigits": 10
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "de",
+                            "text": "A/B"
+                          },
+                          {
+                            "locale": "en",
+                            "text": "A/B"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Computation",
+                      "id": "computation_d8123",
+                      "name": "Computation_1",
+                      "Computation": {
+                        "computedFieldRelPath": "../ResultDivision",
+                        "computationAlternatives": [
+                          {
+                            "operation": "[FieldA] / [FieldB]",
+                            "precondition": "FieldFilled(FieldA) And FieldFilled(FieldB) And [FieldB] != 0"
+                          }
+                        ],
+                        "errorCodesToSuppress": [
+                          "MVK_INVALID_COMPARE_DEC_PLACES"
+                        ],
+                        "errorMessage": [
+                          {
+                            "locale": "de",
+                            "text": "error text for computation of Computation_1"
+                          },
+                          {
+                            "locale": "en",
+                            "text": "error text for computation of Computation_1"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Group",
+                "id": "G3",
+                "name": "Rep",
+                "Group": {
+                  "repeatability": 10,
+                  "elements": [
+                    {
+                      "type": "Field",
+                      "id": "F4",
+                      "name": "FieldA",
+                      "Field": {
+                        "fieldType": {
+                          "type": "NumberType",
+                          "NumberType": {
+                            "maxFractionalDigits": 4,
+                            "minValue": 0
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "de",
+                            "text": "A"
+                          },
+                          {
+                            "locale": "en",
+                            "text": "A"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "F5",
+                      "name": "FieldB",
+                      "Field": {
+                        "fieldType": {
+                          "type": "NumberType",
+                          "NumberType": {
+                            "maxFractionalDigits": 4
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "de",
+                            "text": "B"
+                          },
+                          {
+                            "locale": "en",
+                            "text": "B"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "F6",
+                      "name": "FieldC",
+                      "externalDescription": [
+                        {
+                          "locale": "de",
+                          "text": "Muss positiv sein"
+                        },
+                        {
+                          "locale": "en",
+                          "text": "Must be positive"
+                        }
+                      ],
+                      "Field": {
+                        "fieldType": {
+                          "type": "NumberType",
+                          "NumberType": {
+                            "maxFractionalDigits": 4,
+                            "zeroNotAllowed": true,
+                            "minValue": 0
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "de",
+                            "text": "C"
+                          },
+                          {
+                            "locale": "en",
+                            "text": "C"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Computation",
+                      "id": "R2",
+                      "name": "CalculateSumRep",
+                      "Computation": {
+                        "computedFieldRelPath": "../FieldC",
+                        "computationAlternatives": [
+                          {
+                            "operation": "[FieldA] + [FieldB]",
+                            "precondition": "AllFieldsFilled(FieldA, FieldB)"
+                          }
+                        ],
+                        "errorMessage": [
+                          {
+                            "locale": "de",
+                            "text": "error text for computation of CalculateSumRep"
+                          },
+                          {
+                            "locale": "en",
+                            "text": "error text for computation of CalculateSumRep"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Rule",
+                      "id": "ruleimpl_60560",
+                      "name": "ResultNotPositive",
+                      "Rule": {
+                        "errorEntityRelPath": "../FieldC",
+                        "errorCode": "Error R11",
+                        "errorCondition": "FieldFilled(FieldC) and [FieldC] <= 0",
+                        "severity": "ERROR",
+                        "errorMessage": [
+                          {
+                            "locale": "de",
+                            "text": "Wert muss positiv sein"
+                          },
+                          {
+                            "locale": "en",
+                            "text": "Value must be positive"
+                          }
+                        ],
+                        "guiPatterns": {
+                          "dynamicEnumeration": "false"
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Field",
+                "id": "F9",
+                "name": "FieldD",
+                "Field": {
+                  "fieldType": {
+                    "type": "NumberType",
+                    "NumberType": {
+                      "maxFractionalDigits": 4
+                    }
+                  },
+                  "label": [
+                    {
+                      "locale": "de",
+                      "text": "D"
+                    },
+                    {
+                      "locale": "en",
+                      "text": "D"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Computation",
+                "id": "R13",
+                "name": "CalculateRepSums",
+                "Computation": {
+                  "computedFieldRelPath": "../FieldD",
+                  "computationAlternatives": [
+                    {
+                      "operation": "Sum(Rep*/FieldC)",
+                      "precondition": "AtLeastOneFieldFilled(Rep*/FieldC)"
+                    }
+                  ],
+                  "errorMessage": [
+                    {
+                      "locale": "de",
+                      "text": "error text for computation of CalculateRepSums"
+                    },
+                    {
+                      "locale": "en",
+                      "text": "error text for computation of CalculateRepSums"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Field",
+                "id": "F14",
+                "name": "FieldE",
+                "Field": {
+                  "fieldType": {
+                    "type": "DateType",
+                    "DateType": {
+                      "format": "yyyy-MM-dd"
+                    }
+                  },
+                  "label": [
+                    {
+                      "locale": "de",
+                      "text": "E"
+                    },
+                    {
+                      "locale": "en",
+                      "text": "E"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Field",
+                "id": "F15",
+                "name": "FieldF",
+                "Field": {
+                  "fieldType": {
+                    "type": "NumberType"
+                  },
+                  "label": [
+                    {
+                      "locale": "de",
+                      "text": "F"
+                    },
+                    {
+                      "locale": "en",
+                      "text": "F"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Computation",
+                "id": "R16",
+                "name": "CalculateDayDifference",
+                "Computation": {
+                  "computedFieldRelPath": "../FieldF",
+                  "computationAlternatives": [
+                    {
+                      "operation": "DifferenceInDays(FieldE, Today)",
+                      "precondition": "FieldFilled(FieldE)"
+                    }
+                  ],
+                  "errorMessage": [
+                    {
+                      "locale": "de",
+                      "text": "error text for computation of CalculateDayDifference"
+                    },
+                    {
+                      "locale": "en",
+                      "text": "error text for computation of CalculateDayDifference"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Group",
+                "id": "group_dd72d",
+                "name": "DependentComputation",
+                "Group": {
+                  "repeatability": 1,
+                  "elements": [
+                    {
+                      "type": "Field",
+                      "id": "fieldimpl_3011d",
+                      "name": "FieldA",
+                      "Field": {
+                        "fieldType": {
+                          "type": "NumberType",
+                          "NumberType": {
+                            "maxFractionalDigits": 4,
+                            "minValue": 0
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "de",
+                            "text": "A"
+                          },
+                          {
+                            "locale": "en",
+                            "text": "A"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "fieldimpl_d426f",
+                      "name": "FieldB",
+                      "Field": {
+                        "fieldType": {
+                          "type": "NumberType",
+                          "NumberType": {
+                            "maxFractionalDigits": 4
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "de",
+                            "text": "B"
+                          },
+                          {
+                            "locale": "en",
+                            "text": "B"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "fieldimpl_f8754",
+                      "name": "FieldC",
+                      "externalDescription": [
+                        {
+                          "locale": "de",
+                          "text": "Muss positiv sein"
+                        },
+                        {
+                          "locale": "en",
+                          "text": "Must be positive"
+                        }
+                      ],
+                      "Field": {
+                        "fieldType": {
+                          "type": "NumberType",
+                          "NumberType": {
+                            "maxFractionalDigits": 4,
+                            "zeroNotAllowed": true,
+                            "minValue": 0
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "de",
+                            "text": "C"
+                          },
+                          {
+                            "locale": "en",
+                            "text": "C"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Computation",
+                      "id": "computationimpl_2a4ce",
+                      "name": "CalculateSumRep",
+                      "Computation": {
+                        "computedFieldRelPath": "../FieldC",
+                        "computationAlternatives": [
+                          {
+                            "operation": "[FieldA] + [FieldB]",
+                            "precondition": "[enumerationField] == \"key_1\""
+                          }
+                        ],
+                        "errorMessage": [
+                          {
+                            "locale": "de",
+                            "text": "error text for computation of CalculateSumRep"
+                          },
+                          {
+                            "locale": "en",
+                            "text": "error text for computation of CalculateSumRep"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Rule",
+                      "id": "ruleimpl_bbebf",
+                      "name": "ResultNotPositive",
+                      "Rule": {
+                        "errorEntityRelPath": "../FieldC",
+                        "errorCode": "Error R11",
+                        "errorCondition": "FieldFilled(FieldC) and [FieldC] <= 0",
+                        "severity": "ERROR",
+                        "errorMessage": [
+                          {
+                            "locale": "de",
+                            "text": "Wert muss positiv sein"
+                          },
+                          {
+                            "locale": "en",
+                            "text": "Value must be positive"
+                          }
+                        ],
+                        "guiPatterns": {
+                          "dynamicEnumeration": "false"
+                        }
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_9ec74",
+                      "name": "enumerationField",
+                      "Field": {
+                        "fieldType": {
+                          "type": "EnumerationType",
+                          "EnumerationType": {
+                            "values": [
+                              {
+                                "value": "key_1",
+                                "label": [
+                                  {
+                                    "locale": "de",
+                                    "text": "ja"
+                                  },
+                                  {
+                                    "locale": "en",
+                                    "text": "yes"
+                                  }
+                                ]
+                              },
+                              {
+                                "value": "key_2",
+                                "label": [
+                                  {
+                                    "locale": "de",
+                                    "text": "nein"
+                                  },
+                                  {
+                                    "locale": "en",
+                                    "text": "no"
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "de",
+                            "text": "Soll berechnen werden?"
+                          },
+                          {
+                            "locale": "en",
+                            "text": "Should compute?"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_04bf7",
+                      "name": "dependentEnumeration",
+                      "Field": {
+                        "fieldType": {
+                          "type": "EnumerationType",
+                          "EnumerationType": {
+                            "values": [
+                              {
+                                "value": "key_1",
+                                "label": [
+                                  {
+                                    "locale": "de",
+                                    "text": "ja"
+                                  },
+                                  {
+                                    "locale": "en",
+                                    "text": "yes"
+                                  }
+                                ]
+                              },
+                              {
+                                "value": "key_2",
+                                "label": [
+                                  {
+                                    "locale": "de",
+                                    "text": "nein"
+                                  },
+                                  {
+                                    "locale": "en",
+                                    "text": "no"
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "de",
+                            "text": "Selektierte Option"
+                          },
+                          {
+                            "locale": "en",
+                            "text": "Selected option"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Computation",
+                      "id": "computation_cda5a",
+                      "name": "Computation_1",
+                      "Computation": {
+                        "computedFieldRelPath": "../dependentEnumeration",
+                        "computationAlternatives": [
+                          {
+                            "operation": "[enumerationField]"
+                          }
+                        ],
+                        "errorMessage": [
+                          {
+                            "locale": "de",
+                            "text": "error text for computation of Computation_1"
+                          },
+                          {
+                            "locale": "en",
+                            "text": "error text for computation of Computation_1"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Rule",
+                "id": "rule_af781",
+                "name": "RuleFieldDSmaller20",
+                "Rule": {
+                  "errorEntityRelPath": "../FieldD",
+                  "errorCode": "Error rule_af781",
+                  "errorCondition": "[FieldD] > 20",
+                  "severity": "ERROR",
+                  "errorMessage": [
+                    {
+                      "locale": "de",
+                      "text": "Wert sollte nicht größer als 20 sein!"
+                    },
+                    {
+                      "locale": "en",
+                      "text": "Value should not be bigger than 20!"
+                    }
+                  ],
+                  "guiPatterns": {
+                    "dynamicEnumeration": "false"
+                  }
+                }
+              },
+              {
+                "type": "Group",
+                "id": "group_a04f9",
+                "name": "MultiSelectComputation",
+                "Group": {
+                  "repeatability": 1,
+                  "elements": [
+                    {
+                      "type": "Group",
+                      "id": "group_e68af",
+                      "name": "MultiSelect1",
+                      "Group": {
+                        "repeatability": 999999,
+                        "usageType": "multi-select",
+                        "elements": [
+                          {
+                            "type": "Field",
+                            "id": "field_3bc56",
+                            "name": "value",
+                            "Field": {
+                              "fieldType": {
+                                "type": "EnumerationType",
+                                "EnumerationType": {
+                                  "values": [
+                                    {
+                                      "value": "key1",
+                                      "label": [
+                                        {
+                                          "locale": "de",
+                                          "text": "Wert 1"
+                                        },
+                                        {
+                                          "locale": "en",
+                                          "text": "Value 1"
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "value": "key2",
+                                      "label": [
+                                        {
+                                          "locale": "de",
+                                          "text": "Wert 2"
+                                        },
+                                        {
+                                          "locale": "en",
+                                          "text": "Value 2"
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "value": "key3",
+                                      "label": [
+                                        {
+                                          "locale": "de",
+                                          "text": "Wert 3"
+                                        },
+                                        {
+                                          "locale": "en",
+                                          "text": "Value 3"
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              },
+                              "label": [
+                                {
+                                  "locale": "de",
+                                  "text": ""
+                                },
+                                {
+                                  "locale": "en",
+                                  "text": ""
+                                }
+                              ],
+                              "requirednessConfig": {
+                                "mode": "absoluteOrRelativeToNextRepAncestor"
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_9890f",
+                      "name": "FieldH",
+                      "Field": {
+                        "fieldType": {
+                          "type": "NumberType"
+                        },
+                        "label": [
+                          {
+                            "locale": "de",
+                            "text": "Anzahl von selektierten Werten"
+                          },
+                          {
+                            "locale": "en",
+                            "text": "Number of selected fields"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Computation",
+                      "id": "computation_a8d42",
+                      "name": "Computation_1",
+                      "Computation": {
+                        "computedFieldRelPath": "../FieldH",
+                        "computationAlternatives": [
+                          {
+                            "operation": "NumberOfFilledFields(MultiSelect1*/value)"
+                          }
+                        ],
+                        "errorMessage": [
+                          {
+                            "locale": "de",
+                            "text": "error text for computation of Computation_1"
+                          },
+                          {
+                            "locale": "en",
+                            "text": "error text for computation of Computation_1"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Group",
+                "id": "group_b5efb",
+                "name": "AttachmentComputation",
+                "Group": {
+                  "repeatability": 1,
+                  "elements": [
+                    {
+                      "type": "Group",
+                      "id": "group_fcc4a",
+                      "name": "Attachment",
+                      "Group": {
+                        "repeatability": 1,
+                        "usageType": "attachment",
+                        "elements": [
+                          {
+                            "type": "Field",
+                            "id": "field_27249",
+                            "name": "original_filename",
+                            "Field": {
+                              "fieldType": {
+                                "type": "StringType"
+                              }
+                            }
+                          },
+                          {
+                            "type": "Field",
+                            "id": "field_80914",
+                            "name": "internal_filename",
+                            "Field": {
+                              "fieldType": {
+                                "type": "StringType"
+                              }
+                            }
+                          },
+                          {
+                            "type": "Field",
+                            "id": "field_4ba79",
+                            "name": "content",
+                            "Field": {
+                              "fieldType": {
+                                "type": "StringType",
+                                "StringType": {
+                                  "lineBreaksPermitted": true,
+                                  "noValueValidation": true
+                                }
+                              }
+                            }
+                          },
+                          {
+                            "type": "Field",
+                            "id": "field_29e7c",
+                            "name": "attachment_id",
+                            "Field": {
+                              "fieldType": {
+                                "type": "StringType"
+                              }
+                            }
+                          },
+                          {
+                            "type": "Field",
+                            "id": "field_e541e",
+                            "name": "size",
+                            "Field": {
+                              "fieldType": {
+                                "type": "NumberType"
+                              }
+                            }
+                          },
+                          {
+                            "type": "Field",
+                            "id": "field_54e37",
+                            "name": "mime_type",
+                            "Field": {
+                              "fieldType": {
+                                "type": "StringType"
+                              }
+                            }
+                          },
+                          {
+                            "type": "Field",
+                            "id": "field_c1aa8",
+                            "name": "category",
+                            "Field": {
+                              "fieldType": {
+                                "type": "StringType"
+                              }
+                            }
+                          },
+                          {
+                            "type": "Field",
+                            "id": "field_3c093",
+                            "name": "description",
+                            "Field": {
+                              "fieldType": {
+                                "type": "StringType"
+                              }
+                            }
+                          },
+                          {
+                            "type": "Rule",
+                            "id": "rule_44a45",
+                            "name": "AttachmentInternalFilenameRequired",
+                            "Rule": {
+                              "errorEntityRelPath": "../internal_filename",
+                              "errorCode": "Errorrule_44a45",
+                              "errorCondition": "GroupFilled(RuleGroup) and FieldNotFilled(internal_filename)",
+                              "severity": "ERROR",
+                              "errorMessage": [
+                                {
+                                  "locale": "de",
+                                  "text": "Internal Error: Field $internal_filename$ of customType attachment is not filled."
+                                },
+                                {
+                                  "locale": "en",
+                                  "text": "Internal Error: Field $internal_filename$ of customType attachment is not filled."
+                                }
+                              ]
+                            }
+                          },
+                          {
+                            "type": "Rule",
+                            "id": "rule_962dd",
+                            "name": "AttachmentMimeTypeRequired",
+                            "Rule": {
+                              "errorEntityRelPath": "../mime_type",
+                              "errorCode": "Errorrule_962dd",
+                              "errorCondition": "GroupFilled(RuleGroup) and FieldNotFilled(mime_type)",
+                              "severity": "ERROR",
+                              "errorMessage": [
+                                {
+                                  "locale": "de",
+                                  "text": "Internal Error: Field $mime_type$ of customType attachment is not filled."
+                                },
+                                {
+                                  "locale": "en",
+                                  "text": "Internal Error: Field $mime_type$ of customType attachment is not filled."
+                                }
+                              ]
+                            }
+                          },
+                          {
+                            "type": "Rule",
+                            "id": "rule_ba27c",
+                            "name": "AttachmentIdOrContentFilled",
+                            "Rule": {
+                              "errorEntityRelPath": "../content",
+                              "errorCode": "Errorrule_ba27c",
+                              "errorCondition": "GroupFilled(RuleGroup) and NotExactlyOneFieldFilled(attachment_id, content)",
+                              "severity": "ERROR",
+                              "errorMessage": [
+                                {
+                                  "locale": "de",
+                                  "text": "Internal Error: Either attachment_id or content must be filled in a customType attachment, but not both."
+                                },
+                                {
+                                  "locale": "en",
+                                  "text": "Internal Error: Either attachment_id or content must be filled in a customType attachment, but not both."
+                                }
+                              ]
+                            }
+                          },
+                          {
+                            "type": "Rule",
+                            "id": "rule_9ba1c",
+                            "name": "SizeOfContentFilled",
+                            "Rule": {
+                              "errorEntityRelPath": "../content",
+                              "errorCode": "Errorrule_9ba1c",
+                              "errorCondition": "FieldFilled(content) and FieldNotFilled(size)",
+                              "severity": "ERROR",
+                              "errorMessage": [
+                                {
+                                  "locale": "de",
+                                  "text": "Internal Error: If the content is filled, the size must be also filled."
+                                },
+                                {
+                                  "locale": "en",
+                                  "text": "Internal Error: If the content is filled, the size must be also filled."
+                                }
+                              ]
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_4a937",
+                      "name": "FieldI",
+                      "Field": {
+                        "fieldType": {
+                          "type": "NumberType",
+                          "NumberType": {
+                            "minFractionalDigits": 2,
+                            "maxFractionalDigits": 2
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "de",
+                            "text": ""
+                          },
+                          {
+                            "locale": "en",
+                            "text": ""
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Computation",
+                      "id": "computation_f77b6",
+                      "name": "Computation_1",
+                      "Computation": {
+                        "computedFieldRelPath": "../FieldI",
+                        "computationAlternatives": [
+                          {
+                            "operation": "RoundAccounting([Attachment/size] / 1000, 2)",
+                            "precondition": "GroupFilled(Attachment)"
+                          }
+                        ],
+                        "errorMessage": [
+                          {
+                            "locale": "de",
+                            "text": "error text for computation of Computation_1"
+                          },
+                          {
+                            "locale": "en",
+                            "text": "error text for computation of Computation_1"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

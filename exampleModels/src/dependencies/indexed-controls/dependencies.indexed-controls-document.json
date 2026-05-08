@@ -1,0 +1,399 @@
+{
+  "header": {
+    "id": "dependencies.indexed-controls-document",
+    "modelType": "document",
+    "modelVersion": "28.4.0",
+    "locales": [
+      {
+        "code": "en"
+      }
+    ],
+    "labels": [],
+    "annotations": [
+      {
+        "name": "roles",
+        "value": "admin"
+      }
+    ],
+    "modelReferences": []
+  },
+  "content": {
+    "modelInfo": {
+      "name": "dependencies.indexed-controls-document",
+      "immutable": false,
+      "joinedModelsInfo": "dependencies.indexed-controls-document-document-meta-data+Add"
+    },
+    "modelConfig": {
+      "decimalSeparator": ".",
+      "timeZone": "UTC",
+      "conditionLanguage": {
+        "code": "en_US"
+      }
+    },
+    "modelRoot": {
+      "rootGroups": [
+        {
+          "type": "Group",
+          "id": "group_6204b",
+          "name": "Root",
+          "Group": {
+            "repeatability": 1,
+            "elements": [
+              {
+                "type": "Field",
+                "id": "field_f04bf",
+                "name": "masterNumeric",
+                "Field": {
+                  "fieldType": {
+                    "type": "EnumerationType",
+                    "EnumerationType": {
+                      "values": [
+                        {
+                          "value": "nonRelevant",
+                          "label": [
+                            {
+                              "locale": "en",
+                              "text": "Set non-relevant"
+                            }
+                          ]
+                        },
+                        {
+                          "value": "readonly",
+                          "label": [
+                            {
+                              "locale": "en",
+                              "text": "Set readonly"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "Master"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Group",
+                "id": "group_6f21e",
+                "name": "NumericIndex",
+                "Group": {
+                  "repeatability": 3,
+                  "elements": [
+                    {
+                      "type": "Field",
+                      "id": "field_6611e",
+                      "name": "masterInRepeat",
+                      "Field": {
+                        "fieldType": {
+                          "type": "EnumerationType",
+                          "EnumerationType": {
+                            "values": [
+                              {
+                                "value": "nonRelevant",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "Set non-relevant"
+                                  }
+                                ]
+                              },
+                              {
+                                "value": "readonly",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "Set readonly"
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "Master"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_cff9b",
+                      "name": "DependentField",
+                      "Field": {
+                        "fieldType": {
+                          "type": "StringType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "Dependent Field"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Group",
+                      "id": "group_fc38a",
+                      "name": "nestedGroup1",
+                      "Group": {
+                        "repeatability": 1,
+                        "elements": [
+                          {
+                            "type": "Field",
+                            "id": "field_26a6e",
+                            "name": "FieldFromDependentGroup",
+                            "Field": {
+                              "fieldType": {
+                                "type": "StringType"
+                              },
+                              "label": [
+                                {
+                                  "locale": "en",
+                                  "text": "Field from dependent Group"
+                                }
+                              ]
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_211c0",
+                      "name": "DependentFieldMasterOutside",
+                      "Field": {
+                        "fieldType": {
+                          "type": "StringType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "Dependent Field (Master outside)"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Group",
+                      "id": "group_30701",
+                      "name": "nestedGroup2",
+                      "Group": {
+                        "repeatability": 1,
+                        "elements": [
+                          {
+                            "type": "Field",
+                            "id": "field_447a5",
+                            "name": "FieldFromDependentGroupMasterOutside",
+                            "Field": {
+                              "fieldType": {
+                                "type": "StringType"
+                              },
+                              "label": [
+                                {
+                                  "locale": "en",
+                                  "text": "Field from dependent Group (Master outside)"
+                                }
+                              ]
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Field",
+                "id": "field_bb303",
+                "name": "masterSemantic",
+                "Field": {
+                  "fieldType": {
+                    "type": "EnumerationType",
+                    "EnumerationType": {
+                      "values": [
+                        {
+                          "value": "nonRelevant",
+                          "label": [
+                            {
+                              "locale": "en",
+                              "text": "Set non-relevant"
+                            }
+                          ]
+                        },
+                        {
+                          "value": "readonly",
+                          "label": [
+                            {
+                              "locale": "en",
+                              "text": "Set readonly"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "Master"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Group",
+                "id": "group_c8467",
+                "name": "SemanticIndex",
+                "Group": {
+                  "repeatability": 3,
+                  "indexFieldName": "Index",
+                  "elements": [
+                    {
+                      "type": "Field",
+                      "id": "field_dcbc5",
+                      "name": "Index",
+                      "Field": {
+                        "fieldType": {
+                          "type": "StringType"
+                        }
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_7eb36",
+                      "name": "masterInRepeat",
+                      "Field": {
+                        "fieldType": {
+                          "type": "EnumerationType",
+                          "EnumerationType": {
+                            "values": [
+                              {
+                                "value": "nonRelevant",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "Set non-relevant"
+                                  }
+                                ]
+                              },
+                              {
+                                "value": "readonly",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "Set readonly"
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "Master"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_7c009",
+                      "name": "DependentField",
+                      "Field": {
+                        "fieldType": {
+                          "type": "StringType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "Dependent Field"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Group",
+                      "id": "group_2e827",
+                      "name": "nestedGroup1",
+                      "Group": {
+                        "repeatability": 1,
+                        "elements": [
+                          {
+                            "type": "Field",
+                            "id": "field_c41fc",
+                            "name": "FieldFromDependentGroup",
+                            "Field": {
+                              "fieldType": {
+                                "type": "StringType"
+                              },
+                              "label": [
+                                {
+                                  "locale": "en",
+                                  "text": "Field from dependent Group"
+                                }
+                              ]
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_52c54",
+                      "name": "DependentFieldMasterOutside",
+                      "Field": {
+                        "fieldType": {
+                          "type": "StringType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "Dependent Field (Master outside)"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Group",
+                      "id": "group_126f3",
+                      "name": "nestedGroup2",
+                      "Group": {
+                        "repeatability": 1,
+                        "elements": [
+                          {
+                            "type": "Field",
+                            "id": "field_24639",
+                            "name": "FieldFromDependentGroupMasterOutside",
+                            "Field": {
+                              "fieldType": {
+                                "type": "StringType"
+                              },
+                              "label": [
+                                {
+                                  "locale": "en",
+                                  "text": "Field from dependent Group (Master outside)"
+                                }
+                              ]
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,43 @@
+buildscript {
+    apply from: rootProject.file('scripts/buildscript-platforms.gradle')
+
+    dependencies {
+        classpath a12Libs.build.utilities
+        classpath a12Libs.dataservices.core.tooling
+        classpath a12Libs.kernel.md.model
+        classpath a12Libs.kernel.md.facade
+        classpath a12Libs.kernel.tool.model.migration
+        classpath libs.logback.classic
+    }
+}
+
+plugins {
+    alias(a12Plugins.plugins.prepare.models)
+}
+
+tasks.named('clean') {
+    delete layout.buildDirectory
+    delete layout.projectDirectory.dir('../../target')
+}
+
+tasks.register('generateModelGraph', JavaExec) {
+    dependsOn(tasks.named('prepareModels'))
+
+    final String dir = prepareModels.outputDir.asFile.get().toString()
+    final String modelGraphFile = "${dir}/modelGraph.json"
+
+    classpath = buildscript.configurations.classpath
+    mainClass = 'com.mgmtp.a12.dataservices.tooling.modelgraph.ModelGraphGenerator'
+
+    inputs.dir(prepareModels.outputDir)
+    outputs.file(modelGraphFile)
+
+    args("--output=${modelGraphFile}")
+
+    // models are copied into one directory as the generator class can only handle a "single" input
+    args(dir)
+}
+
+tasks.named('assemble') {
+    dependsOn(tasks.named('generateModelGraph'))
+}

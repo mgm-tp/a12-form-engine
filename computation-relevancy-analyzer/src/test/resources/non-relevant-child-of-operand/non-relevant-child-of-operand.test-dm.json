@@ -1,0 +1,192 @@
+{
+  "header": {
+    "id": "non-relevant-child-of-operand.test-dm",
+    "modelType": "document",
+    "modelVersion": "28.4.0",
+    "locales": [
+      {
+        "code": "en"
+      }
+    ],
+    "annotations": [],
+    "modelReferences": []
+  },
+  "content": {
+    "modelInfo": {
+      "name": "non-relevant-child-of-operand.test-dm",
+      "immutable": false,
+      "joinedModelsInfo": "test-dm-document-meta-data+Add"
+    },
+    "modelConfig": {
+      "decimalSeparator": ".",
+      "timeZone": "UTC",
+      "conditionLanguage": {
+        "code": "en_US"
+      }
+    },
+    "modelRoot": {
+      "rootGroups": [
+        {
+          "type": "Group",
+          "id": "group_ac1be",
+          "name": "root",
+          "Group": {
+            "repeatability": 1,
+            "elements": [
+              {
+                "type": "Field",
+                "id": "field_cf39f",
+                "name": "trigger",
+                "Field": {
+                  "fieldType": {
+                    "type": "BooleanType"
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "trigger"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Group",
+                "id": "group_9fa1b",
+                "name": "childOfGroupOperand",
+                "Group": {
+                  "repeatability": 1,
+                  "elements": [
+                    {
+                      "type": "Group",
+                      "id": "group_a8edd",
+                      "name": "operand",
+                      "Group": {
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "operand"
+                          }
+                        ],
+                        "repeatability": 1,
+                        "elements": [
+                          {
+                            "type": "Field",
+                            "id": "field_6d6cc",
+                            "name": "aField",
+                            "Field": {
+                              "fieldType": {
+                                "type": "StringType"
+                              },
+                              "label": [
+                                {
+                                  "locale": "en",
+                                  "text": "aField"
+                                }
+                              ]
+                            }
+                          },
+                          {
+                            "type": "Group",
+                            "id": "group_0dc18",
+                            "name": "subGroup",
+                            "Group": {
+                              "repeatability": 1,
+                              "elements": [
+                                {
+                                  "type": "Field",
+                                  "id": "field_d1ac6",
+                                  "name": "aField",
+                                  "Field": {
+                                    "fieldType": {
+                                      "type": "StringType"
+                                    },
+                                    "label": [
+                                      {
+                                        "locale": "en",
+                                        "text": "aField"
+                                      }
+                                    ]
+                                  }
+                                },
+                                {
+                                  "type": "Group",
+                                  "id": "group_e7722",
+                                  "name": "repeatableChildGroup",
+                                  "Group": {
+                                    "repeatability": 10,
+                                    "elements": [
+                                      {
+                                        "type": "Field",
+                                        "id": "field_ea377",
+                                        "name": "repeatableField",
+                                        "Field": {
+                                          "fieldType": {
+                                            "type": "StringType"
+                                          },
+                                          "label": [
+                                            {
+                                              "locale": "en",
+                                              "text": "repeatableField"
+                                            }
+                                          ]
+                                        }
+                                      }
+                                    ]
+                                  }
+                                }
+                              ]
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_32afc",
+                      "name": "result",
+                      "Field": {
+                        "fieldType": {
+                          "type": "StringType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "result"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Computation",
+                      "id": "computation_d4884",
+                      "name": "computeResultWithChildren",
+                      "Computation": {
+                        "computedFieldRelPath": "../result",
+                        "computationAlternatives": [
+                          {
+                            "operation": "\"operand group is filled\"",
+                            "precondition": "GroupFilled(operand)"
+                          },
+                          {
+                            "operation": "\"operand group is not filled\"",
+                            "precondition": "GroupNotFilled(operand)"
+                          }
+                        ],
+                        "errorMessage": [
+                          {
+                            "locale": "en",
+                            "text": "error text for computation of computeResultWithChildren"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

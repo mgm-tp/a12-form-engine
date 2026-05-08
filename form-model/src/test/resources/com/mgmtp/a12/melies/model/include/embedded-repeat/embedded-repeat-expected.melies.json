@@ -1,0 +1,160 @@
+{
+  "header": {
+    "id": "embedded-repeat-include.melies",
+    "modelType": "form",
+    "modelVersion": "37.4.0",
+    "locales": [
+      {
+        "code": "en"
+      }
+    ],
+    "modelReferences": [
+      {
+        "alias": "DM",
+        "modelType": "document",
+        "purpose": "data binding",
+        "reference": "embedded-repeat-include.picus"
+      }
+    ]
+  },
+  "content": {
+    "subHeaderBox": {
+      "id": "subHeaderBox1"
+    },
+    "footerBox": {
+      "id": "footerBox1"
+    },
+    "screens": [
+      {
+        "id": "screen1",
+        "name": "Screen1",
+        "screenElements": [
+          {
+            "type": "EmbeddedRepeat",
+            "id": "embeddedrepeat-efae0_embeddedrepeat-f7d52",
+            "name": "embedded-repeat",
+            "repeatOverviewColumn": [
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "embeddedrepeat-efae0_fieldbasedrepeatoverviewcolumn-5a8b0",
+                "width": 2.5,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "elementRef": "include_4d484_field_623db"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "embeddedrepeat-efae0_fieldbasedrepeatoverviewcolumn-5edcf",
+                "width": 1.5,
+                "sortable": true,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "datePickerConfig": {
+                  "minYear": 2016,
+                  "maxYear": 2026,
+                  "absolute": true,
+                  "preselectionYear": 2021
+                },
+                "elementRef": "include_4d484_field_0ec3f"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "embeddedrepeat-efae0_fieldbasedrepeatoverviewcolumn-abfff",
+                "width": 0.5,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "elementRef": "include_4d484_field_5adf5"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "embeddedrepeat-efae0_fieldbasedrepeatoverviewcolumn-76be6",
+                "width": 1.5,
+                "sortable": true,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "elementRef": "include_4d484_field_86ba1"
+              }
+            ],
+            "groupRef": "include_4d484",
+            "enableAdd": true,
+            "enableRemove": true,
+            "enableReorder": false,
+            "enableCopy": false,
+            "includeId": "embeddedrepeat-efae0",
+            "formModelRef": "embedded-repeat.melies",
+            "hostDocumentModelPath": "",
+            "controlGrid": {
+              "type": "ControlGrid",
+              "id": "embeddedrepeat-efae0_controlgrid-3db5d",
+              "name": "cg",
+              "layout": {
+                "lg": "5-3-1-3"
+              },
+              "row": [
+                {
+                  "type": "Row",
+                  "id": "embeddedrepeat-efae0_row-b1bf1",
+                  "cell": [
+                    {
+                      "type": "Control",
+                      "id": "embeddedrepeat-efae0_control-20365",
+                      "elementRef": "include_4d484_field_623db"
+                    },
+                    {
+                      "type": "Control",
+                      "id": "embeddedrepeat-efae0_control-9dbf3",
+                      "elementRef": "include_4d484_field_0ec3f"
+                    },
+                    {
+                      "type": "Control",
+                      "id": "embeddedrepeat-efae0_control-2110a",
+                      "elementRef": "include_4d484_field_5adf5"
+                    },
+                    {
+                      "type": "Control",
+                      "id": "embeddedrepeat-efae0_control-cc845",
+                      "elementRef": "include_4d484_field_86ba1"
+                    }
+                  ]
+                }
+              ],
+              "verticalAlignment": "TOP"
+            }
+          },
+          {
+            "type": "ControlGrid",
+            "id": "controlgrid-7ca4e",
+            "name": "extra-cg",
+            "row": [
+              {
+                "type": "Row",
+                "id": "row-4f86e",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control-31568",
+                    "elementRef": "field_dd3c4"
+                  }
+                ]
+              }
+            ],
+            "verticalAlignment": "TOP"
+          }
+        ]
+      }
+    ],
+    "fieldConfiguration": {
+      "field": [
+        {
+          "initialValue": "false",
+          "exposition": "SWITCH",
+          "elementRef": "include_4d484_field_5adf5"
+        }
+      ]
+    },
+    "groupConfiguration": {},
+    "defaults": {}
+  }
+}

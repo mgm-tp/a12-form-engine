@@ -1,0 +1,523 @@
+{
+  "header": {
+    "id": "controls.multi-select-document",
+    "modelType": "document",
+    "modelVersion": "28.4.0",
+    "locales": [
+      {
+        "code": "en"
+      }
+    ],
+    "labels": [],
+    "annotations": [
+      {
+        "name": "roles",
+        "value": "admin"
+      }
+    ],
+    "modelReferences": []
+  },
+  "content": {
+    "modelInfo": {
+      "name": "controls.multi-select-document",
+      "immutable": false
+    },
+    "modelConfig": {
+      "decimalSeparator": ".",
+      "timeZone": "UTC",
+      "conditionLanguage": {
+        "code": "en_US"
+      }
+    },
+    "modelRoot": {
+      "rootGroups": [
+        {
+          "type": "Group",
+          "id": "group_9227a",
+          "name": "root",
+          "Group": {
+            "repeatability": 1,
+            "elements": [
+              {
+                "type": "Group",
+                "id": "groupimpl_41075",
+                "name": "MultiSelect01",
+                "Group": {
+                  "repeatability": 999999,
+                  "usageType": "multi-select",
+                  "elements": [
+                    {
+                      "type": "Field",
+                      "id": "fieldimpl_3d1a3",
+                      "name": "value",
+                      "Field": {
+                        "fieldType": {
+                          "type": "EnumerationType",
+                          "EnumerationType": {
+                            "values": [
+                              {
+                                "value": "key1",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "Value 1"
+                                  }
+                                ]
+                              },
+                              {
+                                "value": "key2",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "Value 2"
+                                  }
+                                ]
+                              },
+                              {
+                                "value": "key3",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "Value 3"
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "MultiSelect01"
+                          }
+                        ],
+                        "requirednessConfig": {
+                          "mode": "absoluteOrRelativeToNextRepAncestor"
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Rule",
+                "id": "rule_48811",
+                "name": "Rule1",
+                "Rule": {
+                  "errorEntityRelPath": "../MultiSelect01/value",
+                  "errorCode": "Error rule_48811",
+                  "errorCondition": "[MultiSelect01/value] == \"key2\"",
+                  "severity": "ERROR",
+                  "errorMessage": [
+                    {
+                      "locale": "en",
+                      "text": "$MultiSelect01/value.value$ should not be selected!"
+                    }
+                  ],
+                  "guiPatterns": {
+                    "dynamicEnumeration": "false"
+                  }
+                }
+              },
+              {
+                "type": "Group",
+                "id": "groupimpl_b6385",
+                "name": "MultiSelect02",
+                "Group": {
+                  "repeatability": 999999,
+                  "usageType": "multi-select",
+                  "elements": [
+                    {
+                      "type": "Field",
+                      "id": "fieldimpl_8bc27",
+                      "name": "msValue02",
+                      "Field": {
+                        "fieldType": {
+                          "type": "EnumerationType",
+                          "EnumerationType": {
+                            "values": [
+                              {
+                                "value": "key1",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "Value 1"
+                                  }
+                                ]
+                              },
+                              {
+                                "value": "key2",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "Value 2"
+                                  }
+                                ]
+                              },
+                              {
+                                "value": "key3",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "Value 3"
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        },
+                        "requirednessConfig": {
+                          "mode": "absoluteOrRelativeToNextRepAncestor"
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Group",
+                "id": "groupimpl_6c1eb",
+                "name": "MultiSelect03",
+                "Group": {
+                  "repeatability": 999999,
+                  "usageType": "multi-select",
+                  "elements": [
+                    {
+                      "type": "Field",
+                      "id": "fieldimpl_5c656",
+                      "name": "msValue03",
+                      "Field": {
+                        "fieldType": {
+                          "type": "EnumerationType",
+                          "EnumerationType": {
+                            "values": [
+                              {
+                                "value": "key1",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "Value 1"
+                                  }
+                                ]
+                              },
+                              {
+                                "value": "key2",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "Value 2"
+                                  }
+                                ]
+                              },
+                              {
+                                "value": "key3",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "Value 3"
+                                  }
+                                ]
+                              },
+                              {
+                                "value": "key4",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "Value 4"
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        },
+                        "requirednessConfig": {
+                          "mode": "absoluteOrRelativeToNextRepAncestor"
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Group",
+                "id": "groupimpl_11ffe",
+                "name": "MultiSelect04_Full_With_SelectAll",
+                "Group": {
+                  "repeatability": 999999,
+                  "usageType": "multi-select",
+                  "elements": [
+                    {
+                      "type": "Field",
+                      "id": "fieldimpl_06350",
+                      "name": "msValue04",
+                      "Field": {
+                        "fieldType": {
+                          "type": "EnumerationType",
+                          "EnumerationType": {
+                            "values": [
+                              {
+                                "value": "key1",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "Value 1"
+                                  }
+                                ]
+                              },
+                              {
+                                "value": "key2",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "Value 2"
+                                  }
+                                ]
+                              },
+                              {
+                                "value": "key3",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "Value 3"
+                                  }
+                                ]
+                              },
+                              {
+                                "value": "key4",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "Value 4"
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        },
+                        "requirednessConfig": {
+                          "mode": "absoluteOrRelativeToNextRepAncestor"
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Group",
+                "id": "groupimpl_716f2",
+                "name": "MultiSelect05_Inline_With_SelectAll",
+                "Group": {
+                  "repeatability": 999999,
+                  "usageType": "multi-select",
+                  "elements": [
+                    {
+                      "type": "Field",
+                      "id": "fieldimpl_66d59",
+                      "name": "msValue05",
+                      "Field": {
+                        "fieldType": {
+                          "type": "EnumerationType",
+                          "EnumerationType": {
+                            "values": [
+                              {
+                                "value": "key1",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "Value 1"
+                                  }
+                                ]
+                              },
+                              {
+                                "value": "key2",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "Value 2"
+                                  }
+                                ]
+                              },
+                              {
+                                "value": "key3",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "Value 3"
+                                  }
+                                ]
+                              },
+                              {
+                                "value": "key4",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "Value 4"
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        },
+                        "requirednessConfig": {
+                          "mode": "absoluteOrRelativeToNextRepAncestor"
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Group",
+                "id": "group_c52eb",
+                "name": "stringMultiSelect",
+                "Group": {
+                  "repeatability": 999999,
+                  "usageType": "multi-select",
+                  "elements": [
+                    {
+                      "type": "Field",
+                      "id": "field_31f65",
+                      "name": "msValue",
+                      "Field": {
+                        "fieldType": {
+                          "type": "StringType"
+                        },
+                        "requirednessConfig": {
+                          "mode": "absoluteOrRelativeToNextRepAncestor"
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Group",
+                "id": "groupimpl_54796",
+                "name": "repeatableGroup",
+                "Group": {
+                  "repeatability": 5,
+                  "elements": [
+                    {
+                      "type": "Group",
+                      "id": "groupimpl_7f9ef",
+                      "name": "MultiSelect01",
+                      "Group": {
+                        "repeatability": 999999,
+                        "usageType": "multi-select",
+                        "elements": [
+                          {
+                            "type": "Field",
+                            "id": "fieldimpl_d7c10",
+                            "name": "value",
+                            "Field": {
+                              "fieldType": {
+                                "type": "EnumerationType",
+                                "EnumerationType": {
+                                  "values": [
+                                    {
+                                      "value": "key1",
+                                      "label": [
+                                        {
+                                          "locale": "en",
+                                          "text": "Value 1"
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "value": "key2",
+                                      "label": [
+                                        {
+                                          "locale": "en",
+                                          "text": "Value 2"
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "value": "key3",
+                                      "label": [
+                                        {
+                                          "locale": "en",
+                                          "text": "Value 3"
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "value": "key4",
+                                      "label": [
+                                        {
+                                          "locale": "en",
+                                          "text": "Value 4"
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              },
+                              "label": [
+                                {
+                                  "locale": "en",
+                                  "text": "MultiSelect01"
+                                }
+                              ],
+                              "requirednessConfig": {
+                                "mode": "absoluteOrRelativeToNextRepAncestor"
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Rule",
+                      "id": "rule_ab249",
+                      "name": "Rule1",
+                      "Rule": {
+                        "errorEntityRelPath": "../MultiSelect01/value",
+                        "errorCode": "Error rule_48811",
+                        "errorCondition": "[MultiSelect01/value] == \"key2\"",
+                        "severity": "ERROR",
+                        "errorMessage": [
+                          {
+                            "locale": "en",
+                            "text": "$MultiSelect01/value.value$ should not be selected!"
+                          }
+                        ],
+                        "guiPatterns": {
+                          "dynamicEnumeration": "false"
+                        }
+                      }
+                    },
+                    {
+                      "type": "Group",
+                      "id": "group_cac1f",
+                      "name": "stringMultiSelect",
+                      "Group": {
+                        "repeatability": 999999,
+                        "usageType": "multi-select",
+                        "elements": [
+                          {
+                            "type": "Field",
+                            "id": "field_6c7ec",
+                            "name": "value",
+                            "Field": {
+                              "fieldType": {
+                                "type": "StringType"
+                              },
+                              "requirednessConfig": {
+                                "mode": "absoluteOrRelativeToNextRepAncestor"
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

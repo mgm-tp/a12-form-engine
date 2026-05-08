@@ -1,0 +1,152 @@
+{
+  "header": {
+    "id": "detached-repeat.melies",
+    "modelType": "form",
+    "modelVersion": "37.4.0",
+    "locales": [
+      {
+        "code": "en"
+      }
+    ],
+    "modelReferences": [
+      {
+        "alias": "DM",
+        "modelType": "document",
+        "purpose": "data binding",
+        "reference": "detached-repeat.picus"
+      }
+    ]
+  },
+  "content": {
+    "subHeaderBox": {
+      "id": "subHeaderBox1"
+    },
+    "footerBox": {
+      "id": "footerBox1"
+    },
+    "screens": [
+      {
+        "id": "screen1",
+        "name": "Screen1",
+        "screenElements": [
+          {
+            "type": "DetachedRepeat",
+            "id": "detachedrepeat-70bc0",
+            "name": "included-detached-repeat",
+            "repeatOverviewColumn": [
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-7a13d",
+                "width": 2,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "elementRef": "include_79ff6_field_623db"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-dd60f",
+                "width": 1,
+                "sortable": true,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "datePickerConfig": {
+                  "absolute": false,
+                  "preselectionYear": 0
+                },
+                "elementRef": "include_79ff6_field_0ec3f"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-de488",
+                "width": 0.5,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "elementRef": "include_79ff6_field_5adf5"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-df5a3",
+                "width": 0.5,
+                "sortable": true,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "elementRef": "include_79ff6_field_86ba1"
+              }
+            ],
+            "groupRef": "include_79ff6",
+            "enableAdd": true,
+            "enableRemove": true,
+            "enableReorder": false,
+            "enableCopy": false,
+            "detailScreen": {
+              "id": "screen-d67eb",
+              "name": "included-detached-repeat-detail-screen",
+              "screenElements": [
+                {
+                  "type": "ControlGrid",
+                  "id": "controlgrid-6cf1b",
+                  "name": "cg",
+                  "layout": {
+                    "lg": "6-6"
+                  },
+                  "row": [
+                    {
+                      "type": "Row",
+                      "id": "row-7d63d",
+                      "cell": [
+                        {
+                          "type": "Control",
+                          "id": "control-5ec72",
+                          "elementRef": "include_79ff6_field_623db"
+                        },
+                        {
+                          "type": "Control",
+                          "id": "control-3e42a",
+                          "datePickerConfig": {
+                            "absolute": false,
+                            "preselectionYear": 0
+                          },
+                          "elementRef": "include_79ff6_field_0ec3f"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "Row",
+                      "id": "row-b76d0",
+                      "cell": [
+                        {
+                          "type": "Control",
+                          "id": "control-70df6",
+                          "elementRef": "include_79ff6_field_5adf5"
+                        },
+                        {
+                          "type": "Control",
+                          "id": "control-ae06a",
+                          "elementRef": "include_79ff6_field_86ba1"
+                        }
+                      ]
+                    }
+                  ],
+                  "verticalAlignment": "TOP"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "fieldConfiguration": {
+      "field": [
+        {
+          "initialValue": "false",
+          "exposition": "SWITCH",
+          "elementRef": "include_79ff6_field_5adf5"
+        }
+      ]
+    },
+    "groupConfiguration": {},
+    "defaults": {}
+  }
+}

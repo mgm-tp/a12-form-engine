@@ -1,0 +1,133 @@
+{
+  "header": {
+    "id": "mixed-cycle-form",
+    "modelType": "form",
+    "modelVersion": "37.4.0",
+    "locales": [
+      {
+        "code": "en"
+      }
+    ],
+    "annotations": [
+      {
+        "name": "roles",
+        "value": "admin"
+      }
+    ],
+    "modelReferences": [
+      {
+        "alias": "mixed-cycle-document",
+        "modelType": "document",
+        "purpose": "data binding",
+        "reference": "mixed-cycle-document"
+      }
+    ]
+  },
+  "content": {
+    "subHeaderBox": {
+      "id": "subHeaderBox1"
+    },
+    "footerBox": {
+      "id": "footerBox1"
+    },
+    "screens": [
+      {
+        "id": "screen_0b52f",
+        "name": "Screen 1",
+        "screenElements": [
+          {
+            "type": "ControlGrid",
+            "id": "controlgrid_8cf9c",
+            "name": "cg",
+            "row": [
+              {
+                "type": "Row",
+                "id": "row_d2210",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control_1a0fb",
+                    "elementRef": "field_62f6d"
+                  }
+                ]
+              },
+              {
+                "type": "Row",
+                "id": "row_bf876",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control_f1f24",
+                    "elementRef": "field_2620c"
+                  }
+                ]
+              },
+              {
+                "type": "Row",
+                "id": "row_a7b04",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control_a6559",
+                    "elementRef": "field_20d94"
+                  }
+                ]
+              }
+            ],
+            "verticalAlignment": "TOP"
+          }
+        ]
+      }
+    ],
+    "fieldConfiguration": {
+      "field": [
+        {
+          "dependentField": {
+            "masterField": "field_2620c",
+            "case": [
+              {
+                "masterValue": "1",
+                "value": "2"
+              }
+            ]
+          },
+          "elementRef": "field_20d94"
+        },
+        {
+          "dependentEnumeration": {
+            "masterField": "field_20d94",
+            "constraint": [
+              {
+                "masterValue": "1",
+                "constraintValues": [
+                  {
+                    "value": "1"
+                  }
+                ]
+              },
+              {
+                "masterValue": "2",
+                "constraintValues": [
+                  {
+                    "value": "2"
+                  }
+                ]
+              },
+              {
+                "masterValue": "3",
+                "constraintValues": [
+                  {
+                    "value": "3"
+                  }
+                ]
+              }
+            ]
+          },
+          "elementRef": "field_81c55"
+        }
+      ]
+    },
+    "groupConfiguration": {},
+    "defaults": {}
+  }
+}

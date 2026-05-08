@@ -1,0 +1,224 @@
+{
+  "header": {
+    "id": "dependencies.control-document",
+    "modelType": "document",
+    "modelVersion": "28.4.0",
+    "locales": [
+      {
+        "code": "en"
+      }
+    ],
+    "labels": [],
+    "annotations": [
+      {
+        "name": "roles",
+        "value": "admin"
+      }
+    ],
+    "modelReferences": []
+  },
+  "content": {
+    "modelInfo": {
+      "name": "dependencies.control-document",
+      "immutable": false
+    },
+    "modelConfig": {
+      "decimalSeparator": ".",
+      "timeZone": "UTC",
+      "conditionLanguage": {
+        "code": "en_US"
+      }
+    },
+    "modelRoot": {
+      "rootGroups": [
+        {
+          "type": "Group",
+          "id": "G3",
+          "name": "root",
+          "Group": {
+            "repeatability": 1,
+            "elements": [
+              {
+                "type": "Group",
+                "id": "G14",
+                "name": "single",
+                "Group": {
+                  "repeatability": 1,
+                  "elements": [
+                    {
+                      "type": "Field",
+                      "id": "F4",
+                      "name": "bool_single",
+                      "Field": {
+                        "fieldType": {
+                          "type": "BooleanType"
+                        }
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "F5",
+                      "name": "enum_single",
+                      "Field": {
+                        "fieldType": {
+                          "type": "EnumerationType",
+                          "EnumerationType": {
+                            "values": [
+                              {
+                                "value": "V0",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "V0"
+                                  }
+                                ]
+                              },
+                              {
+                                "value": "V1",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "V1"
+                                  }
+                                ]
+                              },
+                              {
+                                "value": "V2",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "V2"
+                                  }
+                                ]
+                              },
+                              {
+                                "value": "V3",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "V3"
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_83376",
+                      "name": "confirm_single",
+                      "Field": {
+                        "fieldType": {
+                          "type": "ConfirmType"
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Group",
+                "id": "G15",
+                "name": "cascade",
+                "Group": {
+                  "repeatability": 1,
+                  "elements": [
+                    {
+                      "type": "Field",
+                      "id": "F9",
+                      "name": "bool_cascade0",
+                      "Field": {
+                        "fieldType": {
+                          "type": "BooleanType"
+                        }
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "F18",
+                      "name": "bool_cascade1",
+                      "Field": {
+                        "fieldType": {
+                          "type": "BooleanType"
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Group",
+                "id": "G16",
+                "name": "combined",
+                "Group": {
+                  "repeatability": 1,
+                  "elements": [
+                    {
+                      "type": "Field",
+                      "id": "F12",
+                      "name": "bool_combined0",
+                      "Field": {
+                        "fieldType": {
+                          "type": "BooleanType"
+                        }
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "F17",
+                      "name": "bool_combined1",
+                      "Field": {
+                        "fieldType": {
+                          "type": "BooleanType"
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Group",
+                "id": "groupimpl_b58ff",
+                "name": "repeat",
+                "Group": {
+                  "repeatability": 2,
+                  "indexFieldName": "index",
+                  "elements": [
+                    {
+                      "type": "Field",
+                      "id": "field_c61c5",
+                      "name": "index",
+                      "Field": {
+                        "fieldType": {
+                          "type": "NumberType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "Index"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "fieldimpl_2e3b6",
+                      "name": "field",
+                      "Field": {
+                        "fieldType": {
+                          "type": "BooleanType"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

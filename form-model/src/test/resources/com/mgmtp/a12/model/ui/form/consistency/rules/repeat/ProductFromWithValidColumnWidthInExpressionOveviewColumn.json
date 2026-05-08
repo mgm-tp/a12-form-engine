@@ -1,0 +1,85 @@
+{
+  "header": {
+    "id": "ProductFromWithValidColumnWidthInExpressionOveviewColumn",
+    "modelType": "form",
+    "modelVersion": "37.4.0",
+    "locales": [
+      {
+        "code": "en"
+      }
+    ],
+    "modelReferences": [
+      {
+        "alias": "DM",
+        "modelType": "document",
+        "purpose": "data binding",
+        "reference": "ProductDomain"
+      }
+    ],
+    "annotations": [
+      {
+        "name": "roles",
+        "value": "admin"
+      }
+    ]
+  },
+  "content": {
+    "subHeaderBox": {
+      "id": "subHeaderBox1"
+    },
+    "footerBox": {
+      "id": "footerBox1"
+    },
+    "screens": [
+      {
+        "id": "screen1",
+        "name": "Screen1",
+        "screenElements": [
+          {
+            "type": "InlineRepeat",
+            "id": "inlinerepeat-fccf4",
+            "name": "inline-repeat-mediaFiles",
+            "repeatOverviewColumn": [
+              {
+                "type": "ExpressionRepeatOverviewColumn",
+                "id": "expressionrepeatoverviewcolumn-3a075",
+                "width": 0.5,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "name": "expression1",
+                "expression": "\"** Some Text **\""
+              },
+              {
+                "type": "ExpressionRepeatOverviewColumn",
+                "id": "expressionrepeatoverviewcolumn-91b8d",
+                "width": 4,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "name": "expression2",
+                "expression": "\"** Some Text **\""
+              },
+              {
+                "type": "ExpressionRepeatOverviewColumn",
+                "id": "expressionrepeatoverviewcolumn-af609",
+                "width": 3.5,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "name": "expression3",
+                "expression": "\"** Some Text **\""
+              }
+            ],
+            "groupRef": "G17",
+            "enableAdd": true,
+            "enableRemove": true
+          }
+        ]
+      }
+    ],
+    "fieldConfiguration": {},
+    "groupConfiguration": {},
+    "defaults": {}
+  }
+}

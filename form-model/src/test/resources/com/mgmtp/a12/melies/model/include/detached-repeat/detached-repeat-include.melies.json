@@ -1,0 +1,76 @@
+{
+  "header": {
+    "id": "detached-repeat-include.melies",
+    "modelType": "form",
+    "modelVersion": "37.4.0",
+    "locales": [
+      {
+        "code": "en"
+      }
+    ],
+    "modelReferences": [
+      {
+        "alias": "DM",
+        "modelType": "document",
+        "purpose": "data binding",
+        "reference": "detached-repeat-include.picus"
+      }
+    ]
+  },
+  "content": {
+    "subHeaderBox": {
+      "id": "subHeaderBox1"
+    },
+    "footerBox": {
+      "id": "footerBox1"
+    },
+    "screens": [
+      {
+        "id": "screen1",
+        "name": "Screen1",
+        "screenElements": [
+          {
+            "type": "ControlGrid",
+            "id": "controlgrid-67726",
+            "name": "cg",
+            "row": [
+              {
+                "type": "Row",
+                "id": "row-596d4",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control-f7aff",
+                    "elementRef": "field_dd3c4"
+                  }
+                ]
+              }
+            ],
+            "verticalAlignment": "TOP"
+          },
+          {
+            "type": "DetachedRepeat",
+            "id": "detachedrepeat-3b1e1",
+            "name": "include-detached-repeat",
+            "groupRef": "include_4d484",
+            "enableAdd": true,
+            "enableRemove": true,
+            "enableReorder": false,
+            "enableCopy": false,
+            "includeId": "detachedrepeat-3b1e1",
+            "formModelRef": "detached-repeat.melies",
+            "hostDocumentModelPath": "",
+            "detailScreen": {
+              "id": "screen-0a300",
+              "name": "include-detached-repeat-detail-screen",
+              "screenElements": []
+            }
+          }
+        ]
+      }
+    ],
+    "fieldConfiguration": {},
+    "groupConfiguration": {},
+    "defaults": {}
+  }
+}

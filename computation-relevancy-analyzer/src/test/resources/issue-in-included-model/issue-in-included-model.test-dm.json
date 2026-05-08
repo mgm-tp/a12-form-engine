@@ -1,0 +1,152 @@
+{
+  "header": {
+    "id": "issue-in-included-model.test-dm",
+    "modelType": "document",
+    "modelVersion": "28.4.0",
+    "locales": [
+      {
+        "code": "en"
+      }
+    ],
+    "annotations": [],
+    "modelReferences": [
+      {
+        "alias": "issue-in-included-model.included-dm",
+        "modelType": "document",
+        "purpose": "include",
+        "reference": "issue-in-included-model.included-dm"
+      }
+    ]
+  },
+  "content": {
+    "modelInfo": {
+      "name": "issue-in-included-model.test-dm",
+      "immutable": false,
+      "joinedModelsInfo": "test-dm-document-meta-data+Add"
+    },
+    "modelConfig": {
+      "decimalSeparator": ".",
+      "timeZone": "UTC",
+      "conditionLanguage": {
+        "code": "en_US"
+      }
+    },
+    "modelRoot": {
+      "rootGroups": [
+        {
+          "type": "Group",
+          "id": "group_ac1be",
+          "name": "root",
+          "Group": {
+            "repeatability": 1,
+            "elements": [
+              {
+                "type": "Field",
+                "id": "field_cf39f",
+                "name": "trigger",
+                "Field": {
+                  "fieldType": {
+                    "type": "BooleanType"
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "trigger"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Group",
+                "id": "include_1e40f",
+                "name": "fieldOperand",
+                "Group": {
+                  "repeatability": 1,
+                  "modelAlias": "issue-in-included-model.included-dm"
+                }
+              },
+              {
+                "type": "Group",
+                "id": "group_8541d",
+                "name": "groupOperand",
+                "Group": {
+                  "repeatability": 1,
+                  "elements": [
+                    {
+                      "type": "Group",
+                      "id": "group_7d889",
+                      "name": "operand",
+                      "Group": {
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "operand"
+                          }
+                        ],
+                        "repeatability": 1,
+                        "elements": [
+                          {
+                            "type": "Field",
+                            "id": "field_caa92",
+                            "name": "aField",
+                            "Field": {
+                              "fieldType": {
+                                "type": "StringType"
+                              },
+                              "label": [
+                                {
+                                  "locale": "en",
+                                  "text": "aField"
+                                }
+                              ]
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_15831",
+                      "name": "result",
+                      "Field": {
+                        "fieldType": {
+                          "type": "StringType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "result"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Computation",
+                      "id": "computation_58222",
+                      "name": "computeResultWithGroup",
+                      "Computation": {
+                        "computedFieldRelPath": "../result",
+                        "computationAlternatives": [
+                          {
+                            "operation": "\"operand/aField is filled with:\" + [operand/aField]",
+                            "precondition": "GroupFilled(operand)"
+                          }
+                        ],
+                        "errorMessage": [
+                          {
+                            "locale": "en",
+                            "text": "error text for computation of computeResultWithGroup"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

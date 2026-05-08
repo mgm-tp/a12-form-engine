@@ -1,0 +1,50 @@
+{
+  "name": "@com.mgmtp.a12.formengine/form-model-generator",
+  "version": "38.5.0-SNAPSHOT",
+  "description": "Form Model Generator",
+  "author": "mgm technology partners",
+  "license": "(EUPL-1.2 OR LicenseRef-commercial)",
+  "type": "module",
+  "sideEffects": false,
+  "exports": {
+    ".": "./lib/main/ts/generator/index.js",
+    "./lib/main/*": "./lib/main/*.js",
+    "./lib/main/*.js": "./lib/main/*.js"
+  },
+  "scripts": {
+    "clean": "rimraf ./lib ./target cyclonedx.json",
+    "build": "pnpm run \"/^compile:.*/\"",
+    "compile:version": "node scripts/version.js",
+    "compile:typescript": "tsc && tsc --project ./tsconfig.lib.json",
+    "compile:detect-cycles": "devtools detect-cycles \"./src/**/*.@(ts|tsx)\"",
+    "test": "mocha",
+    "typescript": "tsc --project ./tsconfig.dev.json",
+    "watch": "tsc --project ./tsconfig.dev.json --watch"
+  },
+  "devDependencies": {
+    "@com.mgmtp.a12.base/base-model-api": "catalog:a12",
+    "@com.mgmtp.a12.devtools/build-tools": "catalog:a12",
+    "@com.mgmtp.a12.devtools/tsconfig": "catalog:a12",
+    "@com.mgmtp.a12.kernel/kernel-md-facade": "catalog:a12",
+    "@com.mgmtp.a12.utils/utils-collections": "catalog:a12",
+    "@com.mgmtp.a12.utils/utils-localization": "catalog:a12",
+    "@com.mgmtp.a12.utils/utils-logging": "catalog:a12",
+    "@types/mocha": "catalog:",
+    "@types/node": "catalog:",
+    "mocha": "catalog:",
+    "rimraf": "catalog:",
+    "source-map-support": "catalog:",
+    "typescript": "catalog:"
+  },
+  "files": [
+    "lib",
+    "!lib/test",
+    "src",
+    "!src/test",
+    "README.md",
+    "cyclonedx.json",
+    "NOTICE",
+    "THIRD_PARTY_NOTICES",
+    "licenses"
+  ]
+}

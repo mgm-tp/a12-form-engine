@@ -1,0 +1,152 @@
+{
+  "header": {
+    "id": "form-model",
+    "modelType": "form",
+    "modelVersion": "37.0.0-pre.5",
+    "locales": [
+      {
+        "code": "en"
+      }
+    ],
+    "labels": [
+      {
+        "locale": "en",
+        "text": "label"
+      }
+    ],
+    "annotations": [
+      {
+        "name": "do-not-migrate",
+        "value": ""
+      },
+      {
+        "name": "roles",
+        "value": "admin"
+      }
+    ],
+    "modelReferences": [
+      {
+        "alias": "document-model",
+        "modelType": "document",
+        "purpose": "data binding",
+        "reference": "document-model"
+      }
+    ]
+  },
+  "content": {
+    "subHeaderBox": {
+      "id": "subHeaderBox1"
+    },
+    "footerBox": {
+      "id": "footerBox1"
+    },
+    "screens": [
+      {
+        "id": "screen_5988b",
+        "name": "Screen 1",
+        "annotations": [
+          {
+            "name": "name",
+            "value": "value"
+          }
+        ],
+        "screenElements": [
+          {
+            "type": "ControlGrid",
+            "id": "controlgrid_9b350",
+            "name": "cg",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "Control Grid"
+                  }
+                ]
+              }
+            },
+            "annotations": [
+              {
+                "name": "name",
+                "value": "value"
+              }
+            ],
+            "row": [
+              {
+                "type": "Row",
+                "id": "row_21ccf",
+                "annotations": [
+                  {
+                    "name": "name",
+                    "value": "value"
+                  }
+                ],
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control_fafd3",
+                    "annotations": [
+                      {
+                        "name": "name",
+                        "value": "value"
+                      }
+                    ],
+                    "elementRef": "field_9c7c9"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "Section",
+            "id": "section_d4b58",
+            "name": "Section 1",
+            "annotations": [
+              {
+                "name": "name",
+                "value": "value"
+              }
+            ],
+            "screenElements": [
+              {
+                "type": "ControlGrid",
+                "id": "controlgrid_791b0",
+                "name": "cg"
+              },
+              {
+                "type": "ButtonPanel",
+                "id": "buttonpanel_7a987",
+                "name": "Button Panel 1",
+                "annotations": [
+                  {
+                    "name": "name",
+                    "value": "value"
+                  }
+                ],
+                "button": [
+                  {
+                    "type": "NAVIGATION",
+                    "id": "button_eb31d",
+                    "name": "Nav Button 1",
+                    "target": "#next",
+                    "scope": "HIDDEN_IN_READONLY_MODE",
+                    "annotations": [
+                      {
+                        "name": "name",
+                        "value": "value"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "fieldConfiguration": {},
+    "groupConfiguration": {},
+    "defaults": {}
+  }
+}

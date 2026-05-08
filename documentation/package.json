@@ -1,0 +1,44 @@
+{
+  "name": "@com.mgmtp.a12.formengine/formengine-dev-documentation",
+  "version": "38.5.0-SNAPSHOT",
+  "description": "AsciiDoc documentation for @com.mgmtp.a12.formengine/formengine-core",
+  "type": "module",
+  "scripts": {
+    "clean": "rimraf ./build",
+    "build": "node scripts/convert.ts",
+    "compile": "tsc",
+    "spellcheck": "cspell .",
+    "watch": "tsc --watch"
+  },
+  "author": "mgm technology partners",
+  "license": "(EUPL-1.2 OR LicenseRef-commercial)",
+  "devDependencies": {
+    "@com.mgmtp.a12.base/base-model-api": "catalog:a12",
+    "@com.mgmtp.a12.client/client-core": "catalog:a12",
+    "@com.mgmtp.a12.dataservices/dataservices-access": "catalog:a12",
+    "@com.mgmtp.a12.devtools/tsconfig": "catalog:a12",
+    "@com.mgmtp.a12.formengine/formengine-core": "workspace:*",
+    "@com.mgmtp.a12.kernel/kernel-core-runtime-api-ts": "catalog:a12",
+    "@com.mgmtp.a12.kernel/kernel-md-facade": "catalog:a12",
+    "@com.mgmtp.a12.utils/utils-collections": "catalog:a12",
+    "@com.mgmtp.a12.utils/utils-connector": "catalog:a12",
+    "@com.mgmtp.a12.utils/utils-localization": "catalog:a12",
+    "@com.mgmtp.a12.utils/utils-logging": "catalog:a12",
+    "@com.mgmtp.a12.widgets/widgets-core": "catalog:a12",
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
+    "@types/react-redux": "catalog:",
+    "asciidoctor-highlight.js": "catalog:",
+    "asciidoctor": "catalog:",
+    "cspell": "catalog:",
+    "highlight.js": "catalog:",
+    "redux": "catalog:",
+    "rimraf": "catalog:",
+    "typed-redux-saga": "catalog:",
+    "typescript": "catalog:",
+    "typescript-fsa": "catalog:"
+  },
+  "files": [
+    "src"
+  ]
+}

@@ -1,0 +1,208 @@
+{
+  "header": {
+    "id": "dependencies.element-computations-form",
+    "modelType": "form",
+    "modelVersion": "37.4.0",
+    "locales": [
+      {
+        "code": "en"
+      }
+    ],
+    "labels": [
+      {
+        "locale": "en",
+        "text": "Input → Computation (1) → Dependent (1) → Computation (2) → Dependent (2)"
+      }
+    ],
+    "modelReferences": [
+      {
+        "alias": "DM",
+        "modelType": "document",
+        "purpose": "data binding",
+        "reference": "dependencies.element-computations-document"
+      }
+    ],
+    "annotations": [
+      {
+        "name": "roles",
+        "value": "admin"
+      }
+    ]
+  },
+  "content": {
+    "subHeaderBox": {
+      "id": "subHeaderBox1"
+    },
+    "footerBox": {
+      "id": "footerBox1"
+    },
+    "screens": [
+      {
+        "id": "screen1",
+        "name": "Screen1",
+        "screenElements": [
+          {
+            "type": "Section",
+            "id": "section-78bf4",
+            "name": "description",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "Description"
+                  }
+                ]
+              }
+            },
+            "collapsible": true,
+            "initiallyCollapsed": true,
+            "screenElements": [
+              {
+                "type": "ControlGrid",
+                "id": "controlgrid-df03e",
+                "name": "grid",
+                "row": [
+                  {
+                    "type": "Row",
+                    "id": "row-ee9e2",
+                    "cell": [
+                      {
+                        "type": "ExpressionCell",
+                        "id": "expressioncell-71f5e",
+                        "offset": {
+                          "lg": 0
+                        },
+                        "span": {
+                          "lg": 1
+                        },
+                        "name": "text",
+                        "expression": "\"The fields of this model build a chain of compuations and dependencies. \n\nThe chain is `Input → Computation (1) → Dependent (1) → Computation (2) → Dependent (2)`.\n\nThe field `Input`, `Dependent` `(1)`, and `Dependent` `(2)` are editable. Changing one of them must set all following fields in the chain to the same value!\""
+                      }
+                    ]
+                  }
+                ],
+                "verticalAlignment": "BOTTOM"
+              }
+            ]
+          },
+          {
+            "type": "ControlGrid",
+            "id": "controlgrid-7c822",
+            "name": "example",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "Example"
+                  }
+                ]
+              }
+            },
+            "row": [
+              {
+                "type": "Row",
+                "id": "row-8e397",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control-810bf",
+                    "elementRef": "field_404ed"
+                  }
+                ]
+              },
+              {
+                "type": "Row",
+                "id": "row-3c8e1",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control-71880",
+                    "readonly": true,
+                    "elementRef": "field_a42db"
+                  }
+                ]
+              },
+              {
+                "type": "Row",
+                "id": "row-70a75",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control-677aa",
+                    "elementRef": "field_668f6"
+                  }
+                ]
+              },
+              {
+                "type": "Row",
+                "id": "row-17364",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control-0edd5",
+                    "readonly": true,
+                    "elementRef": "field_431a6"
+                  }
+                ]
+              },
+              {
+                "type": "Row",
+                "id": "row-74267",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control-486fc",
+                    "elementRef": "field_4fc95"
+                  }
+                ]
+              }
+            ],
+            "verticalAlignment": "BOTTOM"
+          }
+        ]
+      }
+    ],
+    "fieldConfiguration": {
+      "field": [
+        {
+          "dependentField": {
+            "masterField": "field_a42db",
+            "case": [
+              {
+                "masterValue": "false",
+                "value": "false"
+              },
+              {
+                "masterValue": "true",
+                "value": "true"
+              }
+            ]
+          },
+          "elementRef": "field_668f6"
+        },
+        {
+          "dependentField": {
+            "masterField": "field_431a6",
+            "case": [
+              {
+                "masterValue": "false",
+                "value": "false"
+              },
+              {
+                "masterValue": "true",
+                "value": "true"
+              }
+            ]
+          },
+          "elementRef": "field_4fc95"
+        }
+      ]
+    },
+    "groupConfiguration": {},
+    "defaults": {}
+  }
+}

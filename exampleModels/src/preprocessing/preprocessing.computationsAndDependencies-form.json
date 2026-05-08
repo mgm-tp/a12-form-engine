@@ -1,0 +1,300 @@
+{
+  "header": {
+    "id": "preprocessing.computationsAndDependencies-form",
+    "modelType": "form",
+    "modelVersion": "37.4.0",
+    "locales": [
+      {
+        "code": "en"
+      }
+    ],
+    "annotations": [
+      {
+        "name": "roles",
+        "value": "admin"
+      }
+    ],
+    "modelReferences": [
+      {
+        "alias": "preprocessing-document",
+        "modelType": "document",
+        "purpose": "data binding",
+        "reference": "preprocessing-document"
+      }
+    ]
+  },
+  "content": {
+    "subHeaderBox": {
+      "id": "subHeaderBox1"
+    },
+    "footerBox": {
+      "id": "footerBox1"
+    },
+    "screens": [
+      {
+        "id": "screen_b2346",
+        "name": "Screen 1",
+        "screenElements": [
+          {
+            "type": "ControlGrid",
+            "id": "controlgrid_bd002",
+            "name": "cgComputation",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "computation"
+                  }
+                ]
+              }
+            },
+            "row": [
+              {
+                "type": "Row",
+                "id": "row_e74d3",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control_eba7a",
+                    "elementRef": "field_caf09"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "ControlGrid",
+            "id": "controlgrid_e9f09",
+            "name": "cgComputationDependency",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "computation -> dependency"
+                  }
+                ]
+              }
+            },
+            "row": [
+              {
+                "type": "Row",
+                "id": "row_26580",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control_24196",
+                    "elementRef": "field_fdcc3"
+                  }
+                ]
+              },
+              {
+                "type": "Row",
+                "id": "row_6c2c9",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control_cbcb4",
+                    "elementRef": "field_18f2a"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "ControlGrid",
+            "id": "controlgrid_593f1",
+            "name": "cgInitDependencyComputation",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "initial value -> dependency -> computation"
+                  }
+                ]
+              }
+            },
+            "row": [
+              {
+                "type": "Row",
+                "id": "row_e4bf2",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control_79610",
+                    "elementRef": "field_d3bcc"
+                  }
+                ]
+              },
+              {
+                "type": "Row",
+                "id": "row_85a10",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control_b9132",
+                    "elementRef": "field_c4b95"
+                  }
+                ]
+              },
+              {
+                "type": "Row",
+                "id": "row_f1c32",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control_b2702",
+                    "elementRef": "field_1e015"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "ControlGrid",
+            "id": "controlgrid_77a34",
+            "name": "cgDependencyComputationDependency",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "initial value -> dependency -> computation -> dependency"
+                  }
+                ]
+              }
+            },
+            "row": [
+              {
+                "type": "Row",
+                "id": "row_210a4",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control_aa852",
+                    "elementRef": "field_0d630"
+                  }
+                ]
+              },
+              {
+                "type": "Row",
+                "id": "row_0f46a",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control_bb1fd",
+                    "elementRef": "field_5f81b"
+                  }
+                ]
+              },
+              {
+                "type": "Row",
+                "id": "row_1223f",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control_a844c",
+                    "elementRef": "field_61298"
+                  }
+                ]
+              },
+              {
+                "type": "Row",
+                "id": "row_b3972",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control_b39bc",
+                    "elementRef": "field_077c9"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "fieldConfiguration": {
+      "field": [
+        {
+          "dependentField": {
+            "masterField": "field_d3bcc",
+            "case": [
+              {
+                "masterValue": "false",
+                "value": ""
+              },
+              {
+                "masterValue": "true",
+                "value": "true"
+              }
+            ]
+          },
+          "elementRef": "field_c4b95"
+        },
+        {
+          "initialValue": "true",
+          "elementRef": "field_d3bcc"
+        },
+        {
+          "initialValue": "true",
+          "elementRef": "field_0d630"
+        },
+        {
+          "dependentField": {
+            "masterField": "field_0d630",
+            "case": [
+              {
+                "masterValue": "false",
+                "value": ""
+              },
+              {
+                "masterValue": "true",
+                "value": "true"
+              }
+            ]
+          },
+          "elementRef": "field_5f81b"
+        },
+        {
+          "dependentField": {
+            "masterField": "field_61298",
+            "case": [
+              {
+                "masterValue": "false",
+                "value": ""
+              },
+              {
+                "masterValue": "true",
+                "value": "true"
+              }
+            ]
+          },
+          "elementRef": "field_077c9"
+        },
+        {
+          "dependentField": {
+            "masterField": "field_fdcc3",
+            "case": [
+              {
+                "masterValue": "true",
+                "value": "true"
+              }
+            ]
+          },
+          "elementRef": "field_18f2a"
+        }
+      ]
+    },
+    "groupConfiguration": {},
+    "defaults": {},
+    "openNewDocumentPreProcessing": "COMPUTATIONS_AND_DEPENDENCIES",
+    "openExistingDocumentPreProcessing": "COMPUTATIONS_AND_DEPENDENCIES"
+  }
+}

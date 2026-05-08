@@ -1,0 +1,123 @@
+{
+  "header": {
+    "id": "company-document",
+    "modelType": "document",
+    "modelVersion": "28.4.0",
+    "locales": [
+      {
+        "code": "en"
+      }
+    ],
+    "annotations": [
+      {
+        "name": "roles",
+        "value": "admin"
+      }
+    ],
+    "modelReferences": [
+      {
+        "alias": "address-document",
+        "modelType": "document",
+        "purpose": "include",
+        "reference": "address-document"
+      },
+      {
+        "alias": "person-document",
+        "modelType": "document",
+        "purpose": "include",
+        "reference": "person-document"
+      }
+    ]
+  },
+  "content": {
+    "modelInfo": {
+      "name": "company-document"
+    },
+    "modelConfig": {
+      "decimalSeparator": ".",
+      "timeZone": "UTC",
+      "conditionLanguage": {
+        "code": "en_US"
+      }
+    },
+    "modelRoot": {
+      "rootGroups": [
+        {
+          "type": "Group",
+          "id": "group_7721e",
+          "name": "company",
+          "Group": {
+            "label": [
+              {
+                "locale": "en",
+                "text": "Company"
+              }
+            ],
+            "repeatability": 1,
+            "elements": [
+              {
+                "type": "Field",
+                "id": "field_4e8d6",
+                "name": "name",
+                "Field": {
+                  "fieldType": {
+                    "type": "StringType"
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "name"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Field",
+                "id": "field_fda0f",
+                "name": "registerId",
+                "Field": {
+                  "fieldType": {
+                    "type": "StringType"
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "Register ID"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Group",
+                "id": "include_e2762",
+                "name": "locations",
+                "Group": {
+                  "repeatability": 1000,
+                  "modelAlias": "address-document"
+                }
+              },
+              {
+                "type": "Group",
+                "id": "include_e2547",
+                "name": "ceo",
+                "Group": {
+                  "repeatability": 1,
+                  "modelAlias": "person-document"
+                }
+              },
+              {
+                "type": "Group",
+                "id": "include_7a7e7",
+                "name": "employees",
+                "Group": {
+                  "repeatability": 10000,
+                  "modelAlias": "person-document"
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,589 @@
+{
+  "header": {
+    "id": "buttons.enablement-form",
+    "modelType": "form",
+    "modelVersion": "37.4.0",
+    "locales": [
+      {
+        "code": "en"
+      }
+    ],
+    "annotations": [
+      {
+        "name": "roles",
+        "value": "admin"
+      }
+    ],
+    "modelReferences": [
+      {
+        "alias": "DM",
+        "modelType": "document",
+        "purpose": "data binding",
+        "reference": "buttons-document"
+      }
+    ]
+  },
+  "content": {
+    "subHeaderBox": {
+      "id": "subHeaderBox1",
+      "majorButtons": {
+        "button": [
+          {
+            "type": "NAVIGATION",
+            "id": "button-97fe8",
+            "name": "navButtonAlwaysShownAndEnabled",
+            "buttonStyling": {
+              "label": {
+                "type": "Multilingual",
+                "multilingualText": {
+                  "text": [
+                    {
+                      "locale": "en",
+                      "text": "Navigation button is always shown"
+                    }
+                  ]
+                }
+              },
+              "priority": "SECONDARY"
+            },
+            "target": "#previous",
+            "scope": "HIDDEN_IN_READONLY_MODE"
+          }
+        ]
+      }
+    },
+    "footerBox": {
+      "id": "footerBox1"
+    },
+    "screens": [
+      {
+        "id": "screen1",
+        "name": "Screen1",
+        "screenElements": [
+          {
+            "type": "Section",
+            "id": "section-9c68c",
+            "name": "sec1",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "Dirty state"
+                  }
+                ]
+              }
+            },
+            "screenElements": [
+              {
+                "type": "ControlGrid",
+                "id": "controlgrid-22117",
+                "name": "cg",
+                "row": [
+                  {
+                    "type": "Row",
+                    "id": "row-abb8a",
+                    "cell": [
+                      {
+                        "type": "Control",
+                        "id": "control-22807",
+                        "label": {
+                          "type": "Multilingual",
+                          "multilingualText": {
+                            "text": [
+                              {
+                                "locale": "en",
+                                "text": "NumberField"
+                              }
+                            ]
+                          }
+                        },
+                        "elementRef": "id41088"
+                      }
+                    ]
+                  }
+                ],
+                "verticalAlignment": "TOP"
+              },
+              {
+                "type": "ButtonPanel",
+                "id": "buttonpanel-6796a",
+                "name": "bp1",
+                "button": [
+                  {
+                    "type": "EVENT",
+                    "id": "button-c7ef8",
+                    "name": "buttonAlwaysShown",
+                    "buttonStyling": {
+                      "label": {
+                        "type": "Multilingual",
+                        "multilingualText": {
+                          "text": [
+                            {
+                              "locale": "en",
+                              "text": "Button shown even if data did not change"
+                            }
+                          ]
+                        }
+                      },
+                      "priority": "SECONDARY"
+                    },
+                    "scope": "HIDDEN_IN_READONLY_MODE"
+                  },
+                  {
+                    "type": "EVENT",
+                    "id": "button-1b609",
+                    "name": "buttonOnlyEnableWhenDocumentDirty",
+                    "buttonStyling": {
+                      "label": {
+                        "type": "Multilingual",
+                        "multilingualText": {
+                          "text": [
+                            {
+                              "locale": "en",
+                              "text": "Button should only be enabled if the data changed"
+                            }
+                          ]
+                        }
+                      },
+                      "priority": "SECONDARY"
+                    },
+                    "scope": "HIDDEN_IN_READONLY_MODE",
+                    "enablement": "DISABLED"
+                  },
+                  {
+                    "type": "EVENT",
+                    "id": "button-3f25e",
+                    "name": "buttonOnlyShownWhenDocumentDirty",
+                    "buttonStyling": {
+                      "label": {
+                        "type": "Multilingual",
+                        "multilingualText": {
+                          "text": [
+                            {
+                              "locale": "en",
+                              "text": "Button should only be visible if the data changed"
+                            }
+                          ]
+                        }
+                      },
+                      "priority": "SECONDARY"
+                    },
+                    "scope": "HIDDEN_IN_READONLY_MODE",
+                    "enablement": "HIDDEN"
+                  }
+                ]
+              },
+              {
+                "type": "DetachedRepeat",
+                "id": "detachedrepeat-66998",
+                "name": "detached-repeat-Group",
+                "title": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "Detached Repeat"
+                      }
+                    ]
+                  }
+                },
+                "repeatOverviewColumn": [
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-d1005",
+                    "width": 1,
+                    "sortable": false,
+                    "filterable": false,
+                    "preferredSorting": "ASC",
+                    "elementRef": "F44"
+                  }
+                ],
+                "groupRef": "G43",
+                "enableAdd": true,
+                "enableRemove": true,
+                "enableReorder": false,
+                "enableCopy": false,
+                "detailScreen": {
+                  "id": "screen-89323",
+                  "name": "detached-repeat-Group-detail-screen",
+                  "screenElements": [
+                    {
+                      "type": "ControlGrid",
+                      "id": "controlgrid-49ab1",
+                      "name": "cg",
+                      "row": [
+                        {
+                          "type": "Row",
+                          "id": "row-0337f",
+                          "cell": [
+                            {
+                              "type": "Control",
+                              "id": "control-38107",
+                              "label": {
+                                "type": "Multilingual",
+                                "multilingualText": {
+                                  "text": [
+                                    {
+                                      "locale": "en",
+                                      "text": "Field"
+                                    }
+                                  ]
+                                }
+                              },
+                              "elementRef": "F44"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "Row",
+                          "id": "row-c96fe",
+                          "cell": [
+                            {
+                              "type": "TextCell",
+                              "id": "textcell-679d7",
+                              "name": "text",
+                              "content": {
+                                "text": [
+                                  {
+                                    "locale": "en",
+                                    "text": "The commit button of the detached-repeat detail screens should only be \n<br/>\nenabled if the data on the screen changed."
+                                  }
+                                ]
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "DetachedRepeat",
+                      "id": "detachedrepeat-cbff5",
+                      "name": "detached-repeat-Group2",
+                      "title": {
+                        "type": "Multilingual",
+                        "multilingualText": {
+                          "text": [
+                            {
+                              "locale": "en",
+                              "text": "Nested Detached Repeat"
+                            }
+                          ]
+                        }
+                      },
+                      "repeatOverviewColumn": [
+                        {
+                          "type": "FieldBasedRepeatOverviewColumn",
+                          "id": "fieldbasedrepeatoverviewcolumn-7fc29",
+                          "width": 1,
+                          "sortable": false,
+                          "filterable": false,
+                          "preferredSorting": "ASC",
+                          "elementRef": "fieldimpl_1f3bb"
+                        }
+                      ],
+                      "groupRef": "groupimpl_a44ba",
+                      "enableAdd": true,
+                      "enableRemove": true,
+                      "enableReorder": false,
+                      "enableCopy": false,
+                      "detailScreen": {
+                        "id": "screen-b0d92",
+                        "name": "detached-repeat-Group2-detail-screen",
+                        "screenElements": [
+                          {
+                            "type": "ControlGrid",
+                            "id": "controlgrid-12054",
+                            "name": "cg",
+                            "row": [
+                              {
+                                "type": "Row",
+                                "id": "row-c80b8",
+                                "cell": [
+                                  {
+                                    "type": "Control",
+                                    "id": "control-72b0b",
+                                    "elementRef": "fieldimpl_1f3bb"
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "type": "Section",
+            "id": "section-4fa34",
+            "name": "sec2",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "Readonly state"
+                  }
+                ]
+              }
+            },
+            "screenElements": [
+              {
+                "type": "ButtonPanel",
+                "id": "buttonpanel-a522d",
+                "name": "bp2",
+                "title": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "Event Buttons"
+                      }
+                    ]
+                  }
+                },
+                "button": [
+                  {
+                    "type": "EVENT",
+                    "id": "button-19c0c",
+                    "name": "buttonAlwaysShownAndEnabled",
+                    "buttonStyling": {
+                      "label": {
+                        "type": "Multilingual",
+                        "multilingualText": {
+                          "text": [
+                            {
+                              "locale": "en",
+                              "text": "Button is always shown and enabled"
+                            }
+                          ]
+                        }
+                      },
+                      "priority": "SECONDARY"
+                    },
+                    "scope": "ALWAYS"
+                  },
+                  {
+                    "type": "EVENT",
+                    "id": "button-843ba",
+                    "name": "buttonShownInEditMode",
+                    "buttonStyling": {
+                      "label": {
+                        "type": "Multilingual",
+                        "multilingualText": {
+                          "text": [
+                            {
+                              "locale": "en",
+                              "text": "Button is only shown in edit mode"
+                            }
+                          ]
+                        }
+                      },
+                      "priority": "SECONDARY"
+                    },
+                    "scope": "HIDDEN_IN_READONLY_MODE"
+                  },
+                  {
+                    "type": "EVENT",
+                    "id": "button-3baa3",
+                    "name": "buttonShownInReadonlyMode",
+                    "buttonStyling": {
+                      "label": {
+                        "type": "Multilingual",
+                        "multilingualText": {
+                          "text": [
+                            {
+                              "locale": "en",
+                              "text": "Button is only shown in readonly mode"
+                            }
+                          ]
+                        }
+                      },
+                      "priority": "SECONDARY"
+                    },
+                    "scope": "HIDDEN_IN_EDIT_MODE"
+                  },
+                  {
+                    "type": "EVENT",
+                    "id": "button-38ecf",
+                    "name": "buttonDisabledInEditMode",
+                    "buttonStyling": {
+                      "label": {
+                        "type": "Multilingual",
+                        "multilingualText": {
+                          "text": [
+                            {
+                              "locale": "en",
+                              "text": "Button is disabled in edit mode"
+                            }
+                          ]
+                        }
+                      },
+                      "priority": "SECONDARY"
+                    },
+                    "scope": "DISABLED_IN_EDIT_MODE"
+                  },
+                  {
+                    "type": "EVENT",
+                    "id": "button-89af1",
+                    "name": "buttonDisabledInReadonlyMode",
+                    "buttonStyling": {
+                      "label": {
+                        "type": "Multilingual",
+                        "multilingualText": {
+                          "text": [
+                            {
+                              "locale": "en",
+                              "text": "Button is disabled in readonly mode"
+                            }
+                          ]
+                        }
+                      },
+                      "priority": "SECONDARY"
+                    },
+                    "scope": "DISABLED_IN_READONLY_MODE"
+                  }
+                ]
+              },
+              {
+                "type": "ButtonPanel",
+                "id": "buttonpanel-c9c93",
+                "name": "bp3",
+                "title": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "Navigation Buttons"
+                      }
+                    ]
+                  }
+                },
+                "button": [
+                  {
+                    "type": "NAVIGATION",
+                    "id": "button-9357e",
+                    "name": "navButtonAlwaysShownAndEnabled",
+                    "buttonStyling": {
+                      "label": {
+                        "type": "Multilingual",
+                        "multilingualText": {
+                          "text": [
+                            {
+                              "locale": "en",
+                              "text": "Button is always shown and enabled"
+                            }
+                          ]
+                        }
+                      },
+                      "priority": "SECONDARY"
+                    },
+                    "target": "screen1",
+                    "scope": "ALWAYS"
+                  },
+                  {
+                    "type": "NAVIGATION",
+                    "id": "button-96af0",
+                    "name": "navButtonShownInEditMode",
+                    "buttonStyling": {
+                      "label": {
+                        "type": "Multilingual",
+                        "multilingualText": {
+                          "text": [
+                            {
+                              "locale": "en",
+                              "text": "Button is only shown in edit mode"
+                            }
+                          ]
+                        }
+                      },
+                      "priority": "SECONDARY"
+                    },
+                    "target": "screen1",
+                    "scope": "HIDDEN_IN_READONLY_MODE"
+                  },
+                  {
+                    "type": "NAVIGATION",
+                    "id": "button-a845c",
+                    "name": "navButtonShownInReadonlyMode",
+                    "buttonStyling": {
+                      "label": {
+                        "type": "Multilingual",
+                        "multilingualText": {
+                          "text": [
+                            {
+                              "locale": "en",
+                              "text": "Button is only shown in readonly mode"
+                            }
+                          ]
+                        }
+                      },
+                      "priority": "SECONDARY"
+                    },
+                    "target": "screen1",
+                    "scope": "HIDDEN_IN_EDIT_MODE"
+                  },
+                  {
+                    "type": "NAVIGATION",
+                    "id": "button-f0d77",
+                    "name": "navButtonDisabledInEditMode",
+                    "buttonStyling": {
+                      "label": {
+                        "type": "Multilingual",
+                        "multilingualText": {
+                          "text": [
+                            {
+                              "locale": "en",
+                              "text": "Button is disabled in edit mode"
+                            }
+                          ]
+                        }
+                      },
+                      "priority": "SECONDARY"
+                    },
+                    "target": "screen1",
+                    "scope": "DISABLED_IN_EDIT_MODE"
+                  },
+                  {
+                    "type": "NAVIGATION",
+                    "id": "button-833b4",
+                    "name": "navButtonDisabledInReadonlyMode",
+                    "buttonStyling": {
+                      "label": {
+                        "type": "Multilingual",
+                        "multilingualText": {
+                          "text": [
+                            {
+                              "locale": "en",
+                              "text": "Button is disabled in readonly mode"
+                            }
+                          ]
+                        }
+                      },
+                      "priority": "SECONDARY"
+                    },
+                    "target": "screen1",
+                    "scope": "DISABLED_IN_READONLY_MODE"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "fieldConfiguration": {},
+    "groupConfiguration": {},
+    "defaults": {},
+    "detachedRepeatCommitButtonEnablement": "DISABLED"
+  }
+}

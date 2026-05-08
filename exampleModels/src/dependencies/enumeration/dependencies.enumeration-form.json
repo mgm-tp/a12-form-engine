@@ -1,0 +1,864 @@
+{
+  "header": {
+    "id": "dependencies.enumeration-form",
+    "modelType": "form",
+    "modelVersion": "37.4.0",
+    "locales": [
+      {
+        "code": "en"
+      },
+      {
+        "code": "de"
+      }
+    ],
+    "annotations": [
+      {
+        "name": "roles",
+        "value": "admin"
+      }
+    ],
+    "modelReferences": [
+      {
+        "alias": "DM",
+        "modelType": "document",
+        "purpose": "data binding",
+        "reference": "dependencies.enumeration-document"
+      }
+    ]
+  },
+  "content": {
+    "subHeaderBox": {
+      "id": "subHeaderBox"
+    },
+    "footerBox": {
+      "id": "footerBox"
+    },
+    "screens": [
+      {
+        "id": "dependentenumeration",
+        "name": "Dependent Enumeration Screen",
+        "screenElements": [
+          {
+            "type": "ControlGrid",
+            "id": "cg",
+            "name": "CG",
+            "layout": {
+              "lg": "6-6"
+            },
+            "row": [
+              {
+                "type": "Row",
+                "id": "cg-r1",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "c1",
+                    "offset": {
+                      "lg": 0
+                    },
+                    "elementRef": "id11197"
+                  },
+                  {
+                    "type": "Control",
+                    "id": "c2",
+                    "offset": {
+                      "lg": 0
+                    },
+                    "elementRef": "id11198"
+                  }
+                ]
+              },
+              {
+                "type": "Row",
+                "id": "row-8e28b",
+                "cell": [
+                  {
+                    "type": "ExpressionCell",
+                    "id": "expressioncell-a4f6d",
+                    "offset": {
+                      "lg": 0
+                    },
+                    "span": {
+                      "lg": 1
+                    },
+                    "name": "selectedBrand",
+                    "expression": "kontext(A12T_DependentEnumeration) {\n\n\t\tcase [Brand] = \"\" {\n\n             \"no brand selected\"\n\n        }\n\n        case [Brand] != \"\" {\n\n             [Brand]\n\n        }\n\n}",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "Selected Brand"
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "type": "ExpressionCell",
+                    "id": "expressioncell-b9413",
+                    "offset": {
+                      "lg": 0
+                    },
+                    "span": {
+                      "lg": 1
+                    },
+                    "name": "selectModel",
+                    "expression": "kontext(A12T_DependentEnumeration) {\n\t\tcase [Model] = \"\" {\n             \"no model selected\"\n        }\n        case [Model] != \"\" {\n             [Model]\n        }\n}",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "Selected Model"
+                          }
+                        ]
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "Row",
+                "id": "unaffected-cg-r1",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "unaffected-c1",
+                    "elementRef": "F1"
+                  }
+                ]
+              }
+            ],
+            "verticalAlignment": "BOTTOM"
+          },
+          {
+            "type": "DetachedRepeat",
+            "id": "detachedrepeat-347b7",
+            "name": "Repeat",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "Detached Repeat"
+                  }
+                ]
+              }
+            },
+            "repeatOverviewColumn": [
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-a47dd",
+                "elementRef": "id31999"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-18250",
+                "elementRef": "id32000"
+              }
+            ],
+            "groupRef": "K33",
+            "enableAdd": true,
+            "enableRemove": true,
+            "enableReorder": true,
+            "detailScreen": {
+              "id": "screen-402c8",
+              "name": "repeat-screen",
+              "screenElements": [
+                {
+                  "type": "ControlGrid",
+                  "id": "controlgrid-dd94a",
+                  "name": "CG",
+                  "layout": {
+                    "lg": "6-6"
+                  },
+                  "row": [
+                    {
+                      "type": "Row",
+                      "id": "row-213d9",
+                      "cell": [
+                        {
+                          "type": "Control",
+                          "id": "control-3b26e",
+                          "offset": {
+                            "lg": 0
+                          },
+                          "elementRef": "id31999"
+                        },
+                        {
+                          "type": "Control",
+                          "id": "control-2e406",
+                          "offset": {
+                            "lg": 0
+                          },
+                          "elementRef": "id32000"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "Row",
+                      "id": "row-092a4",
+                      "cell": [
+                        {
+                          "type": "ExpressionCell",
+                          "id": "expressioncell-e0894",
+                          "offset": {
+                            "lg": 0
+                          },
+                          "span": {
+                            "lg": 1
+                          },
+                          "name": "selected Brand",
+                          "expression": "case [Brand] = \"\" {\n\n             \"no brand selected\"\n\n        }\n\n        case [Brand] != \"\" {\n\n             [Brand]\n\n        }",
+                          "label": {
+                            "type": "Multilingual",
+                            "multilingualText": {
+                              "text": [
+                                {
+                                  "locale": "en",
+                                  "text": "Selected Brand"
+                                }
+                              ]
+                            }
+                          }
+                        },
+                        {
+                          "type": "ExpressionCell",
+                          "id": "expressioncell-b6832",
+                          "offset": {
+                            "lg": 0
+                          },
+                          "span": {
+                            "lg": 1
+                          },
+                          "name": "selectedModel",
+                          "expression": "case [Model] = \"\" {\n\n             \"no model selected\"\n\n        }\n\n        case [Model] != \"\" {\n\n             [Model]\n\n        }",
+                          "label": {
+                            "type": "Multilingual",
+                            "multilingualText": {
+                              "text": [
+                                {
+                                  "locale": "en",
+                                  "text": "Selected Model"
+                                }
+                              ]
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  ],
+                  "verticalAlignment": "BOTTOM"
+                }
+              ]
+            }
+          },
+          {
+            "type": "InlineRepeat",
+            "id": "irepeat",
+            "name": "Inline-Repeat",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "Inline Repeat"
+                  }
+                ]
+              }
+            },
+            "repeatOverviewColumn": [
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldOverviewColumn-3",
+                "elementRef": "id31999"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldOverviewColumn-4",
+                "elementRef": "id32000"
+              },
+              {
+                "type": "ExpressionRepeatOverviewColumn",
+                "id": "expressionrepeatoverviewcolumn-32e9d",
+                "label": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "Selected Brand"
+                      }
+                    ]
+                  }
+                },
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "name": "selectedBrand",
+                "expression": "case [Brand] = \"\" {\n\n\n\n             \"no brand selected\"\n\n\n\n        }\n\n\n\n        case [Brand] != \"\" {\n\n\n\n             [Brand]\n\n\n\n        }"
+              },
+              {
+                "type": "ExpressionRepeatOverviewColumn",
+                "id": "expressionrepeatoverviewcolumn-5eb34",
+                "label": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "Selected Model"
+                      }
+                    ]
+                  }
+                },
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "name": "selectedModel",
+                "expression": "case [Model] = \"\" {\n\n\n\n             \"no model selected\"\n\n\n\n        }\n\n\n\n        case [Model] != \"\" {\n\n\n\n             [Model]\n\n\n\n        }"
+              }
+            ],
+            "groupRef": "K33",
+            "enableAdd": true,
+            "enableRemove": true,
+            "enableReorder": true,
+            "enableCopy": false
+          },
+          {
+            "type": "EmbeddedRepeat",
+            "id": "embeddedrepeat-7553e",
+            "name": "Embedded-Repeat",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "Embedded Repeat"
+                  }
+                ]
+              }
+            },
+            "repeatOverviewColumn": [
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldOverviewColumn-1",
+                "elementRef": "id31999"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldOverviewColumn-2",
+                "elementRef": "id32000"
+              }
+            ],
+            "groupRef": "K33",
+            "enableAdd": true,
+            "enableRemove": true,
+            "enableReorder": true,
+            "enableCopy": false,
+            "controlGrid": {
+              "type": "ControlGrid",
+              "id": "controlgrid-b212c",
+              "name": "cg",
+              "row": [
+                {
+                  "type": "Row",
+                  "id": "row-1910d",
+                  "cell": [
+                    {
+                      "type": "ExpressionCell",
+                      "id": "expressioncell-cb715",
+                      "offset": {
+                        "lg": 0
+                      },
+                      "span": {
+                        "lg": 1
+                      },
+                      "name": "selected Brand",
+                      "expression": "case [Brand] = \"\" {\n\n             \"no brand selected\"\n\n        }\n\n        case [Brand] != \"\" {\n\n             [Brand]\n\n        }",
+                      "label": {
+                        "type": "Multilingual",
+                        "multilingualText": {
+                          "text": [
+                            {
+                              "locale": "en",
+                              "text": "Selected Brand"
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  ]
+                },
+                {
+                  "type": "Row",
+                  "id": "row-9287b",
+                  "cell": [
+                    {
+                      "type": "ExpressionCell",
+                      "id": "expressioncell-861f2",
+                      "offset": {
+                        "lg": 0
+                      },
+                      "span": {
+                        "lg": 1
+                      },
+                      "name": "selectedModel",
+                      "expression": "case [Model] = \"\" {\n\n             \"no model selected\"\n\n        }\n\n        case [Model] != \"\" {\n\n             [Model]\n\n        }",
+                      "label": {
+                        "type": "Multilingual",
+                        "multilingualText": {
+                          "text": [
+                            {
+                              "locale": "en",
+                              "text": "Selected Model"
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  ]
+                },
+                {
+                  "type": "Row",
+                  "id": "row-58734",
+                  "cell": [
+                    {
+                      "type": "Control",
+                      "id": "rc1",
+                      "offset": {
+                        "lg": 0
+                      },
+                      "elementRef": "id31999"
+                    }
+                  ]
+                },
+                {
+                  "type": "Row",
+                  "id": "row-2fb8f",
+                  "cell": [
+                    {
+                      "type": "Control",
+                      "id": "rc2",
+                      "offset": {
+                        "lg": 0
+                      },
+                      "elementRef": "id32000"
+                    }
+                  ]
+                }
+              ],
+              "verticalAlignment": "BOTTOM"
+            }
+          },
+          {
+            "type": "Section",
+            "id": "section-253ab",
+            "name": "Restricted",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "Restricted"
+                  }
+                ]
+              }
+            },
+            "screenElements": [
+              {
+                "type": "ControlGrid",
+                "id": "cg-r2",
+                "name": "CG",
+                "layout": {
+                  "lg": "12"
+                },
+                "row": [
+                  {
+                    "type": "Row",
+                    "id": "row-b6c8a",
+                    "cell": [
+                      {
+                        "type": "Control",
+                        "id": "control-bf59e",
+                        "elementRef": "F39"
+                      }
+                    ]
+                  }
+                ],
+                "verticalAlignment": "BOTTOM"
+              },
+              {
+                "type": "InlineRepeat",
+                "id": "inlinerepeat-3767e",
+                "name": "irRestricted",
+                "title": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "IR"
+                      }
+                    ]
+                  }
+                },
+                "repeatOverviewColumn": [
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-30be7",
+                    "width": 1,
+                    "sortable": false,
+                    "filterable": false,
+                    "preferredSorting": "ASC",
+                    "elementRef": "F40"
+                  }
+                ],
+                "groupRef": "G38",
+                "enableAdd": true,
+                "enableRemove": true,
+                "enableReorder": false,
+                "enableCopy": false
+              },
+              {
+                "type": "DetachedRepeat",
+                "id": "detachedrepeat-53e2a",
+                "name": "drRestricted",
+                "title": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "DR"
+                      }
+                    ]
+                  }
+                },
+                "repeatOverviewColumn": [
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-e381a",
+                    "width": 1,
+                    "sortable": false,
+                    "filterable": false,
+                    "preferredSorting": "ASC",
+                    "elementRef": "F40"
+                  }
+                ],
+                "groupRef": "G38",
+                "enableAdd": true,
+                "enableRemove": true,
+                "enableReorder": false,
+                "enableCopy": false,
+                "detailScreen": {
+                  "id": "screen-cf901",
+                  "name": "drRestricted-detail-screen",
+                  "screenElements": [
+                    {
+                      "type": "ControlGrid",
+                      "id": "controlgrid-bdbc1",
+                      "name": "cg",
+                      "row": [
+                        {
+                          "type": "Row",
+                          "id": "row-0b44c",
+                          "cell": [
+                            {
+                              "type": "Control",
+                              "id": "control-62771",
+                              "elementRef": "F40"
+                            }
+                          ]
+                        }
+                      ],
+                      "verticalAlignment": "BOTTOM"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "EmbeddedRepeat",
+                "id": "embeddedrepeat-0a6dc",
+                "name": "erRestricted",
+                "title": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "ER"
+                      }
+                    ]
+                  }
+                },
+                "repeatOverviewColumn": [
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-df98d",
+                    "width": 1,
+                    "sortable": false,
+                    "filterable": false,
+                    "preferredSorting": "ASC",
+                    "elementRef": "F40"
+                  }
+                ],
+                "groupRef": "G38",
+                "enableAdd": true,
+                "enableRemove": true,
+                "enableReorder": false,
+                "enableCopy": false,
+                "controlGrid": {
+                  "type": "ControlGrid",
+                  "id": "controlgrid-ae781",
+                  "name": "cg",
+                  "row": [
+                    {
+                      "type": "Row",
+                      "id": "row-b3a8a",
+                      "cell": [
+                        {
+                          "type": "Control",
+                          "id": "control-0ca92",
+                          "elementRef": "F40"
+                        }
+                      ]
+                    }
+                  ],
+                  "verticalAlignment": "BOTTOM"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "fieldConfiguration": {
+      "field": [
+        {
+          "exposition": "COMPACT",
+          "elementRef": "id11197"
+        },
+        {
+          "exposition": "COMPACT",
+          "elementRef": "id31999"
+        },
+        {
+          "exposition": "COMPACT",
+          "dependentEnumeration": {
+            "masterField": "id31999",
+            "constraint": [
+              {
+                "masterValue": "MERCEDES",
+                "constraintValues": [
+                  {
+                    "value": "MERCEDES_A_CLASS"
+                  },
+                  {
+                    "value": "MERCEDES_E_CLASS"
+                  }
+                ]
+              },
+              {
+                "masterValue": "TOYOTA",
+                "constraintValues": [
+                  {
+                    "value": "TOYOTA_COROLLA"
+                  },
+                  {
+                    "value": "TOYOTA_YARIS"
+                  }
+                ]
+              },
+              {
+                "masterValue": "VW",
+                "constraintValues": [
+                  {
+                    "value": "VW_GOLF"
+                  },
+                  {
+                    "value": "VW_UP"
+                  }
+                ],
+                "valueForMasterChange": "VW_UP"
+              }
+            ]
+          },
+          "elementRef": "id32000"
+        },
+        {
+          "exposition": "COMPACT",
+          "dependentEnumeration": {
+            "masterField": "F39",
+            "constraint": [
+              {
+                "masterValue": "MERCEDES",
+                "constraintValues": [
+                  {
+                    "value": "MERCEDES_A_CLASS"
+                  },
+                  {
+                    "value": "MERCEDES_E_CLASS"
+                  }
+                ]
+              },
+              {
+                "masterValue": "TOYOTA",
+                "constraintValues": [
+                  {
+                    "value": "TOYOTA_COROLLA"
+                  },
+                  {
+                    "value": "TOYOTA_YARIS"
+                  }
+                ]
+              },
+              {
+                "masterValue": "VW",
+                "constraintValues": [
+                  {
+                    "value": "VW_GOLF"
+                  },
+                  {
+                    "value": "VW_UP"
+                  }
+                ],
+                "valueForMasterChange": "VW_UP"
+              }
+            ]
+          },
+          "elementRef": "F40"
+        },
+        {
+          "exposition": "COMPACT",
+          "dependentEnumeration": {
+            "masterField": "id11197",
+            "constraint": [
+              {
+                "masterValue": "MERCEDES",
+                "constraintValues": [
+                  {
+                    "value": "MERCEDES_A_CLASS"
+                  },
+                  {
+                    "value": "MERCEDES_E_CLASS"
+                  }
+                ]
+              },
+              {
+                "masterValue": "TOYOTA",
+                "constraintValues": [
+                  {
+                    "value": "TOYOTA_COROLLA"
+                  },
+                  {
+                    "value": "TOYOTA_YARIS"
+                  }
+                ]
+              },
+              {
+                "masterValue": "VW",
+                "constraintValues": [
+                  {
+                    "value": "VW_GOLF"
+                  },
+                  {
+                    "value": "VW_UP"
+                  }
+                ],
+                "valueForMasterChange": "VW_UP"
+              }
+            ]
+          },
+          "elementRef": "id11198"
+        }
+      ]
+    },
+    "groupConfiguration": {},
+    "defaults": {
+      "buttonLabels": {
+        "ADD": {
+          "text": [
+            {
+              "locale": "en",
+              "text": "add"
+            }
+          ]
+        },
+        "APPLY": {
+          "text": [
+            {
+              "locale": "en",
+              "text": "apply changes"
+            }
+          ]
+        },
+        "EDIT": {
+          "text": [
+            {
+              "locale": "en",
+              "text": "edit"
+            }
+          ]
+        },
+        "REMOVE": {
+          "text": [
+            {
+              "locale": "en",
+              "text": "remove"
+            }
+          ]
+        },
+        "VIEW": {
+          "text": [
+            {
+              "locale": "en",
+              "text": "open"
+            }
+          ]
+        },
+        "CANCEL": {
+          "text": [
+            {
+              "locale": "en",
+              "text": "cancel"
+            }
+          ]
+        },
+        "RETURN": {
+          "text": [
+            {
+              "locale": "en",
+              "text": "return"
+            }
+          ]
+        },
+        "UP": {
+          "text": [
+            {
+              "locale": "en",
+              "text": "up"
+            }
+          ]
+        },
+        "DOWN": {
+          "text": [
+            {
+              "locale": "en",
+              "text": "down"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

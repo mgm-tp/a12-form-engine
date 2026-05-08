@@ -1,0 +1,155 @@
+{
+  "header": {
+    "id": "non-relevant-operand.test-fm",
+    "modelType": "form",
+    "modelVersion": "37.4.0",
+    "locales": [
+      {
+        "code": "en"
+      }
+    ],
+    "modelReferences": [
+      {
+        "alias": "non-relevant-operand.test-dm",
+        "modelType": "document",
+        "purpose": "data binding",
+        "reference": "non-relevant-operand.test-dm"
+      }
+    ]
+  },
+  "content": {
+    "subHeaderBox": {
+      "id": "subHeaderBox1"
+    },
+    "footerBox": {
+      "id": "footerBox1"
+    },
+    "screens": [
+      {
+        "id": "screen_3dfee",
+        "name": "Screen 1",
+        "screenElements": [
+          {
+            "type": "ControlGrid",
+            "id": "controlgrid_671bf",
+            "name": "cg",
+            "layout": {
+              "lg": "4-4-4"
+            },
+            "row": [
+              {
+                "type": "Row",
+                "id": "row_b133a",
+                "title": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "global trigger"
+                      }
+                    ]
+                  }
+                },
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control_6b67f",
+                    "elementRef": "field_cf39f"
+                  }
+                ]
+              },
+              {
+                "type": "Row",
+                "id": "row_98470",
+                "title": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "case: non-relevant field operand"
+                      }
+                    ]
+                  }
+                },
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control_eac45",
+                    "elementRef": "field_2b049"
+                  },
+                  {
+                    "type": "Control",
+                    "id": "control_dfe87",
+                    "elementRef": "field_e669a"
+                  }
+                ]
+              },
+              {
+                "type": "Row",
+                "id": "row_af7fc",
+                "title": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "case: non-relevant group operand"
+                      }
+                    ]
+                  }
+                },
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control_d5b13",
+                    "elementRef": "field_caa92"
+                  },
+                  {
+                    "type": "Control",
+                    "id": "control_6eb20",
+                    "elementRef": "field_15831"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "fieldConfiguration": {
+      "field": [
+        {
+          "dependentField": {
+            "masterField": "field_cf39f",
+            "case": [
+              {
+                "masterValue": "true",
+                "notRelevant": true
+              }
+            ]
+          },
+          "elementRef": "field_2b049"
+        }
+      ]
+    },
+    "groupConfiguration": {
+      "group": [
+        {
+          "dependentGroup": {
+            "masterField": "field_cf39f",
+            "case": [
+              {
+                "masterValue": "true",
+                "notRelevant": true
+              }
+            ]
+          },
+          "groupRef": "group_7d889"
+        }
+      ]
+    },
+    "defaults": {}
+  }
+}

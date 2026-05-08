@@ -1,0 +1,106 @@
+{
+  "header": {
+    "id": "LabelsLocales",
+    "modelType": "document",
+    "modelVersion": "28.4.0",
+    "locales": [
+      {
+        "code": "de"
+      },
+      {
+        "code": "en"
+      }
+    ],
+    "labels": [],
+    "annotations": [],
+    "modelReferences": []
+  },
+  "content": {
+    "modelInfo": {
+      "name": "LabelsLocales",
+      "immutable": false,
+      "joinedModelsInfo": "LabelsLocales-document-meta-data+Add"
+    },
+    "modelConfig": {
+      "decimalSeparator": ".",
+      "timeZone": "UTC",
+      "conditionLanguage": {
+        "code": "en_US"
+      }
+    },
+    "modelRoot": {
+      "rootGroups": [
+        {
+          "type": "Group",
+          "id": "group_26d9c",
+          "name": "Root",
+          "Group": {
+            "repeatability": 1,
+            "elements": [
+              {
+                "type": "Group",
+                "id": "group_e23c9",
+                "name": "GroupWithLabel",
+                "Group": {
+                  "label": [
+                    {
+                      "locale": "de",
+                      "text": "GroupLabel.de"
+                    },
+                    {
+                      "locale": "en",
+                      "text": "GroupLabel.en"
+                    }
+                  ],
+                  "repeatability": 1,
+                  "elements": [
+                    {
+                      "type": "Field",
+                      "id": "field_3910a",
+                      "name": "FieldWithLabel",
+                      "Field": {
+                        "fieldType": {
+                          "type": "StringType"
+                        },
+                        "label": [
+                          {
+                            "locale": "de",
+                            "text": "FieldLabel.de"
+                          },
+                          {
+                            "locale": "en",
+                            "text": "FieldLabel.en"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Group",
+                "id": "group_201d2",
+                "name": "GroupWithoutLabel",
+                "Group": {
+                  "repeatability": 1,
+                  "elements": [
+                    {
+                      "type": "Field",
+                      "id": "field_46e4b",
+                      "name": "FieldWithoutLabel",
+                      "Field": {
+                        "fieldType": {
+                          "type": "StringType"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

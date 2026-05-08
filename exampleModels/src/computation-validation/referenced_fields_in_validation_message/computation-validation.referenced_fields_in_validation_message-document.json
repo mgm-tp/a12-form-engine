@@ -1,0 +1,580 @@
+{
+  "header": {
+    "id": "computation-validation.referenced_fields_in_validation_message-document",
+    "modelType": "document",
+    "modelVersion": "28.4.0",
+    "locales": [
+      {
+        "code": "en"
+      }
+    ],
+    "labels": [],
+    "annotations": [
+      {
+        "name": "roles",
+        "value": "admin"
+      }
+    ],
+    "modelReferences": []
+  },
+  "content": {
+    "modelInfo": {
+      "name": "computation-validation.referenced_fields_in_validation_message-document",
+      "immutable": false
+    },
+    "modelConfig": {
+      "decimalSeparator": ".",
+      "timeZone": "UTC",
+      "conditionLanguage": {
+        "code": "en_US"
+      }
+    },
+    "modelRoot": {
+      "rootGroups": [
+        {
+          "type": "Group",
+          "id": "G2",
+          "name": "root",
+          "Group": {
+            "repeatability": 1,
+            "elements": [
+              {
+                "type": "Field",
+                "id": "F3",
+                "name": "F1",
+                "Field": {
+                  "fieldType": {
+                    "type": "StringType"
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "F1"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Field",
+                "id": "F4",
+                "name": "F2",
+                "Field": {
+                  "fieldType": {
+                    "type": "StringType"
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "F2"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Field",
+                "id": "F5",
+                "name": "F3",
+                "Field": {
+                  "fieldType": {
+                    "type": "StringType"
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "F3"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Rule",
+                "id": "R6",
+                "name": "R1",
+                "Rule": {
+                  "errorEntityRelPath": "../F1",
+                  "errorCode": "Error R1",
+                  "errorCondition": "FieldNotFilled(F1)",
+                  "severity": "ERROR",
+                  "errorMessage": [
+                    {
+                      "locale": "en",
+                      "text": "F1 is required."
+                    }
+                  ],
+                  "guiPatterns": {
+                    "dynamicEnumeration": "false"
+                  }
+                }
+              },
+              {
+                "type": "Rule",
+                "id": "R7",
+                "name": "R2",
+                "Rule": {
+                  "errorEntityRelPath": "../F2",
+                  "errorCode": "Error R2",
+                  "errorCondition": "(FieldFilled(F2) and FieldFilled(F3)) or (FieldNotFilled(F2) and FieldNotFilled(F3))",
+                  "severity": "ERROR",
+                  "errorMessage": [
+                    {
+                      "locale": "en",
+                      "text": "F2 xor F3 are required."
+                    }
+                  ],
+                  "guiPatterns": {
+                    "dynamicEnumeration": "false"
+                  }
+                }
+              },
+              {
+                "type": "Rule",
+                "id": "R13",
+                "name": "R5",
+                "Rule": {
+                  "errorEntityRelPath": "../repeat/nestedGroup/F4",
+                  "errorCode": "Error R5",
+                  "errorCondition": "RepetitionNotUnique(repeat/nestedGroup/F4)",
+                  "severity": "ERROR",
+                  "errorMessage": [
+                    {
+                      "locale": "en",
+                      "text": "F4 must be unique."
+                    }
+                  ],
+                  "guiPatterns": {
+                    "dynamicEnumeration": "false"
+                  }
+                }
+              },
+              {
+                "type": "Group",
+                "id": "G8",
+                "name": "repeat",
+                "Group": {
+                  "repeatability": 4,
+                  "elements": [
+                    {
+                      "type": "Group",
+                      "id": "group_d08ba",
+                      "name": "nestedGroup",
+                      "Group": {
+                        "repeatability": 1,
+                        "elements": [
+                          {
+                            "type": "Field",
+                            "id": "F9",
+                            "name": "F4",
+                            "Field": {
+                              "fieldType": {
+                                "type": "EnumerationType",
+                                "EnumerationType": {
+                                  "values": [
+                                    {
+                                      "value": "1",
+                                      "label": [
+                                        {
+                                          "locale": "en",
+                                          "text": "1"
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "value": "2",
+                                      "label": [
+                                        {
+                                          "locale": "en",
+                                          "text": "2"
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "value": "3",
+                                      "label": [
+                                        {
+                                          "locale": "en",
+                                          "text": "3"
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              },
+                              "label": [
+                                {
+                                  "locale": "en",
+                                  "text": "F4"
+                                }
+                              ]
+                            }
+                          },
+                          {
+                            "type": "Field",
+                            "id": "F14",
+                            "name": "F5",
+                            "Field": {
+                              "fieldType": {
+                                "type": "StringType"
+                              },
+                              "label": [
+                                {
+                                  "locale": "en",
+                                  "text": "F5"
+                                }
+                              ]
+                            }
+                          },
+                          {
+                            "type": "Field",
+                            "id": "F15",
+                            "name": "F6",
+                            "Field": {
+                              "fieldType": {
+                                "type": "StringType"
+                              },
+                              "label": [
+                                {
+                                  "locale": "en",
+                                  "text": "F6"
+                                }
+                              ]
+                            }
+                          },
+                          {
+                            "type": "Field",
+                            "id": "field_1def1",
+                            "name": "F7",
+                            "Field": {
+                              "fieldType": {
+                                "type": "StringType"
+                              },
+                              "label": [
+                                {
+                                  "locale": "en",
+                                  "text": "F7"
+                                }
+                              ]
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Rule",
+                      "id": "R11",
+                      "name": "R3",
+                      "Rule": {
+                        "errorEntityRelPath": "../nestedGroup/F4",
+                        "errorCode": "Error R3",
+                        "errorCondition": "GroupFilled(RuleGroup) and FieldNotFilled(nestedGroup/F4)",
+                        "severity": "ERROR",
+                        "errorMessage": [
+                          {
+                            "locale": "en",
+                            "text": "F4 is required."
+                          }
+                        ],
+                        "guiPatterns": {
+                          "dynamicEnumeration": "false"
+                        }
+                      }
+                    },
+                    {
+                      "type": "Rule",
+                      "id": "R16",
+                      "name": "R4",
+                      "Rule": {
+                        "errorEntityRelPath": "../nestedGroup/F5",
+                        "errorCode": "Error R4",
+                        "errorCondition": "GroupFilled(RuleGroup) and ((FieldFilled(nestedGroup/F5) and FieldFilled(nestedGroup/F6)) or (FieldNotFilled(nestedGroup/F5) and FieldNotFilled(nestedGroup/F6)))",
+                        "severity": "ERROR",
+                        "errorMessage": [
+                          {
+                            "locale": "en",
+                            "text": "F5 xor F6 are required."
+                          }
+                        ],
+                        "guiPatterns": {
+                          "dynamicEnumeration": "false"
+                        }
+                      }
+                    },
+                    {
+                      "type": "Rule",
+                      "id": "rule_1ca89",
+                      "name": "R6",
+                      "Rule": {
+                        "errorEntityRelPath": "../nestedGroup/F7",
+                        "errorCode": "Error rule_1ca89",
+                        "errorCondition": "GroupFilled(RuleGroup) and ((FieldFilled(nestedGroup/F7) and [nestedGroup/F7] != \"test\") or (FieldFilled(nestedGroup/F6) and [nestedGroup/F6] != \"test\"))",
+                        "severity": "ERROR",
+                        "errorMessage": [
+                          {
+                            "locale": "en",
+                            "text": "F6 or F7 should have the value \"test\". (Value F6: $F6.value$, Value F7: $F7.value$)"
+                          }
+                        ],
+                        "guiPatterns": {
+                          "dynamicEnumeration": "false"
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Group",
+                "id": "group_3a4ac",
+                "name": "repeat2",
+                "Group": {
+                  "repeatability": 4,
+                  "elements": [
+                    {
+                      "type": "Field",
+                      "id": "field_52706",
+                      "name": "N1",
+                      "Field": {
+                        "fieldType": {
+                          "type": "NumberType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "N1"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Rule",
+                      "id": "rule_89ad0",
+                      "name": "R7",
+                      "Rule": {
+                        "errorEntityRelPath": "../N1",
+                        "errorCode": "Error rule_89ad0",
+                        "errorCondition": "FieldFilled(N1) and [N1] < 42",
+                        "severity": "ERROR",
+                        "errorMessage": [
+                          {
+                            "locale": "en",
+                            "text": "$N1.value$ < 42"
+                          }
+                        ],
+                        "guiPatterns": {
+                          "dynamicEnumeration": "false"
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Group",
+                "id": "groupimpl_ab7dc",
+                "name": "repeat3",
+                "Group": {
+                  "repeatability": 4,
+                  "elements": [
+                    {
+                      "type": "Group",
+                      "id": "groupimpl_be2c5",
+                      "name": "nestedGroup",
+                      "Group": {
+                        "repeatability": 1,
+                        "elements": [
+                          {
+                            "type": "Field",
+                            "id": "fieldimpl_9e8b6",
+                            "name": "F8",
+                            "Field": {
+                              "fieldType": {
+                                "type": "StringType"
+                              },
+                              "label": [
+                                {
+                                  "locale": "en",
+                                  "text": "F8"
+                                }
+                              ]
+                            }
+                          },
+                          {
+                            "type": "Group",
+                            "id": "groupimpl_44e2b",
+                            "name": "nestedRepeat",
+                            "Group": {
+                              "repeatability": 4,
+                              "elements": [
+                                {
+                                  "type": "Group",
+                                  "id": "groupimpl_859ba",
+                                  "name": "nestedNestedGroup1",
+                                  "Group": {
+                                    "repeatability": 1,
+                                    "elements": [
+                                      {
+                                        "type": "Field",
+                                        "id": "fieldimpl_ffe1c",
+                                        "name": "N2",
+                                        "Field": {
+                                          "fieldType": {
+                                            "type": "NumberType"
+                                          },
+                                          "label": [
+                                            {
+                                              "locale": "en",
+                                              "text": "N2"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      {
+                                        "type": "Rule",
+                                        "id": "ruleimpl_b609b",
+                                        "name": "R8",
+                                        "Rule": {
+                                          "errorEntityRelPath": "../N2",
+                                          "errorCode": "Error rule_afedb",
+                                          "errorCondition": "FieldFilled(N2) and [N2] < 42",
+                                          "severity": "ERROR",
+                                          "errorMessage": [
+                                            {
+                                              "locale": "en",
+                                              "text": "$N2.value$ < 42"
+                                            }
+                                          ],
+                                          "guiPatterns": {
+                                            "dynamicEnumeration": "false"
+                                          }
+                                        }
+                                      }
+                                    ]
+                                  }
+                                },
+                                {
+                                  "type": "Group",
+                                  "id": "groupimpl_13650",
+                                  "name": "nestedNestedGroup2",
+                                  "Group": {
+                                    "repeatability": 1,
+                                    "elements": [
+                                      {
+                                        "type": "Field",
+                                        "id": "fieldimpl_9f0ca",
+                                        "name": "N3",
+                                        "Field": {
+                                          "fieldType": {
+                                            "type": "NumberType"
+                                          },
+                                          "label": [
+                                            {
+                                              "locale": "en",
+                                              "text": "N3"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      {
+                                        "type": "Rule",
+                                        "id": "ruleimpl_4c3c3",
+                                        "name": "R9",
+                                        "Rule": {
+                                          "errorEntityRelPath": "../N3",
+                                          "errorCode": "Error rule_dcdf0",
+                                          "errorCondition": "GroupFilled(RuleGroup) and FieldFilled(N3)",
+                                          "severity": "WARNING",
+                                          "errorMessage": [
+                                            {
+                                              "locale": "en",
+                                              "text": "$N3.value$"
+                                            }
+                                          ],
+                                          "guiPatterns": {
+                                            "dynamicEnumeration": "false"
+                                          }
+                                        }
+                                      }
+                                    ]
+                                  }
+                                }
+                              ]
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Group",
+                "id": "group_b37cf",
+                "name": "repeat4",
+                "Group": {
+                  "repeatability": 4,
+                  "elements": [
+                    {
+                      "type": "Field",
+                      "id": "field_caa26",
+                      "name": "F8",
+                      "Field": {
+                        "fieldType": {
+                          "type": "StringType"
+                        }
+                      }
+                    },
+                    {
+                      "type": "Group",
+                      "id": "group_e68b6",
+                      "name": "nestedRepeat",
+                      "Group": {
+                        "repeatability": 4,
+                        "elements": [
+                          {
+                            "type": "Field",
+                            "id": "field_ae796",
+                            "name": "N4",
+                            "Field": {
+                              "fieldType": {
+                                "type": "NumberType"
+                              },
+                              "label": [
+                                {
+                                  "locale": "en",
+                                  "text": "N4"
+                                }
+                              ]
+                            }
+                          },
+                          {
+                            "type": "Rule",
+                            "id": "rule_dcdf0",
+                            "name": "R9",
+                            "Rule": {
+                              "errorEntityRelPath": "../N4",
+                              "errorCode": "Error rule_dcdf0",
+                              "errorCondition": "GroupFilled(RuleGroup) and FieldFilled(N4)",
+                              "severity": "WARNING",
+                              "errorMessage": [
+                                {
+                                  "locale": "en",
+                                  "text": "$N4.value$"
+                                }
+                              ],
+                              "guiPatterns": {
+                                "dynamicEnumeration": "false"
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

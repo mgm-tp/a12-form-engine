@@ -1,0 +1,40 @@
+{
+	"version": "0.2.0",
+	"configurations": [
+		{
+			"type": "node",
+			"request": "launch",
+			"name": "Debug Tests",
+			"program": "${workspaceFolder}/scripts/mocha/runner.js",
+			"args": [
+				"-i",
+				"./lib/test/**/*.@(test|spec).js",
+				"--allowOnly",
+				"--colors",
+				"--timeout=0",
+				"--reporter",
+				".mocha-dev-reporter.json"
+			],
+			"resolveSourceMapLocations": [
+				"${workspaceFolder}/lib/**",
+				"${workspaceFolder}/../node_modules/.pnpm/@com.mgmtp.a12*/**"
+			],
+			// set to "true" to force usage of productive components - only
+			// works for ...Async render functions!
+			"env": {
+				"DISABLE_MOCK_COMPONENTS": "false"
+			}
+		},
+		{
+			// this config is used by Mocha Test Explorer (when running tests via sidebar)
+			"type": "node",
+			"request": "attach",
+			"name": "mocha-explorer-debug-config",
+			"continueOnAttach": true,
+			"resolveSourceMapLocations": [
+				"${workspaceFolder}/lib/**",
+				"${workspaceFolder}/../node_modules/.pnpm/@com.mgmtp.a12*/**"
+			]
+		}
+	]
+}

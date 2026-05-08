@@ -1,0 +1,95 @@
+////
+SPDX-License-Identifier: EUPL-1.2 OR LicenseRef-commercial
+
+Copyright (c) 2012-2026 mgm technology partners GmbH
+
+Dual License
+------------
+This source file is part of the mgm A12 Platform and available under
+a choice of two different licenses:
+
+1. Open-Source License – EUPL v1.2
+   You may redistribute and/or modify this file under the terms of the
+   European Union Public License, version 1.2 - see https://eupl.eu/.
+
+2. Commercial License
+   Alternatively, you may obtain a commercial license from
+   mgm technology partners GmbH, that permits use of this software
+   under different terms (including support and maintenance services).
+
+   Please contact a12-license@mgm-tp.com for more information.
+
+You must select and comply with exactly one of the above license options.
+
+Warranty Disclaimer (applies to either option)
+----------------------------------------------
+THIS SOFTWARE IS PROVIDED "AS IS" AND WITHOUT WARRANTY OF ANY KIND,
+WHETHER EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NON-INFRINGEMENT, EXCEPT WHERE SUCH DISCLAIMERS ARE HELD TO BE
+LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
+////
+
+[#form-engine_tutorials_button_enablement]
+= Custom Enablement for Event, Navigation and Row Action Buttons
+
+The Form Engine provides two maps to configure the enablement of event, navigation and Row Action buttons. The maps can be set via the `enablements` property in the `Config` object of the engine. Refer to <<form-engine_tutorials_configuration_options, Modifying the configuration options>> to see how this `Config` property can be modified and passed to the engine.
+
+The following sections will describe the structure of the maps and show some examples.
+
+== Enablement Map for Event and Navigation Buttons
+The structure of the enablement map for event and navigation buttons looks like this:
+[source,tsx]
+----
+{
+	[buttonName]: {
+		disabled?: boolean
+		hidden?: boolean
+	}
+}
+----
+
+The "buttonName" defines the name of the button for which the enablement should be set. This name needs to be unique in one Form Model otherwise all buttons with this name will get the defined enablement.
+The button will be disabled (hidden), if "disabled" ("hidden") is set to true and enabled (visible) if "disabled" ("hidden") is set to false.
+If nothing is defined for a button, then the engine logic will take place, which will for example:
+
+* disable buttons if the engine is disabled
+* hide buttons if the engine is readonly and the button scope in the model is set to "HIDDEN_IN_READONLY_MODE"
+
+The custom enablement logic will always win over the engine logic.
+
+The map should only be recalculated if values are changed which affect the outcome of the map. Furthermore you should only list these buttons for which you need a different enablement than the default behavior would create, to prevent the maps of becoming too big.
+The following code shows an example of the creation and adaption of such a map.
+The button "Submit" in this example should only be enabled if the engine is dirty.
+
+[source,tsx]
+----
+include::assets/typescript/form-engine/tutorials/button-enablement/event-button-enablement.tsx[tags=engine]
+----
+
+=== Enablement Map for Row Action Buttons
+
+The structure of the enablement map for Row Action buttons looks like this:
+[source,tsx]
+----
+{
+	[repeatName]: {
+		[event]: {
+			[rowIndex]: {
+				disabled?: boolean
+				hidden?: boolean
+			}
+
+		}
+	}
+}
+----
+
+The "repeatName" defines the name of the Repeat for which the enablement for Row Action buttons should be set.
+"Event" is the name of the event, for which the enablement should be set.
+An enablement can be set for the whole Repeat, by setting the rowIndex to 0
+or for one certain row by setting the rowIndex to the number of the row.
+Mind that the row index follows the Kernel logic, where the first row has the index 1.
+The specification of an enablement for one certain row (rowIndex > 0) will always overrule any specification made for the whole Repeat (rowIndex=0).
+
+You can also set the enablement for the default Row Action buttons (delete, copy, move, edit/view). The event names for them are defined in the enumeration `DefaultRepeatButtonNames`.

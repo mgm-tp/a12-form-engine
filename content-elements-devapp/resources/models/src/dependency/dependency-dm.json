@@ -1,0 +1,345 @@
+{
+  "header": {
+    "id": "dependency-dm",
+    "modelType": "document",
+    "modelVersion": "28.4.0",
+    "locales": [
+      {
+        "code": "en"
+      }
+    ],
+    "labels": [],
+    "annotations": [],
+    "modelReferences": []
+  },
+  "content": {
+    "modelInfo": {
+      "name": "dependency-dm",
+      "immutable": false
+    },
+    "modelConfig": {
+      "timeZone": "UTC",
+      "decimalSeparator": ".",
+      "conditionLanguage": {
+        "code": "en_US"
+      }
+    },
+    "modelRoot": {
+      "rootGroups": [
+        {
+          "type": "Group",
+          "id": "group_7bb8a",
+          "name": "dependency",
+          "Group": {
+            "repeatability": 1,
+            "elements": [
+              {
+                "type": "Group",
+                "id": "group_88911",
+                "name": "field",
+                "Group": {
+                  "repeatability": 1,
+                  "elements": [
+                    {
+                      "type": "Field",
+                      "id": "field_36430",
+                      "name": "triggerSetValue",
+                      "Field": {
+                        "fieldType": {
+                          "type": "BooleanType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "triggerSetValue"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_ae8e6",
+                      "name": "triggerNotRelevant",
+                      "Field": {
+                        "fieldType": {
+                          "type": "ConfirmType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "triggerNotRelevant"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_288cd",
+                      "name": "dependentField",
+                      "Field": {
+                        "fieldType": {
+                          "type": "StringType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "dependent field"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_794b7",
+                      "name": "dependentField2",
+                      "Field": {
+                        "fieldType": {
+                          "type": "StringType",
+                          "StringType": {
+                            "minLength": 3
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "dependent field 2"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Group",
+                "id": "group_221e2",
+                "name": "group",
+                "Group": {
+                  "repeatability": 1,
+                  "elements": [
+                    {
+                      "type": "Field",
+                      "id": "field_d1b14",
+                      "name": "trigger",
+                      "Field": {
+                        "fieldType": {
+                          "type": "ConfirmType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "triggerNotRelevant"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Group",
+                      "id": "group_4f9a3",
+                      "name": "depGroup",
+                      "Group": {
+                        "repeatability": 10,
+                        "elements": [
+                          {
+                            "type": "Field",
+                            "id": "field_c2fd8",
+                            "name": "sampleField",
+                            "Field": {
+                              "fieldType": {
+                                "type": "StringType"
+                              },
+                              "label": [
+                                {
+                                  "locale": "en",
+                                  "text": "sample field"
+                                }
+                              ]
+                            }
+                          },
+                          {
+                            "type": "Field",
+                            "id": "field_6c691",
+                            "name": "sampleField2",
+                            "Field": {
+                              "fieldType": {
+                                "type": "StringType"
+                              },
+                              "label": [
+                                {
+                                  "locale": "en",
+                                  "text": "sample field 2"
+                                }
+                              ]
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Group",
+                "id": "group_61154",
+                "name": "enum",
+                "Group": {
+                  "repeatability": 1,
+                  "elements": [
+                    {
+                      "type": "Field",
+                      "id": "field_e13f6",
+                      "name": "proteinSource",
+                      "Field": {
+                        "fieldType": {
+                          "type": "EnumerationType",
+                          "EnumerationType": {
+                            "values": [
+                              {
+                                "value": "meat",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "meat"
+                                  }
+                                ]
+                              },
+                              {
+                                "value": "seafood",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "seafood"
+                                  }
+                                ]
+                              },
+                              {
+                                "value": "plant",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "plant"
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "protein source"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_d6416",
+                      "name": "food",
+                      "Field": {
+                        "fieldType": {
+                          "type": "EnumerationType",
+                          "EnumerationType": {
+                            "values": [
+                              {
+                                "value": "beef",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "beef"
+                                  }
+                                ]
+                              },
+                              {
+                                "value": "pork",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "pork"
+                                  }
+                                ]
+                              },
+                              {
+                                "value": "lamb",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "lamb"
+                                  }
+                                ]
+                              },
+                              {
+                                "value": "shrimp",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "shrimp"
+                                  }
+                                ]
+                              },
+                              {
+                                "value": "tuna",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "tuna"
+                                  }
+                                ]
+                              },
+                              {
+                                "value": "salmon",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "salmon"
+                                  }
+                                ]
+                              },
+                              {
+                                "value": "soy",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "soy"
+                                  }
+                                ]
+                              },
+                              {
+                                "value": "wheat",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "wheat"
+                                  }
+                                ]
+                              },
+                              {
+                                "value": "pea",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "pea"
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "food"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

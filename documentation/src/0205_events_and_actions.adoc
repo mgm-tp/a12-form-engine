@@ -1,0 +1,172 @@
+////
+SPDX-License-Identifier: EUPL-1.2 OR LicenseRef-commercial
+
+Copyright (c) 2012-2026 mgm technology partners GmbH
+
+Dual License
+------------
+This source file is part of the mgm A12 Platform and available under
+a choice of two different licenses:
+
+1. Open-Source License – EUPL v1.2
+   You may redistribute and/or modify this file under the terms of the
+   European Union Public License, version 1.2 - see https://eupl.eu/.
+
+2. Commercial License
+   Alternatively, you may obtain a commercial license from
+   mgm technology partners GmbH, that permits use of this software
+   under different terms (including support and maintenance services).
+
+   Please contact a12-license@mgm-tp.com for more information.
+
+You must select and comply with exactly one of the above license options.
+
+Warranty Disclaimer (applies to either option)
+----------------------------------------------
+THIS SOFTWARE IS PROVIDED "AS IS" AND WITHOUT WARRANTY OF ANY KIND,
+WHETHER EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NON-INFRINGEMENT, EXCEPT WHERE SUCH DISCLAIMERS ARE HELD TO BE
+LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
+////
+
+[#form-engine_events_and_actions]
+= Form Engine Actions
+
+UI Events, triggered by an interaction of the user with the UI, are processed in the `DispatchConfiguration`, which dispatches an Event Action for each UI Event.
+The `DispatchConfiguration` can be customized by connecting the view in the `mapDispatchToProps` method. In this way it is possible to overwrite the default behavior by dispatching custom actions or adapting the payload of an existing Event Action.
+
+== Commands and Events
+
+[#form-engine_events_and_actions_events]
+=== Events
+
+All UI Events trigger the dispatching of a Redux action. The behavior, which gets triggered by these events, can be changed by registering custom middlewares, when the store is created.
+
+The following table describes what each actions does in the Form-Engine and what user interaction leads to the action. For a detailed description, including the specific payloads, please refer to the 
+link:assets/typedoc/modules/back-end_store.Events.html[API documentation].
+
+[cols="1,1,1"]
+|===
+|Action|Description|Dispatched by
+
+3+|*Events*
+|valueChange|triggers validations, dependencies/computations and updates the document|submitting of most inputs, except for attachments, multi-selects and multi file uploads
+|parseError|updates the validation messages|all inputs after the Conversion-API reports a parse error
+|attachmentValueChange|same as "Events.valueChange", but for attachments|Events.Attachments.uploadAttachments
+|multiSelectValueChange|same as "Events.valueChange", but for multi-selects|submitting of multi-select inputs
+|navigationButton|changes screens after a successful validation|a navigation button click
+|eventButton|no usage, lets users react to button clicks|Events.eventButtonTriggered
+|eventButtonTriggered|dispatches "Events.eventButton" after a successful validation|an event button click
+|inputTouched|updates the dirty state|most inputs after a input was modified, but not submitted
+|collapseSection|expand/collapse a section|a collapsible section click
+3+|*Events.Attachments*
+|downloadAttachment|triggers the download of an attachment|the attachment input, the "download" repeat row event, inline or embedded repeat with the "multiFileUpload" property
+|cancelUploadAttachments|cancels an ongoing attachment upload|the attachment input, inline or embedded repeat with the "multiFileUpload" property
+|uploadAttachments|upload an attachment|the attachment input, inline or embedded repeat with the "multiFileUpload" property
+3+|*Events.Repeat*
+|leaveDetachedRepeatRow|restores the previous screen when leaving a detached repeat|the cancel or commit button in a detached repeat detail screen
+|closeEmbeddedRepeatRow|closes the expanded row, adds it to the repeat and potentially validates, based on MiddlewareOption.disableRepeatValidationOnLeaving|the close button in an expanded row in an embedded repeat
+|leaveRepeatRow|restores the repeat state and potentially validates, based on MiddlewareOption.disableRepeatValidationOnLeaving|an inline or embedded repeat row losing focus and the focus remaining inside the repeat
+|leaveRepeatTable|restores the repeat state and potentially validates, based on MiddlewareOption.disableRepeatValidationOnLeaving|an inline or embedded repeat losing focus
+|addRow|adds a row, sets initial values, triggers computation and validation|the repeat add button
+|enterRow|opens the detached repeat screen or expands the row after creating a backup|the edit button on a row in a detached or embedded repeat
+|changeColumnWidth|updates the column width state|a change in the width of a resizable column
+|removeRow|removes a row, triggers computation and validation|the remove button on a row
+|moveRowTriggered|moves a row by a fixed delta in a repeat|the move-up or move-down button on a row
+|cloneRowTriggered|copies a row, triggers computation and validation|the copy button on a row
+|changePage|switches to a new page in the repeat|a new page being selected
+|sortingChange|sets the sorting state of a repeat|a click on the column header
+|showFilter|opens the filter menu of a repeat|the filter button
+|filterValueChange|updates the filter value for a specific column|a submit of the filter inputs
+|filterParseError|marks the filter inputs with an error|filters after the Conversion-API reports a parse error
+|clearFilters|clears all filter inputs|the clear filter button
+|customRowAction|no usage, lets users react to button clicks|a custom row action button
+|multiFileUpload|same as "Events.valueChange", but for multi file upload repeat|inline or embedded repeat with the "multiFileUpload" property
+3+|*Events.CorrectionMode*
+|revalidate|triggers a full validation|the validate button
+|exitCorrectionMode|restores the old screen from the backup|the exit button
+|goToElement|shows the relevant screen and focuses the element|a link to an issue, the goToIssue button in the quick-access-menu
+3+|*Events.CorrectionMode.CorrectionView*
+|show|shows a detailed overview over all issues|the expand/collapse button in the quick-access-menu
+|showDetails|expand/collapse the details view for an issue|the show/hide details button
+3+|*Events.CorrectionMode.ValidationBar*
+|expand|expand/collapse the issue in the validation bar|the expand/collapse message
+|showMessage|sets the message to be shown in the validation bar|the message pagination button
+|===
+
+[#form-engine_events_and_actions_commands]
+=== Commands
+
+All changes to the state are also triggered by Redux actions. However, it is not recommended to listen to these actions directly. What Commands are dispatched at what time and in what order is considered
+an implementation detail and may change any time in a non-breaking way. The more robust way to react to state changes - especially data (document) changes - is to directly compare states.
+
+It is possible to register custom reducers to take care about how information is stored. But be aware that the Form Engine components always need the store in a special structure to be able to render!
+
+The following table shows an overview of all Commands. For a detailed description, including the specific payloads, please refer to the 
+link:assets/typedoc/modules/back-end_store.Commands.html[API documentation].
+
+[cols="1,1,1"]
+|===
+|Action|Description|State Change
+
+3+|*Commands*
+|setDocument|sets the current document|"document" in the "data" slice
+|setMessageState|localizes and sets all validation messages|"messages" in the "ui" slice
+|setMessageStateEntry|sets a validation message for a specific element identified by a document path|"messages" at "path" in the "ui" slice
+|setSectionsCollapsed|sets collapsed state of all sections|"sectionState" in the "ui" slice
+|setLocationStack|sets all screen locations at once|"screenLocation" in the "ui" slice
+|changeScreen|change to a screen by name|"screenLocation" and "repeatStaticState" in the "ui" slice
+|changeScreenState|change any UI state of a specific screen identified by an index|"screenLocation" at "index" in the "ui" slice
+|setDisabled|disable the UI|"disabled" in the "ui" slice
+|setReadonly|set the UI to readonly|"readonly" in the "ui" slice
+|setDataDirty|set the data dirty|"dirty" in the "ui" slice
+|setUIDirty|set the UI dirty|"dirty" in the "ui" slice
+|setColumnWidth|sets the width of a specific column identified by a model path|"columnWidths" at "path" in the "ui" slice
+|setLocale|sets the locale|"locale" in the root state
+|setModels|sets all models|"models" in the root state
+|pushBackup|fills the backup with a document/validation messages|"backup" in the "ui" slice
+|dropBackup|drops the backup|"backup" in the "ui" slice
+|validateFull|performs a full validation|<<whyNotEvent,^[1]^>>
+|validatePart|performs a partial validation|<<whyNotEvent,^[1]^>>
+|pushScreen|pushes a screen and its repeat state onto a stack|"screenLocation" and "repeatStaticState" in the "ui" slice
+|dropScreen|drops the current screen from the stack|"screenLocation" in the "ui" slice
+|changeRepeatStaticStateEntry|sets the data-independent state of a specific repeat identified by a model path|"repeatStaticState" at "path" in the "ui" slice
+|changeRepeatInstanceStateEntry|sets the data-related state of a specific repeat identified by a model path|"repeatInstanceState" at "path" in the "ui" slice
+|setRepeatStaticState|sets the whole data-independent state of all repeats|"repeatStaticState" in the "ui" slice
+3+|*Commands.CorrectionMode*
+|setValidationBarState|sets the messages and UI state of the validation bar|"validationBar" in the "ui" slice
+|setCorrectionScreenState|sets the UI state of the correction screen|"correctionScreen" in the "ui" slice
+|setCorrectionModeBackup|backup the screen state before entering the correction mode|"correctionModeBackup" in the "ui" slice
+|restoreCorrectionModeBackup|restore the correction mode backup|almost all properties in the "ui" slice
+|===
+
+[horizontal]
+[[whyNotEvent]]^1^::
+The line between Commands/Events is blurred here. They are implemented in middlewares, have side effects and do not modify state directly. But they
+are also not linked to specific UI events.
+
+== Client Actions
+The commands and events are specific to the engine and aren't aware of the context it belongs to.
+This can be a problem when multiple instances of an engine are required, resulting in conflict between instances.
+Therefore, the `FormEngineActions` namespace exists to allow adding context to the core's events and commands, e.g. `activityId` and other Client's related information.
+
+The action FormEngineActions.event is used to wrap events while the action FormEngineActions.command is used to wrap commands.
+
+== Dispatch an Engine Action
+In a usual A12 application, the engine runtime will not be able to react if only a bare event or command action is dispatched.
+Those events or commands, which can be seen on Redux Devtool, are usually nested in a Client action. To add these wrapper actions,
+you can also adapt the default dispatch with the adapter functions `FormEngineActions.dispatchAdapterFactory` (events) and `FormEngineActions.commandDispatch` (commands).
+
+[source,tsx]
+----
+include::assets/typescript/form-engine/events_and_actions/dispatch.tsx[tags=dispatchExample]
+----
+
+== Listen to an Engine Action
+Similarly, to handle an event dispatched by the engine, it is necessary to assert the Client action before checking the event, as follows:
+
+[source,tsx]
+----
+include::assets/typescript/form-engine/events_and_actions/listen.tsx[tags=listenExample]
+----

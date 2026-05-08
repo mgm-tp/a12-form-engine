@@ -1,0 +1,248 @@
+{
+  "header": {
+    "id": "customization.custom-input-form",
+    "modelType": "form",
+    "modelVersion": "37.4.0",
+    "locales": [
+      {
+        "code": "en"
+      },
+      {
+        "code": "de"
+      }
+    ],
+    "annotations": [
+      {
+        "name": "roles",
+        "value": "admin"
+      }
+    ],
+    "modelReferences": [
+      {
+        "alias": "DM",
+        "modelType": "document",
+        "purpose": "data binding",
+        "reference": "customization.custom-input-document"
+      }
+    ]
+  },
+  "content": {
+    "subHeaderBox": {
+      "id": "subHeaderBox1"
+    },
+    "footerBox": {
+      "id": "footerBox1"
+    },
+    "screens": [
+      {
+        "id": "screen1",
+        "name": "Screen1",
+        "screenElements": [
+          {
+            "type": "ControlGrid",
+            "id": "controlgrid-f91d6",
+            "name": "cg0",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "Information"
+                  },
+                  {
+                    "locale": "de",
+                    "text": "Information"
+                  }
+                ]
+              }
+            },
+            "row": [
+              {
+                "type": "Row",
+                "id": "row-291a8",
+                "cell": [
+                  {
+                    "type": "TextCell",
+                    "id": "textcell-80e1d",
+                    "name": "text1",
+                    "content": {
+                      "text": [
+                        {
+                          "locale": "en",
+                          "text": "This model uses a custom FormModelMap together with a custom WidgetMap to render a custom string input that is right-aligned and changes its input to uppercase.\n<br/>\nThe code uses some helper functions which are available in the form-engine to render the input.\n<br/>\nYou can check out the code of the devapp to see how the implementation looks like."
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            ],
+            "verticalAlignment": "TOP"
+          },
+          {
+            "type": "ControlGrid",
+            "id": "controlgrid-954a7",
+            "name": "cg1",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "Custom input"
+                  }
+                ]
+              }
+            },
+            "row": [
+              {
+                "type": "Row",
+                "id": "row-c7b5d",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control-23f69",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "String Field with a placeholder"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "Zeichenketten Feld mit einem Platzhalter"
+                          }
+                        ]
+                      }
+                    },
+                    "elementRef": "field_116f8"
+                  }
+                ]
+              },
+              {
+                "type": "Row",
+                "id": "row-50139",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control-57221",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "String Field with validation message box"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "Zeichenketten Feld mit Validierungs Message Box"
+                          }
+                        ]
+                      }
+                    },
+                    "elementRef": "field_b5edc"
+                  }
+                ]
+              },
+              {
+                "type": "Row",
+                "id": "row-64504",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control-73275",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "String Field with validation tooltips"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "Zeichenketten Feld mit validation tooltips"
+                          }
+                        ]
+                      }
+                    },
+                    "messageExposition": "TOOLTIP",
+                    "elementRef": "field_99a57"
+                  }
+                ]
+              },
+              {
+                "type": "Row",
+                "id": "row-be7be",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control-20366",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "String Field with a hint"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "Zeichenketten Feld mit einem Hinweis"
+                          }
+                        ]
+                      }
+                    },
+                    "hint": {
+                      "text": [
+                        {
+                          "locale": "en",
+                          "text": "This is a hint"
+                        },
+                        {
+                          "locale": "de",
+                          "text": "Dies ist ein Hinweis"
+                        }
+                      ]
+                    },
+                    "elementRef": "field_38798"
+                  }
+                ]
+              }
+            ],
+            "verticalAlignment": "TOP"
+          }
+        ]
+      }
+    ],
+    "fieldConfiguration": {
+      "field": [
+        {
+          "placeholder": {
+            "text": [
+              {
+                "locale": "en",
+                "text": "Only uppercase possible"
+              },
+              {
+                "locale": "de",
+                "text": "Nur Großbuchstaben möglich"
+              }
+            ]
+          },
+          "elementRef": "field_116f8"
+        },
+        {
+          "hint": {},
+          "elementRef": "field_38798"
+        }
+      ]
+    },
+    "groupConfiguration": {},
+    "defaults": {}
+  }
+}

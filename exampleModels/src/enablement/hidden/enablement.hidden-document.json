@@ -1,0 +1,213 @@
+{
+  "header": {
+    "id": "enablement.hidden-document",
+    "modelType": "document",
+    "modelVersion": "28.4.0",
+    "locales": [
+      {
+        "code": "en"
+      }
+    ],
+    "labels": [],
+    "annotations": [
+      {
+        "name": "roles",
+        "value": "admin"
+      }
+    ],
+    "modelReferences": []
+  },
+  "content": {
+    "modelInfo": {
+      "name": "enablement.hidden-document",
+      "immutable": false
+    },
+    "modelConfig": {
+      "decimalSeparator": ".",
+      "timeZone": "UTC",
+      "conditionLanguage": {
+        "code": "en_US"
+      }
+    },
+    "modelRoot": {
+      "rootGroups": [
+        {
+          "type": "Group",
+          "id": "group_f0981",
+          "name": "base",
+          "Group": {
+            "repeatability": 1,
+            "elements": [
+              {
+                "type": "Field",
+                "id": "field_2d182",
+                "name": "BooleanField",
+                "Field": {
+                  "fieldType": {
+                    "type": "BooleanType"
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "BooleanField"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Field",
+                "id": "field_f5b15",
+                "name": "StringField",
+                "Field": {
+                  "fieldType": {
+                    "type": "StringType"
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "StringField"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Field",
+                "id": "field_68171",
+                "name": "StringField2",
+                "Field": {
+                  "fieldType": {
+                    "type": "StringType"
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "StringField2"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Group",
+                "id": "group_1a20f",
+                "name": "rep",
+                "Group": {
+                  "repeatability": 100,
+                  "elements": [
+                    {
+                      "type": "Field",
+                      "id": "field_9cb45",
+                      "name": "DateField",
+                      "Field": {
+                        "fieldType": {
+                          "type": "DateType",
+                          "DateType": {
+                            "format": "yyyy-MM-dd"
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "DateField"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_603c9",
+                      "name": "NumberField",
+                      "Field": {
+                        "fieldType": {
+                          "type": "NumberType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "NumberField"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_1ac62",
+                      "name": "EnumField",
+                      "Field": {
+                        "fieldType": {
+                          "type": "EnumerationType",
+                          "EnumerationType": {
+                            "values": [
+                              {
+                                "value": "a",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "A"
+                                  }
+                                ]
+                              },
+                              {
+                                "value": "b",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "B"
+                                  }
+                                ]
+                              },
+                              {
+                                "value": "c",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "C"
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "EnumField"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Group",
+                      "id": "group_4cf07",
+                      "name": "nested_rep",
+                      "Group": {
+                        "repeatability": 10,
+                        "elements": [
+                          {
+                            "type": "Field",
+                            "id": "field_e3711",
+                            "name": "StringField3",
+                            "Field": {
+                              "fieldType": {
+                                "type": "StringType"
+                              },
+                              "label": [
+                                {
+                                  "locale": "en",
+                                  "text": "StringField3"
+                                }
+                              ]
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

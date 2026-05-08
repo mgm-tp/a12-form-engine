@@ -1,0 +1,64 @@
+buildscript {
+    dependencies {
+        classpath a12Libs.build.utilities
+    }
+}
+
+plugins {
+    id 'java'
+}
+
+import com.mgmtp.a12.devtools.gradle.plugins.buildutils.tasks.LeadingBuildTask
+
+dependencies {
+    testImplementation platform(a12Libs.dataservices.bom)
+
+    testImplementation a12Libs.base.model.api
+    testImplementation fileTree('../form-model/build/libs') {
+        builtBy ':form-model:build'
+        include 'form-model-*.jar'
+        exclude '*-sources.jar'
+    }
+    testImplementation libs.jackson.core
+    testImplementation libs.jackson.databind
+    testImplementation libs.testng
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
+}
+
+tasks.register('copyTestModels', Copy) {
+    from('../migrationTool/testdata/migration') {
+        exclude '**/*invalid*'
+    }
+    into layout.buildDirectory.dir("models")
+}
+
+tasks.register('executeMigration', LeadingBuildTask) {
+    dependsOn(tasks.named('copyTestModels'), tasks.named('assemble'))
+    doLast {
+        execCommandLine 'node', '../migrationTool/lib/main/cli.js', copyTestModels.destinationDir.path, '--force', '--no-validate-schema'
+    }
+}
+
+tasks.register('onlyRunSerializationIntegrationTest', Test) {
+    group = 'development'
+
+    /**
+     * Task will be initialized immediately,
+     * therefore we have to exclude the exclusion if the task is not run directly
+     */
+    if (gradle.startParameter.taskNames.contains('onlyRunSerializationIntegrationTest')) {
+        gradle.startParameter.excludedTaskNames += ':form-model:build'
+    }
+    reports.html.required = false
+    useTestNG() { useDefaultListeners() }
+}
+
+test {
+    dependsOn(tasks.named('executeMigration'))
+    reports.html.required = false
+    useTestNG() { useDefaultListeners() }
+}

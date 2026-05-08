@@ -1,0 +1,256 @@
+{
+  "header": {
+    "id": "customization.custom-button-enablements-document",
+    "modelType": "document",
+    "modelVersion": "28.4.0",
+    "locales": [
+      {
+        "code": "en"
+      },
+      {
+        "code": "de"
+      }
+    ],
+    "labels": [],
+    "annotations": [
+      {
+        "name": "roles",
+        "value": "admin"
+      }
+    ],
+    "modelReferences": []
+  },
+  "content": {
+    "modelInfo": {
+      "name": "customization.custom-button-enablements-document",
+      "immutable": false
+    },
+    "modelConfig": {
+      "decimalSeparator": ".",
+      "timeZone": "UTC",
+      "conditionLanguage": {
+        "code": "en_US"
+      }
+    },
+    "modelRoot": {
+      "rootGroups": [
+        {
+          "type": "Group",
+          "id": "group_828e2",
+          "name": "root",
+          "Group": {
+            "repeatability": 1,
+            "elements": [
+              {
+                "type": "Field",
+                "id": "field_77045",
+                "name": "name",
+                "Field": {
+                  "fieldType": {
+                    "type": "StringType"
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "Name"
+                    },
+                    {
+                      "locale": "de",
+                      "text": "Name"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Field",
+                "id": "field_91c46",
+                "name": "birthday",
+                "Field": {
+                  "fieldType": {
+                    "type": "DateType",
+                    "DateType": {
+                      "format": "yyyy-MM-dd"
+                    }
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "Birthday"
+                    },
+                    {
+                      "locale": "de",
+                      "text": "Geburtstag"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Field",
+                "id": "field_794cb",
+                "name": "children",
+                "externalDescription": [
+                  {
+                    "locale": "en",
+                    "text": "Needs to be checked in order to enable the Children nav button."
+                  },
+                  {
+                    "locale": "de",
+                    "text": "Muss angeklickt sein um den Kinder nav button zu enablen."
+                  }
+                ],
+                "Field": {
+                  "fieldType": {
+                    "type": "BooleanType"
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "children"
+                    },
+                    {
+                      "locale": "de",
+                      "text": "Kinder"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Group",
+                "id": "group_a3e5c",
+                "name": "addresses",
+                "Group": {
+                  "repeatability": 10,
+                  "elements": [
+                    {
+                      "type": "Field",
+                      "id": "field_6d08f",
+                      "name": "street",
+                      "Field": {
+                        "fieldType": {
+                          "type": "StringType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "Street"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "Straße"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_38816",
+                      "name": "houseNumber",
+                      "Field": {
+                        "fieldType": {
+                          "type": "NumberType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "Number"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "Nummer"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_794ce",
+                      "name": "dataComplete",
+                      "externalDescription": [
+                        {
+                          "locale": "en",
+                          "text": "Needs to be checked in order to enable the commit button."
+                        },
+                        {
+                          "locale": "de",
+                          "text": "Muss angeklickt sein um den Commit button zu enablen"
+                        }
+                      ],
+                      "Field": {
+                        "fieldType": {
+                          "type": "BooleanType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "Data complete and correct?"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "Daten vollständig und korrekt?"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Group",
+                "id": "group_a3204",
+                "name": "children_group",
+                "Group": {
+                  "repeatability": 1000,
+                  "elements": [
+                    {
+                      "type": "Field",
+                      "id": "field_3defd",
+                      "name": "name",
+                      "Field": {
+                        "fieldType": {
+                          "type": "StringType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "name"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "Name"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_71cc6",
+                      "name": "birthday",
+                      "Field": {
+                        "fieldType": {
+                          "type": "DateType",
+                          "DateType": {
+                            "format": "yyyy-MM-dd"
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "birthday"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "Geburtstag"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

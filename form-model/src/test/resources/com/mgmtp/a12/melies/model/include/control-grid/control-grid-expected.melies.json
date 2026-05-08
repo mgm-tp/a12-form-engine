@@ -1,0 +1,124 @@
+{
+  "header": {
+    "id": "control-grid-include.melies",
+    "modelType": "form",
+    "modelVersion": "37.4.0",
+    "locales": [
+      {
+        "code": "en"
+      }
+    ],
+    "modelReferences": [
+      {
+        "alias": "DM",
+        "modelType": "document",
+        "purpose": "data binding",
+        "reference": "control-grid-include.picus"
+      }
+    ]
+  },
+  "content": {
+    "subHeaderBox": {
+      "id": "subHeaderBox1"
+    },
+    "footerBox": {
+      "id": "footerBox1"
+    },
+    "screens": [
+      {
+        "id": "screen1",
+        "name": "Screen1",
+        "screenElements": [
+          {
+            "type": "ControlGrid",
+            "id": "controlgrid-2f318",
+            "name": "host-control-grid",
+            "layout": {
+              "lg": "3-3-3"
+            },
+            "row": [
+              {
+                "type": "Row",
+                "id": "row-1b0d7",
+                "name": "row-1",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control-7befe",
+                    "offset": {
+                      "lg": 1
+                    },
+                    "elementRef": "field_6b43b"
+                  }
+                ]
+              }
+            ],
+            "verticalAlignment": "TOP"
+          },
+          {
+            "type": "ControlGrid",
+            "id": "controlgrid-55a0e_controlgrid-430cf",
+            "name": "include-a-cg",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "Included Control Grid"
+                  }
+                ]
+              }
+            },
+            "layout": {
+              "lg": "6-6"
+            },
+            "includeId": "controlgrid-55a0e",
+            "formModelRef": "control-grid.melies",
+            "hostDocumentModelPath": "",
+            "row": [
+              {
+                "type": "Row",
+                "id": "controlgrid-55a0e_row-b76ec",
+                "name": "row-1",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "controlgrid-55a0e_control-d4bc2",
+                    "elementRef": "include_f4f58_field_6b43b"
+                  },
+                  {
+                    "type": "Control",
+                    "id": "controlgrid-55a0e_control-c3482",
+                    "elementRef": "include_f4f58_field_0c7eb"
+                  }
+                ]
+              },
+              {
+                "type": "Row",
+                "id": "controlgrid-55a0e_row-be592",
+                "name": "row-2",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "controlgrid-55a0e_control-6465e",
+                    "elementRef": "include_f4f58_field_db4dc"
+                  },
+                  {
+                    "type": "Control",
+                    "id": "controlgrid-55a0e_control-54b51",
+                    "elementRef": "include_f4f58_field_194ed"
+                  }
+                ]
+              }
+            ],
+            "verticalAlignment": "TOP"
+          }
+        ]
+      }
+    ],
+    "fieldConfiguration": {},
+    "groupConfiguration": {},
+    "defaults": {}
+  }
+}

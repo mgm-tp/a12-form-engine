@@ -1,0 +1,94 @@
+{
+  "header": {
+    "id": "issue-in-included-model.included-dm",
+    "modelType": "document",
+    "modelVersion": "28.4.0",
+    "locales": [
+      {
+        "code": "en"
+      }
+    ],
+    "annotations": [],
+    "modelReferences": []
+  },
+  "content": {
+    "modelInfo": {
+      "name": "issue-in-included-model.included-dm",
+      "immutable": false,
+      "joinedModelsInfo": "included-dm-document-meta-data+Add"
+    },
+    "modelConfig": {
+      "decimalSeparator": ".",
+      "timeZone": "UTC",
+      "conditionLanguage": {
+        "code": "en_US"
+      }
+    },
+    "modelRoot": {
+      "rootGroups": [
+        {
+          "type": "Group",
+          "id": "group_b4a17",
+          "name": "fieldOperand",
+          "Group": {
+            "repeatability": 1,
+            "elements": [
+              {
+                "type": "Field",
+                "id": "field_ac56b",
+                "name": "operand",
+                "Field": {
+                  "fieldType": {
+                    "type": "StringType"
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "operand"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Field",
+                "id": "field_83e85",
+                "name": "result",
+                "Field": {
+                  "fieldType": {
+                    "type": "StringType"
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "result"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Computation",
+                "id": "computation_8b5e8",
+                "name": "computeResult",
+                "Computation": {
+                  "computedFieldRelPath": "../result",
+                  "computationAlternatives": [
+                    {
+                      "operation": "\"operand is filled with: \" + [operand]",
+                      "precondition": "FieldFilled(operand)"
+                    }
+                  ],
+                  "errorMessage": [
+                    {
+                      "locale": "en",
+                      "text": "error text for computation of computeResult"
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

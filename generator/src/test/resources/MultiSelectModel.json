@@ -1,0 +1,82 @@
+{
+  "header": {
+    "id": "MultiSelectModel",
+    "modelType": "document",
+    "modelVersion": "28.4.0",
+    "locales": [
+      {
+        "code": "en"
+      }
+    ],
+    "labels": [],
+    "annotations": [],
+    "modelReferences": []
+  },
+  "content": {
+    "modelInfo": {
+      "name": "MultiSelectModel",
+      "immutable": false
+    },
+    "modelConfig": {
+      "decimalSeparator": ".",
+      "timeZone": "UTC",
+      "conditionLanguage": {
+        "code": "en_US"
+      }
+    },
+    "modelRoot": {
+      "rootGroups": [
+        {
+          "type": "Group",
+          "id": "group_93098",
+          "name": "TopLevelMultiSelect",
+          "Group": {
+            "repeatability": 999999,
+            "usageType": "multi-select",
+            "elements": [
+              {
+                "type": "Field",
+                "id": "field_cf51c",
+                "name": "value",
+                "Field": {
+                  "fieldType": {
+                    "type": "EnumerationType",
+                    "EnumerationType": {
+                      "values": [
+                        {
+                          "value": "a",
+                          "label": []
+                        },
+                        {
+                          "value": "b",
+                          "label": []
+                        },
+                        {
+                          "value": "c",
+                          "label": []
+                        },
+                        {
+                          "value": "d",
+                          "label": []
+                        }
+                      ]
+                    }
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": ""
+                    }
+                  ],
+                  "requirednessConfig": {
+                    "mode": "absoluteOrRelativeToNextRepAncestor"
+                  }
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

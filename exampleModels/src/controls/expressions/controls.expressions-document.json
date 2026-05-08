@@ -1,0 +1,272 @@
+{
+  "header": {
+    "id": "controls.expressions-document",
+    "modelType": "document",
+    "modelVersion": "28.4.0",
+    "locales": [
+      {
+        "code": "en"
+      },
+      {
+        "code": "de"
+      }
+    ],
+    "labels": [],
+    "annotations": [
+      {
+        "name": "roles",
+        "value": "admin"
+      }
+    ],
+    "modelReferences": []
+  },
+  "content": {
+    "modelInfo": {
+      "name": "controls.expressions-document",
+      "immutable": false
+    },
+    "modelConfig": {
+      "decimalSeparator": ".",
+      "timeZone": "UTC",
+      "conditionLanguage": {
+        "code": "en_US"
+      }
+    },
+    "modelRoot": {
+      "rootGroups": [
+        {
+          "type": "Group",
+          "id": "G2",
+          "name": "RootGroup",
+          "Group": {
+            "repeatability": 1,
+            "elements": [
+              {
+                "type": "Group",
+                "id": "G10",
+                "name": "ContactGroup",
+                "Group": {
+                  "repeatability": 10,
+                  "elements": [
+                    {
+                      "type": "Field",
+                      "id": "F6",
+                      "name": "Name",
+                      "Field": {
+                        "fieldType": {
+                          "type": "StringType"
+                        },
+                        "label": [
+                          {
+                            "locale": "de",
+                            "text": "Vorname"
+                          },
+                          {
+                            "locale": "en",
+                            "text": "Name"
+                          }
+                        ],
+                        "requirednessConfig": {
+                          "mode": "absoluteOrRelativeToNextRepAncestor"
+                        }
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "F5",
+                      "name": "Surname",
+                      "Field": {
+                        "fieldType": {
+                          "type": "StringType"
+                        },
+                        "label": [
+                          {
+                            "locale": "de",
+                            "text": "Nachname"
+                          },
+                          {
+                            "locale": "en",
+                            "text": "Surname"
+                          }
+                        ],
+                        "requirednessConfig": {
+                          "mode": "absoluteOrRelativeToNextRepAncestor"
+                        }
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "F18",
+                      "name": "Gender",
+                      "Field": {
+                        "fieldType": {
+                          "type": "EnumerationType",
+                          "EnumerationType": {
+                            "values": [
+                              {
+                                "value": "w",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "Female"
+                                  },
+                                  {
+                                    "locale": "de",
+                                    "text": "Weiblich"
+                                  }
+                                ]
+                              },
+                              {
+                                "value": "m",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "Male"
+                                  },
+                                  {
+                                    "locale": "de",
+                                    "text": "Männlich"
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "de",
+                            "text": "Geschlecht"
+                          },
+                          {
+                            "locale": "en",
+                            "text": "Gender"
+                          }
+                        ],
+                        "requirednessConfig": {
+                          "mode": "absoluteOrRelativeToNextRepAncestor"
+                        }
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_456ac",
+                      "name": "Married",
+                      "Field": {
+                        "fieldType": {
+                          "type": "BooleanType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "Married"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "Verheiratet"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "F17",
+                      "name": "ShowCosts",
+                      "Field": {
+                        "fieldType": {
+                          "type": "BooleanType"
+                        },
+                        "label": [
+                          {
+                            "locale": "de",
+                            "text": "Zeige Kosten"
+                          },
+                          {
+                            "locale": "en",
+                            "text": "Show costs"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "F7",
+                      "name": "Costs",
+                      "Field": {
+                        "fieldType": {
+                          "type": "NumberType"
+                        },
+                        "label": [
+                          {
+                            "locale": "de",
+                            "text": "Kosten"
+                          },
+                          {
+                            "locale": "en",
+                            "text": "Costs"
+                          }
+                        ],
+                        "requirednessConfig": {
+                          "mode": "absoluteOrRelativeToNextRepAncestor"
+                        }
+                      }
+                    },
+                    {
+                      "type": "Group",
+                      "id": "G11",
+                      "name": "Children",
+                      "externalDescription": [
+                        {
+                          "locale": "de",
+                          "text": "Kinder"
+                        },
+                        {
+                          "locale": "en",
+                          "text": "Children"
+                        }
+                      ],
+                      "internalDescription": [
+                        {
+                          "locale": "de",
+                          "text": "Kinder"
+                        },
+                        {
+                          "locale": "en",
+                          "text": "Children"
+                        }
+                      ],
+                      "Group": {
+                        "repeatability": 100,
+                        "elements": [
+                          {
+                            "type": "Field",
+                            "id": "F14",
+                            "name": "Name",
+                            "Field": {
+                              "fieldType": {
+                                "type": "StringType"
+                              },
+                              "label": [
+                                {
+                                  "locale": "de",
+                                  "text": "Name"
+                                },
+                                {
+                                  "locale": "en",
+                                  "text": "Name"
+                                }
+                              ]
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

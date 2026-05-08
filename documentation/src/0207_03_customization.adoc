@@ -1,0 +1,132 @@
+////
+SPDX-License-Identifier: EUPL-1.2 OR LicenseRef-commercial
+
+Copyright (c) 2012-2026 mgm technology partners GmbH
+
+Dual License
+------------
+This source file is part of the mgm A12 Platform and available under
+a choice of two different licenses:
+
+1. Open-Source License – EUPL v1.2
+   You may redistribute and/or modify this file under the terms of the
+   European Union Public License, version 1.2 - see https://eupl.eu/.
+
+2. Commercial License
+   Alternatively, you may obtain a commercial license from
+   mgm technology partners GmbH, that permits use of this software
+   under different terms (including support and maintenance services).
+
+   Please contact a12-license@mgm-tp.com for more information.
+
+You must select and comply with exactly one of the above license options.
+
+Warranty Disclaimer (applies to either option)
+----------------------------------------------
+THIS SOFTWARE IS PROVIDED "AS IS" AND WITHOUT WARRANTY OF ANY KIND,
+WHETHER EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NON-INFRINGEMENT, EXCEPT WHERE SUCH DISCLAIMERS ARE HELD TO BE
+LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
+////
+
+[#form-engine_integration_client_customization]
+= Customization
+
+This section will describe the different possibilities to customize the Form Engine inside the Client. It is recommended to read the chapter about <<form-engine_integration_client_form_engine_and_activities,the interaction of activities and the Form Engine>> before.
+
+== Read-only Form Engine
+One often required customization of the Form Engine is to use it in a static read-only mode, where only read-only operations can be performed in the form.
+
+This can be achieved most easily by providing a pre-initialized ui slice (`{ uiState: { readonly: true } }`) to the `slices` property in the payload of the `create` Redux action, when creating a new activity. Alternatively, you could set readonly in the ui state in the `mapStateToProps` mapping, when connecting the Form Engine component yourself.
+
+When the form activity is already present, you can achieve the same thing by dispatching a `setReadonly` Redux action after the Form Engine activity was created.
+
+See <<form-engine_integration_client_customization_connecting-a-custom-view,Connecting a Custom View>> for more details.
+
+== View
+
+[#form-engine_integration_client_customization_customizing-the-standard-view]
+=== Customizing the Standard View
+
+The standard view can be customized via props. The props consist of the `View` props as for every view and in addition the Form Engine `Config` props.
+
+The `View` props are the standard view props, containing the activity id. The `Config` props come from the Form Engine and include properties like `cardView`, `timeMode` or `enablements`. Please refer to the link:assets/typedoc/index.html[API Documentation] for further information.
+
+Via the `Config` props you can also provide custom implementations of the `FormModelMap` and `WidgetMap`. This enables you to use custom Widgets. You can find more information about this in the Section <<form-engine_tutorials_rendering, Rendering>>.
+
+The following code shows a customization example:
+
+[source,tsx]
+----
+include::assets/typescript/form-engine/customization/view.tsx[tags=additionalOptionsExample,indent=0]
+----
+
+[#form-engine_integration_client_customization_initial-ui-slice]
+=== Initial UI Slice
+
+Another high-level way to customize the Form Engine view is to create the Form Engine activity with a pre-initialized ui state. This can be achieved by providing an initial `ui` slice to the `slices` property of the `create` action payload.
+
+[WARNING]
+====
+It is not necessary to use the createUIState function from the Form Engine in order to set initial values for the ui state, because it is not necessary to provide the entire ui state. If the createUIState function is used, you need to provide a non-empty screenLocation. Otherwise, an error will be thrown by the Form Engine.
+====
+
+Or you could modify the `slices` property in a DataReducer for the Form Engine activity default DataHolder.
+
+In this ui slice values for the Form Engine's `EngineStore.UIState` properties can be provided. With this, you can e.g. set the Form Engine to disabled or readonly, or you can modify the collapsed state of collapsible sections. You could even change the initial screen location, i.e. show the detail screen of a detached repeat as the initial screen. See the link:assets/typedoc/index.html[API Documentation] for all available properties.
+
+Creating the Form Engine activity with the action shown in the following example would give you an initially disabled Form Engine:
+
+[source,tsx]
+----
+include::assets/typescript/form-engine/tutorials/connect-form-engine/initialUISlice.ts[tags="createAction",indent=0]
+----
+
+[#form-engine_integration_client_customization_connecting-a-custom-view]
+=== Connecting a Custom View
+
+This section describes how you can connect the Form Engine by yourself.
+When you connect the Form Engine you can use the unconnected `FormEngineViews.FormEngineTpl` component as a basis.
+
+The Client stores the needed information for the Form Engine in a different structure in the state than the Form Engine requires it. When connecting the Form Engine, you need to map the Client state to the engine state with a `mapStateToProps` mapping.
+
+In a `mapDispatchToProps` mapping the UI events occurring in the Form Engine need to be mapped to the respective redux actions.
+
+To connect the component, which means creating and using the mapped props, two helper functions are provided:
+
+* `FormEngineStateAdapter.mapStateToProps` to map the state props.
+* `FormEngineActions.mapDispatchToProps` to map the dispatch props. This function internally already uses a dispatch adapter which takes an event-action from the Form Engine and creates a Client wrapper action which includes the activity id next to the event-action.
+
+Connecting is only necessary if you want to adjust the mapping of state props or if you want to adjust the handling of UI events.
+
+==== Complete Example
+
+The following code shows an example of how to connect your Form Engine.
+
+In this example the ui state of the Form Engine is statically set to readonly and the payload of the `Events.navigationButton` is adapted so that the validation property is always "full", independent of the information from the Form Model.
+
+[NOTE]
+====
+When using validation, the versions of the generated validation code and the validation runtime must match, see link:/docs/kernel/kernel-documentation-dev/index.html#_getting_started_using_code_generated_by_kernel_at_runtime[Getting Started Using Code Generated By Kernel At Runtime].
+====
+
+[source,tsx]
+----
+include::assets/typescript/form-engine/tutorials/connect-form-engine/connectExample.tsx[tags=content]
+----
+
+=== Config
+
+Whether you connect your Form Engine component yourself or use the already connected one, you can always also adjust the `Config` props, like it is described <<form-engine_integration_client_customization_customizing-the-standard-view, here>>.
+
+=== ActivityContext
+
+The Client API provides an ActivityContext which can be used to propagate the id of a view's activity within a custom view component.
+
+The Form Engine views provided by the Client library set this context internally, making it available for customizations.
+
+[#form-engine_integration_client_customization_middlewares-or-sagas]
+== Middlewares or Sagas
+
+You can register custom middlewares and sagas in your application which react to actions coming from the Form Engine. As the Client always wraps these actions into a `FormEngineAction`, you need to match them first and then match the original action.

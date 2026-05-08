@@ -1,0 +1,326 @@
+{
+  "header": {
+    "id": "table-dm",
+    "modelType": "document",
+    "modelVersion": "28.4.0",
+    "locales": [
+      {
+        "code": "en"
+      }
+    ],
+    "labels": [],
+    "annotations": [],
+    "modelReferences": []
+  },
+  "content": {
+    "modelInfo": {
+      "name": "table-dm",
+      "immutable": false
+    },
+    "modelConfig": {
+      "timeZone": "UTC",
+      "decimalSeparator": ".",
+      "conditionLanguage": {
+        "code": "en_US"
+      }
+    },
+    "modelRoot": {
+      "rootGroups": [
+        {
+          "type": "Group",
+          "id": "group_6f6fb",
+          "name": "table",
+          "Group": {
+            "repeatability": 1,
+            "elements": [
+              {
+                "type": "Group",
+                "id": "group_3db43",
+                "name": "weatherData",
+                "Group": {
+                  "repeatability": 10,
+                  "elements": [
+                    {
+                      "type": "Field",
+                      "id": "field_2ca8a",
+                      "name": "date",
+                      "Field": {
+                        "fieldType": {
+                          "type": "DateType",
+                          "DateType": {
+                            "format": "yyyy-MM-dd"
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "date"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_123e7",
+                      "name": "temperatureLow",
+                      "Field": {
+                        "fieldType": {
+                          "type": "NumberType",
+                          "NumberType": {
+                            "minValue": -273,
+                            "maxValue": 100
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "temperatureLow"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_7bbfc",
+                      "name": "temperatureHigh",
+                      "Field": {
+                        "fieldType": {
+                          "type": "NumberType",
+                          "NumberType": {
+                            "minValue": -273,
+                            "maxValue": 100
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "temperatureHigh"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Group",
+                      "id": "group_ad0af",
+                      "name": "precipitation",
+                      "Group": {
+                        "repeatability": 999999,
+                        "usageType": "multi-select",
+                        "elements": [
+                          {
+                            "type": "Field",
+                            "id": "field_7662b",
+                            "name": "value",
+                            "Field": {
+                              "fieldType": {
+                                "type": "EnumerationType",
+                                "EnumerationType": {
+                                  "values": [
+                                    {
+                                      "value": "rain",
+                                      "label": [
+                                        {
+                                          "locale": "en",
+                                          "text": "rain"
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "value": "snow",
+                                      "label": [
+                                        {
+                                          "locale": "en",
+                                          "text": "snow"
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "value": "hail",
+                                      "label": [
+                                        {
+                                          "locale": "en",
+                                          "text": "hail"
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "value": "fog",
+                                      "label": [
+                                        {
+                                          "locale": "en",
+                                          "text": "fog"
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "value": "dew",
+                                      "label": [
+                                        {
+                                          "locale": "en",
+                                          "text": "dew"
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              },
+                              "label": [
+                                {
+                                  "locale": "en",
+                                  "text": "precipitation"
+                                }
+                              ],
+                              "requirednessConfig": {
+                                "mode": "absoluteOrRelativeToNextRepAncestor"
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Group",
+                "id": "group_a8414",
+                "name": "shoppingList",
+                "Group": {
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "Shopping List"
+                    }
+                  ],
+                  "repeatability": 99,
+                  "elements": [
+                    {
+                      "type": "Field",
+                      "id": "field_31b75",
+                      "name": "item",
+                      "Field": {
+                        "fieldType": {
+                          "type": "StringType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "Item"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_fd527",
+                      "name": "amount",
+                      "Field": {
+                        "fieldType": {
+                          "type": "NumberType",
+                          "NumberType": {
+                            "minValue": 0
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "Amount"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Rule",
+                "id": "rule_0328b",
+                "name": "AtLeastOneEntryShoppingList",
+                "Rule": {
+                  "errorEntityRelPath": "../shoppingList/item",
+                  "errorCode": "Error rule_0328b",
+                  "errorCondition": "NoGroupFilled(shoppingList*)",
+                  "severity": "ERROR",
+                  "errorMessage": [
+                    {
+                      "locale": "en",
+                      "text": "At least one shopping list entry needed!"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Rule",
+                "id": "rule_fb028",
+                "name": "MaxAmountEntriesShoppingList",
+                "Rule": {
+                  "errorEntityRelPath": "../shoppingList/item",
+                  "errorCode": "Error rule_fb028",
+                  "errorCondition": "NumberOfFilledGroups(shoppingList*) > 5",
+                  "severity": "ERROR",
+                  "errorMessage": [
+                    {
+                      "locale": "en",
+                      "text": "Only 5 entries allowed!"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Rule",
+                "id": "rule_192b6",
+                "name": "MaxAmountPerItemRule",
+                "Rule": {
+                  "errorEntityRelPath": "../shoppingList/amount",
+                  "errorCode": "Error rule_192b6",
+                  "errorCondition": "FieldFilled(shoppingList/amount) AND [shoppingList/amount] > 50",
+                  "severity": "ERROR",
+                  "errorMessage": [
+                    {
+                      "locale": "en",
+                      "text": "The amount cannot be greater than 50!"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Rule",
+                "id": "rule_c33ed",
+                "name": "IfItemThenAmountRule",
+                "Rule": {
+                  "errorEntityRelPath": "../shoppingList/amount",
+                  "errorCode": "Error rule_c33ed",
+                  "errorCondition": "FieldFilled(shoppingList/item) And FieldNotFilled(shoppingList/amount)",
+                  "severity": "ERROR",
+                  "errorMessage": [
+                    {
+                      "locale": "en",
+                      "text": "If you have an item you need to declare an amount!"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Rule",
+                "id": "rule_d33ee",
+                "name": "MaxAmountSumItemRule",
+                "Rule": {
+                  "errorEntityRelPath": "../shoppingList/amount",
+                  "errorCode": "Error rule_d33ee",
+                  "errorCondition": "Sum(shoppingList*/amount) > 75",
+                  "severity": "ERROR",
+                  "errorMessage": [
+                    {
+                      "locale": "en",
+                      "text": "The overall amount of items cannot exceed 75!"
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

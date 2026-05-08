@@ -1,0 +1,608 @@
+{
+  "header": {
+    "id": "Generated_from_ExampleModel",
+    "modelType": "form",
+    "modelVersion": "37.4.0",
+    "locales": [
+      {
+        "code": "en"
+      },
+      {
+        "code": "de"
+      }
+    ],
+    "modelReferences": [
+      {
+        "alias": "ExampleModel",
+        "modelType": "document",
+        "purpose": "data binding",
+        "reference": "ExampleModel"
+      }
+    ]
+  },
+  "content": {
+    "subHeaderBox": {
+      "id": "subHeaderBox",
+      "majorButtons": {
+        "button": [
+          {
+            "id": "Button_for_Screen_for_G2",
+            "name": "BaseGroup",
+            "type": "NAVIGATION",
+            "target": "Screen_for_G2",
+            "scope": "ALWAYS"
+          },
+          {
+            "id": "Button_for_Screen_for_G9",
+            "name": "FieldTypes",
+            "type": "NAVIGATION",
+            "target": "Screen_for_G9",
+            "scope": "ALWAYS"
+          },
+          {
+            "id": "Button_for_Screen_for_I16_G2",
+            "name": "IncludeGroup",
+            "type": "NAVIGATION",
+            "target": "Screen_for_I16_G2",
+            "scope": "ALWAYS"
+          }
+        ]
+      }
+    },
+    "footerBox": {
+      "id": "footerBox"
+    },
+    "screens": [
+      {
+        "id": "Screen_for_G2",
+        "name": "BaseGroup",
+        "title": {
+          "type": "Multilingual",
+          "multilingualText": {
+            "text": [
+              {
+                "locale": "en",
+                "text": "BaseGroup"
+              },
+              {
+                "locale": "de",
+                "text": "BaseGroup"
+              }
+            ]
+          }
+        },
+        "screenElements": [
+          {
+            "type": "ControlGrid",
+            "id": "ControlGrid_for_G2",
+            "name": "BaseGroup_Controls",
+            "row": [
+              {
+                "type": "Row",
+                "id": "Row_for_F5",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "Control_for_F5",
+                    "elementRef": "F5"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "DetachedRepeat",
+            "id": "DetachedRepeat_for_G21",
+            "name": "RepeatableGroup_Repeat",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "RepeatableGroup"
+                  },
+                  {
+                    "locale": "de",
+                    "text": "RepeatableGroup"
+                  }
+                ]
+              }
+            },
+            "repeatOverviewColumn": [
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "Column_for_F22",
+                "elementRef": "F22"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "Column_for_F23",
+                "elementRef": "F23"
+              }
+            ],
+            "groupRef": "G21",
+            "enableAdd": true,
+            "enableRemove": true,
+            "detailScreen": {
+              "id": "Screen_for_G21",
+              "name": "Details",
+              "title": {
+                "type": "Multilingual",
+                "multilingualText": {
+                  "text": [
+                    {
+                      "locale": "en",
+                      "text": "RepeatableGroup"
+                    },
+                    {
+                      "locale": "de",
+                      "text": "RepeatableGroup"
+                    }
+                  ]
+                }
+              },
+              "screenElements": [
+                {
+                  "type": "ControlGrid",
+                  "id": "ControlGrid_for_G21",
+                  "name": "RepeatableGroup_Controls",
+                  "row": [
+                    {
+                      "type": "Row",
+                      "id": "Row_for_F22",
+                      "cell": [
+                        {
+                          "type": "Control",
+                          "id": "Control_for_F22",
+                          "elementRef": "F22",
+                          "label": {
+                            "type": "Multilingual",
+                            "multilingualText": {
+                              "text": [
+                                {
+                                  "locale": "en",
+                                  "text": "Aaa"
+                                },
+                                {
+                                  "locale": "de",
+                                  "text": "Aaa"
+                                }
+                              ]
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "type": "Row",
+                      "id": "Row_for_F23",
+                      "cell": [
+                        {
+                          "type": "Control",
+                          "id": "Control_for_F23",
+                          "elementRef": "F23",
+                          "label": {
+                            "type": "Multilingual",
+                            "multilingualText": {
+                              "text": [
+                                {
+                                  "locale": "en",
+                                  "text": "Bbb"
+                                },
+                                {
+                                  "locale": "de",
+                                  "text": "Bbb"
+                                }
+                              ]
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "type": "ControlGrid",
+            "id": "ControlGrid_for_G2_1",
+            "name": "BaseGroup_Controls_1",
+            "row": [
+              {
+                "type": "Row",
+                "id": "Row_for_G1007",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "Control_for_G1007",
+                    "elementRef": "G1007",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "Attachment"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "Attachment"
+                          }
+                        ]
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "Row",
+                "id": "Row_for_G1008",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "Control_for_G1008",
+                    "elementRef": "G1008",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "MultiSelect"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "MultiSelect"
+                          }
+                        ]
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Screen_for_G9",
+        "name": "FieldTypes",
+        "title": {
+          "type": "Multilingual",
+          "multilingualText": {
+            "text": [
+              {
+                "locale": "en",
+                "text": "FieldTypes"
+              },
+              {
+                "locale": "de",
+                "text": "FieldTypes"
+              }
+            ]
+          }
+        },
+        "screenElements": [
+          {
+            "type": "ControlGrid",
+            "id": "ControlGrid_for_G9",
+            "name": "FieldTypes_Controls",
+            "row": [
+              {
+                "type": "Row",
+                "id": "Row_for_F10",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "Control_for_F10",
+                    "elementRef": "F10"
+                  }
+                ]
+              },
+              {
+                "type": "Row",
+                "id": "Row_for_F11",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "Control_for_F11",
+                    "elementRef": "F11"
+                  }
+                ]
+              },
+              {
+                "type": "Row",
+                "id": "Row_for_F21",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "Control_for_F21",
+                    "elementRef": "F21"
+                  }
+                ]
+              },
+              {
+                "type": "Row",
+                "id": "Row_for_F24",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "Control_for_F24",
+                    "elementRef": "F24"
+                  }
+                ]
+              },
+              {
+                "type": "Row",
+                "id": "Row_for_F12",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "Control_for_F12",
+                    "elementRef": "F12"
+                  }
+                ]
+              },
+              {
+                "type": "Row",
+                "id": "Row_for_F13",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "Control_for_F13",
+                    "elementRef": "F13"
+                  }
+                ]
+              },
+              {
+                "type": "Row",
+                "id": "Row_for_F14",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "Control_for_F14",
+                    "elementRef": "F14"
+                  }
+                ]
+              },
+              {
+                "type": "Row",
+                "id": "Row_for_F15",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "Control_for_F15",
+                    "elementRef": "F15"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "DetachedRepeat",
+            "id": "DetachedRepeat_for_G17",
+            "name": "SubGroup_Repeat",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "SubGroup"
+                  },
+                  {
+                    "locale": "de",
+                    "text": "SubGroup"
+                  }
+                ]
+              }
+            },
+            "repeatOverviewColumn": [
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "Column_for_F18",
+                "elementRef": "F18"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "Column_for_F19",
+                "elementRef": "F19"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "Column_for_F20",
+                "elementRef": "F20"
+              }
+            ],
+            "groupRef": "G17",
+            "enableAdd": true,
+            "enableRemove": true,
+            "detailScreen": {
+              "id": "Screen_for_G17",
+              "name": "Details",
+              "title": {
+                "type": "Multilingual",
+                "multilingualText": {
+                  "text": [
+                    {
+                      "locale": "en",
+                      "text": "SubGroup"
+                    },
+                    {
+                      "locale": "de",
+                      "text": "SubGroup"
+                    }
+                  ]
+                }
+              },
+              "screenElements": [
+                {
+                  "type": "ControlGrid",
+                  "id": "ControlGrid_for_G17",
+                  "name": "SubGroup_Controls",
+                  "row": [
+                    {
+                      "type": "Row",
+                      "id": "Row_for_F18",
+                      "cell": [
+                        {
+                          "type": "Control",
+                          "id": "Control_for_F18",
+                          "elementRef": "F18",
+                          "label": {
+                            "type": "Multilingual",
+                            "multilingualText": {
+                              "text": [
+                                {
+                                  "locale": "en",
+                                  "text": "A"
+                                },
+                                {
+                                  "locale": "de",
+                                  "text": "A"
+                                }
+                              ]
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "type": "Row",
+                      "id": "Row_for_F19",
+                      "cell": [
+                        {
+                          "type": "Control",
+                          "id": "Control_for_F19",
+                          "elementRef": "F19",
+                          "label": {
+                            "type": "Multilingual",
+                            "multilingualText": {
+                              "text": [
+                                {
+                                  "locale": "en",
+                                  "text": "B"
+                                },
+                                {
+                                  "locale": "de",
+                                  "text": "B"
+                                }
+                              ]
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "type": "Row",
+                      "id": "Row_for_F20",
+                      "cell": [
+                        {
+                          "type": "Control",
+                          "id": "Control_for_F20",
+                          "elementRef": "F20",
+                          "label": {
+                            "type": "Multilingual",
+                            "multilingualText": {
+                              "text": [
+                                {
+                                  "locale": "en",
+                                  "text": "C"
+                                },
+                                {
+                                  "locale": "de",
+                                  "text": "C"
+                                }
+                              ]
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "Screen_for_I16_G2",
+        "name": "IncludeGroup",
+        "title": {
+          "type": "Multilingual",
+          "multilingualText": {
+            "text": [
+              {
+                "locale": "en",
+                "text": "IncludeGroup"
+              },
+              {
+                "locale": "de",
+                "text": "IncludeGroup"
+              }
+            ]
+          }
+        },
+        "screenElements": [
+          {
+            "type": "ControlGrid",
+            "id": "ControlGrid_for_I16_G2",
+            "name": "IncludeGroup_Controls",
+            "row": [
+              {
+                "type": "Row",
+                "id": "Row_for_I16_F5",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "Control_for_I16_F5",
+                    "elementRef": "I16_F5"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "fieldConfiguration": {
+      "field": [
+        {
+          "suffix": {
+            "text": [
+              {
+                "locale": "en",
+                "text": "%"
+              },
+              {
+                "locale": "de",
+                "text": "%"
+              }
+            ]
+          },
+          "elementRef": "F21"
+        },
+        {
+          "suffix": {
+            "text": [
+              {
+                "locale": "en",
+                "text": "‰"
+              },
+              {
+                "locale": "de",
+                "text": "‰"
+              }
+            ]
+          },
+          "elementRef": "F24"
+        }
+      ]
+    },
+    "groupConfiguration": {},
+    "defaults": {}
+  }
+}

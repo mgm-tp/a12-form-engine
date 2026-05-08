@@ -1,0 +1,321 @@
+{
+  "header": {
+    "id": "controls.enumeration-custom-value-form",
+    "modelType": "form",
+    "modelVersion": "37.4.0",
+    "locales": [
+      {
+        "code": "en"
+      }
+    ],
+    "annotations": [
+      {
+        "name": "roles",
+        "value": "admin"
+      }
+    ],
+    "modelReferences": [
+      {
+        "alias": "controls.enumeration-custom-value-document",
+        "modelType": "document",
+        "purpose": "data binding",
+        "reference": "controls.enumeration-custom-value-document"
+      }
+    ]
+  },
+  "content": {
+    "subHeaderBox": {
+      "id": "subHeaderBox1"
+    },
+    "footerBox": {
+      "id": "footerBox1"
+    },
+    "screens": [
+      {
+        "id": "screen_678d8",
+        "name": "Screen 1",
+        "screenElements": [
+          {
+            "type": "ControlGrid",
+            "id": "controlgrid_c3da0",
+            "name": "info",
+            "row": [
+              {
+                "type": "Row",
+                "id": "row_d0c84",
+                "cell": [
+                  {
+                    "type": "TextCell",
+                    "id": "textcell_2968e",
+                    "name": "info",
+                    "decoration": "INFO",
+                    "content": {
+                      "text": [
+                        {
+                          "locale": "en",
+                          "text": "This form shows the behavior of (external) enumerations with custom values in the document. All types should show this value, but only External Enumeration with \"customValuesAllowed\" should be selectable. The custom value can be used in all types of expressions only for these external enumerations as well. You can use the \"Show Data\" feature from the left to verify the current data in the document."
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "ControlGrid",
+            "id": "controlgrid_dfaf3",
+            "name": "cg",
+            "layout": {
+              "lg": "6-6"
+            },
+            "row": [
+              {
+                "type": "Row",
+                "id": "row_fee1f",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control_6fb3c",
+                    "elementRef": "field_2ee70"
+                  },
+                  {
+                    "type": "ExpressionCell",
+                    "id": "expressioncell_b1325",
+                    "name": "Expression",
+                    "expression": "kontext(Root) {\n    \"Expression Cell: \"[EnumerationCompact]\n}",
+                    "label": {
+                      "type": "Expression",
+                      "expressionText": "kontext(Root) {\n    \"Expression Label: \"[EnumerationCompact]\n}"
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "Row",
+                "id": "row_53bb6",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control_bb89d",
+                    "elementRef": "field_a3094"
+                  },
+                  {
+                    "type": "ExpressionCell",
+                    "id": "expressioncell_fc142",
+                    "name": "Expression",
+                    "expression": "kontext(Root) {\n    \"Expression Cell: \"[EnumerationAutocomplete]\n}",
+                    "label": {
+                      "type": "Expression",
+                      "expressionText": "kontext(Root) {\n    \"Expression Label: \"[EnumerationAutocomplete]\n}"
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "Row",
+                "id": "row_1887f",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control_a0941",
+                    "elementRef": "field_81f1f"
+                  },
+                  {
+                    "type": "ExpressionCell",
+                    "id": "expressioncell_94e2b",
+                    "name": "Expression",
+                    "expression": "kontext(Root) {\n    \"Expression Cell: \"[EnumerationFull]\n}",
+                    "label": {
+                      "type": "Expression",
+                      "expressionText": "kontext(Root) {\n    \"Expression Label: \"[EnumerationFull]\n}"
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "Row",
+                "id": "row_b35a0",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control_b9e22",
+                    "elementRef": "field_2c3d5"
+                  },
+                  {
+                    "type": "ExpressionCell",
+                    "id": "expressioncell_a9a2f",
+                    "name": "Expression",
+                    "expression": "kontext(Root) {\n    \"Expression Cell: \"[EnumerationInline]\n}",
+                    "label": {
+                      "type": "Expression",
+                      "expressionText": "kontext(Root) {\n    \"Expression Label: \"[EnumerationInline]\n}"
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "Row",
+                "id": "row_4e805",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control_d5686",
+                    "elementRef": "field_b4b87"
+                  },
+                  {
+                    "type": "ExpressionCell",
+                    "id": "expressioncell_05dcb",
+                    "name": "Expression",
+                    "expression": "kontext(Root) {\n    \"Expression Cell: \"[ExternalEnumerationCompact]\n}",
+                    "label": {
+                      "type": "Expression",
+                      "expressionText": "kontext(Root) {\n    \"Expression Label: \"[ExternalEnumerationCompact]\n}"
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "Row",
+                "id": "row_e8ca9",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control_f5ebe",
+                    "elementRef": "field_5655b"
+                  },
+                  {
+                    "type": "ExpressionCell",
+                    "id": "expressioncell_6f311",
+                    "name": "Expression",
+                    "expression": "kontext(Root) {\n    \"Expression Cell: \"[ExternalEnumerationAutocomplete]\n}",
+                    "label": {
+                      "type": "Expression",
+                      "expressionText": "kontext(Root) {\n    \"Expression Label: \"[ExternalEnumerationAutocomplete]\n}"
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "Row",
+                "id": "row_987d3",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control_a4275",
+                    "elementRef": "field_8f4f5"
+                  },
+                  {
+                    "type": "ExpressionCell",
+                    "id": "expressioncell_89fde",
+                    "name": "Expression",
+                    "expression": "kontext(Root) {\n    \"Expression Cell: \"[ExternalEnumerationAutocompleteAllowed]\n}",
+                    "label": {
+                      "type": "Expression",
+                      "expressionText": "kontext(Root) {\n    \"Expression Label: \"[ExternalEnumerationAutocompleteAllowed]\n}"
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "Row",
+                "id": "row_93ccd",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control_d81f8",
+                    "elementRef": "field_03e61"
+                  },
+                  {
+                    "type": "ExpressionCell",
+                    "id": "expressioncell_e8715",
+                    "name": "Expression",
+                    "expression": "kontext(Root) {\n    \"Expression Cell: \"[ExternalEnumerationFull]\n}",
+                    "label": {
+                      "type": "Expression",
+                      "expressionText": "kontext(Root) {\n    \"Expression Label: \"[ExternalEnumerationFull]\n}"
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "Row",
+                "id": "row_21ed5",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control_40cc2",
+                    "elementRef": "field_d8fef"
+                  },
+                  {
+                    "type": "ExpressionCell",
+                    "id": "expressioncell_7ee57",
+                    "name": "Expression",
+                    "expression": "kontext(Root) {\n    \"Expression Cell: \"[ExternalEnumerationInline]\n}",
+                    "label": {
+                      "type": "Expression",
+                      "expressionText": "kontext(Root) {\n    \"Expression Label: \"[ExternalEnumerationInline]\n}"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "fieldConfiguration": {
+      "field": [
+        {
+          "externalEnumeration": {
+            "src": "config"
+          },
+          "elementRef": "field_b4b87"
+        },
+        {
+          "exposition": "AUTOCOMPLETE",
+          "externalEnumeration": {
+            "src": "config"
+          },
+          "elementRef": "field_5655b"
+        },
+        {
+          "exposition": "FULL",
+          "externalEnumeration": {
+            "src": "config"
+          },
+          "elementRef": "field_03e61"
+        },
+        {
+          "exposition": "INLINE",
+          "externalEnumeration": {
+            "src": "config"
+          },
+          "elementRef": "field_d8fef"
+        },
+        {
+          "exposition": "AUTOCOMPLETE",
+          "externalEnumeration": {
+            "src": "config",
+            "customValuesAllowed": true
+          },
+          "elementRef": "field_8f4f5"
+        },
+        {
+          "exposition": "FULL",
+          "elementRef": "field_81f1f"
+        },
+        {
+          "exposition": "INLINE",
+          "elementRef": "field_2c3d5"
+        },
+        {
+          "exposition": "AUTOCOMPLETE",
+          "elementRef": "field_a3094"
+        }
+      ]
+    },
+    "groupConfiguration": {},
+    "defaults": {}
+  }
+}

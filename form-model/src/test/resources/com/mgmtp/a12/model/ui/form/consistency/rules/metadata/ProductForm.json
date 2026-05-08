@@ -1,0 +1,867 @@
+{
+  "header": {
+    "id": "ProductForm",
+    "modelType": "form",
+    "modelVersion": "37.4.0",
+    "locales": [
+      {
+        "code": "en"
+      }
+    ],
+    "modelReferences": [
+      {
+        "alias": "DM",
+        "modelType": "document",
+        "purpose": "data binding",
+        "reference": "ProductDomain"
+      }
+    ],
+    "annotations": [
+      {
+        "name": "roles",
+        "value": "admin"
+      }
+    ]
+  },
+  "content": {
+    "subHeaderBox": {
+      "id": "subHeaderBox"
+    },
+    "footerBox": {
+      "id": "footerBox"
+    },
+    "screens": [
+      {
+        "id": "screen-a050f",
+        "name": "product (Generated)",
+        "screenElements": [
+          {
+            "type": "ControlGrid",
+            "id": "controlgrid-0f93f",
+            "name": "product Controls",
+            "layout": {
+              "lg": "12"
+            },
+            "row": [
+              {
+                "type": "Row",
+                "id": "row-8e97c",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control-c1269",
+                    "elementRef": "F3"
+                  }
+                ]
+              },
+              {
+                "type": "Row",
+                "id": "row-072a1",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control-be277",
+                    "elementRef": "F7"
+                  }
+                ]
+              },
+              {
+                "type": "Row",
+                "id": "row-5d87d",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control-a5d5d",
+                    "elementRef": "F27"
+                  }
+                ]
+              },
+              {
+                "type": "Row",
+                "id": "row-01c24"
+              },
+              {
+                "type": "Row",
+                "id": "row-aa876",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control-223f5",
+                    "elementRef": "F8"
+                  }
+                ]
+              },
+              {
+                "type": "Row",
+                "id": "row-b1e3b",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control-f1696",
+                    "elementRef": "F28"
+                  }
+                ]
+              },
+              {
+                "type": "Row",
+                "id": "row-8945c",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control-87a78",
+                    "elementRef": "F29"
+                  }
+                ]
+              },
+              {
+                "type": "Row",
+                "id": "row-be778",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control-281d3",
+                    "elementRef": "F9"
+                  }
+                ]
+              }
+            ],
+            "verticalAlignment": "BOTTOM"
+          },
+          {
+            "type": "DetachedRepeat",
+            "id": "detachedrepeat-80a4e",
+            "name": "externalNumber",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "external Number"
+                  }
+                ]
+              }
+            },
+            "repeatOverviewColumn": [
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldOverviewColumn-1",
+                "elementRef": "F5"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldOverviewColumn-2",
+                "elementRef": "F6"
+              }
+            ],
+            "groupRef": "G2",
+            "enableAdd": true,
+            "enableRemove": true,
+            "enableReorder": true,
+            "detailScreen": {
+              "id": "screen-e75f1",
+              "name": "Details",
+              "screenElements": [
+                {
+                  "type": "ControlGrid",
+                  "id": "controlgrid-093bf",
+                  "name": "externalNumber Controls",
+                  "layout": {
+                    "lg": "12"
+                  },
+                  "row": [
+                    {
+                      "type": "Row",
+                      "id": "row-e0428",
+                      "cell": [
+                        {
+                          "type": "Control",
+                          "id": "control-0aa25",
+                          "elementRef": "F5"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "Row",
+                      "id": "row-b8331",
+                      "cell": [
+                        {
+                          "type": "Control",
+                          "id": "control-a4dca",
+                          "elementRef": "F6"
+                        }
+                      ]
+                    }
+                  ],
+                  "verticalAlignment": "BOTTOM"
+                }
+              ]
+            }
+          },
+          {
+            "type": "Section",
+            "id": "section-6ea59",
+            "name": "searchKeywords",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "search Keywords"
+                  }
+                ]
+              }
+            },
+            "screenElements": [
+              {
+                "type": "ControlGrid",
+                "id": "controlgrid-33b11",
+                "name": "searchKeywords Controls",
+                "layout": {
+                  "lg": "12"
+                },
+                "row": [
+                  {
+                    "type": "Row",
+                    "id": "row-d2d4b",
+                    "cell": [
+                      {
+                        "type": "Control",
+                        "id": "control-6b45f",
+                        "elementRef": "F11"
+                      }
+                    ]
+                  }
+                ],
+                "verticalAlignment": "BOTTOM"
+              }
+            ]
+          },
+          {
+            "type": "DetachedRepeat",
+            "id": "detachedrepeat-ef151",
+            "name": "mediaFiles",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "media Files"
+                  }
+                ]
+              }
+            },
+            "repeatOverviewColumn": [
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldOverviewColumn-3",
+                "elementRef": "F19"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldOverviewColumn-4",
+                "elementRef": "F21"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldOverviewColumn-5",
+                "elementRef": "F22"
+              }
+            ],
+            "groupRef": "G3",
+            "enableAdd": true,
+            "enableRemove": true,
+            "enableReorder": true,
+            "detailScreen": {
+              "id": "screen-60aaa",
+              "name": "Details",
+              "screenElements": [
+                {
+                  "type": "Section",
+                  "id": "section-4d4bb",
+                  "name": "mediaFile",
+                  "title": {
+                    "type": "Multilingual",
+                    "multilingualText": {
+                      "text": [
+                        {
+                          "locale": "en",
+                          "text": "media File"
+                        }
+                      ]
+                    }
+                  },
+                  "screenElements": [
+                    {
+                      "type": "ControlGrid",
+                      "id": "controlgrid-e2956",
+                      "name": "mediaFile Controls",
+                      "layout": {
+                        "lg": "12"
+                      },
+                      "row": [
+                        {
+                          "type": "Row",
+                          "id": "row-49266",
+                          "cell": [
+                            {
+                              "type": "Control",
+                              "id": "control-24dfd",
+                              "elementRef": "F19"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "Row",
+                          "id": "row-f25ac",
+                          "cell": [
+                            {
+                              "type": "Control",
+                              "id": "control-76061",
+                              "elementRef": "F21"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "Row",
+                          "id": "row-0d89d",
+                          "cell": [
+                            {
+                              "type": "Control",
+                              "id": "control-9586c",
+                              "elementRef": "F22"
+                            }
+                          ]
+                        }
+                      ],
+                      "verticalAlignment": "BOTTOM"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "type": "Section",
+            "id": "section-6e865",
+            "name": "logistics",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "logistics"
+                  }
+                ]
+              }
+            },
+            "screenElements": [
+              {
+                "type": "Section",
+                "id": "section-47ddc",
+                "name": "weight",
+                "title": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "weight"
+                      }
+                    ]
+                  }
+                },
+                "screenElements": [
+                  {
+                    "type": "ControlGrid",
+                    "id": "controlgrid-a4c28",
+                    "name": "weight Controls",
+                    "layout": {
+                      "lg": "12"
+                    },
+                    "row": [
+                      {
+                        "type": "Row",
+                        "id": "row-b37f7",
+                        "cell": [
+                          {
+                            "type": "Control",
+                            "id": "control-b4bee",
+                            "elementRef": "F15"
+                          }
+                        ]
+                      },
+                      {
+                        "type": "Row",
+                        "id": "row-607f1",
+                        "cell": [
+                          {
+                            "type": "Control",
+                            "id": "control-8ee01",
+                            "elementRef": "F16"
+                          }
+                        ]
+                      }
+                    ],
+                    "verticalAlignment": "BOTTOM"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "Section",
+            "id": "section-3d5ba",
+            "name": "packaging",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "packaging"
+                  }
+                ]
+              }
+            },
+            "screenElements": [
+              {
+                "type": "ControlGrid",
+                "id": "controlgrid-2f345",
+                "name": "packaging-details",
+                "row": [
+                  {
+                    "type": "Row",
+                    "id": "row-6b479",
+                    "cell": [
+                      {
+                        "type": "Control",
+                        "id": "control-55e9c",
+                        "elementRef": "F24"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "Row",
+                    "id": "row-c5909",
+                    "cell": [
+                      {
+                        "type": "Control",
+                        "id": "control-18cc0",
+                        "elementRef": "F25"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "Row",
+                    "id": "row-7c733",
+                    "cell": [
+                      {
+                        "type": "Control",
+                        "id": "control-12586",
+                        "elementRef": "F26"
+                      }
+                    ]
+                  }
+                ],
+                "verticalAlignment": "BOTTOM"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "fieldConfiguration": {
+      "field": [
+        {
+          "label": {
+            "type": "Multilingual",
+            "multilingualText": {
+              "text": [
+                {
+                  "locale": "en",
+                  "text": "system"
+                }
+              ]
+            }
+          },
+          "elementRef": "F5"
+        },
+        {
+          "label": {
+            "type": "Multilingual",
+            "multilingualText": {
+              "text": [
+                {
+                  "locale": "en",
+                  "text": "number"
+                }
+              ]
+            }
+          },
+          "elementRef": "F6"
+        },
+        {
+          "label": {
+            "type": "Multilingual",
+            "multilingualText": {
+              "text": [
+                {
+                  "locale": "en",
+                  "text": "search Keyword"
+                }
+              ]
+            }
+          },
+          "elementRef": "F11"
+        },
+        {
+          "label": {
+            "type": "Multilingual",
+            "multilingualText": {
+              "text": [
+                {
+                  "locale": "en",
+                  "text": "type"
+                }
+              ]
+            }
+          },
+          "elementRef": "F19"
+        },
+        {
+          "label": {
+            "type": "Multilingual",
+            "multilingualText": {
+              "text": [
+                {
+                  "locale": "en",
+                  "text": "mime Type"
+                }
+              ]
+            }
+          },
+          "elementRef": "F21"
+        },
+        {
+          "label": {
+            "type": "Multilingual",
+            "multilingualText": {
+              "text": [
+                {
+                  "locale": "en",
+                  "text": "url"
+                }
+              ]
+            }
+          },
+          "elementRef": "F22"
+        },
+        {
+          "label": {
+            "type": "Multilingual",
+            "multilingualText": {
+              "text": [
+                {
+                  "locale": "en",
+                  "text": "weight Value"
+                }
+              ]
+            }
+          },
+          "elementRef": "F15"
+        },
+        {
+          "label": {
+            "type": "Multilingual",
+            "multilingualText": {
+              "text": [
+                {
+                  "locale": "en",
+                  "text": "weight Unit"
+                }
+              ]
+            }
+          },
+          "elementRef": "F16"
+        },
+        {
+          "label": {
+            "type": "Multilingual",
+            "multilingualText": {
+              "text": [
+                {
+                  "locale": "en",
+                  "text": "number"
+                }
+              ]
+            }
+          },
+          "elementRef": "F3"
+        },
+        {
+          "label": {
+            "type": "Multilingual",
+            "multilingualText": {
+              "text": [
+                {
+                  "locale": "en",
+                  "text": "description"
+                }
+              ]
+            }
+          },
+          "elementRef": "F8"
+        },
+        {
+          "label": {
+            "type": "Multilingual",
+            "multilingualText": {
+              "text": [
+                {
+                  "locale": "en",
+                  "text": "meta Description"
+                }
+              ]
+            }
+          },
+          "elementRef": "F9"
+        },
+        {
+          "label": {
+            "type": "Multilingual",
+            "multilingualText": {
+              "text": [
+                {
+                  "locale": "en",
+                  "text": "multiplicator"
+                }
+              ]
+            }
+          },
+          "elementRef": "F24"
+        },
+        {
+          "label": {
+            "type": "Multilingual",
+            "multilingualText": {
+              "text": [
+                {
+                  "locale": "en",
+                  "text": "amount"
+                }
+              ]
+            }
+          },
+          "elementRef": "F25"
+        },
+        {
+          "label": {
+            "type": "Multilingual",
+            "multilingualText": {
+              "text": [
+                {
+                  "locale": "en",
+                  "text": "unit"
+                }
+              ]
+            }
+          },
+          "elementRef": "F26"
+        },
+        {
+          "label": {
+            "type": "Multilingual",
+            "multilingualText": {
+              "text": [
+                {
+                  "locale": "en",
+                  "text": "eatable"
+                }
+              ]
+            }
+          },
+          "elementRef": "F27"
+        },
+        {
+          "label": {
+            "type": "Multilingual",
+            "multilingualText": {
+              "text": [
+                {
+                  "locale": "en",
+                  "text": "name"
+                }
+              ]
+            }
+          },
+          "dependentField": {
+            "masterField": "F27",
+            "case": [
+              {
+                "masterValue": "false",
+                "fieldRef": "F8"
+              },
+              {
+                "masterValue": "true",
+                "readonly": true,
+                "notRelevant": true
+              }
+            ]
+          },
+          "elementRef": "F7"
+        },
+        {
+          "label": {
+            "type": "Multilingual",
+            "multilingualText": {
+              "text": [
+                {
+                  "locale": "en",
+                  "text": "package size of product"
+                }
+              ]
+            }
+          },
+          "elementRef": "F28"
+        },
+        {
+          "label": {
+            "type": "Multilingual",
+            "multilingualText": {
+              "text": [
+                {
+                  "locale": "en",
+                  "text": "transport vehicle"
+                }
+              ]
+            }
+          },
+          "dependentEnumeration": {
+            "masterField": "F28",
+            "constraint": [
+              {
+                "masterValue": "large",
+                "constraintValues": [
+                  {
+                    "value": "big"
+                  },
+                  {
+                    "value": "small"
+                  }
+                ]
+              },
+              {
+                "masterValue": "medium",
+                "constraintValues": [
+                  {
+                    "value": "big"
+                  }
+                ]
+              },
+              {
+                "masterValue": "small",
+                "constraintValues": [
+                  {
+                    "value": "small"
+                  }
+                ]
+              }
+            ]
+          },
+          "elementRef": "F29"
+        }
+      ]
+    },
+    "groupConfiguration": {
+      "group": [
+        {
+          "dependentGroup": {
+            "masterField": "F27",
+            "case": [
+              {
+                "masterValue": "true",
+                "readonly": true,
+                "notRelevant": true
+              }
+            ]
+          },
+          "groupRef": "G10"
+        }
+      ]
+    },
+    "defaults": {
+      "buttonLabels": {
+        "ADD": {
+          "text": [
+            {
+              "locale": "en",
+              "text": "add"
+            }
+          ]
+        },
+        "COMMIT_ADD": {
+          "text": [
+            {
+              "locale": "en",
+              "text": "add"
+            }
+          ]
+        },
+        "APPLY": {
+          "text": [
+            {
+              "locale": "en",
+              "text": "apply"
+            }
+          ]
+        },
+        "EDIT": {
+          "text": [
+            {
+              "locale": "en",
+              "text": "edit"
+            }
+          ]
+        },
+        "REMOVE": {
+          "text": [
+            {
+              "locale": "en",
+              "text": "remove"
+            }
+          ]
+        },
+        "VIEW": {
+          "text": [
+            {
+              "locale": "en",
+              "text": "view"
+            }
+          ]
+        },
+        "CANCEL": {
+          "text": [
+            {
+              "locale": "en",
+              "text": "cancel"
+            }
+          ]
+        },
+        "RETURN": {
+          "text": [
+            {
+              "locale": "en",
+              "text": "return"
+            }
+          ]
+        },
+        "UP": {},
+        "DOWN": {}
+      }
+    }
+  }
+}

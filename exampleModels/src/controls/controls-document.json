@@ -1,0 +1,169 @@
+{
+  "header": {
+    "id": "controls-document",
+    "modelType": "document",
+    "modelVersion": "28.4.0",
+    "locales": [
+      {
+        "code": "en"
+      }
+    ],
+    "labels": [],
+    "annotations": [
+      {
+        "name": "roles",
+        "value": "admin"
+      }
+    ],
+    "modelReferences": []
+  },
+  "content": {
+    "modelInfo": {
+      "name": "controls-document",
+      "immutable": false
+    },
+    "modelConfig": {
+      "decimalSeparator": ".",
+      "timeZone": "UTC",
+      "conditionLanguage": {
+        "code": "en_US"
+      }
+    },
+    "modelRoot": {
+      "rootGroups": [
+        {
+          "type": "Group",
+          "id": "group_acfc0",
+          "name": "root",
+          "Group": {
+            "repeatability": 1,
+            "elements": [
+              {
+                "type": "Field",
+                "id": "field_91630",
+                "name": "L0_Number",
+                "Field": {
+                  "fieldType": {
+                    "type": "NumberType"
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "L0_Number"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Rule",
+                "id": "rule_28459",
+                "name": "error_smaller_than_42",
+                "Rule": {
+                  "errorEntityRelPath": "../L0_Number",
+                  "errorCode": "Error rule_28459",
+                  "errorCondition": "FieldFilled(L0_Number) And [L0_Number] < 42",
+                  "severity": "ERROR",
+                  "errorMessage": [
+                    {
+                      "locale": "en",
+                      "text": "$L0_Number.value$ is smaller than 42!"
+                    }
+                  ],
+                  "guiPatterns": {
+                    "dynamicEnumeration": "false"
+                  }
+                }
+              },
+              {
+                "type": "Rule",
+                "id": "ruleimpl_95e76",
+                "name": "warning_bigger_than_100",
+                "Rule": {
+                  "errorEntityRelPath": "../L0_Number",
+                  "errorCode": "Error rule_28459",
+                  "errorCondition": "FieldFilled(L0_Number) And  [L0_Number] > 100",
+                  "severity": "WARNING",
+                  "errorMessage": [
+                    {
+                      "locale": "en",
+                      "text": "$L0_Number.value$ is bigger than 100!"
+                    }
+                  ],
+                  "guiPatterns": {
+                    "dynamicEnumeration": "false"
+                  }
+                }
+              },
+              {
+                "type": "Group",
+                "id": "group_ec4c4",
+                "name": "repeatableGroup",
+                "Group": {
+                  "repeatability": 5,
+                  "elements": [
+                    {
+                      "type": "Field",
+                      "id": "fieldimpl_5022f",
+                      "name": "L1_Number",
+                      "Field": {
+                        "fieldType": {
+                          "type": "NumberType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "L1_Number"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Rule",
+                      "id": "ruleimpl_af78a",
+                      "name": "error_smaller_than_42",
+                      "Rule": {
+                        "errorEntityRelPath": "../L1_Number",
+                        "errorCode": "Error rule_28459",
+                        "errorCondition": "FieldFilled(L1_Number) And [L1_Number] < 42",
+                        "severity": "ERROR",
+                        "errorMessage": [
+                          {
+                            "locale": "en",
+                            "text": "$L1_Number.value$ is smaller than 42!"
+                          }
+                        ],
+                        "guiPatterns": {
+                          "dynamicEnumeration": "false"
+                        }
+                      }
+                    },
+                    {
+                      "type": "Rule",
+                      "id": "ruleimpl_983fe",
+                      "name": "warning_bigger_than_100",
+                      "Rule": {
+                        "errorEntityRelPath": "../L1_Number",
+                        "errorCode": "Error rule_28459",
+                        "errorCondition": "FieldFilled(L1_Number) And  [L1_Number] > 100",
+                        "severity": "WARNING",
+                        "errorMessage": [
+                          {
+                            "locale": "en",
+                            "text": "$L1_Number.value$ is bigger than 100!"
+                          }
+                        ],
+                        "guiPatterns": {
+                          "dynamicEnumeration": "false"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

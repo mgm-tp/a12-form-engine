@@ -1,0 +1,68 @@
+/*
+ * SPDX-License-Identifier: EUPL-1.2 OR LicenseRef-commercial
+ *
+ * Copyright (c) 2012-2026 mgm technology partners GmbH
+ *
+ * Dual License
+ * ------------
+ * This source file is part of the mgm A12 Platform and available under
+ * a choice of two different licenses:
+ *
+ * 1. Open-Source License – EUPL v1.2
+ *    You may redistribute and/or modify this file under the terms of the
+ *    European Union Public License, version 1.2 - see https://eupl.eu/.
+ *
+ * 2. Commercial License
+ *    Alternatively, you may obtain a commercial license from
+ *    mgm technology partners GmbH, that permits use of this software
+ *    under different terms (including support and maintenance services).
+ *
+ *    Please contact a12-license@mgm-tp.com for more information.
+ *
+ * You must select and comply with exactly one of the above license options.
+ *
+ * Warranty Disclaimer (applies to either option)
+ * ----------------------------------------------
+ * THIS SOFTWARE IS PROVIDED "AS IS" AND WITHOUT WARRANTY OF ANY KIND,
+ * WHETHER EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+ * OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+ * NON-INFRINGEMENT, EXCEPT WHERE SUCH DISCLAIMERS ARE HELD TO BE
+ * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
+ */
+
+import type {
+	Localizable,
+	LocalizableArgs
+} from "@com.mgmtp.a12.utils/utils-localization/lib/main/index.js";
+import {
+	localizableFromLocalizationTreeMap,
+	type Locale,
+	type LocalizationTreeMap
+} from "@com.mgmtp.a12.utils/utils-localization/lib/main/index.js";
+
+import { en_US } from "./resources/en_US.js";
+
+export const DEFAULT_TRANSLATIONS: LocalizationTreeMap = {
+	en: en_US
+};
+/**
+ * Locale with name of country
+ */
+type LocaleWithName = Locale & { name?: string };
+const supportedLocalesWithName: LocaleWithName[] = [
+	{
+		name: "English",
+		language: "en",
+		country: "US"
+	}
+];
+
+export const supportedLocales: Locale[] = supportedLocalesWithName.map(({ country, language }) => ({
+	country,
+	language
+}));
+
+/** @internal */
+export function createResourceLocalizable(key: string, values: LocalizableArgs = {}): Localizable {
+	return localizableFromLocalizationTreeMap(key, DEFAULT_TRANSLATIONS, values);
+}

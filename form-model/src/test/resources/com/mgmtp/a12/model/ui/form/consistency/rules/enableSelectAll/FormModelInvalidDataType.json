@@ -1,0 +1,75 @@
+{
+  "header": {
+    "id": "FormModelInvalidDataType",
+    "modelType": "form",
+    "modelVersion": "37.4.0",
+    "locales": [
+      {
+        "code": "en"
+      }
+    ],
+    "annotations": [
+      {
+        "name": "roles",
+        "value": "admin"
+      }
+    ],
+    "modelReferences": [
+      {
+        "alias": "DM",
+        "modelType": "document",
+        "purpose": "data binding",
+        "reference": "DocumentModelEnableSelectAll"
+      }
+    ]
+  },
+  "content": {
+    "subHeaderBox": {
+      "id": "subHeaderBox1"
+    },
+    "footerBox": {
+      "id": "footerBox1"
+    },
+    "screens": [
+      {
+        "id": "screen1",
+        "name": "Screen1",
+        "screenElements": [
+          {
+            "type": "ControlGrid",
+            "id": "controlgrid-fff25",
+            "name": "cg",
+            "row": [
+              {
+                "type": "Row",
+                "id": "row-76f9b",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control-2c0b0",
+                    "offset": {
+                      "lg": 0
+                    },
+                    "elementRef": "field_d6a97"
+                  }
+                ]
+              }
+            ],
+            "verticalAlignment": "BOTTOM"
+          }
+        ]
+      }
+    ],
+    "fieldConfiguration": {
+      "field": [
+        {
+          "exposition": "AREA",
+          "elementRef": "field_d6a97",
+          "enableSelectAll": true
+        }
+      ]
+    },
+    "groupConfiguration": {},
+    "defaults": {}
+  }
+}

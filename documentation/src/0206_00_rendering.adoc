@@ -1,0 +1,203 @@
+////
+SPDX-License-Identifier: EUPL-1.2 OR LicenseRef-commercial
+
+Copyright (c) 2012-2026 mgm technology partners GmbH
+
+Dual License
+------------
+This source file is part of the mgm A12 Platform and available under
+a choice of two different licenses:
+
+1. Open-Source License – EUPL v1.2
+   You may redistribute and/or modify this file under the terms of the
+   European Union Public License, version 1.2 - see https://eupl.eu/.
+
+2. Commercial License
+   Alternatively, you may obtain a commercial license from
+   mgm technology partners GmbH, that permits use of this software
+   under different terms (including support and maintenance services).
+
+   Please contact a12-license@mgm-tp.com for more information.
+
+You must select and comply with exactly one of the above license options.
+
+Warranty Disclaimer (applies to either option)
+----------------------------------------------
+THIS SOFTWARE IS PROVIDED "AS IS" AND WITHOUT WARRANTY OF ANY KIND,
+WHETHER EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NON-INFRINGEMENT, EXCEPT WHERE SUCH DISCLAIMERS ARE HELD TO BE
+LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
+////
+
+[#form-engine_rendering]
+= Rendering
+
+A12 uses React for rendering. This has some noticeable side effects for application.
+The browser DOM is controlled by React. Therefore, applications may not directly alter the DOM, e.g. by setting attributes or adding elements.
+
+The package contains three React view components, a <<form-engine_rendering_formengine,FormEngine>>, a <<form-engine_rendering_contentbox,ContentBox>>, and a <<form-engine_rendering_scrollhandler,ScrollHandler>> which have to be connected to the store in order to archive the full behavior. In the example in chapter <<form-engine_integration,Integration>> it is shown how they all can be connected and put together.
+
+== HTML ID Generation
+
+For the purpose of browser-based automated testing, every form element's HTML element has the HTML ID attribute set. The HTML ID is derived from the Form and Document Model element's IDs. The default behavior for all elements that are directly representing a model element is:
+
+`optional-prefix`"-a12-"`ID-of-form-model-element`
+
+However, some types deviate from this behavior. See <<form-engine_rendering_html_id_schema,HTML ID Schema>> for details.
+
+=== Data Attributes
+
+In addition to the HTML ID, some elements have the attribute `data-role` set by the Form Engine for better testing support. See <<form-engine_rendering_data_roles,Data Roles>> for details.
+
+Most Form Model elements are rendered using A12 Widgets which have data-role attributes on their own.
+
+[#form-engine_rendering_formengine]
+== Form Engine
+
+The inner most component is the `FormEngine` which takes care of rendering the actual form, without header and footer. This section is about how the different Form Model elements are rendered.
+
+=== Hiding Behavior of Container Model Elements
+
+If all children model elements of the container model element (i.e. `Section`, `ControlGrid`, or `ButtonPanel`) are hidden, then the container model element is also considered hidden.
+
+==== Rendering of Hidden Model Elements
+
+React components of model elements that are hidden are not rendered (removed from the DOM). They are *not* hidden using CSS.
+
+=== Containers
+
+==== Section
+
+Sections and collapsible sections are rendered as an `HTML DIV` element.
+
+The section title is rendered using the `Typography` widget, while the size depends on the current Aria Level of the component.
+
+A section with multiple columns is rendered using the `SizeContainer` widget.
+
+==== Screen
+
+Screens are basically generic containers like Sections, but the Form Engine only renders the current Screen, i.e. the Screen that is on top of the location stack.
+
+==== Control Grid
+
+The content of a `ControlGrid` is rendered using the `SizeContainer` widget. The layout is applied using a lookup table. Note that the mapping can result in invalid `SizeContainer` configurations.
+
+=== Controls
+
+Each `Control` is rendered using Widgets, depending on the field data type and control configuration:
+
+|===
+|A12 Data Type / Field Setting |Control Setting | Widget
+
+|String |secret |TextLine (password)
+|String |linebreaksPermitted |TextArea
+|String |suggestions |Autocomplete
+|Number | |TextLine
+|Date | |TextLine + DatePicker
+|DateTime | |TextLine + DateTimePicker
+|Time | |TextLine + TimePicker
+|DateFragment | |TextLine
+|DateRange | |TextLine + DateRangePicker
+|Boolean |boolean_select |Select
+|Boolean |checkbox |Checkbox
+|Boolean |switch |Switch
+|Boolean |switch with values |Switch
+|Boolean |full |RadioGroup + Radio
+|Boolean |inline |RadioGroup + Radio
+|Confirm |checkbox |Checkbox
+|Conform |switch |Switch
+|Confirm |switch with values| Switch
+|Enumeration |full |RadioGroup + Radio
+|Enumeration |inline |inline RadioGroup + Radio
+|Enumeration |compact |Select
+|Enumeration |autocomplete |Autocomplete
+|Multi-Select |autocomplete |Autocomplete
+|Multi-Select |full |CheckboxGroup
+|Multi-Select |inline |CheckboxGroup
+|Attachment Custom Type | |FileUpload
+|===
+
+For Boolean, the checked state of the `Checkbox`, `Switch` and `Radio` widgets is bound to the values `true` and `false`. This means, that the value can not be reset to `null` in the ui. This is only possible with the exposition `boolean_select`, which best represents the three-value-logic that comes with the boolean field data type.
+
+All Controls are always rendered inside of a control grid.
+
+Controls that are bound to hidden model elements (fields) are not rendered.
+
+[NOTE]
+====
+Limitation: A control based on a required enumeration field having the exposition 'compact' and an initial value does not show the empty option. Therefore, if the field behind the control contains `null` (e.g. set by the action `Commands.setDocument`), the control will show the first enumeration option as selected.
+====
+
+==== External Enumeration
+
+An external enumeration can be rendered as an autocomplete control or as a select control.
+
+The `ExternalEnumerationProvider`, which delivers the enumeration values, needs to be provided via the `Config` prop when setting up the Form Engine React component and when creating the engines middlewares using `createEngineMiddlewares`.
+
+Example:
+
+[source,tsx]
+----
+include::assets/typescript/form-engine/examples/external-enumeration.ts[tags="example"]
+----
+
+An external enumeration can be configured in the Form Model, so that adding new custom values, in addition to the values offered by the provider is possible.
+An additional value is written to the document without conversion. It is your responsibility to handle the added custom value, e.g. adding the value to the provided values by the `ExternalEnumerationProvider`.
+
+To determine, if the entered value is a custom value or one of the provided values, the values are compared, ignoring the case by default. There is a second configuration option available in the Form Model to make this comparison case-sensitive.
+
+=== Repeats
+
+Overview tables of `Detached Repeats`, `Inline Repeats` and `Embedded Repeats` are rendered using the `Table` widget.
+
+Inputs of fields in `Inline Repeats` are rendered using the same widgets as for Controls, but labels are omitted.
+
+Detail Screens of `Detached Repeats` are rendered as Screens. In addition the Repeat buttons are rendered into the `ActionContentBox` footer.
+
+The inputs for `Embedded Repeats` are rendered using the `ExpandableRow` widget.
+
+Repeats inherit the enablement state of the associated repeatable group.
+
+=== API
+
+The component `FormEngineRenderer` receives the state, the event handlers, and the config as props. By modifying these props, you can modify the appearance and behavior of the `FormEngine` component.
+The `Config` object has the two properties `formModelMap` and `widgetMap` which can be used to customize the appearance. In the `FormModelMap` each element from the Form Model is mapped to one React component. In the `WidgetMap` each UI widget type (Select, ActionContentbox, Button etc.) is mapped to a React component. You can overwrite parts of the map to integrate your custom widgets.
+
+[#form-engine_rendering_contentbox]
+== ContentBox
+
+The `ContentBox` is wrapped around the `FormEngine` and contains the header and footer with the modelled buttons.
+
+=== API
+
+The `ContentBox` rendering can be customized via the `WidgetMap` API in the Form Engine `Config` by providing, for instance, a custom `ActionContentbox` implementation.
+
+
+[#form-engine_rendering_scrollhandler]
+== ScrollHandler
+
+The most outer part is the `ScrollHandler`, which takes care of focusing elements and scrolling the page so that focused elements are visible on the Screen, whenever the Screen is entered or left.
+To be more precise:
+
+* Top-Level-Screen -> Detail-Screen
+* Top-Level-Screen -> Correction-Screen
+* Detail-Screen -> Top-Level-Screen
+* Detail-Screen -> Detail-Screen (Entering)
+* Detail-Screen -> Detail-Screen (Leaving)
+* Detail-Screen -> Correction-Screen
+* Correction-Screen -> Top-Level-Screen
+* Correction-Screen -> Detail-Screen
+* Correction-Screen -> Field
+
+The `ScrollHandler` uses the HTML-Ids to focus elements. If you use a prefix, you need to pass it to the `ScrollHandler` as well as to the `FormEngine`.
+
+[NOTE]
+====
+Controls and columns will only be focussed if their underlying HTML element (that contains the `uiId` property in its `id` attribute) is either:
+
+* an `input`, `select` and `textarea` element or
+* a `div` element with the `data-role` attribute set to `"text-output"`
+
+When customizing inputs, make sure to pass the `uiID` property to an element that fulfills these constraints. Otherwise, the focus behavior will not work correctly for these elements (for example when trying to "jump" to an error field from the validation bar).
+====

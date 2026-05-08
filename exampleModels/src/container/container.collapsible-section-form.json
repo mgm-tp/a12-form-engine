@@ -1,0 +1,878 @@
+{
+  "header": {
+    "id": "container.collapsible-section-form",
+    "modelType": "form",
+    "modelVersion": "37.4.0",
+    "locales": [
+      {
+        "code": "en"
+      }
+    ],
+    "modelReferences": [
+      {
+        "alias": "DM",
+        "modelType": "document",
+        "purpose": "data binding",
+        "reference": "container-document"
+      }
+    ],
+    "annotations": [
+      {
+        "name": "roles",
+        "value": "admin"
+      }
+    ]
+  },
+  "content": {
+    "subHeaderBox": {
+      "id": "subHeaderBox1"
+    },
+    "footerBox": {
+      "id": "footerBox1"
+    },
+    "screens": [
+      {
+        "id": "screen1",
+        "name": "Screen1",
+        "screenElements": [
+          {
+            "type": "Section",
+            "id": "section-r0-not-collapsible",
+            "name": "not-collapsible",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "Not Collapsible"
+                  }
+                ]
+              }
+            },
+            "screenElements": [
+              {
+                "type": "ControlGrid",
+                "id": "controlgrid-d6db3",
+                "name": "cg",
+                "row": [
+                  {
+                    "type": "Row",
+                    "id": "row-83841",
+                    "cell": [
+                      {
+                        "type": "TextCell",
+                        "id": "textcell-2fed2",
+                        "offset": {
+                          "lg": 0
+                        },
+                        "span": {
+                          "lg": 1
+                        },
+                        "name": "text",
+                        "content": {
+                          "text": [
+                            {
+                              "locale": "en",
+                              "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore\net dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut\naliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum\ndolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui\nofficia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit\nvoluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore\nveritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia\nvoluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione\nvoluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur,\nadipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam\nquaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit\nlaboriosam, nisi ut liquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea\nvoluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas\nnulla pariatur?"
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                ],
+                "verticalAlignment": "BOTTOM"
+              }
+            ]
+          },
+          {
+            "type": "Section",
+            "id": "section-r0-collapsible-closed",
+            "name": "collapsible-closed",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "Collapsible Closed"
+                  }
+                ]
+              }
+            },
+            "collapsible": true,
+            "initiallyCollapsed": true,
+            "screenElements": [
+              {
+                "type": "ControlGrid",
+                "id": "controlgrid-b7a94",
+                "name": "cg",
+                "row": [
+                  {
+                    "type": "Row",
+                    "id": "row-b8525",
+                    "cell": [
+                      {
+                        "type": "TextCell",
+                        "id": "textcell-eca98",
+                        "offset": {
+                          "lg": 0
+                        },
+                        "span": {
+                          "lg": 1
+                        },
+                        "name": "text",
+                        "content": {
+                          "text": [
+                            {
+                              "locale": "en",
+                              "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore\net dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut\naliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum\ndolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui\nofficia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit\nvoluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore\nveritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia\nvoluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione\nvoluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur,\nadipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam\nquaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit\nlaboriosam, nisi ut liquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea\nvoluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas\nnulla pariatur?"
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                ],
+                "verticalAlignment": "BOTTOM"
+              }
+            ]
+          },
+          {
+            "type": "Section",
+            "id": "section-r0-collapsible-opened",
+            "name": "collapsible-opened",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "Collapsible Opened"
+                  }
+                ]
+              }
+            },
+            "collapsible": true,
+            "screenElements": [
+              {
+                "type": "ControlGrid",
+                "id": "controlgrid-8eed5",
+                "name": "cg",
+                "row": [
+                  {
+                    "type": "Row",
+                    "id": "row-d0d94",
+                    "cell": [
+                      {
+                        "type": "TextCell",
+                        "id": "textcell-5e5d3",
+                        "offset": {
+                          "lg": 0
+                        },
+                        "span": {
+                          "lg": 1
+                        },
+                        "name": "text",
+                        "content": {
+                          "text": [
+                            {
+                              "locale": "en",
+                              "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore\net dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut\naliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum\ndolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui\nofficia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit\nvoluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore\nveritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia\nvoluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione\nvoluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur,\nadipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam\nquaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit\nlaboriosam, nisi ut liquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea\nvoluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas\nnulla pariatur?"
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                ],
+                "verticalAlignment": "BOTTOM"
+              }
+            ]
+          },
+          {
+            "type": "DetachedRepeat",
+            "id": "r1",
+            "name": "r1",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "Repeat (Depth 1)"
+                  }
+                ]
+              }
+            },
+            "repeatOverviewColumn": [
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-b6113",
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "elementRef": "F6"
+              }
+            ],
+            "groupRef": "G4",
+            "enableAdd": true,
+            "enableRemove": true,
+            "enableReorder": false,
+            "enableCopy": false,
+            "detailScreen": {
+              "id": "screen-b09f6",
+              "name": "Details",
+              "screenElements": [
+                {
+                  "type": "ControlGrid",
+                  "id": "controlgrid-33e85",
+                  "name": "cg",
+                  "row": [
+                    {
+                      "type": "Row",
+                      "id": "row-8c10c",
+                      "cell": [
+                        {
+                          "type": "Control",
+                          "id": "control-6b55f",
+                          "offset": {
+                            "lg": 0
+                          },
+                          "readonly": true,
+                          "elementRef": "F6"
+                        }
+                      ]
+                    }
+                  ],
+                  "verticalAlignment": "BOTTOM"
+                },
+                {
+                  "type": "Section",
+                  "id": "section-r1-not-collapsible",
+                  "name": "not-collapsible",
+                  "title": {
+                    "type": "Multilingual",
+                    "multilingualText": {
+                      "text": [
+                        {
+                          "locale": "en",
+                          "text": "Not Collapsible"
+                        }
+                      ]
+                    }
+                  },
+                  "screenElements": [
+                    {
+                      "type": "ControlGrid",
+                      "id": "controlgrid-48f04",
+                      "name": "cg",
+                      "row": [
+                        {
+                          "type": "Row",
+                          "id": "row-4aae4",
+                          "cell": [
+                            {
+                              "type": "TextCell",
+                              "id": "textcell-94704",
+                              "offset": {
+                                "lg": 0
+                              },
+                              "span": {
+                                "lg": 1
+                              },
+                              "name": "text",
+                              "content": {
+                                "text": [
+                                  {
+                                    "locale": "en",
+                                    "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore\net dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut\naliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum\ndolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui\nofficia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit\nvoluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore\nveritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia\nvoluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione\nvoluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur,\nadipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam\nquaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit\nlaboriosam, nisi ut liquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea\nvoluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas\nnulla pariatur?"
+                                  }
+                                ]
+                              }
+                            }
+                          ]
+                        }
+                      ],
+                      "verticalAlignment": "BOTTOM"
+                    }
+                  ]
+                },
+                {
+                  "type": "Section",
+                  "id": "section-r1-collapsible-closed",
+                  "name": "collapsible-closed",
+                  "title": {
+                    "type": "Multilingual",
+                    "multilingualText": {
+                      "text": [
+                        {
+                          "locale": "en",
+                          "text": "Collapsible Closed"
+                        }
+                      ]
+                    }
+                  },
+                  "collapsible": true,
+                  "initiallyCollapsed": true,
+                  "screenElements": [
+                    {
+                      "type": "ControlGrid",
+                      "id": "controlgrid-a1423",
+                      "name": "cg",
+                      "row": [
+                        {
+                          "type": "Row",
+                          "id": "row-960a9",
+                          "cell": [
+                            {
+                              "type": "Control",
+                              "id": "control-7e3c8",
+                              "elementRef": "F11"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "Row",
+                          "id": "row-d727c",
+                          "cell": [
+                            {
+                              "type": "TextCell",
+                              "id": "textcell-df80c",
+                              "offset": {
+                                "lg": 0
+                              },
+                              "span": {
+                                "lg": 1
+                              },
+                              "name": "text",
+                              "content": {
+                                "text": [
+                                  {
+                                    "locale": "en",
+                                    "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore\net dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut\naliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum\ndolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui\nofficia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit\nvoluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore\nveritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia\nvoluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione\nvoluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur,\nadipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam\nquaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit\nlaboriosam, nisi ut liquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea\nvoluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas\nnulla pariatur?"
+                                  }
+                                ]
+                              }
+                            }
+                          ]
+                        }
+                      ],
+                      "verticalAlignment": "BOTTOM"
+                    }
+                  ]
+                },
+                {
+                  "type": "Section",
+                  "id": "section-r1-collapsible-opened",
+                  "name": "collapsible-opened",
+                  "title": {
+                    "type": "Multilingual",
+                    "multilingualText": {
+                      "text": [
+                        {
+                          "locale": "en",
+                          "text": "Collapsible Opened"
+                        }
+                      ]
+                    }
+                  },
+                  "collapsible": true,
+                  "screenElements": [
+                    {
+                      "type": "ControlGrid",
+                      "id": "controlgrid-60cc2",
+                      "name": "cg",
+                      "row": [
+                        {
+                          "type": "Row",
+                          "id": "row-34af8",
+                          "cell": [
+                            {
+                              "type": "TextCell",
+                              "id": "textcell-19bd7",
+                              "offset": {
+                                "lg": 0
+                              },
+                              "span": {
+                                "lg": 1
+                              },
+                              "name": "text",
+                              "content": {
+                                "text": [
+                                  {
+                                    "locale": "en",
+                                    "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore\net dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut\naliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum\ndolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui\nofficia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit\nvoluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore\nveritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia\nvoluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione\nvoluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur,\nadipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam\nquaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit\nlaboriosam, nisi ut liquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea\nvoluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas\nnulla pariatur?"
+                                  }
+                                ]
+                              }
+                            }
+                          ]
+                        }
+                      ],
+                      "verticalAlignment": "BOTTOM"
+                    }
+                  ]
+                },
+                {
+                  "type": "DetachedRepeat",
+                  "id": "r2",
+                  "name": "r2",
+                  "title": {
+                    "type": "Multilingual",
+                    "multilingualText": {
+                      "text": [
+                        {
+                          "locale": "en",
+                          "text": "Repeat (Depth 2)"
+                        }
+                      ]
+                    }
+                  },
+                  "repeatOverviewColumn": [
+                    {
+                      "type": "FieldBasedRepeatOverviewColumn",
+                      "id": "fieldbasedrepeatoverviewcolumn-bd4c2",
+                      "width": 1,
+                      "sortable": false,
+                      "filterable": false,
+                      "preferredSorting": "ASC",
+                      "elementRef": "F8"
+                    }
+                  ],
+                  "groupRef": "G5",
+                  "enableAdd": true,
+                  "enableRemove": true,
+                  "enableReorder": false,
+                  "enableCopy": false,
+                  "detailScreen": {
+                    "id": "screen-f27c1",
+                    "name": "Details",
+                    "screenElements": [
+                      {
+                        "type": "ControlGrid",
+                        "id": "controlgrid-92159",
+                        "name": "cg",
+                        "row": [
+                          {
+                            "type": "Row",
+                            "id": "row-e88a9",
+                            "cell": [
+                              {
+                                "type": "Control",
+                                "id": "control-9ddaa",
+                                "offset": {
+                                  "lg": 0
+                                },
+                                "readonly": true,
+                                "elementRef": "F8"
+                              }
+                            ]
+                          }
+                        ],
+                        "verticalAlignment": "BOTTOM"
+                      },
+                      {
+                        "type": "Section",
+                        "id": "section-r2-not-collapsible",
+                        "name": "not-collapsible",
+                        "title": {
+                          "type": "Multilingual",
+                          "multilingualText": {
+                            "text": [
+                              {
+                                "locale": "en",
+                                "text": "Not Collapsible"
+                              }
+                            ]
+                          }
+                        },
+                        "screenElements": [
+                          {
+                            "type": "ControlGrid",
+                            "id": "controlgrid-1556e",
+                            "name": "cg",
+                            "row": [
+                              {
+                                "type": "Row",
+                                "id": "row-603e8",
+                                "cell": [
+                                  {
+                                    "type": "TextCell",
+                                    "id": "textcell-37d27",
+                                    "offset": {
+                                      "lg": 0
+                                    },
+                                    "span": {
+                                      "lg": 1
+                                    },
+                                    "name": "text",
+                                    "content": {
+                                      "text": [
+                                        {
+                                          "locale": "en",
+                                          "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore\net dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut\naliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum\ndolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui\nofficia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit\nvoluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore\nveritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia\nvoluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione\nvoluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur,\nadipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam\nquaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit\nlaboriosam, nisi ut liquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea\nvoluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas\nnulla pariatur?"
+                                        }
+                                      ]
+                                    }
+                                  }
+                                ]
+                              }
+                            ],
+                            "verticalAlignment": "BOTTOM"
+                          }
+                        ]
+                      },
+                      {
+                        "type": "Section",
+                        "id": "section-r2-collapsible-closed",
+                        "name": "collapsible-closed",
+                        "title": {
+                          "type": "Multilingual",
+                          "multilingualText": {
+                            "text": [
+                              {
+                                "locale": "en",
+                                "text": "Collapsible Closed"
+                              }
+                            ]
+                          }
+                        },
+                        "collapsible": true,
+                        "initiallyCollapsed": true,
+                        "screenElements": [
+                          {
+                            "type": "ControlGrid",
+                            "id": "controlgrid-59ee3",
+                            "name": "cg",
+                            "row": [
+                              {
+                                "type": "Row",
+                                "id": "row-9175c",
+                                "cell": [
+                                  {
+                                    "type": "TextCell",
+                                    "id": "textcell-1a476",
+                                    "offset": {
+                                      "lg": 0
+                                    },
+                                    "span": {
+                                      "lg": 1
+                                    },
+                                    "name": "text",
+                                    "content": {
+                                      "text": [
+                                        {
+                                          "locale": "en",
+                                          "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore\net dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut\naliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum\ndolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui\nofficia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit\nvoluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore\nveritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia\nvoluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione\nvoluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur,\nadipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam\nquaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit\nlaboriosam, nisi ut liquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea\nvoluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas\nnulla pariatur?"
+                                        }
+                                      ]
+                                    }
+                                  }
+                                ]
+                              }
+                            ],
+                            "verticalAlignment": "BOTTOM"
+                          }
+                        ]
+                      },
+                      {
+                        "type": "Section",
+                        "id": "section-r2-collapsible-opened",
+                        "name": "collapsible-opened",
+                        "title": {
+                          "type": "Multilingual",
+                          "multilingualText": {
+                            "text": [
+                              {
+                                "locale": "en",
+                                "text": "Collapsible Opened"
+                              }
+                            ]
+                          }
+                        },
+                        "collapsible": true,
+                        "screenElements": [
+                          {
+                            "type": "ControlGrid",
+                            "id": "controlgrid-5b45c",
+                            "name": "cg",
+                            "row": [
+                              {
+                                "type": "Row",
+                                "id": "row-b893e",
+                                "cell": [
+                                  {
+                                    "type": "TextCell",
+                                    "id": "textcell-d9ade",
+                                    "offset": {
+                                      "lg": 0
+                                    },
+                                    "span": {
+                                      "lg": 1
+                                    },
+                                    "name": "text",
+                                    "content": {
+                                      "text": [
+                                        {
+                                          "locale": "en",
+                                          "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore\net dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut\naliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum\ndolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui\nofficia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit\nvoluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore\nveritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia\nvoluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione\nvoluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur,\nadipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam\nquaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit\nlaboriosam, nisi ut liquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea\nvoluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas\nnulla pariatur?"
+                                        }
+                                      ]
+                                    }
+                                  }
+                                ]
+                              }
+                            ],
+                            "verticalAlignment": "BOTTOM"
+                          }
+                        ]
+                      },
+                      {
+                        "type": "DetachedRepeat",
+                        "id": "r3",
+                        "name": "r3",
+                        "title": {
+                          "type": "Multilingual",
+                          "multilingualText": {
+                            "text": [
+                              {
+                                "locale": "en",
+                                "text": "Repeat (Depth 3)"
+                              }
+                            ]
+                          }
+                        },
+                        "repeatOverviewColumn": [
+                          {
+                            "type": "FieldBasedRepeatOverviewColumn",
+                            "id": "fieldbasedrepeatoverviewcolumn-1e717",
+                            "width": 1,
+                            "sortable": false,
+                            "filterable": false,
+                            "preferredSorting": "ASC",
+                            "elementRef": "F9"
+                          }
+                        ],
+                        "groupRef": "G6",
+                        "enableAdd": true,
+                        "enableRemove": true,
+                        "enableReorder": false,
+                        "enableCopy": false,
+                        "detailScreen": {
+                          "id": "screen-8c262",
+                          "name": "Details",
+                          "screenElements": [
+                            {
+                              "type": "ControlGrid",
+                              "id": "controlgrid-18d7e",
+                              "name": "cg",
+                              "row": [
+                                {
+                                  "type": "Row",
+                                  "id": "row-ce092",
+                                  "cell": [
+                                    {
+                                      "type": "Control",
+                                      "id": "control-10d40",
+                                      "offset": {
+                                        "lg": 0
+                                      },
+                                      "readonly": true,
+                                      "elementRef": "F9"
+                                    }
+                                  ]
+                                }
+                              ],
+                              "verticalAlignment": "BOTTOM"
+                            },
+                            {
+                              "type": "Section",
+                              "id": "section-r3-not-collapsible",
+                              "name": "not-collapsible",
+                              "title": {
+                                "type": "Multilingual",
+                                "multilingualText": {
+                                  "text": [
+                                    {
+                                      "locale": "en",
+                                      "text": "Not Collapsible"
+                                    }
+                                  ]
+                                }
+                              },
+                              "screenElements": [
+                                {
+                                  "type": "ControlGrid",
+                                  "id": "controlgrid-750c3",
+                                  "name": "cg",
+                                  "row": [
+                                    {
+                                      "type": "Row",
+                                      "id": "row-204a9",
+                                      "cell": [
+                                        {
+                                          "type": "TextCell",
+                                          "id": "textcell-a57cc",
+                                          "offset": {
+                                            "lg": 0
+                                          },
+                                          "span": {
+                                            "lg": 1
+                                          },
+                                          "name": "text",
+                                          "content": {
+                                            "text": [
+                                              {
+                                                "locale": "en",
+                                                "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore\net dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut\naliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum\ndolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui\nofficia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit\nvoluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore\nveritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia\nvoluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione\nvoluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur,\nadipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam\nquaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit\nlaboriosam, nisi ut liquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea\nvoluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas\nnulla pariatur?"
+                                              }
+                                            ]
+                                          }
+                                        }
+                                      ]
+                                    }
+                                  ],
+                                  "verticalAlignment": "BOTTOM"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "Section",
+                              "id": "section-r3-collapsible-closed",
+                              "name": "collapsible-closed",
+                              "title": {
+                                "type": "Multilingual",
+                                "multilingualText": {
+                                  "text": [
+                                    {
+                                      "locale": "en",
+                                      "text": "Collapsible Closed"
+                                    }
+                                  ]
+                                }
+                              },
+                              "collapsible": true,
+                              "initiallyCollapsed": true,
+                              "screenElements": [
+                                {
+                                  "type": "ControlGrid",
+                                  "id": "controlgrid-3c6b3",
+                                  "name": "cg",
+                                  "row": [
+                                    {
+                                      "type": "Row",
+                                      "id": "row-f432d",
+                                      "cell": [
+                                        {
+                                          "type": "TextCell",
+                                          "id": "textcell-36722",
+                                          "offset": {
+                                            "lg": 0
+                                          },
+                                          "span": {
+                                            "lg": 1
+                                          },
+                                          "name": "text",
+                                          "content": {
+                                            "text": [
+                                              {
+                                                "locale": "en",
+                                                "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore\net dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut\naliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum\ndolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui\nofficia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit\nvoluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore\nveritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia\nvoluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione\nvoluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur,\nadipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam\nquaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit\nlaboriosam, nisi ut liquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea\nvoluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas\nnulla pariatur?"
+                                              }
+                                            ]
+                                          }
+                                        }
+                                      ]
+                                    }
+                                  ],
+                                  "verticalAlignment": "BOTTOM"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "Section",
+                              "id": "section-r3-collapsible-opened",
+                              "name": "collapsible-opened",
+                              "title": {
+                                "type": "Multilingual",
+                                "multilingualText": {
+                                  "text": [
+                                    {
+                                      "locale": "en",
+                                      "text": "Collapsible Opened"
+                                    }
+                                  ]
+                                }
+                              },
+                              "collapsible": true,
+                              "screenElements": [
+                                {
+                                  "type": "ControlGrid",
+                                  "id": "controlgrid-229ce",
+                                  "name": "cg",
+                                  "row": [
+                                    {
+                                      "type": "Row",
+                                      "id": "row-95412",
+                                      "cell": [
+                                        {
+                                          "type": "TextCell",
+                                          "id": "textcell-fdb14",
+                                          "offset": {
+                                            "lg": 0
+                                          },
+                                          "span": {
+                                            "lg": 1
+                                          },
+                                          "name": "text",
+                                          "content": {
+                                            "text": [
+                                              {
+                                                "locale": "en",
+                                                "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore\net dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut\naliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum\ndolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui\nofficia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit\nvoluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore\nveritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia\nvoluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione\nvoluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur,\nadipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam\nquaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit\nlaboriosam, nisi ut liquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea\nvoluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas\nnulla pariatur?"
+                                              }
+                                            ]
+                                          }
+                                        }
+                                      ]
+                                    }
+                                  ],
+                                  "verticalAlignment": "BOTTOM"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "fieldConfiguration": {
+      "field": [
+        {
+          "initialValue": "Dummy",
+          "elementRef": "F6"
+        },
+        {
+          "initialValue": "Dummy",
+          "elementRef": "F8"
+        },
+        {
+          "initialValue": "Dummy",
+          "elementRef": "F9"
+        }
+      ]
+    },
+    "groupConfiguration": {},
+    "defaults": {}
+  }
+}

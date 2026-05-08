@@ -1,0 +1,1335 @@
+{
+  "header": {
+    "id": "controls.uiId-document",
+    "modelType": "document",
+    "modelVersion": "28.4.0",
+    "locales": [
+      {
+        "code": "de"
+      },
+      {
+        "code": "en"
+      }
+    ],
+    "labels": [],
+    "annotations": [
+      {
+        "name": "roles",
+        "value": "admin"
+      }
+    ],
+    "modelReferences": []
+  },
+  "content": {
+    "modelInfo": {
+      "name": "controls.uiId-document",
+      "immutable": false
+    },
+    "modelConfig": {
+      "decimalSeparator": ".",
+      "timeZone": "UTC",
+      "conditionLanguage": {
+        "code": "en_US"
+      }
+    },
+    "typeDefinitions": [
+      {
+        "id": "typedef_4ee6ae87-e4b9-49d0-932f-8329a2d94e97",
+        "name": "A12Ref_Feldtyp01",
+        "fieldType": {
+          "type": "StringType",
+          "StringType": {
+            "errorMessage": [
+              {
+                "locale": "de",
+                "text": "Das Feld '$field$' darf nur Ziffern enthalten."
+              },
+              {
+                "locale": "en",
+                "text": "Das Feld '$field$' darf nur Ziffern enthalten."
+              }
+            ],
+            "minLength": 2,
+            "maxLength": 4,
+            "pattern": "[0-9]+"
+          }
+        }
+      },
+      {
+        "id": "typedef_a51c34cd-b42a-4dc9-8599-6709c2aec7af",
+        "name": "A12Ref_Feldtyp02",
+        "fieldType": {
+          "type": "EnumerationType",
+          "EnumerationType": {
+            "values": [
+              {
+                "value": "blue",
+                "label": [
+                  {
+                    "locale": "de",
+                    "text": "blue"
+                  },
+                  {
+                    "locale": "en",
+                    "text": "blue"
+                  }
+                ]
+              },
+              {
+                "value": "green",
+                "label": [
+                  {
+                    "locale": "de",
+                    "text": "green"
+                  },
+                  {
+                    "locale": "en",
+                    "text": "green"
+                  }
+                ]
+              },
+              {
+                "value": "red",
+                "label": [
+                  {
+                    "locale": "de",
+                    "text": "red"
+                  },
+                  {
+                    "locale": "en",
+                    "text": "red"
+                  }
+                ]
+              }
+            ],
+            "errorMessage": [
+              {
+                "locale": "en",
+                "text": "Das Feld '$field$' enthält einen ungültigen Wert."
+              },
+              {
+                "locale": "de",
+                "text": "Das Feld '$field$' enthält einen ungültigen Wert."
+              }
+            ]
+          }
+        }
+      },
+      {
+        "id": "typedef_ca833da5-5d32-4e29-845e-5d02ba95b216",
+        "name": "A12Ref_Feldtyp03_2",
+        "fieldType": {
+          "type": "EnumerationType",
+          "EnumerationType": {
+            "values": [
+              {
+                "value": "blue_darkblue",
+                "label": [
+                  {
+                    "locale": "de",
+                    "text": "Dark Blue"
+                  },
+                  {
+                    "locale": "en",
+                    "text": "Dark Blue"
+                  }
+                ]
+              },
+              {
+                "value": "green_darkgreen",
+                "label": [
+                  {
+                    "locale": "de",
+                    "text": "Dark Green"
+                  },
+                  {
+                    "locale": "en",
+                    "text": "Dark Green"
+                  }
+                ]
+              },
+              {
+                "value": "red_darkred",
+                "label": [
+                  {
+                    "locale": "de",
+                    "text": "Dark Red"
+                  },
+                  {
+                    "locale": "en",
+                    "text": "Dark Red"
+                  }
+                ]
+              },
+              {
+                "value": "blue_lightblue",
+                "label": [
+                  {
+                    "locale": "de",
+                    "text": "Light Blue"
+                  },
+                  {
+                    "locale": "en",
+                    "text": "Light Blue"
+                  }
+                ]
+              },
+              {
+                "value": "green_lightgreen",
+                "label": [
+                  {
+                    "locale": "de",
+                    "text": "Light Green"
+                  },
+                  {
+                    "locale": "en",
+                    "text": "Light Green"
+                  }
+                ]
+              },
+              {
+                "value": "red_lightred",
+                "label": [
+                  {
+                    "locale": "de",
+                    "text": "Light Red"
+                  },
+                  {
+                    "locale": "en",
+                    "text": "Light Red"
+                  }
+                ]
+              }
+            ],
+            "errorMessage": [
+              {
+                "locale": "en",
+                "text": "Das Feld '$field$' enthält einen ungültigen Wert."
+              },
+              {
+                "locale": "de",
+                "text": "Das Feld '$field$' enthält einen ungültigen Wert."
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "modelRoot": {
+      "rootGroups": [
+        {
+          "type": "Group",
+          "id": "K20",
+          "name": "A12T_PicusTypes",
+          "Group": {
+            "repeatability": 1,
+            "elements": [
+              {
+                "type": "Field",
+                "id": "id3948",
+                "name": "stringField",
+                "Field": {
+                  "fieldType": {
+                    "type": "StringType",
+                    "StringType": {
+                      "minLength": 3,
+                      "maxLength": 6
+                    }
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "String"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Field",
+                "id": "id3939",
+                "name": "numberField",
+                "Field": {
+                  "fieldType": {
+                    "type": "NumberType",
+                    "NumberType": {
+                      "minValue": 0
+                    }
+                  },
+                  "label": [
+                    {
+                      "locale": "de",
+                      "text": "Zahl"
+                    },
+                    {
+                      "locale": "en",
+                      "text": "Number"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Field",
+                "id": "F22",
+                "name": "booleanField",
+                "Field": {
+                  "fieldType": {
+                    "type": "BooleanType"
+                  },
+                  "label": [
+                    {
+                      "locale": "de",
+                      "text": "Boolean"
+                    },
+                    {
+                      "locale": "en",
+                      "text": "Boolean"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Field",
+                "id": "field_0a108",
+                "name": "confirmField",
+                "Field": {
+                  "fieldType": {
+                    "type": "ConfirmType"
+                  },
+                  "label": [
+                    {
+                      "locale": "de",
+                      "text": "Confirm"
+                    },
+                    {
+                      "locale": "en",
+                      "text": "Confirm"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Field",
+                "id": "id3963",
+                "name": "dateField",
+                "Field": {
+                  "fieldType": {
+                    "type": "DateType",
+                    "DateType": {
+                      "format": "yyyy-MM-dd"
+                    }
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "Date"
+                    },
+                    {
+                      "locale": "de",
+                      "text": "Datum"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Field",
+                "id": "F28",
+                "name": "dateTimeField",
+                "Field": {
+                  "fieldType": {
+                    "type": "DateTimeType",
+                    "DateTimeType": {
+                      "format": "yyyy-MM-dd'T'HH:mm:ss"
+                    }
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "Date and Time"
+                    },
+                    {
+                      "locale": "de",
+                      "text": "Datum und Zeit"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Field",
+                "id": "F29",
+                "name": "timeField",
+                "Field": {
+                  "fieldType": {
+                    "type": "TimeType",
+                    "TimeType": {
+                      "format": "HH:mm:ss"
+                    }
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "Time"
+                    },
+                    {
+                      "locale": "de",
+                      "text": "Zeit"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Field",
+                "id": "id31404",
+                "name": "enumerationFieldCompact",
+                "Field": {
+                  "fieldType": {
+                    "type": "EnumerationType",
+                    "EnumerationType": {
+                      "values": [
+                        {
+                          "value": "VALUE1",
+                          "label": [
+                            {
+                              "locale": "de",
+                              "text": "Label1"
+                            },
+                            {
+                              "locale": "en",
+                              "text": "Label1"
+                            }
+                          ]
+                        },
+                        {
+                          "value": "VALUE2",
+                          "label": [
+                            {
+                              "locale": "de",
+                              "text": "Label2"
+                            },
+                            {
+                              "locale": "en",
+                              "text": "Label2"
+                            }
+                          ]
+                        },
+                        {
+                          "value": "VALUE3",
+                          "label": [
+                            {
+                              "locale": "de",
+                              "text": "Label3"
+                            },
+                            {
+                              "locale": "en",
+                              "text": "Label3"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "Enumeration compact"
+                    },
+                    {
+                      "locale": "de",
+                      "text": "Aufzählung kompakt"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Field",
+                "id": "field_87d2c",
+                "name": "stringFieldArea",
+                "Field": {
+                  "fieldType": {
+                    "type": "StringType",
+                    "StringType": {
+                      "lineBreaksPermitted": true
+                    }
+                  },
+                  "label": [
+                    {
+                      "locale": "de",
+                      "text": "mehrzeiliger String"
+                    },
+                    {
+                      "locale": "en",
+                      "text": "Text Area"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Field",
+                "id": "fieldimpl_9a36c",
+                "name": "enumerationFieldRadio",
+                "Field": {
+                  "fieldType": {
+                    "type": "EnumerationType",
+                    "EnumerationType": {
+                      "values": [
+                        {
+                          "value": "VALUE1",
+                          "label": [
+                            {
+                              "locale": "de",
+                              "text": "Label1"
+                            },
+                            {
+                              "locale": "en",
+                              "text": "Label1"
+                            }
+                          ]
+                        },
+                        {
+                          "value": "VALUE2",
+                          "label": [
+                            {
+                              "locale": "de",
+                              "text": "Label2"
+                            },
+                            {
+                              "locale": "en",
+                              "text": "Label2"
+                            }
+                          ]
+                        },
+                        {
+                          "value": "VALUE3",
+                          "label": [
+                            {
+                              "locale": "de",
+                              "text": "Label3"
+                            },
+                            {
+                              "locale": "en",
+                              "text": "Label3"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "Enumeration radio"
+                    },
+                    {
+                      "locale": "de",
+                      "text": "Aufzählung Radio"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Field",
+                "id": "fieldimpl_59ab4",
+                "name": "enumerationFieldInline",
+                "Field": {
+                  "fieldType": {
+                    "type": "EnumerationType",
+                    "EnumerationType": {
+                      "values": [
+                        {
+                          "value": "VALUE1",
+                          "label": [
+                            {
+                              "locale": "de",
+                              "text": "Label1"
+                            },
+                            {
+                              "locale": "en",
+                              "text": "Label1"
+                            }
+                          ]
+                        },
+                        {
+                          "value": "VALUE2",
+                          "label": [
+                            {
+                              "locale": "de",
+                              "text": "Label2"
+                            },
+                            {
+                              "locale": "en",
+                              "text": "Label2"
+                            }
+                          ]
+                        },
+                        {
+                          "value": "VALUE3",
+                          "label": [
+                            {
+                              "locale": "de",
+                              "text": "Label3"
+                            },
+                            {
+                              "locale": "en",
+                              "text": "Label3"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "Enumeration inline"
+                    },
+                    {
+                      "locale": "de",
+                      "text": "Aufzählung Inline"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Field",
+                "id": "fieldimpl_30206",
+                "name": "enumerationFieldAutocomplete",
+                "Field": {
+                  "fieldType": {
+                    "type": "EnumerationType",
+                    "EnumerationType": {
+                      "values": [
+                        {
+                          "value": "VALUE1",
+                          "label": [
+                            {
+                              "locale": "de",
+                              "text": "Label1"
+                            },
+                            {
+                              "locale": "en",
+                              "text": "Label1"
+                            }
+                          ]
+                        },
+                        {
+                          "value": "VALUE2",
+                          "label": [
+                            {
+                              "locale": "de",
+                              "text": "Label2"
+                            },
+                            {
+                              "locale": "en",
+                              "text": "Label2"
+                            }
+                          ]
+                        },
+                        {
+                          "value": "VALUE3",
+                          "label": [
+                            {
+                              "locale": "de",
+                              "text": "Label3"
+                            },
+                            {
+                              "locale": "en",
+                              "text": "Label3"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "Enumeration autocomplete"
+                    },
+                    {
+                      "locale": "de",
+                      "text": "Aufzählung autocomplete"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Group",
+                "id": "G30",
+                "name": "InlineRepeat",
+                "Group": {
+                  "repeatability": 10,
+                  "elements": [
+                    {
+                      "type": "Field",
+                      "id": "F49",
+                      "name": "stringField",
+                      "Field": {
+                        "fieldType": {
+                          "type": "StringType",
+                          "StringType": {
+                            "minLength": 3,
+                            "maxLength": 6
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "String"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "F50",
+                      "name": "numberField",
+                      "Field": {
+                        "fieldType": {
+                          "type": "NumberType",
+                          "NumberType": {
+                            "minValue": 0
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "de",
+                            "text": "Zahl"
+                          },
+                          {
+                            "locale": "en",
+                            "text": "Number"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "F53",
+                      "name": "booleanField",
+                      "Field": {
+                        "fieldType": {
+                          "type": "BooleanType"
+                        },
+                        "label": [
+                          {
+                            "locale": "de",
+                            "text": "Boolean"
+                          },
+                          {
+                            "locale": "en",
+                            "text": "Boolean"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "fieldimpl_6d126",
+                      "name": "confirmField",
+                      "Field": {
+                        "fieldType": {
+                          "type": "ConfirmType"
+                        },
+                        "label": [
+                          {
+                            "locale": "de",
+                            "text": "Confirm"
+                          },
+                          {
+                            "locale": "en",
+                            "text": "Confirm"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "F51",
+                      "name": "dateField",
+                      "Field": {
+                        "fieldType": {
+                          "type": "DateType",
+                          "DateType": {
+                            "format": "yyyy-MM-dd"
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "Date"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "Datum"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "F54",
+                      "name": "dateTimeField",
+                      "Field": {
+                        "fieldType": {
+                          "type": "DateTimeType",
+                          "DateTimeType": {
+                            "format": "yyyy-MM-dd'T'HH:mm:ss"
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "Date and Time"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "Datum und Zeit"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "F55",
+                      "name": "timeField",
+                      "Field": {
+                        "fieldType": {
+                          "type": "TimeType",
+                          "TimeType": {
+                            "format": "HH:mm:ss"
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "Time"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "Zeit"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "F52",
+                      "name": "enumerationField",
+                      "Field": {
+                        "fieldType": {
+                          "type": "EnumerationType",
+                          "EnumerationType": {
+                            "values": [
+                              {
+                                "value": "VALUE1",
+                                "label": [
+                                  {
+                                    "locale": "de",
+                                    "text": "Label1"
+                                  },
+                                  {
+                                    "locale": "en",
+                                    "text": "Label1"
+                                  }
+                                ]
+                              },
+                              {
+                                "value": "VALUE2",
+                                "label": [
+                                  {
+                                    "locale": "de",
+                                    "text": "Label2"
+                                  },
+                                  {
+                                    "locale": "en",
+                                    "text": "Label2"
+                                  }
+                                ]
+                              },
+                              {
+                                "value": "VALUE3",
+                                "label": [
+                                  {
+                                    "locale": "de",
+                                    "text": "Label3"
+                                  },
+                                  {
+                                    "locale": "en",
+                                    "text": "Label3"
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "Enumeration"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "Aufzählung"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Group",
+                "id": "groupimpl_1dad2",
+                "name": "DetachedRepeat",
+                "Group": {
+                  "repeatability": 10,
+                  "elements": [
+                    {
+                      "type": "Field",
+                      "id": "fieldimpl_c2618",
+                      "name": "stringField",
+                      "Field": {
+                        "fieldType": {
+                          "type": "StringType",
+                          "StringType": {
+                            "minLength": 3,
+                            "maxLength": 6
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "String"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "fieldimpl_495e6",
+                      "name": "numberField",
+                      "Field": {
+                        "fieldType": {
+                          "type": "NumberType",
+                          "NumberType": {
+                            "minValue": 0
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "de",
+                            "text": "Zahl"
+                          },
+                          {
+                            "locale": "en",
+                            "text": "Number"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "fieldimpl_0fcee",
+                      "name": "booleanField",
+                      "Field": {
+                        "fieldType": {
+                          "type": "BooleanType"
+                        },
+                        "label": [
+                          {
+                            "locale": "de",
+                            "text": "Boolean"
+                          },
+                          {
+                            "locale": "en",
+                            "text": "Boolean"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "fieldimpl_e32df",
+                      "name": "confirmField",
+                      "Field": {
+                        "fieldType": {
+                          "type": "ConfirmType"
+                        },
+                        "label": [
+                          {
+                            "locale": "de",
+                            "text": "Confirm"
+                          },
+                          {
+                            "locale": "en",
+                            "text": "Confirm"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "fieldimpl_ef41c",
+                      "name": "dateField",
+                      "Field": {
+                        "fieldType": {
+                          "type": "DateType",
+                          "DateType": {
+                            "format": "yyyy-MM-dd"
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "Date"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "Datum"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "fieldimpl_b309c",
+                      "name": "dateTimeField",
+                      "Field": {
+                        "fieldType": {
+                          "type": "DateTimeType",
+                          "DateTimeType": {
+                            "format": "yyyy-MM-dd'T'HH:mm:ss"
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "Date and Time"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "Datum und Zeit"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "fieldimpl_bad82",
+                      "name": "timeField",
+                      "Field": {
+                        "fieldType": {
+                          "type": "TimeType",
+                          "TimeType": {
+                            "format": "HH:mm:ss"
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "Time"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "Zeit"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "fieldimpl_5dd46",
+                      "name": "enumerationField",
+                      "Field": {
+                        "fieldType": {
+                          "type": "EnumerationType",
+                          "EnumerationType": {
+                            "values": [
+                              {
+                                "value": "VALUE1",
+                                "label": [
+                                  {
+                                    "locale": "de",
+                                    "text": "Label1"
+                                  },
+                                  {
+                                    "locale": "en",
+                                    "text": "Label1"
+                                  }
+                                ]
+                              },
+                              {
+                                "value": "VALUE2",
+                                "label": [
+                                  {
+                                    "locale": "de",
+                                    "text": "Label2"
+                                  },
+                                  {
+                                    "locale": "en",
+                                    "text": "Label2"
+                                  }
+                                ]
+                              },
+                              {
+                                "value": "VALUE3",
+                                "label": [
+                                  {
+                                    "locale": "de",
+                                    "text": "Label3"
+                                  },
+                                  {
+                                    "locale": "en",
+                                    "text": "Label3"
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "Enumeration"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "Aufzählung"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Group",
+                "id": "group_b4f27",
+                "name": "EmbeddedRepeat",
+                "Group": {
+                  "repeatability": 10,
+                  "elements": [
+                    {
+                      "type": "Field",
+                      "id": "field_2a33f",
+                      "name": "stringField",
+                      "Field": {
+                        "fieldType": {
+                          "type": "StringType",
+                          "StringType": {
+                            "minLength": 3,
+                            "maxLength": 6
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "String"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_9db37",
+                      "name": "numberField",
+                      "Field": {
+                        "fieldType": {
+                          "type": "NumberType",
+                          "NumberType": {
+                            "minValue": 0
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "de",
+                            "text": "Zahl"
+                          },
+                          {
+                            "locale": "en",
+                            "text": "Number"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_fd200",
+                      "name": "booleanField",
+                      "Field": {
+                        "fieldType": {
+                          "type": "BooleanType"
+                        },
+                        "label": [
+                          {
+                            "locale": "de",
+                            "text": "Boolean"
+                          },
+                          {
+                            "locale": "en",
+                            "text": "Boolean"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_fdce1",
+                      "name": "confirmField",
+                      "Field": {
+                        "fieldType": {
+                          "type": "ConfirmType"
+                        },
+                        "label": [
+                          {
+                            "locale": "de",
+                            "text": "Confirm"
+                          },
+                          {
+                            "locale": "en",
+                            "text": "Confirm"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_81982",
+                      "name": "dateField",
+                      "Field": {
+                        "fieldType": {
+                          "type": "DateType",
+                          "DateType": {
+                            "format": "yyyy-MM-dd"
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "Date"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "Datum"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_ce946",
+                      "name": "dateTimeField",
+                      "Field": {
+                        "fieldType": {
+                          "type": "DateTimeType",
+                          "DateTimeType": {
+                            "format": "yyyy-MM-dd'T'HH:mm:ss"
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "Date and Time"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "Datum und Zeit"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_d6ad0",
+                      "name": "timeField",
+                      "Field": {
+                        "fieldType": {
+                          "type": "TimeType",
+                          "TimeType": {
+                            "format": "HH:mm:ss"
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "Time"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "Zeit"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_54aa9",
+                      "name": "enumerationField",
+                      "Field": {
+                        "fieldType": {
+                          "type": "EnumerationType",
+                          "EnumerationType": {
+                            "values": [
+                              {
+                                "value": "VALUE1",
+                                "label": [
+                                  {
+                                    "locale": "de",
+                                    "text": "Label1"
+                                  },
+                                  {
+                                    "locale": "en",
+                                    "text": "Label1"
+                                  }
+                                ]
+                              },
+                              {
+                                "value": "VALUE2",
+                                "label": [
+                                  {
+                                    "locale": "de",
+                                    "text": "Label2"
+                                  },
+                                  {
+                                    "locale": "en",
+                                    "text": "Label2"
+                                  }
+                                ]
+                              },
+                              {
+                                "value": "VALUE3",
+                                "label": [
+                                  {
+                                    "locale": "de",
+                                    "text": "Label3"
+                                  },
+                                  {
+                                    "locale": "en",
+                                    "text": "Label3"
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "Enumeration"
+                          },
+                          {
+                            "locale": "de",
+                            "text": "Aufzählung"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

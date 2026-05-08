@@ -1,0 +1,67 @@
+////
+SPDX-License-Identifier: EUPL-1.2 OR LicenseRef-commercial
+
+Copyright (c) 2012-2026 mgm technology partners GmbH
+
+Dual License
+------------
+This source file is part of the mgm A12 Platform and available under
+a choice of two different licenses:
+
+1. Open-Source License – EUPL v1.2
+   You may redistribute and/or modify this file under the terms of the
+   European Union Public License, version 1.2 - see https://eupl.eu/.
+
+2. Commercial License
+   Alternatively, you may obtain a commercial license from
+   mgm technology partners GmbH, that permits use of this software
+   under different terms (including support and maintenance services).
+
+   Please contact a12-license@mgm-tp.com for more information.
+
+You must select and comply with exactly one of the above license options.
+
+Warranty Disclaimer (applies to either option)
+----------------------------------------------
+THIS SOFTWARE IS PROVIDED "AS IS" AND WITHOUT WARRANTY OF ANY KIND,
+WHETHER EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NON-INFRINGEMENT, EXCEPT WHERE SUCH DISCLAIMERS ARE HELD TO BE
+LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
+////
+
+[#form-engine_tutorials_custom_elements]
+= Custom Model Elements
+
+The FormModelMap provides two special extension points for custom UI with complete own semantics:
+
+* CustomScreenElement: A custom element that can be placed inside a Screen, a Multi Column Section or a Section. It must handle an ID to output a unique HTML ID. Optionally a title, styles, annotations and a height can be passed to the element. 
+* CustomCell: A custom element that can only be placed inside of a Row of a ControlGrid. It must handle an ID. Optionally annotations, offset and span can be passed to the element.
+
+Both elements need to be implemented by the consumer. To achieve this, a custom FormModelMap needs to be implemented which provides rendering code for the custom model elements:
+
+[source,tsx]
+----
+const CustomFormModelMap: FormModelMap = {
+    ...DefaultFormModelMap,
+    CustomCell: {
+        component: (props: FormModelMap.FormModelComponentProps<FormModel.CustomCell>) => {
+            return <MyCustomCell />;
+        }
+    },
+    CustomScreenElement : {
+        component: (props: FormModelMap.FormModelComponentProps<FormModel.CustomScreenElement >) => {
+            return <MyCustomScreenElement />;
+        }
+    }
+}
+----
+
+The custom FormModelMap can then be passed via the Config object to the Form Engine.
+
+[NOTE]
+====
+The Form Engine will render a placeholder component if no custom component for CustomScreenElement or CustomCell is provided in the FormModelMap.
+
+It should be noted that these custom model elements have no predefined behavior. This means that information like the hidden, readonly and disabled status must be retrieved by the custom component itself. There are already API functionalities available to compute this kind of information, as described in <<form-engine_tutorials_rendering_enablements, Enablement of custom Form Model Elements>>.
+====

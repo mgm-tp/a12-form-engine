@@ -1,0 +1,978 @@
+{
+  "header": {
+    "id": "repeat.column-icons-form",
+    "modelType": "form",
+    "modelVersion": "37.4.0",
+    "locales": [
+      {
+        "code": "en"
+      }
+    ],
+    "annotations": [
+      {
+        "name": "roles",
+        "value": "admin"
+      }
+    ],
+    "modelReferences": [
+      {
+        "alias": "DM",
+        "modelType": "document",
+        "purpose": "data binding",
+        "reference": "repeat-document"
+      }
+    ]
+  },
+  "content": {
+    "subHeaderBox": {
+      "id": "subHeaderBox1"
+    },
+    "footerBox": {
+      "id": "footerBox1"
+    },
+    "screens": [
+      {
+        "id": "screen1",
+        "name": "Screen1",
+        "screenElements": [
+          {
+            "type": "InlineRepeat",
+            "id": "inlinerepeat-675ac",
+            "name": "column-icon-ir",
+            "repeatOverviewColumn": [
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-cff2c",
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "elementRef": "F18"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-ab684",
+                "width": 1,
+                "sortable": true,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "icon": {
+                  "name": "fitness_center"
+                },
+                "elementRef": "F19"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-39e96",
+                "width": 1,
+                "sortable": true,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "icon": {
+                  "name": "face"
+                },
+                "labelHidden": true,
+                "hint": {},
+                "datePickerConfig": {
+                  "absolute": false,
+                  "preselectionYear": 0
+                },
+                "elementRef": "F24"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-3992c",
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "icon": {
+                  "name": "settings"
+                },
+                "labelHidden": true,
+                "hint": {
+                  "text": [
+                    {
+                      "locale": "en",
+                      "text": "A Hint"
+                    }
+                  ]
+                },
+                "elementRef": "F25"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-c1f7b",
+                "width": 1,
+                "sortable": true,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "icon": {
+                  "name": "beach_access"
+                },
+                "hint": {
+                  "text": [
+                    {
+                      "locale": "en",
+                      "text": "A Hint"
+                    }
+                  ]
+                },
+                "datePickerConfig": {
+                  "absolute": false,
+                  "preselectionYear": 0
+                },
+                "elementRef": "field_d5c68"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-4cea7",
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "hint": {
+                  "text": [
+                    {
+                      "locale": "en",
+                      "text": "A Hint"
+                    }
+                  ]
+                },
+                "elementRef": "field_ba608"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-a266f",
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "labelHidden": true,
+                "elementRef": "F22"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-74629",
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "labelHidden": true,
+                "hint": {
+                  "text": [
+                    {
+                      "locale": "en",
+                      "text": "A Hint"
+                    }
+                  ]
+                },
+                "elementRef": "F_23"
+              },
+              {
+                "type": "ExpressionRepeatOverviewColumn",
+                "id": "expressionrepeatoverviewcolumn-b96a8",
+                "label": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "expr-1"
+                      }
+                    ]
+                  }
+                },
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "name": "expr-1",
+                "expression": "[L1_String] \" - \" [L1_Number]"
+              },
+              {
+                "type": "ExpressionRepeatOverviewColumn",
+                "id": "expressionrepeatoverviewcolumn-b5e6a",
+                "label": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "expr-2"
+                      }
+                    ]
+                  }
+                },
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "icon": {
+                  "name": "accessibility"
+                },
+                "name": "expr-2",
+                "expression": "[L1_String] \" - \" [L1_Number]"
+              },
+              {
+                "type": "ExpressionRepeatOverviewColumn",
+                "id": "expressionrepeatoverviewcolumn-06773",
+                "label": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "expr-3"
+                      }
+                    ]
+                  }
+                },
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "icon": {
+                  "name": "bug_report"
+                },
+                "labelHidden": true,
+                "name": "expr-3",
+                "expression": "[L1_String] \" - \" [L1_Number]"
+              },
+              {
+                "type": "ExpressionRepeatOverviewColumn",
+                "id": "expressionrepeatoverviewcolumn-c812c",
+                "label": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "expr-4"
+                      }
+                    ]
+                  }
+                },
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "labelHidden": true,
+                "name": "expr-4",
+                "expression": "[L1_String] \" - \" [L1_Number]"
+              }
+            ],
+            "groupRef": "G15",
+            "enableAdd": true,
+            "enableRemove": true,
+            "enableReorder": false,
+            "enableCopy": false
+          },
+          {
+            "type": "DetachedRepeat",
+            "id": "detachedrepeat-98492",
+            "name": "column-icon-dr",
+            "repeatOverviewColumn": [
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-32339",
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "elementRef": "F18"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-de426",
+                "width": 1,
+                "sortable": true,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "icon": {
+                  "name": "fitness_center"
+                },
+                "elementRef": "F19"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-417de",
+                "width": 1,
+                "sortable": true,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "icon": {
+                  "name": "face"
+                },
+                "labelHidden": true,
+                "hint": {},
+                "datePickerConfig": {
+                  "absolute": false,
+                  "preselectionYear": 0
+                },
+                "elementRef": "F24"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-3345d",
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "icon": {
+                  "name": "settings"
+                },
+                "labelHidden": true,
+                "hint": {
+                  "text": [
+                    {
+                      "locale": "en",
+                      "text": "A Hint"
+                    }
+                  ]
+                },
+                "elementRef": "F25"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-b89f4",
+                "width": 1,
+                "sortable": true,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "icon": {
+                  "name": "beach_access"
+                },
+                "hint": {
+                  "text": [
+                    {
+                      "locale": "en",
+                      "text": "A Hint"
+                    }
+                  ]
+                },
+                "datePickerConfig": {
+                  "absolute": false,
+                  "preselectionYear": 0
+                },
+                "elementRef": "field_d5c68"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-9f881",
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "hint": {
+                  "text": [
+                    {
+                      "locale": "en",
+                      "text": "A Hint"
+                    }
+                  ]
+                },
+                "elementRef": "field_ba608"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-34f84",
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "labelHidden": true,
+                "elementRef": "F22"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-bccba",
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "labelHidden": true,
+                "hint": {
+                  "text": [
+                    {
+                      "locale": "en",
+                      "text": "A Hint"
+                    }
+                  ]
+                },
+                "elementRef": "F_23"
+              },
+              {
+                "type": "ExpressionRepeatOverviewColumn",
+                "id": "expressionrepeatoverviewcolumn-af651",
+                "label": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "expr-1"
+                      }
+                    ]
+                  }
+                },
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "name": "expr-1",
+                "expression": "[L1_String] \" - \" [L1_Number]"
+              },
+              {
+                "type": "ExpressionRepeatOverviewColumn",
+                "id": "expressionrepeatoverviewcolumn-114be",
+                "label": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "expr-2"
+                      }
+                    ]
+                  }
+                },
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "icon": {
+                  "name": "accessibility"
+                },
+                "name": "expr-2",
+                "expression": "[L1_String] \" - \" [L1_Number]"
+              },
+              {
+                "type": "ExpressionRepeatOverviewColumn",
+                "id": "expressionrepeatoverviewcolumn-b5110",
+                "label": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "expr-3"
+                      }
+                    ]
+                  }
+                },
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "icon": {
+                  "name": "bug_report"
+                },
+                "labelHidden": true,
+                "name": "expr-3",
+                "expression": "[L1_String] \" - \" [L1_Number]"
+              },
+              {
+                "type": "ExpressionRepeatOverviewColumn",
+                "id": "expressionrepeatoverviewcolumn-bdfec",
+                "label": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "expr-4"
+                      }
+                    ]
+                  }
+                },
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "labelHidden": true,
+                "name": "expr-4",
+                "expression": "[L1_String] \" - \" [L1_Number]"
+              }
+            ],
+            "groupRef": "G15",
+            "enableAdd": true,
+            "enableRemove": true,
+            "enableReorder": false,
+            "enableCopy": false,
+            "detailScreen": {
+              "id": "screen-b89ab",
+              "name": "column-icon-ir-detail-screen",
+              "screenElements": [
+                {
+                  "type": "ControlGrid",
+                  "id": "controlgrid-045b5",
+                  "name": "cg",
+                  "row": [
+                    {
+                      "type": "Row",
+                      "id": "row-4220d",
+                      "cell": [
+                        {
+                          "type": "Control",
+                          "id": "control-c58a1",
+                          "elementRef": "F18"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "Row",
+                      "id": "row-e3ed0",
+                      "cell": [
+                        {
+                          "type": "Control",
+                          "id": "control-53262",
+                          "elementRef": "F19"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "Row",
+                      "id": "row-841f3",
+                      "cell": [
+                        {
+                          "type": "Control",
+                          "id": "control-2dd69",
+                          "hint": {},
+                          "datePickerConfig": {
+                            "absolute": false,
+                            "preselectionYear": 0
+                          },
+                          "elementRef": "F24"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "Row",
+                      "id": "row-7e1aa",
+                      "cell": [
+                        {
+                          "type": "Control",
+                          "id": "control-cadbc",
+                          "hint": {
+                            "text": [
+                              {
+                                "locale": "en",
+                                "text": "A Hint"
+                              }
+                            ]
+                          },
+                          "elementRef": "F25"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "Row",
+                      "id": "row-87d52",
+                      "cell": [
+                        {
+                          "type": "Control",
+                          "id": "control-c7677",
+                          "hint": {
+                            "text": [
+                              {
+                                "locale": "en",
+                                "text": "A Hint"
+                              }
+                            ]
+                          },
+                          "datePickerConfig": {
+                            "absolute": false,
+                            "preselectionYear": 0
+                          },
+                          "elementRef": "field_d5c68"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "Row",
+                      "id": "row-7d5f6",
+                      "cell": [
+                        {
+                          "type": "Control",
+                          "id": "control-8defd",
+                          "hint": {
+                            "text": [
+                              {
+                                "locale": "en",
+                                "text": "A Hint"
+                              }
+                            ]
+                          },
+                          "elementRef": "field_ba608"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "type": "EmbeddedRepeat",
+            "id": "embeddedrepeat-e62fb",
+            "name": "column-icon-er",
+            "repeatOverviewColumn": [
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-6f543",
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "elementRef": "F18"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-e4cb7",
+                "width": 1,
+                "sortable": true,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "icon": {
+                  "name": "fitness_center"
+                },
+                "elementRef": "F19"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-910a5",
+                "width": 1,
+                "sortable": true,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "icon": {
+                  "name": "face"
+                },
+                "labelHidden": true,
+                "hint": {},
+                "datePickerConfig": {
+                  "absolute": false,
+                  "preselectionYear": 0
+                },
+                "elementRef": "F24"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-99907",
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "icon": {
+                  "name": "settings"
+                },
+                "labelHidden": true,
+                "hint": {
+                  "text": [
+                    {
+                      "locale": "en",
+                      "text": "A Hint"
+                    }
+                  ]
+                },
+                "elementRef": "F25"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-624ea",
+                "width": 1,
+                "sortable": true,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "icon": {
+                  "name": "beach_access"
+                },
+                "hint": {
+                  "text": [
+                    {
+                      "locale": "en",
+                      "text": "A Hint"
+                    }
+                  ]
+                },
+                "datePickerConfig": {
+                  "absolute": false,
+                  "preselectionYear": 0
+                },
+                "elementRef": "field_d5c68"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-9136e",
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "hint": {
+                  "text": [
+                    {
+                      "locale": "en",
+                      "text": "A Hint"
+                    }
+                  ]
+                },
+                "elementRef": "field_ba608"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-77290",
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "labelHidden": true,
+                "elementRef": "F22"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-124f3",
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "labelHidden": true,
+                "hint": {
+                  "text": [
+                    {
+                      "locale": "en",
+                      "text": "A Hint"
+                    }
+                  ]
+                },
+                "elementRef": "F_23"
+              },
+              {
+                "type": "ExpressionRepeatOverviewColumn",
+                "id": "expressionrepeatoverviewcolumn-0f4e1",
+                "label": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "expr-1"
+                      }
+                    ]
+                  }
+                },
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "name": "expr-1",
+                "expression": "[L1_String] \" - \" [L1_Number]"
+              },
+              {
+                "type": "ExpressionRepeatOverviewColumn",
+                "id": "expressionrepeatoverviewcolumn-f52b7",
+                "label": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "expr-2"
+                      }
+                    ]
+                  }
+                },
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "icon": {
+                  "name": "accessibility"
+                },
+                "name": "expr-2",
+                "expression": "[L1_String] \" - \" [L1_Number]"
+              },
+              {
+                "type": "ExpressionRepeatOverviewColumn",
+                "id": "expressionrepeatoverviewcolumn-3fba2",
+                "label": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "expr-3"
+                      }
+                    ]
+                  }
+                },
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "icon": {
+                  "name": "bug_report"
+                },
+                "labelHidden": true,
+                "name": "expr-3",
+                "expression": "[L1_String] \" - \" [L1_Number]"
+              },
+              {
+                "type": "ExpressionRepeatOverviewColumn",
+                "id": "expressionrepeatoverviewcolumn-db62f",
+                "label": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "expr-4"
+                      }
+                    ]
+                  }
+                },
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "labelHidden": true,
+                "name": "expr-4",
+                "expression": "[L1_String] \" - \" [L1_Number]"
+              }
+            ],
+            "groupRef": "G15",
+            "enableAdd": true,
+            "enableRemove": true,
+            "enableReorder": false,
+            "enableCopy": false,
+            "controlGrid": {
+              "type": "ControlGrid",
+              "id": "controlgrid-3b605",
+              "name": "cg",
+              "row": [
+                {
+                  "type": "Row",
+                  "id": "row-237da",
+                  "cell": [
+                    {
+                      "type": "Control",
+                      "id": "control-1ef87",
+                      "elementRef": "F18"
+                    }
+                  ]
+                },
+                {
+                  "type": "Row",
+                  "id": "row-200e2",
+                  "cell": [
+                    {
+                      "type": "Control",
+                      "id": "control-96711",
+                      "elementRef": "F19"
+                    }
+                  ]
+                },
+                {
+                  "type": "Row",
+                  "id": "row-fa4de",
+                  "cell": [
+                    {
+                      "type": "Control",
+                      "id": "control-6d2d6",
+                      "hint": {},
+                      "datePickerConfig": {
+                        "absolute": false,
+                        "preselectionYear": 0
+                      },
+                      "elementRef": "F24"
+                    }
+                  ]
+                },
+                {
+                  "type": "Row",
+                  "id": "row-ff8dd",
+                  "cell": [
+                    {
+                      "type": "Control",
+                      "id": "control-d59d9",
+                      "hint": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "A Hint"
+                          }
+                        ]
+                      },
+                      "elementRef": "F25"
+                    }
+                  ]
+                },
+                {
+                  "type": "Row",
+                  "id": "row-fbbd6",
+                  "cell": [
+                    {
+                      "type": "Control",
+                      "id": "control-b34c1",
+                      "hint": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "A Hint"
+                          }
+                        ]
+                      },
+                      "datePickerConfig": {
+                        "absolute": false,
+                        "preselectionYear": 0
+                      },
+                      "elementRef": "field_d5c68"
+                    }
+                  ]
+                },
+                {
+                  "type": "Row",
+                  "id": "row-3a7c7",
+                  "cell": [
+                    {
+                      "type": "Control",
+                      "id": "control-6018d",
+                      "hint": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "A Hint"
+                          }
+                        ]
+                      },
+                      "elementRef": "field_ba608"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "fieldConfiguration": {
+      "field": [
+        {
+          "exposition": "AUTOCOMPLETE",
+          "elementRef": "F25"
+        },
+        {
+          "exposition": "CHECKBOX",
+          "elementRef": "F22"
+        },
+        {
+          "exposition": "CHECKBOX",
+          "elementRef": "F_23"
+        }
+      ]
+    },
+    "groupConfiguration": {},
+    "defaults": {},
+    "markingOfRequiredFields": "NONE"
+  }
+}

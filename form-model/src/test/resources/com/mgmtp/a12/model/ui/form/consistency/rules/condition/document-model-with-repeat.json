@@ -1,0 +1,144 @@
+{
+  "header": {
+    "id": "document-model-with-repeat",
+    "modelType": "document",
+    "modelVersion": "28.4.0",
+    "locales": [
+      {
+        "code": "en"
+      }
+    ],
+    "labels": [],
+    "annotations": [],
+    "modelReferences": []
+  },
+  "content": {
+    "modelInfo": {
+      "name": "document-model-with-repeat",
+      "immutable": false
+    },
+    "modelConfig": {
+      "timeZone": "UTC",
+      "decimalSeparator": ".",
+      "conditionLanguage": {
+        "code": "en_US"
+      }
+    },
+    "modelRoot": {
+      "rootGroups": [
+        {
+          "type": "Group",
+          "id": "group_root",
+          "name": "root",
+          "Group": {
+            "repeatability": 1,
+            "elements": [
+              {
+                "type": "Field",
+                "id": "field_enum_root",
+                "name": "enumFieldRoot",
+                "Field": {
+                  "fieldType": {
+                    "type": "EnumerationType",
+                    "EnumerationType": {
+                      "values": [
+                        {
+                          "value": "option1",
+                          "label": [
+                            {
+                              "locale": "en",
+                              "text": "Option 1"
+                            }
+                          ]
+                        },
+                        {
+                          "value": "option2",
+                          "label": [
+                            {
+                              "locale": "en",
+                              "text": "Option 2"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "Enum Field Root"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Group",
+                "id": "group_repeat",
+                "name": "repeatGroup",
+                "Group": {
+                  "repeatability": 100,
+                  "elements": [
+                    {
+                      "type": "Field",
+                      "id": "field_enum_repeat",
+                      "name": "enumFieldRepeat",
+                      "Field": {
+                        "fieldType": {
+                          "type": "EnumerationType",
+                          "EnumerationType": {
+                            "values": [
+                              {
+                                "value": "valueA",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "Value A"
+                                  }
+                                ]
+                              },
+                              {
+                                "value": "valueB",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "Value B"
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "Enum Field Repeat"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_target_repeat",
+                      "name": "targetFieldRepeat",
+                      "Field": {
+                        "fieldType": {
+                          "type": "StringType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "Target Field Repeat"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,641 @@
+{
+  "header": {
+    "id": "computation-validation.required.hide-asterisks-form",
+    "modelType": "form",
+    "modelVersion": "37.4.0",
+    "locales": [
+      {
+        "code": "en"
+      }
+    ],
+    "annotations": [
+      {
+        "name": "roles",
+        "value": "admin"
+      }
+    ],
+    "modelReferences": [
+      {
+        "alias": "DM",
+        "modelType": "document",
+        "purpose": "data binding",
+        "reference": "computation-validation.required-document"
+      }
+    ]
+  },
+  "content": {
+    "subHeaderBox": {
+      "id": "subHeaderBox"
+    },
+    "footerBox": {
+      "id": "footerBox"
+    },
+    "screens": [
+      {
+        "id": "screen1",
+        "name": "Screen1",
+        "title": {
+          "type": "Multilingual",
+          "multilingualText": {
+            "text": [
+              {
+                "locale": "en",
+                "text": "New Project - Sample Screen"
+              }
+            ]
+          }
+        },
+        "screenElements": [
+          {
+            "type": "ControlGrid",
+            "id": "controlgrid_dd7c8",
+            "name": "intro",
+            "row": [
+              {
+                "type": "Row",
+                "id": "row_29623",
+                "cell": [
+                  {
+                    "type": "TextCell",
+                    "id": "textcell_e4557",
+                    "name": "into",
+                    "decoration": "INFO",
+                    "content": {
+                      "text": [
+                        {
+                          "locale": "en",
+                          "text": "The same form as 'required', but the 'markingOfRequiredFields' setting is set to 'NONE' in the form model content. This should remove the asterisks from all elements."
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "ControlGrid",
+            "id": "controlgrid-d47c0",
+            "name": "all fields",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "All fields"
+                  }
+                ]
+              }
+            },
+            "layout": {
+              "lg": "6-6"
+            },
+            "row": [
+              {
+                "type": "Row",
+                "id": "row-5f2b7",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control-181a0",
+                    "elementRef": "F3"
+                  },
+                  {
+                    "type": "Control",
+                    "id": "control-9c3e1",
+                    "elementRef": "F4"
+                  }
+                ]
+              },
+              {
+                "type": "Row",
+                "id": "row-a825f",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control-c5092",
+                    "elementRef": "fieldimpl_92872"
+                  },
+                  {
+                    "type": "Control",
+                    "id": "control-20f57",
+                    "elementRef": "fieldimpl_22449"
+                  }
+                ]
+              },
+              {
+                "type": "Row",
+                "id": "row-443fa",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control-5c109",
+                    "elementRef": "field_396f0"
+                  },
+                  {
+                    "type": "Control",
+                    "id": "control-9dfe6",
+                    "elementRef": "fieldimpl_def20"
+                  }
+                ]
+              },
+              {
+                "type": "Row",
+                "id": "row-37191",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control-b3ffd",
+                    "elementRef": "fieldimpl_1c877"
+                  },
+                  {
+                    "type": "Control",
+                    "id": "control-1f412",
+                    "elementRef": "fieldimpl_44d1d"
+                  }
+                ]
+              }
+            ],
+            "verticalAlignment": "BOTTOM"
+          },
+          {
+            "type": "ControlGrid",
+            "id": "controlgrid-e613b",
+            "name": "enum-compact",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "Enumeration Exposition Full"
+                  }
+                ]
+              }
+            },
+            "row": [
+              {
+                "type": "Row",
+                "id": "row-b4cef",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control-43468",
+                    "elementRef": "F5"
+                  }
+                ]
+              },
+              {
+                "type": "Row",
+                "id": "row-fe40e",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control-ec3a2",
+                    "elementRef": "F14"
+                  }
+                ]
+              },
+              {
+                "type": "Row",
+                "id": "row-db193",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control-aac98",
+                    "elementRef": "F6"
+                  }
+                ]
+              },
+              {
+                "type": "Row",
+                "id": "row-1fb54",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control-ff4ae",
+                    "elementRef": "F7"
+                  }
+                ]
+              }
+            ],
+            "verticalAlignment": "BOTTOM"
+          },
+          {
+            "type": "ControlGrid",
+            "id": "controlgrid-db137",
+            "name": "enum-full",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "Enumeration Exposition Compact"
+                  }
+                ]
+              }
+            },
+            "row": [
+              {
+                "type": "Row",
+                "id": "row-f415d",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control-399f4",
+                    "elementRef": "F12"
+                  }
+                ]
+              },
+              {
+                "type": "Row",
+                "id": "row-43187",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control-eefce",
+                    "elementRef": "F10"
+                  }
+                ]
+              },
+              {
+                "type": "Row",
+                "id": "row-a6fae",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control-08951",
+                    "elementRef": "F11"
+                  }
+                ]
+              }
+            ],
+            "verticalAlignment": "BOTTOM"
+          },
+          {
+            "type": "DetachedRepeat",
+            "id": "detachedrepeat-f1567",
+            "name": "dr",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "Detached Repeat"
+                  }
+                ]
+              }
+            },
+            "repeatOverviewColumn": [
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-7aff1",
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "elementRef": "F15"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-a2267",
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "elementRef": "F9"
+              }
+            ],
+            "groupRef": "G8",
+            "enableAdd": true,
+            "enableRemove": true,
+            "enableReorder": false,
+            "enableCopy": false,
+            "detailScreen": {
+              "id": "screen-7ef8a",
+              "name": "Details",
+              "screenElements": [
+                {
+                  "type": "ControlGrid",
+                  "id": "controlgrid-aa66b",
+                  "name": "cg",
+                  "row": [
+                    {
+                      "type": "Row",
+                      "id": "row-65d6b",
+                      "cell": [
+                        {
+                          "type": "Control",
+                          "id": "control-5a551",
+                          "elementRef": "F15"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "Row",
+                      "id": "row-c39ea",
+                      "cell": [
+                        {
+                          "type": "Control",
+                          "id": "control-45495",
+                          "elementRef": "F9"
+                        }
+                      ]
+                    }
+                  ],
+                  "verticalAlignment": "BOTTOM"
+                }
+              ]
+            }
+          },
+          {
+            "type": "InlineRepeat",
+            "id": "inlinerepeat-fcab7",
+            "name": "ir",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "Inline Repeat"
+                  }
+                ]
+              }
+            },
+            "repeatOverviewColumn": [
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-d61c4",
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "elementRef": "F15"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-627a5",
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "elementRef": "F9"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-df592",
+                "label": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "RequiredBoolean"
+                      }
+                    ]
+                  }
+                },
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "elementRef": "field_240a2"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-55c54",
+                "label": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "Boolean with rule"
+                      }
+                    ]
+                  }
+                },
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "elementRef": "field_ca6fa"
+              }
+            ],
+            "groupRef": "G8",
+            "enableAdd": true,
+            "enableRemove": true,
+            "enableReorder": false,
+            "enableCopy": false
+          },
+          {
+            "type": "InlineRepeat",
+            "id": "inlinerepeat-660da",
+            "name": "inline-repeat-Repeat2",
+            "repeatOverviewColumn": [
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-ab3d3",
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "elementRef": "fieldimpl_147f2"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-3bc72",
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "elementRef": "fieldimpl_dda58"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-78056",
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "elementRef": "fieldimpl_df8fd"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-27aef",
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "elementRef": "fieldimpl_71569"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-fcc6e",
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "elementRef": "fieldimpl_5bf49"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-76b07",
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "elementRef": "fieldimpl_982c3"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-f07dc",
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "elementRef": "fieldimpl_f3f6e"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-1540f",
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "elementRef": "fieldimpl_b1db4"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-78a0d",
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "elementRef": "fieldimpl_bace0"
+              }
+            ],
+            "groupRef": "group_fcf1e",
+            "enableAdd": true,
+            "enableRemove": true
+          }
+        ]
+      }
+    ],
+    "fieldConfiguration": {
+      "field": [
+        {
+          "initialValue": "2",
+          "exposition": "COMPACT",
+          "elementRef": "F7"
+        },
+        {
+          "exposition": "COMPACT",
+          "elementRef": "F5"
+        },
+        {
+          "exposition": "COMPACT",
+          "elementRef": "F6"
+        },
+        {
+          "exposition": "FULL",
+          "elementRef": "F12"
+        },
+        {
+          "exposition": "FULL",
+          "elementRef": "F10"
+        },
+        {
+          "initialValue": "2",
+          "exposition": "FULL",
+          "elementRef": "F11"
+        },
+        {
+          "initialValue": "1",
+          "exposition": "COMPACT",
+          "elementRef": "F14"
+        },
+        {
+          "exposition": "AUTOCOMPLETE",
+          "elementRef": "fieldimpl_bace0"
+        }
+      ]
+    },
+    "groupConfiguration": {},
+    "defaults": {
+      "buttonLabels": {
+        "ADD": {
+          "text": [
+            {
+              "locale": "en",
+              "text": "add"
+            }
+          ]
+        },
+        "COMMIT_ADD": {
+          "text": [
+            {
+              "locale": "en",
+              "text": "commit"
+            }
+          ]
+        },
+        "APPLY": {
+          "text": [
+            {
+              "locale": "en",
+              "text": "apply changes"
+            }
+          ]
+        },
+        "EDIT": {
+          "text": [
+            {
+              "locale": "en",
+              "text": "edit"
+            }
+          ]
+        },
+        "REMOVE": {
+          "text": [
+            {
+              "locale": "en",
+              "text": "remove"
+            }
+          ]
+        },
+        "VIEW": {
+          "text": [
+            {
+              "locale": "en",
+              "text": "open"
+            }
+          ]
+        },
+        "CANCEL": {
+          "text": [
+            {
+              "locale": "en",
+              "text": "cancel"
+            }
+          ]
+        },
+        "RETURN": {
+          "text": [
+            {
+              "locale": "en",
+              "text": "return"
+            }
+          ]
+        },
+        "UP": {},
+        "DOWN": {}
+      }
+    },
+    "markingOfRequiredFields": "NONE"
+  }
+}

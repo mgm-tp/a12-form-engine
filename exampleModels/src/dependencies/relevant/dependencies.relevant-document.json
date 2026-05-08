@@ -1,0 +1,390 @@
+{
+  "header": {
+    "id": "dependencies.relevant-document",
+    "modelType": "document",
+    "modelVersion": "28.4.0",
+    "locales": [
+      {
+        "code": "en"
+      }
+    ],
+    "labels": [],
+    "annotations": [
+      {
+        "name": "roles",
+        "value": "admin"
+      }
+    ],
+    "modelReferences": []
+  },
+  "content": {
+    "modelInfo": {
+      "name": "dependencies.relevant-document"
+    },
+    "modelConfig": {
+      "decimalSeparator": ".",
+      "timeZone": "UTC",
+      "conditionLanguage": {
+        "code": "en_US"
+      }
+    },
+    "modelRoot": {
+      "rootGroups": [
+        {
+          "type": "Group",
+          "id": "group_0af9d",
+          "name": "base",
+          "Group": {
+            "repeatability": 1,
+            "elements": [
+              {
+                "type": "Field",
+                "id": "field_f7206",
+                "name": "disableSingleField",
+                "Field": {
+                  "fieldType": {
+                    "type": "ConfirmType"
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "disableSingleField"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Field",
+                "id": "field_7477d",
+                "name": "disableRepeatableFields",
+                "Field": {
+                  "fieldType": {
+                    "type": "ConfirmType"
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "disableRepeatableFields"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Field",
+                "id": "field_37fd3",
+                "name": "disableSingleGroup",
+                "Field": {
+                  "fieldType": {
+                    "type": "ConfirmType"
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "disableSingleGroup"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Field",
+                "id": "field_679b7",
+                "name": "disableRepeatableGroup",
+                "Field": {
+                  "fieldType": {
+                    "type": "ConfirmType"
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "disableRepeatableGroup"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Group",
+                "id": "group_a666f",
+                "name": "targets",
+                "Group": {
+                  "repeatability": 1,
+                  "elements": [
+                    {
+                      "type": "Field",
+                      "id": "field_e28e9",
+                      "name": "singleField",
+                      "Field": {
+                        "fieldType": {
+                          "type": "StringType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "singleField"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Rule",
+                      "id": "rule_13e79",
+                      "name": "singleFieldInvalid",
+                      "Rule": {
+                        "errorEntityRelPath": "../singleField",
+                        "errorCode": "Error rule_13e79",
+                        "errorCondition": "GroupFilled(RuleGroup) and FieldFilled(singleField) and [singleField] == \"error\"",
+                        "severity": "ERROR",
+                        "errorMessage": [
+                          {
+                            "locale": "en",
+                            "text": "This value is not allowed."
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Group",
+                      "id": "group_e68ae",
+                      "name": "repeatIt",
+                      "Group": {
+                        "repeatability": 10,
+                        "elements": [
+                          {
+                            "type": "Field",
+                            "id": "field_6c437",
+                            "name": "repeatableField",
+                            "Field": {
+                              "fieldType": {
+                                "type": "StringType"
+                              },
+                              "label": [
+                                {
+                                  "locale": "en",
+                                  "text": "repeatableField"
+                                }
+                              ]
+                            }
+                          },
+                          {
+                            "type": "Field",
+                            "id": "field_07342",
+                            "name": "anotherField",
+                            "Field": {
+                              "fieldType": {
+                                "type": "StringType"
+                              },
+                              "label": [
+                                {
+                                  "locale": "en",
+                                  "text": "anotherField"
+                                }
+                              ]
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Group",
+                      "id": "group_a6bee",
+                      "name": "singleGroup",
+                      "Group": {
+                        "repeatability": 1,
+                        "elements": [
+                          {
+                            "type": "Field",
+                            "id": "field_c9192",
+                            "name": "someField1",
+                            "Field": {
+                              "fieldType": {
+                                "type": "StringType"
+                              },
+                              "label": [
+                                {
+                                  "locale": "en",
+                                  "text": "someField1"
+                                }
+                              ]
+                            }
+                          },
+                          {
+                            "type": "Field",
+                            "id": "field_1c513",
+                            "name": "someField2",
+                            "Field": {
+                              "fieldType": {
+                                "type": "StringType"
+                              },
+                              "label": [
+                                {
+                                  "locale": "en",
+                                  "text": "someField2"
+                                }
+                              ]
+                            }
+                          },
+                          {
+                            "type": "Group",
+                            "id": "group_91c13",
+                            "name": "subGroup1",
+                            "Group": {
+                              "repeatability": 10,
+                              "elements": [
+                                {
+                                  "type": "Field",
+                                  "id": "field_db0f1",
+                                  "name": "subField",
+                                  "Field": {
+                                    "fieldType": {
+                                      "type": "StringType"
+                                    },
+                                    "label": [
+                                      {
+                                        "locale": "en",
+                                        "text": "subField"
+                                      }
+                                    ]
+                                  }
+                                }
+                              ]
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Group",
+                      "id": "group_f1b8e",
+                      "name": "repeatableGroup",
+                      "Group": {
+                        "repeatability": 10,
+                        "elements": [
+                          {
+                            "type": "Field",
+                            "id": "field_e61cf",
+                            "name": "repeatableField1",
+                            "Field": {
+                              "fieldType": {
+                                "type": "StringType"
+                              },
+                              "label": [
+                                {
+                                  "locale": "en",
+                                  "text": "repeatableField1"
+                                }
+                              ]
+                            }
+                          },
+                          {
+                            "type": "Rule",
+                            "id": "rule_f5e1f",
+                            "name": "repeatableField1Invalid",
+                            "Rule": {
+                              "errorEntityRelPath": "../repeatableField1",
+                              "errorCode": "Error rule_f5e1f",
+                              "errorCondition": "GroupFilled(RuleGroup) and FieldFilled(repeatableField1) and [repeatableField1] == \"error\"",
+                              "severity": "ERROR",
+                              "errorMessage": [
+                                {
+                                  "locale": "en",
+                                  "text": "This value is not allowed."
+                                }
+                              ]
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "Group",
+          "id": "group_a7b58",
+          "name": "test",
+          "Group": {
+            "repeatability": 1,
+            "elements": [
+              {
+                "type": "Group",
+                "id": "group_82149",
+                "name": "repeatableLevel",
+                "Group": {
+                  "repeatability": 10,
+                  "elements": [
+                    {
+                      "type": "Field",
+                      "id": "field_97671",
+                      "name": "trigger",
+                      "Field": {
+                        "fieldType": {
+                          "type": "EnumerationType",
+                          "EnumerationType": {
+                            "values": [
+                              {
+                                "value": "a",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "a"
+                                  }
+                                ]
+                              },
+                              {
+                                "value": "b",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "b"
+                                  }
+                                ]
+                              },
+                              {
+                                "value": "c",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "c"
+                                  }
+                                ]
+                              }
+                            ],
+                            "categories": []
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "trigger"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_fa494",
+                      "name": "dependent",
+                      "Field": {
+                        "fieldType": {
+                          "type": "StringType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "dependent"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

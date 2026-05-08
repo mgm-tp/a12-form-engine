@@ -1,0 +1,1061 @@
+{
+  "header": {
+    "id": "computation-validation.validate-fields-document",
+    "modelType": "document",
+    "modelVersion": "28.4.0",
+    "locales": [
+      {
+        "code": "en"
+      }
+    ],
+    "labels": [],
+    "annotations": [
+      {
+        "name": "roles",
+        "value": "admin"
+      }
+    ],
+    "modelReferences": []
+  },
+  "content": {
+    "modelInfo": {
+      "name": "computation-validation.validate-fields-document",
+      "immutable": false,
+      "joinedModelsInfo": "computation-validation.validate-fields-document-document-meta-data+Add"
+    },
+    "modelConfig": {
+      "decimalSeparator": ".",
+      "timeZone": "UTC",
+      "conditionLanguage": {
+        "code": "en_US"
+      }
+    },
+    "modelRoot": {
+      "rootGroups": [
+        {
+          "type": "Group",
+          "id": "group_6046d",
+          "name": "base",
+          "Group": {
+            "repeatability": 1,
+            "elements": [
+              {
+                "type": "Group",
+                "id": "group_b1c68",
+                "name": "fieldValueChange",
+                "Group": {
+                  "repeatability": 1,
+                  "elements": [
+                    {
+                      "type": "Field",
+                      "id": "field_0e6c7",
+                      "name": "master",
+                      "Field": {
+                        "fieldType": {
+                          "type": "EnumerationType",
+                          "EnumerationType": {
+                            "values": [
+                              {
+                                "value": "a",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "A"
+                                  }
+                                ]
+                              },
+                              {
+                                "value": "b",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "B"
+                                  }
+                                ]
+                              },
+                              {
+                                "value": "c",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "C"
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "master"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_aecd0",
+                      "name": "slave",
+                      "Field": {
+                        "fieldType": {
+                          "type": "EnumerationType",
+                          "EnumerationType": {
+                            "values": [
+                              {
+                                "value": "d",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "D"
+                                  }
+                                ]
+                              },
+                              {
+                                "value": "e",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "E"
+                                  }
+                                ]
+                              },
+                              {
+                                "value": "f",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "F"
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "slave"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_a4193",
+                      "name": "numField",
+                      "Field": {
+                        "fieldType": {
+                          "type": "NumberType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "numField"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_3324a",
+                      "name": "bool",
+                      "Field": {
+                        "fieldType": {
+                          "type": "BooleanType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "bool"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_2a2ca",
+                      "name": "notRelevantString",
+                      "Field": {
+                        "fieldType": {
+                          "type": "StringType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": ""
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Group",
+                      "id": "group_28f72",
+                      "name": "depGroup",
+                      "Group": {
+                        "repeatability": 1,
+                        "elements": [
+                          {
+                            "type": "Field",
+                            "id": "field_68365",
+                            "name": "stringField",
+                            "Field": {
+                              "fieldType": {
+                                "type": "StringType"
+                              },
+                              "label": [
+                                {
+                                  "locale": "en",
+                                  "text": "stringField"
+                                }
+                              ],
+                              "requirednessConfig": {
+                                "mode": "absoluteOrRelativeToNextRepAncestor"
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Rule",
+                      "id": "rule_4655e",
+                      "name": "masterSlaveConstraints",
+                      "Rule": {
+                        "errorEntityRelPath": "../slave",
+                        "errorCode": "Error rule_4655e",
+                        "errorCondition": "AllFieldsFilled(master, slave) and [master] == \"b\" and [slave] == \"e\"",
+                        "severity": "ERROR",
+                        "errorMessage": [
+                          {
+                            "locale": "en",
+                            "text": "a combination \"b\" and \"e\" is not allowed"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Rule",
+                      "id": "rule_4df2a",
+                      "name": "masterSlaveConstraints2",
+                      "Rule": {
+                        "errorEntityRelPath": "../slave",
+                        "errorCode": "Error rule_4655e",
+                        "errorCondition": "AllFieldsFilled(master, slave) and [master] == \"c\" and [slave] == \"f\"",
+                        "severity": "ERROR",
+                        "errorMessage": [
+                          {
+                            "locale": "en",
+                            "text": "a combination \"c\" and \"f\" is not allowed"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Rule",
+                      "id": "rule_624ab",
+                      "name": "masterNumFieldConstraints",
+                      "Rule": {
+                        "errorEntityRelPath": "../numField",
+                        "errorCode": "Error rule_624ab",
+                        "errorCondition": "FieldFilled(master) and FieldNotFilled(numField)",
+                        "severity": "ERROR",
+                        "errorMessage": [
+                          {
+                            "locale": "en",
+                            "text": "master and numField must be filled together"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Rule",
+                      "id": "rule_b363e",
+                      "name": "masterNumFieldConstraints2",
+                      "Rule": {
+                        "errorEntityRelPath": "../numField",
+                        "errorCode": "Error rule_624ab",
+                        "errorCondition": "AllFieldsFilled(master, numField) and [master] == \"c\" and [numField] == 123",
+                        "severity": "ERROR",
+                        "errorMessage": [
+                          {
+                            "locale": "en",
+                            "text": "numField may not have the value 123 if master is \"c\""
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Rule",
+                      "id": "rule_7d281",
+                      "name": "masterBoolConstraints",
+                      "Rule": {
+                        "errorEntityRelPath": "../bool",
+                        "errorCode": "Error rule_7d281",
+                        "errorCondition": "AllFieldsFilled(master, bool) and [bool] == False",
+                        "severity": "ERROR",
+                        "errorMessage": [
+                          {
+                            "locale": "en",
+                            "text": "This field must be set to True if master is filled."
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Rule",
+                      "id": "rule_e319d",
+                      "name": "masterStringConstraints",
+                      "Rule": {
+                        "errorEntityRelPath": "../notRelevantString",
+                        "errorCode": "Error rule_e319d",
+                        "errorCondition": "FieldFilled(master) AND [master] == \"b\" AND FieldFilled(notRelevantString) AND [notRelevantString] == \"Error\"",
+                        "severity": "ERROR",
+                        "errorMessage": [
+                          {
+                            "locale": "en",
+                            "text": "Value \"Error\" is not allowed while master is \"b\""
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Rule",
+                      "id": "rule_59deb",
+                      "name": "numFieldConstraint",
+                      "Rule": {
+                        "errorEntityRelPath": "../numField",
+                        "errorCode": "Error rule_59deb",
+                        "errorCondition": "FieldFilled(numField) AND [numField] < 100",
+                        "severity": "ERROR",
+                        "errorMessage": [
+                          {
+                            "locale": "en",
+                            "text": "NumField may not be smaller than 100"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Group",
+                "id": "group_c0846",
+                "name": "multiSelectValueChange",
+                "Group": {
+                  "repeatability": 1,
+                  "elements": [
+                    {
+                      "type": "Group",
+                      "id": "group_ab87f",
+                      "name": "multiSelect",
+                      "Group": {
+                        "repeatability": 999999,
+                        "usageType": "multi-select",
+                        "elements": [
+                          {
+                            "type": "Field",
+                            "id": "field_28e38",
+                            "name": "value",
+                            "Field": {
+                              "fieldType": {
+                                "type": "EnumerationType",
+                                "EnumerationType": {
+                                  "values": [
+                                    {
+                                      "value": "key1",
+                                      "label": []
+                                    },
+                                    {
+                                      "value": "key2",
+                                      "label": []
+                                    }
+                                  ]
+                                }
+                              },
+                              "requirednessConfig": {
+                                "mode": "absoluteOrRelativeToNextRepAncestor"
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_3db33",
+                      "name": "computedFieldMultiSelect",
+                      "Field": {
+                        "fieldType": {
+                          "type": "EnumerationType",
+                          "EnumerationType": {
+                            "values": [
+                              {
+                                "value": "empty",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "Multi Select empty"
+                                  }
+                                ]
+                              },
+                              {
+                                "value": "filled",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "Multi Select filled"
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "Computed by Multi Select"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Computation",
+                      "id": "computation_ddb26",
+                      "name": "computationMultiSelect",
+                      "Computation": {
+                        "computedFieldRelPath": "../computedFieldMultiSelect",
+                        "computationAlternatives": [
+                          {
+                            "operation": "\"empty\"",
+                            "precondition": "NoGroupFilled(multiSelect*)"
+                          },
+                          {
+                            "operation": "\"filled\"",
+                            "precondition": "AtLeastOneGroupFilled(multiSelect*)"
+                          }
+                        ],
+                        "errorMessage": [
+                          {
+                            "locale": "en",
+                            "text": "error text for computation of computationMultiSelect"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_eab6d",
+                      "name": "errorFieldMultiSelect",
+                      "Field": {
+                        "fieldType": {
+                          "type": "StringType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "Error from Multi Select"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Rule",
+                      "id": "rule_ee55f",
+                      "name": "ruleMultiSelect",
+                      "Rule": {
+                        "errorEntityRelPath": "../errorFieldMultiSelect",
+                        "errorCode": "Error rule_ee55f",
+                        "errorCondition": "FieldFilled(computedFieldMultiSelect) AND [computedFieldMultiSelect] == \"filled\" AND FieldFilled(errorFieldMultiSelect) AND [errorFieldMultiSelect] == \"Error\"",
+                        "severity": "ERROR",
+                        "errorMessage": [
+                          {
+                            "locale": "en",
+                            "text": "Value \"Error\" is not allowed while Multi Select is filled"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Group",
+                "id": "group_f7101",
+                "name": "attachmentValueChange",
+                "Group": {
+                  "repeatability": 1,
+                  "elements": [
+                    {
+                      "type": "Group",
+                      "id": "group_f0fc3",
+                      "name": "attachment",
+                      "Group": {
+                        "repeatability": 1,
+                        "usageType": "attachment",
+                        "elements": [
+                          {
+                            "type": "Field",
+                            "id": "field_8b8f6",
+                            "name": "original_filename",
+                            "Field": {
+                              "fieldType": {
+                                "type": "StringType"
+                              }
+                            }
+                          },
+                          {
+                            "type": "Field",
+                            "id": "field_105a5",
+                            "name": "internal_filename",
+                            "Field": {
+                              "fieldType": {
+                                "type": "StringType"
+                              }
+                            }
+                          },
+                          {
+                            "type": "Field",
+                            "id": "field_ff006",
+                            "name": "content",
+                            "Field": {
+                              "fieldType": {
+                                "type": "StringType",
+                                "StringType": {
+                                  "lineBreaksPermitted": true,
+                                  "noValueValidation": true
+                                }
+                              }
+                            }
+                          },
+                          {
+                            "type": "Field",
+                            "id": "field_808e2",
+                            "name": "attachment_id",
+                            "Field": {
+                              "fieldType": {
+                                "type": "StringType"
+                              }
+                            }
+                          },
+                          {
+                            "type": "Field",
+                            "id": "field_0118b",
+                            "name": "size",
+                            "Field": {
+                              "fieldType": {
+                                "type": "NumberType"
+                              }
+                            }
+                          },
+                          {
+                            "type": "Field",
+                            "id": "field_bfa89",
+                            "name": "mime_type",
+                            "Field": {
+                              "fieldType": {
+                                "type": "StringType"
+                              }
+                            }
+                          },
+                          {
+                            "type": "Field",
+                            "id": "field_1e1f9",
+                            "name": "category",
+                            "Field": {
+                              "fieldType": {
+                                "type": "StringType"
+                              }
+                            }
+                          },
+                          {
+                            "type": "Field",
+                            "id": "field_75ebf",
+                            "name": "description",
+                            "Field": {
+                              "fieldType": {
+                                "type": "StringType"
+                              }
+                            }
+                          },
+                          {
+                            "type": "Rule",
+                            "id": "rule_1f8f6",
+                            "name": "AttachmentInternalFilenameRequired",
+                            "Rule": {
+                              "errorEntityRelPath": "../internal_filename",
+                              "errorCode": "Error rule_1f8f6",
+                              "errorCondition": "GroupFilled(RuleGroup) and FieldNotFilled(internal_filename)",
+                              "severity": "ERROR",
+                              "errorMessage": [
+                                {
+                                  "locale": "en",
+                                  "text": "Internal Error: Field internal_filename of customType attachment is not filled."
+                                }
+                              ]
+                            }
+                          },
+                          {
+                            "type": "Rule",
+                            "id": "rule_56174",
+                            "name": "AttachmentMimeTypeRequired",
+                            "Rule": {
+                              "errorEntityRelPath": "../mime_type",
+                              "errorCode": "Error rule_56174",
+                              "errorCondition": "GroupFilled(RuleGroup) and FieldNotFilled(mime_type)",
+                              "severity": "ERROR",
+                              "errorMessage": [
+                                {
+                                  "locale": "en",
+                                  "text": "Internal Error: Field mime_type of customType attachment is not filled."
+                                }
+                              ]
+                            }
+                          },
+                          {
+                            "type": "Rule",
+                            "id": "rule_addb6",
+                            "name": "AttachmentIdOrContentFilled",
+                            "Rule": {
+                              "errorEntityRelPath": "../content",
+                              "errorCode": "Error rule_addb6",
+                              "errorCondition": "GroupFilled(RuleGroup) and NotExactlyOneFieldFilled(attachment_id, content)",
+                              "severity": "ERROR",
+                              "errorMessage": [
+                                {
+                                  "locale": "en",
+                                  "text": "Internal Error: Either attachment_id or content must be filled in a customType attachment, but not both."
+                                }
+                              ]
+                            }
+                          },
+                          {
+                            "type": "Rule",
+                            "id": "rule_3860e",
+                            "name": "SizeOfContentFilled",
+                            "Rule": {
+                              "errorEntityRelPath": "../content",
+                              "errorCode": "Error rule_3860e",
+                              "errorCondition": "FieldFilled(content) and FieldNotFilled(size)",
+                              "severity": "ERROR",
+                              "errorMessage": [
+                                {
+                                  "locale": "en",
+                                  "text": "Internal Error: If the content is filled, the size must be also filled."
+                                }
+                              ]
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_1eae4",
+                      "name": "computedFieldAttachment",
+                      "Field": {
+                        "fieldType": {
+                          "type": "EnumerationType",
+                          "EnumerationType": {
+                            "values": [
+                              {
+                                "value": "empty",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "Attachment empty"
+                                  }
+                                ]
+                              },
+                              {
+                                "value": "filled",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "Attachment uploaded"
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "Computed by Multi Select"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Computation",
+                      "id": "computation_3bbee",
+                      "name": "computationAttachment",
+                      "Computation": {
+                        "computedFieldRelPath": "../computedFieldAttachment",
+                        "computationAlternatives": [
+                          {
+                            "operation": "\"empty\"",
+                            "precondition": "GroupNotFilled(attachment)"
+                          },
+                          {
+                            "operation": "\"filled\"",
+                            "precondition": "GroupFilled(attachment)"
+                          }
+                        ],
+                        "errorMessage": [
+                          {
+                            "locale": "en",
+                            "text": "error text for computation of computationAttachment"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_257a3",
+                      "name": "errorFieldAttachment",
+                      "Field": {
+                        "fieldType": {
+                          "type": "StringType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "Error from Attachment"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Rule",
+                      "id": "rule_c300d",
+                      "name": "ruleAttachment",
+                      "Rule": {
+                        "errorEntityRelPath": "../errorFieldAttachment",
+                        "errorCode": "Error rule_c300d",
+                        "errorCondition": "FieldFilled(computedFieldAttachment) AND [computedFieldAttachment] == \"filled\" AND FieldFilled(errorFieldAttachment) AND [errorFieldAttachment] == \"Error\"",
+                        "severity": "ERROR",
+                        "errorMessage": [
+                          {
+                            "locale": "en",
+                            "text": "Value \"Error\" is not allowed while Attachment is filled"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Group",
+                "id": "group_d7204",
+                "name": "multiFileUpload",
+                "Group": {
+                  "repeatability": 1,
+                  "elements": [
+                    {
+                      "type": "Group",
+                      "id": "group_5a828",
+                      "name": "attachmentCollection",
+                      "Group": {
+                        "repeatability": 3,
+                        "elements": [
+                          {
+                            "type": "Group",
+                            "id": "group_b6504",
+                            "name": "attachment",
+                            "Group": {
+                              "repeatability": 1,
+                              "usageType": "attachment",
+                              "elements": [
+                                {
+                                  "type": "Field",
+                                  "id": "field_295fc",
+                                  "name": "original_filename",
+                                  "Field": {
+                                    "fieldType": {
+                                      "type": "StringType"
+                                    }
+                                  }
+                                },
+                                {
+                                  "type": "Field",
+                                  "id": "field_75723",
+                                  "name": "internal_filename",
+                                  "Field": {
+                                    "fieldType": {
+                                      "type": "StringType"
+                                    }
+                                  }
+                                },
+                                {
+                                  "type": "Field",
+                                  "id": "field_48679",
+                                  "name": "content",
+                                  "Field": {
+                                    "fieldType": {
+                                      "type": "StringType",
+                                      "StringType": {
+                                        "lineBreaksPermitted": true,
+                                        "noValueValidation": true
+                                      }
+                                    }
+                                  }
+                                },
+                                {
+                                  "type": "Field",
+                                  "id": "field_6116d",
+                                  "name": "attachment_id",
+                                  "Field": {
+                                    "fieldType": {
+                                      "type": "StringType"
+                                    }
+                                  }
+                                },
+                                {
+                                  "type": "Field",
+                                  "id": "field_6d222",
+                                  "name": "size",
+                                  "Field": {
+                                    "fieldType": {
+                                      "type": "NumberType"
+                                    }
+                                  }
+                                },
+                                {
+                                  "type": "Field",
+                                  "id": "field_1af1a",
+                                  "name": "mime_type",
+                                  "Field": {
+                                    "fieldType": {
+                                      "type": "StringType"
+                                    }
+                                  }
+                                },
+                                {
+                                  "type": "Field",
+                                  "id": "field_ab9df",
+                                  "name": "category",
+                                  "Field": {
+                                    "fieldType": {
+                                      "type": "StringType"
+                                    }
+                                  }
+                                },
+                                {
+                                  "type": "Field",
+                                  "id": "field_47832",
+                                  "name": "description",
+                                  "Field": {
+                                    "fieldType": {
+                                      "type": "StringType"
+                                    }
+                                  }
+                                },
+                                {
+                                  "type": "Rule",
+                                  "id": "rule_8263b",
+                                  "name": "AttachmentInternalFilenameRequired",
+                                  "Rule": {
+                                    "errorEntityRelPath": "../internal_filename",
+                                    "errorCode": "Error rule_8263b",
+                                    "errorCondition": "GroupFilled(RuleGroup) and FieldNotFilled(internal_filename)",
+                                    "severity": "ERROR",
+                                    "errorMessage": [
+                                      {
+                                        "locale": "en",
+                                        "text": "Internal Error: Field internal_filename of customType attachment is not filled."
+                                      }
+                                    ]
+                                  }
+                                },
+                                {
+                                  "type": "Rule",
+                                  "id": "rule_39d18",
+                                  "name": "AttachmentMimeTypeRequired",
+                                  "Rule": {
+                                    "errorEntityRelPath": "../mime_type",
+                                    "errorCode": "Error rule_39d18",
+                                    "errorCondition": "GroupFilled(RuleGroup) and FieldNotFilled(mime_type)",
+                                    "severity": "ERROR",
+                                    "errorMessage": [
+                                      {
+                                        "locale": "en",
+                                        "text": "Internal Error: Field mime_type of customType attachment is not filled."
+                                      }
+                                    ]
+                                  }
+                                },
+                                {
+                                  "type": "Rule",
+                                  "id": "rule_81b54",
+                                  "name": "AttachmentIdOrContentFilled",
+                                  "Rule": {
+                                    "errorEntityRelPath": "../content",
+                                    "errorCode": "Error rule_81b54",
+                                    "errorCondition": "GroupFilled(RuleGroup) and NotExactlyOneFieldFilled(attachment_id, content)",
+                                    "severity": "ERROR",
+                                    "errorMessage": [
+                                      {
+                                        "locale": "en",
+                                        "text": "Internal Error: Either attachment_id or content must be filled in a customType attachment, but not both."
+                                      }
+                                    ]
+                                  }
+                                },
+                                {
+                                  "type": "Rule",
+                                  "id": "rule_96de0",
+                                  "name": "SizeOfContentFilled",
+                                  "Rule": {
+                                    "errorEntityRelPath": "../content",
+                                    "errorCode": "Error rule_96de0",
+                                    "errorCondition": "FieldFilled(content) and FieldNotFilled(size)",
+                                    "severity": "ERROR",
+                                    "errorMessage": [
+                                      {
+                                        "locale": "en",
+                                        "text": "Internal Error: If the content is filled, the size must be also filled."
+                                      }
+                                    ]
+                                  }
+                                }
+                              ]
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_962d1",
+                      "name": "computedFieldMultiFileUpload",
+                      "Field": {
+                        "fieldType": {
+                          "type": "EnumerationType",
+                          "EnumerationType": {
+                            "values": [
+                              {
+                                "value": "empty",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "No attachments uploaded"
+                                  }
+                                ]
+                              },
+                              {
+                                "value": "one",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "One attachment uploaded"
+                                  }
+                                ]
+                              },
+                              {
+                                "value": "two",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "Two attachments uploaded"
+                                  }
+                                ]
+                              },
+                              {
+                                "value": "three",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "Three attachments uploaded"
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "Number of uploaded attachments"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Computation",
+                      "id": "computation_00fb7",
+                      "name": "computationMultiFileUpload",
+                      "Computation": {
+                        "computedFieldRelPath": "../computedFieldMultiFileUpload",
+                        "computationAlternatives": [
+                          {
+                            "operation": "\"empty\"",
+                            "precondition": "NoGroupFilled(attachmentCollection*)"
+                          },
+                          {
+                            "operation": "\"one\"",
+                            "precondition": "NumberOfFilledGroups(attachmentCollection*) == 1"
+                          },
+                          {
+                            "operation": "\"two\"",
+                            "precondition": "NumberOfFilledGroups(attachmentCollection*) == 2"
+                          },
+                          {
+                            "operation": "\"three\"",
+                            "precondition": "NumberOfFilledGroups(attachmentCollection*) == 3"
+                          }
+                        ],
+                        "errorMessage": [
+                          {
+                            "locale": "en",
+                            "text": "error text for computation of computationMultiFileUpload"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_88d79",
+                      "name": "errorFieldMultiFileUpload",
+                      "Field": {
+                        "fieldType": {
+                          "type": "StringType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "Error from Multi File Upload"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Rule",
+                      "id": "rule_0970f",
+                      "name": "ruleMultiFileUpload",
+                      "Rule": {
+                        "errorEntityRelPath": "../errorFieldMultiFileUpload",
+                        "errorCode": "Error rule_0970f",
+                        "errorCondition": "FieldFilled(computedFieldMultiFileUpload) AND [computedFieldMultiFileUpload] == \"one\" AND FieldFilled(errorFieldMultiFileUpload) AND [errorFieldMultiFileUpload] == \"Error\"",
+                        "severity": "ERROR",
+                        "errorMessage": [
+                          {
+                            "locale": "en",
+                            "text": "Value \"Error\" is not allowed while exactly one attachment was uploaded"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

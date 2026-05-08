@@ -1,0 +1,195 @@
+{
+  "header": {
+    "id": "AttachmentModel",
+    "modelType": "document",
+    "modelVersion": "28.4.0",
+    "locales": [
+      {
+        "code": "en"
+      }
+    ],
+    "labels": [],
+    "annotations": [],
+    "modelReferences": []
+  },
+  "content": {
+    "modelInfo": {
+      "name": "AttachmentModel",
+      "immutable": false
+    },
+    "modelConfig": {
+      "decimalSeparator": ".",
+      "timeZone": "UTC",
+      "conditionLanguage": {
+        "code": "en_US"
+      }
+    },
+    "modelRoot": {
+      "rootGroups": [
+        {
+          "type": "Group",
+          "id": "group_f73c0",
+          "name": "TopLevelAttachment",
+          "Group": {
+            "repeatability": 1,
+            "usageType": "attachment",
+            "elements": [
+              {
+                "type": "Field",
+                "id": "field_5c29c",
+                "name": "original_filename",
+                "Field": {
+                  "fieldType": {
+                    "type": "StringType"
+                  }
+                }
+              },
+              {
+                "type": "Field",
+                "id": "field_09289",
+                "name": "internal_filename",
+                "Field": {
+                  "fieldType": {
+                    "type": "StringType"
+                  }
+                }
+              },
+              {
+                "type": "Field",
+                "id": "field_5158e",
+                "name": "content",
+                "Field": {
+                  "fieldType": {
+                    "type": "StringType",
+                    "StringType": {
+                      "lineBreaksPermitted": true,
+                      "noValueValidation": true
+                    }
+                  }
+                }
+              },
+              {
+                "type": "Field",
+                "id": "field_8d5d2",
+                "name": "attachment_id",
+                "Field": {
+                  "fieldType": {
+                    "type": "StringType"
+                  }
+                }
+              },
+              {
+                "type": "Field",
+                "id": "field_d6705",
+                "name": "size",
+                "Field": {
+                  "fieldType": {
+                    "type": "NumberType"
+                  }
+                }
+              },
+              {
+                "type": "Field",
+                "id": "field_22d83",
+                "name": "mime_type",
+                "Field": {
+                  "fieldType": {
+                    "type": "StringType"
+                  }
+                }
+              },
+              {
+                "type": "Field",
+                "id": "field_7610d",
+                "name": "category",
+                "Field": {
+                  "fieldType": {
+                    "type": "StringType"
+                  }
+                }
+              },
+              {
+                "type": "Field",
+                "id": "field_eed1f",
+                "name": "description",
+                "Field": {
+                  "fieldType": {
+                    "type": "StringType"
+                  }
+                }
+              },
+              {
+                "type": "Rule",
+                "id": "rule_b69ef",
+                "name": "AttachmentInternalFilenameRequired",
+                "Rule": {
+                  "errorEntityRelPath": "../internal_filename",
+                  "errorCode": "Errorrule_b69ef",
+                  "errorCondition": "GroupFilled(RuleGroup) and FieldNotFilled(internal_filename)",
+                  "severity": "ERROR",
+                  "errorMessage": [
+                    {
+                      "locale": "en",
+                      "text": "Internal Error: Field $internal_filename$ of customType attachment is not filled."
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Rule",
+                "id": "rule_d8956",
+                "name": "AttachmentMimeTypeRequired",
+                "Rule": {
+                  "errorEntityRelPath": "../content",
+                  "errorCode": "Errorrule_d8956",
+                  "errorCondition": "GroupFilled(RuleGroup) and FieldNotFilled(mime_type)",
+                  "severity": "ERROR",
+                  "errorMessage": [
+                    {
+                      "locale": "en",
+                      "text": "Internal Error: Field $mime_type$ of customType attachment is not filled."
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Rule",
+                "id": "rule_b89b1",
+                "name": "AttachmentIdOrContentFilled",
+                "Rule": {
+                  "errorEntityRelPath": "../internal_filename",
+                  "errorCode": "Errorrule_b89b1",
+                  "errorCondition": "GroupFilled(RuleGroup) and NotExactlyOneFieldFilled(attachment_id, content)",
+                  "severity": "ERROR",
+                  "errorMessage": [
+                    {
+                      "locale": "en",
+                      "text": "Internal Error: Either attachment_id or content must be filled in a customType attachment, but not both."
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Rule",
+                "id": "rule_b0f8d",
+                "name": "SizeOfContentFilled",
+                "Rule": {
+                  "errorEntityRelPath": "../size",
+                  "errorCode": "Errorrule_b0f8d",
+                  "errorCondition": "FieldFilled(content) and FieldNotFilled(size)",
+                  "severity": "ERROR",
+                  "errorMessage": [
+                    {
+                      "locale": "en",
+                      "text": "Internal Error: If the content is filled, the size must be also filled."
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

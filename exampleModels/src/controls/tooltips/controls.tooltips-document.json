@@ -1,0 +1,2173 @@
+{
+  "header": {
+    "id": "controls.tooltips-document",
+    "modelType": "document",
+    "modelVersion": "28.4.0",
+    "locales": [
+      {
+        "code": "en"
+      }
+    ],
+    "labels": [],
+    "annotations": [
+      {
+        "name": "roles",
+        "value": "admin"
+      }
+    ],
+    "modelReferences": []
+  },
+  "content": {
+    "modelInfo": {
+      "name": "controls.tooltips-document",
+      "immutable": false
+    },
+    "modelConfig": {
+      "decimalSeparator": ".",
+      "timeZone": "UTC",
+      "conditionLanguage": {
+        "code": "en_US"
+      }
+    },
+    "modelRoot": {
+      "rootGroups": [
+        {
+          "type": "Group",
+          "id": "G2",
+          "name": "root",
+          "Group": {
+            "repeatability": 1,
+            "elements": [
+              {
+                "type": "Group",
+                "id": "G46",
+                "name": "group",
+                "Group": {
+                  "repeatability": 1,
+                  "elements": [
+                    {
+                      "type": "Field",
+                      "id": "field_b3e2a",
+                      "name": "ConfirmType",
+                      "Field": {
+                        "fieldType": {
+                          "type": "ConfirmType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "Confirm"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "F47",
+                      "name": "Warnings",
+                      "Field": {
+                        "fieldType": {
+                          "type": "NumberType",
+                          "NumberType": {
+                            "minValue": 0,
+                            "maxValue": 2
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "Number of Warnings"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "F48",
+                      "name": "Errors",
+                      "Field": {
+                        "fieldType": {
+                          "type": "NumberType",
+                          "NumberType": {
+                            "minValue": 0,
+                            "maxValue": 2
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "Number of Errors"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "F3",
+                      "name": "StringType",
+                      "Field": {
+                        "fieldType": {
+                          "type": "StringType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "StringType"
+                          }
+                        ],
+                        "requirednessConfig": {
+                          "mode": "absoluteOrRelativeToNextRepAncestor"
+                        }
+                      }
+                    },
+                    {
+                      "type": "Rule",
+                      "id": "R3E1",
+                      "name": "StringTypeError1",
+                      "Rule": {
+                        "errorEntityRelPath": "../StringType",
+                        "errorCode": "Error R3E1",
+                        "errorCondition": "(FieldFilled(StringType) or FieldNotFilled(StringType)) and FieldFilled(Errors) and [Errors] >= 1",
+                        "severity": "ERROR",
+                        "errorMessage": [
+                          {
+                            "locale": "en",
+                            "text": "Error #1"
+                          }
+                        ],
+                        "guiPatterns": {
+                          "dynamicEnumeration": "false"
+                        }
+                      }
+                    },
+                    {
+                      "type": "Rule",
+                      "id": "R3W1",
+                      "name": "StringTypeWarning1",
+                      "Rule": {
+                        "errorEntityRelPath": "../StringType",
+                        "errorCode": "Error R3W1",
+                        "errorCondition": "(FieldFilled(StringType) or FieldNotFilled(StringType)) and FieldFilled(Warnings) and [Warnings] >= 1",
+                        "severity": "WARNING",
+                        "errorMessage": [
+                          {
+                            "locale": "en",
+                            "text": "Warning #1"
+                          }
+                        ],
+                        "guiPatterns": {
+                          "dynamicEnumeration": "false"
+                        }
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "F4",
+                      "name": "NumberType",
+                      "Field": {
+                        "fieldType": {
+                          "type": "NumberType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "NumberType"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Rule",
+                      "id": "R4E1",
+                      "name": "NumberTypeError1",
+                      "Rule": {
+                        "errorEntityRelPath": "../NumberType",
+                        "errorCode": "Error R4E1",
+                        "errorCondition": "(FieldFilled(NumberType) or FieldNotFilled(NumberType)) and FieldFilled(Errors) and [Errors] >= 1",
+                        "severity": "ERROR",
+                        "errorMessage": [
+                          {
+                            "locale": "en",
+                            "text": "Error #2"
+                          }
+                        ],
+                        "guiPatterns": {
+                          "dynamicEnumeration": "false"
+                        }
+                      }
+                    },
+                    {
+                      "type": "Rule",
+                      "id": "R4W1",
+                      "name": "NumberTypeWarning1",
+                      "Rule": {
+                        "errorEntityRelPath": "../NumberType",
+                        "errorCode": "Error R4W1",
+                        "errorCondition": "(FieldFilled(NumberType) or FieldNotFilled(NumberType)) and FieldFilled(Warnings) and [Warnings] >= 1",
+                        "severity": "WARNING",
+                        "errorMessage": [
+                          {
+                            "locale": "en",
+                            "text": "Warning #2"
+                          }
+                        ],
+                        "guiPatterns": {
+                          "dynamicEnumeration": "false"
+                        }
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "F5",
+                      "name": "BooleanType",
+                      "Field": {
+                        "fieldType": {
+                          "type": "BooleanType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "BooleanType"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Rule",
+                      "id": "R5E1",
+                      "name": "BooleanTypeError1",
+                      "Rule": {
+                        "errorEntityRelPath": "../BooleanType",
+                        "errorCode": "Error R5E1",
+                        "errorCondition": "(FieldFilled(BooleanType) or FieldNotFilled(BooleanType)) and FieldFilled(Errors) and [Errors] >= 1",
+                        "severity": "ERROR",
+                        "errorMessage": [
+                          {
+                            "locale": "en",
+                            "text": "Error #3"
+                          }
+                        ],
+                        "guiPatterns": {
+                          "dynamicEnumeration": "false"
+                        }
+                      }
+                    },
+                    {
+                      "type": "Rule",
+                      "id": "R5W1",
+                      "name": "BooleanTypeWarning1",
+                      "Rule": {
+                        "errorEntityRelPath": "../BooleanType",
+                        "errorCode": "Error R5W1",
+                        "errorCondition": "(FieldFilled(BooleanType) or FieldNotFilled(BooleanType)) and FieldFilled(Warnings) and [Warnings] >= 1",
+                        "severity": "WARNING",
+                        "errorMessage": [
+                          {
+                            "locale": "en",
+                            "text": "Warning #3"
+                          }
+                        ],
+                        "guiPatterns": {
+                          "dynamicEnumeration": "false"
+                        }
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "fieldimpl_f3203",
+                      "name": "BooleanType2",
+                      "Field": {
+                        "fieldType": {
+                          "type": "BooleanType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "BooleanType2"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Rule",
+                      "id": "ruleimpl_a957b",
+                      "name": "BooleanType2Error1",
+                      "Rule": {
+                        "errorEntityRelPath": "../BooleanType2",
+                        "errorCode": "Error R5E1",
+                        "errorCondition": "(FieldFilled(BooleanType2) or FieldNotFilled(BooleanType2)) and FieldFilled(Errors) and [Errors] >= 1",
+                        "severity": "ERROR",
+                        "errorMessage": [
+                          {
+                            "locale": "en",
+                            "text": "Error #3"
+                          }
+                        ],
+                        "guiPatterns": {
+                          "dynamicEnumeration": "false"
+                        }
+                      }
+                    },
+                    {
+                      "type": "Rule",
+                      "id": "ruleimpl_95371",
+                      "name": "BooleanType2Warning1",
+                      "Rule": {
+                        "errorEntityRelPath": "../BooleanType2",
+                        "errorCode": "Error R5W1",
+                        "errorCondition": "(FieldFilled(BooleanType2) or FieldNotFilled(BooleanType2)) and FieldFilled(Warnings) and [Warnings] >= 1",
+                        "severity": "WARNING",
+                        "errorMessage": [
+                          {
+                            "locale": "en",
+                            "text": "Warning #3"
+                          }
+                        ],
+                        "guiPatterns": {
+                          "dynamicEnumeration": "false"
+                        }
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "F6",
+                      "name": "DateType",
+                      "Field": {
+                        "fieldType": {
+                          "type": "DateType",
+                          "DateType": {
+                            "format": "yyyy-MM-dd"
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "DateType"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Rule",
+                      "id": "R6E1",
+                      "name": "DateTypeError1",
+                      "Rule": {
+                        "errorEntityRelPath": "../DateType",
+                        "errorCode": "Error R6E1",
+                        "errorCondition": "(FieldFilled(DateType) or FieldNotFilled(DateType)) and FieldFilled(Errors) and [Errors] >= 1",
+                        "severity": "ERROR",
+                        "errorMessage": [
+                          {
+                            "locale": "en",
+                            "text": "Error #4"
+                          }
+                        ],
+                        "guiPatterns": {
+                          "dynamicEnumeration": "false"
+                        }
+                      }
+                    },
+                    {
+                      "type": "Rule",
+                      "id": "R6W1",
+                      "name": "DateTypeWarning1",
+                      "Rule": {
+                        "errorEntityRelPath": "../DateType",
+                        "errorCode": "Error R6W1",
+                        "errorCondition": "(FieldFilled(DateType) or FieldNotFilled(DateType)) and FieldFilled(Warnings) and [Warnings] >= 1",
+                        "severity": "WARNING",
+                        "errorMessage": [
+                          {
+                            "locale": "en",
+                            "text": "Warning #4"
+                          }
+                        ],
+                        "guiPatterns": {
+                          "dynamicEnumeration": "false"
+                        }
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "F7",
+                      "name": "DateTimeType",
+                      "Field": {
+                        "fieldType": {
+                          "type": "DateTimeType",
+                          "DateTimeType": {
+                            "format": "yyyy-MM-dd'T'HH:mm:ss"
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "DateTimeType"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Rule",
+                      "id": "R7E1",
+                      "name": "DateTimeTypeError1",
+                      "Rule": {
+                        "errorEntityRelPath": "../DateTimeType",
+                        "errorCode": "Error R7E1",
+                        "errorCondition": "(FieldFilled(DateTimeType) or FieldNotFilled(DateTimeType)) and FieldFilled(Errors) and [Errors] >= 1",
+                        "severity": "ERROR",
+                        "errorMessage": [
+                          {
+                            "locale": "en",
+                            "text": "Error #5"
+                          }
+                        ],
+                        "guiPatterns": {
+                          "dynamicEnumeration": "false"
+                        }
+                      }
+                    },
+                    {
+                      "type": "Rule",
+                      "id": "R7W1",
+                      "name": "DateTimeTypeWarning1",
+                      "Rule": {
+                        "errorEntityRelPath": "../DateTimeType",
+                        "errorCode": "Error R7W1",
+                        "errorCondition": "(FieldFilled(DateTimeType) or FieldNotFilled(DateTimeType)) and FieldFilled(Warnings) and [Warnings] >= 1",
+                        "severity": "WARNING",
+                        "errorMessage": [
+                          {
+                            "locale": "en",
+                            "text": "Warning #5"
+                          }
+                        ],
+                        "guiPatterns": {
+                          "dynamicEnumeration": "false"
+                        }
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "F8",
+                      "name": "TimeType",
+                      "Field": {
+                        "fieldType": {
+                          "type": "TimeType",
+                          "TimeType": {
+                            "format": "HH:mm:ss"
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "TimeType"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Rule",
+                      "id": "R8E1",
+                      "name": "TimeTypeError1",
+                      "Rule": {
+                        "errorEntityRelPath": "../TimeType",
+                        "errorCode": "Error R8E1",
+                        "errorCondition": "(FieldFilled(TimeType) or FieldNotFilled(TimeType)) and FieldFilled(Errors) and [Errors] >= 1",
+                        "severity": "ERROR",
+                        "errorMessage": [
+                          {
+                            "locale": "en",
+                            "text": "Error #6"
+                          }
+                        ],
+                        "guiPatterns": {
+                          "dynamicEnumeration": "false"
+                        }
+                      }
+                    },
+                    {
+                      "type": "Rule",
+                      "id": "R8W1",
+                      "name": "TimeTypeWarning1",
+                      "Rule": {
+                        "errorEntityRelPath": "../TimeType",
+                        "errorCode": "Error R8W1",
+                        "errorCondition": "(FieldFilled(TimeType) or FieldNotFilled(TimeType)) and FieldFilled(Warnings) and [Warnings] >= 1",
+                        "severity": "WARNING",
+                        "errorMessage": [
+                          {
+                            "locale": "en",
+                            "text": "Warning #6"
+                          }
+                        ],
+                        "guiPatterns": {
+                          "dynamicEnumeration": "false"
+                        }
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "F9",
+                      "name": "EnumerationType",
+                      "Field": {
+                        "fieldType": {
+                          "type": "EnumerationType",
+                          "EnumerationType": {
+                            "values": [
+                              {
+                                "value": "value1",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "Value 1"
+                                  }
+                                ]
+                              },
+                              {
+                                "value": "value2",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "Value 2"
+                                  }
+                                ]
+                              },
+                              {
+                                "value": "vaue3",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "Value 3"
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "EnumerationType"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Rule",
+                      "id": "R9E1",
+                      "name": "EnumerationTypeError1",
+                      "Rule": {
+                        "errorEntityRelPath": "../EnumerationType",
+                        "errorCode": "Error R9E1",
+                        "errorCondition": "(FieldFilled(EnumerationType) or FieldNotFilled(EnumerationType)) and FieldFilled(Errors) and [Errors] >= 1",
+                        "severity": "ERROR",
+                        "errorMessage": [
+                          {
+                            "locale": "en",
+                            "text": "Error #7"
+                          }
+                        ],
+                        "guiPatterns": {
+                          "dynamicEnumeration": "false"
+                        }
+                      }
+                    },
+                    {
+                      "type": "Rule",
+                      "id": "R9W1",
+                      "name": "EnumerationTypeWarning1",
+                      "Rule": {
+                        "errorEntityRelPath": "../EnumerationType",
+                        "errorCode": "Error R9W1",
+                        "errorCondition": "(FieldFilled(EnumerationType) or FieldNotFilled(EnumerationType)) and FieldFilled(Warnings) and [Warnings] >= 1",
+                        "severity": "WARNING",
+                        "errorMessage": [
+                          {
+                            "locale": "en",
+                            "text": "Warning #7"
+                          }
+                        ],
+                        "guiPatterns": {
+                          "dynamicEnumeration": "false"
+                        }
+                      }
+                    },
+                    {
+                      "type": "Rule",
+                      "id": "rule_84949",
+                      "name": "ConfirmTypeError1",
+                      "Rule": {
+                        "errorEntityRelPath": "../ConfirmType",
+                        "errorCode": "Error rule_84949",
+                        "errorCondition": "(FieldFilled(ConfirmType) or FieldNotFilled(ConfirmType)) and FieldFilled(Errors) and [Errors] >= 1",
+                        "severity": "ERROR",
+                        "errorMessage": [
+                          {
+                            "locale": "en",
+                            "text": "Error #8"
+                          }
+                        ],
+                        "guiPatterns": {
+                          "dynamicEnumeration": "false"
+                        }
+                      }
+                    },
+                    {
+                      "type": "Rule",
+                      "id": "rule_0dafb",
+                      "name": "ConfirmTypeWarning1",
+                      "Rule": {
+                        "errorEntityRelPath": "../ConfirmType",
+                        "errorCode": "Error rule_0dafb",
+                        "errorCondition": "(FieldFilled(ConfirmType) or FieldNotFilled(ConfirmType)) and FieldFilled(Warnings) and [Warnings] >= 1",
+                        "severity": "WARNING",
+                        "errorMessage": [
+                          {
+                            "locale": "en",
+                            "text": "Warning #8"
+                          }
+                        ],
+                        "guiPatterns": {
+                          "dynamicEnumeration": "false"
+                        }
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "fieldimpl_b0748",
+                      "name": "EnumerationTypeAutoComplete",
+                      "Field": {
+                        "fieldType": {
+                          "type": "EnumerationType",
+                          "EnumerationType": {
+                            "values": [
+                              {
+                                "value": "value1",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "Value 1"
+                                  }
+                                ]
+                              },
+                              {
+                                "value": "value2",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "Value 2"
+                                  }
+                                ]
+                              },
+                              {
+                                "value": "vaue3",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "Value 3"
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "EnumerationTypeAutoComplete"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Rule",
+                      "id": "ruleimpl_084f9",
+                      "name": "EnumerationTypeAutoCompleteError1",
+                      "Rule": {
+                        "errorEntityRelPath": "../EnumerationTypeAutoComplete",
+                        "errorCode": "Error R9E1",
+                        "errorCondition": "(FieldFilled(EnumerationTypeAutoComplete) or FieldNotFilled(EnumerationTypeAutoComplete)) and FieldFilled(Errors) and [Errors] >= 1",
+                        "severity": "ERROR",
+                        "errorMessage": [
+                          {
+                            "locale": "en",
+                            "text": "Error #9"
+                          }
+                        ],
+                        "guiPatterns": {
+                          "dynamicEnumeration": "false"
+                        }
+                      }
+                    },
+                    {
+                      "type": "Rule",
+                      "id": "ruleimpl_25462",
+                      "name": "EnumerationTypeAutoCompleteWarning1",
+                      "Rule": {
+                        "errorEntityRelPath": "../EnumerationTypeAutoComplete",
+                        "errorCode": "Error R9W1",
+                        "errorCondition": "(FieldFilled(EnumerationTypeAutoComplete) or FieldNotFilled(EnumerationTypeAutoComplete)) and FieldFilled(Warnings) and [Warnings] >= 1",
+                        "severity": "WARNING",
+                        "errorMessage": [
+                          {
+                            "locale": "en",
+                            "text": "Warning #9"
+                          }
+                        ],
+                        "guiPatterns": {
+                          "dynamicEnumeration": "false"
+                        }
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "fieldimpl_6e4b1",
+                      "name": "EnumerationTypeInline",
+                      "Field": {
+                        "fieldType": {
+                          "type": "EnumerationType",
+                          "EnumerationType": {
+                            "values": [
+                              {
+                                "value": "value1",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "Value 1"
+                                  }
+                                ]
+                              },
+                              {
+                                "value": "value2",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "Value 2"
+                                  }
+                                ]
+                              },
+                              {
+                                "value": "vaue3",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "Value 3"
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "EnumerationTypeInline"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Rule",
+                      "id": "ruleimpl_1d066",
+                      "name": "EnumerationTypeInlineError1",
+                      "Rule": {
+                        "errorEntityRelPath": "../EnumerationTypeInline",
+                        "errorCode": "Error R9E1",
+                        "errorCondition": "(FieldFilled(EnumerationTypeInline) or FieldNotFilled(EnumerationTypeInline)) and FieldFilled(Errors) and [Errors] >= 1",
+                        "severity": "ERROR",
+                        "errorMessage": [
+                          {
+                            "locale": "en",
+                            "text": "Error #10"
+                          }
+                        ],
+                        "guiPatterns": {
+                          "dynamicEnumeration": "false"
+                        }
+                      }
+                    },
+                    {
+                      "type": "Rule",
+                      "id": "ruleimpl_080a3",
+                      "name": "EnumerationTypeInlineWarning1",
+                      "Rule": {
+                        "errorEntityRelPath": "../EnumerationTypeInline",
+                        "errorCode": "Error R9W1",
+                        "errorCondition": "(FieldFilled(EnumerationTypeInline) or FieldNotFilled(EnumerationTypeInline)) and FieldFilled(Warnings) and [Warnings] >= 1",
+                        "severity": "WARNING",
+                        "errorMessage": [
+                          {
+                            "locale": "en",
+                            "text": "Warning #10"
+                          }
+                        ],
+                        "guiPatterns": {
+                          "dynamicEnumeration": "false"
+                        }
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "fieldimpl_13749",
+                      "name": "EnumerationTypeFull",
+                      "Field": {
+                        "fieldType": {
+                          "type": "EnumerationType",
+                          "EnumerationType": {
+                            "values": [
+                              {
+                                "value": "value1",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "Value 1"
+                                  }
+                                ]
+                              },
+                              {
+                                "value": "value2",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "Value 2"
+                                  }
+                                ]
+                              },
+                              {
+                                "value": "vaue3",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "Value 3"
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "EnumerationTypeFull"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Rule",
+                      "id": "ruleimpl_c1ca5",
+                      "name": "EnumerationTypeFullError1",
+                      "Rule": {
+                        "errorEntityRelPath": "../EnumerationTypeFull",
+                        "errorCode": "Error R9E1",
+                        "errorCondition": "(FieldFilled(EnumerationTypeFull) or FieldNotFilled(EnumerationTypeFull)) and FieldFilled(Errors) and [Errors] >= 1",
+                        "severity": "ERROR",
+                        "errorMessage": [
+                          {
+                            "locale": "en",
+                            "text": "Error #11"
+                          }
+                        ],
+                        "guiPatterns": {
+                          "dynamicEnumeration": "false"
+                        }
+                      }
+                    },
+                    {
+                      "type": "Rule",
+                      "id": "ruleimpl_09e87",
+                      "name": "EnumerationTypeFullWarning1",
+                      "Rule": {
+                        "errorEntityRelPath": "../EnumerationTypeFull",
+                        "errorCode": "Error R9W1",
+                        "errorCondition": "(FieldFilled(EnumerationTypeFull) or FieldNotFilled(EnumerationTypeFull)) and FieldFilled(Warnings) and [Warnings] >= 1",
+                        "severity": "WARNING",
+                        "errorMessage": [
+                          {
+                            "locale": "en",
+                            "text": "Warning #11"
+                          }
+                        ],
+                        "guiPatterns": {
+                          "dynamicEnumeration": "false"
+                        }
+                      }
+                    },
+                    {
+                      "type": "Group",
+                      "id": "group_0f382",
+                      "name": "MultiSelectTypeAutoComplete",
+                      "Group": {
+                        "repeatability": 999999,
+                        "usageType": "multi-select",
+                        "elements": [
+                          {
+                            "type": "Field",
+                            "id": "field_cfb81",
+                            "name": "value",
+                            "Field": {
+                              "fieldType": {
+                                "type": "EnumerationType",
+                                "EnumerationType": {
+                                  "values": [
+                                    {
+                                      "value": "key1",
+                                      "label": [
+                                        {
+                                          "locale": "en",
+                                          "text": "Value 1"
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "value": "key2",
+                                      "label": [
+                                        {
+                                          "locale": "en",
+                                          "text": "Value 2"
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              },
+                              "requirednessConfig": {
+                                "mode": "absoluteOrRelativeToNextRepAncestor"
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Rule",
+                      "id": "rule_fb104",
+                      "name": "MultiSelectTypeAutoCompleteError1",
+                      "Rule": {
+                        "errorEntityRelPath": "../MultiSelectTypeAutoComplete/value",
+                        "errorCode": "Error rule_fb104",
+                        "errorCondition": "(NoGroupFilled(RuleGroup) or GroupFilled(RuleGroup)) and FieldFilled(Errors) and [Errors] >= 1",
+                        "severity": "ERROR",
+                        "errorMessage": [
+                          {
+                            "locale": "en",
+                            "text": "Error #12"
+                          }
+                        ],
+                        "guiPatterns": {
+                          "dynamicEnumeration": "false"
+                        }
+                      }
+                    },
+                    {
+                      "type": "Rule",
+                      "id": "ruleimpl_3665b",
+                      "name": "MultiSelectTypeAutoCompleteWarning1",
+                      "Rule": {
+                        "errorEntityRelPath": "../MultiSelectTypeAutoComplete/value",
+                        "errorCode": "Error rule_fb104",
+                        "errorCondition": "(NoGroupFilled(RuleGroup) or GroupFilled(RuleGroup)) and FieldFilled(Warnings) and [Warnings] >= 1",
+                        "severity": "WARNING",
+                        "errorMessage": [
+                          {
+                            "locale": "en",
+                            "text": "Warnings #12"
+                          }
+                        ],
+                        "guiPatterns": {
+                          "dynamicEnumeration": "false"
+                        }
+                      }
+                    },
+                    {
+                      "type": "Group",
+                      "id": "groupimpl_7080e",
+                      "name": "MultiSelectTypeFull",
+                      "Group": {
+                        "repeatability": 999999,
+                        "usageType": "multi-select",
+                        "elements": [
+                          {
+                            "type": "Field",
+                            "id": "fieldimpl_6e651",
+                            "name": "value",
+                            "Field": {
+                              "fieldType": {
+                                "type": "EnumerationType",
+                                "EnumerationType": {
+                                  "values": [
+                                    {
+                                      "value": "key1",
+                                      "label": [
+                                        {
+                                          "locale": "en",
+                                          "text": "Value 1"
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "value": "key2",
+                                      "label": [
+                                        {
+                                          "locale": "en",
+                                          "text": "Value 2"
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              },
+                              "requirednessConfig": {
+                                "mode": "absoluteOrRelativeToNextRepAncestor"
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Rule",
+                      "id": "ruleimpl_a5d48",
+                      "name": "MultiSelectTypeFullError1",
+                      "Rule": {
+                        "errorEntityRelPath": "../MultiSelectTypeFull/value",
+                        "errorCode": "Error rule_fb104",
+                        "errorCondition": "(NoGroupFilled(RuleGroup) or GroupFilled(RuleGroup)) and FieldFilled(Errors) and [Errors] >= 1",
+                        "severity": "ERROR",
+                        "errorMessage": [
+                          {
+                            "locale": "en",
+                            "text": "Error #12"
+                          }
+                        ],
+                        "guiPatterns": {
+                          "dynamicEnumeration": "false"
+                        }
+                      }
+                    },
+                    {
+                      "type": "Rule",
+                      "id": "ruleimpl_58c6f",
+                      "name": "MultiSelectTypeFullWarning1",
+                      "Rule": {
+                        "errorEntityRelPath": "../MultiSelectTypeFull/value",
+                        "errorCode": "Error rule_fb104",
+                        "errorCondition": "(NoGroupFilled(RuleGroup) or GroupFilled(RuleGroup)) and FieldFilled(Warnings) and [Warnings] >= 1",
+                        "severity": "WARNING",
+                        "errorMessage": [
+                          {
+                            "locale": "en",
+                            "text": "Warnings #12"
+                          }
+                        ],
+                        "guiPatterns": {
+                          "dynamicEnumeration": "false"
+                        }
+                      }
+                    },
+                    {
+                      "type": "Group",
+                      "id": "groupimpl_eca66",
+                      "name": "MultiSelectTypeInline",
+                      "Group": {
+                        "repeatability": 999999,
+                        "usageType": "multi-select",
+                        "elements": [
+                          {
+                            "type": "Field",
+                            "id": "fieldimpl_04fb9",
+                            "name": "value",
+                            "Field": {
+                              "fieldType": {
+                                "type": "EnumerationType",
+                                "EnumerationType": {
+                                  "values": [
+                                    {
+                                      "value": "key1",
+                                      "label": [
+                                        {
+                                          "locale": "en",
+                                          "text": "Value 1"
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "value": "key2",
+                                      "label": [
+                                        {
+                                          "locale": "en",
+                                          "text": "Value 2"
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              },
+                              "requirednessConfig": {
+                                "mode": "absoluteOrRelativeToNextRepAncestor"
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Rule",
+                      "id": "ruleimpl_fc9f8",
+                      "name": "MultiSelectTypeInlineError1",
+                      "Rule": {
+                        "errorEntityRelPath": "../MultiSelectTypeInline/value",
+                        "errorCode": "Error rule_fb104",
+                        "errorCondition": "(NoGroupFilled(RuleGroup) or GroupFilled(RuleGroup)) and FieldFilled(Errors) and [Errors] >= 1",
+                        "severity": "ERROR",
+                        "errorMessage": [
+                          {
+                            "locale": "en",
+                            "text": "Error #13"
+                          }
+                        ],
+                        "guiPatterns": {
+                          "dynamicEnumeration": "false"
+                        }
+                      }
+                    },
+                    {
+                      "type": "Rule",
+                      "id": "ruleimpl_fb726",
+                      "name": "MultiSelectTypeInlineWarning1",
+                      "Rule": {
+                        "errorEntityRelPath": "../MultiSelectTypeInline/value",
+                        "errorCode": "Error rule_fb104",
+                        "errorCondition": "(NoGroupFilled(RuleGroup) or GroupFilled(RuleGroup)) and FieldFilled(Warnings) and [Warnings] >= 1",
+                        "severity": "WARNING",
+                        "errorMessage": [
+                          {
+                            "locale": "en",
+                            "text": "Warnings #13"
+                          }
+                        ],
+                        "guiPatterns": {
+                          "dynamicEnumeration": "false"
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Group",
+                "id": "group_f0a9d",
+                "name": "repeat",
+                "Group": {
+                  "repeatability": 5,
+                  "elements": [
+                    {
+                      "type": "Field",
+                      "id": "fieldimpl_76345",
+                      "name": "Warnings",
+                      "Field": {
+                        "fieldType": {
+                          "type": "NumberType",
+                          "NumberType": {
+                            "minValue": 0,
+                            "maxValue": 2
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "Number of Warnings"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "fieldimpl_3aa8c",
+                      "name": "Errors",
+                      "Field": {
+                        "fieldType": {
+                          "type": "NumberType",
+                          "NumberType": {
+                            "minValue": 0,
+                            "maxValue": 2
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "Number of Errors"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "fieldimpl_23940",
+                      "name": "StringType",
+                      "externalDescription": [
+                        {
+                          "locale": "en",
+                          "text": "Hint"
+                        }
+                      ],
+                      "Field": {
+                        "fieldType": {
+                          "type": "StringType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "StringType"
+                          }
+                        ],
+                        "requirednessConfig": {
+                          "mode": "absoluteOrRelativeToNextRepAncestor"
+                        }
+                      }
+                    },
+                    {
+                      "type": "Rule",
+                      "id": "ruleimpl_cf299",
+                      "name": "StringTypeError1",
+                      "Rule": {
+                        "errorEntityRelPath": "../StringType",
+                        "errorCode": "Error R3E1",
+                        "errorCondition": "(FieldFilled(StringType) or FieldNotFilled(StringType)) and FieldFilled(Errors) and [Errors] >= 1",
+                        "severity": "ERROR",
+                        "errorMessage": [
+                          {
+                            "locale": "en",
+                            "text": "Error #1"
+                          }
+                        ],
+                        "guiPatterns": {
+                          "dynamicEnumeration": "false"
+                        }
+                      }
+                    },
+                    {
+                      "type": "Rule",
+                      "id": "ruleimpl_a9350",
+                      "name": "StringTypeWarning1",
+                      "Rule": {
+                        "errorEntityRelPath": "../StringType",
+                        "errorCode": "Error R3W1",
+                        "errorCondition": "(FieldFilled(StringType) or FieldNotFilled(StringType)) and FieldFilled(Warnings) and [Warnings] >= 1",
+                        "severity": "WARNING",
+                        "errorMessage": [
+                          {
+                            "locale": "en",
+                            "text": "Warning #1"
+                          }
+                        ],
+                        "guiPatterns": {
+                          "dynamicEnumeration": "false"
+                        }
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "fieldimpl_3b133",
+                      "name": "NumberType",
+                      "externalDescription": [
+                        {
+                          "locale": "en",
+                          "text": "Hint"
+                        }
+                      ],
+                      "Field": {
+                        "fieldType": {
+                          "type": "NumberType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "NumberType"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Rule",
+                      "id": "ruleimpl_63b55",
+                      "name": "NumberTypeError1",
+                      "Rule": {
+                        "errorEntityRelPath": "../NumberType",
+                        "errorCode": "Error R4E1",
+                        "errorCondition": "(FieldFilled(NumberType) or FieldNotFilled(NumberType)) and FieldFilled(Errors) and [Errors] >= 1",
+                        "severity": "ERROR",
+                        "errorMessage": [
+                          {
+                            "locale": "en",
+                            "text": "Error #2"
+                          }
+                        ],
+                        "guiPatterns": {
+                          "dynamicEnumeration": "false"
+                        }
+                      }
+                    },
+                    {
+                      "type": "Rule",
+                      "id": "ruleimpl_986c8",
+                      "name": "NumberTypeWarning1",
+                      "Rule": {
+                        "errorEntityRelPath": "../NumberType",
+                        "errorCode": "Error R4W1",
+                        "errorCondition": "(FieldFilled(NumberType) or FieldNotFilled(NumberType)) and FieldFilled(Warnings) and [Warnings] >= 1",
+                        "severity": "WARNING",
+                        "errorMessage": [
+                          {
+                            "locale": "en",
+                            "text": "Warning #2"
+                          }
+                        ],
+                        "guiPatterns": {
+                          "dynamicEnumeration": "false"
+                        }
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "fieldimpl_74402",
+                      "name": "BooleanType",
+                      "externalDescription": [
+                        {
+                          "locale": "en",
+                          "text": "Hint"
+                        }
+                      ],
+                      "Field": {
+                        "fieldType": {
+                          "type": "BooleanType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "BooleanType"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Rule",
+                      "id": "ruleimpl_477a9",
+                      "name": "BooleanTypeError1",
+                      "Rule": {
+                        "errorEntityRelPath": "../BooleanType",
+                        "errorCode": "Error R5E1",
+                        "errorCondition": "(FieldFilled(BooleanType) or FieldNotFilled(BooleanType)) and FieldFilled(Errors) and [Errors] >= 1",
+                        "severity": "ERROR",
+                        "errorMessage": [
+                          {
+                            "locale": "en",
+                            "text": "Error #3"
+                          }
+                        ],
+                        "guiPatterns": {
+                          "dynamicEnumeration": "false"
+                        }
+                      }
+                    },
+                    {
+                      "type": "Rule",
+                      "id": "ruleimpl_38fc5",
+                      "name": "BooleanTypeWarning1",
+                      "Rule": {
+                        "errorEntityRelPath": "../BooleanType",
+                        "errorCode": "Error R5W1",
+                        "errorCondition": "(FieldFilled(BooleanType) or FieldNotFilled(BooleanType)) and FieldFilled(Warnings) and [Warnings] >= 1",
+                        "severity": "WARNING",
+                        "errorMessage": [
+                          {
+                            "locale": "en",
+                            "text": "Warning #3"
+                          }
+                        ],
+                        "guiPatterns": {
+                          "dynamicEnumeration": "false"
+                        }
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "fieldimpl_bdc7f",
+                      "name": "BooleanType2",
+                      "Field": {
+                        "fieldType": {
+                          "type": "BooleanType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "BooleanType2"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Rule",
+                      "id": "ruleimpl_a4f7e",
+                      "name": "BooleanType2Error1",
+                      "Rule": {
+                        "errorEntityRelPath": "../BooleanType2",
+                        "errorCode": "Error R5E1",
+                        "errorCondition": "(FieldFilled(BooleanType2) or FieldNotFilled(BooleanType2)) and FieldFilled(Errors) and [Errors] >= 1",
+                        "severity": "ERROR",
+                        "errorMessage": [
+                          {
+                            "locale": "en",
+                            "text": "Error #3"
+                          }
+                        ],
+                        "guiPatterns": {
+                          "dynamicEnumeration": "false"
+                        }
+                      }
+                    },
+                    {
+                      "type": "Rule",
+                      "id": "ruleimpl_6b164",
+                      "name": "BooleanType2Warning1",
+                      "Rule": {
+                        "errorEntityRelPath": "../BooleanType2",
+                        "errorCode": "Error R5W1",
+                        "errorCondition": "(FieldFilled(BooleanType2) or FieldNotFilled(BooleanType2)) and FieldFilled(Warnings) and [Warnings] >= 1",
+                        "severity": "WARNING",
+                        "errorMessage": [
+                          {
+                            "locale": "en",
+                            "text": "Warning #3"
+                          }
+                        ],
+                        "guiPatterns": {
+                          "dynamicEnumeration": "false"
+                        }
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "fieldimpl_d1f26",
+                      "name": "DateType",
+                      "externalDescription": [
+                        {
+                          "locale": "en",
+                          "text": "Hint"
+                        }
+                      ],
+                      "Field": {
+                        "fieldType": {
+                          "type": "DateType",
+                          "DateType": {
+                            "format": "yyyy-MM-dd"
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "DateType"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Rule",
+                      "id": "ruleimpl_1891c",
+                      "name": "DateTypeError1",
+                      "Rule": {
+                        "errorEntityRelPath": "../DateType",
+                        "errorCode": "Error R6E1",
+                        "errorCondition": "(FieldFilled(DateType) or FieldNotFilled(DateType)) and FieldFilled(Errors) and [Errors] >= 1",
+                        "severity": "ERROR",
+                        "errorMessage": [
+                          {
+                            "locale": "en",
+                            "text": "Error #4"
+                          }
+                        ],
+                        "guiPatterns": {
+                          "dynamicEnumeration": "false"
+                        }
+                      }
+                    },
+                    {
+                      "type": "Rule",
+                      "id": "ruleimpl_264df",
+                      "name": "DateTypeWarning1",
+                      "Rule": {
+                        "errorEntityRelPath": "../DateType",
+                        "errorCode": "Error R6W1",
+                        "errorCondition": "(FieldFilled(DateType) or FieldNotFilled(DateType)) and FieldFilled(Warnings) and [Warnings] >= 1",
+                        "severity": "WARNING",
+                        "errorMessage": [
+                          {
+                            "locale": "en",
+                            "text": "Warning #4"
+                          }
+                        ],
+                        "guiPatterns": {
+                          "dynamicEnumeration": "false"
+                        }
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "fieldimpl_dc94c",
+                      "name": "DateTimeType",
+                      "externalDescription": [
+                        {
+                          "locale": "en",
+                          "text": "Hint"
+                        }
+                      ],
+                      "Field": {
+                        "fieldType": {
+                          "type": "DateTimeType",
+                          "DateTimeType": {
+                            "format": "yyyy-MM-dd'T'HH:mm:ss"
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "DateTimeType"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Rule",
+                      "id": "ruleimpl_17de8",
+                      "name": "DateTimeTypeError1",
+                      "Rule": {
+                        "errorEntityRelPath": "../DateTimeType",
+                        "errorCode": "Error R7E1",
+                        "errorCondition": "(FieldFilled(DateTimeType) or FieldNotFilled(DateTimeType)) and FieldFilled(Errors) and [Errors] >= 1",
+                        "severity": "ERROR",
+                        "errorMessage": [
+                          {
+                            "locale": "en",
+                            "text": "Error #5"
+                          }
+                        ],
+                        "guiPatterns": {
+                          "dynamicEnumeration": "false"
+                        }
+                      }
+                    },
+                    {
+                      "type": "Rule",
+                      "id": "ruleimpl_0b8ac",
+                      "name": "DateTimeTypeWarning1",
+                      "Rule": {
+                        "errorEntityRelPath": "../DateTimeType",
+                        "errorCode": "Error R7W1",
+                        "errorCondition": "(FieldFilled(DateTimeType) or FieldNotFilled(DateTimeType)) and FieldFilled(Warnings) and [Warnings] >= 1",
+                        "severity": "WARNING",
+                        "errorMessage": [
+                          {
+                            "locale": "en",
+                            "text": "Warning #5"
+                          }
+                        ],
+                        "guiPatterns": {
+                          "dynamicEnumeration": "false"
+                        }
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "fieldimpl_63871",
+                      "name": "TimeType",
+                      "externalDescription": [
+                        {
+                          "locale": "en",
+                          "text": "Hint"
+                        }
+                      ],
+                      "Field": {
+                        "fieldType": {
+                          "type": "TimeType",
+                          "TimeType": {
+                            "format": "HH:mm:ss"
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "TimeType"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Rule",
+                      "id": "ruleimpl_53c16",
+                      "name": "TimeTypeError1",
+                      "Rule": {
+                        "errorEntityRelPath": "../TimeType",
+                        "errorCode": "Error R8E1",
+                        "errorCondition": "(FieldFilled(TimeType) or FieldNotFilled(TimeType)) and FieldFilled(Errors) and [Errors] >= 1",
+                        "severity": "ERROR",
+                        "errorMessage": [
+                          {
+                            "locale": "en",
+                            "text": "Error #6"
+                          }
+                        ],
+                        "guiPatterns": {
+                          "dynamicEnumeration": "false"
+                        }
+                      }
+                    },
+                    {
+                      "type": "Rule",
+                      "id": "ruleimpl_8d6ac",
+                      "name": "TimeTypeWarning1",
+                      "Rule": {
+                        "errorEntityRelPath": "../TimeType",
+                        "errorCode": "Error R8W1",
+                        "errorCondition": "(FieldFilled(TimeType) or FieldNotFilled(TimeType)) and FieldFilled(Warnings) and [Warnings] >= 1",
+                        "severity": "WARNING",
+                        "errorMessage": [
+                          {
+                            "locale": "en",
+                            "text": "Warning #6"
+                          }
+                        ],
+                        "guiPatterns": {
+                          "dynamicEnumeration": "false"
+                        }
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "fieldimpl_d3224",
+                      "name": "EnumerationType",
+                      "externalDescription": [
+                        {
+                          "locale": "en",
+                          "text": "Hint"
+                        }
+                      ],
+                      "Field": {
+                        "fieldType": {
+                          "type": "EnumerationType",
+                          "EnumerationType": {
+                            "values": [
+                              {
+                                "value": "value1",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "Value 1"
+                                  }
+                                ]
+                              },
+                              {
+                                "value": "value2",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "Value 2"
+                                  }
+                                ]
+                              },
+                              {
+                                "value": "vaue3",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "Value 3"
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "EnumerationType"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Rule",
+                      "id": "ruleimpl_8eaf3",
+                      "name": "EnumerationTypeError1",
+                      "Rule": {
+                        "errorEntityRelPath": "../EnumerationType",
+                        "errorCode": "Error R9E1",
+                        "errorCondition": "(FieldFilled(EnumerationType) or FieldNotFilled(EnumerationType)) and FieldFilled(Errors) and [Errors] >= 1",
+                        "severity": "ERROR",
+                        "errorMessage": [
+                          {
+                            "locale": "en",
+                            "text": "Error #7"
+                          }
+                        ],
+                        "guiPatterns": {
+                          "dynamicEnumeration": "false"
+                        }
+                      }
+                    },
+                    {
+                      "type": "Rule",
+                      "id": "ruleimpl_275ec",
+                      "name": "EnumerationTypeWarning1",
+                      "Rule": {
+                        "errorEntityRelPath": "../EnumerationType",
+                        "errorCode": "Error R9W1",
+                        "errorCondition": "(FieldFilled(EnumerationType) or FieldNotFilled(EnumerationType)) and FieldFilled(Warnings) and [Warnings] >= 1",
+                        "severity": "WARNING",
+                        "errorMessage": [
+                          {
+                            "locale": "en",
+                            "text": "Warning #7"
+                          }
+                        ],
+                        "guiPatterns": {
+                          "dynamicEnumeration": "false"
+                        }
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "fieldimpl_32e27",
+                      "name": "ConfirmType",
+                      "externalDescription": [
+                        {
+                          "locale": "en",
+                          "text": "Hint"
+                        }
+                      ],
+                      "Field": {
+                        "fieldType": {
+                          "type": "ConfirmType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "Confirm"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Rule",
+                      "id": "ruleimpl_add68",
+                      "name": "ConfirmTypeError1",
+                      "Rule": {
+                        "errorEntityRelPath": "../ConfirmType",
+                        "errorCode": "Error rule_84949",
+                        "errorCondition": "(FieldFilled(ConfirmType) or FieldNotFilled(ConfirmType)) and FieldFilled(Errors) and [Errors] >= 1",
+                        "severity": "ERROR",
+                        "errorMessage": [
+                          {
+                            "locale": "en",
+                            "text": "Error #8"
+                          }
+                        ],
+                        "guiPatterns": {
+                          "dynamicEnumeration": "false"
+                        }
+                      }
+                    },
+                    {
+                      "type": "Rule",
+                      "id": "ruleimpl_67d45",
+                      "name": "ConfirmTypeWarning1",
+                      "Rule": {
+                        "errorEntityRelPath": "../ConfirmType",
+                        "errorCode": "Error rule_0dafb",
+                        "errorCondition": "(FieldFilled(ConfirmType) or FieldNotFilled(ConfirmType)) and FieldFilled(Warnings) and [Warnings] >= 1",
+                        "severity": "WARNING",
+                        "errorMessage": [
+                          {
+                            "locale": "en",
+                            "text": "Warning #8"
+                          }
+                        ],
+                        "guiPatterns": {
+                          "dynamicEnumeration": "false"
+                        }
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "fieldimpl_abc89",
+                      "name": "EnumerationTypeAutoComplete",
+                      "externalDescription": [
+                        {
+                          "locale": "en",
+                          "text": "Hint"
+                        }
+                      ],
+                      "Field": {
+                        "fieldType": {
+                          "type": "EnumerationType",
+                          "EnumerationType": {
+                            "values": [
+                              {
+                                "value": "value1",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "Value 1"
+                                  }
+                                ]
+                              },
+                              {
+                                "value": "value2",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "Value 2"
+                                  }
+                                ]
+                              },
+                              {
+                                "value": "vaue3",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "Value 3"
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "EnumerationType"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Rule",
+                      "id": "ruleimpl_ac186",
+                      "name": "EnumerationTypeAutoCompleteError1",
+                      "Rule": {
+                        "errorEntityRelPath": "../EnumerationTypeAutoComplete",
+                        "errorCode": "Error R9E1",
+                        "errorCondition": "(FieldFilled(EnumerationTypeAutoComplete) or FieldNotFilled(EnumerationTypeAutoComplete)) and FieldFilled(Errors) and [Errors] >= 1",
+                        "severity": "ERROR",
+                        "errorMessage": [
+                          {
+                            "locale": "en",
+                            "text": "Error #9"
+                          }
+                        ],
+                        "guiPatterns": {
+                          "dynamicEnumeration": "false"
+                        }
+                      }
+                    },
+                    {
+                      "type": "Rule",
+                      "id": "ruleimpl_78133",
+                      "name": "EnumerationTypeAutoCompleteWarning1",
+                      "Rule": {
+                        "errorEntityRelPath": "../EnumerationTypeAutoComplete",
+                        "errorCode": "Error R9W1",
+                        "errorCondition": "(FieldFilled(EnumerationTypeAutoComplete) or FieldNotFilled(EnumerationTypeAutoComplete)) and FieldFilled(Warnings) and [Warnings] >= 1",
+                        "severity": "WARNING",
+                        "errorMessage": [
+                          {
+                            "locale": "en",
+                            "text": "Warning #9"
+                          }
+                        ],
+                        "guiPatterns": {
+                          "dynamicEnumeration": "false"
+                        }
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "fieldimpl_ac261",
+                      "name": "EnumerationTypeInline",
+                      "externalDescription": [
+                        {
+                          "locale": "en",
+                          "text": "Hint"
+                        }
+                      ],
+                      "Field": {
+                        "fieldType": {
+                          "type": "EnumerationType",
+                          "EnumerationType": {
+                            "values": [
+                              {
+                                "value": "value1",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "Value 1"
+                                  }
+                                ]
+                              },
+                              {
+                                "value": "value2",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "Value 2"
+                                  }
+                                ]
+                              },
+                              {
+                                "value": "vaue3",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "Value 3"
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "EnumerationType"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Rule",
+                      "id": "ruleimpl_a2515",
+                      "name": "EnumerationTypeInlineError1",
+                      "Rule": {
+                        "errorEntityRelPath": "../EnumerationTypeInline",
+                        "errorCode": "Error R9E1",
+                        "errorCondition": "(FieldFilled(EnumerationTypeInline) or FieldNotFilled(EnumerationTypeInline)) and FieldFilled(Errors) and [Errors] >= 1",
+                        "severity": "ERROR",
+                        "errorMessage": [
+                          {
+                            "locale": "en",
+                            "text": "Error #10"
+                          }
+                        ],
+                        "guiPatterns": {
+                          "dynamicEnumeration": "false"
+                        }
+                      }
+                    },
+                    {
+                      "type": "Rule",
+                      "id": "ruleimpl_83df0",
+                      "name": "EnumerationTypeInlineWarning1",
+                      "Rule": {
+                        "errorEntityRelPath": "../EnumerationTypeInline",
+                        "errorCode": "Error R9W1",
+                        "errorCondition": "(FieldFilled(EnumerationTypeInline) or FieldNotFilled(EnumerationTypeInline)) and FieldFilled(Warnings) and [Warnings] >= 1",
+                        "severity": "WARNING",
+                        "errorMessage": [
+                          {
+                            "locale": "en",
+                            "text": "Warning #10"
+                          }
+                        ],
+                        "guiPatterns": {
+                          "dynamicEnumeration": "false"
+                        }
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "fieldimpl_446bb",
+                      "name": "EnumerationTypeFull",
+                      "externalDescription": [
+                        {
+                          "locale": "en",
+                          "text": "Hint"
+                        }
+                      ],
+                      "Field": {
+                        "fieldType": {
+                          "type": "EnumerationType",
+                          "EnumerationType": {
+                            "values": [
+                              {
+                                "value": "value1",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "Value 1"
+                                  }
+                                ]
+                              },
+                              {
+                                "value": "value2",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "Value 2"
+                                  }
+                                ]
+                              },
+                              {
+                                "value": "vaue3",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "Value 3"
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "EnumerationType"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Rule",
+                      "id": "ruleimpl_d5283",
+                      "name": "EnumerationTypeFullError1",
+                      "Rule": {
+                        "errorEntityRelPath": "../EnumerationTypeFull",
+                        "errorCode": "Error R9E1",
+                        "errorCondition": "(FieldFilled(EnumerationTypeFull) or FieldNotFilled(EnumerationTypeFull)) and FieldFilled(Errors) and [Errors] >= 1",
+                        "severity": "ERROR",
+                        "errorMessage": [
+                          {
+                            "locale": "en",
+                            "text": "Error #11"
+                          }
+                        ],
+                        "guiPatterns": {
+                          "dynamicEnumeration": "false"
+                        }
+                      }
+                    },
+                    {
+                      "type": "Rule",
+                      "id": "ruleimpl_f4dbd",
+                      "name": "EnumerationTypeFullWarning1",
+                      "Rule": {
+                        "errorEntityRelPath": "../EnumerationTypeFull",
+                        "errorCode": "Error R9W1",
+                        "errorCondition": "(FieldFilled(EnumerationTypeFull) or FieldNotFilled(EnumerationTypeFull)) and FieldFilled(Warnings) and [Warnings] >= 1",
+                        "severity": "WARNING",
+                        "errorMessage": [
+                          {
+                            "locale": "en",
+                            "text": "Warning #11"
+                          }
+                        ],
+                        "guiPatterns": {
+                          "dynamicEnumeration": "false"
+                        }
+                      }
+                    },
+                    {
+                      "type": "Group",
+                      "id": "groupimpl_ac649",
+                      "name": "MultiSelectTypeAutoComplete",
+                      "Group": {
+                        "repeatability": 999999,
+                        "usageType": "multi-select",
+                        "elements": [
+                          {
+                            "type": "Field",
+                            "id": "fieldimpl_23fcf",
+                            "name": "value",
+                            "Field": {
+                              "fieldType": {
+                                "type": "EnumerationType",
+                                "EnumerationType": {
+                                  "values": [
+                                    {
+                                      "value": "key1",
+                                      "label": [
+                                        {
+                                          "locale": "en",
+                                          "text": "Value 1"
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "value": "key2",
+                                      "label": [
+                                        {
+                                          "locale": "en",
+                                          "text": "Value 2"
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              },
+                              "requirednessConfig": {
+                                "mode": "absoluteOrRelativeToNextRepAncestor"
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Rule",
+                      "id": "ruleimpl_f4114",
+                      "name": "MultiSelectTypeAutoCompleteError1",
+                      "Rule": {
+                        "errorEntityRelPath": "../MultiSelectTypeAutoComplete/value",
+                        "errorCode": "Error rule_fb104",
+                        "errorCondition": "(NoGroupFilled(RuleGroup) or GroupFilled(RuleGroup)) and FieldFilled(Errors) and [Errors] >= 1",
+                        "severity": "ERROR",
+                        "errorMessage": [
+                          {
+                            "locale": "en",
+                            "text": "Error #12"
+                          }
+                        ],
+                        "guiPatterns": {
+                          "dynamicEnumeration": "false"
+                        }
+                      }
+                    },
+                    {
+                      "type": "Rule",
+                      "id": "ruleimpl_99611",
+                      "name": "MultiSelectTypeAutoCompleteWarning1",
+                      "Rule": {
+                        "errorEntityRelPath": "../MultiSelectTypeAutoComplete/value",
+                        "errorCode": "Error rule_fb104",
+                        "errorCondition": "(NoGroupFilled(RuleGroup) or GroupFilled(RuleGroup)) and FieldFilled(Warnings) and [Warnings] >= 1",
+                        "severity": "WARNING",
+                        "errorMessage": [
+                          {
+                            "locale": "en",
+                            "text": "Warnings #12"
+                          }
+                        ],
+                        "guiPatterns": {
+                          "dynamicEnumeration": "false"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

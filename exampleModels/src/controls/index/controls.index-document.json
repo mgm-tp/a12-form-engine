@@ -1,0 +1,818 @@
+{
+  "header": {
+    "id": "controls.index-document",
+    "modelType": "document",
+    "modelVersion": "28.4.0",
+    "locales": [
+      {
+        "code": "en"
+      }
+    ],
+    "labels": [],
+    "annotations": [
+      {
+        "name": "roles",
+        "value": "admin"
+      }
+    ],
+    "modelReferences": []
+  },
+  "content": {
+    "modelInfo": {
+      "name": "controls.index-document",
+      "immutable": false
+    },
+    "modelConfig": {
+      "decimalSeparator": ".",
+      "timeZone": "UTC",
+      "conditionLanguage": {
+        "code": "en_US"
+      }
+    },
+    "modelRoot": {
+      "rootGroups": [
+        {
+          "type": "Group",
+          "id": "group_4b3a1",
+          "name": "root",
+          "Group": {
+            "repeatability": 1,
+            "elements": [
+              {
+                "type": "Group",
+                "id": "group_8b152",
+                "name": "contacts",
+                "Group": {
+                  "repeatability": 2,
+                  "indexFieldName": "applicant",
+                  "elements": [
+                    {
+                      "type": "Field",
+                      "id": "field_c0223",
+                      "name": "applicant",
+                      "Field": {
+                        "fieldType": {
+                          "type": "BooleanType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "Applicant"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Group",
+                      "id": "group_65835",
+                      "name": "details",
+                      "Group": {
+                        "repeatability": 1,
+                        "elements": [
+                          {
+                            "type": "Field",
+                            "id": "field_a16d5",
+                            "name": "name",
+                            "Field": {
+                              "fieldType": {
+                                "type": "StringType"
+                              },
+                              "label": [
+                                {
+                                  "locale": "en",
+                                  "text": "Name"
+                                }
+                              ]
+                            }
+                          },
+                          {
+                            "type": "Field",
+                            "id": "field_6f9f9",
+                            "name": "surname",
+                            "Field": {
+                              "fieldType": {
+                                "type": "StringType"
+                              },
+                              "label": [
+                                {
+                                  "locale": "en",
+                                  "text": "Surname"
+                                }
+                              ]
+                            }
+                          },
+                          {
+                            "type": "Rule",
+                            "id": "rule_7368a",
+                            "name": "nameNotError",
+                            "Rule": {
+                              "errorEntityRelPath": "../name",
+                              "errorCode": "Error rule_7368a",
+                              "errorCondition": "[name] == \"Error\"",
+                              "severity": "ERROR",
+                              "errorMessage": [
+                                {
+                                  "locale": "en",
+                                  "text": "Should not be \"Error\""
+                                }
+                              ]
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Group",
+                "id": "group_7193b",
+                "name": "contacts_with_children_count",
+                "Group": {
+                  "repeatability": 2,
+                  "indexFieldName": "applicant",
+                  "elements": [
+                    {
+                      "type": "Field",
+                      "id": "field_52634",
+                      "name": "applicant",
+                      "Field": {
+                        "fieldType": {
+                          "type": "BooleanType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "Applicant"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Group",
+                      "id": "group_c7315",
+                      "name": "details",
+                      "Group": {
+                        "repeatability": 1,
+                        "elements": [
+                          {
+                            "type": "Field",
+                            "id": "field_a146a",
+                            "name": "name",
+                            "Field": {
+                              "fieldType": {
+                                "type": "StringType"
+                              },
+                              "label": [
+                                {
+                                  "locale": "en",
+                                  "text": "Name"
+                                }
+                              ]
+                            }
+                          },
+                          {
+                            "type": "Field",
+                            "id": "field_66ecb",
+                            "name": "surname",
+                            "Field": {
+                              "fieldType": {
+                                "type": "StringType"
+                              },
+                              "label": [
+                                {
+                                  "locale": "en",
+                                  "text": "Surname"
+                                }
+                              ]
+                            }
+                          },
+                          {
+                            "type": "Field",
+                            "id": "field_8c582",
+                            "name": "number_of_children",
+                            "Field": {
+                              "fieldType": {
+                                "type": "NumberType"
+                              },
+                              "label": [
+                                {
+                                  "locale": "en",
+                                  "text": "Number of Children"
+                                }
+                              ]
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Group",
+                "id": "group_1be0d",
+                "name": "nesting",
+                "Group": {
+                  "repeatability": 2,
+                  "elements": [
+                    {
+                      "type": "Group",
+                      "id": "group_a391d",
+                      "name": "contacts",
+                      "Group": {
+                        "repeatability": 2,
+                        "indexFieldName": "applicant",
+                        "elements": [
+                          {
+                            "type": "Field",
+                            "id": "field_172fd",
+                            "name": "applicant",
+                            "Field": {
+                              "fieldType": {
+                                "type": "BooleanType"
+                              },
+                              "label": [
+                                {
+                                  "locale": "en",
+                                  "text": "Applicant"
+                                }
+                              ]
+                            }
+                          },
+                          {
+                            "type": "Group",
+                            "id": "group_86454",
+                            "name": "details",
+                            "Group": {
+                              "repeatability": 1,
+                              "elements": [
+                                {
+                                  "type": "Field",
+                                  "id": "field_48be9",
+                                  "name": "name",
+                                  "Field": {
+                                    "fieldType": {
+                                      "type": "StringType"
+                                    },
+                                    "label": [
+                                      {
+                                        "locale": "en",
+                                        "text": "Name"
+                                      }
+                                    ]
+                                  }
+                                },
+                                {
+                                  "type": "Field",
+                                  "id": "field_d696b",
+                                  "name": "surname",
+                                  "Field": {
+                                    "fieldType": {
+                                      "type": "StringType"
+                                    },
+                                    "label": [
+                                      {
+                                        "locale": "en",
+                                        "text": "Surname"
+                                      }
+                                    ]
+                                  }
+                                }
+                              ]
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Group",
+                      "id": "group_faa70",
+                      "name": "contacts_with_children_count",
+                      "Group": {
+                        "repeatability": 2,
+                        "indexFieldName": "applicant",
+                        "elements": [
+                          {
+                            "type": "Field",
+                            "id": "field_23f45",
+                            "name": "applicant",
+                            "Field": {
+                              "fieldType": {
+                                "type": "BooleanType"
+                              },
+                              "label": [
+                                {
+                                  "locale": "en",
+                                  "text": "Applicant"
+                                }
+                              ]
+                            }
+                          },
+                          {
+                            "type": "Group",
+                            "id": "group_561a5",
+                            "name": "details",
+                            "Group": {
+                              "repeatability": 1,
+                              "elements": [
+                                {
+                                  "type": "Field",
+                                  "id": "field_443f8",
+                                  "name": "name",
+                                  "Field": {
+                                    "fieldType": {
+                                      "type": "StringType"
+                                    },
+                                    "label": [
+                                      {
+                                        "locale": "en",
+                                        "text": "Name"
+                                      }
+                                    ]
+                                  }
+                                },
+                                {
+                                  "type": "Field",
+                                  "id": "field_773b1",
+                                  "name": "surname",
+                                  "Field": {
+                                    "fieldType": {
+                                      "type": "StringType"
+                                    },
+                                    "label": [
+                                      {
+                                        "locale": "en",
+                                        "text": "Surname"
+                                      }
+                                    ]
+                                  }
+                                },
+                                {
+                                  "type": "Field",
+                                  "id": "field_f32b2",
+                                  "name": "number_of_children",
+                                  "Field": {
+                                    "fieldType": {
+                                      "type": "NumberType"
+                                    },
+                                    "label": [
+                                      {
+                                        "locale": "en",
+                                        "text": "Number of Children"
+                                      }
+                                    ]
+                                  }
+                                }
+                              ]
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Group",
+                "id": "group_bd50e",
+                "name": "contacts_with_all_field_types",
+                "Group": {
+                  "repeatability": 2,
+                  "indexFieldName": "applicant",
+                  "elements": [
+                    {
+                      "type": "Field",
+                      "id": "field_0a1ff",
+                      "name": "applicant",
+                      "Field": {
+                        "fieldType": {
+                          "type": "BooleanType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "Applicant"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Group",
+                      "id": "group_c4bde",
+                      "name": "details",
+                      "Group": {
+                        "repeatability": 1,
+                        "elements": [
+                          {
+                            "type": "Field",
+                            "id": "field_2b3bb",
+                            "name": "name",
+                            "Field": {
+                              "fieldType": {
+                                "type": "StringType"
+                              },
+                              "label": [
+                                {
+                                  "locale": "en",
+                                  "text": "Name"
+                                }
+                              ]
+                            }
+                          },
+                          {
+                            "type": "Field",
+                            "id": "field_30ae6",
+                            "name": "surname",
+                            "Field": {
+                              "fieldType": {
+                                "type": "StringType"
+                              },
+                              "label": [
+                                {
+                                  "locale": "en",
+                                  "text": "Surname"
+                                }
+                              ]
+                            }
+                          },
+                          {
+                            "type": "Field",
+                            "id": "field_fda0c",
+                            "name": "gender",
+                            "Field": {
+                              "fieldType": {
+                                "type": "EnumerationType",
+                                "EnumerationType": {
+                                  "values": [
+                                    {
+                                      "value": "female",
+                                      "label": [
+                                        {
+                                          "locale": "en",
+                                          "text": "Female"
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "value": "male",
+                                      "label": [
+                                        {
+                                          "locale": "en",
+                                          "text": "Male"
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "value": "other",
+                                      "label": [
+                                        {
+                                          "locale": "en",
+                                          "text": "Other"
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              },
+                              "label": [
+                                {
+                                  "locale": "en",
+                                  "text": "Gender"
+                                }
+                              ]
+                            }
+                          },
+                          {
+                            "type": "Field",
+                            "id": "field_56709",
+                            "name": "number_of_children",
+                            "Field": {
+                              "fieldType": {
+                                "type": "NumberType"
+                              },
+                              "label": [
+                                {
+                                  "locale": "en",
+                                  "text": "Number of Children"
+                                }
+                              ]
+                            }
+                          },
+                          {
+                            "type": "Field",
+                            "id": "field_b0653",
+                            "name": "birthday",
+                            "Field": {
+                              "fieldType": {
+                                "type": "DateType",
+                                "DateType": {
+                                  "format": "yyyy-MM-dd"
+                                }
+                              },
+                              "label": [
+                                {
+                                  "locale": "en",
+                                  "text": "Birthday"
+                                }
+                              ]
+                            }
+                          },
+                          {
+                            "type": "Field",
+                            "id": "field_456be",
+                            "name": "birthtime",
+                            "Field": {
+                              "fieldType": {
+                                "type": "TimeType",
+                                "TimeType": {
+                                  "format": "HH:mm:ss"
+                                }
+                              },
+                              "label": [
+                                {
+                                  "locale": "en",
+                                  "text": "Birthtime"
+                                }
+                              ]
+                            }
+                          },
+                          {
+                            "type": "Field",
+                            "id": "field_3d99b",
+                            "name": "start_of_insurance",
+                            "Field": {
+                              "fieldType": {
+                                "type": "DateTimeType",
+                                "DateTimeType": {
+                                  "format": "yyyy-MM-dd'T'HH:mm:ss"
+                                }
+                              },
+                              "label": [
+                                {
+                                  "locale": "en",
+                                  "text": "Start of Insurance"
+                                }
+                              ]
+                            }
+                          },
+                          {
+                            "type": "Field",
+                            "id": "field_d21ee",
+                            "name": "extra",
+                            "Field": {
+                              "fieldType": {
+                                "type": "BooleanType"
+                              },
+                              "label": [
+                                {
+                                  "locale": "en",
+                                  "text": "Extra"
+                                }
+                              ]
+                            }
+                          },
+                          {
+                            "type": "Field",
+                            "id": "field_a1807",
+                            "name": "terms",
+                            "Field": {
+                              "fieldType": {
+                                "type": "ConfirmType"
+                              },
+                              "label": [
+                                {
+                                  "locale": "en",
+                                  "text": "Accept Terms"
+                                }
+                              ]
+                            }
+                          },
+                          {
+                            "type": "Group",
+                            "id": "group_7fed5",
+                            "name": "photo",
+                            "Group": {
+                              "repeatability": 1,
+                              "usageType": "attachment",
+                              "elements": [
+                                {
+                                  "type": "Field",
+                                  "id": "field_b6020",
+                                  "name": "original_filename",
+                                  "Field": {
+                                    "fieldType": {
+                                      "type": "StringType"
+                                    }
+                                  }
+                                },
+                                {
+                                  "type": "Field",
+                                  "id": "field_7357d",
+                                  "name": "internal_filename",
+                                  "Field": {
+                                    "fieldType": {
+                                      "type": "StringType"
+                                    }
+                                  }
+                                },
+                                {
+                                  "type": "Field",
+                                  "id": "field_7e573",
+                                  "name": "content",
+                                  "Field": {
+                                    "fieldType": {
+                                      "type": "StringType",
+                                      "StringType": {
+                                        "lineBreaksPermitted": true,
+                                        "noValueValidation": true
+                                      }
+                                    }
+                                  }
+                                },
+                                {
+                                  "type": "Field",
+                                  "id": "field_b28cf",
+                                  "name": "attachment_id",
+                                  "Field": {
+                                    "fieldType": {
+                                      "type": "StringType"
+                                    }
+                                  }
+                                },
+                                {
+                                  "type": "Field",
+                                  "id": "field_be562",
+                                  "name": "size",
+                                  "Field": {
+                                    "fieldType": {
+                                      "type": "NumberType"
+                                    }
+                                  }
+                                },
+                                {
+                                  "type": "Field",
+                                  "id": "field_87668",
+                                  "name": "mime_type",
+                                  "Field": {
+                                    "fieldType": {
+                                      "type": "StringType"
+                                    }
+                                  }
+                                },
+                                {
+                                  "type": "Field",
+                                  "id": "field_ed604",
+                                  "name": "category",
+                                  "Field": {
+                                    "fieldType": {
+                                      "type": "StringType"
+                                    }
+                                  }
+                                },
+                                {
+                                  "type": "Field",
+                                  "id": "field_32ecf",
+                                  "name": "description",
+                                  "Field": {
+                                    "fieldType": {
+                                      "type": "StringType"
+                                    }
+                                  }
+                                },
+                                {
+                                  "type": "Rule",
+                                  "id": "rule_04181",
+                                  "name": "AttachmentInternalFilenameRequired",
+                                  "Rule": {
+                                    "errorEntityRelPath": "../internal_filename",
+                                    "errorCode": "Errorrule_04181",
+                                    "errorCondition": "GroupFilled(RuleGroup) and FieldNotFilled(internal_filename)",
+                                    "severity": "ERROR",
+                                    "errorMessage": [
+                                      {
+                                        "locale": "en",
+                                        "text": "Internal Error: Field internal_filename of customType attachment is not filled."
+                                      }
+                                    ]
+                                  }
+                                },
+                                {
+                                  "type": "Rule",
+                                  "id": "rule_d7509",
+                                  "name": "AttachmentMimeTypeRequired",
+                                  "Rule": {
+                                    "errorEntityRelPath": "../mime_type",
+                                    "errorCode": "Errorrule_d7509",
+                                    "errorCondition": "GroupFilled(RuleGroup) and FieldNotFilled(mime_type)",
+                                    "severity": "ERROR",
+                                    "errorMessage": [
+                                      {
+                                        "locale": "en",
+                                        "text": "Internal Error: Field mime_type of customType attachment is not filled."
+                                      }
+                                    ]
+                                  }
+                                },
+                                {
+                                  "type": "Rule",
+                                  "id": "rule_e5e49",
+                                  "name": "AttachmentIdOrContentFilled",
+                                  "Rule": {
+                                    "errorEntityRelPath": "../content",
+                                    "errorCode": "Errorrule_e5e49",
+                                    "errorCondition": "GroupFilled(RuleGroup) and NotExactlyOneFieldFilled(attachment_id, content)",
+                                    "severity": "ERROR",
+                                    "errorMessage": [
+                                      {
+                                        "locale": "en",
+                                        "text": "Internal Error: Either attachment_id or content must be filled in a customType attachment, but not both."
+                                      }
+                                    ]
+                                  }
+                                },
+                                {
+                                  "type": "Rule",
+                                  "id": "rule_2075f",
+                                  "name": "SizeOfContentFilled",
+                                  "Rule": {
+                                    "errorEntityRelPath": "../content",
+                                    "errorCode": "Errorrule_2075f",
+                                    "errorCondition": "FieldFilled(content) and FieldNotFilled(size)",
+                                    "severity": "ERROR",
+                                    "errorMessage": [
+                                      {
+                                        "locale": "en",
+                                        "text": "Internal Error: If the content is filled, the size must be also filled."
+                                      }
+                                    ]
+                                  }
+                                }
+                              ]
+                            }
+                          },
+                          {
+                            "type": "Group",
+                            "id": "group_cdf39",
+                            "name": "issues",
+                            "Group": {
+                              "repeatability": 999999,
+                              "usageType": "multi-select",
+                              "elements": [
+                                {
+                                  "type": "Field",
+                                  "id": "field_dc37f",
+                                  "name": "value",
+                                  "Field": {
+                                    "fieldType": {
+                                      "type": "EnumerationType",
+                                      "EnumerationType": {
+                                        "values": [
+                                          {
+                                            "value": "chronic_pain",
+                                            "label": [
+                                              {
+                                                "locale": "en",
+                                                "text": "Chronic Pain"
+                                              }
+                                            ]
+                                          },
+                                          {
+                                            "value": "implantates",
+                                            "label": [
+                                              {
+                                                "locale": "en",
+                                                "text": "Implantates"
+                                              }
+                                            ]
+                                          }
+                                        ]
+                                      }
+                                    },
+                                    "label": [
+                                      {
+                                        "locale": "en",
+                                        "text": ""
+                                      }
+                                    ],
+                                    "requirednessConfig": {
+                                      "mode": "absoluteOrRelativeToNextRepAncestor"
+                                    }
+                                  }
+                                }
+                              ]
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

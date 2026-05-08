@@ -1,0 +1,440 @@
+{
+  "header": {
+    "id": "computation-validation.required.markingOfRequiredFields-form",
+    "modelType": "form",
+    "modelVersion": "37.4.0",
+    "locales": [
+      {
+        "code": "en"
+      }
+    ],
+    "annotations": [
+      {
+        "name": "roles",
+        "value": "admin"
+      }
+    ],
+    "modelReferences": [
+      {
+        "alias": "computation-validation.required-document",
+        "modelType": "document",
+        "purpose": "data binding",
+        "reference": "computation-validation.required-document"
+      }
+    ]
+  },
+  "content": {
+    "subHeaderBox": {
+      "id": "subHeaderBox"
+    },
+    "footerBox": {
+      "id": "footerBox"
+    },
+    "screens": [
+      {
+        "id": "screen1",
+        "name": "Screen1",
+        "title": {
+          "type": "Multilingual",
+          "multilingualText": {
+            "text": [
+              {
+                "locale": "en",
+                "text": "New Project - Sample Screen"
+              }
+            ]
+          }
+        },
+        "screenElements": [
+          {
+            "type": "ControlGrid",
+            "id": "controlgrid_83257",
+            "name": "intro",
+            "row": [
+              {
+                "type": "Row",
+                "id": "row_221c6",
+                "cell": [
+                  {
+                    "type": "TextCell",
+                    "id": "textcell_48c7c",
+                    "name": "Intro",
+                    "decoration": "INFO",
+                    "content": {
+                      "text": [
+                        {
+                          "locale": "en",
+                          "text": "Shows different combinations of asterisks with the 'markingOfRequiredFields' settings on control level. Readonly, disabled and computed fields should not be affected by the setting."
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "ControlGrid",
+            "id": "controlgrid-d47c0",
+            "name": "required",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "MarkingOfRequiredFields = Required"
+                  }
+                ]
+              }
+            },
+            "layout": {
+              "lg": "6-6"
+            },
+            "row": [
+              {
+                "type": "Row",
+                "id": "row-5f2b7",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control-181a0",
+                    "elementRef": "F3"
+                  },
+                  {
+                    "type": "Control",
+                    "id": "control-9c3e1",
+                    "elementRef": "F4"
+                  }
+                ]
+              },
+              {
+                "type": "Row",
+                "id": "row_c57c4",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control_97ef6",
+                    "elementRef": "field_c1203"
+                  },
+                  {
+                    "type": "Control",
+                    "id": "control_9d906",
+                    "readonly": true,
+                    "elementRef": "field_d0d84"
+                  }
+                ]
+              }
+            ],
+            "verticalAlignment": "BOTTOM"
+          },
+          {
+            "type": "InlineRepeat",
+            "id": "inlinerepeat_8fa24",
+            "name": "Required_Repeat",
+            "repeatOverviewColumn": [
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn_68f72",
+                "elementRef": "F15"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn_09aea",
+                "elementRef": "F9"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn_de68f",
+                "elementRef": "field_c1203"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn_bbdb9",
+                "width": 1,
+                "readonly": true,
+                "elementRef": "field_d0d84"
+              }
+            ],
+            "groupRef": "G8",
+            "enableAdd": true,
+            "enableRemove": true
+          },
+          {
+            "type": "ControlGrid",
+            "id": "controlgrid_c3315",
+            "name": "never",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "MarkingOfRequiredFields = Never"
+                  }
+                ]
+              }
+            },
+            "layout": {
+              "lg": "6-6"
+            },
+            "row": [
+              {
+                "type": "Row",
+                "id": "row_5ad61",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control_eba07",
+                    "elementRef": "F3",
+                    "markingOfRequiredFields": "NONE"
+                  },
+                  {
+                    "type": "Control",
+                    "id": "control_2bed7",
+                    "elementRef": "F4",
+                    "markingOfRequiredFields": "NONE"
+                  }
+                ]
+              },
+              {
+                "type": "Row",
+                "id": "row_aff80",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control_757e2",
+                    "elementRef": "field_c1203",
+                    "markingOfRequiredFields": "NONE"
+                  },
+                  {
+                    "type": "Control",
+                    "id": "control_c8586",
+                    "readonly": true,
+                    "elementRef": "field_d0d84",
+                    "markingOfRequiredFields": "NONE"
+                  }
+                ]
+              }
+            ],
+            "verticalAlignment": "BOTTOM"
+          },
+          {
+            "type": "InlineRepeat",
+            "id": "inlinerepeat_99669",
+            "name": "Never_Repeat",
+            "repeatOverviewColumn": [
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn_a4ccc",
+                "width": 1,
+                "elementRef": "F15",
+                "markingOfRequiredFields": "NONE"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn_b1389",
+                "width": 1,
+                "elementRef": "F9",
+                "markingOfRequiredFields": "NONE"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn_6f878",
+                "width": 1,
+                "elementRef": "field_c1203",
+                "markingOfRequiredFields": "NONE"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn_de652",
+                "width": 1,
+                "readonly": true,
+                "elementRef": "field_d0d84",
+                "markingOfRequiredFields": "NONE"
+              }
+            ],
+            "groupRef": "G8",
+            "enableAdd": true,
+            "enableRemove": true
+          },
+          {
+            "type": "ControlGrid",
+            "id": "controlgrid_4a378",
+            "name": "always",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "MarkingOfRequiredFields = Always"
+                  }
+                ]
+              }
+            },
+            "layout": {
+              "lg": "6-6"
+            },
+            "row": [
+              {
+                "type": "Row",
+                "id": "row_ad22e",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control_4c6cd",
+                    "elementRef": "F3",
+                    "markingOfRequiredFields": "ALWAYS"
+                  },
+                  {
+                    "type": "Control",
+                    "id": "control_b33b4",
+                    "elementRef": "F4",
+                    "markingOfRequiredFields": "ALWAYS"
+                  }
+                ]
+              },
+              {
+                "type": "Row",
+                "id": "row_0f52d",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control_f22e3",
+                    "elementRef": "field_c1203",
+                    "markingOfRequiredFields": "ALWAYS"
+                  },
+                  {
+                    "type": "Control",
+                    "id": "control_fed1a",
+                    "readonly": true,
+                    "elementRef": "field_d0d84",
+                    "markingOfRequiredFields": "ALWAYS"
+                  }
+                ]
+              }
+            ],
+            "verticalAlignment": "BOTTOM"
+          },
+          {
+            "type": "InlineRepeat",
+            "id": "inlinerepeat_7ef7c",
+            "name": "Always_Repeat",
+            "repeatOverviewColumn": [
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn_2a67c",
+                "width": 1,
+                "elementRef": "F15",
+                "markingOfRequiredFields": "ALWAYS"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn_383ab",
+                "width": 1,
+                "elementRef": "F9",
+                "markingOfRequiredFields": "ALWAYS"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn_f8a7b",
+                "width": 1,
+                "elementRef": "field_c1203",
+                "markingOfRequiredFields": "ALWAYS"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn_08611",
+                "width": 1,
+                "readonly": true,
+                "elementRef": "field_d0d84",
+                "markingOfRequiredFields": "ALWAYS"
+              }
+            ],
+            "groupRef": "G8",
+            "enableAdd": true,
+            "enableRemove": true
+          }
+        ]
+      }
+    ],
+    "fieldConfiguration": {
+      "field": [
+        {
+          "initialValue": "Readonly",
+          "elementRef": "field_d0d84"
+        }
+      ]
+    },
+    "groupConfiguration": {},
+    "defaults": {
+      "buttonLabels": {
+        "ADD": {
+          "text": [
+            {
+              "locale": "en",
+              "text": "add"
+            }
+          ]
+        },
+        "COMMIT_ADD": {
+          "text": [
+            {
+              "locale": "en",
+              "text": "commit"
+            }
+          ]
+        },
+        "APPLY": {
+          "text": [
+            {
+              "locale": "en",
+              "text": "apply changes"
+            }
+          ]
+        },
+        "EDIT": {
+          "text": [
+            {
+              "locale": "en",
+              "text": "edit"
+            }
+          ]
+        },
+        "REMOVE": {
+          "text": [
+            {
+              "locale": "en",
+              "text": "remove"
+            }
+          ]
+        },
+        "VIEW": {
+          "text": [
+            {
+              "locale": "en",
+              "text": "open"
+            }
+          ]
+        },
+        "CANCEL": {
+          "text": [
+            {
+              "locale": "en",
+              "text": "cancel"
+            }
+          ]
+        },
+        "RETURN": {
+          "text": [
+            {
+              "locale": "en",
+              "text": "return"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

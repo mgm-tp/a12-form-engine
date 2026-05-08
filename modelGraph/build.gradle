@@ -1,0 +1,51 @@
+buildscript {
+    apply from: rootProject.file('scripts/buildscript-platforms.gradle')
+
+    dependencies {
+        classpath a12Libs.dataservices.core.tooling
+    }
+}
+
+final def tmpDir = layout.buildDirectory.dir("tmp")
+
+tasks.register('copyModelFiles', Copy) {
+    dependsOn(project(':exampleModels').tasks.named('assemble'))
+
+    final String exampleModelsDir = '../exampleModels/build/models'
+
+    from file(exampleModelsDir)
+
+    // include all json files, but remove "data files"
+    include '**/*.json'
+    exclude {
+        final FileTreeElement details -> details.file.name.endsWith('.json') && !details.file.text.contains('modelType')
+    }
+
+    into file(tmpDir)
+
+    inputs.files(
+        fileTree(exampleModelsDir) { include('**/*.json') },
+    )
+    outputs.dir(tmpDir)
+}
+
+tasks.register('generateModelGraph', JavaExec) {
+    dependsOn(tasks.named('copyModelFiles'))
+
+    final def modelGraphFile = layout.buildDirectory.file("modelGraph.json")
+
+    classpath = buildscript.configurations.classpath
+    mainClass = 'com.mgmtp.a12.dataservices.tooling.modelgraph.ModelGraphGenerator'
+
+    inputs.dir(tmpDir)
+    outputs.file(modelGraphFile)
+
+    args("--output=${modelGraphFile.get().asFile.path}")
+
+    // models are copied into one directory as the generator class can only handle a "single" input
+    args(file(tmpDir).toURI().toString())
+}
+
+tasks.named('assemble') {
+    dependsOn(tasks.named('generateModelGraph'))
+}
