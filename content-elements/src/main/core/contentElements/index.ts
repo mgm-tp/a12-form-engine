@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -77,6 +77,7 @@ export * from "./modules/switch/switchNode.js";
 export * from "./modules/textArea/textAreaNode.js";
 export * from "./modules/textLine/textLineNode.js";
 
+export * from "./modules/messageGroupContainer/editableElementsContext.js";
 export * from "./modules/messageGroupContainer/messageGroupContext.js";
 export * from "./modules/messageGroupContainer/useCollectDocumentElementIds.js";
 export * from "./modules/messageGroupContainer/useCollectEditableElements.js";

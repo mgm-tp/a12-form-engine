@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -30,16 +30,20 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { mock, type Mock } from "node:test";
+import { mock } from "node:test";
+import type { Mock } from "node:test";
 
-import { ModelPath } from "@com.mgmtp.a12.base/base-model-api/lib/main/model/index.js";
-import type { Locale } from "@com.mgmtp.a12.utils/utils-localization/lib/main/index.js";
+import { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
+import type { Locale } from "@com.mgmtp.a12.utils/utils-localization";
 
 import type { Models } from "../../../../back-end/store/internal/store.js";
 import type { DispatchConfiguration } from "../../../../view/index.js";
 import { defaultMapDispatchToProps } from "../../../../view/index.js";
 import type { RtlRenderWrapper } from "../../../rtl-utils/render-wrapper.js";
-import { SetupHelpers } from "../../../utils/setup.js";
+import {
+	setupConnectedFormEngineWithRtl,
+	setupContentBoxRendererWithRtl
+} from "../../../utils/setup.js";
 import {
 	createDocument,
 	DOCUMENT
@@ -282,11 +286,9 @@ export function setupValidationBarTests(props: {
 		dispatchConfig: props.dispatchConfig,
 		locale: props.locale
 	};
-	return (
-		props.setupDevApp
-			? SetupHelpers.setupConnectedFormEngineWithRtl
-			: SetupHelpers.setupContentBoxRendererWithRtl
-	)(config);
+	return (props.setupDevApp ? setupConnectedFormEngineWithRtl : setupContentBoxRendererWithRtl)(
+		config
+	);
 }
 
 export function createStubbedDispatchConfig(): StubbedDispatchConfig {

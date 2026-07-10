@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -30,27 +30,19 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { DocumentHelpers } from "../document-helpers.js";
+import { createDocumentPath } from "../createDocumentPath.js";
 
 export const DOCUMENT_PATHS = {
-	FIELD_A: DocumentHelpers.createDocumentPath(["root"], ["NonRep"], ["FieldA"]),
-	FIELD_B: DocumentHelpers.createDocumentPath(["root"], ["NonRep"], ["FieldB"]),
-	FIELD_C: DocumentHelpers.createDocumentPath(["root"], ["NonRep"], ["FieldC"]),
-	FIELD_C_REP: DocumentHelpers.createDocumentPath(["root"], ["Rep"], ["FieldC"]),
-	FIELD_G: DocumentHelpers.createDocumentPath(["root"], ["NonRep"], ["FieldG"]),
-	FIELD_QUOTIENT: DocumentHelpers.createDocumentPath(["root"], ["NonRep"], ["ResultDivision"]),
-	FIELD_MULTI_SELECT: DocumentHelpers.createDocumentPath(
-		["root"],
-		["MultiSelectComputation"],
-		["MultiSelect1"]
-	),
-	FIELD_H: DocumentHelpers.createDocumentPath(["root"], ["MultiSelectComputation"], ["FieldH"]),
+	FIELD_A: createDocumentPath(["root"], ["NonRep"], ["FieldA"]),
+	FIELD_B: createDocumentPath(["root"], ["NonRep"], ["FieldB"]),
+	FIELD_C: createDocumentPath(["root"], ["NonRep"], ["FieldC"]),
+	FIELD_C_REP: createDocumentPath(["root"], ["Rep"], ["FieldC"]),
+	FIELD_G: createDocumentPath(["root"], ["NonRep"], ["FieldG"]),
+	FIELD_QUOTIENT: createDocumentPath(["root"], ["NonRep"], ["ResultDivision"]),
+	FIELD_MULTI_SELECT: createDocumentPath(["root"], ["MultiSelectComputation"], ["MultiSelect1"]),
+	FIELD_H: createDocumentPath(["root"], ["MultiSelectComputation"], ["FieldH"]),
 
-	FIELD_ATTACHMENT: DocumentHelpers.createDocumentPath(
-		["root"],
-		["AttachmentComputation"],
-		["Attachment"]
-	),
-	FIELD_I: DocumentHelpers.createDocumentPath(["root"], ["AttachmentComputation"], ["FieldI"]),
-	FIELD_D: DocumentHelpers.createDocumentPath(["root"], ["FieldD"])
+	FIELD_ATTACHMENT: createDocumentPath(["root"], ["AttachmentComputation"], ["Attachment"]),
+	FIELD_I: createDocumentPath(["root"], ["AttachmentComputation"], ["FieldI"]),
+	FIELD_D: createDocumentPath(["root"], ["FieldD"])
 };

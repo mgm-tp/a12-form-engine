@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -32,13 +32,13 @@
 
 import { deepStrictEqual } from "node:assert/strict";
 
-import type { ModelPath } from "@com.mgmtp.a12.base/base-model-api/lib/main/model/index.js";
-import type { Locale } from "@com.mgmtp.a12.utils/utils-localization/lib/main/index.js";
+import type { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
+import type { Locale } from "@com.mgmtp.a12.utils/utils-localization";
 import {
 	defaultDataFormats,
 	defaultLocalizerFactory,
 	defaultValueConversion
-} from "@com.mgmtp.a12.utils/utils-localization/lib/main/index.js";
+} from "@com.mgmtp.a12.utils/utils-localization";
 
 import { createEngineStore } from "../../../../../../back-end/store/index.js";
 import type { Models } from "../../../../../../back-end/store/internal/store.js";
@@ -47,20 +47,17 @@ import { findElementByFormModelPath } from "../../../../../../models/internal/fi
 import type { FormModel } from "../../../../../../models/internal/form-model.js";
 import type { RepeatRow } from "../../../../../../view/internal/components/form-engine/repeat/components/tableColumnTypes.js";
 import { sort } from "../../../../../../view/internal/utilities/sorting.js";
-import { ModelHelpers } from "../../../../../utils/model-helpers.js";
-import { SetupHelpers } from "../../../../../utils/setup.js";
+import { createModelPath } from "../../../../../utils/createModelPath.js";
 import {
 	setupArrayFixture,
 	setupFixture,
 	setupModelsFixture
 } from "../../../../../utils/setupFixture.js";
-import { createDocumentPath } from "../../../../../utils/test-model-helpers/dependent-enumeration.js";
 import { REPEAT_MODEL_PATH } from "../../filter/filter.utils.js";
+import { createDocumentPath } from "../../../../../utils/createDocumentPath.js";
+import { loadData } from "../../../../../utils/setup.js";
 
 import { createRow } from "./utils.js";
-
-const { loadData } = SetupHelpers;
-const { createModelPath } = ModelHelpers;
 
 export function executeTestForDateSorting(models: Models, locale: Locale): void {
 	const COLUMN_NAME = "fieldbasedrepeatoverviewcolumn-2f3cf";

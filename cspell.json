@@ -12,7 +12,7 @@
 		"/\\[#\\S+\\]/", // asciidoc section anchors
 		"-{4}\n((.|\n)*?)-{4}\n", // asciidoc code blocks
 		"/@com\\.mgmtp\\.a12\\.\\S+/", // A12 package names
-		"/\/\/ nosemgrep:.*/" // comment to disable semgrep rules
+		"/// nosemgrep:.*/" // comment to disable semgrep rules
 	],
 	"ignorePaths": [
 		"**/*.json",
@@ -32,28 +32,43 @@
 		"**/.gitignore",
 		"**/.dockerignore",
 		"documentation/scripts/convert.ts",
-		"documentation/scripts/asciidoctor.d.ts"
+		"documentation/scripts/asciidoctor.d.ts",
+		"documentation/src/assets/typedoc",
+		"gradle/*.versions.toml"
 	],
 	"ignoreWords": [
 		"-expandedrow" // part of HTML id
 	],
 	"words": [
-		"mgmtp",
-		"osgi",
-		"localizable",
-		"localizables",
 		"actioncontentbox",
-		"navigationcontentboxcontext",
+		"appsetup",
+		"cldr",
 		"codemod",
 		"codemods",
 		"devapp",
+		"Drewrite",
 		"enablements",
-		"appsetup",
+		"formengine",
+		"jambit",
+		"localizable",
+		"localizables",
+		"Melies",
+		"mgmtp",
+		"navigationcontentboxcontext",
+		"openrewrite",
+		"osgi",
+		"Picus",
+		"Rsbuild",
+		"Rsdoctor",
+		"rspack",
+		"stylable",
+		"typeguard",
 		"unmarshall",
 		"unmarshalling",
-		"typeguard",
-		"formengine"
+		"worktree"
 	],
-	"useGitignore": true,
-	"flagWords": ["wether->whether"]
+	"useGitignore": false, // see bug https://github.com/streetsidesoftware/cspell/issues/8012
+	"flagWords": [
+		"wether->whether"
+	]
 }

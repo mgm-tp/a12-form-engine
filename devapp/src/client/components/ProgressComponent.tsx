@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -34,10 +34,10 @@ import type { JSX } from "react";
 import { useSelector } from "react-redux";
 import { styled } from "styled-components";
 
-import { ActivitySelectors } from "@com.mgmtp.a12.client/client-core/lib/core/activity/index.js";
-import { ViewViews, type View } from "@com.mgmtp.a12.client/client-core/lib/core/view/index.js";
-import type { ProgressIndicatorProps } from "@com.mgmtp.a12.widgets/widgets-core/lib/progress-indicator/main/progress-indicator.api.js";
-import { ProgressIndicator } from "@com.mgmtp.a12.widgets/widgets-core/lib/progress-indicator/main/progress-indicator.view.js";
+import type { View } from "@com.mgmtp.a12.client/client-core";
+import { ActivitySelectors, ViewViews } from "@com.mgmtp.a12.client/client-core";
+import { ProgressIndicator } from "@com.mgmtp.a12.widgets/widgets-core";
+import type { ProgressIndicatorProps } from "@com.mgmtp.a12.widgets/widgets-core";
 
 const StyledIndicator = styled(ViewViews.ProgressIndicator)`
 	height: "100%";

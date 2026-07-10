@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -43,7 +43,7 @@ export const CustomFormModelMap: FormModelMap = {
 	...DefaultFormModelMap,
 	Section: {
 		component(props: FormModelMap.FormModelComponentProps<FormModel.Section>) {
-			if (props.modelElement.annotations && props.modelElement.annotations[0].name === "image") {
+			if (props.modelElement.annotations?.[0].name === "image") {
 				const state = props.config.renderOptions.state;
 				const currentScreenLocation = UiStateSelectors.currentScreenLocation()(state);
 				const dataContext = currentScreenLocation.path;

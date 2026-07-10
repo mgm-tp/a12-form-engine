@@ -1,0 +1,554 @@
+{
+  "header": {
+    "id": "SampleFM",
+    "modelType": "form",
+    "modelVersion": "39.0.0",
+    "locales": [
+      {
+        "code": "en"
+      },
+      {
+        "code": "de"
+      }
+    ],
+    "labels": [
+      {
+        "text": "JSON Serializer Test Model",
+        "locale": "en"
+      }
+    ],
+    "modelReferences": [
+      {
+        "alias": "DM",
+        "modelType": "document",
+        "purpose": "data binding",
+        "reference": "SampleDM"
+      }
+    ],
+    "annotations": [
+      {
+        "name": "roles",
+        "value": "admin"
+      },
+      {
+        "name": "comment",
+        "value": "Dies ist ein Kommentar"
+      }
+    ]
+  },
+  "content": {
+    "subHeaderBox": {
+      "id": "subHeaderBox"
+    },
+    "footerBox": {
+      "id": "footerBox"
+    },
+    "screens": [
+      {
+        "id": "screen1",
+        "name": "First Screen",
+        "title": {
+          "type": "Multilingual",
+          "multilingualText": {
+            "text": [
+              {
+                "locale": "de",
+                "text": "Erster Screen"
+              },
+              {
+                "locale": "en",
+                "text": "First Screen"
+              }
+            ]
+          }
+        },
+        "screenElements": [
+          {
+            "type": "Section",
+            "id": "fdfdf",
+            "name": "Section1",
+            "collapsible": true,
+            "screenElements": [
+              {
+                "type": "DetachedRepeat",
+                "id": "D4343",
+                "name": "DetachedRepeat",
+                "repeatOverviewColumn": [
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldOverviewColumn-1",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "de",
+                            "text": "Deutsch"
+                          }
+                        ]
+                      }
+                    },
+                    "elementRef": "F14"
+                  },
+                  {
+                    "type": "ExpressionRepeatOverviewColumn",
+                    "id": "expressionOverviewColumn-1",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "de",
+                            "text": "Expr Titel"
+                          }
+                        ]
+                      }
+                    },
+                    "name": "ddd",
+                    "expression": "[Type] \"(\" [Weight] \"kg)\""
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldOverviewColumn-2",
+                    "elementRef": "F15"
+                  }
+                ],
+                "groupRef": "G13",
+                "enableAdd": true,
+                "enableRemove": true,
+                "enableReorder": true,
+                "detailScreen": {
+                  "name": "dr-detail-screen",
+                  "id": "erer",
+                  "screenElements": [
+                    {
+                      "type": "ControlGrid",
+                      "id": "baggage-cg",
+                      "name": "baggage",
+                      "row": [
+                        {
+                          "type": "Row",
+                          "id": "baggage-r1",
+                          "cell": [
+                            {
+                              "type": "Control",
+                              "id": "baggage-type",
+                              "elementRef": "F14"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "Row",
+                          "id": "baggage-r2",
+                          "cell": [
+                            {
+                              "type": "Control",
+                              "id": "baggage-weight",
+                              "elementRef": "F15"
+                            }
+                          ]
+                        }
+                      ],
+                      "verticalAlignment": "BOTTOM"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "ControlGrid",
+                "id": "cgexample",
+                "name": "ControlGrid concept example",
+                "title": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "de",
+                        "text": "Telefondaten"
+                      },
+                      {
+                        "locale": "en",
+                        "text": "Phone data"
+                      }
+                    ]
+                  }
+                },
+                "layout": {
+                  "lg": "6-3-3"
+                },
+                "row": [
+                  {
+                    "type": "Row",
+                    "id": "row1",
+                    "title": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "de",
+                            "text": "Telefon"
+                          }
+                        ]
+                      }
+                    },
+                    "cell": [
+                      {
+                        "type": "Control",
+                        "id": "c1",
+                        "label": {
+                          "type": "Multilingual",
+                          "multilingualText": {
+                            "text": [
+                              {
+                                "locale": "de",
+                                "text": "Telefon Ländervorwahl"
+                              }
+                            ]
+                          }
+                        },
+                        "elementRef": "F5"
+                      },
+                      {
+                        "type": "Control",
+                        "id": "c2",
+                        "offset": {
+                          "lg": 1
+                        },
+                        "label": {
+                          "type": "Multilingual",
+                          "multilingualText": {
+                            "text": [
+                              {
+                                "locale": "de",
+                                "text": "Ortsvorwahl"
+                              }
+                            ]
+                          }
+                        },
+                        "elementRef": "F6"
+                      },
+                      {
+                        "type": "Control",
+                        "id": "c3",
+                        "offset": {
+                          "lg": 2
+                        },
+                        "label": {
+                          "type": "Multilingual",
+                          "multilingualText": {
+                            "text": [
+                              {
+                                "locale": "de",
+                                "text": "Rufnummer"
+                              }
+                            ]
+                          }
+                        },
+                        "elementRef": "F7"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "Row",
+                    "id": "row2",
+                    "title": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "de",
+                            "text": "Fax"
+                          }
+                        ]
+                      }
+                    },
+                    "cell": [
+                      {
+                        "type": "Control",
+                        "id": "c4",
+                        "label": {
+                          "type": "Multilingual",
+                          "multilingualText": {
+                            "text": [
+                              {
+                                "locale": "de",
+                                "text": "Fax Ländervorwahl"
+                              }
+                            ]
+                          }
+                        },
+                        "elementRef": "F9"
+                      },
+                      {
+                        "type": "Control",
+                        "id": "c5",
+                        "offset": {
+                          "lg": 1
+                        },
+                        "label": {
+                          "type": "Multilingual",
+                          "multilingualText": {
+                            "text": [
+                              {
+                                "locale": "de",
+                                "text": "Ortsvorwahl"
+                              }
+                            ]
+                          }
+                        },
+                        "elementRef": "F10"
+                      },
+                      {
+                        "type": "Control",
+                        "id": "c6",
+                        "offset": {
+                          "lg": 2
+                        },
+                        "label": {
+                          "type": "Multilingual",
+                          "multilingualText": {
+                            "text": [
+                              {
+                                "locale": "de",
+                                "text": "Rufnummer"
+                              }
+                            ]
+                          }
+                        },
+                        "elementRef": "F11"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "Row",
+                    "id": "row3",
+                    "cell": [
+                      {
+                        "type": "Control",
+                        "id": "c7",
+                        "offset": {
+                          "lg": 1
+                        },
+                        "span": {
+                          "lg": 2
+                        },
+                        "label": {
+                          "type": "Multilingual",
+                          "multilingualText": {
+                            "text": [
+                              {
+                                "locale": "de",
+                                "text": "Kommentar"
+                              }
+                            ]
+                          }
+                        },
+                        "elementRef": "F12"
+                      }
+                    ]
+                  }
+                ],
+                "verticalAlignment": "BOTTOM"
+              }
+            ]
+          },
+          {
+            "type": "ButtonPanel",
+            "id": "buttons",
+            "name": "buttons",
+            "button": [
+              {
+                "type": "NAVIGATION",
+                "id": "next",
+                "name": "next",
+                "buttonStyling": {
+                  "label": {
+                    "type": "Multilingual",
+                    "multilingualText": {
+                      "text": [
+                        {
+                          "locale": "de",
+                          "text": "weiter"
+                        },
+                        {
+                          "locale": "en",
+                          "text": "next"
+                        }
+                      ]
+                    }
+                  },
+                  "priority": "SECONDARY"
+                },
+                "target": "screen2",
+                "scope": "HIDDEN_IN_READONLY_MODE"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "screen2",
+        "name": "Second Screen",
+        "title": {
+          "type": "Multilingual",
+          "multilingualText": {
+            "text": [
+              {
+                "locale": "de",
+                "text": "Zweiter Screen"
+              },
+              {
+                "locale": "en",
+                "text": "Second Screen"
+              }
+            ]
+          }
+        },
+        "screenElements": [
+          {
+            "type": "ControlGrid",
+            "id": "g1",
+            "name": "g1",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "de",
+                    "text": "Bankverbindung"
+                  },
+                  {
+                    "locale": "en",
+                    "text": "Bank Account"
+                  }
+                ]
+              }
+            },
+            "row": [
+              {
+                "type": "Row",
+                "id": "row4",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "bic",
+                    "elementRef": "F17"
+                  }
+                ]
+              },
+              {
+                "type": "Row",
+                "id": "row5",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "iban",
+                    "elementRef": "F18"
+                  }
+                ]
+              }
+            ],
+            "verticalAlignment": "BOTTOM"
+          }
+        ]
+      }
+    ],
+    "fieldConfiguration": {
+      "field": [
+        {
+          "exposition": "FULL",
+          "elementRef": "F14"
+        }
+      ]
+    },
+    "groupConfiguration": {},
+    "defaults": {
+      "buttonLabels": {
+        "ADD": {
+          "text": [
+            {
+              "locale": "de",
+              "text": "Einfg"
+            },
+            {
+              "locale": "en",
+              "text": "Ins"
+            }
+          ]
+        },
+        "EDIT": {
+          "text": [
+            {
+              "locale": "de",
+              "text": "Eingabe"
+            },
+            {
+              "locale": "en",
+              "text": "Edit"
+            }
+          ]
+        },
+        "REMOVE": {
+          "text": [
+            {
+              "locale": "de",
+              "text": "Entf"
+            },
+            {
+              "locale": "en",
+              "text": "Del"
+            }
+          ]
+        },
+        "APPLY": {
+          "text": [
+            {
+              "locale": "de",
+              "text": "Enter"
+            },
+            {
+              "locale": "en",
+              "text": "Enter"
+            }
+          ]
+        },
+        "CANCEL": {
+          "text": [
+            {
+              "locale": "de",
+              "text": "Esc"
+            },
+            {
+              "locale": "en",
+              "text": "Esc"
+            }
+          ]
+        },
+        "VIEW": {
+          "text": [
+            {
+              "locale": "de",
+              "text": "Anzeige"
+            },
+            {
+              "locale": "en",
+              "text": "Open"
+            }
+          ]
+        },
+        "RETURN": {
+          "text": [
+            {
+              "locale": "de",
+              "text": "Zurück"
+            },
+            {
+              "locale": "en",
+              "text": "Back"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

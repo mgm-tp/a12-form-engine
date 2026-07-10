@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -30,20 +30,17 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import type { ActionCreator, AnyAction } from "redux";
-import type { Action } from "typescript-fsa";
-import { actionCreatorFactory } from "typescript-fsa";
+import type { ActionCreator, Action as ReduxAction } from "redux";
 
-import type { ModelPath } from "@com.mgmtp.a12.base/base-model-api/lib/main/model/index.js";
-import type { Attachment } from "@com.mgmtp.a12.dataservices/dataservices-access/lib/Attachment/attachment.js";
+import type { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
+import type { Action } from "@com.mgmtp.a12.client/typescript-fsa-redux-5-compat";
+import { actionCreatorFactory } from "@com.mgmtp.a12.client/typescript-fsa-redux-5-compat";
+import type { Attachment } from "@com.mgmtp.a12.dataservices/dataservices-access";
 import type {
 	EntityInstancePath,
 	FieldInstanceValue
-} from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
-import type {
-	Locale,
-	ValueConversion
-} from "@com.mgmtp.a12.utils/utils-localization/lib/main/index.js";
+} from "@com.mgmtp.a12.kernel/kernel-md-facade";
+import type { Locale, ValueConversionParseError } from "@com.mgmtp.a12.utils/utils-localization";
 
 import type {
 	AttachmentFile,
@@ -64,10 +61,8 @@ import type {
 	RepeatFilter
 } from "./store.js";
 
-namespace actionCreator {
-	export const event = actionCreatorFactory("form-engine/event");
-	export const command = actionCreatorFactory("form-engine/command");
-}
+const event = actionCreatorFactory("form-engine/event");
+const command = actionCreatorFactory("form-engine/command");
 
 /**
  * Actions which are dispatched by `DispatchConfiguration` when an UI-event happens
@@ -78,7 +73,7 @@ export namespace Events {
 	 * when a value changed in the UI.
 	 * The value must already be parsed.
 	 */
-	export const valueChange = actionCreator.event<ValueChangePayload>("VALUE_CHANGE");
+	export const valueChange = event<ValueChangePayload>("VALUE_CHANGE");
 
 	/** Payload for the {@link valueChange} action */
 	export interface ValueChangePayload {
@@ -94,7 +89,7 @@ export namespace Events {
 	 * Action which is dispatched by `DispatchConfiguration.onParseError`
 	 * when an invalid value was entered in the UI.
 	 */
-	export const parseError = actionCreator.event<ParseErrorPayload>("PARSE_ERROR");
+	export const parseError = event<ParseErrorPayload>("PARSE_ERROR");
 
 	/** Payload for the {@link parseError} action */
 	export interface ParseErrorPayload {
@@ -103,15 +98,14 @@ export namespace Events {
 		/** The invalid entered value. */
 		readonly uiValue: string;
 		/** The parsing error. */
-		readonly error: ValueConversion.ParseError;
+		readonly error: ValueConversionParseError;
 	}
 
 	/**
 	 * Action which is dispatched by `DispatchConfiguration.onAttachmentValueChange`
 	 * when an attachment value changed.
 	 */
-	export const attachmentValueChange =
-		actionCreator.event<AttachmentValueChange>("ATTACHMENT_VALUE_CHANGE");
+	export const attachmentValueChange = event<AttachmentValueChange>("ATTACHMENT_VALUE_CHANGE");
 
 	/** Payload for the {@link attachmentValueChange} action */
 	export interface AttachmentValueChange {
@@ -127,9 +121,7 @@ export namespace Events {
 	 * Action which is dispatched by `DispatchConfiguration.onMultiSelectValueChange`
 	 * when a multi-select value changed.
 	 */
-	export const multiSelectValueChange = actionCreator.event<MultiSelectValueChange>(
-		"MULTI_SELECT_VALUE_CHANGE"
-	);
+	export const multiSelectValueChange = event<MultiSelectValueChange>("MULTI_SELECT_VALUE_CHANGE");
 
 	/** Payload for the {@link multiSelectValueChange} action */
 	export interface MultiSelectValueChange {
@@ -145,7 +137,7 @@ export namespace Events {
 	 * Action which is dispatched by `DispatchConfiguration.onNavigationButton`
 	 * when a navigation button is clicked.
 	 */
-	export const navigationButton = actionCreator.event<NavigationButtonPayload>("NAVIGATION_BUTTON");
+	export const navigationButton = event<NavigationButtonPayload>("NAVIGATION_BUTTON");
 
 	/** Payload for the {@link navigationButton} action */
 	export interface NavigationButtonPayload {
@@ -166,7 +158,7 @@ export namespace Events {
 	 * and the validation was successful or not configured for the button.
 	 * In general, you want to use this action to react to button clicks.
 	 */
-	export const eventButton = actionCreator.event<EventButtonPayload>("EVENT_BUTTON");
+	export const eventButton = event<EventButtonPayload>("EVENT_BUTTON");
 
 	/** Payload for the {@link eventButton} action */
 	export interface EventButtonPayload {
@@ -184,8 +176,7 @@ export namespace Events {
 	 * if the validation was successful or not configured. It it dispatched by
 	 * `DispatchConfiguration.onEventButton` when an event button is clicked.
 	 */
-	export const eventButtonTriggered =
-		actionCreator.event<EventButtonTriggeredPayload>("EVENT_BUTTON_TRIGGERED");
+	export const eventButtonTriggered = event<EventButtonTriggeredPayload>("EVENT_BUTTON_TRIGGERED");
 
 	/** Payload for the {@link eventButtonTriggered} action */
 	export interface EventButtonTriggeredPayload {
@@ -209,13 +200,13 @@ export namespace Events {
 	 *
 	 * Note: Touch means changing without submitting the change.
 	 */
-	export const inputTouched = actionCreator.event("INPUT_TOUCHED");
+	export const inputTouched = event("INPUT_TOUCHED");
 
 	/**
 	 * Action which is dispatched by `DispatchConfiguration.onCollapseSection`
 	 * when a collapsible section is clicked.
 	 */
-	export const collapseSection = actionCreator.event<CollapseSectionPayload>("COLLAPSE_SECTION");
+	export const collapseSection = event<CollapseSectionPayload>("COLLAPSE_SECTION");
 
 	/** Payload for the {@link collapseSection} action */
 	export interface CollapseSectionPayload {
@@ -226,8 +217,7 @@ export namespace Events {
 	}
 
 	export namespace Attachments {
-		export const downloadAttachment =
-			actionCreator.event<DownloadAttachmentPayload>("DOWNLOAD_ATTACHMENT");
+		export const downloadAttachment = event<DownloadAttachmentPayload>("DOWNLOAD_ATTACHMENT");
 		export interface DownloadAttachmentPayload {
 			/**
 			 * The attachment that should be downloaded
@@ -239,8 +229,7 @@ export namespace Events {
 			readonly attachmentPath: EntityInstancePath;
 		}
 
-		export const deleteAttachment =
-			actionCreator.event<DeleteAttachmentPayload>("DELETE_ATTACHMENT");
+		export const deleteAttachment = event<DeleteAttachmentPayload>("DELETE_ATTACHMENT");
 		export interface DeleteAttachmentPayload {
 			/**
 			 * The attachment that should be deleted
@@ -253,10 +242,9 @@ export namespace Events {
 			readonly attachmentPath: EntityInstancePath;
 		}
 
-		export const cancelUploadAttachments = actionCreator.event("CANCEL_UPLOAD_ATTACHMENTS");
+		export const cancelUploadAttachments = event("CANCEL_UPLOAD_ATTACHMENTS");
 
-		export const uploadAttachments =
-			actionCreator.event<UploadAttachmentsPayload>("UPLOAD_ATTACHMENTS");
+		export const uploadAttachments = event<UploadAttachmentsPayload>("UPLOAD_ATTACHMENTS");
 
 		export interface UploadAttachmentsPayload {
 			/**
@@ -281,17 +269,6 @@ export namespace Events {
 			 * NOTE: Only relevant when uploading multiple files at once
 			 */
 			readonly duplicateStrategy?: DuplicateStrategy;
-
-			/**
-			 * @deprecated Since 38.1.0. Use formModelElementPath instead.
-			 *
-			 * The `ModelPath` to the repeat in the form model that triggered
-			 * the multi-file upload.
-			 *
-			 * NOTE: This property is required for multi-file uploads and will
-			 * be ignored for single file uploads.
-			 */
-			readonly formModelRepeatPath?: ModelPath;
 
 			/**
 			 * The `EntityInstancePath` to the group in the document model that
@@ -322,7 +299,7 @@ export namespace Events {
 		 * when the cancel or commit button
 		 * in a detached repeat detail screen is clicked
 		 */
-		export const leaveDetachedRepeatRow = actionCreator.event<LeaveDetachedRepeatRowPayload>(
+		export const leaveDetachedRepeatRow = event<LeaveDetachedRepeatRowPayload>(
 			"LEAVE_DETACHED_REPEAT_ROW"
 		);
 
@@ -340,7 +317,7 @@ export namespace Events {
 		 * `DispatchConfiguration.Repeat.onCloseEmbeddedRepeatRow`
 		 * when the close button in an expanded row in an embedded repeat is clicked.
 		 */
-		export const closeEmbeddedRepeatRow = actionCreator.event<CloseEmbeddedRepeatRowPayload>(
+		export const closeEmbeddedRepeatRow = event<CloseEmbeddedRepeatRowPayload>(
 			"CLOSE_EMBEDDED_REPEAT_ROW"
 		);
 
@@ -354,7 +331,7 @@ export namespace Events {
 		 * Action which is dispatched by `DispatchConfiguration.Repeat.onLeaveRepeatRow`
 		 * when a row in a repeat looses its focus.
 		 */
-		export const leaveRepeatRow = actionCreator.event<LeaveRepeatRowPayload>("LEAVE_REPEAT_ROW");
+		export const leaveRepeatRow = event<LeaveRepeatRowPayload>("LEAVE_REPEAT_ROW");
 
 		/** Payload for the {@link leaveRepeatRow} action */
 		export interface LeaveRepeatRowPayload {
@@ -368,7 +345,7 @@ export namespace Events {
 		 * Action which is dispatched by `DispatchConfiguration.Repeat.onLeaveRepeatTable`
 		 * when a inline or embedded repeat looses its focus.
 		 */
-		export const leaveRepeatTable = actionCreator.event<LeaveRepeatTablePayload>("LEAVE_TABLE");
+		export const leaveRepeatTable = event<LeaveRepeatTablePayload>("LEAVE_TABLE");
 
 		/** Payload for the {@link leaveRepeatTable} action */
 		export interface LeaveRepeatTablePayload {
@@ -380,7 +357,7 @@ export namespace Events {
 		 * Action which is dispatched by `DispatchConfiguration.Repeat.addRow`
 		 * when the add button is clicked.
 		 */
-		export const addRow = actionCreator.event<AddRowPayload>("ADD_ROW");
+		export const addRow = event<AddRowPayload>("ADD_ROW");
 
 		/** Payload for the {@link addRow} action */
 		export interface AddRowPayload {
@@ -395,7 +372,7 @@ export namespace Events {
 		 * `DispatchConfiguration.Repeat.enterRow`
 		 * when the edit button of a row is clicked.
 		 */
-		export const enterRow = actionCreator.event<EnterRowPayload>("ENTER_ROW");
+		export const enterRow = event<EnterRowPayload>("ENTER_ROW");
 
 		/** Payload for the {@link enterRow} action */
 		export interface EnterRowPayload {
@@ -418,8 +395,7 @@ export namespace Events {
 		 * `DispatchConfiguration.Repeat.changeColumnWidth`
 		 * when the width of a resizable column is changed.
 		 */
-		export const changeColumnWidth =
-			actionCreator.event<ChangeColumnWidthPayload>("CHANGE_COLUMN_WIDTH");
+		export const changeColumnWidth = event<ChangeColumnWidthPayload>("CHANGE_COLUMN_WIDTH");
 
 		/** Payload for the {@link changeColumnWidth} action */
 		export interface ChangeColumnWidthPayload {
@@ -434,7 +410,7 @@ export namespace Events {
 		 * `DispatchConfiguration.Repeat.removeRow`
 		 * when the remove button of a row is clicked.
 		 */
-		export const removeRow = actionCreator.event<RemoveRowPayload>("REMOVE_ROW");
+		export const removeRow = event<RemoveRowPayload>("REMOVE_ROW");
 
 		/** Payload for the {@link removeRow} action */
 		export interface RemoveRowPayload {
@@ -448,7 +424,7 @@ export namespace Events {
 		 * Action which is dispatched by `DispatchConfiguration.Repeat.onMoveRow`
 		 * when the move-up or move-down button of a row is clicked.
 		 */
-		export const moveRowTriggered = actionCreator.event<MoveRowPayload>("MOVE_ROW");
+		export const moveRowTriggered = event<MoveRowPayload>("MOVE_ROW");
 
 		/** Payload for the {@link moveRowTriggered} action */
 		export interface MoveRowPayload {
@@ -469,7 +445,7 @@ export namespace Events {
 		 * `DispatchConfiguration.Repeat.onCloneRow`
 		 * when the clone button of a row is clicked.
 		 */
-		export const cloneRowTriggered = actionCreator.event<CloneRowPayload>("CLONE_ROW");
+		export const cloneRowTriggered = event<CloneRowPayload>("CLONE_ROW");
 
 		/** Payload for the {@link cloneRowTriggered} action */
 		export interface CloneRowPayload {
@@ -483,7 +459,7 @@ export namespace Events {
 		 * Action which is dispatched by `DispatchConfiguration.Repeat.onChangePage`
 		 * when the page is changed
 		 */
-		export const changePage = actionCreator.event<ChangePagePayload>("CHANGE_PAGE");
+		export const changePage = event<ChangePagePayload>("CHANGE_PAGE");
 
 		/** Payload for the {@link changePage} action */
 		export interface ChangePagePayload {
@@ -497,7 +473,7 @@ export namespace Events {
 		 * Action which is dispatched by `DispatchConfiguration.Repeat.onSortingChange`
 		 * when repeat column header is clicked.
 		 */
-		export const sortingChange = actionCreator.event<SortingChangePayload>("SORTING_CHANGE");
+		export const sortingChange = event<SortingChangePayload>("SORTING_CHANGE");
 
 		/** Payload for the {@link sortingChange} action */
 		export interface SortingChangePayload {
@@ -514,7 +490,7 @@ export namespace Events {
 		 * Action which is dispatched by `DispatchConfiguration.Repeat.onShowFilter`
 		 * when the filter button is clicked.
 		 */
-		export const showFilter = actionCreator.event<ShowFilterPayload>("SHOW_FILTER");
+		export const showFilter = event<ShowFilterPayload>("SHOW_FILTER");
 
 		/** Payload for the {@link showFilter} action */
 		export interface ShowFilterPayload {
@@ -530,8 +506,7 @@ export namespace Events {
 		 * Action which is dispatched by `DispatchConfiguration.Repeat.onFilterValueChange`
 		 * when a filter value changed. The value must already be parsed.
 		 */
-		export const filterValueChange =
-			actionCreator.event<FilterValueChangePayload>("FILTER_VALUE_CHANGE");
+		export const filterValueChange = event<FilterValueChangePayload>("FILTER_VALUE_CHANGE");
 
 		/** Payload for the {@link filterValueChange} action */
 		export interface FilterValueChangePayload {
@@ -547,8 +522,7 @@ export namespace Events {
 		 * Action which is dispatched by `DispatchConfiguration.Repeat.onFilterParseError`
 		 * when the filter value is changed to an invalid value.
 		 */
-		export const filterParseError =
-			actionCreator.event<FilterParseErrorPayload>("FILTER_PARSE_ERROR");
+		export const filterParseError = event<FilterParseErrorPayload>("FILTER_PARSE_ERROR");
 
 		/** Payload for the {@link filterParseError} action */
 		export interface FilterParseErrorPayload {
@@ -564,7 +538,7 @@ export namespace Events {
 		 * Action which is dispatched by `DispatchConfiguration.Repeat.onClearFilters`
 		 * when the clear filter button is clicked.
 		 */
-		export const clearFilters = actionCreator.event<ClearFiltersPayload>("CLEAR_FILTERS");
+		export const clearFilters = event<ClearFiltersPayload>("CLEAR_FILTERS");
 
 		/** Payload for the {@link clearFilters} action */
 		export interface ClearFiltersPayload {
@@ -576,7 +550,7 @@ export namespace Events {
 		 * Action which is dispatched by `DispatchConfiguration.Repeat.onCustomRowAction`
 		 *  when a custom row action button is clicked.
 		 */
-		export const customRowAction = actionCreator.event<CustomRowActionPayload>("CUSTOM_ROW_ACTION");
+		export const customRowAction = event<CustomRowActionPayload>("CUSTOM_ROW_ACTION");
 
 		/** Payload for the {@link customRowAction} action */
 		export interface CustomRowActionPayload {
@@ -588,7 +562,7 @@ export namespace Events {
 			readonly repeatFormModelPath: ModelPath;
 		}
 
-		export const multiFileUpload = actionCreator.event<MultiFileUploadPayload>("MULTI_FILE_UPLOAD");
+		export const multiFileUpload = event<MultiFileUploadPayload>("MULTI_FILE_UPLOAD");
 
 		export interface MultiFileUploadPayload {
 			/** The document path to the repeatable group */
@@ -613,14 +587,14 @@ export namespace Events {
 		 * `DispatchConfiguration.CorrectionMode.onRevalidate`
 		 * when the validate button is clicked.
 		 */
-		export const revalidate = actionCreator.event("VALIDATION_BUTTON");
+		export const revalidate = event("VALIDATION_BUTTON");
 
 		/**
 		 * Action which is dispatched by
 		 * `DispatchConfiguration.CorrectionMode.onExitCorrectionMode`
 		 * when the exit button is clicked.
 		 */
-		export const exitCorrectionMode = actionCreator.event<{}>("EXIT_CORRECTION_MODE");
+		export const exitCorrectionMode = event<{}>("EXIT_CORRECTION_MODE");
 
 		/**
 		 * Action which is dispatched by
@@ -628,7 +602,7 @@ export namespace Events {
 		 * when the link to an issue or of the "GoToIssue" button in the
 		 * quick-access-menu is clicked.
 		 */
-		export const goToElement = actionCreator.event<GoToElementPayload>("GO_TO_ELEMENT");
+		export const goToElement = event<GoToElementPayload>("GO_TO_ELEMENT");
 
 		/** Payload for the {@link goToElement} action */
 		export interface GoToElementPayload {
@@ -653,14 +627,14 @@ export namespace Events {
 			 * `DispatchConfiguration.CorrectionMode.CorrectionView.onShow`
 			 * when the show all issues entry in the quick-access-menu is clicked.
 			 */
-			export const show = actionCreator.event<{ readonly show: boolean }>("SHOW_CORRECTION_VIEW");
+			export const show = event<{ readonly show: boolean }>("SHOW_CORRECTION_VIEW");
 
 			/**
 			 * Action which is dispatched by
 			 * `DispatchConfiguration.CorrectionMode.CorrectionView.onShowDetails`
 			 * when the show/hide details button is clicked.
 			 */
-			export const showDetails = actionCreator.event<ShowDetailsPayload>("SHOW_DETAILS");
+			export const showDetails = event<ShowDetailsPayload>("SHOW_DETAILS");
 
 			/** Payload for the {@link showDetails} action */
 			export interface ShowDetailsPayload {
@@ -683,8 +657,7 @@ export namespace Events {
 			 * when the expand/collapse message
 			 * is clicked.
 			 */
-			export const expand =
-				actionCreator.event<ExpandValidationBarPayload>("EXPAND_VALIDATION_BAR");
+			export const expand = event<ExpandValidationBarPayload>("EXPAND_VALIDATION_BAR");
 
 			/** Payload for the {@link expand} action */
 			export interface ExpandValidationBarPayload {
@@ -699,7 +672,7 @@ export namespace Events {
 			 * `DispatchConfiguration.CorrectionMode.ValidationBar.onShowMessage`
 			 * when the message pagination is clicked.
 			 */
-			export const showMessage = actionCreator.event<MessageChangePayload>("SHOW_MESSAGE");
+			export const showMessage = event<MessageChangePayload>("SHOW_MESSAGE");
 
 			/** Payload for the {@link showMessage} action */
 			export interface MessageChangePayload {
@@ -710,9 +683,7 @@ export namespace Events {
 	}
 
 	/** @internal */
-	export const userConfirmationResponse = actionCreator.event<boolean>(
-		"USER_CONFIRMATION_RESPONSE"
-	);
+	export const userConfirmationResponse = event<boolean>("USER_CONFIRMATION_RESPONSE");
 }
 
 /**
@@ -722,7 +693,7 @@ export namespace Commands {
 	/**
 	 * Action to set a document.
 	 */
-	export const setDocument = actionCreator.command<SetDocumentPayload>("SET_DOCUMENT");
+	export const setDocument = command<SetDocumentPayload>("SET_DOCUMENT");
 
 	/** Payload for the {@link setDocument} action */
 	export interface SetDocumentPayload {
@@ -740,7 +711,7 @@ export namespace Commands {
 	/**
 	 * Action to set the error state.
 	 */
-	export const setMessageState = actionCreator.command<SetMessageStatePayload>("SET_MESSAGE_STATE");
+	export const setMessageState = command<SetMessageStatePayload>("SET_MESSAGE_STATE");
 
 	/** Payload for the `setMessageState` action */
 
@@ -750,8 +721,7 @@ export namespace Commands {
 	}
 
 	/** Action to set an error state entry. */
-	export const setMessageStateEntry =
-		actionCreator.command<SetMessageStateEntryPayload>("ADD_MESSAGE_STATE");
+	export const setMessageStateEntry = command<SetMessageStateEntryPayload>("ADD_MESSAGE_STATE");
 
 	/** Payload for the `setMessageStateEntry` action */
 
@@ -764,7 +734,7 @@ export namespace Commands {
 
 	/** Action to set the section state */
 	export const setSectionsCollapsed =
-		actionCreator.command<SetSectionsCollapsedPayload>("SET_SECTIONS_COLLAPSED");
+		command<SetSectionsCollapsedPayload>("SET_SECTIONS_COLLAPSED");
 
 	/** Payload for the {@link setSectionsCollapsed} action */
 	export interface SetSectionsCollapsedPayload {
@@ -773,8 +743,7 @@ export namespace Commands {
 	}
 
 	/** Action to set the location stack. */
-	export const setLocationStack =
-		actionCreator.command<SetLocationStackPayload>("SET_LOCATION_STACK");
+	export const setLocationStack = command<SetLocationStackPayload>("SET_LOCATION_STACK");
 
 	/** Payload for the {@link setLocationStack} action */
 	export interface SetLocationStackPayload {
@@ -783,7 +752,7 @@ export namespace Commands {
 	}
 
 	/** Action to change a screen. */
-	export const changeScreen = actionCreator.command<ChangeScreenPayload>("CHANGE_SCREEN");
+	export const changeScreen = command<ChangeScreenPayload>("CHANGE_SCREEN");
 
 	/** Payload for the {@link changeScreen} action */
 	export interface ChangeScreenPayload {
@@ -792,8 +761,7 @@ export namespace Commands {
 	}
 
 	/** Action to change the state of a screen */
-	export const changeScreenState =
-		actionCreator.command<ChangeScreenStatePayload>("CHANGE_SCREEN_STATE");
+	export const changeScreenState = command<ChangeScreenStatePayload>("CHANGE_SCREEN_STATE");
 
 	/** Payload for the {@link changeScreenState} action */
 	export interface ChangeScreenStatePayload {
@@ -821,16 +789,16 @@ export namespace Commands {
 	}
 
 	/** Action to set the disabled property. */
-	export const setDisabled = actionCreator.command<boolean>("SET_DISABLED");
+	export const setDisabled = command<boolean>("SET_DISABLED");
 	/** Action to set the readonly property. */
-	export const setReadonly = actionCreator.command<boolean>("SET_READONLY");
+	export const setReadonly = command<boolean>("SET_READONLY");
 	/** Action to set the dirty state of the data. */
-	export const setDataDirty = actionCreator.command<boolean>("SET_DATA_DIRTY");
+	export const setDataDirty = command<boolean>("SET_DATA_DIRTY");
 	/** Action to set the dirty state of the ui. */
-	export const setUIDirty = actionCreator.command<boolean>("SET_UI_DIRTY");
+	export const setUIDirty = command<boolean>("SET_UI_DIRTY");
 
 	/** Action to set a width for a column */
-	export const setColumnWidth = actionCreator.command<SetColumnWidthPayload>("SET_COLUMN_WIDTH");
+	export const setColumnWidth = command<SetColumnWidthPayload>("SET_COLUMN_WIDTH");
 
 	/** Payload for the {@link setColumnWidth} action */
 	export interface SetColumnWidthPayload {
@@ -848,7 +816,7 @@ export namespace Commands {
 	 * After changing the Locale it is not possible to revalidate automatically
 	 * since it could lead to a different validation result.
 	 */
-	export const setLocale = actionCreator.command<SetLocalePayload>("SET_LOCALE");
+	export const setLocale = command<SetLocalePayload>("SET_LOCALE");
 
 	/** Payload for the {@link SetLocalePayload} action */
 	export interface SetLocalePayload {
@@ -856,10 +824,10 @@ export namespace Commands {
 	}
 
 	/** Action to set the models. */
-	export const setModels = actionCreator.command<Models>("SET_MODELS");
+	export const setModels = command<Models>("SET_MODELS");
 
 	/**  Action to drop the last backup. */
-	export const dropBackup = actionCreator.command<DropBackupPayload>("DROP_BACKUP");
+	export const dropBackup = command<DropBackupPayload>("DROP_BACKUP");
 
 	/**
 	 * Payload for the {@link dropBackup} action
@@ -870,7 +838,7 @@ export namespace Commands {
 	}
 
 	/** Action to push a backup. */
-	export const pushBackup = actionCreator.command<PushBackupPayload>("PUSH_BACKUP");
+	export const pushBackup = command<PushBackupPayload>("PUSH_BACKUP");
 
 	/** Payload for the {@link pushBackup} action */
 	export interface PushBackupPayload {
@@ -881,7 +849,7 @@ export namespace Commands {
 	}
 
 	/** Action to execute a full validation */
-	export const validateFull = actionCreator.command<ValidateFullPayload | void>("VALIDATE_FULL");
+	export const validateFull = command<ValidateFullPayload | void>("VALIDATE_FULL");
 
 	/**
 	 * Payload for the {@link validateFull} action
@@ -902,7 +870,7 @@ export namespace Commands {
 	}
 
 	/** Action to execute a partial validation */
-	export const validatePart = actionCreator.command<ValidatePartPayload>("VALIDATE_PART");
+	export const validatePart = command<ValidatePartPayload>("VALIDATE_PART");
 
 	/** Payload for the {@link validatePart} action */
 	export interface ValidatePartPayload {
@@ -911,7 +879,7 @@ export namespace Commands {
 	}
 
 	/** Action to push a screen to the screenLocation. */
-	export const pushScreen = actionCreator.command<PushScreenPayload>("PUSH_SCREEN");
+	export const pushScreen = command<PushScreenPayload>("PUSH_SCREEN");
 
 	/** Payload for the {@link pushScreen} action */
 	export interface PushScreenPayload {
@@ -924,11 +892,12 @@ export namespace Commands {
 	}
 
 	/** Action to drop the current screen. */
-	export const dropScreen = actionCreator.command("DROP_SCREEN");
+	export const dropScreen = command("DROP_SCREEN");
 
 	/**  Action to change the data-independent state of a repeat. */
-	export const changeRepeatStaticStateEntry =
-		actionCreator.command<ChangeRepeatStaticStateEntryPayload>("CHANGE_REPEAT_STATIC_STATE_ENTRY");
+	export const changeRepeatStaticStateEntry = command<ChangeRepeatStaticStateEntryPayload>(
+		"CHANGE_REPEAT_STATIC_STATE_ENTRY"
+	);
 
 	/** Payload for the {@link changeRepeatStaticStateEntry} action */
 	export interface ChangeRepeatStaticStateEntryPayload {
@@ -940,10 +909,9 @@ export namespace Commands {
 	}
 
 	/**  Action to change the data-related state of a repeat. */
-	export const changeRepeatInstanceStateEntry =
-		actionCreator.command<ChangeRepeatInstanceStateEntryPayload>(
-			"CHANGE_REPEAT_INSTANCE_STATE_ENTRY"
-		);
+	export const changeRepeatInstanceStateEntry = command<ChangeRepeatInstanceStateEntryPayload>(
+		"CHANGE_REPEAT_INSTANCE_STATE_ENTRY"
+	);
 
 	/** Payload for the {@link changeRepeatInstanceStateEntry} action */
 	export interface ChangeRepeatInstanceStateEntryPayload {
@@ -957,8 +925,7 @@ export namespace Commands {
 	}
 
 	/** Action to set the data-independent repeat state of the form */
-	export const setRepeatStaticState =
-		actionCreator.command<SetRepeatStaticStatePayload>("SET_REPEAT_STATE");
+	export const setRepeatStaticState = command<SetRepeatStaticStatePayload>("SET_REPEAT_STATE");
 
 	/** Payload for the {@link setRepeatStaticState} action */
 	export interface SetRepeatStaticStatePayload {
@@ -971,7 +938,7 @@ export namespace Commands {
 	 */
 	export namespace CorrectionMode {
 		/** Action to set the state of the validation bar */
-		export const setValidationBarState = actionCreator.command<SetValidationBarStatePayload>(
+		export const setValidationBarState = command<SetValidationBarStatePayload>(
 			"SET_VALIDATION_BAR_STATE"
 		);
 
@@ -982,7 +949,7 @@ export namespace Commands {
 		}
 
 		/** Action to set the state of the correction screen */
-		export const setCorrectionScreenState = actionCreator.command<SetCorrectionScreenStatePayload>(
+		export const setCorrectionScreenState = command<SetCorrectionScreenStatePayload>(
 			"SET_CORRECTION_SCREEN_STATE"
 		);
 
@@ -993,7 +960,7 @@ export namespace Commands {
 		}
 
 		/** Action to set a correction mode backup */
-		export const setCorrectionModeBackup = actionCreator.command<SetCorrectionModeBackupPayload>(
+		export const setCorrectionModeBackup = command<SetCorrectionModeBackupPayload>(
 			"SET_CORRECTION_MODE_BACKUP"
 		);
 
@@ -1006,8 +973,9 @@ export namespace Commands {
 		/**
 		 * Action to restore a correction mode backup.
 		 */
-		export const restoreCorrectionModeBackup =
-			actionCreator.command<RestoreCorrectionModeBackupPayload>("RESTORE_CORRECTION_MODE_BACKUP");
+		export const restoreCorrectionModeBackup = command<RestoreCorrectionModeBackupPayload>(
+			"RESTORE_CORRECTION_MODE_BACKUP"
+		);
 
 		/** Payload for the {@link restoreCorrectionModeBackup} action */
 		export interface RestoreCorrectionModeBackupPayload {
@@ -1017,13 +985,13 @@ export namespace Commands {
 	}
 
 	/** @internal */
-	export const userConfirmationRequested = actionCreator.command<{
+	export const userConfirmationRequested = command<{
 		readonly actionsToDispatch: Action<object>[];
 		readonly validation?: FormModel.ButtonValidationEnum;
 	}>("USER_CONFIRMATION_REQUESTED");
 
 	/** @internal */
-	export const clearUserConfirmation = actionCreator.command("CLEAR_USER_CONFIRMATION");
+	export const clearUserConfirmation = command("CLEAR_USER_CONFIRMATION");
 }
 
 /**
@@ -1035,7 +1003,7 @@ export namespace Commands {
  * outside of the form engine. For internal actions, no action creator is
  * exported.
  */
-export function getAllEventActions(): ActionCreator<AnyAction>[] {
+export function getAllEventActions(): ActionCreator<ReduxAction>[] {
 	return getAllActionsFromNamespace(Events);
 }
 
@@ -1043,7 +1011,7 @@ export function getAllEventActions(): ActionCreator<AnyAction>[] {
  * Function to retrieve a list of all command actions - see
  * {@link getAllEventActions} for more information.
  */
-export function getAllCommandActions(): ActionCreator<AnyAction>[] {
+export function getAllCommandActions(): ActionCreator<ReduxAction>[] {
 	return getAllActionsFromNamespace(Commands);
 }
 
@@ -1053,8 +1021,8 @@ export function getAllCommandActions(): ActionCreator<AnyAction>[] {
  * If the value is of type object, call the function recursively with
  * the new namespace.
  */
-function getAllActionsFromNamespace(namespace: object): ActionCreator<AnyAction>[] {
-	const actions: ActionCreator<AnyAction>[] = [];
+function getAllActionsFromNamespace(namespace: object): ActionCreator<ReduxAction>[] {
+	const actions: ActionCreator<ReduxAction>[] = [];
 
 	function getActions(n: object): void {
 		for (const value of Object.values(n)) {

@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -32,19 +32,17 @@
 
 import { deepStrictEqual } from "node:assert/strict";
 
-import { IMetaKeys } from "@com.mgmtp.a12.kernel/kernel-core-runtime-api-ts/lib/main/js/a12internal/utils/IMetaKeys.js";
+import { IMetaKeys } from "@com.mgmtp.a12.kernel/kernel-core-runtime-api-ts/a12internal";
 
 import type { EngineStore } from "../../back-end/store/index.js";
 import { updateValidationEntries } from "../../back-end/store/internal/validation.js";
 import type { ReadonlyObjectMap } from "../../models/index.js";
 import { DocumentPath } from "../../models/internal/utils/document-utils.js";
 
-import { DocumentHelpers } from "../utils/document-helpers.js";
+import { createDocumentPath } from "../utils/createDocumentPath.js";
 import { setupArrayFixture, setupFixture } from "../utils/setupFixture.js";
 import { createParsingError, createValidationMessage } from "../utils/validation.js";
 import { getValidatorProvider } from "../utils/validatorProvider.js";
-
-const { createDocumentPath } = DocumentHelpers;
 
 const fieldA = createDocumentPath(["root"], ["group"], ["fieldA"]);
 const fieldB = createDocumentPath(["root"], ["group"], ["fieldB"]);

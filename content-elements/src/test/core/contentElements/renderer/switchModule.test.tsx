@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -31,18 +31,13 @@
  */
 
 import { notStrictEqual, strictEqual } from "node:assert/strict";
-import { mock } from "node:test";
 
-import { type ChangeEvent } from "react";
+import type { ChangeEvent } from "react";
 
 import { DocumentContext } from "@com.mgmtp.a12.contentengine/contentengine-core";
 import { query } from "@com.mgmtp.a12.devtools/react";
-import type { Message } from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
+import type { Message } from "@com.mgmtp.a12.kernel/kernel-md-facade";
 
-import { USE_COMMON_CONTROL_SETTINGS_WRAPPER } from "../../../../main/core/contentElements/elementConfiguration/useCommonControlSettings.js";
-import { USE_COMMON_WIDGET_SETTINGS_WRAPPER } from "../../../../main/core/contentElements/elementConfiguration/useCommonWidgetSettings.js";
-import { DefaultFunctionMap } from "../../../../main/core/contentElements/functionMap/defaultFunctionMap.js";
-import { FunctionMapContext } from "../../../../main/core/contentElements/functionMap/functionMapContext.js";
 import { SwitchModule } from "../../../../main/core/contentElements/modules/switch/switchModule.js";
 import type { SwitchNode } from "../../../../main/core/contentElements/modules/switch/switchNode.js";
 import { SWITCH_TYPE } from "../../../../main/core/contentElements/modules/switch/switchNode.js";
@@ -57,35 +52,19 @@ import {
 } from "../../../assertions.js";
 import { mockDocumentContext } from "../../../mocks/mockDocumentContext.js";
 import { getMockMessage } from "../../../mocks/mockError.js";
+import { setupMockHooks } from "../../../mocks/setupMockHooks.js";
 import { renderWrapper } from "../../../rtl-utils/render-wrapper.js";
-
-function setupMocks(controlSettings: BaseControlSettings, widgetSettings: BaseWidgetSettings) {
-	return {
-		useControlSettingsMock: mock.method(
-			USE_COMMON_CONTROL_SETTINGS_WRAPPER,
-			"useCommonControlSettings",
-			() => controlSettings
-		),
-		useWidgetSettingsMock: mock.method(
-			USE_COMMON_WIDGET_SETTINGS_WRAPPER,
-			"useCommonWidgetSettings",
-			() => widgetSettings
-		),
-		useFocusFieldMock: mock.fn(),
-		useFocusFirstErrorMock: mock.fn(),
-		useFocusInputMock: mock.fn()
-	};
-}
 
 describe("core.contentElements", () => {
 	describe("Switch", () => {
 		it("renders a Switch with the correct properties", () => {
 			const mockControlSettings = getMockControlSettings();
-			const mockWidgetSettings = getMockWidgetSettings(false);
+			const mockWidgetSettings = getMockWidgetSettings({ value: false });
 
-			setupMocks(mockControlSettings, mockWidgetSettings);
-
-			const { widgetMap } = renderWrapper(<SwitchModule.renderer node={getMockNode()} />);
+			const { widgetMap } = setup({
+				controlSettings: mockControlSettings,
+				widgetSettings: mockWidgetSettings
+			});
 
 			const props = query(widgetMap.Switch).props();
 
@@ -95,7 +74,6 @@ describe("core.contentElements", () => {
 			strictEqual(props["checkedOption"], mockWidgetSettings.checkedLabel);
 			strictEqual(props["readonly"], mockWidgetSettings.readonly);
 			strictEqual(props["hideLabel"], mockWidgetSettings.hideLabel);
-			strictEqual(props["tooltips"], mockWidgetSettings.tooltips); // TODO: add another test for addonAfter
 			strictEqual(props["helperText"], mockWidgetSettings.helperText);
 			strictEqual(props["error"], mockWidgetSettings.error);
 			strictEqual(props["errorMessage"], mockWidgetSettings.errors);
@@ -108,17 +86,57 @@ describe("core.contentElements", () => {
 				mockWidgetSettings.inputProps?.["aria-required"]
 			);
 			notStrictEqual(props["inputProps"]?.ref, undefined);
-			strictEqual(props["ariaDescribedby"], nmTokensToString(mockWidgetSettings.ariaDescribedBy)); // TODO: additional test for this post-processing?
+		});
+
+		describe("Tooltips", () => {
+			it("sets tooltips in addOnAfter if tooltipsOnTop is not set", () => {
+				const mockWidgetSettings = getMockWidgetSettings();
+
+				const { widgetMap } = setup({ widgetSettings: mockWidgetSettings });
+
+				const props = query(widgetMap.Switch).props();
+
+				strictEqual(props.addonAfter, mockWidgetSettings.tooltips);
+				strictEqual(props.tooltips, undefined);
+			});
+
+			it("sets tooltips in tooltips prop if tooltipsOnTop is set", () => {
+				const mockWidgetSettings = getMockWidgetSettings({ tooltipsOnTop: true });
+
+				const { widgetMap } = setup({ widgetSettings: mockWidgetSettings });
+
+				const props = query(widgetMap.Switch).props();
+
+				strictEqual(props.addonAfter, undefined);
+				strictEqual(props.tooltips, mockWidgetSettings.tooltips);
+			});
+		});
+
+		describe("ariaDescribedBy", () => {
+			it("sets undefined if ariaDescribedBy is empty", () => {
+				const { widgetMap } = setup();
+
+				const props = query(widgetMap.Switch).props();
+
+				strictEqual(props.ariaDescribedby, undefined);
+			});
+
+			it("converts tokens into a single string if ariaDescribedBy is not empty", () => {
+				const mockWidgetSettings = getMockWidgetSettings({
+					ariaDescribedBy: ["token1", "token2"]
+				});
+
+				const { widgetMap } = setup({ widgetSettings: mockWidgetSettings });
+
+				const props = query(widgetMap.Switch).props();
+
+				strictEqual(props.ariaDescribedby, nmTokensToString(mockWidgetSettings.ariaDescribedBy));
+			});
 		});
 
 		describe("Checked", () => {
 			it("sets checked to true when the value is true", () => {
-				const mockControlSettings = getMockControlSettings();
-				const mockWidgetSettings = getMockWidgetSettings(true);
-
-				setupMocks(mockControlSettings, mockWidgetSettings);
-
-				const { widgetMap } = renderWrapper(<SwitchModule.renderer node={getMockNode()} />);
+				const { widgetMap } = setup({ widgetSettings: getMockWidgetSettings({ value: true }) });
 
 				const props = query(widgetMap.Switch).props();
 
@@ -126,12 +144,7 @@ describe("core.contentElements", () => {
 			});
 
 			it("sets checked to false when the value is false", () => {
-				const mockControlSettings = getMockControlSettings();
-				const mockWidgetSettings = getMockWidgetSettings(false);
-
-				setupMocks(mockControlSettings, mockWidgetSettings);
-
-				const { widgetMap } = renderWrapper(<SwitchModule.renderer node={getMockNode()} />);
+				const { widgetMap } = setup({ widgetSettings: getMockWidgetSettings({ value: false }) });
 
 				const props = query(widgetMap.Switch).props();
 
@@ -139,12 +152,7 @@ describe("core.contentElements", () => {
 			});
 
 			it("sets checked to false when the value is undefined", () => {
-				const mockControlSettings = getMockControlSettings();
-				const mockWidgetSettings = getMockWidgetSettings();
-
-				setupMocks(mockControlSettings, mockWidgetSettings);
-
-				const { widgetMap } = renderWrapper(<SwitchModule.renderer node={getMockNode()} />);
+				const { widgetMap } = setup();
 
 				const props = query(widgetMap.Switch).props();
 
@@ -152,147 +160,149 @@ describe("core.contentElements", () => {
 			});
 		});
 
-		it("calls useCommonControlSettings with the given node", () => {
-			const mockNode = getMockNode();
-			const mockControlSettings = getMockControlSettings();
-			const mockWidgetSettings = getMockWidgetSettings();
+		describe("Value Change", () => {
+			it("calls valueChanged from the document context when a new value was entered", () => {
+				const mockControlSettings = getMockControlSettings();
+				const mockDocContext = mockDocumentContext();
 
-			const { useControlSettingsMock } = setupMocks(mockControlSettings, mockWidgetSettings);
-
-			renderWrapper(<SwitchModule.renderer node={mockNode} />);
-
-			assertCalledWith(useControlSettingsMock, mockNode);
-		});
-
-		it("calls useCommonWidgetSettings with the result from useCommonControlSettings", () => {
-			const mockNode = getMockNode();
-			const mockControlSettings = getMockControlSettings();
-			const mockWidgetSettings = getMockWidgetSettings();
-
-			const { useWidgetSettingsMock } = setupMocks(mockControlSettings, mockWidgetSettings);
-
-			renderWrapper(<SwitchModule.renderer node={mockNode} />);
-
-			assertCalledWith(useWidgetSettingsMock, mockControlSettings);
-		});
-
-		describe("focus hooks", () => {
-			function setupFocusTest(options?: {
-				groupedMessages?: Message[];
-				ungroupedMessages?: Message[];
-			}) {
-				const mockControlSettings = getMockControlSettings({
-					groupedMessages: options?.groupedMessages,
-					ungroupedMessages: options?.ungroupedMessages
-				});
-				const mockWidgetSettings = getMockWidgetSettings();
-
-				const { useFocusFieldMock, useFocusFirstErrorMock, useFocusInputMock } = setupMocks(
-					mockControlSettings,
-					mockWidgetSettings
-				);
-
-				renderWrapper(
-					<FunctionMapContext.Provider
-						value={{
-							...DefaultFunctionMap,
-							useFocusField: useFocusFieldMock,
-							useFocusFirstError: useFocusFirstErrorMock,
-							useFocusInput: useFocusInputMock
-						}}
-					>
-						<SwitchModule.renderer node={getMockNode()} />
-					</FunctionMapContext.Provider>
-				);
-
-				return { useFocusFieldMock, useFocusFirstErrorMock, useFocusInputMock };
-			}
-
-			it("calls focus hooks when rendered", () => {
-				const { useFocusFieldMock, useFocusFirstErrorMock, useFocusInputMock } = setupFocusTest();
-
-				assertCallCount(useFocusFieldMock, 1);
-				assertCallCount(useFocusFirstErrorMock, 1);
-				assertCalledWithArgument(useFocusFirstErrorMock, 0, false);
-				assertCallCount(useFocusInputMock, 1);
-			});
-
-			it("calls useFocusFirstError with true when an ungrouped error exists", () => {
-				const { useFocusFirstErrorMock } = setupFocusTest({
-					ungroupedMessages: [getMockMessage({ severity: "ERROR" })]
+				const { widgetMap } = setup({
+					controlSettings: mockControlSettings,
+					docContext: mockDocContext
 				});
 
-				assertCalledWithArgument(useFocusFirstErrorMock, 0, true);
+				const props = query(widgetMap.Switch).props();
+
+				props.onChange(true, {} as ChangeEvent<HTMLInputElement>);
+
+				assertCalledWith(mockDocContext.event.onValueChanged, {
+					path: mockControlSettings.dataReference,
+					value: true
+				});
 			});
 
-			it("calls useFocusFirstError with false when no ungrouped error exists", () => {
-				const { useFocusFirstErrorMock } = setupFocusTest({
-					ungroupedMessages: [
-						getMockMessage({ severity: "WARNING" }),
-						getMockMessage({ severity: "INFO" })
-					],
-					groupedMessages: [
-						getMockMessage({ severity: "ERROR" }),
-						getMockMessage({ severity: "WARNING" }),
-						getMockMessage({ severity: "INFO" })
-					]
+			it("calls valueChanged from the document context with the value 'null' when a confirm field was switched off", () => {
+				const mockControlSettings = getMockControlSettings({ confirm: true });
+				const mockDocContext = mockDocumentContext();
+
+				const { widgetMap } = setup({
+					controlSettings: mockControlSettings,
+					docContext: mockDocContext
 				});
 
-				assertCalledWithArgument(useFocusFirstErrorMock, 0, false);
+				const props = query(widgetMap.Switch).props();
+
+				props.onChange(false, {} as ChangeEvent<HTMLInputElement>);
+
+				assertCalledWith(mockDocContext.event.onValueChanged, {
+					path: mockControlSettings.dataReference,
+					value: null
+				});
 			});
 		});
 
-		it("calls valueChanged from the document context when a new value was entered", () => {
-			const mockNode = getMockNode();
-			const mockControlSettings = getMockControlSettings();
-			const mockWidgetSettings = getMockWidgetSettings();
+		describe("Hooks", () => {
+			it("calls useCommonControlSettings with the given node", () => {
+				const mockNode = getMockNode();
 
-			setupMocks(mockControlSettings, mockWidgetSettings);
+				const { useControlSettingsMock } = setupMockHooks({
+					controlSettings: getMockControlSettings(),
+					widgetSettings: getMockWidgetSettings()
+				});
 
-			const mockDocContext = mockDocumentContext();
+				renderWrapper(<SwitchModule.renderer node={mockNode} />);
 
-			const { widgetMap } = renderWrapper(
-				<DocumentContext.Provider value={mockDocContext}>
-					<SwitchModule.renderer node={mockNode} />
-				</DocumentContext.Provider>
-			);
-
-			const props = query(widgetMap.Switch).props();
-
-			props.onChange(true, {} as ChangeEvent<HTMLInputElement>);
-
-			assertCalledWith(mockDocContext.event.onValueChanged, {
-				path: mockControlSettings.dataReference,
-				value: true
+				assertCalledWith(useControlSettingsMock, mockNode);
 			});
-		});
 
-		it("calls valueChanged from the document context with the value 'null' when a confirm field was switched off", () => {
-			const mockNode = getMockNode();
-			const mockControlSettings = getMockControlSettings({ confirm: true });
-			const mockWidgetSettings = getMockWidgetSettings();
+			it("calls useCommonWidgetSettings with the result from useCommonControlSettings", () => {
+				const mockControlSettings = getMockControlSettings();
 
-			setupMocks(mockControlSettings, mockWidgetSettings);
+				const { useWidgetSettingsMock } = setupMockHooks({
+					controlSettings: mockControlSettings,
+					widgetSettings: getMockWidgetSettings()
+				});
 
-			const mockDocContext = mockDocumentContext();
+				renderWrapper(<SwitchModule.renderer node={getMockNode()} />);
 
-			const { widgetMap } = renderWrapper(
-				<DocumentContext.Provider value={mockDocContext}>
-					<SwitchModule.renderer node={mockNode} />
-				</DocumentContext.Provider>
-			);
+				assertCalledWith(useWidgetSettingsMock, mockControlSettings);
+			});
 
-			const props = query(widgetMap.Switch).props();
+			describe("focus hooks", () => {
+				function setupFocusTest(options?: {
+					groupedMessages?: Message[];
+					ungroupedMessages?: Message[];
+				}) {
+					const mockControlSettings = getMockControlSettings({
+						groupedMessages: options?.groupedMessages,
+						ungroupedMessages: options?.ungroupedMessages
+					});
+					const mockWidgetSettings = getMockWidgetSettings();
 
-			props.onChange(false, {} as ChangeEvent<HTMLInputElement>);
+					setupMockHooks({
+						controlSettings: mockControlSettings,
+						widgetSettings: mockWidgetSettings
+					});
 
-			assertCalledWith(mockDocContext.event.onValueChanged, {
-				path: mockControlSettings.dataReference,
-				value: null
+					return renderWrapper(<SwitchModule.renderer node={getMockNode()} />);
+				}
+
+				it("calls focus hooks when rendered", () => {
+					const { functionMap } = setupFocusTest();
+
+					assertCallCount(functionMap.useFocusField, 1);
+					assertCallCount(functionMap.useFocusFirstError, 1);
+					assertCalledWithArgument(functionMap.useFocusFirstError, 0, false);
+					assertCallCount(functionMap.useFocusInput, 1);
+				});
+
+				it("calls useFocusFirstError with true when an ungrouped error exists", () => {
+					const { functionMap } = setupFocusTest({
+						ungroupedMessages: [getMockMessage({ severity: "ERROR" })]
+					});
+
+					assertCalledWithArgument(functionMap.useFocusFirstError, 0, true);
+				});
+
+				it("calls useFocusFirstError with false when no ungrouped error exists", () => {
+					const { functionMap } = setupFocusTest({
+						ungroupedMessages: [
+							getMockMessage({ severity: "WARNING" }),
+							getMockMessage({ severity: "INFO" })
+						],
+						groupedMessages: [
+							getMockMessage({ severity: "ERROR" }),
+							getMockMessage({ severity: "WARNING" }),
+							getMockMessage({ severity: "INFO" })
+						]
+					});
+
+					assertCalledWithArgument(functionMap.useFocusFirstError, 0, false);
+				});
 			});
 		});
 	});
 });
+
+function setup(options?: {
+	controlSettings?: BaseControlSettings;
+	widgetSettings?: BaseWidgetSettings;
+	docContext?: DocumentContext;
+	node?: SwitchNode;
+}) {
+	const controlSettings = options?.controlSettings ?? getMockControlSettings();
+	const widgetSettings = options?.widgetSettings ?? getMockWidgetSettings();
+
+	setupMockHooks({ controlSettings, widgetSettings });
+
+	const mockDocContext = options?.docContext ?? mockDocumentContext();
+	const node = options?.node ?? getMockNode();
+
+	return renderWrapper(
+		<DocumentContext.Provider value={mockDocContext}>
+			<SwitchModule.renderer node={node} />
+		</DocumentContext.Provider>
+	);
+}
 
 function getMockNode(): SwitchNode {
 	return {
@@ -334,9 +344,9 @@ function getMockControlSettings(options?: {
 	};
 }
 
-function getMockWidgetSettings(value?: boolean): BaseWidgetSettings {
+function getMockWidgetSettings(options?: Partial<BaseWidgetSettings>): BaseWidgetSettings {
 	return {
-		value,
+		value: undefined,
 		label: "test-label",
 		uncheckedLabel: "test-uncheckedLabel",
 		checkedLabel: "test-checkedLabel",
@@ -350,8 +360,8 @@ function getMockWidgetSettings(value?: boolean): BaseWidgetSettings {
 		warnings: "WARNINGS",
 		infos: "INFOS",
 		tooltips: "TOOLTIPS",
-		tooltipsOnTop: true,
 		inputProps: { "aria-required": true },
-		ariaDescribedBy: ["test-aria1", "test-aria2"]
+		ariaDescribedBy: [],
+		...(options ?? {})
 	};
 }

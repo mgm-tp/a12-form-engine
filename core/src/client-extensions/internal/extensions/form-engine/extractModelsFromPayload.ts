@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -30,16 +30,12 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import type { ActivityActions } from "@com.mgmtp.a12.client/client-core/lib/core/activity/index.js";
-import type { ReferencedModel } from "@com.mgmtp.a12.client/client-core/lib/core/model/index.js";
-import {
-	isActivityActionWithModelsInScenePayload,
-	Model
-} from "@com.mgmtp.a12.client/client-core/lib/core/model/index.js";
+import type { ActivityActions, ReferencedModel } from "@com.mgmtp.a12.client/client-core";
+import { isActivityActionWithModelsInScenePayload, Model } from "@com.mgmtp.a12.client/client-core";
 
 import type { Models } from "../../../../back-end/store/internal/store.js";
 import type { FormModel } from "../../../../models/internal/form-model.js";
-import { isFormModel } from "../../../../models/internal/is-form-model.js";
+import { isFormModel } from "../../../../models/internal/FormModelGuards.js";
 import { assertCondition, assertNotNullish } from "../../core/assertion.js";
 
 /** @internal */

@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -33,30 +33,32 @@
 import type { SagaGenerator } from "typed-redux-saga";
 import { call, put, select } from "typed-redux-saga";
 
-import { setThumbnails } from "@com.mgmtp.a12.client/client-core/lib/core/activity/a12-internal/thumbnails/action.js";
-import { convertThumbnailResponse } from "@com.mgmtp.a12.client/client-core/lib/core/activity/a12-internal/thumbnails/slice.js";
+import type { DataProvider, Model } from "@com.mgmtp.a12.client/client-core";
 import {
 	Activity,
 	ActivityActions,
 	ActivitySagas,
-	ActivitySelectors
-} from "@com.mgmtp.a12.client/client-core/lib/core/activity/index.js";
-import { NEW_INSTANCE_IDENTIFIER } from "@com.mgmtp.a12.client/client-core/lib/core/application/index.js";
-import type { DataProvider } from "@com.mgmtp.a12.client/client-core/lib/core/data/index.js";
-import { LocaleSelectors } from "@com.mgmtp.a12.client/client-core/lib/core/locale/index.js";
-import type { Model } from "@com.mgmtp.a12.client/client-core/lib/core/model/index.js";
-import { ModelSagas } from "@com.mgmtp.a12.client/client-core/lib/core/model/index.js";
-import { Dispatcher } from "@com.mgmtp.a12.dataservices/dataservices-access/lib/dispatch/index.js";
-import { DocumentServiceFactory } from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/facade.js";
+	ActivitySelectors,
+	LocaleSelectors,
+	ModelSagas,
+	NEW_INSTANCE_IDENTIFIER
+} from "@com.mgmtp.a12.client/client-core";
+import {
+	convertThumbnailResponse,
+	setThumbnails
+} from "@com.mgmtp.a12.client/client-core/a12internal";
+import { Dispatcher, JsonRpc2Response } from "@com.mgmtp.a12.dataservices/dataservices-access";
+import { DocumentServiceFactory } from "@com.mgmtp.a12.kernel/kernel-md-facade";
 
 import { assertExists } from "../../../../../../back-end/utils/internal/assertions.js";
 import { isObjectEmpty } from "../../../../../../back-end/utils/internal/guards.js";
-import type { FormModel } from "../../../../../../models/index.js";
-import { isFormModel } from "../../../../../../models/index.js";
+import type { FormModel } from "../../../../../../models/internal/form-model.js";
+import { isFormModel } from "../../../../../../models/internal/FormModelGuards.js";
 import { FormActivity } from "../../../../core/activity/internal/activity.js";
 import { PreProcessor } from "../../../form-engine/internal/preProcessDocument.js";
 import { referencesDirectFormModelInScene } from "../../../form-engine/internal/referencesDirectFormModelInScene.js";
 
+import { UniqueConstraintError } from "../UniqueConstraintError.js";
 import { RequestBuilder } from "../utils/requestBuilder.js";
 
 import { DefaultRequestSelectorMap } from "./DefaultRequestSelectorMap.js";
@@ -197,8 +199,44 @@ export function createPlatformSingleDocumentDataProvider(
 							throw new Error("Activity does not contain suitable data!");
 						}
 
-						const saveRequest = yield* select(requestSelectorMap.save(config));
-						const [{ result }] = yield* call(() => Dispatcher.rpc(language, [saveRequest]));
+						const requestTuple = yield* select(requestSelectorMap.save(config));
+
+						const [uniquenessOutcome, saveOutcome] = yield* call(() =>
+							Dispatcher.rpcSettled(language, requestTuple)
+						);
+
+						// check for uniqueness violations
+						if (
+							uniquenessOutcome.status === "fulfilled" &&
+							uniquenessOutcome.value.result.violations.length > 0
+						) {
+							yield* put(
+								saving.failed(
+									UniqueConstraintError.fromViolations(uniquenessOutcome.value.result.violations)
+								)
+							);
+							return;
+						}
+
+						// edge case, unique check does not report violations, but save operation still fails
+						if (saveOutcome.status === "rejected") {
+							if (JsonRpc2Response.uniqueConstraintViolationError.isInstance(saveOutcome.reason)) {
+								const locale = yield* select(LocaleSelectors.locale());
+
+								yield* put(
+									saving.failed(
+										UniqueConstraintError.fromException(saveOutcome.reason, locale.language)
+									)
+								);
+								return;
+							}
+
+							// re-throw other save-related errors
+							throw saveOutcome.reason;
+						}
+
+						// save successful
+						const { result } = saveOutcome.value;
 
 						const data =
 							instance === NEW_INSTANCE_IDENTIFIER
@@ -218,12 +256,14 @@ export function createPlatformSingleDocumentDataProvider(
 							yield* put(ActivityActions.setData({ activityId: config.activityId, data }));
 						}
 
+						const error = yield* select(UniqueConstraintError.select(config.activityId));
+						if (error) {
+							yield* put(ActivityActions.clearError({ activityId: config.activityId }));
+						}
+
 						yield* put(
 							saving.done({
-								instance:
-									"document" in data && Activity.Data.Document.isInstance(data.document)
-										? data.document.id
-										: undefined
+								instance: data.document.id
 							})
 						);
 
@@ -274,7 +314,7 @@ function* waitForModels(
 ): SagaGenerator<[FormModel, Model.DocumentAndValidationModel]> {
 	const models = yield* call(() => ModelSagas.waitForModelsLoaded(activityId));
 
-	const fm = models.find(isFormModel);
+	const fm = models.find(m => isFormModel(m));
 	assertExists(fm);
 
 	const modelReference = fm.header.modelReferences?.find(

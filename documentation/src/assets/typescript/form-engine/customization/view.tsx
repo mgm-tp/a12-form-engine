@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -30,15 +30,13 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
+// tag::additionalOptionsExample[]
 import type { JSX } from "react";
 
-import type { View } from "@com.mgmtp.a12.client/client-core/lib/core/view/index.js";
+import type { View } from "@com.mgmtp.a12.client/client-core";
 import { FormEngineViews } from "@com.mgmtp.a12.formengine/formengine-core";
 
-export namespace AdditionalOptionsExample {
-	// tag::additionalOptionsExample[]
-	export function formEngineViewsComponentProvider(props: View): JSX.Element {
-		return <FormEngineViews.FormEngine {...props} cardView={true} />;
-	}
-	// end::additionalOptionsExample[]
+export function formEngineViewsComponentProvider(props: View): JSX.Element {
+	return <FormEngineViews.FormEngine {...props} cardView={true} />;
 }
+// end::additionalOptionsExample[]

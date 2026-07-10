@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -33,7 +33,7 @@
 import { strictEqual } from "node:assert/strict";
 
 import { query, screen, within } from "@com.mgmtp.a12.devtools/react";
-import type { Localizable } from "@com.mgmtp.a12.utils/utils-localization/lib/main/index.js";
+import type { Localizable } from "@com.mgmtp.a12.utils/utils-localization";
 
 import { ValidationMessages } from "../../../../view/internal/components/widgets/validationMessages.js";
 import { BULLET_LIST_ITEM } from "../../../rtl-utils/data-roles.js";

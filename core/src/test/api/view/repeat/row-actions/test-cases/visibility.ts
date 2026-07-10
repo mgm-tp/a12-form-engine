@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -34,7 +34,7 @@ import { doesNotThrow, equal } from "node:assert/strict";
 
 import { act } from "react";
 
-import { ModelPath } from "@com.mgmtp.a12.base/base-model-api/lib/main/model/index.js";
+import { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
 import { within } from "@com.mgmtp.a12.devtools/react";
 
 import type { EngineStore } from "../../../../../../back-end/store/index.js";
@@ -42,8 +42,12 @@ import type { Models } from "../../../../../../back-end/store/internal/store.js"
 import type { ReadonlyObjectMap } from "../../../../../../models/index.js";
 import type { EnablementByRow } from "../../../../../../view/internal/configuration/engine-configuration.js";
 import type { RtlRenderWrapper } from "../../../../../rtl-utils/render-wrapper.js";
-import { ModelHelpers } from "../../../../../utils/model-helpers.js";
-import { SetupHelpers } from "../../../../../utils/setup.js";
+import { createModelPath } from "../../../../../utils/createModelPath.js";
+import {
+	loadData,
+	setupContentBoxRendererWithRtlAsync,
+	setupFormEngineRendererWithRtlAsync
+} from "../../../../../utils/setup.js";
 import { setupFixture, setupModelsFixture } from "../../../../../utils/setupFixture.js";
 import { VISIBILITY } from "../../../../../utils/test-model-helpers/repeat.row-actions.js";
 import {
@@ -69,7 +73,6 @@ import {
 } from "../row-action-utils.js";
 
 export function executeTestForVisibility(): void {
-	const { loadData } = SetupHelpers;
 	const models = setupModelsFixture("test.custom-button-enablements");
 	const rowActionButtonModels = setupModelsFixture("repeat.row-actions");
 
@@ -94,7 +97,7 @@ export function executeTestForVisibility(): void {
 		};
 		const screenLocation: EngineStore.ScreenState[] = [
 			{
-				locationPath: ModelHelpers.createModelPath("rowActionButtons"),
+				locationPath: createModelPath("rowActionButtons"),
 				path: [],
 				repeatInstanceState
 			}
@@ -1722,12 +1725,12 @@ export function executeTestForVisibility(): void {
 	}): Promise<RtlRenderWrapper> {
 		const screenLocation: EngineStore.ScreenState[] = [
 			{
-				locationPath: ModelHelpers.createModelPath("rowActionButtons"),
+				locationPath: createModelPath("rowActionButtons"),
 				path: []
 			}
 		];
 
-		return SetupHelpers.setupFormEngineRendererWithRtlAsync({
+		return setupFormEngineRendererWithRtlAsync({
 			models,
 			data: { document: fixture.document },
 			ui: {
@@ -1749,7 +1752,7 @@ export function executeTestForVisibility(): void {
 	}): Promise<RtlRenderWrapper> {
 		const screenLocation: EngineStore.ScreenState[] = [
 			{
-				locationPath: ModelHelpers.createModelPath("Enablement"),
+				locationPath: createModelPath("Enablement"),
 				path: []
 			}
 		];
@@ -1759,8 +1762,8 @@ export function executeTestForVisibility(): void {
 		}
 
 		const render = options.contentBoxRenderer
-			? SetupHelpers.setupContentBoxRendererWithRtlAsync
-			: SetupHelpers.setupFormEngineRendererWithRtlAsync;
+			? setupContentBoxRendererWithRtlAsync
+			: setupFormEngineRendererWithRtlAsync;
 
 		return render({
 			models: options.models || rowActionButtonModels,

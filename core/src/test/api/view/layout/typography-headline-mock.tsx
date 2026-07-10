@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -30,8 +30,8 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { DataRoles } from "@com.mgmtp.a12.widgets/widgets-core/lib/common/main/data-roles.js";
-import type { HeadlineProps } from "@com.mgmtp.a12.widgets/widgets-core/lib/typography/main/typography.api.js";
+import { DataRoles } from "@com.mgmtp.a12.widgets/widgets-core";
+import type { HeadlineProps } from "@com.mgmtp.a12.widgets/widgets-core";
 
 import type { WithDataTestId } from "../../../../back-end/utils/internal/types.js";
 import { TYPOGRAPHY_HEADLINE } from "../../../rtl-utils/data-roles.js";

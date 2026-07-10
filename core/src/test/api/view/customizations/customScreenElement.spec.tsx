@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -35,14 +35,14 @@ import { strictEqual } from "node:assert/strict";
 import { screen } from "@com.mgmtp.a12.devtools/react";
 
 import { assertCondition } from "../../../../back-end/utils/internal/assertions.js";
-import { FormModel } from "../../../../models/index.js";
 import { findElementByFormModelPath } from "../../../../models/internal/findElementByFormModelPath.js";
+import { isFormModelCustomScreenElement } from "../../../../models/internal/FormModelGuards.js";
 import { CustomScreenElement } from "../../../../view/internal/components/form-engine/customizations/custom-element.js";
 import { CUSTOM_SCREEN_ELEMENT } from "../../../../view/internal/components/form-engine/data-roles.js";
 import { rtlRenderWrapper } from "../../../rtl-utils/render-wrapper.js";
 import { assertExists } from "../../../utils/assertions.js";
-import { ModelHelpers } from "../../../utils/model-helpers.js";
-import { SetupHelpers } from "../../../utils/setup.js";
+import { createModelPath } from "../../../utils/createModelPath.js";
+import { setupRenderConfiguration } from "../../../utils/setup.js";
 import { setupModelsFixture } from "../../../utils/setupFixture.js";
 
 describe("api.view.customizations", () => {
@@ -53,18 +53,15 @@ describe("api.view.customizations", () => {
 			it("should render a CustomScreenElement with data-role 'custom-screen-element' on the outmost div", () => {
 				const { formModel } = customScreenElementModels;
 
-				const customScreenElementPath = ModelHelpers.createModelPath(
-					"Screen 1",
-					"customScreenElementTestName"
-				);
+				const customScreenElementPath = createModelPath("Screen 1", "customScreenElementTestName");
 
 				const customScreenElement = findElementByFormModelPath(formModel, customScreenElementPath);
 				assertExists(customScreenElement);
-				assertCondition(FormModel.CustomScreenElement.isInstance(customScreenElement));
+				assertCondition(isFormModelCustomScreenElement(customScreenElement));
 
-				const renderConfiguration = SetupHelpers.setupRenderConfiguration({
+				const renderConfiguration = setupRenderConfiguration({
 					models: customScreenElementModels,
-					parentPath: ModelHelpers.createModelPath("Screen 1")
+					parentPath: createModelPath("Screen 1")
 				});
 
 				rtlRenderWrapper(

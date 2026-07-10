@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -38,15 +38,12 @@ import type {
 	EntityInstancePath,
 	FieldInstanceValue,
 	GroupInstance
-} from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
+} from "@com.mgmtp.a12.kernel/kernel-md-facade";
 
-import { DocumentQuery } from "../../models/internal/utils/document-utils.js";
+import { walk } from "../../models/internal/utils/document-utils.js";
 
-import { DocumentHelpers } from "../utils/document-helpers.js";
-import { DocumentModelHelpers } from "../utils/model-helpers.js";
-
-const { Field, Group } = DocumentModelHelpers;
-const { createDocumentPath } = DocumentHelpers;
+import { createDocumentPath } from "../utils/createDocumentPath.js";
+import { DocumentModelHelpers } from "../utils/DocumentModelHelpers.js";
 
 describe("unit.DocumentQuery", () => {
 	describe("walk", () => {
@@ -57,7 +54,7 @@ describe("unit.DocumentQuery", () => {
 				const testData = prepareTestData();
 
 				const visitSpy = mock.fn();
-				DocumentQuery.walk(testData.element, testData.modelElement, visitSpy);
+				walk(testData.element, testData.modelElement, visitSpy);
 
 				strictEqual(visitSpy.mock.callCount(), testData.expectedVisitorArguments.length);
 				const visitorArguments = visitSpy.mock.calls;
@@ -115,46 +112,49 @@ function prepareTestData(): {
 	// End: Document values -------------------------------------------------
 
 	// Start: Document Model elements ---------------------------------------
-	const stringField = Field({ name: "stringField" });
-	const stringFieldRep = Field({ name: "stringFieldRep" });
-	const stringFieldNestedRep = Field({ name: "stringFieldNestedRep" });
+	const stringField = DocumentModelHelpers.Field({ name: "stringField" });
+	const stringFieldRep = DocumentModelHelpers.Field({ name: "stringFieldRep" });
+	const stringFieldNestedRep = DocumentModelHelpers.Field({ name: "stringFieldNestedRep" });
 
-	const dateRangeField = Field({
+	const dateRangeField = DocumentModelHelpers.Field({
 		name: "dateRangeField",
 		fieldType: { type: "DateRangeType", format: "yyyy-MM-dd", rangeSeparator: "/" }
 	});
-	const dateRangeFieldRep = Field({
+	const dateRangeFieldRep = DocumentModelHelpers.Field({
 		name: "dateRangeFieldRep",
 		fieldType: { type: "DateRangeType", format: "yyyy-MM-dd", rangeSeparator: "/" }
 	});
-	const dateRangeFieldNestedRep = Field({
+	const dateRangeFieldNestedRep = DocumentModelHelpers.Field({
 		name: "dateRangeFieldNestedRep",
 		fieldType: { type: "DateRangeType", format: "yyyy-MM-dd", rangeSeparator: "/" }
 	});
 
-	const nestedRepeatableGroup = Group({
+	const nestedRepeatableGroup = DocumentModelHelpers.Group({
 		name: "nestedRepeatableGroup",
 		repeatability: 5,
 		elements: [stringFieldNestedRep, dateRangeFieldNestedRep]
 	});
-	const repeatableGroup = Group({
+	const repeatableGroup = DocumentModelHelpers.Group({
 		name: "repeatableGroup",
 		repeatability: 5,
 		elements: [stringFieldRep, dateRangeFieldRep, nestedRepeatableGroup]
 	});
-	const group = Group({ name: "group", elements: [stringField, dateRangeField] });
+	const group = DocumentModelHelpers.Group({
+		name: "group",
+		elements: [stringField, dateRangeField]
+	});
 
-	const emptyNestedRepeatableGroup = Group({
+	const emptyNestedRepeatableGroup = DocumentModelHelpers.Group({
 		name: "emptyNestedRepeatableGroup",
 		repeatability: 5
 	});
-	const emptyRepeatableGroup = Group({
+	const emptyRepeatableGroup = DocumentModelHelpers.Group({
 		name: "emptyRepeatableGroup",
 		repeatability: 5,
 		elements: [emptyNestedRepeatableGroup]
 	});
-	const emptyGroup = Group({ id: "emptyGroup", name: "emptyGroup" });
-	const rootGroup = Group({
+	const emptyGroup = DocumentModelHelpers.Group({ id: "emptyGroup", name: "emptyGroup" });
+	const rootGroup = DocumentModelHelpers.Group({
 		name: "rootGroup",
 		elements: [group, emptyGroup, repeatableGroup, emptyRepeatableGroup]
 	});

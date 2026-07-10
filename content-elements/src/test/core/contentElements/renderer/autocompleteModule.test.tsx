@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -31,20 +31,14 @@
  */
 
 import { deepStrictEqual, notStrictEqual, strictEqual } from "node:assert/strict";
-import { mock } from "node:test";
 
 import { DocumentContext } from "@com.mgmtp.a12.contentengine/contentengine-core";
 import { query } from "@com.mgmtp.a12.devtools/react";
-import type { Message } from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
-import { LocalizerContext } from "@com.mgmtp.a12.utils/utils-localization-react/lib/main/index.js";
-import type { DropDownItem } from "@com.mgmtp.a12.widgets/widgets-core/lib/dropdown/main/template/dropdown.tpl.api.js";
+import type { Message } from "@com.mgmtp.a12.kernel/kernel-md-facade";
+import { LocalizerContext } from "@com.mgmtp.a12.utils/utils-localization-react";
+import type { DropDownItem } from "@com.mgmtp.a12.widgets/widgets-core";
 
-import { USE_COMMON_CONTROL_SETTINGS_WRAPPER } from "../../../../main/core/contentElements/elementConfiguration/useCommonControlSettings.js";
-import { USE_COMMON_WIDGET_SETTINGS_WRAPPER } from "../../../../main/core/contentElements/elementConfiguration/useCommonWidgetSettings.js";
 import type { EnumerationItem } from "../../../../main/core/contentElements/elementConfiguration/useLocalizedEnumerationValues.js";
-import { USE_LOCALIZED_ENUMERATION_VALUES_WRAPPER } from "../../../../main/core/contentElements/elementConfiguration/useLocalizedEnumerationValues.js";
-import { DefaultFunctionMap } from "../../../../main/core/contentElements/functionMap/defaultFunctionMap.js";
-import { FunctionMapContext } from "../../../../main/core/contentElements/functionMap/functionMapContext.js";
 import { AutoCompleteModule } from "../../../../main/core/contentElements/modules/autoComplete/autocompleteModule.js";
 import type { AutoCompleteNode } from "../../../../main/core/contentElements/modules/autoComplete/autocompleteNode.js";
 import { AUTO_COMPLETE_TYPE } from "../../../../main/core/contentElements/modules/autoComplete/autocompleteNode.js";
@@ -57,47 +51,22 @@ import {
 	assertCalledWith,
 	assertCalledWithArgument
 } from "../../../assertions.js";
+import { getMockLocalization } from "../../../mocks/getMockLocalization.js";
 import { mockDocumentContext } from "../../../mocks/mockDocumentContext.js";
 import { getMockMessage } from "../../../mocks/mockError.js";
+import { setupMockHooks } from "../../../mocks/setupMockHooks.js";
 import { renderWrapper } from "../../../rtl-utils/render-wrapper.js";
-
-function setupMocks(controlSettings: BaseControlSettings, widgetSettings: BaseWidgetSettings) {
-	return {
-		useControlSettingsMock: mock.method(
-			USE_COMMON_CONTROL_SETTINGS_WRAPPER,
-			"useCommonControlSettings",
-			() => controlSettings
-		),
-		useWidgetSettingsMock: mock.method(
-			USE_COMMON_WIDGET_SETTINGS_WRAPPER,
-			"useCommonWidgetSettings",
-			() => widgetSettings
-		),
-		useEnumerationValuesMock: mock.method(
-			USE_LOCALIZED_ENUMERATION_VALUES_WRAPPER,
-			"useLocalizedEnumerationValues",
-			mock.fn(getMockEnumerationValues)
-		),
-		useFocusFieldMock: mock.fn(),
-		useFocusFirstErrorMock: mock.fn(),
-		useFocusInputMock: mock.fn()
-	};
-}
 
 describe("core.contentElements", () => {
 	describe("AutoComplete", () => {
-		// TODO: check, that getNewAutoCompleteValue was called
 		it("renders an AutoComplete with the correct properties", () => {
 			const mockControlSettings = getMockControlSettings({ fieldType: "EnumerationType" });
-			const mockWidgetSettings = getMockWidgetSettings("value-2");
+			const mockWidgetSettings = getMockWidgetSettings({ value: "value-2" });
 
-			setupMocks(mockControlSettings, mockWidgetSettings);
-
-			const { widgetMap } = renderWrapper(
-				<LocalizerContext.Provider value={getMockLocalization()}>
-					<AutoCompleteModule.renderer node={getMockNode()} />
-				</LocalizerContext.Provider>
-			);
+			const { widgetMap } = setup({
+				controlSettings: mockControlSettings,
+				widgetSettings: mockWidgetSettings
+			});
 
 			const props = query(widgetMap.Autocomplete).props();
 
@@ -120,21 +89,33 @@ describe("core.contentElements", () => {
 			strictEqual(props["infoMessage"], mockWidgetSettings.infos);
 			strictEqual(props["inputProps"], mockWidgetSettings.inputProps);
 			notStrictEqual(props["inputRef"], undefined);
-			strictEqual(props["ariaDescribedby"], nmTokensToString(mockWidgetSettings.ariaDescribedBy)); // TODO: additional test for this post-processing?
+		});
+
+		describe("ariaDescribedBy", () => {
+			it("sets undefined if ariaDescribedBy is empty", () => {
+				const { widgetMap } = setup();
+
+				const props = query(widgetMap.Autocomplete).props();
+
+				strictEqual(props.ariaDescribedby, undefined);
+			});
+
+			it("converts tokens into a single string if ariaDescribedBy is not empty", () => {
+				const mockWidgetSettings = getMockWidgetSettings({ ariaDescribedBy: ["token1", "token2"] });
+
+				const { widgetMap } = setup({ widgetSettings: mockWidgetSettings });
+
+				const props = query(widgetMap.Autocomplete).props();
+
+				strictEqual(props.ariaDescribedby, nmTokensToString(mockWidgetSettings.ariaDescribedBy));
+			});
 		});
 
 		describe("allowAddingNewItem + caseSensitive", () => {
 			it("sets allowAddingNewItem and caseSensitive to true for string fields with a hint list", () => {
-				const mockControlSettings = getMockControlSettings({ fieldType: "StringType" });
-				const mockWidgetSettings = getMockWidgetSettings();
-
-				setupMocks(mockControlSettings, mockWidgetSettings);
-
-				const { widgetMap } = renderWrapper(
-					<LocalizerContext.Provider value={getMockLocalization()}>
-						<AutoCompleteModule.renderer node={getMockNode()} />
-					</LocalizerContext.Provider>
-				);
+				const { widgetMap } = setup({
+					controlSettings: getMockControlSettings({ fieldType: "StringType" })
+				});
 
 				const props = query(widgetMap.Autocomplete).props();
 
@@ -143,16 +124,7 @@ describe("core.contentElements", () => {
 			});
 
 			it("sets allowAddingNewItem and caseSensitive to false for enumeration fields", () => {
-				const mockControlSettings = getMockControlSettings({ fieldType: "EnumerationType" });
-				const mockWidgetSettings = getMockWidgetSettings();
-
-				setupMocks(mockControlSettings, mockWidgetSettings);
-
-				const { widgetMap } = renderWrapper(
-					<LocalizerContext.Provider value={getMockLocalization()}>
-						<AutoCompleteModule.renderer node={getMockNode()} />
-					</LocalizerContext.Provider>
-				);
+				const { widgetMap } = setup();
 
 				const props = query(widgetMap.Autocomplete).props();
 
@@ -161,186 +133,194 @@ describe("core.contentElements", () => {
 			});
 		});
 
-		it("calls useCommonControlSettings with the given node", () => {
-			const mockNode = getMockNode();
-			const mockControlSettings = getMockControlSettings({ fieldType: "EnumerationType" });
-			const mockWidgetSettings = getMockWidgetSettings();
+		describe("Value Change", () => {
+			it("calls valueChanged from the document context with the given value when a valid value was entered", () => {
+				const mockControlSettings = getMockControlSettings({ fieldType: "EnumerationType" });
+				const mockDocContext = mockDocumentContext();
 
-			const { useControlSettingsMock } = setupMocks(mockControlSettings, mockWidgetSettings);
-
-			renderWrapper(<AutoCompleteModule.renderer node={mockNode} />);
-
-			assertCalledWith(useControlSettingsMock, mockNode);
-		});
-
-		it("calls useCommonWidgetSettings with the result from useCommonControlSettings", () => {
-			const mockControlSettings = getMockControlSettings({ fieldType: "EnumerationType" });
-			const mockWidgetSettings = getMockWidgetSettings();
-
-			const { useWidgetSettingsMock } = setupMocks(mockControlSettings, mockWidgetSettings);
-
-			renderWrapper(<AutoCompleteModule.renderer node={getMockNode()} />);
-
-			assertCalledWith(useWidgetSettingsMock, mockControlSettings);
-		});
-
-		it("calls useLocalizedEnumerationValues with the given dataReference", () => {
-			const mockControlSettings = getMockControlSettings({ fieldType: "EnumerationType" });
-			const mockWidgetSettings = getMockWidgetSettings();
-
-			const { useEnumerationValuesMock } = setupMocks(mockControlSettings, mockWidgetSettings);
-
-			renderWrapper(<AutoCompleteModule.renderer node={getMockNode()} />);
-
-			assertCalledWith(useEnumerationValuesMock, mockControlSettings.dataReference);
-		});
-
-		describe("focus hooks", () => {
-			function setupFocusTest(options?: {
-				groupedMessages?: Message[];
-				ungroupedMessages?: Message[];
-			}) {
-				const mockControlSettings = getMockControlSettings({
-					fieldType: "EnumerationType",
-					groupedMessages: options?.groupedMessages,
-					ungroupedMessages: options?.ungroupedMessages
+				const { widgetMap } = setup({
+					controlSettings: mockControlSettings,
+					docContext: mockDocContext
 				});
+
+				const props = query(widgetMap.Autocomplete).props();
+
+				props.onValueChange?.("value-1");
+
+				assertCalledWith(mockDocContext.event.onValueChanged, {
+					path: mockControlSettings.dataReference,
+					value: "value-1",
+					userValue: "value-1"
+				});
+			});
+
+			it("calls valueChanged from the document context with a custom value for string fields with a hint list", () => {
+				const mockControlSettings = getMockControlSettings({ fieldType: "StringType" });
+				const mockDocContext = mockDocumentContext();
+
+				const { widgetMap } = setup({
+					controlSettings: mockControlSettings,
+					docContext: mockDocContext
+				});
+
+				const props = query(widgetMap.Autocomplete).props();
+
+				const customValue = "my-custom-value";
+				props.onValueChange?.(customValue);
+
+				assertCalledWith(mockDocContext.event.onValueChanged, {
+					path: mockControlSettings.dataReference,
+					value: customValue,
+					userValue: "my-custom-value"
+				});
+			});
+
+			it("calls valueChanged from the document context with null when an invalid value was entered", () => {
+				const mockControlSettings = getMockControlSettings({ fieldType: "EnumerationType" });
+				const mockDocContext = mockDocumentContext();
+
+				const { widgetMap } = setup({
+					controlSettings: mockControlSettings,
+					docContext: mockDocContext
+				});
+
+				const props = query(widgetMap.Autocomplete).props();
+
+				props.onValueChange?.("my-custom-value");
+
+				assertCalledWith(mockDocContext.event.onValueChanged, {
+					path: mockControlSettings.dataReference,
+					userValue: undefined,
+					value: null
+				});
+			});
+		});
+
+		describe("Hooks", () => {
+			it("calls useCommonControlSettings with the given node", () => {
+				const mockNode = getMockNode();
+				const mockControlSettings = getMockControlSettings({ fieldType: "EnumerationType" });
 				const mockWidgetSettings = getMockWidgetSettings();
 
-				const { useFocusFieldMock, useFocusInputMock, useFocusFirstErrorMock } = setupMocks(
-					mockControlSettings,
-					mockWidgetSettings
-				);
-
-				renderWrapper(
-					<FunctionMapContext.Provider
-						value={{
-							...DefaultFunctionMap,
-							useFocusField: useFocusFieldMock,
-							useFocusFirstError: useFocusFirstErrorMock,
-							useFocusInput: useFocusInputMock
-						}}
-					>
-						<AutoCompleteModule.renderer node={getMockNode()} />
-					</FunctionMapContext.Provider>
-				);
-
-				return { useFocusFieldMock, useFocusInputMock, useFocusFirstErrorMock };
-			}
-
-			it("calls focus hooks when rendered", () => {
-				const { useFocusFieldMock, useFocusInputMock, useFocusFirstErrorMock } = setupFocusTest();
-
-				assertCallCount(useFocusFieldMock, 1);
-				assertCallCount(useFocusFirstErrorMock, 1);
-				assertCalledWithArgument(useFocusFirstErrorMock, 0, false);
-				assertCallCount(useFocusInputMock, 1);
-			});
-
-			it("calls useFocusFirstError with true when an ungrouped error exists", () => {
-				const { useFocusFirstErrorMock } = setupFocusTest({
-					ungroupedMessages: [getMockMessage({ severity: "ERROR" })]
+				const { useControlSettingsMock } = setupMockHooks({
+					controlSettings: mockControlSettings,
+					widgetSettings: mockWidgetSettings
 				});
 
-				assertCalledWithArgument(useFocusFirstErrorMock, 0, true);
+				renderWrapper(<AutoCompleteModule.renderer node={mockNode} />);
+
+				assertCalledWith(useControlSettingsMock, mockNode);
 			});
 
-			it("calls useFocusFirstError with false when no ungrouped error exists", () => {
-				const { useFocusFirstErrorMock } = setupFocusTest({
-					ungroupedMessages: [
-						getMockMessage({ severity: "WARNING" }),
-						getMockMessage({ severity: "INFO" })
-					],
-					groupedMessages: [
-						getMockMessage({ severity: "ERROR" }),
-						getMockMessage({ severity: "WARNING" }),
-						getMockMessage({ severity: "INFO" })
-					]
+			it("calls useCommonWidgetSettings with the result from useCommonControlSettings", () => {
+				const mockControlSettings = getMockControlSettings({ fieldType: "EnumerationType" });
+				const mockWidgetSettings = getMockWidgetSettings();
+
+				const { useWidgetSettingsMock } = setupMockHooks({
+					controlSettings: mockControlSettings,
+					widgetSettings: mockWidgetSettings
 				});
 
-				assertCalledWithArgument(useFocusFirstErrorMock, 0, false);
+				renderWrapper(<AutoCompleteModule.renderer node={getMockNode()} />);
+
+				assertCalledWith(useWidgetSettingsMock, mockControlSettings);
 			});
-		});
 
-		// TODO: check, that getNewAutoCompleteValue was called
-		it("calls valueChanged from the document context with the given value when a valid value was entered", () => {
-			const mockControlSettings = getMockControlSettings({ fieldType: "EnumerationType" });
-			const mockWidgetSettings = getMockWidgetSettings();
+			it("calls useLocalizedEnumerationValues with the given dataReference", () => {
+				const mockControlSettings = getMockControlSettings({ fieldType: "EnumerationType" });
+				const mockWidgetSettings = getMockWidgetSettings();
 
-			setupMocks(mockControlSettings, mockWidgetSettings);
+				const { useEnumerationValuesMock } = setupMockHooks({
+					controlSettings: mockControlSettings,
+					widgetSettings: mockWidgetSettings
+				});
 
-			const mockDocContext = mockDocumentContext();
+				renderWrapper(<AutoCompleteModule.renderer node={getMockNode()} />);
 
-			const { widgetMap } = renderWrapper(
-				<DocumentContext.Provider value={mockDocContext}>
-					<AutoCompleteModule.renderer node={getMockNode()} />
-				</DocumentContext.Provider>
-			);
-
-			const props = query(widgetMap.Autocomplete).props();
-
-			props.onValueChange?.("value-1");
-
-			assertCalledWith(mockDocContext.event.onValueChanged, {
-				path: mockControlSettings.dataReference,
-				value: "value-1",
-				userValue: "value-1"
+				assertCalledWith(useEnumerationValuesMock, mockControlSettings.dataReference);
 			});
-		});
 
-		it("calls valueChanged from the document context with a custom value for string fields with a hint list", () => {
-			const mockControlSettings = getMockControlSettings({ fieldType: "StringType" });
-			const mockWidgetSettings = getMockWidgetSettings();
+			describe("focus hooks", () => {
+				function setupFocusTest(options?: {
+					groupedMessages?: Message[];
+					ungroupedMessages?: Message[];
+				}) {
+					const mockControlSettings = getMockControlSettings({
+						fieldType: "EnumerationType",
+						groupedMessages: options?.groupedMessages,
+						ungroupedMessages: options?.ungroupedMessages
+					});
+					const mockWidgetSettings = getMockWidgetSettings();
 
-			setupMocks(mockControlSettings, mockWidgetSettings);
+					setupMockHooks({
+						controlSettings: mockControlSettings,
+						widgetSettings: mockWidgetSettings
+					});
 
-			const mockDocContext = mockDocumentContext();
+					return renderWrapper(<AutoCompleteModule.renderer node={getMockNode()} />);
+				}
 
-			const { widgetMap } = renderWrapper(
-				<DocumentContext.Provider value={mockDocContext}>
-					<AutoCompleteModule.renderer node={getMockNode()} />
-				</DocumentContext.Provider>
-			);
+				it("calls focus hooks when rendered", () => {
+					const { functionMap } = setupFocusTest();
 
-			const props = query(widgetMap.Autocomplete).props();
+					assertCallCount(functionMap.useFocusField, 1);
+					assertCallCount(functionMap.useFocusFirstError, 1);
+					assertCalledWithArgument(functionMap.useFocusFirstError, 0, false);
+					assertCallCount(functionMap.useFocusInput, 1);
+				});
 
-			const customValue = "my-custom-value";
+				it("calls useFocusFirstError with true when an ungrouped error exists", () => {
+					const { functionMap } = setupFocusTest({
+						ungroupedMessages: [getMockMessage({ severity: "ERROR" })]
+					});
 
-			props.onValueChange?.(customValue);
+					assertCalledWithArgument(functionMap.useFocusFirstError, 0, true);
+				});
 
-			assertCalledWith(mockDocContext.event.onValueChanged, {
-				path: mockControlSettings.dataReference,
-				value: customValue,
-				userValue: "my-custom-value"
-			});
-		});
+				it("calls useFocusFirstError with false when no ungrouped error exists", () => {
+					const { functionMap } = setupFocusTest({
+						ungroupedMessages: [
+							getMockMessage({ severity: "WARNING" }),
+							getMockMessage({ severity: "INFO" })
+						],
+						groupedMessages: [
+							getMockMessage({ severity: "ERROR" }),
+							getMockMessage({ severity: "WARNING" }),
+							getMockMessage({ severity: "INFO" })
+						]
+					});
 
-		it("calls valueChanged from the document context with null when an invalid value was entered", () => {
-			const mockControlSettings = getMockControlSettings({ fieldType: "EnumerationType" });
-			const mockWidgetSettings = getMockWidgetSettings();
-
-			setupMocks(mockControlSettings, mockWidgetSettings);
-
-			const mockDocContext = mockDocumentContext();
-
-			const { widgetMap } = renderWrapper(
-				<DocumentContext.Provider value={mockDocContext}>
-					<AutoCompleteModule.renderer node={getMockNode()} />
-				</DocumentContext.Provider>
-			);
-
-			const props = query(widgetMap.Autocomplete).props();
-
-			props.onValueChange?.("my-custom-value");
-
-			assertCalledWith(mockDocContext.event.onValueChanged, {
-				path: mockControlSettings.dataReference,
-				userValue: undefined,
-				value: null
+					assertCalledWithArgument(functionMap.useFocusFirstError, 0, false);
+				});
 			});
 		});
 	});
 });
+
+function setup(options?: {
+	controlSettings?: BaseControlSettings;
+	widgetSettings?: BaseWidgetSettings;
+	docContext?: DocumentContext;
+	node?: AutoCompleteNode;
+}) {
+	const controlSettings =
+		options?.controlSettings ?? getMockControlSettings({ fieldType: "EnumerationType" });
+	const widgetSettings = options?.widgetSettings ?? getMockWidgetSettings();
+	const enumerationValues = getMockEnumerationValues();
+
+	setupMockHooks({ controlSettings, widgetSettings, enumerationValues });
+
+	const mockDocContext = options?.docContext ?? mockDocumentContext();
+	const node = options?.node ?? getMockNode();
+
+	return renderWrapper(
+		<LocalizerContext.Provider value={getMockLocalization()}>
+			<DocumentContext.Provider value={mockDocContext}>
+				<AutoCompleteModule.renderer node={node} />
+			</DocumentContext.Provider>
+		</LocalizerContext.Provider>
+	);
+}
 
 function getMockNode(): AutoCompleteNode {
 	return {
@@ -394,9 +374,9 @@ function getMockControlSettings(options: {
 	};
 }
 
-function getMockWidgetSettings(value?: string): BaseWidgetSettings {
+function getMockWidgetSettings(options?: Partial<BaseWidgetSettings>): BaseWidgetSettings {
 	return {
-		value,
+		value: undefined,
 		label: "test-label",
 		hideLabel: true,
 		helperText: "test-helperText",
@@ -411,7 +391,8 @@ function getMockWidgetSettings(value?: string): BaseWidgetSettings {
 		tooltipsOnTop: true,
 		suffixes: "SUFFIXES",
 		inputProps: { "aria-required": true },
-		ariaDescribedBy: ["test-aria1", "test-aria2"]
+		ariaDescribedBy: [],
+		...(options ?? {})
 	};
 }
 
@@ -434,18 +415,4 @@ function toDropDownItem(enumerationValues: EnumerationItem[]): DropDownItem[] {
 		value: item.value,
 		key: String(index)
 	}));
-}
-
-function getMockLocalization(): LocalizerContext.Type {
-	return {
-		locale: { language: "en", country: "US" },
-		localizer: localizable => localizable.key,
-		conversion: {
-			parseValue: () => ({
-				value: ""
-			}),
-			formatValue: () => ""
-		},
-		dataFormats: {}
-	};
 }

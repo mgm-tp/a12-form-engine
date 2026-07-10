@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -32,18 +32,24 @@
 
 import type { Middleware } from "redux";
 
-import { ModelPath } from "@com.mgmtp.a12.base/base-model-api/lib/main/model/index.js";
-import type { GroupInstance } from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
+import { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
+import type { GroupInstance } from "@com.mgmtp.a12.kernel/kernel-md-facade";
 
-import { findElementByFormModelPath, FormModel } from "../../../../../models/index.js";
-import { DocumentModelUtils } from "../../../../../models/internal/utils/document-model-utils.js";
+import { findElementByFormModelPath } from "../../../../../models/index.js";
+import {
+	isFormModelDetachedRepeat,
+	isFormModelEmbeddedRepeat,
+	isFormModelInlineRepeat,
+	isFormModelRepeat
+} from "../../../../../models/internal/FormModelGuards.js";
+import * as DocumentModelUtils from "../../../../../models/internal/utils/document-model-utils.js";
 import {
 	createInitialRows,
-	DocumentPath,
-	DocumentUtils
+	DocumentUtils,
+	InternalDocumentPath
 } from "../../../../../models/internal/utils/document-utils.js";
 import { ReadonlyObjectMap } from "../../../../../models/internal/utils/json.js";
-import { ModelUtils } from "../../../../../models/internal/utils/model-utils.js";
+import { createGroupInstance } from "../../../../../models/internal/utils/model-utils.js";
 import { Commands, Events } from "../../actions.js";
 import { KernelComputation } from "../../computation.js";
 import { DataSelectors } from "../../selectors/data.js";
@@ -102,7 +108,7 @@ export function addButtonRepeatMiddlewareFactory(
 			}
 
 			const group = DocumentModelUtils.findByPath(documentModel, action.payload.path);
-			const row = ModelUtils.createGroupInstance(group, formModel, action.payload.path);
+			const row = createGroupInstance(group, formModel, action.payload.path);
 
 			const documentPath = DataSelectors.documentPath(action.payload.path)(state);
 			let newDocument = DocumentUtils.addNewRow(
@@ -115,18 +121,17 @@ export function addButtonRepeatMiddlewareFactory(
 
 			const rows = DocumentUtils.getRows(newDocument, documentPath);
 			const rowCount = rows !== undefined ? rows.length : 0;
-			if (FormModel.DetachedRepeat.isInstance(repeat)) {
+			if (isFormModelDetachedRepeat(repeat)) {
 				api.dispatch(Commands.pushBackup({ messages: messages, document: document }));
 			}
 
 			const newRowPath = [
-				...DocumentPath.parentPath(documentPath),
+				...InternalDocumentPath.parentPath(documentPath),
 				{ elementName: documentPath[documentPath.length - 1].elementName, index: rowCount }
 			];
 
 			const element = findElementByFormModelPath(formModel, repeatFormModelPath);
-			const pageSize =
-				element && FormModel.Repeat.isInstance(element) ? element.pageSize : undefined;
+			const pageSize = element && isFormModelRepeat(element) ? element.pageSize : undefined;
 
 			newDocument = createInitialRows({
 				documentModel,
@@ -154,10 +159,7 @@ export function addButtonRepeatMiddlewareFactory(
 
 			api.dispatch(Commands.setMessageState({ messages: updatedResult.messages }));
 
-			if (
-				FormModel.InlineRepeat.isInstance(repeat) ||
-				FormModel.EmbeddedRepeat.isInstance(repeat)
-			) {
+			if (isFormModelInlineRepeat(repeat) || isFormModelEmbeddedRepeat(repeat)) {
 				updateDataDirtyState(api.dispatch, state);
 			}
 
@@ -172,7 +174,7 @@ export function addButtonRepeatMiddlewareFactory(
 							rowPath: newRowPath,
 							rowState: "workingOn"
 						},
-						...(FormModel.EmbeddedRepeat.isInstance(repeat)
+						...(isFormModelEmbeddedRepeat(repeat)
 							? ({
 									expandedRowPath: newRowPath,
 									tableInteractionDocument: updatedResult.document
@@ -184,7 +186,7 @@ export function addButtonRepeatMiddlewareFactory(
 
 			const screenLocationStack = UiStateSelectors.screenLocationStack()(api.getState());
 
-			if (FormModel.InlineRepeat.isInstance(repeat)) {
+			if (isFormModelInlineRepeat(repeat)) {
 				api.dispatch(
 					Commands.changeScreenState({
 						index: screenLocationStack.length - 1,
@@ -194,7 +196,7 @@ export function addButtonRepeatMiddlewareFactory(
 						}
 					})
 				);
-			} else if (FormModel.EmbeddedRepeat.isInstance(repeat)) {
+			} else if (isFormModelEmbeddedRepeat(repeat)) {
 				api.dispatch(
 					Commands.changeScreenState({
 						index: screenLocationStack.length - 1,
@@ -205,7 +207,7 @@ export function addButtonRepeatMiddlewareFactory(
 						}
 					})
 				);
-			} else if (FormModel.DetachedRepeat.isInstance(repeat)) {
+			} else if (isFormModelDetachedRepeat(repeat)) {
 				collapseAllExpandedRowsActions(api.getState()).forEach(api.dispatch);
 
 				api.dispatch(
@@ -225,7 +227,7 @@ export function addButtonRepeatMiddlewareFactory(
 							{ elementName: repeat.detailScreen.name }
 						],
 						path: [
-							...DocumentPath.parentPath(documentPath),
+							...InternalDocumentPath.parentPath(documentPath),
 							{ elementName: documentPath[documentPath.length - 1].elementName, index: rowCount }
 						]
 					})

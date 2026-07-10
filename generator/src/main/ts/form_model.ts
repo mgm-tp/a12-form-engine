@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -30,9 +30,8 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import type { Annotation } from "@com.mgmtp.a12.base/base-model-api/lib/main/header/index.js";
-import type { Model } from "@com.mgmtp.a12.base/base-model-api/lib/main/model/index.js";
-import type { LocalizedModelText } from "@com.mgmtp.a12.utils/utils-localization/lib/main/index.js";
+import type { Annotation, Model } from "@com.mgmtp.a12.base/base-model-api";
+import type { LocalizedModelText } from "@com.mgmtp.a12.utils/utils-localization";
 
 /**
  * This is the modeling-time (persistence) schema of the Form Model.
@@ -71,6 +70,16 @@ export namespace FormModel {
 	/** Add hide condition to model elements. */
 	export interface ConditionallyHidden {
 		readonly hideCondition?: HideCondition;
+	}
+
+	/**
+	 * Adds a model reference to screen elements that are bound to an external model.
+	 * The reference value corresponds to the modelReference property (model id)
+	 * of a model reference entry in the form model header.
+	 */
+	export interface Referencing {
+		/** The model reference identifier (modelReference/model id) from the form model header that this element is bound to. */
+		readonly reference?: string;
 	}
 
 	/** Data structure to define a static amount suffix */
@@ -327,6 +336,12 @@ export namespace FormModel {
 		 */
 		readonly placeholder?: MultilingualText;
 
+		/** Defines the icon shown on a checked switch */
+		readonly icon?: Icon;
+
+		/** Defines the placement of the label relative to the switch input. */
+		readonly labelPlacement?: LabelPlacement;
+
 		/** Configuration for an attachment */
 		readonly attachmentConfig?: AttachmentConfig;
 	}
@@ -412,7 +427,7 @@ export namespace FormModel {
 	 * Data structure for a custom screen element.
 	 * A custom screen element is a placeholder.
 	 */
-	export interface CustomScreenElement extends BasicScreenElement {
+	export interface CustomScreenElement extends BasicScreenElement, Referencing {
 		readonly type: "CustomScreenElement";
 		readonly height?: number;
 	}
@@ -595,7 +610,6 @@ export namespace FormModel {
 		readonly detailScreen: Screen;
 		/** The row action that is triggered on row click */
 		readonly defaultRowAction?: DefaultRowAction;
-
 		/**
 		 * Whether infinite scrolling should be used.
 		 */
@@ -1422,6 +1436,7 @@ export namespace FormModel {
 		readonly masterValue: string | null;
 	}
 
+	export type LabelPlacement = "TOP" | "LEFT" | "RIGHT";
 	export type ExpositionPresentation =
 		| "AREA"
 		| "COMPACT"

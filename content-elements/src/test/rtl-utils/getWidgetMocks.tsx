@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -32,48 +32,46 @@
 
 import { mock } from "node:test";
 
-import type { ButtonProps } from "@com.mgmtp.a12.widgets/widgets-core/lib/button/main/button.api.js";
-import type { DateTimePickerProps } from "@com.mgmtp.a12.widgets/widgets-core/lib/date-time-picker/main/date-time-picker.api.js";
-import type { HeaderProps } from "@com.mgmtp.a12.widgets/widgets-core/lib/date-time-picker/main/date-time-picker.internal.js";
-import type { DatePickerProps } from "@com.mgmtp.a12.widgets/widgets-core/lib/datepicker/main/date-picker.api.js";
-import type { DatePickerDialogProps } from "@com.mgmtp.a12.widgets/widgets-core/lib/datepicker/main/date-picker.mobile.api.js";
-import type { IconProps } from "@com.mgmtp.a12.widgets/widgets-core/lib/icon/main/icon.api.js";
-import type { AutocompleteProps } from "@com.mgmtp.a12.widgets/widgets-core/lib/input/autocomplete/main/autocomplete.api.js";
 import type {
+	AttachedPortalProps,
+	AutocompleteProps,
+	BulletListProps,
+	ButtonProps,
 	CheckboxGroupProps,
-	CheckboxItemProps
-} from "@com.mgmtp.a12.widgets/widgets-core/lib/input/checkbox-group/main/checkbox-group.api.js";
-import type {
+	CheckboxItemProps,
 	CheckboxProps,
-	IndeterminateCheckboxProps
-} from "@com.mgmtp.a12.widgets/widgets-core/lib/input/checkbox/main/checkbox.api.js";
-import type {
-	RadioItemProps,
-	RadioProps
-} from "@com.mgmtp.a12.widgets/widgets-core/lib/input/radio/main/radio.api.js";
-import type { SelectProps } from "@com.mgmtp.a12.widgets/widgets-core/lib/input/select/main/select.api.js";
-import type { SwitchProps } from "@com.mgmtp.a12.widgets/widgets-core/lib/input/switch/main/switch.api.js";
-import type { TextAreaStatelessProps } from "@com.mgmtp.a12.widgets/widgets-core/lib/input/text-area/main/template/text-area.tpl.api.js";
-import type {
-	TextAffixProps,
-	TextLineStatelessProps
-} from "@com.mgmtp.a12.widgets/widgets-core/lib/input/text-line/main/template/text-line.tpl.api.js";
-import type {
+	DatePickerDialogProps,
+	DatePickerProps,
+	DateTimePickerHeaderProps,
+	DateTimePickerProps,
+	ErrorTooltipProps,
+	HintTooltipProps,
+	IconProps,
+	IndeterminateCheckboxProps,
 	ListItemProps,
-	ListProps
-} from "@com.mgmtp.a12.widgets/widgets-core/lib/list/main/list.api.js";
-import type { MessageBoxProps } from "@com.mgmtp.a12.widgets/widgets-core/lib/message-box/main/message-box.api.js";
-import type { MultiselectProps } from "@com.mgmtp.a12.widgets/widgets-core/lib/multiselect/main/multiselect.api.js";
-import type { TimePickerProps } from "@com.mgmtp.a12.widgets/widgets-core/lib/time-picker/main/time-picker.api.js";
-import type { ErrorTooltipProps } from "@com.mgmtp.a12.widgets/widgets-core/lib/tooltip/error/main/error.api.js";
-import type { HintTooltipProps } from "@com.mgmtp.a12.widgets/widgets-core/lib/tooltip/hint/main/hint.api.js";
-import type { WarningTooltipProps } from "@com.mgmtp.a12.widgets/widgets-core/lib/tooltip/warning/main/warning.api.js";
+	ListProps,
+	MessageBoxProps,
+	ModalOverlayProps,
+	MultiselectProps,
+	RadioItemProps,
+	RadioProps,
+	SelectProps,
+	SwitchProps,
+	TextAffixProps,
+	TextAreaStatelessProps,
+	TextFieldProps,
+	TimePickerProps,
+	WarningTooltipProps
+} from "@com.mgmtp.a12.widgets/widgets-core";
 
 import type { WidgetMap } from "../../main/core/index.js";
 import { DefaultWidgetMap } from "../../main/defaultRender/defaultWidgetMap.js";
 
 import {
+	ATTACHED_PORTAL,
 	AUTO_COMPLETE,
+	BULLET_LIST_ITEM,
+	BULLET_LIST_UNORDERED,
 	BUTTON,
 	CHECKBOX,
 	CHECKBOX_GROUP,
@@ -89,6 +87,7 @@ import {
 	LIST,
 	LIST_ITEM,
 	MESSAGE_BOX,
+	MODAL_OVERLAY,
 	MULTI_SELECT,
 	RADIO,
 	RADIO_ITEM,
@@ -108,10 +107,10 @@ export function getWidgetMocks(): WidgetMap {
 		Button: mock.fn(ButtonMock),
 		Icon: mock.fn(IconMock),
 		TextAreaStateless: mock.fn(TextAreaStatelessMock),
-		TextLineStateless: mock.fn(TextLineStatelessMock),
+		TextField: mock.fn(TextFieldMock),
 		Autocomplete: mock.fn(AutocompleteMock),
 		Select: mock.fn(SelectMock),
-		MultiSelect: mock.fn(MultiSelectMock),
+		Multiselect: mock.fn(MultiSelectMock),
 		Switch: mock.fn(SwitchMock),
 		Checkbox: mock.fn(CheckboxMock),
 		CheckboxIndeterminate: mock.fn(CheckboxIndeterminateMock),
@@ -128,7 +127,11 @@ export function getWidgetMocks(): WidgetMap {
 		WarningTooltip: mock.fn(WarningTooltipMock),
 		HintTooltip: mock.fn(HintTooltipMock),
 		TextAffix: mock.fn(TextAffixMock),
-		Header: mock.fn(HeaderMock),
+		DateTimePickerHeader: mock.fn(HeaderMock),
+		ModalOverlay: mock.fn(ModalOverlayMock),
+		AttachedPortal: mock.fn(AttachedPortalMock),
+		BulletListUnordered: mock.fn(BulletListUnorderedMock),
+		BulletListItem: mock.fn(BulletListItemMock),
 		List: mock.fn(ListMock),
 		ListItem: mock.fn(ListItemMock)
 	};
@@ -152,7 +155,7 @@ function TextAreaStatelessMock(props: TextAreaStatelessProps) {
 	return <MockComponent id={props.id} dataRole={TEXT_AREA} />;
 }
 
-function TextLineStatelessMock(props: TextLineStatelessProps) {
+function TextFieldMock(props: TextFieldProps) {
 	return <MockComponent id={props.id} dataRole={TEXT_LINE} />;
 }
 
@@ -232,6 +235,7 @@ function TimePickerMock(props: TimePickerProps) {
 function MessageBoxMock(props: MessageBoxProps) {
 	return (
 		<MockComponent id={props.id} dataRole={MESSAGE_BOX}>
+			{props.label}
 			{props.children}
 		</MockComponent>
 	);
@@ -253,10 +257,42 @@ function TextAffixMock(props: TextAffixProps) {
 	return <MockComponent id={props.id} dataRole={TEXT_AFFIX} />;
 }
 
-function HeaderMock(props: HeaderProps) {
+function HeaderMock(props: DateTimePickerHeaderProps) {
 	return (
 		<MockComponent id={props.id} dataRole={HEADER}>
 			{props.actionButtons}
+			{props.children}
+		</MockComponent>
+	);
+}
+
+function ModalOverlayMock(props: ModalOverlayProps) {
+	return (
+		<MockComponent id={props.id} dataRole={MODAL_OVERLAY}>
+			{props.children}
+		</MockComponent>
+	);
+}
+
+function AttachedPortalMock(props: AttachedPortalProps) {
+	return (
+		<MockComponent id={props.id} dataRole={ATTACHED_PORTAL}>
+			{props.children}
+		</MockComponent>
+	);
+}
+
+function BulletListUnorderedMock(props: BulletListProps.UnorderedProps) {
+	return (
+		<MockComponent id={props.id} dataRole={BULLET_LIST_UNORDERED}>
+			{props.children}
+		</MockComponent>
+	);
+}
+
+function BulletListItemMock(props: BulletListProps.ItemProps) {
+	return (
+		<MockComponent id={props.id} dataRole={BULLET_LIST_ITEM}>
 			{props.children}
 		</MockComponent>
 	);

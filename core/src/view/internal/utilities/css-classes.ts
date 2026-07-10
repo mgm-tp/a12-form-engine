@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -30,38 +30,39 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { addPrefix } from "@com.mgmtp.a12.widgets/widgets-core/lib/common/main/utils.js";
+import { addPrefix } from "@com.mgmtp.a12.widgets/widgets-core";
 
 /**
  * @internal
  * @ignore
  * see https://www.mgm-tp.com/a12.htmlshowcase/#/basics/helper-classes
  */
-export namespace HelperClasses {
-	export const FLOAT_LEFT = addPrefix("h_floatLeft");
-	export const FLOAT_RIGHT = addPrefix("h_floatRight");
+export const HelperClasses = {
+	FLOAT_LEFT: addPrefix("h_floatLeft"),
+	FLOAT_RIGHT: addPrefix("h_floatRight"),
 
-	export const INLINE_BLOCK = addPrefix("h_inlineBlock");
+	INLINE_BLOCK: addPrefix("h_inlineBlock"),
 
-	export const HIDDEN = addPrefix("h_hidden");
+	HIDDEN: addPrefix("h_hidden"),
 
-	export const MIDDLE_ALIGN = addPrefix("h_middleAlign");
-	export const RIGHT_ALIGN = addPrefix("h_rightAlign");
-}
+	MIDDLE_ALIGN: addPrefix("h_middleAlign"),
+	RIGHT_ALIGN: addPrefix("h_rightAlign")
+};
 
 /**
  * @internal
  * @ignore
  * see https://www.mgm-tp.com/a12.htmlshowcase/#/basics/utility-classes
  */
-export namespace UtilityClasses {
-	export const PADDING = addPrefix("-u-padding-t-md");
+export const UtilityClasses = {
+	PADDING: addPrefix("-u-padding-t-md"),
 
-	export const MARGIN_TOP_SM = addPrefix("-u-margin-t-sm");
-	export const MARGIN_BOTTOM_SM = addPrefix("-u-margin-b-sm");
-	export const MARGIN_BOTTOM_0 = addPrefix("-u-margin-b-0");
+	MARGIN_TOP_SM: addPrefix("-u-margin-t-sm"),
+	MARGIN_BOTTOM_SM: addPrefix("-u-margin-b-sm"),
+	MARGIN_BOTTOM_0: addPrefix("-u-margin-b-0"),
 
-	export const UNSEEN_BUT_READ = addPrefix("-u-unseenButRead");
+	UNSEEN_BUT_READ: addPrefix("-u-unseenButRead"),
 
-	export const OUTLINE_NONE = addPrefix("-u-outline-none");
-}
+	OUTLINE_NONE: addPrefix("-u-outline-none"),
+	HEIGHT_FULL: addPrefix("-u-height-full")
+};

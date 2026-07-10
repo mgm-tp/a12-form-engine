@@ -1,0 +1,313 @@
+{
+  "header": {
+    "id": "mixed-cycle-document",
+    "modelType": "document",
+    "modelVersion": "29.4.0",
+    "locales": [
+      {
+        "code": "en"
+      }
+    ],
+    "annotations": [
+      {
+        "name": "roles",
+        "value": "admin"
+      }
+    ],
+    "modelReferences": []
+  },
+  "content": {
+    "modelInfo": {
+      "name": "mixed-cycle-document",
+      "immutable": false
+    },
+    "modelConfig": {
+      "timeZone": "UTC",
+      "decimalSeparator": ".",
+      "conditionLanguage": {
+        "code": "en_US"
+      }
+    },
+    "modelRoot": {
+      "rootGroups": [
+        {
+          "type": "Group",
+          "id": "group_8af6c",
+          "name": "root",
+          "Group": {
+            "repeatability": 1,
+            "elements": [
+              {
+                "type": "Field",
+                "id": "field_62f6d",
+                "name": "Enum1",
+                "Field": {
+                  "fieldType": {
+                    "type": "EnumerationType",
+                    "EnumerationType": {
+                      "values": [
+                        {
+                          "value": "1",
+                          "label": [
+                            {
+                              "locale": "en",
+                              "text": "1"
+                            }
+                          ]
+                        },
+                        {
+                          "value": "2",
+                          "label": [
+                            {
+                              "locale": "en",
+                              "text": "2"
+                            }
+                          ]
+                        },
+                        {
+                          "value": "3",
+                          "label": [
+                            {
+                              "locale": "en",
+                              "text": "3"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                }
+              },
+              {
+                "type": "Field",
+                "id": "field_2620c",
+                "name": "Enum2",
+                "Field": {
+                  "fieldType": {
+                    "type": "EnumerationType",
+                    "EnumerationType": {
+                      "values": [
+                        {
+                          "value": "1",
+                          "label": [
+                            {
+                              "locale": "en",
+                              "text": "1"
+                            }
+                          ]
+                        },
+                        {
+                          "value": "2",
+                          "label": [
+                            {
+                              "locale": "en",
+                              "text": "2"
+                            }
+                          ]
+                        },
+                        {
+                          "value": "3",
+                          "label": [
+                            {
+                              "locale": "en",
+                              "text": "3"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                }
+              },
+              {
+                "type": "Field",
+                "id": "field_20d94",
+                "name": "Enum3",
+                "Field": {
+                  "fieldType": {
+                    "type": "EnumerationType",
+                    "EnumerationType": {
+                      "values": [
+                        {
+                          "value": "1",
+                          "label": [
+                            {
+                              "locale": "en",
+                              "text": "1"
+                            }
+                          ]
+                        },
+                        {
+                          "value": "2",
+                          "label": [
+                            {
+                              "locale": "en",
+                              "text": "2"
+                            }
+                          ]
+                        },
+                        {
+                          "value": "3",
+                          "label": [
+                            {
+                              "locale": "en",
+                              "text": "3"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                }
+              },
+              {
+                "type": "Field",
+                "id": "field_81c55",
+                "name": "Enum4",
+                "Field": {
+                  "fieldType": {
+                    "type": "EnumerationType",
+                    "EnumerationType": {
+                      "values": [
+                        {
+                          "value": "1",
+                          "label": [
+                            {
+                              "locale": "en",
+                              "text": "1"
+                            }
+                          ]
+                        },
+                        {
+                          "value": "2",
+                          "label": [
+                            {
+                              "locale": "en",
+                              "text": "2"
+                            }
+                          ]
+                        },
+                        {
+                          "value": "3",
+                          "label": [
+                            {
+                              "locale": "en",
+                              "text": "3"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                }
+              },
+              {
+                "type": "Field",
+                "id": "field_f4aea",
+                "name": "Enum5",
+                "Field": {
+                  "fieldType": {
+                    "type": "EnumerationType",
+                    "EnumerationType": {
+                      "values": [
+                        {
+                          "value": "1",
+                          "label": [
+                            {
+                              "locale": "en",
+                              "text": "1"
+                            }
+                          ]
+                        },
+                        {
+                          "value": "2",
+                          "label": [
+                            {
+                              "locale": "en",
+                              "text": "2"
+                            }
+                          ]
+                        },
+                        {
+                          "value": "3",
+                          "label": [
+                            {
+                              "locale": "en",
+                              "text": "3"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                }
+              },
+              {
+                "type": "Computation",
+                "id": "computation_e68a3",
+                "name": "Computation1",
+                "Computation": {
+                  "computedFieldRelPath": "../Enum2",
+                  "computationAlternatives": [
+                    {
+                      "operation": "[Enum1]"
+                    }
+                  ],
+                  "errorMessage": [
+                    {
+                      "locale": "en",
+                      "text": "error text for computation of Computation1"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Computation",
+                "id": "computation_3515c",
+                "name": "Computation2",
+                "Computation": {
+                  "computedFieldRelPath": "../Enum5",
+                  "computationAlternatives": [
+                    {
+                      "operation": "\"2\"",
+                      "precondition": "FieldFilled(Enum4) AND [Enum4] == \"1\""
+                    },
+                    {
+                      "operation": "\"1\"",
+                      "precondition": "FieldFilled(Enum4) AND [Enum4] == \"2\""
+                    }
+                  ],
+                  "errorMessage": [
+                    {
+                      "locale": "en",
+                      "text": "error text for computation of Computation2"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Computation",
+                "id": "computation_63218",
+                "name": "Computation3",
+                "Computation": {
+                  "computedFieldRelPath": "../Enum1",
+                  "computationAlternatives": [
+                    {
+                      "operation": "[Enum5]"
+                    }
+                  ],
+                  "errorMessage": [
+                    {
+                      "locale": "en",
+                      "text": "error text for computation of Computation3"
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -33,20 +33,18 @@
 import type { SagaGenerator } from "typed-redux-saga";
 import { call, put } from "typed-redux-saga";
 
-import type { DataProvider } from "@com.mgmtp.a12.client/client-core/lib/core/data/index.js";
-import { LocaleActions } from "@com.mgmtp.a12.client/client-core/lib/core/locale/index.js";
-import { ModelSelectors } from "@com.mgmtp.a12.client/client-core/lib/core/model/index.js";
-import { StoreSagas } from "@com.mgmtp.a12.client/client-core/lib/core/store/index.js";
+import type { DataProvider } from "@com.mgmtp.a12.client/client-core";
+import { LocaleActions, ModelSelectors, StoreSagas } from "@com.mgmtp.a12.client/client-core";
+import { getLocales } from "@com.mgmtp.a12.formengine/formengine-a12internal-preview";
 import type { FormModel } from "@com.mgmtp.a12.formengine/formengine-core";
-import { Locale } from "@com.mgmtp.a12.utils/utils-localization/lib/main/index.js";
+import { Locale } from "@com.mgmtp.a12.utils/utils-localization";
 
 import type { LoadInstanceConfig } from "../../modules/formEngineModule.js";
 import { isInstanceDescriptor } from "../../modules/formEngineModule.js";
 import { existingDocumentRequested } from "../../reducer/actions.js";
 import { toFormAndDocumentModel } from "../../reducer/toFormAndDocumentModel.js";
-import { getLocales } from "../../shared.js";
 
-import { sanityCheck } from "../utils.js";
+import { assertDevappMode } from "../utils.js";
 
 export const mockSingleDocumentDataProvider: DataProvider = {
 	name: "MockSingleDocumentDataProvider",
@@ -55,7 +53,7 @@ export const mockSingleDocumentDataProvider: DataProvider = {
 		return isInstanceDescriptor(dataHolder.descriptor);
 	},
 	*provideData(config) {
-		sanityCheck("mock");
+		assertDevappMode("mock");
 
 		switch (config.operation) {
 			case "load": {
@@ -96,5 +94,5 @@ async function loadLocalDocument(docRef: string): Promise<object> {
 
 function getDefaultLocaleFromModel({ header }: FormModel): Locale {
 	const modelLocales = getLocales(header.locales);
-	return modelLocales?.[0] ?? Locale.fromString("en_US");
+	return modelLocales.at(0) ?? (Locale.fromString("en_US") as Locale);
 }

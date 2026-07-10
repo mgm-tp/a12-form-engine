@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -34,10 +34,10 @@ import { deepEqual, deepStrictEqual, strictEqual } from "node:assert/strict";
 import { mock } from "node:test";
 
 import { query } from "@com.mgmtp.a12.devtools/react";
-import type { DocumentModel } from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
-import type { Locale } from "@com.mgmtp.a12.utils/utils-localization/lib/main/index.js";
-import { defaultLocalizerFactory } from "@com.mgmtp.a12.utils/utils-localization/lib/main/index.js";
-import type { CheckboxItemProps } from "@com.mgmtp.a12.widgets/widgets-core/lib/input/checkbox-group/main/checkbox-group.api.js";
+import type { DocumentModel } from "@com.mgmtp.a12.kernel/kernel-md-facade";
+import type { Locale } from "@com.mgmtp.a12.utils/utils-localization";
+import { defaultLocalizerFactory } from "@com.mgmtp.a12.utils/utils-localization";
+import type { CheckboxItemProps } from "@com.mgmtp.a12.widgets/widgets-core";
 
 import type { MultiSelectData } from "../../../../../models/index.js";
 import type { DispatchConfiguration } from "../../../../../view/index.js";
@@ -46,11 +46,11 @@ import { CheckboxGroupInput } from "../../../../../view/internal/components/form
 import type { Inputs } from "../../../../../view/internal/configuration/engine-configuration.js";
 import type { RtlRenderWrapper } from "../../../../rtl-utils/render-wrapper.js";
 import { rtlRenderWrapperAsync } from "../../../../rtl-utils/render-wrapper.js";
-import { DocumentHelpers } from "../../../../utils/document-helpers.js";
+import { createModelPath } from "../../../../utils/createModelPath.js";
+import { DocumentModelHelpers } from "../../../../utils/DocumentModelHelpers.js";
 import { DE_LOCALE, US_LOCALE } from "../../../../utils/localization.js";
-import { DocumentModelHelpers } from "../../../../utils/model-helpers.js";
 import { setupModelsFixture } from "../../../../utils/setupFixture.js";
-import { createModelPath } from "../../../../utils/test-model-helpers/dependent-enumeration.js";
+import { createDocumentPath } from "../../../../utils/createDocumentPath.js";
 
 import { inputTest } from "./generic-tests/input-tests.js";
 import { createProps } from "./generic-tests/input-utils.js";
@@ -59,18 +59,14 @@ const { Group, Field } = DocumentModelHelpers;
 
 describe("api.view.inputs", () => {
 	describe("CheckboxGroupInput", () => {
-		const models = setupModelsFixture("controls.picustypes");
+		const models = setupModelsFixture("controls.dmtypes");
 
 		const documentElementDataType: DocumentModel.Group = Group({
 			usageType: "multiselect",
 			elements: [Field({ name: "value" })]
 		});
 
-		const path = DocumentHelpers.createDocumentPath(
-			["A12T_PicusTypes"],
-			["MultiSelect"],
-			["MultiSelect02"]
-		);
+		const path = createDocumentPath(["A12T_DmTypes"], ["MultiSelect"], ["MultiSelect02"]);
 
 		const baseProps = {
 			documentElement: documentElementDataType,

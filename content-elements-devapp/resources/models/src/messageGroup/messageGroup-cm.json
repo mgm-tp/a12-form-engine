@@ -4202,6 +4202,796 @@
           ]
         },
         {
+          "id": "Box-b43155a",
+          "namespace": "com.mgmtp.a12.contentengine",
+          "type": "Box",
+          "props": {
+            "style": {
+              "display": "flex",
+              "width": "100%",
+              "height": "fit-content",
+              "flexDirection": "column",
+              "flexWrap": "nowrap",
+              "padding": "8px",
+              "margin": "0px",
+              "gap": "0px",
+              "backgroundRepeat": "no-repeat",
+              "borderStyle": "solid",
+              "borderColor": "rgb(142, 142, 142)",
+              "borderRadius": "8px"
+            }
+          },
+          "children": [
+            {
+              "id": "Heading-51ce828b",
+              "namespace": "com.mgmtp.a12.contentengine",
+              "type": "Heading",
+              "props": {
+                "tree": {
+                  "root": {
+                    "children": [
+                      {
+                        "children": [
+                          {
+                            "detail": 0,
+                            "format": 0,
+                            "mode": "normal",
+                            "style": "",
+                            "text": "Jump Links in different Data Contexts",
+                            "type": "text",
+                            "version": 1
+                          }
+                        ],
+                        "direction": "ltr",
+                        "format": "",
+                        "indent": 0,
+                        "type": "heading",
+                        "version": 1,
+                        "tag": "h2"
+                      }
+                    ],
+                    "direction": "ltr",
+                    "format": "",
+                    "indent": 0,
+                    "type": "root",
+                    "version": 1
+                  }
+                },
+                "html": "<h2 class=\"editor-heading-h2\" dir=\"ltr\"><span style=\"white-space: pre-wrap;\">Jump Links in different Data Contexts</span></h2>"
+              },
+              "children": []
+            },
+            {
+              "id": "Paragraph-170bdd9f",
+              "namespace": "com.mgmtp.a12.contentengine",
+              "type": "Paragraph",
+              "props": {
+                "style": {
+                  "width": "100%"
+                },
+                "tree": {
+                  "root": {
+                    "children": [
+                      {
+                        "children": [
+                          {
+                            "detail": 0,
+                            "format": 0,
+                            "mode": "normal",
+                            "text": "When a message references multiple instances of the same field, the current data context of the MessageGroupContainer should be considered, so that only links to fields inside of the current data context will be displayed. Both examples below contain a MessageGroupContainer that's placed outside of the repeatable Group node in the root data context.",
+                            "type": "text",
+                            "version": 1
+                          }
+                        ],
+                        "direction": "ltr",
+                        "format": "",
+                        "indent": 0,
+                        "type": "paragraph",
+                        "version": 1,
+                        "textFormat": 0
+                      },
+                      {
+                        "children": [
+                          {
+                            "detail": 0,
+                            "format": 0,
+                            "mode": "normal",
+                            "text": "On the left side an additional MessageGroupContainer is defined within the Group node, i.e. within the repeatable data context. In this case only fields from the current repeat instance should receive links. This example is analogous to placing an entire Content Model in a repeatable context by setting the root group in the model settings.",
+                            "type": "text",
+                            "version": 1
+                          }
+                        ],
+                        "direction": "ltr",
+                        "format": "",
+                        "indent": 0,
+                        "type": "paragraph",
+                        "version": 1,
+                        "textFormat": 0
+                      },
+                      {
+                        "children": [
+                          {
+                            "detail": 0,
+                            "format": 0,
+                            "mode": "normal",
+                            "text": "On the right side no additional MessageGroupContainers are placed in the Group node. That means that the MessageGroupDisplay elements inside of the Group node take their configuration from the outer MessageGroupContainer in the root data context. Therefore, these elements display links for all repeatable instances.",
+                            "type": "text",
+                            "version": 1
+                          }
+                        ],
+                        "direction": "ltr",
+                        "format": "",
+                        "indent": 0,
+                        "type": "paragraph",
+                        "version": 1,
+                        "textFormat": 0
+                      }
+                    ],
+                    "direction": "ltr",
+                    "format": "",
+                    "indent": 0,
+                    "type": "root",
+                    "version": 1
+                  }
+                },
+                "html": "<p class=\"editor-paragraph\" dir=\"ltr\"><span style=\"white-space: pre-wrap;\">When a message references multiple instances of the same field, the current data context of the MessageGroupContainer should be considered, so that only links to fields inside of the current data context will be displayed. Both examples below contain a MessageGroupContainer that's placed outside of the repeatable Group node in the root data context.</span></p><p class=\"editor-paragraph\" dir=\"ltr\"><span style=\"white-space: pre-wrap;\">On the left side an additional MessageGroupContainer is defined within the Group node, i.e. within the repeatable data context. In this case only fields from the current repeat instance should receive links. This example is analogous to placing an entire Content Model in a repeatable context by setting the root group in the model settings.</span></p><p class=\"editor-paragraph\" dir=\"ltr\"><span style=\"white-space: pre-wrap;\">On the right side no additional MessageGroupContainers are placed in the Group node. That means that the MessageGroupDisplay elements inside of the Group node take their configuration from the outer MessageGroupContainer in the root data context. Therefore, these elements display links for all repeatable instances.</span></p>"
+              },
+              "children": []
+            },
+            {
+              "id": "Grid-611e3d54",
+              "namespace": "com.mgmtp.a12.contentengine",
+              "type": "Grid",
+              "props": {},
+              "children": [
+                {
+                  "id": "GridRow-117643f2",
+                  "namespace": "com.mgmtp.a12.contentengine",
+                  "type": "GridRow",
+                  "props": {
+                    "layoutConfig": {
+                      "layout": {
+                        "lg": [
+                          4,
+                          2,
+                          4,
+                          2
+                        ],
+                        "md": [
+                          4,
+                          2,
+                          4,
+                          2
+                        ]
+                      }
+                    }
+                  },
+                  "children": [
+                    {
+                      "id": "GridColumn-7f30b11",
+                      "namespace": "com.mgmtp.a12.contentengine",
+                      "type": "GridColumn",
+                      "props": {},
+                      "children": [
+                        {
+                          "id": "Heading-44ef5763",
+                          "namespace": "com.mgmtp.a12.contentengine",
+                          "type": "Heading",
+                          "props": {
+                            "tree": {
+                              "root": {
+                                "children": [
+                                  {
+                                    "children": [
+                                      {
+                                        "detail": 0,
+                                        "format": 0,
+                                        "mode": "normal",
+                                        "style": "",
+                                        "text": "One MessageGroupContainer per Context",
+                                        "type": "text",
+                                        "version": 1
+                                      }
+                                    ],
+                                    "direction": "ltr",
+                                    "format": "",
+                                    "indent": 0,
+                                    "type": "heading",
+                                    "version": 1,
+                                    "tag": "h3"
+                                  }
+                                ],
+                                "direction": "ltr",
+                                "format": "",
+                                "indent": 0,
+                                "type": "root",
+                                "version": 1
+                              }
+                            },
+                            "html": "<h3 class=\"editor-heading-h3\" dir=\"ltr\"><span style=\"white-space: pre-wrap;\">One MessageGroupContainer per Context</span></h3>"
+                          },
+                          "children": []
+                        }
+                      ]
+                    },
+                    {
+                      "id": "GridColumn-2b7f751f",
+                      "namespace": "com.mgmtp.a12.contentengine",
+                      "type": "GridColumn",
+                      "props": {
+                        "spacerColumn": true
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": "GridColumn-9b6c0a46",
+                      "namespace": "com.mgmtp.a12.contentengine",
+                      "type": "GridColumn",
+                      "props": {},
+                      "children": [
+                        {
+                          "id": "Heading-c00aed60",
+                          "namespace": "com.mgmtp.a12.contentengine",
+                          "type": "Heading",
+                          "props": {
+                            "tree": {
+                              "root": {
+                                "children": [
+                                  {
+                                    "children": [
+                                      {
+                                        "detail": 0,
+                                        "format": 0,
+                                        "mode": "normal",
+                                        "style": "",
+                                        "text": "One Root-Level MessageGroupContainer",
+                                        "type": "text",
+                                        "version": 1
+                                      }
+                                    ],
+                                    "direction": "ltr",
+                                    "format": "",
+                                    "indent": 0,
+                                    "type": "heading",
+                                    "version": 1,
+                                    "tag": "h3"
+                                  }
+                                ],
+                                "direction": "ltr",
+                                "format": "",
+                                "indent": 0,
+                                "type": "root",
+                                "version": 1
+                              }
+                            },
+                            "html": "<h3 class=\"editor-heading-h3\" dir=\"ltr\"><span style=\"white-space: pre-wrap;\">One Root-Level MessageGroupContainer</span></h3>"
+                          },
+                          "children": []
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "GridRow-6b8b1472",
+                  "namespace": "com.mgmtp.a12.contentengine",
+                  "type": "GridRow",
+                  "props": {
+                    "layoutConfig": {
+                      "layout": {
+                        "lg": [
+                          4,
+                          2,
+                          4,
+                          2
+                        ],
+                        "md": [
+                          4,
+                          2,
+                          4,
+                          2
+                        ]
+                      }
+                    }
+                  },
+                  "children": [
+                    {
+                      "id": "GridColumn-794f049b",
+                      "namespace": "com.mgmtp.a12.contentengine",
+                      "type": "GridColumn",
+                      "props": {},
+                      "children": [
+                        {
+                          "id": "MessageGroupContainer-b1aaaf81",
+                          "namespace": "com.mgmtp.a12.formengine",
+                          "type": "MessageGroupContainer",
+                          "props": {
+                            "fields": [
+                              "field_4ff03",
+                              "field_05db8"
+                            ],
+                            "groups": [],
+                            "rules": []
+                          },
+                          "children": [
+                            {
+                              "id": "Grid-7a51b10f",
+                              "namespace": "com.mgmtp.a12.contentengine",
+                              "type": "Grid",
+                              "props": {},
+                              "children": [
+                                {
+                                  "id": "GridRow-3fe886b4",
+                                  "namespace": "com.mgmtp.a12.contentengine",
+                                  "type": "GridRow",
+                                  "props": {
+                                    "layoutConfig": {
+                                      "layout": {
+                                        "lg": [
+                                          6,
+                                          6
+                                        ],
+                                        "md": [
+                                          6,
+                                          6
+                                        ]
+                                      }
+                                    }
+                                  },
+                                  "children": [
+                                    {
+                                      "id": "GridColumn-5062d0e6",
+                                      "namespace": "com.mgmtp.a12.contentengine",
+                                      "type": "GridColumn",
+                                      "props": {},
+                                      "children": [
+                                        {
+                                          "id": "MessageGroupDisplay-e84b5892",
+                                          "namespace": "com.mgmtp.a12.formengine",
+                                          "type": "MessageGroupDisplay",
+                                          "props": {},
+                                          "children": []
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "id": "Group-adc8ff92",
+                              "namespace": "com.mgmtp.a12.contentengine",
+                              "type": "Group",
+                              "props": {
+                                "groupId": "group_2046b"
+                              },
+                              "children": [
+                                {
+                                  "id": "Box-28f638ab",
+                                  "namespace": "com.mgmtp.a12.contentengine",
+                                  "type": "Box",
+                                  "props": {
+                                    "style": {
+                                      "display": "flex",
+                                      "width": "auto",
+                                      "height": "fit-content",
+                                      "flexDirection": "column",
+                                      "flexWrap": "nowrap",
+                                      "padding": "8px",
+                                      "margin": "8px",
+                                      "gap": "0px",
+                                      "backgroundRepeat": "no-repeat",
+                                      "borderStyle": "solid",
+                                      "borderColor": "rgb(142, 142, 142)",
+                                      "borderRadius": "8px"
+                                    }
+                                  },
+                                  "children": [
+                                    {
+                                      "id": "MessageGroupContainer-ce519777",
+                                      "namespace": "com.mgmtp.a12.formengine",
+                                      "type": "MessageGroupContainer",
+                                      "props": {
+                                        "fields": [],
+                                        "groups": [],
+                                        "rules": [],
+                                        "autoCollectNodes": true
+                                      },
+                                      "children": [
+                                        {
+                                          "id": "Grid-c5440a2c",
+                                          "namespace": "com.mgmtp.a12.contentengine",
+                                          "type": "Grid",
+                                          "props": {},
+                                          "children": [
+                                            {
+                                              "id": "GridRow-3f51734e",
+                                              "namespace": "com.mgmtp.a12.contentengine",
+                                              "type": "GridRow",
+                                              "props": {
+                                                "layoutConfig": {
+                                                  "layout": {
+                                                    "lg": [
+                                                      6,
+                                                      6
+                                                    ],
+                                                    "md": [
+                                                      6,
+                                                      6
+                                                    ]
+                                                  }
+                                                }
+                                              },
+                                              "children": [
+                                                {
+                                                  "id": "GridColumn-b38a6693",
+                                                  "namespace": "com.mgmtp.a12.contentengine",
+                                                  "type": "GridColumn",
+                                                  "props": {},
+                                                  "children": [
+                                                    {
+                                                      "id": "MessageGroupDisplay-9cba6a71",
+                                                      "namespace": "com.mgmtp.a12.formengine",
+                                                      "type": "MessageGroupDisplay",
+                                                      "props": {},
+                                                      "children": []
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "id": "GridRow-19185f1",
+                                              "namespace": "com.mgmtp.a12.contentengine",
+                                              "type": "GridRow",
+                                              "props": {
+                                                "layoutConfig": {
+                                                  "layout": {
+                                                    "lg": [
+                                                      6,
+                                                      6
+                                                    ],
+                                                    "md": [
+                                                      6,
+                                                      6
+                                                    ]
+                                                  }
+                                                }
+                                              },
+                                              "children": [
+                                                {
+                                                  "id": "GridColumn-f337f8dd",
+                                                  "namespace": "com.mgmtp.a12.contentengine",
+                                                  "type": "GridColumn",
+                                                  "props": {},
+                                                  "children": [
+                                                    {
+                                                      "id": "TextLine-15aeda48",
+                                                      "namespace": "com.mgmtp.a12.formengine",
+                                                      "type": "TextLine",
+                                                      "props": {
+                                                        "elementId": "field_4ff03",
+                                                        "annotations": []
+                                                      },
+                                                      "children": []
+                                                    }
+                                                  ]
+                                                },
+                                                {
+                                                  "id": "GridColumn-65f35199",
+                                                  "namespace": "com.mgmtp.a12.contentengine",
+                                                  "type": "GridColumn",
+                                                  "props": {},
+                                                  "children": [
+                                                    {
+                                                      "id": "TextLine-5029f200",
+                                                      "namespace": "com.mgmtp.a12.formengine",
+                                                      "type": "TextLine",
+                                                      "props": {
+                                                        "elementId": "field_05db8",
+                                                        "annotations": []
+                                                      },
+                                                      "children": []
+                                                    }
+                                                  ]
+                                                },
+                                                {
+                                                  "id": "GridColumn-47e78cc4",
+                                                  "namespace": "com.mgmtp.a12.contentengine",
+                                                  "type": "GridColumn",
+                                                  "props": {},
+                                                  "children": []
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": "GridColumn-df8c09a2",
+                      "namespace": "com.mgmtp.a12.contentengine",
+                      "type": "GridColumn",
+                      "props": {
+                        "spacerColumn": true
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": "GridColumn-c6273b8d",
+                      "namespace": "com.mgmtp.a12.contentengine",
+                      "type": "GridColumn",
+                      "props": {},
+                      "children": [
+                        {
+                          "id": "MessageGroupContainer-ca9b8eff",
+                          "namespace": "com.mgmtp.a12.formengine",
+                          "type": "MessageGroupContainer",
+                          "props": {
+                            "fields": [],
+                            "groups": [],
+                            "rules": [],
+                            "autoCollectNodes": true
+                          },
+                          "children": [
+                            {
+                              "id": "Grid-bdd2c39d",
+                              "namespace": "com.mgmtp.a12.contentengine",
+                              "type": "Grid",
+                              "props": {},
+                              "children": [
+                                {
+                                  "id": "GridRow-81080b0e",
+                                  "namespace": "com.mgmtp.a12.contentengine",
+                                  "type": "GridRow",
+                                  "props": {
+                                    "layoutConfig": {
+                                      "layout": {
+                                        "lg": [
+                                          6,
+                                          6
+                                        ],
+                                        "md": [
+                                          6,
+                                          6
+                                        ]
+                                      }
+                                    }
+                                  },
+                                  "children": [
+                                    {
+                                      "id": "GridColumn-7a6fae9d",
+                                      "namespace": "com.mgmtp.a12.contentengine",
+                                      "type": "GridColumn",
+                                      "props": {},
+                                      "children": [
+                                        {
+                                          "id": "MessageGroupDisplay-a96f9ea0",
+                                          "namespace": "com.mgmtp.a12.formengine",
+                                          "type": "MessageGroupDisplay",
+                                          "props": {},
+                                          "children": []
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "id": "Group-f8047491",
+                              "namespace": "com.mgmtp.a12.contentengine",
+                              "type": "Group",
+                              "props": {
+                                "groupId": "group_2046b"
+                              },
+                              "children": [
+                                {
+                                  "id": "Box-8569fcb3",
+                                  "namespace": "com.mgmtp.a12.contentengine",
+                                  "type": "Box",
+                                  "props": {
+                                    "style": {
+                                      "display": "flex",
+                                      "width": "auto",
+                                      "height": "fit-content",
+                                      "flexDirection": "column",
+                                      "flexWrap": "nowrap",
+                                      "padding": "8px",
+                                      "margin": "8px",
+                                      "gap": "0px",
+                                      "backgroundRepeat": "no-repeat",
+                                      "borderStyle": "solid",
+                                      "borderColor": "rgb(142, 142, 142)",
+                                      "borderRadius": "8px"
+                                    }
+                                  },
+                                  "children": [
+                                    {
+                                      "id": "Grid-611f6a66",
+                                      "namespace": "com.mgmtp.a12.contentengine",
+                                      "type": "Grid",
+                                      "props": {},
+                                      "children": [
+                                        {
+                                          "id": "GridRow-2bb822e0",
+                                          "namespace": "com.mgmtp.a12.contentengine",
+                                          "type": "GridRow",
+                                          "props": {
+                                            "layoutConfig": {
+                                              "layout": {
+                                                "lg": [
+                                                  6,
+                                                  6
+                                                ],
+                                                "md": [
+                                                  6,
+                                                  6
+                                                ]
+                                              }
+                                            }
+                                          },
+                                          "children": [
+                                            {
+                                              "id": "GridColumn-28a0e434",
+                                              "namespace": "com.mgmtp.a12.contentengine",
+                                              "type": "GridColumn",
+                                              "props": {},
+                                              "children": [
+                                                {
+                                                  "id": "MessageGroupDisplay-dc459f3f",
+                                                  "namespace": "com.mgmtp.a12.formengine",
+                                                  "type": "MessageGroupDisplay",
+                                                  "props": {},
+                                                  "children": []
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "id": "GridRow-a1bf363c",
+                                          "namespace": "com.mgmtp.a12.contentengine",
+                                          "type": "GridRow",
+                                          "props": {
+                                            "layoutConfig": {
+                                              "layout": {
+                                                "lg": [
+                                                  6,
+                                                  6
+                                                ],
+                                                "md": [
+                                                  6,
+                                                  6
+                                                ]
+                                              }
+                                            }
+                                          },
+                                          "children": [
+                                            {
+                                              "id": "GridColumn-1bccd9d2",
+                                              "namespace": "com.mgmtp.a12.contentengine",
+                                              "type": "GridColumn",
+                                              "props": {},
+                                              "children": [
+                                                {
+                                                  "id": "TextLine-9be5fc3c",
+                                                  "namespace": "com.mgmtp.a12.formengine",
+                                                  "type": "TextLine",
+                                                  "props": {
+                                                    "elementId": "field_4ff03",
+                                                    "annotations": []
+                                                  },
+                                                  "children": []
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "id": "GridColumn-aee13f93",
+                                              "namespace": "com.mgmtp.a12.contentengine",
+                                              "type": "GridColumn",
+                                              "props": {},
+                                              "children": [
+                                                {
+                                                  "id": "TextLine-cc5bc376",
+                                                  "namespace": "com.mgmtp.a12.formengine",
+                                                  "type": "TextLine",
+                                                  "props": {
+                                                    "elementId": "field_05db8",
+                                                    "annotations": []
+                                                  },
+                                                  "children": []
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "id": "GridColumn-30602e1e",
+                                              "namespace": "com.mgmtp.a12.contentengine",
+                                              "type": "GridColumn",
+                                              "props": {},
+                                              "children": []
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "ButtonGroupContainer-76ebdf35",
+              "namespace": "com.mgmtp.a12.contentengine",
+              "type": "ButtonGroupContainer",
+              "props": {
+                "style": {
+                  "alignItems": "center"
+                }
+              },
+              "children": [
+                {
+                  "id": "ButtonGroup-628b1d6a",
+                  "namespace": "com.mgmtp.a12.contentengine",
+                  "type": "ButtonGroup",
+                  "props": {
+                    "alignment": "left"
+                  },
+                  "children": [
+                    {
+                      "id": "Button-514e05c4",
+                      "namespace": "com.mgmtp.a12.contentengine",
+                      "type": "Button",
+                      "props": {
+                        "label": "Add",
+                        "primary": true,
+                        "icon": {
+                          "theme": "filled",
+                          "name": "add"
+                        },
+                        "onClick": {
+                          "id": "AddRowAction-2782c285",
+                          "namespace": "com.mgmtp.a12.contentengine",
+                          "type": "AddRowAction",
+                          "props": {
+                            "groupId": "group_2046b"
+                          },
+                          "children": []
+                        }
+                      },
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "id": "ButtonGroup-456cf4e0",
+                  "namespace": "com.mgmtp.a12.contentengine",
+                  "type": "ButtonGroup",
+                  "props": {
+                    "alignment": "right"
+                  },
+                  "children": []
+                }
+              ]
+            }
+          ]
+        },
+        {
           "id": "Box-bf84afac",
           "namespace": "com.mgmtp.a12.contentengine",
           "type": "Box",

@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -30,21 +30,24 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import type { ICustomFieldType } from "@com.mgmtp.a12.kernel/kernel-core-runtime-api-ts/lib/main/js/custom/ICustomFieldType.js";
-import type { ICustomFieldTypeCheckError } from "@com.mgmtp.a12.kernel/kernel-core-runtime-api-ts/lib/main/js/custom/ICustomFieldTypeCheckError.js";
-import type { ICustomFieldTypeConversionResult } from "@com.mgmtp.a12.kernel/kernel-core-runtime-api-ts/lib/main/js/custom/ICustomFieldTypeConversionResult.js";
-import type { ICustomFieldTypeFactory } from "@com.mgmtp.a12.kernel/kernel-core-runtime-api-ts/lib/main/js/custom/ICustomFieldTypeFactory.js";
-import type { Localizable } from "@com.mgmtp.a12.utils/utils-localization/lib/main/localization/Localizable.js";
+import type { Endomorphism } from "fp-ts/lib/Endomorphism.js";
+
+import type { KernelOptionsProvider } from "@com.mgmtp.a12.formengine/formengine-core";
+import type {
+	ICustomFieldTypeCheckError,
+	ICustomFieldTypeConversionResult,
+	ICustomFieldTypeFactory,
+	ICustomFieldValidator
+} from "@com.mgmtp.a12.kernel/kernel-core-runtime-api-ts";
+import type { Localizable } from "@com.mgmtp.a12.utils/utils-localization";
 
 const EMAIL_REGEXP =
 	/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
-// TODO: will be fixed with A12-16990
-// eslint-disable-next-line @typescript-eslint/no-deprecated
-const eMailCustomFieldType: ICustomFieldType = {
+const eMailCustomFieldType: ICustomFieldValidator = {
 	validate(value: string): ICustomFieldTypeCheckError | undefined {
 		if (!EMAIL_REGEXP.test(value)) {
-			return new CustomFieldTypeCheckError("InvalidEMail", {
+			return new DevappFieldTypeCheckError("InvalidEMail", {
 				key: "InvalidEMail",
 				defaults: {
 					en: "Please enter a valid e-mail address.",
@@ -55,18 +58,21 @@ const eMailCustomFieldType: ICustomFieldType = {
 		return undefined;
 	},
 	convertDisplay2Internal(displayValue: string): ICustomFieldTypeConversionResult {
-		return new CustomFieldTypeConversionResult(displayValue);
+		return new DevappFieldTypeConversionResult(displayValue);
 	},
 	convertInternal2Display(internalValue: string): ICustomFieldTypeConversionResult {
-		return new CustomFieldTypeConversionResult(internalValue);
+		return new DevappFieldTypeConversionResult(internalValue);
 	}
 };
 
-class CustomFieldTypeCheckError implements ICustomFieldTypeCheckError {
-	constructor(
-		private _errorKey: string,
-		private _errorLocalizable: Localizable
-	) {}
+class DevappFieldTypeCheckError implements ICustomFieldTypeCheckError {
+	private _errorKey: string;
+	private _errorLocalizable: Localizable;
+
+	constructor(errorKey: string, errorLocalizable: Localizable) {
+		this._errorKey = errorKey;
+		this._errorLocalizable = errorLocalizable;
+	}
 	getErrorMessage(): Localizable[] {
 		return [this._errorLocalizable];
 	}
@@ -75,8 +81,12 @@ class CustomFieldTypeCheckError implements ICustomFieldTypeCheckError {
 	}
 }
 
-class CustomFieldTypeConversionResult implements ICustomFieldTypeConversionResult {
-	constructor(private _value: string) {}
+class DevappFieldTypeConversionResult implements ICustomFieldTypeConversionResult {
+	private _value: string;
+
+	constructor(value: string) {
+		this._value = value;
+	}
 	getConvertedValue(): string {
 		return this._value;
 	}
@@ -85,13 +95,20 @@ class CustomFieldTypeConversionResult implements ICustomFieldTypeConversionResul
 	}
 }
 
-export const customFieldTypeFactory: ICustomFieldTypeFactory = {
-	// TODO: will be fixed with A12-16990
-	// eslint-disable-next-line @typescript-eslint/no-deprecated
-	createCustomFieldType(customFieldTypeName: string): ICustomFieldType | null {
+const devappFieldTypeFactory: ICustomFieldTypeFactory = {
+	createCustomFieldType(customFieldTypeName: string): ICustomFieldValidator | null {
 		if (customFieldTypeName === "DevApp_EMail") {
 			return eMailCustomFieldType;
 		}
 		return null;
 	}
 };
+
+export const withDevappFieldTypeFactory: Endomorphism<KernelOptionsProvider> =
+	kernelOptionsProvider => state => {
+		const kernelOptions = kernelOptionsProvider(state);
+		return {
+			...kernelOptions,
+			customFieldTypeFactory: devappFieldTypeFactory
+		};
+	};

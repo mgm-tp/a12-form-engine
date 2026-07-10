@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -33,8 +33,8 @@
 import type { ReactElement } from "react";
 import { useContext } from "react";
 
-import { ModelPath } from "@com.mgmtp.a12.base/base-model-api/lib/main/model/index.js";
-import { LocalizerContext } from "@com.mgmtp.a12.utils/utils-localization-react/lib/main/index.js";
+import { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
+import { LocalizerContext } from "@com.mgmtp.a12.utils/utils-localization-react";
 
 import { RESOURCE_KEYS } from "../../../../../back-end/localization/internal/languages/keys.js";
 import { createLocalizableFactory } from "../../../../../back-end/localization/internal/localization.js";
@@ -44,11 +44,12 @@ import { ModelSelectors, UiStateSelectors } from "../../../../../back-end/store/
 import { UiId } from "../../../../../back-end/utils/internal/generateUiId.js";
 import { noop } from "../../../../../internal/noop.js";
 import type { ReadonlyObjectMap } from "../../../../../models/index.js";
+import { findElementByFormModelPath } from "../../../../../models/index.js";
 import {
-	DocumentPath,
-	FormModel,
-	findElementByFormModelPath
-} from "../../../../../models/index.js";
+	isFormModelDetachedRepeat,
+	isFormModelEmbeddedRepeat
+} from "../../../../../models/internal/FormModelGuards.js";
+import { InternalDocumentPath } from "../../../../../models/internal/utils/document-utils.js";
 import { ComponentMapContext } from "../../../configuration/componentMap/component-map-context.js";
 import type { FormModelMap } from "../../../configuration/engine-configuration.js";
 import { DefaultRepeatButtonNames } from "../../../configuration/engine-configuration.js";
@@ -81,10 +82,7 @@ export function RepeatFooter(props: {
 	const repeatModelPath = currentLocationPath.slice(0, currentLocationPath.length - 1);
 	const repeat = findElementByFormModelPath(formModel, repeatModelPath);
 
-	if (
-		repeat &&
-		(FormModel.EmbeddedRepeat.isInstance(repeat) || FormModel.DetachedRepeat.isInstance(repeat))
-	) {
+	if (repeat && (isFormModelEmbeddedRepeat(repeat) || isFormModelDetachedRepeat(repeat))) {
 		const isReadOnlyRepeat = isReadonly({
 			formModelPath: repeatModelPath,
 			dataContext,
@@ -95,7 +93,7 @@ export function RepeatFooter(props: {
 			isStandardRowActionDisabled({
 				byRow: renderOptions.config.enablements?.byRow || {},
 				eventName: event,
-				rowIndex: DocumentPath.rowIndex(dataContext),
+				rowIndex: InternalDocumentPath.rowIndex(dataContext),
 				state: renderOptions.state,
 				repeat
 			});
@@ -104,7 +102,7 @@ export function RepeatFooter(props: {
 			isStandardRowActionHidden({
 				byRow: renderOptions.config.enablements?.byRow || {},
 				eventName: event,
-				rowIndex: DocumentPath.rowIndex(dataContext),
+				rowIndex: InternalDocumentPath.rowIndex(dataContext),
 				state: renderOptions.state,
 				repeat,
 				enabledInModel: true,
@@ -243,7 +241,7 @@ export function RepeatFooter(props: {
 			const disable = isCommitButtonDisabled({
 				byRow: renderOptions.config.enablements?.byRow || {},
 				eventName: DefaultRepeatButtonNames.commit_detached_repeat,
-				rowIndex: DocumentPath.rowIndex(dataContext),
+				rowIndex: InternalDocumentPath.rowIndex(dataContext),
 				state: renderOptions.state,
 				repeat,
 				buttonEnablement: formModel.content.detachedRepeatCommitButtonEnablement

@@ -1,0 +1,13 @@
+{
+	"extends": "@com.mgmtp.a12.devtools/tsconfig",
+	"exclude": ["node_modules", "lib"],
+	"include": ["src", "./@types"],
+	"compilerOptions": {
+		"rootDir": "./src",
+		"outDir": "./lib",
+		"types": ["node"],
+		"skipLibCheck": true,
+		"noUnusedParameters": true,
+		"erasableSyntaxOnly": true
+	}
+}

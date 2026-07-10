@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -39,15 +39,16 @@ import { query } from "@com.mgmtp.a12.devtools/react";
 
 import type { WidgetMap } from "../../../../view/index.js";
 import type { RtlRenderWrapper } from "../../../rtl-utils/render-wrapper.js";
-import { SetupHelpers } from "../../../utils/setup.js";
+import {
+	setupContentBoxRendererWithRtl,
+	setupFormEngineRendererWithRtl
+} from "../../../utils/setup.js";
 import { setupModelsFixture } from "../../../utils/setupFixture.js";
 import { IDS } from "../../../utils/test-model-helpers/aria-level.js";
 
 describe("api.features", () => {
 	describe("a11y", () => {
 		describe("aria-level", () => {
-			const { setupFormEngineRendererWithRtl, setupContentBoxRendererWithRtl } = SetupHelpers;
-
 			const models = setupModelsFixture("a11y", "aria-level");
 
 			function setup(): RtlRenderWrapper {

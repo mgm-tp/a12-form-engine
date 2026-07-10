@@ -1,0 +1,99 @@
+{
+  "header": {
+    "id": "TestForm",
+    "modelType": "form",
+    "modelVersion": "39.0.0",
+    "locales": [
+      {
+        "code": "en"
+      }
+    ],
+    "annotations": [
+      {
+        "name": "roles",
+        "value": "admin"
+      }
+    ],
+    "modelReferences": [
+      {
+        "alias": "DM",
+        "modelType": "document",
+        "purpose": "data binding",
+        "reference": "TestModel"
+      }
+    ]
+  },
+  "content": {
+    "subHeaderBox": {
+      "id": "subHeaderBox1"
+    },
+    "footerBox": {
+      "id": "footerBox1"
+    },
+    "screens": [
+      {
+        "id": "screen1",
+        "name": "Screen1",
+        "screenElements": [
+          {
+            "type": "InlineRepeat",
+            "id": "inlinerepeat-a2f2a",
+            "name": "inline-repeat-too-big",
+            "groupRef": "group_176fc",
+            "enableAdd": true,
+            "enableRemove": true,
+            "enableReorder": false,
+            "enableCopy": false,
+            "pageSize": 25
+          },
+          {
+            "type": "EmbeddedRepeat",
+            "id": "embeddedrepeat-28da7",
+            "name": "embedded-repeat",
+            "groupRef": "group_176fc",
+            "enableAdd": true,
+            "enableRemove": true,
+            "enableReorder": false,
+            "enableCopy": false,
+            "controlGrid": {
+              "type": "ControlGrid",
+              "id": "controlgrid-aea72",
+              "name": "cg"
+            }
+          },
+          {
+            "type": "DetachedRepeat",
+            "id": "detachedrepeat-f13c6",
+            "name": "detached-repeat",
+            "groupRef": "group_176fc",
+            "enableAdd": true,
+            "enableRemove": true,
+            "enableReorder": false,
+            "enableCopy": false,
+            "detailScreen": {
+              "id": "screen-58e36",
+              "name": "detached-repeat-repeatable-detail-screen",
+              "screenElements": [
+                {
+                  "type": "ControlGrid",
+                  "id": "controlgrid-d2567",
+                  "name": "cg"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "fieldConfiguration": {},
+    "groupConfiguration": {
+      "group": [
+        {
+          "groupRef": "group_176fc",
+          "numberOfInitialRows": 10
+        }
+      ]
+    },
+    "defaults": {}
+  }
+}

@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -33,20 +33,17 @@
 import { equal, notEqual } from "node:assert/strict";
 
 import { query } from "@com.mgmtp.a12.devtools/react";
-import type {
-	DocumentModel,
-	GroupInstance
-} from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
-import type { DefaultFileUploadProps } from "@com.mgmtp.a12.widgets/widgets-core/lib/file-upload/main/default/default-file-upload.api.js";
+import type { DocumentModel, GroupInstance } from "@com.mgmtp.a12.kernel/kernel-md-facade";
+import type { DefaultFileUploadProps } from "@com.mgmtp.a12.widgets/widgets-core";
 
 import type { EngineStore } from "../../../../../back-end/store/index.js";
 import { DocumentPath } from "../../../../../models/internal/utils/document-utils.js";
 import { AttachmentInput } from "../../../../../view/internal/components/form-engine/cells/controls/attachment/attachment-input.js";
-import { DocumentHelpers } from "../../../../utils/document-helpers.js";
-import { DocumentModelHelpers } from "../../../../utils/model-helpers.js";
-import { SetupHelpers } from "../../../../utils/setup.js";
+import { createDocumentPath } from "../../../../utils/createDocumentPath.js";
+import { setupFormEngineRendererWithRtlAsync } from "../../../../utils/setup.js";
 import { setupFixtureObject, setupModelsFixture } from "../../../../utils/setupFixture.js";
 import { ATTACHMENT } from "../../../../utils/test-model-helpers/attachment.js";
+import { DocumentModelHelpers } from "../../../../utils/DocumentModelHelpers.js";
 
 import { inputTest } from "./generic-tests/input-tests.js";
 import type { GroupBasedProps } from "./generic-tests/input-utils.js";
@@ -66,7 +63,7 @@ describe("api.view.inputs", () => {
 			componentErrorProp: "DefaultFileUpload",
 			breakTooltipsToNewLine: true,
 			renderFunction: AttachmentInput,
-			path: DocumentHelpers.createDocumentPath(["root"], ["group"], ["AttachmentInput"])
+			path: createDocumentPath(["root"], ["group"], ["AttachmentInput"])
 		};
 
 		describe("General", () => {
@@ -98,12 +95,9 @@ describe("api.view.inputs", () => {
 			});
 
 			async function testValidationMessages(severity: EngineStore.Validation.MessageSeverity) {
-				const ATTACHMENT_PATH = DocumentHelpers.createDocumentPath(["root"], ["attachment"]);
-				const pathToFileName = [
-					...ATTACHMENT_PATH,
-					...DocumentHelpers.createDocumentPath(["original_filename"])
-				];
-				const wrapper = await SetupHelpers.setupFormEngineRendererWithRtlAsync({
+				const ATTACHMENT_PATH = createDocumentPath(["root"], ["attachment"]);
+				const pathToFileName = [...ATTACHMENT_PATH, ...createDocumentPath(["original_filename"])];
+				const wrapper = await setupFormEngineRendererWithRtlAsync({
 					models,
 					ui: {
 						messages: {
@@ -150,7 +144,7 @@ describe("api.view.inputs", () => {
 			}
 
 			it("does neither set the errorMessage prop, the warningMessage prop or the infoMessage prop if there are no messages", async () => {
-				const wrapper = await SetupHelpers.setupFormEngineRendererWithRtlAsync({
+				const wrapper = await setupFormEngineRendererWithRtlAsync({
 					models
 				});
 
@@ -165,7 +159,7 @@ describe("api.view.inputs", () => {
 
 		describe("Exposition", () => {
 			it("does not set the prop compact, if the exposition is not COMPACT", async () => {
-				const wrapper = await SetupHelpers.setupFormEngineRendererWithRtlAsync({
+				const wrapper = await setupFormEngineRendererWithRtlAsync({
 					models
 				});
 
@@ -177,7 +171,7 @@ describe("api.view.inputs", () => {
 			});
 
 			it("sets the prop compact to true, if the exposition is COMPACT", async () => {
-				const wrapper = await SetupHelpers.setupFormEngineRendererWithRtlAsync({
+				const wrapper = await setupFormEngineRendererWithRtlAsync({
 					models
 				});
 
@@ -192,7 +186,7 @@ describe("api.view.inputs", () => {
 		describe("file options", () => {
 			describe("given no attachment", () => {
 				it("does not set fileOptions", async () => {
-					const wrapper = await SetupHelpers.setupFormEngineRendererWithRtlAsync({
+					const wrapper = await setupFormEngineRendererWithRtlAsync({
 						models
 					});
 
@@ -206,7 +200,7 @@ describe("api.view.inputs", () => {
 
 			describe("given an attachment", () => {
 				it("does not set fileOptions if the exposition is not COMPACT", async () => {
-					const wrapper = await SetupHelpers.setupFormEngineRendererWithRtlAsync({
+					const wrapper = await setupFormEngineRendererWithRtlAsync({
 						models,
 						data: { document: { root: { attachment: {} } } }
 					});
@@ -226,7 +220,7 @@ describe("api.view.inputs", () => {
 						mime_type: "image/jpeg"
 					};
 
-					const wrapper = await SetupHelpers.setupFormEngineRendererWithRtlAsync({
+					const wrapper = await setupFormEngineRendererWithRtlAsync({
 						models,
 						data: { document: { root: { attachment: mockAttachment } } }
 					});
@@ -283,7 +277,7 @@ describe("api.view.inputs", () => {
 					describe("for an attachment control", () => {
 						describe("with compact set to undefined", () => {
 							it("hands the placeholderIcon prop from the attachmentConfig in the field configuration to the widget", async () => {
-								const wrapper = await SetupHelpers.setupFormEngineRendererWithRtlAsync({
+								const wrapper = await setupFormEngineRendererWithRtlAsync({
 									models
 								});
 
@@ -297,7 +291,7 @@ describe("api.view.inputs", () => {
 
 						describe("with compact set to true", () => {
 							it("does not hand the placeholderIcon prop to the widget", async () => {
-								const wrapper = await SetupHelpers.setupFormEngineRendererWithRtlAsync({
+								const wrapper = await setupFormEngineRendererWithRtlAsync({
 									models
 								});
 
@@ -313,7 +307,7 @@ describe("api.view.inputs", () => {
 					describe("for an attachment in a field overview column", () => {
 						describe("with compact set to undefined", () => {
 							it("hands the placeholderIcon prop from the attachmentConfig in the field configuration to the widget", async () => {
-								const wrapper = await SetupHelpers.setupFormEngineRendererWithRtlAsync({
+								const wrapper = await setupFormEngineRendererWithRtlAsync({
 									models,
 									data: { document }
 								});
@@ -328,7 +322,7 @@ describe("api.view.inputs", () => {
 
 						describe("with compact set to true", () => {
 							it("does not hand the placeholderIcon prop to the widget", async () => {
-								const wrapper = await SetupHelpers.setupFormEngineRendererWithRtlAsync({
+								const wrapper = await setupFormEngineRendererWithRtlAsync({
 									models,
 									data: { document }
 								});
@@ -346,7 +340,7 @@ describe("api.view.inputs", () => {
 				describe("accept", () => {
 					describe("for an attachment control", () => {
 						it("hands the accept prop from the attachmentConfig in the field configuration to the widget", async () => {
-							const wrapper = await SetupHelpers.setupFormEngineRendererWithRtlAsync({
+							const wrapper = await setupFormEngineRendererWithRtlAsync({
 								models
 							});
 
@@ -360,7 +354,7 @@ describe("api.view.inputs", () => {
 
 					describe("for an attachment in a field overview column", () => {
 						it("hands the accept prop from the attachmentConfig in the field configuration to the widget", async () => {
-							const wrapper = await SetupHelpers.setupFormEngineRendererWithRtlAsync({
+							const wrapper = await setupFormEngineRendererWithRtlAsync({
 								models,
 								data: { document }
 							});

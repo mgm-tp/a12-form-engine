@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -32,34 +32,28 @@
 
 import { deepStrictEqual, strictEqual } from "node:assert/strict";
 
-import { ModelPath } from "@com.mgmtp.a12.base/base-model-api/lib/main/model/index.js";
-import type { GroupInstance } from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
+import { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
+import type { GroupInstance } from "@com.mgmtp.a12.kernel/kernel-md-facade";
 import {
 	defaultDataFormats,
 	defaultLocalizerFactory,
 	defaultValueConversion
-} from "@com.mgmtp.a12.utils/utils-localization/lib/main/index.js";
+} from "@com.mgmtp.a12.utils/utils-localization";
 
-import {
-	createDefaultMiddlewareOptions,
-	createEngineStore
-} from "../../../back-end/store/index.js";
+import { createEngineStore } from "../../../back-end/store/index.js";
 import type { CorrectionModeItem } from "../../../back-end/store/internal/CorrectionModeItem.js";
 import type { EngineState, EngineStore, Models } from "../../../back-end/store/internal/store.js";
 import { fullValidation } from "../../../back-end/store/internal/validation.js";
 import { DocumentUtils } from "../../../models/internal/utils/document-utils.js";
 import type { Config, FormModelMap } from "../../../view/index.js";
+import { getUIIssueReport as getUIIssueReportOriginal } from "../../../view/internal/components/form-engine/correction-mode/utils.js";
 import type { UIIssueReport } from "../../../view/internal/components/form-engine/correction-mode/utils.js";
-import { CorrectionModeUtil } from "../../../view/internal/components/form-engine/correction-mode/utils.js";
-import { DocumentHelpers } from "../../utils/document-helpers.js";
+import { createDocumentPath } from "../../utils/createDocumentPath.js";
+import { createModelPath } from "../../utils/createModelPath.js";
 import { US_LOCALE } from "../../utils/localization.js";
-import { ModelHelpers } from "../../utils/model-helpers.js";
-
-const { createModelPath } = ModelHelpers;
-const { createDocumentPath } = DocumentHelpers;
 
 // Re-export for convenience
-export { createDocumentPath, createModelPath, DocumentUtils, ModelPath, US_LOCALE };
+export { DocumentUtils, ModelPath, US_LOCALE };
 export type { CorrectionModeItem, EngineState, EngineStore, GroupInstance, Models, UIIssueReport };
 
 // ============================================================================
@@ -203,7 +197,7 @@ export function setupTest(props: {
 		locale: US_LOCALE,
 		data: { document: props.document ? props.document : {} }
 	});
-	const newMessages = fullValidation(initialState, createDefaultMiddlewareOptions());
+	const newMessages = fullValidation(initialState);
 	return { state: initialState, messages: newMessages };
 }
 
@@ -222,7 +216,7 @@ export function getUIIssueReport(
 	const config = {} as Config;
 	const renderOptions = { state, config } as FormModelMap.RenderOptions;
 
-	return CorrectionModeUtil.getUIIssueReport(message, renderOptions, localizer, converter);
+	return getUIIssueReportOriginal(message, renderOptions, localizer, converter);
 }
 
 export function getLinks(
@@ -244,7 +238,7 @@ export function getFixable(state: EngineState, message: EngineStore.Validation.M
 
 	const renderOptions = { state } as FormModelMap.RenderOptions;
 
-	return CorrectionModeUtil.getUIIssueReport(message, renderOptions, localizer, converter).fixable;
+	return getUIIssueReportOriginal(message, renderOptions, localizer, converter).fixable;
 }
 
 // ============================================================================

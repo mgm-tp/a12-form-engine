@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -37,13 +37,15 @@ import { mock } from "node:test";
 import { fireEvent } from "@testing-library/react";
 import { act } from "react";
 
-import type { ModelPath } from "@com.mgmtp.a12.base/base-model-api/lib/main/model/index.js";
+import type { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
 import { query, within } from "@com.mgmtp.a12.devtools/react";
-import type { GroupInstance } from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
-import { DataRoles } from "@com.mgmtp.a12.widgets/widgets-core/lib/common/main/data-roles.js";
+import type { GroupInstance } from "@com.mgmtp.a12.kernel/kernel-md-facade";
+import { DataRoles } from "@com.mgmtp.a12.widgets/widgets-core";
 
 import type { Models } from "../../../../../back-end/store/internal/store.js";
-import { findElementByFormModelPath, FormModel } from "../../../../../models/index.js";
+import type { FormModel } from "../../../../../models/index.js";
+import { findElementByFormModelPath } from "../../../../../models/index.js";
+import { isFormModelRepeat } from "../../../../../models/internal/FormModelGuards.js";
 import type { DispatchConfiguration, EnablementByRow } from "../../../../../view/index.js";
 import { defaultMapDispatchToProps } from "../../../../../view/index.js";
 import {
@@ -54,15 +56,13 @@ import {
 } from "../../../../rtl-utils/data-roles.js";
 import { mouseEventMock } from "../../../../rtl-utils/mock-utils.js";
 import type { RtlRenderWrapper } from "../../../../rtl-utils/render-wrapper.js";
-import { ModelHelpers } from "../../../../utils/model-helpers.js";
-import { SetupHelpers } from "../../../../utils/setup.js";
+import { createModelPath } from "../../../../utils/createModelPath.js";
+import { setupFormEngineRendererWithRtlAsync } from "../../../../utils/setup.js";
 import {
 	DEFAULT_ROW_ACTION_VISIBILITY,
 	FORM_MODEL
 } from "../../../../utils/test-model-helpers/repeat.row-actions.js";
 import { getReactElementContentLabel } from "../../inputs/control/test-cases/labels/getReactElementContentLabel.js";
-
-const { createModelPath } = ModelHelpers;
 
 const stubbedDispatch = defaultMapDispatchToProps(mock.fn());
 export const stubbedDispatchConfig = {
@@ -109,7 +109,7 @@ export function setupFormEngineRendererForVisibilityTests(
 ): Promise<RtlRenderWrapper> {
 	const SCREEN_MODEL_PATH = screenModelPath || createModelPath(FORM_MODEL.rowActionScreen);
 
-	return SetupHelpers.setupFormEngineRendererWithRtlAsync({
+	return setupFormEngineRendererWithRtlAsync({
 		models,
 		data: { document },
 		ui: {
@@ -163,7 +163,7 @@ export function assertModelSetupCorrect(
 	expectedStatus?: boolean
 ): void {
 	const repeat = findElementByFormModelPath(formModel, repeatPath);
-	if (repeat === undefined || !FormModel.Repeat.isInstance(repeat)) {
+	if (repeat === undefined || !isFormModelRepeat(repeat)) {
 		fail(`Wrong setup: Expected to find a repeat with path ${repeatPath}`);
 	}
 
@@ -274,7 +274,7 @@ export function setupFormEngineRendererForButtonConfigurationTests(
 ): Promise<RtlRenderWrapper> {
 	const SCREEN_MODEL_PATH = createModelPath(screen);
 
-	return SetupHelpers.setupFormEngineRendererWithRtlAsync({
+	return setupFormEngineRendererWithRtlAsync({
 		models,
 		data: { document },
 		ui: {

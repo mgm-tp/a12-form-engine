@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -35,18 +35,16 @@ import { strictEqual } from "node:assert/strict";
 import { act } from "react";
 
 import { query } from "@com.mgmtp.a12.devtools/react";
-import { Locale } from "@com.mgmtp.a12.utils/utils-localization/lib/main/index.js";
+import { Locale } from "@com.mgmtp.a12.utils/utils-localization";
 
 import type { Models } from "../../../../../../back-end/store/index.js";
 import type { InputMap } from "../../../../../../view/internal/configuration/componentMap/input/input-map.js";
 import { getInputMocks } from "../../../../../rtl-utils/getInputMocks.js";
 import { US_LOCALE } from "../../../../../utils/localization.js";
-import { SetupHelpers } from "../../../../../utils/setup.js";
+import { loadData, setupFormEngineRendererWithRtl } from "../../../../../utils/setup.js";
 import { setupFixtureObject, setupModelsFixture } from "../../../../../utils/setupFixture.js";
 import { IDS as AMOUNT_SUFFIX_IDS } from "../../../../../utils/test-model-helpers/amountSuffix.js";
 import { IDS } from "../../../../../utils/test-model-helpers/suffix.js";
-
-const { setupFormEngineRendererWithRtl, loadData } = SetupHelpers;
 
 export function executeTestForSuffix(): void {
 	const suffixModels = setupModelsFixture("controls.suffix");

@@ -1,0 +1,45 @@
+////
+SPDX-License-Identifier: EUPL-1.2 OR LicenseRef-commercial
+
+Copyright (c) 2012-2026 mgm technology partners GmbH
+
+Dual License
+------------
+This source file is part of the mgm A12 Platform and available under
+a choice of two different licenses:
+
+1. Open-Source License - EUPL v1.2
+   You may redistribute and/or modify this file under the terms of the
+   European Union Public License, version 1.2 - see https://eupl.eu/.
+
+2. Commercial License
+   Alternatively, you may obtain a commercial license from
+   mgm technology partners GmbH, that permits use of this software
+   under different terms (including support and maintenance services).
+
+   Please contact a12-license@mgm-tp.com for more information.
+
+You must select and comply with exactly one of the above license options.
+
+Warranty Disclaimer (applies to either option)
+----------------------------------------------
+THIS SOFTWARE IS PROVIDED "AS IS" AND WITHOUT WARRANTY OF ANY KIND,
+WHETHER EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NON-INFRINGEMENT, EXCEPT WHERE SUCH DISCLAIMERS ARE HELD TO BE
+LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
+////
+
+= Frequently Asked Questions
+
+We collect questions that are asked frequently. Please address new questions to Technical Professional Services - we will answer them here if they are of general interest.
+
+== How to Compute Values / Modify Document With Form Engine?
+
+You should never change the document inside the Form Engine state directly. It will create an inconsistency between engine and store. Instead, you should change the document in `activity.data` - which in turn should update the engine document. The Form Engine's internal document should only be used in non-standard based scenarios.
+
+We provide the `FormEngineStateAdapter` exactly for this reason. It allows you to pass a document from the store to the Form Engine. Please refer to the link:assets/typedoc/index.html[API documentation] for more details about the `FormEngineStateAdapter`.
+
+== How to use Custom Events in Form Engine?
+
+See <<form-engine_tutorials_event_handling, here>> for an example.

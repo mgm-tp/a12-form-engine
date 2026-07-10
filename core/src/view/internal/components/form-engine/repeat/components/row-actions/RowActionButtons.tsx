@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -35,15 +35,13 @@ import { useContext } from "react";
 
 import { UiStateSelectors } from "../../../../../../../back-end/store/internal/selectors/ui-state.js";
 import { UiId } from "../../../../../../../back-end/utils/internal/generateUiId.js";
-import { FormModel } from "../../../../../../../models/index.js";
+import { isFormModelRepeat } from "../../../../../../../models/internal/FormModelGuards.js";
 
 import { MenuContext } from "../MenuContext.js";
 
 import { CustomRowActionButton } from "./CustomRowActionButton.js";
-import {
-	StandardRowActionButtons,
-	type StandardRowActionButtonsProps
-} from "./standard/StandardRowActionButtons.js";
+import { StandardRowActionButtons } from "./standard/StandardRowActionButtons.js";
+import type { StandardRowActionButtonsProps } from "./standard/StandardRowActionButtons.js";
 
 /** @internal */
 export function RowActionButtons(props: StandardRowActionButtonsProps): JSX.Element {
@@ -52,9 +50,7 @@ export function RowActionButtons(props: StandardRowActionButtonsProps): JSX.Elem
 	const row = props.row;
 	const { renderAsListItem } = useContext(MenuContext);
 
-	const customRowActions = FormModel.Repeat.isInstance(repeat)
-		? (repeat.rowActionGroup?.action ?? [])
-		: [];
+	const customRowActions = isFormModelRepeat(repeat) ? (repeat.rowActionGroup?.action ?? []) : [];
 	const rowActionId = (actionEvent: string) =>
 		UiId.generateForRowActionButton({
 			uiIdPrefix: options.config.uiIdPrefix,

@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -36,25 +36,23 @@ import type { Predicate } from "fp-ts/lib/Predicate.js";
 import { not } from "fp-ts/lib/Predicate.js";
 
 import { query } from "@com.mgmtp.a12.devtools/react";
-import type { BaseColumnType } from "@com.mgmtp.a12.widgets/widgets-core/lib/table/new-api/column.api.js";
+import type { BaseColumnType } from "@com.mgmtp.a12.widgets/widgets-core";
 
 import type { Models } from "../../../../back-end/store/internal/store.js";
 import type { FormModel } from "../../../../models/index.js";
 import type { TableWidgetMap } from "../../../../view/internal/components/form-engine/repeat/table-widget-map.js";
 import type { RtlRenderWrapper } from "../../../rtl-utils/render-wrapper.js";
-import { ModelHelpers } from "../../../utils/model-helpers.js";
 import { RenderGroupFixture } from "../../../utils/rtl-render-group.js";
-import { SetupHelpers } from "../../../utils/setup.js";
+import { setupFormEngineRendererWithRtlAsync } from "../../../utils/setup.js";
 import { setupModelsFixture } from "../../../utils/setupFixture.js";
 import { IDS } from "../../../utils/test-model-helpers/repeat.column-alignment.js";
 import {
 	createDocumentForRepeat,
 	createNestedL1Entry
 } from "../../../utils/test-model-helpers/repeat.js";
+import { createModelPath } from "../../../utils/createModelPath.js";
 
 import { ModelElementIdEquals } from "./query-predicates.js";
-
-const { createModelPath } = ModelHelpers;
 
 describe("api.view.repeat", () => {
 	describe("Column Alignment", () => {
@@ -77,7 +75,7 @@ describe("api.view.repeat", () => {
 				nestedL1: [createNestedL1Entry({ L1_Number: 42 })]
 			});
 
-			return SetupHelpers.setupFormEngineRendererWithRtlAsync({
+			return setupFormEngineRendererWithRtlAsync({
 				models,
 				data: { document },
 				ui: {

@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -44,19 +44,19 @@ import { DateTextLine } from "../../../../../../view/internal/components/widgets
 import { getComponentMocks } from "../../../../../rtl-utils/getComponentMocks.js";
 import { getInputMocks } from "../../../../../rtl-utils/getInputMocks.js";
 import { setupModelsFixture } from "../../../../../utils/setupFixture.js";
-import { EXTERNAL_ENUM } from "../../../../../utils/test-model-helpers/external-enumeration.js";
 import {
-	PICUS_TYPES,
-	PICUS_TYPES as PICUS_TYPES_RTL,
-	setupPicusTypeTest as setupPicusTypeTestRtl
-} from "../../../../../utils/test-model-helpers/picustypes.js";
+	DM_TYPES,
+	DM_TYPES as DM_TYPES_RTL,
+	setupDmTypeTest as setupDmTypeTestRtl
+} from "../../../../../utils/test-model-helpers/dmtypes.js";
+import { EXTERNAL_ENUM } from "../../../../../utils/test-model-helpers/external-enumeration.js";
 
 export function executeTestsForRendering(): void {
-	const picusTypesModels = setupModelsFixture("controls.picustypes");
+	const dmTypesModels = setupModelsFixture("controls.dmtypes");
 	const externalEnumerationModels = setupModelsFixture("controls.externalenumeration");
 
-	function testPicusTypes() {
-		return testWithModels(picusTypesModels);
+	function testDmTypes() {
+		return testWithModels(dmTypesModels);
 	}
 
 	function testExternalEnumeration() {
@@ -65,7 +65,7 @@ export function executeTestsForRendering(): void {
 
 	function testWithModels(models: Models) {
 		const inputMap = getInputMocks();
-		setupPicusTypeTestRtl({
+		setupDmTypeTestRtl({
 			models,
 			inputMap
 		});
@@ -75,20 +75,18 @@ export function executeTestsForRendering(): void {
 	describe("Given a field with data type String", () => {
 		describe("and lineBreaksPermitted=true", () => {
 			it("renders a MultilineInput", () => {
-				const inputMap = testPicusTypes();
+				const inputMap = testDmTypes();
 
 				query(inputMap.MultilineInput)
-					.withProp("uiId", PICUS_TYPES_RTL.STRING_05)
+					.withProp("uiId", DM_TYPES_RTL.STRING_05)
 					.assertRenderedTimes(1);
 			});
 		});
 
 		describe("and no field configuration entry", () => {
 			it("renders a StringInput", () => {
-				const inputMap = testPicusTypes();
-				query(inputMap.StringInput)
-					.withProp("uiId", PICUS_TYPES_RTL.STRING_01)
-					.assertRenderedTimes(1);
+				const inputMap = testDmTypes();
+				query(inputMap.StringInput).withProp("uiId", DM_TYPES_RTL.STRING_01).assertRenderedTimes(1);
 			});
 		});
 
@@ -128,7 +126,7 @@ export function executeTestsForRendering(): void {
 							...getInputMocks(),
 							RadioInput: mock.fn(RadioInput)
 						};
-						const { widgetMap } = setupPicusTypeTestRtl({
+						const { widgetMap } = setupDmTypeTestRtl({
 							models: externalEnumerationModels,
 							inputMap
 						});
@@ -147,10 +145,10 @@ export function executeTestsForRendering(): void {
 
 			describe("containing exposition=Area", () => {
 				it("renders a MultilineInput", () => {
-					const inputMap = testPicusTypes();
+					const inputMap = testDmTypes();
 
 					const input = query(inputMap.MultilineInput)
-						.withProp("uiId", PICUS_TYPES_RTL.STRING_04)
+						.withProp("uiId", DM_TYPES_RTL.STRING_04)
 						.props();
 
 					const element = input.documentElement;
@@ -167,51 +165,49 @@ export function executeTestsForRendering(): void {
 
 	describe("Given a field with data type Number", () => {
 		it("renders a NumberInput", () => {
-			const inputMap = testPicusTypes();
+			const inputMap = testDmTypes();
 
-			query(inputMap.NumberInput)
-				.withProp("uiId", PICUS_TYPES_RTL.NUMBER_01)
-				.assertRenderedTimes(1);
+			query(inputMap.NumberInput).withProp("uiId", DM_TYPES_RTL.NUMBER_01).assertRenderedTimes(1);
 		});
 	});
 
 	describe("Given a field with data type Enumeration", () => {
 		describe("and exposition 'compact'", () => {
 			it("renders a DropDownInput", () => {
-				const inputMap = testPicusTypes();
+				const inputMap = testDmTypes();
 
 				query(inputMap.DropDownInput)
-					.withProp("uiId", PICUS_TYPES_RTL.ENUMERATION_COMPACT)
+					.withProp("uiId", DM_TYPES_RTL.ENUMERATION_COMPACT)
 					.assertRenderedTimes(1);
 			});
 		});
 
 		describe("and exposition 'autocomplete'", () => {
 			it("renders an AutoCompleteInput", () => {
-				const inputMap = testPicusTypes();
+				const inputMap = testDmTypes();
 
 				query(inputMap.AutoCompleteInput)
-					.withProp("uiId", PICUS_TYPES_RTL.ENUMERATION_AUTOCOMPLETE)
+					.withProp("uiId", DM_TYPES_RTL.ENUMERATION_AUTOCOMPLETE)
 					.assertRenderedTimes(1);
 			});
 		});
 
 		describe("and exposition 'full'", () => {
 			it("renders a RadioInput", () => {
-				const inputMap = testPicusTypes();
+				const inputMap = testDmTypes();
 
 				query(inputMap.RadioInput)
-					.withProp("uiId", PICUS_TYPES_RTL.ENUMERATION_RADIO_FULL)
+					.withProp("uiId", DM_TYPES_RTL.ENUMERATION_RADIO_FULL)
 					.assertRenderedTimes(1);
 			});
 		});
 
 		describe("and exposition 'inline'", () => {
 			it("renders a RadioInput", () => {
-				const inputMap = testPicusTypes();
+				const inputMap = testDmTypes();
 
 				query(inputMap.RadioInput)
-					.withProp("uiId", PICUS_TYPES_RTL.ENUMERATION_RADIO_INLINE)
+					.withProp("uiId", DM_TYPES_RTL.ENUMERATION_RADIO_INLINE)
 					.assertRenderedTimes(1);
 			});
 		});
@@ -227,17 +223,15 @@ export function executeTestsForRendering(): void {
 				...getComponentMocks(),
 				DateTextLine
 			};
-			const { widgetMap } = setupPicusTypeTestRtl({
-				models: picusTypesModels,
+			const { widgetMap } = setupDmTypeTestRtl({
+				models: dmTypesModels,
 				componentMap,
 				inputMap
 			});
 
-			query(inputMap.DateInput).withProp("uiId", PICUS_TYPES.DATE_01).assertRenderedTimes(1);
+			query(inputMap.DateInput).withProp("uiId", DM_TYPES.DATE_01).assertRenderedTimes(1);
 
-			query(widgetMap.Button)
-				.withProp("id", `${PICUS_TYPES.DATE_01}-picker`)
-				.assertRenderedTimes(1);
+			query(widgetMap.Button).withProp("id", `${DM_TYPES.DATE_01}-picker`).assertRenderedTimes(1);
 		});
 	});
 
@@ -251,46 +245,44 @@ export function executeTestsForRendering(): void {
 				...getComponentMocks(),
 				DateTextLine
 			};
-			const { widgetMap } = setupPicusTypeTestRtl({
-				models: picusTypesModels,
+			const { widgetMap } = setupDmTypeTestRtl({
+				models: dmTypesModels,
 				componentMap,
 				inputMap
 			});
 
 			query(inputMap.DateFragmentInput)
-				.withProp("uiId", PICUS_TYPES.DATE_FRAGMENT_01)
+				.withProp("uiId", DM_TYPES.DATE_FRAGMENT_01)
 				.assertRenderedTimes(1);
 
 			query(widgetMap.Button)
-				.withProp("id", `${PICUS_TYPES.DATE_FRAGMENT_01}-picker`)
+				.withProp("id", `${DM_TYPES.DATE_FRAGMENT_01}-picker`)
 				.assertNotRendered();
 		});
 	});
 
 	describe("Given a field with data type DateTime", () => {
 		it("renders a DateTimeInput", () => {
-			const inputMap = testPicusTypes();
+			const inputMap = testDmTypes();
 
-			query(inputMap.DateTimeInput)
-				.withProp("uiId", PICUS_TYPES.DATUM_ZEIT_01)
-				.assertRenderedTimes(1);
+			query(inputMap.DateTimeInput).withProp("uiId", DM_TYPES.DATUM_ZEIT_01).assertRenderedTimes(1);
 		});
 	});
 
 	describe("Given a field with data type Time", () => {
 		it("renders a TimeInput", () => {
-			const inputMap = testPicusTypes();
+			const inputMap = testDmTypes();
 
-			query(inputMap.TimeInput).withProp("uiId", PICUS_TYPES.ZEIT_01).assertRenderedTimes(1);
+			query(inputMap.TimeInput).withProp("uiId", DM_TYPES.ZEIT_01).assertRenderedTimes(1);
 		});
 	});
 
 	describe("Given a field with data type DateRange", () => {
 		it("renders a DateRangeInput", () => {
-			const inputMap = testPicusTypes();
+			const inputMap = testDmTypes();
 
 			query(inputMap.DateRangeInput)
-				.withProp("uiId", PICUS_TYPES.DATE_RANGE_01)
+				.withProp("uiId", DM_TYPES.DATE_RANGE_01)
 				.assertRenderedTimes(1);
 		});
 	});
@@ -298,56 +290,54 @@ export function executeTestsForRendering(): void {
 	describe("Given a field with data type Boolean", () => {
 		describe("and no exposition", () => {
 			it("renders a BooleanSelectInput", () => {
-				const inputMap = testPicusTypes();
+				const inputMap = testDmTypes();
 
 				query(inputMap.BooleanSelectInput)
-					.withProp("uiId", PICUS_TYPES.BOOLEAN_SELECT_01)
+					.withProp("uiId", DM_TYPES.BOOLEAN_SELECT_01)
 					.assertRenderedTimes(1);
 			});
 		});
 
 		describe("and exposition 'boolean_select'", () => {
 			it("renders a BooleanSelectInput", () => {
-				const inputMap = testPicusTypes();
+				const inputMap = testDmTypes();
 
 				query(inputMap.BooleanSelectInput)
-					.withProp("uiId", PICUS_TYPES.BOOLEAN_SELECT_02)
+					.withProp("uiId", DM_TYPES.BOOLEAN_SELECT_02)
 					.assertRenderedTimes(1);
 			});
 		});
 
 		describe("and exposition 'checkbox'", () => {
 			it("renders a CheckboxInput", () => {
-				const inputMap = testPicusTypes();
+				const inputMap = testDmTypes();
 
-				query(inputMap.CheckboxInput)
-					.withProp("uiId", PICUS_TYPES.BOOLEAN_01)
-					.assertRenderedTimes(1);
+				query(inputMap.CheckboxInput).withProp("uiId", DM_TYPES.BOOLEAN_01).assertRenderedTimes(1);
 			});
 		});
 
 		describe("and exposition 'switch'", () => {
 			it("renders a SwitchInput", () => {
-				const inputMap = testPicusTypes();
+				const inputMap = testDmTypes();
 
-				query(inputMap.SwitchInput).withProp("uiId", PICUS_TYPES.BOOLEAN_03).assertRenderedTimes(1);
+				query(inputMap.SwitchInput).withProp("uiId", DM_TYPES.BOOLEAN_03).assertRenderedTimes(1);
 			});
 		});
 
 		describe("and exposition 'switch-with-values'", () => {
 			it("renders a SwitchInput", () => {
-				const inputMap = testPicusTypes();
+				const inputMap = testDmTypes();
 
-				query(inputMap.SwitchInput).withProp("uiId", PICUS_TYPES.BOOLEAN_04).assertRenderedTimes(1);
+				query(inputMap.SwitchInput).withProp("uiId", DM_TYPES.BOOLEAN_04).assertRenderedTimes(1);
 			});
 		});
 
 		describe("and exposition 'full", () => {
 			it("renders a BooleanRadioInput", () => {
-				const inputMap = testPicusTypes();
+				const inputMap = testDmTypes();
 
 				query(inputMap.BooleanRadioInput)
-					.withProp("uiId", PICUS_TYPES.BOOLEAN_RADIO_FULL)
+					.withProp("uiId", DM_TYPES.BOOLEAN_RADIO_FULL)
 					.assertRenderedTimes(1);
 			});
 		});
@@ -358,17 +348,17 @@ export function executeTestsForRendering(): void {
 					...getInputMocks(),
 					BooleanRadioInput: mock.fn(BooleanRadioInput)
 				};
-				const { widgetMap } = setupPicusTypeTestRtl({
-					models: picusTypesModels,
+				const { widgetMap } = setupDmTypeTestRtl({
+					models: dmTypesModels,
 					inputMap
 				});
 
 				query(inputMap.BooleanRadioInput)
-					.withProp("uiId", PICUS_TYPES.BOOLEAN_RADIO_INLINE)
+					.withProp("uiId", DM_TYPES.BOOLEAN_RADIO_INLINE)
 					.assertRenderedTimes(1);
 
 				query(widgetMap.Radio)
-					.withId(PICUS_TYPES.BOOLEAN_RADIO_INLINE)
+					.withId(DM_TYPES.BOOLEAN_RADIO_INLINE)
 					.withProp("inline", true)
 					.assertRenderedTimes(1);
 			});
@@ -378,66 +368,62 @@ export function executeTestsForRendering(): void {
 	describe("Given a field with data type Confirm", () => {
 		describe("and no exposition", () => {
 			it("renders a CheckboxInput", () => {
-				const inputMap = testPicusTypes();
+				const inputMap = testDmTypes();
 
-				query(inputMap.CheckboxInput)
-					.withProp("uiId", PICUS_TYPES.CONFIRM_01)
-					.assertRenderedTimes(1);
+				query(inputMap.CheckboxInput).withProp("uiId", DM_TYPES.CONFIRM_01).assertRenderedTimes(1);
 			});
 		});
 
 		describe("and exposition 'checkbox", () => {
 			it("renders a CheckboxInput", () => {
-				const inputMap = testPicusTypes();
+				const inputMap = testDmTypes();
 
-				query(inputMap.CheckboxInput)
-					.withProp("uiId", PICUS_TYPES.CONFIRM_02)
-					.assertRenderedTimes(1);
+				query(inputMap.CheckboxInput).withProp("uiId", DM_TYPES.CONFIRM_02).assertRenderedTimes(1);
 			});
 		});
 
 		describe("and exposition 'switch'", () => {
 			it("renders a SwitchInput", () => {
-				const inputMap = testPicusTypes();
+				const inputMap = testDmTypes();
 
-				query(inputMap.SwitchInput).withProp("uiId", PICUS_TYPES.CONFIRM_03).assertRenderedTimes(1);
+				query(inputMap.SwitchInput).withProp("uiId", DM_TYPES.CONFIRM_03).assertRenderedTimes(1);
 			});
 		});
 
 		describe("and exposition 'switch-with-values'", () => {
 			it("renders a SwitchInput", () => {
-				const inputMap = testPicusTypes();
+				const inputMap = testDmTypes();
 
-				query(inputMap.SwitchInput).withProp("uiId", PICUS_TYPES.CONFIRM_04).assertRenderedTimes(1);
+				query(inputMap.SwitchInput).withProp("uiId", DM_TYPES.CONFIRM_04).assertRenderedTimes(1);
 			});
 		});
 	});
 
 	describe("Given a field with data type Custom", () => {
 		it("renders a StringInput", () => {
-			const inputMap = testPicusTypes();
+			const inputMap = testDmTypes();
 
-			query(inputMap.StringInput).withProp("uiId", PICUS_TYPES.CUSTOM_01).assertRenderedTimes(1);
+			query(inputMap.StringInput).withProp("uiId", DM_TYPES.CUSTOM_01).assertRenderedTimes(1);
 		});
 	});
 
 	describe("Given a group with customType='attachment'", () => {
 		describe("and no exposition", () => {
 			it("renders an AttachmentInput", () => {
-				const inputMap = testPicusTypes();
+				const inputMap = testDmTypes();
 
 				query(inputMap.AttachmentInput)
-					.withProp("uiId", PICUS_TYPES.ATTACHMENT_01)
+					.withProp("uiId", DM_TYPES.ATTACHMENT_01)
 					.assertRenderedTimes(1);
 			});
 		});
 
 		describe("and exposition compact", () => {
 			it("renders an AttachmentInput", () => {
-				const inputMap = testPicusTypes();
+				const inputMap = testDmTypes();
 
 				query(inputMap.AttachmentInput)
-					.withProp("uiId", PICUS_TYPES.ATTACHMENT_02)
+					.withProp("uiId", DM_TYPES.ATTACHMENT_02)
 					.assertRenderedTimes(1);
 			});
 		});
@@ -446,30 +432,30 @@ export function executeTestsForRendering(): void {
 	describe("Given a group with customType='multiselect'", () => {
 		describe("and exposition autocomplete", () => {
 			it("renders a MultiSelectInput", () => {
-				const inputMap = testPicusTypes();
+				const inputMap = testDmTypes();
 
 				query(inputMap.MultiSelectInput)
-					.withProp("uiId", PICUS_TYPES.MULTI_SELECT01)
+					.withProp("uiId", DM_TYPES.MULTI_SELECT01)
 					.assertRenderedTimes(1);
 			});
 		});
 
 		describe("and exposition full", () => {
 			it("renders a CheckboxGroup", () => {
-				const inputMap = testPicusTypes();
+				const inputMap = testDmTypes();
 
 				query(inputMap.CheckboxGroupInput)
-					.withProp("uiId", PICUS_TYPES.MULTI_SELECT02)
+					.withProp("uiId", DM_TYPES.MULTI_SELECT02)
 					.assertRenderedTimes(1);
 			});
 		});
 
 		describe("and exposition inline", () => {
 			it("renders as CheckboxGroup", () => {
-				const inputMap = testPicusTypes();
+				const inputMap = testDmTypes();
 
 				query(inputMap.CheckboxGroupInput)
-					.withProp("uiId", PICUS_TYPES.MULTI_SELECT03)
+					.withProp("uiId", DM_TYPES.MULTI_SELECT03)
 					.assertRenderedTimes(1);
 			});
 		});

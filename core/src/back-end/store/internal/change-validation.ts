@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -30,15 +30,16 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { ModelPath } from "@com.mgmtp.a12.base/base-model-api/lib/main/model/index.js";
+import { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
 import type {
 	DocumentModel,
 	EntityInstancePath,
+	GeneratedCodeRtConfig,
 	GroupInstance
-} from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
+} from "@com.mgmtp.a12.kernel/kernel-md-facade";
 
 import type { FormModel } from "../../../models/index.js";
-import { DocumentModelUtils } from "../../../models/internal/utils/document-model-utils.js";
+import * as DocumentModelUtils from "../../../models/internal/utils/document-model-utils.js";
 import { DocumentPath } from "../../../models/internal/utils/document-utils.js";
 import { ReadonlyObjectMap } from "../../../models/internal/utils/json.js";
 import { ElementStateUtil } from "../../../view/internal/utilities/elementState.js";
@@ -64,21 +65,25 @@ export function validateChangesAndUpdateMessages(options: {
 	readonly models: Models;
 	readonly initialMessages: ReadonlyObjectMap<EngineStore.Validation.Entry>;
 	readonly parsingErrorsAfterComputation?: ReadonlyObjectMap<EngineStore.Validation.Entry>;
-	readonly kernelConfiguration: {
-		readonly now?: Date;
-	};
+	readonly kernelOptions?: GeneratedCodeRtConfig;
 	readonly relevantFieldPaths?: EntityInstancePath[];
+	readonly isComputedField?: (path: EntityInstancePath) => boolean;
 }): ReadonlyObjectMap<EngineStore.Validation.Entry> {
-	const { models, changes, document, initialMessages, kernelConfiguration, relevantFieldPaths } =
-		options;
-	const { now } = kernelConfiguration;
+	const {
+		models,
+		changes,
+		document,
+		initialMessages,
+		kernelOptions,
+		relevantFieldPaths,
+		isComputedField
+	} = options;
 	const { documentModel, validatorProvider, formModel } = models;
 
-	const categorizedChanges = categorizeChanges(
-		documentModel,
-		changes,
-		relevantFieldPaths ? getEffectiveRelevantFields(relevantFieldPaths) : undefined
-	);
+	const effectiveRelevantPaths = relevantFieldPaths
+		? getEffectiveRelevantFields(relevantFieldPaths)
+		: undefined;
+	const categorizedChanges = categorizeChanges(documentModel, changes, effectiveRelevantPaths);
 
 	let messages = removeOutdatedMessages(
 		document,
@@ -87,14 +92,15 @@ export function validateChangesAndUpdateMessages(options: {
 		categorizedChanges.nonRelevantPaths,
 		categorizedChanges.relevantPaths,
 		documentModel,
-		formModel
+		formModel,
+		isComputedField
 	);
 
 	// update messages with validation of all (relevant) changed elements
 	messages = validateElements({
 		document,
 		initialMessages: messages,
-		now,
+		kernelOptions,
 		relevantElements: categorizedChanges.relevantPaths,
 		validatorProvider: validatorProvider,
 		type: "field"
@@ -177,19 +183,16 @@ interface CategorizedChanges {
 	readonly nonRelevantPaths: EntityInstancePath[];
 	readonly groupRemovedPaths: EntityInstancePath[];
 }
-/**
- * @internal
- *
- * Removes all existing messages that should no longer be present after the given value change(s)
- */
-export function removeOutdatedMessages(
+
+function removeOutdatedMessages(
 	document: GroupInstance,
 	messages: ReadonlyObjectMap<EngineStore.Validation.Entry>,
 	groupRemovedPaths: EntityInstancePath[],
 	nonRelevantPaths: EntityInstancePath[],
 	relevantPaths: EntityInstancePath[],
 	documentModel: DocumentModel,
-	formModel: FormModel
+	formModel: FormModel,
+	isComputedField?: (path: EntityInstancePath) => boolean
 ): ReadonlyObjectMap<EngineStore.Validation.Entry> {
 	let remainingMessages = messages;
 
@@ -209,6 +212,17 @@ export function removeOutdatedMessages(
 			remainingMessages,
 			key => !pathsAsString.includes(key)
 		);
+	}
+
+	// remove stale parse errors for computed fields: after recomputation a computed field may produce
+	// null without error (so it won't appear in changes), leaving a previously recorded parse error stale
+	if (isComputedField !== undefined) {
+		remainingMessages = ReadonlyObjectMap.filter(remainingMessages, (key, entry) => {
+			if (entry?.parseError !== undefined) {
+				return !isComputedField(DocumentPath.fromString(key));
+			}
+			return true;
+		});
 	}
 	// remove messages for removed groups and rewrite existing messages (i.e. to adjust indices)
 	for (const path of groupRemovedPaths) {

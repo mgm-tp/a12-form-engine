@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -32,13 +32,13 @@
 
 import { equal } from "node:assert/strict";
 
-import type { Attachment } from "@com.mgmtp.a12.dataservices/dataservices-access/lib/Attachment/attachment.js";
+import type { Attachment } from "@com.mgmtp.a12.dataservices/dataservices-access";
 import { query } from "@com.mgmtp.a12.devtools/react";
 
 import { DefaultComponentMap } from "../../../../../view/internal/configuration/componentMap/DefaultComponentMap.js";
 import { mockFunctions } from "../../../../rtl-utils/mock-map.js";
 import { US_LOCALE } from "../../../../utils/localization.js";
-import { SetupHelpers } from "../../../../utils/setup.js";
+import { setupFormEngineRendererWithRtlAsync } from "../../../../utils/setup.js";
 import { setupModelsFixture } from "../../../../utils/setupFixture.js";
 import { FORM_MODEL } from "../../../../utils/test-model-helpers/repeat.multi-file-upload.js";
 
@@ -49,7 +49,7 @@ describe("api.view.inputs", () => {
 		describe("Given no attachment", () => {
 			it("does not render a ResponsiveImageContainer or an icon widget", async () => {
 				const componentMap = mockFunctions(DefaultComponentMap);
-				const { widgetMap } = await SetupHelpers.setupFormEngineRendererWithRtlAsync({
+				const { widgetMap } = await setupFormEngineRendererWithRtlAsync({
 					componentMap,
 					models,
 					locale: US_LOCALE,
@@ -79,7 +79,7 @@ describe("api.view.inputs", () => {
 					};
 
 					const componentMap = mockFunctions(DefaultComponentMap);
-					const { widgetMap } = await SetupHelpers.setupFormEngineRendererWithRtlAsync({
+					const { widgetMap } = await setupFormEngineRendererWithRtlAsync({
 						componentMap,
 						data: {
 							document: {
@@ -113,7 +113,7 @@ describe("api.view.inputs", () => {
 					};
 
 					const componentMap = mockFunctions(DefaultComponentMap);
-					const { widgetMap } = await SetupHelpers.setupFormEngineRendererWithRtlAsync({
+					const { widgetMap } = await setupFormEngineRendererWithRtlAsync({
 						componentMap,
 						data: {
 							document: {

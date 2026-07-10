@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -45,7 +45,6 @@ import { ConfirmationButton } from "../../../../../../view/internal/components/w
 import { MODAL_OVERLAY } from "../../../../../rtl-utils/data-roles.js";
 import type { RtlRenderWrapper } from "../../../../../rtl-utils/render-wrapper.js";
 import { RenderGroupFixture } from "../../../../../utils/rtl-render-group.js";
-import { SetupHelpers } from "../../../../../utils/setup.js";
 import { setupModelsFixture } from "../../../../../utils/setupFixture.js";
 import {
 	IDS as EXPRESSION_LABEL_IDS,
@@ -59,6 +58,7 @@ import {
 	ICON_NAMES,
 	IDS as ROW_ACTION_IDS
 } from "../../../../../utils/test-model-helpers/repeat.row-actions.js";
+import { setupFormEngineRendererWithRtlAsync } from "../../../../../utils/setup.js";
 
 import {
 	assertAriaLabelledBy,
@@ -911,7 +911,7 @@ export function executeTestForCustomRowActions(): void {
 		const componentMap = {
 			ConfirmationButton: mock.fn(ConfirmationButton)
 		};
-		return SetupHelpers.setupFormEngineRendererWithRtlAsync({
+		return setupFormEngineRendererWithRtlAsync({
 			componentMap,
 			models: inlineRepeatModels,
 			data: { document: { Root: { Nested_L7: [{}] } } },
@@ -924,7 +924,7 @@ export function executeTestForCustomRowActions(): void {
 	}
 
 	function setupForExpressionLabelModels(withFormatting = false): Promise<RtlRenderWrapper> {
-		return SetupHelpers.setupFormEngineRendererWithRtlAsync({
+		return setupFormEngineRendererWithRtlAsync({
 			models: expressionLabelModels,
 			data: { document: expressionLabelDocument },
 			ui: withFormatting ? formattedExpressionUiState : undefined

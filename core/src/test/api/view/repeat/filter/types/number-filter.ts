@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -35,9 +35,9 @@ import { deepStrictEqual, notStrictEqual } from "node:assert/strict";
 import type { FilterParseError, Models } from "../../../../../../back-end/store/internal/store.js";
 import type { RepeatRow } from "../../../../../../view/internal/components/form-engine/repeat/components/tableColumnTypes.js";
 import { filterRows } from "../../../../../../view/internal/utilities/filtering.js";
-import { ModelHelpers } from "../../../../../utils/model-helpers.js";
 import { setupArrayFixture } from "../../../../../utils/setupFixture.js";
 import { IR } from "../../../../../utils/test-model-helpers/inline.repeat.js";
+import { createModelPath } from "../../../../../utils/createModelPath.js";
 
 import { emptySwitchFunctions } from "../filter-functions/empty-switch.js";
 import { textLineRangeFunctions } from "../filter-functions/textline-range-filter.js";
@@ -50,8 +50,6 @@ import {
 } from "../filter.utils.js";
 
 import { createRow } from "./utils.js";
-
-const { createModelPath } = ModelHelpers;
 
 export function describeTestForNumberFilter(models: Models): void {
 	const COLUMN_NAME = IR.SortingAndFiltering.ID_L1_NUMBER_COLUMN;

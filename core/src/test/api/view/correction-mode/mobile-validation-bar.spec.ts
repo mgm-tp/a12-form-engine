@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -34,17 +34,17 @@ import { deepStrictEqual, strictEqual } from "node:assert/strict";
 import type { Mock } from "node:test";
 import { mock } from "node:test";
 
-import type { ModelPath } from "@com.mgmtp.a12.base/base-model-api/lib/main/model/index.js";
+import type { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
 import { query } from "@com.mgmtp.a12.devtools/react";
-import { Locale } from "@com.mgmtp.a12.utils/utils-localization/lib/main/index.js";
-import { provider } from "@com.mgmtp.a12.widgets/widgets-core/lib/common/main/device-detector.js";
-import type { MobileValidationProps } from "@com.mgmtp.a12.widgets/widgets-core/lib/validation-bar/main/validation-bar.mobile.api.js";
+import { Locale } from "@com.mgmtp.a12.utils/utils-localization";
+import { provider } from "@com.mgmtp.a12.widgets/widgets-core";
+import type { MobileValidationProps } from "@com.mgmtp.a12.widgets/widgets-core";
 
 import type { EngineStore } from "../../../../back-end/store/index.js";
 import type { RtlRenderWrapper } from "../../../rtl-utils/render-wrapper.js";
+import { createModelPath } from "../../../utils/createModelPath.js";
 import { RenderGroupFixture } from "../../../utils/rtl-render-group.js";
 import { setupModelsFixture } from "../../../utils/setupFixture.js";
-import { createModelPath } from "../../../utils/test-model-helpers/dependent-enumeration.js";
 
 import type { StubbedDispatchConfig } from "./validation-bar-setup.js";
 import { createStubbedDispatchConfig, setupValidationBarTests } from "./validation-bar-setup.js";
@@ -68,23 +68,23 @@ describe("api.view.validation.Mobile Validation Bar", () => {
 						onlyTopLevelMessages: true
 					});
 
-					query(widgetMap.MobileValidationBarOverview)
+					query(widgetMap.MobileValidationOverview)
 						.withProp("variant", "error")
 						.assertRenderedTimes(1);
 
-					const errorGraphic = query(widgetMap.MobileValidationBarGraphic)
+					const errorGraphic = query(widgetMap.MobileValidationGraphic)
 						.withProp("variant", "error")
 						.props();
 					strictEqual(errorGraphic.children, "7");
 					strictEqual(errorGraphic.a11yTitleSupport, true);
 
-					const warningGraphics = query(widgetMap.MobileValidationBarGraphic)
+					const warningGraphics = query(widgetMap.MobileValidationGraphic)
 						.withProp("variant", "warning")
 						.props();
 					strictEqual(warningGraphics.children, "0");
 					strictEqual(warningGraphics.a11yTitleSupport, true);
 
-					const infoGraphics = query(widgetMap.MobileValidationBarGraphic)
+					const infoGraphics = query(widgetMap.MobileValidationGraphic)
 						.withProp("variant", "info")
 						.props();
 					strictEqual(infoGraphics.children, "0");
@@ -100,23 +100,23 @@ describe("api.view.validation.Mobile Validation Bar", () => {
 						onlyTopLevelMessages: true
 					});
 
-					query(widgetMap.MobileValidationBarOverview)
+					query(widgetMap.MobileValidationOverview)
 						.withProp("variant", "warning")
 						.assertRenderedTimes(1);
 
-					const errorGraphic = query(widgetMap.MobileValidationBarGraphic)
+					const errorGraphic = query(widgetMap.MobileValidationGraphic)
 						.withProp("variant", "error")
 						.props();
 					strictEqual(errorGraphic.children, "0");
 					strictEqual(errorGraphic.a11yTitleSupport, true);
 
-					const warningGraphics = query(widgetMap.MobileValidationBarGraphic)
+					const warningGraphics = query(widgetMap.MobileValidationGraphic)
 						.withProp("variant", "warning")
 						.props();
 					strictEqual(warningGraphics.children, "7");
 					strictEqual(warningGraphics.a11yTitleSupport, true);
 
-					const infoGraphics = query(widgetMap.MobileValidationBarGraphic)
+					const infoGraphics = query(widgetMap.MobileValidationGraphic)
 						.withProp("variant", "info")
 						.props();
 					strictEqual(infoGraphics.children, "0");
@@ -132,23 +132,23 @@ describe("api.view.validation.Mobile Validation Bar", () => {
 						onlyTopLevelMessages: true
 					});
 
-					query(widgetMap.MobileValidationBarOverview)
+					query(widgetMap.MobileValidationOverview)
 						.withProp("variant", "info")
 						.assertRenderedTimes(1);
 
-					const errorGraphic = query(widgetMap.MobileValidationBarGraphic)
+					const errorGraphic = query(widgetMap.MobileValidationGraphic)
 						.withProp("variant", "error")
 						.props();
 					strictEqual(errorGraphic.children, "0");
 					strictEqual(errorGraphic.a11yTitleSupport, true);
 
-					const warningGraphics = query(widgetMap.MobileValidationBarGraphic)
+					const warningGraphics = query(widgetMap.MobileValidationGraphic)
 						.withProp("variant", "warning")
 						.props();
 					strictEqual(warningGraphics.children, "0");
 					strictEqual(warningGraphics.a11yTitleSupport, true);
 
-					const infoGraphics = query(widgetMap.MobileValidationBarGraphic)
+					const infoGraphics = query(widgetMap.MobileValidationGraphic)
 						.withProp("variant", "info")
 						.props();
 					strictEqual(infoGraphics.children, "7");
@@ -160,23 +160,23 @@ describe("api.view.validation.Mobile Validation Bar", () => {
 				it("shows a validation bar with variant=error, the number of errors, warnings and infos and a11yTitleSupport=true", () => {
 					const { widgetMap } = setup({ setupDevApp: false, onlyTopLevelMessages: true });
 
-					query(widgetMap.MobileValidationBarOverview)
+					query(widgetMap.MobileValidationOverview)
 						.withProp("variant", "error")
 						.assertRenderedTimes(1);
 
-					const errorGraphic = query(widgetMap.MobileValidationBarGraphic)
+					const errorGraphic = query(widgetMap.MobileValidationGraphic)
 						.withProp("variant", "error")
 						.props();
 					strictEqual(errorGraphic.children, "3");
 					strictEqual(errorGraphic.a11yTitleSupport, true);
 
-					const warningGraphics = query(widgetMap.MobileValidationBarGraphic)
+					const warningGraphics = query(widgetMap.MobileValidationGraphic)
 						.withProp("variant", "warning")
 						.props();
 					strictEqual(warningGraphics.children, "2");
 					strictEqual(warningGraphics.a11yTitleSupport, true);
 
-					const infoGraphics = query(widgetMap.MobileValidationBarGraphic)
+					const infoGraphics = query(widgetMap.MobileValidationGraphic)
 						.withProp("variant", "info")
 						.props();
 					strictEqual(infoGraphics.children, "2");
@@ -194,7 +194,7 @@ describe("api.view.validation.Mobile Validation Bar", () => {
 						dispatchConfig
 					});
 
-					const props = query(widgetMap.MobileValidationBarOverview).props();
+					const props = query(widgetMap.MobileValidationOverview).props();
 					props.onClick?.({} as React.MouseEvent<HTMLDivElement>);
 
 					strictEqual(dispatchConfig.correctionMode.validationBar.onExpand.mock.callCount(), 1);
@@ -223,23 +223,23 @@ describe("api.view.validation.Mobile Validation Bar", () => {
 						onlyTopLevelMessages: true
 					});
 
-					query(widgetMap.MobileValidationBarOverview)
+					query(widgetMap.MobileValidationOverview)
 						.withProp("variant", "error")
 						.assertRenderedTimes(1);
 
-					const errorGraphic = query(widgetMap.MobileValidationBarGraphic)
+					const errorGraphic = query(widgetMap.MobileValidationGraphic)
 						.withProp("variant", "error")
 						.props();
 					strictEqual(errorGraphic.children, "3");
 					strictEqual(errorGraphic.a11yTitleSupport, undefined);
 
-					const warningGraphics = query(widgetMap.MobileValidationBarGraphic)
+					const warningGraphics = query(widgetMap.MobileValidationGraphic)
 						.withProp("variant", "warning")
 						.props();
 					strictEqual(warningGraphics.children, "2");
 					strictEqual(warningGraphics.a11yTitleSupport, undefined);
 
-					const infoGraphics = query(widgetMap.MobileValidationBarGraphic)
+					const infoGraphics = query(widgetMap.MobileValidationGraphic)
 						.withProp("variant", "info")
 						.props();
 					strictEqual(infoGraphics.children, "2");
@@ -253,8 +253,8 @@ describe("api.view.validation.Mobile Validation Bar", () => {
 						onlyTopLevelMessages: true
 					});
 
-					query(widgetMap.MobilePreviewList).assertRenderedTimes(1);
-					const items = query(widgetMap.MobilePreviewListIem).groupByTestId();
+					query(widgetMap.MobileValidationPreviewList).assertRenderedTimes(1);
+					const items = query(widgetMap.MobileValidationPreviewListItem).groupByTestId();
 					items.assertSize(7);
 
 					const assertItem = (
@@ -283,7 +283,7 @@ describe("api.view.validation.Mobile Validation Bar", () => {
 						onlyTopLevelMessages: true,
 						dispatchConfig
 					});
-					const props = query(widgetMap.MobilePreviewListIem).props();
+					const props = query(widgetMap.MobileValidationPreviewListItem).props();
 					props.onClick?.({} as React.MouseEvent<HTMLElement>);
 
 					strictEqual(
@@ -305,7 +305,7 @@ describe("api.view.validation.Mobile Validation Bar", () => {
 						currentMessageKey: ERROR_KEY_2,
 						onlyTopLevelMessages: true
 					});
-					query(widgetMap.MobileValidationBarGraphic)
+					query(widgetMap.MobileValidationGraphic)
 						.withProp("children", ["Error", " (2/7)"])
 						.withProp("variant", "error")
 						.assertRenderedTimes(1);
@@ -319,7 +319,7 @@ describe("api.view.validation.Mobile Validation Bar", () => {
 							onlyTopLevelMessages: true
 						});
 
-						query(widgetMap.SizeContainerRow)
+						query(widgetMap.LayoutGridRow)
 							.withProp("children", "Error String 2")
 							.assertRenderedTimes(1);
 						query(widgetMap.Button)
@@ -337,10 +337,10 @@ describe("api.view.validation.Mobile Validation Bar", () => {
 							onlyTopLevelMessages: true
 						});
 
-						query(widgetMap.SizeContainerRow)
+						query(widgetMap.LayoutGridRow)
 							.withProp("children", "Error String 1")
 							.assertRenderedTimes(1);
-						query(widgetMap.SizeContainerRow)
+						query(widgetMap.LayoutGridRow)
 							.withProp("children", "Multiple possible causes")
 							.assertRenderedTimes(1);
 						query(widgetMap.Button)
@@ -526,7 +526,7 @@ describe("api.view.validation.Mobile Validation Bar", () => {
 						currentMessageKey: WARNING_KEY_1,
 						onlyTopLevelMessages: true
 					});
-					query(widgetMap.MobileValidationBarGraphic)
+					query(widgetMap.MobileValidationGraphic)
 						.withProp("children", ["Warning", " (4/7)"])
 						.withProp("variant", "warning")
 						.assertRenderedTimes(1);
@@ -541,7 +541,7 @@ describe("api.view.validation.Mobile Validation Bar", () => {
 						currentMessageKey: INFO_KEY_1,
 						onlyTopLevelMessages: true
 					});
-					query(widgetMap.MobileValidationBarGraphic)
+					query(widgetMap.MobileValidationGraphic)
 						.withProp("children", ["Info", " (6/7)"])
 						.withProp("variant", "info")
 						.assertRenderedTimes(1);
@@ -575,14 +575,14 @@ describe("api.view.validation.Mobile Validation Bar", () => {
 	describe("Given a state with validation messages and an information that the validation bar is not visible", () => {
 		it("does not show a validation bar", () => {
 			const { widgetMap } = setup({ validationBarNotVisible: true });
-			query(widgetMap.MobileValidationBar).assertNotRendered();
+			query(widgetMap.MobileValidation).assertNotRendered();
 		});
 	});
 
 	describe("Disabled Form-Engine", () => {
 		it("disables the Validation Bar Overview", () => {
 			const { widgetMap } = setup({ setupDevApp: false, disabled: true });
-			const allProps = query(widgetMap.MobileValidationBarOverview).propsHistory();
+			const allProps = query(widgetMap.MobileValidationOverview).propsHistory();
 			allProps.forEach(props => {
 				strictEqual(props.onClick, undefined);
 			});
@@ -590,7 +590,7 @@ describe("api.view.validation.Mobile Validation Bar", () => {
 
 		it("disables the PreviewList Items", () => {
 			const { widgetMap } = setup({ setupDevApp: false, expanded: true, disabled: true });
-			const allProps = query(widgetMap.MobilePreviewListIem).propsHistory();
+			const allProps = query(widgetMap.MobileValidationPreviewListItem).propsHistory();
 			allProps.forEach(props => {
 				strictEqual(props.onClick, undefined);
 			});
@@ -660,14 +660,14 @@ describe("api.view.validation.Mobile Validation Bar", () => {
 				it("renders a localized 'Multiple causes' text", () => {
 					const expectedText =
 						locale === "en_US" ? "Multiple possible causes" : "Mehrere mögliche Fehlerquellen";
-					query(render.wrapper.widgetMap.SizeContainerRow)
+					query(render.wrapper.widgetMap.LayoutGridRow)
 						.withProp("children", expectedText)
 						.assertRenderedTimes(1);
 				});
 
 				it("renders a localized header text", () => {
 					const expectedText = locale === "en_US" ? ["Error", " (1/7)"] : ["Fehler", " (1/7)"];
-					query(render.wrapper.widgetMap.MobileValidationBarGraphic)
+					query(render.wrapper.widgetMap.MobileValidationGraphic)
 						.withProp("children", expectedText)
 						.assertRenderedTimes(1);
 				});
@@ -682,7 +682,7 @@ describe("api.view.validation.Mobile Validation Bar", () => {
 						locale: Locale.fromString(locale) as Locale,
 						onlyTopLevelMessages: true
 					});
-					query(widgetMap.MobileValidationBarGraphic)
+					query(widgetMap.MobileValidationGraphic)
 						.withProp("children", expectedText)
 						.assertRenderedTimes(1);
 				});
@@ -697,7 +697,7 @@ describe("api.view.validation.Mobile Validation Bar", () => {
 						locale: Locale.fromString(locale) as Locale,
 						onlyTopLevelMessages: true
 					});
-					query(widgetMap.MobileValidationBarGraphic)
+					query(widgetMap.MobileValidationGraphic)
 						.withProp("children", expectedText)
 						.assertRenderedTimes(1);
 				});

@@ -1,6 +1,6 @@
 {
   "name": "@com.mgmtp.a12.formengine/formengine-model-migration",
-  "version": "38.5.0-SNAPSHOT",
+  "version": "39.0.0",
   "description": "form model migration CLI tool",
   "author": "mgm technology partners",
   "license": "(EUPL-1.2 OR LicenseRef-commercial)",
@@ -14,7 +14,10 @@
     "test:coverage": "c8 mocha",
     "test": "mocha",
     "typescript": "tsc --project ./tsconfig.dev.json",
-    "watch": "tsc --project ./tsconfig.dev.json --watch"
+    "watch": "tsc --project ./tsconfig.dev.json --watch",
+    "lint": "eslint --flag unstable_native_nodejs_ts_config . --cache",
+    "lint:fix": "node --run lint -- --fix",
+    "lint:onlyErrors": "node --run lint -- --quiet"
   },
   "bin": "lib/main/cli.js",
   "devDependencies": {
@@ -27,6 +30,7 @@
     "@types/node": "catalog:",
     "mocha": "catalog:",
     "c8": "catalog:",
+    "eslint": "catalog:",
     "rimraf": "catalog:",
     "source-map-support": "catalog:",
     "typescript": "catalog:"
@@ -44,10 +48,5 @@
     "THIRD_PARTY_NOTICES",
     "licenses"
   ],
-  "exports": {
-    ".": "./lib/main/api.js",
-    "./lib/*": "./lib/*.js",
-    "./lib/*.js": "./lib/*.js"
-  },
-  "types": "lib/main/api.d.ts"
+  "exports": "./lib/main/api.js"
 }

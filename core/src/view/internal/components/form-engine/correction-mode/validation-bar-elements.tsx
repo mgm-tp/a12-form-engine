@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -33,13 +33,13 @@
 import type { ReactElement } from "react";
 import { useContext } from "react";
 
-import type { ModelPath } from "@com.mgmtp.a12.base/base-model-api/lib/main/model/index.js";
-import { LocalizerContext } from "@com.mgmtp.a12.utils/utils-localization-react/lib/main/index.js";
+import type { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
 import type {
 	Localizable,
 	Localizer,
 	ValueConversion
-} from "@com.mgmtp.a12.utils/utils-localization/lib/main/index.js";
+} from "@com.mgmtp.a12.utils/utils-localization";
+import { LocalizerContext } from "@com.mgmtp.a12.utils/utils-localization-react";
 
 import { RESOURCE_KEYS } from "../../../../../back-end/localization/internal/languages/keys.js";
 import { createLocalizableFactory } from "../../../../../back-end/localization/internal/localization.js";
@@ -47,12 +47,20 @@ import { getLocalizedResource } from "../../../../../back-end/localization/inter
 import type { CorrectionModeItem } from "../../../../../back-end/store/internal/CorrectionModeItem.js";
 import { ModelSelectors } from "../../../../../back-end/store/internal/selectors/models.js";
 import type { EngineStore } from "../../../../../back-end/store/internal/store.js";
-import { findElementByFormModelPath, FormModel } from "../../../../../models/index.js";
+import type { FormModel } from "../../../../../models/index.js";
+import { findElementByFormModelPath } from "../../../../../models/index.js";
+import {
+	isFormModelControl,
+	isFormModelDetachedRepeat,
+	isFormModelFieldOverviewColumn,
+	isFormModelInlineRepeat,
+	isFormModelScreen
+} from "../../../../../models/internal/FormModelGuards.js";
 import { DocumentPath } from "../../../../../models/internal/utils/document-utils.js";
 import type { FormModelMap } from "../../../configuration/engine-configuration.js";
 import { WidgetMapContext } from "../../../configuration/widget-map-context.js";
 
-import { CorrectionModeUtil } from "./utils.js";
+import { getUIIssueReport } from "./utils.js";
 
 /**
  * Type alias for convenience
@@ -105,12 +113,7 @@ export function createToValidationBarItem(
 	includeLocations: boolean
 ): ValidationBarItem {
 	const items: CorrectionModeItem[] = [];
-	const uiIssueReport = CorrectionModeUtil.getUIIssueReport(
-		message,
-		renderOptions,
-		localizer,
-		converter
-	);
+	const uiIssueReport = getUIIssueReport(message, renderOptions, localizer, converter);
 	if (includeLocations && uiIssueReport.fixable) {
 		items.push(...uiIssueReport.items);
 	}
@@ -145,27 +148,26 @@ export function ValidationBarContent(props: {
 	const { disabled, text, locations, isFixable } = props;
 
 	const localizer = useContext(LocalizerContext).localizer;
-	const { Button, SizeContainer, SizeContainerColumn, SizeContainerRow } =
-		useContext(WidgetMapContext);
+	const { Button, LayoutGrid, LayoutGridColumn, LayoutGridRow } = useContext(WidgetMapContext);
 
 	return (
-		<SizeContainer>
-			<SizeContainerColumn size={{ sm: 12, md: 12, lg: 12 }}>
-				<SizeContainerRow key="0" data-testid={`row-0`}>
+		<LayoutGrid>
+			<LayoutGridColumn size={{ sm: 12, md: 12, lg: 12 }}>
+				<LayoutGridRow key="0" data-testid={`row-0`}>
 					{localizer(...text)}
-				</SizeContainerRow>
+				</LayoutGridRow>
 				{locations.length !== 1 ? (
-					<SizeContainerRow key="1" data-testid={`row-1`}>
+					<LayoutGridRow key="1" data-testid={`row-1`}>
 						{locations.length === 0
 							? isFixable
 								? getLocalizedResource(RESOURCE_KEYS.validation.issueCanBeFixed, localizer)
 								: getLocalizedResource(RESOURCE_KEYS.validation.issueCannotBeFixed, localizer)
 							: getLocalizedResource(RESOURCE_KEYS.validation.multiplePossibleCauses, localizer)}
-					</SizeContainerRow>
+					</LayoutGridRow>
 				) : null}
 				{locations.map((location, index) => {
 					return (
-						<SizeContainerRow key={String(index + 2)} data-testid={`row-${index + 2}`}>
+						<LayoutGridRow key={String(index + 2)} data-testid={`row-${index + 2}`}>
 							<Button
 								disabled={disabled}
 								label={location.map(localizables => localizer(...localizables) ?? "").join(" > ")}
@@ -173,11 +175,11 @@ export function ValidationBarContent(props: {
 								buttonAttributes={ARIA_LINK}
 								data-testid={`row-button-${index + 2}`}
 							/>
-						</SizeContainerRow>
+						</LayoutGridRow>
 					);
 				})}
-			</SizeContainerColumn>
-		</SizeContainer>
+			</LayoutGridColumn>
+		</LayoutGrid>
 	);
 }
 
@@ -222,7 +224,7 @@ function localizeLocation(
 		throw new Error("No element found for path " + formModelPath);
 	}
 
-	if (!FormModel.Screen.isInstance(element) && !FormModel.DetachedRepeat.isInstance(element)) {
+	if (!isFormModelScreen(element) && !isFormModelDetachedRepeat(element)) {
 		throw new Error(
 			"Expected that element is of type FormModel.Screen or FormModel.DetachedRepeat"
 		);
@@ -249,14 +251,14 @@ function localizeEditableComponent(
 		return undefined;
 	}
 
-	if (FormModel.Control.isInstance(formModelElement)) {
+	if (isFormModelControl(formModelElement)) {
 		return localizableFactory.inputLabel(formModelElement, formModelPath);
 	} else {
 		const repeat = findElementByFormModelPath(
 			ModelSelectors.formModel()(renderOptions.state),
 			formModelPath.slice(0, formModelPath.length - 1)
 		);
-		if (repeat && FormModel.InlineRepeat.isInstance(repeat)) {
+		if (repeat && isFormModelInlineRepeat(repeat)) {
 			const column = repeat.repeatOverviewColumn?.find(c =>
 				columnMatchesModelPath(c, formModelPath)
 			);
@@ -274,7 +276,7 @@ function columnMatchesModelPath(
 	formModelPath: ModelPath
 ): boolean {
 	return (
-		(FormModel.FieldOverviewColumn.isInstance(column) ? column.id : column.name) ===
+		(isFormModelFieldOverviewColumn(column) ? column.id : column.name) ===
 		formModelPath[formModelPath.length - 1].elementName
 	);
 }

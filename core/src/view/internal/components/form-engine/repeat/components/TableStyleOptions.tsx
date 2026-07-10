@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -30,7 +30,11 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { FormModel } from "../../../../../../models/internal/form-model.js";
+import {
+	isFormModelDetachedRepeat,
+	isFormModelInlineRepeat
+} from "../../../../../../models/internal/FormModelGuards.js";
+import type { FormModel } from "../../../../../../models/internal/form-model.js";
 
 /** @internal */
 export interface TableStyleOptions {
@@ -55,7 +59,7 @@ export function getTableStyleOptions(
 			: repeat.tableStyle?.rowHeight;
 
 	const infiniteScrolling =
-		FormModel.InlineRepeat.isInstance(repeat) || FormModel.DetachedRepeat.isInstance(repeat)
+		isFormModelInlineRepeat(repeat) || isFormModelDetachedRepeat(repeat)
 			? repeat.infiniteScrolling
 			: undefined;
 

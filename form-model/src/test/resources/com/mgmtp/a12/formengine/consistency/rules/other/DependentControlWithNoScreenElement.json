@@ -1,0 +1,85 @@
+{
+  "header": {
+    "id": "DependentControlWithNoScreenElement",
+    "modelType": "form",
+    "modelVersion": "39.0.0",
+    "locales": [
+      {
+        "code": "en"
+      }
+    ],
+    "annotations": [
+      {
+        "name": "roles",
+        "value": "admin"
+      }
+    ],
+    "modelReferences": [
+      {
+        "alias": "DM",
+        "modelType": "document",
+        "purpose": "data binding",
+        "reference": "DependentControl-document"
+      }
+    ]
+  },
+  "content": {
+    "subHeaderBox": {
+      "id": "subHeaderBox1"
+    },
+    "footerBox": {
+      "id": "footerBox1"
+    },
+    "screens": [
+      {
+        "id": "screen1",
+        "name": "Screen1",
+        "screenElements": [
+          {
+            "type": "ControlGrid",
+            "id": "controlgrid-eb2a5",
+            "name": "cg1",
+            "row": [
+              {
+                "type": "Row",
+                "id": "row-12a47",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control-ae4b2",
+                    "elementRef": "field_18797",
+                    "dependentControls": {}
+                  }
+                ]
+              },
+              {
+                "type": "Row",
+                "id": "row-2fe0c",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control-09494",
+                    "elementRef": "field_695a8",
+                    "dependentControls": {
+                      "screenElement": []
+                    }
+                  }
+                ]
+              }
+            ],
+            "verticalAlignment": "TOP"
+          },
+          {
+            "type": "ControlGrid",
+            "id": "controlgrid-63325",
+            "name": "cg2",
+            "verticalAlignment": "TOP"
+          }
+        ]
+      }
+    ],
+    "fieldConfiguration": {},
+    "groupConfiguration": {},
+    "defaults": {}
+  }
+}

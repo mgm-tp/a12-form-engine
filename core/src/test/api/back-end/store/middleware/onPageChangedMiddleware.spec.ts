@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -31,13 +31,11 @@
  */
 
 import { Commands, Events } from "../../../../../back-end/store/index.js";
-import { MiddlewareHelpers } from "../../../../utils/back-end-helpers.js";
-import { ModelHelpers } from "../../../../utils/model-helpers.js";
-import { SetupHelpers } from "../../../../utils/setup.js";
+import { createModelPath } from "../../../../utils/createModelPath.js";
+import { MiddlewareHelpers } from "../../../../utils/MiddlewareHelpers.js";
+import { createTestStore } from "../../../../utils/setup.js";
 import { setupFixture, setupModelsFixture } from "../../../../utils/setupFixture.js";
 import { IR } from "../../../../utils/test-model-helpers/inline.repeat.js";
-
-const { createTestStore } = SetupHelpers;
 
 describe("api.back-end.store.middleware", () => {
 	describe("onPageChangeMiddleware", () => {
@@ -45,10 +43,7 @@ describe("api.back-end.store.middleware", () => {
 			const middlewareSpy = setupFixture(() => MiddlewareHelpers.createMiddlewareSpy());
 			const models = setupModelsFixture("repeat", "inline");
 
-			const repeatFormModelPath = ModelHelpers.createModelPath(
-				IR.SortingAndFiltering.screen,
-				"Repeat"
-			);
+			const repeatFormModelPath = createModelPath(IR.SortingAndFiltering.screen, "Repeat");
 			it("dispatches a Commands.changeRepeatInstanceStateEntry action with the page from the payload", () => {
 				setupStore().dispatch(
 					Events.Repeat.changePage({
@@ -58,7 +53,7 @@ describe("api.back-end.store.middleware", () => {
 				);
 
 				const expectedCommand = Commands.changeRepeatInstanceStateEntry({
-					locationPath: ModelHelpers.createModelPath(IR.SortingAndFiltering.screen),
+					locationPath: createModelPath(IR.SortingAndFiltering.screen),
 					entry: {
 						page: 5,
 						newRow: undefined,

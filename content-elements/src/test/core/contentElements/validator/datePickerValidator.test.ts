@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -32,49 +32,51 @@
 
 import { deepStrictEqual, strictEqual } from "node:assert/strict";
 
-import { ModelPath } from "@com.mgmtp.a12.base/base-model-api/lib/main/model/index.js";
+import { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
 import type { ValidationMessage } from "@com.mgmtp.a12.contentengine/contentengine-core";
-import type { DocumentModel } from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
+import type { DocumentModel } from "@com.mgmtp.a12.kernel/kernel-md-facade";
 
 import { checkValidElementForDatePicker } from "../../../../main/core/contentElements/modules/datePicker/datePickerValidator.js";
 
-describe("DatePickerValidator", () => {
-	describe("checkValidElementForDatePicker", () => {
-		it("returns no error for a reference to a supported field", () => {
-			const validTypes = [
-				"DateType",
-				"DateTimeType",
-				"TimeType",
-				"DateFragmentType",
-				"DateRangeType"
-			] as const;
+describe("core.contentElements.validator", () => {
+	describe("DatePickerValidator", () => {
+		describe("checkValidElementForDatePicker", () => {
+			it("returns no error for a reference to a supported field", () => {
+				const validTypes = [
+					"DateType",
+					"DateTimeType",
+					"TimeType",
+					"DateFragmentType",
+					"DateRangeType"
+				] as const;
 
-			validTypes.forEach(t => {
+				validTypes.forEach(t => {
+					const messages = checkValidElementForDatePicker({
+						element: field(t),
+						path: modelPath()
+					});
+
+					strictEqual(messages.length, 0);
+				});
+			});
+
+			it("returns an error for a reference to an unsupported field", () => {
 				const messages = checkValidElementForDatePicker({
-					element: field(t),
+					element: field("StringType"),
 					path: modelPath()
 				});
 
-				strictEqual(messages.length, 0);
-			});
-		});
-
-		it("returns an error for a reference to an unsupported field", () => {
-			const messages = checkValidElementForDatePicker({
-				element: field("StringType"),
-				path: modelPath()
+				deepStrictEqual(messages, [errorMessage()]);
 			});
 
-			deepStrictEqual(messages, [errorMessage()]);
-		});
+			it("returns an error for a reference to a group", () => {
+				const messages = checkValidElementForDatePicker({
+					element: group(),
+					path: modelPath()
+				});
 
-		it("returns an error for a reference to a group", () => {
-			const messages = checkValidElementForDatePicker({
-				element: group(),
-				path: modelPath()
+				deepStrictEqual(messages, [errorMessage()]);
 			});
-
-			deepStrictEqual(messages, [errorMessage()]);
 		});
 	});
 });

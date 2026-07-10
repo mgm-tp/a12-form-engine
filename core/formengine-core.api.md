@@ -4,108 +4,110 @@
 
 ```ts
 
-import type { A12ApplicationConfig } from '@com.mgmtp.a12.client/client-core/lib/core/application/index.js';
-import type { ActionContentboxProps } from '@com.mgmtp.a12.widgets/widgets-core/lib/contentbox/main/action-contentbox/action-contentbox.api.js';
-import { ActionCreator } from 'typescript-fsa';
+import type { A12ApplicationConfig } from '@com.mgmtp.a12.client/client-core';
+import type { Action } from 'redux';
+import type { ActionContentboxProps } from '@com.mgmtp.a12.widgets/widgets-core';
+import { ActionCreator } from '@com.mgmtp.a12.client/typescript-fsa-redux-5-compat';
 import type { ActionCreator as ActionCreator_2 } from 'redux';
-import { Activity } from '@com.mgmtp.a12.client/client-core/lib/core/activity/index.js';
-import { ActivityReducers } from '@com.mgmtp.a12.client/client-core/lib/core/activity/index.js';
-import type { Annotation } from '@com.mgmtp.a12.base/base-model-api/lib/main/header/index.js';
-import type { AnyAction } from 'redux';
-import type { AnyAction as AnyAction_2 } from 'typescript-fsa';
-import type { ApplicationWithConfiguredFeature } from '@com.mgmtp.a12.client/client-core/lib/core/application/index.js';
-import type { AttachedPortalProps } from '@com.mgmtp.a12.widgets/widgets-core/lib/attached-portal/main/attached-portal.api.js';
-import type { Attachment } from '@com.mgmtp.a12.dataservices/dataservices-access/lib/Attachment/attachment.js';
-import type { AutocompleteProps } from '@com.mgmtp.a12.widgets/widgets-core/lib/input/autocomplete/main/autocomplete.api.js';
-import type { BodyProps } from '@com.mgmtp.a12.widgets/widgets-core/lib/typography/main/typography.api.js';
-import type { BreadcrumbProps } from '@com.mgmtp.a12.widgets/widgets-core/lib/breadcrumb/main/breadcrumb.api.js';
-import type { BulletListProps } from '@com.mgmtp.a12.widgets/widgets-core/lib/bullet-list/main/bullet-list.api.js';
-import type { ButtonGroupContainerProps } from '@com.mgmtp.a12.widgets/widgets-core/lib/layout/button-group-container/main/button-group-container.api.js';
-import type { ButtonGroupProps } from '@com.mgmtp.a12.widgets/widgets-core/lib/button-group/main/button-group.api.js';
-import type { ButtonProps } from '@com.mgmtp.a12.widgets/widgets-core/lib/button/main/button.api.js';
-import type { CheckboxGroupProps } from '@com.mgmtp.a12.widgets/widgets-core/lib/input/checkbox-group/main/checkbox-group.api.js';
-import type { CheckboxItemProps } from '@com.mgmtp.a12.widgets/widgets-core/lib/input/checkbox-group/main/checkbox-group.api.js';
-import type { CheckboxProps } from '@com.mgmtp.a12.widgets/widgets-core/lib/input/checkbox/main/checkbox.api.js';
-import type { ClearfixProps } from '@com.mgmtp.a12.widgets/widgets-core/lib/clearfix/main/clearfix.api.js';
-import type { Column } from '@com.mgmtp.a12.widgets/widgets-core/lib/table/new-api/column.api.js';
+import { Activity } from '@com.mgmtp.a12.client/client-core';
+import { ActivityReducers } from '@com.mgmtp.a12.client/client-core';
+import type { Annotation } from '@com.mgmtp.a12.base/base-model-api';
+import type { ApplicationWithConfiguredFeature } from '@com.mgmtp.a12.client/client-core';
+import type { AttachedPortalProps } from '@com.mgmtp.a12.widgets/widgets-core';
+import type { Attachment } from '@com.mgmtp.a12.dataservices/dataservices-access';
+import type { AutocompleteProps } from '@com.mgmtp.a12.widgets/widgets-core';
+import type { BodyProps } from '@com.mgmtp.a12.widgets/widgets-core';
+import type { BreadcrumbProps } from '@com.mgmtp.a12.widgets/widgets-core';
+import type { BulletListProps } from '@com.mgmtp.a12.widgets/widgets-core';
+import type { ButtonGroupContainerProps } from '@com.mgmtp.a12.widgets/widgets-core';
+import type { ButtonGroupProps } from '@com.mgmtp.a12.widgets/widgets-core';
+import type { ButtonProps } from '@com.mgmtp.a12.widgets/widgets-core';
+import type { CheckboxGroupProps } from '@com.mgmtp.a12.widgets/widgets-core';
+import type { CheckboxItemProps } from '@com.mgmtp.a12.widgets/widgets-core';
+import type { CheckboxProps } from '@com.mgmtp.a12.widgets/widgets-core';
+import type { ClearfixProps } from '@com.mgmtp.a12.widgets/widgets-core';
+import type { Column } from '@com.mgmtp.a12.widgets/widgets-core';
 import { Component } from 'react';
 import type { ComponentType } from 'react';
-import type { Container } from '@com.mgmtp.a12.widgets/widgets-core/lib/common/main/base-props.js';
-import type { ContentBoxProps } from '@com.mgmtp.a12.widgets/widgets-core/lib/contentbox/main/template/contentbox.tpl.api.js';
+import type { Container } from '@com.mgmtp.a12.widgets/widgets-core';
+import type { ContentBoxProps } from '@com.mgmtp.a12.widgets/widgets-core';
 import { Context } from 'react';
-import type { CounterProps } from '@com.mgmtp.a12.widgets/widgets-core/lib/counter/main/counter.api.js';
-import type { CssEllipsisProps } from '@com.mgmtp.a12.widgets/widgets-core/lib/css-ellipsis/main/css-ellipsis.api.js';
-import type { DataFormats } from '@com.mgmtp.a12.utils/utils-localization/lib/main/index.js';
-import type { DataProvider } from '@com.mgmtp.a12.client/client-core/lib/core/data/index.js';
-import type { DatePickerDialogProps } from '@com.mgmtp.a12.widgets/widgets-core/lib/datepicker/main/date-picker.mobile.api.js';
-import type { DatePickerProps } from '@com.mgmtp.a12.widgets/widgets-core/lib/datepicker/main/date-picker.api.js';
-import type { DateTimePickerProps } from '@com.mgmtp.a12.widgets/widgets-core/lib/date-time-picker/main/date-time-picker.api.js';
-import type { DefaultFileUploadProps } from '@com.mgmtp.a12.widgets/widgets-core/lib/file-upload/main/default/default-file-upload.api.js';
+import type { CounterProps } from '@com.mgmtp.a12.widgets/widgets-core';
+import type { CssEllipsisProps } from '@com.mgmtp.a12.widgets/widgets-core';
+import type { DataFormats } from '@com.mgmtp.a12.utils/utils-localization';
+import type { DataProvider } from '@com.mgmtp.a12.client/client-core';
+import type { DatePickerDialogProps } from '@com.mgmtp.a12.widgets/widgets-core';
+import type { DatePickerProps } from '@com.mgmtp.a12.widgets/widgets-core';
+import type { DateTimePickerHeaderProps } from '@com.mgmtp.a12.widgets/widgets-core';
+import type { DateTimePickerProps } from '@com.mgmtp.a12.widgets/widgets-core';
+import type { DefaultFileUploadProps } from '@com.mgmtp.a12.widgets/widgets-core';
 import type { Dispatch } from 'redux';
-import type { Document as Document_2 } from '@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js';
-import type { DocumentJsonRpc2Request } from '@com.mgmtp.a12.dataservices/dataservices-access/lib/Document/index.js';
-import type { DocumentModel } from '@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js';
-import type { EntityInstancePath } from '@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js';
-import type { ErrorTooltipProps } from '@com.mgmtp.a12.widgets/widgets-core/lib/tooltip/error/main/error.api.js';
+import type { Document as Document_2 } from '@com.mgmtp.a12.kernel/kernel-md-facade';
+import type { DocumentJsonRpc2Request } from '@com.mgmtp.a12.dataservices/dataservices-access';
+import type { DocumentModel } from '@com.mgmtp.a12.kernel/kernel-md-facade';
+import type { EntityInstancePath } from '@com.mgmtp.a12.kernel/kernel-md-facade';
+import type { ErrorTooltipProps } from '@com.mgmtp.a12.widgets/widgets-core';
 import type { Expression } from '@com.mgmtp.a12.expression/expression-core';
-import type { FieldInstanceValue } from '@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js';
-import type { FlyoutMenuProps } from '@com.mgmtp.a12.widgets/widgets-core/lib/menu/main/flyout-menu.api.js';
-import type { GlobalMessageBoxProps } from '@com.mgmtp.a12.widgets/widgets-core/lib/global-message-box/main/global-message-box.api.js';
-import type { GroupInstance } from '@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js';
-import type { HeaderProps } from '@com.mgmtp.a12.widgets/widgets-core/lib/date-time-picker/main/date-time-picker.internal.js';
-import type { HeadlineProps } from '@com.mgmtp.a12.widgets/widgets-core/lib/typography/main/typography.api.js';
-import type { HiddenTextProps } from '@com.mgmtp.a12.widgets/widgets-core/lib/common/main/hidden-text/hidden-text.api.js';
-import type { HintTooltipProps } from '@com.mgmtp.a12.widgets/widgets-core/lib/tooltip/hint/main/hint.api.js';
-import type { IconProps } from '@com.mgmtp.a12.widgets/widgets-core/lib/icon/main/icon.api.js';
-import type { IconTheme } from '@com.mgmtp.a12.widgets/widgets-core/lib/icon/main/icon.api.js';
-import type { IGeneratedCodeAccessor } from '@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js';
-import type { IndeterminateCheckboxProps } from '@com.mgmtp.a12.widgets/widgets-core/lib/input/checkbox/main/checkbox.api.js';
+import type { FieldInstanceValue } from '@com.mgmtp.a12.kernel/kernel-md-facade';
+import type { FlyoutMenuProps } from '@com.mgmtp.a12.widgets/widgets-core';
+import type { FunctionComponent } from 'react';
+import type { GeneratedCodeRtConfig } from '@com.mgmtp.a12.kernel/kernel-md-facade';
+import type { GlobalMessageBoxProps } from '@com.mgmtp.a12.widgets/widgets-core';
+import type { GroupInstance } from '@com.mgmtp.a12.kernel/kernel-md-facade';
+import type { HeadlineProps } from '@com.mgmtp.a12.widgets/widgets-core';
+import type { HiddenTextProps } from '@com.mgmtp.a12.widgets/widgets-core';
+import type { HintTooltipProps } from '@com.mgmtp.a12.widgets/widgets-core';
+import type { IconProps } from '@com.mgmtp.a12.widgets/widgets-core';
+import type { IconTheme } from '@com.mgmtp.a12.widgets/widgets-core';
+import type { IGeneratedCodeAccessor } from '@com.mgmtp.a12.kernel/kernel-md-facade';
+import type { IndeterminateCheckboxProps } from '@com.mgmtp.a12.widgets/widgets-core';
 import type { JSX } from 'react';
-import type { LayoutGridProps } from '@com.mgmtp.a12.widgets/widgets-core/lib/layout/layout-grid/main/layout-grid.api.js';
-import type { ListItemProps } from '@com.mgmtp.a12.widgets/widgets-core/lib/list/main/list.api.js';
-import type { ListProps } from '@com.mgmtp.a12.widgets/widgets-core/lib/list/main/list.api.js';
-import type { ListSubHeaderProps } from '@com.mgmtp.a12.widgets/widgets-core/lib/list/main/list.api.js';
-import type { Locale } from '@com.mgmtp.a12.utils/utils-localization/lib/main/index.js';
-import type { Localizable } from '@com.mgmtp.a12.utils/utils-localization/lib/main/index.js';
-import type { LocalizedModelText } from '@com.mgmtp.a12.utils/utils-localization/lib/main/index.js';
-import type { Localizer } from '@com.mgmtp.a12.utils/utils-localization/lib/main/index.js';
-import type { MessageBoxProps } from '@com.mgmtp.a12.widgets/widgets-core/lib/message-box/main/message-box.api.js';
-import type { MessageProps } from '@com.mgmtp.a12.widgets/widgets-core/lib/message/main/message.api.js';
+import type { LayoutGridProps } from '@com.mgmtp.a12.widgets/widgets-core';
+import type { ListItemProps } from '@com.mgmtp.a12.widgets/widgets-core';
+import type { ListProps } from '@com.mgmtp.a12.widgets/widgets-core';
+import type { ListSubHeaderProps } from '@com.mgmtp.a12.widgets/widgets-core';
+import type { Locale } from '@com.mgmtp.a12.utils/utils-localization';
+import type { Localizable } from '@com.mgmtp.a12.utils/utils-localization';
+import type { LocalizedModelText } from '@com.mgmtp.a12.utils/utils-localization';
+import type { Localizer } from '@com.mgmtp.a12.utils/utils-localization';
+import type { MessageBoxProps } from '@com.mgmtp.a12.widgets/widgets-core';
+import type { MessageProps } from '@com.mgmtp.a12.widgets/widgets-core';
 import type { Middleware } from 'redux';
-import type { MobileValidationProps } from '@com.mgmtp.a12.widgets/widgets-core/lib/validation-bar/main/validation-bar.mobile.api.js';
-import type { ModalNotificationProps } from '@com.mgmtp.a12.widgets/widgets-core/lib/modal-notification/main/modal-notification.api.js';
-import type { ModalOverlayProps } from '@com.mgmtp.a12.widgets/widgets-core/lib/modal-overlay/main/modal-overlay.api.js';
-import type { Model } from '@com.mgmtp.a12.base/base-model-api/lib/main/model/index.js';
-import { ModelPath } from '@com.mgmtp.a12.base/base-model-api/lib/main/model/index.js';
-import type { ModelProcessor } from '@com.mgmtp.a12.client/client-core/lib/core/model/index.js';
-import type { MultiselectProps } from '@com.mgmtp.a12.widgets/widgets-core/lib/multiselect/main/multiselect.api.js';
-import type { PaginationProps } from '@com.mgmtp.a12.widgets/widgets-core/lib/pagination/main/pagination.api.js';
-import type { PopUpMenuProps } from '@com.mgmtp.a12.widgets/widgets-core/lib/pop-up-menu/main/pop-up-menu.api.js';
-import type { Query } from '@com.mgmtp.a12.dataservices/dataservices-access/lib/query/Query.js';
-import type { QueryJsonRpc2Request } from '@com.mgmtp.a12.dataservices/dataservices-access/lib/query/Request.js';
-import type { QuickAccessButtonProps } from '@com.mgmtp.a12.widgets/widgets-core/lib/quick-access-button/main/quick-access-button.api.js';
-import type { RadioItemProps } from '@com.mgmtp.a12.widgets/widgets-core/lib/input/radio/main/radio.api.js';
-import type { RadioProps } from '@com.mgmtp.a12.widgets/widgets-core/lib/input/radio/main/radio.api.js';
+import type { MobileValidationProps } from '@com.mgmtp.a12.widgets/widgets-core';
+import type { ModalNotificationProps } from '@com.mgmtp.a12.widgets/widgets-core';
+import type { ModalOverlayProps } from '@com.mgmtp.a12.widgets/widgets-core';
+import type { Model } from '@com.mgmtp.a12.base/base-model-api';
+import { ModelPath } from '@com.mgmtp.a12.base/base-model-api';
+import type { ModelProcessor } from '@com.mgmtp.a12.client/client-core';
+import type { MultiselectProps } from '@com.mgmtp.a12.widgets/widgets-core';
+import type { PaginationProps } from '@com.mgmtp.a12.widgets/widgets-core';
+import type { PopUpMenuProps } from '@com.mgmtp.a12.widgets/widgets-core';
+import type { Query } from '@com.mgmtp.a12.dataservices/dataservices-access';
+import type { QueryJsonRpc2Request } from '@com.mgmtp.a12.dataservices/dataservices-access';
+import type { QuickAccessButtonProps } from '@com.mgmtp.a12.widgets/widgets-core';
+import type { RadioItemProps } from '@com.mgmtp.a12.widgets/widgets-core';
+import type { RadioProps } from '@com.mgmtp.a12.widgets/widgets-core';
 import type { ReactNode } from 'react';
 import type { Reducer } from 'redux';
 import type { RefObject } from 'react';
-import type { RequireFeatures } from '@com.mgmtp.a12.client/client-core/lib/core/application/index.js';
-import type { ResponsiveImageContainerProps } from '@com.mgmtp.a12.widgets/widgets-core/lib/responsive-image-container/main/responsive-image-container.api.js';
+import type { RequireFeatures } from '@com.mgmtp.a12.client/client-core';
+import type { ResponsiveImageContainerProps } from '@com.mgmtp.a12.widgets/widgets-core';
 import type { SagaGenerator } from 'typed-redux-saga';
-import type { SectionProps } from '@com.mgmtp.a12.widgets/widgets-core/lib/typography/main/typography.api.js';
-import type { Selector as Selector_2 } from '@com.mgmtp.a12.client/client-core/lib/core/store/index.js';
-import type { SelectProps } from '@com.mgmtp.a12.widgets/widgets-core/lib/input/select/main/select.api.js';
-import type { SupportedType } from '@com.mgmtp.a12.utils/utils-localization/lib/main/conversion.js';
-import type { SwitchProps } from '@com.mgmtp.a12.widgets/widgets-core/lib/input/switch/main/switch.api.js';
-import type { TextAffixProps } from '@com.mgmtp.a12.widgets/widgets-core/lib/input/text-line/main/template/text-line.tpl.api.js';
-import type { TextAreaStatelessProps } from '@com.mgmtp.a12.widgets/widgets-core/lib/input/text-area/main/template/text-area.tpl.api.js';
-import type { TextLineStatelessProps } from '@com.mgmtp.a12.widgets/widgets-core/lib/input/text-line/main/template/text-line.tpl.api.js';
-import type { TextOutputProps } from '@com.mgmtp.a12.widgets/widgets-core/lib/text-output/main/text-output.api.js';
-import type { TimePickerProps } from '@com.mgmtp.a12.widgets/widgets-core/lib/time-picker/main/time-picker.api.js';
-import type { ValidationBarProps } from '@com.mgmtp.a12.widgets/widgets-core/lib/validation-bar/main/validation-bar.api.js';
-import type { ValueConversion } from '@com.mgmtp.a12.utils/utils-localization/lib/main/index.js';
-import type { View } from '@com.mgmtp.a12.client/client-core/lib/core/view/index.js';
-import type { WarningTooltipProps } from '@com.mgmtp.a12.widgets/widgets-core/lib/tooltip/warning/main/warning.api.js';
+import type { SectionProps } from '@com.mgmtp.a12.widgets/widgets-core';
+import type { Selector as Selector_2 } from '@com.mgmtp.a12.client/client-core';
+import type { SelectProps } from '@com.mgmtp.a12.widgets/widgets-core';
+import type { SupportedType } from '@com.mgmtp.a12.utils/utils-localization';
+import type { SwitchProps } from '@com.mgmtp.a12.widgets/widgets-core';
+import type { TextAffixProps } from '@com.mgmtp.a12.widgets/widgets-core';
+import type { TextAreaStatelessProps } from '@com.mgmtp.a12.widgets/widgets-core';
+import type { TextFieldProps } from '@com.mgmtp.a12.widgets/widgets-core';
+import type { TextOutputProps } from '@com.mgmtp.a12.widgets/widgets-core';
+import type { TimePickerProps } from '@com.mgmtp.a12.widgets/widgets-core';
+import type { ValidationBarProps } from '@com.mgmtp.a12.widgets/widgets-core';
+import type { ValueConversion } from '@com.mgmtp.a12.utils/utils-localization';
+import type { ValueConversionParseError } from '@com.mgmtp.a12.utils/utils-localization';
+import type { View } from '@com.mgmtp.a12.client/client-core';
+import type { WarningTooltipProps } from '@com.mgmtp.a12.widgets/widgets-core';
 
 // @public (undocumented)
 export type ApplicationWithFormEngineConfig = RequireFeatures<A12ApplicationConfig, {
@@ -160,13 +162,13 @@ export interface BooleanRepeatFilter extends RepeatFilterBase {
 export type Change = ValueChanged | GroupAdded | GroupRemoved | GroupMoved | Revert;
 
 // @public (undocumented)
-export namespace Change {
-    export function isGroupAdded(element: Change): element is GroupAdded;
-    export function isGroupMoved(element: Change): element is GroupMoved;
-    export function isGroupRemoved(element: Change): element is GroupRemoved;
-    export function isRevert(element: Change): element is Revert;
-    export function isValueChanged(element: Change): element is ValueChanged;
-}
+export const Change: {
+    isGroupAdded(element: Change): element is GroupAdded;
+    isGroupMoved(element: Change): element is GroupMoved;
+    isGroupRemoved(element: Change): element is GroupRemoved;
+    isRevert(element: Change): element is Revert;
+    isValueChanged(element: Change): element is ValueChanged;
+};
 
 // @public
 export type ClockMode = "12h" | "24h";
@@ -289,9 +291,7 @@ export namespace Commands {
 export function computeDocument(options: {
     readonly document: GroupInstance;
     readonly validatorProvider?: IGeneratedCodeAccessor;
-    readonly kernelConfiguration: {
-        readonly now?: Date;
-    };
+    readonly kernelOptions?: GeneratedCodeRtConfig;
 }): {
     changes: ReadonlyObjectMap<Change>;
     document: GroupInstance;
@@ -313,7 +313,6 @@ export interface Config {
     readonly formModelMap: FormModelMap;
     readonly hideCustomEnumerationValue: boolean;
     readonly selectorMap?: SelectorMap;
-    readonly timeMode: ClockMode;
     readonly uiIdPrefix?: string;
     readonly widgetMap?: WidgetMap;
 }
@@ -383,19 +382,15 @@ export interface DataFormatsProvider {
 }
 
 // @public
-export function dataReducer(dataState: EngineStore.DataState, action: AnyAction_2): EngineStore.DataState;
+export function dataReducer(dataState: EngineStore.DataState, action: Action): EngineStore.DataState;
 
 // @public
-export namespace DataSelectors {
-    // (undocumented)
-    export function dirty(): Selector<boolean>;
-    // (undocumented)
-    export function document(): Selector<object>;
-    // (undocumented)
-    export function documentPath(documentModelPath: ModelPath): Selector<EntityInstancePath>;
-    // (undocumented)
-    export function relevantDocument(): Selector<object>;
-}
+export const DataSelectors: {
+    dirty(): Selector<boolean>;
+    document(): Selector<object>;
+    documentPath(documentModelPath: ModelPath): Selector<EntityInstancePath>;
+    relevantDocument(): Selector<object>;
+};
 
 // @public
 export function dataSlice(state: object): EngineStore.DataState;
@@ -438,24 +433,16 @@ export interface DefaultOwnProps {
 }
 
 // @public
-export enum DefaultRepeatButtonNames {
-    // (undocumented)
-    add = "defaultButton/add",
-    // (undocumented)
-    cancel_detached_repeat = "defaultButton/cancel_detached_repeat",
-    // (undocumented)
-    commit_detached_repeat = "defaultButton/commit_detached_repeat",
-    // (undocumented)
-    copy = "defaultButton/copy",
-    // (undocumented)
-    delete = "defaultButton/delete",
-    // (undocumented)
-    download = "defaultButton/download",
-    // (undocumented)
-    edit = "defaultButton/edit",
-    // (undocumented)
-    move = "defaultButton/move"
-}
+export const DefaultRepeatButtonNames: {
+    readonly add: "defaultButton/add";
+    readonly cancel_detached_repeat: "defaultButton/cancel_detached_repeat";
+    readonly commit_detached_repeat: "defaultButton/commit_detached_repeat";
+    readonly copy: "defaultButton/copy";
+    readonly delete: "defaultButton/delete";
+    readonly download: "defaultButton/download";
+    readonly edit: "defaultButton/edit";
+    readonly move: "defaultButton/move";
+};
 
 // @public
 export const DefaultRequestSelectorMap: RequestSelectorMap;
@@ -477,7 +464,7 @@ export interface DispatchConfiguration {
     readonly correctionMode: DispatchConfiguration.CorrectionMode;
     onAttachmentDelete(attachment: Attachment, attachmentPath: EntityInstancePath): void;
     onAttachmentDownload(attachment: Attachment, attachmentPath: EntityInstancePath): void;
-    onAttachmentUpload(files: AttachmentFile[], formModelElementPath: ModelPath, formModelRepeatPath?: ModelPath, pathToRepeatGroup?: EntityInstancePath, duplicateStrategy?: DuplicateStrategy, existingFiles?: ExistingFile[]): void;
+    onAttachmentUpload(files: AttachmentFile[], formModelElementPath: ModelPath, pathToRepeatGroup?: EntityInstancePath, duplicateStrategy?: DuplicateStrategy, existingFiles?: ExistingFile[]): void;
     onAttachmentValueChange(path: EntityInstancePath, value: Attachment, formModelElementPath: ModelPath): void;
     onCancelAttachmentUpload(): void;
     onCollapseSection(collapse: boolean, path: ModelPath): void;
@@ -489,7 +476,7 @@ export interface DispatchConfiguration {
     }[]): void;
     onMultiSelectValueChange(path: EntityInstancePath, value: MultiSelectData, formModelElementPath: ModelPath): void;
     onNavigationButton(target: string, validation?: FormModel.ButtonValidationEnum): void;
-    onParseError(path: EntityInstancePath, uiValue: string, error: ValueConversion.ParseError): void;
+    onParseError(path: EntityInstancePath, uiValue: string, error: ValueConversionParseError): void;
     onValueChange(path: EntityInstancePath, value: FieldInstanceValue, formModelElementPath: ModelPath): void;
     readonly repeat: DispatchConfiguration.Repeat;
 }
@@ -543,22 +530,20 @@ export interface DocumentDescriptor {
 }
 
 // @public
-export namespace DocumentPath {
-    // (undocumented)
-    export function contains(p1: EntityInstancePath, p2: EntityInstancePath): boolean;
-    export function equal(p1: EntityInstancePath, p2: EntityInstancePath): boolean;
-    export function fromString(str: string): EntityInstancePath;
-    export function matches(p1: EntityInstancePath, p2: EntityInstancePath): boolean;
-    export function toString(path: EntityInstancePath): string;
-}
+export const DocumentPath: {
+    contains(p1: EntityInstancePath, p2: EntityInstancePath): boolean;
+    equal(p1: EntityInstancePath, p2: EntityInstancePath): boolean;
+    fromString(str: string): EntityInstancePath;
+    matches(p1: EntityInstancePath, p2: EntityInstancePath): boolean;
+    toString(path: EntityInstancePath): string;
+};
 
 // @public
 export type DuplicateStrategy = "skip" | "as_copy" | "replace";
 
 // @public
 export interface EmptyDocumentDataProviderOptions {
-    // (undocumented)
-    readonly now?: Date;
+    readonly kernelOptions?: KernelOptionsProvider;
 }
 
 // @public
@@ -739,10 +724,10 @@ export namespace EngineStore {
 }
 
 // @public (undocumented)
-export namespace EnumerableHelper {
-    export function getLocalizedDependentEnumerationValues(renderOptions: FormModelMap.RenderOptions, documentPath: EntityInstancePath, localizer: Localizer): EnumerationValue[];
-    export function getLocalizedEnumerationValues(renderOptions: FormModelMap.RenderOptions, modelPath: ModelPath, localizer: Localizer): EnumerationValue[];
-}
+export const EnumerableHelper: {
+    getLocalizedDependentEnumerationValues(renderOptions: FormModelMap.RenderOptions, documentPath: EntityInstancePath, localizer: Localizer): EnumerationValue[];
+    getLocalizedEnumerationValues(renderOptions: FormModelMap.RenderOptions, modelPath: ModelPath, localizer: Localizer): EnumerationValue[];
+};
 
 // @public
 export interface EnumerationRepeatFilter extends RepeatFilterBase {
@@ -788,8 +773,6 @@ export namespace Events {
             readonly existingFiles?: ExistingFile[];
             readonly files: AttachmentFile[];
             readonly formModelElementPath: ModelPath;
-            // @deprecated (undocumented)
-            readonly formModelRepeatPath?: ModelPath;
             readonly pathToRepeatGroup?: EntityInstancePath;
         }
     }
@@ -859,7 +842,7 @@ export namespace Events {
         readonly validation?: FormModel.ButtonValidationEnum;
     }
     export interface ParseErrorPayload {
-        readonly error: ValueConversion.ParseError;
+        readonly error: ValueConversionParseError;
         readonly path: EntityInstancePath;
         readonly uiValue: string;
     }
@@ -983,7 +966,7 @@ export function filterDocumentByRelevance(document: Document_2, models: Models):
 
 // @public
 export interface FilterParseError {
-    readonly error: ValueConversion.ParseError;
+    readonly error: ValueConversionParseError;
     // (undocumented)
     readonly type: "FilterParseError";
     readonly value: string;
@@ -1022,15 +1005,15 @@ export namespace FormActivity {
 // @public
 export namespace FormEngineActions {
     export function commandDispatch(clientDispatch: Dispatch, activityId: string): Dispatch;
-    const event: ActionCreator<FormEngineEventActions<AnyAction>>;
-    const command: ActionCreator<FormEngineEventActions<AnyAction>>;
+    const event: ActionCreator<FormEngineEventActions<Action>>;
+    const command: ActionCreator<FormEngineEventActions<Action>>;
     export function dispatchAdapterFactory(clientDispatch: Dispatch, activityId: string): Dispatch;
     // (undocumented)
-    export interface FormEngineEventActions<T = AnyAction> {
+    export interface FormEngineEventActions<T = Action> {
         readonly activityId: string;
         readonly engineEvent: T;
     }
-    export function mapDispatchToProps(dispatch: Dispatch, ownProps: View & Partial<Config> & Partial<ScrollHandlerProps>): DefaultDispatchProps;
+    export function mapDispatchToProps(dispatch: Dispatch, ownProps: Pick<View, "activityId">): DefaultDispatchProps;
 }
 
 // @public
@@ -1070,11 +1053,8 @@ export namespace FormEngineSelectors {
 
 // @public
 export namespace FormEngineStateAdapter {
-    export function mapStateToProps(clientState: object, ownProps: OwnProps): StateProps;
-    export interface OwnProps extends Partial<Config> {
-        // (undocumented)
-        readonly activityId: string;
-    }
+    // Warning: (ae-forgotten-export) The symbol "FormEngineProps" needs to be exported by the entry point index.d.ts
+    export function mapStateToProps(clientState: object, ownProps: FormEngineProps): StateProps;
     // (undocumented)
     export type StateProps = Partial<DefaultStateProps>;
 }
@@ -1082,14 +1062,18 @@ export namespace FormEngineStateAdapter {
 // @public
 export namespace FormEngineViews {
     // (undocumented)
-    export type FormEngineProps = View & Partial<Config> & Partial<ScrollHandlerProps>;
+    export type FormEngineProps = FormEngineProps;
+    // Warning: (ae-forgotten-export) The symbol "FormEngineScrollHandlerProps" needs to be exported by the entry point index.d.ts
+    //
     // (undocumented)
-    export type FormEngineScrollHandlerProps = View & Omit<ScrollHandlerProps, "uiState" | "models">;
+    export type FormEngineScrollHandlerProps = FormEngineScrollHandlerProps;
+    // Warning: (ae-forgotten-export) The symbol "FormEngineTplProps" needs to be exported by the entry point index.d.ts
+    //
     // (undocumented)
-    export type FormEngineTplProps = Partial<View & FormEngineRendererPropsType & ScrollHandlerProps>;
-    const FormEngine: ComponentType<FormEngineProps>;
-    const ScrollHandler: ComponentType<FormEngineScrollHandlerProps>;
-    const FormEngineTpl: ComponentType<FormEngineTplProps>;
+    export type FormEngineTplProps = FormEngineTplProps;
+    const FormEngine: FunctionComponent<FormEngineProps>;
+    const ScrollHandler: FunctionComponent<FormEngineScrollHandlerProps>;
+    const FormEngineTpl: FunctionComponent<FormEngineTplProps>;
 }
 
 // @public
@@ -1129,9 +1113,6 @@ export namespace FormModel {
         // (undocumented)
         readonly type: "ButtonPanel";
     }
-    export namespace ButtonPanel {
-        export function isInstance(element: object | FormModel.ScreenElement): element is FormModel.ButtonPanel;
-    }
     // (undocumented)
     export type ButtonPriorityEnum = "PRIMARY" | "SECONDARY";
     export interface ButtonStyling extends Stylable {
@@ -1144,11 +1125,6 @@ export namespace FormModel {
     }
     // (undocumented)
     export type ButtonType = EventButton | NavigationButton;
-    export namespace ButtonType {
-        export function isEventButton(element: object | FormModel.ButtonType): element is FormModel.EventButton;
-        export function isInstance(element: object): element is FormModel.ButtonType;
-        export function isNavigationButton(element: object | FormModel.ButtonType): element is FormModel.NavigationButton;
-    }
     // (undocumented)
     export type ButtonValidationEnum = "partial" | "full";
     export interface Cell extends Annotated, ConditionallyHidden {
@@ -1163,11 +1139,6 @@ export namespace FormModel {
     export type CellType = Control | ExpressionCell | TextCell | CustomCell;
     // (undocumented)
     export type ComponentWithDescription = ButtonType | RowAction;
-    // (undocumented)
-    export namespace ComponentWithDescription {
-        // (undocumented)
-        export function isInstance(component: object): component is ComponentWithDescription;
-    }
     export interface ConditionallyHidden {
         // (undocumented)
         readonly hideCondition?: HideCondition;
@@ -1211,10 +1182,6 @@ export namespace FormModel {
         readonly subHeaderBox: FormModel.HeaderFooterType;
         readonly subtitle?: FormModel.Label;
     }
-    // (undocumented)
-    export namespace Content {
-        export function isInstance(element: object | FormModel.Content, ignoreRuntimeProperties?: boolean): element is FormModel.Content;
-    }
     export interface Control extends Cell, Stylable, FieldBasedInput {
         readonly dependentControls?: DependentControls;
         // (undocumented)
@@ -1227,10 +1194,6 @@ export namespace FormModel {
         // (undocumented)
         readonly type: "Control";
     }
-    // (undocumented)
-    export namespace Control {
-        export function isInstance(element: object | FormModel.Cell): element is FormModel.Control;
-    }
     export interface ControlGrid extends BasicScreenElement {
         readonly layout?: SizedString;
         readonly readonlyPresentation?: ReadonlyPresentation;
@@ -1238,10 +1201,6 @@ export namespace FormModel {
         // (undocumented)
         readonly type: "ControlGrid";
         readonly verticalAlignment?: ControlGridVerticalAlignment;
-    }
-    // (undocumented)
-    export namespace ControlGrid {
-        export function isInstance(element: unknown): element is FormModel.ControlGrid;
     }
     // (undocumented)
     export type ControlGridVerticalAlignment = "TOP" | "MIDDLE" | "BOTTOM";
@@ -1259,19 +1218,11 @@ export namespace FormModel {
         // (undocumented)
         readonly type: "CustomCell";
     }
-    // (undocumented)
-    export namespace CustomCell {
-        export function isInstance(element: object | FormModel.Cell): element is FormModel.CustomCell;
-    }
-    export interface CustomScreenElement extends BasicScreenElement {
+    export interface CustomScreenElement extends BasicScreenElement, Referencing {
         // (undocumented)
         readonly height?: number;
         // (undocumented)
         readonly type: "CustomScreenElement";
-    }
-    // (undocumented)
-    export namespace CustomScreenElement {
-        export function isInstance(element: object | FormModel.ScreenElement): element is FormModel.CustomScreenElement;
     }
     export interface DatePickerConfig {
         readonly absolute?: boolean;
@@ -1350,10 +1301,6 @@ export namespace FormModel {
         readonly type: "DetachedRepeat";
     }
     // (undocumented)
-    export namespace DetachedRepeat {
-        export function isInstance(element: unknown): element is FormModel.DetachedRepeat;
-    }
-    // (undocumented)
     export type DisableRuleConfirmation = "WARNING" | "INFO";
     export interface DynamicAmountSuffix {
         // (undocumented)
@@ -1368,10 +1315,6 @@ export namespace FormModel {
         readonly multiFileUploadOptions?: MultiFileUploadOptions;
         // (undocumented)
         readonly type: "EmbeddedRepeat";
-    }
-    // (undocumented)
-    export namespace EmbeddedRepeat {
-        export function isInstance(element: unknown): element is FormModel.EmbeddedRepeat;
     }
     // (undocumented)
     export interface EventButton extends IdNamed, Annotated {
@@ -1396,10 +1339,6 @@ export namespace FormModel {
         readonly type: "ExpressionCell";
     }
     // (undocumented)
-    export namespace ExpressionCell {
-        export function isInstance(element: unknown): element is FormModel.ExpressionCell;
-    }
-    // (undocumented)
     export interface ExpressionLabel {
         // (undocumented)
         readonly expressionText: string;
@@ -1414,10 +1353,6 @@ export namespace FormModel {
         readonly name: string;
         // (undocumented)
         readonly type: "ExpressionRepeatOverviewColumn";
-    }
-    // (undocumented)
-    export namespace ExpressionOverviewColumn {
-        export function isInstance(value: unknown): value is FormModel.ExpressionOverviewColumn;
     }
     export interface ExternalEnumeration {
         readonly caseSensitive?: boolean;
@@ -1442,10 +1377,6 @@ export namespace FormModel {
         readonly type: "Control" | "FieldBasedRepeatOverviewColumn";
     }
     export type FieldBasedInputType = Control | FieldOverviewColumn;
-    // (undocumented)
-    export namespace FieldBasedInputType {
-        export function isInstance(element: object | FormModel.Cell): element is FormModel.FieldBasedInputType;
-    }
     export interface FieldConfiguration {
         readonly field?: ReadonlyArray<FieldConfigurationEntry>;
         readonly fieldMap: ReadonlyObjectMap<FieldConfigurationEntry>;
@@ -1461,9 +1392,11 @@ export namespace FormModel {
         readonly exposition?: ExpositionPresentation;
         readonly externalEnumeration?: ExternalEnumeration;
         readonly hint?: MultilingualText;
+        readonly icon?: Icon;
         readonly initialValue?: string;
         readonly initialValueTyped?: FieldInstanceValue;
         readonly label?: Label;
+        readonly labelPlacement?: LabelPlacement;
         readonly placeholder?: MultilingualText;
         readonly readonly?: boolean;
         readonly secret?: boolean;
@@ -1478,10 +1411,6 @@ export namespace FormModel {
         readonly showSummary?: boolean;
         // (undocumented)
         readonly type: "FieldBasedRepeatOverviewColumn";
-    }
-    // (undocumented)
-    export namespace FieldOverviewColumn {
-        export function isInstance(value: unknown): value is FormModel.FieldOverviewColumn;
     }
     // (undocumented)
     export type FilterExposition = "FULL" | "STRING";
@@ -1534,19 +1463,11 @@ export namespace FormModel {
         readonly type: "InlineRepeat";
     }
     // (undocumented)
-    export namespace InlineRepeat {
-        export function isInstance(element: unknown): element is FormModel.InlineRepeat;
-    }
-    export function isInstance(model: object, ignoreRuntimeProperties?: boolean): model is FormModel;
-    // (undocumented)
     export type Label = MultilingualLabel | ExpressionLabel;
     // (undocumented)
     export type LabeledComponent = ButtonType | RowAction | FieldBasedInput | ExpressionCell | ExpressionOverviewColumn;
     // (undocumented)
-    export namespace LabeledComponent {
-        // (undocumented)
-        export function isInstance(component: object): component is LabeledComponent;
-    }
+    export type LabelPlacement = "TOP" | "LEFT" | "RIGHT";
     // (undocumented)
     export type MarkingOfRequiredFields = "NONE" | "REQUIRED" | "ALWAYS";
     // (undocumented)
@@ -1558,10 +1479,6 @@ export namespace FormModel {
         readonly screenElements?: ReadonlyArray<ScreenElement>;
         // (undocumented)
         readonly type: "MultiColumnSection";
-    }
-    // (undocumented)
-    export namespace MultiColumnSection {
-        export function isInstance(value: unknown): value is FormModel.MultiColumnSection;
     }
     // (undocumented)
     export interface MultiFileUploadOptions {
@@ -1606,6 +1523,9 @@ export namespace FormModel {
     export type PreferredSorting = "ASC" | "DESC";
     // (undocumented)
     export type ReadonlyPresentation = "INPUT" | "TEXT";
+    export interface Referencing {
+        readonly reference?: string;
+    }
     export interface Repeat extends BasicScreenElement {
         readonly buttonLabels?: RepeatButtonLabels;
         readonly confirmationTexts?: ConfirmationTexts;
@@ -1628,19 +1548,11 @@ export namespace FormModel {
         readonly titleHidden?: boolean;
     }
     // (undocumented)
-    export namespace Repeat {
-        export function isInstance(element: unknown): element is FormModel.InlineRepeat | FormModel.DetachedRepeat | FormModel.EmbeddedRepeat;
-    }
-    // (undocumented)
     export type RepeatButtonLabelEnum = "ADD" | "COMMIT_ADD" | "APPLY" | "EDIT" | "REMOVE" | "VIEW" | "CANCEL" | "CONFIRM" | "RETURN" | "UP" | "DOWN" | "COPY" | "CLOSE" | "DOWNLOAD" | "SKIP" | "REPLACE" | "UPLOAD_AS_COPY";
     // (undocumented)
     export type RepeatButtonLabels = {
         readonly [key in RepeatButtonLabelEnum]?: MultilingualText;
     };
-    // (undocumented)
-    export namespace RepeatOverviewColumn {
-        export function isInstance(value: unknown): value is RepeatOverviewColumn;
-    }
     // (undocumented)
     export type RepeatOverviewColumn = FieldOverviewColumn | ExpressionOverviewColumn;
     export interface RepeatOverviewColumnBase extends Annotated, ConditionallyHidden {
@@ -1671,21 +1583,12 @@ export namespace FormModel {
         // (undocumented)
         readonly type: "Row";
     }
-    // (undocumented)
-    export namespace Row {
-        export function isInstance(element: object): element is FormModel.Row;
-    }
     export interface RowAction extends Annotated {
         readonly buttonStyling?: ButtonStyling;
         readonly confirmation?: MultilingualText;
         readonly confirmationDialogTitle?: MultilingualText;
         readonly event: string;
         readonly scope: ScopeEnum;
-    }
-    // (undocumented)
-    export namespace RowAction {
-        // (undocumented)
-        export function isInstance(element: object): element is RowAction;
     }
     export interface RowActionGroup {
         // (undocumented)
@@ -1702,15 +1605,7 @@ export namespace FormModel {
         readonly title?: Label;
     }
     // (undocumented)
-    export namespace Screen {
-        export function isInstance(value: unknown): value is FormModel.Screen;
-    }
-    // (undocumented)
     export type ScreenElement = Section | ControlGrid | MultiColumnSection | ButtonPanel | DetachedRepeat | InlineRepeat | EmbeddedRepeat | CustomScreenElement;
-    // (undocumented)
-    export namespace ScreenElement {
-        export function isInstance(element: object): element is ScreenElement;
-    }
     export interface ScreenElementRef {
         readonly idref: string;
         readonly masterValue: string | null;
@@ -1721,10 +1616,6 @@ export namespace FormModel {
         readonly screenElements?: ReadonlyArray<ScreenElement>;
         // (undocumented)
         readonly type: "Section";
-    }
-    // (undocumented)
-    export namespace Section {
-        export function isInstance(value: unknown): value is FormModel.Section;
     }
     export interface SizedNumber {
         // (undocumented)
@@ -1766,12 +1657,10 @@ export namespace FormModel {
         // (undocumented)
         readonly style?: ReadonlyArray<Style>;
     }
-    export function stylableToClassName(stylable?: Stylable): string | undefined;
     export interface Style {
         // (undocumented)
         readonly name: string;
     }
-    export function styleToClassName(style?: readonly Style[]): string | undefined;
     // (undocumented)
     export interface TableStyle {
         readonly actionColumnWidth?: number;
@@ -1789,18 +1678,9 @@ export namespace FormModel {
         readonly type: "TextCell";
     }
     // (undocumented)
-    export namespace TextCell {
-        export function isInstance(element: object | FormModel.Cell): element is FormModel.TextCell;
-    }
-    // (undocumented)
     export type TextCellDecoration = "INFO" | "WARNING" | "SUCCESS" | "ERROR";
     // (undocumented)
     export type TitledComponent = Screen | ButtonPanel | Section | MultiColumnSection | ControlGrid | Row | Repeat | CustomScreenElement;
-    // (undocumented)
-    export namespace TitledComponent {
-        // (undocumented)
-        export function isInstance(component: object): component is TitledComponent;
-    }
     // (undocumented)
     export type TypedComponent = Screen | FieldOverviewColumn | Cell | Section | MultiColumnSection | ControlGrid | Control | ButtonType | ExpressionCell | InlineRepeat | DetachedRepeat | EmbeddedRepeat | RepeatOverviewColumn | ScreenElement;
     // (undocumented)
@@ -1867,9 +1747,9 @@ export interface FormModelMap {
 }
 
 // @public (undocumented)
-export namespace FormModelPath {
-    export function extend(parentFormModelPath: ModelPath, ...formModelElement: readonly object[]): ModelPath;
-}
+export const FormModelPath: {
+    extend(parentFormModelPath: ModelPath, ...formModelElement: readonly object[]): ModelPath;
+};
 
 // @public
 export const FormModelProcessor: ModelProcessor;
@@ -1880,10 +1760,10 @@ export const FormModelSelectors: {
 };
 
 // @public
-export function getAllCommandActions(): ActionCreator_2<AnyAction>[];
+export function getAllCommandActions(): ActionCreator_2<Action>[];
 
 // @public
-export function getAllEventActions(): ActionCreator_2<AnyAction>[];
+export function getAllEventActions(): ActionCreator_2<Action>[];
 
 // @public
 export interface GroupAdded extends BaseChange {
@@ -1915,20 +1795,136 @@ export interface IExternalEnumerationProvider {
 // @public (undocumented)
 export function isDataState(value: unknown): value is EngineStore.DataState;
 
+// @public
+export function isDisabled(options: {
+    readonly formModelElement: object;
+    readonly state: EngineState;
+    readonly enablements?: {
+        buttons?: EnablementByButtonName;
+    };
+}): boolean;
+
 // @public (undocumented)
 export function isEngineState(value: unknown): value is EngineState;
 
 // @public
-export function isFormModel(value: unknown): value is FormModel;
+export function isFormModel(value: unknown, ignoreRuntimeProperties?: boolean): value is FormModel;
+
+// @public
+export function isFormModelButtonPanel(value: unknown): value is FormModel.ButtonPanel;
+
+// @public
+export function isFormModelButtonType(value: unknown): value is FormModel.ButtonType;
+
+// @public
+export function isFormModelComponentWithDescription(value: unknown): value is FormModel.ComponentWithDescription;
+
+// @public
+export function isFormModelContent(value: unknown, ignoreRuntimeProperties?: boolean): value is FormModel.Content;
+
+// @public
+export function isFormModelControl(value: unknown): value is FormModel.Control;
+
+// @public
+export function isFormModelControlGrid(value: unknown): value is FormModel.ControlGrid;
+
+// @public
+export function isFormModelCustomCell(value: unknown): value is FormModel.CustomCell;
+
+// @public
+export function isFormModelCustomScreenElement(value: unknown): value is FormModel.CustomScreenElement;
+
+// @public
+export function isFormModelDetachedRepeat(value: unknown): value is FormModel.DetachedRepeat;
+
+// @public
+export function isFormModelEmbeddedRepeat(value: unknown): value is FormModel.EmbeddedRepeat;
+
+// @public
+export function isFormModelEventButton(value: unknown): value is FormModel.EventButton;
+
+// @public
+export function isFormModelExpressionCell(value: unknown): value is FormModel.ExpressionCell;
+
+// @public
+export function isFormModelExpressionOverviewColumn(value: unknown): value is FormModel.ExpressionOverviewColumn;
+
+// @public
+export function isFormModelFieldBasedInputType(value: unknown): value is FormModel.FieldBasedInputType;
+
+// @public
+export function isFormModelFieldOverviewColumn(value: unknown): value is FormModel.FieldOverviewColumn;
+
+// @public
+export function isFormModelHeaderFooterType(value: unknown): value is FormModel.HeaderFooterType;
+
+// @public
+export function isFormModelInlineRepeat(value: unknown): value is FormModel.InlineRepeat;
+
+// @public
+export function isFormModelLabeledComponent(value: unknown): value is FormModel.LabeledComponent;
+
+// @public
+export function isFormModelMultiColumnSection(value: unknown): value is FormModel.MultiColumnSection;
+
+// @public
+export function isFormModelNavigationButton(value: unknown): value is FormModel.NavigationButton;
+
+// @public
+export function isFormModelRepeat(value: unknown): value is FormModel.InlineRepeat | FormModel.DetachedRepeat | FormModel.EmbeddedRepeat;
+
+// @public
+export function isFormModelRepeatOverviewColumn(value: unknown): value is FormModel.RepeatOverviewColumn;
+
+// @public
+export function isFormModelRow(value: unknown): value is FormModel.Row;
+
+// @public
+export function isFormModelRowAction(value: unknown): value is FormModel.RowAction;
+
+// @public
+export function isFormModelScreen(value: unknown): value is FormModel.Screen;
+
+// @public
+export function isFormModelScreenElement(value: unknown): value is FormModel.ScreenElement;
+
+// @public
+export function isFormModelSection(value: unknown): value is FormModel.Section;
+
+// @public
+export function isFormModelTextCell(value: unknown): value is FormModel.TextCell;
+
+// @public
+export function isFormModelTitledComponent(value: unknown): value is FormModel.TitledComponent;
+
+// @public
+export function isHidden(options: {
+    readonly formModelElement: object;
+    readonly state: EngineState;
+    readonly dataContext: EntityInstancePath;
+    readonly enablements?: {
+        buttons?: EnablementByButtonName;
+    };
+}): boolean;
 
 // @public (undocumented)
 export function isModels(value: unknown): value is Models;
 
+// @public
+export function isReadonly(options: {
+    readonly formModelPath: ModelPath;
+    readonly state: EngineState;
+    readonly dataContext: EntityInstancePath;
+}): boolean;
+
 // @public (undocumented)
 export function isUiState(value: unknown): value is EngineStore.UIState;
 
+// @public (undocumented)
+export type KernelOptionsProvider = EngineStore.Provider<GeneratedCodeRtConfig>;
+
 // @public
-export function localeReducer(localeState: Locale, action: AnyAction_2): Locale;
+export function localeReducer(localeState: Locale, action: Action): Locale;
 
 // @public
 export function localeSlice(state: object): Locale;
@@ -1942,7 +1938,7 @@ export interface Localization {
 export interface MiddlewareOptions extends Localization, Conversion {
     readonly disableRepeatValidationOnLeaving?: boolean;
     readonly externalEnumerationProvider?: IExternalEnumerationProvider;
-    readonly nowProvider?: EngineStore.Provider<Date | undefined>;
+    readonly kernelOptionsProvider?: KernelOptionsProvider;
 }
 
 // @public
@@ -1956,17 +1952,14 @@ export interface Models {
 }
 
 // @public
-export namespace ModelSelectors {
-    // (undocumented)
-    export function documentModel(): Selector<DocumentModel>;
-    // (undocumented)
-    export function formModel(): Selector<FormModel>;
-    // (undocumented)
-    export function validationCode(): Selector<IGeneratedCodeAccessor | undefined>;
-}
+export const ModelSelectors: {
+    documentModel(): Selector<DocumentModel>;
+    formModel(): Selector<FormModel>;
+    validationCode(): Selector<IGeneratedCodeAccessor | undefined>;
+};
 
 // @public
-export function modelsReducer(modelsState: EngineState["models"], action: AnyAction_2): EngineState["models"];
+export function modelsReducer(modelsState: EngineState["models"], action: Action): EngineState["models"];
 
 // @public
 export function modelsSlice(state: object): Models;
@@ -2012,7 +2005,7 @@ export type PreProcessDocumentParams = {
         readonly validatorProvider: IGeneratedCodeAccessor;
     };
     readonly isNewInstance: boolean;
-    readonly now?: Date;
+    readonly kernelOptions?: GeneratedCodeRtConfig;
 };
 
 // @public
@@ -2043,7 +2036,10 @@ export type RepeatFilter = NumberRepeatFilter | StringRepeatFilter | BooleanRepe
 export interface RequestSelectorMap {
     delete: (config: DataProvider.DeleteConfig) => Selector_2<DocumentJsonRpc2Request.DeleteJsonRpc2Request>;
     load: (config: DataProvider.LoadConfig) => Selector_2<QueryJsonRpc2Request<Query.DocRefExactMatchQueryRoot>>;
-    save: (config: DataProvider.SaveConfig) => Selector_2<DocumentJsonRpc2Request.AddJsonRpc2Request | DocumentJsonRpc2Request.ModifyJsonRpc2Request>;
+    save: (config: DataProvider.SaveConfig) => Selector_2<[
+    DocumentJsonRpc2Request.CheckUniquenessJsonRpc2Request,
+    DocumentJsonRpc2Request.AddJsonRpc2Request | DocumentJsonRpc2Request.ModifyJsonRpc2Request
+    ]>;
 }
 
 // @public
@@ -2333,6 +2329,12 @@ export interface StringRepeatFilter extends RepeatFilterBase {
 }
 
 // @public (undocumented)
+export function stylableToClassName(stylable?: FormModel.Stylable): string | undefined;
+
+// @public
+export function styleToClassName(style?: readonly FormModel.Style[]): string | undefined;
+
+// @public (undocumented)
 export function Suffix(props: SuffixProps): JSX.Element | null;
 
 // @public (undocumented)
@@ -2371,34 +2373,24 @@ export interface TooltipsProps {
 }
 
 // @public
-export function uiReducer(uiState: EngineStore.UIState, action: AnyAction_2, models: EngineState["models"]): EngineStore.UIState;
+export function uiReducer(uiState: EngineStore.UIState, action: Action, models: EngineState["models"]): EngineStore.UIState;
 
 // @public
 export function uiSlice(state: object): EngineStore.UIState;
 
 // @public
-export namespace UiStateSelectors {
-    // (undocumented)
-    export function backupStack(): Selector<ReadonlyArray<EngineStore.BackupEntry>>;
-    // (undocumented)
-    export function columnWidths(): Selector<{
+export const UiStateSelectors: {
+    backupStack(): Selector<ReadonlyArray<EngineStore.BackupEntry>>;
+    columnWidths(): Selector<{
         [modelPath: string]: number | undefined;
     }>;
-    // (undocumented)
-    export function correctionModeBackup(): Selector<EngineStore.CorrectionModeBackup | undefined>;
-    // (undocumented)
-    export function correctionScreenState(): Selector<EngineStore.CorrectionScreenState>;
-    // (undocumented)
-    export function currentBackup(): Selector<EngineStore.BackupEntry>;
-    // (undocumented)
-    export function currentScreenLocation(): Selector<EngineStore.ScreenState>;
-    // (undocumented)
-    export function dirty(): Selector<boolean>;
-    // (undocumented)
-    export function disabled(): Selector<boolean>;
-    // (undocumented)
-    export function locale(): Selector<Locale>;
-    const // (undocumented)
+    correctionModeBackup(): Selector<EngineStore.CorrectionModeBackup | undefined>;
+    correctionScreenState(): Selector<EngineStore.CorrectionScreenState>;
+    currentBackup(): Selector<EngineStore.BackupEntry>;
+    currentScreenLocation(): Selector<EngineStore.ScreenState>;
+    dirty(): Selector<boolean>;
+    disabled(): Selector<boolean>;
+    locale(): Selector<Locale>;
     InputLocalization: {
         labelLocalizables: (formModelPath: ModelPath, input: FormModel.FieldBasedInputType) => Selector<Localizable[]>;
         placeholderLocalizables(formModelPath: ModelPath, input: FormModel.FieldBasedInputType): Selector<Localizable[]>;
@@ -2406,27 +2398,17 @@ export namespace UiStateSelectors {
         helperTextLocalizables(formModelPath: ModelPath, input: FormModel.FieldBasedInputType): Selector<Localizable[]>;
         suffixTextLocalizables(documentModelPath: ModelPath): Selector<Localizable[]>;
     };
-    // (undocumented)
-    export function messages(): Selector<ReadonlyObjectMap<EngineStore.Validation.Entry>>;
-    // (undocumented)
-    export function messagesByPath(documentPath: EntityInstancePath, formModelPath: ModelPath, filter?: Lowercase<EngineStore.Validation.MessageSeverity>): Selector<EngineStore.Validation.Message[]>;
-    // (undocumented)
-    export function readonly(): Selector<boolean>;
-    // (undocumented)
-    export function repeatInstanceState(): Selector<ReadonlyObjectMap<EngineStore.Repeat.InstanceState> | undefined>;
-    // (undocumented)
-    export function repeatInstanceStateEntry(identifier: ModelPath): Selector<EngineStore.Repeat.InstanceState | undefined>;
-    // (undocumented)
-    export function repeatStaticState(): Selector<ReadonlyObjectMap<EngineStore.Repeat.StaticState> | undefined>;
-    // (undocumented)
-    export function repeatStaticStateEntry(identifier: ModelPath): Selector<EngineStore.Repeat.StaticState | undefined>;
-    // (undocumented)
-    export function screenLocationStack(): Selector<ReadonlyArray<EngineStore.ScreenState>>;
-    // (undocumented)
-    export function sectionState(): Selector<ReadonlyObjectMap<boolean>>;
-    // (undocumented)
-    export function validationBarState(): Selector<EngineStore.ValidationBarState>;
-}
+    messages(): Selector<ReadonlyObjectMap<EngineStore.Validation.Entry>>;
+    messagesByPath(documentPath: EntityInstancePath, _formModelPath: ModelPath, filter?: Lowercase<EngineStore.Validation.MessageSeverity>): Selector<EngineStore.Validation.Message[]>;
+    readonly(): Selector<boolean>;
+    repeatInstanceState(): Selector<ReadonlyObjectMap<EngineStore.Repeat.InstanceState> | undefined>;
+    repeatInstanceStateEntry(identifier: ModelPath): Selector<EngineStore.Repeat.InstanceState | undefined>;
+    repeatStaticState(): Selector<ReadonlyObjectMap<EngineStore.Repeat.StaticState> | undefined>;
+    repeatStaticStateEntry(identifier: ModelPath): Selector<EngineStore.Repeat.StaticState | undefined>;
+    screenLocationStack(): Selector<ReadonlyArray<EngineStore.ScreenState>>;
+    sectionState(): Selector<ReadonlyObjectMap<boolean>>;
+    validationBarState(): Selector<EngineStore.ValidationBarState>;
+};
 
 // @public
 export function unmarshallFormModel(formModelJson: object, documentModel: DocumentModel, valueParser: ValueParser): FormModel;
@@ -2496,6 +2478,8 @@ export interface WidgetMap {
     // (undocumented)
     readonly ContentBoxFooter: ComponentType<ContentBoxProps.FooterProps>;
     // (undocumented)
+    readonly ContentBoxNotificationArea: ComponentType<ContentBoxProps.FooterProps>;
+    // (undocumented)
     readonly ContentBoxSubtitle: ComponentType<ContentBoxProps.TitleProps>;
     // (undocumented)
     readonly ContentBoxTitle: ComponentType<ContentBoxProps.TitleProps>;
@@ -2510,6 +2494,8 @@ export interface WidgetMap {
     // (undocumented)
     readonly DateTimePicker: ComponentType<DateTimePickerProps>;
     // (undocumented)
+    readonly DateTimePickerHeader: ComponentType<DateTimePickerHeaderProps>;
+    // (undocumented)
     readonly DefaultFileUpload: ComponentType<DefaultFileUploadProps>;
     // (undocumented)
     readonly ErrorTooltip: ComponentType<ErrorTooltipProps>;
@@ -2518,13 +2504,17 @@ export interface WidgetMap {
     // (undocumented)
     readonly GlobalMessageBox: ComponentType<GlobalMessageBoxProps>;
     // (undocumented)
-    readonly Header: ComponentType<HeaderProps>;
-    // (undocumented)
     readonly HiddenText: ComponentType<HiddenTextProps>;
     // (undocumented)
     readonly HintTooltip: ComponentType<HintTooltipProps>;
     // (undocumented)
     readonly Icon: ComponentType<IconProps>;
+    // (undocumented)
+    readonly LayoutGrid: ComponentType<LayoutGridProps.LayoutGridProps>;
+    // (undocumented)
+    readonly LayoutGridColumn: ComponentType<LayoutGridProps.ColumnProps>;
+    // (undocumented)
+    readonly LayoutGridRow: ComponentType<LayoutGridProps.RowProps>;
     // (undocumented)
     readonly List: ComponentType<ListProps>;
     // (undocumented)
@@ -2536,29 +2526,27 @@ export interface WidgetMap {
     // (undocumented)
     readonly MessageBox: ComponentType<MessageBoxProps>;
     // (undocumented)
-    readonly MobileAction: ComponentType<MobileValidationProps.ActionsProps>;
+    readonly MobileValidation: ComponentType<MobileValidationProps>;
     // (undocumented)
-    readonly MobileActionItem: ComponentType<MobileValidationProps.ActionsItemProps>;
+    readonly MobileValidationActionItem: ComponentType<MobileValidationProps.ActionsItemProps>;
     // (undocumented)
-    readonly MobilePreviewList: ComponentType<MobileValidationProps.PreviewListProps>;
-    // (undocumented)
-    readonly MobilePreviewListIem: ComponentType<MobileValidationProps.PreviewListItemProps>;
-    // (undocumented)
-    readonly MobileValidationBar: ComponentType<MobileValidationProps>;
-    // (undocumented)
-    readonly MobileValidationBarGraphic: ComponentType<MobileValidationProps.GraphicProps>;
-    // (undocumented)
-    readonly MobileValidationBarOverview: ComponentType<MobileValidationProps.OverviewProps>;
+    readonly MobileValidationActions: ComponentType<MobileValidationProps.ActionsProps>;
     // (undocumented)
     readonly MobileValidationContent: ComponentType<MobileValidationProps.ContentProps>;
+    // (undocumented)
+    readonly MobileValidationGraphic: ComponentType<MobileValidationProps.GraphicProps>;
+    // (undocumented)
+    readonly MobileValidationOverview: ComponentType<MobileValidationProps.OverviewProps>;
+    // (undocumented)
+    readonly MobileValidationPreviewList: ComponentType<MobileValidationProps.PreviewListProps>;
+    // (undocumented)
+    readonly MobileValidationPreviewListItem: ComponentType<MobileValidationProps.PreviewListItemProps>;
     // (undocumented)
     readonly ModalNotification: ComponentType<ModalNotificationProps>;
     // (undocumented)
     readonly ModalOverlay: ComponentType<ModalOverlayProps>;
     // (undocumented)
-    readonly MultiSelect: ComponentType<MultiselectProps>;
-    // (undocumented)
-    readonly NotificationArea: ComponentType<ContentBoxProps.FooterProps>;
+    readonly Multiselect: ComponentType<MultiselectProps>;
     // (undocumented)
     readonly Pagination: ComponentType<PaginationProps>;
     // (undocumented)
@@ -2574,19 +2562,13 @@ export interface WidgetMap {
     // (undocumented)
     readonly Select: ComponentType<SelectProps>;
     // (undocumented)
-    readonly SizeContainer: ComponentType<LayoutGridProps.LayoutGridProps>;
-    // (undocumented)
-    readonly SizeContainerColumn: ComponentType<LayoutGridProps.ColumnProps>;
-    // (undocumented)
-    readonly SizeContainerRow: ComponentType<LayoutGridProps.RowProps>;
-    // (undocumented)
     readonly Switch: ComponentType<SwitchProps>;
     // (undocumented)
     readonly TextAffix: ComponentType<TextAffixProps>;
     // (undocumented)
     readonly TextAreaStateless: ComponentType<TextAreaStatelessProps>;
     // (undocumented)
-    readonly TextLineStateless: ComponentType<TextLineStatelessProps>;
+    readonly TextField: ComponentType<TextFieldProps>;
     // (undocumented)
     readonly TextOutput: ComponentType<TextOutputProps>;
     // (undocumented)
@@ -2626,12 +2608,6 @@ export const withFormEngineView: <T extends ApplicationWithFormEngineConfig>(cfg
 
 // @public (undocumented)
 export const withFormModelSupport: <T extends ApplicationWithFormEngineConfig>(cfg: T) => T;
-
-// Warnings were encountered during analysis:
-//
-// src/view/internal/utilities/enablements/index.ts:37:25 - (ae-forgotten-export) The symbol "isHidden" needs to be exported by the entry point index.d.ts
-// src/view/internal/utilities/enablements/index.ts:37:25 - (ae-forgotten-export) The symbol "isReadonly" needs to be exported by the entry point index.d.ts
-// src/view/internal/utilities/enablements/index.ts:37:25 - (ae-forgotten-export) The symbol "isDisabled" needs to be exported by the entry point index.d.ts
 
 // (No @packageDocumentation comment for this package)
 

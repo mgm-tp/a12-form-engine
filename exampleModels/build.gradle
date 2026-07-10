@@ -1,5 +1,4 @@
-import com.mgmtp.a12.devtools.gradle.plugins.buildutils.tasks.LeadingBuildTask
-import com.mgmtp.a12.gradle.utils.ModelHelper
+import com.mgmtp.a12.devtools.gradle.plugins.models.ModelHelper
 import groovy.json.JsonBuilder
 
 import java.nio.file.Path
@@ -8,23 +7,21 @@ import java.nio.file.Paths
 import static groovy.io.FileType.FILES
 
 buildscript {
-    apply from: rootProject.file('scripts/buildscript-platforms.gradle')
-
     dependencies {
-        classpath a12Libs.build.utilities
-        classpath a12Libs.kernel.md.model
-        classpath a12Libs.kernel.md.facade
-        classpath a12Libs.kernel.tool.model.migration
+        classpath platform(libs.dataservices.bom)
+        classpath libs.build.utilities
+        classpath libs.kernel.md.facade
         classpath libs.logback.classic
     }
 }
 
 plugins {
-    alias(a12Plugins.plugins.prepare.models)
+    alias(libs.plugins.prepare.models)
 }
 
 prepareModels {
     outputDir = layout.buildDirectory.dir('models')
+    generateValidationCodeInConverter = true
 
     eachFileAction.set({ details ->
         details.path = ModelHelper.isFormModel(details.file) ? details.name : "../data/${details.name}"
@@ -108,24 +105,7 @@ tasks.register('generateInstances') {
     }
 }
 
-tasks.register('copyModelsForDevapp', LeadingBuildTask) {
-    dependsOn(project(':modelGraph').tasks.named('assemble'))
-
-    final String devappDirectory = project.file('../devapp')
-
-    doLast {
-        execCommandLine(['node', '--run', 'init']) {
-            workingDir devappDirectory
-        }
-    }
-}
-
 tasks.named('assemble') {
     dependsOn(tasks.named('generateFormModelList'), tasks.named('generateInstances'))
 }
 
-tasks.register('onlyBuildModels') {
-    dependsOn(tasks.named('copyModelsForDevapp'))
-    description = 'This only converts models'
-    group = 'development'
-}

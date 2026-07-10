@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -35,18 +35,11 @@
  * the Client.
  * @packageDocumentation
  */
-import type { ComponentType } from "react";
+import type { FunctionComponent } from "react";
 import type { Middleware } from "redux";
-
-import type { View } from "@com.mgmtp.a12.client/client-core/lib/core/view/index.js";
 
 import type { MiddlewareOptions } from "../../../../back-end/store/index.js";
 import { createEngineMiddlewares } from "../../../../back-end/store/index.js";
-import type {
-	Config,
-	FormEngineRendererPropsType,
-	ScrollHandlerProps
-} from "../../../../view/index.js";
 
 import { FormEngineActions } from "./internal/actions.js";
 import { attachmentReducer } from "./internal/attachments/reducer/attachmentReducer.js";
@@ -56,14 +49,16 @@ import { uploadSaga } from "./internal/attachments/sagas/uploadSaga.js";
 import { engineMiddlewareAdapterFactory } from "./internal/engineMiddlewareAdapterFactory.js";
 import { resetUiDirtyStateOnSave } from "./internal/formEngineSaga.js";
 import type { FormEngineSagaOptions } from "./internal/sagaOptions.js";
+import type { FormEngineScrollHandlerProps as FormEngineScrollHandlerPropsInternal } from "./internal/scrollHandler.js";
 import { FormEngineScrollHandler } from "./internal/scrollHandler.js";
 import { FormEngineSelectors } from "./internal/selectors.js";
 import { FormEngineStateAdapter } from "./internal/state.js";
 import { uiStateReducer } from "./internal/uiStateReducer.js";
-import {
-	FormEngineView as FormEngineViewInternal,
-	FormEngineViewTpl as FormEngineViewTplInternal
+import type {
+	FormEngineProps as FormEnginePropsInternal,
+	FormEngineTplProps as FormEngineTplPropsInternal
 } from "./internal/view.js";
+import { FormEngineView, FormEngineViewTpl } from "./internal/view.js";
 
 export type { FormEngineSagaOptions } from "./internal/sagaOptions.js";
 
@@ -136,13 +131,13 @@ export const formEngineDataReducers = [uiStateReducer, attachmentReducer];
  * ## Configuration
  *
  * You can set Form-Engine config and ScrollHandler props. For this, compose the
- * {@link FormEngineViews.FormEngine} component to create your own View
+ * `FormEngineViews.FormEngine` component to create your own View
  * component.
  *
  * ## Custom behavior (high level)
  *
  * If you want to change other props like data or models, please use
- * {@link FormEngineViews.FormEngineTpl} or the components of the formengine
+ * `FormEngineViews.FormEngineTpl` or the components of the formengine
  * package and connect them to the store yourself. Most likely you want to
  * compose your connect functions from {@link FormEngineStateAdapter.mapStateToProps}
  * and {@link FormEngineActions.mapDispatchToProps}.
@@ -153,9 +148,9 @@ export const formEngineDataReducers = [uiStateReducer, attachmentReducer];
  * individual selectors in {@link FormEngineSelectors}.
  */
 export namespace FormEngineViews {
-	export type FormEngineProps = View & Partial<Config> & Partial<ScrollHandlerProps>;
-	export type FormEngineTplProps = Partial<View & FormEngineRendererPropsType & ScrollHandlerProps>;
-	export type FormEngineScrollHandlerProps = View & Omit<ScrollHandlerProps, "uiState" | "models">;
+	export type FormEngineProps = FormEnginePropsInternal;
+	export type FormEngineTplProps = FormEngineTplPropsInternal;
+	export type FormEngineScrollHandlerProps = FormEngineScrollHandlerPropsInternal;
 
 	/**
 	 * The default view component for the Form-Engine, connected to the Client
@@ -164,18 +159,19 @@ export namespace FormEngineViews {
 	 * This component consists of a ScrollHandler, ContentBox and the actual
 	 * FormEngine.
 	 */
-	export const FormEngine: ComponentType<FormEngineProps> = FormEngineViewInternal;
+	export const FormEngine: FunctionComponent<FormEngineProps> = FormEngineView;
 
 	/**
 	 * Wrap the Form-Engine with this component to activate the default
 	 * scrolling behavior. You only need this component if you don't use the
-	 * {@link FormEngineViews.FormEngine} component.
+	 * {@link FormEngine} component.
 	 */
-	export const ScrollHandler: ComponentType<FormEngineScrollHandlerProps> = FormEngineScrollHandler;
+	export const ScrollHandler: FunctionComponent<FormEngineScrollHandlerProps> =
+		FormEngineScrollHandler;
 
 	/**
-	 * An alternative to {@link FormEngineViews.FormEngine} with the same
+	 * An alternative to {@link FormEngine} with the same
 	 * configuration, except it is not connected to the store.
 	 */
-	export const FormEngineTpl: ComponentType<FormEngineTplProps> = FormEngineViewTplInternal;
+	export const FormEngineTpl: FunctionComponent<FormEngineTplProps> = FormEngineViewTpl;
 }

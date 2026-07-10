@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -33,17 +33,17 @@
 import type { JSX } from "react";
 import { useContext } from "react";
 
-import { ModelPath } from "@com.mgmtp.a12.base/base-model-api/lib/main/model/index.js";
-import { Attachment } from "@com.mgmtp.a12.dataservices/dataservices-access/lib/Attachment/attachment.js";
-import type { DocumentModel } from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
-import { LocalizerContext } from "@com.mgmtp.a12.utils/utils-localization-react/lib/main/index.js";
+import { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
+import { Attachment } from "@com.mgmtp.a12.dataservices/dataservices-access";
+import type { DocumentModel } from "@com.mgmtp.a12.kernel/kernel-md-facade";
+import { LocalizerContext } from "@com.mgmtp.a12.utils/utils-localization-react";
 
 import { ModelSelectors } from "../../../../../../../back-end/store/internal/selectors/models.js";
 import { UiId } from "../../../../../../../back-end/utils/internal/generateUiId.js";
 import { getDocumentPath } from "../../../../../../../back-end/utils/internal/path.js";
 import { getFieldTextValue } from "../../../../../../../data/internal/field-text-value.js";
 import type { FormModel } from "../../../../../../../models/index.js";
-import { DocumentModelUtils } from "../../../../../../../models/internal/utils/document-model-utils.js";
+import * as DocumentModelUtils from "../../../../../../../models/internal/utils/document-model-utils.js";
 import { DocumentUtils } from "../../../../../../../models/internal/utils/document-utils.js";
 import { FormModelPath } from "../../../../../../../models/internal/utils/form-model-path.js";
 import type { FormModelMap } from "../../../../../configuration/engine-configuration.js";

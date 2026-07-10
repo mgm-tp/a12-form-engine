@@ -1,0 +1,99 @@
+{
+  "header": {
+    "id": "FormModelAutoExpandValidArea",
+    "modelType": "form",
+    "modelVersion": "39.0.0",
+    "locales": [
+      {
+        "code": "en"
+      }
+    ],
+    "modelReferences": [
+      {
+        "alias": "DM",
+        "modelType": "document",
+        "purpose": "data binding",
+        "reference": "DocumentModelWithStringNoLineBreaks"
+      }
+    ],
+    "annotations": [
+      {
+        "name": "roles",
+        "value": "admin"
+      }
+    ]
+  },
+  "content": {
+    "subHeaderBox": {
+      "id": "subHeaderBox1"
+    },
+    "footerBox": {
+      "id": "footerBox1"
+    },
+    "screens": [
+      {
+        "id": "screen1",
+        "name": "Screen1",
+        "screenElements": [
+          {
+            "type": "ControlGrid",
+            "id": "controlgrid-ab5cc",
+            "name": "cg",
+            "row": [
+              {
+                "type": "Row",
+                "id": "row-18393",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control-d8bfc",
+                    "offset": {
+                      "lg": 0
+                    },
+                    "autoExpand": true,
+                    "elementRef": "field_e5208"
+                  }
+                ]
+              }
+            ],
+            "verticalAlignment": "BOTTOM"
+          },
+          {
+            "type": "InlineRepeat",
+            "id": "inlinerepeat-3edfe",
+            "name": "inline-repeat-rep",
+            "repeatOverviewColumn": [
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-91751",
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "autoExpand": true,
+                "elementRef": "field_96f7a"
+              }
+            ],
+            "groupRef": "group_9d50f",
+            "enableAdd": true,
+            "enableRemove": true
+          }
+        ]
+      }
+    ],
+    "fieldConfiguration": {
+      "field": [
+        {
+          "exposition": "AREA",
+          "elementRef": "field_e5208"
+        },
+        {
+          "exposition": "AREA",
+          "elementRef": "field_96f7a"
+        }
+      ]
+    },
+    "groupConfiguration": {},
+    "defaults": {}
+  }
+}

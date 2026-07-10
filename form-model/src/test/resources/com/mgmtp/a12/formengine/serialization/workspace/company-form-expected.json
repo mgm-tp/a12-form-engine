@@ -1,0 +1,687 @@
+{
+  "header": {
+    "id": "company-form",
+    "modelType": "form",
+    "modelVersion": "39.0.0",
+    "locales": [
+      {
+        "code": "en"
+      }
+    ],
+    "annotations": [
+      {
+        "name": "roles",
+        "value": "admin"
+      }
+    ],
+    "modelReferences": [
+      {
+        "alias": "company-document",
+        "modelType": "document",
+        "purpose": "data binding",
+        "reference": "company-document"
+      }
+    ]
+  },
+  "content": {
+    "subHeaderBox": {
+      "id": "subHeaderBox1"
+    },
+    "footerBox": {
+      "id": "footerBox1"
+    },
+    "screens": [
+      {
+        "id": "screen_ae86e",
+        "name": "Screen 1",
+        "screenElements": [
+          {
+            "type": "Section",
+            "id": "section_8e169",
+            "name": "company-section",
+            "title": {
+              "type": "Expression",
+              "expressionText": "\"Company \"\nkontext(company) {\n    [name]\n}\n\" Overview\""
+            },
+            "screenElements": [
+              {
+                "type": "ControlGrid",
+                "id": "controlgrid_be346",
+                "name": "company-cg",
+                "layout": {
+                  "lg": "8-4"
+                },
+                "row": [
+                  {
+                    "type": "Row",
+                    "id": "row_54c5d",
+                    "cell": [
+                      {
+                        "type": "Control",
+                        "id": "control_ab1a5",
+                        "elementRef": "field_4e8d6"
+                      },
+                      {
+                        "type": "Control",
+                        "id": "control_326b8",
+                        "elementRef": "field_fda0f"
+                      }
+                    ]
+                  }
+                ],
+                "verticalAlignment": "TOP"
+              },
+              {
+                "type": "Section",
+                "id": "section_36d06",
+                "name": "ceo-section",
+                "title": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "CEO"
+                      }
+                    ]
+                  }
+                },
+                "screenElements": [
+                  {
+                    "type": "ControlGrid",
+                    "id": "controlgrid_0c4e2_controlgrid_6dcf1",
+                    "name": "controlgrid_0c4e2-personal-information",
+                    "title": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "Personal Information"
+                          }
+                        ]
+                      }
+                    },
+                    "includeId": "controlgrid_0c4e2",
+                    "formModelRef": "person-form",
+                    "hostDocumentModelPath": "/company/ceo",
+                    "layout": {
+                      "lg": "5-5-2"
+                    },
+                    "row": [
+                      {
+                        "type": "Row",
+                        "id": "controlgrid_0c4e2_row_895f0",
+                        "cell": [
+                          {
+                            "type": "Control",
+                            "id": "controlgrid_0c4e2_control_5dbe6",
+                            "elementRef": "include_e2547_field_bbd56"
+                          },
+                          {
+                            "type": "Control",
+                            "id": "controlgrid_0c4e2_control_834ab",
+                            "elementRef": "include_e2547_field_38ab9"
+                          },
+                          {
+                            "type": "Control",
+                            "id": "controlgrid_0c4e2_control_0fd75",
+                            "elementRef": "include_e2547_field_82668"
+                          }
+                        ]
+                      }
+                    ],
+                    "verticalAlignment": "TOP"
+                  },
+                  {
+                    "type": "ControlGrid",
+                    "id": "controlgrid_0c4e2_controlgrid_a93f3_controlgrid_ee6e4",
+                    "name": "controlgrid_0c4e2-home-address",
+                    "title": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "Address"
+                          }
+                        ]
+                      }
+                    },
+                    "includeId": "controlgrid_0c4e2",
+                    "formModelRef": "person-form",
+                    "hostDocumentModelPath": "/company/ceo",
+                    "layout": {
+                      "lg": "6-6"
+                    },
+                    "row": [
+                      {
+                        "type": "Row",
+                        "id": "controlgrid_0c4e2_controlgrid_a93f3_row_455ea",
+                        "cell": [
+                          {
+                            "type": "Control",
+                            "id": "controlgrid_0c4e2_controlgrid_a93f3_control_8f265",
+                            "elementRef": "include_e2547_include_c1f6f_field_d736a"
+                          },
+                          {
+                            "type": "Control",
+                            "id": "controlgrid_0c4e2_controlgrid_a93f3_control_d261f",
+                            "hint": {
+                              "text": [
+                                {
+                                  "locale": "en",
+                                  "text": "State / City"
+                                }
+                              ]
+                            },
+                            "elementRef": "include_e2547_include_c1f6f_field_7a626"
+                          }
+                        ]
+                      },
+                      {
+                        "type": "Row",
+                        "id": "controlgrid_0c4e2_controlgrid_a93f3_row_36374",
+                        "cell": [
+                          {
+                            "type": "Control",
+                            "id": "controlgrid_0c4e2_controlgrid_a93f3_control_9fe40",
+                            "elementRef": "include_e2547_include_c1f6f_field_d508d"
+                          },
+                          {
+                            "type": "Control",
+                            "id": "controlgrid_0c4e2_controlgrid_a93f3_control_d39ad",
+                            "elementRef": "include_e2547_include_c1f6f_field_f0bbc"
+                          }
+                        ]
+                      }
+                    ],
+                    "readonlyPresentation": "TEXT",
+                    "verticalAlignment": "TOP"
+                  },
+                  {
+                    "type": "ControlGrid",
+                    "id": "controlgrid_0c4e2_controlgrid_bf7c8_controlgrid_ee6e4",
+                    "name": "controlgrid_0c4e2-work-address",
+                    "title": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "Address"
+                          }
+                        ]
+                      }
+                    },
+                    "includeId": "controlgrid_0c4e2",
+                    "formModelRef": "person-form",
+                    "hostDocumentModelPath": "/company/ceo",
+                    "layout": {
+                      "lg": "6-6"
+                    },
+                    "row": [
+                      {
+                        "type": "Row",
+                        "id": "controlgrid_0c4e2_controlgrid_bf7c8_row_455ea",
+                        "cell": [
+                          {
+                            "type": "Control",
+                            "id": "controlgrid_0c4e2_controlgrid_bf7c8_control_8f265",
+                            "elementRef": "include_e2547_include_135f6_field_d736a"
+                          },
+                          {
+                            "type": "Control",
+                            "id": "controlgrid_0c4e2_controlgrid_bf7c8_control_d261f",
+                            "hint": {
+                              "text": [
+                                {
+                                  "locale": "en",
+                                  "text": "State / City"
+                                }
+                              ]
+                            },
+                            "elementRef": "include_e2547_include_135f6_field_7a626"
+                          }
+                        ]
+                      },
+                      {
+                        "type": "Row",
+                        "id": "controlgrid_0c4e2_controlgrid_bf7c8_row_36374",
+                        "cell": [
+                          {
+                            "type": "Control",
+                            "id": "controlgrid_0c4e2_controlgrid_bf7c8_control_9fe40",
+                            "elementRef": "include_e2547_include_135f6_field_d508d"
+                          },
+                          {
+                            "type": "Control",
+                            "id": "controlgrid_0c4e2_controlgrid_bf7c8_control_d39ad",
+                            "elementRef": "include_e2547_include_135f6_field_f0bbc"
+                          }
+                        ]
+                      }
+                    ],
+                    "readonlyPresentation": "TEXT",
+                    "verticalAlignment": "TOP"
+                  }
+                ]
+              },
+              {
+                "type": "EmbeddedRepeat",
+                "id": "embeddedrepeat_d4d2d",
+                "name": "repeat-locations",
+                "title": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "Company Locations"
+                      }
+                    ]
+                  }
+                },
+                "repeatOverviewColumn": [
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn_f4563",
+                    "elementRef": "include_e2762_field_d736a"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn_107c1",
+                    "elementRef": "include_e2762_field_7a626"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn_5c955",
+                    "elementRef": "include_e2762_field_d508d"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn_f910a",
+                    "elementRef": "include_e2762_field_f0bbc"
+                  }
+                ],
+                "groupRef": "include_e2762",
+                "enableAdd": true,
+                "enableRemove": true,
+                "controlGrid": {
+                  "type": "ControlGrid",
+                  "id": "controlgrid_758fd_controlgrid_ee6e4",
+                  "name": "cg",
+                  "title": {
+                    "type": "Multilingual",
+                    "multilingualText": {
+                      "text": [
+                        {
+                          "locale": "en",
+                          "text": "Address"
+                        }
+                      ]
+                    }
+                  },
+                  "includeId": "controlgrid_758fd",
+                  "formModelRef": "address-form",
+                  "hostDocumentModelPath": "/company/locations",
+                  "layout": {
+                    "lg": "6-6"
+                  },
+                  "row": [
+                    {
+                      "type": "Row",
+                      "id": "controlgrid_758fd_row_455ea",
+                      "cell": [
+                        {
+                          "type": "Control",
+                          "id": "controlgrid_758fd_control_8f265",
+                          "elementRef": "include_e2762_field_d736a"
+                        },
+                        {
+                          "type": "Control",
+                          "id": "controlgrid_758fd_control_d261f",
+                          "hint": {
+                            "text": [
+                              {
+                                "locale": "en",
+                                "text": "State / City"
+                              }
+                            ]
+                          },
+                          "elementRef": "include_e2762_field_7a626"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "Row",
+                      "id": "controlgrid_758fd_row_36374",
+                      "cell": [
+                        {
+                          "type": "Control",
+                          "id": "controlgrid_758fd_control_9fe40",
+                          "elementRef": "include_e2762_field_d508d"
+                        },
+                        {
+                          "type": "Control",
+                          "id": "controlgrid_758fd_control_d39ad",
+                          "elementRef": "include_e2762_field_f0bbc"
+                        }
+                      ]
+                    }
+                  ],
+                  "readonlyPresentation": "TEXT",
+                  "verticalAlignment": "TOP"
+                }
+              },
+              {
+                "type": "DetachedRepeat",
+                "id": "inlinerepeat_30e18",
+                "name": "repeat-employees",
+                "title": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "Employees"
+                      }
+                    ]
+                  }
+                },
+                "repeatOverviewColumn": [
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn_7cff5",
+                    "elementRef": "include_7a7e7_field_bbd56"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn_98082",
+                    "elementRef": "include_7a7e7_field_38ab9"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn_30b29",
+                    "elementRef": "include_7a7e7_field_82668"
+                  }
+                ],
+                "groupRef": "include_7a7e7",
+                "enableAdd": true,
+                "enableRemove": true,
+                "detailScreen": {
+                  "id": "screen_6110f",
+                  "name": "repeat-employees-detail-screen",
+                  "screenElements": [
+                    {
+                      "type": "ControlGrid",
+                      "id": "controlgrid_808c8_controlgrid_6dcf1",
+                      "name": "controlgrid_808c8-personal-information",
+                      "title": {
+                        "type": "Multilingual",
+                        "multilingualText": {
+                          "text": [
+                            {
+                              "locale": "en",
+                              "text": "Personal Information"
+                            }
+                          ]
+                        }
+                      },
+                      "includeId": "controlgrid_808c8",
+                      "formModelRef": "person-form",
+                      "hostDocumentModelPath": "/company/employees",
+                      "layout": {
+                        "lg": "5-5-2"
+                      },
+                      "row": [
+                        {
+                          "type": "Row",
+                          "id": "controlgrid_808c8_row_895f0",
+                          "cell": [
+                            {
+                              "type": "Control",
+                              "id": "controlgrid_808c8_control_5dbe6",
+                              "elementRef": "include_7a7e7_field_bbd56"
+                            },
+                            {
+                              "type": "Control",
+                              "id": "controlgrid_808c8_control_834ab",
+                              "elementRef": "include_7a7e7_field_38ab9"
+                            },
+                            {
+                              "type": "Control",
+                              "id": "controlgrid_808c8_control_0fd75",
+                              "elementRef": "include_7a7e7_field_82668"
+                            }
+                          ]
+                        }
+                      ],
+                      "verticalAlignment": "TOP"
+                    },
+                    {
+                      "type": "ControlGrid",
+                      "id": "controlgrid_808c8_controlgrid_a93f3_controlgrid_ee6e4",
+                      "name": "controlgrid_808c8-home-address",
+                      "title": {
+                        "type": "Multilingual",
+                        "multilingualText": {
+                          "text": [
+                            {
+                              "locale": "en",
+                              "text": "Address"
+                            }
+                          ]
+                        }
+                      },
+                      "includeId": "controlgrid_808c8",
+                      "formModelRef": "person-form",
+                      "hostDocumentModelPath": "/company/employees",
+                      "layout": {
+                        "lg": "6-6"
+                      },
+                      "row": [
+                        {
+                          "type": "Row",
+                          "id": "controlgrid_808c8_controlgrid_a93f3_row_455ea",
+                          "cell": [
+                            {
+                              "type": "Control",
+                              "id": "controlgrid_808c8_controlgrid_a93f3_control_8f265",
+                              "elementRef": "include_7a7e7_include_c1f6f_field_d736a"
+                            },
+                            {
+                              "type": "Control",
+                              "id": "controlgrid_808c8_controlgrid_a93f3_control_d261f",
+                              "hint": {
+                                "text": [
+                                  {
+                                    "locale": "en",
+                                    "text": "State / City"
+                                  }
+                                ]
+                              },
+                              "elementRef": "include_7a7e7_include_c1f6f_field_7a626"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "Row",
+                          "id": "controlgrid_808c8_controlgrid_a93f3_row_36374",
+                          "cell": [
+                            {
+                              "type": "Control",
+                              "id": "controlgrid_808c8_controlgrid_a93f3_control_9fe40",
+                              "elementRef": "include_7a7e7_include_c1f6f_field_d508d"
+                            },
+                            {
+                              "type": "Control",
+                              "id": "controlgrid_808c8_controlgrid_a93f3_control_d39ad",
+                              "elementRef": "include_7a7e7_include_c1f6f_field_f0bbc"
+                            }
+                          ]
+                        }
+                      ],
+                      "readonlyPresentation": "TEXT",
+                      "verticalAlignment": "TOP"
+                    },
+                    {
+                      "type": "ControlGrid",
+                      "id": "controlgrid_808c8_controlgrid_bf7c8_controlgrid_ee6e4",
+                      "name": "controlgrid_808c8-work-address",
+                      "title": {
+                        "type": "Multilingual",
+                        "multilingualText": {
+                          "text": [
+                            {
+                              "locale": "en",
+                              "text": "Address"
+                            }
+                          ]
+                        }
+                      },
+                      "includeId": "controlgrid_808c8",
+                      "formModelRef": "person-form",
+                      "hostDocumentModelPath": "/company/employees",
+                      "layout": {
+                        "lg": "6-6"
+                      },
+                      "row": [
+                        {
+                          "type": "Row",
+                          "id": "controlgrid_808c8_controlgrid_bf7c8_row_455ea",
+                          "cell": [
+                            {
+                              "type": "Control",
+                              "id": "controlgrid_808c8_controlgrid_bf7c8_control_8f265",
+                              "elementRef": "include_7a7e7_include_135f6_field_d736a"
+                            },
+                            {
+                              "type": "Control",
+                              "id": "controlgrid_808c8_controlgrid_bf7c8_control_d261f",
+                              "hint": {
+                                "text": [
+                                  {
+                                    "locale": "en",
+                                    "text": "State / City"
+                                  }
+                                ]
+                              },
+                              "elementRef": "include_7a7e7_include_135f6_field_7a626"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "Row",
+                          "id": "controlgrid_808c8_controlgrid_bf7c8_row_36374",
+                          "cell": [
+                            {
+                              "type": "Control",
+                              "id": "controlgrid_808c8_controlgrid_bf7c8_control_9fe40",
+                              "elementRef": "include_7a7e7_include_135f6_field_d508d"
+                            },
+                            {
+                              "type": "Control",
+                              "id": "controlgrid_808c8_controlgrid_bf7c8_control_d39ad",
+                              "elementRef": "include_7a7e7_include_135f6_field_f0bbc"
+                            }
+                          ]
+                        }
+                      ],
+                      "readonlyPresentation": "TEXT",
+                      "verticalAlignment": "TOP"
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "fieldConfiguration": {
+      "field": [
+        {
+          "elementRef": "include_e2547_field_bbd56"
+        },
+        {
+          "elementRef": "include_e2547_field_38ab9"
+        },
+        {
+          "elementRef": "include_e2547_field_82668"
+        },
+        {
+          "elementRef": "include_e2547_include_c1f6f_field_d736a"
+        },
+        {
+          "elementRef": "include_e2547_include_c1f6f_field_7a626"
+        },
+        {
+          "elementRef": "include_e2547_include_c1f6f_field_d508d"
+        },
+        {
+          "elementRef": "include_e2547_include_c1f6f_field_f0bbc"
+        },
+        {
+          "elementRef": "include_e2547_include_135f6_field_d736a"
+        },
+        {
+          "elementRef": "include_e2547_include_135f6_field_7a626"
+        },
+        {
+          "elementRef": "include_e2547_include_135f6_field_d508d"
+        },
+        {
+          "elementRef": "include_e2547_include_135f6_field_f0bbc"
+        },
+        {
+          "elementRef": "include_e2762_field_d736a"
+        },
+        {
+          "elementRef": "include_e2762_field_7a626"
+        },
+        {
+          "elementRef": "include_e2762_field_d508d"
+        },
+        {
+          "elementRef": "include_e2762_field_f0bbc"
+        },
+        {
+          "elementRef": "include_7a7e7_field_bbd56"
+        },
+        {
+          "elementRef": "include_7a7e7_field_38ab9"
+        },
+        {
+          "elementRef": "include_7a7e7_field_82668"
+        },
+        {
+          "elementRef": "include_7a7e7_include_c1f6f_field_d736a"
+        },
+        {
+          "elementRef": "include_7a7e7_include_c1f6f_field_7a626"
+        },
+        {
+          "elementRef": "include_7a7e7_include_c1f6f_field_d508d"
+        },
+        {
+          "elementRef": "include_7a7e7_include_c1f6f_field_f0bbc"
+        },
+        {
+          "elementRef": "include_7a7e7_include_135f6_field_d736a"
+        },
+        {
+          "elementRef": "include_7a7e7_include_135f6_field_7a626"
+        },
+        {
+          "elementRef": "include_7a7e7_include_135f6_field_d508d"
+        },
+        {
+          "elementRef": "include_7a7e7_include_135f6_field_f0bbc"
+        }
+      ]
+    },
+    "groupConfiguration": {},
+    "defaults": {}
+  }
+}

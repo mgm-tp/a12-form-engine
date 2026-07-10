@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -30,35 +30,36 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import "@com.mgmtp.a12.widgets/widgets-core/lib/theme/basic.css";
-
 import { de } from "date-fns/locale/de";
 import { enUS } from "date-fns/locale/en-US";
 import type { PropsWithChildren } from "react";
 import { useSelector } from "react-redux";
 import { StyleSheetManager, ThemeProvider } from "styled-components";
 
-import { ApplicationSelectors } from "@com.mgmtp.a12.client/client-core/lib/core/application/index.js";
-import { LocaleSelectors } from "@com.mgmtp.a12.client/client-core/lib/core/locale/index.js";
-import { NotificationViews } from "@com.mgmtp.a12.client/client-core/lib/core/notification/index.js";
-import { ViewViews } from "@com.mgmtp.a12.client/client-core/lib/core/view/index.js";
-import { DirtyHandlingViews } from "@com.mgmtp.a12.client/client-core/lib/extensions/dirtyHandling/index.js";
-import { LocalizerContext } from "@com.mgmtp.a12.utils/utils-localization-react/lib/main/index.js";
+import {
+	ApplicationSelectors,
+	LocaleSelectors,
+	NotificationViews,
+	ViewViews
+} from "@com.mgmtp.a12.client/client-core";
+import { DirtyHandlingViews } from "@com.mgmtp.a12.client/client-core/dirtyHandling";
+import type { ClockMode } from "@com.mgmtp.a12.formengine/formengine-content-elements";
 import {
 	defaultDataFormats,
 	defaultLocalizerFactory,
 	defaultValueConversion
-} from "@com.mgmtp.a12.utils/utils-localization/lib/main/index.js";
+} from "@com.mgmtp.a12.utils/utils-localization";
+import { LocalizerContext } from "@com.mgmtp.a12.utils/utils-localization-react";
 import {
 	A11YLanguageContext,
-	getA11yResource
-} from "@com.mgmtp.a12.widgets/widgets-core/lib/common/main/a11y-localization/language-context.js";
-import { DateTimeContext } from "@com.mgmtp.a12.widgets/widgets-core/lib/common/main/date-time/date-time-context.js";
-import { shouldForwardProp } from "@com.mgmtp.a12.widgets/widgets-core/lib/common/main/should-forward-prop.js";
-import { SizeContext } from "@com.mgmtp.a12.widgets/widgets-core/lib/layout/size-detector/main/size-context.js";
-import { useWindowSize } from "@com.mgmtp.a12.widgets/widgets-core/lib/layout/size-detector/main/size-detector.view.js";
-import { GlobalStyles } from "@com.mgmtp.a12.widgets/widgets-core/lib/theme/base/global-styles.js";
-import { flatTheme } from "@com.mgmtp.a12.widgets/widgets-core/lib/theme/flat/flat-theme.js";
+	DateTimeContext,
+	getBaseTheme,
+	getA11yResource,
+	GlobalStyles,
+	shouldForwardProp,
+	SizeContext,
+	useWindowSize
+} from "@com.mgmtp.a12.widgets/widgets-core";
 
 import { DEFAULT_TRANSLATIONS } from "../../localization/index.js";
 
@@ -89,12 +90,13 @@ function A12Provider({ children }: PropsWithChildren) {
 	const A11yResource = getA11yResource(locale.language);
 
 	const dateTimeLocale = locale.language === "en" ? enUS : de;
+	const timeMode: ClockMode = locale.language === "en" ? "12h" : "24h";
 
 	return (
 		<SizeContext.Provider value={{ currentSize: breakPoint.size }}>
 			<LocalizerContext.Provider value={{ locale, dataFormats, localizer, conversion }}>
 				<A11YLanguageContext.Provider value={A11yResource}>
-					<DateTimeContext value={{ locale: dateTimeLocale }}>{children}</DateTimeContext>
+					<DateTimeContext value={{ locale: dateTimeLocale, timeMode }}>{children}</DateTimeContext>
 				</A11YLanguageContext.Provider>
 			</LocalizerContext.Provider>
 		</SizeContext.Provider>
@@ -104,7 +106,7 @@ function A12Provider({ children }: PropsWithChildren) {
 export function AppContainer({ children }: PropsWithChildren) {
 	return (
 		<StyleSheetManager shouldForwardProp={shouldForwardProp}>
-			<ThemeProvider theme={flatTheme}>
+			<ThemeProvider theme={getBaseTheme()}>
 				<GlobalStyles />
 				<A12Provider>
 					<A12ViewWrapper>{children}</A12ViewWrapper>

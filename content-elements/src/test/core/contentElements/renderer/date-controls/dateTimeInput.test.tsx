@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -36,30 +36,25 @@ import { mock } from "node:test";
 import { act } from "@testing-library/react";
 import type { MouseEvent } from "react";
 
-import type { ParseError } from "@com.mgmtp.a12.client/client-data";
-import { DocumentPath, KernelMessage } from "@com.mgmtp.a12.client/client-data";
 import { DocumentContext } from "@com.mgmtp.a12.contentengine/contentengine-core";
 import { query, screen } from "@com.mgmtp.a12.devtools/react";
-import type { Message } from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
-import { LocalizerContext } from "@com.mgmtp.a12.utils/utils-localization-react/lib/main/index.js";
-import type { ValueConversion } from "@com.mgmtp.a12.utils/utils-localization/lib/main/index.js";
-import type { ButtonProps } from "@com.mgmtp.a12.widgets/widgets-core/lib/button/main/button.api.js";
-import { DateTimeUtils } from "@com.mgmtp.a12.widgets/widgets-core/lib/common/main/date-time/date-utils.js";
-import type { IconProps } from "@com.mgmtp.a12.widgets/widgets-core/lib/icon/main/icon.api.js";
+import type { LocalizerContextProps } from "@com.mgmtp.a12.utils/utils-localization-react";
+import { LocalizerContext } from "@com.mgmtp.a12.utils/utils-localization-react";
+import { DateTimeUtils, provider as deviceDetector } from "@com.mgmtp.a12.widgets/widgets-core";
+import type { ButtonProps, IconProps } from "@com.mgmtp.a12.widgets/widgets-core";
+import type { Message } from "@com.mgmtp.a12.kernel/kernel-md-facade";
 
-import { USE_COMMON_CONTROL_SETTINGS_WRAPPER } from "../../../../../main/core/contentElements/elementConfiguration/useCommonControlSettings.js";
-import { USE_COMMON_WIDGET_SETTINGS_WRAPPER } from "../../../../../main/core/contentElements/elementConfiguration/useCommonWidgetSettings.js";
-import { DefaultFunctionMap } from "../../../../../main/core/contentElements/functionMap/defaultFunctionMap.js";
-import { FunctionMapContext } from "../../../../../main/core/contentElements/functionMap/functionMapContext.js";
 import type { DatePickerNode } from "../../../../../main/core/contentElements/modules/datePicker/datePickerNode.js";
 import { DATE_PICKER_TYPE } from "../../../../../main/core/contentElements/modules/datePicker/datePickerNode.js";
 import { DateTimeInput } from "../../../../../main/core/contentElements/modules/datePicker/inputTypes/dateTimeInput.js";
+import { DateUtils } from "../../../../../main/core/contentElements/modules/datePicker/inputTypes/dateUtils.js";
 import { nmTokensToString } from "../../../../../main/core/contentElements/nmtokens.js";
 import {
 	FORM_ELEMENTS_NAMESPACE,
 	FormElementContext,
 	RESOURCE_KEYS
 } from "../../../../../main/core/index.js";
+import type { WidgetMap } from "../../../../../main/core/index.js";
 import type { BaseControlSettings } from "../../../../../main/core/types/controlSettings.js";
 import type { BaseWidgetSettings } from "../../../../../main/core/types/widgetSettings.js";
 import {
@@ -67,32 +62,20 @@ import {
 	assertCalledWith,
 	assertCalledWithArgument
 } from "../../../../assertions.js";
+import { getMockLocalization } from "../../../../mocks/getMockLocalization.js";
 import { mockDocumentContext } from "../../../../mocks/mockDocumentContext.js";
-import { getMockMessage } from "../../../../mocks/mockError.js";
+import {
+	getMockMessage,
+	mockConversionError,
+	mockParseError
+} from "../../../../mocks/mockError.js";
+import { setupMockHooks } from "../../../../mocks/setupMockHooks.js";
 import { getReactElementName, isReactElement } from "../../../../react-element-utils.js";
 import { BUFFERED_TEXT_LINE, PICKER_WRAPPER } from "../../../../rtl-utils/data-roles.js";
 import { renderWrapper } from "../../../../rtl-utils/render-wrapper.js";
 
-function setupMocks(controlSettings: BaseControlSettings, widgetSettings: BaseWidgetSettings) {
-	return {
-		useControlSettingsMock: mock.method(
-			USE_COMMON_CONTROL_SETTINGS_WRAPPER,
-			"useCommonControlSettings",
-			() => controlSettings
-		),
-		useWidgetSettingsMock: mock.method(
-			USE_COMMON_WIDGET_SETTINGS_WRAPPER,
-			"useCommonWidgetSettings",
-			() => widgetSettings
-		),
-		useFocusFieldMock: mock.fn(),
-		useFocusFirstErrorMock: mock.fn(),
-		useFocusInputMock: mock.fn()
-	};
-}
-
 describe("core.contentElements", () => {
-	describe("DateInput", () => {
+	describe("DateTimeInput", () => {
 		it("renders a BufferedTextLine with the correct properties", () => {
 			const mockControlSettings = getMockControlSettings();
 			const mockWidgetSettings = getMockWidgetSettings({
@@ -100,9 +83,10 @@ describe("core.contentElements", () => {
 				readonly: true
 			});
 
-			setupMocks(mockControlSettings, mockWidgetSettings);
-
-			const { componentMap } = renderWrapper(<DateTimeInput node={mockNode} />);
+			const { componentMap } = setup({
+				controlSettings: mockControlSettings,
+				widgetSettings: mockWidgetSettings
+			});
 
 			const props = query(componentMap.BufferedTextLine).props();
 
@@ -110,8 +94,6 @@ describe("core.contentElements", () => {
 			strictEqual(props.label, mockWidgetSettings.label);
 			strictEqual(props.readonly, mockWidgetSettings.readonly);
 			strictEqual(props.hideLabel, mockWidgetSettings.hideLabel);
-			strictEqual(props.addonAfter, undefined); // TODO: add more tests
-			strictEqual(props.tooltips, mockWidgetSettings.tooltips);
 			strictEqual(props.helperText, mockWidgetSettings.helperText);
 			strictEqual(props.placeholder, mockControlSettings.placeholder);
 			strictEqual(props.value, mockWidgetSettings.formattedValue);
@@ -123,21 +105,60 @@ describe("core.contentElements", () => {
 			strictEqual(props.infoMessage, mockWidgetSettings.infos);
 			strictEqual(props.inputProps, mockWidgetSettings.inputProps);
 			notStrictEqual(props.inputRef, undefined);
-			strictEqual(props.ariaDescribedby, nmTokensToString(mockWidgetSettings.ariaDescribedBy)); // TODO: additional test for this post-processing?
+		});
+
+		describe("Tooltips", () => {
+			it("sets tooltips in addOnAfter if tooltipsOnTop is not set", () => {
+				const mockWidgetSettings = getMockWidgetSettings();
+
+				const { componentMap } = setup({ widgetSettings: mockWidgetSettings });
+
+				const props = query(componentMap.BufferedTextLine).props();
+
+				strictEqual(props.addonAfter, mockWidgetSettings.tooltips);
+				strictEqual(props.tooltips, undefined);
+			});
+
+			it("sets tooltips in tooltips prop if tooltipsOnTop is set", () => {
+				const mockWidgetSettings = getMockWidgetSettings({ tooltipsOnTop: true });
+
+				const { componentMap } = setup({ widgetSettings: mockWidgetSettings });
+
+				const props = query(componentMap.BufferedTextLine).props();
+
+				strictEqual(props.addonAfter, undefined);
+				strictEqual(props.tooltips, mockWidgetSettings.tooltips);
+			});
+		});
+
+		describe("ariaDescribedBy", () => {
+			it("sets undefined if ariaDescribedBy is empty", () => {
+				const { componentMap } = setup();
+
+				const props = query(componentMap.BufferedTextLine).props();
+
+				strictEqual(props.ariaDescribedby, undefined);
+			});
+
+			it("converts tokens into a single string if ariaDescribedBy is not empty", () => {
+				const mockWidgetSettings = getMockWidgetSettings({ ariaDescribedBy: ["token1", "token2"] });
+
+				const { componentMap } = setup({ widgetSettings: mockWidgetSettings });
+
+				const props = query(componentMap.BufferedTextLine).props();
+
+				strictEqual(props.ariaDescribedby, nmTokensToString(mockWidgetSettings.ariaDescribedBy));
+			});
 		});
 
 		describe("Picker button", () => {
 			it("renders a picker button if the date picker is not disabled and the control is not readonly", () => {
 				const mockControlSettings = getMockControlSettings();
-				const mockWidgetSettings = getMockWidgetSettings({ value: new Date(0) });
 
-				setupMocks(mockControlSettings, mockWidgetSettings);
-
-				const { componentMap } = renderWrapper(
-					<LocalizerContext.Provider value={getMockLocalization()}>
-						<DateTimeInput node={mockNode} />
-					</LocalizerContext.Provider>
-				);
+				const { componentMap } = setup({
+					controlSettings: mockControlSettings,
+					widgetSettings: getMockWidgetSettings({ value: new Date(0) })
+				});
 
 				const textLineProps = query(componentMap.BufferedTextLine).props();
 				const buttonProps =
@@ -146,9 +167,9 @@ describe("core.contentElements", () => {
 						? (textLineProps.prefixes.props as ButtonProps)
 						: undefined;
 
-				// TODO: test buttonRef somehow?
 				strictEqual(buttonProps?.id, `${mockControlSettings.uiId}-picker`);
 				strictEqual(buttonProps?.title, RESOURCE_KEYS.dateTime.button.open);
+				notStrictEqual(buttonProps?.buttonRef, undefined);
 
 				const iconProps =
 					isReactElement(buttonProps?.icon) && getReactElementName(buttonProps?.icon) === "IconMock"
@@ -159,341 +180,289 @@ describe("core.contentElements", () => {
 			});
 
 			it("does not render a picker button if the date picker is disabled", () => {
-				const mockControlSettings = getMockControlSettings();
-				const mockWidgetSettings = getMockWidgetSettings({ value: new Date(0) });
-
-				setupMocks(mockControlSettings, mockWidgetSettings);
-
-				const { widgetMap } = renderWrapper(
-					<LocalizerContext.Provider value={getMockLocalization()}>
-						<FormElementContext.Provider
-							value={{
-								config: { timeMode: "12h", disableDatePicker: true },
-								contentModelName: ""
-							}}
-						>
-							<DateTimeInput node={mockNode} />
-						</FormElementContext.Provider>
-					</LocalizerContext.Provider>
-				);
+				const { widgetMap } = setup({
+					widgetSettings: getMockWidgetSettings({ value: new Date(0) }),
+					disableDatePicker: true
+				});
 
 				query(widgetMap.Button).assertNotRendered();
 			});
 
 			it("does not render a picker button if the control is readonly", () => {
-				const mockControlSettings = getMockControlSettings();
-				const mockWidgetSettings = getMockWidgetSettings({
-					value: new Date(0),
-					readonly: true
+				const { widgetMap } = setup({
+					widgetSettings: getMockWidgetSettings({
+						value: new Date(0),
+						readonly: true
+					})
 				});
-
-				setupMocks(mockControlSettings, mockWidgetSettings);
-
-				const { widgetMap } = renderWrapper(
-					<LocalizerContext.Provider value={getMockLocalization()}>
-						<DateTimeInput node={mockNode} />
-					</LocalizerContext.Provider>
-				);
 
 				query(widgetMap.Button).assertNotRendered();
 			});
 		});
 
 		describe("Picker", () => {
+			it("renders a PickerWrapper and a DateTimePicker when the picker button is clicked", async () => {
+				const mockControlSettings = getMockControlSettings();
+				const mockWidgetSettings = getMockWidgetSettings({ value: new Date(0) });
+
+				const { widgetMap, componentMap } = setup({
+					controlSettings: mockControlSettings,
+					widgetSettings: mockWidgetSettings,
+					timeMode: "24h"
+				});
+
+				await openPicker(widgetMap);
+
+				const wrapperProps = query(componentMap.PickerWrapper).props();
+
+				deepStrictEqual(wrapperProps.referenceElement, {});
+				notStrictEqual(wrapperProps.updateElementPosition, undefined);
+
+				const pickerProps = query(widgetMap.DateTimePicker).props();
+
+				strictEqual(pickerProps.backLabel, RESOURCE_KEYS.dateTime.button.back);
+				strictEqual(pickerProps.okLabel, RESOURCE_KEYS.dateTime.button.ok);
+				strictEqual(pickerProps.clearLabel, RESOURCE_KEYS.dateTime.button.clear);
+				strictEqual(pickerProps.value, mockWidgetSettings.value);
+				strictEqual(pickerProps.timeRequired, true);
+				strictEqual(pickerProps.timeMode, "24h");
+				strictEqual(pickerProps.timezone, mockControlSettings.timeZone);
+				strictEqual(pickerProps.customTimeEditLabel, RESOURCE_KEYS.dateTime.button.editTime);
+				deepStrictEqual(pickerProps.yearRange, {
+					start: mockControlSettings.datePickerConfig?.minYear,
+					end: mockControlSettings.datePickerConfig?.maxYear
+				});
+				notStrictEqual(pickerProps.onAccept, undefined);
+				notStrictEqual(pickerProps.onChange, undefined);
+				notStrictEqual(pickerProps.onScreenChange, undefined);
+			});
+
+			it("sets an initial date for the DateTimePicker when no value is given", async () => {
+				const initialDate = new Date(42);
+				mock.method(DateUtils, "calculateInitialDate", () => initialDate);
+
+				const { widgetMap } = setup();
+
+				await openPicker(widgetMap);
+
+				const pickerProps = query(widgetMap.DateTimePicker).props();
+
+				strictEqual(pickerProps.value, initialDate);
+			});
+
+			describe("Header", () => {
+				it("renders a custom Header with a formatted date string in the picker if a value was given", async () => {
+					const expectedHeader = "FORMATTED_DATE_STRING";
+
+					const { widgetMap } = setup({
+						widgetSettings: getMockWidgetSettings({ value: new Date(0) }),
+						localizerContext: getMockLocalization({ formatValue: () => expectedHeader })
+					});
+
+					await openPicker(widgetMap);
+
+					const headerProps = query(widgetMap.DateTimePickerHeader).props();
+
+					strictEqual(headerProps.children, expectedHeader);
+				});
+
+				it("updates the custom Header when onChange is triggered", async () => {
+					const oldValue = new Date(0);
+
+					const { widgetMap } = setup({
+						widgetSettings: getMockWidgetSettings({ value: oldValue }),
+						localizerContext: getMockLocalization({
+							formatValue: value => "" + value
+						})
+					});
+
+					await openPicker(widgetMap);
+
+					const headerPropsBefore = query(widgetMap.DateTimePickerHeader).props();
+					strictEqual(headerPropsBefore.children, "" + oldValue);
+
+					const pickerProps = query(widgetMap.DateTimePicker).props();
+
+					const newDate = new Date(123);
+					const newTime = new Date(456789);
+
+					act(() => {
+						pickerProps.onChange?.(newDate, newTime);
+					});
+
+					const headerPropsAfter = query(widgetMap.DateTimePickerHeader).props();
+					strictEqual(
+						headerPropsAfter.children,
+						"" + DateTimeUtils.combineDateAndTime(newDate, newTime)
+					);
+				});
+
+				it("renders a custom Header with a placeholder if the value is cleared", async () => {
+					const oldValue = new Date(0);
+
+					const { widgetMap } = setup({
+						widgetSettings: getMockWidgetSettings({ value: oldValue }),
+						localizerContext: getMockLocalization({
+							formatValue: value => "" + value
+						})
+					});
+
+					await openPicker(widgetMap);
+
+					const headerPropsBefore = query(widgetMap.DateTimePickerHeader).props();
+					strictEqual(headerPropsBefore.children, "" + oldValue);
+
+					const pickerProps = query(widgetMap.DateTimePicker).props();
+
+					act(() => {
+						pickerProps.onChange?.();
+					});
+
+					const headerPropsAfter = query(widgetMap.DateTimePickerHeader).props();
+					strictEqual(headerPropsAfter.children, RESOURCE_KEYS.dateTime.placeholderTime);
+				});
+			});
+
+			it("closes the PickerWrapper when onClose is triggered", async () => {
+				const { widgetMap, componentMap } = setup({
+					widgetSettings: getMockWidgetSettings({ value: new Date(0) })
+				});
+
+				await openPicker(widgetMap);
+
+				const pickerWrapperBefore = screen.getByDataRole(PICKER_WRAPPER);
+				notStrictEqual(pickerWrapperBefore, undefined);
+
+				const wrapperProps = query(componentMap.PickerWrapper).props();
+
+				act(() => {
+					wrapperProps.onClose?.();
+				});
+
+				const pickerWrapperAfter = screen.queryAllByDataRole(PICKER_WRAPPER);
+				strictEqual(pickerWrapperAfter.length, 0);
+			});
+
+			it("closes the PickerWrapper when onAccept is triggered", async () => {
+				const { widgetMap } = setup({
+					widgetSettings: getMockWidgetSettings({ value: new Date(0) }),
+					docContext: mockDocumentContext()
+				});
+
+				await openPicker(widgetMap);
+
+				const pickerWrapperBefore = screen.getByDataRole(PICKER_WRAPPER);
+				notStrictEqual(pickerWrapperBefore, undefined);
+
+				const pickerProps = query(widgetMap.DateTimePicker).props();
+
+				act(() => {
+					pickerProps.onAccept?.(new Date(0));
+				});
+
+				const pickerWrapperAfter = screen.queryAllByDataRole(PICKER_WRAPPER);
+				strictEqual(pickerWrapperAfter.length, 0);
+			});
+
+			it("calls valueChanged from the document context with the new value when onAccept is triggered", async () => {
+				const mockControlSettings = getMockControlSettings();
+				const mockDocContext = mockDocumentContext();
+
+				const { widgetMap } = setup({
+					controlSettings: mockControlSettings,
+					widgetSettings: getMockWidgetSettings({ value: new Date(0) }),
+					docContext: mockDocContext
+				});
+
+				await openPicker(widgetMap);
+
+				const pickerProps = query(widgetMap.DateTimePicker).props();
+
+				const newValue = new Date(0);
+
+				act(() => {
+					pickerProps.onAccept?.(newValue);
+				});
+
+				assertCalledWith(mockDocContext.event.onValueChanged, {
+					path: mockControlSettings.dataReference,
+					value: newValue
+				});
+			});
+
+			it("calls valueChanged from the document context with null when onAccept is triggered without a value", async () => {
+				const mockControlSettings = getMockControlSettings();
+				const mockDocContext = mockDocumentContext();
+
+				const { widgetMap } = setup({
+					controlSettings: mockControlSettings,
+					widgetSettings: getMockWidgetSettings({ value: new Date(0) }),
+					docContext: mockDocContext
+				});
+
+				await openPicker(widgetMap);
+
+				const pickerProps = query(widgetMap.DateTimePicker).props();
+
+				act(() => {
+					pickerProps.onAccept?.();
+				});
+
+				assertCalledWith(mockDocContext.event.onValueChanged, {
+					path: mockControlSettings.dataReference,
+					value: null
+				});
+			});
+
+			it("combines the selected date and time and updates the pickerValue when onChange is triggered", async () => {
+				const mockWidgetSettings = getMockWidgetSettings({ value: new Date(0) });
+
+				const { widgetMap, componentMap } = setup({
+					widgetSettings: mockWidgetSettings
+				});
+
+				await openPicker(widgetMap);
+
+				const wrapperProps = query(componentMap.PickerWrapper).props();
+
+				deepStrictEqual(wrapperProps.referenceElement, {});
+
+				const pickerPropsBefore = query(widgetMap.DateTimePicker).props();
+				strictEqual(pickerPropsBefore.value, mockWidgetSettings.value);
+
+				const newDate = new Date(42);
+				const newTime = new Date(13370000);
+				const expectedValue = DateTimeUtils.combineDateAndTime(newDate, newTime);
+
+				act(() => {
+					pickerPropsBefore.onChange?.(newDate, newTime);
+				});
+
+				const pickerPropsAfter = query(widgetMap.DateTimePicker).props();
+				deepStrictEqual(pickerPropsAfter.value, expectedValue);
+			});
+
 			describe("desktop mode", () => {
-				// TODO: add test for initial date calculation (mock + add unit test?)
-				it("renders a PickerWrapper and a DateTimePicker when the picker button is clicked", () => {
-					const mockControlSettings = getMockControlSettings();
-					const mockWidgetSettings = getMockWidgetSettings({ value: new Date(0) });
+				beforeEach(() => {
+					mock.method(deviceDetector, "get", () => "desktop");
+				});
 
-					setupMocks(mockControlSettings, mockWidgetSettings);
+				it("sets mobileMode to false on desktop devices", async () => {
+					const { widgetMap } = setup();
 
-					const { widgetMap, componentMap } = renderWrapper(
-						<FormElementContext.Provider
-							value={{ contentModelName: "", config: { timeMode: "24h" } }}
-						>
-							<LocalizerContext.Provider value={getMockLocalization()}>
-								<DateTimeInput node={mockNode} />
-							</LocalizerContext.Provider>
-						</FormElementContext.Provider>
-					);
-
-					const buttonProps = query(widgetMap.Button).props();
-
-					act(() => {
-						buttonProps.onClick?.({} as MouseEvent<HTMLElement>);
-					});
-
-					const wrapperProps = query(componentMap.PickerWrapper).props();
-
-					// TODO: test for updateElementPosition?
-					deepStrictEqual(wrapperProps.referenceElement, {});
+					await openPicker(widgetMap);
 
 					const pickerProps = query(widgetMap.DateTimePicker).props();
 
-					// TODO: test for customHeaderElement
-					// TODO: mock yearRange calculation and add unit test?
-					strictEqual(pickerProps.backLabel, RESOURCE_KEYS.dateTime.button.back);
-					strictEqual(pickerProps.okLabel, RESOURCE_KEYS.dateTime.button.ok);
-					strictEqual(pickerProps.clearLabel, RESOURCE_KEYS.dateTime.button.clear);
-					strictEqual(pickerProps.value, mockWidgetSettings.value);
-					strictEqual(pickerProps.timeRequired, true);
-					strictEqual(pickerProps.timeMode, "24h");
-					strictEqual(pickerProps.timezone, mockControlSettings.timeZone);
-					strictEqual(pickerProps.customTimeEditLabel, RESOURCE_KEYS.dateTime.button.editTime);
-					deepStrictEqual(pickerProps.yearRange, {
-						start: mockControlSettings.datePickerConfig?.minYear,
-						end: mockControlSettings.datePickerConfig?.maxYear
-					});
+					strictEqual(pickerProps.mobileMode, false);
 				});
 
-				describe("Header", () => {
-					it("renders a custom Header with a formatted date string in the picker if a value was given", () => {
-						const mockControlSettings = getMockControlSettings();
-						const mockWidgetSettings = getMockWidgetSettings({ value: new Date(0) });
-
-						setupMocks(mockControlSettings, mockWidgetSettings);
-
-						const expectedHeader = "FORMATTED_DATE_STRING";
-
-						const { widgetMap } = renderWrapper(
-							<LocalizerContext.Provider
-								value={getMockLocalization({ formatValue: () => expectedHeader })}
-							>
-								<DateTimeInput node={mockNode} />
-							</LocalizerContext.Provider>
-						);
-
-						const buttonProps = query(widgetMap.Button).props();
-
-						act(() => {
-							buttonProps.onClick?.({} as MouseEvent<HTMLElement>);
-						});
-
-						const headerProps = query(widgetMap.Header).props();
-
-						strictEqual(headerProps.children, expectedHeader);
+				it("focuses the buffered text line when onAccept is triggered", async () => {
+					const { widgetMap } = setup({
+						widgetSettings: getMockWidgetSettings({ value: new Date(0) })
 					});
 
-					// TODO: mock initial date calculation
-					// it("renders a custom Header with an initial date in the DateTimePicker if no value was given", () => {
-					// 	const mockControlSettings = getMockControlSettings();
-					// 	const mockWidgetSettings = getMockWidgetSettings();
-
-					// 	setupMocks(mockControlSettings, mockWidgetSettings);
-
-					// 	const { widgetMap } = renderWrapper(
-					// 		<LocalizerContext.Provider value={getMockLocalization()}>
-					// 			<DateTimeInput node={mockNode} />
-					// 		</LocalizerContext.Provider>
-					// 	);
-
-					// 	const buttonProps = query(widgetMap.Button).props();
-
-					// 	act(() => {
-					// 		buttonProps.onClick?.({} as MouseEvent<HTMLElement>);
-					// 	});
-
-					// 	const headerProps = query(widgetMap.Header).props();
-
-					// 	strictEqual(headerProps.children, RESOURCE_KEYS.dateTime.placeholderTime);
-					// });
-
-					it("updates the custom Header when onChange is triggered", () => {
-						const oldValue = new Date(0);
-
-						const mockControlSettings = getMockControlSettings();
-						const mockWidgetSettings = getMockWidgetSettings({ value: oldValue });
-
-						setupMocks(mockControlSettings, mockWidgetSettings);
-
-						const { widgetMap } = renderWrapper(
-							<LocalizerContext.Provider
-								value={getMockLocalization({
-									formatValue: value => "" + value
-								})}
-							>
-								<DateTimeInput node={mockNode} />
-							</LocalizerContext.Provider>
-						);
-
-						const buttonProps = query(widgetMap.Button).props();
-
-						act(() => {
-							buttonProps.onClick?.({} as MouseEvent<HTMLElement>);
-						});
-
-						const headerPropsBefore = query(widgetMap.Header).props();
-						strictEqual(headerPropsBefore.children, "" + oldValue);
-
-						const pickerProps = query(widgetMap.DateTimePicker).props();
-
-						const newDate = new Date(123);
-						const newTime = new Date(456789);
-
-						act(() => {
-							pickerProps.onChange?.(newDate, newTime);
-						});
-
-						const headerPropsAfter = query(widgetMap.Header).props();
-						strictEqual(
-							headerPropsAfter.children,
-							"" + DateTimeUtils.combineDateAndTime(newDate, newTime)
-						);
-					});
-
-					it("renders a custom Header with a placeholder if the value is cleared", () => {
-						const oldValue = new Date(0);
-
-						const mockControlSettings = getMockControlSettings();
-						const mockWidgetSettings = getMockWidgetSettings({ value: oldValue });
-
-						setupMocks(mockControlSettings, mockWidgetSettings);
-
-						const { widgetMap } = renderWrapper(
-							<LocalizerContext.Provider
-								value={getMockLocalization({
-									formatValue: value => "" + value
-								})}
-							>
-								<DateTimeInput node={mockNode} />
-							</LocalizerContext.Provider>
-						);
-
-						const buttonProps = query(widgetMap.Button).props();
-
-						act(() => {
-							buttonProps.onClick?.({} as MouseEvent<HTMLElement>);
-						});
-
-						const headerPropsBefore = query(widgetMap.Header).props();
-						strictEqual(headerPropsBefore.children, "" + oldValue);
-
-						const pickerProps = query(widgetMap.DateTimePicker).props();
-
-						act(() => {
-							pickerProps.onChange?.();
-						});
-
-						const headerPropsAfter = query(widgetMap.Header).props();
-						strictEqual(headerPropsAfter.children, RESOURCE_KEYS.dateTime.placeholderTime);
-					});
-				});
-
-				it("closes the PickerWrapper when onClose is triggered", () => {
-					const mockControlSettings = getMockControlSettings();
-					const mockWidgetSettings = getMockWidgetSettings({ value: new Date(0) });
-
-					setupMocks(mockControlSettings, mockWidgetSettings);
-
-					const { widgetMap, componentMap } = renderWrapper(<DateTimeInput node={mockNode} />);
-
-					const buttonProps = query(widgetMap.Button).props();
-
-					act(() => {
-						buttonProps.onClick?.({} as MouseEvent<HTMLElement>);
-					});
-
-					const pickerWrapperBefore = screen.getByDataRole(PICKER_WRAPPER);
-					notStrictEqual(pickerWrapperBefore, undefined);
-
-					const wrapperProps = query(componentMap.PickerWrapper).props();
-
-					act(() => {
-						wrapperProps.onClose?.();
-					});
-
-					const pickerWrapperAfter = screen.queryAllByDataRole(PICKER_WRAPPER);
-					strictEqual(pickerWrapperAfter.length, 0);
-				});
-
-				it("closes the PickerWrapper when onAccept is triggered", () => {
-					const mockControlSettings = getMockControlSettings();
-					const mockWidgetSettings = getMockWidgetSettings({ value: new Date(0) });
-
-					setupMocks(mockControlSettings, mockWidgetSettings);
-
-					const { widgetMap } = renderWrapper(
-						<DocumentContext.Provider value={mockDocumentContext()}>
-							<DateTimeInput node={mockNode} />
-						</DocumentContext.Provider>
-					);
-
-					const buttonProps = query(widgetMap.Button).props();
-
-					act(() => {
-						buttonProps.onClick?.({} as MouseEvent<HTMLElement>);
-					});
-
-					const pickerWrapperBefore = screen.getByDataRole(PICKER_WRAPPER);
-					notStrictEqual(pickerWrapperBefore, undefined);
-
-					const pickerProps = query(widgetMap.DateTimePicker).props();
-
-					act(() => {
-						pickerProps.onAccept?.(new Date(0));
-					});
-
-					const pickerWrapperAfter = screen.queryAllByDataRole(PICKER_WRAPPER);
-					strictEqual(pickerWrapperAfter.length, 0);
-				});
-
-				it("calls valueChanged from the document context when onAccept is triggered", () => {
-					const mockControlSettings = getMockControlSettings();
-					const mockWidgetSettings = getMockWidgetSettings({ value: new Date(0) });
-
-					setupMocks(mockControlSettings, mockWidgetSettings);
-
-					const mockDocContext = mockDocumentContext();
-
-					const { widgetMap } = renderWrapper(
-						<DocumentContext.Provider value={mockDocContext}>
-							<DateTimeInput node={mockNode} />
-						</DocumentContext.Provider>
-					);
-
-					const buttonProps = query(widgetMap.Button).props();
-
-					act(() => {
-						buttonProps.onClick?.({} as MouseEvent<HTMLElement>);
-					});
-
-					const pickerProps = query(widgetMap.DateTimePicker).props();
-
-					const newValue = new Date(0);
-
-					act(() => {
-						pickerProps.onAccept?.(newValue);
-					});
-
-					assertCalledWith(mockDocContext.event.onValueChanged, {
-						path: mockControlSettings.dataReference,
-						value: newValue
-					});
-				});
-
-				/**
-				 * The test for clearing the value via the picker has been omitted,
-				 * because it's not actually possible in the UI.
-				 */
-
-				it("focuses the buffered text line when onAccept is triggered", () => {
-					const mockControlSettings = getMockControlSettings();
-					const mockWidgetSettings = getMockWidgetSettings({ value: new Date(0) });
-
-					setupMocks(mockControlSettings, mockWidgetSettings);
-
-					const { widgetMap } = renderWrapper(
-						<DocumentContext.Provider value={mockDocumentContext()}>
-							<DateTimeInput node={mockNode} />
-						</DocumentContext.Provider>
-					);
-
-					const buttonProps = query(widgetMap.Button).props();
-
-					act(() => {
-						buttonProps.onClick?.({} as MouseEvent<HTMLElement>);
-					});
+					await openPicker(widgetMap);
 
 					const pickerProps = query(widgetMap.DateTimePicker).props();
 
@@ -503,158 +472,107 @@ describe("core.contentElements", () => {
 
 					const bufferedTextLine = screen.getByDataRole(BUFFERED_TEXT_LINE);
 
-					// expect(bufferedTextLine).toHaveFocus();
 					strictEqual(bufferedTextLine, document.activeElement);
 				});
 
-				it("combines the selected date and time and updates the pickerValue when onChange is triggered", () => {
-					const mockControlSettings = getMockControlSettings();
-					const mockWidgetSettings = getMockWidgetSettings({ value: new Date(0) });
+				describe("Header", () => {
+					it("does not render a close button in the custom Header", async () => {
+						const mockControlSettings = getMockControlSettings();
 
-					setupMocks(mockControlSettings, mockWidgetSettings);
+						const { widgetMap } = setup({
+							controlSettings: mockControlSettings,
+							widgetSettings: getMockWidgetSettings({ value: new Date(0) })
+						});
 
-					const { widgetMap, componentMap } = renderWrapper(
-						<LocalizerContext.Provider value={getMockLocalization()}>
-							<DateTimeInput node={mockNode} />
-						</LocalizerContext.Provider>
-					);
+						await openPicker(widgetMap);
 
-					const buttonProps = query(widgetMap.Button).props();
+						query(widgetMap.Button)
+							.withId(mockControlSettings.uiId + "-header-button")
+							.assertNotRendered();
+					});
+				});
+			});
 
-					act(() => {
-						buttonProps.onClick?.({} as MouseEvent<HTMLElement>);
+			describe("mobile mode", () => {
+				beforeEach(() => {
+					mock.method(deviceDetector, "get", () => "phone");
+				});
+
+				it("sets mobileMode to true on mobile devices", async () => {
+					const { widgetMap } = setup();
+
+					await openPicker(widgetMap);
+
+					const pickerProps = query(widgetMap.DateTimePicker).props();
+
+					strictEqual(pickerProps.mobileMode, true);
+				});
+
+				describe("Header", () => {
+					it("renders a close button in the custom Header", async () => {
+						const mockControlSettings = getMockControlSettings();
+
+						const { widgetMap } = setup({
+							controlSettings: mockControlSettings,
+							widgetSettings: getMockWidgetSettings({ value: new Date(0) })
+						});
+
+						await openPicker(widgetMap);
+
+						const buttonProps = query(widgetMap.Button)
+							.withId(mockControlSettings.uiId + "-header-button")
+							.props();
+
+						strictEqual(buttonProps.invert, true);
+						notStrictEqual(buttonProps.onClick, undefined);
+
+						const iconProps =
+							isReactElement(buttonProps?.icon) &&
+							getReactElementName(buttonProps?.icon) === "IconMock"
+								? (buttonProps?.icon.props as IconProps)
+								: undefined;
+
+						strictEqual(iconProps?.children, "close");
 					});
 
-					const wrapperProps = query(componentMap.PickerWrapper).props();
+					it("closes the PickerWrapper when the close button is clicked", async () => {
+						const mockControlSettings = getMockControlSettings();
 
-					deepStrictEqual(wrapperProps.referenceElement, {});
+						const { widgetMap } = setup({
+							controlSettings: mockControlSettings,
+							widgetSettings: getMockWidgetSettings({ value: new Date(0) })
+						});
 
-					const pickerPropsBefore = query(widgetMap.DateTimePicker).props();
-					strictEqual(pickerPropsBefore.value, mockWidgetSettings.value);
+						await openPicker(widgetMap);
 
-					const newDate = new Date(42);
-					const newTime = new Date(13370000);
-					const expectedValue = DateTimeUtils.combineDateAndTime(newDate, newTime);
+						const buttonProps = query(widgetMap.Button)
+							.withId(mockControlSettings.uiId + "-header-button")
+							.props();
 
-					act(() => {
-						pickerPropsBefore.onChange?.(newDate, newTime);
+						act(() => {
+							buttonProps.onClick?.({} as MouseEvent<HTMLElement>);
+						});
+
+						const pickerWrapperAfter = screen.queryAllByDataRole(PICKER_WRAPPER);
+						strictEqual(pickerWrapperAfter.length, 0);
 					});
-
-					const pickerPropsAfter = query(widgetMap.DateTimePicker).props();
-					deepStrictEqual(pickerPropsAfter.value, expectedValue);
 				});
-
-				// TODO: test onScreenChange?
-			});
-
-			// TODO: test mobile mode
-		});
-
-		it("calls useCommonControlSettings with the given node", () => {
-			const mockControlSettings = getMockControlSettings();
-			const mockWidgetSettings = getMockWidgetSettings({ value: new Date(0) });
-
-			const { useControlSettingsMock } = setupMocks(mockControlSettings, mockWidgetSettings);
-
-			renderWrapper(<DateTimeInput node={mockNode} />);
-
-			assertCalledWith(useControlSettingsMock, mockNode);
-		});
-
-		it("calls useCommonWidgetSettings with the result from useCommonControlSettings", () => {
-			const mockControlSettings = getMockControlSettings();
-			const mockWidgetSettings = getMockWidgetSettings({ value: new Date(0) });
-
-			const { useWidgetSettingsMock } = setupMocks(mockControlSettings, mockWidgetSettings);
-
-			renderWrapper(<DateTimeInput node={mockNode} />);
-
-			assertCalledWith(useWidgetSettingsMock, mockControlSettings);
-		});
-
-		describe("focus hooks", () => {
-			function setupFocusTest(options?: {
-				groupedMessages?: Message[];
-				ungroupedMessages?: Message[];
-			}) {
-				const mockControlSettings = getMockControlSettings(options);
-				const mockWidgetSettings = getMockWidgetSettings({ value: new Date(0) });
-
-				const { useFocusFieldMock, useFocusFirstErrorMock, useFocusInputMock } = setupMocks(
-					mockControlSettings,
-					mockWidgetSettings
-				);
-
-				renderWrapper(
-					<FunctionMapContext.Provider
-						value={{
-							...DefaultFunctionMap,
-							useFocusField: useFocusFieldMock,
-							useFocusFirstError: useFocusFirstErrorMock,
-							useFocusInput: useFocusInputMock
-						}}
-					>
-						<DateTimeInput node={mockNode} />
-					</FunctionMapContext.Provider>
-				);
-
-				return { useFocusFieldMock, useFocusFirstErrorMock, useFocusInputMock };
-			}
-
-			it("calls focus hooks when rendered", () => {
-				const { useFocusFieldMock, useFocusFirstErrorMock, useFocusInputMock } = setupFocusTest();
-
-				assertCallCount(useFocusFieldMock, 1);
-				assertCallCount(useFocusFirstErrorMock, 1);
-				assertCalledWithArgument(useFocusFirstErrorMock, 0, false);
-				assertCallCount(useFocusInputMock, 1);
-			});
-
-			it("calls useFocusFirstError with true when an ungrouped error exists", () => {
-				const { useFocusFirstErrorMock } = setupFocusTest({
-					ungroupedMessages: [getMockMessage({ severity: "ERROR" })]
-				});
-
-				assertCalledWithArgument(useFocusFirstErrorMock, 0, true);
-			});
-
-			it("calls useFocusFirstError with false when no ungrouped error exists", () => {
-				const { useFocusFirstErrorMock } = setupFocusTest({
-					ungroupedMessages: [
-						getMockMessage({ severity: "WARNING" }),
-						getMockMessage({ severity: "INFO" })
-					],
-					groupedMessages: [
-						getMockMessage({ severity: "ERROR" }),
-						getMockMessage({ severity: "WARNING" }),
-						getMockMessage({ severity: "INFO" })
-					]
-				});
-
-				assertCalledWithArgument(useFocusFirstErrorMock, 0, false);
 			});
 		});
 
 		describe("ValueChange on TextLine", () => {
 			it("calls valueChanged from the document context when a valid value was entered", () => {
 				const mockControlSettings = getMockControlSettings();
-				const mockWidgetSettings = getMockWidgetSettings({ value: new Date(0) });
-
-				setupMocks(mockControlSettings, mockWidgetSettings);
-
-				const newValue = new Date(0);
-
 				const mockDocContext = mockDocumentContext();
 
-				const { componentMap } = renderWrapper(
-					<LocalizerContext.Provider
-						value={getMockLocalization({ parseValue: () => ({ value: newValue }) })}
-					>
-						<DocumentContext.Provider value={mockDocContext}>
-							<DateTimeInput node={mockNode} />
-						</DocumentContext.Provider>
-					</LocalizerContext.Provider>
-				);
+				const newValue = new Date(1);
+
+				const { componentMap } = setup({
+					controlSettings: mockControlSettings,
+					widgetSettings: getMockWidgetSettings({ value: new Date(0) }),
+					localizerContext: getMockLocalization({ parseValue: () => ({ value: newValue }) }),
+					docContext: mockDocContext
+				});
 
 				const props = query(componentMap.BufferedTextLine).props();
 
@@ -669,17 +587,13 @@ describe("core.contentElements", () => {
 
 			it("calls valueChanged with undefined when no value was entered", () => {
 				const mockControlSettings = getMockControlSettings();
-				const mockWidgetSettings = getMockWidgetSettings({ value: new Date(0) });
-
-				setupMocks(mockControlSettings, mockWidgetSettings);
-
 				const mockDocContext = mockDocumentContext();
 
-				const { componentMap } = renderWrapper(
-					<DocumentContext.Provider value={mockDocContext}>
-						<DateTimeInput node={mockNode} />
-					</DocumentContext.Provider>
-				);
+				const { componentMap } = setup({
+					controlSettings: mockControlSettings,
+					widgetSettings: getMockWidgetSettings({ value: new Date(0) }),
+					docContext: mockDocContext
+				});
 
 				const props = query(componentMap.BufferedTextLine).props();
 
@@ -694,19 +608,13 @@ describe("core.contentElements", () => {
 
 			it("calls conversion.parseValue with the new value", () => {
 				const mockControlSettings = getMockControlSettings();
-				const mockWidgetSettings = getMockWidgetSettings({ value: new Date(0) });
-
-				setupMocks(mockControlSettings, mockWidgetSettings);
-
 				const mockParseValue = mock.fn(() => ({ value: new Date(0) }));
 
-				const { componentMap } = renderWrapper(
-					<LocalizerContext.Provider value={getMockLocalization({ parseValue: mockParseValue })}>
-						<DocumentContext.Provider value={mockDocumentContext()}>
-							<DateTimeInput node={mockNode} />
-						</DocumentContext.Provider>
-					</LocalizerContext.Provider>
-				);
+				const { componentMap } = setup({
+					controlSettings: mockControlSettings,
+					widgetSettings: getMockWidgetSettings({ value: new Date(0) }),
+					localizerContext: getMockLocalization({ parseValue: mockParseValue })
+				});
 
 				const props = query(componentMap.BufferedTextLine).props();
 
@@ -719,44 +627,22 @@ describe("core.contentElements", () => {
 
 			it("calls parsingFailed from the document context when an invalid value was entered", () => {
 				const mockControlSettings = getMockControlSettings();
-				const mockWidgetSettings = getMockWidgetSettings({ value: new Date(0) });
-
-				setupMocks(mockControlSettings, mockWidgetSettings);
-
-				const parseError: ValueConversion.ParseError = {
-					errorCode: "",
-					errorKey: "",
-					errorText: { key: "" },
-					severity: "ERROR" as const
-				};
-
-				const newValue = "test-value";
-
-				const expectedError: ParseError = {
-					message: {
-						errorCode: parseError.errorCode,
-						errorText: [parseError.errorText],
-						severity: "ERROR",
-						messageType: "VALUE_ERROR",
-						entityInstance: DocumentPath.fromString(mockControlSettings.dataReference),
-						referencedFields: [DocumentPath.fromString(mockControlSettings.dataReference)],
-						rulePath: KernelMessage.FORMAL_VALIDATION,
-						refOmissionErrorResponsible: []
-					},
-					value: newValue
-				};
-
 				const mockDocContext = mockDocumentContext();
 
-				const { componentMap } = renderWrapper(
-					<LocalizerContext.Provider
-						value={getMockLocalization({ parseValue: () => ({ parseError }) })}
-					>
-						<DocumentContext.Provider value={mockDocContext}>
-							<DateTimeInput node={mockNode} />
-						</DocumentContext.Provider>
-					</LocalizerContext.Provider>
+				const parseError = mockConversionError();
+				const newValue = "test-value";
+				const expectedError = mockParseError(
+					parseError,
+					mockControlSettings.dataReference,
+					newValue
 				);
+
+				const { componentMap } = setup({
+					controlSettings: mockControlSettings,
+					widgetSettings: getMockWidgetSettings({ value: new Date(0) }),
+					docContext: mockDocContext,
+					localizerContext: getMockLocalization({ parseValue: () => ({ parseError }) })
+				});
 
 				const props = query(componentMap.BufferedTextLine).props();
 
@@ -768,23 +654,13 @@ describe("core.contentElements", () => {
 				});
 			});
 
-			it("closes the PickerWrapper if it was open", () => {
-				const mockControlSettings = getMockControlSettings();
-				const mockWidgetSettings = getMockWidgetSettings({ value: new Date(0) });
-
-				setupMocks(mockControlSettings, mockWidgetSettings);
-
-				const { widgetMap, componentMap } = renderWrapper(
-					<DocumentContext.Provider value={mockDocumentContext()}>
-						<DateTimeInput node={mockNode} />
-					</DocumentContext.Provider>
-				);
-
-				const buttonProps = query(widgetMap.Button).props();
-
-				act(() => {
-					buttonProps.onClick?.({} as MouseEvent<HTMLElement>);
+			it("closes the PickerWrapper if it was open", async () => {
+				const { widgetMap, componentMap } = setup({
+					widgetSettings: getMockWidgetSettings({ value: new Date(0) }),
+					docContext: mockDocumentContext()
 				});
+
+				await openPicker(widgetMap);
 
 				const pickerWrapperBefore = screen.getByDataRole(PICKER_WRAPPER);
 				notStrictEqual(pickerWrapperBefore, undefined);
@@ -799,17 +675,139 @@ describe("core.contentElements", () => {
 				strictEqual(pickerWrapperAfter.length, 0);
 			});
 		});
+
+		describe("Hooks", () => {
+			it("calls useCommonControlSettings with the given node", () => {
+				const { useControlSettingsMock } = setupMockHooks({
+					controlSettings: getMockControlSettings(),
+					widgetSettings: getMockWidgetSettings()
+				});
+
+				renderWrapper(<DateTimeInput node={mockNode()} />);
+
+				assertCalledWith(useControlSettingsMock, mockNode());
+			});
+
+			it("calls useCommonWidgetSettings with the result from useCommonControlSettings", () => {
+				const mockControlSettings = getMockControlSettings();
+
+				const { useWidgetSettingsMock } = setupMockHooks({
+					controlSettings: mockControlSettings,
+					widgetSettings: getMockWidgetSettings()
+				});
+
+				renderWrapper(<DateTimeInput node={mockNode()} />);
+
+				assertCalledWith(useWidgetSettingsMock, mockControlSettings);
+			});
+
+			describe("focus hooks", () => {
+				function setupFocusTest(options?: {
+					groupedMessages?: Message[];
+					ungroupedMessages?: Message[];
+				}) {
+					const mockControlSettings = getMockControlSettings({
+						groupedMessages: options?.groupedMessages,
+						ungroupedMessages: options?.ungroupedMessages
+					});
+					const mockWidgetSettings = getMockWidgetSettings();
+
+					setupMockHooks({
+						controlSettings: mockControlSettings,
+						widgetSettings: mockWidgetSettings
+					});
+
+					return renderWrapper(<DateTimeInput node={mockNode()} />);
+				}
+
+				it("calls focus hooks when rendered", () => {
+					const { functionMap } = setupFocusTest();
+
+					assertCallCount(functionMap.useFocusField, 1);
+					assertCallCount(functionMap.useFocusFirstError, 1);
+					assertCalledWithArgument(functionMap.useFocusFirstError, 0, false);
+					assertCallCount(functionMap.useFocusInput, 1);
+				});
+
+				it("calls useFocusFirstError with true when an ungrouped error exists", () => {
+					const { functionMap } = setupFocusTest({
+						ungroupedMessages: [getMockMessage({ severity: "ERROR" })]
+					});
+
+					assertCalledWithArgument(functionMap.useFocusFirstError, 0, true);
+				});
+
+				it("calls useFocusFirstError with false when no ungrouped error exists", () => {
+					const { functionMap } = setupFocusTest({
+						ungroupedMessages: [
+							getMockMessage({ severity: "WARNING" }),
+							getMockMessage({ severity: "INFO" })
+						],
+						groupedMessages: [
+							getMockMessage({ severity: "ERROR" }),
+							getMockMessage({ severity: "WARNING" }),
+							getMockMessage({ severity: "INFO" })
+						]
+					});
+
+					assertCalledWithArgument(functionMap.useFocusFirstError, 0, false);
+				});
+			});
+		});
 	});
 });
 
-const mockNode: DatePickerNode = {
-	id: "test-node-id",
-	namespace: FORM_ELEMENTS_NAMESPACE,
-	type: DATE_PICKER_TYPE,
-	props: {
-		elementId: "test-id"
-	}
-};
+function setup(options?: {
+	controlSettings?: BaseControlSettings;
+	widgetSettings?: BaseWidgetSettings;
+	docContext?: DocumentContext;
+	localizerContext?: LocalizerContextProps;
+	disableDatePicker?: true;
+	timeMode?: "12h" | "24h";
+	node?: DatePickerNode;
+}) {
+	const controlSettings = options?.controlSettings ?? getMockControlSettings();
+	const widgetSettings = options?.widgetSettings ?? getMockWidgetSettings();
+
+	setupMockHooks({ controlSettings, widgetSettings });
+
+	const mockDocContext = options?.docContext ?? mockDocumentContext();
+	const mockLocalizerContext = options?.localizerContext ?? getMockLocalization();
+	const formElementContext = {
+		config: { timeMode: options?.timeMode ?? "12h", disableDatePicker: options?.disableDatePicker },
+		contentModelName: ""
+	};
+	const node = options?.node ?? mockNode();
+
+	return renderWrapper(
+		<LocalizerContext.Provider value={mockLocalizerContext}>
+			<DocumentContext.Provider value={mockDocContext}>
+				<FormElementContext.Provider value={formElementContext}>
+					<DateTimeInput node={node} />
+				</FormElementContext.Provider>
+			</DocumentContext.Provider>
+		</LocalizerContext.Provider>
+	);
+}
+
+async function openPicker(widgetMap: WidgetMap) {
+	const buttonProps = query(widgetMap.Button).props();
+
+	await act(() => {
+		buttonProps.onClick?.({} as MouseEvent<HTMLElement>);
+	});
+}
+
+function mockNode(): DatePickerNode {
+	return {
+		id: "test-node-id",
+		namespace: FORM_ELEMENTS_NAMESPACE,
+		type: DATE_PICKER_TYPE,
+		props: {
+			elementId: "test-id"
+		}
+	};
+}
 
 function getMockControlSettings(options?: {
 	groupedMessages?: Message[];
@@ -848,14 +846,13 @@ function getMockControlSettings(options?: {
 	};
 }
 
-function getMockWidgetSettings(options?: { value?: Date; readonly?: true }): BaseWidgetSettings {
+function getMockWidgetSettings(options?: Partial<BaseWidgetSettings>): BaseWidgetSettings {
 	return {
-		value: options?.value,
+		value: undefined,
 		formattedValue: "test-value",
 		label: "test-label",
 		hideLabel: true,
 		helperText: "test-helperText",
-		readonly: options?.readonly,
 		error: true,
 		warning: true,
 		info: true,
@@ -863,23 +860,8 @@ function getMockWidgetSettings(options?: { value?: Date; readonly?: true }): Bas
 		warnings: "WARNINGS",
 		infos: "INFOS",
 		tooltips: "TOOLTIPS",
-		tooltipsOnTop: true,
 		inputProps: { "aria-required": true },
-		ariaDescribedBy: ["test-aria1", "test-aria2"]
-	};
-}
-
-function getMockLocalization(conversion?: Partial<ValueConversion>): LocalizerContext.Type {
-	return {
-		locale: { language: "en", country: "US" },
-		localizer: localizable => localizable.key,
-		conversion: {
-			parseValue: () => ({
-				value: ""
-			}),
-			formatValue: () => "",
-			...conversion
-		},
-		dataFormats: {}
+		ariaDescribedBy: [],
+		...(options ?? {})
 	};
 }

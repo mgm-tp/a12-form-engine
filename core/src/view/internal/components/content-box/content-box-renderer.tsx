@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -30,14 +30,13 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import type { JSX, ReactNode } from "react";
+import type { JSX, PropsWithChildren } from "react";
 import { useContext } from "react";
-
-import { LocalizerContext } from "@com.mgmtp.a12.utils/utils-localization-react/lib/main/index.js";
 
 import { ComponentMapContext } from "../../configuration/componentMap/component-map-context.js";
 import { DefaultComponentMap } from "../../configuration/componentMap/DefaultComponentMap.js";
 import { DefaultWidgetMap } from "../../configuration/DefaultWidgetMap.js";
+import type { FormModelMap } from "../../configuration/engine-configuration.js";
 import { DefaultSelectorMap, SelectorContext } from "../../configuration/selectorContext.js";
 import { WidgetMapContext } from "../../configuration/widget-map-context.js";
 
@@ -46,20 +45,21 @@ import type { FormEngineRendererPropsType } from "../form-engine/form-engine-pro
 import { ContentBox } from "./content-box-component.js";
 import type { ContentBoxRenderConfiguration } from "./content-box-render-configuration.js";
 
+type FormEngineContentBoxRendererProps = PropsWithChildren<
+	Pick<FormEngineRendererPropsType, "config" | "state" | "eventHandlers">
+>;
+
 /**
  * @internal
  * Plain (non-connected) React component to render a content box.
  */
 export function FormEngineContentBoxRenderer(
-	props: FormEngineRendererPropsType & { children?: ReactNode }
+	props: FormEngineContentBoxRendererProps
 ): JSX.Element {
-	// TODO: why do we need to prepare the full config incl. renderOptions here for the contentBox?
-	const localizer = useContext(LocalizerContext).localizer;
-	const options = {
+	const options: FormModelMap.RenderOptions = {
 		state: props.state,
 		config: props.config,
-		eventHandlers: props.eventHandlers,
-		localizer
+		eventHandlers: props.eventHandlers
 	};
 
 	const initialConfig: ContentBoxRenderConfiguration = {

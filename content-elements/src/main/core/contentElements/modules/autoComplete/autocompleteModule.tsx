@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -33,13 +33,13 @@
 import type { JSX } from "react";
 import { useContext, useRef } from "react";
 
-import {
-	useDocumentContext,
-	type ContentModel,
-	type NodeRendererProps
+import { useDocumentContext } from "@com.mgmtp.a12.contentengine/contentengine-core";
+import type {
+	ContentModel,
+	NodeRendererProps
 } from "@com.mgmtp.a12.contentengine/contentengine-core";
-import { LocalizerContext } from "@com.mgmtp.a12.utils/utils-localization-react/lib/main/index.js";
-import type { DropDownItem } from "@com.mgmtp.a12.widgets/widgets-core/lib/dropdown/main/template/dropdown.tpl.api.js";
+import { LocalizerContext } from "@com.mgmtp.a12.utils/utils-localization-react";
+import type { DropDownItem } from "@com.mgmtp.a12.widgets/widgets-core";
 
 import { createResourceLocalizable } from "../../../localization/createResourceLocalizable.js";
 import { RESOURCE_KEYS } from "../../../localization/resources.js";
@@ -49,12 +49,13 @@ import { createElementModule } from "../../createElementModule.js";
 import { USE_COMMON_CONTROL_SETTINGS_WRAPPER } from "../../elementConfiguration/useCommonControlSettings.js";
 import { USE_COMMON_WIDGET_SETTINGS_WRAPPER } from "../../elementConfiguration/useCommonWidgetSettings.js";
 import { USE_LOCALIZED_ENUMERATION_VALUES_WRAPPER } from "../../elementConfiguration/useLocalizedEnumerationValues.js";
-import { nmTokensToString } from "../../nmtokens.js";
 import { useFocus } from "../../focus.js";
+import { nmTokensToString } from "../../nmtokens.js";
 
 import type { AutoCompleteNode } from "./autocompleteNode.js";
 import { AUTO_COMPLETE_TYPE } from "./autocompleteNode.js";
 import { autocompleteValidator } from "./autocompleteValidator.js";
+import { getNewAutocompleteValue } from "./getNewAutocompleteValue.js";
 
 /** @internal */
 export const AutoCompleteModule = createElementModule<AutoCompleteNode>({
@@ -167,31 +168,4 @@ function AutoCompleteRenderer(
 			ariaDescribedby={ariaDescribedBy.length ? nmTokensToString(ariaDescribedBy) : undefined}
 		/>
 	);
-}
-
-// TODO: export for unit tests?
-function getNewAutocompleteValue(
-	selectedValue: string | DropDownItem,
-	items: { label: string; value: string }[],
-	allowAddingNewItem: boolean
-): string | null {
-	const stringValue =
-		typeof selectedValue === "string" // else DropDownItem
-			? selectedValue.trim()
-			: // use value for pre-defined enum options
-				// use label for new items (e.g. custom values for strings with hintList)
-				(selectedValue.value ?? selectedValue.label);
-
-	// unset autocomplete when entered an empty string
-	const value = stringValue ? stringValue : null;
-
-	/*
-	 * If for the autocomplete adding custom values is allowed and the new value is not
-	 * amongst the known items, then, despite being a ui value, it is used as the new
-	 * internal value. Otherwise null.
-	 */
-	const item = items.find(i => i.value === value);
-	const newItem = allowAddingNewItem ? value : null;
-
-	return item ? item.value : newItem;
 }

@@ -1,6 +1,6 @@
 {
   "name": "@com.mgmtp.a12.formengine/formengine-devapp",
-  "version": "38.5.0-SNAPSHOT",
+  "version": "39.0.0",
   "description": "Form Engine Devapp",
   "author": "mgm technology partners",
   "license": "(EUPL-1.2 OR LicenseRef-commercial)",
@@ -11,15 +11,16 @@
   ],
   "scripts": {
     "clean": "rimraf ./dist",
-    "init": "pnpm run \"/^copy:.*/\"",
-    "copy:exampleModels": "cpy \"../exampleModels/build/**/*\" dist --cwd=. --parents",
-    "copy:modelGraph": "cpy \"../modelGraph/build/modelGraph.json\" dist/modelIndex --cwd=. --parents",
-    "build": "node --run init && tsc && rsbuild build -c rsbuild/rsbuild.config.ts",
+    "build": "node --run compile && rsbuild build -c rsbuild/rsbuild.config.ts",
+    "compile": "tsc",
+    "lint": "eslint --flag unstable_native_nodejs_ts_config . --cache",
+    "lint:fix": "node --run lint -- --fix",
+    "lint:onlyErrors": "node --run lint -- --quiet",
     "start": "node --run start:mock",
-    "start:mock": "rsbuild dev -c rsbuild/rsbuild.config.ts --env-mode mock",
+    "start:mock": "rsbuild dev --env-mode mock -c rsbuild/rsbuild.config.ts",
     "start:services": "pnpm run \"/^start:services:.*/\"",
-    "start:services:server": "gradle -b ./src/server/services/build.gradle --console=plain clean runJar",
-    "start:services:app": "rsbuild dev -c rsbuild/rsbuild.config.ts --env-mode services",
+    "start:services:server": "gradle -b ./resources/server/build.gradle --console=plain clean runJar",
+    "start:services:app": "rsbuild dev --env-mode services -c rsbuild/rsbuild.config.ts",
     "analyze": "rsbuild build --env-mode analyze -c rsbuild/rsbuild.config.ts",
     "preview": "rsbuild preview -c rsbuild/rsbuild.config.ts"
   },
@@ -27,10 +28,12 @@
   "devDependencies": {
     "@com.mgmtp.a12.base/base-model-api": "catalog:a12",
     "@com.mgmtp.a12.client/client-core": "catalog:a12",
+    "@com.mgmtp.a12.client/typescript-fsa-redux-5-compat": "catalog:a12",
     "@com.mgmtp.a12.dataservices/dataservices-access": "catalog:a12",
     "@com.mgmtp.a12.devtools/tsconfig": "catalog:a12",
     "@com.mgmtp.a12.expression/expression-core": "catalog:a12",
     "@com.mgmtp.a12.formengine/formengine-core": "workspace:*",
+    "@com.mgmtp.a12.formengine/formengine-a12internal-preview": "workspace:*",
     "@com.mgmtp.a12.kernel/kernel-core-runtime-api-ts": "catalog:a12",
     "@com.mgmtp.a12.kernel/kernel-md-facade": "catalog:a12",
     "@com.mgmtp.a12.utils/utils-collections": "catalog:a12",
@@ -46,10 +49,12 @@
     "@types/node": "catalog:",
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
-    "@types/react-redux": "catalog:",
     "@types/semver": "catalog:",
     "cpy-cli": "catalog:",
     "date-fns": "catalog:",
+    "eslint": "catalog:",
+    "fp-ts": "catalog:ranges",
+    "picocolors": "catalog:",
     "react": "catalog:",
     "react-dnd": "catalog:",
     "react-dom": "catalog:",
@@ -61,12 +66,12 @@
     "source-map-loader": "catalog:",
     "styled-components": "catalog:",
     "typed-redux-saga": "catalog:",
-    "typescript": "catalog:",
-    "typescript-fsa": "catalog:"
+    "typescript": "catalog:"
   },
   "browserslist": [
     "last 1 chrome version",
     "last 1 firefox version",
     "last 1 safari version"
-  ]
+  ],
+  "exports": null
 }

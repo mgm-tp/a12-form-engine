@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -35,12 +35,12 @@ import type {
 	Locale,
 	Localizer,
 	ValueConversion
-} from "@com.mgmtp.a12.utils/utils-localization/lib/main/index.js";
+} from "@com.mgmtp.a12.utils/utils-localization";
 import {
 	defaultDataFormats,
 	defaultLocalizerFactory,
 	defaultValueConversion
-} from "@com.mgmtp.a12.utils/utils-localization/lib/main/index.js";
+} from "@com.mgmtp.a12.utils/utils-localization";
 
 import type { MiddlewareOptions } from "./middleware/middleware-options.js";
 import { UiStateSelectors } from "./selectors/ui-state.js";
@@ -55,7 +55,8 @@ import type { EngineStore } from "./store.js";
 export function createDefaultMiddlewareOptions(
 	options: Partial<MiddlewareOptions> = {}
 ): MiddlewareOptions {
-	const { externalEnumerationProvider, disableRepeatValidationOnLeaving, nowProvider } = options;
+	const { externalEnumerationProvider, disableRepeatValidationOnLeaving, kernelOptionsProvider } =
+		options;
 
 	const converter =
 		options.converter ||
@@ -67,7 +68,7 @@ export function createDefaultMiddlewareOptions(
 		converter,
 		localizer,
 		externalEnumerationProvider,
-		nowProvider,
+		kernelOptionsProvider,
 		disableRepeatValidationOnLeaving
 	};
 

@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -34,27 +34,27 @@ import { equal, ok } from "node:assert/strict";
 import type { Mock } from "node:test";
 import { mock } from "node:test";
 
-import { ModelPath } from "@com.mgmtp.a12.base/base-model-api/lib/main/model/index.js";
+import { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
 import { query, within } from "@com.mgmtp.a12.devtools/react";
-import { DataRoles } from "@com.mgmtp.a12.widgets/widgets-core/lib/common/main/data-roles.js";
-import type { HeadlineProps } from "@com.mgmtp.a12.widgets/widgets-core/lib/typography/main/typography.api.js";
+import { DataRoles } from "@com.mgmtp.a12.widgets/widgets-core";
+import type { HeadlineProps } from "@com.mgmtp.a12.widgets/widgets-core";
 
 import type { Models } from "../../../../back-end/store/internal/store.js";
 import type { WidgetMap } from "../../../../view/index.js";
 import { defaultMapDispatchToProps } from "../../../../view/index.js";
 import { mouseEventMock } from "../../../rtl-utils/mock-utils.js";
 import type { RtlRenderWrapper, SetupWithRtlOptions } from "../../../rtl-utils/render-wrapper.js";
+import { createModelPath } from "../../../utils/createModelPath.js";
 import { RenderGroupFixture } from "../../../utils/rtl-render-group.js";
-import { SetupHelpers } from "../../../utils/setup.js";
 import { setupModelsFixture } from "../../../utils/setupFixture.js";
 import { IDS as TitleIds } from "../../../utils/test-model-helpers/aria-level.js";
 import { FORM_MODEL, IDS } from "../../../utils/test-model-helpers/collapsible-section.js";
-import { createModelPath } from "../../../utils/test-model-helpers/dependent-enumeration.js";
 import {
 	expressionLabelDocument,
 	IDS as ExpressionLabelIds,
 	formattedExpressionUiState
 } from "../../../utils/test-model-helpers/expression-label.js";
+import { setupFormEngineRendererWithRtlAsync } from "../../../utils/setup.js";
 
 import { TypographyHeadline } from "./typography-headline-mock.js";
 
@@ -66,14 +66,14 @@ describe("api.view.layout", () => {
 			const SECTION_HIDDEN_IF_EMPTY_ID = "a12-section-b7fcd";
 
 			it("is hidden", async () => {
-				const wrapper = await SetupHelpers.setupFormEngineRendererWithRtlAsync({ models });
+				const wrapper = await setupFormEngineRendererWithRtlAsync({ models });
 
 				const section = within(wrapper.baseElement).queryById(EMPTY_SECTION_ID);
 				ok(section === null);
 			});
 
 			it("is hidden when all children are hidden", async () => {
-				const wrapper = await SetupHelpers.setupFormEngineRendererWithRtlAsync({
+				const wrapper = await setupFormEngineRendererWithRtlAsync({
 					models,
 					data: {}
 				});
@@ -83,7 +83,7 @@ describe("api.view.layout", () => {
 			});
 
 			it("is hidden when all children are hidden", async () => {
-				const wrapper = await SetupHelpers.setupFormEngineRendererWithRtlAsync({
+				const wrapper = await setupFormEngineRendererWithRtlAsync({
 					models,
 					data: {
 						document: {
@@ -125,7 +125,7 @@ describe("api.view.layout", () => {
 					onCollapseSection
 				};
 
-				const wrapper = await SetupHelpers.setupFormEngineRendererWithRtlAsync({
+				const wrapper = await setupFormEngineRendererWithRtlAsync({
 					models: collapsibleSectionModels,
 					ui: {
 						sectionState: {
@@ -162,7 +162,7 @@ describe("api.view.layout", () => {
 
 			describe("given a section with 'collapse=OFF'", () => {
 				it("always renders a non collapsible section", async () => {
-					const wrapper = await SetupHelpers.setupFormEngineRendererWithRtlAsync({
+					const wrapper = await setupFormEngineRendererWithRtlAsync({
 						models: collapsibleSectionModels,
 						ui: {
 							sectionState: { ["/Screen1/not-collapsible"]: false }
@@ -330,7 +330,7 @@ describe("api.view.layout", () => {
 			};
 
 			function renderTitleTest(options: SetupWithRtlOptions): Promise<RtlRenderWrapper> {
-				return SetupHelpers.setupFormEngineRendererWithRtlAsync({
+				return setupFormEngineRendererWithRtlAsync({
 					...options,
 					config: {
 						widgetMap

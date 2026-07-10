@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -36,15 +36,15 @@ import { query } from "@com.mgmtp.a12.devtools/react";
 
 import { getInputMocks } from "../../../../../rtl-utils/getInputMocks.js";
 import { setupModelsFixture } from "../../../../../utils/setupFixture.js";
-import { setupPicusTypeTest } from "../../../../../utils/test-model-helpers/picustypes.js";
+import { setupDmTypeTest } from "../../../../../utils/test-model-helpers/dmtypes.js";
 
 export function executeTestForAutoExpand(): void {
-	const models = setupModelsFixture("controls.picustypes");
+	const models = setupModelsFixture("controls.dmtypes");
 
 	function assertAutoExpand(opts: { elementId: string; autoExpand: true | undefined }): void {
 		const { elementId, autoExpand } = opts;
 		const inputMap = getInputMocks();
-		setupPicusTypeTest({
+		setupDmTypeTest({
 			models,
 			inputMap
 		});

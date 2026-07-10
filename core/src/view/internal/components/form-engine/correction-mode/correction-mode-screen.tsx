@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -33,7 +33,7 @@
 import type { ReactElement } from "react";
 import { useContext } from "react";
 
-import { LocalizerContext } from "@com.mgmtp.a12.utils/utils-localization-react/lib/main/index.js";
+import { LocalizerContext } from "@com.mgmtp.a12.utils/utils-localization-react";
 
 import { RESOURCE_KEYS } from "../../../../../back-end/localization/internal/languages/keys.js";
 import { createLocalizableFactory } from "../../../../../back-end/localization/internal/localization.js";
@@ -43,22 +43,26 @@ import { ModelSelectors } from "../../../../../back-end/store/internal/selectors
 import { UiStateSelectors } from "../../../../../back-end/store/internal/selectors/ui-state.js";
 import type { EngineStore } from "../../../../../back-end/store/internal/store.js";
 import { UiId } from "../../../../../back-end/utils/internal/generateUiId.js";
-import { findElementByFormModelPath, FormModel } from "../../../../../models/index.js";
+import { findElementByFormModelPath } from "../../../../../models/index.js";
+import {
+	isFormModelControl,
+	isFormModelFieldOverviewColumn
+} from "../../../../../models/internal/FormModelGuards.js";
 import { ComponentMapContext } from "../../../configuration/componentMap/component-map-context.js";
 import { DefaultWidgetMap } from "../../../configuration/DefaultWidgetMap.js";
 import type { FormModelMap } from "../../../configuration/engine-configuration.js";
 import { WidgetMapContext } from "../../../configuration/widget-map-context.js";
-import { getErrors, getInfos, getWarnings } from "../../../utilities/control-utilities.js";
+import { getCountsByMessageSeverity } from "../../../utilities/getCountsByMessageSeverity.js";
 import { AriaLevelContext, DEFAULT_ARIA_LEVEL } from "../../content-box/AriaLevelContext.js";
 
-import { CorrectionModeUtil } from "./utils.js";
+import { getUIIssueReport } from "./utils.js";
 import { getValidationMessageKey, localizeLocationStack } from "./validation-bar-elements.js";
 
 /** @internal  */
 export function CorrectionModeScreen(config: FormModelMap.RenderConfiguration): ReactElement {
 	const { renderOptions: options } = config;
 	const localizer = useContext(LocalizerContext).localizer;
-	const { ActionContentbox, List, ListItem, SizeContainer } = useContext(WidgetMapContext);
+	const { ActionContentbox, List, ListItem, LayoutGrid } = useContext(WidgetMapContext);
 	const { ContentBoxHeader } = useContext(ComponentMapContext);
 
 	const titleText = getLocalizedResource(RESOURCE_KEYS.validation.correctionMode.title, localizer);
@@ -89,9 +93,11 @@ export function CorrectionModeScreen(config: FormModelMap.RenderConfiguration): 
 					: 1
 	);
 
-	const errors = getErrors(sortedMessages).length;
-	const warnings = getWarnings(sortedMessages).length;
-	const infos = getInfos(sortedMessages).length;
+	const {
+		ERROR: errors,
+		WARNING: warnings,
+		INFO: infos
+	} = getCountsByMessageSeverity(sortedMessages);
 
 	const noErrorsText = (
 		<div>{getLocalizedResource(RESOURCE_KEYS.validation.correctionMode.noErrors, localizer)}</div>
@@ -102,7 +108,7 @@ export function CorrectionModeScreen(config: FormModelMap.RenderConfiguration): 
 	});
 
 	const contentBoxContent = (
-		<SizeContainer id={uiId}>
+		<LayoutGrid id={uiId}>
 			{sortedMessages.length > 0 ? (
 				<List>
 					{sortedMessages.map((message, index) => {
@@ -124,7 +130,7 @@ export function CorrectionModeScreen(config: FormModelMap.RenderConfiguration): 
 			) : (
 				noErrorsText
 			)}
-		</SizeContainer>
+		</LayoutGrid>
 	);
 
 	return (
@@ -158,12 +164,7 @@ function ValidationMessage(props: {
 	const { Button, Icon, MessageBox } = useContext(WidgetMapContext);
 
 	const items: CorrectionModeItem[] = [];
-	const uiIssueReport = CorrectionModeUtil.getUIIssueReport(
-		validationMessage,
-		options,
-		localizer,
-		conversion
-	);
+	const uiIssueReport = getUIIssueReport(validationMessage, options, localizer, conversion);
 	if (uiIssueReport.fixable) {
 		items.push(...uiIssueReport.items);
 	}
@@ -268,9 +269,9 @@ function CorrectionModeItemComponent(props: {
 		throw new Error("Could not find element " + formModelPath);
 	}
 
-	const label = FormModel.Control.isInstance(element)
+	const label = isFormModelControl(element)
 		? localizer(...localizableFactory.inputLabel(element, formModelPath))
-		: FormModel.FieldOverviewColumn.isInstance(element)
+		: isFormModelFieldOverviewColumn(element)
 			? localizer(...localizableFactory.repeatOverviewColumnTitle(element, formModelPath))
 			: undefined;
 
@@ -318,7 +319,7 @@ function CorrectionModeNotificationArea(props: {
 	readonly disabled?: boolean;
 }): ReactElement {
 	const localizer = useContext(LocalizerContext).localizer;
-	const { Button, GlobalMessageBox, NotificationArea } = useContext(WidgetMapContext);
+	const { Button, GlobalMessageBox, ContentBoxNotificationArea } = useContext(WidgetMapContext);
 
 	const severities = ["errors", "warnings", "infos"] as const;
 
@@ -342,7 +343,7 @@ function CorrectionModeNotificationArea(props: {
 	);
 
 	return (
-		<NotificationArea>
+		<ContentBoxNotificationArea>
 			<GlobalMessageBox
 				content={text}
 				variant={props.errors > 0 ? "error" : props.warnings > 0 ? "warning" : "info"}
@@ -351,6 +352,6 @@ function CorrectionModeNotificationArea(props: {
 				focusOnMount
 				id={UiId.generateForCorrectionScreenBar({ uiIdPrefix: props.options.config.uiIdPrefix })}
 			/>
-		</NotificationArea>
+		</ContentBoxNotificationArea>
 	);
 }

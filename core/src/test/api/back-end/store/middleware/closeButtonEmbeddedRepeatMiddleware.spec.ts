@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -30,19 +30,24 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import type { AnyAction, Store } from "redux";
-import type { Action } from "typescript-fsa";
+import type { Action as ReduxAction, Store } from "redux";
 
-import { ModelPath } from "@com.mgmtp.a12.base/base-model-api/lib/main/model/index.js";
-import type { EntityInstancePath } from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
+import { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
+import type { Action } from "@com.mgmtp.a12.client/typescript-fsa-redux-5-compat";
+import type { EntityInstancePath } from "@com.mgmtp.a12.kernel/kernel-md-facade";
 
 import type { EngineState, EngineStore } from "../../../../../back-end/store/index.js";
 import { Commands, Events } from "../../../../../back-end/store/index.js";
 import { DocumentPath } from "../../../../../models/index.js";
-import { MiddlewareHelpers } from "../../../../utils/back-end-helpers.js";
-import { DocumentHelpers } from "../../../../utils/document-helpers.js";
-import { ModelHelpers } from "../../../../utils/model-helpers.js";
-import { SetupHelpers } from "../../../../utils/setup.js";
+import { MiddlewareHelpers } from "../../../../utils/MiddlewareHelpers.js";
+import { createDocumentPath } from "../../../../utils/createDocumentPath.js";
+import { createModelPath } from "../../../../utils/createModelPath.js";
+import {
+	createRepeatInstanceStateEntry,
+	createRepeatStaticStateEntry,
+	createTestStore
+} from "../../../../utils/setup.js";
+import type { SetupParams } from "../../../../utils/setup.js";
 import { setupFixture, setupModelsFixture } from "../../../../utils/setupFixture.js";
 import { ER } from "../../../../utils/test-model-helpers/embedded.repeat.js";
 import {
@@ -51,11 +56,6 @@ import {
 	createNestedL6Entry
 } from "../../../../utils/test-model-helpers/repeat.js";
 import { createValidationMessage } from "../../../../utils/validation.js";
-
-const { createDocumentPath } = DocumentHelpers;
-const { createModelPath } = ModelHelpers;
-const { createTestStore, createRepeatInstanceStateEntry, createRepeatStaticStateEntry } =
-	SetupHelpers;
 
 describe("api.back-end.store.middleware", () => {
 	describe("closeEmbeddedRepeatRowMiddleware", () => {
@@ -241,8 +241,8 @@ describe("api.back-end.store.middleware", () => {
 			}
 
 			function setupStore(
-				options: SetupHelpers.SetupParams & RepeatEntryOptions
-			): Store<EngineState, AnyAction> {
+				options: SetupParams & RepeatEntryOptions
+			): Store<EngineState, ReduxAction> {
 				const repeatableEntries = [
 					createNestedL6Entry({ L6_Number: 12 }),
 					createNestedL6Entry({ L6_Number: 13 })
@@ -295,7 +295,7 @@ describe("api.back-end.store.middleware", () => {
 				options: RepeatEntryOptions
 			): EngineStore.Repeat.InstanceState {
 				return createRepeatInstanceStateEntry({
-					page: options && options.page,
+					page: options?.page,
 					newRow: options?.newRowPath
 						? {
 								rowPath: options.newRowPath,

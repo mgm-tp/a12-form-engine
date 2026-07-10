@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -38,19 +38,20 @@ import { Commands } from "../../../../back-end/store/index.js";
 import type { FormModel } from "../../../../models/index.js";
 import { assertUniqueId } from "../../../utils/assertions.js";
 import { US_LOCALE } from "../../../utils/localization.js";
-import { ModelHelpers } from "../../../utils/model-helpers.js";
 import { RenderGroupFixture } from "../../../utils/rtl-render-group.js";
-import { SetupHelpers } from "../../../utils/setup.js";
+import { loadModels, setupConnectedFormEngineWithRtlAsync } from "../../../utils/setup.js";
+import type { ConnectedRtlWrapper } from "../../../utils/setup.js";
+import { createModelPath } from "../../../utils/createModelPath.js";
 
 import { widgetMocksForInputTests } from "../inputs/input-element/inputTestWidgetMocks.js";
 
 describe("api.view.FormEngineRenderer", () => {
-	interface Render extends SetupHelpers.ConnectedRtlWrapper {
+	interface Render extends ConnectedRtlWrapper {
 		models: Models;
 	}
 
 	async function render(params: { idPrefix?: string }): Promise<Render> {
-		let models = SetupHelpers.loadModels("controls.uiId");
+		let models = loadModels("controls.uiId");
 		const locale = US_LOCALE;
 
 		/*
@@ -67,12 +68,12 @@ describe("api.view.FormEngineRenderer", () => {
 
 		const widgetMap = widgetMocksForInputTests();
 
-		const wrapper = await SetupHelpers.setupConnectedFormEngineWithRtlAsync({
+		const wrapper = await setupConnectedFormEngineWithRtlAsync({
 			config: { widgetMap, uiIdPrefix: params.idPrefix },
 			locale,
 			data: {
 				document: {
-					A12T_PicusTypes: {
+					A12T_DmTypes: {
 						InlineRepeat: [{ booleanField: false }, { booleanField: false }]
 					}
 				}
@@ -80,7 +81,7 @@ describe("api.view.FormEngineRenderer", () => {
 			ui: {
 				screenLocation: [
 					{
-						locationPath: ModelHelpers.createModelPath("Screen1"),
+						locationPath: createModelPath("Screen1"),
 						path: []
 					}
 				],

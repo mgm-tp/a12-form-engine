@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -35,9 +35,9 @@ import type { Mock } from "node:test";
 import { mock } from "node:test";
 
 import { query } from "@com.mgmtp.a12.devtools/react";
-import type { DocumentModel } from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
-import type { Locale, Localizer } from "@com.mgmtp.a12.utils/utils-localization/lib/main/index.js";
-import { defaultLocalizerFactory } from "@com.mgmtp.a12.utils/utils-localization/lib/main/index.js";
+import type { DocumentModel } from "@com.mgmtp.a12.kernel/kernel-md-facade";
+import type { Locale, Localizer } from "@com.mgmtp.a12.utils/utils-localization";
+import { defaultLocalizerFactory } from "@com.mgmtp.a12.utils/utils-localization";
 
 import type { FormModel } from "../../../../../models/index.js";
 import type { Config, DispatchConfiguration, Value } from "../../../../../view/index.js";
@@ -47,12 +47,12 @@ import { DateUtils } from "../../../../../view/internal/components/form-engine/c
 import { getComponentMocks } from "../../../../rtl-utils/getComponentMocks.js";
 import type { RtlRenderWrapper } from "../../../../rtl-utils/render-wrapper.js";
 import { rtlRenderWrapperAsync } from "../../../../rtl-utils/render-wrapper.js";
-import { DocumentHelpers } from "../../../../utils/document-helpers.js";
+import { createModelPath } from "../../../../utils/createModelPath.js";
+import { DocumentModelHelpers } from "../../../../utils/DocumentModelHelpers.js";
 import { DE_LOCALE, US_LOCALE } from "../../../../utils/localization.js";
-import { DocumentModelHelpers } from "../../../../utils/model-helpers.js";
-import { SetupHelpers } from "../../../../utils/setup.js";
+import { setupFormEngineRendererWithRtlAsync } from "../../../../utils/setup.js";
 import { setupModelsFixture } from "../../../../utils/setupFixture.js";
-import { createModelPath } from "../../../../utils/test-model-helpers/dependent-enumeration.js";
+import { createDocumentPath } from "../../../../utils/createDocumentPath.js";
 
 import { inputTest } from "./generic-tests/input-tests.js";
 import { createProps } from "./generic-tests/input-utils.js";
@@ -67,20 +67,11 @@ describe("api.view.inputs", () => {
 			formModelPath: createModelPath("foo", "bar")
 		};
 
-		const dateRangePathFullDate = DocumentHelpers.createDocumentPath(
-			["DateRanges"],
-			["dateRangeFieldyyyyMMdd"]
-		);
+		const dateRangePathFullDate = createDocumentPath(["DateRanges"], ["dateRangeFieldyyyyMMdd"]);
 
-		const dateRangePathOnlyYear = DocumentHelpers.createDocumentPath(
-			["DateRanges"],
-			["dateRangeFieldyyyy"]
-		);
+		const dateRangePathOnlyYear = createDocumentPath(["DateRanges"], ["dateRangeFieldyyyy"]);
 
-		const dateRangePathFullDateTimeZone = DocumentHelpers.createDocumentPath(
-			["root"],
-			["DateRange01"]
-		);
+		const dateRangePathFullDateTimeZone = createDocumentPath(["root"], ["DateRange01"]);
 
 		const datePickerConfig: FormModel.DatePickerConfig = {
 			absolute: true,
@@ -100,7 +91,7 @@ describe("api.view.inputs", () => {
 				...baseProps,
 				documentElement: Field({ fieldType: documentElementDataType }),
 				documentElementDataType,
-				component: "TextLineStateless",
+				component: "TextField",
 				renderFunction: DateRangeInput
 			};
 		}
@@ -171,8 +162,8 @@ describe("api.view.inputs", () => {
 				() => models,
 				{
 					...getBaseProps(),
-					component: "TextLineStateless",
-					path: DocumentHelpers.createDocumentPath(["DateRanges"], ["dateRangeFieldyyyyMMdd"]),
+					component: "TextField",
+					path: createDocumentPath(["DateRanges"], ["dateRangeFieldyyyyMMdd"]),
 					placeholder: true
 				},
 				{ autoCompleteTest: false }
@@ -466,7 +457,7 @@ describe("api.view.inputs", () => {
 			});
 
 			it("sets timeZone to the value from the document model", async () => {
-				const wrapper = await SetupHelpers.setupFormEngineRendererWithRtlAsync({
+				const wrapper = await setupFormEngineRendererWithRtlAsync({
 					componentMap: getComponentMocks(),
 					models: timeZoneModels
 				});

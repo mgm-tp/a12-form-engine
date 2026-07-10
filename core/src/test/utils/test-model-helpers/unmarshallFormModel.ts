@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -30,118 +30,81 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { createModelPath } from "./dependent-enumeration.js";
+import { createModelPath } from "../createModelPath.js";
 
-export namespace DOCUMENT_MODEL {
-	export const rootGroup = "rootGroup";
-	export const repeatableGroup = "repeatableGroup";
-	export const nestedGroup = "nestedGroup";
+export const DOCUMENT_MODEL = {
+	rootGroup: "rootGroup",
+	repeatableGroup: "repeatableGroup",
+	nestedGroup: "nestedGroup",
+	groupForFieldConfiguration: "groupForFieldConfiguration",
+	masterField1: "MasterField1",
+	masterField2: "MasterField2",
+	groupForIndexedControl: "groupForIndexedControl",
+	indexedMasterControl: "MasterEnum"
+} as const;
 
-	export const groupForFieldConfiguration = "groupForFieldConfiguration";
-	export const masterField1 = "MasterField1";
-	export const masterField2 = "MasterField2";
+const pathToDrDetailScreen = createModelPath(
+	"screen1",
+	"sec1",
+	"detached-repeat-repeatableGroup",
+	"detached-repeat-repeatableGroup-detail-screen"
+);
 
-	export const groupForIndexedControl = "groupForIndexedControl";
-	export const indexedMasterControl = "MasterEnum";
-}
+const pathToErDetailCg = createModelPath(
+	"screen1",
+	"sec1",
+	"embedded-repeat-repeatableGroup",
+	"cg"
+);
 
-export namespace FORM_MODEL {
-	export const pathToF0 = createModelPath("screen1", "sec1", "cg0", "row-9b467", "control-21889");
-	export const pathToF11 = createModelPath("screen1", "sec1", "cg0", "row-f0894", "control-a130e");
-	export const pathToF12 = createModelPath("screen1", "sec1", "cg0", "row-f0894", "control-2ada9");
-	export const pathToF2 = createModelPath("screen1", "sec1", "cg0", "row-65743", "control-12492");
+const pathToIr = createModelPath("screen1", "sec1", "inline-repeat-repeatableGroup");
 
-	export const pathToDetachedRepeat = createModelPath(
-		"screen1",
-		"sec1",
-		"detached-repeat-repeatableGroup"
-	);
-
-	export const pathToDrDetailScreen = createModelPath(
-		"screen1",
-		"sec1",
-		"detached-repeat-repeatableGroup",
-		"detached-repeat-repeatableGroup-detail-screen"
-	);
-	export const pathToF4InDr = [
-		...pathToDrDetailScreen,
-		...createModelPath("cg", "row-f6e5d", "control-628b4")
-	];
-	export const pathToF5InDr = [
-		...pathToDrDetailScreen,
-		...createModelPath("cg", "row-a2443", "control-861d7")
-	];
-
-	export const pathToErDetailCg = createModelPath(
-		"screen1",
-		"sec1",
-		"embedded-repeat-repeatableGroup",
-		"cg"
-	);
-	export const pathToF4InEr = [
-		...pathToErDetailCg,
-		...createModelPath("row-de68a", "control-6a942")
-	];
-	export const pathToF5InEr = [
-		...pathToErDetailCg,
-		...createModelPath("row-aa5dc", "control-403d6")
-	];
-
-	export const pathToIr = createModelPath("screen1", "sec1", "inline-repeat-repeatableGroup");
-	export const pathToF4InIr = [
-		...pathToIr,
-		...createModelPath("fieldbasedrepeatoverviewcolumn-c775c")
-	];
-	export const pathToF5InIr = [
-		...pathToIr,
-		...createModelPath("fieldbasedrepeatoverviewcolumn-1fb84")
-	];
-
-	export const pathToExpressionCell = createModelPath(
-		"screen1",
-		"sec4",
-		"cg2",
-		"row-59707",
-		"expression1"
-	);
-	export const pathToF0WithExpressionLabel = createModelPath(
+export const FORM_MODEL = {
+	pathToF0: createModelPath("screen1", "sec1", "cg0", "row-9b467", "control-21889"),
+	pathToF11: createModelPath("screen1", "sec1", "cg0", "row-f0894", "control-a130e"),
+	pathToF12: createModelPath("screen1", "sec1", "cg0", "row-f0894", "control-2ada9"),
+	pathToF2: createModelPath("screen1", "sec1", "cg0", "row-65743", "control-12492"),
+	pathToDetachedRepeat: createModelPath("screen1", "sec1", "detached-repeat-repeatableGroup"),
+	pathToDrDetailScreen,
+	pathToF4InDr: [...pathToDrDetailScreen, ...createModelPath("cg", "row-f6e5d", "control-628b4")],
+	pathToF5InDr: [...pathToDrDetailScreen, ...createModelPath("cg", "row-a2443", "control-861d7")],
+	pathToErDetailCg,
+	pathToF4InEr: [...pathToErDetailCg, ...createModelPath("row-de68a", "control-6a942")],
+	pathToF5InEr: [...pathToErDetailCg, ...createModelPath("row-aa5dc", "control-403d6")],
+	pathToIr,
+	pathToF4InIr: [...pathToIr, ...createModelPath("fieldbasedrepeatoverviewcolumn-c775c")],
+	pathToF5InIr: [...pathToIr, ...createModelPath("fieldbasedrepeatoverviewcolumn-1fb84")],
+	pathToExpressionCell: createModelPath("screen1", "sec4", "cg2", "row-59707", "expression1"),
+	pathToF0WithExpressionLabel: createModelPath(
 		"screen1",
 		"sec4",
 		"cg2",
 		"row-59707",
 		"control-dd987"
-	);
-	export const pathToIndexedControlWithExpressionLabel = createModelPath(
+	),
+	pathToIndexedControlWithExpressionLabel: createModelPath(
 		"screen1",
 		"sec4",
 		"cg2",
 		"row_fb1a8",
 		"control_0a130"
-	);
-
-	export const pathToIrWithFilterExpression = createModelPath(
-		"screen1",
-		"sec3",
-		"inline-repeat-repeatableGroup"
-	);
-	export const pathToErWithFilterExpression = createModelPath(
+	),
+	pathToIrWithFilterExpression: createModelPath("screen1", "sec3", "inline-repeat-repeatableGroup"),
+	pathToErWithFilterExpression: createModelPath(
 		"screen1",
 		"sec3",
 		"embedded-repeat-repeatableGroup"
-	);
-	export const pathToDrWithFilterExpression = createModelPath(
+	),
+	pathToDrWithFilterExpression: createModelPath(
 		"screen1",
 		"sec3",
 		"detached-repeat-repeatableGroup"
-	);
-
-	export const idDependentControlGrid = "controlgrid-4f1c2";
-	export const idDependentSection = "section-59946";
-	export const idDependentMultiColunbSection = "multicolumnsection-4d2e1";
-	export const idExpressionCell = "expressioncell-70cf2";
-
-	export const idDependentControlGridIndexedControlMaster = "controlgrid-4f1c3";
-
-	export const idDependentControlMaster = "control-e4668";
-	export const idDependentControlMasterWithIndex = "control-e4669";
-}
+	),
+	idDependentControlGrid: "controlgrid-4f1c2",
+	idDependentSection: "section-59946",
+	idDependentMultiColunbSection: "multicolumnsection-4d2e1",
+	idExpressionCell: "expressioncell-70cf2",
+	idDependentControlGridIndexedControlMaster: "controlgrid-4f1c3",
+	idDependentControlMaster: "control-e4668",
+	idDependentControlMasterWithIndex: "control-e4669"
+};

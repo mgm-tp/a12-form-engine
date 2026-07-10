@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -38,9 +38,6 @@ import type { ReadonlyObjectMap } from "../../models/internal/utils/json.js";
 export interface IExternalEnumerationProvider {
 	(source: string): ReadonlyObjectMap<{ [key: string]: string | undefined }>;
 }
-
-// TODO: Remove with A12-17671
-export default IExternalEnumerationProvider;
 
 /**
  * Implementation of an external enumeration provider.

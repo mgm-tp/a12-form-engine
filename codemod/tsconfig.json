@@ -1,4 +1,5 @@
 {
+	"extends": "@com.mgmtp.a12.devtools/tsconfig",
 	"include": ["src"],
 	"exclude": ["src/testData"],
 	"compilerOptions": {
@@ -9,6 +10,9 @@
 		"moduleResolution": "nodenext",
 		"types": ["node"],
 		"skipLibCheck": true,
-		"resolveJsonModule": true
+		"resolveJsonModule": true,
+		// allow debugging
+		"sourceMap": true,
+		"erasableSyntaxOnly": true
 	}
 }

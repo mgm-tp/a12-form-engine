@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -30,35 +30,33 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import type { ModelPath } from "@com.mgmtp.a12.base/base-model-api/lib/main/model/index.js";
-import type { GroupInstance } from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
+import type { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
+import type { GroupInstance } from "@com.mgmtp.a12.kernel/kernel-md-facade";
 
 import type { EngineStore, Models } from "../../../back-end/store/internal/store.js";
 import type { ReadonlyObjectMap } from "../../../models/internal/utils/json.js";
 import type { Config } from "../../../view/internal/configuration/engine-configuration.js";
 
-import { DocumentHelpers } from "../document-helpers.js";
+import { createDocumentPath } from "../createDocumentPath.js";
 
 import type { RenderWithInputMap } from "./render-with-inputmocks.js";
 import { renderWithInputMocks } from "./render-with-inputmocks.js";
 
-const { createDocumentPath } = DocumentHelpers;
+export const IDS = {
+	NUMBER_TYPE_PATH: createDocumentPath(["root"], ["group"], ["NumberType"]),
+	NUMBER_TYPE_REPEAT_PATH: createDocumentPath(["root"], ["repeat"], ["NumberType"]),
 
-export namespace IDS {
-	export const NUMBER_TYPE_PATH = createDocumentPath(["root"], ["group"], ["NumberType"]);
-	export const NUMBER_TYPE_REPEAT_PATH = createDocumentPath(["root"], ["repeat"], ["NumberType"]);
+	SCREEN: "Screen1",
+	WARNING_INPUT: "a12-Warnings-F47",
+	NUMBER_INPUT: "a12-NumberType-F4",
+	STRING_INPUT: "a12-StringType-F3",
+	NUMBER_INPUT_TOOLTIP_ON_TOP: "a12-NumberType-F4-3",
+	NUMBER_INPUT_INLINE_REPEAT: "a12-fieldbasedrepeatoverviewcolumn-1e8bf-cell-0",
 
-	export const SCREEN = "Screen1";
-	export const WARNING_INPUT = "a12-Warnings-F47";
-	export const NUMBER_INPUT = "a12-NumberType-F4";
-	export const STRING_INPUT = "a12-StringType-F3";
-	export const NUMBER_INPUT_TOOLTIP_ON_TOP = "a12-NumberType-F4-3";
-	export const NUMBER_INPUT_INLINE_REPEAT = "a12-fieldbasedrepeatoverviewcolumn-1e8bf-cell-0";
-
-	export const NUMBER_TYPE_VALUE_BACKUP = 100;
-	export const NUMBER_TYPE_VALUE = 200;
-	export const NUMBER_TYPE_VALUE_REPEAT = 300;
-}
+	NUMBER_TYPE_VALUE_BACKUP: 100,
+	NUMBER_TYPE_VALUE: 200,
+	NUMBER_TYPE_VALUE_REPEAT: 300
+} as const;
 
 export function createDocumentForTooltipsModels(values: {
 	NumberType: number;

@@ -1,0 +1,47 @@
+{
+  "header": {
+    "id": "button-panel-include.form",
+    "modelType": "form",
+    "modelVersion": "39.0.0",
+    "locales": [
+      {
+        "code": "en"
+      }
+    ],
+    "modelReferences": [
+      {
+        "alias": "DM",
+        "modelType": "document",
+        "purpose": "data binding",
+        "reference": "button-panel.dm"
+      }
+    ]
+  },
+  "content": {
+    "subHeaderBox": {
+      "id": "subHeaderBox1"
+    },
+    "footerBox": {
+      "id": "footerBox1"
+    },
+    "screens": [
+      {
+        "id": "screen1",
+        "name": "Screen1",
+        "screenElements": [
+          {
+            "type": "ButtonPanel",
+            "id": "buttonpanel-c6cd1",
+            "name": "include-a-bp",
+            "includeId": "buttonpanel-c6cd1",
+            "formModelRef": "button-panel.form",
+            "hostDocumentModelPath": "/"
+          }
+        ]
+      }
+    ],
+    "fieldConfiguration": {},
+    "groupConfiguration": {},
+    "defaults": {}
+  }
+}

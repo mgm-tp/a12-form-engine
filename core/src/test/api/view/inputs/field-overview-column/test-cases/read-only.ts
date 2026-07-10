@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -35,17 +35,15 @@ import { equal } from "node:assert/strict";
 import { query, within } from "@com.mgmtp.a12.devtools/react";
 
 import { BULLET_LIST_ITEM } from "../../../../../rtl-utils/data-roles.js";
-import { SetupHelpers } from "../../../../../utils/setup.js";
+import { createModelPath } from "../../../../../utils/createModelPath.js";
+import { loadData } from "../../../../../utils/setup.js";
 import { setupModelsFixture } from "../../../../../utils/setupFixture.js";
 import { DEP_ELEMENT } from "../../../../../utils/test-model-helpers/dependent-element.js";
-import { createModelPath } from "../../../../../utils/test-model-helpers/dependent-enumeration.js";
 import { IR } from "../../../../../utils/test-model-helpers/inline.repeat.js";
 import { IDS } from "../../../../../utils/test-model-helpers/readonly-presentation.js";
 import { renderWithInputMocks } from "../../../../../utils/test-model-helpers/render-with-inputmocks.js";
 import { createDocumentForRepeat } from "../../../../../utils/test-model-helpers/repeat.js";
 import { executeReadonlyPropTest } from "../../control/executeReadonlyPropTest.js";
-
-const { loadData } = SetupHelpers;
 
 export function executeTestForFieldOverviewColumnReadOnly(): void {
 	const dependentElementModels = setupModelsFixture("dependencies.element");

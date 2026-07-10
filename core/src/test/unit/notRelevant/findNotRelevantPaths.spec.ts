@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -36,18 +36,18 @@ import type {
 	Document,
 	DocumentModel,
 	EntityInstancePath
-} from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
-import { DocumentServiceFactory } from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/facade.js";
+} from "@com.mgmtp.a12.kernel/kernel-md-facade";
+import { DocumentServiceFactory } from "@com.mgmtp.a12.kernel/kernel-md-facade";
 
 import { findNotRelevantPaths } from "../../../back-end/store/internal/findNotRelevantPaths.js";
 import { DocumentPath } from "../../../models/index.js";
-import { SetupHelpers } from "../../utils/setup.js";
+import { loadModels } from "../../utils/setup.js";
 
 import testDocument from "./findNotRelevantPaths.data.json" with { type: "json" };
 
 describe("unit.dependency.findNotRelevantPaths", () => {
 	describe("findNotRelevantPaths", () => {
-		const testModels = SetupHelpers.loadModels("test.findNotRelevantPaths");
+		const testModels = loadModels("test.findNotRelevantPaths");
 
 		const documentService = new DocumentServiceFactory().getDocumentService();
 

@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -31,33 +31,36 @@
  */
 
 import { deepStrictEqual, rejects, strictEqual } from "node:assert/strict";
-import { mock, type Mock } from "node:test";
+import { mock } from "node:test";
+import type { Mock } from "node:test";
 
 import { expectSaga } from "redux-saga-test-plan";
 
-import type { Model as ModelAPI } from "@com.mgmtp.a12.base/base-model-api/lib/main/model/index.js";
+import type { Model as ModelAPI } from "@com.mgmtp.a12.base/base-model-api";
+import type { Model, ReferencedModel } from "@com.mgmtp.a12.client/client-core";
 import {
 	ActivityActions,
-	ActivitySelectors
-} from "@com.mgmtp.a12.client/client-core/lib/core/activity/index.js";
-import { NEW_INSTANCE_IDENTIFIER } from "@com.mgmtp.a12.client/client-core/lib/core/application/index.js";
-import type { DataProvider } from "@com.mgmtp.a12.client/client-core/lib/core/data/index.js";
-import type {
-	Model,
-	ReferencedModel
-} from "@com.mgmtp.a12.client/client-core/lib/core/model/index.js";
+	ActivitySelectors,
+	NEW_INSTANCE_IDENTIFIER
+} from "@com.mgmtp.a12.client/client-core";
+import type { DataProvider } from "@com.mgmtp.a12.client/client-core";
+import type { GeneratedCodeRtConfig } from "@com.mgmtp.a12.kernel/kernel-md-facade";
 
 import type { EngineStore } from "../../../back-end/store/index.js";
-import { createEmptyDocumentDataProvider } from "../../../client-extensions/index.js";
+import {
+	createEmptyDocumentDataProvider,
+	FormEngineSelectors
+} from "../../../client-extensions/index.js";
 import { InternalModelSelectors } from "../../../client-extensions/internal/core/view/internal/components/selectors.js";
 import { PreProcessor } from "../../../client-extensions/internal/extensions/form-engine/internal/preProcessDocument.js";
 import { EmptyDocument } from "../../../models/internal/utils/document-utils.js";
 import {
-	TEST_ACTIVITY_ID,
 	createActivity,
 	createDataHolder,
-	createTestConfig
+	createTestConfig,
+	TEST_ACTIVITY_ID
 } from "../../utils/client-helpers.js";
+import { createFormModelContent } from "../../utils/FormModelHelpers.js";
 
 describe("api.client-extensions.createEmptyDocumentDataProvider", () => {
 	describe("canHandle", () => {
@@ -209,7 +212,7 @@ describe("api.client-extensions.createEmptyDocumentDataProvider", () => {
 					<T extends ModelAPI>() => ({
 						stateChanged: true,
 						returnValue: {
-							uiModel: { header: { modelType: "form" }, content: {} } as T,
+							uiModel: { header: { modelType: "form" }, content: createFormModelContent() } as T,
 							documentAndValidationModel: {
 								header: { id: "testDm" },
 								generatedCodeAccessor: {}
@@ -223,6 +226,7 @@ describe("api.client-extensions.createEmptyDocumentDataProvider", () => {
 				document: preProcessedDocument,
 				changes: {}
 			}));
+			mock.method(FormEngineSelectors, "engineState", () => () => ({}));
 		});
 
 		it("should throw an error when the operation from the config isn't load", async () => {
@@ -386,5 +390,24 @@ describe("api.client-extensions.createEmptyDocumentDataProvider", () => {
 				deepStrictEqual(testPlanResult.effects.put[1].payload.action, expectedSetDataAction);
 			}
 		);
+
+		it("should pass kernel options", async () => {
+			const configuredNow = new Date("2024-01-01T00:00:00.000Z");
+			const kernelOptions: GeneratedCodeRtConfig = { currentDateForTest: configuredNow };
+			emptyDocumentDataProvider = createEmptyDocumentDataProvider({
+				kernelOptions: () => kernelOptions
+			});
+
+			await expectSaga(
+				emptyDocumentDataProvider.provideData,
+				createTestConfig({ operation: "load" })
+			).run();
+
+			const passedKernelOptions = preProcessDocumentStub.mock.calls
+				.at(-1)
+				?.arguments.at(0)?.kernelOptions;
+
+			strictEqual(passedKernelOptions, kernelOptions);
+		});
 	});
 });

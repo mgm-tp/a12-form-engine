@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -33,9 +33,9 @@
 import type { JSX } from "react";
 import { useSelector } from "react-redux";
 
-import { ActivitySelectors } from "@com.mgmtp.a12.client/client-core/lib/core/activity/index.js";
-import type { ViewNGProps } from "@com.mgmtp.a12.client/client-core/lib/core/view/index.js";
-import { LayoutGrid } from "@com.mgmtp.a12.widgets/widgets-core/lib/layout/layout-grid/main/layout-grid.view.js";
+import type { ViewNGProps } from "@com.mgmtp.a12.client/client-core";
+import { ActivitySelectors } from "@com.mgmtp.a12.client/client-core";
+import { LayoutGrid } from "@com.mgmtp.a12.widgets/widgets-core";
 
 import type { Group } from "./DevappTile.js";
 import { DevappTile } from "./DevappTile.js";
@@ -63,7 +63,7 @@ export default function ModelsOverview(props: ViewNGProps): JSX.Element {
 
 	for (const entry of devAppModelsList?.groups ?? []) {
 		const baseName = entry.name.split(".")[0];
-		if (list[baseName] === undefined) {
+		if (!(baseName in list)) {
 			list[baseName] = {
 				name: baseName,
 				group: [],

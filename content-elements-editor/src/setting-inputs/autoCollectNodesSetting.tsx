@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -31,27 +31,24 @@
  */
 
 import type { JSX } from "react";
-import { useSelector, type DefaultRootState } from "react-redux";
+import { useSelector } from "react-redux";
 
-import { ModelPath } from "@com.mgmtp.a12.base/base-model-api/lib/main/model/index.js";
+import { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
 import { useDocumentContext } from "@com.mgmtp.a12.contentengine/contentengine-core";
 import {
 	SettingTemplate,
 	UIStateSelector,
 	useContentEditorState,
-	useSettingState,
-	type BooleanSettingState
+	useSettingState
 } from "@com.mgmtp.a12.contentengine/contentengine-editor";
+import type { BooleanSettingState } from "@com.mgmtp.a12.contentengine/contentengine-editor";
 import { useCollectDocumentElementIds } from "@com.mgmtp.a12.formengine/formengine-content-elements";
-import type { BaseColumnType } from "@com.mgmtp.a12.widgets/widgets-core/lib/table/new-api/column.api.js";
+import { DefaultTableComponentRenderers, Table } from "@com.mgmtp.a12.widgets/widgets-core";
 import type {
+	BaseColumnType,
 	TableComponentRenderers,
 	TableRenderPropsType
-} from "@com.mgmtp.a12.widgets/widgets-core/lib/table/new-api/table-renderer.api.js";
-import {
-	DefaultTableComponentRenderers,
-	Table
-} from "@com.mgmtp.a12.widgets/widgets-core/lib/table/new-api/table.view.js";
+} from "@com.mgmtp.a12.widgets/widgets-core";
 
 import { SwitchSetting } from "./switchSetting.js";
 
@@ -122,7 +119,7 @@ function ContainedNodeIdsList(): JSX.Element {
 }
 
 function getPaths(
-	state: DefaultRootState,
+	state: object,
 	docIds: string[],
 	getModelPathById: (state: object, id: string) => ModelPath
 ): string[] {

@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -34,7 +34,7 @@ import { query } from "@com.mgmtp.a12.devtools/react";
 
 import { getComponentMocks } from "../../../../../rtl-utils/getComponentMocks.js";
 import { RenderGroupFixture } from "../../../../../utils/rtl-render-group.js";
-import { SetupHelpers } from "../../../../../utils/setup.js";
+import { setupFormEngineRendererWithRtlAsync } from "../../../../../utils/setup.js";
 import { setupModelsFixture } from "../../../../../utils/setupFixture.js";
 import { ATTACHMENT } from "../../../../../utils/test-model-helpers/attachment.js";
 import { EXTERNAL_ENUM } from "../../../../../utils/test-model-helpers/external-enumeration.js";
@@ -409,7 +409,7 @@ export function executeTestsForFieldOverviewColumnRendering(): void {
 					repeatableGroup: [{ attachment: { attachment_id: "1" } }]
 				});
 
-				const wrapper = await SetupHelpers.setupFormEngineRendererWithRtlAsync({
+				const wrapper = await setupFormEngineRendererWithRtlAsync({
 					componentMap: getComponentMocks(),
 					models: attachmentModels,
 					data: { document: documentForAttachment }

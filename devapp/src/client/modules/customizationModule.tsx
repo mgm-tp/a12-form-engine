@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -32,13 +32,9 @@
 
 import type { ComponentType } from "react";
 
-import type { Module } from "@com.mgmtp.a12.client/client-core/lib/core/application/index.js";
-import { ModuleRegistryProvider } from "@com.mgmtp.a12.client/client-core/lib/core/application/index.js";
-import type {
-	MiddlewareOptions,
-	FormEngineViews,
-	Config
-} from "@com.mgmtp.a12.formengine/formengine-core";
+import type { Module } from "@com.mgmtp.a12.client/client-core";
+import { ModuleRegistryProvider } from "@com.mgmtp.a12.client/client-core";
+import type { FormEngineViews, Config } from "@com.mgmtp.a12.formengine/formengine-core";
 
 import { selectCurrentFormName } from "./utils.js";
 
@@ -47,11 +43,6 @@ import { selectCurrentFormName } from "./utils.js";
  * "per-name" basis
  *
  * Configuration/Options are merged with the default values, allowing to override them
- *
- * NOTE about middlewares:
- *
- * The form engine middlewares must NOT be registered here, because they are registered by default already.
- * To customize them, use the `middlewareOptions`
  */
 export interface DevappCustomization extends Omit<Module, "id"> {
 	/**
@@ -59,7 +50,6 @@ export interface DevappCustomization extends Omit<Module, "id"> {
 	 */
 	readonly formModelName: string;
 
-	readonly middlewareOptions?: Partial<MiddlewareOptions>;
 	readonly config?: Partial<Config>;
 
 	readonly FormEngineView?: ComponentType<FormEngineViews.FormEngineProps>;

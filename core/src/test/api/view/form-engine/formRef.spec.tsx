@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -33,21 +33,22 @@
 import { strictEqual } from "node:assert/strict";
 import { mock } from "node:test";
 
-import { createRef, type RefObject } from "react";
+import { createRef } from "react";
+import type { RefObject } from "react";
 
 import { screen } from "@com.mgmtp.a12.devtools/react";
-import type { TextLineStatelessProps } from "@com.mgmtp.a12.widgets/widgets-core/lib/input/text-line/main/template/text-line.tpl.api.js";
+import type { TextFieldProps } from "@com.mgmtp.a12.widgets/widgets-core";
 
 import type { Models } from "../../../../back-end/store/index.js";
-import { type ScrollApi, type WidgetMap } from "../../../../view/index.js";
-import { SetupHelpers } from "../../../utils/setup.js";
+import type { ScrollApi, WidgetMap } from "../../../../view/index.js";
+import { loadModels, setupFormEngineRendererWithRtl } from "../../../utils/setup.js";
 
 describe("api.view.scrollRef", () => {
 	it("contains scrollToTop which, when called, scrolls to the top of the form", () => {
 		const scrollIntoViewStub = mock.method(Element.prototype, "scrollIntoView");
 
 		// any model will do
-		const scrollRef = render(SetupHelpers.loadModels("styles"));
+		const scrollRef = render(loadModels("styles"));
 		scrollRef.current?.scrollToTop();
 
 		strictEqual(scrollIntoViewStub.mock.callCount(), 1, "one scroll event");
@@ -59,7 +60,7 @@ describe("api.view.scrollRef", () => {
 	// note: do not mock.method on focus as is it is monkey-patched by RTL userEvent
 	it("contains focusElement which, when called for a model with initiallyFocusedElementId, focuses a specific control of the form", () => {
 		// model with initiallyFocusedElementId
-		const scrollRef = render(SetupHelpers.loadModels("customization.scroll-api"));
+		const scrollRef = render(loadModels("customization.scroll-api"));
 		scrollRef.current?.focusElement();
 
 		const focusTarget = screen.getById("a12-StringField-field_13ec5");
@@ -68,7 +69,7 @@ describe("api.view.scrollRef", () => {
 
 	it("contains focusElement which, when called for a model without initiallyFocusedElementId, focuses nothing", () => {
 		// any model without initiallyFocusedElementId will do
-		const scrollRef = render(SetupHelpers.loadModels("styles"));
+		const scrollRef = render(loadModels("styles"));
 
 		const focusedElementBefore = document.activeElement;
 		scrollRef.current?.focusElement();
@@ -82,11 +83,11 @@ describe("api.view.scrollRef", () => {
 	 */
 	function render(models: Models): RefObject<ScrollApi | null> {
 		const widgetMap: Partial<WidgetMap> = {
-			TextLineStateless: mock.fn(TextLineWithRef)
+			TextField: mock.fn(TextLineWithRef)
 		};
 
 		const scrollRef = createRef<ScrollApi>();
-		SetupHelpers.setupFormEngineRendererWithRtl({
+		setupFormEngineRendererWithRtl({
 			models,
 			scrollRef,
 			config: { widgetMap }
@@ -96,7 +97,7 @@ describe("api.view.scrollRef", () => {
 	}
 
 	// specific mock with ref support
-	function TextLineWithRef(props: TextLineStatelessProps) {
+	function TextLineWithRef(props: TextFieldProps) {
 		return <div id={props.id} ref={props.inputRef} tabIndex={-1}></div>;
 	}
 });

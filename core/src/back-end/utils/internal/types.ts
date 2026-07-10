@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -55,10 +55,14 @@ export type RequiredButUndefined<T> = {
 };
 
 /**
- * @internal
- * Utility type that extracts a property from T and makes it partial
+ * Utility type that makes specified properties optional while keeping the rest unchanged
  */
-export type PickPartial<T, K extends keyof T> = { [P in K]: Partial<T[P]> };
+export type PickOptional<T, K extends keyof T> = Omit<T, K> & Partial<Pick<T, K>>;
+
+/**
+ * Utility type that makes specified properties Partial<T> while keeping the rest unchanged
+ */
+export type PickPartial<T, K extends keyof T> = Omit<T, K> & { [P in K]: Partial<T[P]> };
 
 /**
  * @internal

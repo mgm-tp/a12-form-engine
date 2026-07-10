@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -33,16 +33,13 @@
 import type { ReactNode } from "react";
 import { Fragment } from "react";
 
-import { ModelPath } from "@com.mgmtp.a12.base/base-model-api/lib/main/model/index.js";
+import { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
 import { Expression } from "@com.mgmtp.a12.expression/expression-core";
 import type { FormModel, FormModelMap } from "@com.mgmtp.a12.formengine/formengine-core";
-import { ModelSelectors, DefaultFormModelMap } from "@com.mgmtp.a12.formengine/formengine-core";
-import type { DocumentModel } from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
-import { DocumentServiceFactory } from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/facade.js";
-import {
-	TreeContainer,
-	TreeNode
-} from "@com.mgmtp.a12.widgets/widgets-core/lib/tree/main/tpl/tree-elements.tpl.js";
+import { DefaultFormModelMap, ModelSelectors } from "@com.mgmtp.a12.formengine/formengine-core";
+import type { DocumentModel } from "@com.mgmtp.a12.kernel/kernel-md-facade";
+import { DocumentServiceFactory } from "@com.mgmtp.a12.kernel/kernel-md-facade";
+import { TreeContainer, TreeNode } from "@com.mgmtp.a12.widgets/widgets-core";
 
 export const CustomFormModelMapForUnmarshallFormModelExample = {
 	...DefaultFormModelMap,
@@ -59,7 +56,7 @@ export const CustomFormModelMapForUnmarshallFormModelExample = {
 			const group = findByPath(documentModel, groupPath);
 
 			const gce =
-				group && group.type === "Group"
+				group.type === "Group"
 					? formModel.content.groupConfiguration.groupMap[ModelPath.toString(groupPath)]
 					: undefined;
 
@@ -115,7 +112,7 @@ export const CustomFormModelMapForUnmarshallFormModelExample = {
 			const group = findByPath(documentModel, groupPath);
 
 			const gce =
-				group && group.type === "Group"
+				group.type === "Group"
 					? formModel.content.groupConfiguration.groupMap[ModelPath.toString(groupPath)]
 					: undefined;
 
@@ -243,7 +240,7 @@ function renderFilterExpressionInfo(
 	>
 ): ReactNode {
 	const filterExpressionTree = props.modelElement.filterExpressionTree;
-	const context = filterExpressionTree?.context?.name;
+	const context = filterExpressionTree?.context.name;
 	const operation = filterExpressionTree?.operation;
 	return filterExpressionTree
 		? `Filter expression: ${context} ${operation} ${filterExpressionTree.content}`

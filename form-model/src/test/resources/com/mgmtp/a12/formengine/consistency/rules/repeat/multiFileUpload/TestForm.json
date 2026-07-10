@@ -1,0 +1,166 @@
+{
+    "header": {
+        "id": "TestForm",
+        "modelType": "form",
+        "modelVersion": "39.0.0",
+        "locales": [
+            {
+                "code": "en"
+            }
+        ],
+        "annotations": [
+            {
+                "name": "roles",
+                "value": "admin"
+            }
+        ],
+        "modelReferences": [
+            {
+                "alias": "DM",
+                "modelType": "document",
+                "purpose": "data binding",
+                "reference": "TestModel"
+            }
+        ]
+    },
+    "content": {
+        "subHeaderBox": {
+            "id": "subHeaderBox1"
+        },
+        "footerBox": {
+            "id": "footerBox1"
+        },
+        "screens": [
+            {
+                "id": "screen1",
+                "name": "Screen1",
+                "screenElements": [
+                    {
+                        "type": "InlineRepeat",
+                        "id": "inlinerepeat-c4e68",
+                        "name": "ir-no-attachment-collection",
+                        "repeatOverviewColumn": [
+                            {
+                                "type": "FieldBasedRepeatOverviewColumn",
+                                "id": "fieldbasedrepeatoverviewcolumn-da91f",
+                                "width": 1,
+                                "sortable": false,
+                                "filterable": false,
+                                "preferredSorting": "ASC",
+                                "elementRef": "field_fef47"
+                            }
+                        ],
+                        "groupRef": "group_99da2",
+                        "enableAdd": true,
+                        "enableRemove": true,
+                        "enableReorder": false,
+                        "enableCopy": false,
+                        "multiFileUpload": true,
+                        "multiFileUploadOptions": {
+                            "elementRef": "group_d8b2a"
+                        }
+                    },
+                    {
+                        "type": "InlineRepeat",
+                        "id": "inlinerepeat-c988d",
+                        "name": "ir-multi-file-disabled-but-options",
+                        "repeatOverviewColumn": [
+                            {
+                                "type": "FieldBasedRepeatOverviewColumn",
+                                "id": "fieldbasedrepeatoverviewcolumn-48552",
+                                "width": 1,
+                                "sortable": false,
+                                "filterable": false,
+                                "preferredSorting": "ASC",
+                                "elementRef": "group_d8b2a"
+                            }
+                        ],
+                        "groupRef": "group_a7c7a",
+                        "enableAdd": true,
+                        "enableRemove": true,
+                        "enableReorder": false,
+                        "enableCopy": false,
+                        "multiFileUploadOptions": {
+                            "elementRef": "group_d8b2a"
+                        }
+                    },
+                    {
+                        "type": "InlineRepeat",
+                        "id": "inlinerepeat-3a4da",
+                        "name": "ir-missing-elementRef",
+                        "repeatOverviewColumn": [
+                            {
+                                "type": "FieldBasedRepeatOverviewColumn",
+                                "id": "fieldbasedrepeatoverviewcolumn-2acbf",
+                                "width": 1,
+                                "sortable": false,
+                                "filterable": false,
+                                "preferredSorting": "ASC",
+                                "elementRef": "group_d8b2a"
+                            }
+                        ],
+                        "groupRef": "group_a7c7a",
+                        "enableAdd": true,
+                        "enableRemove": true,
+                        "enableReorder": false,
+                        "enableCopy": false,
+                        "multiFileUpload": true,
+                        "multiFileUploadOptions": {
+                            "enableDownload": true
+                        }
+                    },
+                    {
+                        "type": "InlineRepeat",
+                        "id": "inlinerepeat-894b7",
+                        "name": "inline-missing-options",
+                        "repeatOverviewColumn": [
+                            {
+                                "type": "FieldBasedRepeatOverviewColumn",
+                                "id": "fieldbasedrepeatoverviewcolumn-3f968",
+                                "width": 1,
+                                "sortable": false,
+                                "filterable": false,
+                                "preferredSorting": "ASC",
+                                "elementRef": "group_d8b2a"
+                            }
+                        ],
+                        "groupRef": "group_a7c7a",
+                        "enableAdd": true,
+                        "enableRemove": true,
+                        "enableReorder": false,
+                        "enableCopy": false,
+                        "multiFileUpload": true
+                    },
+                    {
+                        "type": "InlineRepeat",
+                        "id": "inlinerepeat-dbc46",
+                        "name": "ir-valid",
+                        "repeatOverviewColumn": [
+                            {
+                                "type": "FieldBasedRepeatOverviewColumn",
+                                "id": "fieldbasedrepeatoverviewcolumn-f2bcc",
+                                "width": 1,
+                                "sortable": false,
+                                "filterable": false,
+                                "preferredSorting": "ASC",
+                                "elementRef": "group_d8b2a"
+                            }
+                        ],
+                        "groupRef": "group_a7c7a",
+                        "enableAdd": true,
+                        "enableRemove": true,
+                        "enableReorder": false,
+                        "enableCopy": false,
+                        "multiFileUpload": true,
+                        "multiFileUploadOptions": {
+                            "elementRef": "group_d8b2a"
+                        }
+                    }
+                ]
+            }
+        ],
+        "fieldConfiguration": {},
+        "groupConfiguration": {},
+        "defaults": {}
+    }
+}

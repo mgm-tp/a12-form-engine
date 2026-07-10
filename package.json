@@ -1,7 +1,7 @@
 {
   "name": "@com.mgmtp.a12.formengine/root",
-  "version": "38.5.0-SNAPSHOT",
-  "a12ReleaseLine": "2025.06",
+  "version": "39.0.0",
+  "a12ReleaseLine": "2026.06",
   "description": "Form Engine Workspaces Root",
   "author": "mgm technology partners",
   "type": "module",
@@ -19,19 +19,23 @@
     "build": "pnpm run -r build",
     "compile": "pnpm run -r compile",
     "watch": "pnpm run -r --parallel watch",
-    "test": "pnpm run -r test",
-    "format": "prettier \"**/src/**/*.{ts,tsx}\" --check --cache --cache-strategy metadata",
-    "format:fix": "prettier \"**/src/**/*.{ts,tsx}\" --check -w",
-    "lint": "node --run eslint -- --cache",
-    "lint:onlyErrors": "node --run eslint -- --quiet",
+    "test": "pnpm run -r --filter=!@com.mgmtp.a12.formengine/formengine-content-elements --filter=!@com.mgmtp.a12.formengine/formengine-content-elements-editor test",
+    "start": "pnpm run -r start",
+    "format": "prettier \"**/src/**/*.{ts,tsx}\" \"*.ts\" --check --experimental-cli --parallel-workers 2",
+    "format:fix": "prettier \"**/src/**/*.{ts,tsx}\" \"*.ts\" --write --experimental-cli --parallel-workers 2",
+    "lint:root": "eslint --flag unstable_native_nodejs_ts_config -c eslint.root.config.ts . --cache",
+    "lint": "pnpm run -r --sequential lint && node --run lint:root",
+    "lint:fix": "pnpm run -r --sequential lint:fix && node --run lint:root -- --fix",
+    "lint:onlyErrors": "pnpm run -r --sequential lint:onlyErrors && node --run lint:root -- --quiet",
     "lint:inspect": "pnpm dlx @eslint/config-inspector",
-    "lint:fix": "node --run eslint -- --fix",
-    "eslint": "node --max-old-space-size=4096 ./node_modules/eslint/bin/eslint.js --flag unstable_native_nodejs_ts_config .",
-    "spellcheck": "pnpm run -r --parallel spellcheck"
+    "spellcheck": "pnpm run -r --parallel spellcheck",
+    "validate:api": "pnpm run -r --parallel validate:api",
+    "update:api": "pnpm run -r --parallel update:api"
   },
   "devDependencies": {
     "@com.mgmtp.a12.devtools/eslint-config": "catalog:a12",
     "@com.mgmtp.a12.devtools/prettier-config": "catalog:a12",
+    "@eslint/compat": "catalog:",
     "@jambit/eslint-plugin-typed-redux-saga": "catalog:",
     "@types/node": "catalog:",
     "@types/semver": "catalog:",
@@ -44,7 +48,8 @@
     "prettier": "catalog:",
     "react": "catalog:",
     "semver": "catalog:",
+    "smol-toml": "catalog:",
     "yaml": "catalog:"
   },
-  "packageManager": "pnpm@11.1.2"
+  "packageManager": "pnpm@11.3.0"
 }

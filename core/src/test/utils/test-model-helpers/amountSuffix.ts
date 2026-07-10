@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -30,16 +30,16 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-export namespace IDS {
-	export const CONTROL_NO_SUFFIX = "a12-number_none_01-fieldimpl_553eb";
-	export const CONTROL_SUFFIX = "a12-number_none_02-fieldimpl_79a36";
+export const IDS = {
+	CONTROL_NO_SUFFIX: "a12-number_none_01-fieldimpl_553eb",
+	CONTROL_SUFFIX: "a12-number_none_02-fieldimpl_79a36",
 
-	export const AMOUNT_CONTROL_NO_SUFFIX = "a12-number_amount_01-fieldimpl_aad64";
-	export const AMOUNT_CONTROL_SUFFIX = "a12-number_amount_02-fieldimpl_0722c";
+	AMOUNT_CONTROL_NO_SUFFIX: "a12-number_amount_01-fieldimpl_aad64",
+	AMOUNT_CONTROL_SUFFIX: "a12-number_amount_02-fieldimpl_0722c",
 
-	export const COLUMN_NO_SUFFIX = "a12-fieldbasedrepeatoverviewcolumn-20eba-cell-0";
-	export const COLUMN_SUFFIX = "a12-fieldbasedrepeatoverviewcolumn-15465-cell-0";
+	COLUMN_NO_SUFFIX: "a12-fieldbasedrepeatoverviewcolumn-20eba-cell-0",
+	COLUMN_SUFFIX: "a12-fieldbasedrepeatoverviewcolumn-15465-cell-0",
 
-	export const AMOUNT_COLUMN_NO_SUFFIX = "a12-fieldbasedrepeatoverviewcolumn-143fb-cell-0";
-	export const AMOUNT_COLUMN_SUFFIX = "a12-fieldbasedrepeatoverviewcolumn-95ce5-cell-0";
-}
+	AMOUNT_COLUMN_NO_SUFFIX: "a12-fieldbasedrepeatoverviewcolumn-143fb-cell-0",
+	AMOUNT_COLUMN_SUFFIX: "a12-fieldbasedrepeatoverviewcolumn-95ce5-cell-0"
+} as const;

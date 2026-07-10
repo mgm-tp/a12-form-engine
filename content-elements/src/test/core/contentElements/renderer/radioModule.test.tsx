@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -37,17 +37,12 @@ import type { ReactElement } from "react";
 
 import { DocumentContext } from "@com.mgmtp.a12.contentengine/contentengine-core";
 import { query } from "@com.mgmtp.a12.devtools/react";
-import type { Message } from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
-import { LocalizerContext } from "@com.mgmtp.a12.utils/utils-localization-react/lib/main/index.js";
-import type { ValueConversion } from "@com.mgmtp.a12.utils/utils-localization/lib/main/conversion.js";
-import type { RadioItemProps } from "@com.mgmtp.a12.widgets/widgets-core/lib/input/radio/main/radio.api.js";
+import type { Message } from "@com.mgmtp.a12.kernel/kernel-md-facade";
+import type { LocalizerContextProps } from "@com.mgmtp.a12.utils/utils-localization-react";
+import { LocalizerContext } from "@com.mgmtp.a12.utils/utils-localization-react";
+import type { RadioItemProps } from "@com.mgmtp.a12.widgets/widgets-core";
 
-import { USE_COMMON_CONTROL_SETTINGS_WRAPPER } from "../../../../main/core/contentElements/elementConfiguration/useCommonControlSettings.js";
-import { USE_COMMON_WIDGET_SETTINGS_WRAPPER } from "../../../../main/core/contentElements/elementConfiguration/useCommonWidgetSettings.js";
 import type { EnumerationItem } from "../../../../main/core/contentElements/elementConfiguration/useLocalizedEnumerationValues.js";
-import { USE_LOCALIZED_ENUMERATION_VALUES_WRAPPER } from "../../../../main/core/contentElements/elementConfiguration/useLocalizedEnumerationValues.js";
-import { DefaultFunctionMap } from "../../../../main/core/contentElements/functionMap/defaultFunctionMap.js";
-import { FunctionMapContext } from "../../../../main/core/contentElements/functionMap/functionMapContext.js";
 import { RadioModule } from "../../../../main/core/contentElements/modules/radio/radioModule.js";
 import type { RadioNode } from "../../../../main/core/contentElements/modules/radio/radioNode.js";
 import { RADIO_TYPE } from "../../../../main/core/contentElements/modules/radio/radioNode.js";
@@ -60,32 +55,11 @@ import {
 	assertCalledWith,
 	assertCalledWithArgument
 } from "../../../assertions.js";
+import { getMockLocalization } from "../../../mocks/getMockLocalization.js";
 import { mockDocumentContext } from "../../../mocks/mockDocumentContext.js";
 import { getMockMessage } from "../../../mocks/mockError.js";
+import { setupMockHooks } from "../../../mocks/setupMockHooks.js";
 import { renderWrapper } from "../../../rtl-utils/render-wrapper.js";
-
-function setupMocks(controlSettings: BaseControlSettings) {
-	return {
-		useControlSettingsMock: mock.method(
-			USE_COMMON_CONTROL_SETTINGS_WRAPPER,
-			"useCommonControlSettings",
-			() => controlSettings
-		),
-		useWidgetSettingsMock: mock.method(
-			USE_COMMON_WIDGET_SETTINGS_WRAPPER,
-			"useCommonWidgetSettings",
-			mock.fn(getMockWidgetSettings)
-		),
-		useEnumerationValuesMock: mock.method(
-			USE_LOCALIZED_ENUMERATION_VALUES_WRAPPER,
-			"useLocalizedEnumerationValues",
-			mock.fn(getMockEnumerationValues)
-		),
-		useFocusFieldMock: mock.fn(),
-		useFocusFirstErrorMock: mock.fn(),
-		useFocusInputMock: mock.fn()
-	};
-}
 
 describe("core.contentElements", () => {
 	describe("Radio", () => {
@@ -93,9 +67,10 @@ describe("core.contentElements", () => {
 			const mockControlSettings = getMockControlSettings({ fieldType: "EnumerationType" });
 			const mockWidgetSettings = getMockWidgetSettings();
 
-			setupMocks(mockControlSettings);
-
-			const { widgetMap } = renderWrapper(<RadioModule.renderer node={getMockNode()} />);
+			const { widgetMap } = setup({
+				controlSettings: mockControlSettings,
+				widgetSettings: mockWidgetSettings
+			});
 
 			const props = query(widgetMap.Radio).props();
 
@@ -115,16 +90,39 @@ describe("core.contentElements", () => {
 			strictEqual(props["info"], mockWidgetSettings.info);
 			strictEqual(props["infoMessage"], mockWidgetSettings.infos);
 			deepStrictEqual(props["groupDOMProps"], mockWidgetSettings.inputProps);
-			strictEqual(props["ariaDescribedby"], nmTokensToString(mockWidgetSettings.ariaDescribedBy)); // TODO: additional test for this post-processing?
+		});
+
+		describe("ariaDescribedBy", () => {
+			it("sets undefined if ariaDescribedBy is empty", () => {
+				const { widgetMap } = setup({
+					controlSettings: getMockControlSettings({ fieldType: "BooleanType" })
+				});
+
+				const props = query(widgetMap.Radio).props();
+
+				strictEqual(props.ariaDescribedby, undefined);
+			});
+
+			it("converts tokens into a single string if ariaDescribedBy is not empty", () => {
+				const mockWidgetSettings = getMockWidgetSettings({ ariaDescribedBy: ["token1", "token2"] });
+
+				const { widgetMap } = setup({
+					controlSettings: getMockControlSettings({ fieldType: "BooleanType" }),
+					widgetSettings: mockWidgetSettings
+				});
+
+				const props = query(widgetMap.Radio).props();
+
+				strictEqual(props.ariaDescribedby, nmTokensToString(mockWidgetSettings.ariaDescribedBy));
+			});
 		});
 
 		it("renders RadioItems for all enumeration options as children of the Radio widget", () => {
-			const mockControlSettings = getMockControlSettings({ fieldType: "EnumerationType" });
 			const mockWidgetSettings = getMockWidgetSettings();
 
-			setupMocks(mockControlSettings);
-
-			const { widgetMap } = renderWrapper(<RadioModule.renderer node={getMockNode()} />);
+			const { widgetMap } = setup({
+				widgetSettings: mockWidgetSettings
+			});
 
 			const mockEnumValues = getMockEnumerationValues();
 
@@ -146,174 +144,181 @@ describe("core.contentElements", () => {
 			});
 		});
 
-		it("calls useCommonControlSettings with the given node", () => {
-			const mockControlSettings = getMockControlSettings({ fieldType: "EnumerationType" });
-			const mockNode = getMockNode();
+		describe("Value Change", () => {
+			it("calls valueChanged from the document context when a valid value was entered", () => {
+				const mockControlSettings = getMockControlSettings({ fieldType: "EnumerationType" });
+				const mockDocContext = mockDocumentContext();
 
-			const { useControlSettingsMock } = setupMocks(mockControlSettings);
-
-			renderWrapper(<RadioModule.renderer node={mockNode} />);
-
-			assertCalledWith(useControlSettingsMock, mockNode);
-		});
-
-		it("calls useCommonWidgetSettings with the result from useCommonControlSettings", () => {
-			const mockControlSettings = getMockControlSettings({ fieldType: "EnumerationType" });
-
-			const { useWidgetSettingsMock } = setupMocks(mockControlSettings);
-
-			renderWrapper(<RadioModule.renderer node={getMockNode()} />);
-
-			assertCalledWith(useWidgetSettingsMock, mockControlSettings);
-		});
-
-		it("calls useLocalizedEnumerationValues with the given dataReference", () => {
-			const mockControlSettings = getMockControlSettings({ fieldType: "EnumerationType" });
-
-			const { useEnumerationValuesMock } = setupMocks(mockControlSettings);
-
-			renderWrapper(<RadioModule.renderer node={getMockNode()} />);
-
-			assertCalledWith(useEnumerationValuesMock, mockControlSettings.dataReference);
-		});
-
-		describe("focus hooks", () => {
-			function setupFocusTest(options?: {
-				groupedMessages?: Message[];
-				ungroupedMessages?: Message[];
-			}) {
-				const mockControlSettings = getMockControlSettings({
-					fieldType: "EnumerationType",
-					groupedMessages: options?.groupedMessages,
-					ungroupedMessages: options?.ungroupedMessages
+				const { widgetMap } = setup({
+					controlSettings: mockControlSettings,
+					docContext: mockDocContext
 				});
 
-				const { useFocusFieldMock, useFocusFirstErrorMock, useFocusInputMock } =
-					setupMocks(mockControlSettings);
+				const props = query(widgetMap.Radio).props();
 
-				renderWrapper(
-					<FunctionMapContext.Provider
-						value={{
-							...DefaultFunctionMap,
-							useFocusField: useFocusFieldMock,
-							useFocusFirstError: useFocusFirstErrorMock,
-							useFocusInput: useFocusInputMock
-						}}
-					>
-						<RadioModule.renderer node={getMockNode()} />
-					</FunctionMapContext.Provider>
-				);
+				props.onValueChanged?.("false");
 
-				return { useFocusFieldMock, useFocusFirstErrorMock, useFocusInputMock };
-			}
-
-			it("calls focus hooks when rendered", () => {
-				const { useFocusFieldMock, useFocusFirstErrorMock, useFocusInputMock } = setupFocusTest();
-
-				assertCallCount(useFocusFieldMock, 1);
-				assertCallCount(useFocusFirstErrorMock, 1);
-				assertCalledWithArgument(useFocusFirstErrorMock, 0, false);
-				assertCallCount(useFocusInputMock, 1);
+				assertCalledWith(mockDocContext.event.onValueChanged, {
+					path: mockControlSettings.dataReference,
+					value: "false",
+					userValue: "false"
+				});
 			});
 
-			it("calls useFocusFirstError with true when an ungrouped error exists", () => {
-				const { useFocusFirstErrorMock } = setupFocusTest({
-					ungroupedMessages: [getMockMessage({ severity: "ERROR" })]
+			it("calls conversion.parseValue with the new value for fields of type boolean", () => {
+				const mockControlSettings = getMockControlSettings({ fieldType: "BooleanType" });
+				const mockParseValue = mock.fn(() => ({ value: true }));
+
+				const { widgetMap } = setup({
+					controlSettings: mockControlSettings,
+					localizerContext: getMockLocalization({ parseValue: mockParseValue })
 				});
 
-				assertCalledWithArgument(useFocusFirstErrorMock, 0, true);
+				const props = query(widgetMap.Radio).props();
+
+				props.onValueChanged?.("true");
+
+				assertCalledWith(mockParseValue, "true", mockControlSettings.conversionConfig);
 			});
 
-			it("calls useFocusFirstError with false when no ungrouped error exists", () => {
-				const { useFocusFirstErrorMock } = setupFocusTest({
-					ungroupedMessages: [
-						getMockMessage({ severity: "WARNING" }),
-						getMockMessage({ severity: "INFO" })
-					],
-					groupedMessages: [
-						getMockMessage({ severity: "ERROR" }),
-						getMockMessage({ severity: "WARNING" }),
-						getMockMessage({ severity: "INFO" })
-					]
+			it("does not call conversion.parseValue with the new value for fields of type enumeration", () => {
+				const mockParseValue = mock.fn(() => ({ value: true }));
+
+				const { widgetMap } = setup({
+					localizerContext: getMockLocalization({ parseValue: mockParseValue })
 				});
 
-				assertCalledWithArgument(useFocusFirstErrorMock, 0, false);
+				const props = query(widgetMap.Radio).props();
+
+				props.onValueChanged?.("true");
+
+				assertCallCount(mockParseValue, 0);
 			});
 		});
 
-		it("calls valueChanged from the document context when a valid value was entered", () => {
-			const mockControlSettings = getMockControlSettings({ fieldType: "EnumerationType" });
+		describe("Hooks", () => {
+			it("calls useCommonControlSettings with the given node", () => {
+				const mockNode = getMockNode();
 
-			const mockDocContext = mockDocumentContext();
+				const { useControlSettingsMock } = setupMockHooks({
+					controlSettings: getMockControlSettings({ fieldType: "EnumerationType" }),
+					widgetSettings: getMockWidgetSettings()
+				});
 
-			setupMocks(mockControlSettings);
+				renderWrapper(<RadioModule.renderer node={mockNode} />);
 
-			const { widgetMap } = renderWrapper(
-				<DocumentContext.Provider value={mockDocContext}>
-					<RadioModule.renderer node={getMockNode()} />
-				</DocumentContext.Provider>
-			);
-
-			const props = query(widgetMap.Radio).props();
-
-			props.onValueChanged?.("false");
-
-			assertCalledWith(mockDocContext.event.onValueChanged, {
-				path: mockControlSettings.dataReference,
-				value: "false",
-				userValue: "false"
+				assertCalledWith(useControlSettingsMock, mockNode);
 			});
-		});
 
-		it("calls conversion.parseValue with the new value for fields of type boolean", () => {
-			const mockControlSettings = getMockControlSettings({ fieldType: "BooleanType" });
+			it("calls useCommonWidgetSettings with the result from useCommonControlSettings", () => {
+				const mockControlSettings = getMockControlSettings({ fieldType: "EnumerationType" });
 
-			setupMocks(mockControlSettings);
+				const { useWidgetSettingsMock } = setupMockHooks({
+					controlSettings: mockControlSettings,
+					widgetSettings: getMockWidgetSettings()
+				});
 
-			const mockDocContext = mockDocumentContext();
+				renderWrapper(<RadioModule.renderer node={getMockNode()} />);
 
-			const mockParseValue = mock.fn(() => ({ value: true }));
+				assertCalledWith(useWidgetSettingsMock, mockControlSettings);
+			});
 
-			const { widgetMap } = renderWrapper(
-				<LocalizerContext.Provider value={getMockLocalization(mockParseValue)}>
-					<DocumentContext.Provider value={mockDocContext}>
-						<RadioModule.renderer node={getMockNode()} />
-					</DocumentContext.Provider>
-				</LocalizerContext.Provider>
-			);
+			it("calls useLocalizedEnumerationValues with the given dataReference", () => {
+				const mockControlSettings = getMockControlSettings({ fieldType: "EnumerationType" });
 
-			const props = query(widgetMap.Radio).props();
+				const { useEnumerationValuesMock } = setupMockHooks({
+					controlSettings: mockControlSettings,
+					widgetSettings: getMockWidgetSettings()
+				});
 
-			props.onValueChanged?.("true");
+				renderWrapper(<RadioModule.renderer node={getMockNode()} />);
 
-			assertCalledWith(mockParseValue, "true", mockControlSettings.conversionConfig);
-		});
+				assertCalledWith(useEnumerationValuesMock, mockControlSettings.dataReference);
+			});
 
-		it("does not call conversion.parseValue with the new value for fields of type enumeration", () => {
-			const mockControlSettings = getMockControlSettings({ fieldType: "EnumerationType" });
+			describe("focus hooks", () => {
+				function setupFocusTest(options?: {
+					groupedMessages?: Message[];
+					ungroupedMessages?: Message[];
+				}) {
+					const mockControlSettings = getMockControlSettings({
+						fieldType: "EnumerationType",
+						groupedMessages: options?.groupedMessages,
+						ungroupedMessages: options?.ungroupedMessages
+					});
+					const mockWidgetSettings = getMockWidgetSettings();
 
-			setupMocks(mockControlSettings);
+					setupMockHooks({
+						controlSettings: mockControlSettings,
+						widgetSettings: mockWidgetSettings
+					});
 
-			const mockDocContext = mockDocumentContext();
+					return renderWrapper(<RadioModule.renderer node={getMockNode()} />);
+				}
 
-			const mockParseValue = mock.fn(() => ({ value: true }));
+				it("calls focus hooks when rendered", () => {
+					const { functionMap } = setupFocusTest();
 
-			const { widgetMap } = renderWrapper(
-				<LocalizerContext.Provider value={getMockLocalization(mockParseValue)}>
-					<DocumentContext.Provider value={mockDocContext}>
-						<RadioModule.renderer node={getMockNode()} />
-					</DocumentContext.Provider>
-				</LocalizerContext.Provider>
-			);
+					assertCallCount(functionMap.useFocusField, 1);
+					assertCallCount(functionMap.useFocusFirstError, 1);
+					assertCalledWithArgument(functionMap.useFocusFirstError, 0, false);
+					assertCallCount(functionMap.useFocusInput, 1);
+				});
 
-			const props = query(widgetMap.Radio).props();
+				it("calls useFocusFirstError with true when an ungrouped error exists", () => {
+					const { functionMap } = setupFocusTest({
+						ungroupedMessages: [getMockMessage({ severity: "ERROR" })]
+					});
 
-			props.onValueChanged?.("true");
+					assertCalledWithArgument(functionMap.useFocusFirstError, 0, true);
+				});
 
-			assertCallCount(mockParseValue, 0);
+				it("calls useFocusFirstError with false when no ungrouped error exists", () => {
+					const { functionMap } = setupFocusTest({
+						ungroupedMessages: [
+							getMockMessage({ severity: "WARNING" }),
+							getMockMessage({ severity: "INFO" })
+						],
+						groupedMessages: [
+							getMockMessage({ severity: "ERROR" }),
+							getMockMessage({ severity: "WARNING" }),
+							getMockMessage({ severity: "INFO" })
+						]
+					});
+
+					assertCalledWithArgument(functionMap.useFocusFirstError, 0, false);
+				});
+			});
 		});
 	});
 });
+
+function setup(options?: {
+	controlSettings?: BaseControlSettings;
+	widgetSettings?: BaseWidgetSettings;
+	docContext?: DocumentContext;
+	localizerContext?: LocalizerContextProps;
+	node?: RadioNode;
+}) {
+	const controlSettings =
+		options?.controlSettings ?? getMockControlSettings({ fieldType: "EnumerationType" });
+	const widgetSettings = options?.widgetSettings ?? getMockWidgetSettings();
+	const enumerationValues = getMockEnumerationValues();
+
+	setupMockHooks({ controlSettings, widgetSettings, enumerationValues });
+
+	const mockDocContext = options?.docContext ?? mockDocumentContext();
+	const mockLocalizerContext = options?.localizerContext ?? getMockLocalization();
+	const node = options?.node ?? getMockNode();
+
+	return renderWrapper(
+		<LocalizerContext.Provider value={mockLocalizerContext}>
+			<DocumentContext.Provider value={mockDocContext}>
+				<RadioModule.renderer node={node} />
+			</DocumentContext.Provider>
+		</LocalizerContext.Provider>
+	);
+}
 
 function getMockNode(): RadioNode {
 	return {
@@ -361,7 +366,7 @@ function getMockControlSettings(options: {
 	};
 }
 
-function getMockWidgetSettings(): BaseWidgetSettings {
+function getMockWidgetSettings(options?: Partial<BaseWidgetSettings>): BaseWidgetSettings {
 	return {
 		value: "true",
 		label: "test-label",
@@ -378,7 +383,8 @@ function getMockWidgetSettings(): BaseWidgetSettings {
 		tooltipsOnTop: true,
 		inline: true,
 		inputProps: { "aria-required": true },
-		ariaDescribedBy: ["test-aria1", "test-aria2"]
+		ariaDescribedBy: [],
+		...(options ?? {})
 	};
 }
 
@@ -393,20 +399,4 @@ function getMockEnumerationValues(): EnumerationItem[] {
 			value: "false"
 		}
 	];
-}
-
-function getMockLocalization(parseValue?: ValueConversion["parseValue"]): LocalizerContext.Type {
-	return {
-		locale: { language: "en", country: "US" },
-		localizer: () => "",
-		conversion: {
-			parseValue:
-				parseValue ??
-				(() => ({
-					value: ""
-				})),
-			formatValue: () => ""
-		},
-		dataFormats: {}
-	};
 }

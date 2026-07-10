@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -32,9 +32,11 @@
 
 import { deepStrictEqual, strictEqual } from "node:assert/strict";
 
-import { IIdentifier } from "@com.mgmtp.a12.kernel/kernel-core-runtime-api-ts/lib/main/js/a12internal/validation/IIdentifier.js";
-import { ErrorType } from "@com.mgmtp.a12.kernel/kernel-core-runtime-api-ts/lib/main/js/a12internal/validation/IResult.js";
-import type { Localizable } from "@com.mgmtp.a12.utils/utils-localization/lib/main/index.js";
+import {
+	ErrorType,
+	IIdentifier
+} from "@com.mgmtp.a12.kernel/kernel-core-runtime-api-ts/a12internal";
+import type { Localizable } from "@com.mgmtp.a12.utils/utils-localization";
 
 import { ValidationResult } from "../../../back-end/store/internal/kernel-adapter.js";
 

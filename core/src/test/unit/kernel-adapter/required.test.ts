@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -32,20 +32,17 @@
 
 import { ok, strictEqual } from "node:assert/strict";
 
-import type { GroupInstance } from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
-import type { Locale } from "@com.mgmtp.a12.utils/utils-localization/lib/main/index.js";
-import { defaultLocalizerFactory } from "@com.mgmtp.a12.utils/utils-localization/lib/main/index.js";
+import type { GroupInstance } from "@com.mgmtp.a12.kernel/kernel-md-facade";
+import type { Locale } from "@com.mgmtp.a12.utils/utils-localization";
+import { defaultLocalizerFactory } from "@com.mgmtp.a12.utils/utils-localization";
 
-import { createDefaultMiddlewareOptions } from "../../../back-end/store/index.js";
 import { fullValidation } from "../../../back-end/store/internal/validation.js";
 import { DocumentPath } from "../../../models/internal/utils/document-utils.js";
-import { DocumentHelpers } from "../../utils/document-helpers.js";
+import { createDocumentPath } from "../../utils/createDocumentPath.js";
 import { US_LOCALE } from "../../utils/localization.js";
-import { SetupHelpers } from "../../utils/setup.js";
+import { createTestStore } from "../../utils/setup.js";
 import { setupModelsFixture } from "../../utils/setupFixture.js";
 
-const { createTestStore } = SetupHelpers;
-const { createDocumentPath } = DocumentHelpers;
 describe("api.back-end.store.kernel-adapter", () => {
 	describe("Required", () => {
 		const models = setupModelsFixture("computation-validation.required");
@@ -69,10 +66,7 @@ describe("api.back-end.store.kernel-adapter", () => {
 				const locale = US_LOCALE;
 				const localizer = defaultLocalizerFactory({ locale });
 				const store = setupStore(locale);
-				const validationMessage = fullValidation(
-					store.getState(),
-					createDefaultMiddlewareOptions()
-				);
+				const validationMessage = fullValidation(store.getState());
 
 				const stringRequiredError = validationMessage.find(m =>
 					DocumentPath.equal(m.element, pathToStringField)
@@ -85,10 +79,7 @@ describe("api.back-end.store.kernel-adapter", () => {
 				const pathToStringGroup = createDocumentPath(["Root"], ["String"]);
 
 				const store = setupStore(US_LOCALE);
-				const validationMessage = fullValidation(
-					store.getState(),
-					createDefaultMiddlewareOptions()
-				);
+				const validationMessage = fullValidation(store.getState());
 
 				const stringGroupError = validationMessage.find(m =>
 					DocumentPath.equal(m.element, pathToStringGroup)
@@ -100,10 +91,7 @@ describe("api.back-end.store.kernel-adapter", () => {
 				const pathToStringField = createDocumentPath(["Root"], ["Repeated"], ["RequiredString"]);
 
 				const store = setupStore(US_LOCALE);
-				const validationMessage = fullValidation(
-					store.getState(),
-					createDefaultMiddlewareOptions()
-				);
+				const validationMessage = fullValidation(store.getState());
 
 				const stringGroupError = validationMessage.find(m =>
 					DocumentPath.equal(m.element, pathToStringField)
@@ -131,10 +119,7 @@ describe("api.back-end.store.kernel-adapter", () => {
 				const store = setupStore(US_LOCALE, {
 					Root: { Repeated: [{}, {}] }
 				});
-				const validationMessage = fullValidation(
-					store.getState(),
-					createDefaultMiddlewareOptions()
-				);
+				const validationMessage = fullValidation(store.getState());
 
 				const stringField1 = validationMessage.find(m =>
 					DocumentPath.equal(m.element, pathToStringFieldRow1)

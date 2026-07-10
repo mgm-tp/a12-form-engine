@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -46,7 +46,6 @@ export const MESSAGE_LIST = "message-list";
 export const MESSAGE_LIST_ITEM = "message-list-item";
 
 // widgets
-export const EXPANDED_ROW = "table-expandable-row";
 export const BUTTON = "button";
 export const ICON = "icon";
 export const TEXT_AREA = "textarea";
@@ -72,5 +71,9 @@ export const ERROR_TOOLTIP = "error-tooltip";
 export const WARNING_TOOLTIP = "warning-tooltip";
 export const HINT_TOOLTIP = "hint-tooltip";
 export const HEADER = "header";
+export const MODAL_OVERLAY = "modal-overlay";
+export const ATTACHED_PORTAL = "portal";
+export const BULLET_LIST_UNORDERED = "unordered-bullet-list";
+export const BULLET_LIST_ITEM = "bullet-list-item";
 export const LIST = "list";
 export const LIST_ITEM = "list-item";

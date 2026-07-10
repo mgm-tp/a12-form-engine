@@ -1,0 +1,75 @@
+{
+  "header": {
+    "id": "control-grid-include.dm",
+    "modelType": "document",
+    "modelVersion": "29.4.0",
+    "locales": [
+      {
+        "code": "en"
+      }
+    ],
+    "labels": [],
+    "annotations": [],
+    "modelReferences": [
+      {
+        "modelType": "document",
+        "purpose": "include",
+        "reference": "control-grid.dm"
+      }
+    ]
+  },
+  "content": {
+    "modelInfo": {
+      "name": "control-grid-include.dm",
+      "immutable": false
+    },
+    "modelConfig": {
+      "decimalSeparator": ".",
+      "timeZone": "UTC",
+      "conditionLanguage": {
+        "code": "en_US"
+      }
+    },
+    "modelRoot": {
+      "rootGroups": [
+        {
+          "type": "Group",
+          "id": "group_320c5",
+          "name": "host",
+          "Group": {
+            "repeatability": 1,
+            "elements": [
+              {
+                "type": "Field",
+                "id": "field_6b43b",
+                "name": "testField",
+                "Field": {
+                  "fieldType": {
+                    "type": "StringType"
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "Test Field (Host)"
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "Group",
+          "id": "include_f4f58",
+          "name": "base",
+          "Group": {
+            "repeatability": 1,
+            "includeConfig": {
+              "reference": "control-grid.dm"
+            }
+          }
+        }
+      ]
+    }
+  }
+}

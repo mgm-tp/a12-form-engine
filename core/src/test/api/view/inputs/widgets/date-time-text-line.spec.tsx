@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -38,8 +38,7 @@ import { fireEvent } from "@testing-library/react";
 import { act } from "react";
 
 import { query, within } from "@com.mgmtp.a12.devtools/react";
-import { DataRoles } from "@com.mgmtp.a12.widgets/widgets-core/lib/common/main/data-roles.js";
-import { provider } from "@com.mgmtp.a12.widgets/widgets-core/lib/common/main/device-detector.js";
+import { DataRoles, provider } from "@com.mgmtp.a12.widgets/widgets-core";
 
 import type { DateTimeTextLineProps } from "../../../../../view/internal/components/widgets/form-engine/date-props.js";
 import { DateTimeTextLine } from "../../../../../view/internal/components/widgets/form-engine/dateTimeTextLine.js";
@@ -58,27 +57,30 @@ describe("api.view.inputs", () => {
 			onTypedValueSubmit: Mock<DateTimeTextLineProps["onTypedValueSubmit"]>;
 		}
 
+		const defaultProps = {
+			id: "my-date-button",
+			getLocalizedDateString: (date: Date) => date.toDateString(),
+			typedValue: new Date(2020, 10, 10),
+			enableDatePicker: true,
+			yearRange: { start: 2010, end: 2020 },
+			initialDatePickerSelection: new Date(2020, 10, 10),
+			timeZone: "UTC",
+
+			okLabel: "OK",
+			openPickerLabel: "OPEN",
+			backLabel: "Back",
+			clearLabel: "Clear",
+			editTimeLabel: "Edit Time",
+			placeholderText: "Placeholder Text"
+		} satisfies Omit<DateTimeTextLineProps, "onValueSubmit" | "onTypedValueSubmit">;
+
 		async function createInput(options: Partial<DateTimeTextLineProps>) {
 			const submitHandlers: SubmitHandlers = {
 				onTypedValueSubmit: mock.fn(),
 				onValueSubmit: mock.fn()
 			};
 			const props: DateTimeTextLineProps = {
-				id: "my-date-button",
-				getLocalizedDateString: (date: Date) => date.toDateString(),
-				typedValue: options.typedValue === undefined ? new Date(2020, 10, 10) : options.typedValue,
-				enableDatePicker: true,
-				yearRange: { start: 2010, end: 2020 },
-				initialDatePickerSelection: new Date(2020, 10, 10),
-				timeZone: "UTC",
-
-				okLabel: "OK",
-				openPickerLabel: "OPEN",
-				backLabel: "Back",
-				clearLabel: "Clear",
-				editTimeLabel: "Edit Time",
-				placeholderText: "Placeholder Text",
-
+				...defaultProps,
 				...submitHandlers,
 				...options
 			};
@@ -116,8 +118,8 @@ describe("api.view.inputs", () => {
 					});
 					openDatePicker(wrapper);
 
-					const header = query(wrapper.widgetMap.Header).props();
-					strictEqual(header.children, "Placeholder Text");
+					const header = query(wrapper.widgetMap.DateTimePickerHeader).props();
+					strictEqual(header.children, defaultProps.placeholderText);
 				});
 			});
 		}
@@ -132,13 +134,13 @@ describe("api.view.inputs", () => {
 
 					const datePicker = query(wrapper.widgetMap.DateTimePicker).props();
 
-					deepStrictEqual(datePicker.yearRange, { start: 2010, end: 2020 });
-					deepStrictEqual(datePicker.value, new Date(2020, 10, 10));
+					deepStrictEqual(datePicker.yearRange, defaultProps.yearRange);
+					deepStrictEqual(datePicker.value, defaultProps.typedValue);
 					strictEqual(datePicker.timezone, "Europe/Berlin");
-					strictEqual(datePicker.okLabel, "OK");
-					strictEqual(datePicker.backLabel, "Back");
-					strictEqual(datePicker.clearLabel, "Clear");
-					strictEqual(datePicker.customTimeEditLabel, "Edit Time");
+					strictEqual(datePicker.okLabel, defaultProps.okLabel);
+					strictEqual(datePicker.backLabel, defaultProps.backLabel);
+					strictEqual(datePicker.clearLabel, defaultProps.clearLabel);
+					strictEqual(datePicker.customTimeEditLabel, defaultProps.editTimeLabel);
 					strictEqual(datePicker.mobileMode, undefined);
 				});
 
@@ -148,6 +150,28 @@ describe("api.view.inputs", () => {
 
 					const portal = query(wrapper.widgetMap.AttachedPortal).props();
 					strictEqual(portal.focusOnOpen, true);
+				});
+
+				describe("if the picker is cleared", () => {
+					it("unsets the temp date time so the placeholder text is shown in the header", async () => {
+						const wrapper = await createInput({});
+						openDatePicker(wrapper);
+
+						const headerBefore = query(wrapper.widgetMap.DateTimePickerHeader).props();
+						strictEqual(
+							headerBefore.children,
+							defaultProps.getLocalizedDateString(defaultProps.typedValue)
+						);
+
+						const datePicker = query(wrapper.widgetMap.DateTimePicker).props();
+						act(() => {
+							assertExists(datePicker.onChange);
+							datePicker.onChange(undefined, undefined);
+						});
+
+						const headerAfter = query(wrapper.widgetMap.DateTimePickerHeader).props();
+						strictEqual(headerAfter.children, defaultProps.placeholderText);
+					});
 				});
 
 				describe("if onAccept is triggered", () => {

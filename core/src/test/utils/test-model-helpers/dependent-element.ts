@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -30,142 +30,110 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import type { GroupInstance } from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
+import type { GroupInstance } from "@com.mgmtp.a12.kernel/kernel-md-facade";
 
-import type { EngineStore, Models } from "../../../back-end/store/index.js";
+import type { EngineStore, Models } from "../../../back-end/store/internal/store.js";
 
-import { DocumentHelpers } from "../document-helpers.js";
-import { ModelHelpers } from "../model-helpers.js";
-import { SetupHelpers } from "../setup.js";
+import { createDocumentPath } from "../createDocumentPath.js";
+import { createModelPath } from "../createModelPath.js";
+import { createTestStore } from "../setup.js";
 
-const { createModelPath } = ModelHelpers;
-const { createDocumentPath } = DocumentHelpers;
-const { createTestStore } = SetupHelpers;
-export namespace DEP_ELEMENT {
-	export const pathToMasterEnumerationField = createDocumentPath(
+export const DEP_ELEMENT = {
+	pathToMasterEnumerationField: createDocumentPath(
 		["Wrapper"],
 		["MasterGroup"],
 		["MasterEnumerationField"]
-	);
-	export const pathToMasterEnumerationGroup = createDocumentPath(
+	),
+	pathToMasterEnumerationGroup: createDocumentPath(
 		["Wrapper"],
 		["MasterGroup"],
 		["MasterEnumerationGroup"]
-	);
-
-	export const pathToMasterBooleanField = createDocumentPath(
+	),
+	pathToMasterBooleanField: createDocumentPath(
 		["Wrapper"],
 		["MasterGroup"],
 		["MasterBooleanField"]
-	);
-	export const pathToMasterBooleanGroup = createDocumentPath(
+	),
+	pathToMasterBooleanGroup: createDocumentPath(
 		["Wrapper"],
 		["MasterGroup"],
 		["MasterBooleanGroup"]
-	);
-	export const pathToMasterConfirmField = createDocumentPath(
+	),
+	pathToMasterConfirmField: createDocumentPath(
 		["Wrapper"],
 		["MasterGroup"],
 		["MasterConfirmField"]
-	);
-	export const pathToMasterConfirmGroup = createDocumentPath(
+	),
+	pathToMasterConfirmGroup: createDocumentPath(
 		["Wrapper"],
 		["MasterGroup"],
 		["MasterConfirmGroup"]
-	);
-
-	export const pathToDepRepeatMasterField = createDocumentPath(
+	),
+	pathToDepRepeatMasterField: createDocumentPath(
 		["Wrapper"],
 		["DependentRepContainer"],
 		["DependentRepeatableGroup"],
 		["DepRepeatMasterField"]
-	);
-	export const pathToRepeatGroupMasterField = createDocumentPath(
+	),
+	pathToRepeatGroupMasterField: createDocumentPath(
 		["Wrapper"],
 		["DependentRepContainer"],
 		["RepeatGroupMasterField"]
-	);
-
-	export function getPathToDependentRepeatableGroup(rowIndex?: number) {
+	),
+	getPathToDependentRepeatableGroup(rowIndex?: number) {
 		return createDocumentPath(
 			["Wrapper"],
 			["DependentRepContainer"],
 			["DependentRepeatableGroup", rowIndex]
 		);
-	}
-	export const DEPENDENT_REPEAT_FIELD_MASTER_OUTSIDE = "DepRepeatFieldMasterOutside";
-
-	export const SET_VALUE_FIELD = "DependentValue";
-	export const SET_FIELD_VALUE_FIELD = "DependentFieldValue";
-	export const READONLY_FIELD = "DependentReadonly";
-
-	export const DEPENDENT_GROUP = createDocumentPath(["Wrapper"], ["DependentGroup"]);
-	export const DEPENDENT_GROUP_WITHOUT_INITIAL_VALUES = createDocumentPath(
+	},
+	DEPENDENT_REPEAT_FIELD_MASTER_OUTSIDE: "DepRepeatFieldMasterOutside",
+	SET_VALUE_FIELD: "DependentValue",
+	SET_FIELD_VALUE_FIELD: "DependentFieldValue",
+	READONLY_FIELD: "DependentReadonly",
+	DEPENDENT_GROUP: createDocumentPath(["Wrapper"], ["DependentGroup"]),
+	DEPENDENT_GROUP_WITHOUT_INITIAL_VALUES: createDocumentPath(
 		["Wrapper"],
 		["DependentGroupWithoutInitialValues"]
-	);
-
-	export namespace ENUMERATION {
-		export const screenName = "Dependent Field Screen";
-		export const ID_DEP_READONLY = "a12-DependentReadonly-F92";
-		export const ID_DEP_HIDDEN = "";
-		export const ID_DEP_FIELD_ONE = "a12-DependentGroupFieldOne-F101";
-
-		export const dr_locationPath = createModelPath(
-			"Dependent Field Screen",
-			"repeats",
-			"dr1",
-			"Details"
-		);
-		export const er_locationPath = createModelPath("Dependent Field Screen", "repeats", "er1");
-
-		export const ID_DR_DEP_FIELD_MASTER_OUTSIDE = "a12-DepRepeatFieldMasterOutside-F112";
-		export const ID_DR_DEP_FIELD = "a12-DepRepeatField-F105";
-
-		export const ID_NOT_RELEVANT_FIELD = "a12-DependentNotRelevant-F93";
-
-		export const ID_ER_DEP_FIELD_MASTER_OUTSIDE = "a12-DepRepeatFieldMasterOutside-F112-2";
-		export const ID_ER_DEP_FIELD = "a12-DepRepeatField-F105-2";
-
-		export const ID_IR_DEP_FIELD_MASTER_OUTSIDE = "a12-fieldOverviewColumn-2-cell-0";
-		export const ID_IR_DEP_FIELD = "a12-fieldbasedrepeatoverviewcolumn-9769b-cell-0";
-
-		export const ID_ER = "embeddedrepeat-bdcea";
-
-		export const DEPENDENT_FIELD_GROUP = createDocumentPath(["Wrapper"], ["DependentFields"]);
-	}
-
-	export namespace BOOLEAN {
-		export const screenName = "Dependent Boolean";
-		export const ID_DEP_READONLY_TRUE = "a12-DependentReadonly-F135";
-		export const ID_DEP_READONLY_FALSE = "a12-DependentReadonly-fieldimpl_a5ab8";
-		export const ID_RO_STRING_FIELD_TRUE = "a12-stringField1-F164";
-		export const ID_RO_STRING_FIELD_FALSE = "a12-stringField1-fieldimpl_13711";
-		export const ID_NOT_RELEVANT_TRUE = "a12-DependentNotRelevant-F136";
-		export const ID_NOT_RELEVANT_FALSE = "a12-DependentNotRelevant-fieldimpl_0b994";
-
-		export const ID_NOT_RELEVANT_STRING_FIELD_TRUE = "a12-stringField1-F155";
-		export const ID_NOT_RELEVANT_STRING_FIELD_FALSE = "a12-stringField1-fieldimpl_6a3b7";
-
-		export const DEPENDENT_FIELD_GROUP_TRUE = createDocumentPath(
-			["Wrapper"],
-			["DependentFieldsForBooleanTrue"]
-		);
-		export const DEPENDENT_FIELD_GROUP_FALSE = createDocumentPath(
-			["Wrapper"],
-			["DependentFieldsForBooleanFalse"]
-		);
-	}
-
-	export namespace CONFIRM {
-		export const screenName = "Dependent Confirm";
-		export const ID_DEP_READONLY = "a12-DependentReadonly-F128";
-		export const ID_RO_STRING_FIELD = "a12-stringField1-F174";
-		export const ID_NOT_RELEVANT = "a12-DependentNotRelevant-F129";
-		export const ID_NOT_RELEVANT_STRING_FIELD = "a12-stringField1-F168";
-	}
-
-	export function setupStore({
+	),
+	ENUMERATION: {
+		screenName: "Dependent Field Screen",
+		ID_DEP_READONLY: "a12-DependentReadonly-F92",
+		ID_DEP_HIDDEN: "",
+		ID_DEP_FIELD_ONE: "a12-DependentGroupFieldOne-F101",
+		dr_locationPath: createModelPath("Dependent Field Screen", "repeats", "dr1", "Details"),
+		er_locationPath: createModelPath("Dependent Field Screen", "repeats", "er1"),
+		ID_DR_DEP_FIELD_MASTER_OUTSIDE: "a12-DepRepeatFieldMasterOutside-F112",
+		ID_DR_DEP_FIELD: "a12-DepRepeatField-F105",
+		ID_NOT_RELEVANT_FIELD: "a12-DependentNotRelevant-F93",
+		ID_ER_DEP_FIELD_MASTER_OUTSIDE: "a12-DepRepeatFieldMasterOutside-F112-2",
+		ID_ER_DEP_FIELD: "a12-DepRepeatField-F105-2",
+		ID_IR_DEP_FIELD_MASTER_OUTSIDE: "a12-fieldOverviewColumn-2-cell-0",
+		ID_IR_DEP_FIELD: "a12-fieldbasedrepeatoverviewcolumn-9769b-cell-0",
+		ID_ER: "embeddedrepeat-bdcea",
+		DEPENDENT_FIELD_GROUP: createDocumentPath(["Wrapper"], ["DependentFields"])
+	},
+	BOOLEAN: {
+		screenName: "Dependent Boolean",
+		ID_DEP_READONLY_TRUE: "a12-DependentReadonly-F135",
+		ID_DEP_READONLY_FALSE: "a12-DependentReadonly-fieldimpl_a5ab8",
+		ID_RO_STRING_FIELD_TRUE: "a12-stringField1-F164",
+		ID_RO_STRING_FIELD_FALSE: "a12-stringField1-fieldimpl_13711",
+		ID_NOT_RELEVANT_TRUE: "a12-DependentNotRelevant-F136",
+		ID_NOT_RELEVANT_FALSE: "a12-DependentNotRelevant-fieldimpl_0b994",
+		ID_NOT_RELEVANT_STRING_FIELD_TRUE: "a12-stringField1-F155",
+		ID_NOT_RELEVANT_STRING_FIELD_FALSE: "a12-stringField1-fieldimpl_6a3b7",
+		DEPENDENT_FIELD_GROUP_TRUE: createDocumentPath(["Wrapper"], ["DependentFieldsForBooleanTrue"]),
+		DEPENDENT_FIELD_GROUP_FALSE: createDocumentPath(["Wrapper"], ["DependentFieldsForBooleanFalse"])
+	},
+	CONFIRM: {
+		screenName: "Dependent Confirm",
+		ID_DEP_READONLY: "a12-DependentReadonly-F128",
+		ID_RO_STRING_FIELD: "a12-stringField1-F174",
+		ID_NOT_RELEVANT: "a12-DependentNotRelevant-F129",
+		ID_NOT_RELEVANT_STRING_FIELD: "a12-stringField1-F168"
+	},
+	setupStore({
 		models,
 		data = {},
 		ui = {}
@@ -175,9 +143,9 @@ export namespace DEP_ELEMENT {
 		ui?: Partial<EngineStore.UIState>;
 	}) {
 		return createTestStore({ storeConfig: { models, data, ui } });
-	}
+	},
 
-	export function createDocument(): GroupInstance {
+	createDocument(): GroupInstance {
 		const document = {
 			Wrapper: {
 				DependentFields: {
@@ -186,25 +154,25 @@ export namespace DEP_ELEMENT {
 				},
 				DependentFieldsForBooleanTrue: {
 					DependentReadonly: "FieldValue",
-					DependentFieldsInRepeatableGroup: [1, 2, 3].map(e => ({
+					DependentFieldsInRepeatableGroup: Array(3).fill({
 						FieldValueInsideRepeat: "FieldValueInsideRepeat"
-					}))
+					})
 				},
 				DependentFieldsForBooleanFalse: {
 					DependentReadonly: "FieldValue",
-					DependentFieldsInRepeatableGroup: [1, 2, 3].map(e => ({
+					DependentFieldsInRepeatableGroup: Array(3).fill({
 						FieldValueInsideRepeat: "FieldValueInsideRepeat"
-					}))
+					})
 				},
 				DependentRepContainer: {
-					DependentRepeatableGroup: [1, 2, 3].map(e => ({
+					DependentRepeatableGroup: Array(3).fill({
 						FieldValueInsideRepeat: "FieldValueInsideRepeat",
 						DepRepeatField: "somewhere over the ocean"
-					}))
+					})
 				}
 			}
 		};
 
 		return document;
 	}
-}
+} as const;

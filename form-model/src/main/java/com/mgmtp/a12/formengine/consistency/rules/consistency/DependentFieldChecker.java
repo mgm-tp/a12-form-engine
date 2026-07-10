@@ -1,0 +1,79 @@
+/*
+ * SPDX-License-Identifier: EUPL-1.2 OR LicenseRef-commercial
+ *
+ * Copyright (c) 2012-2026 mgm technology partners GmbH
+ *
+ * Dual License
+ * ------------
+ * This source file is part of the mgm A12 Platform and available under
+ * a choice of two different licenses:
+ *
+ * 1. Open-Source License - EUPL v1.2
+ *    You may redistribute and/or modify this file under the terms of the
+ *    European Union Public License, version 1.2 - see https://eupl.eu/.
+ *
+ * 2. Commercial License
+ *    Alternatively, you may obtain a commercial license from
+ *    mgm technology partners GmbH, that permits use of this software
+ *    under different terms (including support and maintenance services).
+ *
+ *    Please contact a12-license@mgm-tp.com for more information.
+ *
+ * You must select and comply with exactly one of the above license options.
+ *
+ * Warranty Disclaimer (applies to either option)
+ * ----------------------------------------------
+ * THIS SOFTWARE IS PROVIDED "AS IS" AND WITHOUT WARRANTY OF ANY KIND,
+ * WHETHER EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+ * OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+ * NON-INFRINGEMENT, EXCEPT WHERE SUCH DISCLAIMERS ARE HELD TO BE
+ * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
+ */
+package com.mgmtp.a12.formengine.consistency.rules.consistency;
+
+import com.mgmtp.a12.model.consistency.Problem;
+
+import com.mgmtp.a12.formengine.consistency.FormModelCategory;
+import com.mgmtp.a12.formengine.model.FormModel;
+import com.mgmtp.a12.formengine.model.internal.DocumentModelAccess;
+import com.mgmtp.a12.formengine.model.types.DependentFieldCaseType;
+import com.mgmtp.a12.formengine.model.types.DependentFieldType;
+import com.mgmtp.a12.formengine.model.types.FieldConfigurationEntryType;
+
+import java.util.ArrayList;
+import java.util.List;
+
+class DependentFieldChecker extends AbstractReferenceChecker {
+
+	public DependentFieldChecker(final FormModel formModel, final DocumentModelAccess documentModelService) {
+		super(formModel, documentModelService);
+	}
+
+	/**
+	 * check case of dependent field, if master field exists, and is of type enum/boolean and foreach case, if fieldRef
+	 * specified, check if it exists
+	 *
+	 * @param fieldConfigurationEntry
+	 * @return
+	 */
+	List<Problem> checkDependentField(final FieldConfigurationEntryType fieldConfigurationEntry) {
+		final List<Problem> problems = new ArrayList<>();
+		final DependentFieldType dependentField = fieldConfigurationEntry.getDependentField();
+		if (dependentField != null) {
+			problems.addAll(checkDmFieldInDependentType(
+				dependentField.getMasterField(),
+				true,
+				FormModelCategory.MISSING_DM_FIELD_IN_DEPENDENT_FIELD_MASTER
+			));
+			for (final DependentFieldCaseType dependentFieldCase : dependentField.getCase()) {
+				problems.addAll(checkDmFieldInDependentType(
+					dependentFieldCase.getFieldRef(),
+					false,
+					FormModelCategory.MISSING_DM_FIELD_IN_DEPENDENT_FIELD_CASE
+				));
+			}
+		}
+		return problems;
+	}
+
+}

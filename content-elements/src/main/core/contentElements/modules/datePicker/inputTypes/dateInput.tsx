@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -33,21 +33,20 @@
 import type { ReactNode } from "react";
 import { useContext, useRef, useState } from "react";
 
-import { DocumentPath } from "@com.mgmtp.a12.client/client-data/lib/core/api/path/documentPath.js";
-import {
-	useDocumentContext,
-	type ContentModel,
-	type NodeRendererProps
+import { DocumentPath } from "@com.mgmtp.a12.client/client-data";
+import { useDocumentContext } from "@com.mgmtp.a12.contentengine/contentengine-core";
+import type {
+	ContentModel,
+	NodeRendererProps
 } from "@com.mgmtp.a12.contentengine/contentengine-core";
-import { LocalizerContext } from "@com.mgmtp.a12.utils/utils-localization-react/lib/main/index.js";
-import { provider as DeviceDetector } from "@com.mgmtp.a12.widgets/widgets-core/lib/common/main/device-detector.js";
-import type { DatePickerProps } from "@com.mgmtp.a12.widgets/widgets-core/lib/datepicker/main/date-picker.api.js";
-import type { YearRange } from "@com.mgmtp.a12.widgets/widgets-core/lib/input/year-month-selector/year-selector.api.js";
+import { LocalizerContext } from "@com.mgmtp.a12.utils/utils-localization-react";
+import { provider as DeviceDetector } from "@com.mgmtp.a12.widgets/widgets-core";
+import type { DatePickerProps } from "@com.mgmtp.a12.widgets/widgets-core";
 
 import { FormElementContext } from "../../../../configuration/formElementContext.js";
 import { createResourceLocalizable } from "../../../../localization/createResourceLocalizable.js";
 import { RESOURCE_KEYS } from "../../../../localization/resources.js";
-import type { BaseControlProps, DatePickerConfig } from "../../../../types/controlProps.js";
+import type { BaseControlProps } from "../../../../types/controlProps.js";
 import { WidgetMapContext } from "../../../../widgetMap/widgetMap-context.js";
 import { ComponentMapContext } from "../../../componentMap/componentMapContext.js";
 import { createParseError } from "../../../createParseError.js";
@@ -55,6 +54,8 @@ import { USE_COMMON_CONTROL_SETTINGS_WRAPPER } from "../../../elementConfigurati
 import { USE_COMMON_WIDGET_SETTINGS_WRAPPER } from "../../../elementConfiguration/useCommonWidgetSettings.js";
 import { useFocus } from "../../../focus.js";
 import { nmTokensToString } from "../../../nmtokens.js";
+
+import { DateUtils } from "./dateUtils.js";
 
 /**
  * @internal
@@ -149,13 +150,12 @@ export function DateInput(
 		value && conversionConfig ? (conversion.formatValue(value, conversionConfig) ?? "") : "";
 
 	const pickerProps: DatePickerProps = {
-		yearRange: calculateYearRange(datePickerConfig), // TODO: already pre-compute in useCommonWidgetSettings?
+		yearRange: DateUtils.calculateYearRange(datePickerConfig), // TODO: already pre-compute in useCommonWidgetSettings?
 		value: pickerValue,
 		timezone: timeZone
 	};
 
-	const shouldShowPicker =
-		!disableDatePicker && showPicker && pickerButtonRef.current !== undefined;
+	const shouldShowPicker = showPicker && pickerButtonRef.current !== undefined;
 	const isMobile = DeviceDetector.get() === "phone";
 
 	const pickerButton =
@@ -168,7 +168,7 @@ export function DateInput(
 					if (value instanceof Date) {
 						setPickerValue(value);
 					} else {
-						setPickerValue(calculateInitialDate(datePickerConfig));
+						setPickerValue(DateUtils.calculateInitialDate(datePickerConfig));
 					}
 				}}
 				buttonRef={ref => {
@@ -211,6 +211,7 @@ export function DateInput(
 		shouldShowPicker ? (
 			isMobile ? (
 				<DatePickerDialog
+					key="picker-dialog"
 					{...pickerProps}
 					title={getLocalizedDateString(pickerValue)}
 					onClose={() => {
@@ -261,33 +262,4 @@ export function DateInput(
 function focusInput(id: string): void {
 	const domNode = document.getElementById(id);
 	domNode?.focus();
-}
-
-function calculateYearRange(datePickerConfig: DatePickerConfig | undefined): YearRange | undefined {
-	if (datePickerConfig === undefined) {
-		return undefined;
-	}
-	const { minYear, maxYear, absolute } = datePickerConfig;
-	if (minYear === undefined || maxYear === undefined) {
-		return undefined;
-	}
-	if (absolute) {
-		return { start: minYear, end: maxYear };
-	} else {
-		const currentYear = new Date().getFullYear();
-		return { start: currentYear + minYear, end: currentYear + maxYear };
-	}
-}
-
-function calculateInitialDate(datePickerConfig?: DatePickerConfig): Date {
-	const initialDate = new Date();
-	const { absolute, preselectionYear } = datePickerConfig ?? {};
-
-	initialDate.setFullYear(
-		absolute
-			? preselectionYear || initialDate.getFullYear()
-			: initialDate.getFullYear() + (preselectionYear ?? 0)
-	);
-
-	return initialDate;
 }

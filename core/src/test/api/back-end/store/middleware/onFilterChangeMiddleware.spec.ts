@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -38,15 +38,12 @@ import type {
 	FilterParseError,
 	RepeatFilter
 } from "../../../../../back-end/store/internal/store.js";
-import { MiddlewareHelpers } from "../../../../utils/back-end-helpers.js";
+import { MiddlewareHelpers } from "../../../../utils/MiddlewareHelpers.js";
+import { createModelPath } from "../../../../utils/createModelPath.js";
 import { US_LOCALE } from "../../../../utils/localization.js";
-import { ModelHelpers } from "../../../../utils/model-helpers.js";
-import { SetupHelpers } from "../../../../utils/setup.js";
+import { createTestStore } from "../../../../utils/setup.js";
 import { setupFixture } from "../../../../utils/setupFixture.js";
 import { REPEAT_MODEL_PATH } from "../../../view/repeat/filter/filter.utils.js";
-
-const { createTestStore } = SetupHelpers;
-const { createModelPath } = ModelHelpers;
 
 describe("api.back-end.store.middleware", () => {
 	describe("onFilterChangeMiddleware", () => {

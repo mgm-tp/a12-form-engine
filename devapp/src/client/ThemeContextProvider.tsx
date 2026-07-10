@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -30,18 +30,14 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { createContext, useCallback, useMemo, useState, type JSX } from "react";
+import { createContext, useCallback, useMemo, useState } from "react";
+import type { JSX } from "react";
 import { StyleSheetManager, ThemeProvider } from "styled-components";
 
-import type { Container } from "@com.mgmtp.a12.widgets/widgets-core/lib/common/main/base-props.js";
-import { shouldForwardProp } from "@com.mgmtp.a12.widgets/widgets-core/lib/common/main/should-forward-prop.js";
-import { GlobalStyles } from "@com.mgmtp.a12.widgets/widgets-core/lib/theme/base/global-styles.js";
-import { compactTheme } from "@com.mgmtp.a12.widgets/widgets-core/lib/theme/compact/compact-theme.js";
-import { defaultTheme } from "@com.mgmtp.a12.widgets/widgets-core/lib/theme/default/default-theme.js";
-import { flatCompactTheme } from "@com.mgmtp.a12.widgets/widgets-core/lib/theme/flat-compact/flat-compact-theme.js";
-import { flatTheme } from "@com.mgmtp.a12.widgets/widgets-core/lib/theme/flat/flat-theme.js";
+import { shouldForwardProp, GlobalStyles, getBaseTheme } from "@com.mgmtp.a12.widgets/widgets-core";
+import type { Container } from "@com.mgmtp.a12.widgets/widgets-core";
 
-const THEMES = ["default", "compact", "flat", "flat_compact"] as const;
+const THEMES = ["base", "base_flat"] as const;
 type Theme = (typeof THEMES)[number];
 
 interface DevappThemeContextProps {
@@ -69,16 +65,10 @@ export function DevappThemeContextProvider(props: Container): JSX.Element {
 	}, []);
 
 	const currentTheme = useMemo(() => {
-		if (theme === "flat") {
-			return flatTheme;
+		if (theme === "base_flat") {
+			return getBaseTheme({ spacing: { base: 16 } });
 		}
-		if (theme === "compact") {
-			return compactTheme;
-		}
-		if (theme === "flat_compact") {
-			return flatCompactTheme;
-		}
-		return defaultTheme;
+		return getBaseTheme();
 	}, [theme]);
 
 	return (

@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -30,47 +30,32 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import type { GroupInstance } from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
+import type { GroupInstance } from "@com.mgmtp.a12.kernel/kernel-md-facade";
 
-/**
- * Constants for element IDs and test values used in hideCondition tests.
- */
-export namespace HIDE_CONDITION {
-	// Element IDs from the form model
-	export const CONTROL_FOR_BOOLEAN_MASTER_ID = "a12-fieldForBooleanMaster-field_0a1d3";
-	export const CONTROL_FOR_CONFIRM_MASTER_ID = "a12-fieldForConfirmMaster-field_4a47c";
-	export const CONTROL_FOR_ENUM_MASTER_ID = "a12-fieldForEnumMaster-field_1d95d";
-
-	export const SECTION_ID = "a12-section_3fdc9";
-	export const NESTED_SECTION_ID = "a12-section_6f87c";
-	export const MULTI_COLUMN_SECTION_ID = "a12-multicolumnsection_4f2d7";
-	export const CONTROL_GRID_ID = "a12-controlgrid_f1c15";
-	export const BUTTON_PANEL_ID = "a12-buttonpanel_92d2b";
-	export const INLINE_REPEAT_ID = "a12-inlinerepeat_271e0";
-	export const DETACHED_REPEAT_ID = "a12-detachedrepeat_cc543";
-	export const EMBEDDED_REPEAT_ID = "a12-embeddedrepeat_32537";
-	export const CUSTOM_SCREEN_ELEMENT_ID = "a12-customscreenelement_c33a9";
-	export const ROW_ID = "a12-row_e1fcd";
-	export const CONTROL_ID = "a12-stringField-field_b40c9-3";
-
-	// Cell types
-	export const TEXT_CELL_ID = "a12-textcell_f0729-content";
-	export const EXPRESSION_CELL_ID = "a12-expressioncell_05231-expression";
-	export const CUSTOM_CELL_ID = "customcell_bd7a8";
-
-	// Control with index
-	export const CONTROL_WITH_INDEX_ID = "a12-fieldForIndexedControl-field_69265";
-	export const CONTROL_WITH_INDEX_AND_INDEXED_MASTER_ID =
-		"a12-fieldForIndexedControl-field_69265-2";
-
-	// Column types - master outside repeat
-	export const FIELD_COLUMN_ID = "a12-fieldbasedrepeatoverviewcolumn_e4f4f-cell-0";
-	export const EXPRESSION_COLUMN_ID = "a12-expressionrepeatoverviewcolumn_abaec-bodycell-0";
-
-	// Column type - master inside repeat (sibling column)
-	export const FIELD_COLUMN_WITH_MASTER_IN_GROUP_ID =
-		"a12-fieldbasedrepeatoverviewcolumn_e8f18-cell-0";
-}
+export const HIDE_CONDITION = {
+	CONTROL_FOR_BOOLEAN_MASTER_ID: "a12-fieldForBooleanMaster-field_0a1d3",
+	CONTROL_FOR_CONFIRM_MASTER_ID: "a12-fieldForConfirmMaster-field_4a47c",
+	CONTROL_FOR_ENUM_MASTER_ID: "a12-fieldForEnumMaster-field_1d95d",
+	SECTION_ID: "a12-section_3fdc9",
+	NESTED_SECTION_ID: "a12-section_6f87c",
+	MULTI_COLUMN_SECTION_ID: "a12-multicolumnsection_4f2d7",
+	CONTROL_GRID_ID: "a12-controlgrid_f1c15",
+	BUTTON_PANEL_ID: "a12-buttonpanel_92d2b",
+	INLINE_REPEAT_ID: "a12-inlinerepeat_271e0",
+	DETACHED_REPEAT_ID: "a12-detachedrepeat_cc543",
+	EMBEDDED_REPEAT_ID: "a12-embeddedrepeat_32537",
+	CUSTOM_SCREEN_ELEMENT_ID: "a12-customscreenelement_c33a9",
+	ROW_ID: "a12-row_e1fcd",
+	CONTROL_ID: "a12-stringField-field_b40c9-3",
+	TEXT_CELL_ID: "a12-textcell_f0729-content",
+	EXPRESSION_CELL_ID: "a12-expressioncell_05231-expression",
+	CUSTOM_CELL_ID: "customcell_bd7a8",
+	CONTROL_WITH_INDEX_ID: "a12-fieldForIndexedControl-field_69265",
+	CONTROL_WITH_INDEX_AND_INDEXED_MASTER_ID: "a12-fieldForIndexedControl-field_69265-2",
+	FIELD_COLUMN_ID: "a12-fieldbasedrepeatoverviewcolumn_e4f4f-cell-0",
+	EXPRESSION_COLUMN_ID: "a12-expressionrepeatoverviewcolumn_abaec-bodycell-0",
+	FIELD_COLUMN_WITH_MASTER_IN_GROUP_ID: "a12-fieldbasedrepeatoverviewcolumn_e8f18-cell-0"
+} as const;
 
 /**
  * Creates a document where all hideCondition-controlled elements are hidden.

@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -32,7 +32,7 @@
 
 import { createContext, useState } from "react";
 
-import type { TableComponentRenderers } from "@com.mgmtp.a12.widgets/widgets-core/lib/table/new-api/table-renderer.api.js";
+import type { TableComponentRenderers } from "@com.mgmtp.a12.widgets/widgets-core";
 
 import { DataContext } from "../../../view/internal/components/form-engine/data-context.js";
 import type { RepeatRow } from "../../../view/internal/components/form-engine/repeat/components/tableColumnTypes.js";

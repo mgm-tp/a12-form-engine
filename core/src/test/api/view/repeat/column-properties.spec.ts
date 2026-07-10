@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -34,16 +34,15 @@ import { deepEqual, equal, strictEqual } from "node:assert/strict";
 import { mock } from "node:test";
 
 import { query } from "@com.mgmtp.a12.devtools/react";
-import type { Column } from "@com.mgmtp.a12.widgets/widgets-core/lib/table/new-api/column.api.js";
-import type { TableProps } from "@com.mgmtp.a12.widgets/widgets-core/lib/table/new-api/table.api.js";
+import type { Column, TableProps } from "@com.mgmtp.a12.widgets/widgets-core";
 
 import type { Models } from "../../../../back-end/store/internal/store.js";
 import { mapRecord } from "../../../../back-end/utils/internal/record.js";
 import { defaultMapDispatchToProps } from "../../../../view/internal/configuration/Defaults.js";
 import type { RtlRenderWrapper } from "../../../rtl-utils/render-wrapper.js";
-import { ModelHelpers } from "../../../utils/model-helpers.js";
+import { createModelPath } from "../../../utils/createModelPath.js";
 import { RenderGroupFixture } from "../../../utils/rtl-render-group.js";
-import { SetupHelpers } from "../../../utils/setup.js";
+import { setupFormEngineRendererWithRtlAsync } from "../../../utils/setup.js";
 import { setupModelsFixture } from "../../../utils/setupFixture.js";
 import { IR } from "../../../utils/test-model-helpers/inline.repeat.js";
 import {
@@ -53,8 +52,6 @@ import {
 
 import { ColumnByLabelView } from "./column_view.js";
 
-const { createModelPath } = ModelHelpers;
-
 describe("api.view.repeat", () => {
 	describe("Column properties", () => {
 		const onColumnWidthChangeStub = mock.fn();
@@ -63,7 +60,7 @@ describe("api.view.repeat", () => {
 		});
 		async function setup(models: Models, screenName: string): Promise<RtlRenderWrapper> {
 			const stubbedDispatch = defaultMapDispatchToProps(mock.fn());
-			return SetupHelpers.setupFormEngineRendererWithRtlAsync({
+			return setupFormEngineRendererWithRtlAsync({
 				models,
 				data: { document },
 				ui: {
@@ -198,7 +195,7 @@ describe("api.view.repeat", () => {
 
 		describe("With UI state", () => {
 			it("uses the column width from the state if one is defined for a column", async () => {
-				const wrapper = await SetupHelpers.setupFormEngineRendererWithRtlAsync({
+				const wrapper = await setupFormEngineRendererWithRtlAsync({
 					models,
 					data: { document },
 					ui: {

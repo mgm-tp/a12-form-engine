@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -33,14 +33,14 @@
 import type { ReactElement } from "react";
 import { useContext } from "react";
 
-import type { DocumentModel } from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
-import { LocalizerContext } from "@com.mgmtp.a12.utils/utils-localization-react/lib/main/index.js";
+import type { DocumentModel } from "@com.mgmtp.a12.kernel/kernel-md-facade";
+import { LocalizerContext } from "@com.mgmtp.a12.utils/utils-localization-react";
 
 import { RESOURCE_KEYS } from "../../../../../../../back-end/localization/internal/languages/keys.js";
 import { getLocalizedResource } from "../../../../../../../back-end/localization/internal/localize.js";
 import { ModelSelectors } from "../../../../../../../back-end/store/internal/selectors/models.js";
-import { FormModel } from "../../../../../../../models/internal/form-model.js";
-import { DocumentModelUtils } from "../../../../../../../models/internal/utils/document-model-utils.js";
+import { styleToClassName } from "../../../../../../../models/internal/stylableToClassName.js";
+import * as DocumentModelUtils from "../../../../../../../models/internal/utils/document-model-utils.js";
 import type { FormModelMap, Inputs } from "../../../../../configuration/engine-configuration.js";
 import { WidgetMapContext } from "../../../../../configuration/widget-map-context.js";
 import type { Value } from "../../../../../utilities/value.js";
@@ -52,7 +52,7 @@ import { useBasePropsForTextInputs } from "../use-input-props.js";
 export function TimeInput(props: Inputs.InputProps<DocumentModel.TimeType>): ReactElement {
 	const { localizer, conversion } = useContext(LocalizerContext);
 	const widgetMap = useContext(WidgetMapContext);
-
+	const { inputRef } = props;
 	const options = props.renderConfiguration.renderOptions;
 	const value = props.value.data;
 	const documentPath = props.value.path;
@@ -62,7 +62,7 @@ export function TimeInput(props: Inputs.InputProps<DocumentModel.TimeType>): Rea
 	const clearLabel = getLocalizedResource(RESOURCE_KEYS.time.button.clear, localizer);
 	const placeholderText = getLocalizedResource(RESOURCE_KEYS.time.placeholderTime, localizer);
 
-	const classes = FormModel.styleToClassName(props.modelElement.style);
+	const classes = styleToClassName(props.modelElement.style);
 
 	const documentModel = ModelSelectors.documentModel()(options.state);
 	const conversionConfig = DocumentModelUtils.useConversionConfig(documentModel, documentPath);
@@ -76,7 +76,6 @@ export function TimeInput(props: Inputs.InputProps<DocumentModel.TimeType>): Rea
 			}
 			okLabel={okLabel ?? ""}
 			clearLabel={clearLabel ?? ""}
-			mode={options.config.timeMode}
 			timezone={props.modelElement.timeZone}
 			onChange={newValue => {
 				options.eventHandlers.onValueChange(documentPath, newValue ?? null, props.formModelPath);
@@ -100,14 +99,14 @@ export function TimeInput(props: Inputs.InputProps<DocumentModel.TimeType>): Rea
 			inputProps={htmlInputProps}
 			focusOnInputAfterPicking={true}
 			customHeaderElement={time => (
-				<widgetMap.Header>
+				<widgetMap.DateTimePickerHeader>
 					<strong>{time ? conversion.formatValue(time, conversionConfig) : placeholderText}</strong>
-				</widgetMap.Header>
+				</widgetMap.DateTimePickerHeader>
 			)}
 			timeInputWrapperProps={classes ? { className: classes } : undefined}
 			timePickerInputRef={element => {
-				if (props.inputRef) {
-					props.inputRef.current = element;
+				if (inputRef) {
+					inputRef.current = element;
 				}
 			}}
 		/>
@@ -152,7 +151,6 @@ export function TimeFilter(props: {
 			value={typedValue instanceof Date ? typedValue : undefined}
 			okLabel={okLabel ?? ""}
 			clearLabel={clearLabel ?? ""}
-			mode={renderOptions.config.timeMode}
 			timezone={timeZone}
 			onChange={props.onChange}
 			errorMessage={errorMessage}
@@ -163,9 +161,9 @@ export function TimeFilter(props: {
 			onValidate={props.onValidate}
 			focusOnInputAfterPicking={true}
 			customHeaderElement={time => (
-				<widgetMap.Header>
+				<widgetMap.DateTimePickerHeader>
 					<strong>{time ? conversion.formatValue(time, conversionConfig) : placeholderText}</strong>
-				</widgetMap.Header>
+				</widgetMap.DateTimePickerHeader>
 			)}
 		/>
 	);

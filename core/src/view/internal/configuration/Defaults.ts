@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -32,16 +32,15 @@
 
 import type { Dispatch } from "redux";
 
-import type { ModelPath } from "@com.mgmtp.a12.base/base-model-api/lib/main/model/index.js";
-import type { Attachment } from "@com.mgmtp.a12.dataservices/dataservices-access/lib/Attachment/attachment.js";
+import type { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
+import type { Attachment } from "@com.mgmtp.a12.dataservices/dataservices-access";
 import type {
 	EntityInstancePath,
 	FieldInstanceValue
-} from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
-import type { ValueConversion } from "@com.mgmtp.a12.utils/utils-localization/lib/main/index.js";
-import { Locale } from "@com.mgmtp.a12.utils/utils-localization/lib/main/index.js";
+} from "@com.mgmtp.a12.kernel/kernel-md-facade";
+import type { ValueConversionParseError } from "@com.mgmtp.a12.utils/utils-localization";
 
-import type ExternalEnumerationProvider from "../../../back-end/services/external-enumeration-provider.js";
+import type { IExternalEnumerationProvider } from "../../../back-end/services/external-enumeration-provider.js";
 import { Events } from "../../../back-end/store/internal/actions.js";
 import type { CorrectionModeItem } from "../../../back-end/store/internal/CorrectionModeItem.js";
 import type {
@@ -66,6 +65,7 @@ import {
 	FieldOverviewColumn
 } from "../components/form-engine/cells/controls/input-control.js";
 import { ExpressionCell } from "../components/form-engine/cells/expression-cell/ExpressionCell.js";
+import { ExpressionOverviewColumn } from "../components/form-engine/cells/expression-cell/ExpressionOverviewColumn.js";
 import { TextCell } from "../components/form-engine/cells/text-cell/text-cell.js";
 import {
 	CustomCell,
@@ -83,10 +83,9 @@ import {
 	EmbeddedRepeat,
 	InlineRepeat
 } from "../components/form-engine/repeat/repeats.js";
-import { ExpressionOverviewColumn } from "../components/form-engine/cells/expression-cell/ExpressionOverviewColumn.js";
 
 import { DefaultWidgetMap } from "./DefaultWidgetMap.js";
-import type { ClockMode, Config, FormModelMap } from "./engine-configuration.js";
+import type { Config, FormModelMap } from "./engine-configuration.js";
 import { DefaultSelectorMap } from "./selectorContext.js";
 
 /**
@@ -100,7 +99,6 @@ export function defaultMapDispatchToProps(dispatch: Dispatch): DefaultDispatchPr
 			onAttachmentUpload(
 				files: AttachmentFile[],
 				formModelElementPath: ModelPath,
-				formModelRepeatPath?: ModelPath,
 				pathToRepeatGroup?: EntityInstancePath,
 				duplicateStrategy?: DuplicateStrategy,
 				existingFiles?: ExistingFile[]
@@ -109,7 +107,6 @@ export function defaultMapDispatchToProps(dispatch: Dispatch): DefaultDispatchPr
 					Events.Attachments.uploadAttachments({
 						formModelElementPath,
 						files,
-						formModelRepeatPath,
 						pathToRepeatGroup,
 						duplicateStrategy,
 						existingFiles
@@ -138,7 +135,7 @@ export function defaultMapDispatchToProps(dispatch: Dispatch): DefaultDispatchPr
 			onParseError(
 				path: EntityInstancePath,
 				uiValue: string,
-				error: ValueConversion.ParseError
+				error: ValueConversionParseError
 			): void {
 				dispatch(Events.parseError({ path, uiValue, error }));
 			},
@@ -322,14 +319,12 @@ export function defaultMapStateToProps(
 ): DefaultStateProps {
 	return {
 		state,
-		config: createConfig(ownProps.config ?? {}, state)
+		config: createConfig(ownProps.config ?? {})
 	};
 }
 
 /** @internal */
-export function createConfig(config: Partial<Config>, state: EngineState): Config {
-	const locale = state.locale || { language: "de", country: "DE" };
-
+export function createConfig(config: Partial<Config>): Config {
 	return {
 		...config,
 		cardView: config.cardView ?? false,
@@ -338,7 +333,6 @@ export function createConfig(config: Partial<Config>, state: EngineState): Confi
 		earlyDetectDirtyControl: config.earlyDetectDirtyControl ?? false,
 		externalEnumerationProvider:
 			config.externalEnumerationProvider ?? DefaultExternalEnumerationProvider,
-		timeMode: config.timeMode ?? getTimeModeByLocale(locale),
 		uiIdPrefix: config.uiIdPrefix,
 		ariaLevel: config.ariaLevel ?? 1,
 		formModelMap: config.formModelMap ?? DefaultFormModelMap,
@@ -348,7 +342,7 @@ export function createConfig(config: Partial<Config>, state: EngineState): Confi
 }
 
 /** @internal */
-export const DefaultExternalEnumerationProvider: ExternalEnumerationProvider = () => ({});
+export const DefaultExternalEnumerationProvider: IExternalEnumerationProvider = () => ({});
 
 /**
  * Default map for the form model elements.
@@ -383,17 +377,3 @@ export const DefaultFormModelMap: FormModelMap = {
 	CustomCell: { component: CustomCell },
 	CustomScreenElement: { component: CustomScreenElement }
 };
-
-function getTimeModeByLocale(locale: Locale): ClockMode {
-	const timeModesToCheck: { [locale: string]: ClockMode } = {
-		en_US: "12h",
-		en_DE: "24h",
-		de_DE: "24h"
-	};
-
-	if (Locale.toString(locale) in timeModesToCheck) {
-		return timeModesToCheck[Locale.toString(locale)];
-	} else {
-		return "24h";
-	}
-}

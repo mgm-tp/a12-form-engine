@@ -1,0 +1,138 @@
+{
+  "header": {
+    "id": "embedded-repeat.form",
+    "modelType": "form",
+    "modelVersion": "39.0.0",
+    "locales": [
+      {
+        "code": "en"
+      }
+    ],
+    "modelReferences": [
+      {
+        "alias": "DM",
+        "modelType": "document",
+        "purpose": "data binding",
+        "reference": "embedded-repeat.dm"
+      }
+    ]
+  },
+  "content": {
+    "subHeaderBox": {
+      "id": "subHeaderBox1"
+    },
+    "footerBox": {
+      "id": "footerBox1"
+    },
+    "screens": [
+      {
+        "id": "screen1",
+        "name": "Screen1",
+        "screenElements": [
+          {
+            "type": "EmbeddedRepeat",
+            "id": "embeddedrepeat-f7d52",
+            "name": "included-embedded-repeat",
+            "repeatOverviewColumn": [
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-5a8b0",
+                "width": 2.5,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "elementRef": "include_79ff6_field_623db"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-5edcf",
+                "width": 1.5,
+                "sortable": true,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "datePickerConfig": {
+                  "minYear": 2016,
+                  "maxYear": 2026,
+                  "absolute": true,
+                  "preselectionYear": 2021
+                },
+                "elementRef": "include_79ff6_field_0ec3f"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-abfff",
+                "width": 0.5,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "elementRef": "include_79ff6_field_5adf5"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-76be6",
+                "width": 1.5,
+                "sortable": true,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "elementRef": "include_79ff6_field_86ba1"
+              }
+            ],
+            "groupRef": "include_79ff6",
+            "enableAdd": true,
+            "enableRemove": true,
+            "enableReorder": false,
+            "enableCopy": false,
+            "controlGrid": {
+              "type": "ControlGrid",
+              "id": "controlgrid-3db5d",
+              "name": "cg",
+              "layout": {
+                "lg": "5-3-1-3"
+              },
+              "row": [
+                {
+                  "type": "Row",
+                  "id": "row-b1bf1",
+                  "cell": [
+                    {
+                      "type": "Control",
+                      "id": "control-20365",
+                      "elementRef": "include_79ff6_field_623db"
+                    },
+                    {
+                      "type": "Control",
+                      "id": "control-9dbf3",
+                      "elementRef": "include_79ff6_field_0ec3f"
+                    },
+                    {
+                      "type": "Control",
+                      "id": "control-2110a",
+                      "elementRef": "include_79ff6_field_5adf5"
+                    },
+                    {
+                      "type": "Control",
+                      "id": "control-cc845",
+                      "elementRef": "include_79ff6_field_86ba1"
+                    }
+                  ]
+                }
+              ],
+              "verticalAlignment": "TOP"
+            }
+          }
+        ]
+      }
+    ],
+    "fieldConfiguration": {
+      "field": [
+        {
+          "initialValue": "false",
+          "exposition": "SWITCH",
+          "elementRef": "include_79ff6_field_5adf5"
+        }
+      ]
+    },
+    "groupConfiguration": {},
+    "defaults": {}
+  }
+}

@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -33,15 +33,12 @@
 import type { ComponentType } from "react";
 import { useContext, useMemo } from "react";
 
+import { BufferedInput, HTMLInputAdapter } from "@com.mgmtp.a12.widgets/widgets-core";
 import type {
 	BufferedInputProps,
-	ImmediateInputProps
-} from "@com.mgmtp.a12.widgets/widgets-core/lib/input/buffered/main/buffered.api.js";
-import {
-	BufferedInput,
-	HTMLInputAdapter
-} from "@com.mgmtp.a12.widgets/widgets-core/lib/input/buffered/main/buffered.view.js";
-import type { TextAreaStatelessProps } from "@com.mgmtp.a12.widgets/widgets-core/lib/input/text-area/main/template/text-area.tpl.api.js";
+	ImmediateInputProps,
+	TextAreaStatelessProps
+} from "@com.mgmtp.a12.widgets/widgets-core";
 
 import { WidgetMapContext } from "../../widgetMap/widgetMap-context.js";
 

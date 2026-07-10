@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -32,16 +32,20 @@
 
 import { ok, strictEqual } from "node:assert/strict";
 
-import { ModelPath } from "@com.mgmtp.a12.base/base-model-api/lib/main/model/index.js";
+import { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
 import { within } from "@com.mgmtp.a12.devtools/react";
 
 import type { EngineStore, Models } from "../../../../../back-end/store/index.js";
 import type { ReadonlyObjectMap } from "../../../../../models/index.js";
 import { MESSAGE, TABLE_BODY } from "../../../../rtl-utils/data-roles.js";
 import type { RtlRenderWrapper } from "../../../../rtl-utils/render-wrapper.js";
-import { DocumentHelpers } from "../../../../utils/document-helpers.js";
-import { ModelHelpers } from "../../../../utils/model-helpers.js";
-import { SetupHelpers } from "../../../../utils/setup.js";
+import { createDocumentPath } from "../../../../utils/createDocumentPath.js";
+import { createModelPath } from "../../../../utils/createModelPath.js";
+import {
+	createRepeatInstanceStateEntry,
+	createRepeatStaticStateEntry,
+	setupFormEngineRendererWithRtlAsync
+} from "../../../../utils/setup.js";
 import {
 	createDocumentForDetachedRepeat,
 	DR
@@ -78,14 +82,14 @@ export function describeTestsForNewRowState(detachedModels: Models, models: Mode
 	};
 
 	it("shows the row if the filter matches", async () => {
-		const wrapper = await SetupHelpers.setupFormEngineRendererWithRtlAsync({
+		const wrapper = await setupFormEngineRendererWithRtlAsync({
 			models: detachedModels,
 			data: { document: doc },
 			ui: {
 				screenLocation: [
 					createRootScreenState({
 						newRow: {
-							rowPath: DocumentHelpers.createDocumentPath([REPEAT.rootGroup], [REPEAT.nestedL1, 4]),
+							rowPath: createDocumentPath([REPEAT.rootGroup], [REPEAT.nestedL1, 4]),
 							rowState: "recentlyAdded"
 						}
 					})
@@ -108,17 +112,14 @@ export function describeTestsForNewRowState(detachedModels: Models, models: Mode
 
 	describe("and the filter does not match the new row", () => {
 		it("does not show the row and shows a hint", async () => {
-			const wrapper = await SetupHelpers.setupFormEngineRendererWithRtlAsync({
+			const wrapper = await setupFormEngineRendererWithRtlAsync({
 				models: detachedModels,
 				data: { document: doc },
 				ui: {
 					screenLocation: [
 						createRootScreenState({
 							newRow: {
-								rowPath: DocumentHelpers.createDocumentPath(
-									[REPEAT.rootGroup],
-									[REPEAT.nestedL1, 4]
-								),
+								rowPath: createDocumentPath([REPEAT.rootGroup], [REPEAT.nestedL1, 4]),
 								rowState: "recentlyAdded"
 							}
 						})
@@ -149,17 +150,14 @@ export function describeTestsForNewRowState(detachedModels: Models, models: Mode
 					{ L1_Number: 100 } // new row
 				]);
 
-				const wrapper = await SetupHelpers.setupFormEngineRendererWithRtlAsync({
+				const wrapper = await setupFormEngineRendererWithRtlAsync({
 					models,
 					data: { document: docAllRowsNotMatchingTheFilter },
 					ui: {
 						screenLocation: [
 							createRootScreenState({
 								newRow: {
-									rowPath: DocumentHelpers.createDocumentPath(
-										[REPEAT.rootGroup],
-										[REPEAT.nestedL1, 4]
-									),
+									rowPath: createDocumentPath([REPEAT.rootGroup], [REPEAT.nestedL1, 4]),
 									rowState: "recentlyAdded"
 								}
 							})
@@ -191,7 +189,7 @@ function createRootScreenState(
 ): EngineStore.ScreenState {
 	return {
 		path: [],
-		locationPath: ModelHelpers.createModelPath("SortingAndFiltering"),
+		locationPath: createModelPath("SortingAndFiltering"),
 		repeatInstanceState: {
 			[ModelPath.toString(DR.SortingAndFiltering.repeatFormModelPath)]: createRepeatEntry(o)
 		}
@@ -204,7 +202,7 @@ function createStaticRepeatState(
 	return o
 		? {
 				[ModelPath.toString(DR.SortingAndFiltering.repeatFormModelPath)]:
-					SetupHelpers.createRepeatStaticStateEntry(o)
+					createRepeatStaticStateEntry(o)
 			}
 		: undefined;
 }
@@ -212,7 +210,7 @@ function createStaticRepeatState(
 function createRepeatEntry(
 	o?: Partial<EngineStore.Repeat.InstanceState>
 ): EngineStore.Repeat.InstanceState {
-	return SetupHelpers.createRepeatInstanceStateEntry({
+	return createRepeatInstanceStateEntry({
 		...o,
 		newRow: o?.newRow?.rowPath
 			? {

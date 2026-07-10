@@ -1,0 +1,70 @@
+{
+  "name": "@com.mgmtp.a12.formengine/formengine-a12internal-preview",
+  "version": "39.0.0",
+  "description": "Form-Engine A12 Internal Preview",
+  "author": "mgm technology partners",
+  "license": "(EUPL-1.2 OR LicenseRef-commercial)",
+  "type": "module",
+  "sideEffects": false,
+  "exports": "./lib/index.js",
+  "scripts": {
+    "clean": "rimraf ./lib ./target cyclonedx.json",
+    "build": "node --run compile && node --run validate:api",
+    "compile": "pnpm \"/^compile:.+/\"",
+    "compile:typescript": "tsc",
+    "compile:detect-cycles": "devtools detect-cycles \"./src/**/*.@(ts|tsx|d.ts|d.cts|d.mts)\" --ignore-type-imports",
+    "validate:api": "api-extractor run --verbose",
+    "update:api": "api-extractor run --local",
+    "watch": "tsc --project ./tsconfig.dev.json --watch",
+    "lint": "eslint --flag unstable_native_nodejs_ts_config . --cache",
+    "lint:fix": "node --run lint -- --fix",
+    "lint:onlyErrors": "node --run lint -- --quiet"
+  },
+  "dependencies": {
+    "@com.mgmtp.a12.client/typescript-fsa-redux-5-compat": "catalog:a12ranges"
+  },
+  "devDependencies": {
+    "@com.mgmtp.a12.base/base-model-api": "catalog:a12",
+    "@com.mgmtp.a12.client/client-core": "catalog:a12",
+    "@com.mgmtp.a12.devtools/build-tools": "catalog:a12",
+    "@com.mgmtp.a12.devtools/tsconfig": "catalog:a12",
+    "@com.mgmtp.a12.formengine/formengine-core": "workspace:*",
+    "@com.mgmtp.a12.kernel/kernel-core-runtime-api-ts": "catalog:a12",
+    "@com.mgmtp.a12.kernel/kernel-md-facade": "catalog:a12",
+    "@com.mgmtp.a12.utils/utils-collections": "catalog:a12",
+    "@com.mgmtp.a12.utils/utils-connector": "catalog:a12",
+    "@com.mgmtp.a12.utils/utils-localization": "catalog:a12",
+    "@com.mgmtp.a12.utils/utils-localization-react": "catalog:a12",
+    "@com.mgmtp.a12.widgets/widgets-core": "catalog:a12",
+    "@microsoft/api-extractor": "catalog:",
+    "@types/node": "catalog:",
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
+    "eslint": "catalog:",
+    "react": "catalog:",
+    "react-dom": "catalog:",
+    "react-redux": "catalog:",
+    "redux": "catalog:",
+    "rimraf": "catalog:",
+    "styled-components": "catalog:",
+    "typescript": "catalog:"
+  },
+  "peerDependencies": {
+    "@com.mgmtp.a12.base/base-model-api": "catalog:a12ranges",
+    "@com.mgmtp.a12.client/client-core": "catalog:a12ranges",
+    "@com.mgmtp.a12.kernel/kernel-md-facade": "catalog:a12ranges",
+    "@com.mgmtp.a12.utils/utils-localization": "catalog:a12ranges",
+    "@com.mgmtp.a12.utils/utils-localization-react": "catalog:a12ranges",
+    "@com.mgmtp.a12.widgets/widgets-core": "catalog:a12ranges",
+    "react": "catalog:ranges",
+    "redux": "catalog:ranges"
+  },
+  "files": [
+    "lib",
+    "src",
+    "cyclonedx.json",
+    "NOTICE",
+    "THIRD_PARTY_NOTICES",
+    "licenses"
+  ]
+}

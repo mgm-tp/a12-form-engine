@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -30,7 +30,7 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import type { SupportedType } from "@com.mgmtp.a12.utils/utils-localization/lib/main/conversion.js";
+import type { SupportedType } from "@com.mgmtp.a12.utils/utils-localization";
 
 /** @internal */
 export function parse(input: string): FilterNode;

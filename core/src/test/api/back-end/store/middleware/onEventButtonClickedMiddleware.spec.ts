@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -32,21 +32,19 @@
 
 import type { Action, Store } from "redux";
 
-import { ModelPath } from "@com.mgmtp.a12.base/base-model-api/lib/main/model/index.js";
+import { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
 
 import { Commands, Events } from "../../../../../back-end/store/index.js";
 import type { EngineState, EngineStore } from "../../../../../back-end/store/internal/store.js";
 import { significantSeverity } from "../../../../../back-end/store/internal/validation.js";
 import type { FormModel, ReadonlyObjectMap } from "../../../../../models/index.js";
 import { DocumentPath } from "../../../../../models/internal/utils/document-utils.js";
-import { MiddlewareHelpers } from "../../../../utils/back-end-helpers.js";
-import { DocumentHelpers } from "../../../../utils/document-helpers.js";
+import { MiddlewareHelpers } from "../../../../utils/MiddlewareHelpers.js";
+import { createDocumentPath } from "../../../../utils/createDocumentPath.js";
 import { US_LOCALE } from "../../../../utils/localization.js";
-import { SetupHelpers } from "../../../../utils/setup.js";
+import { createTestStore } from "../../../../utils/setup.js";
 import { setupModelsFixture } from "../../../../utils/setupFixture.js";
 import { createValidationEntryWithParsingError } from "../../../../utils/validation.js";
-
-const { createTestStore } = SetupHelpers;
 
 describe("api.back-end.store.middleware", () => {
 	describe("onEventButtonClickedMiddleware", () => {
@@ -279,7 +277,7 @@ describe("api.back-end.store.middleware", () => {
 		}: WithParseErrorParams): void {
 			spy.mock.resetCalls();
 
-			const numberFieldPath = DocumentHelpers.createDocumentPath(["A12T_Buttons"], ["NumberField"]);
+			const numberFieldPath = createDocumentPath(["A12T_Buttons"], ["NumberField"]);
 			const messages = createValidationEntryWithParsingError(
 				numberFieldPath,
 				"A",
@@ -316,7 +314,7 @@ describe("api.back-end.store.middleware", () => {
 		}: WithValidationWarningOrInfoParams): void {
 			spy.mock.resetCalls();
 
-			const errorPath = DocumentHelpers.createDocumentPath(["A12T_Buttons"], ["RequiredField"]);
+			const errorPath = createDocumentPath(["A12T_Buttons"], ["RequiredField"]);
 
 			const store = createApp({ document: documentWithInfo, disableRuleConfirmation });
 			store.dispatch(Events.eventButtonTriggered({ name: "any", validation, buttonPath }));
@@ -375,7 +373,7 @@ describe("api.back-end.store.middleware", () => {
 		}: WithValidationWarningOrInfoParams): void {
 			spy.mock.resetCalls();
 
-			const errorPath = DocumentHelpers.createDocumentPath(["A12T_Buttons"], ["RequiredField"]);
+			const errorPath = createDocumentPath(["A12T_Buttons"], ["RequiredField"]);
 
 			const store = createApp({ document: documentWithWarning, disableRuleConfirmation });
 			store.dispatch(Events.eventButtonTriggered({ name: "any", validation, buttonPath }));
@@ -440,8 +438,8 @@ describe("api.back-end.store.middleware", () => {
 		}: WithValidationErrorParams): void {
 			spy.mock.resetCalls();
 
-			const errorPath = DocumentHelpers.createDocumentPath(["A12T_Buttons"], ["RequiredField"]);
-			const booleanPath = DocumentHelpers.createDocumentPath(["A12T_Buttons"], ["BooleanField"]);
+			const errorPath = createDocumentPath(["A12T_Buttons"], ["RequiredField"]);
+			const booleanPath = createDocumentPath(["A12T_Buttons"], ["BooleanField"]);
 
 			const messages: Messages = {
 				[DocumentPath.toString(errorPath)]: {

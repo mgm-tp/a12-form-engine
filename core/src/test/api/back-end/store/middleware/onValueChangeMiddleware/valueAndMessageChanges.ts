@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -30,27 +30,21 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import type { ModelPath } from "@com.mgmtp.a12.base/base-model-api/lib/main/model/index.js";
-import type {
-	EntityInstancePath,
-	GroupInstance
-} from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
+import type { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
+import type { EntityInstancePath, GroupInstance } from "@com.mgmtp.a12.kernel/kernel-md-facade";
 
 import { Commands, Events } from "../../../../../../back-end/store/index.js";
 import { DocumentPath } from "../../../../../../models/internal/utils/document-utils.js";
-import { MiddlewareHelpers } from "../../../../../utils/back-end-helpers.js";
-import { DocumentHelpers } from "../../../../../utils/document-helpers.js";
-import { SetupHelpers } from "../../../../../utils/setup.js";
+import { createDocumentPath } from "../../../../../utils/createDocumentPath.js";
+import { MiddlewareHelpers } from "../../../../../utils/MiddlewareHelpers.js";
+import { createTestStore, loadModels } from "../../../../../utils/setup.js";
 import { setupFixture, setupModelsFixture } from "../../../../../utils/setupFixture.js";
 import { CONTROLS_INDEX } from "../../../../../utils/test-model-helpers/controls.index.js";
-import { createDocumentPath } from "../../../../../utils/test-model-helpers/dependent-enumeration.js";
 import { DR } from "../../../../../utils/test-model-helpers/detached.repeat.js";
 import {
 	createValidationEntry,
 	createValidationEntryWithParsingError
 } from "../../../../../utils/validation.js";
-
-const { createTestStore } = SetupHelpers;
 
 export function executeTestsForDocumentAndMessageChanges(): void {
 	const middlewareSpy = setupFixture(() => MiddlewareHelpers.createMiddlewareSpy());
@@ -72,8 +66,8 @@ export function executeTestsForDocumentAndMessageChanges(): void {
 		middlewareSpy.spy.mock.resetCalls();
 	});
 
-	const F2M_PATH = DocumentHelpers.createDocumentPath(["root"], ["F2M"]);
-	const F1_PATH = DocumentHelpers.createDocumentPath(["root"], ["F1"]);
+	const F2M_PATH = createDocumentPath(["root"], ["F2M"]);
+	const F1_PATH = createDocumentPath(["root"], ["F1"]);
 
 	function createEventAction(
 		value: number | null,
@@ -113,7 +107,7 @@ export function executeTestsForDocumentAndMessageChanges(): void {
 
 		describe("and a detached repeat detail screen is opened", () => {
 			it("dispatches Commands.changeScreenState with dirty=true", () => {
-				const models = SetupHelpers.loadModels("repeat", "detached");
+				const models = loadModels("repeat", "detached");
 				const store = createTestStore({
 					storeConfig: {
 						models,
@@ -123,7 +117,7 @@ export function executeTestsForDocumentAndMessageChanges(): void {
 								{ locationPath: [], path: [] },
 								{
 									locationPath: DR.NestedRepeat.nested_dr_dr_locationPath,
-									path: DocumentHelpers.createDocumentPath(["Root"], ["Nested_L1"])
+									path: createDocumentPath(["Root"], ["Nested_L1"])
 								}
 							]
 						}
@@ -132,7 +126,7 @@ export function executeTestsForDocumentAndMessageChanges(): void {
 				});
 
 				const valueChangeEvent = Events.valueChange({
-					path: DocumentHelpers.createDocumentPath(["Root"], ["Nested_L1"], ["L1_Number"]),
+					path: createDocumentPath(["Root"], ["Nested_L1"], ["L1_Number"]),
 					value: 44
 				});
 

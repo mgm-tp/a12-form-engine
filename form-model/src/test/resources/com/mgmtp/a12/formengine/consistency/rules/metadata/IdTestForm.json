@@ -1,0 +1,348 @@
+{
+  "header": {
+    "id": "IdTestForm",
+    "modelType": "form",
+    "modelVersion": "39.0.0",
+    "locales": [
+      {
+        "code": "en"
+      }
+    ],
+    "annotations": [
+      {
+        "name": "roles",
+        "value": "admin"
+      }
+    ],
+    "modelReferences": [
+      {
+        "alias": "DM",
+        "modelType": "document",
+        "purpose": "data binding",
+        "reference": "DocumentModel"
+      }
+    ]
+  },
+  "content": {
+    "subHeaderBox": {
+      "id": "subHeaderBox1"
+    },
+    "footerBox": {
+      "id": "footerBox1"
+    },
+    "screens": [
+      {
+        "id": "screen1",
+        "name": "Screen1",
+        "screenElements": [
+          {
+            "type": "Section",
+            "id": "section-af573",
+            "name": "sec1",
+            "screenElements": [
+              {
+                "type": "ControlGrid",
+                "id": "controlgrid-ba10b",
+                "name": "cg1",
+                "layout": {
+                  "lg": "4-4-4"
+                },
+                "row": [
+                  {
+                    "type": "Row",
+                    "id": "row-52bba",
+                    "name": "row1",
+                    "cell": [
+                      {
+                        "type": "Control",
+                        "id": "control-7f4ef",
+                        "elementRef": "F234"
+                      },
+                      {
+                        "type": "TextCell",
+                        "id": "textcell-058be",
+                        "name": "text1",
+                        "content": {
+                          "text": [
+                            {
+                              "locale": "en",
+                              "text": "Text"
+                            }
+                          ]
+                        }
+                      },
+                      {
+                        "type": "ExpressionCell",
+                        "id": "expressioncell-a762c",
+                        "name": "expression1",
+                        "expression": "\"Expression\""
+                      }
+                    ]
+                  }
+                ],
+                "verticalAlignment": "TOP"
+              }
+            ]
+          },
+          {
+            "type": "Section",
+            "id": "section-c519d",
+            "name": "sec2",
+            "screenElements": [
+              {
+                "type": "ControlGrid",
+                "id": "controlgrid-39a8a",
+                "name": "cg2",
+                "layout": {
+                  "lg": "4-4-4"
+                },
+                "row": [
+                  {
+                    "type": "Row",
+                    "id": "row-9080d",
+                    "name": "row2",
+                    "cell": [
+                      {
+                        "type": "Control",
+                        "id": "control-48eab",
+                        "elementRef": "F234"
+                      },
+                      {
+                        "type": "TextCell",
+                        "id": "textcell-c2c88",
+                        "name": "text2",
+                        "content": {
+                          "text": [
+                            {
+                              "locale": "en",
+                              "text": "Text"
+                            }
+                          ]
+                        }
+                      },
+                      {
+                        "type": "ExpressionCell",
+                        "id": "expressioncell-1989b",
+                        "name": "expression2",
+                        "expression": "\"Expression\""
+                      }
+                    ]
+                  }
+                ],
+                "verticalAlignment": "TOP"
+              }
+            ]
+          },
+          {
+            "type": "MultiColumnSection",
+            "id": "multicolumnsection-41fc5",
+            "name": "mcs1",
+            "layout": {
+              "lg": "12"
+            }
+          },
+          {
+            "type": "MultiColumnSection",
+            "id": "multicolumnsection-f8894",
+            "name": "mcs2",
+            "layout": {
+              "lg": "12"
+            }
+          },
+          {
+            "type": "ButtonPanel",
+            "id": "buttonpanel-29a78",
+            "name": "bp1",
+            "button": [
+              {
+                "type": "EVENT",
+                "id": "button-598f0",
+                "name": "eventBtn1",
+                "buttonStyling": {
+                  "priority": "SECONDARY"
+                },
+                "scope": "HIDDEN_IN_READONLY_MODE"
+              },
+              {
+                "type": "EVENT",
+                "id": "button-7187e",
+                "name": "navBtn1",
+                "buttonStyling": {
+                  "priority": "SECONDARY"
+                },
+                "scope": "HIDDEN_IN_READONLY_MODE"
+              }
+            ]
+          },
+          {
+            "type": "ButtonPanel",
+            "id": "buttonpanel-679e2",
+            "name": "bp2",
+            "button": [
+              {
+                "type": "EVENT",
+                "id": "button-63c43",
+                "name": "eventBtn2",
+                "buttonStyling": {
+                  "priority": "SECONDARY"
+                },
+                "scope": "HIDDEN_IN_READONLY_MODE"
+              },
+              {
+                "type": "EVENT",
+                "id": "button-7478d",
+                "name": "navBtn2",
+                "buttonStyling": {
+                  "priority": "SECONDARY"
+                },
+                "scope": "HIDDEN_IN_READONLY_MODE"
+              }
+            ]
+          },
+          {
+            "type": "InlineRepeat",
+            "id": "inlinerepeat-ac846",
+            "name": "inline-repeat-RepeatableGroup1",
+            "repeatOverviewColumn": [
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-c24fa",
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "elementRef": "F123"
+              },
+              {
+                "type": "ExpressionRepeatOverviewColumn",
+                "id": "expressionrepeatoverviewcolumn-0894b",
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "name": "expColumn1",
+                "expression": "\"Expression Column\""
+              }
+            ],
+            "groupRef": "G2",
+            "enableAdd": true,
+            "enableRemove": true,
+            "enableReorder": false,
+            "enableCopy": false
+          },
+          {
+            "type": "InlineRepeat",
+            "id": "inlinerepeat-f1b52",
+            "name": "inline-repeat-RepeatableGroup2",
+            "repeatOverviewColumn": [
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-a7acd",
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "elementRef": "F123"
+              },
+              {
+                "type": "ExpressionRepeatOverviewColumn",
+                "id": "expressionrepeatoverviewcolumn-6c989",
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "name": "expColumn2",
+                "expression": "\"Expression Column\""
+              }
+            ],
+            "groupRef": "G2",
+            "enableAdd": true,
+            "enableRemove": true,
+            "enableReorder": false,
+            "enableCopy": false
+          },
+          {
+            "type": "DetachedRepeat",
+            "id": "detachedrepeat-88408",
+            "name": "detached-repeat-RepeatableGroup1",
+            "groupRef": "G2",
+            "enableAdd": true,
+            "enableRemove": true,
+            "enableReorder": false,
+            "enableCopy": false,
+            "detailScreen": {
+              "id": "screen-e91f4",
+              "name": "detached-repeat-RepeatableGroup-detail-screen",
+              "screenElements": [
+                {
+                  "type": "ControlGrid",
+                  "id": "controlgrid-b34a0",
+                  "name": "cg"
+                }
+              ]
+            }
+          },
+          {
+            "type": "DetachedRepeat",
+            "id": "detachedrepeat-2d998",
+            "name": "detached-repeat-RepeatableGroup2",
+            "groupRef": "G2",
+            "enableAdd": true,
+            "enableRemove": true,
+            "enableReorder": false,
+            "enableCopy": false,
+            "detailScreen": {
+              "id": "screen-a523f",
+              "name": "detached-repeat-RepeatableGroup-detail-screen",
+              "screenElements": [
+                {
+                  "type": "ControlGrid",
+                  "id": "controlgrid-ec9e5",
+                  "name": "cg"
+                }
+              ]
+            }
+          },
+          {
+            "type": "EmbeddedRepeat",
+            "id": "embeddedrepeat-7d55a",
+            "name": "embedded-repeat-RepeatableGroup1",
+            "groupRef": "G2",
+            "enableAdd": true,
+            "enableRemove": true,
+            "enableReorder": false,
+            "enableCopy": false,
+            "controlGrid": {
+              "type": "ControlGrid",
+              "id": "controlgrid-4888e",
+              "name": "cg"
+            }
+          },
+          {
+            "type": "EmbeddedRepeat",
+            "id": "embeddedrepeat-43ebe",
+            "name": "embedded-repeat-RepeatableGroup2",
+            "groupRef": "G2",
+            "enableAdd": true,
+            "enableRemove": true,
+            "enableReorder": false,
+            "enableCopy": false,
+            "controlGrid": {
+              "type": "ControlGrid",
+              "id": "controlgrid-36c7d",
+              "name": "cg"
+            }
+          }
+        ]
+      },
+      {
+        "id": "screen-c6da3",
+        "name": "Screen2",
+        "screenElements": []
+      }
+    ],
+    "fieldConfiguration": {},
+    "groupConfiguration": {},
+    "defaults": {}
+  }
+}

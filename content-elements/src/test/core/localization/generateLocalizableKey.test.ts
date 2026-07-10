@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -30,8 +30,16 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-describe("", () => {
-	it("", () => {
-		// TODO
+import { strictEqual } from "node:assert/strict";
+
+import { generateLocalizableKey } from "../../../main/core/localization/generateLocalizableKey.js";
+
+describe("core.localization", () => {
+	describe("generateLocalizableKey", () => {
+		it("returns a concatenated string of the parameters with dot escaping", () => {
+			const result = generateLocalizableKey("model.id", "element.id", "suffix.text");
+
+			strictEqual(result, "model\\pid.element\\pid.suffix\\ptext");
+		});
 	});
 });

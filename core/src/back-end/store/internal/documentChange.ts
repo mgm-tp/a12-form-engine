@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -30,7 +30,7 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import type { EntityInstancePath } from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
+import type { EntityInstancePath } from "@com.mgmtp.a12.kernel/kernel-md-facade";
 
 import { DocumentPath } from "../../../models/internal/utils/document-utils.js";
 import type { ReadonlyObjectMap } from "../../../models/internal/utils/json.js";
@@ -82,74 +82,74 @@ export interface Revert {
 }
 
 /** @experimental */
-export namespace Change {
-	/** Function to check if a given element is an instance of {@link ValueChanged} */
-	export function isValueChanged(element: Change): element is ValueChanged {
-		return element.type === "ValueChanged";
-	}
-
+export const Change = {
 	/** Function to check if a given element is an instance of {@link GroupAdded} */
-	export function isGroupAdded(element: Change): element is GroupAdded {
+	isGroupAdded(element: Change): element is GroupAdded {
 		return element.type === "GroupAdded";
-	}
+	},
 
 	/** Function to check if a given element is an instance of {@link GroupMoved} */
-	export function isGroupMoved(element: Change): element is GroupMoved {
+	isGroupMoved(element: Change): element is GroupMoved {
 		return element.type === "GroupMoved";
-	}
+	},
 
 	/** Function to check if a given element is an instance of {@link GroupRemoved} */
-	export function isGroupRemoved(element: Change): element is GroupRemoved {
+	isGroupRemoved(element: Change): element is GroupRemoved {
 		return element.type === "GroupRemoved";
-	}
+	},
 
 	/** Function to check if a given element is an instance of {@link ValueChanged} */
-	export function isRevert(element: Change): element is Revert {
+	isRevert(element: Change): element is Revert {
 		return element.type === "Revert";
+	},
+
+	/** Function to check if a given element is an instance of {@link ValueChanged} */
+	isValueChanged(element: Change): element is ValueChanged {
+		return element.type === "ValueChanged";
 	}
-}
+};
 
 /** @internal */
-export namespace ChangeMapCreators {
-	export function createValueChanged(path: EntityInstancePath): ReadonlyObjectMap<Change> {
+export const ChangeMapCreators = {
+	createValueChanged(path: EntityInstancePath): ReadonlyObjectMap<Change> {
 		return { [DocumentPath.toString(path)]: { type: "ValueChanged", path } };
-	}
+	},
 
-	export function createGroupRemoved(path: EntityInstancePath): ReadonlyObjectMap<Change> {
+	createGroupRemoved(path: EntityInstancePath): ReadonlyObjectMap<Change> {
 		return { [DocumentPath.toString(path)]: { type: "GroupRemoved", path } };
-	}
+	},
 
-	export function createValueChanges(paths: EntityInstancePath[]): ReadonlyObjectMap<Change> {
+	createValueChanges(paths: EntityInstancePath[]): ReadonlyObjectMap<Change> {
 		return paths.reduce<ReadonlyObjectMap<Change>>((result, path) => {
 			return {
 				...result,
-				...createValueChanged(path)
+				...ChangeMapCreators.createValueChanged(path)
 			};
 		}, {});
-	}
+	},
 
-	export function union(...changeMaps: ReadonlyObjectMap<Change>[]): ReadonlyObjectMap<Change> {
+	union(...changeMaps: ReadonlyObjectMap<Change>[]): ReadonlyObjectMap<Change> {
 		return Object.assign({}, ...changeMaps);
-	}
+	},
 
-	export function difference(
+	difference(
 		minuend: ReadonlyObjectMap<Change>,
 		subtrahend: ReadonlyObjectMap<Change>
 	): ReadonlyObjectMap<Change> {
 		return Object.fromEntries(Object.entries(minuend).filter(c => subtrahend[c[0]] === undefined));
-	}
+	},
 
-	export function fromList(changes: Change[]): ReadonlyObjectMap<Change> {
+	fromList(changes: Change[]): ReadonlyObjectMap<Change> {
 		const entries = changes.map(changePathEntry);
 		const pathBasedChanges = entries.filter(notUndefined);
 		return Object.fromEntries(pathBasedChanges);
 	}
+};
 
-	function changePathEntry(change: Change) {
-		return change.type !== "Revert" ? [DocumentPath.toString(change.path), change] : undefined;
-	}
+function changePathEntry(change: Change) {
+	return change.type !== "Revert" ? [DocumentPath.toString(change.path), change] : undefined;
+}
 
-	function notUndefined<T>(obj: T | undefined): obj is T {
-		return obj !== undefined;
-	}
+function notUndefined<T>(obj: T | undefined): obj is T {
+	return obj !== undefined;
 }

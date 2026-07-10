@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -30,8 +30,8 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-export namespace IDS {
-	export const topControlGrid = "a12-controlgrid-0f872";
-	export const middleControlGrid = "a12-controlgrid-e40bc";
-	export const bottomControlGrid = "a12-controlgrid-31087";
-}
+export const IDS = {
+	topControlGrid: "a12-controlgrid-0f872",
+	middleControlGrid: "a12-controlgrid-e40bc",
+	bottomControlGrid: "a12-controlgrid-31087"
+} as const;

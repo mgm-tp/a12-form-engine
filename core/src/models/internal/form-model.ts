@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -30,16 +30,11 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import type { Annotation } from "@com.mgmtp.a12.base/base-model-api/lib/main/header/index.js";
-import type { Model, ModelPath } from "@com.mgmtp.a12.base/base-model-api/lib/main/model/index.js";
-import { isModelInstance } from "@com.mgmtp.a12.base/base-model-api/lib/main/model/index.js";
+import type { Annotation, Model, ModelPath } from "@com.mgmtp.a12.base/base-model-api";
 import type { Expression } from "@com.mgmtp.a12.expression/expression-core";
-import type { FieldInstanceValue } from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
-import type { LocalizedModelText } from "@com.mgmtp.a12.utils/utils-localization/lib/main/index.js";
-import type { IconTheme } from "@com.mgmtp.a12.widgets/widgets-core/lib/icon/main/icon.api.js";
-
-import { isRecord } from "../../back-end/utils/internal/guards.js";
-import { nmTokensToString } from "../../view/internal/utilities/nmtokens.js";
+import type { FieldInstanceValue } from "@com.mgmtp.a12.kernel/kernel-md-facade";
+import type { LocalizedModelText } from "@com.mgmtp.a12.utils/utils-localization";
+import type { IconTheme } from "@com.mgmtp.a12.widgets/widgets-core";
 
 import type * as RepeatExpressionFilter from "./jison/repeatfilter.cjs";
 import type { ReadonlyObjectMap } from "./utils/json.js";
@@ -59,18 +54,6 @@ export interface FormModel extends Model {
 }
 
 export namespace FormModel {
-	/**
-	 * Function to check if a given object is an instance of {@link FormModel}.
-	 * @param model the object to check
-	 * @param ignoreRuntimeProperties This needs to be set to true, if you only want to check
-	 * the persistence properties and not the added run-time properties (e.g. fieldPath).
-	 */
-	export function isInstance(model: object, ignoreRuntimeProperties?: boolean): model is FormModel {
-		return (
-			isModelInstance(model) && FormModel.Content.isInstance(model.content, ignoreRuntimeProperties)
-		);
-	}
-
 	/** Adds Id and Naming functionality to model elements */
 	export interface IdNamed {
 		readonly id: string;
@@ -87,16 +70,6 @@ export namespace FormModel {
 		readonly style?: ReadonlyArray<Style>;
 	}
 
-	/** if the given element has styles, concat them to an HTML class string */
-	export function stylableToClassName(stylable?: Stylable): string | undefined {
-		return styleToClassName(stylable?.style);
-	}
-
-	/** if styles given, concat them to an HTML class string */
-	export function styleToClassName(style?: readonly Style[]): string | undefined {
-		return nmTokensToString(style?.map(s => s.name));
-	}
-
 	/** Data structure to define a style */
 	export interface Style {
 		readonly name: string;
@@ -105,6 +78,16 @@ export namespace FormModel {
 	/** Add hide condition to model elements. */
 	export interface ConditionallyHidden {
 		readonly hideCondition?: HideCondition;
+	}
+
+	/**
+	 * Adds a model reference to screen elements that are bound to an external model.
+	 * The reference value corresponds to the modelReference property (model id)
+	 * of a model reference entry in the form model header.
+	 */
+	export interface Referencing {
+		/** The model reference identifier (modelReference/model id) from the form model header that this element is bound to. */
+		readonly reference?: string;
 	}
 
 	/** Data structure to define a static amount suffix */
@@ -256,29 +239,6 @@ export namespace FormModel {
 		readonly openExistingDocumentPreProcessing?: FormModel.OpenDocumentPreProcessing;
 	}
 
-	export namespace Content {
-		/**
-		 * Function to check if a given object is an instance of {@link FormModel.Content}.
-		 * @param element the object to check
-		 * @param ignoreRuntimeProperties This needs to be set to true, if you only want to check
-		 * the persistence properties and not the added run-time properties (e.g. fieldPath).
-		 */
-		export function isInstance(
-			element: object | FormModel.Content,
-			ignoreRuntimeProperties?: boolean
-		): element is FormModel.Content {
-			return (
-				"subHeaderBox" in element &&
-				"footerBox" in element &&
-				"screens" in element &&
-				"fieldConfiguration" in element &&
-				"groupConfiguration" in element &&
-				"defaults" in element &&
-				(ignoreRuntimeProperties || "dependentScreenElements" in element)
-			);
-		}
-	}
-
 	/** Data structure to define header and footers. */
 	export interface HeaderFooterType {
 		/** The unique id. */
@@ -296,24 +256,6 @@ export namespace FormModel {
 		 * Major buttons will never be collapsed to a pop-up menu.
 		 */
 		readonly majorButtons?: ButtonList;
-	}
-
-	/**
-	 * @internal
-	 *
-	 * Data structure to represent a header or footer.
-	 */
-	export namespace HeaderFooterType {
-		/**
-		 * Function to check if a given object is an instance of {@link FormModel.HeaderFooterType}.
-		 * @param element the object to check
-		 */
-
-		export function isInstance(
-			element: object | FormModel.HeaderFooterType
-		): element is FormModel.HeaderFooterType {
-			return "minorButtons" in element || "majorButtons" in element;
-		}
 	}
 
 	/**
@@ -453,6 +395,12 @@ export namespace FormModel {
 		 */
 		readonly placeholder?: MultilingualText;
 
+		/** Defines the icon shown on a checked switch */
+		readonly icon?: Icon;
+
+		/** Defines the placement of the label relative to the switch input. */
+		readonly labelPlacement?: LabelPlacement;
+
 		/** Configuration for an attachment */
 		readonly attachmentConfig?: AttachmentConfig;
 	}
@@ -506,22 +454,6 @@ export namespace FormModel {
 		readonly initiallyFocusedElementId?: string;
 	}
 
-	export namespace Screen {
-		/**
-		 * Function to check if a given object is an instance of {@link Screen}.
-		 * @param value the object to check
-		 */
-
-		export function isInstance(value: unknown): value is FormModel.Screen {
-			return (
-				isRecord(value) &&
-				value.screenElements !== undefined &&
-				!Section.isInstance(value) &&
-				!MultiColumnSection.isInstance(value)
-			);
-		}
-	}
-
 	export type ScreenElement =
 		| Section
 		| ControlGrid
@@ -531,24 +463,6 @@ export namespace FormModel {
 		| InlineRepeat
 		| EmbeddedRepeat
 		| CustomScreenElement;
-
-	export namespace ScreenElement {
-		/**
-		 * Function to check if a given object is an instance of {@link FormModel.ScreenElement}.
-		 * @param element the object to check
-		 */
-
-		export function isInstance(element: object): element is ScreenElement {
-			return (
-				FormModel.Section.isInstance(element) ||
-				FormModel.ControlGrid.isInstance(element) ||
-				FormModel.MultiColumnSection.isInstance(element) ||
-				FormModel.ButtonPanel.isInstance(element) ||
-				FormModel.Repeat.isInstance(element) ||
-				FormModel.CustomScreenElement.isInstance(element)
-			);
-		}
-	}
 
 	/**
 	 * Data structure for a basic screen elements from which the actual
@@ -572,22 +486,9 @@ export namespace FormModel {
 	 * Data structure for a custom screen element.
 	 * A custom screen element is a placeholder.
 	 */
-	export interface CustomScreenElement extends BasicScreenElement {
+	export interface CustomScreenElement extends BasicScreenElement, Referencing {
 		readonly type: "CustomScreenElement";
 		readonly height?: number;
-	}
-
-	export namespace CustomScreenElement {
-		/**
-		 * Function to check if a given object is an instance of {@link CustomScreenElement}.
-		 * @param element the object to check
-		 */
-		export function isInstance(
-			element: object | FormModel.ScreenElement
-		): element is FormModel.CustomScreenElement {
-			const target: Partial<FormModel.ScreenElement> = element;
-			return target.type === "CustomScreenElement";
-		}
 	}
 
 	/**
@@ -608,17 +509,6 @@ export namespace FormModel {
 		readonly initiallyCollapsed?: boolean;
 		/** The children of the section. */
 		readonly screenElements?: ReadonlyArray<ScreenElement>;
-	}
-
-	export namespace Section {
-		/**
-		 * Function to check if a given object is an instance of {@link FormModel.Section}.
-		 * @param value the object to check
-		 */
-
-		export function isInstance(value: unknown): value is FormModel.Section {
-			return isRecord(value) && value.type === "Section";
-		}
 	}
 
 	/**
@@ -648,17 +538,6 @@ export namespace FormModel {
 
 		/** The children of the multi column section. */
 		readonly screenElements?: ReadonlyArray<ScreenElement>;
-	}
-
-	export namespace MultiColumnSection {
-		/**
-		 * Function to check if a given object is an instance of {@link FormModel.MultiColumnSection}.
-		 * @param value the object to check
-		 */
-
-		export function isInstance(value: unknown): value is FormModel.MultiColumnSection {
-			return isRecord(value) && value.type === "MultiColumnSection";
-		}
 	}
 
 	/**
@@ -700,13 +579,6 @@ export namespace FormModel {
 
 		/** The enablement scope for the row action */
 		readonly scope: ScopeEnum;
-	}
-
-	export namespace RowAction {
-		export function isInstance(element: object): element is RowAction {
-			const target: Partial<FormModel.RowAction> = element;
-			return !("type" in target) && typeof target.event === "string" && "scope" in target;
-		}
 	}
 
 	/**
@@ -791,24 +663,6 @@ export namespace FormModel {
 		readonly tableStyle?: TableStyle;
 	}
 
-	export namespace Repeat {
-		/**
-		 * Function to check if a given object is an instance of {@link FormModel.DetachedRepeat} or {@link FormModel.InlineRepeat}
-		 * or {@link FormModel.EmbeddedRepeat}.
-		 * @param element the object to check
-		 */
-
-		export function isInstance(
-			element: unknown
-		): element is FormModel.InlineRepeat | FormModel.DetachedRepeat | FormModel.EmbeddedRepeat {
-			return (
-				DetachedRepeat.isInstance(element) ||
-				InlineRepeat.isInstance(element) ||
-				EmbeddedRepeat.isInstance(element)
-			);
-		}
-	}
-
 	/**
 	 * Data structure for a detached repeat.
 	 * A detached repeat only shows a readonly table of the data.
@@ -826,17 +680,6 @@ export namespace FormModel {
 		 * Whether infinite scrolling should be used.
 		 */
 		readonly infiniteScrolling?: boolean;
-	}
-
-	export namespace DetachedRepeat {
-		/**
-		 * Function to check if a given object is an instance of {@link FormModel.DetachedRepeat}.
-		 * @param element the object to check
-		 */
-
-		export function isInstance(element: unknown): element is FormModel.DetachedRepeat {
-			return isRecord(element) && element.type === "DetachedRepeat";
-		}
 	}
 
 	export interface TableStyle {
@@ -935,17 +778,6 @@ export namespace FormModel {
 		readonly fixedWidth?: boolean;
 	}
 
-	export namespace RepeatOverviewColumn {
-		/**
-		 * Function to check if a given value is an instance of {@link FormModel.RepeatOverviewColumn}.
-		 * @param value the value to check
-		 */
-
-		export function isInstance(value: unknown): value is RepeatOverviewColumn {
-			return FieldOverviewColumn.isInstance(value) || ExpressionOverviewColumn.isInstance(value);
-		}
-	}
-
 	export type PreferredSorting = "ASC" | "DESC";
 	export type PinDirection = "LEFT" | "RIGHT";
 	export type HorizontalAlignment = "left" | "center" | "right";
@@ -999,17 +831,6 @@ export namespace FormModel {
 		readonly filterExposition?: FilterExposition;
 	}
 
-	export namespace FieldOverviewColumn {
-		/**
-		 * Function to check if a given value is an instance of {@link FormModel.FieldOverviewColumn}.
-		 * @param value the value to check
-		 */
-
-		export function isInstance(value: unknown): value is FormModel.FieldOverviewColumn {
-			return isRecord(value) && value.type === "FieldBasedRepeatOverviewColumn";
-		}
-	}
-
 	/**
 	 * Data structure for a cell in a {@link InlineRepeat} to show
 	 * an evaluated expression.
@@ -1026,17 +847,6 @@ export namespace FormModel {
 		readonly expressionTree: Expression.RootNode;
 
 		readonly name: string;
-	}
-
-	export namespace ExpressionOverviewColumn {
-		/**
-		 * Function to check if a given value is an instance of {@link FormModel.ExpressionOverviewColumn}.
-		 * @param value the value to check
-		 */
-
-		export function isInstance(value: unknown): value is FormModel.ExpressionOverviewColumn {
-			return isRecord(value) && value.type === "ExpressionRepeatOverviewColumn";
-		}
 	}
 
 	export type RepeatOverviewColumn = FieldOverviewColumn | ExpressionOverviewColumn;
@@ -1068,17 +878,6 @@ export namespace FormModel {
 		readonly multiFileUploadOptions?: MultiFileUploadOptions;
 	}
 
-	export namespace InlineRepeat {
-		/**
-		 * Function to check if a given object is an instance of {@link FormModel.InlineRepeat}.
-		 * @param element the object to check
-		 */
-
-		export function isInstance(element: unknown): element is FormModel.InlineRepeat {
-			return isRecord(element) && element.type === "InlineRepeat";
-		}
-	}
-
 	/**
 	 * Data structure for an embedded repeat.
 	 * An embedded repeat only shows a readonly table of the data.
@@ -1099,17 +898,6 @@ export namespace FormModel {
 
 		/** Defines the options that will be used for the multi file upload area */
 		readonly multiFileUploadOptions?: MultiFileUploadOptions;
-	}
-
-	export namespace EmbeddedRepeat {
-		/**
-		 * Function to check if a given object is an instance of {@link FormModel.EmbeddedRepeat}.
-		 * @param element the object to check
-		 */
-
-		export function isInstance(element: unknown): element is FormModel.EmbeddedRepeat {
-			return isRecord(element) && element.type === "EmbeddedRepeat";
-		}
 	}
 
 	export interface MultiFileUploadOptions {
@@ -1207,17 +995,6 @@ export namespace FormModel {
 		readonly verticalAlignment?: ControlGridVerticalAlignment;
 	}
 
-	export namespace ControlGrid {
-		/**
-		 * Function to check if a given object is an instance of {@link FormModel.ControlGrid}.
-		 * @param element the object to check
-		 */
-
-		export function isInstance(element: unknown): element is FormModel.ControlGrid {
-			return isRecord(element) && element.type === "ControlGrid";
-		}
-	}
-
 	/** Container for cells. */
 	export interface Row extends Annotated, Stylable, ConditionallyHidden {
 		readonly type: "Row";
@@ -1231,18 +1008,6 @@ export namespace FormModel {
 
 		/** Name of the row. */
 		readonly name?: string;
-	}
-
-	export namespace Row {
-		/**
-		 * Function to check if a given object is an instance of {@link FormModel.Row}.
-		 * @param element the object to check
-		 */
-
-		export function isInstance(element: object): element is FormModel.Row {
-			const { type }: { readonly type?: unknown } = element;
-			return type === "Row";
-		}
 	}
 
 	export type CellType = Control | ExpressionCell | TextCell | CustomCell;
@@ -1277,17 +1042,6 @@ export namespace FormModel {
 		readonly type: "CustomCell";
 	}
 
-	export namespace CustomCell {
-		/**
-		 * Function to check if a given object is an instance of {@link CustomCell}.
-		 * @param element the object to check
-		 */
-		export function isInstance(element: object | FormModel.Cell): element is FormModel.CustomCell {
-			const target: Partial<FormModel.Cell> = element;
-			return target.type === "CustomCell";
-		}
-	}
-
 	/**
 	 * Data structure to hold a number for the different size classes lg, md and sm used in responsive layout grids.
 	 */
@@ -1308,18 +1062,6 @@ export namespace FormModel {
 		readonly decoration?: TextCellDecoration;
 	}
 
-	export namespace TextCell {
-		/**
-		 * Function to check if a given object is an instance of {@link FormModel.TextCell}.
-		 * @param element the object to check
-		 */
-
-		export function isInstance(element: object | FormModel.Cell): element is FormModel.TextCell {
-			const target: Partial<FormModel.Cell> = element;
-			return target.type === "TextCell";
-		}
-	}
-
 	/**
 	 * Cell which content and appearance is derived from the defined
 	 * expression.
@@ -1338,20 +1080,6 @@ export namespace FormModel {
 
 		readonly label?: Label;
 		readonly name: string;
-	}
-
-	export namespace ExpressionCell {
-		/**
-		 * Function to check if a given object is an instance of {@link FormModel.ExpressionCell}.
-		 * @param element the object to check
-		 */
-
-		export function isInstance(element: unknown): element is FormModel.ExpressionCell {
-			return (
-				isRecord(element) &&
-				(element.type === "ExpressionCell" || element.type === "ExpressionRepeatOverviewColumn")
-			);
-		}
 	}
 
 	export type Label = MultilingualLabel | ExpressionLabel;
@@ -1428,19 +1156,6 @@ export namespace FormModel {
 	 */
 	export type FieldBasedInputType = Control | FieldOverviewColumn;
 
-	export namespace FieldBasedInputType {
-		/**
-		 * Function to check if a given object is an instance of {@link FormModel.FieldBasedInputType}.
-		 * @param element the object to check
-		 */
-
-		export function isInstance(
-			element: object | FormModel.Cell
-		): element is FormModel.FieldBasedInputType {
-			return Control.isInstance(element) || FieldOverviewColumn.isInstance(element);
-		}
-	}
-
 	/**
 	 * Model element to show input elements which are used to
 	 * change field data of the document.
@@ -1499,18 +1214,6 @@ export namespace FormModel {
 				readonly typedValue: FieldInstanceValue;
 		  };
 
-	export namespace Control {
-		/**
-		 * Function to check if a given object is an instance of {@link FormModel.Control}.
-		 * @param element the object to check
-		 */
-
-		export function isInstance(element: object | FormModel.Cell): element is FormModel.Control {
-			const target: Partial<FormModel.Cell> = element;
-			return target.type === "Control";
-		}
-	}
-
 	/**
 	 * Configuration for the Date and DateTimePicker
 	 */
@@ -1562,23 +1265,6 @@ export namespace FormModel {
 		readonly type: "ButtonPanel";
 		/** Children of the container. */
 		readonly button?: ReadonlyArray<ButtonType>;
-	}
-
-	/**
-	 * Container for buttons
-	 */
-	export namespace ButtonPanel {
-		/**
-		 * Function to check if a given object is an instance of {@link FormModel.ButtonPanel}.
-		 * @param element the object to check
-		 */
-
-		export function isInstance(
-			element: object | FormModel.ScreenElement
-		): element is FormModel.ButtonPanel {
-			const target: Partial<FormModel.ScreenElement> = element;
-			return target.type === "ButtonPanel";
-		}
 	}
 
 	/**
@@ -1652,40 +1338,6 @@ export namespace FormModel {
 	}
 
 	export type ButtonType = EventButton | NavigationButton;
-
-	/**
-	 * Data structure for a button.
-	 */
-	export namespace ButtonType {
-		/**
-		 * Function to check if a given object is an instance of {@link FormModel.ButtonType}.
-		 * @param element the object to check
-		 */
-
-		export function isInstance(element: object): element is FormModel.ButtonType {
-			return isNavigationButton(element) || isEventButton(element);
-		}
-
-		/**
-		 * Checks if the button is a navigation button
-		 */
-		export function isNavigationButton(
-			element: object | FormModel.ButtonType
-		): element is FormModel.NavigationButton {
-			const target: Partial<FormModel.ButtonType> = element;
-			return target.type === "NAVIGATION";
-		}
-
-		/**
-		 * Checks if the button is an event button
-		 */
-		export function isEventButton(
-			element: object | FormModel.ButtonType
-		): element is FormModel.EventButton {
-			const target: Partial<FormModel.ButtonType> = element;
-			return target.type === "EVENT";
-		}
-	}
 
 	export type ButtonEnum = "EVENT" | "NAVIGATION";
 
@@ -1944,6 +1596,7 @@ export namespace FormModel {
 		readonly values: (string | boolean | null)[];
 	}
 
+	export type LabelPlacement = "TOP" | "LEFT" | "RIGHT";
 	export type ExpositionPresentation =
 		| "AREA"
 		| "COMPACT"
@@ -1989,12 +1642,6 @@ export namespace FormModel {
 		| Repeat
 		| CustomScreenElement;
 
-	export namespace TitledComponent {
-		export function isInstance(component: object): component is TitledComponent {
-			return "title" in component;
-		}
-	}
-
 	export type LabeledComponent =
 		| ButtonType
 		| RowAction
@@ -2002,30 +1649,5 @@ export namespace FormModel {
 		| ExpressionCell
 		| ExpressionOverviewColumn;
 
-	export namespace LabeledComponent {
-		export function isInstance(component: object): component is LabeledComponent {
-			const target: Partial<LabeledComponent> = component;
-
-			return (
-				"label" in target ||
-				("buttonStyling" in target &&
-					target.buttonStyling !== undefined &&
-					"label" in target.buttonStyling)
-			);
-		}
-	}
-
 	export type ComponentWithDescription = ButtonType | RowAction;
-
-	export namespace ComponentWithDescription {
-		export function isInstance(component: object): component is ComponentWithDescription {
-			const target: Partial<ComponentWithDescription> = component;
-
-			return (
-				"buttonStyling" in target &&
-				target.buttonStyling !== undefined &&
-				"description" in target.buttonStyling
-			);
-		}
-	}
 }

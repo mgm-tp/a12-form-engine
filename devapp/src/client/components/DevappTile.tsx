@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -33,10 +33,8 @@
 import type { JSX } from "react";
 import { useDispatch } from "react-redux";
 
-import { ActivityActions } from "@com.mgmtp.a12.client/client-core/lib/core/activity/index.js";
-import { NEW_INSTANCE_IDENTIFIER } from "@com.mgmtp.a12.client/client-core/lib/core/application/index.js";
-import { Tile } from "@com.mgmtp.a12.widgets/widgets-core/lib/contentbox/main/tile/tile.view.js";
-import { Link } from "@com.mgmtp.a12.widgets/widgets-core/lib/link/main/link/link.view.js";
+import { ActivityActions, NEW_INSTANCE_IDENTIFIER } from "@com.mgmtp.a12.client/client-core";
+import { Tile, Link } from "@com.mgmtp.a12.widgets/widgets-core";
 
 export interface Group {
 	name: string;

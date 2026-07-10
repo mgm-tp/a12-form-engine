@@ -1,0 +1,162 @@
+{
+  "header": {
+    "id": "expressionWithAttachmentFM",
+    "modelType": "form",
+    "modelVersion": "39.0.0",
+    "locales": [
+      {
+        "code": "en"
+      }
+    ],
+    "modelReferences": [
+      {
+        "alias": "DM",
+        "modelType": "document",
+        "purpose": "data binding",
+        "reference": "TestModel"
+      }
+    ],
+    "annotations": [
+      {
+        "name": "roles",
+        "value": "admin"
+      }
+    ]
+  },
+  "content": {
+    "subHeaderBox": {
+      "id": "subHeaderBox1"
+    },
+    "footerBox": {
+      "id": "footerBox1"
+    },
+    "screens": [
+      {
+        "id": "screen1",
+        "name": "Screen1",
+        "screenElements": [
+          {
+            "type": "ControlGrid",
+            "id": "controlgrid-578d6",
+            "name": "cg",
+            "row": [
+              {
+                "type": "Row",
+                "id": "row-05c14",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control-07fd5",
+                    "elementRef": "field_74fbb"
+                  }
+                ]
+              }
+            ],
+            "verticalAlignment": "BOTTOM"
+          },
+          {
+            "type": "DetachedRepeat",
+            "id": "inlinerepeat-de879",
+            "name": "detached-repeat-RepGroup",
+            "repeatOverviewColumn": [
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-e4dba",
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "elementRef": "field_02db7"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-d6d9a",
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "elementRef": "field_0c460"
+              },
+              {
+                "type": "ExpressionRepeatOverviewColumn",
+                "id": "expressionrepeatoverviewcolumn-d1443",
+                "label": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "dr-expr-1"
+                      }
+                    ]
+                  }
+                },
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "name": "dr-expr-1",
+                "expression": "[RepeatedlyAttachedFile]"
+              }
+            ],
+            "groupRef": "group_f8ef7",
+            "enableAdd": true,
+            "enableRemove": true,
+            "enableReorder": false,
+            "enableCopy": false,
+            "detailScreen": {
+              "id": "screen-3734c",
+              "name": "inline-repeat-RepGroup-detail-screen",
+              "screenElements": [
+                {
+                  "type": "ControlGrid",
+                  "id": "controlgrid-136b2",
+                  "name": "cg-dr",
+                  "row": [
+                    {
+                      "type": "Row",
+                      "id": "row-7e279",
+                      "cell": [
+                        {
+                          "type": "Control",
+                          "id": "control-5cd67",
+                          "elementRef": "field_02db7"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "Row",
+                      "id": "row-8f4d6",
+                      "cell": [
+                        {
+                          "type": "Control",
+                          "id": "control-541b9",
+                          "elementRef": "field_0c460"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "Row",
+                      "id": "row-cc3ff",
+                      "cell": [
+                        {
+                          "type": "Control",
+                          "id": "control-d23a6",
+                          "elementRef": "group_3d17d"
+                        }
+                      ]
+                    }
+                  ],
+                  "verticalAlignment": "BOTTOM"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "fieldConfiguration": {},
+    "groupConfiguration": {},
+    "defaults": {}
+  }
+}

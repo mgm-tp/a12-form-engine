@@ -1,18 +1,19 @@
 buildscript {
-    apply from: rootProject.file('scripts/buildscript-platforms.gradle')
-
     dependencies {
-        classpath a12Libs.build.utilities
-        classpath a12Libs.dataservices.core.tooling
-        classpath a12Libs.kernel.md.model
-        classpath a12Libs.kernel.md.facade
-        classpath a12Libs.kernel.tool.model.migration
+        classpath platform(libs.dataservices.bom)
+        classpath libs.build.utilities
+        classpath libs.dataservices.modelgraph
+        classpath libs.kernel.md.facade
         classpath libs.logback.classic
     }
 }
 
 plugins {
-    alias(a12Plugins.plugins.prepare.models)
+    alias(libs.plugins.prepare.models)
+}
+
+prepareModels {
+    generateValidationCodeInConverter = true
 }
 
 tasks.named('clean') {
@@ -27,7 +28,7 @@ tasks.register('generateModelGraph', JavaExec) {
     final String modelGraphFile = "${dir}/modelGraph.json"
 
     classpath = buildscript.configurations.classpath
-    mainClass = 'com.mgmtp.a12.dataservices.tooling.modelgraph.ModelGraphGenerator'
+    mainClass = 'com.mgmtp.a12.dataservices.modelgraph.fs.impl.ModelGraphGenerator'
 
     inputs.dir(prepareModels.outputDir)
     outputs.file(modelGraphFile)

@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -33,15 +33,15 @@
 import { query } from "@com.mgmtp.a12.devtools/react";
 
 import { UiId } from "../../../../../../back-end/utils/internal/generateUiId.js";
-import type { BufferedTextLine } from "../../../../../../view/internal/components/widgets/form-engine/buffered-text-line.js";
+import type { BufferedTextLineProps } from "../../../../../../view/internal/components/widgets/form-engine/buffered-text-line.js";
 
 import type { RenderSideEffect } from "../render-sideeffect.js";
 
 import type { FilterPropsSelector } from "./props-selector.js";
 
 export interface TextLineRangeFunctions {
-	query: (name: string) => FilterPropsSelector<BufferedTextLine.PropsType>;
-	queryAll: FilterPropsSelector<BufferedTextLine.PropsType[]>;
+	query: (name: string) => FilterPropsSelector<BufferedTextLineProps>;
+	queryAll: FilterPropsSelector<BufferedTextLineProps[]>;
 	triggerChange: (name: string, value: string) => RenderSideEffect;
 }
 

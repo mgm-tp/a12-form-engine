@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -34,7 +34,7 @@ import { notStrictEqual, strictEqual } from "node:assert/strict";
 
 import { query } from "@com.mgmtp.a12.devtools/react";
 
-import type { FormModelHelpers } from "../../../utils/model-helpers.js";
+import type { ButtonDef } from "../../../utils/FormModelHelpers.js";
 import { setupModelsFixture } from "../../../utils/setupFixture.js";
 
 import { setupFooterButtonTests, setupForButtonTests } from "./utils.js";
@@ -50,7 +50,7 @@ describe("api.view.content-box", () => {
 		});
 
 		it("does not render when no footer buttons are visible", () => {
-			const buttons: FormModelHelpers.ButtonDef[] = [
+			const buttons: ButtonDef[] = [
 				{ type: "EVENT", scope: "HIDDEN_IN_READONLY_MODE" },
 				{ type: "NAVIGATION", scope: "HIDDEN_IN_READONLY_MODE" }
 			];
@@ -65,7 +65,7 @@ describe("api.view.content-box", () => {
 		});
 
 		it("renders buttons in a responsive ButtonGroupContainer", () => {
-			const buttons: FormModelHelpers.ButtonDef[] = [
+			const buttons: ButtonDef[] = [
 				{ type: "EVENT", priority: "SECONDARY" },
 				{ type: "NAVIGATION", priority: "SECONDARY" }
 			];
@@ -76,8 +76,10 @@ describe("api.view.content-box", () => {
 			});
 
 			const buttonGroupProps = query(widgetMap.ButtonGroupContainer).props();
+
 			// eslint-disable-next-line @typescript-eslint/no-deprecated
 			strictEqual(buttonGroupProps.leftSlot?.length, 4);
+
 			// eslint-disable-next-line @typescript-eslint/no-deprecated
 			strictEqual(buttonGroupProps.rightSlot?.length, 4);
 			strictEqual(buttonGroupProps.responsive, true);
@@ -90,7 +92,7 @@ describe("api.view.content-box", () => {
 				readonly labelHidden?: boolean;
 				readonly setIcon?: boolean;
 			}) {
-				const button: FormModelHelpers.ButtonDef = {
+				const button: ButtonDef = {
 					type: "EVENT",
 					scope: "HIDDEN_IN_READONLY_MODE"
 				};
@@ -304,7 +306,7 @@ describe("api.view.content-box", () => {
 
 		describe("major footer buttons", () => {
 			it("renders right aligned", () => {
-				const buttons: FormModelHelpers.ButtonDef[] = [
+				const buttons: ButtonDef[] = [
 					{ type: "EVENT", priority: "PRIMARY" },
 					{ type: "NAVIGATION", priority: "PRIMARY" }
 				];
@@ -325,7 +327,7 @@ describe("api.view.content-box", () => {
 			});
 
 			it("renders the primary buttons as primary button", () => {
-				const buttons: FormModelHelpers.ButtonDef[] = [
+				const buttons: ButtonDef[] = [
 					{ type: "EVENT", priority: "PRIMARY" },
 					{ type: "NAVIGATION", priority: "PRIMARY" }
 				];
@@ -345,7 +347,7 @@ describe("api.view.content-box", () => {
 			});
 
 			it("renders the secondary buttons as secondary button", () => {
-				const buttons: FormModelHelpers.ButtonDef[] = [
+				const buttons: ButtonDef[] = [
 					{ type: "EVENT", priority: "SECONDARY" },
 					{ type: "NAVIGATION", priority: "SECONDARY" }
 				];
@@ -367,7 +369,7 @@ describe("api.view.content-box", () => {
 
 		describe("minor footer buttons", () => {
 			it("renders left aligned", () => {
-				const buttons: FormModelHelpers.ButtonDef[] = [
+				const buttons: ButtonDef[] = [
 					{ type: "EVENT", priority: "PRIMARY" },
 					{ type: "NAVIGATION", priority: "PRIMARY" }
 				];
@@ -388,7 +390,7 @@ describe("api.view.content-box", () => {
 			});
 
 			it("renders the primary buttons as primary button", () => {
-				const buttons: FormModelHelpers.ButtonDef[] = [
+				const buttons: ButtonDef[] = [
 					{ type: "EVENT", priority: "PRIMARY" },
 					{ type: "NAVIGATION", priority: "PRIMARY" }
 				];
@@ -408,7 +410,7 @@ describe("api.view.content-box", () => {
 			});
 
 			it("renders the secondary buttons as secondary button", () => {
-				const buttons: FormModelHelpers.ButtonDef[] = [
+				const buttons: ButtonDef[] = [
 					{ type: "EVENT", priority: "SECONDARY" },
 					{ type: "NAVIGATION", priority: "SECONDARY" }
 				];

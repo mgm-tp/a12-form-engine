@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -33,14 +33,23 @@
 import type { ReactElement } from "react";
 import { useContext } from "react";
 
-import { LocalizerContext } from "@com.mgmtp.a12.utils/utils-localization-react/lib/main/index.js";
+import { LocalizerContext } from "@com.mgmtp.a12.utils/utils-localization-react";
+import { Icon } from "@com.mgmtp.a12.widgets/widgets-core";
+import type { SwitchLabelPosition } from "@com.mgmtp.a12.widgets/widgets-core";
 
+import type { FormModel } from "../../../../../../../models/index.js";
 import { WidgetMapContext } from "../../../../../configuration/widget-map-context.js";
 
 import { useBasePropsForSwitch } from "../use-input-props.js";
 
 import { getDisplayLabels } from "./display-label.js";
 import type { BooleanOrConfirmInputProps } from "./types.js";
+
+const labelPlacementToLabelPosition: Record<FormModel.LabelPlacement, SwitchLabelPosition> = {
+	TOP: "top",
+	LEFT: "left",
+	RIGHT: "right"
+};
 
 /** @internal */
 export function SwitchInput(props: BooleanOrConfirmInputProps): ReactElement {
@@ -54,12 +63,16 @@ export function SwitchInput(props: BooleanOrConfirmInputProps): ReactElement {
 		? getDisplayLabels(props.renderConfiguration.renderOptions, value, props.coalescing)
 		: { checkedOption: undefined, uncheckedOption: undefined };
 	const specificHorizontalAlignment = props.modelElement.specificHorizontalAlignment?.body;
+	const labelPosition = labelPlacementToLabelPosition[props.modelElement.labelPlacement ?? "TOP"];
+	const icon = props.modelElement.icon ?? { name: "check" };
 
 	const SwitchComponent = useContext(WidgetMapContext).Switch;
 
 	return (
 		<SwitchComponent
 			{...inputProps}
+			labelPosition={labelPosition}
+			checkedIcon=<Icon iconTheme={icon.theme}>{icon.name}</Icon>
 			onChange={() => {
 				options.eventHandlers.onValueChange(
 					value.path,

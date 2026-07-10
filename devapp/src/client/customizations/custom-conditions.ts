@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -35,8 +35,8 @@ import type {
 	EntityInstancePath,
 	ICustomCondition,
 	ICustomConditionFactory
-} from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
-import { DocumentServiceFactory } from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/facade.js";
+} from "@com.mgmtp.a12.kernel/kernel-md-facade";
+import { DocumentServiceFactory } from "@com.mgmtp.a12.kernel/kernel-md-facade";
 
 const documentService = new DocumentServiceFactory().getDocumentService();
 
@@ -44,9 +44,9 @@ const conditionsMap: Record<string, ICustomCondition> = {
 	CustomTestCondition: {
 		check(
 			document: Document,
-			documentModelId: string,
-			relevantEntityInstances: EntityInstancePath[] | undefined,
-			formallyIncorrectEntityInstances: EntityInstancePath[],
+			_documentModelId: string,
+			_relevantEntityInstances: EntityInstancePath[] | undefined,
+			_formallyIncorrectEntityInstances: EntityInstancePath[],
 			errorEntityInstance: EntityInstancePath
 		) {
 			return "abc" === documentService.getAssignedObject(document, errorEntityInstance);
@@ -55,9 +55,9 @@ const conditionsMap: Record<string, ICustomCondition> = {
 	CustomTestConditionMultiSelect: {
 		check(
 			document: Document,
-			documentModelId: string,
-			relevantEntityInstances: EntityInstancePath[] | undefined,
-			formallyIncorrectEntityInstances: EntityInstancePath[],
+			_documentModelId: string,
+			_relevantEntityInstances: EntityInstancePath[] | undefined,
+			_formallyIncorrectEntityInstances: EntityInstancePath[],
 			errorEntityInstance: EntityInstancePath
 		) {
 			return "key1" === documentService.getAssignedObject(document, errorEntityInstance);
@@ -66,9 +66,9 @@ const conditionsMap: Record<string, ICustomCondition> = {
 	CustomTestConditionAttachment: {
 		check(
 			document: Document,
-			documentModelId: string,
-			relevantEntityInstances: EntityInstancePath[] | undefined,
-			formallyIncorrectEntityInstances: EntityInstancePath[],
+			_documentModelId: string,
+			_relevantEntityInstances: EntityInstancePath[] | undefined,
+			_formallyIncorrectEntityInstances: EntityInstancePath[],
 			errorEntityInstance: EntityInstancePath
 		) {
 			return "abc.png" === documentService.getAssignedObject(document, errorEntityInstance);

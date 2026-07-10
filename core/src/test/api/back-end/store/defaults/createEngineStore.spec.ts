@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -34,12 +34,10 @@ import { deepStrictEqual, strictEqual } from "node:assert/strict";
 
 import type { EngineState, EngineStore } from "../../../../../back-end/store/index.js";
 import { createEngineStore } from "../../../../../back-end/store/index.js";
+import { createDocumentPath } from "../../../../utils/createDocumentPath.js";
+import { createModelPath } from "../../../../utils/createModelPath.js";
 import { US_LOCALE } from "../../../../utils/localization.js";
 import { setupFixtureObject, setupModelsFixture } from "../../../../utils/setupFixture.js";
-import {
-	createDocumentPath,
-	createModelPath
-} from "../../../../utils/test-model-helpers/dependent-enumeration.js";
 
 describe("api.back-end.store.defaults", () => {
 	const models = setupModelsFixture("controls.initial-values");

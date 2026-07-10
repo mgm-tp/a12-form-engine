@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -33,15 +33,16 @@
 import type { JSX } from "react";
 import { useContext } from "react";
 
-import { LocalizerContext } from "@com.mgmtp.a12.utils/utils-localization-react/lib/main/index.js";
+import { LocalizerContext } from "@com.mgmtp.a12.utils/utils-localization-react";
 
 import { RESOURCE_KEYS } from "../../../../../back-end/localization/index.js";
 import { getLocalizedResource } from "../../../../../back-end/localization/internal/localize.js";
-import { ModelSelectors, UiStateSelectors } from "../../../../../back-end/store/index.js";
+import { ModelSelectors } from "../../../../../back-end/store/index.js";
+import { InternalUiStateSelectors } from "../../../../../back-end/store/internal/selectors/ui-state.js";
 import { relevantMessagesSelector } from "../../../../../back-end/store/internal/validation.js";
 import type { FormModelMap } from "../../../configuration/engine-configuration.js";
 import { WidgetMapContext } from "../../../configuration/widget-map-context.js";
-import { getInfos, getWarnings } from "../../../utilities/control-utilities.js";
+import { getCountsByMessageSeverity } from "../../../utilities/getCountsByMessageSeverity.js";
 
 /** @internal */
 export function WarningInfoConfirmation(props: {
@@ -52,7 +53,9 @@ export function WarningInfoConfirmation(props: {
 
 	const { renderOptions } = props;
 
-	const confirmationRequested = UiStateSelectors.actionConfirmationRequested()(renderOptions.state);
+	const confirmationRequested = InternalUiStateSelectors.actionConfirmationRequested()(
+		renderOptions.state
+	);
 	if (!confirmationRequested) {
 		return null;
 	}
@@ -64,8 +67,7 @@ export function WarningInfoConfirmation(props: {
 	const hideConfirmationSummary = ModelSelectors.formModel()(renderOptions.state).content
 		.hideConfirmationSummary;
 
-	const warnings = getWarnings(relevantMessages).length;
-	const infos = getInfos(relevantMessages).length;
+	const { WARNING: warnings, INFO: infos } = getCountsByMessageSeverity(relevantMessages);
 
 	return (
 		<ModalNotification

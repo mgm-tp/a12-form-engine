@@ -14,6 +14,7 @@ Refer to https://geta12.com/#/docs to get started with A12 development
 ## License
 
 Parts of the A12 platform are made available under a **dual license**.
+
 Please check the [LICENSE](./LICENSE) file for details.
 
 ---
@@ -23,7 +24,6 @@ Please check the [LICENSE](./LICENSE) file for details.
 ### Java
 
 - **form-model** - contains the Java code part of the repository.
-- **computation-relevancy-analyzer** - CLI tool that analyzes and validates form computation dependencies
 
 ### TypeScript
 
@@ -69,8 +69,8 @@ The following tools are required in order to build this repository.
 
 | Tool     | Version |
 | -------- | ------- |
-| [JDK]    | `^21`   |
-| [Gradle] | `^8.11.0` |
+| [JDK]    | `^25`   |
+| [Gradle] | `^9`    |
 | [Node]   | `^24`   |
 | [pnpm]   | `^11`   |
 
@@ -105,8 +105,10 @@ In the `devapp` subpackage, use following npm scripts to start the application.
 To start the application in mock mode (no backend, all requests stubbed), use
 
 ```sh
-node --run start:mock // or simply node --run start
+node --run start:mock
 ```
+
+or simply `node --run start`.
 
 To start the application in server mode (using a real DataServices backend), use
 
@@ -118,8 +120,14 @@ node --run start:services
 
 #### Make updates to example models available to dev server
 
+Model changes are picked up automatically while the dev server is running — the
+devapp runs a Gradle continuous build in the background and reloads the page automatically.
+
+To rebuild the example models / the model graph manually, call the gradle tasks:
+
 ```sh
-gradle onlyBuildModels
+gradle prepareModels # models only
+gradle generateModelGraph # models + model graph
 ```
 
 #### Rebuild only the developer documentation

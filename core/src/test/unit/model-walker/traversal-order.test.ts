@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -32,9 +32,10 @@
 
 import { strictEqual } from "node:assert/strict";
 
-import { last, type NonEmptyArray } from "fp-ts/lib/NonEmptyArray.js";
+import { last } from "fp-ts/lib/NonEmptyArray.js";
+import type { NonEmptyArray } from "fp-ts/lib/NonEmptyArray.js";
 
-import { ModelPath } from "@com.mgmtp.a12.base/base-model-api/lib/main/model/index.js";
+import { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
 
 import { FormModelPath } from "../../../models/internal/utils/form-model-path.js";
 import type { ModelVisitor } from "../../../models/internal/utils/form-model-walker.js";

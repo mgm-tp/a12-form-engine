@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -30,11 +30,12 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import type { DataProvider } from "@com.mgmtp.a12.client/client-core/lib/core/data/index.js";
-import type { Selector } from "@com.mgmtp.a12.client/client-core/lib/core/store/index.js";
-import type { DocumentJsonRpc2Request } from "@com.mgmtp.a12.dataservices/dataservices-access/lib/Document/index.js";
-import type { Query } from "@com.mgmtp.a12.dataservices/dataservices-access/lib/query/Query.js";
-import type { QueryJsonRpc2Request } from "@com.mgmtp.a12.dataservices/dataservices-access/lib/query/Request.js";
+import type { DataProvider, Selector } from "@com.mgmtp.a12.client/client-core";
+import type {
+	DocumentJsonRpc2Request,
+	Query,
+	QueryJsonRpc2Request
+} from "@com.mgmtp.a12.dataservices/dataservices-access";
 
 /**
  * @experimental
@@ -50,13 +51,16 @@ export interface RequestSelectorMap {
 		config: DataProvider.LoadConfig
 	) => Selector<QueryJsonRpc2Request<Query.DocRefExactMatchQueryRoot>>;
 	/**
-	 * Selects the request that will be made when saving a document.
+	 * Selects the requests that will be made when saving a document.
 	 * Note the document can either be new or existing
 	 */
 	save: (
 		config: DataProvider.SaveConfig
 	) => Selector<
-		DocumentJsonRpc2Request.AddJsonRpc2Request | DocumentJsonRpc2Request.ModifyJsonRpc2Request
+		[
+			DocumentJsonRpc2Request.CheckUniquenessJsonRpc2Request,
+			DocumentJsonRpc2Request.AddJsonRpc2Request | DocumentJsonRpc2Request.ModifyJsonRpc2Request
+		]
 	>;
 	/**
 	 * Selects the request that will be made when deleting a document

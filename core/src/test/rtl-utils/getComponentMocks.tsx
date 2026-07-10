@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -38,13 +38,13 @@ import type {
 	AttachmentUploadProps,
 	MultiAttachmentUploadProps
 } from "../../view/internal/components/widgets/form-engine/attachments/attachmentUploadProps.js";
-import type { BufferedTextArea } from "../../view/internal/components/widgets/form-engine/buffered-text-area.js";
-import type { BufferedTextLine } from "../../view/internal/components/widgets/form-engine/buffered-text-line.js";
+import type { BufferedTextAreaProps } from "../../view/internal/components/widgets/form-engine/buffered-text-area.js";
 import type {
 	DateRangeTextLineProps,
 	DateTextLineProps,
 	DateTimeTextLineProps
 } from "../../view/internal/components/widgets/form-engine/date-props.js";
+import type { PickerWrapperProps } from "../../view/internal/components/widgets/form-engine/pickerWrapper.js";
 import type { SuffixProps } from "../../view/internal/components/widgets/form-engine/suffix.js";
 import type { HtmlTextProps } from "../../view/internal/components/widgets/form-engine/text.js";
 import type { TooltipsProps } from "../../view/internal/components/widgets/tooltips.js";
@@ -52,7 +52,7 @@ import type { ValidationMessagesProps } from "../../view/internal/components/wid
 import type { ComponentMap } from "../../view/internal/configuration/componentMap/component-map.js";
 import { DefaultComponentMap } from "../../view/internal/configuration/componentMap/DefaultComponentMap.js";
 import type { ContentWithNewLinesProps } from "../../view/internal/utilities/contentWithNewLines.js";
-import type { PickerWrapperProps } from "../../view/internal/components/widgets/form-engine/pickerWrapper.js";
+import type { BufferedTextLineProps } from "../../view/internal/components/widgets/form-engine/buffered-text-line.js";
 
 import {
 	ACTION_BUTTONS,
@@ -133,7 +133,7 @@ export function MultiAttachmentUploadMock(props: WithDataTestId<MultiAttachmentU
 	);
 }
 
-export function BufferedTextLineMock(props: WithDataTestId<BufferedTextLine.PropsType>) {
+export function BufferedTextLineMock(props: WithDataTestId<BufferedTextLineProps>) {
 	return (
 		<MockComponent id={props.id} dataRole={BUFFERED_TEXT_LINE} dataTestId={props["data-testid"]}>
 			{props.prefixes}
@@ -141,7 +141,7 @@ export function BufferedTextLineMock(props: WithDataTestId<BufferedTextLine.Prop
 	);
 }
 
-export function BufferedTextAreaMock(props: WithDataTestId<BufferedTextArea.PropsType>) {
+export function BufferedTextAreaMock(props: WithDataTestId<BufferedTextAreaProps>) {
 	return (
 		<MockComponent id={props.id} dataRole={BUFFERED_TEXT_AREA} dataTestId={props["data-testid"]} />
 	);

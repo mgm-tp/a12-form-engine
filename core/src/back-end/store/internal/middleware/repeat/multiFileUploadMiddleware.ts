@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -32,25 +32,25 @@
 
 import type { Middleware } from "redux";
 
-import type {
-	EntityInstancePath,
-	GroupInstance
-} from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
+import type { EntityInstancePath, GroupInstance } from "@com.mgmtp.a12.kernel/kernel-md-facade";
 
 import { RepeatData } from "../../../../../data/internal/repeat.js";
-import { findElementByFormModelPath, FormModel } from "../../../../../models/index.js";
-import { DocumentModelUtils } from "../../../../../models/internal/utils/document-model-utils.js";
+import { findElementByFormModelPath } from "../../../../../models/index.js";
+import { isFormModelRepeat } from "../../../../../models/internal/FormModelGuards.js";
+import * as DocumentModelUtils from "../../../../../models/internal/utils/document-model-utils.js";
 import {
 	DocumentPath,
-	DocumentUtils
+	DocumentUtils,
+	InternalDocumentPath
 } from "../../../../../models/internal/utils/document-utils.js";
 import { ReadonlyObjectMap } from "../../../../../models/internal/utils/json.js";
-import { ModelUtils } from "../../../../../models/internal/utils/model-utils.js";
+import { createGroupInstance } from "../../../../../models/internal/utils/model-utils.js";
 import { getDocumentPath } from "../../../../utils/internal/path.js";
 import { Commands, Events } from "../../actions.js";
+import { validateChangesAndUpdateMessages } from "../../change-validation.js";
 import { KernelComputation } from "../../computation.js";
-import type { Change } from "../../documentChange.js";
 import { ChangeMapCreators } from "../../documentChange.js";
+import type { Change } from "../../documentChange.js";
 import { DataSelectors } from "../../selectors/data.js";
 import { ModelSelectors } from "../../selectors/models.js";
 import { UiStateSelectors } from "../../selectors/ui-state.js";
@@ -87,7 +87,16 @@ export function multiFileUploadMiddlewareFactory(middlewareOptions: MiddlewareOp
 			const rowCountBefore = rows !== undefined ? rows.length : 0;
 
 			let newDocument = document;
+			/*
+			 * Parallel document used as a baseline for validation comparison:
+			 * new rows added via addNewRow (with initial values) but WITHOUT attachment values.
+			 * Used to identify which validation errors appear specifically because attachment
+			 * values were set — not merely because a new row was created.
+			 */
+			let newDocumentWithOnlyGroupsAdded = document;
 			const changes: Change[] = [];
+			const attachmentPaths: EntityInstancePath[] = [];
+			const attachmentAddedChanges: Change[] = [];
 			let firstNewRowPath: EntityInstancePath | undefined = undefined;
 
 			if (action.payload.toBeReplaced) {
@@ -99,20 +108,27 @@ export function multiFileUploadMiddlewareFactory(middlewareOptions: MiddlewareOp
 					}
 
 					newDocument = DocumentUtils.setValue(newDocument, entry.path, entry.value, documentModel);
+					newDocumentWithOnlyGroupsAdded = DocumentUtils.setValue(
+						newDocumentWithOnlyGroupsAdded,
+						entry.path,
+						entry.value,
+						documentModel
+					);
 
 					const changesForAttachment = ReadonlyObjectMap.values(
 						createChangesForAttachment(entry.path, entry.value)
 					);
 
 					changes.push(...changesForAttachment);
+					attachmentPaths.push(entry.path);
 				}
 			}
 
 			for (let i = 0; i < action.payload.toBeAdded.length; i++) {
 				const attachment = action.payload.toBeAdded[i];
-				const row = ModelUtils.createGroupInstance(group, formModel, action.payload.path);
+				const row = createGroupInstance(group, formModel, action.payload.path);
 				const newRowPath = [
-					...DocumentPath.parentPath(groupDocumentPath),
+					...InternalDocumentPath.parentPath(groupDocumentPath),
 					{
 						elementName: groupDocumentPath[groupDocumentPath.length - 1].elementName,
 						index: rowCountBefore + i + 1
@@ -142,44 +158,185 @@ export function multiFileUploadMiddlewareFactory(middlewareOptions: MiddlewareOp
 					documentModel
 				);
 
+				// Groups-only baseline: add the row (with initial values) but do NOT set attachment values.
+				// This lets us later compare validation results to find errors triggered by attachment upload.
+				newDocumentWithOnlyGroupsAdded = DocumentUtils.addNewRow(
+					newDocumentWithOnlyGroupsAdded,
+					groupDocumentPath,
+					row,
+					documentModel,
+					formModel
+				);
+
 				changes.push({ type: "GroupAdded", path: groupDocumentPath });
+				attachmentPaths.push(newAttachmentPath);
+				attachmentAddedChanges.push(
+					...ReadonlyObjectMap.values(createChangesForAttachment(newAttachmentPath, attachment))
+				);
 			}
 
+			// Changes produced by adding / changing group instances via multi file upload
 			const changeEntries = ChangeMapCreators.fromList(changes);
 
-			/**
-			 * TODO: Should this work like the other value change middlewares?
-			 * We don't consider relevant fields here?
-			 */
-			const updatedResult = KernelComputation.internalComputeThenValidate({
-				document: newDocument,
-				messages,
-				middlewareOptions,
-				state,
-				existingChanges: changeEntries
-			});
+			let computedDocument: GroupInstance;
+			let changesFromComputations: ReturnType<typeof ChangeMapCreators.difference>;
+			let finalMessages: typeof messages;
 
-			// separate the changes from computation because there might be
-			// multiple "group added" changes and they all have the same path
-			// (pointing to the repeatable group context, not the added row!) -
-			// internalComputeThenValidate merges both sets in a single map with
-			// key=path, which would loose those group changes!
-			const changesFromComputations = ChangeMapCreators.difference(
-				updatedResult.changes,
-				changeEntries
-			);
+			if (action.payload.toBeAdded.length === 0) {
+				/*
+				 * Fast path: pure attachment replacement (no rows added).
+				 *
+				 * Without new rows there is nothing to defer: existing rows already have
+				 * their other fields in their previously-validated state. We can use the
+				 * bundled compute+validate helper, matching the pattern used by other
+				 * repeat middlewares (add/clone/remove) and the pre-A12E-3602 behaviour.
+				 */
+				const updatedResult = KernelComputation.internalComputeThenValidate({
+					document: newDocument,
+					messages,
+					middlewareOptions,
+					state,
+					existingChanges: changeEntries
+				});
 
-			newDocument = updatedResult.document;
-			const newMessages = updatedResult.messages;
+				computedDocument = updatedResult.document;
+				finalMessages = updatedResult.messages;
+				changesFromComputations = ChangeMapCreators.difference(
+					updatedResult.changes,
+					changeEntries
+				);
+			} else {
+				/*
+				 * Slow path: at least one new row is added. We need to distinguish
+				 * validation errors triggered by attachment values from errors caused
+				 * merely by group addition, so that errors only relevant to the new row's
+				 * non-attachment fields are deferred to on-leave validation.
+				 */
+				const models = {
+					documentModel,
+					formModel,
+					validatorProvider: ModelSelectors.validationCode()(state)
+				};
+				const kernelOptions = middlewareOptions.kernelOptionsProvider?.(state);
+
+				/*
+				 * Baseline computation: evaluate computations and dependencies on only-groups-added document (no attachment values).
+				 * Used to establish which validation errors exist purely from group addition — e.g. from
+				 * initial values or computations that depend on group structure, not on attachment field values.
+				 */
+				const { document: computedDocumentWithOnlyGroupsAdded } =
+					KernelComputation.computeAndEvaluateDependencies({
+						models,
+						document: newDocumentWithOnlyGroupsAdded,
+						kernelOptions,
+						changes: changeEntries
+					});
+
+				// Full computation: evaluate all computations and dependencies after group additions and attachment value changes
+				const {
+					document: fullComputedDocument,
+					changes: computationChanges,
+					parseErrors
+				} = KernelComputation.computeAndEvaluateDependencies({
+					models,
+					document: newDocument,
+					kernelOptions,
+					changes: changeEntries
+				});
+
+				/*
+				 * Changes from the multi file upload changed instances and
+				 * additional changes from triggered computations or dependencies
+				 *
+				 * Also include attachment field changes for toBeAdded rows. These
+				 * are not included in the changes for setDocument, since there the
+				 * groupAdded changes are sufficient, but they are needed for
+				 * field-level validation.
+				 */
+				const allChanges = ChangeMapCreators.union(
+					ChangeMapCreators.union(changeEntries, computationChanges),
+					ChangeMapCreators.fromList(attachmentAddedChanges)
+				);
+
+				/*
+				 * Separate the changes from computation because there might be
+				 * multiple "group added" changes and they all have the same path
+				 * (pointing to the repeatable group context, not the added row!).
+				 *
+				 * ChangeMapCreators.union merges both sets in a single map with
+				 * key=path, which would lose those group changes!
+				 */
+				changesFromComputations = ChangeMapCreators.difference(computationChanges, changeEntries);
+
+				/*
+				 * Validation comparison: find which validation errors appear specifically
+				 * because attachment values were set — not just because a row was added.
+				 *
+				 * Baseline: validate all changed fields against the computed only-groups-added document (no attachment values).
+				 * Full: validate all changed fields against the computed document (attachment values present).
+				 *
+				 * Fields present in full messages but absent from baseline have attachment-triggered
+				 * validation errors and should be validated immediately after upload.
+				 * This also catches fields whose initial values cause rule violations only when an
+				 * attachment field is also filled.
+				 */
+				const baselineValidationMessages = validateChangesAndUpdateMessages({
+					changes: allChanges,
+					document: computedDocumentWithOnlyGroupsAdded,
+					initialMessages: {},
+					kernelOptions,
+					models
+				});
+
+				const fullValidationMessages = validateChangesAndUpdateMessages({
+					changes: allChanges,
+					document: fullComputedDocument,
+					initialMessages: {},
+					kernelOptions,
+					models
+				});
+
+				const baselineKeys = new Set(ReadonlyObjectMap.keys(baselineValidationMessages));
+				const validationTriggeredPaths = ReadonlyObjectMap.keys(fullValidationMessages)
+					.filter(key => !baselineKeys.has(key))
+					.map(key => DocumentPath.fromString(key));
+
+				/*
+				 * Some paths in validationTriggeredPaths (e.g. fields with initial values whose
+				 * validation rules reference attachment fields) may not appear in allChanges because
+				 * they were set by addNewRow, not by a kernel computation. We add them as synthetic
+				 * ValueChanged entries so that categorizeChanges called within validateChangesAndUpdateMessages
+				 * includes them in relevantPaths.
+				 */
+				const allChangesForFinalValidation = ChangeMapCreators.union(
+					allChanges,
+					ChangeMapCreators.createValueChanges(validationTriggeredPaths)
+				);
+
+				// Validate immediately for attachment fields and attachment-value-triggered validation fields.
+				// Other added-group fields (e.g. required-but-empty, fields with initial values unrelated
+				// to the attachment) are deferred to on-leave validation.
+				finalMessages = validateChangesAndUpdateMessages({
+					changes: allChangesForFinalValidation,
+					document: fullComputedDocument,
+					initialMessages: messages,
+					kernelOptions,
+					models,
+					parsingErrorsAfterComputation: parseErrors,
+					relevantFieldPaths: [...attachmentPaths, ...validationTriggeredPaths]
+				});
+
+				computedDocument = fullComputedDocument;
+			}
 
 			dispatch(
 				Commands.setDocument({
-					document: newDocument,
+					document: computedDocument,
 					changes: [...changes, ...ReadonlyObjectMap.values(changesFromComputations)]
 				})
 			);
 
-			dispatch(Commands.setMessageState({ messages: newMessages }));
+			dispatch(Commands.setMessageState({ messages: finalMessages }));
 
 			updateDataDirtyState(dispatch, state);
 
@@ -194,7 +351,7 @@ export function multiFileUploadMiddlewareFactory(middlewareOptions: MiddlewareOp
 				const repeat = findElementByFormModelPath(formModel, repeatFormModelPath);
 
 				const { page } =
-					repeat && FormModel.Repeat.isInstance(repeat) && firstNewRowPath
+					repeat && isFormModelRepeat(repeat) && firstNewRowPath
 						? RepeatData.getPageOfNewRow({
 								converter: middlewareOptions.converter(state),
 								localizer: middlewareOptions.localizer(state),

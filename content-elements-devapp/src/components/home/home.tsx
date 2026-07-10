@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -32,16 +32,15 @@
 
 import { useDispatch, useSelector } from "react-redux";
 
-import {
-	ActivityActions,
-	ActivitySelectors
-} from "@com.mgmtp.a12.client/client-core/lib/core/activity/index.js";
-import type { ViewNGProps } from "@com.mgmtp.a12.client/client-core/lib/core/view/index.js";
+import type { ViewNGProps } from "@com.mgmtp.a12.client/client-core";
+import { ActivityActions, ActivitySelectors } from "@com.mgmtp.a12.client/client-core";
 import { ContentEditorDataHolder } from "@com.mgmtp.a12.contentengine/contentengine-editor";
-import { Button } from "@com.mgmtp.a12.widgets/widgets-core/lib/button/main/button.view.js";
-import { ActionContentbox } from "@com.mgmtp.a12.widgets/widgets-core/lib/contentbox/main/action-contentbox/action-contentbox.view.js";
-import { LayoutGrid } from "@com.mgmtp.a12.widgets/widgets-core/lib/layout/layout-grid/main/layout-grid.view.js";
-import { Typography } from "@com.mgmtp.a12.widgets/widgets-core/lib/typography/main/typography.view.js";
+import {
+	Button,
+	ActionContentbox,
+	LayoutGrid,
+	Typography
+} from "@com.mgmtp.a12.widgets/widgets-core";
 
 const { Grid, Row, Column } = LayoutGrid;
 

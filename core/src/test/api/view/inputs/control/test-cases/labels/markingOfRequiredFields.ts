@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -39,7 +39,6 @@ import { query } from "@com.mgmtp.a12.devtools/react";
 import type { FormModel } from "../../../../../../../models/index.js";
 import { getComponentMocks } from "../../../../../../rtl-utils/getComponentMocks.js";
 import { isReactElement } from "../../../../../../rtl-utils/mock-utils.js";
-import { SetupHelpers } from "../../../../../../utils/setup.js";
 import { setupModelsFixture } from "../../../../../../utils/setupFixture.js";
 import {
 	IDS as ExpressionLabelIds,
@@ -48,6 +47,7 @@ import {
 } from "../../../../../../utils/test-model-helpers/expression-label.js";
 import { IDS } from "../../../../../../utils/test-model-helpers/tooltips.js";
 import { IDS as MarkingIds } from "../../../../../../utils/test-model-helpers/validation.required.markingOfRequiredFields.js";
+import { setupFormEngineRendererWithRtl } from "../../../../../../utils/setup.js";
 
 import { renderStringInput } from "../renderStringInput.js";
 
@@ -222,7 +222,7 @@ export function executeMarkingOfRequiredFieldsOnControlLevel(): void {
 				asteriskExpected ? "" : " no"
 			} asterisk`, () => {
 				const componentMap = getComponentMocks();
-				SetupHelpers.setupFormEngineRendererWithRtl({
+				setupFormEngineRendererWithRtl({
 					models: markingOfRequiredFieldsModels,
 					componentMap
 				});

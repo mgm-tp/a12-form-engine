@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -30,11 +30,8 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { ModelPath } from "@com.mgmtp.a12.base/base-model-api/lib/main/model/index.js";
-import type {
-	EntityInstancePath,
-	GroupInstance
-} from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
+import { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
+import type { EntityInstancePath, GroupInstance } from "@com.mgmtp.a12.kernel/kernel-md-facade";
 
 import { isComputedField } from "../../../back-end/store/internal/kernel-adapter.js";
 import type { Models } from "../../../back-end/store/internal/store.js";
@@ -56,26 +53,19 @@ interface EntryCaseFilter {
  * FieldState related features: setting a field and therefore all controls that reference this field hidden or readonly.
  * @ignore
  */
-export namespace ElementStateUtil {
-	/** @internal */
-	const readOnlyFilter: EntryCaseFilter = (entryCase: FormModel.DependentGroupCase) =>
-		entryCase.readonly === true;
-	/** @internal */
-	const notRelevantFilter: EntryCaseFilter = (entryCase: FormModel.DependentGroupCase) =>
-		entryCase.notRelevant === true;
-
+export const ElementStateUtil = {
 	/**
 	 * @internal
 	 *
 	 * evaluate if a field is supposed to be read-only
 	 */
-	export function evaluateFieldReadOnly(
+	evaluateFieldReadOnly(
 		document: object,
 		models: Models,
 		elementPath: ModelPath,
 		context: EntityInstancePath
 	): boolean {
-		const fieldState = evaluateStateAttributeField(
+		const fieldState = ElementStateUtil.evaluateStateAttributeField(
 			document,
 			models,
 			elementPath,
@@ -102,20 +92,20 @@ export namespace ElementStateUtil {
 		return models.validatorProvider
 			? isComputedField(models.validatorProvider, elementPath)
 			: false;
-	}
+	},
 
 	/**
 	 * @internal
 	 *
 	 * evaluate whether a field is not relevant
 	 */
-	export function evaluateFieldNotRelevant(
+	evaluateFieldNotRelevant(
 		document: object,
 		models: Models,
 		fieldPath: ModelPath,
 		context: EntityInstancePath
 	): boolean {
-		const fieldState = evaluateStateAttributeField(
+		const fieldState = ElementStateUtil.evaluateStateAttributeField(
 			document,
 			models,
 			fieldPath,
@@ -131,35 +121,35 @@ export namespace ElementStateUtil {
 			context
 		);
 		return fieldState || groupState;
-	}
+	},
 
 	/**
 	 * @internal
 	 *
 	 * evaluate if a group is supposed to be read-only
 	 */
-	export function evaluateGroupReadOnly(
+	evaluateGroupReadOnly(
 		document: object,
 		models: Models,
 		fieldPath: ModelPath,
 		context: EntityInstancePath
 	): boolean {
 		return evaluateStateAttributeGroup(document, models, fieldPath, readOnlyFilter, context);
-	}
+	},
 
 	/**
 	 * @internal
 	 *
 	 * evaluate whether a group is not relevant
 	 */
-	export function evaluateGroupNotRelevant(
+	evaluateGroupNotRelevant(
 		document: object,
 		models: Models,
 		fieldPath: ModelPath,
 		context: EntityInstancePath
 	): boolean {
 		return evaluateStateAttributeGroup(document, models, fieldPath, notRelevantFilter, context);
-	}
+	},
 
 	/**
 	 * @internal
@@ -167,7 +157,7 @@ export namespace ElementStateUtil {
 	 * Evaluate if a screen element is supposed to be hidden
 	 * due to a DependentControl dependency
 	 */
-	export function evaluateHiddenDependentScreenElement(
+	evaluateHiddenDependentScreenElement(
 		document: object,
 		models: Models,
 		id: string,
@@ -206,7 +196,7 @@ export namespace ElementStateUtil {
 
 			return c.values.every(v => v !== masterValue);
 		});
-	}
+	},
 
 	/**
 	 * @internal
@@ -214,7 +204,7 @@ export namespace ElementStateUtil {
 	 * evaluates if any of the dependent field or group affects the property readonly or hidden
 	 * (implicitly defined by a filter function) for this field.
 	 */
-	export function evaluateStateAttributeField(
+	evaluateStateAttributeField(
 		document: object,
 		models: Models,
 		fieldPath: ModelPath,
@@ -230,14 +220,14 @@ export namespace ElementStateUtil {
 		} else {
 			return false;
 		}
-	}
+	},
 
 	/**
 	 * @internal
 	 *
 	 * Evaluates whether an element is hidden due to its hide condition
 	 */
-	export function evaluateHiddenByCondition(
+	evaluateHiddenByCondition(
 		document: object,
 		models: Models,
 		id: string,
@@ -264,56 +254,63 @@ export namespace ElementStateUtil {
 
 		return entry.values.some(value => value === masterValue);
 	}
+};
 
-	/**
-	 * @internal
-	 *
-	 * evaluates if any of the dependent field or group affects the property readonly or hidden
-	 * (implicitly defined by a filter function) for this field.
-	 */
-	function evaluateStateAttributeGroup(
-		document: object,
-		models: Models,
-		path: ModelPath,
-		filter: EntryCaseFilter,
-		context: EntityInstancePath
-	): boolean {
-		let remainingPath = path;
-		while (remainingPath.length > 0) {
-			const groupConfigEntry =
-				models.formModel.content.groupConfiguration.groupMap[ModelPath.toString(remainingPath)];
-			if (groupConfigEntry && groupConfigEntry.dependentGroup) {
-				const masterFieldPath = groupConfigEntry.dependentGroup.masterFieldPath;
-				const entryCase = groupConfigEntry.dependentGroup.case.filter(filter);
-				const result = evaluateCases(masterFieldPath, entryCase, document, models, context);
-				if (result) {
-					return true;
-				}
+/** @internal */
+const readOnlyFilter: EntryCaseFilter = (entryCase: FormModel.DependentGroupCase) =>
+	entryCase.readonly === true;
+/** @internal */
+const notRelevantFilter: EntryCaseFilter = (entryCase: FormModel.DependentGroupCase) =>
+	entryCase.notRelevant === true;
+
+/**
+ * @internal
+ *
+ * evaluates if any of the dependent field or group affects the property readonly or hidden
+ * (implicitly defined by a filter function) for this field.
+ */
+function evaluateStateAttributeGroup(
+	document: object,
+	models: Models,
+	path: ModelPath,
+	filter: EntryCaseFilter,
+	context: EntityInstancePath
+): boolean {
+	let remainingPath = path;
+	while (remainingPath.length > 0) {
+		const groupConfigEntry =
+			models.formModel.content.groupConfiguration.groupMap[ModelPath.toString(remainingPath)];
+		if (groupConfigEntry && groupConfigEntry.dependentGroup) {
+			const masterFieldPath = groupConfigEntry.dependentGroup.masterFieldPath;
+			const entryCase = groupConfigEntry.dependentGroup.case.filter(filter);
+			const result = evaluateCases(masterFieldPath, entryCase, document, models, context);
+			if (result) {
+				return true;
 			}
-
-			remainingPath = remainingPath.slice(0, remainingPath.length - 1);
 		}
 
-		return false;
+		remainingPath = remainingPath.slice(0, remainingPath.length - 1);
 	}
 
-	// evaluate if at least for one case the value of the master field equals the desired master value
-	function evaluateCases(
-		masterFieldPath: ModelPath,
-		entryCases: FormModel.DependentGroupCase[],
-		document: object,
-		models: Models,
-		context: EntityInstancePath
-	) {
-		const { documentModel } = models;
-		const masterFieldDocumentPath = getDocumentPath(documentModel, masterFieldPath, context);
-		const masterValue = DocumentUtils.getValue({
-			document: document as GroupInstance,
-			path: masterFieldDocumentPath
-		});
+	return false;
+}
 
-		return entryCases.some(entryCase => {
-			return masterValue === entryCase.masterValueTyped;
-		});
-	}
+// evaluate if at least for one case the value of the master field equals the desired master value
+function evaluateCases(
+	masterFieldPath: ModelPath,
+	entryCases: FormModel.DependentGroupCase[],
+	document: object,
+	models: Models,
+	context: EntityInstancePath
+) {
+	const { documentModel } = models;
+	const masterFieldDocumentPath = getDocumentPath(documentModel, masterFieldPath, context);
+	const masterValue = DocumentUtils.getValue({
+		document: document as GroupInstance,
+		path: masterFieldDocumentPath
+	});
+
+	return entryCases.some(entryCase => {
+		return masterValue === entryCase.masterValueTyped;
+	});
 }

@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -34,10 +34,10 @@ import { deepStrictEqual, notStrictEqual, strictEqual } from "node:assert/strict
 
 import { act } from "react";
 
-import { ModelPath } from "@com.mgmtp.a12.base/base-model-api/lib/main/model/index.js";
-import type { Attachment } from "@com.mgmtp.a12.dataservices/dataservices-access/lib/Attachment/attachment.js";
+import { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
+import type { Attachment } from "@com.mgmtp.a12.dataservices/dataservices-access";
 import { query } from "@com.mgmtp.a12.devtools/react";
-import type { Localizable } from "@com.mgmtp.a12.utils/utils-localization/lib/main/index.js";
+import type { Localizable } from "@com.mgmtp.a12.utils/utils-localization";
 
 import { createLocalizableFactory } from "../../../../../back-end/localization/internal/localization.js";
 import type { EngineStore, Models } from "../../../../../back-end/store/index.js";
@@ -53,9 +53,12 @@ import { getComponentMocks } from "../../../../rtl-utils/getComponentMocks.js";
 import { mouseEventMock } from "../../../../rtl-utils/mock-utils.js";
 import type { RtlRenderWrapper } from "../../../../rtl-utils/render-wrapper.js";
 import { rtlRenderWrapperAsync } from "../../../../rtl-utils/render-wrapper.js";
-import { MiddlewareHelpers } from "../../../../utils/back-end-helpers.js";
+import { MiddlewareHelpers } from "../../../../utils/MiddlewareHelpers.js";
 import { US_LOCALE } from "../../../../utils/localization.js";
-import { SetupHelpers } from "../../../../utils/setup.js";
+import {
+	setupConnectedFormEngineWithRtlAsync,
+	setupFormEngineRendererWithRtlAsync
+} from "../../../../utils/setup.js";
 import { setupFixture, setupModelsFixture } from "../../../../utils/setupFixture.js";
 import {
 	DOCUMENT_MODEL,
@@ -195,7 +198,7 @@ describe("api.view.inputs", () => {
 						it("does not render a modal dialog", async () => {
 							const fileListMock = setupFileListMock([fixture.fileMocks.uniqueFileMock1]);
 
-							const wrapper = await SetupHelpers.setupFormEngineRendererWithRtlAsync({
+							const wrapper = await setupFormEngineRendererWithRtlAsync({
 								models,
 								data: { document: fixture.document }
 							});
@@ -219,7 +222,7 @@ describe("api.view.inputs", () => {
 							fixture.fileMocks.uniqueFileMock2
 						]);
 
-						const wrapper = await SetupHelpers.setupFormEngineRendererWithRtlAsync({
+						const wrapper = await setupFormEngineRendererWithRtlAsync({
 							models,
 							data: { document: fixture.documentAlmostMaxRep }
 						});
@@ -319,7 +322,7 @@ describe("api.view.inputs", () => {
 
 			describe("given a document, where the maximum repeatability of the repeatable group is reached", () => {
 				it("renders a disabled file upload widget", async () => {
-					const wrapper = await SetupHelpers.setupFormEngineRendererWithRtlAsync({
+					const wrapper = await setupFormEngineRendererWithRtlAsync({
 						models,
 						data: { document: fixture.documentMaxRep }
 					});
@@ -432,7 +435,7 @@ describe("api.view.inputs", () => {
 			it("renders a modal dialog for duplicate handling", async () => {
 				const fileListMock = setupFileListMock([fixture.fileMocks.duplicateFileMock]);
 
-				const wrapper = await SetupHelpers.setupConnectedFormEngineWithRtlAsync({
+				const wrapper = await setupConnectedFormEngineWithRtlAsync({
 					models,
 					data: { document: fixture.document }
 				});
@@ -475,7 +478,7 @@ describe("api.view.inputs", () => {
 								)
 							})),
 							formModelElementPath: FORM_MODEL.IR.repeatFormModelPath,
-							formModelRepeatPath: FORM_MODEL.IR.repeatFormModelPath,
+
 							pathToRepeatGroup: DOCUMENT_MODEL.getAttachmentCollectionDocPath(0),
 							duplicateStrategy: testCase.strategy,
 							existingFiles: [
@@ -490,7 +493,7 @@ describe("api.view.inputs", () => {
 						const { ready, middleware: waitForActionMiddleware } =
 							createMiddlewareWaitForAction(expectedAction);
 
-						const wrapper = await SetupHelpers.setupConnectedFormEngineWithRtlAsync({
+						const wrapper = await setupConnectedFormEngineWithRtlAsync({
 							models,
 							locale: US_LOCALE,
 							data: { document: fixture.document },

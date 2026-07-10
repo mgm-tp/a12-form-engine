@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -38,9 +38,9 @@ import { MessageGroupDisplayModule } from "../../../../main/core/contentElements
 import {
 	FormElementContext,
 	MESSAGE_GROUP_DISPLAY_TYPE,
-	MessageGroupContext,
-	type MessageGroupDisplayNode
+	MessageGroupContext
 } from "../../../../main/core/index.js";
+import type { MessageGroupDisplayNode } from "../../../../main/core/index.js";
 import { FORM_ELEMENTS_NAMESPACE } from "../../../../main/core/namespace.js";
 import { renderWrapper } from "../../../rtl-utils/render-wrapper.js";
 
@@ -85,7 +85,6 @@ function setup(options?: {
 			<MessageGroupContext.Provider
 				value={{
 					id: messageGroupId ?? "",
-					editableElements: [],
 					getGroupedValidationMessages: () => [],
 					getUngroupedValidationMessages: () => []
 				}}

@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -34,12 +34,9 @@ import { deepEqual, deepStrictEqual, equal, strictEqual } from "node:assert/stri
 import { mock } from "node:test";
 
 import { query } from "@com.mgmtp.a12.devtools/react";
-import type {
-	DocumentModel,
-	EntityInstancePath
-} from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
-import type { Locale } from "@com.mgmtp.a12.utils/utils-localization/lib/main/index.js";
-import { defaultLocalizerFactory } from "@com.mgmtp.a12.utils/utils-localization/lib/main/index.js";
+import type { DocumentModel, EntityInstancePath } from "@com.mgmtp.a12.kernel/kernel-md-facade";
+import type { Locale } from "@com.mgmtp.a12.utils/utils-localization";
+import { defaultLocalizerFactory } from "@com.mgmtp.a12.utils/utils-localization";
 
 import type { DispatchConfiguration, Value } from "../../../../../view/index.js";
 import { defaultMapDispatchToProps } from "../../../../../view/index.js";
@@ -47,11 +44,11 @@ import { DropDownInput } from "../../../../../view/internal/components/form-engi
 import type { Inputs } from "../../../../../view/internal/configuration/engine-configuration.js";
 import type { RtlRenderWrapper } from "../../../../rtl-utils/render-wrapper.js";
 import { rtlRenderWrapperAsync } from "../../../../rtl-utils/render-wrapper.js";
-import { DocumentHelpers } from "../../../../utils/document-helpers.js";
+import { createModelPath } from "../../../../utils/createModelPath.js";
+import { DocumentModelHelpers } from "../../../../utils/DocumentModelHelpers.js";
 import { DE_LOCALE, US_LOCALE } from "../../../../utils/localization.js";
-import { DocumentModelHelpers } from "../../../../utils/model-helpers.js";
 import { setupModelsFixture } from "../../../../utils/setupFixture.js";
-import { createModelPath } from "../../../../utils/test-model-helpers/dependent-enumeration.js";
+import { createDocumentPath } from "../../../../utils/createDocumentPath.js";
 
 import { inputTest } from "./generic-tests/input-tests.js";
 import { createProps } from "./generic-tests/input-utils.js";
@@ -60,7 +57,7 @@ const { Field } = DocumentModelHelpers;
 
 describe("api.view.inputs", () => {
 	describe("SelectInput", () => {
-		const models = setupModelsFixture("controls.picustypes");
+		const models = setupModelsFixture("controls.dmtypes");
 
 		const documentElementDataType: DocumentModel.EnumerationType = {
 			type: "EnumerationType",
@@ -74,18 +71,18 @@ describe("api.view.inputs", () => {
 			formModelPath: createModelPath("foo", "bar")
 		};
 
-		const selectPathCompactNotRequired = DocumentHelpers.createDocumentPath(
-			["A12T_PicusTypes"],
+		const selectPathCompactNotRequired = createDocumentPath(
+			["A12T_DmTypes"],
 			["Enumeration"],
 			["Enumeration011"]
 		);
-		const selectPathCompactRequired = DocumentHelpers.createDocumentPath(
-			["A12T_PicusTypes"],
+		const selectPathCompactRequired = createDocumentPath(
+			["A12T_DmTypes"],
 			["Enumeration"],
 			["Enumeration012"]
 		);
-		const selectPathCompactRequiredInitialValue = DocumentHelpers.createDocumentPath(
-			["A12T_PicusTypes"],
+		const selectPathCompactRequiredInitialValue = createDocumentPath(
+			["A12T_DmTypes"],
 			["Enumeration"],
 			["Enumeration013"]
 		);
@@ -120,11 +117,7 @@ describe("api.view.inputs", () => {
 					...baseProps,
 					breakTooltipsToNewLine: true,
 					component: "Select",
-					path: DocumentHelpers.createDocumentPath(
-						["A12T_PicusTypes"],
-						["Enumeration"],
-						["Enumeration011"]
-					)
+					path: createDocumentPath(["A12T_DmTypes"], ["Enumeration"], ["Enumeration011"])
 				},
 				{ autoCompleteTest: false }
 			);

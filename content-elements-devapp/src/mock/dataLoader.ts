@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -30,16 +30,14 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import type { Activity } from "@com.mgmtp.a12.client/client-core/lib/core/activity/index.js";
-import type { DataLoader } from "@com.mgmtp.a12.client/client-core/lib/core/data/index.js";
-import type { Model } from "@com.mgmtp.a12.client/client-core/lib/core/model/index.js";
+import type { Activity, DataLoader, Model } from "@com.mgmtp.a12.client/client-core";
 import type { DgChangeLogSlice, DgSlice, FormModel } from "@com.mgmtp.a12.client/client-data";
 import {
 	generateNotRelevantConfigFromFormModel,
 	initializeDataComponent
 } from "@com.mgmtp.a12.client/client-data";
-import type { Document } from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
-import { DocumentRtServiceFactory } from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/facade.js";
+import type { Document } from "@com.mgmtp.a12.kernel/kernel-md-facade";
+import { DocumentRtServiceFactory } from "@com.mgmtp.a12.kernel/kernel-md-facade";
 
 import { isInstanceDescriptor } from "../modules/contentEngine/contentEngineModule.js";
 
@@ -85,8 +83,8 @@ export class MockContentEngineDataLoader implements DataLoader<DgSlice & DgChang
 		const computationResult = documentService.compute(document as Document);
 		const preparedDocument = computationResult.appliedTo(document as Document);
 
-		const data = initializeDataComponent(
-			[
+		const data = initializeDataComponent({
+			documents: [
 				{
 					docRef,
 					document: preparedDocument,
@@ -96,9 +94,9 @@ export class MockContentEngineDataLoader implements DataLoader<DgSlice & DgChang
 					loadingState: "loaded"
 				}
 			],
-			[],
-			docRef
-		);
+			links: [],
+			entryPoint: docRef
+		});
 
 		return Promise.resolve(data);
 	}

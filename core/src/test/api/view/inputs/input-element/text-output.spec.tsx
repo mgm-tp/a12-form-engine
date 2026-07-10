@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -33,9 +33,9 @@
 import { deepEqual, equal, ok } from "node:assert/strict";
 
 import { within } from "@com.mgmtp.a12.devtools/react";
-import type { DocumentModel } from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
-import type { Locale } from "@com.mgmtp.a12.utils/utils-localization/lib/main/index.js";
-import { defaultLocalizerFactory } from "@com.mgmtp.a12.utils/utils-localization/lib/main/index.js";
+import type { DocumentModel } from "@com.mgmtp.a12.kernel/kernel-md-facade";
+import type { Locale } from "@com.mgmtp.a12.utils/utils-localization";
+import { defaultLocalizerFactory } from "@com.mgmtp.a12.utils/utils-localization";
 
 import type { Value } from "../../../../../view/index.js";
 import { TextOutput } from "../../../../../view/internal/components/form-engine/cells/controls/text-output/text-output.js";
@@ -43,10 +43,10 @@ import type { Inputs } from "../../../../../view/internal/configuration/engine-c
 import { BULLET_LIST_ITEM, BULLET_LIST_UNORDERED } from "../../../../rtl-utils/data-roles.js";
 import type { RtlRenderWrapper } from "../../../../rtl-utils/render-wrapper.js";
 import { rtlRenderWrapperAsync } from "../../../../rtl-utils/render-wrapper.js";
-import { DocumentHelpers } from "../../../../utils/document-helpers.js";
+import { DocumentModelHelpers } from "../../../../utils/DocumentModelHelpers.js";
 import { DE_LOCALE, US_LOCALE } from "../../../../utils/localization.js";
-import { DocumentModelHelpers } from "../../../../utils/model-helpers.js";
 import { setupModelsFixture } from "../../../../utils/setupFixture.js";
+import { createDocumentPath } from "../../../../utils/createDocumentPath.js";
 
 import { inputTest } from "./generic-tests/input-tests.js";
 import type { FieldBasedProps } from "./generic-tests/input-utils.js";
@@ -57,7 +57,7 @@ const { Field } = DocumentModelHelpers;
 
 describe("api.view.inputs", () => {
 	describe("TextOutput", () => {
-		const models = setupModelsFixture("controls.picustypes");
+		const models = setupModelsFixture("controls.dmtypes");
 
 		const documentElementDataType: DocumentModel.NumberType = {
 			type: "NumberType",
@@ -68,7 +68,7 @@ describe("api.view.inputs", () => {
 			documentElementDataType,
 			component: "TextOutput",
 			renderFunction: TextOutput,
-			path: DocumentHelpers.createDocumentPath(["A12T_PicusTypes"], ["Number"], ["Number01"])
+			path: createDocumentPath(["A12T_DmTypes"], ["Number"], ["Number01"])
 		};
 
 		/** General test which are similar for all inputs */
@@ -410,15 +410,11 @@ describe("api.view.inputs", () => {
 							value: {
 								data: [{ value: "key_blue" }],
 								ui: "",
-								path: DocumentHelpers.createDocumentPath(
-									["A12T_PicusTypes"],
-									["MultiSelect"],
-									["MultiSelect01"]
-								)
+								path: createDocumentPath(["A12T_DmTypes"], ["MultiSelect"], ["MultiSelect01"])
 							},
 							modelElement: {
-								elementPath: DocumentHelpers.createDocumentPath(
-									["A12T_PicusTypes"],
+								elementPath: createDocumentPath(
+									["A12T_DmTypes"],
 									["MultiSelect"],
 									["MultiSelect01"]
 								)
@@ -438,15 +434,11 @@ describe("api.view.inputs", () => {
 							value: {
 								data: [{ value: "key_blue" }, { value: "key_red" }],
 								ui: "",
-								path: DocumentHelpers.createDocumentPath(
-									["A12T_PicusTypes"],
-									["MultiSelect"],
-									["MultiSelect01"]
-								)
+								path: createDocumentPath(["A12T_DmTypes"], ["MultiSelect"], ["MultiSelect01"])
 							},
 							modelElement: {
-								elementPath: DocumentHelpers.createDocumentPath(
-									["A12T_PicusTypes"],
+								elementPath: createDocumentPath(
+									["A12T_DmTypes"],
 									["MultiSelect"],
 									["MultiSelect01"]
 								)

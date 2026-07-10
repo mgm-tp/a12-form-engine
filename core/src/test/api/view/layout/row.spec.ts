@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -33,9 +33,8 @@
 import { strictEqual } from "node:assert/strict";
 
 import { within } from "@com.mgmtp.a12.devtools/react";
-import { DataRoles } from "@com.mgmtp.a12.widgets/widgets-core/lib/common/main/data-roles.js";
+import { DataRoles } from "@com.mgmtp.a12.widgets/widgets-core";
 
-import { SetupHelpers } from "../../../utils/setup.js";
 import { setupModelsFixture } from "../../../utils/setupFixture.js";
 import { IDS } from "../../../utils/test-model-helpers/aria-level.js";
 import {
@@ -43,6 +42,7 @@ import {
 	expressionLabelDocument,
 	formattedExpressionUiState
 } from "../../../utils/test-model-helpers/expression-label.js";
+import { setupFormEngineRendererWithRtlAsync } from "../../../utils/setup.js";
 
 import { TypographyHeadline } from "./typography-headline-mock.js";
 
@@ -52,7 +52,7 @@ describe("api.view.layout", () => {
 			const models = setupModelsFixture("container", "container-visibility");
 
 			it("is hidden", async () => {
-				const wrapper = await SetupHelpers.setupFormEngineRendererWithRtlAsync({
+				const wrapper = await setupFormEngineRendererWithRtlAsync({
 					models
 				});
 
@@ -67,7 +67,7 @@ describe("api.view.layout", () => {
 
 			describe("with a multilingual label defined in the model", () => {
 				it("renders a title", async () => {
-					const wrapper = await SetupHelpers.setupFormEngineRendererWithRtlAsync({
+					const wrapper = await setupFormEngineRendererWithRtlAsync({
 						models: a11yModels
 					});
 
@@ -77,7 +77,7 @@ describe("api.view.layout", () => {
 
 			describe("with an expression label defined in the model", () => {
 				it("renders a title", async () => {
-					const wrapper = await SetupHelpers.setupFormEngineRendererWithRtlAsync({
+					const wrapper = await setupFormEngineRendererWithRtlAsync({
 						models: expressionLabelModels,
 						data: { document: expressionLabelDocument }
 					});
@@ -88,7 +88,7 @@ describe("api.view.layout", () => {
 				});
 
 				it("renders a formatted title if the expression contained markdown formatting", async () => {
-					const wrapper = await SetupHelpers.setupFormEngineRendererWithRtlAsync({
+					const wrapper = await setupFormEngineRendererWithRtlAsync({
 						config: {
 							widgetMap: {
 								TypographyHeadline
@@ -111,7 +111,7 @@ describe("api.view.layout", () => {
 
 			describe("with no label defined in the model", () => {
 				it("doesn't render a title", async () => {
-					const wrapper = await SetupHelpers.setupFormEngineRendererWithRtlAsync({
+					const wrapper = await setupFormEngineRendererWithRtlAsync({
 						models: a11yModels
 					});
 

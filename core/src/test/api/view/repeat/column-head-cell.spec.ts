@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -36,11 +36,13 @@ import { query, screen, within } from "@com.mgmtp.a12.devtools/react";
 
 import { CONTENT_WITH_NEW_LINES, HINT_TOOLTIP } from "../../../rtl-utils/data-roles.js";
 import { getComponentMocks } from "../../../rtl-utils/getComponentMocks.js";
-import { ModelHelpers } from "../../../utils/model-helpers.js";
-import { SetupHelpers } from "../../../utils/setup.js";
+import { createModelPath } from "../../../utils/createModelPath.js";
+import { setupFormEngineRendererWithRtlAsync } from "../../../utils/setup.js";
 import { setupModelsFixture } from "../../../utils/setupFixture.js";
 import { IDS as A11Y_IDS } from "../../../utils/test-model-helpers/a11y.js";
+import type { ColumnHeaderCellsTestTableColumns } from "../../../utils/test-model-helpers/a11y.js";
 import { IDS } from "../../../utils/test-model-helpers/repeat.column-icons.js";
+import type { TestTableColumns } from "../../../utils/test-model-helpers/repeat.column-icons.js";
 
 import { ModelElementIdEquals } from "./query-predicates.js";
 
@@ -69,9 +71,9 @@ describe("api.view.repeat", () => {
 			});
 		});
 
-		function executeTestForHeadCell(ids: { columns: IDS.TestTableColumns }): void {
+		function executeTestForHeadCell(ids: { columns: TestTableColumns }): void {
 			function setup() {
-				return SetupHelpers.setupFormEngineRendererWithRtlAsync({
+				return setupFormEngineRendererWithRtlAsync({
 					models,
 					componentMap: getComponentMocks(),
 					withWidgets: true
@@ -304,17 +306,17 @@ describe("api.view.repeat", () => {
 		}
 
 		function executeTestForAccessibility(ids: {
-			columns: A11Y_IDS.ColumnHeaderCells.TestTableColumns;
+			columns: ColumnHeaderCellsTestTableColumns;
 		}): void {
 			describe("accessibility", () => {
 				const models = setupModelsFixture("a11y", "repeat");
 				function setup() {
-					return SetupHelpers.setupFormEngineRendererWithRtlAsync({
+					return setupFormEngineRendererWithRtlAsync({
 						models,
 						ui: {
 							screenLocation: [
 								{
-									locationPath: ModelHelpers.createModelPath("columnHeader"),
+									locationPath: createModelPath("columnHeader"),
 									path: []
 								}
 							]

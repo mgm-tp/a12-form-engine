@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -35,7 +35,8 @@ import { strictEqual } from "node:assert/strict";
 import { screen } from "@com.mgmtp.a12.devtools/react";
 
 import { assertCondition } from "../../../../back-end/utils/internal/assertions.js";
-import { findElementByFormModelPath, FormModel } from "../../../../models/index.js";
+import { findElementByFormModelPath } from "../../../../models/index.js";
+import { isFormModelScreen } from "../../../../models/internal/FormModelGuards.js";
 import {
 	DETACHED_REPEAT_DETAIL_SCREEN,
 	SCREEN
@@ -43,25 +44,25 @@ import {
 import { ScreenComponent } from "../../../../view/internal/components/form-engine/layout/screen.js";
 import { rtlRenderWrapperAsync } from "../../../rtl-utils/render-wrapper.js";
 import { assertExists } from "../../../utils/assertions.js";
-import { DocumentHelpers } from "../../../utils/document-helpers.js";
-import { ModelHelpers } from "../../../utils/model-helpers.js";
-import { SetupHelpers } from "../../../utils/setup.js";
+import { createDocumentPath } from "../../../utils/createDocumentPath.js";
+import { createModelPath } from "../../../utils/createModelPath.js";
+import { setupRenderConfiguration } from "../../../utils/setup.js";
 import { setupModelsFixture } from "../../../utils/setupFixture.js";
 
 describe("api.view.layout", () => {
 	describe("Screens", () => {
 		describe("data-roles", () => {
 			const models = setupModelsFixture("container", "screen");
-			const topLevelScreenPath = ModelHelpers.createModelPath("topLevelScreen");
+			const topLevelScreenPath = createModelPath("topLevelScreen");
 
 			describe("top level screen", () => {
 				it("should have the data-role 'screen' on the outmost div", async () => {
 					const { formModel } = models;
 					const topLevelScreen = findElementByFormModelPath(formModel, topLevelScreenPath);
 					assertExists(topLevelScreen);
-					assertCondition(FormModel.Screen.isInstance(topLevelScreen));
+					assertCondition(isFormModelScreen(topLevelScreen));
 
-					const renderConfiguration = SetupHelpers.setupRenderConfiguration({
+					const renderConfiguration = setupRenderConfiguration({
 						models,
 						parentPath: [],
 						ui: {
@@ -83,21 +84,18 @@ describe("api.view.layout", () => {
 				it("should have the data-role 'screen-detached-repeat-detail' on the outmost div", async () => {
 					const { formModel } = models;
 
-					const detailScreenPath = ModelHelpers.createModelPath(
+					const detailScreenPath = createModelPath(
 						"screenWithDetachedRepeat",
 						"repeat-r1",
 						"repeat-r1-detail-screen"
 					);
 					const detailScreen = findElementByFormModelPath(formModel, detailScreenPath);
 					assertExists(detailScreen);
-					assertCondition(FormModel.Screen.isInstance(detailScreen));
+					assertCondition(isFormModelScreen(detailScreen));
 
-					const detailScreenContext = DocumentHelpers.createDocumentPath(
-						["groupForSection"],
-						["r1"]
-					);
+					const detailScreenContext = createDocumentPath(["groupForSection"], ["r1"]);
 
-					const renderConfiguration = SetupHelpers.setupRenderConfiguration({
+					const renderConfiguration = setupRenderConfiguration({
 						models,
 						parentPath: detailScreenPath,
 						ui: {

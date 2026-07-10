@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -30,13 +30,9 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import type { DataReference } from "@com.mgmtp.a12.client/client-data/lib/core/api/data-reference.js";
-import type { KernelTypes } from "@com.mgmtp.a12.client/client-data/lib/data-mutation/types.js";
-import type {
-	DocumentModel,
-	Message
-} from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
-import type { ValueConversionConfig } from "@com.mgmtp.a12.utils/utils-localization/lib/main/index.js";
+import type { DataReference, KernelTypes } from "@com.mgmtp.a12.client/client-data";
+import type { DocumentModel, Message } from "@com.mgmtp.a12.kernel/kernel-md-facade";
+import type { ValueConversionConfig } from "@com.mgmtp.a12.utils/utils-localization";
 
 import type { DatePickerConfig } from "./controlProps.js";
 
@@ -69,7 +65,7 @@ export interface BaseControlSettings {
 	 * Only relevant for some controls. These props are still listed
 	 * here to be able to use this typing in useCommonControlSettings.
 	 */
-	readonly placeholder?: string;
+	readonly placeholder?: string; // TODO: why is the placeholder the only localized text, that's not in the widget settings?
 	readonly autoComplete?: string;
 	readonly autoExpand?: true;
 	readonly secret?: true;

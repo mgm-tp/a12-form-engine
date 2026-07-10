@@ -2,7 +2,7 @@
   "header": {
     "id": "computation-validation.validate-fields-form",
     "modelType": "form",
-    "modelVersion": "37.4.0",
+    "modelVersion": "39.0.0",
     "locales": [
       {
         "code": "en"
@@ -388,7 +388,7 @@
                           "text": [
                             {
                               "locale": "en",
-                              "text": "<p>Initially, the control for Error Field should not be shown.</p>\n<p>Uploading exactly one file in the multi file upload should immediately show Error Field with a validation error.</p>\n<p>Uploading additional files or removing all files should set Error Field back to non-relevant.</p>"
+                              "text": "<p>Initially, the control for Error Field should not be shown.</p>\n<p>Uploading exactly one file in the multi file upload should immediately show Error Field</p>\n<p>But in this case, since it is not a field of the uploaded attachment or a field changed due to the presence of <br/>the attachment field values but only due to the presence of the new row, the error is not immediately shown, <br/>but only after triggering another partial or full validation</p>\n<p>Uploading additional files or removing all files should set Error Field back to non-relevant.</p>"
                             }
                           ]
                         }
@@ -477,6 +477,189 @@
                     ]
                   }
                 ]
+              },
+              {
+                "type": "ControlGrid",
+                "id": "controlgrid_0c71a",
+                "name": "cgDescriptionForAttachmentErrorCase",
+                "layout": {
+                  "lg": "4-4-4"
+                },
+                "row": [
+                  {
+                    "type": "Row",
+                    "id": "row_2025d",
+                    "name": "desc-row",
+                    "cell": [
+                      {
+                        "type": "TextCell",
+                        "id": "textcell_4fc91",
+                        "span": {
+                          "lg": 2
+                        },
+                        "name": "test case description",
+                        "content": {
+                          "text": [
+                            {
+                              "locale": "en",
+                              "text": "<p>In this second case it is shown, that an error rule defined for a field of the attachment triggers immediately on upload</p>"
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "InlineRepeat",
+                "id": "inlinerepeat_63887",
+                "name": "attachmentCollectionWithError_Repeat",
+                "title": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "Multi File Upload Repeat with Attachment Error"
+                      }
+                    ]
+                  }
+                },
+                "repeatOverviewColumn": [
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn_362a2",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "original file name"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "readonly": true,
+                    "elementRef": "field_d2403",
+                    "readonlyPresentation": "TEXT"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn_cd1cb",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "size"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "readonly": true,
+                    "elementRef": "field_cbb03",
+                    "readonlyPresentation": "TEXT"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn_2a45d",
+                    "elementRef": "field_1fb9c"
+                  }
+                ],
+                "groupRef": "group_edb86",
+                "enableAdd": false,
+                "enableRemove": true,
+                "multiFileUpload": true,
+                "multiFileUploadOptions": {
+                  "elementRef": "group_653c5"
+                }
+              },
+              {
+                "type": "ControlGrid",
+                "id": "controlgrid_b1c2d",
+                "name": "cgDescriptionForInitialValueCase",
+                "layout": {
+                  "lg": "4-4-4"
+                },
+                "row": [
+                  {
+                    "type": "Row",
+                    "id": "row_e3f4g",
+                    "name": "desc-row",
+                    "cell": [
+                      {
+                        "type": "TextCell",
+                        "id": "textcell_h5i6j",
+                        "span": {
+                          "lg": 2
+                        },
+                        "name": "test case description",
+                        "content": {
+                          "text": [
+                            {
+                              "locale": "en",
+                              "text": "<p>In this third case it is shown that a field with an initial value whose validation rule references an attachment field triggers immediately on upload</p>"
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "InlineRepeat",
+                "id": "inlinerepeat_k7l8m",
+                "name": "attachmentCollectionWithInitialValue_Repeat",
+                "title": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "Multi File Upload Repeat with Initial Value"
+                      }
+                    ]
+                  }
+                },
+                "repeatOverviewColumn": [
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn_n9o0p",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "en",
+                            "text": "original file name"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "readonly": true,
+                    "elementRef": "field_e4d01",
+                    "readonlyPresentation": "TEXT"
+                  },
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn_q1r2s",
+                    "elementRef": "field_e1f9b"
+                  }
+                ],
+                "groupRef": "group_f3b52",
+                "enableAdd": false,
+                "enableRemove": true,
+                "multiFileUpload": true,
+                "multiFileUploadOptions": {
+                  "elementRef": "group_a7c63"
+                }
               }
             ]
           }
@@ -678,6 +861,10 @@
             ]
           },
           "elementRef": "field_88d79"
+        },
+        {
+          "initialValue": "initialized",
+          "elementRef": "field_e1f9b"
         }
       ]
     },

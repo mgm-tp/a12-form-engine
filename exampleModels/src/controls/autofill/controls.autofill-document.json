@@ -2,7 +2,7 @@
   "header": {
     "id": "controls.autofill-document",
     "modelType": "document",
-    "modelVersion": "28.4.0",
+    "modelVersion": "29.4.0",
     "locales": [
       {
         "code": "en"
@@ -39,6 +39,35 @@
       "immutable": false,
       "comment": "model based on the invoice training exercise"
     },
+    "documentUniquenessCriteria": [
+      {
+        "name": "addressCriterion",
+        "errorMessage": [
+          {
+            "locale": "en",
+            "text": "The chosen address does already exist."
+          },
+          {
+            "locale": "de",
+            "text": "Die gewählte Adresse existiert bereits."
+          }
+        ],
+        "fields": [
+          {
+            "fullName": "/invoice/addresses/billing_address/street"
+          },
+          {
+            "fullName": "/invoice/addresses/billing_address/nr"
+          },
+          {
+            "fullName": "/invoice/addresses/billing_address/zip"
+          },
+          {
+            "fullName": "/invoice/addresses/billing_address/city"
+          }
+        ]
+      }
+    ],
     "modelConfig": {
       "decimalSeparator": ".",
       "timeZone": "UTC",
@@ -393,7 +422,10 @@
                                   "locale": "de",
                                   "text": "Straße"
                                 }
-                              ]
+                              ],
+                              "requirednessConfig": {
+                                "mode": "absoluteOrRelativeToNextRepAncestor"
+                              }
                             }
                           },
                           {
@@ -432,7 +464,10 @@
                                   "locale": "en",
                                   "text": "Number"
                                 }
-                              ]
+                              ],
+                              "requirednessConfig": {
+                                "mode": "absoluteOrRelativeToNextRepAncestor"
+                              }
                             }
                           },
                           {
@@ -465,13 +500,16 @@
                               "label": [
                                 {
                                   "locale": "de",
-                                  "text": "Postleizahl"
+                                  "text": "Postleitzahl"
                                 },
                                 {
                                   "locale": "en",
                                   "text": "Zip code"
                                 }
-                              ]
+                              ],
+                              "requirednessConfig": {
+                                "mode": "absoluteOrRelativeToNextRepAncestor"
+                              }
                             }
                           },
                           {
@@ -497,7 +535,10 @@
                                   "locale": "en",
                                   "text": "City"
                                 }
-                              ]
+                              ],
+                              "requirednessConfig": {
+                                "mode": "absoluteOrRelativeToNextRepAncestor"
+                              }
                             }
                           },
                           {

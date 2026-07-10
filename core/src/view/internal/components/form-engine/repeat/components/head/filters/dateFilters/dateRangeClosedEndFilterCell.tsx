@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -32,20 +32,20 @@
 
 import { useContext } from "react";
 
-import type { DocumentModel } from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
-import { LocalizerContext } from "@com.mgmtp.a12.utils/utils-localization-react/lib/main/index.js";
+import type { DocumentModel } from "@com.mgmtp.a12.kernel/kernel-md-facade";
+import { LocalizerContext } from "@com.mgmtp.a12.utils/utils-localization-react";
 
 import { RESOURCE_KEYS } from "../../../../../../../../../back-end/localization/internal/languages/keys.js";
 import { getLocalizedResource } from "../../../../../../../../../back-end/localization/internal/localize.js";
 import {
 	ModelSelectors,
-	UiStateSelectors,
-	type RepeatFilter
+	UiStateSelectors
 } from "../../../../../../../../../back-end/store/index.js";
+import type { RepeatFilter } from "../../../../../../../../../back-end/store/index.js";
 import { isDateRangeFilter } from "../../../../../../../../../back-end/store/internal/store.js";
 import { UiId } from "../../../../../../../../../back-end/utils/internal/generateUiId.js";
 import { getDocumentPath } from "../../../../../../../../../back-end/utils/internal/path.js";
-import { DocumentModelUtils } from "../../../../../../../../../models/internal/utils/document-model-utils.js";
+import * as DocumentModelUtils from "../../../../../../../../../models/internal/utils/document-model-utils.js";
 import { ComponentMapContext } from "../../../../../../../configuration/componentMap/component-map-context.js";
 import { DateRangeFilter } from "../../../../../cells/controls/date/date-range-input.js";
 
@@ -56,13 +56,14 @@ interface DateRangeClosedFilterCellProps extends DateFilterCellProps {
 	readonly dataType: DocumentModel.DateRangeType;
 }
 
-/** @internal
+/**
+ * @internal
  * This case is only relevant when interpretationOfYear is set in the Document Model.
  * This cannot be modeled in the SME at the moment, but needs to be set directly in the JSON.
  * This filter option only allows date range values. That's why only one input is rendered to enter that value.
  * Entering only a start date and leaving the end date open is not possible.
  */
-export default function DateRangeClosedEndFilterCell(props: DateRangeClosedFilterCellProps) {
+export function DateRangeClosedEndFilterCell(props: DateRangeClosedFilterCellProps) {
 	const { options, element, filter, repeatFormModelPath, dataType } = props;
 	const { MessageList } = useContext(ComponentMapContext);
 	const { localizer, conversion } = useContext(LocalizerContext);

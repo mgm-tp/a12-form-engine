@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -32,12 +32,28 @@
 
 import type { ReactElement } from "react";
 
-import type { EntityInstancePath } from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
-import type { LayoutGridProps } from "@com.mgmtp.a12.widgets/widgets-core/lib/layout/layout-grid/main/layout-grid.api.js";
+import type { EntityInstancePath } from "@com.mgmtp.a12.kernel/kernel-md-facade";
+import type { LayoutGridProps } from "@com.mgmtp.a12.widgets/widgets-core";
 
 import { UiStateSelectors } from "../../../../back-end/store/internal/selectors/ui-state.js";
 import { UiId } from "../../../../back-end/utils/internal/generateUiId.js";
-import { FormModel } from "../../../../models/internal/form-model.js";
+import type { FormModel } from "../../../../models/internal/form-model.js";
+import {
+	isFormModelButtonPanel,
+	isFormModelButtonType,
+	isFormModelControl,
+	isFormModelControlGrid,
+	isFormModelCustomCell,
+	isFormModelCustomScreenElement,
+	isFormModelDetachedRepeat,
+	isFormModelEmbeddedRepeat,
+	isFormModelExpressionCell,
+	isFormModelInlineRepeat,
+	isFormModelMultiColumnSection,
+	isFormModelNavigationButton,
+	isFormModelSection,
+	isFormModelTextCell
+} from "../../../../models/internal/FormModelGuards.js";
 import { FormModelPath } from "../../../../models/internal/utils/form-model-path.js";
 import type { FormModelMap } from "../../configuration/engine-configuration.js";
 import { isHidden } from "../../utilities/enablements/hidden.js";
@@ -51,43 +67,43 @@ export function createFormModelElement(
 	element: object,
 	renderConfiguration: FormModelMap.RenderConfiguration
 ): ReactElement | null {
-	if (FormModel.Section.isInstance(element)) {
+	if (isFormModelSection(element)) {
 		return createSection(element, renderConfiguration);
 	}
-	if (FormModel.ButtonType.isInstance(element)) {
+	if (isFormModelButtonType(element)) {
 		return createButton(element, renderConfiguration);
 	}
-	if (FormModel.ButtonPanel.isInstance(element)) {
+	if (isFormModelButtonPanel(element)) {
 		return createButtonPanel(element, renderConfiguration);
 	}
-	if (FormModel.Control.isInstance(element)) {
+	if (isFormModelControl(element)) {
 		return createControl(element, renderConfiguration);
 	}
-	if (FormModel.ControlGrid.isInstance(element)) {
+	if (isFormModelControlGrid(element)) {
 		return createControlGrid(element, renderConfiguration);
 	}
-	if (FormModel.DetachedRepeat.isInstance(element)) {
+	if (isFormModelDetachedRepeat(element)) {
 		return createDetachedRepeat(element, renderConfiguration);
 	}
-	if (FormModel.InlineRepeat.isInstance(element)) {
+	if (isFormModelInlineRepeat(element)) {
 		return createInlineRepeat(element, renderConfiguration);
 	}
-	if (FormModel.EmbeddedRepeat.isInstance(element)) {
+	if (isFormModelEmbeddedRepeat(element)) {
 		return createEmbeddedRepeat(element, renderConfiguration);
 	}
-	if (FormModel.TextCell.isInstance(element)) {
+	if (isFormModelTextCell(element)) {
 		return createTextCell(element, renderConfiguration);
 	}
-	if (FormModel.ExpressionCell.isInstance(element)) {
+	if (isFormModelExpressionCell(element)) {
 		return createExpressionCell(element, renderConfiguration);
 	}
-	if (FormModel.MultiColumnSection.isInstance(element)) {
+	if (isFormModelMultiColumnSection(element)) {
 		return createMultiColumnSection(element, renderConfiguration);
 	}
-	if (FormModel.CustomScreenElement.isInstance(element)) {
+	if (isFormModelCustomScreenElement(element)) {
 		return createCustomScreenElement(element, renderConfiguration);
 	}
-	if (FormModel.CustomCell.isInstance(element)) {
+	if (isFormModelCustomCell(element)) {
 		return createCustomCell(element, renderConfiguration);
 	}
 
@@ -169,7 +185,7 @@ export function createButton(
 		currentPath: formModelPath
 	};
 
-	if (FormModel.ButtonType.isNavigationButton(button)) {
+	if (isFormModelNavigationButton(button)) {
 		const Component =
 			renderConfiguration.renderOptions.config.formModelMap.NavigationButton.component;
 		return <Component modelElement={button} config={c} key={id} data-testid={dataTestId} />;

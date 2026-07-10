@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -35,26 +35,26 @@ import { deepStrictEqual, strictEqual } from "node:assert/strict";
 import type { Models } from "../../../../../back-end/store/index.js";
 import type { RepeatRow } from "../../../../../view/internal/components/form-engine/repeat/components/tableColumnTypes.js";
 import { filterRows } from "../../../../../view/internal/utilities/filtering.js";
-import { DocumentHelpers } from "../../../../utils/document-helpers.js";
-import { ModelHelpers } from "../../../../utils/model-helpers.js";
+import { createModelPath } from "../../../../utils/createModelPath.js";
 import { setupArrayFixture } from "../../../../utils/setupFixture.js";
 import { IR } from "../../../../utils/test-model-helpers/inline.repeat.js";
+import { createDocumentPath } from "../../../../utils/createDocumentPath.js";
 
 import { REPEAT_MODEL_PATH } from "./filter.utils.js";
 
 export function describeTestsForFilterRows(models: Models) {
-	const stringColumnPath = ModelHelpers.createModelPath(
+	const stringColumnPath = createModelPath(
 		...REPEAT_MODEL_PATH,
 		IR.SortingAndFiltering.ID_L1_STRING_COLUMN
 	);
-	const numberColumnPath = ModelHelpers.createModelPath(
+	const numberColumnPath = createModelPath(
 		...REPEAT_MODEL_PATH,
 		IR.SortingAndFiltering.ID_L1_NUMBER_COLUMN
 	);
 
 	const rows: RepeatRow[] = setupArrayFixture(() => {
 		const createRow = (rowIndex: number, stringValue: string, numberValue: number) => {
-			const rowPath = DocumentHelpers.createDocumentPath(["Root"], ["Nested_L1", rowIndex + 1]);
+			const rowPath = createDocumentPath(["Root"], ["Nested_L1", rowIndex + 1]);
 
 			return {
 				path: rowPath,
@@ -62,13 +62,13 @@ export function describeTestsForFilterRows(models: Models) {
 				values: [
 					{
 						data: stringValue,
-						path: [...rowPath, ...DocumentHelpers.createDocumentPath(["L1_String"])],
+						path: [...rowPath, ...createDocumentPath(["L1_String"])],
 						formModelPath: stringColumnPath,
 						ui: ""
 					},
 					{
 						data: numberValue,
-						path: [...rowPath, ...DocumentHelpers.createDocumentPath(["L1_Number"])],
+						path: [...rowPath, ...createDocumentPath(["L1_Number"])],
 						formModelPath: numberColumnPath,
 						ui: ""
 					}

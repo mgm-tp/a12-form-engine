@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -32,20 +32,20 @@
 
 import { lazy, Suspense } from "react";
 
-import {
-	ActivityActions,
-	ActivitySelectors
-} from "@com.mgmtp.a12.client/client-core/lib/core/activity/index.js";
-import { ApplicationActions } from "@com.mgmtp.a12.client/client-core/lib/core/application/index.js";
 import type {
 	DynamicConfiguration,
 	DynamicFlow,
 	DynamicMenu,
-	DynamicRegion
-} from "@com.mgmtp.a12.client/client-core/lib/core/configurationNG/index.js";
-import type { DataLoader } from "@com.mgmtp.a12.client/client-core/lib/core/data/index.js";
-import { NullRegionLayoutNG } from "@com.mgmtp.a12.client/client-core/lib/core/frame/index.js";
-import type { ViewNGProps } from "@com.mgmtp.a12.client/client-core/lib/core/view/index.js";
+	DynamicRegion,
+	DataLoader,
+	ViewNGProps
+} from "@com.mgmtp.a12.client/client-core";
+import {
+	ActivityActions,
+	ActivitySelectors,
+	ApplicationActions,
+	NullRegionLayoutNG
+} from "@com.mgmtp.a12.client/client-core";
 
 import { DevappLayoutNG } from "../components/DevappLayout.js";
 

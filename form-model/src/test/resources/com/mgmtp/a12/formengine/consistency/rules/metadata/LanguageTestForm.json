@@ -1,0 +1,1226 @@
+{
+  "header": {
+    "id": "LanguageTestForm",
+    "modelType": "form",
+    "modelVersion": "39.0.0",
+    "locales": [
+      {
+        "code": "de_DE"
+      }
+    ],
+    "labels": [
+      {
+        "locale": "de_DE",
+        "text": "TestModel"
+      }
+    ],
+    "annotations": [
+      {
+        "name": "roles",
+        "value": "admin"
+      }
+    ],
+    "modelReferences": [
+      {
+        "alias": "DM",
+        "modelType": "document",
+        "purpose": "data binding",
+        "reference": "DocumentModel"
+      }
+    ]
+  },
+  "content": {
+    "subHeaderBox": {
+      "id": "SH1",
+      "majorButtons": {
+        "button": [
+          {
+            "type": "EVENT",
+            "id": "b-1",
+            "name": "b-1",
+            "buttonStyling": {
+              "label": {
+                "type": "Multilingual",
+                "multilingualText": {
+                  "text": [
+                    {
+                      "locale": "de_DE",
+                      "text": "b-1"
+                    }
+                  ]
+                }
+              },
+              "priority": "PRIMARY"
+            },
+            "event": "event",
+            "scope": "HIDDEN_IN_READONLY_MODE"
+          }
+        ]
+      }
+    },
+    "footerBox": {
+      "id": "F1",
+      "majorButtons": {
+        "button": [
+          {
+            "type": "EVENT",
+            "id": "b-2",
+            "name": "b-2",
+            "buttonStyling": {
+              "label": {
+                "type": "Multilingual",
+                "multilingualText": {
+                  "text": [
+                    {
+                      "locale": "de_DE",
+                      "text": "b-2"
+                    }
+                  ]
+                }
+              },
+              "priority": "PRIMARY"
+            },
+            "event": "event",
+            "scope": "HIDDEN_IN_READONLY_MODE"
+          }
+        ]
+      }
+    },
+    "screens": [
+      {
+        "id": "Screen-1",
+        "name": "Screen1",
+        "title": {
+          "type": "Multilingual",
+          "multilingualText": {
+            "text": [
+              {
+                "locale": "de_DE",
+                "text": "Screen1"
+              }
+            ]
+          }
+        },
+        "subHeaderBox": {
+          "id": "headerfooter-f5ec3",
+          "majorButtons": {
+            "button": [
+              {
+                "type": "EVENT",
+                "id": "button-e080a",
+                "name": "Button",
+                "buttonStyling": {
+                  "label": {
+                    "type": "Multilingual",
+                    "multilingualText": {
+                      "text": [
+                        {
+                          "locale": "de_DE",
+                          "text": "ScreenSubheaderButton"
+                        }
+                      ]
+                    }
+                  },
+                  "priority": "SECONDARY"
+                },
+                "event": "submission",
+                "scope": "HIDDEN_IN_READONLY_MODE"
+              }
+            ]
+          }
+        },
+        "footerBox": {
+          "id": "headerfooter-27509",
+          "minorButtons": {
+            "button": [
+              {
+                "type": "EVENT",
+                "id": "button-f16ce",
+                "name": "Button",
+                "buttonStyling": {
+                  "label": {
+                    "type": "Multilingual",
+                    "multilingualText": {
+                      "text": [
+                        {
+                          "locale": "de_DE",
+                          "text": "ScreenFooterMinorButton"
+                        }
+                      ]
+                    }
+                  },
+                  "priority": "SECONDARY"
+                },
+                "event": "submission",
+                "scope": "HIDDEN_IN_READONLY_MODE"
+              }
+            ]
+          },
+          "majorButtons": {
+            "button": [
+              {
+                "type": "EVENT",
+                "id": "button-ad21a",
+                "name": "Button",
+                "buttonStyling": {
+                  "label": {
+                    "type": "Multilingual",
+                    "multilingualText": {
+                      "text": [
+                        {
+                          "locale": "de_DE",
+                          "text": "ScreenFooterMajorButton"
+                        }
+                      ]
+                    }
+                  },
+                  "priority": "SECONDARY"
+                },
+                "event": "submission",
+                "scope": "HIDDEN_IN_READONLY_MODE"
+              }
+            ]
+          }
+        },
+        "screenElements": [
+          {
+            "type": "CustomScreenElement",
+            "id": "customscreen-1",
+            "name": "cse-1",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "de_DE",
+                    "text": "cse-1"
+                  }
+                ]
+              }
+            },
+            "height": 328
+          },
+          {
+            "type": "Section",
+            "id": "sec-1",
+            "name": "sec-1",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "de_DE",
+                    "text": "sec-1"
+                  }
+                ]
+              }
+            },
+            "screenElements": [
+              {
+                "type": "ControlGrid",
+                "id": "cg-1",
+                "name": "cg-1",
+                "title": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "de_DE",
+                        "text": "cg-1"
+                      }
+                    ]
+                  }
+                },
+                "row": [
+                  {
+                    "type": "Row",
+                    "id": "r-1",
+                    "title": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "de_DE",
+                            "text": "text"
+                          }
+                        ]
+                      }
+                    },
+                    "cell": [
+                      {
+                        "type": "TextCell",
+                        "id": "t-1",
+                        "offset": {
+                          "lg": 0
+                        },
+                        "span": {
+                          "lg": 1
+                        },
+                        "name": "TextCell",
+                        "content": {
+                          "text": [
+                            {
+                              "locale": "de_DE",
+                              "text": "TextCell"
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "type": "Row",
+                    "id": "row-20e3a",
+                    "cell": [
+                      {
+                        "type": "Control",
+                        "id": "control-e8014",
+                        "offset": {
+                          "lg": 0
+                        },
+                        "label": {
+                          "type": "Multilingual",
+                          "multilingualText": {
+                            "text": [
+                              {
+                                "locale": "de_DE",
+                                "text": "Control Label"
+                              }
+                            ]
+                          }
+                        },
+                        "hint": {
+                          "text": [
+                            {
+                              "locale": "de_DE",
+                              "text": "Control Hint"
+                            }
+                          ]
+                        },
+                        "elementRef": "F234"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "Row",
+                    "id": "row-d69a2",
+                    "cell": [
+                      {
+                        "type": "ExpressionCell",
+                        "id": "expressioncell-c06e8",
+                        "offset": {
+                          "lg": 0
+                        },
+                        "span": {
+                          "lg": 1
+                        },
+                        "name": "ExpressionCell",
+                        "expression": "\"a\"",
+                        "label": {
+                          "type": "Multilingual",
+                          "multilingualText": {
+                            "text": [
+                              {
+                                "locale": "de_DE",
+                                "text": "ExpressionCell"
+                              }
+                            ]
+                          }
+                        }
+                      }
+                    ]
+                  }
+                ],
+                "verticalAlignment": "BOTTOM"
+              },
+              {
+                "type": "MultiColumnSection",
+                "id": "multicolumnsection-f631a",
+                "name": "mcs",
+                "title": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "de_DE",
+                        "text": "mcs"
+                      }
+                    ]
+                  }
+                },
+                "layout": {
+                  "lg": "12"
+                }
+              },
+              {
+                "type": "DetachedRepeat",
+                "id": "dr-1",
+                "name": "dr-1",
+                "title": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "de_DE",
+                        "text": "dr-1"
+                      }
+                    ]
+                  }
+                },
+                "buttonLabels": {
+                  "APPLY": {
+                    "text": [
+                      {
+                        "locale": "de_DE",
+                        "text": "dr-1-apply"
+                      }
+                    ]
+                  },
+                  "ADD": {
+                    "text": [
+                      {
+                        "locale": "de_DE",
+                        "text": "dr-1-add"
+                      }
+                    ]
+                  },
+                  "COMMIT_ADD": {
+                    "text": [
+                      {
+                        "locale": "de_DE",
+                        "text": "dr-1-commit-add"
+                      }
+                    ]
+                  },
+                  "EDIT": {
+                    "text": [
+                      {
+                        "locale": "de_DE",
+                        "text": "dr-1-edit"
+                      }
+                    ]
+                  },
+                  "REMOVE": {
+                    "text": [
+                      {
+                        "locale": "de_DE",
+                        "text": "dr-1-remove"
+                      }
+                    ]
+                  },
+                  "VIEW": {
+                    "text": [
+                      {
+                        "locale": "de_DE",
+                        "text": "dr-1-view"
+                      }
+                    ]
+                  },
+                  "CANCEL": {
+                    "text": [
+                      {
+                        "locale": "de_DE",
+                        "text": "dr-1-cancel"
+                      }
+                    ]
+                  },
+                  "RETURN": {
+                    "text": [
+                      {
+                        "locale": "de_DE",
+                        "text": "dr-1-returen"
+                      }
+                    ]
+                  },
+                  "UP": {
+                    "text": [
+                      {
+                        "locale": "de_DE",
+                        "text": "dr-1-up"
+                      }
+                    ]
+                  },
+                  "DOWN": {
+                    "text": [
+                      {
+                        "locale": "de_DE",
+                        "text": "dr-1-down"
+                      }
+                    ]
+                  }
+                },
+                "confirmationTexts": {
+                  "REMOVE": {
+                    "title": {
+                      "text": [
+                        {
+                          "locale": "de_DE",
+                          "text": "dr-1-confirmation-title"
+                        }
+                      ]
+                    },
+                    "message": {
+                      "text": [
+                        {
+                          "locale": "de_DE",
+                          "text": "dr-1-confirmation-message"
+                        }
+                      ]
+                    }
+                  }
+                },
+                "repeatOverviewColumn": [
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "f-1",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "de_DE",
+                            "text": "dr-1-column"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "sortable": false,
+                    "filterable": false,
+                    "preferredSorting": "ASC",
+                    "elementRef": "F123"
+                  },
+                  {
+                    "type": "ExpressionRepeatOverviewColumn",
+                    "id": "expressionrepeatoverviewcolumn-34c0c",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "de_DE",
+                            "text": "ExpressionColumn"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "sortable": false,
+                    "filterable": false,
+                    "preferredSorting": "ASC",
+                    "name": "ExpressionColumn",
+                    "expression": "\"a\""
+                  }
+                ],
+                "rowActionGroup": {
+                  "action": [
+                    {
+                      "buttonStyling": {
+                        "label": {
+                          "type": "Multilingual",
+                          "multilingualText": {
+                            "text": [
+                              {
+                                "locale": "de_DE",
+                                "text": "dr-1-rowaction-label"
+                              }
+                            ]
+                          }
+                        }
+                      },
+                      "event": "test",
+                      "confirmation": {
+                        "text": [
+                          {
+                            "locale": "de_DE",
+                            "text": "dr-1-rowaction-message"
+                          }
+                        ]
+                      },
+                      "scope": "ALWAYS"
+                    }
+                  ]
+                },
+                "groupRef": "G2",
+                "enableAdd": true,
+                "enableRemove": true,
+                "enableReorder": false,
+                "enableCopy": false,
+                "detailScreen": {
+                  "id": "screen-2",
+                  "name": "screen-2",
+                  "screenElements": [
+                    {
+                      "type": "ControlGrid",
+                      "id": "cg-2",
+                      "name": "cg-2",
+                      "row": [
+                        {
+                          "type": "Row",
+                          "id": "r-2",
+                          "cell": [
+                            {
+                              "type": "Control",
+                              "id": "c-1",
+                              "offset": {
+                                "lg": 0
+                              },
+                              "label": {
+                                "type": "Multilingual",
+                                "multilingualText": {
+                                  "text": [
+                                    {
+                                      "locale": "de_DE",
+                                      "text": "dr-1-control-label"
+                                    }
+                                  ]
+                                }
+                              },
+                              "hint": {
+                                "text": [
+                                  {
+                                    "locale": "de_DE",
+                                    "text": "dr-1-control-hint"
+                                  }
+                                ]
+                              },
+                              "elementRef": "F234"
+                            }
+                          ]
+                        }
+                      ],
+                      "verticalAlignment": "BOTTOM"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "InlineRepeat",
+                "id": "ir-1",
+                "name": "ir-1",
+                "title": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "de_DE",
+                        "text": "ir-1"
+                      }
+                    ]
+                  }
+                },
+                "buttonLabels": {
+                  "APPLY": {
+                    "text": [
+                      {
+                        "locale": "de_DE",
+                        "text": "ir-1-apply"
+                      }
+                    ]
+                  },
+                  "ADD": {
+                    "text": [
+                      {
+                        "locale": "de_DE",
+                        "text": "ir-1-add"
+                      }
+                    ]
+                  },
+                  "COMMIT_ADD": {
+                    "text": [
+                      {
+                        "locale": "de_DE",
+                        "text": "ir-1-commit-add"
+                      }
+                    ]
+                  },
+                  "EDIT": {
+                    "text": [
+                      {
+                        "locale": "de_DE",
+                        "text": "ir-1-edit"
+                      }
+                    ]
+                  },
+                  "REMOVE": {
+                    "text": [
+                      {
+                        "locale": "de_DE",
+                        "text": "ir-1-remove"
+                      }
+                    ]
+                  },
+                  "VIEW": {
+                    "text": [
+                      {
+                        "locale": "de_DE",
+                        "text": "ir-1-view"
+                      }
+                    ]
+                  },
+                  "CANCEL": {
+                    "text": [
+                      {
+                        "locale": "de_DE",
+                        "text": "ir-1-cancel"
+                      }
+                    ]
+                  },
+                  "RETURN": {
+                    "text": [
+                      {
+                        "locale": "de_DE",
+                        "text": "ir-1-returen"
+                      }
+                    ]
+                  },
+                  "UP": {
+                    "text": [
+                      {
+                        "locale": "de_DE",
+                        "text": "ir-1-up"
+                      }
+                    ]
+                  },
+                  "DOWN": {
+                    "text": [
+                      {
+                        "locale": "de_DE",
+                        "text": "ir-1-down"
+                      }
+                    ]
+                  }
+                },
+                "confirmationTexts": {
+                  "REMOVE": {
+                    "title": {
+                      "text": [
+                        {
+                          "locale": "de_DE",
+                          "text": "ir-1-confirmation-title"
+                        }
+                      ]
+                    },
+                    "message": {
+                      "text": [
+                        {
+                          "locale": "de_DE",
+                          "text": "ir-1-confirmation-message"
+                        }
+                      ]
+                    }
+                  }
+                },
+                "repeatOverviewColumn": [
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "f-2",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "de_DE",
+                            "text": "ir-1-column"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "sortable": false,
+                    "filterable": false,
+                    "preferredSorting": "ASC",
+                    "elementRef": "F123"
+                  }
+                ],
+                "rowActionGroup": {
+                  "action": [
+                    {
+                      "buttonStyling": {
+                        "label": {
+                          "type": "Multilingual",
+                          "multilingualText": {
+                            "text": [
+                              {
+                                "locale": "de_DE",
+                                "text": "ir-1-rowaction-label"
+                              }
+                            ]
+                          }
+                        }
+                      },
+                      "event": "test",
+                      "confirmation": {
+                        "text": [
+                          {
+                            "locale": "de_DE",
+                            "text": "ir-1-rowaction-message"
+                          }
+                        ]
+                      },
+                      "scope": "ALWAYS"
+                    }
+                  ]
+                },
+                "groupRef": "G2",
+                "enableAdd": true,
+                "enableRemove": true,
+                "enableReorder": false,
+                "enableCopy": false
+              },
+              {
+                "type": "EmbeddedRepeat",
+                "id": "embeddedrepeat-c9b80",
+                "name": "er-1",
+                "title": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "de_DE",
+                        "text": "er-1"
+                      }
+                    ]
+                  }
+                },
+                "buttonLabels": {
+                  "APPLY": {
+                    "text": [
+                      {
+                        "locale": "de_DE",
+                        "text": "er-1-apply"
+                      }
+                    ]
+                  },
+                  "ADD": {
+                    "text": [
+                      {
+                        "locale": "de_DE",
+                        "text": "er-1-add"
+                      }
+                    ]
+                  },
+                  "COMMIT_ADD": {
+                    "text": [
+                      {
+                        "locale": "de_DE",
+                        "text": "er-1-commit-add"
+                      }
+                    ]
+                  },
+                  "EDIT": {
+                    "text": [
+                      {
+                        "locale": "de_DE",
+                        "text": "er-1-edit"
+                      }
+                    ]
+                  },
+                  "REMOVE": {
+                    "text": [
+                      {
+                        "locale": "de_DE",
+                        "text": "er-1-remove"
+                      }
+                    ]
+                  },
+                  "VIEW": {
+                    "text": [
+                      {
+                        "locale": "de_DE",
+                        "text": "er-1-view"
+                      }
+                    ]
+                  },
+                  "CANCEL": {
+                    "text": [
+                      {
+                        "locale": "de_DE",
+                        "text": "er-1-cancel"
+                      }
+                    ]
+                  },
+                  "RETURN": {
+                    "text": [
+                      {
+                        "locale": "de_DE",
+                        "text": "er-1-returen"
+                      }
+                    ]
+                  },
+                  "UP": {
+                    "text": [
+                      {
+                        "locale": "de_DE",
+                        "text": "er-1-up"
+                      }
+                    ]
+                  },
+                  "DOWN": {
+                    "text": [
+                      {
+                        "locale": "de_DE",
+                        "text": "er-1-down"
+                      }
+                    ]
+                  }
+                },
+                "confirmationTexts": {
+                  "REMOVE": {
+                    "title": {
+                      "text": [
+                        {
+                          "locale": "de_DE",
+                          "text": "er-1-confirmation-title"
+                        }
+                      ]
+                    },
+                    "message": {
+                      "text": [
+                        {
+                          "locale": "de_DE",
+                          "text": "er-1-confirmation-message"
+                        }
+                      ]
+                    }
+                  }
+                },
+                "repeatOverviewColumn": [
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "fieldbasedrepeatoverviewcolumn-bcdaa",
+                    "label": {
+                      "type": "Multilingual",
+                      "multilingualText": {
+                        "text": [
+                          {
+                            "locale": "de_DE",
+                            "text": "er-1-column"
+                          }
+                        ]
+                      }
+                    },
+                    "width": 1,
+                    "sortable": false,
+                    "filterable": false,
+                    "preferredSorting": "ASC",
+                    "elementRef": "F123"
+                  }
+                ],
+                "rowActionGroup": {
+                  "action": [
+                    {
+                      "buttonStyling": {
+                        "label": {
+                          "type": "Multilingual",
+                          "multilingualText": {
+                            "text": [
+                              {
+                                "locale": "de_DE",
+                                "text": "er-1-rowaction-label"
+                              }
+                            ]
+                          }
+                        }
+                      },
+                      "event": "test",
+                      "confirmation": {
+                        "text": [
+                          {
+                            "locale": "de_DE",
+                            "text": "er-1-rowaction-message"
+                          }
+                        ]
+                      },
+                      "scope": "ALWAYS"
+                    }
+                  ]
+                },
+                "groupRef": "G2",
+                "enableAdd": true,
+                "enableRemove": true,
+                "enableReorder": false,
+                "enableCopy": false,
+                "controlGrid": {
+                  "type": "ControlGrid",
+                  "id": "controlgrid-bd321",
+                  "name": "cg",
+                  "row": [
+                    {
+                      "type": "Row",
+                      "id": "row-546b3",
+                      "cell": [
+                        {
+                          "type": "Control",
+                          "id": "control-06633",
+                          "elementRef": "F123"
+                        }
+                      ]
+                    }
+                  ],
+                  "verticalAlignment": "BOTTOM"
+                }
+              },
+              {
+                "type": "ButtonPanel",
+                "id": "bp-1",
+                "name": "bp-1",
+                "title": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "de_DE",
+                        "text": "bp-1"
+                      }
+                    ]
+                  }
+                },
+                "button": [
+                  {
+                    "type": "EVENT",
+                    "id": "button-9ed43",
+                    "name": "b",
+                    "buttonStyling": {
+                      "label": {
+                        "type": "Multilingual",
+                        "multilingualText": {
+                          "text": [
+                            {
+                              "locale": "de_DE",
+                              "text": "b"
+                            }
+                          ]
+                        }
+                      },
+                      "priority": "SECONDARY"
+                    },
+                    "event": "submission",
+                    "scope": "HIDDEN_IN_READONLY_MODE"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "fieldConfiguration": {
+      "field": [
+        {
+          "label": {
+            "type": "Multilingual",
+            "multilingualText": {
+              "text": [
+                {
+                  "locale": "de_DE",
+                  "text": "text"
+                }
+              ]
+            }
+          },
+          "hint": {
+            "text": [
+              {
+                "locale": "de_DE",
+                "text": "text"
+              }
+            ]
+          },
+          "elementRef": "F123"
+        },
+        {
+          "label": {
+            "type": "Multilingual",
+            "multilingualText": {
+              "text": [
+                {
+                  "locale": "de_DE",
+                  "text": "Field Configuration Label"
+                }
+              ]
+            }
+          },
+          "hint": {
+            "text": [
+              {
+                "locale": "de_DE",
+                "text": "Field Configuration Hint"
+              }
+            ]
+          },
+          "placeholder": {
+            "text": [
+              {
+                "locale": "de_DE",
+                "text": "Field Configuration Placeholder"
+              }
+            ]
+          },
+          "elementRef": "F234"
+        }
+      ]
+    },
+    "groupConfiguration": {},
+    "defaults": {
+      "buttonLabels": {
+        "APPLY": {
+          "text": [
+            {
+              "locale": "de_DE",
+              "text": "apply"
+            }
+          ]
+        },
+        "ADD": {
+          "text": [
+            {
+              "locale": "de_DE",
+              "text": "add"
+            }
+          ]
+        },
+        "COMMIT_ADD": {
+          "text": [
+            {
+              "locale": "de_DE",
+              "text": "commit-add"
+            }
+          ]
+        },
+        "EDIT": {
+          "text": [
+            {
+              "locale": "de_DE",
+              "text": "edit"
+            }
+          ]
+        },
+        "REMOVE": {
+          "text": [
+            {
+              "locale": "de_DE",
+              "text": "remove"
+            }
+          ]
+        },
+        "VIEW": {
+          "text": [
+            {
+              "locale": "de_DE",
+              "text": "view"
+            }
+          ]
+        },
+        "CANCEL": {
+          "text": [
+            {
+              "locale": "de_DE",
+              "text": "cancel"
+            }
+          ]
+        },
+        "CONFIRM": {
+          "text": [
+            {
+              "locale": "de_DE",
+              "text": "confirm"
+            }
+          ]
+        },
+        "RETURN": {
+          "text": [
+            {
+              "locale": "de_DE",
+              "text": "returen"
+            }
+          ]
+        },
+        "UP": {
+          "text": [
+            {
+              "locale": "de_DE",
+              "text": "up"
+            }
+          ]
+        },
+        "DOWN": {
+          "text": [
+            {
+              "locale": "de_DE",
+              "text": "down"
+            }
+          ]
+        },
+        "COPY": {
+          "text": [
+            {
+              "locale": "de_DE",
+              "text": "copy"
+            }
+          ]
+        },
+        "CLOSE": {
+          "text": [
+            {
+              "locale": "de_DE",
+              "text": "close"
+            }
+          ]
+        },
+        "DOWNLOAD": {
+          "text": [
+            {
+              "locale": "de_DE",
+              "text": "download"
+            }
+          ]
+        },
+        "SKIP": {
+          "text": [
+            {
+              "locale": "de_DE",
+              "text": "skip"
+            }
+          ]
+        },
+        "REPLACE": {
+          "text": [
+            {
+              "locale": "de_DE",
+              "text": "replace"
+            }
+          ]
+        },
+        "UPLOAD_AS_COPY": {
+          "text": [
+            {
+              "locale": "de_DE",
+              "text": "upload-as-copy"
+            }
+          ]
+        }
+      },
+      "confirmationTexts": {
+        "REMOVE": {
+          "title": {
+            "text": [
+              {
+                "locale": "de_DE",
+                "text": "confirmation-title"
+              }
+            ]
+          },
+          "message": {
+            "text": [
+              {
+                "locale": "de_DE",
+                "text": "confirmation-message"
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}

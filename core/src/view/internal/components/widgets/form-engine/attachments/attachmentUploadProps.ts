@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -32,10 +32,10 @@
 
 import type { ReactElement } from "react";
 
-import type { ModelPath } from "@com.mgmtp.a12.base/base-model-api/lib/main/model/index.js";
-import type { Attachment } from "@com.mgmtp.a12.dataservices/dataservices-access/lib/Attachment/attachment.js";
-import type { EntityInstancePath } from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
-import type { Localizable } from "@com.mgmtp.a12.utils/utils-localization/lib/main/index.js";
+import type { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
+import type { Attachment } from "@com.mgmtp.a12.dataservices/dataservices-access";
+import type { EntityInstancePath } from "@com.mgmtp.a12.kernel/kernel-md-facade";
+import type { Localizable } from "@com.mgmtp.a12.utils/utils-localization";
 
 import type { LocalizableFactory } from "../../../../../../back-end/localization/internal/localization.js";
 import type { EngineStore } from "../../../../../../back-end/store/internal/store.js";

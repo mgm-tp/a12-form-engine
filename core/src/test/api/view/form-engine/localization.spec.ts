@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -36,14 +36,16 @@ import { mock } from "node:test";
 import { act } from "react";
 
 import { query, within } from "@com.mgmtp.a12.devtools/react";
-import type { Locale } from "@com.mgmtp.a12.utils/utils-localization/lib/main/index.js";
+import type { Locale } from "@com.mgmtp.a12.utils/utils-localization";
 import {
 	defaultLocalizerFactory,
 	localizableFromModel
-} from "@com.mgmtp.a12.utils/utils-localization/lib/main/index.js";
-import type { MenuItemType } from "@com.mgmtp.a12.widgets/widgets-core/lib/menu/main/menu.api.ts";
-import type { MultiselectProps } from "@com.mgmtp.a12.widgets/widgets-core/lib/multiselect/main/multiselect.api.js";
-import type { BaseColumnType } from "@com.mgmtp.a12.widgets/widgets-core/lib/table/new-api/column.api.js";
+} from "@com.mgmtp.a12.utils/utils-localization";
+import type {
+	BaseColumnType,
+	MenuItemType,
+	MultiselectProps
+} from "@com.mgmtp.a12.widgets/widgets-core";
 
 import { LocalizableFactory } from "../../../../back-end/localization/internal/localization.js";
 import type { EngineStore } from "../../../../back-end/store/internal/store.js";
@@ -57,11 +59,14 @@ import { HtmlTextSpanMock } from "../../../rtl-utils/getComponentMocks.js";
 import { ControlInputMock, getInputMocks } from "../../../rtl-utils/getInputMocks.js";
 import { mouseEventMock } from "../../../rtl-utils/mock-utils.js";
 import type { RtlRenderWrapper, SetupWithRtlOptions } from "../../../rtl-utils/render-wrapper.js";
+import { createModelPath } from "../../../utils/createModelPath.js";
 import type { TestLocale } from "../../../utils/localization.js";
 import { DE_LOCALE, US_LOCALE } from "../../../utils/localization.js";
-import { ModelHelpers } from "../../../utils/model-helpers.js";
 import { RenderGroupFixture } from "../../../utils/rtl-render-group.js";
-import { SetupHelpers } from "../../../utils/setup.js";
+import {
+	setupConnectedFormEngineWithRtlAsync,
+	setupFormEngineRendererWithRtlAsync
+} from "../../../utils/setup.js";
 import { setupModelsFixture } from "../../../utils/setupFixture.js";
 import { LOCALIZATION } from "../../../utils/test-model-helpers/localization.js";
 import { queryRadioItemsProps } from "../../../utils/test-model-helpers/radio-item-query.js";
@@ -89,7 +94,7 @@ describe("api.back-end.localization", () => {
 			inputMap?: InputMap,
 			componentMap?: Partial<ComponentMap>
 		): Promise<RtlRenderWrapper> {
-			return SetupHelpers.setupFormEngineRendererWithRtlAsync(
+			return setupFormEngineRendererWithRtlAsync(
 				setupOptions(locale, screenState, inputMap, componentMap)
 			);
 		}
@@ -98,7 +103,7 @@ describe("api.back-end.localization", () => {
 			locale: Locale,
 			screenState?: EngineStore.ScreenState
 		): Promise<RtlRenderWrapper> {
-			return SetupHelpers.setupConnectedFormEngineWithRtlAsync(setupOptions(locale, screenState));
+			return setupConnectedFormEngineWithRtlAsync(setupOptions(locale, screenState));
 		}
 
 		function setupOptions(
@@ -371,7 +376,7 @@ describe("api.back-end.localization", () => {
 
 				describe("multi select", () => {
 					it("has correctly localized value labels", () => {
-						const multiSelect = query(render.wrapper.widgetMap.MultiSelect)
+						const multiSelect = query(render.wrapper.widgetMap.Multiselect)
 							.withId(LOCALIZATION.MULTI_SELECT_FIELD.ID_FIELD_NO_LABEL)
 							.props();
 
@@ -389,13 +394,13 @@ describe("api.back-end.localization", () => {
 				};
 				const { it } = RenderGroupFixture(() => setup(locale, undefined, inputMap));
 				const fieldIds = [
-					LOCALIZATION.STRING_FIELD.ID_FIELD_LABEL_PICUS,
-					LOCALIZATION.NUMBER_FIELD.ID_FIELD_LABEL_PICUS,
-					LOCALIZATION.BOOLEAN_FIELD.ID_FIELD_LABEL_PICUS,
-					LOCALIZATION.DATE_FIELD.ID_FIELD_LABEL_PICUS,
-					LOCALIZATION.ENUM_SELECT_FIELD.ID_FIELD_LABEL_PICUS,
-					LOCALIZATION.ENUM_RADIO_FIELD.ID_FIELD_LABEL_PICUS,
-					LOCALIZATION.CONFIRM_FIELD.ID_FIELD_LABEL_PICUS
+					LOCALIZATION.STRING_FIELD.ID_FIELD_LABEL,
+					LOCALIZATION.NUMBER_FIELD.ID_FIELD_LABEL,
+					LOCALIZATION.BOOLEAN_FIELD.ID_FIELD_LABEL,
+					LOCALIZATION.DATE_FIELD.ID_FIELD_LABEL,
+					LOCALIZATION.ENUM_SELECT_FIELD.ID_FIELD_LABEL,
+					LOCALIZATION.ENUM_RADIO_FIELD.ID_FIELD_LABEL,
+					LOCALIZATION.CONFIRM_FIELD.ID_FIELD_LABEL
 				];
 
 				for (const fieldId of fieldIds) {
@@ -420,7 +425,7 @@ describe("api.back-end.localization", () => {
 				describe("multi-select control", () => {
 					it("has label from document model", () => {
 						const label = query(inputMap.Input)
-							.withProp("uiId", LOCALIZATION.MULTI_SELECT_FIELD.ID_FIELD_LABEL_PICUS)
+							.withProp("uiId", LOCALIZATION.MULTI_SELECT_FIELD.ID_FIELD_LABEL)
 							.props().modelElement.label;
 						ok(
 							typeof label === "string" && label.startsWith(`DocumentModelLabel.${locale.language}`)
@@ -436,14 +441,14 @@ describe("api.back-end.localization", () => {
 				};
 				const { it } = RenderGroupFixture(() => setup(locale, undefined, inputMap));
 				const fieldIds = [
-					LOCALIZATION.STRING_FIELD.ID_FIELD_LABEL_PICUS_MELIES,
-					LOCALIZATION.NUMBER_FIELD.ID_FIELD_LABEL_PICUS_MELIES,
-					LOCALIZATION.BOOLEAN_FIELD.ID_FIELD_LABEL_PICUS_MELIES,
-					LOCALIZATION.DATE_FIELD.ID_FIELD_LABEL_PICUS_MELIES,
-					LOCALIZATION.ENUM_SELECT_FIELD.ID_FIELD_LABEL_PICUS_MELIES,
-					LOCALIZATION.ENUM_RADIO_FIELD.ID_FIELD_LABEL_PICUS_MELIES,
-					LOCALIZATION.MULTI_SELECT_FIELD.ID_FIELD_LABEL_PICUS_MELIES,
-					LOCALIZATION.CONFIRM_FIELD.ID_FIELD_LABEL_PICUS_MELIES
+					LOCALIZATION.STRING_FIELD.ID_FIELD_LABEL_FM,
+					LOCALIZATION.NUMBER_FIELD.ID_FIELD_LABEL_FM,
+					LOCALIZATION.BOOLEAN_FIELD.ID_FIELD_LABEL_FM,
+					LOCALIZATION.DATE_FIELD.ID_FIELD_LABEL_FM,
+					LOCALIZATION.ENUM_SELECT_FIELD.ID_FIELD_LABEL_FM,
+					LOCALIZATION.ENUM_RADIO_FIELD.ID_FIELD_LABEL_FM,
+					LOCALIZATION.MULTI_SELECT_FIELD.ID_FIELD_LABEL_FM,
+					LOCALIZATION.CONFIRM_FIELD.ID_FIELD_LABEL_FM
 				];
 
 				for (const fieldId of fieldIds) {
@@ -471,14 +476,14 @@ describe("api.back-end.localization", () => {
 				};
 				const { it } = RenderGroupFixture(() => setup(locale, undefined, inputMap));
 				const fieldIds = [
-					LOCALIZATION.STRING_FIELD.ID_FIELD_LABEL_PICUS_FIELD_CONFIG,
-					LOCALIZATION.NUMBER_FIELD.ID_FIELD_LABEL_PICUS_FIELD_CONFIG,
-					LOCALIZATION.BOOLEAN_FIELD.ID_FIELD_LABEL_PICUS_FIELD_CONFIG,
-					LOCALIZATION.DATE_FIELD.ID_FIELD_LABEL_PICUS_FIELD_CONFIG,
-					LOCALIZATION.ENUM_SELECT_FIELD.ID_FIELD_LABEL_PICUS_FIELD_CONFIG,
-					LOCALIZATION.ENUM_RADIO_FIELD.ID_FIELD_LABEL_PICUS_FIELD_CONFIG,
-					LOCALIZATION.MULTI_SELECT_FIELD.ID_FIELD_LABEL_PICUS_FIELD_CONFIG,
-					LOCALIZATION.CONFIRM_FIELD.ID_FIELD_LABEL_PICUS_FIELD_CONFIG
+					LOCALIZATION.STRING_FIELD.ID_FIELD_LABEL_FIELD_CONFIG,
+					LOCALIZATION.NUMBER_FIELD.ID_FIELD_LABEL_FIELD_CONFIG,
+					LOCALIZATION.BOOLEAN_FIELD.ID_FIELD_LABEL_FIELD_CONFIG,
+					LOCALIZATION.DATE_FIELD.ID_FIELD_LABEL_FIELD_CONFIG,
+					LOCALIZATION.ENUM_SELECT_FIELD.ID_FIELD_LABEL_FIELD_CONFIG,
+					LOCALIZATION.ENUM_RADIO_FIELD.ID_FIELD_LABEL_FIELD_CONFIG,
+					LOCALIZATION.MULTI_SELECT_FIELD.ID_FIELD_LABEL_FIELD_CONFIG,
+					LOCALIZATION.CONFIRM_FIELD.ID_FIELD_LABEL_FIELD_CONFIG
 				];
 
 				for (const fieldId of fieldIds) {
@@ -549,12 +554,9 @@ describe("api.back-end.localization", () => {
 
 		function describeTestsForNavigationButton(locale: TestLocale) {
 			function renderForNavigationButtonTest(): Promise<RtlRenderWrapper> {
-				return setup(
-					locale,
-					{ locationPath: ModelHelpers.createModelPath("Screen2"), path: [] },
-					undefined,
-					{ HtmlTextSpan: mock.fn(HtmlTextSpanMock) }
-				);
+				return setup(locale, { locationPath: createModelPath("Screen2"), path: [] }, undefined, {
+					HtmlTextSpan: mock.fn(HtmlTextSpanMock)
+				});
 			}
 
 			describe("Navigation Buttons", () => {
@@ -604,7 +606,7 @@ describe("api.back-end.localization", () => {
 
 		function describeTestsForMenuItem(locale: TestLocale) {
 			function renderForMenuItemTest(): Promise<RtlRenderWrapper> {
-				return SetupHelpers.setupConnectedFormEngineWithRtlAsync({
+				return setupConnectedFormEngineWithRtlAsync({
 					componentMap: { HtmlTextSpan: mock.fn(HtmlTextSpanMock) },
 					models: models,
 					locale,
@@ -614,7 +616,7 @@ describe("api.back-end.localization", () => {
 					ui: {
 						screenLocation: [
 							{
-								locationPath: ModelHelpers.createModelPath("Screen2"),
+								locationPath: createModelPath("Screen2"),
 								path: []
 							}
 						]

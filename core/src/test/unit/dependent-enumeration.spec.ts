@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -32,26 +32,24 @@
 
 import { strictEqual } from "node:assert/strict";
 
-import { ModelPath } from "@com.mgmtp.a12.base/base-model-api/lib/main/model/index.js";
+import { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
 import { query } from "@com.mgmtp.a12.devtools/react";
-import type { SelectItem } from "@com.mgmtp.a12.widgets/widgets-core/lib/input/select/main/select.api.js";
+import type { SelectItem } from "@com.mgmtp.a12.widgets/widgets-core";
 
 import type { EngineStore } from "../../back-end/store/internal/store.js";
 import type { ReadonlyObjectMap } from "../../models/index.js";
 
-import { ModelHelpers } from "../utils/model-helpers.js";
-import { SetupHelpers } from "../utils/setup.js";
+import { createModelPath } from "../utils/createModelPath.js";
+import { setupFormEngineRendererWithRtlAsync } from "../utils/setup.js";
 import { setupModelsFixture } from "../utils/setupFixture.js";
 import { DEP_ENUMERATION } from "../utils/test-model-helpers/dependent-enumeration.js";
-
-const { createModelPath } = ModelHelpers;
 
 describe("unit.view.Dependent Enumeration", () => {
 	const models = setupModelsFixture("dependencies.enumeration");
 
 	describe("Enumeration control inside top level screen", () => {
 		it("renders all enumeration values when no master value is selected", async () => {
-			const wrapper = await SetupHelpers.setupFormEngineRendererWithRtlAsync({ models });
+			const wrapper = await setupFormEngineRendererWithRtlAsync({ models });
 
 			query(wrapper.widgetMap.Select).withId(DEP_ENUMERATION.ID_TOP_LEVEL_BRAND).assertRendered();
 			const dependentEnumeration = query(wrapper.widgetMap.Select)
@@ -128,7 +126,7 @@ describe("unit.view.Dependent Enumeration", () => {
 			it("only renders enumeration values which fit the dependency", async () => {
 				const doc = { A12T_DependentEnumeration: { Cars: [{ Brand: "MERCEDES" }] } };
 
-				const wrapper = await SetupHelpers.setupFormEngineRendererWithRtlAsync({
+				const wrapper = await setupFormEngineRendererWithRtlAsync({
 					models,
 					data: { document: doc }
 				});
@@ -153,7 +151,7 @@ describe("unit.view.Dependent Enumeration", () => {
 						}
 					}
 				};
-				const wrapper = await SetupHelpers.setupFormEngineRendererWithRtlAsync({
+				const wrapper = await setupFormEngineRendererWithRtlAsync({
 					models,
 					data: {
 						document: doc
@@ -214,7 +212,7 @@ describe("unit.view.Dependent Enumeration", () => {
 			screenLocation.push(options.screenState);
 		}
 
-		const wrapper = await SetupHelpers.setupFormEngineRendererWithRtlAsync({
+		const wrapper = await setupFormEngineRendererWithRtlAsync({
 			models,
 			data: { document: documentWithOneRow },
 			ui: {

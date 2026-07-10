@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -34,24 +34,21 @@ import { deepEqual, deepStrictEqual, equal, strictEqual } from "node:assert/stri
 import { mock } from "node:test";
 
 import { query } from "@com.mgmtp.a12.devtools/react";
-import type {
-	DocumentModel,
-	EntityInstancePath
-} from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
-import type { Locale } from "@com.mgmtp.a12.utils/utils-localization/lib/main/index.js";
-import { defaultLocalizerFactory } from "@com.mgmtp.a12.utils/utils-localization/lib/main/index.js";
-import type { DropDownItem } from "@com.mgmtp.a12.widgets/widgets-core/lib/dropdown/main/template/dropdown.tpl.api.js";
+import type { DocumentModel, EntityInstancePath } from "@com.mgmtp.a12.kernel/kernel-md-facade";
+import type { Locale } from "@com.mgmtp.a12.utils/utils-localization";
+import { defaultLocalizerFactory } from "@com.mgmtp.a12.utils/utils-localization";
+import type { DropDownItem } from "@com.mgmtp.a12.widgets/widgets-core";
 
 import type { DispatchConfiguration } from "../../../../../view/index.js";
 import { defaultMapDispatchToProps } from "../../../../../view/index.js";
 import { AutoCompleteInput } from "../../../../../view/internal/components/form-engine/cells/controls/enumeration/autocomplete-input.js";
 import type { RtlRenderWrapper } from "../../../../rtl-utils/render-wrapper.js";
 import { rtlRenderWrapperAsync } from "../../../../rtl-utils/render-wrapper.js";
-import { DocumentHelpers } from "../../../../utils/document-helpers.js";
+import { createModelPath } from "../../../../utils/createModelPath.js";
+import { DocumentModelHelpers } from "../../../../utils/DocumentModelHelpers.js";
 import { DE_LOCALE, US_LOCALE } from "../../../../utils/localization.js";
-import { DocumentModelHelpers } from "../../../../utils/model-helpers.js";
 import { setupModelsFixture } from "../../../../utils/setupFixture.js";
-import { createModelPath } from "../../../../utils/test-model-helpers/dependent-enumeration.js";
+import { createDocumentPath } from "../../../../utils/createDocumentPath.js";
 
 import { inputTest } from "./generic-tests/input-tests.js";
 import { createProps } from "./generic-tests/input-utils.js";
@@ -60,17 +57,13 @@ const { Field } = DocumentModelHelpers;
 
 describe("api.view.inputs", () => {
 	describe("AutoCompleteInput", () => {
-		const models = setupModelsFixture("controls.picustypes");
+		const models = setupModelsFixture("controls.dmtypes");
 
 		const documentElementDataType: DocumentModel.EnumerationType = {
 			type: "EnumerationType",
 			values: []
 		};
-		const path = DocumentHelpers.createDocumentPath(
-			["A12T_PicusTypes"],
-			["Enumeration"],
-			["Enumeration011"]
-		);
+		const path = createDocumentPath(["A12T_DmTypes"], ["Enumeration"], ["Enumeration011"]);
 		const baseProps = {
 			documentElement: Field({ fieldType: documentElementDataType }),
 			documentElementDataType,
@@ -148,11 +141,7 @@ describe("api.view.inputs", () => {
 			});
 
 			it("strips leading and tailing spaces", async () => {
-				const path = DocumentHelpers.createDocumentPath(
-					["A12T_PicusTypes"],
-					["Enumeration"],
-					["Enumeration05"]
-				);
+				const path = createDocumentPath(["A12T_DmTypes"], ["Enumeration"], ["Enumeration05"]);
 				const dispatchConfig = stubDispatchConfig();
 				const wrapper = await setup({ dispatchConfig, path });
 				const input = query(wrapper.widgetMap.Autocomplete).props();

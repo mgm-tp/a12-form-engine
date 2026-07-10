@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -30,7 +30,8 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { useCallback, useMemo, type JSX } from "react";
+import { useCallback, useMemo } from "react";
+import type { JSX } from "react";
 
 import type {
 	DropdownItemProps,
@@ -40,11 +41,9 @@ import type {
 import {
 	SettingEvents,
 	SettingTemplate,
-	UIStateSelector,
-	useContentEditorState,
 	useSettingState
 } from "@com.mgmtp.a12.contentengine/contentengine-editor";
-import { type SelectItem } from "@com.mgmtp.a12.widgets/widgets-core/lib/input/select/main/select.api.js";
+import type { SelectItem } from "@com.mgmtp.a12.widgets/widgets-core";
 
 import { StyledSelect } from "./styledWidgets.js";
 
@@ -78,8 +77,6 @@ export function SelectSetting(props: SelectSettingsProps): JSX.Element {
 		[dispatch]
 	);
 
-	const disabled = useContentEditorState(UIStateSelector.isReadonlySetting());
-
 	return (
 		<SettingTemplate.Setting
 			label={label}
@@ -89,7 +86,6 @@ export function SelectSetting(props: SelectSettingsProps): JSX.Element {
 					items={selectItems}
 					$width={width}
 					onValueChanged={onValueChanged ?? defaultOnValueChanged}
-					disabled={disabled}
 				/>
 			}
 		/>

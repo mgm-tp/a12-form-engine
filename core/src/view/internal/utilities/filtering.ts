@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -30,11 +30,11 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { type Predicate } from "fp-ts/lib/Predicate.js";
+import type { Predicate } from "fp-ts/lib/Predicate.js";
 
-import { ModelPath } from "@com.mgmtp.a12.base/base-model-api/lib/main/model/index.js";
-import { getApproximatedDate } from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/a12internal/KernelUtils.js";
-import type { DocumentModel } from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
+import { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
+import type { DocumentModel } from "@com.mgmtp.a12.kernel/kernel-md-facade";
+import { getApproximatedDate } from "@com.mgmtp.a12.kernel/kernel-md-facade/a12internal";
 
 import type {
 	BooleanRepeatFilter,
@@ -59,8 +59,10 @@ import {
 } from "../../../back-end/store/internal/store.js";
 import { and } from "../../../back-end/utils/internal/combinators.js";
 import { isObjectEmpty } from "../../../back-end/utils/internal/guards.js";
-import { findElementByFormModelPath, FormModel, ReadonlyObjectMap } from "../../../models/index.js";
-import { DocumentModelUtils } from "../../../models/internal/utils/document-model-utils.js";
+import type { FormModel } from "../../../models/index.js";
+import { findElementByFormModelPath, ReadonlyObjectMap } from "../../../models/index.js";
+import { isFormModelFieldOverviewColumn } from "../../../models/internal/FormModelGuards.js";
+import * as DocumentModelUtils from "../../../models/internal/utils/document-model-utils.js";
 import { FormModelUtils } from "../../../models/internal/utils/form-model-utils.js";
 
 import { DateUtils } from "../components/form-engine/cells/controls/date/date-utilities.js";
@@ -111,7 +113,7 @@ function createPredicateFactory(
 			return true;
 		}
 
-		if (FormModel.FieldOverviewColumn.isInstance(formModelElement)) {
+		if (isFormModelFieldOverviewColumn(formModelElement)) {
 			const documentElement = DocumentModelUtils.findByPath(
 				documentModel,
 				formModelElement.elementPath

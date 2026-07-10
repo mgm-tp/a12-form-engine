@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -32,10 +32,10 @@
 
 import { equal, notEqual } from "node:assert/strict";
 
-import { ModelPath } from "@com.mgmtp.a12.base/base-model-api/lib/main/model/index.js";
+import { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
 import { query } from "@com.mgmtp.a12.devtools/react";
-import type { GroupInstance } from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
-import type { InfiniteScrollTableProps } from "@com.mgmtp.a12.widgets/widgets-core/lib/table/new-api/table.api.js";
+import type { GroupInstance } from "@com.mgmtp.a12.kernel/kernel-md-facade";
+import type { InfiniteScrollTableProps } from "@com.mgmtp.a12.widgets/widgets-core";
 
 import type { EngineStore, Models } from "../../../../../back-end/store/internal/store.js";
 import type { Mutable } from "../../../../../back-end/utils/internal/types.js";
@@ -43,10 +43,14 @@ import type { FormModel } from "../../../../../models/index.js";
 import type { Config } from "../../../../../view/index.js";
 import type { RtlRenderWrapper } from "../../../../rtl-utils/render-wrapper.js";
 import { RenderGroupFixture } from "../../../../utils/rtl-render-group.js";
-import { SetupHelpers } from "../../../../utils/setup.js";
+import {
+	loadData,
+	loadModels,
+	setupFormEngineRendererWithRtlAsync
+} from "../../../../utils/setup.js";
 import { setupFixture, setupModelsFixture } from "../../../../utils/setupFixture.js";
-import { createModelPath } from "../../../../utils/test-model-helpers/dependent-enumeration.js";
 import { FORM_MODEL } from "../../../../utils/test-model-helpers/repeat.infinite-scrolling.js";
+import { createModelPath } from "../../../../utils/createModelPath.js";
 
 import { IdEquals } from "../query-predicates.js";
 
@@ -75,7 +79,7 @@ function setupWithOptions(options: {
 		}
 	];
 
-	return SetupHelpers.setupFormEngineRendererWithRtlAsync({
+	return setupFormEngineRendererWithRtlAsync({
 		models: options.models,
 		data: { document: options.data },
 		ui: {
@@ -100,7 +104,7 @@ function executeInfiniteScrollingTest(
 			const models = (() => {
 				type InfiniteScrollingRepeat = FormModel.DetachedRepeat | FormModel.InlineRepeat;
 
-				const tmp = SetupHelpers.loadModels("repeat.infinite-scrolling");
+				const tmp = loadModels("repeat.infinite-scrolling");
 				const screen = tmp.formModel.content.screens.find(s => screenName === s.name);
 				const repeat = screen?.screenElements.find(
 					IdEquals(repeatId)
@@ -110,11 +114,7 @@ function executeInfiniteScrollingTest(
 				return tmp;
 			})();
 
-			const data = SetupHelpers.loadData(
-				"repeat.infinite-scrolling",
-				"dataSmall",
-				models.documentModel
-			);
+			const data = loadData("repeat.infinite-scrolling", "dataSmall", models.documentModel);
 
 			const { tableMap } = await setupWithOptions({
 				models,
@@ -134,7 +134,7 @@ function executeInfiniteScrollingTest(
 	describe("given a repeat with infiniteScrolling=true, a tableHeight, a rowHeight and a cardHeight", () => {
 		const models = setupModelsFixture("repeat.infinite-scrolling");
 		const fixture = setupFixture(() => ({
-			data: SetupHelpers.loadData("repeat.infinite-scrolling", "dataSmall", models.documentModel)
+			data: loadData("repeat.infinite-scrolling", "dataSmall", models.documentModel)
 		}));
 
 		interface TableRender extends RtlRenderWrapper {

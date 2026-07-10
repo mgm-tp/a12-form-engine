@@ -1,0 +1,180 @@
+{
+  "header": {
+    "id": "no-cycle-form",
+    "modelType": "form",
+    "modelVersion": "39.0.0",
+    "locales": [
+      {
+        "code": "en"
+      }
+    ],
+    "annotations": [
+      {
+        "name": "roles",
+        "value": "admin"
+      }
+    ],
+    "modelReferences": [
+      {
+        "alias": "no-cycle-document",
+        "modelType": "document",
+        "purpose": "data binding",
+        "reference": "no-cycle-document"
+      }
+    ]
+  },
+  "content": {
+    "subHeaderBox": {
+      "id": "subHeaderBox1"
+    },
+    "footerBox": {
+      "id": "footerBox1"
+    },
+    "screens": [
+      {
+        "id": "screen_ca80a",
+        "name": "Screen 1",
+        "screenElements": []
+      }
+    ],
+    "fieldConfiguration": {
+      "field": [
+        {
+          "dependentField": {
+            "masterField": "field_2b488",
+            "case": [
+              {
+                "masterValue": "1"
+              }
+            ]
+          },
+          "elementRef": "field_6a774"
+        },
+        {
+          "dependentField": {
+            "masterField": "field_beb78",
+            "case": [
+              {
+                "masterValue": "false",
+                "value": "true"
+              }
+            ]
+          },
+          "elementRef": "field_f859a"
+        },
+        {
+          "dependentField": {
+            "masterField": "field_528e5",
+            "case": [
+              {
+                "masterValue": "true",
+                "fieldRef": "field_528e5"
+              }
+            ]
+          },
+          "elementRef": "field_46318"
+        },
+        {
+          "dependentEnumeration": {
+            "masterField": "field_5bdb4",
+            "constraint": [
+              {
+                "masterValue": "1",
+                "valueForMasterChange": "1",
+                "constraintValues": [
+                  {
+                    "value": "1"
+                  },
+                  {
+                    "value": "2"
+                  }
+                ]
+              },
+              {
+                "masterValue": "2",
+                "valueForMasterChange": "2",
+                "constraintValues": [
+                  {
+                    "value": "1"
+                  },
+                  {
+                    "value": "2"
+                  },
+                  {
+                    "value": "3"
+                  }
+                ]
+              },
+              {
+                "masterValue": "3",
+                "valueForMasterChange": "3",
+                "constraintValues": [
+                  {
+                    "value": "2"
+                  },
+                  {
+                    "value": "3"
+                  }
+                ]
+              }
+            ]
+          },
+          "elementRef": "field_2b488"
+        },
+        {
+          "dependentField": {
+            "masterField": "field_f859a",
+            "case": [
+              {
+                "masterValue": "false",
+                "notRelevant": true
+              }
+            ]
+          },
+          "elementRef": "field_16f23"
+        },
+        {
+          "dependentField": {
+            "masterField": "field_46318",
+            "case": [
+              {
+                "masterValue": "true",
+                "readonly": true
+              }
+            ]
+          },
+          "elementRef": "field_7dcf9"
+        },
+        {
+          "dependentField": {
+            "masterField": "field_6a774",
+            "case": [
+              {
+                "masterValue": "1",
+                "notRelevant": true
+              }
+            ]
+          },
+          "elementRef": "field_5bdb4"
+        }
+      ]
+    },
+    "groupConfiguration": {
+      "group": [
+        {
+          "dependentGroup": {
+            "masterField": "field_f82ad",
+            "case": [
+              {
+                "masterValue": "true",
+                "notRelevant": true
+              }
+            ]
+          },
+          "groupRef": "group_f9449"
+        }
+      ]
+    },
+    "defaults": {}
+  }
+}

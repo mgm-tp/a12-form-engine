@@ -8,7 +8,7 @@ Dual License
 This source file is part of the mgm A12 Platform and available under
 a choice of two different licenses:
 
-1. Open-Source License – EUPL v1.2
+1. Open-Source License - EUPL v1.2
    You may redistribute and/or modify this file under the terms of the
    European Union Public License, version 1.2 - see https://eupl.eu/.
 
@@ -90,7 +90,7 @@ include::assets/typescript/form-engine/tutorials/rendering/custom-section-with-e
 
 == WidgetMap
 
-In this example a custom `WidgetMap` is created, which renders an additional button next to the `TextLineStateless` widget, if the corresponding FormModel element contains a special annotation.
+In this example a custom `WidgetMap` is created, which renders an additional button next to the `TextField` widget, if the corresponding FormModel element contains a special annotation.
 
 [source,tsx]
 ----
@@ -104,7 +104,7 @@ If you do not need to access the FormModel element, you can omit the additional 
 
 [NOTE]
 ====
-The customization of a widget will only take effect, if the widget is rendered directly by the Form Engine. For example, the `TextLineStateless` widget renders a `Label` widget internally. This `Label` cannot be customized by providing your own `Label` widget in the map, but only through the corresponding property of the containing widget - in this case the `TextLineStateless`.
+The customization of a widget will only take effect, if the widget is rendered directly by the Form Engine. For example, the `TextField` widget renders a `Label` widget internally. This `Label` cannot be customized by providing your own `Label` widget in the map, but only through the corresponding property of the containing widget - in this case the `TextField`.
 ====
 
 == Input Customization

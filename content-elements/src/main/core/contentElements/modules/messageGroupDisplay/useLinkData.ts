@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -33,7 +33,6 @@
 import { useContext, useMemo } from "react";
 import { useSelector } from "react-redux";
 
-import { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
 import { DocumentPath, KernelMessage } from "@com.mgmtp.a12.client/client-data";
 import type { DocumentContext } from "@com.mgmtp.a12.contentengine/contentengine-core";
 import { useDocumentContext } from "@com.mgmtp.a12.contentengine/contentengine-core";
@@ -41,9 +40,9 @@ import type {
 	DocumentModel,
 	EntityInstancePath,
 	Message
-} from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
+} from "@com.mgmtp.a12.kernel/kernel-md-facade";
 import type { Localizer } from "@com.mgmtp.a12.utils/utils-localization";
-import { LocalizerContext } from "@com.mgmtp.a12.utils/utils-localization-react/lib/main/index.js";
+import { LocalizerContext } from "@com.mgmtp.a12.utils/utils-localization-react";
 
 import { FormElementContext } from "../../../configuration/formElementContext.js";
 import { getPlainLocalizabledLabel } from "../../elementConfiguration/getLocalizedModelTexts.js";
@@ -51,7 +50,7 @@ import type { FunctionMap } from "../../functionMap/functionMap.js";
 import { FunctionMapContext } from "../../functionMap/functionMapContext.js";
 import { UiId } from "../../generateUiId.js";
 
-import { MessageGroupContext } from "../messageGroupContainer/messageGroupContext.js";
+import { EditableElementsContext } from "../messageGroupContainer/editableElementsContext.js";
 import type { EditableElementList } from "../messageGroupContainer/useCollectEditableElements.js";
 
 /** @internal */
@@ -63,12 +62,10 @@ export interface LinkDataItem {
 /** @internal */
 export function useLinkData(message: Message): LinkDataItem[] {
 	const { contentModelName, config } = useContext(FormElementContext);
-	const { editableElements } = useContext(MessageGroupContext);
+	const editableElements = useContext(EditableElementsContext);
 	const { localizer } = useContext(LocalizerContext);
 	const { computeVirtualNodeId } = useContext(FunctionMapContext);
-	const { getElementByPath, getDocumentModelName, getModelPathById } = useDocumentContext(
-		c => c.model
-	);
+	const { getElementByPath, getDocumentModelName } = useDocumentContext(c => c.model);
 
 	const errorFields = KernelMessage.effectiveFieldReferences(message);
 
@@ -81,7 +78,6 @@ export function useLinkData(message: Message): LinkDataItem[] {
 				contentModelName,
 				localizer,
 				getDocumentModelName,
-				getModelPathById,
 				getElementByPath,
 				computeVirtualNodeId
 			}),
@@ -92,7 +88,6 @@ export function useLinkData(message: Message): LinkDataItem[] {
 			contentModelName,
 			localizer,
 			getDocumentModelName,
-			getModelPathById,
 			getElementByPath,
 			computeVirtualNodeId
 		]
@@ -109,7 +104,6 @@ export interface LinkDataSelectorOptions {
 	readonly contentModelName: string;
 	readonly localizer: Localizer;
 	readonly getDocumentModelName: DocumentContext["model"]["getDocumentModelName"];
-	readonly getModelPathById: DocumentContext["model"]["getModelPathById"];
 	readonly getElementByPath: DocumentContext["model"]["getElementByPath"];
 	readonly computeVirtualNodeId: FunctionMap["computeVirtualNodeId"];
 }
@@ -124,7 +118,6 @@ function createLinkDataSelector(
 		contentModelName,
 		localizer,
 		getDocumentModelName,
-		getModelPathById,
 		getElementByPath,
 		computeVirtualNodeId
 	} = options;
@@ -132,12 +125,10 @@ function createLinkDataSelector(
 	return (state: object): LinkDataItem[] => {
 		return editableElements.flatMap(editableElement => {
 			const documentModelName = getDocumentModelName(state) ?? "";
-			const modelPath = getModelPathById(state, editableElement.elementId);
 
 			return errorFields.flatMap(ef => {
-				// Caution: Only matching the model path here will break with indexed controls
 				// Note: contains instead of equals for multi-selects
-				if (!ModelPath.contains(ef, modelPath)) {
+				if (!DocumentPath.contains(ef, editableElement.documentPath)) {
 					return [];
 				}
 
@@ -150,7 +141,7 @@ function createLinkDataSelector(
 				);
 				const uiId = UiId.generateForControl({
 					controlId: virtualNodeId,
-					elementPath: modelPath,
+					elementPath: editableElement.documentPath,
 					uiIdPrefix
 				});
 

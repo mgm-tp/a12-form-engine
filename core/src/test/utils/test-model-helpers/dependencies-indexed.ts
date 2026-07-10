@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -30,42 +30,32 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import type { GroupInstance } from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
+import type { GroupInstance } from "@com.mgmtp.a12.kernel/kernel-md-facade";
 
-import { DocumentHelpers } from "../document-helpers.js";
+import { createDocumentPath } from "../createDocumentPath.js";
 
-const { createDocumentPath } = DocumentHelpers;
-
-export namespace DEP_INDEXED {
-	export namespace DOCUMENT_MODEL {
-		export const MASTER_OUTSIDE_FOR_NUMERIC = createDocumentPath(["Root"], ["masterNumeric"]);
-		export const MASTER_OUTSIDE_FOR_SEMANTIC = createDocumentPath(["Root"], ["masterSemantic"]);
-
-		export function getNumericMasterPath(index: number) {
+export const DEP_INDEXED = {
+	DOCUMENT_MODEL: {
+		MASTER_OUTSIDE_FOR_NUMERIC: createDocumentPath(["Root"], ["masterNumeric"]),
+		MASTER_OUTSIDE_FOR_SEMANTIC: createDocumentPath(["Root"], ["masterSemantic"]),
+		getNumericMasterPath(index: number) {
 			return createDocumentPath(["Root"], ["NumericIndex", index], ["masterInRepeat"]);
-		}
-		export function getSemanticMasterPath(index: number) {
+		},
+		getSemanticMasterPath(index: number) {
 			return createDocumentPath(["Root"], ["SemanticIndex", index], ["masterInRepeat"]);
 		}
-	}
-
-	export namespace FORM_MODEL {
-		export const NUMERIC_INDEX_FIELD_DEP = "a12-DependentField-field_cff9b";
-		export const NUMERIC_INDEX_GROUP_DEP = "a12-FieldFromDependentGroup-field_26a6e";
-		export const NUMERIC_INDEX_FIELD_DEP_MASTER_OUTSIDE =
-			"a12-DependentFieldMasterOutside-field_211c0";
-		export const NUMERIC_INDEX_GROUP_DEP_MASTER_OUTSIDE =
-			"a12-FieldFromDependentGroupMasterOutside-field_447a5";
-
-		export const SEMANTIC_INDEX_FIELD_DEP = "a12-DependentField-field_7c009";
-		export const SEMANTIC_INDEX_GROUP_DEP = "a12-FieldFromDependentGroup-field_c41fc";
-		export const SEMANTIC_INDEX_FIELD_DEP_MASTER_OUTSIDE =
-			"a12-DependentFieldMasterOutside-field_52c54";
-		export const SEMANTIC_INDEX_GROUP_DEP_MASTER_OUTSIDE =
-			"a12-FieldFromDependentGroupMasterOutside-field_24639";
-	}
-
-	export function createDocument(): GroupInstance {
+	},
+	FORM_MODEL: {
+		NUMERIC_INDEX_FIELD_DEP: "a12-DependentField-field_cff9b",
+		NUMERIC_INDEX_GROUP_DEP: "a12-FieldFromDependentGroup-field_26a6e",
+		NUMERIC_INDEX_FIELD_DEP_MASTER_OUTSIDE: "a12-DependentFieldMasterOutside-field_211c0",
+		NUMERIC_INDEX_GROUP_DEP_MASTER_OUTSIDE: "a12-FieldFromDependentGroupMasterOutside-field_447a5",
+		SEMANTIC_INDEX_FIELD_DEP: "a12-DependentField-field_7c009",
+		SEMANTIC_INDEX_GROUP_DEP: "a12-FieldFromDependentGroup-field_c41fc",
+		SEMANTIC_INDEX_FIELD_DEP_MASTER_OUTSIDE: "a12-DependentFieldMasterOutside-field_52c54",
+		SEMANTIC_INDEX_GROUP_DEP_MASTER_OUTSIDE: "a12-FieldFromDependentGroupMasterOutside-field_24639"
+	},
+	createDocument(): GroupInstance {
 		const document = {
 			Root: {
 				NumericIndex: [{}, {}, {}],
@@ -75,4 +65,4 @@ export namespace DEP_INDEXED {
 
 		return document;
 	}
-}
+} as const;

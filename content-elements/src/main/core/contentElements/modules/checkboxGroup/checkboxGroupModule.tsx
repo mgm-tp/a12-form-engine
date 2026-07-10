@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -33,17 +33,17 @@
 import type { JSX } from "react";
 import { useContext, useRef } from "react";
 
-import { DataReference } from "@com.mgmtp.a12.client/client-data/lib/core/api/data-reference.js";
 import {
+	DataReference,
 	getMultiSelectValueField,
 	isMultiSelectData
-} from "@com.mgmtp.a12.client/client-data/lib/kernel-extension/multiSelect.js";
-import {
-	useDocumentContext,
-	type ContentModel,
-	type NodeRendererProps
+} from "@com.mgmtp.a12.client/client-data";
+import { useDocumentContext } from "@com.mgmtp.a12.contentengine/contentengine-core";
+import type {
+	ContentModel,
+	NodeRendererProps
 } from "@com.mgmtp.a12.contentengine/contentengine-core";
-import { LocalizerContext } from "@com.mgmtp.a12.utils/utils-localization-react/lib/main/index.js";
+import { LocalizerContext } from "@com.mgmtp.a12.utils/utils-localization-react";
 
 import { createResourceLocalizable } from "../../../localization/createResourceLocalizable.js";
 import { RESOURCE_KEYS } from "../../../localization/resources.js";
@@ -177,7 +177,7 @@ function CheckboxGroupRenderer(
 					: [...selectedValues.slice(0, index), ...selectedValues.slice(index + 1)];
 
 			const newValue = enumerationOptions
-				.filter(e => newSelectedValues.indexOf(e.value) >= 0)
+				.filter(e => newSelectedValues.includes(e.value))
 				.map(e => ({ [msFieldName]: e.value }));
 
 			onValueChanged({ path: dataReference, value: newValue });

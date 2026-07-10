@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -42,12 +42,10 @@ import { DefaultTableWidgetMap } from "../../../../../view/internal/components/f
 import { DATE_PICKER } from "../../../../rtl-utils/data-roles.js";
 import { mockFunctions } from "../../../../rtl-utils/mock-map.js";
 import type { RtlRenderWrapper } from "../../../../rtl-utils/render-wrapper.js";
-import { SetupHelpers } from "../../../../utils/setup.js";
+import { createDocumentPath } from "../../../../utils/createDocumentPath.js";
+import { createModelPath } from "../../../../utils/createModelPath.js";
+import { setupConnectedFormEngineWithRtlAsync } from "../../../../utils/setup.js";
 import { setupModelsFixture } from "../../../../utils/setupFixture.js";
-import {
-	createDocumentPath,
-	createModelPath
-} from "../../../../utils/test-model-helpers/dependent-enumeration.js";
 import {
 	createDocumentForBlurAndFocus,
 	DOCUMENT_MODEL,
@@ -199,7 +197,7 @@ export function executeBlurAndFocusTest(): void {
 			}
 		};
 
-		return SetupHelpers.setupConnectedFormEngineWithRtlAsync({
+		return setupConnectedFormEngineWithRtlAsync({
 			withWidgets: true,
 			tableMap: mockFunctions(DefaultTableWidgetMap),
 			config: {

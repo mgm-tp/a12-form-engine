@@ -1,0 +1,125 @@
+{
+  "header": {
+    "id": "DependentControlWithReferencesToDifferentScreen",
+    "modelType": "form",
+    "modelVersion": "39.0.0",
+    "locales": [
+      {
+        "code": "en"
+      }
+    ],
+    "annotations": [
+      {
+        "name": "roles",
+        "value": "admin"
+      }
+    ],
+    "modelReferences": [
+      {
+        "alias": "DependentControl-document",
+        "modelType": "document",
+        "purpose": "data binding",
+        "reference": "DependentControl-document"
+      }
+    ]
+  },
+  "content": {
+    "subHeaderBox": {
+      "id": "subHeaderBox1"
+    },
+    "footerBox": {
+      "id": "footerBox1"
+    },
+    "screens": [
+      {
+        "id": "screen_a46b7",
+        "name": "Screen 1",
+        "screenElements": [
+          {
+            "type": "ControlGrid",
+            "id": "controlgrid_cea93",
+            "name": "cg",
+            "row": [
+              {
+                "type": "Row",
+                "id": "row_89150",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control_eadf7",
+                    "elementRef": "field_18797",
+                    "dependentControls": {
+                      "screenElement": [
+                        {
+                          "idref": "section_1264f",
+                          "masterValue": "true"
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "screen_6a3ea",
+        "name": "Screen 2",
+        "screenElements": [
+          {
+            "type": "ControlGrid",
+            "id": "controlgrid_8f086",
+            "name": "cg",
+            "row": [
+              {
+                "type": "Row",
+                "id": "row_56911",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control_217f6",
+                    "elementRef": "field_695a8",
+                    "dependentControls": {
+                      "screenElement": [
+                        {
+                          "idref": "multicolumnsection_7350e",
+                          "masterValue": "true"
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "Section",
+            "id": "section_1264f",
+            "name": "sec"
+          },
+          {
+            "type": "MultiColumnSection",
+            "id": "multicolumnsection_7350e",
+            "name": "mcs",
+            "layout": {
+              "lg": "12"
+            }
+          }
+        ]
+      }
+    ],
+    "fieldConfiguration": {
+      "field": [
+        {
+          "elementRef": "field_18797"
+        },
+        {
+          "elementRef": "field_695a8"
+        }
+      ]
+    },
+    "groupConfiguration": {},
+    "defaults": {}
+  }
+}

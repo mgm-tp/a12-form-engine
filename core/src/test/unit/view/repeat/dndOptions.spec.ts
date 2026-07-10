@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -35,21 +35,22 @@ import { mock } from "node:test";
 
 import type { Dispatch } from "redux";
 
-import { ModelPath } from "@com.mgmtp.a12.base/base-model-api/lib/main/model/index.js";
-import type { EntityInstancePath } from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
-import type { TableRenderPropsType } from "@com.mgmtp.a12.widgets/widgets-core/lib/table/new-api/table-renderer.api.js";
+import { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
+import type { EntityInstancePath } from "@com.mgmtp.a12.kernel/kernel-md-facade";
+import type { TableRenderPropsType } from "@com.mgmtp.a12.widgets/widgets-core";
 
 import { Events } from "../../../../back-end/store/index.js";
 import { assertCondition } from "../../../../back-end/utils/internal/assertions.js";
 import { findElementByFormModelPath } from "../../../../models/internal/findElementByFormModelPath.js";
-import { FormModel } from "../../../../models/internal/form-model.js";
+import type { FormModel } from "../../../../models/internal/form-model.js";
+import { isFormModelRepeat } from "../../../../models/internal/FormModelGuards.js";
 import {
 	createDndOptions,
 	getDndOptions
 } from "../../../../view/internal/components/form-engine/repeat/components/dndOptions.js";
 import type { RepeatRow } from "../../../../view/internal/components/form-engine/repeat/components/tableColumnTypes.js";
 import { defaultMapDispatchToProps } from "../../../../view/internal/configuration/Defaults.js";
-import { SetupHelpers } from "../../../utils/setup.js";
+import { setupRenderConfiguration } from "../../../utils/setup.js";
 import { setupFixtureObject, setupModelsFixture } from "../../../utils/setupFixture.js";
 import {
 	FORM_MODEL,
@@ -62,7 +63,7 @@ describe("unit.view.repeat.dndOptions", () => {
 		getRepeat(repeatModels.formModel, FORM_MODEL.repeatWithMove)
 	);
 	const defaultConfig = setupFixtureObject(() =>
-		SetupHelpers.setupRenderConfiguration({
+		setupRenderConfiguration({
 			models: repeatModels,
 			parentPath: FORM_MODEL.repeatWithMove
 		})
@@ -79,7 +80,7 @@ describe("unit.view.repeat.dndOptions", () => {
 
 		describe("returns undefined if", () => {
 			it("correction mode is visible", () => {
-				const correctionModeConfig = SetupHelpers.setupRenderConfiguration({
+				const correctionModeConfig = setupRenderConfiguration({
 					models: repeatModels,
 					parentPath: FORM_MODEL.repeatWithMove,
 					ui: {
@@ -99,7 +100,7 @@ describe("unit.view.repeat.dndOptions", () => {
 			});
 
 			it("form is readonly", () => {
-				const readonlyConfig = SetupHelpers.setupRenderConfiguration({
+				const readonlyConfig = setupRenderConfiguration({
 					models: repeatModels,
 					parentPath: FORM_MODEL.repeatWithMove,
 					ui: { readonly: true }
@@ -116,7 +117,7 @@ describe("unit.view.repeat.dndOptions", () => {
 			});
 
 			it("given repeat is currently sorted", () => {
-				const sortConfig = SetupHelpers.setupRenderConfiguration({
+				const sortConfig = setupRenderConfiguration({
 					models: repeatModels,
 					parentPath: FORM_MODEL.repeatWithMove,
 					ui: {
@@ -142,7 +143,7 @@ describe("unit.view.repeat.dndOptions", () => {
 			});
 
 			it("given repeat is currently filtered", () => {
-				const filterConfig = SetupHelpers.setupRenderConfiguration({
+				const filterConfig = setupRenderConfiguration({
 					models: repeatModels,
 					parentPath: FORM_MODEL.repeatWithMove,
 					ui: {
@@ -192,7 +193,7 @@ describe("unit.view.repeat.dndOptions", () => {
 
 		describe("#canDrag", () => {
 			it("disallows dragging when the form is disabled", () => {
-				const disabledConfig = SetupHelpers.setupRenderConfiguration({
+				const disabledConfig = setupRenderConfiguration({
 					models: repeatModels,
 					parentPath: FORM_MODEL.repeatWithMove,
 					ui: { disabled: true }
@@ -207,7 +208,7 @@ describe("unit.view.repeat.dndOptions", () => {
 			});
 
 			it("disallows dragging when correction model is visible", () => {
-				const correctionModeConfig = SetupHelpers.setupRenderConfiguration({
+				const correctionModeConfig = setupRenderConfiguration({
 					models: repeatModels,
 					parentPath: FORM_MODEL.repeatWithMove,
 					ui: {
@@ -238,7 +239,7 @@ describe("unit.view.repeat.dndOptions", () => {
 			const dispatchStub = mock.fn<Dispatch>();
 
 			const stubConfig = setupFixtureObject(() =>
-				SetupHelpers.setupRenderConfiguration({
+				setupRenderConfiguration({
 					models: repeatModels,
 					parentPath: FORM_MODEL.repeatWithMove,
 					dispatchConfig: defaultMapDispatchToProps(dispatchStub).eventHandlers
@@ -313,7 +314,7 @@ function createItem({
 function getRepeat(formModel: FormModel, path: ModelPath): FormModel.Repeat {
 	const repeat = findElementByFormModelPath(formModel, path);
 
-	assertCondition(FormModel.Repeat.isInstance(repeat));
+	assertCondition(isFormModelRepeat(repeat));
 
 	return repeat;
 }

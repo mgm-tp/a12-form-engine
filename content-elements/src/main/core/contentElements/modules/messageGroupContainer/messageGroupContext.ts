@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -32,25 +32,16 @@
 
 import { createContext } from "react";
 
-import type { Message } from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
-
-import type { EditableElementList } from "./useCollectEditableElements.js";
+import type { Message } from "@com.mgmtp.a12.kernel/kernel-md-facade";
 
 export interface MessageGroupFilter {
 	readonly id?: string;
-	/**
-	 * List of form content elements in the current Message Group container.
-	 * Used for generating jump links in validation messages.
-	 * Note: This considers all elements in the container and all nested containers.
-	 */
-	readonly editableElements: EditableElementList;
 	getGroupedValidationMessages(entries: Message[]): Message[];
 	getUngroupedValidationMessages(entries: Message[]): Message[];
 }
 
 export const MessageGroupContext = createContext<MessageGroupFilter>({
 	id: undefined,
-	editableElements: [],
 	getGroupedValidationMessages: () => [],
 	getUngroupedValidationMessages: () => []
 });

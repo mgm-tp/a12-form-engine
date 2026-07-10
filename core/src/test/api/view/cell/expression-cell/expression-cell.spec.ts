@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -34,34 +34,36 @@ import { fail, ok, strictEqual } from "node:assert/strict";
 
 import { act } from "@testing-library/react";
 
-import { ModelPath } from "@com.mgmtp.a12.base/base-model-api/lib/main/model/index.js";
+import { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
 import { query, screen } from "@com.mgmtp.a12.devtools/react";
-import type {
-	Locale,
-	Localizer,
-	ValueConversion
-} from "@com.mgmtp.a12.utils/utils-localization/lib/main/index.js";
+import type { Locale, Localizer, ValueConversion } from "@com.mgmtp.a12.utils/utils-localization";
 import {
 	defaultDataFormats,
 	defaultLocalizerFactory,
 	defaultValueConversion
-} from "@com.mgmtp.a12.utils/utils-localization/lib/main/index.js";
+} from "@com.mgmtp.a12.utils/utils-localization";
 
 import { createEngineStore } from "../../../../../back-end/store/index.js";
 import type { EngineStore } from "../../../../../back-end/store/internal/store.js";
 import type { Mutable } from "../../../../../back-end/utils/internal/types.js";
-import { findElementByFormModelPath, FormModel } from "../../../../../models/index.js";
+import type { FormModel } from "../../../../../models/index.js";
+import { findElementByFormModelPath } from "../../../../../models/index.js";
+import {
+	isFormModelControlGrid,
+	isFormModelSection
+} from "../../../../../models/internal/FormModelGuards.js";
 import { DocumentUtils } from "../../../../../models/internal/utils/document-utils.js";
 import type { Config, FormModelMap } from "../../../../../view/index.js";
 import { defaultMapDispatchToProps } from "../../../../../view/index.js";
 import { getExpressionCellValueInUI } from "../../../../../view/internal/components/form-engine/cells/expression-cell/getExpressionCellValueInUI.js";
 import { createConfig } from "../../../../../view/internal/configuration/Defaults.js";
 import { getComponentMocks } from "../../../../rtl-utils/getComponentMocks.js";
-import { type RtlRenderWrapper } from "../../../../rtl-utils/render-wrapper.js";
-import { DocumentHelpers } from "../../../../utils/document-helpers.js";
+import type { RtlRenderWrapper } from "../../../../rtl-utils/render-wrapper.js";
+import { createDocumentPath } from "../../../../utils/createDocumentPath.js";
+import { createModelPath } from "../../../../utils/createModelPath.js";
 import { DE_LOCALE, US_LOCALE } from "../../../../utils/localization.js";
-import { ModelHelpers } from "../../../../utils/model-helpers.js";
-import { SetupHelpers } from "../../../../utils/setup.js";
+import { loadData, loadModels, setupFormEngineRendererWithRtl } from "../../../../utils/setup.js";
+import type { JsonAdapter } from "../../../../utils/setup.js";
 import { setupFixture, setupModelsFixture } from "../../../../utils/setupFixture.js";
 import type { LocationStackPosition } from "../../../../utils/test-model-helpers/controls.js";
 import {
@@ -71,9 +73,6 @@ import {
 } from "../../../../utils/test-model-helpers/expression-label.js";
 import { EXPRESSIONS } from "../../../../utils/test-model-helpers/expressions.js";
 import { FORM_MODEL } from "../../../../utils/test-model-helpers/unmarshallFormModel.js";
-
-const { loadData, setupFormEngineRendererWithRtl } = SetupHelpers;
-const { createDocumentPath } = DocumentHelpers;
 
 describe("api.view.cell", () => {
 	describe("Expression Cell", () => {
@@ -300,7 +299,7 @@ describe("api.view.cell", () => {
 		describe("getExpressionCellValue", () => {
 			function setupTests(
 				cellPath: ModelPath,
-				jsonAdapter?: SetupHelpers.JsonAdapter,
+				jsonAdapter?: JsonAdapter,
 				locale?: Locale
 			): {
 				renderOptions: FormModelMap.RenderOptions;
@@ -308,11 +307,7 @@ describe("api.view.cell", () => {
 				localizer: Localizer;
 				converter: ValueConversion;
 			} {
-				const expressionModels = SetupHelpers.loadModels(
-					"controls.expressions",
-					undefined,
-					jsonAdapter
-				);
+				const expressionModels = loadModels("controls.expressions", undefined, jsonAdapter);
 				const document1 = loadData("controls.expressions", "data", models.documentModel);
 				const initialState = createEngineStore({
 					models: expressionModels,
@@ -321,7 +316,7 @@ describe("api.view.cell", () => {
 				});
 
 				const renderOptions: FormModelMap.RenderOptions = {
-					config: createConfig({}, initialState),
+					config: createConfig({}),
 					eventHandlers: defaultMapDispatchToProps(a => a).eventHandlers,
 					state: initialState
 				};
@@ -341,7 +336,7 @@ describe("api.view.cell", () => {
 			}
 
 			it("returns the evaluated expression when given a valid expression and respective data", () => {
-				const expressionCellPath = ModelHelpers.createModelPath(
+				const expressionCellPath = createModelPath(
 					"Expressions Sample Screen",
 					"Screen 0",
 					"String",
@@ -361,7 +356,7 @@ describe("api.view.cell", () => {
 			});
 
 			it("localizes the expression correctly", () => {
-				const expressionCellPath2 = ModelHelpers.createModelPath(
+				const expressionCellPath2 = createModelPath(
 					"Expressions Sample Screen",
 					"Screen 0",
 					"String",
@@ -403,7 +398,7 @@ describe("api.view.cell", () => {
 			});
 
 			it("throws an error if given an invalid expression using a field reference on a group", () => {
-				const expressionCellPath = ModelHelpers.createModelPath(
+				const expressionCellPath = createModelPath(
 					"Expressions Sample Screen",
 					"Screen 0",
 					"String",
@@ -411,12 +406,12 @@ describe("api.view.cell", () => {
 					"expression-2"
 				);
 
-				const expressionAdapter: SetupHelpers.JsonAdapter = json => {
+				const expressionAdapter: JsonAdapter = json => {
 					const sec = json.content.screens[0].screenElements[0];
-					ok(FormModel.Section.isInstance(sec), "Invalid setup, section is missing");
+					ok(isFormModelSection(sec), "Invalid setup, section is missing");
 
 					const cg = sec.screenElements?.[0];
-					ok(FormModel.ControlGrid.isInstance(cg), "Invalid setup, cg is missing");
+					ok(isFormModelControlGrid(cg), "Invalid setup, cg is missing");
 
 					const expressionCell = cg.row?.[1].cell?.[0] as Mutable<FormModel.ExpressionCell>;
 

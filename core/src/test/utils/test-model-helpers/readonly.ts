@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -30,18 +30,15 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-export namespace IDS {
-	export const STRING_NO_RO_PRESENTATION = "a12-stringField-field_acc6b";
-	export const STRING_INPUT_RO_PRESENTATION = "a12-stringField-field_acc6b-2";
-	export const STRING_TO_RO_PRESENTATION = "a12-stringField-field_acc6b-3";
-
-	export const INPUT_CG = "a12-controlgrid-60f31";
-	export const STRING_FIELD_IN_INPUT_CG = "a12-stringField-field_acc6b-5";
-	export const NUMBER_FIELD_IN_INPUT_CG = "a12-numberField-fieldimpl_08f9e-5";
-
-	export const TEXT_OUTPUT_CG = "a12-controlgrid-df306";
-	export const STRING_FIELD_IN_TEXT_OUTPUT = "a12-stringField-field_acc6b-6";
-	export const NUMBER_FIELD_IN_TEXT_OUTPUT = "a12-numberField-fieldimpl_08f9e-6";
-
-	export const ATTACHMENT = "a12-attachment-group_ecd88";
-}
+export const IDS = {
+	STRING_NO_RO_PRESENTATION: "a12-stringField-field_acc6b",
+	STRING_INPUT_RO_PRESENTATION: "a12-stringField-field_acc6b-2",
+	STRING_TO_RO_PRESENTATION: "a12-stringField-field_acc6b-3",
+	INPUT_CG: "a12-controlgrid-60f31",
+	STRING_FIELD_IN_INPUT_CG: "a12-stringField-field_acc6b-5",
+	NUMBER_FIELD_IN_INPUT_CG: "a12-numberField-fieldimpl_08f9e-5",
+	TEXT_OUTPUT_CG: "a12-controlgrid-df306",
+	STRING_FIELD_IN_TEXT_OUTPUT: "a12-stringField-field_acc6b-6",
+	NUMBER_FIELD_IN_TEXT_OUTPUT: "a12-numberField-fieldimpl_08f9e-6",
+	ATTACHMENT: "a12-attachment-group_ecd88"
+} as const;

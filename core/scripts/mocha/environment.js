@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -38,10 +38,9 @@ install({ environment: "node" });
 
 import "@testing-library/react/dont-cleanup-after-each.js";
 
-import { LogLevel } from "@com.mgmtp.a12.utils/utils-logging/api.js";
-import { ConsoleLoggingStrategy, Settings } from "@com.mgmtp.a12.utils/utils-logging/index.js";
+import { ConsoleLoggingStrategy, Settings } from "@com.mgmtp.a12.utils/utils-logging";
 
-Settings.LogStrategy = new ConsoleLoggingStrategy(console, LogLevel.LOG);
+Settings.LogStrategy = new ConsoleLoggingStrategy(console, "log");
 
 // stub missing DOM functions missing in JSDOM
 global.window.requestAnimationFrame = callback => setTimeout(callback, 0);

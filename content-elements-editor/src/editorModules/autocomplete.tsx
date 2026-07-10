@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -39,7 +39,7 @@ import type {
 import { SettingTemplate } from "@com.mgmtp.a12.contentengine/contentengine-editor";
 import type { AutoCompleteNode } from "@com.mgmtp.a12.formengine/formengine-content-elements";
 import { FormElementsModules } from "@com.mgmtp.a12.formengine/formengine-content-elements";
-import type { DocumentModel } from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
+import type { DocumentModel } from "@com.mgmtp.a12.kernel/kernel-md-facade";
 
 import { markingOfRequiredFieldsItems } from "../dropdownItems.js";
 import { extendModule } from "../extendModule.js";

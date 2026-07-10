@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -32,44 +32,37 @@
 
 import type { ComponentType } from "react";
 
-import type { AttachedPortalProps } from "@com.mgmtp.a12.widgets/widgets-core/lib/attached-portal/main/attached-portal.api.js";
-import type { ButtonProps } from "@com.mgmtp.a12.widgets/widgets-core/lib/button/main/button.api.js";
-import type { DateTimePickerProps } from "@com.mgmtp.a12.widgets/widgets-core/lib/date-time-picker/main/date-time-picker.api.js";
-import type { HeaderProps } from "@com.mgmtp.a12.widgets/widgets-core/lib/date-time-picker/main/date-time-picker.internal.js";
-import type { DatePickerProps } from "@com.mgmtp.a12.widgets/widgets-core/lib/datepicker/main/date-picker.api.js";
-import type { DatePickerDialogProps } from "@com.mgmtp.a12.widgets/widgets-core/lib/datepicker/main/date-picker.mobile.api.js";
-import type { IconProps } from "@com.mgmtp.a12.widgets/widgets-core/lib/icon/main/icon.api.js";
-import type { AutocompleteProps } from "@com.mgmtp.a12.widgets/widgets-core/lib/input/autocomplete/main/autocomplete.api.js";
 import type {
+	AttachedPortalProps,
+	AutocompleteProps,
+	BulletListProps,
+	ButtonProps,
 	CheckboxGroupProps,
-	CheckboxItemProps
-} from "@com.mgmtp.a12.widgets/widgets-core/lib/input/checkbox-group/main/checkbox-group.api.js";
-import type {
+	CheckboxItemProps,
 	CheckboxProps,
-	IndeterminateCheckboxProps
-} from "@com.mgmtp.a12.widgets/widgets-core/lib/input/checkbox/main/checkbox.api.js";
-import type {
-	RadioItemProps,
-	RadioProps
-} from "@com.mgmtp.a12.widgets/widgets-core/lib/input/radio/main/radio.api.js";
-import type { SelectProps } from "@com.mgmtp.a12.widgets/widgets-core/lib/input/select/main/select.api.js";
-import type { SwitchProps } from "@com.mgmtp.a12.widgets/widgets-core/lib/input/switch/main/switch.api.js";
-import type { TextAreaStatelessProps } from "@com.mgmtp.a12.widgets/widgets-core/lib/input/text-area/main/template/text-area.tpl.api.js";
-import type {
-	TextAffixProps,
-	TextLineStatelessProps
-} from "@com.mgmtp.a12.widgets/widgets-core/lib/input/text-line/main/template/text-line.tpl.api.js";
-import type {
+	DatePickerDialogProps,
+	DatePickerProps,
+	DateTimePickerHeaderProps,
+	DateTimePickerProps,
+	ErrorTooltipProps,
+	HintTooltipProps,
+	IconProps,
+	IndeterminateCheckboxProps,
 	ListItemProps,
-	ListProps
-} from "@com.mgmtp.a12.widgets/widgets-core/lib/list/main/list.api.js";
-import type { MessageBoxProps } from "@com.mgmtp.a12.widgets/widgets-core/lib/message-box/main/message-box.api.js";
-import type { ModalOverlayProps } from "@com.mgmtp.a12.widgets/widgets-core/lib/modal-overlay/main/modal-overlay.api.js";
-import type { MultiselectProps } from "@com.mgmtp.a12.widgets/widgets-core/lib/multiselect/main/multiselect.api.js";
-import type { TimePickerProps } from "@com.mgmtp.a12.widgets/widgets-core/lib/time-picker/main/time-picker.api.js";
-import type { ErrorTooltipProps } from "@com.mgmtp.a12.widgets/widgets-core/lib/tooltip/error/main/error.api.js";
-import type { HintTooltipProps } from "@com.mgmtp.a12.widgets/widgets-core/lib/tooltip/hint/main/hint.api.js";
-import type { WarningTooltipProps } from "@com.mgmtp.a12.widgets/widgets-core/lib/tooltip/warning/main/warning.api.js";
+	ListProps,
+	MessageBoxProps,
+	ModalOverlayProps,
+	MultiselectProps,
+	RadioItemProps,
+	RadioProps,
+	SelectProps,
+	SwitchProps,
+	TextAffixProps,
+	TextAreaStatelessProps,
+	TextFieldProps,
+	TimePickerProps,
+	WarningTooltipProps
+} from "@com.mgmtp.a12.widgets/widgets-core";
 
 /**
  * Set of A12 Widgets that can be replaced by custom components.
@@ -82,10 +75,10 @@ import type { WarningTooltipProps } from "@com.mgmtp.a12.widgets/widgets-core/li
 export interface WidgetMap {
 	// Control Elements
 	readonly TextAreaStateless: ComponentType<TextAreaStatelessProps>;
-	readonly TextLineStateless: ComponentType<TextLineStatelessProps>;
+	readonly TextField: ComponentType<TextFieldProps>;
 	readonly Autocomplete: ComponentType<AutocompleteProps>;
 	readonly Select: ComponentType<SelectProps>;
-	readonly MultiSelect: ComponentType<MultiselectProps>;
+	readonly Multiselect: ComponentType<MultiselectProps>;
 	readonly Switch: ComponentType<SwitchProps>;
 	readonly Checkbox: ComponentType<CheckboxProps>;
 	readonly CheckboxIndeterminate: ComponentType<IndeterminateCheckboxProps>;
@@ -101,6 +94,7 @@ export interface WidgetMap {
 
 	// readonly DefaultFileUpload: ComponentType<DefaultFileUploadProps>;
 
+	readonly MessageBox: ComponentType<MessageBoxProps>;
 	readonly ErrorTooltip: ComponentType<ErrorTooltipProps>;
 	readonly HintTooltip: ComponentType<HintTooltipProps>;
 	readonly WarningTooltip: ComponentType<WarningTooltipProps>;
@@ -108,14 +102,15 @@ export interface WidgetMap {
 	readonly TextAffix: ComponentType<TextAffixProps>;
 
 	// Helpers
-	readonly Header: ComponentType<HeaderProps>;
+	readonly DateTimePickerHeader: ComponentType<DateTimePickerHeaderProps>;
 	readonly Button: ComponentType<ButtonProps>;
 	readonly Icon: ComponentType<IconProps>;
 	readonly ModalOverlay: ComponentType<ModalOverlayProps>;
 	readonly AttachedPortal: ComponentType<AttachedPortalProps>;
+	readonly BulletListUnordered: ComponentType<BulletListProps.UnorderedProps>;
+	readonly BulletListItem: ComponentType<BulletListProps.ItemProps>;
 	readonly List: ComponentType<ListProps>;
 	readonly ListItem: ComponentType<ListItemProps>;
-	readonly MessageBox: ComponentType<MessageBoxProps>;
 
 	// the following widgets are only relevant for attachments
 	// readonly ButtonGroup: ComponentType<ButtonGroupProps>;

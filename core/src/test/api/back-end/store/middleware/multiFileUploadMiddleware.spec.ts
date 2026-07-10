@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -30,27 +30,24 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import type { Store } from "redux";
-import type { AnyAction } from "typescript-fsa";
+import type { Action, Store } from "redux";
 
-import type { ModelPath } from "@com.mgmtp.a12.base/base-model-api/lib/main/model/index.js";
-import type { GroupInstance } from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
+import type { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
+import type { GroupInstance } from "@com.mgmtp.a12.kernel/kernel-md-facade";
 
 import type { EngineState } from "../../../../../back-end/store/index.js";
 import { Commands, Events } from "../../../../../back-end/store/index.js";
 import type { EngineStore, Models } from "../../../../../back-end/store/internal/store.js";
 import { DocumentPath } from "../../../../../models/index.js";
-import { MiddlewareHelpers } from "../../../../utils/back-end-helpers.js";
-import { ModelHelpers } from "../../../../utils/model-helpers.js";
-import { SetupHelpers } from "../../../../utils/setup.js";
+import { createModelPath } from "../../../../utils/createModelPath.js";
+import { MiddlewareHelpers } from "../../../../utils/MiddlewareHelpers.js";
+import { createTestStore } from "../../../../utils/setup.js";
 import { setupFixture, setupModelsFixture } from "../../../../utils/setupFixture.js";
 import {
 	DOCUMENT_MODEL,
 	FORM_MODEL
 } from "../../../../utils/test-model-helpers/repeat.multi-file-upload.js";
 import { createValidationEntry } from "../../../../utils/validation.js";
-
-const { createTestStore } = SetupHelpers;
 
 describe("api.back-end.store.middleware", () => {
 	describe("multiFileUploadMiddlewareFactory", () => {
@@ -292,9 +289,7 @@ describe("api.back-end.store.middleware", () => {
 						toBeReplaced: [{ path: DOCUMENT_MODEL.getAttachmentDocPath(1), value: attachment3 }]
 					});
 
-					const screenLocation = [
-						{ locationPath: ModelHelpers.createModelPath(options.screenName), path: [] }
-					];
+					const screenLocation = [{ locationPath: createModelPath(options.screenName), path: [] }];
 
 					return {
 						attachment1,
@@ -446,9 +441,7 @@ describe("api.back-end.store.middleware", () => {
 						toBeReplaced: []
 					});
 
-					const screenLocation = [
-						{ locationPath: ModelHelpers.createModelPath(options.screenName), path: [] }
-					];
+					const screenLocation = [{ locationPath: createModelPath(options.screenName), path: [] }];
 
 					return { screenLocation, action, attachment };
 				});
@@ -514,9 +507,7 @@ describe("api.back-end.store.middleware", () => {
 						toBeReplaced: undefined
 					});
 
-					const screenLocation = [
-						{ locationPath: ModelHelpers.createModelPath(options.screenName), path: [] }
-					];
+					const screenLocation = [{ locationPath: createModelPath(options.screenName), path: [] }];
 
 					return {
 						attachment,
@@ -568,7 +559,7 @@ describe("api.back-end.store.middleware", () => {
 						}
 					);
 
-					it("dispatches Commands.setMessageState with the validation message", () => {
+					it("dispatches Commands.setMessageState with only the attachment validation message, not non-attachment field errors", () => {
 						const validationEntrySizeField = createValidationEntry({
 							path: DocumentPath.fromString(
 								"/Root[1]/AttachmentCollection_InitialValuesAndError[1]/Attachment01[1]/size[1]"
@@ -587,25 +578,8 @@ describe("api.back-end.store.middleware", () => {
 							errorKey: "/Root/AttachmentCollection_InitialValuesAndError/Max1MB"
 						});
 
-						const validationEntryComputedField = createValidationEntry({
-							path: DocumentPath.fromString(
-								"/Root[1]/AttachmentCollection_InitialValuesAndError[1]/ComputedField[1]"
-							),
-							errorText: [
-								{
-									key: "documentModel.ruleErrorMessage.repeat\\pmulti-file-upload-document.Root.AttachmentCollection_InitialValuesAndError.Validation",
-									args: {},
-									defaults: {
-										de: "Nur Werte unter 100 sind erlaubt",
-										en: "Only values below 100 are allowed"
-									}
-								}
-							],
-							errorCode: "Error rule_38106",
-							errorKey: "/Root/AttachmentCollection_InitialValuesAndError/Validation"
-						});
 						const expectedCommand = Commands.setMessageState({
-							messages: { ...validationEntrySizeField, ...validationEntryComputedField }
+							messages: { ...validationEntrySizeField }
 						});
 						MiddlewareHelpers.assertAction(middlewareSpy.spy, expectedCommand);
 					});
@@ -613,23 +587,7 @@ describe("api.back-end.store.middleware", () => {
 			}
 
 			function executeTestForNoRowsToBeAdded(repeatFormModelPath: ModelPath): void {
-				before(() => {
-					middlewareSpy.spy.mock.resetCalls();
-				});
-
-				it("dispatches Commands.changeRepeatInstanceStateEntry with a newRow entry and an updated page number", () => {
-					const screenLocation = [
-						{ locationPath: [{ elementName: FORM_MODEL.SCREENS.PAGING }], path: [] }
-					];
-					const store = createTestStore({
-						storeConfig: {
-							models,
-							data: { document: dataFixture.document },
-							ui: { screenLocation }
-						},
-						middlewares: [middlewareSpy.middleware]
-					});
-
+				const fixture = setupFixture(() => {
 					const attachment = {
 						attachment_id: "4",
 						original_filename: "already_existing3.txt",
@@ -637,7 +595,9 @@ describe("api.back-end.store.middleware", () => {
 						mime_type: "text/plain",
 						size: 10
 					};
-
+					const screenLocation = [
+						{ locationPath: [{ elementName: FORM_MODEL.SCREENS.PAGING }], path: [] }
+					];
 					const action = Events.Repeat.multiFileUpload({
 						path: DOCUMENT_MODEL.getAttachmentCollectionDocPath(0),
 						attachmentModelPath: DOCUMENT_MODEL.attachmentModelPath,
@@ -651,9 +611,91 @@ describe("api.back-end.store.middleware", () => {
 						]
 					});
 
-					store.dispatch(action);
+					return { attachment, screenLocation, action };
+				});
+
+				before(() => {
+					middlewareSpy.spy.mock.resetCalls();
+
+					const store = createTestStore({
+						storeConfig: {
+							models,
+							data: { document: dataFixture.document },
+							ui: { screenLocation: fixture.screenLocation }
+						},
+						middlewares: [middlewareSpy.middleware]
+					});
+
+					store.dispatch(fixture.action);
+				});
+
+				it(
+					"updates the existing row with the attachment from `toBeReplaced` " +
+						"and dispatches Commands.setDocument with the new document",
+					() => {
+						const expectedCommand = Commands.setDocument({
+							document: {
+								Root: {
+									AttachmentCollection: [
+										{ ...dataFixture.document.Root.AttachmentCollection[0] },
+										{ ...dataFixture.document.Root.AttachmentCollection[1] },
+										{
+											...dataFixture.document.Root.AttachmentCollection[2],
+											Attachment01: fixture.attachment
+										}
+									]
+								}
+							},
+							changes: [
+								{
+									type: "ValueChanged",
+									path: [
+										...DOCUMENT_MODEL.getAttachmentDocPath(3),
+										{ elementName: "attachment_id", index: 1 }
+									]
+								},
+								{
+									type: "ValueChanged",
+									path: [
+										...DOCUMENT_MODEL.getAttachmentDocPath(3),
+										{ elementName: "original_filename", index: 1 }
+									]
+								},
+								{
+									type: "ValueChanged",
+									path: [
+										...DOCUMENT_MODEL.getAttachmentDocPath(3),
+										{ elementName: "internal_filename", index: 1 }
+									]
+								},
+								{
+									type: "ValueChanged",
+									path: [
+										...DOCUMENT_MODEL.getAttachmentDocPath(3),
+										{ elementName: "mime_type", index: 1 }
+									]
+								},
+								{
+									type: "ValueChanged",
+									path: [
+										...DOCUMENT_MODEL.getAttachmentDocPath(3),
+										{ elementName: "size", index: 1 }
+									]
+								}
+							]
+						});
+						MiddlewareHelpers.assertAction(middlewareSpy.spy, expectedCommand);
+					}
+				);
+
+				it("dispatches Commands.setMessageState (the fast path still runs validation)", () => {
+					const expectedCommand = Commands.setMessageState({ messages: {} });
+					MiddlewareHelpers.assertAction(middlewareSpy.spy, expectedCommand);
+				});
+
+				it("dispatches Commands.changeRepeatInstanceStateEntry with a newRow entry and an updated page number", () => {
 					const expectedCommand = Commands.changeRepeatInstanceStateEntry({
-						locationPath: screenLocation[0].locationPath,
+						locationPath: fixture.screenLocation[0].locationPath,
 						repeatFormModelPath,
 						entry: {
 							page: 2,
@@ -677,7 +719,7 @@ describe("api.back-end.store.middleware", () => {
 				screenLocation: EngineStore.ScreenState[];
 			}
 
-			function setupStore(options: StoreOptions): Store<EngineState, AnyAction> {
+			function setupStore(options: StoreOptions): Store<EngineState, Action> {
 				const dirty = options.dirty ? true : false;
 				const data = options.data;
 				return createTestStore({

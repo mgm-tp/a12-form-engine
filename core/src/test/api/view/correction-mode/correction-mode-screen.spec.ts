@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -41,10 +41,10 @@ import type { EngineStore } from "../../../../back-end/store/index.js";
 import { UiStateSelectors } from "../../../../back-end/store/index.js";
 import type { DispatchConfiguration } from "../../../../view/index.js";
 import { defaultMapDispatchToProps } from "../../../../view/index.js";
-import { DocumentHelpers } from "../../../utils/document-helpers.js";
-import { SetupHelpers } from "../../../utils/setup.js";
+import { createDocumentPath } from "../../../utils/createDocumentPath.js";
+import { createModelPath } from "../../../utils/createModelPath.js";
+import { setupConnectedFormEngineWithRtl } from "../../../utils/setup.js";
 import { setupModelsFixture } from "../../../utils/setupFixture.js";
-import { createModelPath } from "../../../utils/test-model-helpers/dependent-enumeration.js";
 import { createValidationEntry } from "../../../utils/validation.js";
 
 describe("api.view.Correction-Mode-Screen", () => {
@@ -228,11 +228,11 @@ describe("api.view.Correction-Mode-Screen", () => {
 			],
 			messages: {
 				...createValidationEntry({
-					path: DocumentHelpers.createDocumentPath(["root"], ["F1"]),
+					path: createDocumentPath(["root"], ["F1"]),
 					errorText: [{ key: "errorKey" }]
 				}),
 				...createValidationEntry({
-					path: DocumentHelpers.createDocumentPath(["root"], ["G1R"], ["F1R1"]),
+					path: createDocumentPath(["root"], ["G1R"], ["F1R1"]),
 					errorText: [{ key: "errorKey" }]
 				})
 			},
@@ -249,7 +249,7 @@ describe("api.view.Correction-Mode-Screen", () => {
 			document: { root: { F1: 1, G1R: [{ F1R1: 1, G1R2: {} }] } }
 		};
 
-		return SetupHelpers.setupConnectedFormEngineWithRtl({
+		return setupConnectedFormEngineWithRtl({
 			models,
 			ui,
 			data,

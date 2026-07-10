@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -30,14 +30,17 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import type { ModelPath } from "@com.mgmtp.a12.base/base-model-api/lib/main/model/index.js";
-import type { EntityInstancePath } from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
+import type { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
+import type { EntityInstancePath } from "@com.mgmtp.a12.kernel/kernel-md-facade";
 
 import { DataSelectors } from "../../../../back-end/store/index.js";
 import { ModelSelectors } from "../../../../back-end/store/internal/selectors/models.js";
 import { UiStateSelectors } from "../../../../back-end/store/internal/selectors/ui-state.js";
 import type { EngineState } from "../../../../back-end/store/internal/store.js";
-import { FormModel } from "../../../../models/index.js";
+import {
+	isFormModelFieldBasedInputType,
+	isFormModelRepeat
+} from "../../../../models/internal/FormModelGuards.js";
 import { FormModelUtils } from "../../../../models/internal/utils/form-model-utils.js";
 
 import { ElementStateUtil } from "../elementState.js";
@@ -71,14 +74,14 @@ export function isReadonly(options: {
 
 		if (formModelElement.readonly) {
 			return true;
-		} else if (FormModel.FieldBasedInputType.isInstance(formModelElement)) {
+		} else if (isFormModelFieldBasedInputType(formModelElement)) {
 			return ElementStateUtil.evaluateFieldReadOnly(
 				DataSelectors.document()(state),
 				state.models,
 				formModelElement.elementPath,
 				dataContext
 			);
-		} else if (FormModel.Repeat.isInstance(formModelElement)) {
+		} else if (isFormModelRepeat(formModelElement)) {
 			return ElementStateUtil.evaluateGroupReadOnly(
 				DataSelectors.document()(state),
 				state.models,

@@ -1,0 +1,94 @@
+{
+  "header": {
+    "id": "computation-dependency-fieldref-cycle-form",
+    "modelType": "form",
+    "modelVersion": "39.0.0",
+    "locales": [
+      {
+        "code": "en"
+      }
+    ],
+    "modelReferences": [
+      {
+        "alias": "computation-dependency-fieldref-cycle-document",
+        "modelType": "document",
+        "purpose": "data binding",
+        "reference": "computation-dependency-fieldref-cycle-document"
+      }
+    ]
+  },
+  "content": {
+    "subHeaderBox": {
+      "id": "subHeaderBox1"
+    },
+    "footerBox": {
+      "id": "footerBox1"
+    },
+    "screens": [
+      {
+        "id": "screen_8c8f4",
+        "name": "Screen 1",
+        "screenElements": [
+          {
+            "type": "ControlGrid",
+            "id": "controlgrid_d9360",
+            "name": "cg",
+            "row": [
+              {
+                "type": "Row",
+                "id": "row_db0f7",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control_ff68a",
+                    "elementRef": "field_bc487"
+                  }
+                ]
+              },
+              {
+                "type": "Row",
+                "id": "row_51a7c",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control_b5c1f",
+                    "elementRef": "field_96c9b"
+                  }
+                ]
+              },
+              {
+                "type": "Row",
+                "id": "row_fb1d3",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control_47995",
+                    "elementRef": "field_1bacc"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "fieldConfiguration": {
+      "field": [
+        {
+          "dependentField": {
+            "masterField": "field_bc487",
+            "case": [
+              {
+                "masterValue": "true",
+                "fieldRef": "field_1bacc"
+              }
+            ]
+          },
+          "elementRef": "field_96c9b"
+        }
+      ]
+    },
+    "groupConfiguration": {},
+    "defaults": {}
+  }
+}

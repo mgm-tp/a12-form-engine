@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -34,10 +34,11 @@ import { equal, notEqual, strictEqual } from "node:assert/strict";
 import { mock } from "node:test";
 
 import { query, within } from "@com.mgmtp.a12.devtools/react";
-import type { GroupInstance } from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
+import type { GroupInstance } from "@com.mgmtp.a12.kernel/kernel-md-facade";
 
 import { assertCondition } from "../../../../../back-end/utils/internal/assertions.js";
-import { findElementByFormModelPath, FormModel } from "../../../../../models/index.js";
+import { findElementByFormModelPath } from "../../../../../models/index.js";
+import { isFormModelEmbeddedRepeat } from "../../../../../models/internal/FormModelGuards.js";
 import { DocumentUtils } from "../../../../../models/internal/utils/document-utils.js";
 import { DefaultFormModelMap } from "../../../../../view/index.js";
 import {
@@ -50,7 +51,10 @@ import { TABLE } from "../../../../rtl-utils/data-roles.js";
 import { mockFunctions } from "../../../../rtl-utils/mock-map.js";
 import { rtlRenderWrapperAsync } from "../../../../rtl-utils/render-wrapper.js";
 import { assertExists } from "../../../../utils/assertions.js";
-import { SetupHelpers } from "../../../../utils/setup.js";
+import {
+	setupFormEngineRendererWithRtlAsync,
+	setupRenderConfiguration
+} from "../../../../utils/setup.js";
 import { setupModelsFixture } from "../../../../utils/setupFixture.js";
 import { DEP_ELEMENT } from "../../../../utils/test-model-helpers/dependent-element.js";
 import { ER } from "../../../../utils/test-model-helpers/embedded.repeat.js";
@@ -60,7 +64,7 @@ import type { EmbeddedRepeatTestEnv } from "./utils.js";
 export function executeRenderingTests(testEnv: EmbeddedRepeatTestEnv) {
 	it("renders the configured EmbeddedRepeat", async () => {
 		const formModelMap = mockFunctions(DefaultFormModelMap);
-		await SetupHelpers.setupFormEngineRendererWithRtlAsync({
+		await setupFormEngineRendererWithRtlAsync({
 			models: testEnv.models(),
 			config: {
 				formModelMap
@@ -93,7 +97,7 @@ export function executeRenderingTests(testEnv: EmbeddedRepeatTestEnv) {
 					EmbeddedRepeat
 				};
 
-				await SetupHelpers.setupFormEngineRendererWithRtlAsync({
+				await setupFormEngineRendererWithRtlAsync({
 					models: testEnv.dependentElementModels(),
 					data: { document },
 					config: {
@@ -121,7 +125,7 @@ export function executeRenderingTests(testEnv: EmbeddedRepeatTestEnv) {
 
 	describe("multi file upload", () => {
 		it("renders an embedded repeat without an upload area if multi file upload is not set", async () => {
-			const { componentMap } = await SetupHelpers.setupFormEngineRendererWithRtlAsync({
+			const { componentMap } = await setupFormEngineRendererWithRtlAsync({
 				componentMap: mockFunctions(DefaultComponentMap),
 				models: testEnv.models()
 			});
@@ -130,7 +134,7 @@ export function executeRenderingTests(testEnv: EmbeddedRepeatTestEnv) {
 		});
 
 		it("renders an embedded repeat with an upload area if multi file upload is set to true", async () => {
-			const { componentMap } = await SetupHelpers.setupFormEngineRendererWithRtlAsync({
+			const { componentMap } = await setupFormEngineRendererWithRtlAsync({
 				componentMap: mockFunctions(DefaultComponentMap),
 				models: testEnv.multiFileUploadModels()
 			});
@@ -149,9 +153,9 @@ export function executeRenderingTests(testEnv: EmbeddedRepeatTestEnv) {
 				ER.SortingAndFiltering.repeatFormModelPath
 			);
 			assertExists(embeddedRepeat);
-			assertCondition(FormModel.EmbeddedRepeat.isInstance(embeddedRepeat));
+			assertCondition(isFormModelEmbeddedRepeat(embeddedRepeat));
 
-			const renderConfiguration = SetupHelpers.setupRenderConfiguration({
+			const renderConfiguration = setupRenderConfiguration({
 				models,
 				parentPath: ER.SortingAndFiltering.repeatFormModelPath.slice(0, -1)
 			});

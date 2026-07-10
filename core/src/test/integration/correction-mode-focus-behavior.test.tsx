@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -35,11 +35,10 @@ import { mock } from "node:test";
 
 import type { JSX } from "react";
 
-import { ModelPath } from "@com.mgmtp.a12.base/base-model-api/lib/main/model/index.js";
+import { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
 import { within } from "@com.mgmtp.a12.devtools/react";
-import type { ButtonProps } from "@com.mgmtp.a12.widgets/widgets-core/lib/button/main/button.api.js";
-import { provider as deviceDetector } from "@com.mgmtp.a12.widgets/widgets-core/lib/common/main/device-detector.js";
-import type { MobileValidationProps } from "@com.mgmtp.a12.widgets/widgets-core/lib/validation-bar/main/validation-bar.mobile.api.js";
+import { provider as deviceDetector } from "@com.mgmtp.a12.widgets/widgets-core";
+import type { ButtonProps, MobileValidationProps } from "@com.mgmtp.a12.widgets/widgets-core";
 
 import type { EngineStore } from "../../back-end/store/index.js";
 import type { WidgetMap } from "../../view/index.js";
@@ -51,14 +50,15 @@ import {
 } from "../rtl-utils/data-roles.js";
 import type { RtlRenderWrapper } from "../rtl-utils/render-wrapper.js";
 import { click } from "../rtl-utils/rtl-click.js";
-import { ModelHelpers } from "../utils/model-helpers.js";
-import { SetupHelpers } from "../utils/setup.js";
 import { setupFixture, setupModelsFixture } from "../utils/setupFixture.js";
 import {
 	DOCUMENT,
 	FORM_MODEL
 } from "../utils/test-model-helpers/validation.errors_and_warnings_and_infos.js";
 import { createValidationMessage } from "../utils/validation.js";
+import { createModelPath } from "../utils/createModelPath.js";
+import { setupConnectedFormEngineWithRtlAsync } from "../utils/setup.js";
+import type { ConnectedRtlWrapper } from "../utils/setup.js";
 
 import { widgetMocksForFocusTests } from "./focusTestInputMocks.js";
 
@@ -316,7 +316,7 @@ describe("integration.view.Correction-Mode-Focus-Behavior", () => {
 		describe("Correction Mode", () => {
 			describe("is active", () => {
 				const correctionModeBackup = setupFixture(() => ({
-					location: [{ locationPath: ModelHelpers.createModelPath("Screen1"), path: [] }],
+					location: [{ locationPath: createModelPath("Screen1"), path: [] }],
 					sections: {}
 				}));
 
@@ -401,7 +401,7 @@ describe("integration.view.Correction-Mode-Focus-Behavior", () => {
 		currentMessageKey?: string;
 		correctionScreenVisible?: boolean;
 		correctionModeBackup?: EngineStore.CorrectionModeBackup;
-	}): Promise<SetupHelpers.ConnectedRtlWrapper> {
+	}): Promise<ConnectedRtlWrapper> {
 		const validationMessages =
 			props.validationBarVisible || props.validationMessage
 				? {
@@ -456,11 +456,11 @@ describe("integration.view.Correction-Mode-Focus-Behavior", () => {
 		const widgetMap: Partial<WidgetMap> = {
 			...widgetMocksForFocusTests(),
 			Button,
-			MobileValidationBarOverview,
-			MobilePreviewListIem
+			MobileValidationOverview,
+			MobileValidationPreviewListItem
 		};
 
-		return SetupHelpers.setupConnectedFormEngineWithRtlAsync({
+		return setupConnectedFormEngineWithRtlAsync({
 			config: {
 				widgetMap
 			},
@@ -483,7 +483,7 @@ describe("integration.view.Correction-Mode-Focus-Behavior", () => {
 	}
 
 	// render onClick
-	function MobileValidationBarOverview(props: MobileValidationProps.OverviewProps): JSX.Element {
+	function MobileValidationOverview(props: MobileValidationProps.OverviewProps): JSX.Element {
 		return (
 			<div id={props.id} data-role={MOBILE_VALIDATION_BAR_OVERVIEW} onClick={props.onClick}>
 				{props.leftElement}
@@ -493,7 +493,9 @@ describe("integration.view.Correction-Mode-Focus-Behavior", () => {
 	}
 
 	// render onClick
-	function MobilePreviewListIem(props: MobileValidationProps.PreviewListItemProps): JSX.Element {
+	function MobileValidationPreviewListItem(
+		props: MobileValidationProps.PreviewListItemProps
+	): JSX.Element {
 		return <div id={props.id} data-role={MOBILE_PREVIEW_LIST_ITEM} onClick={props.onClick} />;
 	}
 });

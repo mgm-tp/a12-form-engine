@@ -4,53 +4,54 @@
 
 ```ts
 
-import type { Annotation } from '@com.mgmtp.a12.base/base-model-api/lib/main/header/index.js';
-import type { AttachedPortalProps } from '@com.mgmtp.a12.widgets/widgets-core/lib/attached-portal/main/attached-portal.api.js';
-import type { AutocompleteProps } from '@com.mgmtp.a12.widgets/widgets-core/lib/input/autocomplete/main/autocomplete.api.js';
-import type { ButtonProps } from '@com.mgmtp.a12.widgets/widgets-core/lib/button/main/button.api.js';
-import type { CheckboxGroupProps } from '@com.mgmtp.a12.widgets/widgets-core/lib/input/checkbox-group/main/checkbox-group.api.js';
-import type { CheckboxItemProps } from '@com.mgmtp.a12.widgets/widgets-core/lib/input/checkbox-group/main/checkbox-group.api.js';
-import type { CheckboxProps } from '@com.mgmtp.a12.widgets/widgets-core/lib/input/checkbox/main/checkbox.api.js';
+import type { Annotation } from '@com.mgmtp.a12.base/base-model-api';
+import type { AttachedPortalProps } from '@com.mgmtp.a12.widgets/widgets-core';
+import type { AutocompleteProps } from '@com.mgmtp.a12.widgets/widgets-core';
+import type { BulletListProps } from '@com.mgmtp.a12.widgets/widgets-core';
+import type { ButtonProps } from '@com.mgmtp.a12.widgets/widgets-core';
+import type { CheckboxGroupProps } from '@com.mgmtp.a12.widgets/widgets-core';
+import type { CheckboxItemProps } from '@com.mgmtp.a12.widgets/widgets-core';
+import type { CheckboxProps } from '@com.mgmtp.a12.widgets/widgets-core';
 import type { ComponentType } from 'react';
 import type { ContentModel } from '@com.mgmtp.a12.contentengine/contentengine-core';
 import { Context } from 'react';
-import type { DataReference } from '@com.mgmtp.a12.client/client-data/lib/core/api/data-reference.js';
-import type { DatePickerDialogProps } from '@com.mgmtp.a12.widgets/widgets-core/lib/datepicker/main/date-picker.mobile.api.js';
-import type { DatePickerProps } from '@com.mgmtp.a12.widgets/widgets-core/lib/datepicker/main/date-picker.api.js';
-import type { DateTimePickerProps } from '@com.mgmtp.a12.widgets/widgets-core/lib/date-time-picker/main/date-time-picker.api.js';
-import type { DocumentModel } from '@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js';
+import type { DataReference } from '@com.mgmtp.a12.client/client-data';
+import type { DatePickerDialogProps } from '@com.mgmtp.a12.widgets/widgets-core';
+import type { DatePickerProps } from '@com.mgmtp.a12.widgets/widgets-core';
+import type { DateTimePickerHeaderProps } from '@com.mgmtp.a12.widgets/widgets-core';
+import type { DateTimePickerProps } from '@com.mgmtp.a12.widgets/widgets-core';
+import type { DocumentModel } from '@com.mgmtp.a12.kernel/kernel-md-facade';
 import type { ElementLibrary } from '@com.mgmtp.a12.contentengine/contentengine-core';
 import { ElementModule } from '@com.mgmtp.a12.contentengine/contentengine-core';
-import type { ErrorTooltipProps } from '@com.mgmtp.a12.widgets/widgets-core/lib/tooltip/error/main/error.api.js';
-import type { HeaderProps } from '@com.mgmtp.a12.widgets/widgets-core/lib/date-time-picker/main/date-time-picker.internal.js';
-import type { HintTooltipProps } from '@com.mgmtp.a12.widgets/widgets-core/lib/tooltip/hint/main/hint.api.js';
-import type { IconProps } from '@com.mgmtp.a12.widgets/widgets-core/lib/icon/main/icon.api.js';
-import type { IndeterminateCheckboxProps } from '@com.mgmtp.a12.widgets/widgets-core/lib/input/checkbox/main/checkbox.api.js';
+import type { EntityInstancePath } from '@com.mgmtp.a12.kernel/kernel-md-facade';
+import type { ErrorTooltipProps } from '@com.mgmtp.a12.widgets/widgets-core';
+import type { HintTooltipProps } from '@com.mgmtp.a12.widgets/widgets-core';
+import type { IconProps } from '@com.mgmtp.a12.widgets/widgets-core';
+import type { IndeterminateCheckboxProps } from '@com.mgmtp.a12.widgets/widgets-core';
 import type { JSX } from 'react';
-import type { KernelTypes } from '@com.mgmtp.a12.client/client-data/lib/data-mutation/types.js';
-import type { KernelTypes as KernelTypes_2 } from '@com.mgmtp.a12.client/client-data';
-import type { ListItemProps } from '@com.mgmtp.a12.widgets/widgets-core/lib/list/main/list.api.js';
-import type { ListProps } from '@com.mgmtp.a12.widgets/widgets-core/lib/list/main/list.api.js';
-import type { LocalizedModelText } from '@com.mgmtp.a12.utils/utils-localization/lib/main/index.js';
-import type { Message } from '@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js';
-import type { MessageBoxProps } from '@com.mgmtp.a12.widgets/widgets-core/lib/message-box/main/message-box.api.js';
-import type { ModalOverlayProps } from '@com.mgmtp.a12.widgets/widgets-core/lib/modal-overlay/main/modal-overlay.api.js';
-import type { MultiselectProps } from '@com.mgmtp.a12.widgets/widgets-core/lib/multiselect/main/multiselect.api.js';
+import type { KernelTypes } from '@com.mgmtp.a12.client/client-data';
+import type { ListItemProps } from '@com.mgmtp.a12.widgets/widgets-core';
+import type { ListProps } from '@com.mgmtp.a12.widgets/widgets-core';
+import type { LocalizedModelText } from '@com.mgmtp.a12.utils/utils-localization';
+import type { Message } from '@com.mgmtp.a12.kernel/kernel-md-facade';
+import type { MessageBoxProps } from '@com.mgmtp.a12.widgets/widgets-core';
+import type { ModalOverlayProps } from '@com.mgmtp.a12.widgets/widgets-core';
+import type { MultiselectProps } from '@com.mgmtp.a12.widgets/widgets-core';
 import type { NodeValidationContext } from '@com.mgmtp.a12.contentengine/contentengine-core';
 import type { PropsWithChildren } from 'react';
-import type { RadioItemProps } from '@com.mgmtp.a12.widgets/widgets-core/lib/input/radio/main/radio.api.js';
-import type { RadioProps } from '@com.mgmtp.a12.widgets/widgets-core/lib/input/radio/main/radio.api.js';
-import { RefObject } from 'react';
-import type { SelectProps } from '@com.mgmtp.a12.widgets/widgets-core/lib/input/select/main/select.api.js';
-import type { SwitchProps } from '@com.mgmtp.a12.widgets/widgets-core/lib/input/switch/main/switch.api.js';
-import type { TextAffixProps } from '@com.mgmtp.a12.widgets/widgets-core/lib/input/text-line/main/template/text-line.tpl.api.js';
-import type { TextAreaStatelessProps } from '@com.mgmtp.a12.widgets/widgets-core/lib/input/text-area/main/template/text-area.tpl.api.js';
-import type { TextLineStatelessProps } from '@com.mgmtp.a12.widgets/widgets-core/lib/input/text-line/main/template/text-line.tpl.api.js';
-import type { TimePickerProps } from '@com.mgmtp.a12.widgets/widgets-core/lib/time-picker/main/time-picker.api.js';
+import type { RadioItemProps } from '@com.mgmtp.a12.widgets/widgets-core';
+import type { RadioProps } from '@com.mgmtp.a12.widgets/widgets-core';
+import type { RefObject } from 'react';
+import type { SelectProps } from '@com.mgmtp.a12.widgets/widgets-core';
+import type { SwitchProps } from '@com.mgmtp.a12.widgets/widgets-core';
+import type { TextAffixProps } from '@com.mgmtp.a12.widgets/widgets-core';
+import type { TextAreaStatelessProps } from '@com.mgmtp.a12.widgets/widgets-core';
+import type { TextFieldProps } from '@com.mgmtp.a12.widgets/widgets-core';
+import type { TimePickerProps } from '@com.mgmtp.a12.widgets/widgets-core';
 import type { ValidationMessage } from '@com.mgmtp.a12.contentengine/contentengine-core';
-import type { ValueConversionConfig } from '@com.mgmtp.a12.utils/utils-localization/lib/main/index.js';
-import type { ViewNGProps } from '@com.mgmtp.a12.client/client-core/lib/core/view/index.js';
-import type { WarningTooltipProps } from '@com.mgmtp.a12.widgets/widgets-core/lib/tooltip/warning/main/warning.api.js';
+import type { ValueConversionConfig } from '@com.mgmtp.a12.utils/utils-localization';
+import type { ViewNGProps } from '@com.mgmtp.a12.client/client-core';
+import type { WarningTooltipProps } from '@com.mgmtp.a12.widgets/widgets-core';
 
 // @public (undocumented)
 export type AmountSuffix = StaticAmountSuffix | DynamicAmountSuffix;
@@ -215,7 +216,7 @@ export interface BaseWidgetSettings {
     // (undocumented)
     readonly uncheckedLabel?: string;
     // (undocumented)
-    readonly value: KernelTypes_2.Value;
+    readonly value: KernelTypes.Value;
     // (undocumented)
     readonly warning?: boolean;
     // (undocumented)
@@ -246,11 +247,6 @@ export interface CheckboxNode extends ContentModel.Node<BaseControlProps> {
 
 // @public (undocumented)
 export type ClockMode = "12h" | "24h";
-
-// @public (undocumented)
-export interface CollectDocumentElementIdsOptions {
-    traverseNested?: true;
-}
 
 // @public (undocumented)
 export type CollectedDocumentElementIds = {
@@ -293,7 +289,19 @@ export interface DynamicAmountSuffix {
 }
 
 // @public (undocumented)
-export interface EditableElement {
+export interface EditableElement extends Omit<EditableModelElement, "elementId"> {
+    // (undocumented)
+    readonly documentPath: EntityInstancePath;
+}
+
+// @public
+export type EditableElementList = EditableElement[];
+
+// @public
+export const EditableElementsContext: Context<EditableElementList>;
+
+// @public (undocumented)
+export interface EditableModelElement {
     // (undocumented)
     readonly elementId: string;
     // (undocumented)
@@ -303,7 +311,7 @@ export interface EditableElement {
 }
 
 // @public
-export type EditableElementList = EditableElement[];
+export type EditableModelElementExtractor = (node: ContentModel.Node) => EditableModelElement | null;
 
 // @public (undocumented)
 export type EnumerationItem = {
@@ -418,7 +426,6 @@ export interface MessageGroupDisplayNodeProps {
 
 // @public (undocumented)
 export interface MessageGroupFilter {
-    readonly editableElements: EditableElementList;
     // (undocumented)
     getGroupedValidationMessages(entries: Message[]): Message[];
     // (undocumented)
@@ -549,26 +556,11 @@ export interface TextLineNode extends ContentModel.Node<BaseControlProps> {
     readonly type: typeof TEXT_LINE_TYPE;
 }
 
-// @public (undocumented)
-export const USE_COMMON_CONTROL_SETTINGS_WRAPPER: {
-    useCommonControlSettings: typeof useCommonControlSettings;
-};
-
-// @public (undocumented)
-export const USE_COMMON_WIDGET_SETTINGS_WRAPPER: {
-    useCommonWidgetSettings: typeof useCommonWidgetSettings;
-};
-
-// @public (undocumented)
-export const USE_LOCALIZED_ENUMERATION_VALUES_WRAPPER: {
-    useLocalizedEnumerationValues: typeof useLocalizedEnumerationValues;
-};
-
 // @public
 export function useCollectDocumentElementIds(node?: ContentModel.Node): CollectedDocumentElementIds;
 
 // @public
-export function useCollectEditableElements(node: MessageGroupContainerNode): EditableElementList;
+export function useCollectEditableElements(node: MessageGroupContainerNode, additionalExtractor?: EditableModelElementExtractor): EditableElementList;
 
 // @public
 export function useCommonControlSettings(node: ContentModel.Node<BaseControlProps>): BaseControlSettings;
@@ -589,6 +581,10 @@ export interface WidgetMap {
     // (undocumented)
     readonly Autocomplete: ComponentType<AutocompleteProps>;
     // (undocumented)
+    readonly BulletListItem: ComponentType<BulletListProps.ItemProps>;
+    // (undocumented)
+    readonly BulletListUnordered: ComponentType<BulletListProps.UnorderedProps>;
+    // (undocumented)
     readonly Button: ComponentType<ButtonProps>;
     // (undocumented)
     readonly Checkbox: ComponentType<CheckboxProps>;
@@ -605,9 +601,9 @@ export interface WidgetMap {
     // (undocumented)
     readonly DateTimePicker: ComponentType<DateTimePickerProps>;
     // (undocumented)
-    readonly ErrorTooltip: ComponentType<ErrorTooltipProps>;
+    readonly DateTimePickerHeader: ComponentType<DateTimePickerHeaderProps>;
     // (undocumented)
-    readonly Header: ComponentType<HeaderProps>;
+    readonly ErrorTooltip: ComponentType<ErrorTooltipProps>;
     // (undocumented)
     readonly HintTooltip: ComponentType<HintTooltipProps>;
     // (undocumented)
@@ -621,7 +617,7 @@ export interface WidgetMap {
     // (undocumented)
     readonly ModalOverlay: ComponentType<ModalOverlayProps>;
     // (undocumented)
-    readonly MultiSelect: ComponentType<MultiselectProps>;
+    readonly Multiselect: ComponentType<MultiselectProps>;
     // (undocumented)
     readonly Radio: ComponentType<RadioProps>;
     // (undocumented)
@@ -635,7 +631,7 @@ export interface WidgetMap {
     // (undocumented)
     readonly TextAreaStateless: ComponentType<TextAreaStatelessProps>;
     // (undocumented)
-    readonly TextLineStateless: ComponentType<TextLineStatelessProps>;
+    readonly TextField: ComponentType<TextFieldProps>;
     // (undocumented)
     readonly TimePicker: ComponentType<TimePickerProps>;
     // (undocumented)

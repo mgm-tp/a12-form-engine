@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -35,19 +35,21 @@ import { call, put, select } from "typed-redux-saga";
 import {
 	Activity,
 	ActivityActions,
-	ActivitySelectors
-} from "@com.mgmtp.a12.client/client-core/lib/core/activity/index.js";
-import { NEW_INSTANCE_IDENTIFIER } from "@com.mgmtp.a12.client/client-core/lib/core/application/index.js";
-import type { DataProvider } from "@com.mgmtp.a12.client/client-core/lib/core/data/index.js";
-import { Model } from "@com.mgmtp.a12.client/client-core/lib/core/model/index.js";
-import { StoreSagas } from "@com.mgmtp.a12.client/client-core/lib/core/store/index.js";
+	ActivitySelectors,
+	Model,
+	NEW_INSTANCE_IDENTIFIER,
+	StoreSagas
+} from "@com.mgmtp.a12.client/client-core";
+import type { DataProvider } from "@com.mgmtp.a12.client/client-core";
 
-import { isFormModel } from "../../../../../models/internal/is-form-model.js";
+import type { KernelOptionsProvider } from "../../../../../back-end/store/index.js";
 import { EmptyDocument } from "../../../../../models/internal/utils/document-utils.js";
 import { InternalModelSelectors } from "../../../core/view/internal/components/selectors.js";
+import { isFormModel } from "../../../../../models/internal/FormModelGuards.js";
 
 import { PreProcessor } from "./preProcessDocument.js";
 import { referencesDirectFormModelInScene } from "./referencesDirectFormModelInScene.js";
+import { FormEngineSelectors } from "./selectors.js";
 
 /**
  * Configuration options for computing and validating
@@ -56,7 +58,15 @@ import { referencesDirectFormModelInScene } from "./referencesDirectFormModelInS
  * for more information about these parameters.
  */
 export interface EmptyDocumentDataProviderOptions {
-	readonly now?: Date;
+	/**
+	 * Use additional kernel options used in kernel computation/validation.
+	 *
+	 * To use state-dependent logic, define the function with access to the
+	 * store.
+	 *
+	 * Please note that the default for ignoreUnknownFields is true.
+	 */
+	readonly kernelOptions?: KernelOptionsProvider;
 }
 /**
  * This DataProvider creates new A12 Documents.
@@ -140,6 +150,8 @@ export function createEmptyDocumentDataProvider(
 			const { generatedCodeAccessor: validatorProvider, ...documentModel } =
 				models.documentAndValidationModel;
 
+			const state = yield* select(FormEngineSelectors.engineState(activityId));
+
 			const preProcessingResult = PreProcessor.preProcessDocument({
 				document,
 				isNewInstance: true,
@@ -148,7 +160,7 @@ export function createEmptyDocumentDataProvider(
 					documentModel,
 					validatorProvider
 				},
-				now: options?.now
+				kernelOptions: state ? options?.kernelOptions?.(state) : undefined
 			});
 
 			if (preProcessingResult.messages) {

@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -30,14 +30,19 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import type { ComponentType, JSX, ReactNode } from "react";
+import type { ComponentType, FunctionComponent, JSX, ReactNode } from "react";
 import { Component as ReactComponent } from "react";
 import { connect } from "react-redux";
 
-import { addPrefix } from "@com.mgmtp.a12.widgets/widgets-core/lib/common/main/utils.js";
+import { addPrefix } from "@com.mgmtp.a12.widgets/widgets-core";
+
+import type { PickOptional } from "../../../../../../back-end/utils/internal/types.js";
 
 const className = addPrefix("-u-height-full", "-u-width-full");
-function Placeholder(): JSX.Element | null {
+/**
+ * @internal
+ */
+export function Placeholder(): JSX.Element | null {
 	return <div className={className}></div>;
 }
 
@@ -63,6 +68,7 @@ function Placeholder(): JSX.Element | null {
  * @param propsAreComplete returns true if the props of the provided `Component` are complete
  * @param stateIsComplete returns true if the state of the provided `Component` is complete
  * @param PlaceholderComponent is shown until the `Component` was rendered once
+ * @param showSkeleton whether the component should be shown if the state is not complete yet
  * @returns React component that shows the `PlaceholderComponent` until the props
  * for the provided `Component` are complete once and updates the provided
  * `Component` if the props and state are complete.
@@ -86,16 +92,20 @@ function Placeholder(): JSX.Element | null {
  * As soon as the data is loaded (`stateIsComplete` returns `true`), the
  * Form-Engine updates.
  */
-export function createRenderGuardComponent<T extends {} = {}>(
+export function createRenderGuardComponent<
+	T extends {} = {},
+	OptionalProps extends keyof T = keyof T
+>(
 	Component: ComponentType<T>,
-	propsAreComplete: (props: Partial<T>) => props is T,
+	propsAreComplete: (props: PickOptional<T, OptionalProps>) => props is T,
 	stateIsComplete: (state: object, props: T) => boolean = () => true,
-	PlaceholderComponent: ComponentType = Placeholder
-): ComponentType<Partial<T>> {
+	PlaceholderComponent: ComponentType = Placeholder,
+	showSkeleton = true
+): FunctionComponent<PickOptional<T, OptionalProps>> {
 	interface RenderGuardProps {
 		readonly propsAreComplete: boolean;
 		readonly stateIsComplete: boolean;
-		readonly componentProps: Partial<T>;
+		readonly componentProps: PickOptional<T, OptionalProps>;
 	}
 
 	class RenderGuard extends ReactComponent<RenderGuardProps> {
@@ -109,8 +119,11 @@ export function createRenderGuardComponent<T extends {} = {}>(
 		 * complete, is not an issue, because `shouldComponentUpdate` prevents
 		 * that this case occur and therefore `render` is not executed at all.
 		 */
-		private renderComponent(props: Partial<T>): props is T {
-			return this.componentIsInitialized || this.props.propsAreComplete;
+		private renderComponent(): boolean {
+			return (
+				this.componentIsInitialized ||
+				(this.props.propsAreComplete && (showSkeleton || this.props.stateIsComplete))
+			);
 		}
 
 		shouldComponentUpdate(nextProps: RenderGuardProps): boolean {
@@ -120,12 +133,12 @@ export function createRenderGuardComponent<T extends {} = {}>(
 		}
 
 		render(): ReactNode {
-			if (!this.renderComponent(this.props.componentProps)) {
+			if (!this.renderComponent()) {
 				return <PlaceholderComponent />;
 			}
 
 			this.componentIsInitialized = true;
-			return <Component {...this.props.componentProps} />;
+			return <Component {...(this.props.componentProps as T)} />;
 		}
 	}
 
@@ -135,7 +148,7 @@ export function createRenderGuardComponent<T extends {} = {}>(
 	 * and `stateIsComplete`.
 	 */
 	return connect(
-		function mapStateToProps(state, ownProps) {
+		function mapStateToProps(state: object, ownProps: PickOptional<T, OptionalProps>) {
 			return propsAreComplete(ownProps)
 				? {
 						propsAreComplete: true,
@@ -145,7 +158,7 @@ export function createRenderGuardComponent<T extends {} = {}>(
 					{ propsAreComplete: false, stateIsComplete: false };
 		},
 		undefined,
-		function mergeProps(stateProps, dispatchProps, ownProps) {
+		function mergeProps(stateProps, _, ownProps): RenderGuardProps {
 			return { ...stateProps, componentProps: ownProps };
 		}
 	)(function FunctionalRenderGuard(props: RenderGuardProps): JSX.Element | null {

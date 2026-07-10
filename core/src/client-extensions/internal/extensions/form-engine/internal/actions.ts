@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -30,12 +30,11 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import type { AnyAction, Dispatch } from "redux";
-import { actionCreatorFactory } from "typescript-fsa";
+import type { Action, Dispatch } from "redux";
 
-import type { View } from "@com.mgmtp.a12.client/client-core/lib/core/view/index.js";
+import type { View } from "@com.mgmtp.a12.client/client-core";
+import { actionCreatorFactory } from "@com.mgmtp.a12.client/typescript-fsa-redux-5-compat";
 
-import type { Config, ScrollHandlerProps } from "../../../../../view/index.js";
 import type { DefaultDispatchProps } from "../../../../../view/internal/configuration/Defaults.js";
 import { defaultMapDispatchToProps } from "../../../../../view/internal/configuration/Defaults.js";
 
@@ -47,7 +46,7 @@ const factory = actionCreatorFactory("Activity");
  * of all Form-Engine event-actions.
  */
 export namespace FormEngineActions {
-	export interface FormEngineEventActions<T = AnyAction> {
+	export interface FormEngineEventActions<T = Action> {
 		/** Activity that holds the Form Engine state. */
 		readonly activityId: string;
 
@@ -62,7 +61,7 @@ export namespace FormEngineActions {
 	export const command = factory<FormEngineEventActions>("FORM-ENGINE-COMMAND");
 
 	/**
-	 * Dispatch adapter to dispatch the {@link FormEngineActions.event}
+	 * Dispatch adapter to dispatch the FormEngineActions.{@link event}
 	 * with the activity id and the original action.
 	 */
 	export function dispatchAdapterFactory(clientDispatch: Dispatch, activityId: string): Dispatch {
@@ -73,7 +72,7 @@ export namespace FormEngineActions {
 	}
 
 	/**
-	 * Dispatch adapter to dispatch the {@link FormEngineActions.command}
+	 * Dispatch adapter to dispatch the FormEngineActions.{@link command}
 	 * with the activity id and the original action.
 	 */
 	export function commandDispatch(clientDispatch: Dispatch, activityId: string): Dispatch {
@@ -88,7 +87,7 @@ export namespace FormEngineActions {
 	 */
 	export function mapDispatchToProps(
 		dispatch: Dispatch,
-		ownProps: View & Partial<Config> & Partial<ScrollHandlerProps>
+		ownProps: Pick<View, "activityId">
 	): DefaultDispatchProps {
 		return defaultMapDispatchToProps(
 			FormEngineActions.dispatchAdapterFactory(dispatch, ownProps.activityId)

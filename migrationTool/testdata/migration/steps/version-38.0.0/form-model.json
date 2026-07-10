@@ -1,0 +1,140 @@
+{
+  "header": {
+    "id": "form-model",
+    "modelType": "form",
+    "modelVersion": "37.5.0",
+    "locales": [
+      {
+        "code": "en"
+      }
+    ],
+    "labels": [
+      {
+        "locale": "en",
+        "text": "CEO"
+      }
+    ],
+    "annotations": [
+      {
+        "name": "bindingConfiguration",
+        "value": "[{\"type\":\"relationship\",\"details\":{\"name\":\"binding-CEOCompany\",\"metaInformation\":{\"version\":\"1.0.0\"},\"relationshipName\":\"CEOCompany\",\"targetRole\":\"Company\",\"components\":[{\"name\":\"TableList\",\"linkPageSize\":8,\"props\":{\"editComponent\":\"1\",\"editDialogTitle\":{\"label\":[{\"locale\":\"en\",\"text\":\"modal title\"}]},\"editDialogCloseButtonLabel\":{\"label\":[{\"locale\":\"en\",\"text\":\"close it\"}]},\"editDialogCancelButtonLabel\":{\"label\":[{\"locale\":\"en\",\"text\":\"cancel it\"}]}},\"models\":[{\"name\":\"CEOCompany_Company_TableList_SelectedItems_OM\",\"use\":\"link\"}]},{\"name\":\"DualPaneSelection\",\"id\":\"1\",\"candidatePageSize\":8,\"linkPageSize\":8,\"props\":{\"height\":400,\"availableItemsTable\":{\"label\":[{\"locale\":\"en\",\"text\":\"the available items\"}]},\"selectedItemsTable\":{\"label\":[{\"locale\":\"en\",\"text\":\"the selected items\"}]}},\"models\":[{\"name\":\"CEOCompany_Company_AvailableItems_OM\",\"use\":\"candidate\"},{\"name\":\"CEOCompany_Company_DualPane_SelectedItems_OM\",\"use\":\"link\"}]}]},\"elementId\":\"customscreenelement_7eaae\"},{\"type\":\"relationship\",\"details\":{\"name\":\"binding-CEOCompanyDualPane\",\"metaInformation\":{\"version\":\"1.0.0\"},\"relationshipName\":\"CEOCompany\",\"targetRole\":\"Company\",\"components\":[{\"name\":\"DualPaneSelection\",\"candidatePageSize\":8,\"linkPageSize\":8,\"props\":{\"availableItemsTable\":{\"label\":[{\"locale\":\"en\",\"text\":\"available\"}]},\"selectedItemsTable\":{\"label\":[{\"locale\":\"en\",\"text\":\"selected\"}]},\"height\":300},\"models\":[{\"name\":\"CEOCompany_Company_AvailableItems_OM\",\"use\":\"candidate\"},{\"name\":\"CEOCompany_Company_DualPane_SelectedItems_OM\",\"use\":\"link\"}]}]},\"elementId\":\"customscreenelement_1cf0e\"}]"
+      },
+      {
+        "name": "do-not-migrate",
+        "value": ""
+      },
+      {
+        "name": "roles",
+        "value": "admin"
+      }
+    ],
+    "modelReferences": [
+      {
+        "alias": "DM",
+        "modelType": "document",
+        "purpose": "data binding",
+        "reference": "document-model"
+      }
+    ]
+  },
+  "content": {
+    "subHeaderBox": {
+      "id": "subHeaderBox1"
+    },
+    "footerBox": {
+      "id": "footerBox1",
+      "majorButtons": {
+        "button": [
+          {
+            "type": "EVENT",
+            "id": "button-bb5af",
+            "name": "cancel",
+            "buttonStyling": {
+              "label": {
+                "type": "Multilingual",
+                "multilingualText": {
+                  "text": [
+                    {
+                      "locale": "en",
+                      "text": "Cancel"
+                    }
+                  ]
+                }
+              },
+              "priority": "SECONDARY",
+              "destructive": true
+            },
+            "event": "event_cancel",
+            "scope": "HIDDEN_IN_READONLY_MODE"
+          },
+          {
+            "type": "EVENT",
+            "id": "button-ac86b",
+            "name": "save",
+            "buttonStyling": {
+              "label": {
+                "type": "Multilingual",
+                "multilingualText": {
+                  "text": [
+                    {
+                      "locale": "en",
+                      "text": "Save"
+                    }
+                  ]
+                }
+              },
+              "priority": "PRIMARY"
+            },
+            "event": "event_submit",
+            "validation": "full",
+            "scope": "HIDDEN_IN_READONLY_MODE"
+          }
+        ]
+      }
+    },
+    "screens": [
+      {
+        "id": "screen-f2211",
+        "name": "Screen",
+        "screenElements": [
+          {
+            "type": "CustomScreenElement",
+            "id": "customscreenelement_7eaae",
+            "name": "binding-CEOCompany",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "binding-CEOCompany"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "type": "CustomScreenElement",
+            "id": "customscreenelement_1cf0e",
+            "name": "binding-CEOCompanyDualPane",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "binding-CEOCompanyDualPane"
+                  }
+                ]
+              }
+            },
+            "height": 300
+          }
+        ]
+      }
+    ],
+    "fieldConfiguration": {},
+    "groupConfiguration": {},
+    "defaults": {}
+  }
+}

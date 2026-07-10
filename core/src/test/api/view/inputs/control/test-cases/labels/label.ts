@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -35,7 +35,6 @@ import { strictEqual } from "node:assert/strict";
 import { query } from "@com.mgmtp.a12.devtools/react";
 
 import { getInputMocks } from "../../../../../../rtl-utils/getInputMocks.js";
-import { SetupHelpers } from "../../../../../../utils/setup.js";
 import { setupModelsFixture } from "../../../../../../utils/setupFixture.js";
 import {
 	expressionLabelDocument,
@@ -43,6 +42,7 @@ import {
 	formattedExpressionUiState
 } from "../../../../../../utils/test-model-helpers/expression-label.js";
 import { IDS } from "../../../../../../utils/test-model-helpers/tooltips.js";
+import { setupFormEngineRendererWithRtl } from "../../../../../../utils/setup.js";
 
 import { renderStringInput } from "../renderStringInput.js";
 
@@ -62,7 +62,7 @@ export function executeTestLabel(): void {
 		describe("with a multilingual label", () => {
 			it("renders a component with prop 'label' set to the localized given label", () => {
 				const inputMap = getInputMocks();
-				SetupHelpers.setupFormEngineRendererWithRtl({
+				setupFormEngineRendererWithRtl({
 					models: tooltipModels,
 					inputMap
 				});
@@ -126,7 +126,7 @@ export function executeTestLabel(): void {
 		describe("with an expression label", () => {
 			it("renders a component with prop 'label' set to the localized given label", () => {
 				const inputMap = getInputMocks();
-				SetupHelpers.setupFormEngineRendererWithRtl({
+				setupFormEngineRendererWithRtl({
 					models: expressionLabelModels,
 					data: { document: expressionLabelDocument },
 					inputMap
@@ -140,7 +140,7 @@ export function executeTestLabel(): void {
 			describe("and a control index", () => {
 				it("renders a component with prop 'label' set to the localized given label", () => {
 					const inputMap = getInputMocks();
-					SetupHelpers.setupFormEngineRendererWithRtl({
+					setupFormEngineRendererWithRtl({
 						models: expressionLabelModels,
 						data: { document: expressionLabelDocument },
 						inputMap

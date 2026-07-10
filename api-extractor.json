@@ -6,6 +6,16 @@
 		"reportFolder": "<projectFolder>",
 		"reportTempFolder": "<projectFolder>/target/api"
 	},
+  "compiler": {
+		"tsconfigFilePath": "<projectFolder>/tsconfig.json",
+		"overrideTsconfig": {
+			"compilerOptions": {
+				"target": "ES2024",
+				"lib": ["DOM", "DOM.Iterable", "ES2024"],
+				"skipLibCheck": true
+			}
+		}
+	},
 	"docModel": {
 		"enabled": false
 	},

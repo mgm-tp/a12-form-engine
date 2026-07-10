@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -32,19 +32,17 @@
 
 import type {
 	DocumentModel,
+	GeneratedCodeRtConfig,
 	GroupInstance,
 	IGeneratedCodeAccessor
-} from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
+} from "@com.mgmtp.a12.kernel/kernel-md-facade";
 
 import type { Change, EngineStore } from "../../../../../back-end/store/index.js";
 import { KernelComputation } from "../../../../../back-end/store/internal/computation.js";
 import { isObjectEmpty } from "../../../../../back-end/utils/internal/guards.js";
 import type { FormModel } from "../../../../../models/index.js";
 import { ReadonlyObjectMap } from "../../../../../models/index.js";
-import {
-	DocumentPath,
-	DocumentQuery
-} from "../../../../../models/internal/utils/document-utils.js";
+import { DocumentPath, walk } from "../../../../../models/internal/utils/document-utils.js";
 
 import { DocumentComputation } from "./computeDocument.js";
 
@@ -74,13 +72,7 @@ export type PreProcessDocumentParams = {
 	 */
 	readonly isNewInstance: boolean;
 
-	/**
-	 * Allows setting an alternative value for the current time that is used
-	 * when evaluating computations.
-	 *
-	 * Intended for testing purposes only.
-	 */
-	readonly now?: Date;
+	readonly kernelOptions?: GeneratedCodeRtConfig;
 };
 
 /**
@@ -127,7 +119,7 @@ export type PreProcessDocumentResult = {
  * - for existing instances the document is returned without any preprocessing
  */
 export function preProcessDocument(params: PreProcessDocumentParams): PreProcessDocumentResult {
-	const { document, models, isNewInstance, now } = params;
+	const { document, models, isNewInstance, kernelOptions } = params;
 	const { formModel, validatorProvider } = models;
 	const preProcessingMode: FormModel.OpenDocumentPreProcessing = isNewInstance
 		? (formModel.content.openNewDocumentPreProcessing ?? "COMPUTATIONS")
@@ -143,7 +135,7 @@ export function preProcessDocument(params: PreProcessDocumentParams): PreProcess
 			const computationResult = DocumentComputation.computeDocument({
 				document,
 				validatorProvider,
-				kernelConfiguration: { now }
+				kernelOptions
 			});
 
 			return {
@@ -158,7 +150,7 @@ export function preProcessDocument(params: PreProcessDocumentParams): PreProcess
 			const evaluationResult = KernelComputation.computeAndEvaluateDependencies({
 				document,
 				models,
-				kernelConfiguration: { now },
+				kernelOptions,
 
 				// For new documents we need to provide changes for the initial
 				// values so that the kernel is able to evaluate chains that
@@ -205,15 +197,11 @@ function createChangesForInitialFieldInstances(
 	documentModel: DocumentModel
 ): ReadonlyObjectMap<Change> {
 	const result: Record<string, Change> = {};
-	DocumentQuery.walk(
-		document,
-		documentModel.content.modelRoot,
-		({ path, element, modelElement }) => {
-			if (modelElement.type === "Field" && element !== undefined) {
-				result[DocumentPath.toString(path)] = { type: "ValueChanged", path };
-			}
+	walk(document, documentModel.content.modelRoot, ({ path, element, modelElement }) => {
+		if (modelElement.type === "Field" && element !== undefined) {
+			result[DocumentPath.toString(path)] = { type: "ValueChanged", path };
 		}
-	);
+	});
 
 	return result;
 }

@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -30,17 +30,15 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import type { Action } from "typescript-fsa";
+import type { Action } from "@com.mgmtp.a12.client/typescript-fsa-redux-5-compat";
 
 import type { EngineStore } from "../../../../../back-end/store/index.js";
 import { Commands, Events } from "../../../../../back-end/store/index.js";
-import { MiddlewareHelpers } from "../../../../utils/back-end-helpers.js";
-import { DocumentHelpers } from "../../../../utils/document-helpers.js";
-import { ModelHelpers } from "../../../../utils/model-helpers.js";
-import { SetupHelpers } from "../../../../utils/setup.js";
+import { createDocumentPath } from "../../../../utils/createDocumentPath.js";
+import { createModelPath } from "../../../../utils/createModelPath.js";
+import { MiddlewareHelpers } from "../../../../utils/MiddlewareHelpers.js";
+import { createTestStore } from "../../../../utils/setup.js";
 import { setupFixture, setupModelsFixture } from "../../../../utils/setupFixture.js";
-
-const { createTestStore } = SetupHelpers;
 
 describe("api.back-end.store.middleware", () => {
 	describe("exitCorrectionModeTriggeredMiddleware", () => {
@@ -54,10 +52,10 @@ describe("api.back-end.store.middleware", () => {
 
 			const screenLocation: ReadonlyArray<EngineStore.ScreenState> = [
 				{
-					locationPath: ModelHelpers.createModelPath("Screen1"),
+					locationPath: createModelPath("Screen1"),
 					path: [],
 					focusedComponent: {
-						formModelPath: ModelHelpers.createModelPath("Screen1")
+						formModelPath: createModelPath("Screen1")
 					},
 					repeatInstanceState: {
 						repeat1: {
@@ -66,10 +64,10 @@ describe("api.back-end.store.middleware", () => {
 					}
 				},
 				{
-					locationPath: ModelHelpers.createModelPath("Screen1", "Detail1"),
-					path: DocumentHelpers.createDocumentPath(["group"], ["repeat1"]),
+					locationPath: createModelPath("Screen1", "Detail1"),
+					path: createDocumentPath(["group"], ["repeat1"]),
 					focusedComponent: {
-						formModelPath: ModelHelpers.createModelPath("Screen1", "Detail1", "control1")
+						formModelPath: createModelPath("Screen1", "Detail1", "control1")
 					}
 				}
 			];

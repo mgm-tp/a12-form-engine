@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -30,36 +30,32 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-export namespace FieldInValidatonMessage {
-	export const rootGroup = "root";
-
-	export namespace REPEAT_1 {
-		export const repeatName = "repeat";
-		export const nestedGroup = "nestedGroup";
-		export const F6 = "F6";
-		export const F7 = "F7";
-		export const F8 = "F8";
+export const FieldInValidatonMessage = {
+	rootGroup: "root",
+	REPEAT_1: {
+		repeatName: "repeat",
+		nestedGroup: "nestedGroup",
+		F6: "F6",
+		F7: "F7",
+		F8: "F8"
+	},
+	REPEAT_2: {
+		repeatName: "repeat2",
+		N1: "N1"
+	},
+	REPEAT_3: {
+		repeatName: "repeat3",
+		nestedGroup: "nestedGroup",
+		nestedRepeat: "nestedRepeat",
+		nestedNestedGroup1: "nestedNestedGroup1",
+		nestedNestedGroup2: "nestedNestedGroup2",
+		N2: "N2",
+		N3: "N3",
+		F8: "F8"
+	},
+	REPEAT_4: {
+		repeatName: "repeat4",
+		nestedRepeat: "nestedRepeat",
+		N4: "N4"
 	}
-
-	export namespace REPEAT_2 {
-		export const repeatName = "repeat2";
-		export const N1 = "N1";
-	}
-
-	export namespace REPEAT_3 {
-		export const repeatName = "repeat3";
-		export const nestedGroup = "nestedGroup";
-		export const nestedRepeat = "nestedRepeat";
-		export const nestedNestedGroup1 = "nestedNestedGroup1";
-		export const nestedNestedGroup2 = "nestedNestedGroup2";
-		export const N2 = "N2";
-		export const N3 = "N3";
-		export const F8 = "F8";
-	}
-
-	export namespace REPEAT_4 {
-		export const repeatName = "repeat4";
-		export const nestedRepeat = "nestedRepeat";
-		export const N4 = "N4";
-	}
-}
+} as const;

@@ -1,0 +1,230 @@
+{
+  "header": {
+    "id": "siblings-include.form",
+    "modelType": "form",
+    "modelVersion": "39.0.0",
+    "locales": [
+      {
+        "code": "en"
+      }
+    ],
+    "annotations": [
+      {
+        "name": "roles",
+        "value": "admin"
+      }
+    ],
+    "modelReferences": [
+      {
+        "alias": "host-document",
+        "modelType": "document",
+        "purpose": "data binding",
+        "reference": "host-document"
+      }
+    ]
+  },
+  "content": {
+    "subHeaderBox": {
+      "id": "subHeaderBox1"
+    },
+    "footerBox": {
+      "id": "footerBox1"
+    },
+    "screens": [
+      {
+        "id": "screen_7e7d3",
+        "name": "Screen 1",
+        "screenElements": [
+          {
+            "type": "ControlGrid",
+            "id": "controlgrid_98b50",
+            "name": "own-cg",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "Host Control Grid"
+                  }
+                ]
+              }
+            },
+            "layout": {
+              "lg": "6-6"
+            },
+            "row": [
+              {
+                "type": "Row",
+                "id": "row_82a60",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control_e0bdf",
+                    "elementRef": "field_8c3e5"
+                  },
+                  {
+                    "type": "Control",
+                    "id": "control_3b9d5",
+                    "elementRef": "field_a37b0"
+                  }
+                ]
+              }
+            ],
+            "verticalAlignment": "TOP"
+          },
+          {
+            "type": "ControlGrid",
+            "id": "controlgrid_4f28f_controlgrid_dcad6",
+            "name": "controlgrid_4f28f-cg",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "included cg"
+                  }
+                ]
+              }
+            },
+            "includeId": "controlgrid_4f28f",
+            "formModelRef": "referenced-form",
+            "hostDocumentModelPath": "/root/include",
+            "layout": {
+              "lg": "6-6"
+            },
+            "row": [
+              {
+                "type": "Row",
+                "id": "controlgrid_4f28f_row_47f01",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "controlgrid_4f28f_control_5238c",
+                    "elementRef": "include_22e88_field_c0894"
+                  },
+                  {
+                    "type": "Control",
+                    "id": "controlgrid_4f28f_control_29b57",
+                    "elementRef": "include_22e88_field_bfef8"
+                  }
+                ]
+              }
+            ],
+            "verticalAlignment": "TOP"
+          },
+          {
+            "type": "ButtonPanel",
+            "id": "controlgrid_4f28f_buttonpanel_452db",
+            "name": "controlgrid_4f28f-included-button-panel",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "Included Button Panel"
+                  }
+                ]
+              }
+            },
+            "includeId": "controlgrid_4f28f",
+            "formModelRef": "referenced-form",
+            "hostDocumentModelPath": "/root/include",
+            "button": [
+              {
+                "type": "EVENT",
+                "id": "controlgrid_4f28f_button_cff8b",
+                "name": "test-button",
+                "buttonStyling": {
+                  "label": {
+                    "type": "Multilingual",
+                    "multilingualText": {
+                      "text": [
+                        {
+                          "locale": "en",
+                          "text": "Test"
+                        }
+                      ]
+                    }
+                  },
+                  "priority": "SECONDARY"
+                },
+                "event": "test",
+                "scope": "HIDDEN_IN_READONLY_MODE"
+              }
+            ]
+          },
+          {
+            "type": "Section",
+            "id": "section_7a5a9_section_22d02",
+            "name": "include-2",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "Included Section"
+                  }
+                ]
+              }
+            },
+            "includeId": "section_7a5a9",
+            "formModelRef": "referenced2-form",
+            "hostDocumentModelPath": "/root",
+            "screenElements": [
+              {
+                "type": "ControlGrid",
+                "id": "section_7a5a9_controlgrid_14100",
+                "name": "cg",
+                "row": [
+                  {
+                    "type": "Row",
+                    "id": "section_7a5a9_row_1b8bf",
+                    "name": "row-1",
+                    "cell": [
+                      {
+                        "type": "TextCell",
+                        "id": "section_7a5a9_textcell_582ad",
+                        "name": "text-cell",
+                        "content": {
+                          "text": [
+                            {
+                              "locale": "en",
+                              "text": "This is an included text cell."
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                ],
+                "verticalAlignment": "TOP"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "fieldConfiguration": {
+      "field": [
+        {
+          "elementRef": "field_8c3e5"
+        },
+        {
+          "elementRef": "field_a37b0"
+        },
+        {
+          "elementRef": "include_22e88_field_c0894"
+        },
+        {
+          "elementRef": "include_22e88_field_bfef8"
+        }
+      ]
+    },
+    "groupConfiguration": {},
+    "defaults": {}
+  }
+}

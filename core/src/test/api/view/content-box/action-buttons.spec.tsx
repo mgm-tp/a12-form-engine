@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -34,8 +34,8 @@ import { notStrictEqual, ok, strictEqual } from "node:assert/strict";
 
 import { query, screen } from "@com.mgmtp.a12.devtools/react";
 
-import type { FormModelHelpers } from "../../../utils/model-helpers.js";
 import { setupModelsFixture } from "../../../utils/setupFixture.js";
+import type { ButtonDef } from "../../../utils/FormModelHelpers.js";
 
 import { setupForButtonTests, setupSubheaderButtonTests } from "./utils.js";
 
@@ -44,7 +44,7 @@ describe("api.view.content-box", () => {
 
 	describe("ActionButtons subaction bar", () => {
 		it("renders only sub-header buttons of type `EVENT`", () => {
-			const buttons: FormModelHelpers.ButtonDef[] = [
+			const buttons: ButtonDef[] = [
 				{ type: "EVENT", label: "EVENT" },
 				{ type: "NAVIGATION", label: "NAVIGATION" },
 				{ type: "EVENT", label: "SUBMIT" }
@@ -64,7 +64,7 @@ describe("api.view.content-box", () => {
 		});
 
 		it("renders button container with right-left collapse direction`", () => {
-			const buttons: FormModelHelpers.ButtonDef[] = [
+			const buttons: ButtonDef[] = [
 				{ type: "EVENT", label: "EVENT" },
 				{ type: "NAVIGATION", label: "NAVIGATION" },
 				{ type: "EVENT", label: "SUBMIT" }
@@ -83,7 +83,7 @@ describe("api.view.content-box", () => {
 		});
 
 		it("does not render when no sub-header buttons are visible", () => {
-			const buttons: FormModelHelpers.ButtonDef[] = [
+			const buttons: ButtonDef[] = [
 				{ type: "NAVIGATION", scope: "HIDDEN_IN_READONLY_MODE" },
 				{ type: "EVENT", scope: "HIDDEN_IN_READONLY_MODE" }
 			];
@@ -98,11 +98,11 @@ describe("api.view.content-box", () => {
 		});
 
 		it("renders all major sub-header buttons left aligned and minor buttons right aligned", () => {
-			const majorButtons: FormModelHelpers.ButtonDef[] = [
+			const majorButtons: ButtonDef[] = [
 				{ type: "EVENT", label: "major" },
 				{ type: "EVENT", label: "major" }
 			];
-			const minorButtons: FormModelHelpers.ButtonDef[] = [
+			const minorButtons: ButtonDef[] = [
 				{ type: "EVENT", label: "minor" },
 				{ type: "EVENT", label: "minor" }
 			];
@@ -132,7 +132,7 @@ describe("api.view.content-box", () => {
 				readonly setIcon?: boolean;
 				readonly labelHidden?: boolean;
 			}) {
-				const button: FormModelHelpers.ButtonDef = {
+				const button: ButtonDef = {
 					type: "EVENT",
 					scope: "HIDDEN_IN_READONLY_MODE"
 				};
@@ -369,7 +369,7 @@ describe("api.view.content-box", () => {
 		);
 
 		it("renders the primary sub-header buttons of type `EVENT` as primary button", () => {
-			const buttons: FormModelHelpers.ButtonDef[] = [{ type: "EVENT", priority: "PRIMARY" }];
+			const buttons: ButtonDef[] = [{ type: "EVENT", priority: "PRIMARY" }];
 			const { widgetMap } = setupSubheaderButtonTests({
 				models,
 				buttons
@@ -382,7 +382,7 @@ describe("api.view.content-box", () => {
 		});
 
 		it("renders the secondary sub-header buttons of type `EVENT` as secondary button", () => {
-			const buttons: FormModelHelpers.ButtonDef[] = [{ type: "EVENT", priority: "SECONDARY" }];
+			const buttons: ButtonDef[] = [{ type: "EVENT", priority: "SECONDARY" }];
 			const { widgetMap } = setupSubheaderButtonTests({
 				models,
 				buttons
@@ -396,7 +396,7 @@ describe("api.view.content-box", () => {
 
 		describe("given major and minor buttons", () => {
 			it("renders event buttons in a responsive ButtonGroupContainer", () => {
-				const buttons: FormModelHelpers.ButtonDef[] = [
+				const buttons: ButtonDef[] = [
 					{ type: "EVENT", priority: "SECONDARY" },
 					{ type: "NAVIGATION", priority: "SECONDARY" }
 				];
@@ -417,7 +417,7 @@ describe("api.view.content-box", () => {
 
 		describe("given only minor buttons", () => {
 			it("renders event buttons in a responsive ButtonGroupContainer", () => {
-				const buttons: FormModelHelpers.ButtonDef[] = [
+				const buttons: ButtonDef[] = [
 					{ type: "EVENT", priority: "SECONDARY" },
 					{ type: "NAVIGATION", priority: "SECONDARY" }
 				];
@@ -441,7 +441,7 @@ describe("api.view.content-box", () => {
 
 		describe("given only major buttons", () => {
 			it("renders event buttons in a responsive ButtonGroupContainer", () => {
-				const buttons: FormModelHelpers.ButtonDef[] = [
+				const buttons: ButtonDef[] = [
 					{ type: "EVENT", priority: "SECONDARY" },
 					{ type: "NAVIGATION", priority: "SECONDARY" }
 				];

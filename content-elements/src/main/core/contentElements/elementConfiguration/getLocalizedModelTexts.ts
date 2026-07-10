@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -30,16 +30,13 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { ModelPath } from "@com.mgmtp.a12.base/base-model-api/lib/main/model/index.js";
-import type { DataReference } from "@com.mgmtp.a12.client/client-data/lib/core/api/data-reference.js";
-import { DocumentModelLocalizableFactory } from "@com.mgmtp.a12.client/client-data/lib/kernel-extension/documentModelLocalizableFactory.js";
+import { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
+import type { DataReference } from "@com.mgmtp.a12.client/client-data";
+import { DocumentModelLocalizableFactory } from "@com.mgmtp.a12.client/client-data";
 import type { ContentModel } from "@com.mgmtp.a12.contentengine/contentengine-core";
-import type { DocumentModel } from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
-import type {
-	LocalizedModelText,
-	Localizer
-} from "@com.mgmtp.a12.utils/utils-localization/lib/main/index.js";
-import { localizableFromModel } from "@com.mgmtp.a12.utils/utils-localization/lib/main/index.js";
+import type { DocumentModel } from "@com.mgmtp.a12.kernel/kernel-md-facade";
+import type { LocalizedModelText, Localizer } from "@com.mgmtp.a12.utils/utils-localization";
+import { localizableFromModel } from "@com.mgmtp.a12.utils/utils-localization";
 
 import { generateLocalizableKey } from "../../localization/generateLocalizableKey.js";
 import type { BaseControlProps, MarkingOfRequiredFields } from "../../types/controlProps.js";

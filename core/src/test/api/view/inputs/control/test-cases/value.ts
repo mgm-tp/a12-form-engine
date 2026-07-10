@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -32,12 +32,13 @@
 
 import { strictEqual } from "node:assert/strict";
 
-import { ModelPath } from "@com.mgmtp.a12.base/base-model-api/lib/main/model/index.js";
+import { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
 import { query } from "@com.mgmtp.a12.devtools/react";
 
 import { DocumentPath } from "../../../../../../models/index.js";
 import { getInputMocks } from "../../../../../rtl-utils/getInputMocks.js";
-import { DocumentHelpers } from "../../../../../utils/document-helpers.js";
+import { createDocumentPath } from "../../../../../utils/createDocumentPath.js";
+import { createModelPath } from "../../../../../utils/createModelPath.js";
 import { setupModelsFixture } from "../../../../../utils/setupFixture.js";
 import { CONTROLS_INDEX } from "../../../../../utils/test-model-helpers/controls.index.js";
 import {
@@ -45,15 +46,12 @@ import {
 	createDocumentForControlsModels,
 	setupForControlsModel
 } from "../../../../../utils/test-model-helpers/controls.js";
-import { createModelPath } from "../../../../../utils/test-model-helpers/dependent-enumeration.js";
 import {
 	DR,
 	createDocumentForDetachedRepeat,
 	setupForDetachedRepeat
 } from "../../../../../utils/test-model-helpers/detached.repeat.js";
 import { renderWithInputMocks } from "../../../../../utils/test-model-helpers/render-with-inputmocks.js";
-
-const { createDocumentPath } = DocumentHelpers;
 
 export function executeTestForValue(): void {
 	const createDocument = () =>

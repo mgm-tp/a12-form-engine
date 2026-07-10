@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -32,10 +32,10 @@
 
 import type { ComponentType, ReactNode } from "react";
 
-import { localizableFromLocalizationTreeMap } from "@com.mgmtp.a12.utils/utils-localization/lib/main/index.js";
+import { localizableFromLocalizationTreeMap } from "@com.mgmtp.a12.utils/utils-localization";
+import { PreviewDataModal } from "@com.mgmtp.a12.formengine/formengine-a12internal-preview";
 
 import { devappTranslationSource } from "../config/devappTranslationSource.js";
-import { PreviewDataModal } from "../shared.js";
 
 export type ModalType = "OVERWRITE_LOCAL_STORAGE_DATA" | "OVERWRITE_FORM_DATA";
 

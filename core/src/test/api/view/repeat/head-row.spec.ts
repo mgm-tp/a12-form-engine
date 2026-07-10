@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -38,7 +38,7 @@ import type { Models } from "../../../../back-end/store/internal/store.js";
 import type { FormModel } from "../../../../models/index.js";
 import { HEAD_CELL_CONTENT } from "../../../rtl-utils/data-roles.js";
 import type { RtlRenderWrapper } from "../../../rtl-utils/render-wrapper.js";
-import { SetupHelpers } from "../../../utils/setup.js";
+import { setupFormEngineRendererWithRtlAsync } from "../../../utils/setup.js";
 import { setupModelsFixture } from "../../../utils/setupFixture.js";
 import {
 	IDS as ExpressionLabelIds,
@@ -199,7 +199,7 @@ describe("api.view.repeat", () => {
 			describe("given a field overview column referencing a field which is not required", () => {
 				describe("and 'markingOfRequiredFields' in the form-model content is set to 'REQUIRED'", () => {
 					it("renders a head row component with a label set to the localized given label", async () => {
-						const wrapper = await SetupHelpers.setupFormEngineRendererWithRtlAsync({
+						const wrapper = await setupFormEngineRendererWithRtlAsync({
 							models: setMarkingOfRequiredFieldsInFormModel(props.models, "REQUIRED"),
 							data: props.data,
 							ui: props.formattedExpression ? formattedExpressionUiState : undefined
@@ -215,7 +215,7 @@ describe("api.view.repeat", () => {
 
 				describe("and 'markingOfRequiredFields' in the form-model content is not defined", () => {
 					it("renders a head row component with a label set to the localized given label", async () => {
-						const wrapper = await SetupHelpers.setupFormEngineRendererWithRtlAsync({
+						const wrapper = await setupFormEngineRendererWithRtlAsync({
 							models: setMarkingOfRequiredFieldsInFormModel(props.models, undefined),
 							data: props.data,
 							ui: props.formattedExpression ? formattedExpressionUiState : undefined
@@ -231,7 +231,7 @@ describe("api.view.repeat", () => {
 
 				describe("and 'markingOfRequiredFields' in the form-model content is set to 'NONE'", () => {
 					it("renders a head row component with a label set to the localized given label", async () => {
-						const wrapper = await SetupHelpers.setupFormEngineRendererWithRtlAsync({
+						const wrapper = await setupFormEngineRendererWithRtlAsync({
 							models: setMarkingOfRequiredFieldsInFormModel(props.models, "NONE"),
 							data: props.data,
 							ui: props.formattedExpression ? formattedExpressionUiState : undefined
@@ -249,7 +249,7 @@ describe("api.view.repeat", () => {
 			describe("given a field overview column referencing a field which is required", () => {
 				describe("and 'markingOfRequiredFields' in the form-model content is set to 'REQUIRED'", () => {
 					it("renders a head row component with a label set to the localized given label plus an asterisk", async () => {
-						const wrapper = await SetupHelpers.setupFormEngineRendererWithRtlAsync({
+						const wrapper = await setupFormEngineRendererWithRtlAsync({
 							models: setMarkingOfRequiredFieldsInFormModel(props.models, "REQUIRED"),
 							data: props.data,
 							ui: props.formattedExpression ? formattedExpressionUiState : undefined
@@ -265,7 +265,7 @@ describe("api.view.repeat", () => {
 
 				describe("and 'markingOfRequiredFields' in the form-model content is not defined", () => {
 					it("renders a head row component with a label set to the localized given label plus an asterisk", async () => {
-						const wrapper = await SetupHelpers.setupFormEngineRendererWithRtlAsync({
+						const wrapper = await setupFormEngineRendererWithRtlAsync({
 							models: setMarkingOfRequiredFieldsInFormModel(props.models, undefined),
 							data: props.data,
 							ui: props.formattedExpression ? formattedExpressionUiState : undefined
@@ -281,7 +281,7 @@ describe("api.view.repeat", () => {
 
 				describe("and 'markingOfRequiredFields' in the form-model content is set to 'NONE'", () => {
 					it("renders a head row component with a label set to the localized given label with no asterisk", async () => {
-						const wrapper = await SetupHelpers.setupFormEngineRendererWithRtlAsync({
+						const wrapper = await setupFormEngineRendererWithRtlAsync({
 							models: setMarkingOfRequiredFieldsInFormModel(props.models, "NONE"),
 							data: props.data,
 							ui: props.formattedExpression ? formattedExpressionUiState : undefined
@@ -294,7 +294,7 @@ describe("api.view.repeat", () => {
 
 			describe("given an expression overview column", () => {
 				it("renders a head row component with a label set to the localized given label", async () => {
-					const wrapper = await SetupHelpers.setupFormEngineRendererWithRtlAsync({
+					const wrapper = await setupFormEngineRendererWithRtlAsync({
 						models: props.models,
 						data: props.data,
 						ui: props.formattedExpression ? formattedExpressionUiState : undefined
@@ -320,7 +320,7 @@ describe("api.view.repeat", () => {
 			describe("given a field overview column referencing a field which is not required", () => {
 				describe("and 'markingOfRequiredFields' in the form-model content is set to 'REQUIRED'", () => {
 					it("renders a head row component with a label set to the localized given label", async () => {
-						const wrapper = await SetupHelpers.setupFormEngineRendererWithRtlAsync({
+						const wrapper = await setupFormEngineRendererWithRtlAsync({
 							models: setMarkingOfRequiredFieldsInFormModel(props.models, "REQUIRED"),
 							data: props.data,
 							ui: props.formattedExpression ? formattedExpressionUiState : undefined
@@ -336,7 +336,7 @@ describe("api.view.repeat", () => {
 
 				describe("and 'markingOfRequiredFields' in the form-model content is not defined", () => {
 					it("renders a head row component with a label set to the localized given label", async () => {
-						const wrapper = await SetupHelpers.setupFormEngineRendererWithRtlAsync({
+						const wrapper = await setupFormEngineRendererWithRtlAsync({
 							models: setMarkingOfRequiredFieldsInFormModel(props.models, undefined),
 							data: props.data,
 							ui: props.formattedExpression ? formattedExpressionUiState : undefined
@@ -352,7 +352,7 @@ describe("api.view.repeat", () => {
 
 				describe("and 'markingOfRequiredFields' in the form-model content is set to 'NONE'", () => {
 					it("renders a head row component with a label set to the localized given label", async () => {
-						const wrapper = await SetupHelpers.setupFormEngineRendererWithRtlAsync({
+						const wrapper = await setupFormEngineRendererWithRtlAsync({
 							models: setMarkingOfRequiredFieldsInFormModel(props.models, "NONE"),
 							data: props.data,
 							ui: props.formattedExpression ? formattedExpressionUiState : undefined
@@ -370,7 +370,7 @@ describe("api.view.repeat", () => {
 			describe("given a field overview column referencing a field which is required", () => {
 				describe("and 'markingOfRequiredFields' in the form-model content is set to 'REQUIRED'", () => {
 					it("renders a head row component with a label set to the localized given label with no asterisk", async () => {
-						const wrapper = await SetupHelpers.setupFormEngineRendererWithRtlAsync({
+						const wrapper = await setupFormEngineRendererWithRtlAsync({
 							models: setMarkingOfRequiredFieldsInFormModel(props.models, "REQUIRED"),
 							data: props.data,
 							ui: props.formattedExpression ? formattedExpressionUiState : undefined
@@ -382,7 +382,7 @@ describe("api.view.repeat", () => {
 
 				describe("and 'markingOfRequiredFields' in the form-model content is set not defined", () => {
 					it("renders a head row component with a label set to the localized given label with no asterisk", async () => {
-						const wrapper = await SetupHelpers.setupFormEngineRendererWithRtlAsync({
+						const wrapper = await setupFormEngineRendererWithRtlAsync({
 							models: setMarkingOfRequiredFieldsInFormModel(props.models, undefined),
 							data: props.data,
 							ui: props.formattedExpression ? formattedExpressionUiState : undefined
@@ -394,7 +394,7 @@ describe("api.view.repeat", () => {
 
 				describe("and 'markingOfRequiredFields' in the form-model content is set to 'NONE'", () => {
 					it("renders a head row component with a label set to the localized given label with no asterisk", async () => {
-						const wrapper = await SetupHelpers.setupFormEngineRendererWithRtlAsync({
+						const wrapper = await setupFormEngineRendererWithRtlAsync({
 							models: setMarkingOfRequiredFieldsInFormModel(props.models, "NONE"),
 							data: props.data,
 							ui: props.formattedExpression ? formattedExpressionUiState : undefined
@@ -407,7 +407,7 @@ describe("api.view.repeat", () => {
 
 			describe("given an expression overview column", () => {
 				it("renders a head row component with a label set to the localized given label", async () => {
-					const wrapper = await SetupHelpers.setupFormEngineRendererWithRtlAsync({
+					const wrapper = await setupFormEngineRendererWithRtlAsync({
 						models: props.models,
 						data: props.data,
 						ui: props.formattedExpression ? formattedExpressionUiState : undefined

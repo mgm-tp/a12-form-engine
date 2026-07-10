@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -32,20 +32,17 @@
 
 import { equal, ok, strictEqual } from "node:assert/strict";
 
-import { ModelPath } from "@com.mgmtp.a12.base/base-model-api/lib/main/model/index.js";
+import { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
 import { within } from "@com.mgmtp.a12.devtools/react";
 
 import type { EngineStore } from "../../../../../back-end/store/internal/store.js";
 import type { ReadonlyObjectMap } from "../../../../../models/internal/utils/json.js";
 import { BODY_CELL, BODY_ROW, MESSAGE, TABLE_BODY } from "../../../../rtl-utils/data-roles.js";
-import { DocumentHelpers } from "../../../../utils/document-helpers.js";
-import { ModelHelpers } from "../../../../utils/model-helpers.js";
-import { SetupHelpers } from "../../../../utils/setup.js";
+import { createDocumentPath } from "../../../../utils/createDocumentPath.js";
+import { createModelPath } from "../../../../utils/createModelPath.js";
+import { loadData, setupFormEngineRendererWithRtlAsync } from "../../../../utils/setup.js";
 import { setupFixture, setupModelsFixture } from "../../../../utils/setupFixture.js";
-import { createModelPath } from "../../../../utils/test-model-helpers/dependent-enumeration.js";
 import { FORM_MODEL } from "../../../../utils/test-model-helpers/filter-expressions.js";
-
-const { loadData } = SetupHelpers;
 
 export function executeFilterExpressionTests(): void {
 	const models = setupModelsFixture("repeat.filterexpressions");
@@ -56,7 +53,7 @@ export function executeFilterExpressionTests(): void {
 
 	describe("Repeat with no filter expression", () => {
 		it("shows all rows in the overview table", async () => {
-			const wrapper = await SetupHelpers.setupFormEngineRendererWithRtlAsync({
+			const wrapper = await setupFormEngineRendererWithRtlAsync({
 				models,
 				data: { document: fixture.document },
 				ui: getUiState()
@@ -75,7 +72,7 @@ export function executeFilterExpressionTests(): void {
 
 	describe("Repeat with a filter expression", () => {
 		it("should only show rows in the overview table which fit the filter expression", async () => {
-			const wrapper = await SetupHelpers.setupFormEngineRendererWithRtlAsync({
+			const wrapper = await setupFormEngineRendererWithRtlAsync({
 				models,
 				data: { document: fixture.document },
 				ui: getUiState()
@@ -147,7 +144,7 @@ export function executeFilterExpressionTests(): void {
 		});
 
 		it("should show no entry placeholder, when no rows are added", async () => {
-			const repeatPath = ModelHelpers.createModelPath("DetachedRepeat", "sec1", "Private Contacts");
+			const repeatPath = createModelPath("DetachedRepeat", "sec1", "Private Contacts");
 			const repeatInstanceState: ReadonlyObjectMap<EngineStore.Repeat.InstanceState> = {
 				[ModelPath.toString(repeatPath)]: {}
 			};
@@ -158,7 +155,7 @@ export function executeFilterExpressionTests(): void {
 				}
 			};
 
-			const wrapper = await SetupHelpers.setupFormEngineRendererWithRtlAsync({
+			const wrapper = await setupFormEngineRendererWithRtlAsync({
 				models,
 				data: { document: doc },
 				ui: getUiState(repeatInstanceState)
@@ -173,12 +170,12 @@ export function executeFilterExpressionTests(): void {
 		});
 
 		describe("Row with row state 'recentlyAdded'", () => {
-			const repeatPath = ModelHelpers.createModelPath("DetachedRepeat", "sec1", "Private Contacts");
+			const repeatPath = createModelPath("DetachedRepeat", "sec1", "Private Contacts");
 			const repeatInstanceState: ReadonlyObjectMap<EngineStore.Repeat.InstanceState> = {
 				[ModelPath.toString(repeatPath)]: {
 					page: 1,
 					newRow: {
-						rowPath: DocumentHelpers.createDocumentPath(["RootGroup"], ["Contacts"]),
+						rowPath: createDocumentPath(["RootGroup"], ["Contacts"]),
 						rowState: "recentlyAdded"
 					}
 				}
@@ -196,7 +193,7 @@ export function executeFilterExpressionTests(): void {
 					}
 				};
 
-				const wrapper = await SetupHelpers.setupFormEngineRendererWithRtlAsync({
+				const wrapper = await setupFormEngineRendererWithRtlAsync({
 					models,
 					data: { document: doc },
 					ui: getUiState(repeatInstanceState)
@@ -231,7 +228,7 @@ export function executeFilterExpressionTests(): void {
 					}
 				};
 
-				const wrapper = await SetupHelpers.setupFormEngineRendererWithRtlAsync({
+				const wrapper = await setupFormEngineRendererWithRtlAsync({
 					models,
 					data: { document: doc },
 					ui: getUiState(repeatInstanceState)
@@ -261,7 +258,7 @@ export function executeFilterExpressionTests(): void {
 						]
 					}
 				};
-				const wrapper = await SetupHelpers.setupFormEngineRendererWithRtlAsync({
+				const wrapper = await setupFormEngineRendererWithRtlAsync({
 					models,
 					data: { document: doc },
 					ui: getUiState(repeatInstanceState)
@@ -275,12 +272,12 @@ export function executeFilterExpressionTests(): void {
 		});
 
 		describe("Row with row state 'workingOn'", () => {
-			const repeatPath = ModelHelpers.createModelPath("DetachedRepeat", "sec1", "Private Contacts");
+			const repeatPath = createModelPath("DetachedRepeat", "sec1", "Private Contacts");
 			const repeatInstanceState: ReadonlyObjectMap<EngineStore.Repeat.InstanceState> = {
 				[ModelPath.toString(repeatPath)]: {
 					page: 1,
 					newRow: {
-						rowPath: DocumentHelpers.createDocumentPath(["RootGroup"], ["Contacts"]),
+						rowPath: createDocumentPath(["RootGroup"], ["Contacts"]),
 						rowState: "workingOn"
 					}
 				}
@@ -298,7 +295,7 @@ export function executeFilterExpressionTests(): void {
 					}
 				};
 
-				const wrapper = await SetupHelpers.setupFormEngineRendererWithRtlAsync({
+				const wrapper = await setupFormEngineRendererWithRtlAsync({
 					models,
 					data: { document: doc },
 					ui: getUiState(repeatInstanceState)
@@ -327,7 +324,7 @@ export function executeFilterExpressionTests(): void {
 					}
 				};
 
-				const wrapper = await SetupHelpers.setupFormEngineRendererWithRtlAsync({
+				const wrapper = await setupFormEngineRendererWithRtlAsync({
 					models,
 					data: { document: doc },
 					ui: getUiState(repeatInstanceState)

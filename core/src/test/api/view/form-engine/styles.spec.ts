@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -40,10 +40,8 @@ import { DefaultWidgetMap } from "../../../../view/index.js";
 import { DefaultTableWidgetMap } from "../../../../view/internal/components/form-engine/repeat/table-widget-map.js";
 import { BODY_CELL, BUTTON, HEAD_CELL } from "../../../rtl-utils/data-roles.js";
 import { US_LOCALE } from "../../../utils/localization.js";
-import { SetupHelpers } from "../../../utils/setup.js";
+import { setupFormEngineRendererWithRtl } from "../../../utils/setup.js";
 import { setupModelsFixture } from "../../../utils/setupFixture.js";
-
-const { setupFormEngineRendererWithRtl } = SetupHelpers;
 
 describe("api.view.Styles", () => {
 	const models = setupModelsFixture("styles");

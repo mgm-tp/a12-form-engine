@@ -1,0 +1,778 @@
+////
+SPDX-License-Identifier: EUPL-1.2 OR LicenseRef-commercial
+
+Copyright (c) 2012-2026 mgm technology partners GmbH
+
+Dual License
+------------
+This source file is part of the mgm A12 Platform and available under
+a choice of two different licenses:
+
+1. Open-Source License - EUPL v1.2
+   You may redistribute and/or modify this file under the terms of the
+   European Union Public License, version 1.2 - see https://eupl.eu/.
+
+2. Commercial License
+   Alternatively, you may obtain a commercial license from
+   mgm technology partners GmbH, that permits use of this software
+   under different terms (including support and maintenance services).
+
+   Please contact a12-license@mgm-tp.com for more information.
+
+You must select and comply with exactly one of the above license options.
+
+Warranty Disclaimer (applies to either option)
+----------------------------------------------
+THIS SOFTWARE IS PROVIDED "AS IS" AND WITHOUT WARRANTY OF ANY KIND,
+WHETHER EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NON-INFRINGEMENT, EXCEPT WHERE SUCH DISCLAIMERS ARE HELD TO BE
+LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
+////
+
+= 2026.06
+
+== Breaking Changes
+
+Codemod recipes exist for some of the breaking changes. To use them, first install or update the codemod with your preferred package manager, e.g. with `pnpm`:
+[source,bash]
+----
+pnpm install -g @com.mgmtp.a12.formengine/formengine-codemod
+----
+
+Then run the specific recipe:
+[source,bash]
+----
+formengine-codemod <recipe> <path to directory with tsconfig.json>
+
+// or as a single command
+pnpx @com.mgmtp.a12.formengine/formengine-codemod <recipe> <path to directory with tsconfig.json>
+----
+
+=== Integration of Dependencies
+The versions of the A12 dependencies have been increased. Please see documentation of the respective components for further migration instructions.
+
+Required:: Yes.
+Migration:: Manual, no codemod available.
+Result:: See component documentation for details.
+
+=== React Peer Dependency Update
+
+The peer dependency version of `react` has been increased to `^19.2.6` to be able to use latest React features. If you are on an older React 19 version, update your `react` and `react-dom` dependencies.
+
+Required:: Yes.
+Migration:: Manual, no codemod available.
+Result::
++
+[source,json]
+----
+{
+  "dependencies": {
+    "react": "^19.2.6",
+    "react-dom": "^19.2.6"
+  }
+}
+----
+
+=== Updating to ES2025
+
+The javascript output of the npm artifacts was updated from `ES2024` to `ES2025` to be able to use latest language features. When using supported browsers, there is no change necessary. If support for older browsers is required, make sure to include necessary polyfills.
+
+Required:: Depending on whether support for older browsers is required.
+Migration:: Manual, no codemod available.
+Result:: Depending on your bundler setup, consult its documentation on how to include polyfills.
+
+=== Removal of Deep Import Paths
+
+Deep import paths from `@com.mgmtp.a12.formengine/formengine-model-migration`, `@com.mgmtp.a12.formengine/formengine-core`, `@com.mgmtp.a12.formengine/formengine-content-elements` and `@com.mgmtp.a12.formengine/formengine-content-elements-editor` (e.g., `@com.mgmtp.a12.formengine/formengine-core/lib/models/index.js`) have been removed.
+All exports must now be imported directly from the package root. For detailed migration instructions, see the link:/docs/2025.06/ext4/FORM_ENGINE/formengine-documentation-bundle/index.html#preferTopLevel-codemod[deprecation,role=external] note.
+
+[NOTE]
+====
+The package now uses the `exports` field instead of `main`/`types`. This should be transparent for most consumers but may require configuration updates for older bundlers.
+====
+
+Required:: Yes.
+Migration::
++
+Codemod available in link:/docs/2025.06/ext4/FORM_ENGINE/formengine-documentation-bundle/index.html#preferTopLevel-codemod[2025.06-ext4,role=external].
+Result::
++
+[source,js]
+----
+// before
+import { FormModel } from "@com.mgmtp.a12.formengine/formengine-core/lib/models/index.js"
+
+// after
+import { FormModel } from "@com.mgmtp.a12.formengine/formengine-core";
+----
+
+=== Conversion of value-only namespaces into objects
+
+Several namespaces consisting only of value exports were changed to `const` objects. This was done to improve tree-shaking support in modern bundlers.
+This change should be transparent for most consumers since the usage syntax remains the same (e.g., `UiStateSelectors.dirty()`).
+
+Required:: No.
+Migration:: Not needed.
+Result:: No changes.
+
+=== Removal of `isInstance` Methods from `FormModel` Namespace
+
+All `isInstance` methods have been removed from the `FormModel` namespace and its nested namespaces (e.g., `FormModel.Screen.isInstance`, `FormModel.Control.isInstance`). These have been replaced with standalone type guard functions exported from the package root.
+
+Additionally, the helper functions `FormModel.stylableToClassName` and `FormModel.styleToClassName` have been moved to standalone exports `stylableToClassName` and `styleToClassName`.
+
+Required:: Yes.
+Migration::
++
+[source,bash]
+----
+# Migrate isInstance calls
+formengine-codemod replaceFormModelIsInstance <path to directory with tsconfig.json>
+
+# Migrate stylableToClassName/styleToClassName calls
+formengine-codemod replaceFormModelStylable <path to directory with tsconfig.json>
+
+# Wrap isFormModel type guard when passed to array methods
+formengine-codemod wrapIsFormModel <path to directory with tsconfig.json>
+----
+Result::
++
+[source,typescript]
+----
+// Old
+import { FormModel } from "@com.mgmtp.a12.formengine/formengine-core";
+
+if (FormModel.isInstance(model)) { /* ... */ }
+if (FormModel.Screen.isInstance(element)) { /* ... */ }
+if (FormModel.Control.isInstance(cell)) { /* ... */ }
+if (FormModel.ButtonType.isNavigationButton(button)) { /* ... */ }
+const className = FormModel.stylableToClassName(element);
+
+// New
+import {
+    isFormModel,
+    isFormModelScreen,
+    isFormModelControl,
+    isFormModelNavigationButton,
+    stylableToClassName
+} from "@com.mgmtp.a12.formengine/formengine-core";
+
+if (isFormModel(model)) { /* ... */ }
+if (isFormModelScreen(element)) { /* ... */ }
+if (isFormModelControl(cell)) { /* ... */ }
+if (isFormModelNavigationButton(button)) { /* ... */ }
+const className = stylableToClassName(element);
+----
+
+[NOTE]
+====
+The type guard function `isFormModel` now accepts an optional second parameter (used to control whether runtime-only properties should be ignored when checking, default is `true`). When passing this directly to array methods like `find()`, `filter()`, or `some()`, the array index parameter conflicts with it.
+
+[source,typescript]
+----
+// Old - no longer works correctly
+const fm = models.find(isFormModel);
+
+// New - wrap in arrow function
+const fm = models.find(m => isFormModel(m));
+----
+====
+
+=== Consistency Validation API Simplification
+
+The consistency validation API of A12 Form Engine has been simplified to align with the new API from A12 Base. Refer to the link:/docs/2026.06/ext0/base/base-documentation-bundle/index.html#_breaking_changes[migration instructions there] for more information.
+The `FormModelConsistencyRulesProvider` class has been removed and replaced with a new `FormModelValidator` class that extends the abstract `ConsistencyValidator`.
+
+Required:: Depending on your usage of consistency validation in your application.
+Migration:: Manual, no codemod available.
+Result::
++
+Replace the usage of the automatic rule provider discovery with direct instantiation of `FormModelValidator`.
++
+Example:
+[source,java,options="nowrap"]
+----
+// Old: automatic discovery of FormModelConsistencyRulesProvider via ServiceLoader (if used)
+ConsistencyValidator validator = new ConsistencyValidator(modelResolver);
+ConsistencyStatus status = validator.validate(formModel);
+
+// New: use FormModelValidator directly
+FormModelValidator validator = new FormModelValidator(modelResolver);
+List<Problem> problems = validator.validate(formModel);
+----
+
+Note that the new `FormModelValidator` is only capable of validating Form Models. This means that:
+
+* the referenced document model is not automatically checked for consistency anymore. The validator will only check whether the model exists and can be expanded. If needed, validate the Document Models directly using the existing API from A12 Kernel beforehand.
+* adding custom validation is not possible anymore. If you have additional validation logic for Form Models, implement your own `ConsistencyValidator` that extends from `FormModelValidator`.
+
+=== Now Date moved to GeneratedCodeRtConfig
+
+The `now` date used for computations and validations has been generalized to link:/docs/kernel/kernel-documentation-dev/assets/doc/typescript/interfaces/Document_model_and_document_facade.GeneratedCodeRtConfig.html[`GeneratedCodeRtConfig`] (link to Kernel documentation). If you were setting this date in your application, please update the code accordingly.
+
+Required:: Depending on whether you used the `now` date in your application.
+Migration:: Manual, no codemod available.
+Result::
++
+- Replace `now: Date` → `kernelOptions: { currentDateForTest: Date }`
+- Replace `nowProvider: () => Date` → `kernelOptions: () => { currentDateForTest: Date }`
++
+The new `kernelOptions` also supports:
+- `customConditionFactory`
+- `customFieldTypeFactory`
+- `ignoreUnknownFields`
+
+==== `computeDocument` Function Signature Change
+===== Before
+```typescript
+export function computeDocument(options: {
+    readonly document: GroupInstance;
+    readonly validatorProvider?: IGeneratedCodeAccessor;
+    readonly kernelConfiguration: {
+        readonly now?: Date;
+    };
+}): {...}
+```
+
+===== After
+```typescript
+export function computeDocument(options: {
+    readonly document: GroupInstance;
+    readonly validatorProvider?: IGeneratedCodeAccessor;
+    readonly kernelOptions?: GeneratedCodeRtConfig;
+}): {...}
+```
+
+===== Breaking Change
+- Property `kernelConfiguration` removed
+- Property `kernelOptions` added (optional)
+
+===== Migration
+```typescript
+// Old code
+computeDocument({
+    document: myDoc,
+    kernelConfiguration: { now: new Date() }
+});
+
+// New code
+computeDocument({
+    document: myDoc,
+    kernelOptions: { currentDateForTest: new Date() }
+});
+```
+
+==== `EmptyDocumentDataProviderOptions` Interface Change
+
+===== Before
+```typescript
+export interface EmptyDocumentDataProviderOptions {
+    readonly now?: Date;
+}
+```
+
+===== After
+```typescript
+export interface EmptyDocumentDataProviderOptions {
+    readonly kernelOptions?: KernelOptionsProvider;
+}
+```
+
+===== Breaking Change
+- Property `now` removed
+- Property `kernelOptions` added (optional, different type)
+
+===== Migration
+```typescript
+// Old code
+const options: EmptyDocumentDataProviderOptions = {
+    now: new Date()
+};
+
+// New code
+const options: EmptyDocumentDataProviderOptions = {
+    kernelOptions: () => ({ currentDateForTest: new Date() })
+};
+```
+
+
+==== `MiddlewareOptions` Interface Change
+
+===== Before
+```typescript
+export interface MiddlewareOptions extends Localization, Conversion {
+    readonly disableRepeatValidationOnLeaving?: boolean;
+    readonly externalEnumerationProvider?: IExternalEnumerationProvider;
+    readonly nowProvider?: EngineStore.Provider<Date | undefined>;
+}
+```
+
+===== After
+```typescript
+export interface MiddlewareOptions extends Localization, Conversion {
+    readonly disableRepeatValidationOnLeaving?: boolean;
+    readonly externalEnumerationProvider?: IExternalEnumerationProvider;
+    readonly kernelOptions?: KernelOptionsProvider;
+}
+```
+
+===== Breaking Change
+- Property `nowProvider` removed
+- Property `kernelOptions` added (optional, different return type)
+
+===== Migration
+```typescript
+// Old code
+const middleware: MiddlewareOptions = {
+    nowProvider: () => new Date()
+};
+
+// New code
+const middleware: MiddlewareOptions = {
+    kernelOptions: () => ({ currentDateForTest: new Date() })
+};
+```
+
+
+==== `PreProcessDocumentParams` Type Change
+===== Before
+```typescript
+export type PreProcessDocumentParams = {
+    readonly model: {
+        readonly validatorProvider: IGeneratedCodeAccessor;
+    };
+    readonly isNewInstance: boolean;
+    readonly now?: Date;
+};
+```
+
+===== After
+```typescript
+export type PreProcessDocumentParams = {
+    readonly model: {
+        readonly validatorProvider: IGeneratedCodeAccessor;
+    };
+    readonly isNewInstance: boolean;
+    readonly kernelOptions?: GeneratedCodeRtConfig;
+};
+```
+
+===== Breaking Change
+- Property `now` removed
+- Property `kernelOptions` added (optional, different type)
+
+===== Migration
+```typescript
+// Old code
+const params: PreProcessDocumentParams = {
+    model: { validatorProvider },
+    isNewInstance: true,
+    now: new Date()
+};
+
+// New code
+const params: PreProcessDocumentParams = {
+    model: { validatorProvider },
+    isNewInstance: true,
+    kernelOptions: { currentDateForTest: new Date() }
+};
+```
+
+=== Multi File Upload: Validation Restricted to Attachment and Attachment-Value-Triggered Fields
+
+After a multi file upload, the immediate validation is now restricted to:
+
+* Attachment-related fields (fields in groups with `usageType="attachment"`)
+* Fields that have a new validation error specifically because the attachment field values (such as `attachment_id`, `size`, or `mime_type`) were set - detected by comparing validation results with and without the uploaded attachment values
+
+Other fields of the newly added rows will only be validated once the row or the whole repeat is left and loses focus. This includes for example required fields the user has not yet filled in, fields with initial values, and fields changed by computations and dependencies not triggered by the attachment field value changes.
+Previously, all fields in the newly created repeat rows were validated immediately after upload, which caused confusing validation errors for fields the user had not yet had the chance to fill in.
+
+Required:: Depending on whether you relied on immediate validation of fields that are neither attachment fields nor attachment-value-triggered directly after a multi file upload.
+Migration:: Manual, no codemod available.
+Result::
++
+To restore the previous behavior and validate all relevant fields after upload, trigger a partial validation in a custom middleware that listens to `Events.Repeat.multiFileUpload`:
+
+[source,typescript]
+----
+import { Events, Commands } from "@com.mgmtp.a12.formengine/formengine-core";
+
+const myMiddleware = api => next => action => {
+    const result = next(action);
+    if (Events.Repeat.multiFileUpload.match(action)) {
+        api.dispatch(Commands.validatePart({}));
+    }
+    return result;
+};
+----
+
+=== Removal of default export for IExternalEnumerationProvider
+
+The default export for the IExternalEnumerationProvider has been removed. Because of this, the import for the IExternalEnumerationProvider changes to a named import.
+
+The PreferTopLevel Codemod in link:/docs/2025.06/ext4/FORM_ENGINE/formengine-documentation-bundle/index.html#preferTopLevel-codemod[2025.06-ext4] can be executed to migrate this change automatically.
+
+Required:: Depending on your usage of IExternalEnumerationProvider.
+Migration::
++
+Codemod available in link:/docs/2025.06/ext4/FORM_ENGINE/formengine-documentation-bundle/index.html#preferTopLevel-codemod[2025.06-ext4].
+Result::
++
+[source,js]
+----
+// before
+import IExternalEnumerationProvider from "@com.mgmtp.a12.formengine/formengine-core/lib/back-end/services/external-enumeration-provider.js";
+
+// after
+import { IExternalEnumerationProvider } from "@com.mgmtp.a12.formengine/formengine-core";
+----
+
+=== Removal of formModelRepeatPath from Events.Attachments.UploadAttachmentsPayload
+
+The deprecated `formModelRepeatPath` property has been removed from the Events.Attachments.UploadAttachmentsPayload. Instead the `formModelElementPath` property should be used.
+
+NOTE: This property was originally deprecated in link:/docs/2025.06/ext2/FORM_ENGINE/formengine-documentation-bundle/index.html#_boolean_value_handling[Form Engine 38.1.0,role=external].
+
+Required:: Depending on your usage of Events.Attachments.UploadAttachmentsPayload.
+Migration::
++
+[source,bash]
+----
+formengine-codemod replaceFormModelRepeatPath <path to directory with tsconfig.json>
+----
+Result::
++
+[source,ts]
+----
+// before
+export interface UploadAttachmentsPayload {
+	formModelRepeatPath: string;
+	// others...
+}
+
+// after
+export interface UploadAttachmentsPayload {
+	formModelElementPath: string;
+	// others...
+}
+----
+
+=== Redux 5 Upgrade
+
+As a Client based component, we followed the upgrade to Redux 5. Refer to Clients link:/docs/CLIENT/client-documentation-bundle/index.html#_redux_5_upgrade[Migration Instructions] for details.
+
+Required:: Yes.
+Migration:: Partial, some codemods available.
+Result:: See Clients Migration Instructions for details.
+
+=== Add Java 25 Support
+
+The FormEngine Java libraries are now compiled with and for Java 21. Support for Java 25 is also guaranteed.
+
+Required:: As required by Java 21 Migration Guide.
+Migration:: Manual, no codemod available.
+Result:: See Java 21 Migration Guide.
+
+=== Changes To Java Artifacts
+
+For the following changes, an OpenRewrite recipe is provided to automatically migrate package and class renames.
+To use it, add the following to your `build.gradle`:
+
+[source,groovy]
+----
+plugins {
+    id("org.openrewrite.rewrite") version("7.28.0") // or newer
+}
+
+dependencies {
+    rewrite("com.mgmtp.a12.formengine:formengine-rewrite:39.0.0")
+}
+
+rewrite {
+	// other recipes here...
+
+    activeRecipe("com.mgmtp.a12.formengine.UpgradeFormEngine_39")
+
+	// due to a bug in openrewrite, this is necessary when migrating a kotlin codebase
+	rewriteVersion = "8.75.2" // or newer
+}
+----
+
+Then run:
+
+[source,bash]
+----
+gradle rewriteRun
+----
+
+For Maven projects, run from command line:
+
+[source,bash]
+----
+mvn -U org.openrewrite.maven:rewrite-maven-plugin:run \
+  -Drewrite.recipeArtifactCoordinates=com.mgmtp.a12.formengine:formengine-rewrite:39.0.0 \
+  -Drewrite.activeRecipes=com.mgmtp.a12.formengine.UpgradeFormEngine_39
+----
+
+==== Java Packages Renamed
+
+The following Java packages have been renamed to consolidate the Form Engine API under a unified namespace:
+
+[cols="1,1", options="header"]
+|===
+| Old Package | New Package
+
+| `com.mgmtp.a12.melies.model.*`
+| `com.mgmtp.a12.formengine.model.*`
+
+| `com.mgmtp.a12.melies.common.*`
+| `com.mgmtp.a12.formengine.common.*`
+
+| `com.mgmtp.a12.model.ui.form.*`
+| `com.mgmtp.a12.formengine.*`
+
+| `com.mgmtp.a12.model.ui.form.consistency.*`
+| `com.mgmtp.a12.formengine.consistency.*`
+
+| `com.mgmtp.a12.model.ui.form.serialization.*`
+| `com.mgmtp.a12.formengine.serialization.*`
+|===
+
+Required:: Depending on your usage of the JAVA api.
+Migration::
++
+[source,bash]
+----
+// see setup above for adding the OpenRewrite plugin and recipe
+gradle rewriteRun
+----
+Result:: See table above.
+
+==== Renaming of Java Classes
+
+Several Java classes have been renamed to remove legacy naming conventions:
+
+[cols="1,1", options="header"]
+|===
+| Old Class | New Class
+
+| `MeliesModel`
+| `FormModel`
+
+| `MeliesModelUtil`
+| `FormModelUtil`
+
+| `MeliesModelJsonSerializer`
+| `FormModelJsonSerializer`
+
+| `PicusReferenceType`
+| `DmReferenceType`
+
+| `PicusFileReferenceType`
+| `DmFileReferenceType`
+
+| `PicusRepositoryReferenceType`
+| `DmRepositoryReferenceType`
+
+| `FileBasedPicusModelResolver`
+| `FileBasedDocumentModelResolver`
+|===
+
+Required:: Depending on your usage of the renamed classes.
+Migration::
++
+[source,bash]
+----
+// see setup above for adding the OpenRewrite plugin and recipe
+gradle rewriteRun
+----
+Result:: See table above.
+
+==== FormModel Interface Removed
+
+The `com.mgmtp.a12.model.ui.form.FormModel` interface has been removed. The concrete class previously named `MeliesModel` is now named `FormModel` and directly implements `com.mgmtp.a12.model.Model`.
+
+If your code referenced the old `FormModel` interface, update it to use the new concrete `FormModel` class from `com.mgmtp.a12.formengine.model.FormModel`.
+
+Required:: Depending on your usage of FormModel interface.
+Migration::
++
+[source,bash]
+----
+// see setup above for adding the OpenRewrite plugin and recipe
+gradle rewriteRun
+----
+Result:: `MeliesModel` is renamed to `FormModel`.
+
+==== FormModelCategory Enum Values Renamed
+
+All enum values in `FormModelCategory` that had the `PICUS_` prefix have been renamed. The prefix has been removed or replaced with `DM`
+If your code explicitly references these enum values (e.g., in error handling or logging), update the references accordingly.
+
+Required:: Depending on your usage of `FormModelCategory` enum values.
+Migration:: Manual, no codemod available.
+Result:: `PICUS_` prefix is removed everywhere.
+
+=== Removal of computation-relevancy-analyzer
+
+The `computation-relevancy-analyzer` was a CLI tool introduced in 2024.06, that was meant to ease the migration to `notRelevant`. It was removed without replacement, since the support for 2024.06 ended. You can still use older versions of this tool.
+
+Required:: No.
+Migration:: Manual, no codemod available.
+Result:: No changes.
+
+=== WidgetMap Key Renames
+
+The keys of the `WidgetMap` have been renamed to match the naming of the underlying widget exports from `@com.mgmtp.a12.widgets/widgets-core`. This removes the naming divergence between the FormEngine `WidgetMap` and the Widgets components it maps to, and fixes a typo.
+
+[cols="1,1", options="header"]
+|===
+| Old Key | New Key
+
+| `Header`
+| `DateTimePickerHeader`
+
+| `TextLineStateless`
+| `TextField`
+
+| `MultiSelect`
+| `Multiselect`
+
+| `SizeContainer`
+| `LayoutGrid`
+
+| `SizeContainerRow`
+| `LayoutGridRow`
+
+| `SizeContainerColumn`
+| `LayoutGridColumn`
+
+| `NotificationArea`
+| `ContentBoxNotificationArea`
+
+| `MobileValidationBar`
+| `MobileValidation`
+
+| `MobileValidationBarOverview`
+| `MobileValidationOverview`
+
+| `MobileValidationBarGraphic`
+| `MobileValidationGraphic`
+
+| `MobilePreviewList`
+| `MobileValidationPreviewList`
+
+| `MobilePreviewListIem`
+| `MobileValidationPreviewListItem`
+
+| `MobileAction`
+| `MobileValidationActions`
+
+| `MobileActionItem`
+| `MobileValidationActionItem`
+|===
+
+Required:: Yes.
+Migration::
++
+[source,bash]
+----
+formengine-codemod renameWidgetMapKeys <path to directory with tsconfig.json>
+----
+Result::
++
+[source,typescript]
+----
+// Old
+const customWidgetMap: Partial<WidgetMap> = {
+    TextLineStateless: MyTextLine,
+    Header: MyDatePickerHeader,
+    SizeContainer: MyGrid
+};
+
+const Header = widgetMap.Header;
+const { TextLineStateless } = widgetMap;
+
+// New
+const customWidgetMap: Partial<WidgetMap> = {
+    TextField: MyTextLine,
+    DateTimePickerHeader: MyDatePickerHeader,
+    LayoutGrid: MyGrid
+};
+
+const Header = widgetMap.DateTimePickerHeader;
+const { TextField } = widgetMap;
+----
+
+=== Removal of `timeMode` from Engine `Config`
+
+The `timeMode` property has been removed from the Form Engine `Config`. The time mode (12h / 24h) is now consumed from the `DateTimeContext` provided by `@com.mgmtp.a12.widgets/widgets-core`.
+
+To configure the time mode, wrap the `FormEngine` component with `DateTimeContext.Provider` and specify the desired `timeMode` on its value.
+
+Required:: Depending on whether you were using the `timeMode` property in your Engine `Config` or relying on the default locale-based time mode handling.
+Migration:: Manual, no codemod available.
+Result::
++
+[source,typescript]
+----
+// Old: timeMode was set on the Engine Config
+const config: Partial<Config> = {
+    timeMode: "12h",
+    // ...other config options
+};
+
+<FormEngine config={config} />
+
+// New: timeMode is provided through DateTimeContext
+import { DateTimeContext } from "@com.mgmtp.a12.widgets/widgets-core";
+
+const config: Partial<Config> = {
+    // ...other config options
+};
+
+<DateTimeContext.Provider value={{ timeMode: "12h" }}>
+    <FormEngine config={config} />
+</DateTimeContext.Provider>
+----
+
+[NOTE]
+====
+The Form Engine no longer derives the time mode from the active locale (previously `en_US` defaulted to `12h` and other locales to `24h`). If locale-based time mode handling is required, it must now be implemented by the consumer by computing the `timeMode` value passed to the `DateTimeContext.Provider` based on the current locale.
+====
+
+=== Removal of unused FormEngine/FormEngineTpl/ScrollHandler props
+
+Some props of View Components in `FormEngineViews` were unused by the Form Engine and were removed. Remove the following props from usage sites.
+
+For `FormEngineViews.FormEngine` and `FormEngineViews.FormEngineTpl`:
+
+* `name`
+* `modelDescriptors`
+* `configuration`
+* `constraints`
+* `ProgressComponent`
+* `models`
+* `uiState`
+* `children`
+
+For `FormEngineViews.ScrollHandler`:
+
+* `name`
+* `modelDescriptors`
+* `configuration`
+* `constraints`
+* `ariaLevel`
+* `ProgressComponent`
+* `cardView`
+
+Required:: Yes.
+Migration::
++
+[source,bash]
+----
+formengine-codemod removeFormEngineViewProps <path to directory with tsconfig.json>
+----
+Result:: Props listed above are removed.

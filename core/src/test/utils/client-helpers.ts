@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -32,24 +32,16 @@
 
 import type { Reducer, Store } from "redux";
 
-import type {
-	Activity,
-	ActivityMap
-} from "@com.mgmtp.a12.client/client-core/lib/core/activity/index.js";
-import {
-	ApplicationFactories,
-	ModuleTestExtensions
-} from "@com.mgmtp.a12.client/client-core/lib/core/application/index.js";
-import type {
-	DataHandler,
-	DataProvider
-} from "@com.mgmtp.a12.client/client-core/lib/core/data/index.js";
+import type { Activity, ActivityMap } from "@com.mgmtp.a12.client/client-core";
 import {
 	APPLICATION_MODEL_PLACEHOLDER,
-	type ModelMap
-} from "@com.mgmtp.a12.client/client-core/lib/core/model/index.js";
-import type { ModelGraph } from "@com.mgmtp.a12.dataservices/dataservices-access/lib/Relationship/ModelGraph.js";
-import type { Locale } from "@com.mgmtp.a12.utils/utils-localization/lib/main/index.js";
+	ApplicationFactories,
+	ModuleTestExtensions
+} from "@com.mgmtp.a12.client/client-core";
+import type { DataHandler, DataProvider, ModelMap } from "@com.mgmtp.a12.client/client-core";
+import { actionCreatorFactory } from "@com.mgmtp.a12.client/typescript-fsa-redux-5-compat";
+import type { ModelGraph } from "@com.mgmtp.a12.dataservices/dataservices-access";
+import type { Locale } from "@com.mgmtp.a12.utils/utils-localization";
 
 import { US_LOCALE } from "./localization.js";
 
@@ -61,6 +53,8 @@ export function createActivity(options?: {
 	dataHolders?: Activity.DataHolder[];
 	initiatingActivityId?: string;
 	loadingState?: Activity.DataHolder["loadingState"];
+	savingState?: Activity.DataHolder["savingState"];
+	error?: Activity.Error<any>;
 }): Activity {
 	return {
 		id: options?.id ?? TEST_ACTIVITY_ID,
@@ -68,7 +62,11 @@ export function createActivity(options?: {
 		initiatingActivityId: options?.initiatingActivityId,
 		activationTimestamp: 0,
 		dataHolders: options?.dataHolders ?? [
-			createDataHolder({ descriptor: options?.descriptor, loadingState: options?.loadingState })
+			createDataHolder({
+				descriptor: options?.descriptor,
+				loadingState: options?.loadingState,
+				error: options?.error
+			})
 		]
 	};
 }
@@ -88,13 +86,15 @@ export function createDataHolder(options?: {
 	data?: Record<string, unknown>;
 	datasourceActivityId?: string;
 	loadingState?: Activity.DataHolder["loadingState"];
+	error?: Activity.Error;
 }): Activity.DataHolder {
 	return {
 		descriptor: options?.descriptor ?? createDescriptor({ properties: { test: "test" } }),
 		dirty: false,
 		loadingState: options?.loadingState ?? "missing",
-		savingState: "not_saved",
+		savingState: options?.error ? "error" : "not_saved",
 		slices: {},
+		error: options?.error,
 		data: options?.data,
 		datasourceActivityId: options?.datasourceActivityId
 	};
@@ -157,7 +157,8 @@ export function createTestConfig<
 	}
 }
 
-const SET_INITIAL_STATE_ACTION_TYPE = "SET_INITIAL_STATE";
+const factory = actionCreatorFactory("Test");
+const setInitialState = factory<object>("SET_INITIAL_STATE");
 
 export function createStore({
 	locale,
@@ -188,12 +189,9 @@ export function createStore({
 
 	const customRootReducer: (defaultReducer: Reducer<object>) => Reducer<object> =
 		defaultReducer => (state, action) => {
-			switch (action.type) {
-				case SET_INITIAL_STATE_ACTION_TYPE:
-					return { ...state, ...action.payload };
-				default:
-					return defaultReducer(state, action);
-			}
+			return setInitialState.match(action)
+				? { ...state, ...action.payload }
+				: defaultReducer(state, action);
 		};
 
 	const { store } = ApplicationFactories.createApplicationSetup({
@@ -202,7 +200,7 @@ export function createStore({
 		dataHandlers: dataHandlers ?? [],
 		rootReducer: customRootReducer,
 		locale,
-		setupActions: [{ type: SET_INITIAL_STATE_ACTION_TYPE, payload: initialState }]
+		setupActions: [setInitialState(initialState)]
 	});
 
 	return {

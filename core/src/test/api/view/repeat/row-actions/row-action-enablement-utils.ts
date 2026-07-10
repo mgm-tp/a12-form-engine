@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -36,9 +36,12 @@ import { notUndefined } from "../../../../../client-extensions/internal/core/uti
 import type { EnablementByRow } from "../../../../../view/internal/configuration/engine-configuration.js";
 import { DefaultRepeatButtonNames } from "../../../../../view/internal/configuration/engine-configuration.js";
 import type { RtlRenderWrapper } from "../../../../rtl-utils/render-wrapper.js";
-import { DocumentHelpers } from "../../../../utils/document-helpers.js";
-import { ModelHelpers } from "../../../../utils/model-helpers.js";
-import { SetupHelpers } from "../../../../utils/setup.js";
+import { createDocumentPath } from "../../../../utils/createDocumentPath.js";
+import { createModelPath } from "../../../../utils/createModelPath.js";
+import {
+	setupContentBoxRendererWithRtl,
+	setupFormEngineRendererWithRtlAsync
+} from "../../../../utils/setup.js";
 import {
 	DR_ROW_ACTIONS,
 	IR_ATTACHMENT_COLLECTION,
@@ -57,22 +60,22 @@ export function setupForDetachedRepeat(options: {
 }): RtlRenderWrapper {
 	const screenLocation: EngineStore.ScreenState[] = [
 		{
-			locationPath: ModelHelpers.createModelPath("rowActionButtons"),
+			locationPath: createModelPath("rowActionButtons"),
 			path: []
 		},
 		{
-			locationPath: ModelHelpers.createModelPath(
+			locationPath: createModelPath(
 				"rowActionButtons",
 				"sec1",
 				"detached-repeat",
 				"detached-repeat-repeatableGroup1-detail-screen"
 			),
-			path: DocumentHelpers.createDocumentPath(["root"], ["repeatableGroupDetachedRepeat", 2]),
+			path: createDocumentPath(["root"], ["repeatableGroupDetachedRepeat", 2]),
 			dirty: options.screenDirty
 		}
 	];
 
-	return SetupHelpers.setupContentBoxRendererWithRtl({
+	return setupContentBoxRendererWithRtl({
 		models: options.models,
 		data: { document: options.document, dirty: options.documentDirty },
 		ui: {
@@ -95,7 +98,7 @@ export function setupForEmbeddedRepeat(options: {
 	enablementMap?: EnablementByRow;
 	screenLocation?: EngineStore.ScreenState[];
 }): Promise<RtlRenderWrapper> {
-	return SetupHelpers.setupFormEngineRendererWithRtlAsync({
+	return setupFormEngineRendererWithRtlAsync({
 		models: options.models,
 		data: { document: options.document },
 		ui: {

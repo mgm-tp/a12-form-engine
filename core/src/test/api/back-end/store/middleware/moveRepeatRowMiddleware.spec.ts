@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -30,22 +30,18 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import type { Action } from "typescript-fsa";
+import type { Action } from "@com.mgmtp.a12.client/typescript-fsa-redux-5-compat";
 
 import type { EngineStore } from "../../../../../back-end/store/index.js";
 import { Commands, Events } from "../../../../../back-end/store/index.js";
 import { DocumentPath } from "../../../../../models/internal/utils/document-utils.js";
 import type { ReadonlyObjectMap } from "../../../../../models/internal/utils/json.js";
-import { MiddlewareHelpers } from "../../../../utils/back-end-helpers.js";
-import { DocumentHelpers } from "../../../../utils/document-helpers.js";
-import { ModelHelpers } from "../../../../utils/model-helpers.js";
-import { SetupHelpers } from "../../../../utils/setup.js";
+import { MiddlewareHelpers } from "../../../../utils/MiddlewareHelpers.js";
+import { createDocumentPath } from "../../../../utils/createDocumentPath.js";
+import { createModelPath } from "../../../../utils/createModelPath.js";
+import { createTestStore } from "../../../../utils/setup.js";
 import { setupFixture, setupModelsFixture } from "../../../../utils/setupFixture.js";
 import { createDocument } from "../../../../utils/test-model-helpers/repeat.row-actions.js";
-
-const { createDocumentPath } = DocumentHelpers;
-const { createModelPath } = ModelHelpers;
-const { createTestStore } = SetupHelpers;
 
 describe("api.back-end.store.middleware", () => {
 	describe("moveRepeatRowMiddleware", () => {
@@ -148,7 +144,7 @@ describe("api.back-end.store.middleware", () => {
 							changes: [
 								{
 									type: "GroupMoved",
-									path: DocumentHelpers.createDocumentPath(["Root"], ["repeat", 2]),
+									path: createDocumentPath(["Root"], ["repeat", 2]),
 									delta
 								}
 							]
@@ -182,7 +178,7 @@ describe("api.back-end.store.middleware", () => {
 							changes: [
 								{
 									type: "GroupMoved",
-									path: DocumentHelpers.createDocumentPath(["Root"], ["repeat", 2]),
+									path: createDocumentPath(["Root"], ["repeat", 2]),
 									delta
 								}
 							]

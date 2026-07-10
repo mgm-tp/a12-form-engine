@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -34,16 +34,21 @@ import { strictEqual } from "node:assert/strict";
 
 import { act } from "react";
 
-import { ModelPath } from "@com.mgmtp.a12.base/base-model-api/lib/main/model/index.js";
+import { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
 import { query } from "@com.mgmtp.a12.devtools/react";
 
 import type { EngineStore } from "../../../../../back-end/store/index.js";
 import type { ReadonlyObjectMap } from "../../../../../models/index.js";
 import type { RtlRenderWrapper } from "../../../../rtl-utils/render-wrapper.js";
-import { DocumentHelpers } from "../../../../utils/document-helpers.js";
+import { createDocumentPath } from "../../../../utils/createDocumentPath.js";
+import { createModelPath } from "../../../../utils/createModelPath.js";
 import { US_LOCALE } from "../../../../utils/localization.js";
-import { ModelHelpers } from "../../../../utils/model-helpers.js";
-import { SetupHelpers } from "../../../../utils/setup.js";
+import {
+	createRepeatInstanceStateEntry,
+	createRepeatStaticStateEntry,
+	setupConnectedFormEngineWithRtl,
+	setupFormEngineRendererWithRtl
+} from "../../../../utils/setup.js";
 import { setupModelsFixture } from "../../../../utils/setupFixture.js";
 import { createDocumentForDetachedRepeat } from "../../../../utils/test-model-helpers/detached.repeat.js";
 import { IR } from "../../../../utils/test-model-helpers/inline.repeat.js";
@@ -66,10 +71,6 @@ import { executeTestForStringSorting } from "./types/string-sorting.js";
 import { executeTestForTimeSorting } from "./types/time-sorting.js";
 import { executeTestForTypeDefSorting } from "./types/typedef-sorting.js";
 
-const { createRepeatInstanceStateEntry, createRepeatStaticStateEntry } = SetupHelpers;
-const { createModelPath } = ModelHelpers;
-const { createDocumentPath } = DocumentHelpers;
-
 describe("api.view.repeat", () => {
 	describe("Repeat Sorting", () => {
 		const models = setupModelsFixture("repeat", "inline");
@@ -80,7 +81,7 @@ describe("api.view.repeat", () => {
 		describe("Table", () => {
 			describe("given a table with a default sorting column", () => {
 				it("sorts the table by the default column and the default order and sets the default sorting state", () => {
-					const wrapper = SetupHelpers.setupFormEngineRendererWithRtl({
+					const wrapper = setupFormEngineRendererWithRtl({
 						models,
 						data: { document: { Root: { Nested_L7: [{}] } } }
 					});
@@ -98,7 +99,7 @@ describe("api.view.repeat", () => {
 
 			describe("Column default sorting: Asc", () => {
 				it("changes the sorting if the head cell is clicked in the order: asc, desc, none", async () => {
-					const wrapper = SetupHelpers.setupConnectedFormEngineWithRtl({
+					const wrapper = setupConnectedFormEngineWithRtl({
 						models,
 						locale: US_LOCALE,
 						data: { document: { Root: { Nested_L7: [{}] } } }
@@ -148,7 +149,7 @@ describe("api.view.repeat", () => {
 					IR.SortingAndFiltering.ID_L1_NUMBER_COLUMN
 				);
 
-				return SetupHelpers.setupFormEngineRendererWithRtl({
+				return setupFormEngineRendererWithRtl({
 					models,
 					data: { document: doc },
 					ui: {
@@ -208,7 +209,7 @@ describe("api.view.repeat", () => {
 
 			describe("Column default sorting: Desc", () => {
 				it("changes the sorting if the head cell is clicked in the order: desc, asc, none", async () => {
-					const wrapper = SetupHelpers.setupConnectedFormEngineWithRtl({
+					const wrapper = setupConnectedFormEngineWithRtl({
 						models,
 						locale: US_LOCALE,
 						data: { document: { Root: { Nested_L7: [{}] } } }
@@ -247,7 +248,7 @@ describe("api.view.repeat", () => {
 			describe("New row", () => {
 				it("does not sort the new row if it has newRowState='workingOn'", () => {
 					const wrapper = renderForNewRowState("workingOn");
-					const inputRows = query(wrapper.widgetMap.TextLineStateless)
+					const inputRows = query(wrapper.widgetMap.TextField)
 						.withProp("label", "L1_Number")
 						.propsHistory();
 
@@ -257,7 +258,7 @@ describe("api.view.repeat", () => {
 
 				it("does sort the new row if it has newRowState='recentlyAdded'", () => {
 					const wrapper = renderForNewRowState("recentlyAdded");
-					const inputRows = query(wrapper.widgetMap.TextLineStateless)
+					const inputRows = query(wrapper.widgetMap.TextField)
 						.withProp("label", "L1_Number")
 						.propsHistory();
 

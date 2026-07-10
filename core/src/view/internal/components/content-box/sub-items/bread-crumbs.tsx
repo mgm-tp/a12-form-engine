@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -33,12 +33,13 @@
 import type { ReactElement } from "react";
 import { useContext } from "react";
 
-import { LocalizerContext } from "@com.mgmtp.a12.utils/utils-localization-react/lib/main/index.js";
+import { LocalizerContext } from "@com.mgmtp.a12.utils/utils-localization-react";
 
 import { ModelSelectors } from "../../../../../back-end/store/internal/selectors/models.js";
 import { UiStateSelectors } from "../../../../../back-end/store/internal/selectors/ui-state.js";
 import { notUndefined } from "../../../../../client-extensions/internal/core/utils.js";
-import { findElementByFormModelPath, FormModel } from "../../../../../models/index.js";
+import { findElementByFormModelPath } from "../../../../../models/index.js";
+import { isFormModelDetachedRepeat } from "../../../../../models/internal/FormModelGuards.js";
 import { ComponentMapContext } from "../../../configuration/componentMap/component-map-context.js";
 import { WidgetMapContext } from "../../../configuration/widget-map-context.js";
 import { getTitleLabel } from "../../form-engine/model-element-labels.js";
@@ -60,7 +61,7 @@ export function BreadCrumbs(props: { config: ContentBoxRenderConfiguration }): R
 				ModelSelectors.formModel()(renderOptions.state),
 				location.locationPath.slice(0, location.locationPath.length - 1)
 			);
-			if (dataContext && repeat && FormModel.DetachedRepeat.isInstance(repeat)) {
+			if (dataContext && repeat && isFormModelDetachedRepeat(repeat)) {
 				return (
 					getTitleLabel(
 						renderOptions,

@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -30,10 +30,9 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import type { Reducer } from "redux";
-import type { AnyAction } from "typescript-fsa";
+import type { Action, Reducer } from "redux";
 
-import type { Locale } from "@com.mgmtp.a12.utils/utils-localization/lib/main/index.js";
+import type { Locale } from "@com.mgmtp.a12.utils/utils-localization";
 
 import { Commands } from "../actions.js";
 import { engineState } from "../selectors/engineState.js";
@@ -86,12 +85,8 @@ export function createCombinedReducer(initialState: EngineState): Reducer<Engine
 /**
  * Reducer for the locale
  */
-export function localeReducer(localeState: Locale, action: AnyAction): Locale {
-	if (Commands.setLocale.match(action)) {
-		return handleSetLocale(localeState, action);
-	} else {
-		return localeState;
-	}
+export function localeReducer(localeState: Locale, action: Action): Locale {
+	return Commands.setLocale.match(action) ? handleSetLocale(action) : localeState;
 }
 
 /**
@@ -99,7 +94,7 @@ export function localeReducer(localeState: Locale, action: AnyAction): Locale {
  */
 export function uiReducer(
 	uiState: EngineStore.UIState,
-	action: AnyAction,
+	action: Action,
 	models: EngineState["models"]
 ): EngineStore.UIState {
 	if (Commands.setMessageStateEntry.match(action)) {
@@ -158,7 +153,7 @@ export function uiReducer(
  */
 export function dataReducer(
 	dataState: EngineStore.DataState,
-	action: AnyAction
+	action: Action
 ): EngineStore.DataState {
 	if (Commands.setDocument.match(action)) {
 		return handleSetDocument(dataState, action);
@@ -174,11 +169,7 @@ export function dataReducer(
  */
 export function modelsReducer(
 	modelsState: EngineState["models"],
-	action: AnyAction
+	action: Action
 ): EngineState["models"] {
-	if (Commands.setModels.match(action)) {
-		return handleSetModels(modelsState, action);
-	} else {
-		return modelsState;
-	}
+	return Commands.setModels.match(action) ? handleSetModels(action) : modelsState;
 }

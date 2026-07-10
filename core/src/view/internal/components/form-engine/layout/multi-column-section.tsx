@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -33,12 +33,13 @@
 import type { ComponentType, ReactElement } from "react";
 import { Fragment, useContext } from "react";
 
-import { LocalizerContext } from "@com.mgmtp.a12.utils/utils-localization-react/lib/main/index.js";
-import type { LayoutGridProps } from "@com.mgmtp.a12.widgets/widgets-core/lib/layout/layout-grid/main/layout-grid.api.js";
+import { LocalizerContext } from "@com.mgmtp.a12.utils/utils-localization-react";
+import type { LayoutGridProps } from "@com.mgmtp.a12.widgets/widgets-core";
 
 import { UiStateSelectors } from "../../../../../back-end/store/index.js";
 import { UiId } from "../../../../../back-end/utils/internal/generateUiId.js";
-import { FormModel } from "../../../../../models/index.js";
+import type { FormModel } from "../../../../../models/index.js";
+import { stylableToClassName } from "../../../../../models/internal/stylableToClassName.js";
 import { FormModelPath } from "../../../../../models/internal/utils/form-model-path.js";
 import { ComponentMapContext } from "../../../configuration/componentMap/component-map-context.js";
 import type { FormModelMap } from "../../../configuration/engine-configuration.js";
@@ -54,7 +55,7 @@ import { transformToColumnNumbers } from "./transformToColumnNumbers.js";
 /**
  * @internal
  *
- * Maps a MultiColumnSection from the Form-Model to a RenderModel.SizeContainer element
+ * Maps a MultiColumnSection from the Form-Model to a RenderModel.LayoutGrid element
  *
  * @param config The render configuration
  */
@@ -66,7 +67,7 @@ export function createMultiColumnSection(
 	const id = UiId.generate({ element: element, uiIdPrefix: options.config.uiIdPrefix });
 	return {
 		id: id,
-		className: FormModel.stylableToClassName(element)
+		className: stylableToClassName(element)
 	};
 }
 
@@ -80,7 +81,7 @@ export function MultiColumnSection(props: {
 
 	const { localizer, conversion } = useContext(LocalizerContext);
 	const componentMap = useContext(ComponentMapContext);
-	const { SizeContainer, SizeContainerRow, SizeContainerColumn } = useContext(WidgetMapContext);
+	const { LayoutGrid, LayoutGridRow, LayoutGridColumn } = useContext(WidgetMapContext);
 
 	const { Title } = componentMap;
 
@@ -114,7 +115,7 @@ export function MultiColumnSection(props: {
 							...config,
 							parentPath: formModelPath
 						},
-						SizeContainerColumn
+						LayoutGridColumn
 					);
 				})
 				.filter(el => el !== null)
@@ -135,13 +136,13 @@ export function MultiColumnSection(props: {
 	});
 
 	const row = (
-		<SizeContainerRow layoutConfig={{ layout }} data-testid={multiColumnSectionProps.id + "-row"}>
+		<LayoutGridRow layoutConfig={{ layout }} data-testid={multiColumnSectionProps.id + "-row"}>
 			{columns}
-		</SizeContainerRow>
+		</LayoutGridRow>
 	);
 
 	return (
-		<SizeContainer {...multiColumnSectionProps}>
+		<LayoutGrid {...multiColumnSectionProps}>
 			{titleLabel ? (
 				<AriaLevelContext.Consumer>
 					{value => (
@@ -161,7 +162,7 @@ export function MultiColumnSection(props: {
 			) : (
 				row
 			)}
-		</SizeContainer>
+		</LayoutGrid>
 	);
 }
 

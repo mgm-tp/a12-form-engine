@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -73,10 +73,7 @@ describe("unit.back-end.store.fullValidation", () => {
 				}
 			});
 
-			const result = fullValidation(state, {
-				converter: () => ({ formatValue: () => "", parseValue: () => ({}) }),
-				localizer: () => () => undefined
-			});
+			const result = fullValidation(state);
 
 			strictEqual(result.length, 5);
 		});
@@ -84,10 +81,7 @@ describe("unit.back-end.store.fullValidation", () => {
 		it("returns no messages when the document is valid", () => {
 			const state = setupStore({ document: {} });
 
-			const result = fullValidation(state, {
-				converter: () => ({ formatValue: () => "", parseValue: () => ({}) }),
-				localizer: () => () => undefined
-			});
+			const result = fullValidation(state);
 
 			strictEqual(result.length, 0);
 		});
@@ -119,10 +113,7 @@ describe("unit.back-end.store.fullValidation", () => {
 				}
 			});
 
-			const result = fullValidation(state, {
-				converter: () => ({ formatValue: () => "", parseValue: () => ({}) }),
-				localizer: () => () => undefined
-			});
+			const result = fullValidation(state);
 
 			strictEqual(result.length, 0);
 		});

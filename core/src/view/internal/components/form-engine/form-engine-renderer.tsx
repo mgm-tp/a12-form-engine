@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -34,7 +34,7 @@ import type { ComponentType } from "react";
 import { memo } from "react";
 import { DndProvider } from "react-dnd";
 
-import { DragAndDropUtils } from "@com.mgmtp.a12.widgets/widgets-core/lib/common/main/drag-and-drop-utils.js";
+import { DragAndDropUtils } from "@com.mgmtp.a12.widgets/widgets-core";
 
 import { ModelSelectors } from "../../../../back-end/store/index.js";
 import type { FormModelMap } from "../../configuration/engine-configuration.js";
@@ -50,7 +50,8 @@ export const FormEngineRenderer: ComponentType<FormEngineRendererPropsType> = me
 	function FormEngineRenderer(props) {
 		const engineProps: FormModelMap.RenderConfiguration = {
 			renderOptions: {
-				...props,
+				config: props.config,
+				eventHandlers: props.eventHandlers,
 				state: props.state
 			},
 			parentPath: []
@@ -63,7 +64,11 @@ export const FormEngineRenderer: ComponentType<FormEngineRendererPropsType> = me
 				backend={DragAndDropUtils.DefaultDndBackend}
 				options={DragAndDropUtils.DefaultDndBackendOptions}
 			>
-				<FormEngineContentBoxRenderer {...props}>
+				<FormEngineContentBoxRenderer
+					config={props.config}
+					eventHandlers={props.eventHandlers}
+					state={props.state}
+				>
 					<FormModelComponent
 						config={engineProps}
 						modelElement={ModelSelectors.formModel()(engineProps.renderOptions.state)}

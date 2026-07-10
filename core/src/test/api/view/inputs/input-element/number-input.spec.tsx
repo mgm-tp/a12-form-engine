@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -37,11 +37,8 @@ import { mock } from "node:test";
 import { act } from "react";
 
 import { query } from "@com.mgmtp.a12.devtools/react";
-import type {
-	DocumentModel,
-	EntityInstancePath
-} from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
-import type { ValueConversion } from "@com.mgmtp.a12.utils/utils-localization/lib/main/index.js";
+import type { DocumentModel, EntityInstancePath } from "@com.mgmtp.a12.kernel/kernel-md-facade";
+import type { ValueConversionParseError } from "@com.mgmtp.a12.utils/utils-localization";
 
 import type { DispatchConfiguration } from "../../../../../view/index.js";
 import { defaultMapDispatchToProps } from "../../../../../view/index.js";
@@ -49,10 +46,10 @@ import { NumberInput } from "../../../../../view/internal/components/form-engine
 import { getComponentMocks } from "../../../../rtl-utils/getComponentMocks.js";
 import type { RtlRenderWrapper } from "../../../../rtl-utils/render-wrapper.js";
 import { rtlRenderWrapperAsync } from "../../../../rtl-utils/render-wrapper.js";
-import { DocumentHelpers } from "../../../../utils/document-helpers.js";
-import { DocumentModelHelpers } from "../../../../utils/model-helpers.js";
+import { createDocumentPath } from "../../../../utils/createDocumentPath.js";
+import { createModelPath } from "../../../../utils/createModelPath.js";
+import { DocumentModelHelpers } from "../../../../utils/DocumentModelHelpers.js";
 import { setupModelsFixture } from "../../../../utils/setupFixture.js";
-import { createModelPath } from "../../../../utils/test-model-helpers/dependent-enumeration.js";
 
 import { inputTest } from "./generic-tests/input-tests.js";
 import { createProps } from "./generic-tests/input-utils.js";
@@ -61,7 +58,7 @@ const { Field } = DocumentModelHelpers;
 
 describe("api.view.inputs", () => {
 	describe("NumberInput", () => {
-		const models = setupModelsFixture("controls.picustypes");
+		const models = setupModelsFixture("controls.dmtypes");
 
 		const documentElementDataType: DocumentModel.NumberType = {
 			type: "NumberType",
@@ -71,7 +68,7 @@ describe("api.view.inputs", () => {
 		const baseProps = {
 			documentElement: Field({ fieldType: documentElementDataType }),
 			documentElementDataType,
-			component: "TextLineStateless",
+			component: "TextField",
 			renderFunction: NumberInput,
 			formModelPath: createModelPath("foo", "bar")
 		};
@@ -82,19 +79,15 @@ describe("api.view.inputs", () => {
 				() => models,
 				{
 					...baseProps,
-					component: "TextLineStateless",
-					path: DocumentHelpers.createDocumentPath(["A12T_PicusTypes"], ["Number"], ["Number01"])
+					component: "TextField",
+					path: createDocumentPath(["A12T_DmTypes"], ["Number"], ["Number01"])
 				},
 				{ suffixTest: true, truncateSuffixTest: true, autoCompleteTest: false }
 			);
 		});
 
 		describe("onValueSubmit", () => {
-			const numberPath = DocumentHelpers.createDocumentPath(
-				["A12T_PicusTypes"],
-				["Number"],
-				["Number01"]
-			);
+			const numberPath = createDocumentPath(["A12T_DmTypes"], ["Number"], ["Number01"]);
 
 			interface MockDispatchConfig extends DispatchConfiguration {
 				onValueChange: Mock<DispatchConfiguration["onValueChange"]>;
@@ -164,8 +157,8 @@ describe("api.view.inputs", () => {
 				});
 
 				it("leading zeros are removed if the field does not have 'leadingZerosAllowed' set", async () => {
-					const fieldWithNotLeadingZerosAllowed = DocumentHelpers.createDocumentPath(
-						["A12T_PicusTypes"],
+					const fieldWithNotLeadingZerosAllowed = createDocumentPath(
+						["A12T_DmTypes"],
 						["Number"],
 						["Number04"]
 					);
@@ -217,7 +210,7 @@ describe("api.view.inputs", () => {
 
 					deepEqual(args[0], numberPath);
 					deepEqual(args[1], "abc");
-					deepEqual((args[2] as ValueConversion.ParseError).errorCode, expectedErrorCode);
+					deepEqual((args[2] as ValueConversionParseError).errorCode, expectedErrorCode);
 				});
 			});
 		});

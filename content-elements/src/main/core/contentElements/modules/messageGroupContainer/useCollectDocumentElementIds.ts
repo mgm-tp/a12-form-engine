@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -31,11 +31,11 @@
  */
 
 import { useMemo } from "react";
-import { useSelector, type DefaultRootState } from "react-redux";
+import { useSelector } from "react-redux";
 
 import type { ContentModel } from "@com.mgmtp.a12.contentengine/contentengine-core";
 import { useDocumentContext } from "@com.mgmtp.a12.contentengine/contentengine-core";
-import type { DocumentModel } from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
+import type { DocumentModel } from "@com.mgmtp.a12.kernel/kernel-md-facade";
 
 import { FORM_ELEMENTS_NAMESPACE } from "../../../namespace.js";
 
@@ -48,14 +48,14 @@ import {
 
 export type CollectedDocumentElementIds = { fieldIds: string[]; groupIds: string[] };
 
-export interface CollectDocumentElementIdsOptions {
-	/** When true, also collects ids from elements nested inside child MessageGroupContainerNodes. Defaults to false. */
-	traverseNested?: true;
-}
+/** @internal */
+export const USE_COLLECT_DOCUMENT_ELEMENT_IDS_WRAPPER = {
+	useCollectDocumentElementIds
+};
 
 /**
  * Collects all of the DocumentElementIds of fields and groups that are referenced by some form element in the given MessageGroupContainerNode.
- * Does not collect DocumentElementIds that are nested in another MessageGroupContainerNode unless `traverseNested` is set to true.
+ * Does not collect DocumentElementIds that are nested in another MessageGroupContainerNode.
  */
 export function useCollectDocumentElementIds(
 	node?: ContentModel.Node
@@ -63,8 +63,7 @@ export function useCollectDocumentElementIds(
 	const { getElementById: getDocumentElementById } = useDocumentContext(c => c.model);
 
 	const getElementByIdFromState = useMemo(() => {
-		return (state: DefaultRootState) => (elementId: string) =>
-			getDocumentElementById(state, elementId);
+		return (state: object) => (elementId: string) => getDocumentElementById(state, elementId);
 	}, [getDocumentElementById]);
 
 	const getElementById = useSelector(getElementByIdFromState);
@@ -137,7 +136,7 @@ function collectDocumentElementId(
 }
 
 /**
- * Elements nested in another MessageGroupContainer are not shown in the parent container..
+ * Elements nested in another MessageGroupContainer are not shown in the parent container.
  */
 function isTraversableNode(nodeType: string): boolean {
 	return nodeType !== MESSAGE_GROUP_CONTAINER_TYPE && nodeType !== MESSAGE_GROUP_DISPLAY_TYPE;

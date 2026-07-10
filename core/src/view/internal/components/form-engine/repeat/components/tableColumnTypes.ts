@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -30,12 +30,9 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import type { ModelPath } from "@com.mgmtp.a12.base/base-model-api/lib/main/model/index.js";
-import type { EntityInstancePath } from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
-import type {
-	BaseColumnType,
-	Column
-} from "@com.mgmtp.a12.widgets/widgets-core/lib/table/new-api/column.api.js";
+import type { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
+import type { EntityInstancePath } from "@com.mgmtp.a12.kernel/kernel-md-facade";
+import type { BaseColumnType, Column } from "@com.mgmtp.a12.widgets/widgets-core";
 
 import type { FormModel } from "../../../../../../models/internal/form-model.js";
 import type { Value } from "../../../../utilities/value.js";
@@ -65,43 +62,40 @@ export type RepeatTableColumn =
 	| RepeatTableValidationColumn;
 
 /** @internal */
-export namespace RepeatTableColumn {
-	export function isInstance(column: unknown): column is RepeatTableColumn {
+export type ColumnWithModelElement = BaseColumnType & {
+	modelElement: FormModel.RepeatOverviewColumn;
+};
+
+/** @internal */
+export const RepeatTableColumn = {
+	isInstance(column: unknown): column is RepeatTableColumn {
 		return ColumnTypes.includes((column as RepeatTableColumn).type);
-	}
+	},
 
-	export function isFieldColumn(column: RepeatTableColumn): column is FieldRepeatTableColumn {
+	isFieldColumn(column: RepeatTableColumn): column is FieldRepeatTableColumn {
 		return column.type === "field";
-	}
+	},
 
-	export function isExpressionColumn(
-		column: RepeatTableColumn
-	): column is ExpressionRepeatTableColumn {
+	isExpressionColumn(column: RepeatTableColumn): column is ExpressionRepeatTableColumn {
 		return column.type === "expression";
-	}
+	},
 
-	export type ColumnWithModelElement = BaseColumnType & {
-		modelElement: FormModel.RepeatOverviewColumn;
-	};
-
-	export function isColumnWithModelElement(col: unknown): col is ColumnWithModelElement {
+	isColumnWithModelElement(col: unknown): col is ColumnWithModelElement {
 		return (
 			RepeatTableColumn.isInstance(col) &&
 			(RepeatTableColumn.isFieldColumn(col as RepeatTableColumn) ||
 				RepeatTableColumn.isExpressionColumn(col as RepeatTableColumn))
 		);
-	}
+	},
 
-	export function isActionColumn(column: RepeatTableColumn): column is RepeatTableActionColumn {
+	isActionColumn(column: RepeatTableColumn): column is RepeatTableActionColumn {
 		return column.type === "action";
-	}
+	},
 
-	export function isValidationColumn(
-		column: RepeatTableColumn
-	): column is RepeatTableValidationColumn {
+	isValidationColumn(column: RepeatTableColumn): column is RepeatTableValidationColumn {
 		return column.type === "validation";
 	}
-}
+};
 
 /** @internal */
 export interface FieldRepeatTableColumn extends AbstractRepeatTableColumn {

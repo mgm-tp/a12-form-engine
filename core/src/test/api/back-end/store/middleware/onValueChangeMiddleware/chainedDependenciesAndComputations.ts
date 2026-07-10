@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -30,9 +30,9 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { strictEqual, ok } from "node:assert/strict";
+import { ok, strictEqual } from "node:assert/strict";
 
-import type { GroupInstance } from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
+import type { GroupInstance } from "@com.mgmtp.a12.kernel/kernel-md-facade";
 
 import { DataSelectors, Events, UiStateSelectors } from "../../../../../../back-end/store/index.js";
 import { ReadonlyObjectMap } from "../../../../../../models/index.js";
@@ -40,11 +40,9 @@ import {
 	DocumentPath,
 	DocumentUtils
 } from "../../../../../../models/internal/utils/document-utils.js";
-import { SetupHelpers } from "../../../../../utils/setup.js";
+import { createDocumentPath } from "../../../../../utils/createDocumentPath.js";
+import { createTestStore } from "../../../../../utils/setup.js";
 import { setupModelsFixture } from "../../../../../utils/setupFixture.js";
-import { createDocumentPath } from "../../../../../utils/test-model-helpers/dependent-enumeration.js";
-
-const { createTestStore } = SetupHelpers;
 
 export function executeTestsForChainedDependenciesAndComputations(): void {
 	describe("Chained Dependencies and Computations", () => {

@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -32,9 +32,10 @@
 
 import type { Middleware } from "redux";
 
-import type { GroupInstance } from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
+import type { GroupInstance } from "@com.mgmtp.a12.kernel/kernel-md-facade";
 
-import { findElementByFormModelPath, FormModel } from "../../../../../models/index.js";
+import { findElementByFormModelPath } from "../../../../../models/index.js";
+import { isFormModelRepeat } from "../../../../../models/internal/FormModelGuards.js";
 import { DocumentUtils } from "../../../../../models/internal/utils/document-utils.js";
 import { ReadonlyObjectMap } from "../../../../../models/internal/utils/json.js";
 import { DataUtils } from "../../../../utils/internal/edit-document-utils.js";
@@ -111,8 +112,7 @@ export function removeRepeatRowMiddleware(
 			];
 
 			const element = findElementByFormModelPath(formModel, repeatFormModelPath);
-			const pageSize =
-				element && FormModel.Repeat.isInstance(element) ? element.pageSize : undefined;
+			const pageSize = element && isFormModelRepeat(element) ? element.pageSize : undefined;
 			const rows = DocumentUtils.getRows(updatedResult.document, repeatPath);
 			const count = rows !== undefined ? rows.length : 0;
 

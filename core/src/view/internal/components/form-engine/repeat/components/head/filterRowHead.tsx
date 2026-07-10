@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -30,9 +30,10 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { useContext, type ReactElement } from "react";
+import { useContext } from "react";
+import type { ReactElement } from "react";
 
-import { ModelPath } from "@com.mgmtp.a12.base/base-model-api/lib/main/model/index.js";
+import { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
 
 import type {
 	BooleanRepeatFilter,
@@ -44,15 +45,17 @@ import type {
 	NumberRepeatFilter,
 	StringRepeatFilter
 } from "../../../../../../../back-end/store/index.js";
-import { ModelSelectors, UiStateSelectors } from "../../../../../../../back-end/store/index.js";
-import { FormModel } from "../../../../../../../models/index.js";
-import { DocumentModelUtils } from "../../../../../../../models/internal/utils/document-model-utils.js";
+import { ModelSelectors } from "../../../../../../../back-end/store/index.js";
+import type { FormModel } from "../../../../../../../models/index.js";
+import { isFormModelExpressionOverviewColumn } from "../../../../../../../models/internal/FormModelGuards.js";
+import * as DocumentModelUtils from "../../../../../../../models/internal/utils/document-model-utils.js";
 import { FormModelUtils } from "../../../../../../../models/internal/utils/form-model-utils.js";
 import type { FormModelMap } from "../../../../../configuration/engine-configuration.js";
 import {
 	isEnumerationWithStringExposition,
 	isExternalEnumerationWithDefaultExposition
 } from "../../../../../utilities/filtering.js";
+import { InternalUiStateSelectors } from "../../../../../../../back-end/store/internal/selectors/ui-state.js";
 
 import { FilterCellMapContext } from "./filters/filter-cell-map.js";
 
@@ -73,10 +76,10 @@ export function FilterRowHead(props: {
 		StringFilterCell
 	} = useContext(FilterCellMapContext);
 
-	const isExpressionColumn = FormModel.ExpressionOverviewColumn.isInstance(formModelElement);
+	const isExpressionColumn = isFormModelExpressionOverviewColumn(formModelElement);
 	const columnId = isExpressionColumn ? formModelElement.name : formModelElement.id;
 
-	const filter = UiStateSelectors.repeatFilterById(
+	const filter = InternalUiStateSelectors.repeatFilterById(
 		columnId,
 		repeatFormModelPath
 	)(renderOptions.state);

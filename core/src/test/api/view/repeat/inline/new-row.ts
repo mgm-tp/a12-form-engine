@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -32,16 +32,14 @@
 
 import { equal } from "node:assert/strict";
 
-import { ModelPath } from "@com.mgmtp.a12.base/base-model-api/lib/main/model/index.js";
+import { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
 import { query } from "@com.mgmtp.a12.devtools/react";
 
 import type { RtlRenderWrapper } from "../../../../rtl-utils/render-wrapper.js";
-import { SetupHelpers } from "../../../../utils/setup.js";
+import { createDocumentPath } from "../../../../utils/createDocumentPath.js";
+import { createModelPath } from "../../../../utils/createModelPath.js";
+import { setupFormEngineRendererWithRtlAsync } from "../../../../utils/setup.js";
 import { setupModelsFixture } from "../../../../utils/setupFixture.js";
-import {
-	createDocumentPath,
-	createModelPath
-} from "../../../../utils/test-model-helpers/dependent-enumeration.js";
 import {
 	DOCUMENT_MODEL,
 	FORM_MODEL,
@@ -53,7 +51,7 @@ export function executeNewRowTest(): void {
 	const models = setupModelsFixture("repeat.blur-and-focus");
 
 	function setup(): Promise<RtlRenderWrapper> {
-		return SetupHelpers.setupFormEngineRendererWithRtlAsync({
+		return setupFormEngineRendererWithRtlAsync({
 			models,
 			data: { document: createDocumentForBlurAndFocus() },
 			ui: {

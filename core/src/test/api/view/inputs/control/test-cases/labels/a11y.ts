@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -33,7 +33,7 @@
 import { query } from "@com.mgmtp.a12.devtools/react";
 
 import { getComponentMocks } from "../../../../../../rtl-utils/getComponentMocks.js";
-import { SetupHelpers } from "../../../../../../utils/setup.js";
+import { setupFormEngineRendererWithRtl } from "../../../../../../utils/setup.js";
 import { setupModelsFixture } from "../../../../../../utils/setupFixture.js";
 import { IDS as A11Y_IDS } from "../../../../../../utils/test-model-helpers/a11y.js";
 
@@ -43,7 +43,7 @@ export function executeA11yTests(): void {
 	function assertHideLabel(opts: { elementId: string; hideLabel: true | undefined }): void {
 		const { elementId, hideLabel } = opts;
 		const componentMap = getComponentMocks();
-		SetupHelpers.setupFormEngineRendererWithRtl({
+		setupFormEngineRendererWithRtl({
 			models: a11yModels,
 			componentMap
 		});

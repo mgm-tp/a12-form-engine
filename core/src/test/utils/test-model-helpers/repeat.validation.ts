@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -30,55 +30,49 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import type { GroupInstance } from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
+import type { GroupInstance } from "@com.mgmtp.a12.kernel/kernel-md-facade";
 
 import { DocumentPath } from "../../../models/index.js";
 
-import { DocumentHelpers } from "../document-helpers.js";
-import { ModelHelpers } from "../model-helpers.js";
+import { createDocumentPath } from "../createDocumentPath.js";
+import { createModelPath } from "../createModelPath.js";
 import { createValidationMessage } from "../validation.js";
 
-export namespace IDS {
-	export const L0_STRING = "a12-L0_String-field_30aa3";
-	export const IR_BODY_ROW = "a12-inlinerepeat-97f35-bodyrow";
-	export const IR_L1_STRING = "a12-fieldbasedrepeatoverviewcolumn-0d9da-cell";
-	export const IR_L1_DATE = "a12-fieldbasedrepeatoverviewcolumn-0bb9f-cell";
-	export const IR_L1_DATE_TIME = "a12-fieldbasedrepeatoverviewcolumn-710df-cell";
-	export const IR_L1_TIME = "a12-fieldbasedrepeatoverviewcolumn-37a66-cell";
-	export const IR_L1_ENUMERATION = "a12-fieldbasedrepeatoverviewcolumn-42842-cell";
-	export const IR_SORTING_COLUMN = "fieldbasedrepeatoverviewcolumn-44a07";
+export const IDS = {
+	L0_STRING: "a12-L0_String-field_30aa3",
+	IR_BODY_ROW: "a12-inlinerepeat-97f35-bodyrow",
+	IR_L1_STRING: "a12-fieldbasedrepeatoverviewcolumn-0d9da-cell",
+	IR_L1_DATE: "a12-fieldbasedrepeatoverviewcolumn-0bb9f-cell",
+	IR_L1_DATE_TIME: "a12-fieldbasedrepeatoverviewcolumn-710df-cell",
+	IR_L1_TIME: "a12-fieldbasedrepeatoverviewcolumn-37a66-cell",
+	IR_L1_ENUMERATION: "a12-fieldbasedrepeatoverviewcolumn-42842-cell",
+	IR_SORTING_COLUMN: "fieldbasedrepeatoverviewcolumn-44a07",
+	ER_L1_STRING: "a12-L1_String-field_ea294-2",
+	ER_L1_DATE: "a12-L1_Date-field_43f56-2",
+	ER_L1_ENUMERATION: "a12-L1_Enumeration-fieldimpl_6110d-2",
+	ER_BODY_ROW: "a12-embeddedrepeat-6bd83-bodyrow",
+	ER_REMOVE_BUTTON: "a12-remove-button-embeddedrepeat-6bd83",
+	ER_SORTING_COLUMN: "fieldbasedrepeatoverviewcolumn-efe75",
+	DR_BODY_ROW: "a12-detachedrepeat-d162f-bodyrow",
+	DR_REMOVE_BUTTON: "a12-remove-button-detachedrepeat-d162f",
+	DR_SORTING_COLUMN: "fieldbasedrepeatoverviewcolumn-87f01"
+} as const;
 
-	export const ER_L1_STRING = "a12-L1_String-field_ea294-2";
-	export const ER_L1_DATE = "a12-L1_Date-field_43f56-2";
-	export const ER_L1_ENUMERATION = "a12-L1_Enumeration-fieldimpl_6110d-2";
-	export const ER_BODY_ROW = "a12-embeddedrepeat-6bd83-bodyrow";
-	export const ER_REMOVE_BUTTON = "a12-remove-button-embeddedrepeat-6bd83";
-	export const ER_SORTING_COLUMN = "fieldbasedrepeatoverviewcolumn-efe75";
+const screenName = "Screen1";
 
-	export const DR_BODY_ROW = "a12-detachedrepeat-d162f-bodyrow";
-	export const DR_REMOVE_BUTTON = "a12-remove-button-detachedrepeat-d162f";
-	export const DR_SORTING_COLUMN = "fieldbasedrepeatoverviewcolumn-87f01";
-}
+export const FORM_MODEL = {
+	screenName,
+	inlineRepeatModelPath: createModelPath(screenName, "inline-repeat"),
+	detachedRepeatModelPath: createModelPath(screenName, "detached-repeat"),
+	embeddedRepeatModelPath: createModelPath(screenName, "embedded-repeat")
+} as const;
 
-export namespace FORM_MODEL {
-	export const screenName = "Screen1";
-	export const inlineRepeatModelPath = ModelHelpers.createModelPath(screenName, "inline-repeat");
-	export const detachedRepeatModelPath = ModelHelpers.createModelPath(
-		screenName,
-		"detached-repeat"
-	);
-	export const embeddedRepeatModelPath = ModelHelpers.createModelPath(
-		screenName,
-		"embedded-repeat"
-	);
-}
-
-export namespace DOCUMENT_MODEL {
-	export const rootGroup = "root";
-	export const repeatGroup = "repGroup1";
-	export const indexField = "indexField";
-	export const numberField1 = "numberField1";
-}
+export const DOCUMENT_MODEL = {
+	rootGroup: "root",
+	repeatGroup: "repGroup1",
+	indexField: "indexField",
+	numberField1: "numberField1"
+} as const;
 
 export function createDocumentForRepeatValidation(
 	values?: { numberField1?: number; indexField?: string }[]
@@ -93,7 +87,7 @@ export function createDocumentForRepeatValidation(
 }
 
 export const message = (index: number) => {
-	const errorField = DocumentHelpers.createDocumentPath(
+	const errorField = createDocumentPath(
 		[DOCUMENT_MODEL.rootGroup],
 		[DOCUMENT_MODEL.repeatGroup, index],
 		["numberField1"]
@@ -116,15 +110,15 @@ export const message = (index: number) => {
 						}
 					],
 					referencedFields: [
-						DocumentHelpers.createDocumentPath(
-							[DOCUMENT_MODEL.rootGroup],
-							[DOCUMENT_MODEL.repeatGroup, index],
-							["numberField2"]
-						),
-						DocumentHelpers.createDocumentPath(
+						createDocumentPath(
 							[DOCUMENT_MODEL.rootGroup],
 							[DOCUMENT_MODEL.repeatGroup, index],
 							["numberField1"]
+						),
+						createDocumentPath(
+							[DOCUMENT_MODEL.rootGroup],
+							[DOCUMENT_MODEL.repeatGroup, index],
+							["numberField2"]
 						)
 					]
 				})

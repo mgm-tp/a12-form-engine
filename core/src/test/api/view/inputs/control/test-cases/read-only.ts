@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -33,18 +33,19 @@
 import * as Optic from "@fp-ts/optic";
 import { act } from "react";
 
-import { ModelPath } from "@com.mgmtp.a12.base/base-model-api/lib/main/model/index.js";
+import { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
 import { query } from "@com.mgmtp.a12.devtools/react";
-import type {
-	EntityInstancePath,
-	GroupInstance
-} from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
+import type { EntityInstancePath, GroupInstance } from "@com.mgmtp.a12.kernel/kernel-md-facade";
 
 import type { EngineStore, Models } from "../../../../../../back-end/store/index.js";
-import { FormModel } from "../../../../../../models/index.js";
+import {
+	isFormModelControl,
+	isFormModelControlGrid
+} from "../../../../../../models/internal/FormModelGuards.js";
 import { DocumentUtils } from "../../../../../../models/internal/utils/document-utils.js";
-import { ModelHelpers } from "../../../../../utils/model-helpers.js";
-import { SetupHelpers } from "../../../../../utils/setup.js";
+import { createDocumentPath } from "../../../../../utils/createDocumentPath.js";
+import { createModelPath } from "../../../../../utils/createModelPath.js";
+import { loadModels, setupFormEngineRendererWithRtl } from "../../../../../utils/setup.js";
 import { setupModelsFixture } from "../../../../../utils/setupFixture.js";
 import {
 	CONTROLS,
@@ -53,14 +54,10 @@ import {
 } from "../../../../../utils/test-model-helpers/controls.js";
 import { DEP_INDEXED } from "../../../../../utils/test-model-helpers/dependencies-indexed.js";
 import { DEP_ELEMENT } from "../../../../../utils/test-model-helpers/dependent-element.js";
-import { createDocumentPath } from "../../../../../utils/test-model-helpers/dependent-enumeration.js";
-import { setupPicusTypeTest as setupPicusTypeTestRtl } from "../../../../../utils/test-model-helpers/picustypes.js";
+import { setupDmTypeTest as setupDmTypeTestRtl } from "../../../../../utils/test-model-helpers/dmtypes.js";
 import { IDS } from "../../../../../utils/test-model-helpers/readonly.js";
 
 import { executeReadonlyPropTest } from "../executeReadonlyPropTest.js";
-
-const { setupFormEngineRendererWithRtl, loadModels } = SetupHelpers;
-const { createModelPath } = ModelHelpers;
 
 export function executeTestForReadonly(): void {
 	const controls = setupModelsFixture("controls");
@@ -69,10 +66,10 @@ export function executeTestForReadonly(): void {
 	const dependenciesIndexedModels = setupModelsFixture("dependencies.indexed-controls");
 
 	it("renders a component with prop 'readonly=true' if the input is set read-only in the model", () => {
-		const picusTypesModels = loadModels("controls.picustypes");
-		const { widgetMap } = setupPicusTypeTestRtl({ models: picusTypesModels });
+		const dmTypesModels = loadModels("controls.dmtypes");
+		const { widgetMap } = setupDmTypeTestRtl({ models: dmTypesModels });
 
-		query(widgetMap.TextLineStateless)
+		query(widgetMap.TextField)
 			.withId("a12-Number01-id3939-2")
 			.withProp("readonly", true)
 			.assertRendered();
@@ -89,14 +86,14 @@ export function executeTestForReadonly(): void {
 			.compose(Optic.findFirst(s => s.name === CONTROLS.screenName))
 			.at("screenElements")
 			.compose(Optic.findFirst(se => se.name === "cg"))
-			.filter(FormModel.ControlGrid.isInstance)
+			.filter(isFormModelControlGrid)
 			.at("row")
 			.nonNullable()
 			.compose(Optic.findFirst(r => r.name === "r2"))
 			.at("cell")
 			.nonNullable()
 			.compose(Optic.findFirst(c => c.id === CONTROL_ID))
-			.filter(FormModel.Control.isInstance)
+			.filter(isFormModelControl)
 			.at("readonly");
 
 		const models = Optic.modify(computedControlReadonlyLens)(() => false)(computationModels);
@@ -105,16 +102,13 @@ export function executeTestForReadonly(): void {
 			models
 		});
 
-		query(widgetMap.TextLineStateless)
-			.withId("a12-FieldG-F18")
-			.withProp("readonly", true)
-			.assertRendered();
+		query(widgetMap.TextField).withId("a12-FieldG-F18").withProp("readonly", true).assertRendered();
 	});
 
 	it("renders a component with prop 'readonly=true' if the parent control-grid is set read-only in the model", () => {
 		const { widgetMap } = setupFormEngineRendererWithRtl({ models: readonlyModel });
 
-		query(widgetMap.TextLineStateless)
+		query(widgetMap.TextField)
 			.withId(IDS.STRING_FIELD_IN_INPUT_CG)
 			.withProp("readonly", true)
 			.assertRendered();
@@ -137,7 +131,7 @@ export function executeTestForReadonly(): void {
 			});
 
 			for (const id of [CONTROLS.ID_L0_NUMBER_IN_RO_DR, CONTROLS.ID_L1_NUMBER_IN_RO_DR]) {
-				query(widgetMap.TextLineStateless).withId(id).withProp("readonly", true).assertRendered();
+				query(widgetMap.TextField).withId(id).withProp("readonly", true).assertRendered();
 			}
 		}
 	);
@@ -169,7 +163,7 @@ export function executeTestForReadonly(): void {
 			);
 
 			for (const id of [CONTROLS.ID_L0_NUMBER_IN_RO_ER, CONTROLS.ID_L1_NUMBER_IN_RO_ER]) {
-				query(widgetMap.TextLineStateless).withId(id).withProp("readonly", true).assertRendered();
+				query(widgetMap.TextField).withId(id).withProp("readonly", true).assertRendered();
 			}
 		}
 	);
@@ -190,7 +184,7 @@ export function executeTestForReadonly(): void {
 					models: readonlyModel,
 					ui: { readonly: true }
 				});
-				query(widgetMap.TextLineStateless)
+				query(widgetMap.TextField)
 					.withId(IDS.STRING_NO_RO_PRESENTATION)
 					.withProp("readonly", true)
 					.assertRendered();
@@ -201,7 +195,7 @@ export function executeTestForReadonly(): void {
 					models: readonlyModel,
 					ui: { readonly: true }
 				});
-				query(widgetMap.TextLineStateless)
+				query(widgetMap.TextField)
 					.withId(IDS.STRING_INPUT_RO_PRESENTATION)
 					.withProp("readonly", true)
 					.assertRendered();
@@ -489,7 +483,7 @@ export function executeTestForReadonly(): void {
 
 						const { widgetMap } = await render(newDocument);
 
-						query(widgetMap.TextLineStateless)
+						query(widgetMap.TextField)
 							.withId(DEP_ELEMENT.ENUMERATION.ID_ER_DEP_FIELD_MASTER_OUTSIDE)
 							.withProp("readonly", true)
 							.assertRendered();
@@ -507,7 +501,7 @@ export function executeTestForReadonly(): void {
 
 						const { widgetMap } = await render(newDocument);
 
-						query(widgetMap.TextLineStateless)
+						query(widgetMap.TextField)
 							.withId(DEP_ELEMENT.ENUMERATION.ID_ER_DEP_FIELD)
 							.withProp("readonly", true)
 							.assertRendered();

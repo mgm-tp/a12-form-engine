@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -33,18 +33,15 @@
 import type { ReactElement } from "react";
 import { useContext } from "react";
 
-import { ModelPath } from "@com.mgmtp.a12.base/base-model-api/lib/main/model/index.js";
+import { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
 import type {
 	DocumentModel,
 	EntityInstancePath,
 	GroupInstance
-} from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
-import { LocalizerContext } from "@com.mgmtp.a12.utils/utils-localization-react/lib/main/index.js";
-import type {
-	Localizer,
-	ValueConversion
-} from "@com.mgmtp.a12.utils/utils-localization/lib/main/index.js";
-import type { Column } from "@com.mgmtp.a12.widgets/widgets-core/lib/table/new-api/column.api.js";
+} from "@com.mgmtp.a12.kernel/kernel-md-facade";
+import type { Localizer, ValueConversion } from "@com.mgmtp.a12.utils/utils-localization";
+import { LocalizerContext } from "@com.mgmtp.a12.utils/utils-localization-react";
+import type { Column } from "@com.mgmtp.a12.widgets/widgets-core";
 
 import {
 	DataSelectors,
@@ -54,7 +51,14 @@ import {
 } from "../../../../../../back-end/store/index.js";
 import { UiId } from "../../../../../../back-end/utils/internal/generateUiId.js";
 import { getDocumentPath } from "../../../../../../back-end/utils/internal/path.js";
-import { DocumentModelUtils } from "../../../../../../models/internal/utils/document-model-utils.js";
+import type { FormModel } from "../../../../../../models/index.js";
+import {
+	isFormModelControl,
+	isFormModelDetachedRepeat,
+	isFormModelFieldOverviewColumn,
+	isFormModelInlineRepeat
+} from "../../../../../../models/internal/FormModelGuards.js";
+import * as DocumentModelUtils from "../../../../../../models/internal/utils/document-model-utils.js";
 import {
 	DocumentUtils,
 	IndexedControl
@@ -77,7 +81,6 @@ import {
 	getLabelWithAsterisk,
 	shouldShowAsterisk
 } from "../../model-element-labels.js";
-import { FormModel } from "../../../../../../models/internal/form-model.js";
 
 import { getValueForUI } from "./getValueForUI.js";
 import { TextOutput } from "./text-output/text-output.js";
@@ -155,7 +158,7 @@ export function FieldOverviewColumn(props: {
 	let attachment = undefined;
 	if (
 		DocumentModelUtils.isAttachment(fieldOptions.documentElement) &&
-		FormModel.InlineRepeat.isInstance(repeat) &&
+		isFormModelInlineRepeat(repeat) &&
 		fieldOverviewColumn.exposition === "THUMBNAIL_OR_ICON"
 	) {
 		attachment = fieldOptions.value.data ?? {};
@@ -166,7 +169,7 @@ export function FieldOverviewColumn(props: {
 
 	return fieldOptions.modelElement.readonly &&
 		!DocumentModelUtils.isAttachment(fieldOptions.documentElement) &&
-		FormModel.InlineRepeat.isInstance(repeat) &&
+		isFormModelInlineRepeat(repeat) &&
 		evaluateReadonlyPresentation(formModelPath, config.renderOptions.state) === "TEXT" ? (
 		<TextOutput
 			{...fieldOptions}
@@ -180,8 +183,7 @@ export function FieldOverviewColumn(props: {
 		<AttachmentPreview
 			id={uiId}
 			repeatRowHeight={
-				(FormModel.InlineRepeat.isInstance(repeat) ||
-					FormModel.DetachedRepeat.isInstance(repeat)) &&
+				(isFormModelInlineRepeat(repeat) || isFormModelDetachedRepeat(repeat)) &&
 				repeat.infiniteScrolling
 					? repeat.tableStyle?.rowHeight
 					: undefined
@@ -289,6 +291,7 @@ export function Control(props: {
 			enableSelectAll: fce?.enableSelectAll,
 			tooltipsOnTop: control.tooltipsOnTop,
 			labelHiddenButRead: control.labelHiddenButRead,
+			labelPlacement: fce?.labelPlacement,
 			helperText: localizer(...helperTextLocalizables),
 			attachmentConfig: fce?.attachmentConfig
 		},
@@ -364,7 +367,7 @@ function calculateFieldBasedInputOptions(options: {
 		options: renderOptions,
 		element: input,
 		formModelPath,
-		dataContext: FormModel.Control.isInstance(input) ? dataContext : currentScreenLocation.path,
+		dataContext: isFormModelControl(input) ? dataContext : currentScreenLocation.path,
 		localizer,
 		converter,
 		fce
@@ -392,22 +395,22 @@ function calculateFieldBasedInputOptions(options: {
 	const infoMessages = infoMessagesForElement.map(m => m.errorText);
 
 	const exposition =
-		FormModel.FieldOverviewColumn.isInstance(input) &&
+		isFormModelFieldOverviewColumn(input) &&
 		((documentElement.type === "Field" &&
 			FormModelUtils.isEnumerable(documentElement.fieldType, fce)) ||
 			DocumentModelUtils.isMultiSelect(documentElement))
 			? enumerationExposition({ dataType, columnExposition: input.exposition, fceExposition })
 			: input.exposition || fceExposition || defaultExposition(dataType);
 
-	const specificHorizontalAlignment = FormModel.FieldOverviewColumn.isInstance(input)
+	const specificHorizontalAlignment = isFormModelFieldOverviewColumn(input)
 		? input.specificHorizontalAlignment
 		: undefined;
 
-	const specificVerticalAlignment = FormModel.FieldOverviewColumn.isInstance(input)
+	const specificVerticalAlignment = isFormModelFieldOverviewColumn(input)
 		? input.specificVerticalAlignment
 		: undefined;
 
-	const showCommaSeparated = FormModel.FieldOverviewColumn.isInstance(input)
+	const showCommaSeparated = isFormModelFieldOverviewColumn(input)
 		? input.showCommaSeparated
 		: undefined;
 
@@ -456,7 +459,8 @@ function calculateFieldBasedInputOptions(options: {
 			showCommaSeparated,
 			timeZone,
 			style: input.style,
-			autoComplete: input.autoComplete
+			autoComplete: input.autoComplete,
+			icon: fce?.icon
 		},
 		formModelPath,
 		documentElementDataType: dataType,

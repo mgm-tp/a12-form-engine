@@ -1,0 +1,195 @@
+{
+  "header": {
+    "id": "TestModel",
+    "modelType": "document",
+    "modelVersion": "29.4.0",
+    "locales": [
+      {
+        "code": "en"
+      }
+    ],
+    "labels": [],
+    "annotations": [],
+    "modelReferences": []
+  },
+  "content": {
+    "modelInfo": {
+      "name": "TestModel",
+      "immutable": false
+    },
+    "modelConfig": {
+      "decimalSeparator": ".",
+      "timeZone": "UTC",
+      "conditionLanguage": {
+        "code": "en_US"
+      }
+    },
+    "typeDefinitions": [
+      {
+        "id": "typedef_b00a73f4-d8c1-462b-ba9e-0e4086cd4b88",
+        "name": "StringTypeDef",
+        "fieldType": {
+          "type": "StringType"
+        }
+      },
+      {
+        "id": "typedef_c4ab7c73-fc45-4779-bfa3-f6c9a288b792",
+        "name": "NumberTypeDef",
+        "fieldType": {
+          "type": "NumberType"
+        }
+      }
+    ],
+    "modelRoot": {
+      "rootGroups": [
+        {
+          "type": "Group",
+          "id": "group_9cb26",
+          "name": "base",
+          "Group": {
+            "repeatability": 1,
+            "elements": [
+              {
+                "type": "Field",
+                "id": "field_fc743",
+                "name": "StringField",
+                "Field": {
+                  "fieldType": {
+                    "type": "StringType"
+                  }
+                }
+              },
+              {
+                "type": "Field",
+                "id": "field_055de",
+                "name": "NumberField",
+                "Field": {
+                  "fieldType": {
+                    "type": "NumberType",
+                    "NumberType": {
+                      "minFractionalDigits": 2,
+                      "maxFractionalDigits": 2
+                    }
+                  }
+                }
+              },
+              {
+                "type": "Field",
+                "id": "field_38aaf",
+                "name": "BooleanField",
+                "Field": {
+                  "fieldType": {
+                    "type": "BooleanType"
+                  }
+                }
+              },
+              {
+                "type": "Field",
+                "id": "field_02790",
+                "name": "DateField",
+                "Field": {
+                  "fieldType": {
+                    "type": "DateType",
+                    "DateType": {
+                      "format": "yyyy-MM-dd"
+                    }
+                  }
+                }
+              },
+              {
+                "type": "Field",
+                "id": "field_3fd19",
+                "name": "TimeField",
+                "Field": {
+                  "fieldType": {
+                    "type": "TimeType",
+                    "TimeType": {
+                      "format": "HH:mm:ss"
+                    }
+                  }
+                }
+              },
+              {
+                "type": "Field",
+                "id": "field_242c4",
+                "name": "EnumerationField",
+                "Field": {
+                  "fieldType": {
+                    "type": "EnumerationType",
+                    "EnumerationType": {
+                      "values": [
+                        {
+                          "value": "a",
+                          "label": [
+                            {
+                              "locale": "en",
+                              "text": "A"
+                            }
+                          ]
+                        },
+                        {
+                          "value": "b",
+                          "label": [
+                            {
+                              "locale": "en",
+                              "text": "B"
+                            }
+                          ]
+                        },
+                        {
+                          "value": "c",
+                          "label": [
+                            {
+                              "locale": "en",
+                              "text": "C"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                }
+              },
+              {
+                "type": "Field",
+                "id": "field_aeb18",
+                "name": "ConfirmField",
+                "Field": {
+                  "fieldType": {
+                    "type": "ConfirmType"
+                  }
+                }
+              },
+              {
+                "type": "Field",
+                "id": "field_8534b",
+                "name": "StringTypeDefField",
+                "Field": {
+                  "fieldType": {
+                    "type": "TypeDefType",
+                    "TypeDefType": {
+                      "typeDefinitionId": "typedef_b00a73f4-d8c1-462b-ba9e-0e4086cd4b88"
+                    }
+                  }
+                }
+              },
+              {
+                "type": "Field",
+                "id": "field_e742d",
+                "name": "NumberTypeDefField",
+                "Field": {
+                  "fieldType": {
+                    "type": "TypeDefType",
+                    "TypeDefType": {
+                      "typeDefinitionId": "typedef_c4ab7c73-fc45-4779-bfa3-f6c9a288b792"
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

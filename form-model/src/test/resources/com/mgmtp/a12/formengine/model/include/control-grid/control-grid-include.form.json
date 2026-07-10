@@ -1,0 +1,74 @@
+{
+  "header": {
+    "id": "control-grid-include.form",
+    "modelType": "form",
+    "modelVersion": "39.0.0",
+    "locales": [
+      {
+        "code": "en"
+      }
+    ],
+    "modelReferences": [
+      {
+        "alias": "DM",
+        "modelType": "document",
+        "purpose": "data binding",
+        "reference": "control-grid-include.dm"
+      }
+    ]
+  },
+  "content": {
+    "subHeaderBox": {
+      "id": "subHeaderBox1"
+    },
+    "footerBox": {
+      "id": "footerBox1"
+    },
+    "screens": [
+      {
+        "id": "screen1",
+        "name": "Screen1",
+        "screenElements": [
+          {
+            "type": "ControlGrid",
+            "id": "controlgrid-2f318",
+            "name": "host-control-grid",
+            "layout": {
+              "lg": "3-3-3"
+            },
+            "row": [
+              {
+                "type": "Row",
+                "id": "row-1b0d7",
+                "name": "row-1",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control-7befe",
+                    "offset": {
+                      "lg": 1
+                    },
+                    "elementRef": "field_6b43b"
+                  }
+                ]
+              }
+            ],
+            "verticalAlignment": "TOP"
+          },
+          {
+            "type": "ControlGrid",
+            "id": "controlgrid-55a0e",
+            "name": "include-a-cg",
+            "verticalAlignment": "TOP",
+            "includeId": "controlgrid-55a0e",
+            "formModelRef": "control-grid.form",
+            "hostDocumentModelPath": ""
+          }
+        ]
+      }
+    ],
+    "fieldConfiguration": {},
+    "groupConfiguration": {},
+    "defaults": {}
+  }
+}

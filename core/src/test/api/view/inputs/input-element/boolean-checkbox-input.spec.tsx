@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -35,7 +35,7 @@ import type { Mock } from "node:test";
 import { mock } from "node:test";
 
 import { query } from "@com.mgmtp.a12.devtools/react";
-import type { DocumentModel } from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
+import type { DocumentModel } from "@com.mgmtp.a12.kernel/kernel-md-facade";
 
 import type { DispatchConfiguration } from "../../../../../view/index.js";
 import { defaultMapDispatchToProps } from "../../../../../view/index.js";
@@ -44,10 +44,10 @@ import type { Inputs } from "../../../../../view/internal/configuration/engine-c
 import { changeEventMock } from "../../../../rtl-utils/mock-utils.js";
 import type { RtlRenderWrapper } from "../../../../rtl-utils/render-wrapper.js";
 import { rtlRenderWrapperAsync } from "../../../../rtl-utils/render-wrapper.js";
-import { DocumentHelpers } from "../../../../utils/document-helpers.js";
-import { DocumentModelHelpers } from "../../../../utils/model-helpers.js";
+import { createDocumentPath } from "../../../../utils/createDocumentPath.js";
+import { createModelPath } from "../../../../utils/createModelPath.js";
+import { DocumentModelHelpers } from "../../../../utils/DocumentModelHelpers.js";
 import { setupModelsFixture } from "../../../../utils/setupFixture.js";
-import { createModelPath } from "../../../../utils/test-model-helpers/dependent-enumeration.js";
 
 import { inputTest } from "./generic-tests/input-tests.js";
 import { createProps } from "./generic-tests/input-utils.js";
@@ -57,7 +57,7 @@ const { Field } = DocumentModelHelpers;
 
 describe("api.view.inputs", () => {
 	describe("BooleanInput", () => {
-		const models = setupModelsFixture("controls.picustypes");
+		const models = setupModelsFixture("controls.dmtypes");
 
 		const documentElementDataType: DocumentModel.BooleanType = { type: "BooleanType" };
 		const baseProps = {
@@ -65,7 +65,7 @@ describe("api.view.inputs", () => {
 			documentElementDataType,
 			component: "Checkbox",
 			renderFunction: CheckboxInput,
-			path: DocumentHelpers.createDocumentPath(["A12T_PicusTypes"], ["Boolean"], ["Boolean01"]),
+			path: createDocumentPath(["A12T_DmTypes"], ["Boolean"], ["Boolean01"]),
 			formModelPath: createModelPath("foo", "bar")
 		};
 
@@ -87,11 +87,7 @@ describe("api.view.inputs", () => {
 		});
 
 		describe("onChange", () => {
-			const path = DocumentHelpers.createDocumentPath(
-				["A12T_PicusTypes"],
-				["Boolean"],
-				["Boolean01"]
-			);
+			const path = createDocumentPath(["A12T_DmTypes"], ["Boolean"], ["Boolean01"]);
 
 			interface MockDispatchConfig extends DispatchConfiguration {
 				onValueChange: Mock<DispatchConfiguration["onValueChange"]>;

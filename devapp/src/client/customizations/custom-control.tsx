@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -47,13 +47,10 @@ import {
 	useDocumentPathForInput,
 	ValidationMessages
 } from "@com.mgmtp.a12.formengine/formengine-core";
-import type { GroupInstance } from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
-import { DocumentServiceFactory } from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/facade.js";
-import { LocalizerContext } from "@com.mgmtp.a12.utils/utils-localization-react/lib/main/index.js";
-import type {
-	Localizable,
-	Localizer
-} from "@com.mgmtp.a12.utils/utils-localization/lib/main/index.js";
+import type { GroupInstance } from "@com.mgmtp.a12.kernel/kernel-md-facade";
+import { DocumentServiceFactory } from "@com.mgmtp.a12.kernel/kernel-md-facade";
+import type { Localizable, Localizer } from "@com.mgmtp.a12.utils/utils-localization";
+import { LocalizerContext } from "@com.mgmtp.a12.utils/utils-localization-react";
 
 /**
  * This example demonstrates how to customize a control.
@@ -69,7 +66,7 @@ import type {
  * Mind: You do not need every code parts if you model does not contain these specifics.
  * E.g. if you do not have suffixes you don't need to retrieve them.
  */
-export const CustomFormModelMapForCustomControl = {
+export const CustomFormModelMapForCustomControl: FormModelMap = {
 	...DefaultFormModelMap,
 	Control: {
 		component: (props: FormModelMap.FormModelComponentProps<FormModel.Control>) => {
@@ -204,7 +201,7 @@ export function CustomControlWithValidationTooltips(
 		ariaDescribedBy.push(infoTooltip.id);
 	}
 	if (hintToolTip) {
-		ariaDescribedBy.push(hintToolTip?.id);
+		ariaDescribedBy.push(hintToolTip.id);
 	}
 
 	/** Suffix */

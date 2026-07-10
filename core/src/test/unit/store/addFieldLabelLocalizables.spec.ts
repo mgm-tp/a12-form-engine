@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -32,13 +32,13 @@
 
 import { deepStrictEqual, strictEqual } from "node:assert/strict";
 
-import type { ModelPath } from "@com.mgmtp.a12.base/base-model-api/lib/main/model/index.js";
+import type { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
 
 import type { EngineStore } from "../../../back-end/store/index.js";
 import { addFieldLabelLocalizables } from "../../../back-end/store/internal/reducers/handler/setMessageState.js";
 import type { ReadonlyObjectMap } from "../../../models/index.js";
 import { DocumentPath } from "../../../models/internal/utils/document-utils.js";
-import { DocumentHelpers } from "../../utils/document-helpers.js";
+import { createDocumentPath } from "../../utils/createDocumentPath.js";
 import {
 	createValidationEntry,
 	createValidationEntryWithParsingError,
@@ -63,7 +63,7 @@ describe("unit.back-end.store.reducers.addFieldLabelLocalizables", () => {
 
 	describe("entry without error text", () => {
 		it("validationMessage variant", () => {
-			const messages = createValidationEntry({ path: DocumentHelpers.createDocumentPath(["f1"]) });
+			const messages = createValidationEntry({ path: createDocumentPath(["f1"]) });
 
 			const newMessages = addFieldLabelLocalizables(messages, provider);
 
@@ -71,7 +71,7 @@ describe("unit.back-end.store.reducers.addFieldLabelLocalizables", () => {
 		});
 
 		it("parseError variant", () => {
-			const path = DocumentHelpers.createDocumentPath(["f1"]);
+			const path = createDocumentPath(["f1"]);
 			const messages = createValidationEntryWithParsingError(
 				path,
 				"invalid",
@@ -87,7 +87,7 @@ describe("unit.back-end.store.reducers.addFieldLabelLocalizables", () => {
 	describe("entry with error text without localizable args", () => {
 		it("validationMessage variant", () => {
 			const messages = createValidationEntry({
-				path: DocumentHelpers.createDocumentPath(["f1"]),
+				path: createDocumentPath(["f1"]),
 				errorText: [{ key: "error.simple", defaults: { en: "Error" } }]
 			});
 
@@ -97,7 +97,7 @@ describe("unit.back-end.store.reducers.addFieldLabelLocalizables", () => {
 		});
 
 		it("parseError variant", () => {
-			const path = DocumentHelpers.createDocumentPath(["f1"]);
+			const path = createDocumentPath(["f1"]);
 			const messages: ReadonlyObjectMap<EngineStore.Validation.Entry> = {
 				[DocumentPath.toString(path)]: {
 					validationMessages: [],
@@ -120,7 +120,7 @@ describe("unit.back-end.store.reducers.addFieldLabelLocalizables", () => {
 	describe("entry with error text with localizable args, but without placeholder", () => {
 		it("validationMessage variant", () => {
 			const messages = createValidationEntry({
-				path: DocumentHelpers.createDocumentPath(["f1"]),
+				path: createDocumentPath(["f1"]),
 				errorText: [
 					{
 						key: "error.withArgs",
@@ -138,7 +138,7 @@ describe("unit.back-end.store.reducers.addFieldLabelLocalizables", () => {
 		});
 
 		it("parseError variant", () => {
-			const path = DocumentHelpers.createDocumentPath(["f1"]);
+			const path = createDocumentPath(["f1"]);
 			const messages: ReadonlyObjectMap<EngineStore.Validation.Entry> = {
 				[DocumentPath.toString(path)]: {
 					validationMessages: [],
@@ -169,7 +169,7 @@ describe("unit.back-end.store.reducers.addFieldLabelLocalizables", () => {
 	describe("entry with error text with localizable args and a placeholder that does not reference a dm field", () => {
 		it("validationMessage variant", () => {
 			const messages = createValidationEntry({
-				path: DocumentHelpers.createDocumentPath(["f1"]),
+				path: createDocumentPath(["f1"]),
 				errorText: [
 					{
 						key: "error.withLocalizable",
@@ -191,7 +191,7 @@ describe("unit.back-end.store.reducers.addFieldLabelLocalizables", () => {
 		});
 
 		it("parseError variant", () => {
-			const path = DocumentHelpers.createDocumentPath(["f1"]);
+			const path = createDocumentPath(["f1"]);
 			const messages: ReadonlyObjectMap<EngineStore.Validation.Entry> = {
 				[DocumentPath.toString(path)]: {
 					validationMessages: [],
@@ -225,7 +225,7 @@ describe("unit.back-end.store.reducers.addFieldLabelLocalizables", () => {
 
 	describe("entry with error text with localizable args and a placeholder that references a dm field", () => {
 		it("validationMessage variant", () => {
-			const fieldPath = DocumentHelpers.createDocumentPath(["f1"]);
+			const fieldPath = createDocumentPath(["f1"]);
 			const messages = createValidationEntry({
 				path: fieldPath,
 				errorText: [
@@ -256,7 +256,7 @@ describe("unit.back-end.store.reducers.addFieldLabelLocalizables", () => {
 		});
 
 		it("parseError variant", () => {
-			const fieldPath = DocumentHelpers.createDocumentPath(["f1"]);
+			const fieldPath = createDocumentPath(["f1"]);
 			const messages: ReadonlyObjectMap<EngineStore.Validation.Entry> = {
 				[DocumentPath.toString(fieldPath)]: {
 					validationMessages: [],
@@ -299,7 +299,7 @@ describe("unit.back-end.store.reducers.addFieldLabelLocalizables", () => {
 
 	describe("entry with error text with localizable args and a placeholder thats already extended", () => {
 		it("validationMessage variant", () => {
-			const fieldPath = DocumentHelpers.createDocumentPath(["f1"]);
+			const fieldPath = createDocumentPath(["f1"]);
 			const messages = createValidationEntry({
 				path: fieldPath,
 				errorText: [
@@ -324,7 +324,7 @@ describe("unit.back-end.store.reducers.addFieldLabelLocalizables", () => {
 		});
 
 		it("parseError variant", () => {
-			const fieldPath = DocumentHelpers.createDocumentPath(["f1"]);
+			const fieldPath = createDocumentPath(["f1"]);
 			const messages: ReadonlyObjectMap<EngineStore.Validation.Entry> = {
 				[DocumentPath.toString(fieldPath)]: {
 					validationMessages: [],

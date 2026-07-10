@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -32,8 +32,8 @@
 
 import { strictEqual } from "node:assert/strict";
 
-import type { EntityInstancePath } from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
-import { defaultLocalizerFactory } from "@com.mgmtp.a12.utils/utils-localization/lib/main/index.js";
+import type { EntityInstancePath } from "@com.mgmtp.a12.kernel/kernel-md-facade";
+import { defaultLocalizerFactory } from "@com.mgmtp.a12.utils/utils-localization";
 
 import { createEngineStore, UiStateSelectors } from "../../../../../back-end/store/index.js";
 import type { EngineState, Models } from "../../../../../back-end/store/internal/store.js";
@@ -41,13 +41,11 @@ import type { FormModel } from "../../../../../models/index.js";
 import { findElementByFormModelPath } from "../../../../../models/index.js";
 import { DocumentPath } from "../../../../../models/internal/utils/document-utils.js";
 import { DE_LOCALE, US_LOCALE } from "../../../../utils/localization.js";
-import { ModelHelpers } from "../../../../utils/model-helpers.js";
-import { SetupHelpers } from "../../../../utils/setup.js";
+import { createModelPath } from "../../../../utils/createModelPath.js";
+import { setupRenderConfiguration } from "../../../../utils/setup.js";
 import { setupModelsFixture } from "../../../../utils/setupFixture.js";
-import { BUTTONS } from "../../../../utils/test-model-helpers/button.melies.js";
+import { BUTTONS } from "../../../../utils/test-model-helpers/button.form.js";
 import { createValidationMessage } from "../../../../utils/validation.js";
-
-const { setupRenderConfiguration } = SetupHelpers;
 
 function setupValidationTests(models: Models, documentPath: EntityInstancePath): EngineState {
 	const errorMessage = createValidationMessage({ path: documentPath, type: "ERROR" });
@@ -107,7 +105,7 @@ describe("api.back-end.store.selectors", () => {
 							models: modelsLocalization,
 							locale
 						});
-						const formModelPath = ModelHelpers.createModelPath(
+						const formModelPath = createModelPath(
 							"Screen1",
 							"sec1",
 							"cg2",
@@ -132,7 +130,7 @@ describe("api.back-end.store.selectors", () => {
 							models: modelsLocalization,
 							locale
 						});
-						const formModelPath = ModelHelpers.createModelPath(
+						const formModelPath = createModelPath(
 							"Screen1",
 							"sec1",
 							"cg2",
@@ -159,12 +157,7 @@ describe("api.back-end.store.selectors", () => {
 							models: modelsPlaceholder,
 							locale
 						});
-						const formModelPath = ModelHelpers.createModelPath(
-							"Screen1",
-							"cg",
-							"row1",
-							"control-3c65f"
-						);
+						const formModelPath = createModelPath("Screen1", "cg", "row1", "control-3c65f");
 						const input = findElementByFormModelPath(modelsPlaceholder.formModel, formModelPath);
 						const localizables = UiStateSelectors.InputLocalization.placeholderLocalizables(
 							formModelPath,
@@ -183,12 +176,7 @@ describe("api.back-end.store.selectors", () => {
 							models: modelsPlaceholder,
 							locale
 						});
-						const formModelPath = ModelHelpers.createModelPath(
-							"Screen1",
-							"cg",
-							"row1",
-							"control-3c65f"
-						);
+						const formModelPath = createModelPath("Screen1", "cg", "row1", "control-3c65f");
 						const input = findElementByFormModelPath(modelsPlaceholder.formModel, formModelPath);
 						const localizables = UiStateSelectors.InputLocalization.placeholderLocalizables(
 							formModelPath,
@@ -209,7 +197,7 @@ describe("api.back-end.store.selectors", () => {
 							models: modelsLocalization,
 							locale
 						});
-						const formModelPath = ModelHelpers.createModelPath(
+						const formModelPath = createModelPath(
 							"Screen1",
 							"sec1",
 							"cg2",
@@ -234,7 +222,7 @@ describe("api.back-end.store.selectors", () => {
 							models: modelsLocalization,
 							locale
 						});
-						const formModelPath = ModelHelpers.createModelPath(
+						const formModelPath = createModelPath(
 							"Screen1",
 							"sec1",
 							"cg2",

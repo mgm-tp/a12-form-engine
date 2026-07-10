@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -33,12 +33,9 @@
 import type { ReactNode } from "react";
 import { useContext, useMemo } from "react";
 
-import { ModelPath } from "@com.mgmtp.a12.base/base-model-api/lib/main/model/index.js";
-import type { DocumentModel } from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
-import type {
-	Localizable,
-	Localizer
-} from "@com.mgmtp.a12.utils/utils-localization/lib/main/index.js";
+import { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
+import type { DocumentModel } from "@com.mgmtp.a12.kernel/kernel-md-facade";
+import type { Localizable, Localizer } from "@com.mgmtp.a12.utils/utils-localization";
 
 import { RESOURCE_KEYS } from "../../../../../../back-end/localization/index.js";
 import { createResourceLocalizable } from "../../../../../../back-end/localization/internal/factory.js";
@@ -46,15 +43,18 @@ import { ModelSelectors } from "../../../../../../back-end/store/internal/select
 import { UiStateSelectors } from "../../../../../../back-end/store/internal/selectors/ui-state.js";
 import { UiId } from "../../../../../../back-end/utils/internal/generateUiId.js";
 import { findElementByFormModelPath } from "../../../../../../models/internal/findElementByFormModelPath.js";
-import { FormModel } from "../../../../../../models/internal/form-model.js";
 import type { StringValueDataType } from "../../../../../../models/internal/utils/document-model-utils.js";
 import { ComponentMapContext } from "../../../../configuration/componentMap/component-map-context.js";
 import type { FormModelMap, Inputs } from "../../../../configuration/engine-configuration.js";
-import { EnumerableHelper } from "../../../../utilities/enumerable/enumerableHelper.js";
+import {
+	EnumerableHelper,
+	InternalEnumerableHelper
+} from "../../../../utilities/enumerable/enumerableHelper.js";
 import type { EnumerationValue } from "../../../../utilities/enumerable/enumValue.js";
 import { nmTokensToString } from "../../../../utilities/nmtokens.js";
 import type { Value } from "../../../../utilities/value.js";
 import { getScreenReaderCellId } from "../../repeat/components/row-actions/getScreenReaderCellId.js";
+import { isFormModelRepeat } from "../../../../../../models/index.js";
 
 import type { ControlProps } from "./input-props.js";
 
@@ -296,7 +296,7 @@ export function useBasePropsForCheckbox(
 
 	const parent = findElementByFormModelPath(formModel, props.formModelPath.slice(0, -1));
 
-	const cellId = FormModel.Repeat.isInstance(parent)
+	const cellId = isFormModelRepeat(parent)
 		? getScreenReaderCellId(
 				parent,
 				props.value.path,
@@ -428,7 +428,7 @@ function addCustomValueToEnumeration(
 	if (typeof value.data === "string" && !enumerationOptions.some(o => o.value === value.data)) {
 		const formModel = ModelSelectors.formModel()(options.state);
 		const fce = formModel.content.fieldConfiguration.fieldMap[ModelPath.toString(value.path)];
-		const customValueAllowed = EnumerableHelper.isCustomValuesAllowed(fce);
+		const customValueAllowed = InternalEnumerableHelper.isCustomValuesAllowed(fce);
 		result.push({
 			value: value.data,
 			label: value.data,

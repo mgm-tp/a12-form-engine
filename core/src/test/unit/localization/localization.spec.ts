@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -30,18 +30,15 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { strictEqual, deepStrictEqual, ok } from "node:assert/strict";
+import { deepStrictEqual, ok, strictEqual } from "node:assert/strict";
 
-import { ModelPath } from "@com.mgmtp.a12.base/base-model-api/lib/main/model/index.js";
-import type {
-	Localizable,
-	LocalizableArgs
-} from "@com.mgmtp.a12.utils/utils-localization/lib/main/index.js";
+import { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
+import type { Localizable, LocalizableArgs } from "@com.mgmtp.a12.utils/utils-localization";
 import {
 	defaultLocalizerFactory,
 	Locale,
 	localizableFromLocalizationTreeMap
-} from "@com.mgmtp.a12.utils/utils-localization/lib/main/index.js";
+} from "@com.mgmtp.a12.utils/utils-localization";
 
 import { DEFAULT_TRANSLATIONS } from "../../../back-end/localization/index.js";
 import { createResourceLocalizable } from "../../../back-end/localization/internal/factory.js";
@@ -50,11 +47,21 @@ import { en } from "../../../back-end/localization/internal/languages/en.js";
 import { RESOURCE_KEYS } from "../../../back-end/localization/internal/languages/keys.js";
 import type { LocalizableFactory } from "../../../back-end/localization/internal/localization.js";
 import { createLocalizableFactory } from "../../../back-end/localization/internal/localization.js";
-import type { ReadonlyObjectMap } from "../../../models/index.js";
-import { findElementByFormModelPath, FormModel } from "../../../models/index.js";
-import { DocumentModelUtils } from "../../../models/internal/utils/document-model-utils.js";
+import type { FormModel, ReadonlyObjectMap } from "../../../models/index.js";
+import { findElementByFormModelPath } from "../../../models/index.js";
+import {
+	isFormModelControl,
+	isFormModelEventButton,
+	isFormModelExpressionOverviewColumn,
+	isFormModelFieldOverviewColumn,
+	isFormModelRepeat,
+	isFormModelRow,
+	isFormModelSection,
+	isFormModelTextCell
+} from "../../../models/internal/FormModelGuards.js";
+import * as DocumentModelUtils from "../../../models/internal/utils/document-model-utils.js";
+import { createModelPath } from "../../utils/createModelPath.js";
 import { DE_LOCALE, US_LOCALE } from "../../utils/localization.js";
-import { ModelHelpers } from "../../utils/model-helpers.js";
 import { setupModelsFixture } from "../../utils/setupFixture.js";
 
 const locales = [US_LOCALE, DE_LOCALE];
@@ -149,7 +156,7 @@ describe("unit.back-end.localization", () => {
 	describe("test model text resolution order", () => {
 		function getControlsFromRow(path: ModelPath): FormModelElementWithPath<FormModel.Control>[] {
 			const element = findElementByFormModelPath(models.formModel, path);
-			if (element === undefined || !FormModel.Row.isInstance(element)) {
+			if (element === undefined || !isFormModelRow(element)) {
 				throw new Error(`Internal Error: Row "${ModelPath.toString(path)}" cannot be found!`);
 			}
 
@@ -159,7 +166,7 @@ describe("unit.back-end.localization", () => {
 
 			const result: FormModelElementWithPath<FormModel.Control>[] = [];
 			for (const child of element.cell) {
-				if (!FormModel.Control.isInstance(child)) {
+				if (!isFormModelControl(child)) {
 					continue;
 				}
 
@@ -172,7 +179,7 @@ describe("unit.back-end.localization", () => {
 		describe("control", () => {
 			describe("that neither have a texts provided in the document model nor in the form model", () => {
 				let controls: FormModelElementWithPath<FormModel.Control>[];
-				const cgPath = ModelHelpers.createModelPath("Screen1", "sec1", "cg1");
+				const cgPath = createModelPath("Screen1", "sec1", "cg1");
 
 				before(() => {
 					const row1Path = [...cgPath, { elementName: "row1" }];
@@ -210,7 +217,7 @@ describe("unit.back-end.localization", () => {
 
 			describe("that have only a texts provided in the document model", () => {
 				let controls: FormModelElementWithPath<FormModel.Control>[];
-				const cgPath = ModelHelpers.createModelPath("Screen1", "sec1", "cg2");
+				const cgPath = createModelPath("Screen1", "sec1", "cg2");
 				before(() => {
 					const row1Path = [...cgPath, { elementName: "row1" }];
 					controls = getControlsFromRow(row1Path);
@@ -256,7 +263,7 @@ describe("unit.back-end.localization", () => {
 
 			describe("that have only a texts provided in the document model and at the field configuration of the form model", () => {
 				let controls: FormModelElementWithPath<FormModel.Control>[];
-				const cgPath = ModelHelpers.createModelPath("Screen1", "sec1", "cg4");
+				const cgPath = createModelPath("Screen1", "sec1", "cg4");
 				before(() => {
 					const row1Path = [...cgPath, { elementName: "row1" }];
 					const row2Path = [...cgPath, { elementName: "row2" }];
@@ -303,7 +310,7 @@ describe("unit.back-end.localization", () => {
 
 			describe("that have only a texts provided in the document model and at the control of the form model", () => {
 				let controls: FormModelElementWithPath<FormModel.Control>[];
-				const cgPath = ModelHelpers.createModelPath("Screen1", "sec1", "cg3");
+				const cgPath = createModelPath("Screen1", "sec1", "cg3");
 				before(() => {
 					const row1Path = [...cgPath, { elementName: "row1" }];
 					const row2Path = [...cgPath, { elementName: "row2" }];
@@ -349,7 +356,7 @@ describe("unit.back-end.localization", () => {
 
 			describe("that have a texts provided in the document model and at the control and field configuration of the form model", () => {
 				let controls: FormModelElementWithPath<FormModel.Control>[];
-				const cgPath = ModelHelpers.createModelPath("Screen1", "sec1", "cg3");
+				const cgPath = createModelPath("Screen1", "sec1", "cg3");
 				before(() => {
 					const row1Path = [...cgPath, { elementName: "row1" }];
 					const row2Path = [...cgPath, { elementName: "row2" }];
@@ -469,19 +476,11 @@ describe("unit.back-end.localization", () => {
 			}
 
 			before(() => {
-				const defaultLabelsRepeatPath = ModelHelpers.createModelPath(
-					"Screen1",
-					"Repeat",
-					"RepeatDefaultLabels"
-				);
-				const customLabelsRepeatPath = ModelHelpers.createModelPath(
-					"Screen1",
-					"Repeat",
-					"RepeatCustomLabels"
-				);
+				const defaultLabelsRepeatPath = createModelPath("Screen1", "Repeat", "RepeatDefaultLabels");
+				const customLabelsRepeatPath = createModelPath("Screen1", "Repeat", "RepeatCustomLabels");
 
 				let element = findElementByFormModelPath(models.formModel, defaultLabelsRepeatPath);
-				if (element === undefined || !FormModel.Repeat.isInstance(element)) {
+				if (element === undefined || !isFormModelRepeat(element)) {
 					throw new Error(
 						`Internal Error: Repeat "${ModelPath.toString(
 							defaultLabelsRepeatPath
@@ -495,7 +494,7 @@ describe("unit.back-end.localization", () => {
 				};
 
 				element = findElementByFormModelPath(models.formModel, customLabelsRepeatPath);
-				if (element === undefined || !FormModel.Repeat.isInstance(element)) {
+				if (element === undefined || !isFormModelRepeat(element)) {
 					throw new Error(
 						`Internal Error: Repeat "${ModelPath.toString(
 							customLabelsRepeatPath
@@ -641,29 +640,26 @@ describe("unit.back-end.localization", () => {
 		let expressionOverviewColumn: FormModelElementWithPath<FormModel.ExpressionOverviewColumn>;
 
 		before(() => {
-			section = getElementWithPath(
-				ModelHelpers.createModelPath("Screen1", "Section"),
-				FormModel.Section.isInstance
-			);
+			section = getElementWithPath(createModelPath("Screen1", "Section"), isFormModelSection);
 
 			control = getElementWithPath(
-				ModelHelpers.createModelPath("Screen1", "sec1", "cg1", "row1", "control-ead0a"),
-				FormModel.Control.isInstance
+				createModelPath("Screen1", "sec1", "cg1", "row1", "control-ead0a"),
+				isFormModelControl
 			);
 
 			textCell = getElementWithPath(
-				ModelHelpers.createModelPath("Screen1", "gridText", "row-f852d", "text1"),
-				FormModel.TextCell.isInstance
+				createModelPath("Screen1", "gridText", "row-f852d", "text1"),
+				isFormModelTextCell
 			);
 
 			repeat = getElementWithPath(
-				ModelHelpers.createModelPath("Screen1", "Repeat", "RepeatDefaultLabels"),
-				FormModel.Repeat.isInstance
+				createModelPath("Screen1", "Repeat", "RepeatDefaultLabels"),
+				isFormModelRepeat
 			);
 
 			button = getElementWithPath(
-				ModelHelpers.createModelPath("Screen1", "ButtonPanel", "Button"),
-				FormModel.ButtonType.isEventButton
+				createModelPath("Screen1", "ButtonPanel", "Button"),
+				isFormModelEventButton
 			);
 
 			const match = repeat.element.rowActionGroup?.action?.find(x => x.event === "custom");
@@ -677,30 +673,20 @@ describe("unit.back-end.localization", () => {
 			rowAction = { element: match, path: repeat.path };
 
 			fieldOverviewColumn = getElementWithPath(
-				ModelHelpers.createModelPath(
-					"Screen1",
-					"Repeat",
-					"RepeatDefaultLabels",
-					"fieldOverviewColumn-1"
-				),
-				FormModel.FieldOverviewColumn.isInstance
+				createModelPath("Screen1", "Repeat", "RepeatDefaultLabels", "fieldOverviewColumn-1"),
+				isFormModelFieldOverviewColumn
 			);
 
 			expressionOverviewColumn = getElementWithPath(
-				ModelHelpers.createModelPath(
-					"Screen1",
-					"Repeat",
-					"RepeatDefaultLabels",
-					"expressionColumn"
-				),
-				FormModel.ExpressionOverviewColumn.isInstance
+				createModelPath("Screen1", "Repeat", "RepeatDefaultLabels", "expressionColumn"),
+				isFormModelExpressionOverviewColumn
 			);
 		});
 
 		describe("boolean value", () => {
 			it("returns localizables with the right keys for true", () => {
 				const localizables = localizableFactory.booleanValue(
-					ModelHelpers.createModelPath("root", "booleanfield"),
+					createModelPath("root", "booleanfield"),
 					true
 				);
 
@@ -713,7 +699,7 @@ describe("unit.back-end.localization", () => {
 
 			it("returns localizables with the right keys for false", () => {
 				const localizables = localizableFactory.booleanValue(
-					ModelHelpers.createModelPath("root", "booleanfield"),
+					createModelPath("root", "booleanfield"),
 					false
 				);
 
@@ -728,7 +714,7 @@ describe("unit.back-end.localization", () => {
 		describe("confirm value", () => {
 			it("returns localizables with the right keys for true", () => {
 				const localizables = localizableFactory.confirmValue(
-					ModelHelpers.createModelPath("root", "confirmfield"),
+					createModelPath("root", "confirmfield"),
 					true
 				);
 
@@ -741,7 +727,7 @@ describe("unit.back-end.localization", () => {
 
 			it("returns localizables with the right keys for null", () => {
 				const localizables = localizableFactory.confirmValue(
-					ModelHelpers.createModelPath("root", "confirmfield"),
+					createModelPath("root", "confirmfield"),
 					null
 				);
 
@@ -755,7 +741,7 @@ describe("unit.back-end.localization", () => {
 
 		describe("enumeration value", () => {
 			it("returns localizables with the right keys", () => {
-				const path = ModelHelpers.createModelPath("root", "enumerationfield_full");
+				const path = createModelPath("root", "enumerationfield_full");
 
 				const enumeration = DocumentModelUtils.findByPath(models.documentModel, path);
 				if (enumeration.type !== "Field" || enumeration.fieldType.type !== "EnumerationType") {

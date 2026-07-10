@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -30,10 +30,11 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { useContext, type ReactElement } from "react";
+import { useContext } from "react";
+import type { ReactElement } from "react";
 
-import type { DocumentModel } from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
-import { LocalizerContext } from "@com.mgmtp.a12.utils/utils-localization-react/lib/main/index.js";
+import type { DocumentModel } from "@com.mgmtp.a12.kernel/kernel-md-facade";
+import { LocalizerContext } from "@com.mgmtp.a12.utils/utils-localization-react";
 
 import type { Inputs } from "../../../../../configuration/engine-configuration.js";
 import { WidgetMapContext } from "../../../../../configuration/widget-map-context.js";
@@ -47,6 +48,7 @@ export function BooleanRadioInput(
 	props: Inputs.InputProps<DocumentModel.BooleanType>
 ): ReactElement {
 	const localizer = useContext(LocalizerContext).localizer;
+	const { inputRef } = props;
 	const options = props.renderConfiguration.renderOptions;
 	const { checked, htmlInputProps, ...inputProps } = useBasePropsForBooleanRadio(props);
 	const { Radio, RadioItem } = useContext(WidgetMapContext);
@@ -69,8 +71,8 @@ export function BooleanRadioInput(
 				inputRef={
 					index === 0
 						? element => {
-								if (props.inputRef) {
-									props.inputRef.current = element;
+								if (inputRef) {
+									inputRef.current = element;
 								}
 							}
 						: undefined

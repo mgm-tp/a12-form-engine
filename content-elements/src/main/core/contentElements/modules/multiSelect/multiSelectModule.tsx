@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -33,19 +33,19 @@
 import type { JSX } from "react";
 import { useContext, useRef } from "react";
 
-import { DataReference } from "@com.mgmtp.a12.client/client-data/lib/core/api/data-reference.js";
 import {
+	DataReference,
 	getMultiSelectValueField,
 	isMultiSelectData
-} from "@com.mgmtp.a12.client/client-data/lib/kernel-extension/multiSelect.js";
-import {
-	useDocumentContext,
-	type ContentModel,
-	type NodeRendererProps
+} from "@com.mgmtp.a12.client/client-data";
+import { useDocumentContext } from "@com.mgmtp.a12.contentengine/contentengine-core";
+import type {
+	ContentModel,
+	NodeRendererProps
 } from "@com.mgmtp.a12.contentengine/contentengine-core";
-import { LocalizerContext } from "@com.mgmtp.a12.utils/utils-localization-react/lib/main/index.js";
-import { provider as DeviceDetector } from "@com.mgmtp.a12.widgets/widgets-core/lib/common/main/device-detector.js";
-import type { MultiselectProps } from "@com.mgmtp.a12.widgets/widgets-core/lib/multiselect/main/multiselect.api.js";
+import { LocalizerContext } from "@com.mgmtp.a12.utils/utils-localization-react";
+import { provider as DeviceDetector } from "@com.mgmtp.a12.widgets/widgets-core";
+import type { MultiselectProps } from "@com.mgmtp.a12.widgets/widgets-core";
 
 import { createResourceLocalizable } from "../../../localization/createResourceLocalizable.js";
 import { RESOURCE_KEYS } from "../../../localization/resources.js";
@@ -72,7 +72,7 @@ export const MultiSelectModule = createElementModule<MultiSelectNode>({
 function MultiSelectRenderer(
 	props: NodeRendererProps<ContentModel.Node<BaseControlProps>>
 ): JSX.Element | null {
-	const { MultiSelect } = useContext(WidgetMapContext);
+	const { Multiselect } = useContext(WidgetMapContext);
 	const { localizer } = useContext(LocalizerContext);
 	const inputRef = useRef<HTMLInputElement>(null);
 	const { onValueChanged } = useDocumentContext(c => c.event);
@@ -152,7 +152,7 @@ function MultiSelectRenderer(
 	// TODO: MultiSelect does not support error, warning, info props
 	//  => create bug ticket?
 	return (
-		<MultiSelect
+		<Multiselect
 			mobile={DeviceDetector.get() === "phone"}
 			id={uiId}
 			items={items}

@@ -1,27 +1,24 @@
 buildscript {
-    apply from: rootProject.file('scripts/buildscript-platforms.gradle')
-
     dependencies {
-        classpath a12Libs.kernel.tool.model.migration
+        classpath platform(libs.dataservices.bom)
         classpath libs.logback.classic
+        classpath libs.kernel.md.facade
     }
 }
 
 plugins {
-    alias(a12Plugins.plugins.prepare.models)
+    alias(libs.plugins.prepare.models)
 }
 
 dependencies {
     // A12 LIBRARIES - using versions from platforms (defined in root build.gradle)
-    api a12Libs.base.model.api
-    api a12Libs.base.model.consistency
-    api a12Libs.base.model.marshalling
+    api libs.base.model.api
+    api libs.base.model.consistency
+    api libs.base.model.marshalling
 
-    api a12Libs.kernel.md.model
-    api a12Libs.kernel.md.document.api
-    api a12Libs.kernel.md.facade
+    api libs.kernel.md.facade
 
-    api a12Libs.dataservices.core.metadata
+    api libs.rmc.conversion
 
     // THIRD PARTY LIBRARIES
     api libs.jackson.core
@@ -55,9 +52,43 @@ tasks.named('migrateDocumentModels') {
     args = ["-skipUniqueIdCheck", "-o", "."]
 }
 
+tasks.register('runConsistencyCheck', JavaExec) {
+    dependsOn(classes)
+
+    mainClass = 'com.mgmtp.a12.formengine.consistency.ConsistencyCheckCLI'
+    classpath = sourceSets.main.runtimeClasspath
+
+    args = project.hasProperty('args') ? project.property('args').toString().split() : ['--help']
+
+    group = 'development'
+    description = 'Runs the ConsistencyCheckCLI tool. Usage: gradle runConsistencyCheck --args="<dir>"'
+}
+
+tasks.register('consistencyCheckJar', Jar) {
+    dependsOn(classes)
+
+    archiveClassifier = 'consistency-check'
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+
+    manifest {
+        attributes 'Main-Class': 'com.mgmtp.a12.formengine.consistency.ConsistencyCheckCLI'
+    }
+
+    from sourceSets.main.output
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+
+    exclude 'META-INF/*.SF', 'META-INF/*.DSA', 'META-INF/*.RSA'
+
+    group = 'development'
+    description = 'Creates an executable JAR for the ConsistencyCheckCLI tool'
+}
+
 // Copy expression parser JS file during resource processing
 tasks.register('copyExpressionParser', Copy) {
     dependsOn(rootProject.tasks.named('installDependencies'))
+    mustRunAfter(rootProject.tasks.named('copyLicenseFilesTocore'))
 
     from layout.projectDirectory.file('../core/node_modules/@com.mgmtp.a12.expression/expression-core/dist/parser.js')
     into layout.buildDirectory.dir('resources/main/resources')

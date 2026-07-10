@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -33,11 +33,13 @@
 import { deepStrictEqual } from "node:assert/strict";
 
 import { Expression } from "@com.mgmtp.a12.expression/expression-core";
-import { DocumentServiceFactory } from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/facade.js";
+import { DocumentServiceFactory } from "@com.mgmtp.a12.kernel/kernel-md-facade";
 
 import type { FormModel } from "../../models/index.js";
-import { addConditionallyHiddenElementsMap } from "../../models/internal/utils/addConditionallyHiddenElementsMap.js";
+import { addConditionallyHiddenElementsMap } from "../../models/internal/unmarshall/addConditionallyHiddenElementsMap.js";
 
+import { createModelPath } from "../utils/createModelPath.js";
+import { DocumentModelHelpers } from "../utils/DocumentModelHelpers.js";
 import {
 	createButtonPanel,
 	createControl,
@@ -53,7 +55,6 @@ import {
 	createScreen,
 	createSection
 } from "../utils/form-model-factory.js";
-import { DocumentModelHelpers, ModelHelpers } from "../utils/model-helpers.js";
 
 describe("unit.models.internal.utils.conditionallyHiddenElements", () => {
 	describe("addConditionallyHiddenElementsMap", () => {
@@ -142,7 +143,7 @@ describe("unit.models.internal.utils.conditionallyHiddenElements", () => {
 
 					const expected = {
 						control1: {
-							masterFieldModelPath: ModelHelpers.createModelPath("root", "masterField1"),
+							masterFieldModelPath: createModelPath("root", "masterField1"),
 							values: ["value1"]
 						}
 					};
@@ -181,7 +182,7 @@ describe("unit.models.internal.utils.conditionallyHiddenElements", () => {
 
 					const expected = {
 						control1: {
-							masterFieldModelPath: ModelHelpers.createModelPath("root", "masterField1"),
+							masterFieldModelPath: createModelPath("root", "masterField1"),
 							values: ["value1", null]
 						}
 					};
@@ -221,7 +222,7 @@ describe("unit.models.internal.utils.conditionallyHiddenElements", () => {
 
 					const expected = {
 						control1: {
-							masterFieldModelPath: ModelHelpers.createModelPath("root", "masterField1"),
+							masterFieldModelPath: createModelPath("root", "masterField1"),
 							values: [true, false]
 						}
 					};
@@ -259,7 +260,7 @@ describe("unit.models.internal.utils.conditionallyHiddenElements", () => {
 
 					const expected = {
 						control1: {
-							masterFieldModelPath: ModelHelpers.createModelPath("root", "masterField1"),
+							masterFieldModelPath: createModelPath("root", "masterField1"),
 							values: [true, null, null]
 						}
 					};
@@ -299,7 +300,7 @@ describe("unit.models.internal.utils.conditionallyHiddenElements", () => {
 
 					const expected = {
 						control1: {
-							masterFieldModelPath: ModelHelpers.createModelPath("root", "masterField1"),
+							masterFieldModelPath: createModelPath("root", "masterField1"),
 							values: [true]
 						}
 					};
@@ -337,7 +338,7 @@ describe("unit.models.internal.utils.conditionallyHiddenElements", () => {
 
 					const expected = {
 						control1: {
-							masterFieldModelPath: ModelHelpers.createModelPath("root", "masterField1"),
+							masterFieldModelPath: createModelPath("root", "masterField1"),
 							values: [true, null]
 						}
 					};
@@ -431,15 +432,15 @@ describe("unit.models.internal.utils.conditionallyHiddenElements", () => {
 
 					const expected = {
 						control1: {
-							masterFieldModelPath: ModelHelpers.createModelPath("root", "masterField1"),
+							masterFieldModelPath: createModelPath("root", "masterField1"),
 							values: ["value1"]
 						},
 						control2: {
-							masterFieldModelPath: ModelHelpers.createModelPath("root", "masterField2"),
+							masterFieldModelPath: createModelPath("root", "masterField2"),
 							values: [true]
 						},
 						sectionWithCondition: {
-							masterFieldModelPath: ModelHelpers.createModelPath("root", "masterField1"),
+							masterFieldModelPath: createModelPath("root", "masterField1"),
 							values: ["value2"]
 						}
 					};
@@ -554,7 +555,7 @@ describe("unit.models.internal.utils.conditionallyHiddenElements", () => {
 
 					const elementId = `${elementType}1`;
 					const expectedEntry = {
-						masterFieldModelPath: ModelHelpers.createModelPath("root", "masterField1"),
+						masterFieldModelPath: createModelPath("root", "masterField1"),
 						values: ["testValue"]
 					};
 
@@ -654,23 +655,23 @@ describe("unit.models.internal.utils.conditionallyHiddenElements", () => {
 
 				const expected = {
 					grid1: {
-						masterFieldModelPath: ModelHelpers.createModelPath("root", "masterField1"),
+						masterFieldModelPath: createModelPath("root", "masterField1"),
 						values: ["hideGrid"]
 					},
 					row1: {
-						masterFieldModelPath: ModelHelpers.createModelPath("root", "masterField1"),
+						masterFieldModelPath: createModelPath("root", "masterField1"),
 						values: ["hideRow"]
 					},
 					cell1: {
-						masterFieldModelPath: ModelHelpers.createModelPath("root", "masterField1"),
+						masterFieldModelPath: createModelPath("root", "masterField1"),
 						values: ["hideCell"]
 					},
 					cell2: {
-						masterFieldModelPath: ModelHelpers.createModelPath("root", "masterField2"),
+						masterFieldModelPath: createModelPath("root", "masterField2"),
 						values: [true]
 					},
 					cell3: {
-						masterFieldModelPath: ModelHelpers.createModelPath("root", "masterField1"),
+						masterFieldModelPath: createModelPath("root", "masterField1"),
 						values: ["hideCustom"]
 					}
 				};

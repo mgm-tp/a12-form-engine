@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -35,10 +35,7 @@ import { mock } from "node:test";
 
 import type { Dispatch } from "redux";
 
-import type {
-	EntityInstancePath,
-	GroupInstance
-} from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
+import type { EntityInstancePath, GroupInstance } from "@com.mgmtp.a12.kernel/kernel-md-facade";
 
 import {
 	Commands,
@@ -52,14 +49,17 @@ import type { ReadonlyObjectMap } from "../../models/index.js";
 import { DocumentPath, DocumentUtils } from "../../models/internal/utils/document-utils.js";
 
 import { validateSetErrorMessageStateAction } from "../utils/assertions.js";
-import { MiddlewareHelpers } from "../utils/back-end-helpers.js";
-import { DocumentHelpers } from "../utils/document-helpers.js";
+import { createDocumentPath } from "../utils/createDocumentPath.js";
 import { US_LOCALE } from "../utils/localization.js";
-import { SetupHelpers } from "../utils/setup.js";
+import { MiddlewareHelpers } from "../utils/MiddlewareHelpers.js";
+import { loadModels } from "../utils/setup.js";
 import { setupFixture, setupModelsFixture } from "../utils/setupFixture.js";
-import { DOCUMENT_MODEL } from "../utils/test-model-helpers/validation.partial.js";
-
-const { createDocumentPath } = DocumentHelpers;
+import {
+	DOCUMENT_MODEL,
+	REPEATABLE_GROUP_1,
+	REQUIRED_STRING,
+	ROOT_GROUP
+} from "../utils/test-model-helpers/validation.partial.js";
 
 describe("unit.back-end.store.partialValidation", () => {
 	const defaultModels = setupModelsFixture("computation-validation.partial");
@@ -140,7 +140,7 @@ describe("unit.back-end.store.partialValidation", () => {
 		});
 
 		it("sets the message state with the new messages", () => {
-			const model = SetupHelpers.loadModels("buttons");
+			const model = loadModels("buttons");
 			const initialState = setupStoreWithScreen({
 				document: {},
 				screenName: "Screen2",
@@ -158,8 +158,8 @@ describe("unit.back-end.store.partialValidation", () => {
 			});
 			strictEqual(result, false);
 
-			const errorPath = DocumentHelpers.createDocumentPath(["A12T_Buttons"], ["RequiredField"]);
-			const booleanPath = DocumentHelpers.createDocumentPath(["A12T_Buttons"], ["BooleanField"]);
+			const errorPath = createDocumentPath(["A12T_Buttons"], ["RequiredField"]);
+			const booleanPath = createDocumentPath(["A12T_Buttons"], ["BooleanField"]);
 
 			const messages: ReadonlyObjectMap<EngineStore.Validation.Entry> = {
 				[DocumentPath.toString(errorPath)]: {
@@ -194,7 +194,7 @@ describe("unit.back-end.store.partialValidation", () => {
 			};
 			dispatchSpy.mock.resetCalls();
 
-			relevantElements = collectRelevantFields(initialState);
+			relevantElements = collectRelevantFields(newState);
 			result = validatePartlyWithFocusHandling({
 				state: newState,
 				dispatch: dispatchSpy,
@@ -210,8 +210,63 @@ describe("unit.back-end.store.partialValidation", () => {
 		});
 
 		describe("when a parseError is already present", () => {
+			it("removes stale parse errors when the document value is no longer null", () => {
+				const model = loadModels("computation-validation.errorValue");
+				const documentPath = createDocumentPath(["Root"], ["aNumber"]);
+
+				const initialMessages: ReadonlyObjectMap<EngineStore.Validation.Entry> = {
+					[DocumentPath.toString(documentPath)]: {
+						validationMessages: [],
+						parseError: {
+							value: "abc",
+							message: {
+								errorCode: "zahlHatUngueltigeZeichen",
+								errorKey: "formalePruefung",
+								errorText: [
+									{
+										key: "kernel.formalErrors.ZAHL_MIT_UNGUELTIGEN_ZEICHEN_ONK",
+										args: {},
+										defaults: { en: "The value must be integer." }
+									}
+								],
+								severity: "ERROR",
+								element: documentPath,
+								referencedFields: [documentPath]
+							}
+						}
+					}
+				};
+
+				// Document has a non-null value at the path → parse error is stale
+				const document = DocumentUtils.setValue({}, documentPath, 42, model.documentModel);
+
+				const state = setupStoreWithScreen({
+					document,
+					screenName: "Screen1",
+					models: model,
+					messages: initialMessages
+				});
+
+				const dispatch = mock.fn(x => x);
+				const middlewareOptions = createDefaultMiddlewareOptions();
+				const relevantElements = collectRelevantFields(state);
+				validatePartlyWithFocusHandling({
+					state,
+					dispatch,
+					middlewareOptions,
+					relevantElements
+				});
+
+				// The stale parse error should be removed from the dispatched messages
+				MiddlewareHelpers.assertActions(
+					dispatch,
+					[Commands.setMessageState({ messages: {} })],
+					false
+				);
+			});
+
 			it("must consider the error value and not return an error that would result from an empty field", () => {
-				const model = SetupHelpers.loadModels("computation-validation.errorValue");
+				const model = loadModels("computation-validation.errorValue");
 
 				const initialMessages: ReadonlyObjectMap<EngineStore.Validation.Entry> = {
 					"/Root[1]/aNumber[1]": {
@@ -413,50 +468,33 @@ describe("unit.back-end.store.partialValidation", () => {
 		});
 
 		describe("Given the first error is on a FieldOverviewColumn", () => {
-			const documentPath = createDocumentPath(
-				[DOCUMENT_MODEL.ROOT_GROUP],
-				[DOCUMENT_MODEL.REPEATABLE_GROUP_1, 0]
-			);
+			const documentPath = createDocumentPath([ROOT_GROUP], [REPEATABLE_GROUP_1, 0]);
+
+			function documentWithRequiredStringValues(values: (string | null)[]): GroupInstance {
+				return DocumentUtils.setValue(
+					{},
+					documentPath,
+					values.map(value => ({ requiredString: value })),
+					defaultModels.documentModel
+				);
+			}
 
 			const fixture = setupFixture(() => ({
-				documentWithValidationError: DocumentUtils.setValue(
-					{},
-					documentPath,
-					[
-						{
-							requiredString: "a"
-						},
-						{
-							requiredString: ""
-						}
-					],
-					defaultModels.documentModel
-				),
-				documentWithoutValidationError: DocumentUtils.setValue(
-					{},
-					documentPath,
-					[
-						{
-							requiredString: "a"
-						},
-						{
-							requiredString: "b"
-						}
-					],
-					defaultModels.documentModel
-				)
+				documentWithValidationError: documentWithRequiredStringValues(["a", ""]),
+				documentWithParseAndValidationError: documentWithRequiredStringValues([null, ""]),
+				documentWithoutValidationError: documentWithRequiredStringValues(["a", "b"])
 			}));
 
 			const pathToErrorField1 = createDocumentPath(
-				[DOCUMENT_MODEL.ROOT_GROUP],
-				[DOCUMENT_MODEL.REPEATABLE_GROUP_1, 1],
-				[DOCUMENT_MODEL.REQUIRED_STRING]
+				[ROOT_GROUP],
+				[REPEATABLE_GROUP_1, 1],
+				[REQUIRED_STRING]
 			);
 
 			const pathToErrorField2 = createDocumentPath(
-				[DOCUMENT_MODEL.ROOT_GROUP],
-				[DOCUMENT_MODEL.REPEATABLE_GROUP_1, 2],
-				[DOCUMENT_MODEL.REQUIRED_STRING]
+				[ROOT_GROUP],
+				[REPEATABLE_GROUP_1, 2],
+				[REQUIRED_STRING]
 			);
 
 			const focusedComponent = {
@@ -493,7 +531,7 @@ describe("unit.back-end.store.partialValidation", () => {
 				it("will focus the first error if set to true", () => {
 					testFocusFirstError({
 						focusFirstError: true,
-						document: fixture.documentWithValidationError,
+						document: fixture.documentWithParseAndValidationError,
 						pathToFirstErrorField: pathToErrorField1,
 						focusedComponent: { ...focusedComponent, index: 0 },
 						initialMessages
@@ -503,7 +541,7 @@ describe("unit.back-end.store.partialValidation", () => {
 				it("will not focus the first error if set to false", () => {
 					testFocusFirstError({
 						focusFirstError: false,
-						document: fixture.documentWithValidationError,
+						document: fixture.documentWithParseAndValidationError,
 						pathToFirstErrorField: pathToErrorField1,
 						initialMessages
 					});

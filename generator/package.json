@@ -1,25 +1,24 @@
 {
   "name": "@com.mgmtp.a12.formengine/form-model-generator",
-  "version": "38.5.0-SNAPSHOT",
+  "version": "39.0.0",
   "description": "Form Model Generator",
   "author": "mgm technology partners",
   "license": "(EUPL-1.2 OR LicenseRef-commercial)",
   "type": "module",
   "sideEffects": false,
-  "exports": {
-    ".": "./lib/main/ts/generator/index.js",
-    "./lib/main/*": "./lib/main/*.js",
-    "./lib/main/*.js": "./lib/main/*.js"
-  },
+  "exports": "./lib/main/ts/generator/index.js",
   "scripts": {
     "clean": "rimraf ./lib ./target cyclonedx.json",
     "build": "pnpm run \"/^compile:.*/\"",
     "compile:version": "node scripts/version.js",
     "compile:typescript": "tsc && tsc --project ./tsconfig.lib.json",
-    "compile:detect-cycles": "devtools detect-cycles \"./src/**/*.@(ts|tsx)\"",
+    "compile:detect-cycles": "devtools detect-cycles \"./src/**/*.@(ts|tsx|d.ts|d.cts|d.mts)\"",
     "test": "mocha",
     "typescript": "tsc --project ./tsconfig.dev.json",
-    "watch": "tsc --project ./tsconfig.dev.json --watch"
+    "watch": "tsc --project ./tsconfig.dev.json --watch",
+    "lint": "eslint --flag unstable_native_nodejs_ts_config . --cache",
+    "lint:fix": "node --run lint -- --fix",
+    "lint:onlyErrors": "node --run lint -- --quiet"
   },
   "devDependencies": {
     "@com.mgmtp.a12.base/base-model-api": "catalog:a12",
@@ -31,6 +30,7 @@
     "@com.mgmtp.a12.utils/utils-logging": "catalog:a12",
     "@types/mocha": "catalog:",
     "@types/node": "catalog:",
+    "eslint": "catalog:",
     "mocha": "catalog:",
     "rimraf": "catalog:",
     "source-map-support": "catalog:",

@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -33,13 +33,13 @@
 import type { JSX } from "react";
 import { useContext, useEffect, useRef } from "react";
 
-import { ModelPath } from "@com.mgmtp.a12.base/base-model-api/lib/main/model/index.js";
-import { LocalizerContext } from "@com.mgmtp.a12.utils/utils-localization-react/lib/main/index.js";
-import type { VirtualScrollOptions } from "@com.mgmtp.a12.widgets/widgets-core/lib/table/new-api/table.api.js";
+import { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
+import { LocalizerContext } from "@com.mgmtp.a12.utils/utils-localization-react";
+import type { VirtualScrollOptions } from "@com.mgmtp.a12.widgets/widgets-core";
 
 import { UiStateSelectors } from "../../../../../../back-end/store/internal/selectors/ui-state.js";
 import { usePrevious } from "../../../../../../internal/debugProps.js";
-import { FormModel } from "../../../../../../models/index.js";
+import { isFormModelFieldOverviewColumn } from "../../../../../../models/internal/FormModelGuards.js";
 import { DocumentPath } from "../../../../../../models/internal/utils/document-utils.js";
 import { ComponentMapContext } from "../../../../configuration/componentMap/component-map-context.js";
 import { getTitleLabel } from "../../model-element-labels.js";
@@ -97,7 +97,7 @@ export function RepeatTable(props: RepeatTableProps) {
 	const showSummary =
 		props.processedData.rows.length > 0 &&
 		props.modelElement.repeatOverviewColumn?.some(
-			col => FormModel.FieldOverviewColumn.isInstance(col) && col.showSummary
+			col => isFormModelFieldOverviewColumn(col) && col.showSummary
 		);
 
 	const { headFilterContentRenderer, footContentRenderer, ...commonTableComponentRenderers } =

@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -32,13 +32,9 @@
 
 import { strictEqual } from "node:assert/strict";
 
-import type { Action } from "typescript-fsa";
-
-import { ModelPath } from "@com.mgmtp.a12.base/base-model-api/lib/main/model/index.js";
-import type {
-	EntityInstancePath,
-	GroupInstance
-} from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
+import { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
+import type { Action } from "@com.mgmtp.a12.client/typescript-fsa-redux-5-compat";
+import type { EntityInstancePath, GroupInstance } from "@com.mgmtp.a12.kernel/kernel-md-facade";
 
 import { Commands, Events } from "../../../../../back-end/store/internal/actions.js";
 import type { EngineStore, Models } from "../../../../../back-end/store/internal/store.js";
@@ -47,18 +43,14 @@ import {
 	DocumentUtils
 } from "../../../../../models/internal/utils/document-utils.js";
 import type { ReadonlyObjectMap } from "../../../../../models/internal/utils/json.js";
-import { MiddlewareHelpers } from "../../../../utils/back-end-helpers.js";
-import { DocumentHelpers } from "../../../../utils/document-helpers.js";
-import { ModelHelpers } from "../../../../utils/model-helpers.js";
-import { SetupHelpers } from "../../../../utils/setup.js";
+import { MiddlewareHelpers } from "../../../../utils/MiddlewareHelpers.js";
+import { createDocumentPath } from "../../../../utils/createDocumentPath.js";
+import { createModelPath } from "../../../../utils/createModelPath.js";
+import { createTestStore, loadData } from "../../../../utils/setup.js";
 import { setupFixture, setupModelsFixture } from "../../../../utils/setupFixture.js";
 import { DOCUMENT_PATHS } from "../../../../utils/test-model-helpers/computation.js";
 import { DR } from "../../../../utils/test-model-helpers/detached.repeat.js";
 import { REPEAT, createDocumentForRepeat } from "../../../../utils/test-model-helpers/repeat.js";
-
-const { createTestStore, loadData } = SetupHelpers;
-const { createModelPath } = ModelHelpers;
-const { createDocumentPath } = DocumentHelpers;
 
 describe("api.back-end.store.middleware", () => {
 	describe("removeRepeatRowMiddleware", () => {
@@ -184,7 +176,7 @@ describe("api.back-end.store.middleware", () => {
 						changes: [
 							{
 								type: "ValueChanged",
-								path: DocumentHelpers.createDocumentPath(["Root"], ["L6_Number_Sum"])
+								path: createDocumentPath(["Root"], ["L6_Number_Sum"])
 							},
 							{ type: "GroupRemoved", path: removeRowEvent.payload.rowPath }
 						],
@@ -369,8 +361,8 @@ describe("api.back-end.store.middleware", () => {
 					const expectedCommand = Commands.setDocument({
 						changes: [
 							{ type: "ValueChanged", path: DOCUMENT_PATHS.FIELD_QUOTIENT },
-							{ type: "ValueChanged", path: DOCUMENT_PATHS.FIELD_D },
 							{ type: "ValueChanged", path: DOCUMENT_PATHS.FIELD_H },
+							{ type: "ValueChanged", path: DOCUMENT_PATHS.FIELD_D },
 							{ type: "GroupRemoved", path: removeRowEvent.payload.rowPath }
 						],
 						document: expectedDocument
@@ -486,7 +478,7 @@ describe("api.back-end.store.middleware", () => {
 									{ locationPath: [], path: [] },
 									{
 										locationPath: DR.NestedRepeat.nested_dr_dr_locationPath,
-										path: DocumentHelpers.createDocumentPath(["Root"], ["Nested_L1"])
+										path: createDocumentPath(["Root"], ["Nested_L1"])
 									}
 								]
 							}
@@ -495,7 +487,7 @@ describe("api.back-end.store.middleware", () => {
 					});
 
 					const removeRowEvent = Events.Repeat.removeRow({
-						rowPath: DocumentHelpers.createDocumentPath(["Root"], ["Nested_L1"], ["Nested_L2"]),
+						rowPath: createDocumentPath(["Root"], ["Nested_L1"], ["Nested_L2"]),
 						repeatFormModelPath: [
 							...DR.NestedRepeat.nested_dr_dr_locationPath,
 							{ elementName: "inline-repeat-Nested_L2" }

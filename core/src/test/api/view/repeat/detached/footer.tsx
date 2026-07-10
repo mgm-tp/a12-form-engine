@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -33,12 +33,12 @@
 import { deepEqual, equal } from "node:assert/strict";
 import { mock } from "node:test";
 
-import { act, type ComponentType } from "react";
+import { act } from "react";
+import type { ComponentType } from "react";
 
 import { query } from "@com.mgmtp.a12.devtools/react";
-import type { ButtonProps } from "@com.mgmtp.a12.widgets/widgets-core/lib/button/main/button.api.js";
-import { Button } from "@com.mgmtp.a12.widgets/widgets-core/lib/button/main/button.view.js";
-import type { ActionContentboxProps } from "@com.mgmtp.a12.widgets/widgets-core/lib/contentbox/main/action-contentbox/action-contentbox.api.js";
+import { Button } from "@com.mgmtp.a12.widgets/widgets-core";
+import type { ButtonProps, ActionContentboxProps } from "@com.mgmtp.a12.widgets/widgets-core";
 
 import type { EngineStore } from "../../../../../back-end/store/internal/store.js";
 import type { ReadonlyObjectMap } from "../../../../../models/internal/utils/json.js";
@@ -53,14 +53,14 @@ import type { Config } from "../../../../../view/internal/configuration/engine-c
 import { getComponentMocks } from "../../../../rtl-utils/getComponentMocks.js";
 import { mockFunctions } from "../../../../rtl-utils/mock-map.js";
 import { mouseEventMock } from "../../../../rtl-utils/mock-utils.js";
-import { DocumentHelpers } from "../../../../utils/document-helpers.js";
-import { ModelHelpers } from "../../../../utils/model-helpers.js";
-import { SetupHelpers } from "../../../../utils/setup.js";
+import { createDocumentPath } from "../../../../utils/createDocumentPath.js";
+import { createModelPath } from "../../../../utils/createModelPath.js";
+import {
+	setupConnectedFormEngineWithRtlAsync,
+	setupFormEngineRendererWithRtlAsync
+} from "../../../../utils/setup.js";
 import { setupModelsFixture } from "../../../../utils/setupFixture.js";
-import { BUTTONS } from "../../../../utils/test-model-helpers/button.melies.js";
-
-const { createDocumentPath } = DocumentHelpers;
-const { createModelPath } = ModelHelpers;
+import { BUTTONS } from "../../../../utils/test-model-helpers/button.form.js";
 
 export function executeFooterTests() {
 	const models = setupModelsFixture("buttons");
@@ -213,7 +213,7 @@ export function executeFooterTests() {
 			it(`renders a${disabled ? " disabled" : ""} ${options.buttonType} button${disabled ? " when the disabled state is true" : ""}`, async () => {
 				const formModelMap = mockFunctions(DefaultFormModelMap);
 
-				const wrapper = await SetupHelpers.setupFormEngineRendererWithRtlAsync({
+				const wrapper = await setupFormEngineRendererWithRtlAsync({
 					componentMap,
 					models,
 					ui: {
@@ -244,7 +244,7 @@ export function executeFooterTests() {
 				it(`triggers onLeaveDetachedRepeatRow with cancel === ${
 					options.buttonType !== "commit"
 				}`, async () => {
-					const wrapper = await SetupHelpers.setupConnectedFormEngineWithRtlAsync({
+					const wrapper = await setupConnectedFormEngineWithRtlAsync({
 						models,
 						ui: {
 							screenLocation: options.locationStack,
@@ -272,7 +272,7 @@ export function executeFooterTests() {
 				});
 			} else {
 				it("triggers onLeaveDetachedRepeatRow with cancel === true, when the confirm button is clicked", async () => {
-					const wrapper = await SetupHelpers.setupConnectedFormEngineWithRtlAsync({
+					const wrapper = await setupConnectedFormEngineWithRtlAsync({
 						models,
 						ui: {
 							screenLocation: options.locationStack,

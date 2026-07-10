@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -32,8 +32,8 @@
 
 import type { DataReference, ParseError } from "@com.mgmtp.a12.client/client-data";
 import { DocumentPath, KernelMessage } from "@com.mgmtp.a12.client/client-data";
-import type { Message } from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
-import type { ValueConversion } from "@com.mgmtp.a12.utils/utils-localization/lib/main/conversion.js";
+import type { Message } from "@com.mgmtp.a12.kernel/kernel-md-facade";
+import type { ValueConversionParseError } from "@com.mgmtp.a12.utils/utils-localization";
 
 export function getMockMessage(options?: Partial<Message>): Message {
 	return {
@@ -49,7 +49,7 @@ export function getMockMessage(options?: Partial<Message>): Message {
 	};
 }
 
-export function mockConversionError(): ValueConversion.ParseError {
+export function mockConversionError(): ValueConversionParseError {
 	return {
 		errorCode: "",
 		errorKey: "",
@@ -59,7 +59,7 @@ export function mockConversionError(): ValueConversion.ParseError {
 }
 
 export function mockParseError(
-	conversionError: ValueConversion.ParseError,
+	conversionError: ValueConversionParseError,
 	dataReference: DataReference,
 	errorValue: string
 ): ParseError {

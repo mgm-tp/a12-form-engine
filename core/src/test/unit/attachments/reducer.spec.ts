@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -32,9 +32,9 @@
 
 import { deepStrictEqual, strictEqual } from "node:assert/strict";
 
-import { ModelPath } from "@com.mgmtp.a12.base/base-model-api/lib/main/model/index.js";
-import type { Activity } from "@com.mgmtp.a12.client/client-core/lib/core/activity/index.js";
-import { ActivityActions } from "@com.mgmtp.a12.client/client-core/lib/core/activity/index.js";
+import { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
+import type { Activity } from "@com.mgmtp.a12.client/client-core";
+import { ActivityActions } from "@com.mgmtp.a12.client/client-core";
 
 import { Events } from "../../../back-end/store/internal/actions.js";
 import type { EngineStore } from "../../../back-end/store/internal/store.js";
@@ -52,7 +52,8 @@ import {
 	reduceUiState
 } from "../../../client-extensions/internal/extensions/form-engine/internal/attachments/reducer/reduceUiState.js";
 import { DocumentPath } from "../../../models/internal/utils/document-utils.js";
-import { DocumentModelHelpers } from "../../utils/model-helpers.js";
+import { DocumentModelHelpers } from "../../utils/DocumentModelHelpers.js";
+import { createFormModelContent } from "../../utils/FormModelHelpers.js";
 
 describe("unit.attachments.reducer", () => {
 	describe("attachmentReducer", () => {
@@ -562,9 +563,7 @@ function withModels<A extends ActivityActions.DataReducerAction>(action: A): A {
 							modelVersion: "38.0.0",
 							modelReferences: [{ modelType: "document", reference: "DM" }]
 						},
-						content: {
-							screens: [{ name: "screen1" }]
-						}
+						content: createFormModelContent()
 					},
 					direct: true
 				},

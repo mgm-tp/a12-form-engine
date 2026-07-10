@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -30,11 +30,14 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { ActivitySelectors } from "@com.mgmtp.a12.client/client-core/lib/core/activity/index.js";
-import { NEW_INSTANCE_IDENTIFIER } from "@com.mgmtp.a12.client/client-core/lib/core/application/index.js";
-import { LocaleSelectors } from "@com.mgmtp.a12.client/client-core/lib/core/locale/index.js";
-import { Model, ModelSelectors } from "@com.mgmtp.a12.client/client-core/lib/core/model/index.js";
-import { DocumentServiceFactory } from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/facade.js";
+import {
+	ActivitySelectors,
+	LocaleSelectors,
+	Model,
+	ModelSelectors,
+	NEW_INSTANCE_IDENTIFIER
+} from "@com.mgmtp.a12.client/client-core";
+import { DocumentServiceFactory } from "@com.mgmtp.a12.kernel/kernel-md-facade";
 
 import type { FormModel } from "../../../../../../models/index.js";
 import { isFormModel } from "../../../../../../models/index.js";
@@ -78,22 +81,26 @@ export const DefaultRequestSelectorMap: RequestSelectorMap = {
 			});
 		};
 	},
-	save(config) {
+	save({ activityId }) {
 		return state => {
 			const locale = LocaleSelectors.locale()(state);
 			const instance = ActivitySelectors.activityPropById(
-				config.activityId,
+				activityId,
 				a => a.descriptor.instance
 			)(state);
-			const oldData = ActivitySelectors.data(config.activityId)(state);
+
+			const oldData = ActivitySelectors.data(activityId)(state);
 			assertCondition(
 				FormActivity.Data.SingleDocumentData.isInstance(oldData),
 				"Activity data does not contain a single document"
 			);
 
-			const models = ModelSelectors.allModelsInScene(config.activityId)(state);
+			const models = ModelSelectors.allModelsInScene(activityId)(state);
 
-			const formModel = assertNotNullish(models.find(isFormModel), "No form model found in scene");
+			const formModel = assertNotNullish(
+				models.find(m => isFormModel(m)),
+				"No form model found in scene"
+			);
 			const documentModel = assertNotNullish(models.find(isReferencedDM(formModel)));
 
 			// apply "notRelevant" from dependent groups & fields
@@ -109,9 +116,18 @@ export const DefaultRequestSelectorMap: RequestSelectorMap = {
 				.getDocumentService()
 				.formatDates(relevantDocument, documentModel);
 
-			return instance === NEW_INSTANCE_IDENTIFIER
-				? RequestBuilder.addDocument(modelId, docForServer, locale)
-				: RequestBuilder.modifyDocument(id, docForServer, locale);
+			const saveRequest =
+				instance === NEW_INSTANCE_IDENTIFIER
+					? RequestBuilder.addDocument(modelId, docForServer, locale)
+					: RequestBuilder.modifyDocument(id, docForServer, locale);
+
+			const uniquenessRequest = RequestBuilder.checkUniqueness(
+				modelId,
+				docForServer,
+				id !== NEW_INSTANCE_IDENTIFIER ? id : undefined
+			);
+
+			return [uniquenessRequest, saveRequest];
 		};
 	},
 	delete(config) {

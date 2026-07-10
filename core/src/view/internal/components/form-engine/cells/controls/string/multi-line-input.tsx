@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -33,8 +33,8 @@
 import type { ReactElement } from "react";
 import { useCallback, useContext } from "react";
 
-import { ModelPath } from "@com.mgmtp.a12.base/base-model-api/lib/main/model/index.js";
-import type { DocumentModel } from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
+import { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
+import type { DocumentModel } from "@com.mgmtp.a12.kernel/kernel-md-facade";
 
 import { DocumentPath } from "../../../../../../../models/internal/utils/document-utils.js";
 import { ComponentMapContext } from "../../../../../configuration/componentMap/component-map-context.js";
@@ -50,7 +50,7 @@ export function MultilineInput(
 	const { BufferedTextArea } = useContext(ComponentMapContext);
 
 	const options = props.renderConfiguration.renderOptions;
-
+	const { inputRef } = props;
 	const value = props.value;
 	const { suffixes, truncateSuffix, htmlInputProps, ...inputProps } =
 		useBasePropsForTextInputs(props);
@@ -72,9 +72,9 @@ export function MultilineInput(
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 		[
 			options.eventHandlers,
-			// eslint-disable-next-line react-hooks/exhaustive-deps
+			// eslint-disable-next-line react-hooks/exhaustive-deps, react-hooks/use-memo
 			ModelPath.toString(props.formModelPath),
-			// eslint-disable-next-line react-hooks/exhaustive-deps
+			// eslint-disable-next-line react-hooks/exhaustive-deps, react-hooks/use-memo
 			DocumentPath.toString(value.path)
 		]
 	);
@@ -87,8 +87,8 @@ export function MultilineInput(
 			onValueChange={() => inputTouched(options)}
 			inputProps={htmlInputProps}
 			inputRef={(element: HTMLElement | null) => {
-				if (props.inputRef) {
-					props.inputRef.current = element;
+				if (inputRef) {
+					inputRef.current = element;
 				}
 			}}
 		/>

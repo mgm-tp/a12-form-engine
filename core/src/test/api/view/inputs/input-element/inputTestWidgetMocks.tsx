@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -32,7 +32,7 @@
 
 import type { JSX, PropsWithChildren } from "react";
 
-import { DataRoles } from "@com.mgmtp.a12.widgets/widgets-core/lib/common/main/data-roles.js";
+import { DataRoles } from "@com.mgmtp.a12.widgets/widgets-core";
 
 import type { WidgetMap } from "../../../../../view/index.js";
 import { DefaultWidgetMap } from "../../../../../view/index.js";
@@ -84,7 +84,7 @@ interface InputWidgetMockProps {
 
 function mockForType(type: keyof WidgetMap): React.ComponentType<InputWidgetMockProps> {
 	const Irregular_Labels: Partial<Record<keyof WidgetMap, unknown>> = {
-		TextLineStateless: DataRoles.Textline.Label
+		TextField: DataRoles.TextField.Label
 	};
 
 	function labelDataRole(type: keyof WidgetMap): unknown {
@@ -101,8 +101,8 @@ function mockForType(type: keyof WidgetMap): React.ComponentType<InputWidgetMock
 					<div data-role={DataRoles.Warning.Text}>{props.warningMessage}</div>
 				)}
 				{props.infoMessage && <div data-role={DataRoles.Info.Text}>{props.infoMessage}</div>}
-				{props.prefixes && <div data-role={DataRoles.Textline.Prefix}>{props.prefixes}</div>}
-				{props.suffixes && <div data-role={DataRoles.Textline.TextAffix}>{props.suffixes}</div>}
+				{props.prefixes && <div data-role={DataRoles.TextField.Prefix}>{props.prefixes}</div>}
+				{props.suffixes && <div data-role={DataRoles.TextField.TextAffix}>{props.suffixes}</div>}
 
 				{/* plain ReactNode props */}
 				{props.addonAfter}

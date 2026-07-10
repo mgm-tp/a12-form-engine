@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -30,24 +30,24 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import type { Action } from "typescript-fsa";
 import type { JSX } from "react";
 
+import type { Action } from "@com.mgmtp.a12.client/typescript-fsa-redux-5-compat";
 import {
 	SettingTemplate,
 	useSettingState
 } from "@com.mgmtp.a12.contentengine/contentengine-editor";
-import { Button } from "@com.mgmtp.a12.widgets/widgets-core/lib/button/main/button.view.js";
-import { Icon } from "@com.mgmtp.a12.widgets/widgets-core/lib/icon/main/icon.view.js";
-import type { BaseColumnType } from "@com.mgmtp.a12.widgets/widgets-core/lib/table/new-api/column.api.js";
-import type {
-	TableComponentRenderers,
-	TableRenderPropsType
-} from "@com.mgmtp.a12.widgets/widgets-core/lib/table/new-api/table-renderer.api.js";
 import {
+	Button,
+	Icon,
 	DefaultTableComponentRenderers,
 	Table
-} from "@com.mgmtp.a12.widgets/widgets-core/lib/table/new-api/table.view.js";
+} from "@com.mgmtp.a12.widgets/widgets-core";
+import type {
+	BaseColumnType,
+	TableComponentRenderers,
+	TableRenderPropsType
+} from "@com.mgmtp.a12.widgets/widgets-core";
 
 import type {
 	ChangeAnnotationPayload,

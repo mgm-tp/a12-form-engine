@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -33,7 +33,7 @@
 import type { JSX, ReactNode } from "react";
 import { useContext } from "react";
 
-import { provider as DeviceDetector } from "@com.mgmtp.a12.widgets/widgets-core/lib/common/main/device-detector.js";
+import { provider as DeviceDetector } from "@com.mgmtp.a12.widgets/widgets-core";
 
 import { WidgetMapContext } from "../../../configuration/widget-map-context.js";
 

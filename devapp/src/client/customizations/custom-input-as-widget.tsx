@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -35,13 +35,13 @@ import { createContext, useContext } from "react";
 
 import type { FormModel, FormModelMap, WidgetMap } from "@com.mgmtp.a12.formengine/formengine-core";
 import {
-	FormModelPath,
 	DefaultFormModelMap,
 	DefaultWidgetMap,
+	FormModelPath,
 	useDocumentPathForInput
 } from "@com.mgmtp.a12.formengine/formengine-core";
-import { DocumentServiceFactory } from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/facade.js";
-import type { TextLineStatelessProps } from "@com.mgmtp.a12.widgets/widgets-core/lib/input/text-line/main/template/text-line.tpl.api.js";
+import { DocumentServiceFactory } from "@com.mgmtp.a12.kernel/kernel-md-facade";
+import type { TextFieldProps } from "@com.mgmtp.a12.widgets/widgets-core";
 
 /**
  * This example demonstrates how to customize a StringInput
@@ -63,7 +63,7 @@ import type { TextLineStatelessProps } from "@com.mgmtp.a12.widgets/widgets-core
  */
 export const CustomWidgetMapForCustomInput: WidgetMap = {
 	...DefaultWidgetMap,
-	TextLineStateless: StringInput
+	TextField: StringInput
 };
 
 export const CustomFormModelMapForCustomInput: FormModelMap = {
@@ -83,7 +83,7 @@ export const ControlContext = createContext<
 	FormModelMap.FormModelComponentProps<FormModel.Control> | undefined
 >(undefined);
 
-function StringInput(props: TextLineStatelessProps): ReactElement | null {
+function StringInput(props: TextFieldProps): ReactElement | null {
 	const controlContext = useContext(ControlContext);
 	if (controlContext === undefined) {
 		throw new Error(`Context for control is missing!`);
@@ -103,11 +103,11 @@ function StringInput(props: TextLineStatelessProps): ReactElement | null {
 	// text input does not belong to a StringInput control,
 	// just render the normal widget
 	if (field?.type !== "Field" || field.fieldType.type !== "StringType") {
-		return <DefaultWidgetMap.TextLineStateless {...props} />;
+		return <DefaultWidgetMap.TextField {...props} />;
 	}
 
 	return (
-		<DefaultWidgetMap.TextLineStateless
+		<DefaultWidgetMap.TextField
 			{...props}
 			textAlignment={"right"}
 			onChange={ev => {

@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -38,28 +38,23 @@ import type { MouseEvent } from "react";
 
 import { DocumentContext } from "@com.mgmtp.a12.contentengine/contentengine-core";
 import { query, screen } from "@com.mgmtp.a12.devtools/react";
-import type { Message } from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
-import { LocalizerContext } from "@com.mgmtp.a12.utils/utils-localization-react/lib/main/index.js";
-import type {
-	DateRangeConversionConfig,
-	ValueConversion
-} from "@com.mgmtp.a12.utils/utils-localization/lib/main/index.js";
-import { provider as deviceDetector } from "@com.mgmtp.a12.widgets/widgets-core/lib/common/main/device-detector.js";
+import type { DateRangeConversionConfig } from "@com.mgmtp.a12.utils/utils-localization";
+import type { LocalizerContextProps } from "@com.mgmtp.a12.utils/utils-localization-react";
+import { LocalizerContext } from "@com.mgmtp.a12.utils/utils-localization-react";
+import { provider as deviceDetector } from "@com.mgmtp.a12.widgets/widgets-core";
+import type { Message } from "@com.mgmtp.a12.kernel/kernel-md-facade";
 
-import { DefaultFunctionMap } from "../../../../../main/core/contentElements/functionMap/defaultFunctionMap.js";
-import { FunctionMapContext } from "../../../../../main/core/contentElements/functionMap/functionMapContext.js";
 import type { DatePickerNode } from "../../../../../main/core/contentElements/modules/datePicker/datePickerNode.js";
 import { DATE_PICKER_TYPE } from "../../../../../main/core/contentElements/modules/datePicker/datePickerNode.js";
 import { DateRangeInput } from "../../../../../main/core/contentElements/modules/datePicker/inputTypes/dateRangeInput.js";
+import { DateUtils } from "../../../../../main/core/contentElements/modules/datePicker/inputTypes/dateUtils.js";
 import { nmTokensToString } from "../../../../../main/core/contentElements/nmtokens.js";
 import {
 	FORM_ELEMENTS_NAMESPACE,
 	FormElementContext,
-	RESOURCE_KEYS,
-	USE_COMMON_CONTROL_SETTINGS_WRAPPER,
-	USE_COMMON_WIDGET_SETTINGS_WRAPPER,
-	type WidgetMap
+	RESOURCE_KEYS
 } from "../../../../../main/core/index.js";
+import type { WidgetMap } from "../../../../../main/core/index.js";
 import type { BaseControlSettings } from "../../../../../main/core/types/controlSettings.js";
 import type { BaseWidgetSettings } from "../../../../../main/core/types/widgetSettings.js";
 import {
@@ -67,39 +62,20 @@ import {
 	assertCalledWith,
 	assertCalledWithArgument
 } from "../../../../assertions.js";
+import { getMockLocalization } from "../../../../mocks/getMockLocalization.js";
 import { mockDocumentContext } from "../../../../mocks/mockDocumentContext.js";
 import {
 	getMockMessage,
 	mockConversionError,
 	mockParseError
 } from "../../../../mocks/mockError.js";
+import { setupMockHooks } from "../../../../mocks/setupMockHooks.js";
 import {
 	BUFFERED_TEXT_LINE,
 	DATE_PICKER_DIALOG,
 	PICKER_WRAPPER
 } from "../../../../rtl-utils/data-roles.js";
 import { renderWrapper } from "../../../../rtl-utils/render-wrapper.js";
-
-function setupMockHooks(options: {
-	controlSettings: BaseControlSettings;
-	widgetSettings: BaseWidgetSettings;
-}) {
-	return {
-		useControlSettingsMock: mock.method(
-			USE_COMMON_CONTROL_SETTINGS_WRAPPER,
-			"useCommonControlSettings",
-			() => options.controlSettings
-		),
-		useWidgetSettingsMock: mock.method(
-			USE_COMMON_WIDGET_SETTINGS_WRAPPER,
-			"useCommonWidgetSettings",
-			() => options.widgetSettings
-		),
-		useFocusFieldMock: mock.fn(),
-		useFocusFirstErrorMock: mock.fn(),
-		useFocusInputMock: mock.fn()
-	};
-}
 
 describe("core.contentElements", () => {
 	describe("DateRangeInput", () => {
@@ -253,6 +229,22 @@ describe("core.contentElements", () => {
 
 					strictEqual(pickerProps.footer?.acceptLabel, RESOURCE_KEYS.daterange.button.ok);
 					strictEqual(pickerProps.footer?.clearLabel, RESOURCE_KEYS.daterange.button.clear);
+				});
+
+				it("sets an initial date range for the DateRangePicker when no value is given", async () => {
+					const initialDate = new Date(42);
+					mock.method(DateUtils, "calculateInitialDateRange", () => ({ from: initialDate }));
+
+					const { widgetMap } = setup();
+
+					await openPicker(widgetMap);
+
+					const pickerProps = query(widgetMap.DatePicker).props();
+
+					deepStrictEqual(pickerProps.selected, [
+						initialDate,
+						{ from: initialDate, to: undefined }
+					]);
 				});
 
 				it("closes the PickerWrapper when onClose is triggered", async () => {
@@ -443,6 +435,22 @@ describe("core.contentElements", () => {
 					strictEqual(buttonProps.label, RESOURCE_KEYS.daterange.button.clear);
 					strictEqual(buttonProps.disabled, false);
 					notStrictEqual(buttonProps.onClick, undefined);
+				});
+
+				it("sets an initial date range for the DatePickerDialog when no value is given", async () => {
+					const initialDateRange = { from: new Date(42) };
+					mock.method(DateUtils, "calculateInitialDateRange", () => initialDateRange);
+
+					const { widgetMap } = setup();
+
+					await openPicker(widgetMap);
+
+					const pickerProps = query(widgetMap.DatePickerDialog).props();
+
+					deepStrictEqual(pickerProps.selected, [
+						initialDateRange.from,
+						{ from: initialDateRange.from, to: undefined }
+					]);
 				});
 
 				it("closes the DatePickerDialog when onClose is triggered", async () => {
@@ -719,49 +727,39 @@ describe("core.contentElements", () => {
 					groupedMessages?: Message[];
 					ungroupedMessages?: Message[];
 				}) {
-					const { useFocusFieldMock, useFocusFirstErrorMock, useFocusInputMock } = setupMockHooks({
-						controlSettings: getMockControlSettings({
-							groupedMessages: options?.groupedMessages,
-							ungroupedMessages: options?.ungroupedMessages
-						}),
-						widgetSettings: getMockWidgetSettings()
+					const mockControlSettings = getMockControlSettings({
+						groupedMessages: options?.groupedMessages,
+						ungroupedMessages: options?.ungroupedMessages
+					});
+					const mockWidgetSettings = getMockWidgetSettings();
+
+					setupMockHooks({
+						controlSettings: mockControlSettings,
+						widgetSettings: mockWidgetSettings
 					});
 
-					renderWrapper(
-						<FunctionMapContext.Provider
-							value={{
-								...DefaultFunctionMap,
-								useFocusField: useFocusFieldMock,
-								useFocusFirstError: useFocusFirstErrorMock,
-								useFocusInput: useFocusInputMock
-							}}
-						>
-							<DateRangeInput node={mockNode()} />
-						</FunctionMapContext.Provider>
-					);
-
-					return { useFocusFieldMock, useFocusFirstErrorMock, useFocusInputMock };
+					return renderWrapper(<DateRangeInput node={mockNode()} />);
 				}
 
 				it("calls focus hooks when rendered", () => {
-					const { useFocusFieldMock, useFocusFirstErrorMock, useFocusInputMock } = setupFocusTest();
+					const { functionMap } = setupFocusTest();
 
-					assertCallCount(useFocusFieldMock, 1);
-					assertCallCount(useFocusFirstErrorMock, 1);
-					assertCalledWithArgument(useFocusFirstErrorMock, 0, false);
-					assertCallCount(useFocusInputMock, 1);
+					assertCallCount(functionMap.useFocusField, 1);
+					assertCallCount(functionMap.useFocusFirstError, 1);
+					assertCalledWithArgument(functionMap.useFocusFirstError, 0, false);
+					assertCallCount(functionMap.useFocusInput, 1);
 				});
 
 				it("calls useFocusFirstError with true when an ungrouped error exists", () => {
-					const { useFocusFirstErrorMock } = setupFocusTest({
+					const { functionMap } = setupFocusTest({
 						ungroupedMessages: [getMockMessage({ severity: "ERROR" })]
 					});
 
-					assertCalledWithArgument(useFocusFirstErrorMock, 0, true);
+					assertCalledWithArgument(functionMap.useFocusFirstError, 0, true);
 				});
 
 				it("calls useFocusFirstError with false when no ungrouped error exists", () => {
-					const { useFocusFirstErrorMock } = setupFocusTest({
+					const { functionMap } = setupFocusTest({
 						ungroupedMessages: [
 							getMockMessage({ severity: "WARNING" }),
 							getMockMessage({ severity: "INFO" })
@@ -773,7 +771,7 @@ describe("core.contentElements", () => {
 						]
 					});
 
-					assertCalledWithArgument(useFocusFirstErrorMock, 0, false);
+					assertCalledWithArgument(functionMap.useFocusFirstError, 0, false);
 				});
 			});
 		});
@@ -784,7 +782,7 @@ function setup(options?: {
 	controlSettings?: BaseControlSettings;
 	widgetSettings?: BaseWidgetSettings;
 	docContext?: DocumentContext;
-	localizerContext?: LocalizerContext.Type;
+	localizerContext?: LocalizerContextProps;
 	disableDatePicker?: true;
 	node?: DatePickerNode;
 }) {
@@ -894,20 +892,5 @@ function getMockWidgetSettings(
 		inputProps: { "aria-required": true },
 		ariaDescribedBy: [],
 		...(options ?? {})
-	};
-}
-
-function getMockLocalization(conversion?: Partial<ValueConversion>): LocalizerContext.Type {
-	return {
-		locale: { language: "en", country: "US" },
-		localizer: localizable => localizable.key,
-		conversion: {
-			parseValue: () => ({
-				value: ""
-			}),
-			formatValue: () => "",
-			...conversion
-		},
-		dataFormats: {}
 	};
 }

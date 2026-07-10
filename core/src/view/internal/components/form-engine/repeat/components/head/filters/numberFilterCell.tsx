@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -33,7 +33,7 @@
 import type { ReactElement } from "react";
 import { useContext } from "react";
 
-import { LocalizerContext } from "@com.mgmtp.a12.utils/utils-localization-react/lib/main/index.js";
+import { LocalizerContext } from "@com.mgmtp.a12.utils/utils-localization-react";
 
 import { RESOURCE_KEYS } from "../../../../../../../../back-end/localization/internal/languages/keys.js";
 import { getLocalizedResource } from "../../../../../../../../back-end/localization/internal/localize.js";
@@ -46,7 +46,7 @@ import type {
 } from "../../../../../../../../back-end/store/internal/store.js";
 import { UiId } from "../../../../../../../../back-end/utils/internal/generateUiId.js";
 import { getDocumentPath } from "../../../../../../../../back-end/utils/internal/path.js";
-import { DocumentModelUtils } from "../../../../../../../../models/internal/utils/document-model-utils.js";
+import * as DocumentModelUtils from "../../../../../../../../models/internal/utils/document-model-utils.js";
 
 import { EmptyFilterInput } from "./emptyFilterInput.js";
 import type { FilterCellProps } from "./filter-cell.js";

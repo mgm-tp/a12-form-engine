@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -37,17 +37,15 @@ import type {
 	DocumentModel,
 	GroupInstance,
 	IGeneratedCodeAccessor
-} from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
+} from "@com.mgmtp.a12.kernel/kernel-md-facade";
 
 import type { Change, EngineStore } from "../../../back-end/store/index.js";
 import { KernelComputation } from "../../../back-end/store/internal/computation.js";
-import {
-	preProcessDocument,
-	type PreProcessDocumentResult
-} from "../../../client-extensions/index.js";
+import { preProcessDocument } from "../../../client-extensions/index.js";
+import type { PreProcessDocumentResult } from "../../../client-extensions/index.js";
 import { DocumentComputation } from "../../../client-extensions/internal/extensions/form-engine/internal/computeDocument.js";
 import type { FormModel, ReadonlyObjectMap } from "../../../models/index.js";
-import { DocumentModelHelpers } from "../../utils/model-helpers.js";
+import { DocumentModelHelpers } from "../../utils/DocumentModelHelpers.js";
 
 describe("api.client-extensions.preProcessDocument", () => {
 	interface TestSpec {

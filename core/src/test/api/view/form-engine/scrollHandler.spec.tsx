@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -37,10 +37,9 @@ import type { JSX } from "react";
 import { act, useEffect, useRef } from "react";
 import type { Action } from "redux";
 
-import { ModelPath } from "@com.mgmtp.a12.base/base-model-api/lib/main/model/index.js";
-import type { GroupInstance } from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
-import type { GlobalMessageBoxProps } from "@com.mgmtp.a12.widgets/widgets-core/lib/global-message-box/main/global-message-box.api.js";
-import type { LayoutGridProps } from "@com.mgmtp.a12.widgets/widgets-core/lib/layout/layout-grid/main/layout-grid.api.js";
+import { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
+import type { GroupInstance } from "@com.mgmtp.a12.kernel/kernel-md-facade";
+import type { GlobalMessageBoxProps, LayoutGridProps } from "@com.mgmtp.a12.widgets/widgets-core";
 
 import { Commands, Events } from "../../../../back-end/store/index.js";
 import type { EngineStore } from "../../../../back-end/store/internal/store.js";
@@ -51,20 +50,21 @@ import { widgetMocksForFocusTests as inputWidgetMocksForFocusTests } from "../..
 import { GLOBAL_MESSAGE_BOX } from "../../../rtl-utils/data-roles.js";
 import { getWidgetMocks } from "../../../rtl-utils/getWidgetMocks.js";
 import { assertExists } from "../../../utils/assertions.js";
+import { createDocumentPath } from "../../../utils/createDocumentPath.js";
 import { DisableMockComponents } from "../../../utils/disable-mocks.js";
-import { DocumentHelpers } from "../../../utils/document-helpers.js";
 import { US_LOCALE } from "../../../utils/localization.js";
 import { getSingleElementScrollIntoView } from "../../../utils/scroll-into-view.js";
-import { SetupHelpers } from "../../../utils/setup.js";
+import {
+	createTestStore,
+	loadData,
+	setupConnectedFormEngineWithRtlAsync
+} from "../../../utils/setup.js";
 import { setupFixture, setupModelsFixture } from "../../../utils/setupFixture.js";
 import {
 	FORM_MODEL_PATHS,
 	IDS
 } from "../../../utils/test-model-helpers/test-model.scroll-handler.js";
 import { createValidationEntry } from "../../../utils/validation.js";
-
-const { loadData, createTestStore } = SetupHelpers;
-const { createDocumentPath } = DocumentHelpers;
 
 type Fixture = {
 	dataDocument: GroupInstance;
@@ -141,7 +141,7 @@ describe("api.view.ScrollHandler", () => {
 
 				const widgetMap = DefaultWidgetMap;
 				const tableMap = DefaultTableWidgetMap;
-				const wrapper = await SetupHelpers.setupConnectedFormEngineWithRtlAsync({
+				const wrapper = await setupConnectedFormEngineWithRtlAsync({
 					tableMap,
 					config: {
 						widgetMap
@@ -216,7 +216,7 @@ describe("api.view.ScrollHandler", () => {
 			...getWidgetMocks(),
 			...inputWidgetMocksForFocusTests(),
 			GlobalMessageBox,
-			SizeContainer
+			LayoutGrid: SizeContainer
 		}));
 	}
 
@@ -249,7 +249,7 @@ describe("api.view.ScrollHandler", () => {
 				}
 			}
 
-			await SetupHelpers.setupConnectedFormEngineWithRtlAsync({
+			await setupConnectedFormEngineWithRtlAsync({
 				config: {
 					...uiConfig,
 					widgetMap: widgetMap()
@@ -749,10 +749,7 @@ describe("api.view.ScrollHandler", () => {
 										},
 										repeatInstanceState: {
 											[ModelPath.toString(FORM_MODEL_PATHS.EMBEDDED_REPEAT)]: {
-												expandedRowPath: DocumentHelpers.createDocumentPath(
-													["root"],
-													["repGroup", 2]
-												)
+												expandedRowPath: createDocumentPath(["root"], ["repGroup", 2])
 											}
 										}
 									}
@@ -768,7 +765,7 @@ describe("api.view.ScrollHandler", () => {
 										locationPath: [{ elementName: "Screen1" }],
 										repeatInstanceState: {
 											[ModelPath.toString(FORM_MODEL_PATHS.EMBEDDED_REPEAT)]: {
-												expandedRowPath: DocumentHelpers.createDocumentPath(["root"], ["repGroup"])
+												expandedRowPath: createDocumentPath(["root"], ["repGroup"])
 											}
 										}
 									}

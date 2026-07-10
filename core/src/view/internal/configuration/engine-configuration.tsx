@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -32,16 +32,12 @@
 
 import type { ComponentType, ReactElement, RefObject } from "react";
 
-import type { ModelPath } from "@com.mgmtp.a12.base/base-model-api/lib/main/model/index.js";
-import type {
-	DocumentModel,
-	EntityInstancePath
-} from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
-import type { Localizable } from "@com.mgmtp.a12.utils/utils-localization/lib/main/index.js";
-import type { LayoutGridProps } from "@com.mgmtp.a12.widgets/widgets-core/lib/layout/layout-grid/main/layout-grid.api.js";
-import type { Column } from "@com.mgmtp.a12.widgets/widgets-core/lib/table/new-api/column.api.js";
+import type { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
+import type { DocumentModel, EntityInstancePath } from "@com.mgmtp.a12.kernel/kernel-md-facade";
+import type { Localizable } from "@com.mgmtp.a12.utils/utils-localization";
+import type { Column, LayoutGridProps } from "@com.mgmtp.a12.widgets/widgets-core";
 
-import type ExternalEnumerationProvider from "../../../back-end/services/external-enumeration-provider.js";
+import type { IExternalEnumerationProvider } from "../../../back-end/services/external-enumeration-provider.js";
 import type { createEngineMiddlewares } from "../../../back-end/store/internal/middleware/middleware-factory.js";
 import type { EngineState } from "../../../back-end/store/internal/store.js";
 import type { FormModel } from "../../../models/index.js";
@@ -277,6 +273,12 @@ export namespace Inputs {
 		/** Whether the label of the input should be hidden but readable for screen readers */
 		readonly labelHiddenButRead?: boolean;
 
+		/** Defines the icon shown on a checked switch */
+		readonly icon?: FormModel.Icon;
+
+		/** Defines the placement of the label relative to the switch input. */
+		readonly labelPlacement?: FormModel.LabelPlacement;
+
 		/** This property is set to true if the text-area is auto expandable */
 		readonly autoExpand?: boolean;
 
@@ -343,7 +345,7 @@ export interface Config {
 	 * Mind: You need to register your external enumeration provider here, as well as
 	 * in the middlewares ({@link createEngineMiddlewares})!
 	 */
-	readonly externalEnumerationProvider: ExternalEnumerationProvider;
+	readonly externalEnumerationProvider: IExternalEnumerationProvider;
 
 	/**
 	 * Boolean, that specifies, if the date picker should be disabled.
@@ -374,11 +376,6 @@ export interface Config {
 	 * Boolean, that specifies, whether dirty handling should be disabled for detached repeat detail screens.
 	 */
 	readonly disableDirtyHandlingForDetachedRepeat?: boolean;
-
-	/**
-	 * timeMode for the TimePicker
-	 */
-	readonly timeMode: ClockMode;
 
 	/**
 	 * String, which will be set in front of component ids if it is specified.
@@ -436,21 +433,21 @@ export type ClockMode = "12h" | "24h";
 /**
  * Names of the default repeat buttons
  * which can be used for the "byButtonName" map of
- * {@link Config.enablements}
+ * {@link Config["enablements"]}
  *
  * Mind: If you want to set the enablement for the "add" button
  * you need to use a row index of 0, as the add button exists for a whole repeat.
  */
-export enum DefaultRepeatButtonNames {
-	edit = "defaultButton/edit",
-	delete = "defaultButton/delete",
-	copy = "defaultButton/copy",
-	move = "defaultButton/move",
-	add = "defaultButton/add",
-	download = "defaultButton/download",
-	commit_detached_repeat = "defaultButton/commit_detached_repeat",
-	cancel_detached_repeat = "defaultButton/cancel_detached_repeat"
-}
+export const DefaultRepeatButtonNames = {
+	add: "defaultButton/add",
+	cancel_detached_repeat: "defaultButton/cancel_detached_repeat",
+	commit_detached_repeat: "defaultButton/commit_detached_repeat",
+	copy: "defaultButton/copy",
+	delete: "defaultButton/delete",
+	download: "defaultButton/download",
+	edit: "defaultButton/edit",
+	move: "defaultButton/move"
+} as const;
 
 /**
  * Definition of the enablement of row action buttons

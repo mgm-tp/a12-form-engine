@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -31,31 +31,33 @@
  */
 
 import { deepStrictEqual, rejects, strictEqual } from "node:assert/strict";
-import { mock, type Mock } from "node:test";
+import { mock } from "node:test";
+import type { Mock } from "node:test";
 
 import { expectSaga } from "redux-saga-test-plan";
 import type { SagaGenerator } from "typed-redux-saga";
 import { call } from "typed-redux-saga";
 
-import type { Model as ModelAPI } from "@com.mgmtp.a12.base/base-model-api/lib/main/model/index.js";
-import { setThumbnails } from "@com.mgmtp.a12.client/client-core/lib/core/activity/a12-internal/thumbnails/action.js";
-import type { Activity } from "@com.mgmtp.a12.client/client-core/lib/core/activity/index.js";
+import type { Model as ModelAPI } from "@com.mgmtp.a12.base/base-model-api";
+import type { Activity, Model, ReferencedModel } from "@com.mgmtp.a12.client/client-core";
 import {
 	ActivityActions,
 	ActivitySagas,
-	ActivitySelectors
-} from "@com.mgmtp.a12.client/client-core/lib/core/activity/index.js";
-import { LocaleSelectors } from "@com.mgmtp.a12.client/client-core/lib/core/locale/index.js";
+	ActivitySelectors,
+	LocaleSelectors,
+	ModelSagas
+} from "@com.mgmtp.a12.client/client-core";
+import { setThumbnails } from "@com.mgmtp.a12.client/client-core/a12internal";
 import type {
-	Model,
-	ReferencedModel
-} from "@com.mgmtp.a12.client/client-core/lib/core/model/index.js";
-import { ModelSagas } from "@com.mgmtp.a12.client/client-core/lib/core/model/index.js";
-import type { LoadThumbnailUrlsJsonRpc2 } from "@com.mgmtp.a12.dataservices/dataservices-access/lib/Attachment/attachment.js";
-import { Dispatcher } from "@com.mgmtp.a12.dataservices/dataservices-access/lib/dispatch/index.js";
-import type { AddDocumentJsonRpc2Response } from "@com.mgmtp.a12.dataservices/dataservices-access/lib/Document/index.js";
-import type { QueryJsonRpc2Response } from "@com.mgmtp.a12.dataservices/dataservices-access/lib/query/Response.js";
-import { Locale } from "@com.mgmtp.a12.utils/utils-localization/lib/main/index.js";
+	AddDocumentJsonRpc2Response,
+	CheckUniquenessJsonRpc2Response,
+	CheckUniquenessViolation,
+	JsonRpc2UniqueConstraintErrorResponse,
+	LoadThumbnailUrlsJsonRpc2,
+	QueryJsonRpc2Response
+} from "@com.mgmtp.a12.dataservices/dataservices-access";
+import { Dispatcher } from "@com.mgmtp.a12.dataservices/dataservices-access";
+import { Locale } from "@com.mgmtp.a12.utils/utils-localization";
 
 import type { EngineStore } from "../../../back-end/store/index.js";
 import { createPlatformSingleDocumentDataProvider } from "../../../client-extensions/index.js";
@@ -70,8 +72,9 @@ import {
 	createDescriptor,
 	createTestConfig
 } from "../../utils/client-helpers.js";
+import { DocumentModelHelpers } from "../../utils/DocumentModelHelpers.js";
+import { createFormModelContent } from "../../utils/FormModelHelpers.js";
 import { US_LOCALE } from "../../utils/localization.js";
-import { DocumentModelHelpers } from "../../utils/model-helpers.js";
 
 describe("api.client-extensions.platformSingleDocumentDataProvider", () => {
 	const testInstance = "testInstance";
@@ -181,7 +184,10 @@ describe("api.client-extensions.platformSingleDocumentDataProvider", () => {
 							paging: { pageNumber: 1, pageSize: 10 }
 						})
 				),
-				save: mock.fn(() => () => RequestBuilder.addDocument("", {}, US_LOCALE)),
+				save: mock.fn(() => () => [
+					RequestBuilder.checkUniqueness("", {}, ""),
+					RequestBuilder.addDocument("", {}, US_LOCALE)
+				]),
 				delete: mock.fn(() => () => RequestBuilder.deleteDocument("", US_LOCALE))
 			} satisfies RequestSelectorMap;
 		}
@@ -416,6 +422,12 @@ describe("api.client-extensions.platformSingleDocumentDataProvider", () => {
 			});
 
 			describe("save", () => {
+				const uniquenessCheckResponse = {
+					jsonrpc: "2.0",
+					id: "uniqueness",
+					result: { rootModelName: "", violations: [], errorKey: "" }
+				} as CheckUniquenessJsonRpc2Response;
+
 				const addDocumentResponse = {
 					jsonrpc: "2.0",
 					id: "test",
@@ -424,10 +436,13 @@ describe("api.client-extensions.platformSingleDocumentDataProvider", () => {
 					}
 				} as AddDocumentJsonRpc2Response;
 
+				let dispatchRpcSettledStub: Mock<typeof Dispatcher.rpcSettled>;
+
 				beforeEach(() => {
-					dispatchJsonRpcStub = mock.method(Dispatcher, "rpc", (async () => [
-						addDocumentResponse
-					]) as typeof Dispatcher.rpc);
+					dispatchRpcSettledStub = mock.method(Dispatcher, "rpcSettled", (async () => [
+						{ status: "fulfilled", value: uniquenessCheckResponse },
+						{ status: "fulfilled", value: addDocumentResponse }
+					]) as typeof Dispatcher.rpcSettled);
 				});
 
 				it("should persist the document and dispatch the configured saving done action", async () => {
@@ -455,7 +470,7 @@ describe("api.client-extensions.platformSingleDocumentDataProvider", () => {
 					).run();
 
 					strictEqual(requestFactory.save.mock.callCount(), 1);
-					strictEqual(dispatchJsonRpcStub.mock.callCount(), 1);
+					strictEqual(dispatchRpcSettledStub.mock.callCount(), 1);
 					strictEqual(testPlanResult.effects.put.length, 1);
 					deepStrictEqual(testPlanResult.effects.put[0].payload.action, savingDoneDummyAction);
 				});
@@ -558,6 +573,110 @@ describe("api.client-extensions.platformSingleDocumentDataProvider", () => {
 					strictEqual(testPlanResult.effects.put.length, 2);
 					deepStrictEqual(testPlanResult.effects.put[1].payload.action, expectedReloadAction);
 				});
+
+				it("should fail saving when the uniqueness check returns violations", async () => {
+					const violation: CheckUniquenessViolation = {
+						modelName: "testModel",
+						constraintName: "testConstraint",
+						conflictingDocRef: "otherDoc",
+						errorMessage: { en: "already exists" },
+						errorKey: "key",
+						fieldFullNames: ["/name"]
+					};
+					dispatchRpcSettledStub.mock.mockImplementationOnce((async () => [
+						{
+							status: "fulfilled",
+							value: {
+								...uniquenessCheckResponse,
+								result: { ...uniquenessCheckResponse.result, violations: [violation] }
+							}
+						},
+						{ status: "fulfilled", value: addDocumentResponse }
+					]) as typeof Dispatcher.rpcSettled);
+
+					const savingFailedDummyAction = { type: "SavingFailedDummy" };
+					const savingFailedStub = mock.fn(() => savingFailedDummyAction);
+
+					const testPlanResult = await expectSaga(
+						createPlatformSingleDocumentDataProvider({
+							requestSelectorMap: createRequestFactory()
+						}).provideData,
+						createTestConfig({
+							operation: "save",
+							dataHolders: [
+								createDataHolder({
+									descriptor: testDescriptor,
+									data: { document: preProcessedDocument }
+								})
+							],
+							details: {
+								saving: {
+									failed: savingFailedStub
+								}
+							}
+						})
+					).run();
+
+					strictEqual(savingFailedStub.mock.callCount(), 1);
+					strictEqual(testPlanResult.effects.put.length, 1);
+					deepStrictEqual(testPlanResult.effects.put[0].payload.action, savingFailedDummyAction);
+				});
+
+				it(
+					"should fail saving when the uniqueness check passes " +
+						"but the save request fails with a unique constraint violation",
+					async () => {
+						const uniqueConstraintErrorResponse: JsonRpc2UniqueConstraintErrorResponse = {
+							jsonrpc: "2.0",
+							id: "save",
+							error: {
+								code: -32060,
+								message: "Unique constraint violated",
+								data: {
+									level: "error",
+									title: { key: "conflict.title", default: "Conflict" },
+									description: { key: "conflict.description", default: "Duplicate" },
+									details: {
+										code: "UNIQUE_CONSTRAINT_VIOLATION",
+										subsystem: "document",
+										time: "2026-04-22T00:00:00Z"
+									}
+								}
+							}
+						};
+						dispatchRpcSettledStub.mock.mockImplementationOnce((async () => [
+							{ status: "fulfilled", value: uniquenessCheckResponse },
+							{ status: "rejected", reason: uniqueConstraintErrorResponse }
+						]) as typeof Dispatcher.rpcSettled);
+
+						const savingFailedDummyAction = { type: "SavingFailedDummy" };
+						const savingFailedStub = mock.fn(() => savingFailedDummyAction);
+
+						const testPlanResult = await expectSaga(
+							createPlatformSingleDocumentDataProvider({
+								requestSelectorMap: createRequestFactory()
+							}).provideData,
+							createTestConfig({
+								operation: "save",
+								dataHolders: [
+									createDataHolder({
+										descriptor: testDescriptor,
+										data: { document: preProcessedDocument }
+									})
+								],
+								details: {
+									saving: {
+										failed: savingFailedStub
+									}
+								}
+							})
+						).run();
+
+						strictEqual(savingFailedStub.mock.callCount(), 1);
+						strictEqual(testPlanResult.effects.put.length, 1);
+						deepStrictEqual(testPlanResult.effects.put[0].payload.action, savingFailedDummyAction);
+					}
+				);
 			});
 
 			describe("delete", () => {
@@ -655,7 +774,7 @@ describe("api.client-extensions.platformSingleDocumentDataProvider", () => {
 						modelType: "form",
 						modelReferences: [{ modelType: "document", reference: testDmName }]
 					},
-					content: {}
+					content: createFormModelContent()
 				} as FormModel,
 				{
 					header: { id: testDmName, modelType: "document", modelVersion: "0.0.0" },

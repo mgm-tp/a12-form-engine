@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -30,23 +30,16 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import type { Config, DefaultStateProps } from "../../../../../view/index.js";
+import type { DefaultStateProps } from "../../../../../view/index.js";
 import { defaultMapStateToProps } from "../../../../../view/index.js";
 
 import { FormEngineSelectors } from "./selectors.js";
+import type { FormEngineProps } from "./view.js";
 
 /**
- * Adapter to map the Client state to the
- * engine state.
+ * Adapter to map the Client state to the engine state.
  */
 export namespace FormEngineStateAdapter {
-	/**
-	 * Props for the Form-Engine view.
-	 */
-	export interface OwnProps extends Partial<Config> {
-		readonly activityId: string;
-	}
-
 	export type StateProps = Partial<DefaultStateProps>;
 
 	/**
@@ -55,9 +48,9 @@ export namespace FormEngineStateAdapter {
 	 *
 	 * @param clientState The whole client state
 	 * @param ownProps Props for the Form Engine
-	 * @returns the respective Form Engine state or undefined if some information is missing in the Client state
+	 * @returns the respective Form Engine state or an empty object if some information is missing in the Client state
 	 */
-	export function mapStateToProps(clientState: object, ownProps: OwnProps): StateProps {
+	export function mapStateToProps(clientState: object, ownProps: FormEngineProps): StateProps {
 		const engineState = FormEngineSelectors.engineState(ownProps.activityId)(clientState);
 		return engineState ? defaultMapStateToProps(engineState, { config: ownProps }) : {};
 	}

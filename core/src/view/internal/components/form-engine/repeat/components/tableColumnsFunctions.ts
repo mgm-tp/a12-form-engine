@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -32,19 +32,21 @@
 
 import type { ComponentType, ReactElement } from "react";
 
-import { ModelPath } from "@com.mgmtp.a12.base/base-model-api/lib/main/model/index.js";
-import type {
-	Localizer,
-	ValueConversion
-} from "@com.mgmtp.a12.utils/utils-localization/lib/main/index.js";
-import type { Column } from "@com.mgmtp.a12.widgets/widgets-core/lib/table/new-api/column.api.js";
+import { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
+import type { Localizer, ValueConversion } from "@com.mgmtp.a12.utils/utils-localization";
+import type { Column } from "@com.mgmtp.a12.widgets/widgets-core";
 
 import { createLocalizableFactory } from "../../../../../../back-end/localization/internal/localization.js";
 import { ModelSelectors } from "../../../../../../back-end/store/internal/selectors/models.js";
 import { UiStateSelectors } from "../../../../../../back-end/store/internal/selectors/ui-state.js";
-import { FormModel } from "../../../../../../models/internal/form-model.js";
-import { DocumentModelUtils } from "../../../../../../models/internal/utils/document-model-utils.js";
-import { DocumentPath } from "../../../../../../models/internal/utils/document-utils.js";
+import type { FormModel } from "../../../../../../models/internal/form-model.js";
+import {
+	isFormModelEmbeddedRepeat,
+	isFormModelExpressionOverviewColumn,
+	isFormModelFieldOverviewColumn,
+	isFormModelInlineRepeat
+} from "../../../../../../models/internal/FormModelGuards.js";
+import * as DocumentModelUtils from "../../../../../../models/internal/utils/document-model-utils.js";
 import { FormModelPath } from "../../../../../../models/internal/utils/form-model-path.js";
 import type { FormModelMap } from "../../../../configuration/engine-configuration.js";
 import { DefaultRepeatButtonNames } from "../../../../configuration/engine-configuration.js";
@@ -56,6 +58,7 @@ import {
 import { isReadonly } from "../../../../utilities/enablements/readonly.js";
 import type { Value } from "../../../../utilities/value.js";
 import { getLabel, getLabelWithAsterisk, shouldShowAsterisk } from "../../model-element-labels.js";
+import { InternalDocumentPath } from "../../../../../../models/internal/utils/document-utils.js";
 
 import type { PaginatedRepeatData } from "./repeat-data.js";
 import { showMoveButton } from "./row-actions/standard/showMoveButton.js";
@@ -70,7 +73,7 @@ import type {
 /** @internal */
 export function computeColumns(
 	parentPath: ModelPath,
-	meliesRepeat: FormModel.Repeat,
+	repeat: FormModel.Repeat,
 	config: FormModelMap.RenderConfiguration,
 	localizer: Localizer,
 	converter: ValueConversion,
@@ -87,8 +90,8 @@ export function computeColumns(
 
 	const columnWidths = UiStateSelectors.columnWidths()(config.renderOptions.state);
 
-	if (meliesRepeat.repeatOverviewColumn) {
-		for (const column of meliesRepeat.repeatOverviewColumn) {
+	if (repeat.repeatOverviewColumn) {
+		for (const column of repeat.repeatOverviewColumn) {
 			const formModelElementPath = FormModelPath.extend(parentPath, column);
 			const specificVerticalAlignment = {
 				head: column.specificVerticalAlignment?.head,
@@ -105,7 +108,7 @@ export function computeColumns(
 				filterableColumnExists = true;
 			}
 
-			if (FormModel.FieldOverviewColumn.isInstance(column)) {
+			if (isFormModelFieldOverviewColumn(column)) {
 				const localizableFactory = createLocalizableFactory(
 					ModelSelectors.documentModel()(config.renderOptions.state),
 					ModelSelectors.formModel()(config.renderOptions.state)
@@ -117,7 +120,7 @@ export function computeColumns(
 
 				columns.push({
 					type: "field",
-					label: computeLabel(column, meliesRepeat, config, localizer, converter),
+					label: computeLabel(column, repeat, config, localizer, converter),
 					sortable: column.sortable,
 					pinning: computePinning(column),
 					specificVerticalAlignment,
@@ -132,11 +135,11 @@ export function computeColumns(
 					showCommaSeparated: column.showCommaSeparated,
 					sum: processedData.summaryResult?.[column.id]
 				} as FieldRepeatTableColumn);
-			} else if (FormModel.ExpressionOverviewColumn.isInstance(column)) {
+			} else if (isFormModelExpressionOverviewColumn(column)) {
 				const formModelElementPath = FormModelPath.extend(parentPath, column);
 				columns.push({
 					type: "expression",
-					label: computeLabel(column, meliesRepeat, config, localizer, converter),
+					label: computeLabel(column, repeat, config, localizer, converter),
 					sortable: column.sortable,
 					pinning: computePinning(column),
 					specificVerticalAlignment,
@@ -157,7 +160,7 @@ export function computeColumns(
 	if (
 		showActionColumn({
 			config,
-			repeat: meliesRepeat,
+			repeat: repeat,
 			repeatFormModelPath: parentPath,
 			filterableColumnExists,
 			processedData,
@@ -191,7 +194,7 @@ function computeWidth(column: FormModel.RepeatOverviewColumn): Column.Width {
 }
 
 function valueGetter(column: FormModel.FieldOverviewColumn): (params: { row: RepeatRow }) => Value {
-	if (FormModel.FieldOverviewColumn.isInstance(column)) {
+	if (isFormModelFieldOverviewColumn(column)) {
 		return params => {
 			const row = params.row;
 			const value = row.values.find(v => ModelPath.equal(v.path, column.elementPath));
@@ -208,9 +211,9 @@ function dataGetter(
 	column: FormModel.RepeatOverviewColumn,
 	config: FormModelMap.RenderConfiguration
 ): (params: { rowIndex: number; row: RepeatRow }) => string {
-	if (FormModel.FieldOverviewColumn.isInstance(column)) {
+	if (isFormModelFieldOverviewColumn(column)) {
 		return fieldColumnValue(column);
-	} else if (FormModel.ExpressionOverviewColumn.isInstance(column)) {
+	} else if (isFormModelExpressionOverviewColumn(column)) {
 		return expressionColumnValue(column, config);
 	} else {
 		throw new Error("unsupported column type!");
@@ -241,7 +244,7 @@ function expressionColumnValue(
 
 function computeLabel(
 	column: FormModel.RepeatOverviewColumn,
-	meliesRepeat: FormModel.Repeat,
+	repeat: FormModel.Repeat,
 	config: FormModelMap.RenderConfiguration,
 	localizer: Localizer,
 	converter: ValueConversion
@@ -261,10 +264,7 @@ function computeLabel(
 		converter
 	});
 
-	if (
-		!FormModel.FieldOverviewColumn.isInstance(column) ||
-		!FormModel.InlineRepeat.isInstance(meliesRepeat)
-	) {
+	if (!isFormModelFieldOverviewColumn(column) || !isFormModelInlineRepeat(repeat)) {
 		return label;
 	}
 
@@ -291,7 +291,7 @@ function getDefaultHorizontalAlignment(
 	// by default, specific body alignment changes the head as well
 	if (column.specificHorizontalAlignment?.body) {
 		return column.specificHorizontalAlignment?.body;
-	} else if (FormModel.FieldOverviewColumn.isInstance(column)) {
+	} else if (isFormModelFieldOverviewColumn(column)) {
 		const documentElement = DocumentModelUtils.findByPath(
 			ModelSelectors.documentModel()(config.renderOptions.state),
 			column.elementPath
@@ -355,7 +355,7 @@ export function showActionColumn(options: {
 
 	for (const row of processedData.rows) {
 		const partialRowActionHidden: Omit<RowActionHidden, "eventName"> = {
-			rowIndex: DocumentPath.rowIndex(row.path),
+			rowIndex: InternalDocumentPath.rowIndex(row.path),
 			state: config.renderOptions.state,
 			byRow: config.renderOptions.config.enablements?.byRow || {},
 			repeat
@@ -407,7 +407,7 @@ export function showActionColumn(options: {
 		}
 
 		const downloadButtonHidden =
-			FormModel.InlineRepeat.isInstance(repeat) || FormModel.EmbeddedRepeat.isInstance(repeat)
+			isFormModelInlineRepeat(repeat) || isFormModelEmbeddedRepeat(repeat)
 				? isStandardRowActionHidden({
 						...partialRowActionHidden,
 						eventName: DefaultRepeatButtonNames.download,

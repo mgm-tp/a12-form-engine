@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -30,24 +30,24 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { ModelPath } from "@com.mgmtp.a12.base/base-model-api/lib/main/model/index.js";
+import { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
 import type {
 	DocumentModel,
 	EntityInstancePath,
 	GroupInstance
-} from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
-import type { Localizer } from "@com.mgmtp.a12.utils/utils-localization/lib/main/index.js";
+} from "@com.mgmtp.a12.kernel/kernel-md-facade";
+import type { Localizer } from "@com.mgmtp.a12.utils/utils-localization";
 
-import type IExternalEnumerationProvider from "../../../../back-end/services/external-enumeration-provider.js";
+import type { IExternalEnumerationProvider } from "../../../../back-end/services/external-enumeration-provider.js";
 import { DataSelectors } from "../../../../back-end/store/internal/selectors/data.js";
 import { ModelSelectors } from "../../../../back-end/store/internal/selectors/models.js";
 import { UiStateSelectors } from "../../../../back-end/store/internal/selectors/ui-state.js";
 import type { EngineState } from "../../../../back-end/store/internal/store.js";
 import { getExternalEnumerationSource } from "../../../../models/internal/enumeration/getExternalEnumerationSource.js";
 import type { FormModel } from "../../../../models/internal/form-model.js";
+import * as DocumentModelUtils from "../../../../models/internal/utils/document-model-utils.js";
 import { DocumentUtils } from "../../../../models/internal/utils/document-utils.js";
 import { FormModelUtils } from "../../../../models/internal/utils/form-model-utils.js";
-import { DocumentModelUtils } from "../../../../shared/internal/document-model-utils.js";
 import type { FormModelMap } from "../../configuration/engine-configuration.js";
 
 import type { EnumerationValue } from "./enumValue.js";
@@ -55,16 +55,16 @@ import { ExternalEnumHelper } from "./externalEnumHelper.js";
 import { localizeAndFilterEnumerationValues } from "./localizeAndFilterEnumerationValues.js";
 import { localizeEnumerationValue } from "./localizeEnumerationValue.js";
 
-export namespace EnumerableHelper {
+export const EnumerableHelper = {
 	/**
 	 * Returns all enumeration values with their localized label that satisfy the current master value.
 	 */
-	export function getLocalizedDependentEnumerationValues(
+	getLocalizedDependentEnumerationValues(
 		renderOptions: FormModelMap.RenderOptions,
 		documentPath: EntityInstancePath,
 		localizer: Localizer
 	): EnumerationValue[] {
-		const enumValues = getEnumerationValues(renderOptions, documentPath);
+		const enumValues = InternalEnumerableHelper.getEnumerationValues(renderOptions, documentPath);
 		const formModel = ModelSelectors.formModel()(renderOptions.state);
 		const fce = formModel.content.fieldConfiguration.fieldMap[ModelPath.toString(documentPath)];
 		const context = documentPath.slice(0, documentPath.length - 1);
@@ -76,18 +76,18 @@ export namespace EnumerableHelper {
 			localizer,
 			fieldConfigurationEntry: fce
 		});
-	}
+	},
 
 	/**
 	 * Returns all enumeration values, with their localized label.
 	 * This does not respect any dependencies restrictions.
 	 */
-	export function getLocalizedEnumerationValues(
+	getLocalizedEnumerationValues(
 		renderOptions: FormModelMap.RenderOptions,
 		modelPath: ModelPath,
 		localizer: Localizer
 	): EnumerationValue[] {
-		const enumValues = getEnumerationValues(renderOptions, modelPath);
+		const enumValues = InternalEnumerableHelper.getEnumerationValues(renderOptions, modelPath);
 		const context = UiStateSelectors.currentScreenLocation()(renderOptions.state).path;
 		return localizeAndFilterEnumerationValues({
 			renderOptions,
@@ -97,9 +97,11 @@ export namespace EnumerableHelper {
 			localizer
 		});
 	}
+};
 
-	/** @internal */
-	export function getEnumerationValue(options: {
+/** @internal */
+export const InternalEnumerableHelper = {
+	getEnumerationValue(options: {
 		state: EngineState;
 		localizer: Localizer;
 		externalEnumerationProvider?: IExternalEnumerationProvider;
@@ -144,10 +146,9 @@ export namespace EnumerableHelper {
 		}
 
 		throw new Error("Can not resolve enumerationValue of non enumerable type!");
-	}
+	},
 
-	/** @internal */
-	export function getEnumerationValues(
+	getEnumerationValues(
 		options: FormModelMap.RenderOptions,
 		modelPath: ModelPath
 	): readonly DocumentModel.EnumValue[] {
@@ -163,17 +164,13 @@ export namespace EnumerableHelper {
 
 			return ExternalEnumHelper.convertValues(map);
 		}
-	}
+	},
 
-	/** @internal */
-	export function isCustomValuesAllowed(
-		fce?: FormModel.FieldConfigurationEntry
-	): boolean | undefined {
+	isCustomValuesAllowed(fce?: FormModel.FieldConfigurationEntry): boolean | undefined {
 		return fce?.externalEnumeration?.customValuesAllowed;
-	}
+	},
 
-	/** @internal */
-	export function isCaseSensitive(fce?: FormModel.FieldConfigurationEntry): boolean | undefined {
+	isCaseSensitive(fce?: FormModel.FieldConfigurationEntry): boolean | undefined {
 		return fce?.externalEnumeration?.caseSensitive;
 	}
-}
+};

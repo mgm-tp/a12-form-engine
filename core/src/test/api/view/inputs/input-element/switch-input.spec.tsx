@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -35,27 +35,21 @@ import type { Mock } from "node:test";
 import { mock } from "node:test";
 
 import { query } from "@com.mgmtp.a12.devtools/react";
-import type {
-	DocumentModel,
-	EntityInstancePath
-} from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
-import {
-	defaultLocalizerFactory,
-	Locale
-} from "@com.mgmtp.a12.utils/utils-localization/lib/main/index.js";
+import type { DocumentModel, EntityInstancePath } from "@com.mgmtp.a12.kernel/kernel-md-facade";
+import { defaultLocalizerFactory, Locale } from "@com.mgmtp.a12.utils/utils-localization";
 
 import type { FormModel } from "../../../../../models/index.js";
 import type { DispatchConfiguration } from "../../../../../view/index.js";
 import { defaultMapDispatchToProps } from "../../../../../view/index.js";
 import { SwitchInput } from "../../../../../view/internal/components/form-engine/cells/controls/boolean/switch-input.js";
 import type { Inputs } from "../../../../../view/internal/configuration/engine-configuration.js";
-import { changeEventMock } from "../../../../rtl-utils/mock-utils.js";
+import { changeEventMock, isReactElement } from "../../../../rtl-utils/mock-utils.js";
 import type { RtlRenderWrapper } from "../../../../rtl-utils/render-wrapper.js";
 import { rtlRenderWrapperAsync } from "../../../../rtl-utils/render-wrapper.js";
-import { DocumentHelpers } from "../../../../utils/document-helpers.js";
-import { DocumentModelHelpers } from "../../../../utils/model-helpers.js";
+import { createDocumentPath } from "../../../../utils/createDocumentPath.js";
+import { createModelPath } from "../../../../utils/createModelPath.js";
+import { DocumentModelHelpers } from "../../../../utils/DocumentModelHelpers.js";
 import { setupModelsFixture } from "../../../../utils/setupFixture.js";
-import { createModelPath } from "../../../../utils/test-model-helpers/dependent-enumeration.js";
 
 import { inputTest } from "./generic-tests/input-tests.js";
 import { createProps } from "./generic-tests/input-utils.js";
@@ -64,7 +58,7 @@ const { Field } = DocumentModelHelpers;
 
 describe("api.view.inputs", () => {
 	describe("Switch", () => {
-		const models = setupModelsFixture("controls.picustypes");
+		const models = setupModelsFixture("controls.dmtypes");
 
 		const documentElementDataType: DocumentModel.BooleanType = { type: "BooleanType" };
 		const baseProps = {
@@ -72,7 +66,7 @@ describe("api.view.inputs", () => {
 			documentElementDataType,
 			component: "Switch",
 			renderFunction: SwitchInput,
-			path: DocumentHelpers.createDocumentPath(["A12T_PicusTypes"], ["Boolean"], ["Boolean03"]),
+			path: createDocumentPath(["A12T_DmTypes"], ["Boolean"], ["Boolean03"]),
 			formModelPath: createModelPath("foo", "bar")
 		} as const;
 
@@ -90,11 +84,7 @@ describe("api.view.inputs", () => {
 		});
 
 		describe("onChange", () => {
-			const path = DocumentHelpers.createDocumentPath(
-				["A12T_PicusTypes"],
-				["Boolean"],
-				["Boolean03"]
-			);
+			const path = createDocumentPath(["A12T_DmTypes"], ["Boolean"], ["Boolean03"]);
 
 			interface MockDispatchConfig extends DispatchConfiguration {
 				onValueChange: Mock<DispatchConfiguration["onValueChange"]>;
@@ -180,7 +170,7 @@ describe("api.view.inputs", () => {
 			describe("'switch'", () => {
 				it("renders a Switch without displaying the options", async () => {
 					const wrapper = await setup(
-						DocumentHelpers.createDocumentPath(["A12T_PicusTypes"], ["Boolean"], ["Boolean03"]),
+						createDocumentPath(["A12T_DmTypes"], ["Boolean"], ["Boolean03"]),
 						"SWITCH"
 					);
 					const input = query(wrapper.widgetMap.Switch).props();
@@ -192,7 +182,7 @@ describe("api.view.inputs", () => {
 			describe("'switch-with-values'", () => {
 				it("renders a Switch which also displays the option", async () => {
 					const wrapper = await setup(
-						DocumentHelpers.createDocumentPath(["A12T_PicusTypes"], ["Boolean"], ["Boolean04"]),
+						createDocumentPath(["A12T_DmTypes"], ["Boolean"], ["Boolean04"]),
 						"SWITCH_WITH_VALUES"
 					);
 					const input = query(wrapper.widgetMap.Switch).props();
@@ -202,13 +192,27 @@ describe("api.view.inputs", () => {
 			});
 		});
 
+		describe("icon", () => {
+			it("renders the custom icon when checked", async () => {
+				const path = createDocumentPath(["A12T_DmTypes"], ["Boolean"], ["Boolean03"]);
+				const props: Inputs.InputProps<DocumentModel.BooleanType> = createProps({
+					...baseProps,
+					models,
+					path,
+					modelElement: { icon: { name: "star" } },
+					value: { data: true, ui: "true", path }
+				});
+				const Component = baseProps.renderFunction;
+				const wrapper = await rtlRenderWrapperAsync(<Component {...props} />);
+				const input = query(wrapper.widgetMap.Switch).props();
+				const iconProps = isReactElement(input.checkedIcon) ? input.checkedIcon.props : undefined;
+				equal(iconProps?.children, "star");
+			});
+		});
+
 		describe("localization", () => {
 			function setup(locale: Locale): Promise<RtlRenderWrapper> {
-				const path = DocumentHelpers.createDocumentPath(
-					["A12T_PicusTypes"],
-					["Boolean"],
-					["Boolean04"]
-				);
+				const path = createDocumentPath(["A12T_DmTypes"], ["Boolean"], ["Boolean04"]);
 
 				const props: Inputs.InputProps<DocumentModel.BooleanType> = createProps({
 					...baseProps,

@@ -1,15 +1,12 @@
 {
 	"extends": "@com.mgmtp.a12.devtools/tsconfig",
 	"exclude": ["node_modules", "lib", "target"],
-	"include": ["./src/**/*"],
+	"include": ["./src/**/*", "./@types"],
 	"compilerOptions": {
 		"outDir": "./lib",
 		"rootDir": "./src",
 		"types": ["node", "mocha"],
 		"skipLibCheck": true,
-		"verbatimModuleSyntax": true,
-		"isolatedModules": true,
-		"noUncheckedSideEffectImports": true,
-		"moduleDetection": "force"
+		"erasableSyntaxOnly": true
 	}
 }

@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -32,18 +32,25 @@
 
 import { deepStrictEqual, fail, notEqual, notStrictEqual, strictEqual } from "node:assert/strict";
 
-import type { ModelPath } from "@com.mgmtp.a12.base/base-model-api/lib/main/model/index.js";
+import type { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
 
 import { assertCondition } from "../../../back-end/utils/internal/assertions.js";
+import type { FormModel } from "../../../models/index.js";
 import {
 	defaultValueParser,
 	findElementByFormModelPath,
-	FormModel,
 	unmarshallFormModel
 } from "../../../models/index.js";
+import {
+	isFormModelControl,
+	isFormModelDetachedRepeat,
+	isFormModelExpressionCell,
+	isFormModelFieldBasedInputType,
+	isFormModelRepeat
+} from "../../../models/internal/FormModelGuards.js";
 import type { ParsedFilterNode } from "../../../models/internal/jison/repeatfilter.cjs";
+import { createModelPath } from "../../utils/createModelPath.js";
 import { setupFixture, setupModelsFixture } from "../../utils/setupFixture.js";
-import { createModelPath } from "../../utils/test-model-helpers/dependent-enumeration.js";
 import { DOCUMENT_MODEL, FORM_MODEL } from "../../utils/test-model-helpers/unmarshallFormModel.js";
 
 describe("api.models.unmarshallFormModel", () => {
@@ -63,7 +70,7 @@ describe("api.models.unmarshallFormModel", () => {
 		): void {
 			notStrictEqual(element, undefined, `${elementName} not found`);
 
-			if (FormModel.FieldBasedInputType.isInstance(element!)) {
+			if (isFormModelFieldBasedInputType(element!)) {
 				deepStrictEqual(
 					element.elementPath,
 					expectedModelPath,
@@ -162,7 +169,7 @@ describe("api.models.unmarshallFormModel", () => {
 		): void {
 			notStrictEqual(element, `${elementName} not found`);
 
-			if (FormModel.Control.isInstance(element!)) {
+			if (isFormModelControl(element!)) {
 				deepStrictEqual(
 					element.occurrence,
 					expectedOccurrence,
@@ -280,7 +287,7 @@ describe("api.models.unmarshallFormModel", () => {
 
 			notStrictEqual(element, undefined, `${elementName} not found`);
 
-			if (FormModel.Repeat.isInstance(element)) {
+			if (isFormModelRepeat(element)) {
 				deepStrictEqual(
 					element.filterExpressionTree,
 					expectedFilterExpressionTree,
@@ -340,7 +347,7 @@ describe("api.models.unmarshallFormModel", () => {
 
 			notStrictEqual(expressionCell, undefined, "Expression Cell not found");
 
-			if (FormModel.ExpressionCell.isInstance(expressionCell)) {
+			if (isFormModelExpressionCell(expressionCell)) {
 				deepStrictEqual(expressionCell.expressionTree, expectedFilterExpressionTree);
 			} else {
 				fail("Expected that element is a Control or FieldOverviewColumn");
@@ -354,7 +361,7 @@ describe("api.models.unmarshallFormModel", () => {
 			);
 			notStrictEqual(detachedRepeat, undefined, "Detached Repeat not found");
 
-			if (FormModel.DetachedRepeat.isInstance(detachedRepeat)) {
+			if (isFormModelDetachedRepeat(detachedRepeat)) {
 				assertCondition(detachedRepeat.title?.type === "Expression");
 				notEqual(detachedRepeat.title.expressionTree, undefined);
 			} else {
@@ -369,7 +376,7 @@ describe("api.models.unmarshallFormModel", () => {
 			);
 			notStrictEqual(control, undefined, "Control not found");
 
-			if (control && FormModel.Control.isInstance(control)) {
+			if (control && isFormModelControl(control)) {
 				assertCondition(control.label?.type === "Expression");
 				notEqual(control.label.expressionTree, undefined);
 			} else {
@@ -384,7 +391,7 @@ describe("api.models.unmarshallFormModel", () => {
 			);
 			notStrictEqual(control, undefined, "Control not found");
 
-			if (control && FormModel.Control.isInstance(control)) {
+			if (control && isFormModelControl(control)) {
 				assertCondition(control.label?.type === "Expression");
 				notEqual(control.label.expressionTree, undefined);
 			} else {

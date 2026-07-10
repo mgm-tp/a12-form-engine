@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -35,19 +35,17 @@ import { strictEqual } from "node:assert/strict";
 import { act } from "react";
 
 import { query, within } from "@com.mgmtp.a12.devtools/react";
-import { DataRoles } from "@com.mgmtp.a12.widgets/widgets-core/lib/common/main/data-roles.js";
+import { DataRoles } from "@com.mgmtp.a12.widgets/widgets-core";
 
 import { COUNTER } from "../../../rtl-utils/data-roles.js";
 import { mouseEventMock } from "../../../rtl-utils/mock-utils.js";
-import { SetupHelpers } from "../../../utils/setup.js";
+import { loadModels, setupConnectedFormEngineWithRtlAsync } from "../../../utils/setup.js";
 
 describe("api.view.modals", () => {
 	describe("warning-info-confirmation", () => {
 		describe("when hideConfirmationSummary is not set", () => {
 			it("should render confirmation summary", async () => {
-				const models = SetupHelpers.loadModels(
-					"computation-validation.errors_and_warnings_and_infos"
-				);
+				const models = loadModels("computation-validation.errors_and_warnings_and_infos");
 				// raises information message
 				const data = {
 					document: {
@@ -57,7 +55,7 @@ describe("api.view.modals", () => {
 						}
 					}
 				};
-				const wrapper = await SetupHelpers.setupConnectedFormEngineWithRtlAsync({
+				const wrapper = await setupConnectedFormEngineWithRtlAsync({
 					models,
 					data
 				});
@@ -77,7 +75,7 @@ describe("api.view.modals", () => {
 		});
 		describe("when hideConfirmationSummary is set to true", () => {
 			it("should not render confirmation summary", async () => {
-				const models = SetupHelpers.loadModels("buttons");
+				const models = loadModels("buttons");
 				// raises warning
 				const data = {
 					document: {
@@ -86,7 +84,7 @@ describe("api.view.modals", () => {
 						}
 					}
 				};
-				const wrapper = await SetupHelpers.setupConnectedFormEngineWithRtlAsync({
+				const wrapper = await setupConnectedFormEngineWithRtlAsync({
 					models,
 					data
 				});

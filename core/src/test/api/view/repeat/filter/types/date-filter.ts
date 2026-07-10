@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -32,27 +32,27 @@
 
 import { deepStrictEqual, notStrictEqual } from "node:assert/strict";
 
-import { ModelPath } from "@com.mgmtp.a12.base/base-model-api/lib/main/model/index.js";
+import { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
 import {
 	defaultDataFormats,
 	defaultLocalizerFactory,
 	defaultValueConversion
-} from "@com.mgmtp.a12.utils/utils-localization/lib/main/index.js";
+} from "@com.mgmtp.a12.utils/utils-localization";
 
 import { createEngineStore } from "../../../../../../back-end/store/index.js";
 import type { FilterParseError, Models } from "../../../../../../back-end/store/internal/store.js";
 import { RepeatData } from "../../../../../../data/internal/repeat.js";
 import type { RepeatRow } from "../../../../../../view/internal/components/form-engine/repeat/components/tableColumnTypes.js";
 import { filterRows } from "../../../../../../view/internal/utilities/filtering.js";
+import { createDocumentPath } from "../../../../../utils/createDocumentPath.js";
+import { createModelPath } from "../../../../../utils/createModelPath.js";
 import { US_LOCALE } from "../../../../../utils/localization.js";
-import { ModelHelpers } from "../../../../../utils/model-helpers.js";
-import { SetupHelpers } from "../../../../../utils/setup.js";
 import {
 	setupArrayFixture,
 	setupFixture,
 	setupModelsFixture
 } from "../../../../../utils/setupFixture.js";
-import { createDocumentPath } from "../../../../../utils/test-model-helpers/dependent-enumeration.js";
+import { loadData } from "../../../../../utils/setup.js";
 
 import { emptySwitchFunctions } from "../filter-functions/empty-switch.js";
 import { textLineRangeFunctions } from "../filter-functions/textline-range-filter.js";
@@ -65,9 +65,6 @@ import {
 } from "../filter.utils.js";
 
 import { createRow } from "./utils.js";
-
-const { loadData } = SetupHelpers;
-const { createModelPath } = ModelHelpers;
 
 export function describeTestForDateFilter(
 	models: Models,

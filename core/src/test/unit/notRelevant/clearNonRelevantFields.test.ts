@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -32,10 +32,7 @@
 
 import { deepStrictEqual } from "node:assert/strict";
 
-import type {
-	Document,
-	GroupInstance
-} from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
+import type { Document, GroupInstance } from "@com.mgmtp.a12.kernel/kernel-md-facade";
 
 import { filterDocumentByRelevance } from "../../../back-end/store/index.js";
 import { setupModelsFixture } from "../../utils/setupFixture.js";

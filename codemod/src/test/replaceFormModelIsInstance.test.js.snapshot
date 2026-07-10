@@ -1,0 +1,114 @@
+exports[`codemod.recipes.replaceFormModelIsInstance > replaces FormModel.X.isInstance calls with standalone guard functions > should migrate isInstance.ts correctly 1`] = `
+import { FormModel, isFormModel, isFormModelContent, isFormModelScreen, isFormModelScreenElement, isFormModelSection, isFormModelMultiColumnSection, isFormModelControlGrid, isFormModelRow, isFormModelControl, isFormModelTextCell, isFormModelExpressionCell, isFormModelCustomCell, isFormModelButtonPanel, isFormModelButtonType, isFormModelNavigationButton, isFormModelEventButton, isFormModelInlineRepeat, isFormModelEmbeddedRepeat, isFormModelCustomScreenElement, isFormModelHeaderFooterType, isFormModelExpressionOverviewColumn, isFormModelFieldBasedInputType, isFormModelTitledComponent, isFormModelLabeledComponent, isFormModelComponentWithDescription, isFormModelRowAction, isFormModelRepeat, isFormModelDetachedRepeat, isFormModelRepeatOverviewColumn, isFormModelFieldOverviewColumn } from "@com.mgmtp.a12.formengine/formengine-core";
+declare const model: unknown;
+declare const element: unknown;
+declare const cell: unknown;
+declare const button: unknown;
+declare const elements: unknown[];
+// Simple isInstance calls
+if (isFormModel(model)) {
+    console.log("is form model");
+}
+if (isFormModelContent(element)) {
+    console.log("is content");
+}
+if (isFormModelScreen(element)) {
+    console.log("is screen");
+}
+if (isFormModelScreenElement(element)) {
+    console.log("is screen element");
+}
+if (isFormModelSection(element)) {
+    console.log("is section");
+}
+if (isFormModelMultiColumnSection(element)) {
+    console.log("is multi column section");
+}
+if (isFormModelControlGrid(element)) {
+    console.log("is control grid");
+}
+if (isFormModelRow(element)) {
+    console.log("is row");
+}
+if (isFormModelControl(cell)) {
+    console.log("is control");
+}
+if (isFormModelTextCell(cell)) {
+    console.log("is text cell");
+}
+if (isFormModelExpressionCell(cell)) {
+    console.log("is expression cell");
+}
+if (isFormModelCustomCell(cell)) {
+    console.log("is custom cell");
+}
+if (isFormModelButtonPanel(element)) {
+    console.log("is button panel");
+}
+if (isFormModelButtonType(button)) {
+    console.log("is button type");
+}
+// ButtonType special methods
+if (isFormModelNavigationButton(button)) {
+    console.log("is navigation button");
+}
+if (isFormModelEventButton(button)) {
+    console.log("is event button");
+}
+// More isInstance calls
+if (isFormModelInlineRepeat(element)) {
+    console.log("is inline repeat");
+}
+if (isFormModelEmbeddedRepeat(element)) {
+    console.log("is embedded repeat");
+}
+if (isFormModelCustomScreenElement(element)) {
+    console.log("is custom screen element");
+}
+if (isFormModelHeaderFooterType(element)) {
+    console.log("is header footer type");
+}
+if (isFormModelExpressionOverviewColumn(element)) {
+    console.log("is expression overview column");
+}
+if (isFormModelFieldBasedInputType(cell)) {
+    console.log("is field based input type");
+}
+if (isFormModelTitledComponent(element)) {
+    console.log("is titled component");
+}
+if (isFormModelLabeledComponent(element)) {
+    console.log("is labeled component");
+}
+if (isFormModelComponentWithDescription(element)) {
+    console.log("is component with description");
+}
+// Additional isInstance calls
+if (isFormModelRowAction(element)) {
+    console.log("is row action");
+}
+if (isFormModelRepeat(element)) {
+    console.log("is repeat");
+}
+if (isFormModelDetachedRepeat(element)) {
+    console.log("is detached repeat");
+}
+if (isFormModelRepeatOverviewColumn(element)) {
+    console.log("is repeat overview column");
+}
+if (isFormModelFieldOverviewColumn(element)) {
+    console.log("is field overview column");
+}
+// With ignoreRuntimeProperties parameter
+if (isFormModel(model, true)) {
+    console.log("is form model ignoring runtime");
+}
+if (isFormModelContent(element, true)) {
+    console.log("is content ignoring runtime");
+}
+// isInstance used as callback reference (not direct call)
+const foundRepeat = elements.find(isFormModelDetachedRepeat);
+const foundSection = elements.filter(isFormModelSection);
+const hasScreen = elements.some(isFormModelScreen);
+
+`;

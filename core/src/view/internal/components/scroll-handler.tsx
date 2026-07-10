@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -33,13 +33,21 @@
 import type { ReactNode } from "react";
 import { Component, createContext } from "react";
 
-import { ModelPath } from "@com.mgmtp.a12.base/base-model-api/lib/main/model/index.js";
-import type { Container } from "@com.mgmtp.a12.widgets/widgets-core/lib/common/main/base-props.js";
+import { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
+import type { Container } from "@com.mgmtp.a12.widgets/widgets-core";
 
-import type { Models } from "../../../back-end/store/internal/store.js";
-import { EngineStore } from "../../../back-end/store/internal/store.js";
+import type { EngineStore, Models } from "../../../back-end/store/internal/store.js";
+import { areFocusedComponentsEqual } from "../../../back-end/store/internal/store.js";
 import { UiId } from "../../../back-end/utils/internal/generateUiId.js";
-import { findElementByFormModelPath, FormModel } from "../../../models/index.js";
+import type { FormModel } from "../../../models/index.js";
+import { findElementByFormModelPath } from "../../../models/index.js";
+import {
+	isFormModelDetachedRepeat,
+	isFormModelEmbeddedRepeat,
+	isFormModelFieldBasedInputType,
+	isFormModelFieldOverviewColumn,
+	isFormModelRepeat
+} from "../../../models/internal/FormModelGuards.js";
 
 /**
  * Props for the scroll handler.
@@ -188,7 +196,7 @@ export class ScrollHandler extends Component<ScrollHandlerProps> {
 			focusedComponent !== undefined &&
 			(this.lastFocusedComponent === undefined ||
 				this.lastFocusedComponentRequestCount !== screen.focusedComponentRequestCount ||
-				!EngineStore.FocusedComponent.equal(focusedComponent, this.lastFocusedComponent))
+				!areFocusedComponentsEqual(focusedComponent, this.lastFocusedComponent))
 		) {
 			return this.scrollToFocusedComponent(focusedComponent);
 		}
@@ -221,7 +229,13 @@ export class ScrollHandler extends Component<ScrollHandlerProps> {
 	 */
 	private scrollToTopOfCorrectionScreen(): boolean {
 		const uiId = UiId.generateForCorrectionModeDetailScreen({ uiIdPrefix: this.props.uiIdPrefix });
-		return this.scrollToElement(uiId, "start");
+		// allowSuccessWithoutFocus set to true since the correction screen
+		// cannot be focussed. The correction screen bar gets focused instead.
+		return this.scrollToElementAndFocus({
+			uiId,
+			verticalPosition: "start",
+			allowSuccessWithoutFocus: true
+		});
 	}
 
 	/**
@@ -238,7 +252,7 @@ export class ScrollHandler extends Component<ScrollHandlerProps> {
 			element: this.props.models.formModel,
 			uiIdPrefix: this.props.uiIdPrefix
 		});
-		return this.scrollToElement(uiId, "start");
+		return this.scrollToElementAndFocus({ uiId, verticalPosition: "start" });
 	}
 
 	/**
@@ -268,7 +282,7 @@ export class ScrollHandler extends Component<ScrollHandlerProps> {
 			return false;
 		}
 
-		if (this.props.disableRepeatBehavior !== true && FormModel.Repeat.isInstance(element)) {
+		if (this.props.disableRepeatBehavior !== true && isFormModelRepeat(element)) {
 			const tableUiId = UiId.generateForRepeatTable({
 				id: element.id,
 				uiIdPrefix: this.props.uiIdPrefix
@@ -304,15 +318,15 @@ export class ScrollHandler extends Component<ScrollHandlerProps> {
 				 * If the row is not shown when coming from a detached repeat
 				 * detail screen then focus the table
 				 */
-				if (FormModel.DetachedRepeat.isInstance(element)) {
-					return this.scrollToElement(tableUiId, "center");
+				if (isFormModelDetachedRepeat(element)) {
+					return this.scrollToElementAndFocus({ uiId: tableUiId, verticalPosition: "center" });
 				} else {
 					return false;
 				}
 			}
 
-			return this.scrollToElement(tableUiId, "center");
-		} else if (FormModel.FieldBasedInputType.isInstance(element)) {
+			return this.scrollToElementAndFocus({ uiId: tableUiId, verticalPosition: "center" });
+		} else if (isFormModelFieldBasedInputType(element)) {
 			return this.scrollToInputElement(
 				focusedComponent.formModelPath,
 				element,
@@ -324,21 +338,35 @@ export class ScrollHandler extends Component<ScrollHandlerProps> {
 	}
 
 	/**
-	 * Scrolls to an element with a certain HTML id.
+	 * Scrolls to an element with a certain HTML id and tries to focus.
 	 *
-	 * @returns true if the scrolling is applied.
+	 * @returns true if the scrolling is applied and the element was
+	 * successfully focused. Also returns true if the successful focus can be
+	 * ignored after a successful scrolling.
 	 */
-	private scrollToElement(uiId: string, verticalPosition: "start" | "center"): boolean {
-		let scrollingSuccessful = false;
-
+	private scrollToElementAndFocus({
+		uiId,
+		verticalPosition,
+		allowSuccessWithoutFocus
+	}: {
+		uiId: string;
+		verticalPosition: "start" | "center";
+		allowSuccessWithoutFocus?: boolean;
+	}): boolean {
 		const scrollToElement = document.getElementById(uiId);
 		if (scrollToElement !== null) {
-			scrollingSuccessful = true;
 			scrollToElement.scrollIntoView({ block: verticalPosition });
 			scrollToElement.focus();
+
+			// Return true only when the element was successfully focused or
+			// when the successful focus can be ignored. It could be currently
+			// not focusable, e.g. because it is disabled. In this case it is
+			// kept in the scroll queue as it should become focusable with a
+			// future dom update.
+			return allowSuccessWithoutFocus ? true : document.activeElement === scrollToElement;
 		}
 
-		return scrollingSuccessful;
+		return false;
 	}
 
 	/**
@@ -352,7 +380,7 @@ export class ScrollHandler extends Component<ScrollHandlerProps> {
 		index?: number
 	): boolean {
 		let scrollingSuccessful = false;
-		const uiId = FormModel.FieldOverviewColumn.isInstance(fieldBasedInput)
+		const uiId = isFormModelFieldOverviewColumn(fieldBasedInput)
 			? UiId.generate({
 					element: fieldBasedInput,
 					uiIdPrefix: this.props.uiIdPrefix,
@@ -373,7 +401,7 @@ export class ScrollHandler extends Component<ScrollHandlerProps> {
 
 			if (
 				embeddedRepeat !== undefined &&
-				FormModel.EmbeddedRepeat.isInstance(embeddedRepeat.element) &&
+				isFormModelEmbeddedRepeat(embeddedRepeat.element) &&
 				!this.isExpandedRowOpen(embeddedRepeat.element, embeddedRepeat.formModelPath)
 			) {
 				return false;
@@ -381,9 +409,11 @@ export class ScrollHandler extends Component<ScrollHandlerProps> {
 
 			const scrollToElement = this.findScrollToElementOfInput(fieldBasedInput, index);
 			if (scrollToElement !== null) {
-				scrollingSuccessful = true;
 				scrollToElement.scrollIntoView({ block: "center" });
 				inputElement.focus();
+
+				// Is only true, if the focusing was possible.
+				scrollingSuccessful = document.activeElement === inputElement;
 			}
 		}
 
@@ -400,7 +430,9 @@ export class ScrollHandler extends Component<ScrollHandlerProps> {
 			element.scrollIntoView(true);
 			element.tabIndex = -1;
 			element.focus();
-			return true;
+
+			// Only return true, if the focusing was possible.
+			return document.activeElement === element;
 		}
 
 		return false;
@@ -420,7 +452,9 @@ export class ScrollHandler extends Component<ScrollHandlerProps> {
 			element.scrollIntoView({ block: "center" });
 			element.tabIndex = -1;
 			element.focus();
-			return true;
+
+			// Only return true, if the focusing was possible.
+			return document.activeElement === element;
 		}
 
 		return false;
@@ -430,7 +464,7 @@ export class ScrollHandler extends Component<ScrollHandlerProps> {
 		fieldBasedInput: FormModel.FieldBasedInputType,
 		index?: number
 	): Element | null {
-		const uiId = FormModel.FieldOverviewColumn.isInstance(fieldBasedInput)
+		const uiId = isFormModelFieldOverviewColumn(fieldBasedInput)
 			? UiId.generateForRepeatTableBodyCell({
 					id: fieldBasedInput.id,
 					uiIdPrefix: this.props.uiIdPrefix,
@@ -479,7 +513,7 @@ export class ScrollHandler extends Component<ScrollHandlerProps> {
 			buttonType: "button"
 		});
 
-		return this.scrollToElement(editButtonUiId, "center");
+		return this.scrollToElementAndFocus({ uiId: editButtonUiId, verticalPosition: "center" });
 	}
 
 	private scrollToTableRow(repeat: FormModel.Repeat, index: number): boolean {
@@ -489,7 +523,7 @@ export class ScrollHandler extends Component<ScrollHandlerProps> {
 			rowIndex: index
 		});
 
-		return this.scrollToElement(rowUiId, "center");
+		return this.scrollToElementAndFocus({ uiId: rowUiId, verticalPosition: "center" });
 	}
 
 	private scrollToRepeatAddButton(repeat: FormModel.Repeat): boolean {
@@ -497,7 +531,7 @@ export class ScrollHandler extends Component<ScrollHandlerProps> {
 			repeat,
 			uiIdPrefix: this.props.uiIdPrefix
 		});
-		return this.scrollToElement(addButtonUiId, "center");
+		return this.scrollToElementAndFocus({ uiId: addButtonUiId, verticalPosition: "center" });
 	}
 
 	private focusNewRepeatRow(rowRef: HTMLElement): boolean {
@@ -553,7 +587,7 @@ export class ScrollHandler extends Component<ScrollHandlerProps> {
 				return undefined;
 			}
 
-			if (FormModel.EmbeddedRepeat.isInstance(element)) {
+			if (isFormModelEmbeddedRepeat(element)) {
 				return { element: element, formModelPath: workingPath };
 			}
 

@@ -1,8 +1,7 @@
 buildscript {
-    apply from: rootProject.file('scripts/buildscript-platforms.gradle')
-
     dependencies {
-        classpath a12Libs.dataservices.core.tooling
+        classpath platform(libs.dataservices.bom)
+        classpath libs.dataservices.modelgraph
     }
 }
 
@@ -32,10 +31,10 @@ tasks.register('copyModelFiles', Copy) {
 tasks.register('generateModelGraph', JavaExec) {
     dependsOn(tasks.named('copyModelFiles'))
 
-    final def modelGraphFile = layout.buildDirectory.file("modelGraph.json")
+    final def modelGraphFile = layout.buildDirectory.file("modelIndex/modelGraph.json")
 
     classpath = buildscript.configurations.classpath
-    mainClass = 'com.mgmtp.a12.dataservices.tooling.modelgraph.ModelGraphGenerator'
+    mainClass = 'com.mgmtp.a12.dataservices.modelgraph.fs.impl.ModelGraphGenerator'
 
     inputs.dir(tmpDir)
     outputs.file(modelGraphFile)

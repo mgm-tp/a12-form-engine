@@ -1,0 +1,13 @@
+exports[`codemod.recipes.replaceFormModelStylable > replaces FormModel.stylableToClassName/styleToClassName with standalone functions > should migrate stylable.ts correctly 1`] = `
+import { FormModel, stylableToClassName, styleToClassName } from "@com.mgmtp.a12.formengine/formengine-core";
+declare const element: FormModel.Stylable;
+declare const styles: readonly FormModel.Style[];
+// stylableToClassName usage
+const className1 = stylableToClassName(element);
+// styleToClassName usage
+const className2 = styleToClassName(styles);
+// With optional parameter
+const className3 = stylableToClassName(undefined);
+const className4 = styleToClassName(undefined);
+
+`;

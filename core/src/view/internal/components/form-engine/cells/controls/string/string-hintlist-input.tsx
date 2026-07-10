@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -33,15 +33,15 @@
 import type { ReactElement } from "react";
 import { useCallback, useContext } from "react";
 
-import type { DocumentModel } from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
-import { LocalizerContext } from "@com.mgmtp.a12.utils/utils-localization-react/lib/main/index.js";
-import { Locale } from "@com.mgmtp.a12.utils/utils-localization/lib/main/index.js";
-import type { DropDownItem } from "@com.mgmtp.a12.widgets/widgets-core/lib/dropdown/main/template/dropdown.tpl.api.js";
+import type { DocumentModel } from "@com.mgmtp.a12.kernel/kernel-md-facade";
+import { Locale } from "@com.mgmtp.a12.utils/utils-localization";
+import { LocalizerContext } from "@com.mgmtp.a12.utils/utils-localization-react";
+import type { DropDownItem } from "@com.mgmtp.a12.widgets/widgets-core";
 
 import { RESOURCE_KEYS } from "../../../../../../../back-end/localization/internal/languages/keys.js";
 import { getLocalizedResource } from "../../../../../../../back-end/localization/internal/localize.js";
 import { ModelSelectors } from "../../../../../../../back-end/store/internal/selectors/models.js";
-import { DocumentModelUtils } from "../../../../../../../models/internal/utils/document-model-utils.js";
+import * as DocumentModelUtils from "../../../../../../../models/internal/utils/document-model-utils.js";
 import type { Inputs } from "../../../../../configuration/engine-configuration.js";
 import { WidgetMapContext } from "../../../../../configuration/widget-map-context.js";
 
@@ -53,6 +53,7 @@ export function StringWithHintListInput(
 ): ReactElement {
 	const { localizer, conversion, locale } = useContext(LocalizerContext);
 
+	const { inputRef } = props;
 	const options = props.renderConfiguration.renderOptions;
 	const { addonAfter, suffixes, truncateSuffix, placeholder, htmlInputProps, ...inputProps } =
 		useBaseProps(props);
@@ -85,13 +86,13 @@ export function StringWithHintListInput(
 		[conversion, conversionConfig, options.eventHandlers, props.formModelPath, value.path]
 	);
 
-	const inputRef = useCallback(
+	const autoCompleteInputRef = useCallback(
 		(element: HTMLElement | null) => {
-			if (props.inputRef) {
-				props.inputRef.current = element;
+			if (inputRef) {
+				inputRef.current = element;
 			}
 		},
-		[props.inputRef]
+		[inputRef]
 	);
 
 	return (
@@ -107,7 +108,7 @@ export function StringWithHintListInput(
 			breakTooltipsToNewLine={props.modelElement.tooltipsOnTop}
 			inputPlaceHolder={placeholder}
 			inputProps={htmlInputProps}
-			inputRef={inputRef}
+			inputRef={autoCompleteInputRef}
 		/>
 	);
 }

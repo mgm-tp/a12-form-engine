@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -30,22 +30,30 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { ModelPath } from "@com.mgmtp.a12.base/base-model-api/lib/main/model/index.js";
-import type { DocumentModel } from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
-import type { Localizable } from "@com.mgmtp.a12.utils/utils-localization/lib/main/index.js";
+import { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
+import type { DocumentModel } from "@com.mgmtp.a12.kernel/kernel-md-facade";
+import type { Localizable } from "@com.mgmtp.a12.utils/utils-localization";
 import {
 	localizableFromModel,
 	localizableKeyFromSegments
-} from "@com.mgmtp.a12.utils/utils-localization/lib/main/index.js";
+} from "@com.mgmtp.a12.utils/utils-localization";
 
-import { FormModel } from "../../../models/internal/form-model.js";
-import { DocumentModelUtils } from "../../../models/internal/utils/document-model-utils.js";
+import {
+	isFormModelButtonType,
+	isFormModelControl,
+	isFormModelEmbeddedRepeat,
+	isFormModelFieldOverviewColumn,
+	isFormModelInlineRepeat,
+	isFormModelRowAction
+} from "../../../models/internal/FormModelGuards.js";
+import type { FormModel } from "../../../models/internal/form-model.js";
+import * as DocumentModelUtils from "../../../models/internal/utils/document-model-utils.js";
 import { FormModelUtils } from "../../../models/internal/utils/form-model-utils.js";
 
-import { DocumentModelKeyFactory } from "./documentModelKeyFactory.js";
+import { createKey } from "./documentModelKeyFactory.js";
 import { createResourceLocalizable } from "./factory.js";
+import { FmKeySegmentFactory } from "./fmKeySegmentFactory.js";
 import { RESOURCE_KEYS } from "./languages/keys.js";
-import { MeliesKeySegmentFactory } from "./meliesKeyFactory.js";
 
 /** @internal */
 export function createLocalizableFactory(
@@ -70,11 +78,14 @@ export interface IDocumentModelLocalizableFactory {
 }
 
 class DocumentModelLocalizableFactory implements IDocumentModelLocalizableFactory {
-	public constructor(protected documentModel: DocumentModel) {}
+	protected documentModel: DocumentModel;
+	public constructor(documentModel: DocumentModel) {
+		this.documentModel = documentModel;
+	}
 
 	public booleanValue(path: ModelPath, value: boolean | null): Localizable[] {
 		const stringValue = String(value);
-		const key = DocumentModelKeyFactory.createKey(this.documentModel, "boolean", path, stringValue);
+		const key = createKey(this.documentModel, "boolean", path, stringValue);
 		return [
 			{ key },
 			value === true
@@ -87,7 +98,7 @@ class DocumentModelLocalizableFactory implements IDocumentModelLocalizableFactor
 
 	public confirmValue(path: ModelPath, value: true | null): Localizable[] {
 		const stringValue = String(value);
-		const key = DocumentModelKeyFactory.createKey(this.documentModel, "confirm", path, stringValue);
+		const key = createKey(this.documentModel, "confirm", path, stringValue);
 		return [
 			{ key },
 			value
@@ -98,12 +109,7 @@ class DocumentModelLocalizableFactory implements IDocumentModelLocalizableFactor
 
 	public confirmUIValue(path: ModelPath, value: true | null): Localizable[] {
 		const stringValue = String(value);
-		const key = DocumentModelKeyFactory.createKey(
-			this.documentModel,
-			"confirmUI",
-			path,
-			stringValue
-		);
+		const key = createKey(this.documentModel, "confirmUI", path, stringValue);
 		return [
 			{ key },
 			value
@@ -116,7 +122,7 @@ class DocumentModelLocalizableFactory implements IDocumentModelLocalizableFactor
 		path: ModelPath,
 		{ value, label }: DocumentModel.EnumValue
 	): Localizable[] {
-		const key = DocumentModelKeyFactory.createKey(this.documentModel, "enumValues", path, value);
+		const key = createKey(this.documentModel, "enumValues", path, value);
 		const keyForDefault = `${key}.default`;
 
 		return [
@@ -136,13 +142,13 @@ class DocumentModelLocalizableFactory implements IDocumentModelLocalizableFactor
 			return [];
 		}
 
-		const key = DocumentModelKeyFactory.createKey(this.documentModel, "label", path);
+		const key = createKey(this.documentModel, "label", path);
 		return [localizableFromModel(key, element.label || [])];
 	}
 
 	protected fieldHint(path: ModelPath): Localizable[] {
 		const element = DocumentModelUtils.findByPath(this.documentModel, path);
-		const key = DocumentModelKeyFactory.createKey(this.documentModel, "hint", path);
+		const key = createKey(this.documentModel, "hint", path);
 		return [localizableFromModel(key, element.externalDescription)];
 	}
 
@@ -157,7 +163,7 @@ class DocumentModelLocalizableFactory implements IDocumentModelLocalizableFactor
 			return [];
 		}
 
-		const key = DocumentModelKeyFactory.createKey(this.documentModel, "helperText", path);
+		const key = createKey(this.documentModel, "helperText", path);
 		return [localizableFromModel(key, element.helperText)];
 	}
 }
@@ -216,62 +222,62 @@ export class LocalizableFactory
 	extends DocumentModelLocalizableFactory
 	implements LocalizableFactory
 {
-	constructor(
-		documentModel: DocumentModel,
-		private formModel: FormModel
-	) {
+	private formModel: FormModel;
+
+	constructor(documentModel: DocumentModel, formModel: FormModel) {
 		super(documentModel);
+		this.formModel = formModel;
 	}
 
 	modelLabel(model: FormModel): Localizable[] {
-		const meliesKey = MeliesKeySegmentFactory.getHeaderKey(this.formModel, "label");
+		const fmKey = FmKeySegmentFactory.getHeaderKey(this.formModel, "label");
 		const writeableLabels = model.header.labels;
-		return [localizableFromModel(meliesKey, writeableLabels)];
+		return [localizableFromModel(fmKey, writeableLabels)];
 	}
 
 	modelSubtitle(model: FormModel): Localizable[] {
-		const meliesKey = MeliesKeySegmentFactory.getHeaderKey(this.formModel, "subtitle");
+		const fmKey = FmKeySegmentFactory.getHeaderKey(this.formModel, "subtitle");
 		const subtitle = model.content.subtitle;
 		const multilingualSubtitle =
 			subtitle?.type === "Multilingual" ? subtitle.multilingualText : undefined;
-		return [localizableFromModel(meliesKey, multilingualSubtitle?.text)];
+		return [localizableFromModel(fmKey, multilingualSubtitle?.text)];
 	}
 
 	componentTitle(component: FormModel.TitledComponent, path: ModelPath): Localizable[] {
-		const meliesKey = MeliesKeySegmentFactory.getComponentKey(this.formModel, path, "title");
+		const fmKey = FmKeySegmentFactory.getComponentKey(this.formModel, path, "title");
 		const multilingualTitle =
 			component.title?.type === "Multilingual" ? component.title.multilingualText : undefined;
-		return [localizableFromModel(meliesKey, multilingualTitle?.text)];
+		return [localizableFromModel(fmKey, multilingualTitle?.text)];
 	}
 
 	componentLabel(component: FormModel.LabeledComponent, path: ModelPath): Localizable[] {
-		const meliesKey = MeliesKeySegmentFactory.getComponentKey(this.formModel, path, "label");
+		const fmKey = FmKeySegmentFactory.getComponentKey(this.formModel, path, "label");
 		const labelType =
-			FormModel.ButtonType.isInstance(component) || FormModel.RowAction.isInstance(component)
+			isFormModelButtonType(component) || isFormModelRowAction(component)
 				? component.buttonStyling?.label
 				: component.label;
 		const multilingualLabel =
 			labelType?.type === "Multilingual" ? labelType.multilingualText : undefined;
-		return [localizableFromModel(meliesKey, multilingualLabel?.text)];
+		return [localizableFromModel(fmKey, multilingualLabel?.text)];
 	}
 
 	componentDescription(
 		component: FormModel.ComponentWithDescription,
 		path: ModelPath
 	): Localizable[] {
-		const meliesKey = MeliesKeySegmentFactory.getComponentKey(this.formModel, path, "description");
+		const fmKey = FmKeySegmentFactory.getComponentKey(this.formModel, path, "description");
 		const labelType = component.buttonStyling?.description;
-		return [localizableFromModel(meliesKey, labelType?.text)];
+		return [localizableFromModel(fmKey, labelType?.text)];
 	}
 
 	componentHint(component: FormModel.FieldBasedInputType, path: ModelPath): Localizable[] {
-		const meliesKey = MeliesKeySegmentFactory.getComponentKey(this.formModel, path, "hint");
-		return [localizableFromModel(meliesKey, component.hint?.text)];
+		const fmKey = FmKeySegmentFactory.getComponentKey(this.formModel, path, "hint");
+		return [localizableFromModel(fmKey, component.hint?.text)];
 	}
 
 	componentContent(component: FormModel.TextCell, path: ModelPath): Localizable[] {
-		const meliesKey = MeliesKeySegmentFactory.getComponentKey(this.formModel, path, "content");
-		return [localizableFromModel(meliesKey, component.content.text)];
+		const fmKey = FmKeySegmentFactory.getComponentKey(this.formModel, path, "content");
+		return [localizableFromModel(fmKey, component.content.text)];
 	}
 
 	componentButtonLabels(
@@ -279,13 +285,13 @@ export class LocalizableFactory
 		path: ModelPath,
 		type: FormModel.RepeatButtonLabelEnum
 	): Localizable[] {
-		const key = MeliesKeySegmentFactory.getComponentButtonLabel(this.formModel, path, type);
+		const key = FmKeySegmentFactory.getComponentButtonLabel(this.formModel, path, type);
 		const buttonLabel =
 			"buttonLabels" in component && component.buttonLabels
 				? component.buttonLabels[type]
 				: undefined;
 
-		const defaultKey = MeliesKeySegmentFactory.getComponentDefaultButtonLabel(this.formModel, type);
+		const defaultKey = FmKeySegmentFactory.getComponentDefaultButtonLabel(this.formModel, type);
 		const defaultButtonLabel = this.formModel.content.defaults.buttonLabels?.[type];
 
 		return [
@@ -300,12 +306,12 @@ export class LocalizableFactory
 		path: ModelPath,
 		type: FormModel.ConfirmationTextEnum
 	): Localizable[] {
-		const key = MeliesKeySegmentFactory.getComponentConfirmationMessage(this.formModel, path, type);
+		const key = FmKeySegmentFactory.getComponentConfirmationMessage(this.formModel, path, type);
 		const confirmationText = component.confirmationTexts
 			? component.confirmationTexts[type]
 			: undefined;
 
-		const defaultKey = MeliesKeySegmentFactory.getComponentDefaultConfirmationMessage(
+		const defaultKey = FmKeySegmentFactory.getComponentDefaultConfirmationMessage(
 			this.formModel,
 			type
 		);
@@ -323,12 +329,12 @@ export class LocalizableFactory
 		path: ModelPath,
 		type: FormModel.ConfirmationTextEnum
 	): Localizable[] {
-		const key = MeliesKeySegmentFactory.getComponentConfirmationTitle(this.formModel, path, type);
+		const key = FmKeySegmentFactory.getComponentConfirmationTitle(this.formModel, path, type);
 		const confirmationText = component.confirmationTexts
 			? component.confirmationTexts[type]
 			: undefined;
 
-		const defaultKey = MeliesKeySegmentFactory.getComponentDefaultConfirmationTitle(
+		const defaultKey = FmKeySegmentFactory.getComponentDefaultConfirmationTitle(
 			this.formModel,
 			type
 		);
@@ -357,16 +363,12 @@ export class LocalizableFactory
 	}
 
 	inputPlaceholder(control: FormModel.FieldBasedInputType, path: ModelPath): Localizable[] {
-		const meliesKey = MeliesKeySegmentFactory.getComponentKey(this.formModel, path, "placeholder");
-		return [localizableFromModel(meliesKey), ...this.fieldConfigurationPlaceholder(control)];
+		const fmKey = FmKeySegmentFactory.getComponentKey(this.formModel, path, "placeholder");
+		return [localizableFromModel(fmKey), ...this.fieldConfigurationPlaceholder(control)];
 	}
 
 	inputSuffix(documentModelPath: ModelPath): Localizable[] {
-		const documentModelKey = DocumentModelKeyFactory.createKey(
-			this.documentModel,
-			"suffix",
-			documentModelPath
-		);
+		const documentModelKey = createKey(this.documentModel, "suffix", documentModelPath);
 
 		const { fieldMap } = this.formModel.content.fieldConfiguration;
 		const fieldConfigurationEntry = fieldMap[ModelPath.toString(documentModelPath)];
@@ -378,12 +380,7 @@ export class LocalizableFactory
 	}
 
 	repeatRowActionLabel(path: ModelPath, action: FormModel.RowAction): Localizable[] {
-		const key = MeliesKeySegmentFactory.getRepeatRowActionKey(
-			this.formModel,
-			path,
-			action,
-			"label"
-		);
+		const key = FmKeySegmentFactory.getRepeatRowActionKey(this.formModel, path, action, "label");
 		const multilingualLabel =
 			action.buttonStyling?.label?.type === "Multilingual"
 				? action.buttonStyling.label.multilingualText
@@ -392,7 +389,7 @@ export class LocalizableFactory
 	}
 
 	repeatRowActionDescription(path: ModelPath, action: FormModel.RowAction): Localizable[] {
-		const key = MeliesKeySegmentFactory.getRepeatRowActionKey(
+		const key = FmKeySegmentFactory.getRepeatRowActionKey(
 			this.formModel,
 			path,
 			action,
@@ -403,7 +400,7 @@ export class LocalizableFactory
 	}
 
 	repeatRowActionConfirmation(path: ModelPath, action: FormModel.RowAction): Localizable[] {
-		const key = MeliesKeySegmentFactory.getRepeatRowActionKey(
+		const key = FmKeySegmentFactory.getRepeatRowActionKey(
 			this.formModel,
 			path,
 			action,
@@ -413,7 +410,7 @@ export class LocalizableFactory
 	}
 
 	repeatRowActionDialogTitle(path: ModelPath, action: FormModel.RowAction): Localizable[] {
-		const key = MeliesKeySegmentFactory.getRepeatRowActionKey(
+		const key = FmKeySegmentFactory.getRepeatRowActionKey(
 			this.formModel,
 			path,
 			action,
@@ -450,10 +447,10 @@ export class LocalizableFactory
 
 	repeatMultiFileUploadDescription(repeat: FormModel.Repeat, path: ModelPath): Localizable[] {
 		if (
-			(FormModel.EmbeddedRepeat.isInstance(repeat) || FormModel.InlineRepeat.isInstance(repeat)) &&
+			(isFormModelEmbeddedRepeat(repeat) || isFormModelInlineRepeat(repeat)) &&
 			repeat.multiFileUploadOptions
 		) {
-			const key = MeliesKeySegmentFactory.getRepeatMultiFileUploadKey(
+			const key = FmKeySegmentFactory.getRepeatMultiFileUploadKey(
 				this.formModel,
 				path,
 				"description"
@@ -467,10 +464,10 @@ export class LocalizableFactory
 
 	repeatMultiFileUploadButtonText(repeat: FormModel.Repeat, path: ModelPath): Localizable[] {
 		if (
-			(FormModel.EmbeddedRepeat.isInstance(repeat) || FormModel.InlineRepeat.isInstance(repeat)) &&
+			(isFormModelEmbeddedRepeat(repeat) || isFormModelInlineRepeat(repeat)) &&
 			repeat.multiFileUploadOptions
 		) {
-			const key = MeliesKeySegmentFactory.getRepeatMultiFileUploadKey(
+			const key = FmKeySegmentFactory.getRepeatMultiFileUploadKey(
 				this.formModel,
 				path,
 				"buttonText"
@@ -484,10 +481,10 @@ export class LocalizableFactory
 
 	repeatMultiFileUploadHelperText(repeat: FormModel.Repeat, path: ModelPath): Localizable[] {
 		if (
-			(FormModel.EmbeddedRepeat.isInstance(repeat) || FormModel.InlineRepeat.isInstance(repeat)) &&
+			(isFormModelEmbeddedRepeat(repeat) || isFormModelInlineRepeat(repeat)) &&
 			repeat.multiFileUploadOptions
 		) {
-			const key = MeliesKeySegmentFactory.getRepeatMultiFileUploadKey(
+			const key = FmKeySegmentFactory.getRepeatMultiFileUploadKey(
 				this.formModel,
 				path,
 				"helperText"
@@ -505,9 +502,9 @@ export class LocalizableFactory
 			path
 		);
 		if (instance !== undefined) {
-			if (FormModel.Control.isInstance(instance.element)) {
+			if (isFormModelControl(instance.element)) {
 				return this.inputLabel(instance.element, instance.formModelPath);
-			} else if (FormModel.FieldOverviewColumn.isInstance(instance.element)) {
+			} else if (isFormModelFieldOverviewColumn(instance.element)) {
 				return this.repeatOverviewColumnTitle(instance.element, instance.formModelPath);
 			}
 		}
@@ -534,11 +531,7 @@ export class LocalizableFactory
 		fieldBasedInput: FormModel.FieldBasedInputType,
 		entry?: FormModel.FieldConfigurationEntry
 	): Localizable[] {
-		const documentModelKey = DocumentModelKeyFactory.createKey(
-			this.documentModel,
-			"label",
-			fieldBasedInput.elementPath
-		);
+		const documentModelKey = createKey(this.documentModel, "label", fieldBasedInput.elementPath);
 
 		const fieldConfigEntryKey = `${localizableKeyFromSegments([
 			"uiModel",
@@ -555,21 +548,13 @@ export class LocalizableFactory
 		control: FormModel.FieldBasedInputType,
 		entry?: FormModel.FieldConfigurationEntry
 	): Localizable[] {
-		const documentModelKey = DocumentModelKeyFactory.createKey(
-			this.documentModel,
-			"hint",
-			control.elementPath
-		);
+		const documentModelKey = createKey(this.documentModel, "hint", control.elementPath);
 
 		return [localizableFromModel(documentModelKey, entry?.hint?.text)];
 	}
 
 	protected fieldConfigurationPlaceholder(element: FormModel.FieldBasedInputType): Localizable[] {
-		const documentModelKey = DocumentModelKeyFactory.createKey(
-			this.documentModel,
-			"placeholder",
-			element.elementPath
-		);
+		const documentModelKey = createKey(this.documentModel, "placeholder", element.elementPath);
 		const { fieldMap } = this.formModel.content.fieldConfiguration;
 		const fieldConfigurationEntry = fieldMap[ModelPath.toString(element.elementPath)];
 		return [localizableFromModel(documentModelKey, fieldConfigurationEntry?.placeholder?.text)];

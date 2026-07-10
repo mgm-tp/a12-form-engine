@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -34,13 +34,11 @@ import { deepStrictEqual, strictEqual } from "node:assert/strict";
 
 import { DocumentPath } from "@com.mgmtp.a12.client/client-data";
 import { query } from "@com.mgmtp.a12.devtools/react";
-import type {
-	EntityInstancePath,
-	Message
-} from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
+import type { EntityInstancePath, Message } from "@com.mgmtp.a12.kernel/kernel-md-facade";
 
 import { USE_COMMON_WIDGET_SETTINGS_WRAPPER } from "../../../../main/core/contentElements/elementConfiguration/useCommonWidgetSettings.js";
 import type { BaseControlSettings } from "../../../../main/core/types/controlSettings.js";
+import { getMockMessage } from "../../../mocks/mockError.js";
 import { getReactElementName, isReactElement } from "../../../react-element-utils.js";
 import { renderHookWrapper, renderWrapper } from "../../../rtl-utils/render-wrapper.js";
 
@@ -127,7 +125,7 @@ describe("core.contentElements.elementConfiguration", () => {
 				it("returns error === true if grouped errors are given", () => {
 					const mockControlSettings: BaseControlSettings = {
 						...getMockControlSettings(),
-						groupedValidationMessages: [getMockMessage()]
+						groupedValidationMessages: [mockMessage({ severity: "ERROR" })]
 					};
 
 					const { result } = renderHookWrapper(() =>
@@ -139,7 +137,7 @@ describe("core.contentElements.elementConfiguration", () => {
 				it("returns error === true if ungrouped errors are given", () => {
 					const mockControlSettings: BaseControlSettings = {
 						...getMockControlSettings(),
-						ungroupedValidationMessages: [getMockMessage()]
+						ungroupedValidationMessages: [mockMessage({ severity: "ERROR" })]
 					};
 
 					const { result } = renderHookWrapper(() =>
@@ -158,7 +156,7 @@ describe("core.contentElements.elementConfiguration", () => {
 				});
 
 				it("returns the pre-rendered errors in a ValidationMessages component if ungrouped errors are given", () => {
-					const mockError = getMockMessage();
+					const mockError = mockMessage({ severity: "ERROR" });
 					const mockControlSettings: BaseControlSettings = {
 						...getMockControlSettings(),
 						ungroupedValidationMessages: [mockError]
@@ -180,7 +178,7 @@ describe("core.contentElements.elementConfiguration", () => {
 				it("does not return a pre-rendered error if no ungrouped errors are given", () => {
 					const mockControlSettings: BaseControlSettings = {
 						...getMockControlSettings(),
-						groupedValidationMessages: [getMockMessage()]
+						groupedValidationMessages: [mockMessage()]
 					};
 
 					const { result } = renderHookWrapper(() =>
@@ -194,7 +192,7 @@ describe("core.contentElements.elementConfiguration", () => {
 				it("returns warning === true if grouped warnings are given", () => {
 					const mockControlSettings: BaseControlSettings = {
 						...getMockControlSettings(),
-						groupedValidationMessages: [getMockMessage({ severity: "WARNING" })]
+						groupedValidationMessages: [mockMessage({ severity: "WARNING" })]
 					};
 
 					const { result } = renderHookWrapper(() =>
@@ -206,7 +204,7 @@ describe("core.contentElements.elementConfiguration", () => {
 				it("returns warning === true if ungrouped warnings are given", () => {
 					const mockControlSettings: BaseControlSettings = {
 						...getMockControlSettings(),
-						ungroupedValidationMessages: [getMockMessage({ severity: "WARNING" })]
+						ungroupedValidationMessages: [mockMessage({ severity: "WARNING" })]
 					};
 
 					const { result } = renderHookWrapper(() =>
@@ -225,7 +223,7 @@ describe("core.contentElements.elementConfiguration", () => {
 				});
 
 				it("returns the pre-rendered warnings in a ValidationMessages component if ungrouped warnings are given", () => {
-					const mockWarning = getMockMessage({ severity: "WARNING" });
+					const mockWarning = mockMessage({ severity: "WARNING" });
 					const mockControlSettings: BaseControlSettings = {
 						...getMockControlSettings(),
 						ungroupedValidationMessages: [mockWarning]
@@ -248,7 +246,7 @@ describe("core.contentElements.elementConfiguration", () => {
 				it("does not return a pre-rendered warning if no ungrouped warnings are given", () => {
 					const mockControlSettings: BaseControlSettings = {
 						...getMockControlSettings(),
-						groupedValidationMessages: [getMockMessage({ severity: "WARNING" })]
+						groupedValidationMessages: [mockMessage({ severity: "WARNING" })]
 					};
 
 					const { result } = renderHookWrapper(() =>
@@ -262,7 +260,7 @@ describe("core.contentElements.elementConfiguration", () => {
 				it("returns info === true if grouped infos are given", () => {
 					const mockControlSettings: BaseControlSettings = {
 						...getMockControlSettings(),
-						groupedValidationMessages: [getMockMessage({ severity: "INFO" })]
+						groupedValidationMessages: [mockMessage({ severity: "INFO" })]
 					};
 
 					const { result } = renderHookWrapper(() =>
@@ -274,7 +272,7 @@ describe("core.contentElements.elementConfiguration", () => {
 				it("returns info === true if ungrouped infos are given", () => {
 					const mockControlSettings: BaseControlSettings = {
 						...getMockControlSettings(),
-						ungroupedValidationMessages: [getMockMessage({ severity: "INFO" })]
+						ungroupedValidationMessages: [mockMessage({ severity: "INFO" })]
 					};
 
 					const { result } = renderHookWrapper(() =>
@@ -293,7 +291,7 @@ describe("core.contentElements.elementConfiguration", () => {
 				});
 
 				it("returns the pre-rendered infos in a ValidationMessages component if ungrouped infos are given", () => {
-					const mockInfo = getMockMessage({ severity: "INFO" });
+					const mockInfo = mockMessage({ severity: "INFO" });
 					const mockControlSettings: BaseControlSettings = {
 						...getMockControlSettings(),
 						ungroupedValidationMessages: [mockInfo]
@@ -315,7 +313,7 @@ describe("core.contentElements.elementConfiguration", () => {
 				it("does not return a pre-rendered info if no ungrouped infos are given", () => {
 					const mockControlSettings: BaseControlSettings = {
 						...getMockControlSettings(),
-						groupedValidationMessages: [getMockMessage({ severity: "INFO" })]
+						groupedValidationMessages: [mockMessage({ severity: "INFO" })]
 					};
 
 					const { result } = renderHookWrapper(() =>
@@ -349,7 +347,7 @@ describe("core.contentElements.elementConfiguration", () => {
 			});
 
 			it("returns the pre-rendered tooltips in a Tooltips component if an ungrouped error is given and showMessagesAsTooltip is set", () => {
-				const mockError = getMockMessage({ severity: "ERROR" });
+				const mockError = mockMessage({ severity: "ERROR" });
 				const mockControlSettings: BaseControlSettings = {
 					...getMockControlSettings(),
 					ungroupedValidationMessages: [mockError],
@@ -373,7 +371,7 @@ describe("core.contentElements.elementConfiguration", () => {
 			});
 
 			it("returns the pre-rendered tooltips in a Tooltips component if an ungrouped warning is given and showMessagesAsTooltip is set", () => {
-				const mockWarning = getMockMessage({ severity: "WARNING" });
+				const mockWarning = mockMessage({ severity: "WARNING" });
 				const mockControlSettings: BaseControlSettings = {
 					...getMockControlSettings(),
 					ungroupedValidationMessages: [mockWarning],
@@ -397,7 +395,7 @@ describe("core.contentElements.elementConfiguration", () => {
 			});
 
 			it("returns the pre-rendered tooltips in a Tooltips component if an ungrouped info is given and showMessagesAsTooltip is set", () => {
-				const mockInfo = getMockMessage({ severity: "INFO" });
+				const mockInfo = mockMessage({ severity: "INFO" });
 				const mockControlSettings: BaseControlSettings = {
 					...getMockControlSettings(),
 					ungroupedValidationMessages: [mockInfo],
@@ -424,9 +422,9 @@ describe("core.contentElements.elementConfiguration", () => {
 				const mockControlSettings: BaseControlSettings = {
 					...getMockControlSettings(),
 					groupedValidationMessages: [
-						getMockMessage({ severity: "ERROR" }),
-						getMockMessage({ severity: "WARNING" }),
-						getMockMessage({ severity: "INFO" })
+						mockMessage({ severity: "ERROR" }),
+						mockMessage({ severity: "WARNING" }),
+						mockMessage({ severity: "INFO" })
 					],
 					showMessagesAsTooltip: true
 				};
@@ -441,9 +439,9 @@ describe("core.contentElements.elementConfiguration", () => {
 				const mockControlSettings: BaseControlSettings = {
 					...getMockControlSettings(),
 					ungroupedValidationMessages: [
-						getMockMessage({ severity: "ERROR" }),
-						getMockMessage({ severity: "WARNING" }),
-						getMockMessage({ severity: "INFO" })
+						mockMessage({ severity: "ERROR" }),
+						mockMessage({ severity: "WARNING" }),
+						mockMessage({ severity: "INFO" })
 					]
 				};
 
@@ -464,7 +462,6 @@ describe("core.contentElements.elementConfiguration", () => {
 				deepStrictEqual(result.current.ariaDescribedBy, []);
 			});
 
-			// TODO: mock ID generation?
 			it("returns an array containing the hint tooltip ID if a hint is given", () => {
 				const mockControlSettings: BaseControlSettings = {
 					...getMockControlSettings(),
@@ -482,11 +479,13 @@ describe("core.contentElements.elementConfiguration", () => {
 					...getMockControlSettings(),
 					messageGroupId: "test-messageGroupId",
 					groupedValidationMessages: [
-						getMockMessage({
+						mockMessage({
+							severity: "ERROR",
 							entityInstance: DocumentPath.fromString("/test[1]/field1[1]"),
 							rulePath: "/test/rule1"
 						}),
-						getMockMessage({
+						mockMessage({
+							severity: "ERROR",
 							entityInstance: DocumentPath.fromString("/test[1]/field1[1]"),
 							rulePath: "/test/rule2"
 						})
@@ -507,7 +506,7 @@ describe("core.contentElements.elementConfiguration", () => {
 				it("returns an entry for the error tooltip if an ungrouped error message is given", () => {
 					const mockControlSettings: BaseControlSettings = {
 						...getMockControlSettings(),
-						ungroupedValidationMessages: [getMockMessage()],
+						ungroupedValidationMessages: [mockMessage({ severity: "ERROR" })],
 						showMessagesAsTooltip: true
 					};
 
@@ -520,7 +519,7 @@ describe("core.contentElements.elementConfiguration", () => {
 				it("returns an entry for the warning tooltip if an ungrouped warning message is given", () => {
 					const mockControlSettings: BaseControlSettings = {
 						...getMockControlSettings(),
-						ungroupedValidationMessages: [getMockMessage({ severity: "WARNING" })],
+						ungroupedValidationMessages: [mockMessage({ severity: "WARNING" })],
 						showMessagesAsTooltip: true
 					};
 
@@ -533,7 +532,7 @@ describe("core.contentElements.elementConfiguration", () => {
 				it("returns an entry for the info tooltip if an ungrouped info message is given", () => {
 					const mockControlSettings: BaseControlSettings = {
 						...getMockControlSettings(),
-						ungroupedValidationMessages: [getMockMessage({ severity: "INFO" })],
+						ungroupedValidationMessages: [mockMessage({ severity: "INFO" })],
 						showMessagesAsTooltip: true
 					};
 
@@ -547,9 +546,9 @@ describe("core.contentElements.elementConfiguration", () => {
 					const mockControlSettings: BaseControlSettings = {
 						...getMockControlSettings(),
 						groupedValidationMessages: [
-							getMockMessage(),
-							getMockMessage({ severity: "WARNING" }),
-							getMockMessage({ severity: "INFO" })
+							mockMessage(),
+							mockMessage({ severity: "WARNING" }),
+							mockMessage({ severity: "INFO" })
 						],
 						showMessagesAsTooltip: true
 					};
@@ -564,9 +563,9 @@ describe("core.contentElements.elementConfiguration", () => {
 			describe("showMessagesAsTooltip === undefined", () => {
 				it("does not return entries for grouped or ungrouped messages", () => {
 					const mockMessages = [
-						getMockMessage(),
-						getMockMessage({ severity: "WARNING" }),
-						getMockMessage({ severity: "INFO" })
+						mockMessage(),
+						mockMessage({ severity: "WARNING" }),
+						mockMessage({ severity: "INFO" })
 					];
 					const mockControlSettings: BaseControlSettings = {
 						...getMockControlSettings(),
@@ -667,19 +666,15 @@ function getMockControlSettings(): BaseControlSettings {
 	};
 }
 
-function getMockMessage(options?: {
-	severity?: Message.Severity;
+function mockMessage(options?: {
+	severity: Message.Severity;
 	entityInstance?: EntityInstancePath;
 	rulePath?: string;
 }): Message {
-	return {
-		errorCode: "",
+	return getMockMessage({
 		errorText: [{ key: `${options?.severity}-localizable` }],
-		severity: options?.severity ?? "ERROR",
-		messageType: "VALUE_ERROR",
+		severity: options?.severity,
 		entityInstance: options?.entityInstance ?? [],
-		referencedFields: [],
-		rulePath: options?.rulePath,
-		refOmissionErrorResponsible: []
-	};
+		rulePath: options?.rulePath
+	});
 }

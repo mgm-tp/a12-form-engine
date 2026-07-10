@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -36,17 +36,14 @@ import { query } from "@com.mgmtp.a12.devtools/react";
 
 import { getInputMocks } from "../../../../../rtl-utils/getInputMocks.js";
 import { setupModelsFixture } from "../../../../../utils/setupFixture.js";
-import {
-	PICUS_TYPES,
-	setupPicusTypeTest
-} from "../../../../../utils/test-model-helpers/picustypes.js";
+import { DM_TYPES, setupDmTypeTest } from "../../../../../utils/test-model-helpers/dmtypes.js";
 
 export function executeTestForSecret(): void {
-	const models = setupModelsFixture("controls.picustypes");
+	const models = setupModelsFixture("controls.dmtypes");
 
 	function assertSecret(uiId: string, value: true | undefined): void {
 		const inputMap = getInputMocks();
-		setupPicusTypeTest({
+		setupDmTypeTest({
 			models,
 			inputMap
 		});
@@ -57,13 +54,13 @@ export function executeTestForSecret(): void {
 	describe("given a form-model", () => {
 		describe("with a control where 'secret is set", () => {
 			it("renders an input with prop 'secret' which is set to true", () => {
-				assertSecret(PICUS_TYPES.STRING_01_SECRET, true);
+				assertSecret(DM_TYPES.STRING_01_SECRET, true);
 			});
 		});
 
 		describe("with a control where 'secret is not set", () => {
 			it("renders an input with prop 'secret' which is set to undefined", () => {
-				assertSecret(PICUS_TYPES.STRING_01, undefined);
+				assertSecret(DM_TYPES.STRING_01, undefined);
 			});
 		});
 	});

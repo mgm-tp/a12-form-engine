@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -30,17 +30,20 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import type { Dispatch } from "redux";
-import type { AnyAction } from "typescript-fsa";
+import type { Action, Dispatch } from "redux";
 
-import type { ModelPath } from "@com.mgmtp.a12.base/base-model-api/lib/main/model/index.js";
+import type { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
 import type {
 	DocumentModel,
 	EntityInstancePath,
 	GroupInstance
-} from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
+} from "@com.mgmtp.a12.kernel/kernel-md-facade";
 
 import type { FormModel } from "../../../../../models/index.js";
+import {
+	findByPath,
+	isMultiSelect
+} from "../../../../../models/internal/utils/document-model-utils.js";
 import type { MultiSelectData } from "../../../../../models/internal/utils/document-model-utils.js";
 import {
 	DocumentPath,
@@ -48,7 +51,6 @@ import {
 	IndexedControl
 } from "../../../../../models/internal/utils/document-utils.js";
 import { ReadonlyObjectMap } from "../../../../../models/internal/utils/json.js";
-import { DocumentModelUtils } from "../../../../../shared/internal/document-model-utils.js";
 import { assertCondition } from "../../../../utils/internal/assertions.js";
 import { Commands } from "../../actions.js";
 import { validateChangesAndUpdateMessages } from "../../change-validation.js";
@@ -73,7 +75,7 @@ export function handleMultiSelectValueChange(
 	multiSelectGroupPath: EntityInstancePath,
 	value: MultiSelectData,
 	state: EngineState,
-	dispatch: Dispatch<AnyAction>,
+	dispatch: Dispatch<Action>,
 	middlewareOptions: MiddlewareOptions,
 	formModelElementPath?: ModelPath
 ): void {
@@ -85,8 +87,8 @@ export function handleMultiSelectValueChange(
 
 	const multiSelectGroupPathString = DocumentPath.toString(multiSelectGroupPath);
 
-	const multiSelectGroup = DocumentModelUtils.findByPath(documentModel, multiSelectGroupPath);
-	assertCondition(DocumentModelUtils.isMultiSelect(multiSelectGroup));
+	const multiSelectGroup = findByPath(documentModel, multiSelectGroupPath);
+	assertCondition(isMultiSelect(multiSelectGroup));
 
 	const multiSelectFieldName = multiSelectGroup.elements[0].name;
 
@@ -145,7 +147,7 @@ export function handleMultiSelectValueChange(
 	const computationAndDependencyResult = updateDependencies({
 		state,
 		document: documentWithMultiSelectValue,
-		options: middlewareOptions,
+		kernelOptions: middlewareOptions.kernelOptionsProvider?.(state),
 		changes: multiSelectChangesForDependencyUpdate
 	});
 
@@ -170,9 +172,7 @@ export function handleMultiSelectValueChange(
 		changes: changesWithOutWildCardPath,
 		document: documentAfterComputation,
 		initialMessages: messageWithoutMultiSelectMessages,
-		kernelConfiguration: {
-			now: middlewareOptions.nowProvider?.(state)
-		},
+		kernelOptions: middlewareOptions.kernelOptionsProvider?.(state),
 		models: { documentModel, formModel, validatorProvider: validationCode },
 		parsingErrorsAfterComputation: computationAndDependencyResult.parseErrors,
 		relevantFieldPaths

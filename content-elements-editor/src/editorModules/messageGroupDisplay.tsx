@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -32,12 +32,12 @@
 
 import type { JSX } from "react";
 
-import { KernelMessage } from "@com.mgmtp.a12.client/client-data/lib/data-mutation/validation-computation/message.js";
+import { KernelMessage } from "@com.mgmtp.a12.client/client-data";
 import {
 	DocumentContext,
-	useDocumentContext,
-	type NodeRendererProps
+	useDocumentContext
 } from "@com.mgmtp.a12.contentengine/contentengine-core";
+import type { NodeRendererProps } from "@com.mgmtp.a12.contentengine/contentengine-core";
 import {
 	EditorElementModule,
 	SettingTemplate
@@ -109,7 +109,6 @@ function MessageGroupDisplayEditingRenderer(
 			<MessageGroupContext.Provider
 				value={{
 					id: "foo",
-					editableElements: [],
 					getGroupedValidationMessages: () => [
 						{
 							type: "FieldConstraintError",

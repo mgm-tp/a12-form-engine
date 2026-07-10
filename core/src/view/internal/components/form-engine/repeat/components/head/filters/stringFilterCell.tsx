@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -33,14 +33,14 @@
 import type { ReactElement } from "react";
 import { useContext } from "react";
 
-import { LocalizerContext } from "@com.mgmtp.a12.utils/utils-localization-react/lib/main/index.js";
+import { LocalizerContext } from "@com.mgmtp.a12.utils/utils-localization-react";
 
 import { RESOURCE_KEYS } from "../../../../../../../../back-end/localization/internal/languages/keys.js";
 import { getLocalizedResource } from "../../../../../../../../back-end/localization/internal/localize.js";
+import type { StringRepeatFilter } from "../../../../../../../../back-end/store/index.js";
 import { UiStateSelectors } from "../../../../../../../../back-end/store/internal/selectors/ui-state.js";
 import { UiId } from "../../../../../../../../back-end/utils/internal/generateUiId.js";
-import { FormModel } from "../../../../../../../../models/index.js";
-import type { StringRepeatFilter } from "../../../../../../../../back-end/store/index.js";
+import { isFormModelExpressionOverviewColumn } from "../../../../../../../../models/internal/FormModelGuards.js";
 
 import { EmptyFilterInput } from "./emptyFilterInput.js";
 import type { StringFilterCellProps } from "./filter-cell.js";
@@ -59,9 +59,7 @@ export function StringFilterCell(props: StringFilterCellProps): ReactElement {
 	});
 
 	// for expressions, name "wins" over id
-	const columnId = FormModel.ExpressionOverviewColumn.isInstance(element)
-		? element.name
-		: element.id;
+	const columnId = isFormModelExpressionOverviewColumn(element) ? element.name : element.id;
 
 	const isFilterNullActive = !!filter?.filterNull;
 

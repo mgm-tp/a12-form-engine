@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -33,8 +33,8 @@
 import type { ReactElement } from "react";
 import { useContext } from "react";
 
-import type { DocumentModel } from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
-import { LocalizerContext } from "@com.mgmtp.a12.utils/utils-localization-react/lib/main/index.js";
+import type { DocumentModel } from "@com.mgmtp.a12.kernel/kernel-md-facade";
+import { LocalizerContext } from "@com.mgmtp.a12.utils/utils-localization-react";
 
 import { RESOURCE_KEYS } from "../../../../../../../back-end/localization/index.js";
 import { getLocalizedResource } from "../../../../../../../back-end/localization/internal/localize.js";
@@ -48,7 +48,7 @@ import { useBaseProps } from "../use-input-props.js";
 /** @internal */
 export function CheckboxGroupInput(props: Inputs.InputProps<DocumentModel.Group>): ReactElement {
 	const { localizer } = useContext(LocalizerContext);
-
+	const { inputRef } = props;
 	const options = props.renderConfiguration.renderOptions;
 	const { CheckboxGroup, CheckboxGroupItem, CheckboxIndeterminate } = useContext(WidgetMapContext);
 
@@ -92,8 +92,8 @@ export function CheckboxGroupInput(props: Inputs.InputProps<DocumentModel.Group>
 					);
 				}}
 				buttonRef={element => {
-					if (props.inputRef) {
-						props.inputRef.current = element;
+					if (inputRef) {
+						inputRef.current = element;
 					}
 				}}
 			/>
@@ -111,8 +111,8 @@ export function CheckboxGroupInput(props: Inputs.InputProps<DocumentModel.Group>
 					inputRef={
 						!useCheckboxIndeterminate && index === 0
 							? element => {
-									if (props.inputRef) {
-										props.inputRef.current = element;
+									if (inputRef) {
+										inputRef.current = element;
 									}
 								}
 							: undefined

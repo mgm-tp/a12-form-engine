@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -30,9 +30,16 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import type { Header } from "@com.mgmtp.a12.base/base-model-api/lib/main/header/index.js";
+import type { Header } from "@com.mgmtp.a12.base/base-model-api";
 
-import { FormModel } from "../../../models/internal/form-model.js";
+import {
+	isFormModelControl,
+	isFormModelExpressionCell,
+	isFormModelRepeatOverviewColumn,
+	isFormModelScreen,
+	isFormModelTextCell
+} from "../../../models/internal/FormModelGuards.js";
+import type { FormModel } from "../../../models/internal/form-model.js";
 
 import { assertExists, assertUnreachable } from "./assertions.js";
 
@@ -48,16 +55,10 @@ interface UiIdGeneratorProps {
  * @internal
  * FIXME: Move to Runtime Form Model
  */
-export namespace UiId {
-	export function generate({
-		element,
-		uiIdPrefix,
-		infix,
-		suffix = "",
-		rowIndex
-	}: UiIdGeneratorProps): string {
+export const UiId = {
+	generate({ element, uiIdPrefix, infix, suffix = "", rowIndex }: UiIdGeneratorProps): string {
 		if ("type" in element) {
-			if (FormModel.Control.isInstance(element)) {
+			if (isFormModelControl(element)) {
 				const { elementPath, elementRef, occurrence } = element;
 
 				const fieldName = elementPath.at(-1)?.elementName;
@@ -71,13 +72,13 @@ export namespace UiId {
 						uiIdPrefix
 					}) + suffix
 				);
-			} else if (FormModel.RepeatOverviewColumn.isInstance(element)) {
-				return generateForRepeatOverviewColumn({
+			} else if (isFormModelRepeatOverviewColumn(element)) {
+				return UiId.generateForRepeatOverviewColumn({
 					id: element.id,
 					uiIdPrefix,
 					rowIndex
 				});
-			} else if (FormModel.TextCell.isInstance(element)) {
+			} else if (isFormModelTextCell(element)) {
 				return (
 					generateForComponent({
 						id: element.id,
@@ -85,7 +86,7 @@ export namespace UiId {
 						infix
 					}) + "-content"
 				);
-			} else if (FormModel.ExpressionCell.isInstance(element)) {
+			} else if (isFormModelExpressionCell(element)) {
 				return (
 					generateForComponent({
 						id: element.id,
@@ -96,7 +97,7 @@ export namespace UiId {
 			}
 		}
 
-		if (FormModel.Screen.isInstance(element)) {
+		if (isFormModelScreen(element)) {
 			return generateForScreen({ id: element.id, uiIdPrefix });
 		}
 
@@ -116,9 +117,9 @@ export namespace UiId {
 
 		// ensure every element receives an id
 		assertUnreachable(element);
-	}
+	},
 
-	export function generateForRowActionButton(params: {
+	generateForRowActionButton(params: {
 		repeat: FormModel.Repeat;
 		uiIdPrefix?: string;
 		rowIndex: number;
@@ -132,174 +133,156 @@ export namespace UiId {
 				infix: params.eventType + `-${params.buttonType}`
 			}) + `-${params.rowIndex}`
 		);
-	}
+	},
 
-	export function generateForAddButton(params: {
-		repeat: FormModel.Repeat;
-		uiIdPrefix?: string;
-	}): string {
+	generateForAddButton(params: { repeat: FormModel.Repeat; uiIdPrefix?: string }): string {
 		return UiId.generate({
 			element: params.repeat,
 			uiIdPrefix: params.uiIdPrefix,
 			infix: "add-button"
 		});
-	}
+	},
 
-	export function generateForBtnGroup(params: {
-		id: string;
-		uiIdPrefix?: string;
-		alignment: string;
-	}): string {
+	generateForBtnGroup(params: { id: string; uiIdPrefix?: string; alignment: string }): string {
 		return generateForComponent(params) + "-btn-group-" + params.alignment;
-	}
+	},
 
-	export function generateForDetachedRepeatScreen(params: {
-		repeatId: string;
-		uiIdPrefix?: string;
-	}): string {
+	generateForDetachedRepeatScreen(params: { repeatId: string; uiIdPrefix?: string }): string {
 		return getPrefix(params.uiIdPrefix) + "case-" + params.repeatId;
-	}
+	},
 
-	export function generateForCorrectionModeDetailScreen(params: { uiIdPrefix?: string }): string {
+	generateForCorrectionModeDetailScreen(params: { uiIdPrefix?: string }): string {
 		return generateForComponent({ ...params, id: "correction-screen" });
-	}
+	},
 
-	export function generateForEmbeddedRepeatExpandedRow(params: {
+	generateForEmbeddedRepeatExpandedRow(params: {
 		repeat: FormModel.Repeat;
 		uiIdPrefix?: string;
 		rowIndex: number;
 	}): string {
 		return (
-			generate({ element: params.repeat, uiIdPrefix: params.uiIdPrefix }) +
+			UiId.generate({ element: params.repeat, uiIdPrefix: params.uiIdPrefix }) +
 			"-expandedrow" +
 			"-" +
 			params.rowIndex
 		);
-	}
+	},
 
-	export function generateForMultiAttachmentUpload(params: {
+	generateForMultiAttachmentUpload(params: {
 		repeat: FormModel.Repeat;
 		uiIdPrefix?: string;
 	}): string {
 		return (
-			generate({ element: params.repeat, uiIdPrefix: params.uiIdPrefix }) +
+			UiId.generate({ element: params.repeat, uiIdPrefix: params.uiIdPrefix }) +
 			"-multi-attachment-upload"
 		);
-	}
+	},
 
-	function generateForComponent(params: {
+	generateForRepeatTableBodyCell(params: {
 		id: string;
-		infix?: string;
 		uiIdPrefix?: string;
+		rowIndex?: number;
 	}): string {
-		return (
-			getPrefix(params.uiIdPrefix) +
-			`a12-${params.infix !== undefined ? params.infix + "-" : ""}${params.id}`
-		);
-	}
+		return generateForComponent(params) + "-bodycell-" + params.rowIndex;
+	},
 
-	function generateForControl(params: {
-		fieldId: string;
-		fieldName: string;
-		occurrence: number;
+	generateForRepeatTableBodyRow(params: {
+		id: string;
 		uiIdPrefix?: string;
+		rowIndex?: number;
 	}): string {
-		return (
-			getPrefix(params.uiIdPrefix) +
-			"a12" +
-			"-" +
-			params.fieldName +
-			"-" +
-			params.fieldId +
-			(params.occurrence > 1 ? "-" + params.occurrence : "")
-		);
-	}
+		return generateForComponent(params) + "-bodyrow-" + params.rowIndex;
+	},
 
-	function generateForScreen(params: { id: string; uiIdPrefix?: string }): string {
-		return getPrefix(params.uiIdPrefix) + "case-" + params.id;
-	}
+	generateForRepeatTable(params: { id: string; uiIdPrefix?: string; rowIndex?: number }): string {
+		return generateForComponent(params) + "-table";
+	},
 
-	export function generateForRepeatOverviewColumn(params: {
+	generateForTitle(params: { id: string; uiIdPrefix?: string }): string {
+		return generateForComponent(params) + "-title";
+	},
+
+	generateForFieldOverviewColumnFilter(params: {
+		id: string;
+		uiIdPrefix?: string;
+		suffix?: string;
+	}): string {
+		return generateForComponent(params) + "-filter" + `${params.suffix ? params.suffix : ""}`;
+	},
+
+	generateForValidationBar(params: { uiIdPrefix?: string }): string {
+		return getPrefix(params.uiIdPrefix) + "a12-validation-bar";
+	},
+
+	generateForCorrectionScreenBar(params: { uiIdPrefix?: string }): string {
+		return getPrefix(params.uiIdPrefix) + "a12-correction-screen-bar";
+	},
+
+	generateForMobileValidationBarModal(params: { uiIdPrefix?: string }): string {
+		return getPrefix(params.uiIdPrefix) + "a12-validation-bar-modal";
+	},
+
+	generateForErrorTooltip(params: { inputId: string }): string {
+		return `${params.inputId}-errors-tooltip`;
+	},
+
+	generateForWarningTooltip(params: { inputId: string }): string {
+		return `${params.inputId}-warnings-tooltip`;
+	},
+
+	generateForInfoTooltip(params: { inputId: string }): string {
+		return `${params.inputId}-infos-tooltip`;
+	},
+
+	generateForHintTooltip(params: { inputId: string }): string {
+		return `${params.inputId}-hint-tooltip`;
+	},
+
+	generateForSuffix(params: { inputId: string }): string {
+		return `${params.inputId}-suffix`;
+	},
+
+	generateForRepeatOverviewColumn(params: {
 		id: string;
 		uiIdPrefix?: string;
 		rowIndex?: number;
 	}): string {
 		return generateForComponent(params) + "-cell-" + params.rowIndex;
 	}
+};
 
-	export function generateForRepeatTableBodyCell(params: {
-		id: string;
-		uiIdPrefix?: string;
-		rowIndex?: number;
-	}): string {
-		return generateForComponent(params) + "-bodycell-" + params.rowIndex;
-	}
+function generateForComponent(params: { id: string; infix?: string; uiIdPrefix?: string }): string {
+	return (
+		getPrefix(params.uiIdPrefix) +
+		`a12-${params.infix !== undefined ? params.infix + "-" : ""}${params.id}`
+	);
+}
 
-	export function generateForRepeatTableBodyRow(params: {
-		id: string;
-		uiIdPrefix?: string;
-		rowIndex?: number;
-	}): string {
-		return generateForComponent(params) + "-bodyrow-" + params.rowIndex;
-	}
+function generateForControl(params: {
+	fieldId: string;
+	fieldName: string;
+	occurrence: number;
+	uiIdPrefix?: string;
+}): string {
+	return (
+		getPrefix(params.uiIdPrefix) +
+		"a12" +
+		"-" +
+		params.fieldName +
+		"-" +
+		params.fieldId +
+		(params.occurrence > 1 ? "-" + params.occurrence : "")
+	);
+}
 
-	export function generateForRepeatTable(params: {
-		id: string;
-		uiIdPrefix?: string;
-		rowIndex?: number;
-	}): string {
-		return generateForComponent(params) + "-table";
-	}
+function generateForScreen(params: { id: string; uiIdPrefix?: string }): string {
+	return getPrefix(params.uiIdPrefix) + "case-" + params.id;
+}
 
-	export function generateForTitle(params: { id: string; uiIdPrefix?: string }): string {
-		return generateForComponent(params) + "-title";
-	}
+function generateForFormModel(params: { header: Header; uiIdPrefix?: string }): string {
+	return getPrefix(params.uiIdPrefix) + params.header.id;
+}
 
-	function generateForFormModel(params: { header: Header; uiIdPrefix?: string }): string {
-		return getPrefix(params.uiIdPrefix) + params.header.id;
-	}
-
-	function getPrefix(uiIdPrefix?: string): string {
-		return `${uiIdPrefix !== undefined ? uiIdPrefix + "-" : ""}`;
-	}
-
-	export function generateForFieldOverviewColumnFilter(params: {
-		id: string;
-		uiIdPrefix?: string;
-		suffix?: string;
-	}): string {
-		return generateForComponent(params) + "-filter" + `${params.suffix ? params.suffix : ""}`;
-	}
-
-	export function generateForValidationBar(params: { uiIdPrefix?: string }): string {
-		return getPrefix(params.uiIdPrefix) + "a12-validation-bar";
-	}
-
-	export function generateForCorrectionScreenBar(params: { uiIdPrefix?: string }): string {
-		return getPrefix(params.uiIdPrefix) + "a12-correction-screen-bar";
-	}
-
-	export function generateForMobileValidationBarModal(params: { uiIdPrefix?: string }): string {
-		return getPrefix(params.uiIdPrefix) + "a12-validation-bar-modal";
-	}
-
-	export function generateForErrorTooltip(params: { inputId: string }): string {
-		return `${params.inputId}-errors-tooltip`;
-	}
-
-	export function generateForWarningTooltip(params: { inputId: string }): string {
-		return `${params.inputId}-warnings-tooltip`;
-	}
-
-	export function generateForInfoTooltip(params: { inputId: string }): string {
-		return `${params.inputId}-infos-tooltip`;
-	}
-
-	export function generateForHintTooltip(params: { inputId: string }): string {
-		return `${params.inputId}-hint-tooltip`;
-	}
-
-	export function generateForSuffix(params: { inputId: string }): string {
-		return `${params.inputId}-suffix`;
-	}
+function getPrefix(uiIdPrefix?: string): string {
+	return `${uiIdPrefix !== undefined ? uiIdPrefix + "-" : ""}`;
 }

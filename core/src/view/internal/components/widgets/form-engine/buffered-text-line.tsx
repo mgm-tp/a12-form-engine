@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -32,15 +32,12 @@
 
 import { useContext } from "react";
 
+import { BufferedInput, HTMLInputAdapter } from "@com.mgmtp.a12.widgets/widgets-core";
 import type {
 	BufferedInputProps,
-	ImmediateInputProps
-} from "@com.mgmtp.a12.widgets/widgets-core/lib/input/buffered/main/buffered.api.js";
-import {
-	BufferedInput,
-	HTMLInputAdapter
-} from "@com.mgmtp.a12.widgets/widgets-core/lib/input/buffered/main/buffered.view.js";
-import type { TextLineStatelessProps } from "@com.mgmtp.a12.widgets/widgets-core/lib/input/text-line/main/template/text-line.tpl.api.js";
+	ImmediateInputProps,
+	TextFieldProps
+} from "@com.mgmtp.a12.widgets/widgets-core";
 
 import { WidgetMapContext } from "../../../configuration/widget-map-context.js";
 
@@ -49,10 +46,10 @@ import { WidgetMapContext } from "../../../configuration/widget-map-context.js";
  * @ignore
  */
 export const BufferedTextLineInternal = BufferedInput(
-	HTMLInputAdapter(function (props: TextLineStatelessProps) {
-		const TextLineStateless = useContext(WidgetMapContext).TextLineStateless;
+	HTMLInputAdapter(function (props: TextFieldProps) {
+		const TextField = useContext(WidgetMapContext).TextField;
 
-		return <TextLineStateless {...props} />;
+		return <TextField {...props} />;
 	})
 );
 
@@ -60,7 +57,7 @@ export const BufferedTextLineInternal = BufferedInput(
  * @internal
  * @ignore
  */
-export function BufferedTextLine(props: BufferedTextLine.PropsType) {
+export function BufferedTextLine(props: BufferedTextLineProps) {
 	return <BufferedTextLineInternal {...props} submitOnEnter />;
 }
 
@@ -68,8 +65,6 @@ export function BufferedTextLine(props: BufferedTextLine.PropsType) {
  * @internal
  * @ignore
  */
-export namespace BufferedTextLine {
-	export type PropsType = BufferedInputProps<string> &
-		ImmediateInputProps<string> &
-		TextLineStatelessProps;
-}
+export type BufferedTextLineProps = BufferedInputProps<string> &
+	ImmediateInputProps<string> &
+	TextFieldProps;

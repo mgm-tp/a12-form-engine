@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -30,20 +30,18 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import type { GroupInstance } from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
+import type { GroupInstance } from "@com.mgmtp.a12.kernel/kernel-md-facade";
 
-export namespace EXTERNAL_ENUM {
-	export const ID_EXTERNAL_ENUM_COMPACT = "a12-ExternalEnumeration-field_127e7";
-	export const ID_EXTERNAL_ENUM_AUTOCOMPLETE = "a12-ExternalEnumerationAllowCustom-field_78eea";
-	export const ID_EXTERNAL_ENUM_FULL = "a12-ExternalEnumerationFull-field_d8403";
-	export const ID_EXTERNAL_ENUM_INLINE = "a12-ExternalEnumerationInline-field_75bf2";
-
-	export const ID_IR_EXTERNAL_ENUM_COMPACT = "a12-fieldbasedrepeatoverviewcolumn-d34a9-cell-0";
-	export const ID_IR_EXTERNAL_ENUM_AUTOCOMPLETE = "a12-fieldbasedrepeatoverviewcolumn-caf88-cell-0";
-	export const ID_IR_EXTERNAL_ENUM_FULL = "a12-fieldbasedrepeatoverviewcolumn-0465f-cell-0";
-	export const ID_IR_EXTERNAL_ENUM_INLINE = "a12-fieldbasedrepeatoverviewcolumn-41a5a-cell-0";
-
-	export function createDocument(values: { repeatableGroup?: GroupInstance[] }): GroupInstance {
+export const EXTERNAL_ENUM = {
+	ID_EXTERNAL_ENUM_COMPACT: "a12-ExternalEnumeration-field_127e7",
+	ID_EXTERNAL_ENUM_AUTOCOMPLETE: "a12-ExternalEnumerationAllowCustom-field_78eea",
+	ID_EXTERNAL_ENUM_FULL: "a12-ExternalEnumerationFull-field_d8403",
+	ID_EXTERNAL_ENUM_INLINE: "a12-ExternalEnumerationInline-field_75bf2",
+	ID_IR_EXTERNAL_ENUM_COMPACT: "a12-fieldbasedrepeatoverviewcolumn-d34a9-cell-0",
+	ID_IR_EXTERNAL_ENUM_AUTOCOMPLETE: "a12-fieldbasedrepeatoverviewcolumn-caf88-cell-0",
+	ID_IR_EXTERNAL_ENUM_FULL: "a12-fieldbasedrepeatoverviewcolumn-0465f-cell-0",
+	ID_IR_EXTERNAL_ENUM_INLINE: "a12-fieldbasedrepeatoverviewcolumn-41a5a-cell-0",
+	createDocument(values: { repeatableGroup?: GroupInstance[] }): GroupInstance {
 		return {
 			Root: {
 				Config: {
@@ -52,4 +50,4 @@ export namespace EXTERNAL_ENUM {
 			}
 		};
 	}
-}
+} as const;

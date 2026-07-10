@@ -1,0 +1,95 @@
+{
+  "header": {
+    "id": "control-grid.form",
+    "modelType": "form",
+    "modelVersion": "39.0.0",
+    "locales": [
+      {
+        "code": "en"
+      }
+    ],
+    "modelReferences": [
+      {
+        "alias": "DM",
+        "modelType": "document",
+        "purpose": "data binding",
+        "reference": "control-grid.dm"
+      }
+    ]
+  },
+  "content": {
+    "subHeaderBox": {
+      "id": "subHeaderBox1"
+    },
+    "footerBox": {
+      "id": "footerBox1"
+    },
+    "screens": [
+      {
+        "id": "screen1",
+        "name": "Screen1",
+        "screenElements": [
+          {
+            "type": "ControlGrid",
+            "id": "controlgrid-430cf",
+            "name": "included-control-grid",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "Included Control Grid"
+                  }
+                ]
+              }
+            },
+            "layout": {
+              "lg": "6-6"
+            },
+            "row": [
+              {
+                "type": "Row",
+                "id": "row-b76ec",
+                "name": "row-1",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control-d4bc2",
+                    "elementRef": "field_6b43b"
+                  },
+                  {
+                    "type": "Control",
+                    "id": "control-c3482",
+                    "elementRef": "field_0c7eb"
+                  }
+                ]
+              },
+              {
+                "type": "Row",
+                "id": "row-be592",
+                "name": "row-2",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control-6465e",
+                    "elementRef": "field_db4dc"
+                  },
+                  {
+                    "type": "Control",
+                    "id": "control-54b51",
+                    "elementRef": "field_194ed"
+                  }
+                ]
+              }
+            ],
+            "verticalAlignment": "TOP"
+          }
+        ]
+      }
+    ],
+    "fieldConfiguration": {},
+    "groupConfiguration": {},
+    "defaults": {}
+  }
+}

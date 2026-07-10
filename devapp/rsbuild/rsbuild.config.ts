@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -31,15 +31,20 @@
  */
 
 import { execSync } from "node:child_process";
+import process from "node:process";
 
-import { defineConfig, type ProxyConfig, rspack } from "@rsbuild/core";
+import type { ProxyConfig } from "@rsbuild/core";
+import { defineConfig, rspack } from "@rsbuild/core";
 import { pluginReact } from "@rsbuild/plugin-react";
 import { RsdoctorRspackPlugin } from "@rsdoctor/rspack-plugin";
 
-import corePkg from "@com.mgmtp.a12.formengine/formengine-core/package.json" with { type: "json" };
+// eslint-disable-next-line workspaces/no-relative-imports
+import corePkg from "../../core/package.json" with { type: "json" };
 
 import packageJson from "../package.json" with { type: "json" };
 import { createDependencyTreeRoot } from "../scripts/dependencyTree.js";
+
+import { pluginModelWatcher } from "./pluginModelWatcher.js";
 
 const commitHash = execSync("git rev-parse HEAD || exit 0", {
 	stdio: [1],
@@ -48,20 +53,28 @@ const commitHash = execSync("git rev-parse HEAD || exit 0", {
 
 function setupProxy(envMode: string): ProxyConfig | undefined {
 	switch (envMode) {
-		case "services":
+		case "services": {
+			const serverPort = process.env.SERVER_PORT ?? "14001";
 			return {
 				"/api": {
-					target: "http://localhost:14001",
+					target: `http://localhost:${serverPort}`,
 					changeOrigin: true,
 					secure: false
 				},
-				"/status": {
-					target: "http://localhost:14001/actuator/health/initializationFinished",
+				"/statusDataservices": {
+					target: `http://localhost:${serverPort}/actuator/health/dataservicesInitializationFinished`,
 					changeOrigin: true,
 					secure: false,
-					pathRewrite: { "^/status": "" }
+					pathRewrite: { "^/statusDataservices": "" }
+				},
+				"/statusContentstore": {
+					target: `http://localhost:${serverPort}/actuator/health/contentstoreInitializationFinished`,
+					changeOrigin: true,
+					secure: false,
+					pathRewrite: { "^/statusContentstore": "" }
 				}
 			};
+		}
 		default:
 			return undefined;
 	}
@@ -75,7 +88,14 @@ export default defineConfig(({ envMode, env }) => {
 	return {
 		server: {
 			port: 14000,
-			publicDir: [{ name: "resources" }, { name: "dist", copyOnBuild: false }],
+			publicDir: [
+				{ name: "resources" },
+				// Served directly from the Gradle build dirs (no copy step). watch:true
+				// reloads the page when `gradle -t` rewrites artifacts. On production
+				// build, copyOnBuild ('auto') copies them into dist.
+				{ name: "../exampleModels/build", watch: true },
+				{ name: "../modelGraph/build", watch: true }
+			],
 			proxy: setupProxy(devappMode)
 		},
 		dev: {
@@ -90,6 +110,7 @@ export default defineConfig(({ envMode, env }) => {
 			]
 		},
 		source: {
+			preEntry: "@com.mgmtp.a12.widgets/widgets-core/styles/basic.css",
 			entry: { index: `./src/client/index.tsx` },
 			define: {
 				__VERSION__: JSON.stringify(version),
@@ -103,13 +124,13 @@ export default defineConfig(({ envMode, env }) => {
 			}
 		},
 		resolve: {
-			dedupe: ["scheduler", "react-is", "big.js", "@date-fns/tz"]
+			dedupe: ["scheduler", "react-is", "big.js", "@date-fns/tz", "clsx"]
 		},
 		html: {
 			title: `Form Engine Devapp - ${version}`,
 			template: "resources/index.html"
 		},
-		plugins: [pluginReact()],
+		plugins: [pluginReact(), pluginModelWatcher(devappMode)],
 		tools: {
 			rspack(config, { addRules, appendPlugins }) {
 				addRules({ test: /\.js$/, loader: "source-map-loader", enforce: "pre" });

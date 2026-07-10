@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -34,7 +34,7 @@ import type {
 	DocumentModel,
 	EntityInstancePath,
 	GroupInstance
-} from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
+} from "@com.mgmtp.a12.kernel/kernel-md-facade";
 
 import { DocumentUtils } from "../../../models/internal/utils/document-utils.js";
 import type { ReadonlyObjectMap } from "../../../models/internal/utils/json.js";
@@ -54,7 +54,7 @@ export interface UpdateResult {
  * @internal
  * @ignore
  */
-export namespace DataUtils {
+export const DataUtils = {
 	/**
 	 * @internal
 	 *
@@ -62,7 +62,7 @@ export namespace DataUtils {
 	 * The row instance has to be moved in the document and
 	 * the errors-messages have to be updated.
 	 */
-	export function moveRow(
+	moveRow(
 		json: GroupInstance,
 		rowPath: EntityInstancePath,
 		delta: number,
@@ -73,7 +73,7 @@ export namespace DataUtils {
 		const newMessages: ReadonlyObjectMap<EngineStore.Validation.Entry> =
 			EngineStore.Validation.Message.updateMessagesPaths(messages, rowPath, documentModel, delta);
 		return { document: newDocument, messages: newMessages, changed: true };
-	}
+	},
 
 	/**
 	 * @internal
@@ -82,7 +82,7 @@ export namespace DataUtils {
 	 * The row has to be removed from the document and
 	 * the error message references have to be updated.
 	 */
-	export function removeRow(
+	removeRow(
 		documentPath: EntityInstancePath,
 		initialDocument: GroupInstance,
 		modelElement: DocumentModel
@@ -92,4 +92,4 @@ export namespace DataUtils {
 			document !== initialDocument ? ChangeMapCreators.createGroupRemoved(documentPath) : {};
 		return { document, changes };
 	}
-}
+};

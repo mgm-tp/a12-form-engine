@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -35,7 +35,8 @@ import { strictEqual } from "node:assert/strict";
 import { within } from "@com.mgmtp.a12.devtools/react";
 
 import { assertCondition } from "../../../../../back-end/utils/internal/assertions.js";
-import { findElementByFormModelPath, FormModel } from "../../../../../models/index.js";
+import { findElementByFormModelPath } from "../../../../../models/index.js";
+import { isFormModelDetachedRepeat } from "../../../../../models/internal/FormModelGuards.js";
 import {
 	DETACHED_REPEAT,
 	REPEAT_CONTENT
@@ -43,21 +44,21 @@ import {
 import { DetachedRepeat } from "../../../../../view/internal/components/form-engine/repeat/repeats.js";
 import { TABLE } from "../../../../rtl-utils/data-roles.js";
 import { rtlRenderWrapperAsync } from "../../../../rtl-utils/render-wrapper.js";
-import { SetupHelpers } from "../../../../utils/setup.js";
+import { loadModels, setupRenderConfiguration } from "../../../../utils/setup.js";
 import { DR } from "../../../../utils/test-model-helpers/detached.repeat.js";
 
 export function executeRenderingTests() {
 	describe("data-role", () => {
 		it("renders a DetachedRepeat with data-role 'repeat-detached' on the outermost div and 'repeat-content' on the repeat container div", async () => {
-			const models = SetupHelpers.loadModels("repeat", "detached");
+			const models = loadModels("repeat", "detached");
 
 			const detachedRepeat = findElementByFormModelPath(
 				models.formModel,
 				DR.SortingAndFiltering.repeatFormModelPath
 			);
-			assertCondition(FormModel.DetachedRepeat.isInstance(detachedRepeat));
+			assertCondition(isFormModelDetachedRepeat(detachedRepeat));
 
-			const renderConfiguration = SetupHelpers.setupRenderConfiguration({
+			const renderConfiguration = setupRenderConfiguration({
 				models,
 				parentPath: DR.SortingAndFiltering.repeatFormModelPath.slice(0, -1)
 			});

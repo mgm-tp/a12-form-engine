@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -30,10 +30,7 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import type {
-	DocumentModel,
-	IGeneratedCodeAccessor
-} from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
+import type { DocumentModel, IGeneratedCodeAccessor } from "@com.mgmtp.a12.kernel/kernel-md-facade";
 
 import type { FormModel } from "../../../../models/internal/form-model.js";
 
@@ -43,31 +40,31 @@ import type { Selector } from "./selectors.js";
 /**
  * All model related selector creators.
  */
-export namespace ModelSelectors {
-	/**
-	 * @returns a selector that selects the form model from the state
-	 */
-	export function formModel(): Selector<FormModel> {
-		return state => {
-			return engineState(state).models.formModel;
-		};
-	}
-
+export const ModelSelectors = {
 	/**
 	 * @returns a selector that selects the document model from the state
 	 */
-	export function documentModel(): Selector<DocumentModel> {
+	documentModel(): Selector<DocumentModel> {
 		return state => {
 			return engineState(state).models.documentModel;
 		};
-	}
+	},
+
+	/**
+	 * @returns a selector that selects the form model from the state
+	 */
+	formModel(): Selector<FormModel> {
+		return state => {
+			return engineState(state).models.formModel;
+		};
+	},
 
 	/**
 	 * @returns a selector that selects the validation code from the state
 	 */
-	export function validationCode(): Selector<IGeneratedCodeAccessor | undefined> {
+	validationCode(): Selector<IGeneratedCodeAccessor | undefined> {
 		return state => {
 			return engineState(state).models.validatorProvider;
 		};
 	}
-}
+};

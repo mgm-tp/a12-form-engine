@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -31,13 +31,11 @@
  */
 
 import { Commands, Events } from "../../../../../back-end/store/index.js";
-import { MiddlewareHelpers } from "../../../../utils/back-end-helpers.js";
-import { DocumentHelpers } from "../../../../utils/document-helpers.js";
-import { SetupHelpers } from "../../../../utils/setup.js";
+import { createDocumentPath } from "../../../../utils/createDocumentPath.js";
+import { MiddlewareHelpers } from "../../../../utils/MiddlewareHelpers.js";
+import { createTestStore, loadData } from "../../../../utils/setup.js";
 import { setupFixture, setupModelsFixture } from "../../../../utils/setupFixture.js";
 import { DR } from "../../../../utils/test-model-helpers/detached.repeat.js";
-
-const { createTestStore } = SetupHelpers;
 
 describe("api.back-end.store.middleware", () => {
 	describe("onInputTouchedMiddleware", () => {
@@ -87,7 +85,7 @@ describe("api.back-end.store.middleware", () => {
 			});
 
 			function setupStore(uiDirty?: boolean, screenDirty?: boolean) {
-				const document = SetupHelpers.loadData("repeat", "data", models.documentModel);
+				const document = loadData("repeat", "data", models.documentModel);
 				return createTestStore({
 					storeConfig: {
 						models,
@@ -97,7 +95,7 @@ describe("api.back-end.store.middleware", () => {
 								{ locationPath: [], path: [] },
 								{
 									locationPath: DR.NestedRepeat.nested_dr_dr_locationPath,
-									path: DocumentHelpers.createDocumentPath(["Root"], ["Nested_L1"]),
+									path: createDocumentPath(["Root"], ["Nested_L1"]),
 									dirty: screenDirty
 								}
 							],

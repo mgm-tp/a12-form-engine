@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -33,9 +33,13 @@
 import type { CSSProperties } from "react";
 import { useMemo } from "react";
 
-import type { Attachment } from "@com.mgmtp.a12.dataservices/dataservices-access/lib/Attachment/attachment.js";
+import type { Attachment } from "@com.mgmtp.a12.dataservices/dataservices-access";
 
-import { FormModel } from "../../../../../../models/internal/form-model.js";
+import {
+	isFormModelEmbeddedRepeat,
+	isFormModelInlineRepeat
+} from "../../../../../../models/internal/FormModelGuards.js";
+import type { FormModel } from "../../../../../../models/internal/form-model.js";
 
 /**@internal */
 export function getFileExtension(attachment: Attachment): string | undefined {
@@ -82,7 +86,7 @@ export function isRepeatWithMultiFileUpload(
 	repeat: FormModel.Repeat
 ): repeat is RepeatWithMultiFileUpload {
 	return (
-		(FormModel.InlineRepeat.isInstance(repeat) || FormModel.EmbeddedRepeat.isInstance(repeat)) &&
+		(isFormModelInlineRepeat(repeat) || isFormModelEmbeddedRepeat(repeat)) &&
 		repeat.multiFileUpload !== undefined &&
 		repeat.multiFileUploadOptions !== undefined
 	);

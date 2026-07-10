@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -32,21 +32,20 @@
 
 import { deepStrictEqual } from "node:assert/strict";
 
-import type { EntityInstancePath } from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
+import type { EntityInstancePath } from "@com.mgmtp.a12.kernel/kernel-md-facade";
 import {
 	defaultDataFormats,
 	defaultLocalizerFactory,
 	defaultValueConversion
-} from "@com.mgmtp.a12.utils/utils-localization/lib/main/index.js";
+} from "@com.mgmtp.a12.utils/utils-localization";
 
 import type { EngineStore, Models } from "../../../back-end/store/index.js";
-import { createEngineStore } from "../../../back-end/store/internal/storeFactory.js";
 import type { ReadonlyObjectMap } from "../../../models/index.js";
 import type { Value } from "../../../view/index.js";
 import { createConfig } from "../../../view/internal/configuration/Defaults.js";
 import { getValueByPath } from "../../../view/internal/utilities/getValueByPath.js";
 import { US_LOCALE } from "../../utils/localization.js";
-import { SetupHelpers } from "../../utils/setup.js";
+import { setupRenderConfiguration } from "../../utils/setup.js";
 import { setupModelsFixture } from "../../utils/setupFixture.js";
 import {
 	createDocumentForRepeat,
@@ -59,10 +58,8 @@ import {
 
 import { externalEnumerationProvider } from "./configurable_externalenumeration.js";
 
-const { setupRenderConfiguration } = SetupHelpers;
-
 describe("unit.view.getValueByPath", () => {
-	const picusTypesModelFixture = setupModelsFixture("controls.picustypes");
+	const dmTypesModelFixture = setupModelsFixture("controls.dmtypes");
 	const inlineRepeatModelFixture = setupModelsFixture("repeat", "inline");
 
 	describe("given a path to a non-repeatable field", () => {
@@ -71,14 +68,14 @@ describe("unit.view.getValueByPath", () => {
 				describe("with no external enumeration defined", () => {
 					it("returns the correct Value object", () => {
 						const path = [
-							{ elementName: "A12T_PicusTypes", index: 1 },
+							{ elementName: "A12T_DmTypes", index: 1 },
 							{ elementName: "String", index: 1 },
 							{ elementName: "String01", index: 1 }
 						];
 
 						executeTest({
-							models: picusTypesModelFixture,
-							document: { A12T_PicusTypes: { String: { String01: "Test" } } },
+							models: dmTypesModelFixture,
+							document: { A12T_DmTypes: { String: { String01: "Test" } } },
 							path,
 							expectedValue: {
 								ui: "Test",
@@ -92,14 +89,14 @@ describe("unit.view.getValueByPath", () => {
 				describe("with an external enumeration defined", () => {
 					it("returns the correct Value object", () => {
 						const path = [
-							{ elementName: "A12T_PicusTypes", index: 1 },
+							{ elementName: "A12T_DmTypes", index: 1 },
 							{ elementName: "Enumeration", index: 1 },
 							{ elementName: "Enumeration05", index: 1 }
 						];
 
 						executeTest({
-							models: picusTypesModelFixture,
-							document: { A12T_PicusTypes: { Enumeration: { Enumeration05: "Berlin_key" } } },
+							models: dmTypesModelFixture,
+							document: { A12T_DmTypes: { Enumeration: { Enumeration05: "Berlin_key" } } },
 							path,
 							expectedValue: {
 								ui: "Berlin",
@@ -114,14 +111,14 @@ describe("unit.view.getValueByPath", () => {
 			describe("and the field is of type number", () => {
 				it("returns the correct Value object", () => {
 					const path = [
-						{ elementName: "A12T_PicusTypes", index: 1 },
+						{ elementName: "A12T_DmTypes", index: 1 },
 						{ elementName: "Number", index: 1 },
 						{ elementName: "Number02", index: 1 }
 					];
 
 					executeTest({
-						models: picusTypesModelFixture,
-						document: { A12T_PicusTypes: { Number: { Number02: 69420 } } },
+						models: dmTypesModelFixture,
+						document: { A12T_DmTypes: { Number: { Number02: 69420 } } },
 						path,
 						expectedValue: {
 							ui: "69,420.0",
@@ -137,14 +134,14 @@ describe("unit.view.getValueByPath", () => {
 			describe("and it is not a parse error", () => {
 				it("returns the correct Value object", () => {
 					const path = [
-						{ elementName: "A12T_PicusTypes", index: 1 },
+						{ elementName: "A12T_DmTypes", index: 1 },
 						{ elementName: "Number", index: 1 },
 						{ elementName: "Number02", index: 1 }
 					];
 
 					executeTest({
-						models: picusTypesModelFixture,
-						document: { A12T_PicusTypes: { Number: { Number02: 69420 } } },
+						models: dmTypesModelFixture,
+						document: { A12T_DmTypes: { Number: { Number02: 69420 } } },
 						path,
 						messages: createValidationEntry({ path }),
 						expectedValue: {
@@ -159,14 +156,14 @@ describe("unit.view.getValueByPath", () => {
 			describe("and it is a parse error", () => {
 				it("returns the correct Value object", () => {
 					const path = [
-						{ elementName: "A12T_PicusTypes", index: 1 },
+						{ elementName: "A12T_DmTypes", index: 1 },
 						{ elementName: "Number", index: 1 },
 						{ elementName: "Number02", index: 1 }
 					];
 
 					executeTest({
-						models: picusTypesModelFixture,
-						document: { A12T_PicusTypes: { Number: { Number02: "69420a" } } },
+						models: dmTypesModelFixture,
+						document: { A12T_DmTypes: { Number: { Number02: "69420a" } } },
 						path,
 						messages: createValidationEntryWithParsingError(
 							path,
@@ -333,15 +330,10 @@ describe("unit.view.getValueByPath", () => {
 		expectedValue: Value;
 	}) {
 		const { models, document, path, messages, expectedValue } = options;
-		const initialState = createEngineStore({
-			models,
-			locale: US_LOCALE,
-			data: { document }
-		});
 
 		const renderConfig = setupRenderConfiguration({
 			models,
-			config: createConfig({ externalEnumerationProvider }, initialState)
+			config: createConfig({ externalEnumerationProvider })
 		});
 
 		const actualValue = getValueByPath({

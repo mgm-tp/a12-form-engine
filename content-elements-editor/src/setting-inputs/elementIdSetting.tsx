@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -31,19 +31,15 @@
  */
 
 import { useCallback, useMemo } from "react";
-import type { Action } from "typescript-fsa";
 
-import { ModelPath } from "@com.mgmtp.a12.base/base-model-api/lib/main/model/index.js";
-import {
-	computeGranularity,
-	granularityDistance
-} from "@com.mgmtp.a12.client/client-data/lib/index.js";
+import type { Action } from "@com.mgmtp.a12.client/typescript-fsa-redux-5-compat";
+import { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
+import { computeGranularity, granularityDistance } from "@com.mgmtp.a12.client/client-data";
 import type {
 	DocumentElementReference,
 	DocumentModelService
 } from "@com.mgmtp.a12.contentengine/contentengine-editor";
 import {
-	type StringSettingState,
 	ErrorMessages,
 	ModelStateSelector,
 	SettingEvents,
@@ -52,9 +48,10 @@ import {
 	useContentEditorState,
 	useSettingState
 } from "@com.mgmtp.a12.contentengine/contentengine-editor";
-import type { DocumentModel } from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
-import type { DropDownItem } from "@com.mgmtp.a12.widgets/widgets-core/lib/dropdown/main/template/dropdown.tpl.api.js";
-import { Autocomplete } from "@com.mgmtp.a12.widgets/widgets-core/lib/input/autocomplete/main/autocomplete.view.js";
+import type { StringSettingState } from "@com.mgmtp.a12.contentengine/contentengine-editor";
+import type { DocumentModel } from "@com.mgmtp.a12.kernel/kernel-md-facade";
+import { Autocomplete } from "@com.mgmtp.a12.widgets/widgets-core";
+import type { DropDownItem } from "@com.mgmtp.a12.widgets/widgets-core";
 
 import { ClearDatePickerConfig } from "../controllers/datePickerConfigActions.js";
 import type { DatePickerSettingState } from "../controllers/datePickerConfigController.js";

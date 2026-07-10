@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -36,15 +36,13 @@ import type { Models } from "../../../../../../back-end/store/internal/store.js"
 import { sort } from "../../../../../../view/internal/utilities/sorting.js";
 import { externalEnumerationProvider } from "../../../../../unit/view/configurable_externalenumeration.js";
 import { US_LOCALE } from "../../../../../utils/localization.js";
-import { SetupHelpers } from "../../../../../utils/setup.js";
+import { createModelPath } from "../../../../../utils/createModelPath.js";
 import { setupArrayFixture, setupFixture } from "../../../../../utils/setupFixture.js";
-import { createModelPath } from "../../../../../utils/test-model-helpers/dependent-enumeration.js";
 import { IR } from "../../../../../utils/test-model-helpers/inline.repeat.js";
 import { REPEAT_MODEL_PATH } from "../../filter/filter.utils.js";
+import { loadData } from "../../../../../utils/setup.js";
 
 import { getData, getRows } from "./utils.js";
-
-const { loadData } = SetupHelpers;
 
 export function executeTestForExternalEnumerationSorting(models: Models): void {
 	const COLUMN_NAME = IR.SortingAndFiltering.ID_L1_EXT_ENUM_COLUMN;

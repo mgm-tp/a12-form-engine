@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -35,10 +35,12 @@ import type { ReactElement } from "react";
 import { ModelSelectors, UiStateSelectors } from "../../../../../back-end/store/index.js";
 import { UiId } from "../../../../../back-end/utils/internal/generateUiId.js";
 import { findElementByFormModelPath } from "../../../../../models/index.js";
-import { FormModel } from "../../../../../models/internal/form-model.js";
+import type { FormModel } from "../../../../../models/internal/form-model.js";
+import { isFormModelDetachedRepeat } from "../../../../../models/internal/FormModelGuards.js";
 import type { FormModelMap } from "../../../configuration/engine-configuration.js";
 import { UtilityClasses } from "../../../utilities/css-classes.js";
 import { nmTokensToString } from "../../../utilities/nmtokens.js";
+import { InternalUiStateSelectors } from "../../../../../back-end/store/internal/selectors/ui-state.js";
 
 import { DataContext } from "../data-context.js";
 import { DETACHED_REPEAT_DETAIL_SCREEN, SCREEN } from "../data-roles.js";
@@ -60,14 +62,13 @@ export function ScreenComponent(props: {
 		createFormModelElement(screenElement, config)
 	);
 
-	const isDetachedRepeatDetailScreenOpen = UiStateSelectors.isDetachedRepeatDetailScreenOpen()(
-		options.state
-	);
+	const isDetachedRepeatDetailScreenOpen =
+		InternalUiStateSelectors.isDetachedRepeatDetailScreenOpen()(options.state);
 	const id = isDetachedRepeatDetailScreenOpen
 		? getUiIdForDetachedRepeat(config)
 		: UiId.generate({ element: screen, uiIdPrefix: options.config.uiIdPrefix });
 
-	const className = nmTokensToString([UtilityClasses.PADDING]);
+	const className = nmTokensToString([UtilityClasses.PADDING, UtilityClasses.HEIGHT_FULL]);
 
 	const dataRole = isDetachedRepeatDetailScreenOpen ? DETACHED_REPEAT_DETAIL_SCREEN : SCREEN;
 
@@ -95,7 +96,7 @@ function getUiIdForDetachedRepeat(config: FormModelMap.RenderConfiguration): str
 	);
 
 	const drId =
-		detachedRepeat && FormModel.DetachedRepeat.isInstance(detachedRepeat)
+		detachedRepeat && isFormModelDetachedRepeat(detachedRepeat)
 			? UiId.generate({ element: detachedRepeat })
 			: "";
 

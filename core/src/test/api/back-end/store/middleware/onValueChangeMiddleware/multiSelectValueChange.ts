@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -30,27 +30,20 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import type { Action } from "typescript-fsa";
-
-import type { ModelPath } from "@com.mgmtp.a12.base/base-model-api/lib/main/model/index.js";
-import type {
-	EntityInstancePath,
-	GroupInstance
-} from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
+import type { Action } from "@com.mgmtp.a12.client/typescript-fsa-redux-5-compat";
+import type { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
+import type { EntityInstancePath, GroupInstance } from "@com.mgmtp.a12.kernel/kernel-md-facade";
 
 import { Commands, Events } from "../../../../../../back-end/store/index.js";
 import type { EngineStore } from "../../../../../../back-end/store/internal/store.js";
 import type { MultiSelectData, ReadonlyObjectMap } from "../../../../../../models/index.js";
-import { MiddlewareHelpers } from "../../../../../utils/back-end-helpers.js";
-import { DocumentHelpers } from "../../../../../utils/document-helpers.js";
-import { SetupHelpers } from "../../../../../utils/setup.js";
+import { createDocumentPath } from "../../../../../utils/createDocumentPath.js";
+import { MiddlewareHelpers } from "../../../../../utils/MiddlewareHelpers.js";
+import { createTestStore, loadModels } from "../../../../../utils/setup.js";
 import { setupFixture, setupModelsFixture } from "../../../../../utils/setupFixture.js";
 import { CONTROLS_INDEX } from "../../../../../utils/test-model-helpers/controls.index.js";
-import { createDocumentPath } from "../../../../../utils/test-model-helpers/dependent-enumeration.js";
 import { DR } from "../../../../../utils/test-model-helpers/detached.repeat.js";
 import { createValidationEntry } from "../../../../../utils/validation.js";
-
-const { createTestStore } = SetupHelpers;
 
 export function executeTestsForMultiSelectValueChange(): void {
 	const middlewareSpy = setupFixture(() => MiddlewareHelpers.createMiddlewareSpy());
@@ -72,7 +65,7 @@ export function executeTestsForMultiSelectValueChange(): void {
 		middlewareSpy.spy.mock.resetCalls();
 	});
 
-	const pathToMultiSelect = DocumentHelpers.createDocumentPath(["root"], ["MultiSelect01", 0]);
+	const pathToMultiSelect = createDocumentPath(["root"], ["MultiSelect01", 0]);
 
 	function createEventAction(path: EntityInstancePath, value: MultiSelectData) {
 		return Events.multiSelectValueChange({ value, path, formModelElementPath: [] });
@@ -86,11 +79,11 @@ export function executeTestsForMultiSelectValueChange(): void {
 			changes: [
 				{
 					type: "ValueChanged",
-					path: DocumentHelpers.createDocumentPath(["root"], ["MultiSelect01", 1], ["value"])
+					path: createDocumentPath(["root"], ["MultiSelect01", 1], ["value"])
 				},
 				{
 					type: "ValueChanged",
-					path: DocumentHelpers.createDocumentPath(["root"], ["MultiSelect01", 2], ["value"])
+					path: createDocumentPath(["root"], ["MultiSelect01", 2], ["value"])
 				}
 			]
 		});
@@ -104,21 +97,11 @@ export function executeTestsForMultiSelectValueChange(): void {
 			changes: [
 				{
 					type: "ValueChanged",
-					path: DocumentHelpers.createDocumentPath(
-						["root"],
-						["repeatableGroup"],
-						["MultiSelect01", 1],
-						["value"]
-					)
+					path: createDocumentPath(["root"], ["repeatableGroup"], ["MultiSelect01", 1], ["value"])
 				},
 				{
 					type: "ValueChanged",
-					path: DocumentHelpers.createDocumentPath(
-						["root"],
-						["repeatableGroup"],
-						["MultiSelect01", 2],
-						["value"]
-					)
+					path: createDocumentPath(["root"], ["repeatableGroup"], ["MultiSelect01", 2], ["value"])
 				}
 			]
 		});
@@ -148,7 +131,7 @@ export function executeTestsForMultiSelectValueChange(): void {
 
 		describe("and a detached repeat detail screen is opened", () => {
 			it("dispatches Commands.changeScreenState with dirty=true", () => {
-				const models = SetupHelpers.loadModels("repeat", "detached");
+				const models = loadModels("repeat", "detached");
 				const store = createTestStore({
 					storeConfig: {
 						models,
@@ -158,7 +141,7 @@ export function executeTestsForMultiSelectValueChange(): void {
 								{ locationPath: [], path: [] },
 								{
 									locationPath: DR.NestedRepeat.nested_dr_dr_locationPath,
-									path: DocumentHelpers.createDocumentPath(["Root"], ["Nested_L1"])
+									path: createDocumentPath(["Root"], ["Nested_L1"])
 								}
 							]
 						}
@@ -167,7 +150,7 @@ export function executeTestsForMultiSelectValueChange(): void {
 				});
 
 				const valueChangeEvent = Events.multiSelectValueChange({
-					path: DocumentHelpers.createDocumentPath(["Root"], ["Nested_L1"], ["L1_MultiSelect", 0]),
+					path: createDocumentPath(["Root"], ["Nested_L1"], ["L1_MultiSelect", 0]),
 					value: [{ value: "V1" }],
 					formModelElementPath: []
 				});
@@ -220,14 +203,14 @@ export function executeTestsForMultiSelectValueChange(): void {
 								type: "ValueChanged",
 								path: [
 									...path.slice(0, path.length - 1),
-									...DocumentHelpers.createDocumentPath(["issues", 1], ["value"])
+									...createDocumentPath(["issues", 1], ["value"])
 								]
 							},
 							{
 								type: "ValueChanged",
 								path: [
 									...path.slice(0, path.length - 1),
-									...DocumentHelpers.createDocumentPath(["issues", 2], ["value"])
+									...createDocumentPath(["issues", 2], ["value"])
 								]
 							}
 						]
@@ -286,7 +269,7 @@ export function executeTestsForMultiSelectValueChange(): void {
 		describe("Control", () => {
 			function createValueError(index: number): ReadonlyObjectMap<EngineStore.Validation.Entry> {
 				const pathToInvalidValue = [
-					...DocumentHelpers.createDocumentPath(["root"], ["MultiSelect01", index]),
+					...createDocumentPath(["root"], ["MultiSelect01", index]),
 					{ elementName: "value", index: 1 }
 				];
 
@@ -359,11 +342,7 @@ export function executeTestsForMultiSelectValueChange(): void {
 		describe("FieldOverviewColumn", () => {
 			function createValueError(index: number): ReadonlyObjectMap<EngineStore.Validation.Entry> {
 				const pathToInvalidValue = [
-					...DocumentHelpers.createDocumentPath(
-						["root"],
-						["repeatableGroup"],
-						["MultiSelect01", index]
-					),
+					...createDocumentPath(["root"], ["repeatableGroup"], ["MultiSelect01", index]),
 					{ elementName: "value", index: 1 }
 				];
 
@@ -394,7 +373,7 @@ export function executeTestsForMultiSelectValueChange(): void {
 				});
 			}
 
-			const pathToMultiSelectInRepeat = DocumentHelpers.createDocumentPath(
+			const pathToMultiSelectInRepeat = createDocumentPath(
 				["root"],
 				["repeatableGroup"],
 				["MultiSelect01", 0]

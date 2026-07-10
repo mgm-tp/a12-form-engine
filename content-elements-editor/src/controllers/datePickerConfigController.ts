@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -32,9 +32,9 @@
 
 import {
 	createReducerBuilder,
-	SettingEvents,
-	type SettingsStore
+	SettingEvents
 } from "@com.mgmtp.a12.contentengine/contentengine-editor";
+import type { SettingsStore } from "@com.mgmtp.a12.contentengine/contentengine-editor";
 import type { BaseControlProps } from "@com.mgmtp.a12.formengine/formengine-content-elements";
 
 import { ClearDatePickerConfig } from "./datePickerConfigActions.js";
@@ -43,12 +43,12 @@ import { ClearDatePickerConfig } from "./datePickerConfigActions.js";
 export type DatePickerSettingState = SettingState;
 
 /** @internal */
-export enum DatePickerConfigElement {
-	MinYear = "minYear",
-	MaxYear = "maxYear",
-	Absolute = "absolute",
-	PreselectionYear = "preselectionYear"
-}
+export const DatePickerConfigElement = {
+	MinYear: "minYear",
+	MaxYear: "maxYear",
+	Absolute: "absolute",
+	PreselectionYear: "preselectionYear"
+} as const;
 
 interface NumberState {
 	value?: number;

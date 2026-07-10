@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -33,11 +33,12 @@
 import type { ReactElement } from "react";
 import { useContext } from "react";
 
-import { LocalizerContext } from "@com.mgmtp.a12.utils/utils-localization-react/lib/main/index.js";
-import type { LayoutGridProps } from "@com.mgmtp.a12.widgets/widgets-core/lib/layout/layout-grid/main/layout-grid.api.js";
+import { LocalizerContext } from "@com.mgmtp.a12.utils/utils-localization-react";
+import type { LayoutGridProps } from "@com.mgmtp.a12.widgets/widgets-core";
 
 import { UiId } from "../../../../../back-end/utils/internal/generateUiId.js";
-import { FormModel } from "../../../../../models/index.js";
+import type { FormModel } from "../../../../../models/index.js";
+import { stylableToClassName } from "../../../../../models/internal/stylableToClassName.js";
 import { FormModelPath } from "../../../../../models/internal/utils/form-model-path.js";
 import { ComponentMapContext } from "../../../configuration/componentMap/component-map-context.js";
 import type { FormModelMap } from "../../../configuration/engine-configuration.js";
@@ -52,7 +53,7 @@ import { getTitleLabel } from "../model-element-labels.js";
 /**
  * @internal
  *
- * Maps a Row from the Form-Model to a RenderModel.SizeContainer element
+ * Maps a Row from the Form-Model to a RenderModel.LayoutGrid element
  *
  * @param modelElement The row from the form model
  * @param config The render configuration
@@ -70,7 +71,7 @@ export function createRow(
 	const { renderOptions: options } = config;
 	const id = UiId.generate({ element: modelElement, uiIdPrefix: options.config.uiIdPrefix });
 	return {
-		className: FormModel.stylableToClassName(modelElement),
+		className: stylableToClassName(modelElement),
 		id,
 		layoutConfig: {
 			layout,
@@ -90,7 +91,7 @@ export function Row(props: {
 	const { renderOptions: options } = config;
 
 	const componentMap = useContext(ComponentMapContext);
-	const { SizeContainer, SizeContainerRow, SizeContainerColumn } = useContext(WidgetMapContext);
+	const { LayoutGrid, LayoutGridRow, LayoutGridColumn } = useContext(WidgetMapContext);
 	const { localizer, conversion } = useContext(LocalizerContext);
 	const dataContext = useContext(DataContext);
 
@@ -151,7 +152,7 @@ export function Row(props: {
 						parentPath: formModelPath
 					},
 					currentIndex: index,
-					SizeContainerColumn
+					LayoutGridColumn
 				});
 			})
 		: [];
@@ -177,7 +178,7 @@ export function Row(props: {
 	return (
 		<>
 			{titleLabel && (
-				<SizeContainer
+				<LayoutGrid
 					key={sizeContainerRowProps.id + "-title-row"}
 					id={sizeContainerRowProps.id + "-title-row"}
 				>
@@ -191,15 +192,15 @@ export function Row(props: {
 							/>
 						)}
 					</AriaLevelContext.Consumer>
-				</SizeContainer>
+				</LayoutGrid>
 			)}
-			<SizeContainerRow
+			<LayoutGridRow
 				key={sizeContainerRowProps.id}
 				{...sizeContainerRowProps}
 				className={sizeContainerRowProps.className}
 			>
 				{cells}
-			</SizeContainerRow>
+			</LayoutGridRow>
 		</>
 	);
 }

@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -32,15 +32,15 @@
 
 import { strictEqual } from "node:assert/strict";
 
-import type { ModelPath } from "@com.mgmtp.a12.base/base-model-api/lib/main/model/index.js";
-import type { Localizer } from "@com.mgmtp.a12.utils/utils-localization/lib/main/index.js";
-import { defaultLocalizerFactory } from "@com.mgmtp.a12.utils/utils-localization/lib/main/index.js";
+import type { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
+import type { Localizer } from "@com.mgmtp.a12.utils/utils-localization";
+import { defaultLocalizerFactory } from "@com.mgmtp.a12.utils/utils-localization";
 
 import { createEngineStore, FormModelSelectors } from "../../../back-end/store/index.js";
 import type { EngineState } from "../../../back-end/store/internal/store.js";
 import type { FormModel } from "../../../models/index.js";
+import { createModelPath } from "../../utils/createModelPath.js";
 import { US_LOCALE } from "../../utils/localization.js";
-import { ModelHelpers } from "../../utils/model-helpers.js";
 import { setupFixture, setupModelsFixture } from "../../utils/setupFixture.js";
 
 describe("api.models.FormModelSelectors", () => {
@@ -81,11 +81,7 @@ describe("api.models.FormModelSelectors", () => {
 							it("returns the suffix from fieldConfigurationEntry", () => {
 								assert({
 									...fixture,
-									documentModelPath: ModelHelpers.createModelPath(
-										"root",
-										"norep",
-										"number_amount_02"
-									),
+									documentModelPath: createModelPath("root", "norep", "number_amount_02"),
 									expectedSuffix: "€"
 								});
 							});
@@ -95,11 +91,7 @@ describe("api.models.FormModelSelectors", () => {
 							it("returns the given amountSuffix", () => {
 								assert({
 									...fixture,
-									documentModelPath: ModelHelpers.createModelPath(
-										"root",
-										"norep",
-										"number_amount_01"
-									),
+									documentModelPath: createModelPath("root", "norep", "number_amount_01"),
 									expectedSuffix: AMOUNT_SUFFIX
 								});
 							});
@@ -133,11 +125,7 @@ describe("api.models.FormModelSelectors", () => {
 							it("returns the suffix from fieldConfigurationEntry", () => {
 								assert({
 									...fixture,
-									documentModelPath: ModelHelpers.createModelPath(
-										"root",
-										"norep",
-										"number_amount_02"
-									),
+									documentModelPath: createModelPath("root", "norep", "number_amount_02"),
 									expectedSuffix: "€"
 								});
 							});
@@ -149,11 +137,7 @@ describe("api.models.FormModelSelectors", () => {
 
 								assert({
 									...fixture,
-									documentModelPath: ModelHelpers.createModelPath(
-										"root",
-										"norep",
-										"number_amount_01"
-									),
+									documentModelPath: createModelPath("root", "norep", "number_amount_01"),
 									expectedSuffix
 								});
 							});
@@ -189,11 +173,7 @@ describe("api.models.FormModelSelectors", () => {
 							it("returns the suffix from fieldConfigurationEntry", () => {
 								assert({
 									...fixture,
-									documentModelPath: ModelHelpers.createModelPath(
-										"root",
-										"norep",
-										"number_amount_02"
-									),
+									documentModelPath: createModelPath("root", "norep", "number_amount_02"),
 									expectedSuffix: "€"
 								});
 							});
@@ -203,11 +183,7 @@ describe("api.models.FormModelSelectors", () => {
 							it("returns undefined", () => {
 								assert({
 									...fixture,
-									documentModelPath: ModelHelpers.createModelPath(
-										"root",
-										"norep",
-										"number_amount_01"
-									),
+									documentModelPath: createModelPath("root", "norep", "number_amount_01"),
 									expectedSuffix: undefined
 								});
 							});
@@ -233,7 +209,7 @@ describe("api.models.FormModelSelectors", () => {
 						it("returns the suffix from fieldConfigurationEntry", () => {
 							assert({
 								...fixture,
-								documentModelPath: ModelHelpers.createModelPath("root", "norep", "number_none_02"),
+								documentModelPath: createModelPath("root", "norep", "number_none_02"),
 								expectedSuffix: "mmol/l"
 							});
 						});
@@ -243,7 +219,7 @@ describe("api.models.FormModelSelectors", () => {
 						it("returns undefined", () => {
 							assert({
 								...fixture,
-								documentModelPath: ModelHelpers.createModelPath("root", "norep", "number_none_01"),
+								documentModelPath: createModelPath("root", "norep", "number_none_01"),
 								expectedSuffix: undefined
 							});
 						});
@@ -268,7 +244,7 @@ describe("api.models.FormModelSelectors", () => {
 				it("returns undefined", () => {
 					assert({
 						...fixture,
-						documentModelPath: ModelHelpers.createModelPath("root", "norep", "string"),
+						documentModelPath: createModelPath("root", "norep", "string"),
 						expectedSuffix: undefined
 					});
 				});

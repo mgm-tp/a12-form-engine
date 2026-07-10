@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -40,13 +40,13 @@ import type { WidgetMap } from "../../../../../view/index.js";
 import type { TableWidgetMap } from "../../../../../view/internal/components/form-engine/repeat/table-widget-map.js";
 import { mouseEventMock } from "../../../../rtl-utils/mock-utils.js";
 import type { RtlRenderWrapper } from "../../../../rtl-utils/render-wrapper.js";
-import { ModelHelpers } from "../../../../utils/model-helpers.js";
 import { findClickConfirm } from "../../../../utils/row-action-buttons.js";
 import type { Context } from "../../../../utils/rtl-render-group.js";
 import { RenderGroupFixture } from "../../../../utils/rtl-render-group.js";
-import { SetupHelpers } from "../../../../utils/setup.js";
 import { setupFixture, setupModelsFixture } from "../../../../utils/setupFixture.js";
 import { IDS } from "../../../../utils/test-model-helpers/repeat.row-actions.js";
+import { createModelPath } from "../../../../utils/createModelPath.js";
+import { loadData, setupFormEngineRendererWithRtlAsync } from "../../../../utils/setup.js";
 
 import {
 	stubbedDispatchConfig as dispatchConfig,
@@ -60,21 +60,17 @@ describe("api.view.repeat", () => {
 	describe("Default Row Action", () => {
 		const models = setupModelsFixture("repeat.row-actions");
 		const fixture = setupFixture(() => ({
-			document: SetupHelpers.loadData(
-				"repeat.row-actions",
-				"data-repeat-options",
-				models.documentModel
-			)
+			document: loadData("repeat.row-actions", "data-repeat-options", models.documentModel)
 		}));
 
-		const SCREEN_MODEL_PATH = ModelHelpers.createModelPath("DefaultRowActionsScreen");
+		const SCREEN_MODEL_PATH = createModelPath("DefaultRowActionsScreen");
 
 		function setupFormEngineRendererForTests(
 			readonly: boolean,
 			disabled: boolean,
 			correctionMode: boolean
 		): Promise<RtlRenderWrapper> {
-			return SetupHelpers.setupFormEngineRendererWithRtlAsync({
+			return setupFormEngineRendererWithRtlAsync({
 				models,
 				data: { document: fixture.document },
 				ui: {

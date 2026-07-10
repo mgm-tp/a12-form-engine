@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -30,15 +30,14 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-export namespace IDS {
-	export const STRING_READONLY = "a12-readonlyField-field_f56e5";
-	export const STRING_COMPUTED = "a12-computedField-field_5c076";
-	export const STRING_DEPENDENT = "a12-dependentField-field_870cb";
-	export const STRING_DEPENDENT_GROUP = "a12-inDependentGroupField-field_a93b3";
-	export const STRING_CG_READONLY = "a12-CGReadonlyField-field_4309c";
-
-	export const IR_STRING_DEPENDENT = "fieldbasedrepeatoverviewcolumn_3cc5a";
-	export const IR_STRING_DEPENDENT_GROUP = "fieldbasedrepeatoverviewcolumn_30f2e";
-	export const IR_STRING_READONLY = "fieldbasedrepeatoverviewcolumn_e4948";
-	export const IR_STRING_COMPUTED = "fieldbasedrepeatoverviewcolumn_a9a94";
-}
+export const IDS = {
+	STRING_READONLY: "a12-readonlyField-field_f56e5",
+	STRING_COMPUTED: "a12-computedField-field_5c076",
+	STRING_DEPENDENT: "a12-dependentField-field_870cb",
+	STRING_DEPENDENT_GROUP: "a12-inDependentGroupField-field_a93b3",
+	STRING_CG_READONLY: "a12-CGReadonlyField-field_4309c",
+	IR_STRING_DEPENDENT: "fieldbasedrepeatoverviewcolumn_3cc5a",
+	IR_STRING_DEPENDENT_GROUP: "fieldbasedrepeatoverviewcolumn_30f2e",
+	IR_STRING_READONLY: "fieldbasedrepeatoverviewcolumn_e4948",
+	IR_STRING_COMPUTED: "fieldbasedrepeatoverviewcolumn_a9a94"
+} as const;

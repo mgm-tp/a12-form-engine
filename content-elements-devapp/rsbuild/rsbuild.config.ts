@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -35,8 +35,6 @@ import { execSync } from "node:child_process";
 import { defineConfig, rspack } from "@rsbuild/core";
 import { pluginReact } from "@rsbuild/plugin-react";
 import { RsdoctorRspackPlugin } from "@rsdoctor/rspack-plugin";
-
-import ceCorePkg from "@com.mgmtp.a12.contentengine/contentengine-core/package.json" with { type: "json" };
 
 import packageJson from "../package.json" with { type: "json" };
 
@@ -67,15 +65,12 @@ export default defineConfig(({ envMode, env }) => {
 			]
 		},
 		source: {
+			preEntry: "@com.mgmtp.a12.widgets/widgets-core/styles/basic.css",
 			entry: { index: `./src/index.tsx` },
 			define: {
 				__VERSION__: JSON.stringify(version),
 				__COMMIT_HASH__: JSON.stringify(commitHash),
 				SC_DISABLE_SPEEDY: false,
-				__A12_MODEL_VERSIONS__: JSON.stringify({
-					// CE does not have modelType defined in package.json
-					content: ceCorePkg.modelVersion
-				}),
 				__DEVAPP_MODE__: JSON.stringify(devappMode)
 			}
 		},

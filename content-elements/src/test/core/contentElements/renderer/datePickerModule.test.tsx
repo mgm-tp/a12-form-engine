@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -48,39 +48,41 @@ import type { RenderWrapper } from "../../../rtl-utils/render-wrapper.js";
 import { renderWrapper } from "../../../rtl-utils/render-wrapper.js";
 
 describe("core.contentElements", () => {
-	it("renders a DateInput with the given node for fields of type 'DateType'", () => {
-		const { componentMap } = setup("DateType");
+	describe("DatePicker", () => {
+		it("renders a DateInput with the given node for fields of type 'DateType'", () => {
+			const { componentMap } = setup("DateType");
 
-		const props = query(componentMap.DateInput).props();
-		strictEqual(props.node, mockNode);
-	});
+			const props = query(componentMap.DateInput).props();
+			strictEqual(props.node, mockNode);
+		});
 
-	it("renders a DateTimeInput with the given node for fields of type 'DateTimeType'", () => {
-		const { componentMap } = setup("DateTimeType");
+		it("renders a DateTimeInput with the given node for fields of type 'DateTimeType'", () => {
+			const { componentMap } = setup("DateTimeType");
 
-		const props = query(componentMap.DateTimeInput).props();
-		strictEqual(props.node, mockNode);
-	});
+			const props = query(componentMap.DateTimeInput).props();
+			strictEqual(props.node, mockNode);
+		});
 
-	it("renders a TimeInput with the given node for fields of type 'TimeType'", () => {
-		const { componentMap } = setup("TimeType");
+		it("renders a TimeInput with the given node for fields of type 'TimeType'", () => {
+			const { componentMap } = setup("TimeType");
 
-		const props = query(componentMap.TimeInput).props();
-		strictEqual(props.node, mockNode);
-	});
+			const props = query(componentMap.TimeInput).props();
+			strictEqual(props.node, mockNode);
+		});
 
-	it("renders a DateRangeInput with the given node for fields of type 'DateRangeType'", () => {
-		const { componentMap } = setup("DateRangeType");
+		it("renders a DateRangeInput with the given node for fields of type 'DateRangeType'", () => {
+			const { componentMap } = setup("DateRangeType");
 
-		const props = query(componentMap.DateRangeInput).props();
-		strictEqual(props.node, mockNode);
-	});
+			const props = query(componentMap.DateRangeInput).props();
+			strictEqual(props.node, mockNode);
+		});
 
-	it("renders a DateFragmentInput with the given node for fields of type 'DateFragmentType'", () => {
-		const { componentMap } = setup("DateFragmentType");
+		it("renders a DateFragmentInput with the given node for fields of type 'DateFragmentType'", () => {
+			const { componentMap } = setup("DateFragmentType");
 
-		const props = query(componentMap.DateFragmentInput).props();
-		strictEqual(props.node, mockNode);
+			const props = query(componentMap.DateFragmentInput).props();
+			strictEqual(props.node, mockNode);
+		});
 	});
 });
 

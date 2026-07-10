@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -37,10 +37,11 @@ import { within } from "@com.mgmtp.a12.devtools/react";
 import type { EngineStore } from "../../../back-end/store/index.js";
 import type { Models } from "../../../back-end/store/internal/store.js";
 import { click } from "../../rtl-utils/rtl-click.js";
-import { SetupHelpers } from "../../utils/setup.js";
-import { createModelPath } from "../../utils/test-model-helpers/dependent-enumeration.js";
+import { createModelPath } from "../../utils/createModelPath.js";
+import { setupConnectedFormEngineWithRtlAsync } from "../../utils/setup.js";
+import type { ConnectedRtlWrapper } from "../../utils/setup.js";
 
-export function createSetup(models: Models): Promise<SetupHelpers.ConnectedRtlWrapper> {
+export function createSetup(models: Models): Promise<ConnectedRtlWrapper> {
 	const ui: Partial<EngineStore.UIState> = {
 		screenLocation: [
 			{
@@ -62,7 +63,7 @@ export function createSetup(models: Models): Promise<SetupHelpers.ConnectedRtlWr
 		}
 	};
 
-	return SetupHelpers.setupConnectedFormEngineWithRtlAsync({
+	return setupConnectedFormEngineWithRtlAsync({
 		withScrollHandler: true,
 		models,
 		ui,

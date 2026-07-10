@@ -1,0 +1,14 @@
+exports[`codemod.recipes.removeFormEngineViewProps > removes unsupported FormEngineViews props > should migrate views.tsx correctly 1`] = `
+import { FormEngineViews } from "@com.mgmtp.a12.formengine/formengine-core";
+declare const Anything: any;
+const removed = (<>
+		<FormEngineViews.FormEngine activityId={"42"}/>
+
+		<FormEngineViews.FormEngineTpl activityId={"42"}/>
+
+		<FormEngineViews.ScrollHandler activityId={"42"}>
+			{Anything}
+		</FormEngineViews.ScrollHandler>
+	</>);
+
+`;

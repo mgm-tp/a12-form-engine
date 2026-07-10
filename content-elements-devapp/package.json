@@ -1,6 +1,6 @@
 {
   "name": "content-elements-devapp",
-  "version": "38.5.0-SNAPSHOT",
+  "version": "39.0.0",
   "description": "Devapp for form content elements",
   "private": true,
   "type": "module",
@@ -9,7 +9,10 @@
     "build": "node --run compile",
     "compile": "pnpm run \"/^compile:.*/\"",
     "compile:typescript": "tsc",
-    "compile:cycle-detection": "devtools detect-cycles \"./src/**/*.@(ts|tsx)\"",
+    "compile:cycle-detection": "devtools detect-cycles \"./src/**/*.@(ts|tsx|d.ts|d.cts|d.mts)\"",
+    "lint": "eslint --flag unstable_native_nodejs_ts_config . --cache",
+    "lint:fix": "node --run lint -- --fix",
+    "lint:onlyErrors": "node --run lint -- --quiet",
     "watch": "tsc --watch",
     "start": "node --run start:mock",
     "start:mock": "rsbuild dev -c rsbuild/rsbuild.config.ts --env-mode mock",
@@ -22,6 +25,7 @@
     "@com.mgmtp.a12.base/base-model-api": "catalog:a12",
     "@com.mgmtp.a12.client/client-core": "catalog:a12",
     "@com.mgmtp.a12.client/client-data": "catalog:a12",
+    "@com.mgmtp.a12.client/typescript-fsa-redux-5-compat": "catalog:a12",
     "@com.mgmtp.a12.contentengine/contentengine-core": "catalog:a12",
     "@com.mgmtp.a12.contentengine/contentengine-default-element-library": "catalog:a12",
     "@com.mgmtp.a12.contentengine/contentengine-editor": "catalog:a12",
@@ -43,8 +47,8 @@
     "@rsdoctor/rspack-plugin": "catalog:",
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
-    "@types/react-redux": "catalog:",
     "date-fns": "catalog:",
+    "eslint": "catalog:",
     "rimraf": "catalog:",
     "react": "catalog:",
     "react-dnd": "catalog:",
@@ -55,7 +59,7 @@
     "source-map-loader": "catalog:",
     "styled-components": "catalog:",
     "typed-redux-saga": "catalog:",
-    "typescript": "catalog:",
-    "typescript-fsa": "catalog:"
-  }
+    "typescript": "catalog:"
+  },
+  "exports": null
 }

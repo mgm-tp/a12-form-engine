@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -30,10 +30,11 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import type { EntityInstancePath } from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
+import type { EntityInstancePath } from "@com.mgmtp.a12.kernel/kernel-md-facade";
 
 import { UiId } from "../../../../../../../back-end/utils/internal/generateUiId.js";
-import { FormModel } from "../../../../../../../models/internal/form-model.js";
+import { isFormModelInlineRepeat } from "../../../../../../../models/index.js";
+import type { FormModel } from "../../../../../../../models/internal/form-model.js";
 
 import type { RepeatRow } from "../tableColumnTypes.js";
 
@@ -53,20 +54,26 @@ export function getScreenReaderCellId(
 			? rowOrPath.rowIndexInDocument
 			: getRowIndexFromPath(rowOrPath);
 
-	return repeat.screenReaderColumnRef && rowIndex !== undefined
-		? FormModel.InlineRepeat.isInstance(repeat)
-			? UiId.generateForRepeatOverviewColumn({
-					id: repeat.screenReaderColumnRef,
-					uiIdPrefix,
-					rowIndex
-				})
-			: // ER/DR do not render FieldOverviewColumns, so we use the body cell instead
-				UiId.generateForRepeatTableBodyCell({
-					id: repeat.screenReaderColumnRef,
-					uiIdPrefix,
-					rowIndex
-				})
-		: undefined;
+	if (!repeat.screenReaderColumnRef) {
+		return undefined;
+	}
+
+	if (rowIndex === undefined) {
+		return undefined;
+	}
+
+	return isFormModelInlineRepeat(repeat)
+		? UiId.generateForRepeatOverviewColumn({
+				id: repeat.screenReaderColumnRef,
+				uiIdPrefix,
+				rowIndex
+			})
+		: // ER/DR do not render FieldOverviewColumns, so we use the body cell instead
+			UiId.generateForRepeatTableBodyCell({
+				id: repeat.screenReaderColumnRef,
+				uiIdPrefix,
+				rowIndex
+			});
 }
 
 // a path to a column must be a specific one and not empty (meaning index > 0)

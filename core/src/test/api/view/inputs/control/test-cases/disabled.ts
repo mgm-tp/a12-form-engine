@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -34,22 +34,20 @@ import { strictEqual } from "node:assert/strict";
 
 import { act } from "react";
 
-import { ModelPath } from "@com.mgmtp.a12.base/base-model-api/lib/main/model/index.js";
+import { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
 import { query } from "@com.mgmtp.a12.devtools/react";
 
 import type { EngineStore } from "../../../../../../back-end/store/index.js";
 import type { InputMap } from "../../../../../../view/internal/configuration/componentMap/input/input-map.js";
 import { getInputMocks } from "../../../../../rtl-utils/getInputMocks.js";
-import { DocumentHelpers } from "../../../../../utils/document-helpers.js";
-import { SetupHelpers } from "../../../../../utils/setup.js";
+import { createDocumentPath } from "../../../../../utils/createDocumentPath.js";
+import { setupFormEngineRendererWithRtl } from "../../../../../utils/setup.js";
 import { setupModelsFixture } from "../../../../../utils/setupFixture.js";
 import type { LocationStackPosition } from "../../../../../utils/test-model-helpers/controls.js";
 import {
 	CONTROLS,
 	createDocumentForControlsModels
 } from "../../../../../utils/test-model-helpers/controls.js";
-
-const { createDocumentPath } = DocumentHelpers;
 
 export function executeTestForDisabled(): void {
 	function assertInputDisabled(options: {
@@ -118,7 +116,7 @@ export function executeTestForDisabled(): void {
 		}
 
 		const inputMap = getInputMocks();
-		SetupHelpers.setupFormEngineRendererWithRtl({
+		setupFormEngineRendererWithRtl({
 			withWidgets: withWidgets ? true : undefined,
 			inputMap,
 			models: controls,

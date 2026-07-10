@@ -1,17 +1,17 @@
 buildscript {
     dependencies {
         classpath libs.groovy.yaml
-        classpath gradlePluginLibs.spotbugs.plugin
-        classpath a12Libs.build.utilities
+        classpath libs.build.utilities
     }
 }
 
 plugins {
     // make plugin available to subprojects without creating multiple instances
-    alias(gradlePluginLibs.plugins.docker) apply false
-    alias(gradlePluginLibs.plugins.spotless) apply false
-    alias(gradlePluginLibs.plugins.spotbugs) apply false
-    alias(gradlePluginLibs.plugins.cyclonedx) apply false
+    alias(libs.plugins.docker) apply false
+    alias(libs.plugins.spotless) apply false
+    alias(libs.plugins.spotbugs) apply false
+    alias(libs.plugins.cyclonedx) apply false
+    alias(libs.plugins.version.catalog.update)
 }
 
 import com.github.spotbugs.snom.Confidence
@@ -22,6 +22,7 @@ import com.mgmtp.a12.devtools.gradle.plugins.buildutils.tasks.PackageJsonModifie
 import groovy.json.JsonSlurper
 import groovy.yaml.YamlSlurper
 import org.cyclonedx.model.ExternalReference
+import nl.littlerobots.vcu.plugin.resolver.VersionSelectors
 
 import java.nio.file.Files
 import java.nio.file.Path
@@ -53,7 +54,6 @@ allprojects {
     tasks.withType(JavaForkOptions).configureEach {
         def loggingConfiguration = rootProject.file('logback.xml').absolutePath
         systemProperty 'logback.logLevel', project.findProperty('logLevel')
-        systemProperty 'logback.configurationFile', loggingConfiguration
         systemProperty 'logging.config', loggingConfiguration
     }
 }
@@ -67,35 +67,20 @@ subprojects {
     if (
         project.name == 'form-parent' ||
         project.name == 'form-model' ||
-        project.name == 'computation-relevancy-analyzer' ||
-        project.name == 'devappServices'
+        project.name == 'devappServices' ||
+        project.name == 'java-codemod'
     ) {
         pluginManager.apply('maven-publish')
         pluginManager.apply('org.cyclonedx.bom')
 
         if (project.name != 'form-parent') {
             pluginManager.apply('java-library')
-            pluginManager.apply('jacoco')
-            pluginManager.apply('com.github.spotbugs')
-            pluginManager.apply('com.diffplug.spotless')
 
             java {
                 toolchain {
-                    languageVersion = JavaLanguageVersion.of(21)
+                    languageVersion = JavaLanguageVersion.of(25)
                 }
                 withSourcesJar()
-            }
-
-            // A12 Data Services platform used for centralized version management for all subprojects
-            dependencies {
-                api platform(a12Libs.dataservices.bom)
-            }
-
-            tasks.withType(JavaCompile).configureEach {
-                options.encoding = 'UTF-8'
-                options.deprecation = true
-                options.compilerArgs << '-Xlint:deprecation'
-                options.compilerArgs << '-Werror'
             }
 
             tasks.withType(Jar).configureEach {
@@ -106,82 +91,124 @@ subprojects {
                     from(rootProject.file('licenses')) {
                         into('licenses')
                     }
-                    from(tasks.named('cyclonedxDirectBom').get().jsonOutput) {
-                        rename { 'cyclonedx.json' }
+                }
+            }
+
+            // java-codemod is a pure resource JAR (OpenRewrite YAML), skip code quality tools
+            if (project.name != 'java-codemod') {
+                pluginManager.apply('jacoco')
+                pluginManager.apply('com.github.spotbugs')
+                pluginManager.apply('com.diffplug.spotless')
+
+                // A12 Data Services platform used for centralized version management for all subprojects
+                dependencies {
+                    api platform(libs.dataservices.bom)
+                }
+
+                tasks.withType(JavaCompile).configureEach {
+                    options.release.set(21)
+                    options.encoding = 'UTF-8'
+                    options.deprecation = true
+                    options.compilerArgs << '-Xlint:deprecation'
+                    options.compilerArgs << '-Werror'
+                }
+
+                tasks.withType(Jar).configureEach {
+                    into('META-INF') {
+                        from(tasks.named('cyclonedxDirectBom').get().jsonOutput) {
+                            rename { 'cyclonedx.json' }
+                        }
                     }
                 }
-            }
 
-            test {
-                useTestNG()
-                testLogging {
-                    events = ['passed', 'skipped', 'failed']
-                    exceptionFormat = 'full'
+                test {
+                    useTestNG()
+                    testLogging {
+                        events = ['passed', 'skipped', 'failed']
+                        exceptionFormat = 'full'
+                    }
                 }
-            }
 
-            // SpotBugs configuration
-            spotbugs {
-                effort = Effort.valueOf('MAX')
-                reportLevel = Confidence.valueOf('HIGH')
-            }
-
-            spotbugsMain {
-                reports {
-                    xml.required = true
-                    html.required = false
+                // SpotBugs configuration
+                spotbugs {
+                    effort = Effort.valueOf('MAX')
+                    reportLevel = Confidence.valueOf('HIGH')
                 }
-            }
 
-            // Spotless configuration for license headers
-            spotless {
-                java {
-                    licenseHeaderFile rootProject.file('license_header.txt')
-                    target 'src/**/*.java'
+                spotbugsMain {
+                    reports {
+                        xml.required = true
+                        html.required = false
+                    }
                 }
-                format('properties') {
-                    licenseHeaderFile(rootProject.file('license_header.txt'), '(^[a-zA-Z])')
 
-                    // transform C-style header in `*.properties` to `#`-comments
-                    replaceRegex('Convert C-style block start to properties comment', '(?m)^\\s*/\\*', '##')
-                    replaceRegex('Remove C-style block end in properties files', '(?m)^\\s*\\Q*/\\E\\s*$', '##')
-                    replaceRegex('Convert C-style block asterisk lines to properties comment', '(?m)^\\s*\\* ?', '# ')
+                // Spotless configuration
+                spotless {
+                    java {
+                        importOrder(
+                            'com.mgmtp.a12.model',
+                            'com.mgmtp.a12.kernel',
+                            'com.mgmtp.a12.formengine',
+                            'java',
+                            '' // static imports
+                        )
+                        removeUnusedImports()
+                        licenseHeaderFile rootProject.file('license_header.txt')
+                        target 'src/**/*.java'
+                    }
+                    format('properties') {
+                        licenseHeaderFile(rootProject.file('license_header.txt'), '(^[a-zA-Z])')
 
-                    target('src/**/*.properties')
+                        // transform C-style header in `*.properties` to `#`-comments
+                        replaceRegex('Convert C-style block start to properties comment', '(?m)^\\s*/\\*', '##')
+                        replaceRegex('Remove C-style block end in properties files', '(?m)^\\s*\\Q*/\\E\\s*$', '##')
+                        replaceRegex('Convert C-style block asterisk lines to properties comment', '(?m)^\\s*\\* ?', '# ')
+
+                        target('src/**/*.properties')
+                    }
                 }
-            }
 
-            // Jacoco configuration
-            jacoco {
-                toolVersion = '0.8.13'
-            }
-
-            jacocoTestReport {
-                dependsOn(tasks.named('test'))
-                reports {
-                    xml.required = true
-                    html.required = false
+                // Jacoco configuration
+                jacoco {
+                    toolVersion = '0.8.13'
                 }
-            }
 
-            tasks.named('test') {
-                finalizedBy(tasks.named('jacocoTestReport'))
-            }
+                jacocoTestReport {
+                    dependsOn(tasks.named('test'))
+                    reports {
+                        xml.required = true
+                        html.required = false
+                    }
+                }
 
-            publishing {
-                publications {
-                    mavenJava(MavenPublication) {
-                        from components.java
+                tasks.named('test') {
+                    finalizedBy(tasks.named('jacocoTestReport'))
+                }
 
-                        final String groupIdForParent = group
-                        final String versionForParent = version
+                publishing {
+                    publications {
+                        mavenJava(MavenPublication) {
+                            from components.java
 
-                        pom.withXml {
-                            asNode().appendNode('parent').with {
-                                appendNode('groupId', groupIdForParent)
-                                appendNode('artifactId', 'formengine-parent')
-                                appendNode('version', versionForParent)
+                            final String groupIdForParent = group
+                            final String versionForParent = version
+
+                            pom.withXml {
+                                asNode().appendNode('parent').with {
+                                    appendNode('groupId', groupIdForParent)
+                                    appendNode('artifactId', 'formengine-parent')
+                                    appendNode('version', versionForParent)
+                                }
                             }
+                        }
+                    }
+                }
+            } else {
+                publishing {
+                    publications {
+                        mavenJava(MavenPublication) {
+                            from components.java
+                            artifactId = 'formengine-rewrite'
                         }
                     }
                 }
@@ -189,10 +216,11 @@ subprojects {
         }
 
         tasks.named('cyclonedxDirectBom') {
-            jsonOutput.set(rootProject.file("build/${project.name}-cyclonedx/cyclonedx.json"))
+            jsonOutput.set(project.layout.buildDirectory.file('cyclonedx.json'))
             xmlOutput.unsetConvention()
 
             includeBuildSystem = false
+            includeConfigs = ['runtimeClasspath']
 
             externalReferences = [
                 new ExternalReference(type: ExternalReference.Type.VCS, url: "https://git.geta12.com")
@@ -253,12 +281,29 @@ subprojects {
     }
 }
 
+project(':documentation') {
+    pluginManager.apply('com.diffplug.spotless')
+
+    spotless {
+        format('asciidoc') {
+            target '**/*.adoc'
+            targetExclude("**/node_modules/**", "**/build/**")
+
+            licenseHeaderFile(rootProject.file('license_header.txt'), '^[=\\[]')
+            // transform C-style header to asciidoc block comments
+            replaceRegex 'Convert C-style block start to asciidoc block comment start', '^/\\*', '////'
+            replaceRegex 'Convert C-style block end to asciidoc block comment end', '^ \\*/', '////\n'
+            replaceRegex 'Remove asterisk prefixes', '^ \\* ?', ''
+        }
+    }
+}
+
 tasks.register('configurePnpm', LeadingBuildTask) {
     doLast {
         if (System.getenv('CI')) {
             println "Installing $pnpmVersion"
 
-            Path installDir = Paths.get("${rootDir}/.npm")
+            final Path installDir = Path.of("${rootDir}/.npm")
             Files.createDirectories(installDir)
 
             execCommandLine 'npm', 'install', '-g', '--prefix', installDir.toString(), pnpmVersion
@@ -323,4 +368,11 @@ tasks.register('setVersion', PackageJsonModifierTask) {
     packageDirs = new YamlSlurper().parse(file('./pnpm-workspace.yaml')).packages
         .collect({ file(it) }) + file('.')
     change = Helper.createSetVersion(version)
+}
+
+versionCatalogUpdate {
+    sortByKey = false
+    versionSelector {
+        VersionSelectors.PREFER_STABLE.select(it) && !it.candidate.version.contains('SNAPSHOT')
+    }
 }

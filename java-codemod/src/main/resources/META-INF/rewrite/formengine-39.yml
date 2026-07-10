@@ -1,0 +1,45 @@
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.mgmtp.a12.formengine.UpgradeFormEngine_39
+displayName: Migrate to Form Engine 39
+description: >-
+  Migrates applications to Form Engine 39.x.x.
+  This includes package renames from 'melies' and 'model.ui.form' to 'formengine',
+  as well as class renames removing legacy 'Melies' and 'Picus' prefixes.
+recipeList:
+  # Package renames
+  - org.openrewrite.java.ChangePackage:
+      oldPackageName: com.mgmtp.a12.melies
+      newPackageName: com.mgmtp.a12.formengine
+      recursive: true
+  - org.openrewrite.java.ChangePackage:
+      oldPackageName: com.mgmtp.a12.model.ui.form
+      newPackageName: com.mgmtp.a12.formengine
+      recursive: true
+
+  # Class renames - Melies classes
+  - org.openrewrite.java.ChangeType:
+      oldFullyQualifiedTypeName: com.mgmtp.a12.formengine.model.MeliesModel
+      newFullyQualifiedTypeName: com.mgmtp.a12.formengine.model.FormModel
+  - org.openrewrite.java.ChangeType:
+      oldFullyQualifiedTypeName: com.mgmtp.a12.formengine.model.MeliesModelUtil
+      newFullyQualifiedTypeName: com.mgmtp.a12.formengine.model.FormModelUtil
+  - org.openrewrite.java.ChangeType:
+      oldFullyQualifiedTypeName: com.mgmtp.a12.formengine.model.MeliesModelJsonSerializer
+      newFullyQualifiedTypeName: com.mgmtp.a12.formengine.serialization.FormModelJsonSerializer
+
+  # Class renames - Picus classes
+  - org.openrewrite.java.ChangeType:
+      oldFullyQualifiedTypeName: com.mgmtp.a12.formengine.model.types.PicusReferenceType
+      newFullyQualifiedTypeName: com.mgmtp.a12.formengine.model.types.DmReferenceType
+  - org.openrewrite.java.ChangeType:
+      oldFullyQualifiedTypeName: com.mgmtp.a12.formengine.model.types.PicusFileReferenceType
+      newFullyQualifiedTypeName: com.mgmtp.a12.formengine.model.types.DmFileReferenceType
+  - org.openrewrite.java.ChangeType:
+      oldFullyQualifiedTypeName: com.mgmtp.a12.formengine.model.types.PicusRepositoryReferenceType
+      newFullyQualifiedTypeName: com.mgmtp.a12.formengine.model.types.DmRepositoryReferenceType
+
+  # Class renames - Resolver classes
+  - org.openrewrite.java.ChangeType:
+      oldFullyQualifiedTypeName: com.mgmtp.a12.formengine.consistency.general.FileBasedPicusModelResolver
+      newFullyQualifiedTypeName: com.mgmtp.a12.formengine.consistency.general.FileBasedDocumentModelResolver

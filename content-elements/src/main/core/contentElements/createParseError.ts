@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -30,14 +30,14 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { KernelMessage } from "@com.mgmtp.a12.client/client-data/lib/data-mutation/validation-computation/message.js";
-import type { ParseError } from "@com.mgmtp.a12.client/client-data/lib/data-mutation/validation-computation/types.js";
-import type { EntityInstancePath } from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
-import type { ValueConversion } from "@com.mgmtp.a12.utils/utils-localization/lib/main/conversion.js";
+import type { ParseError } from "@com.mgmtp.a12.client/client-data";
+import { KernelMessage } from "@com.mgmtp.a12.client/client-data";
+import type { EntityInstancePath } from "@com.mgmtp.a12.kernel/kernel-md-facade";
+import type { ValueConversionParseError } from "@com.mgmtp.a12.utils/utils-localization";
 
 /** @internal */
 export function createParseError(
-	parseError: ValueConversion.ParseError,
+	parseError: ValueConversionParseError,
 	documentPath: EntityInstancePath,
 	errorValue: string
 ): ParseError {

@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -30,13 +30,11 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { useContext, type JSX } from "react";
+import type { JSX } from "react";
+import { useContext } from "react";
 
-import { LocalizerContext } from "@com.mgmtp.a12.utils/utils-localization-react/lib/main/index.js";
-import { Button } from "@com.mgmtp.a12.widgets/widgets-core/lib/button/main/button.view.js";
-import { Icon } from "@com.mgmtp.a12.widgets/widgets-core/lib/icon/main/icon.view.js";
-import { List } from "@com.mgmtp.a12.widgets/widgets-core/lib/list/main/list.view.js";
-import { PopUpMenu } from "@com.mgmtp.a12.widgets/widgets-core/lib/pop-up-menu/main/pop-up-menu.view.js";
+import { LocalizerContext } from "@com.mgmtp.a12.utils/utils-localization-react";
+import { Button, Icon, List, PopUpMenu } from "@com.mgmtp.a12.widgets/widgets-core";
 
 import { DevappThemeContext } from "../ThemeContextProvider.js";
 
@@ -48,7 +46,7 @@ export function Settings(): JSX.Element {
 			triggerElement={
 				<Button
 					icon={<Icon>settings</Icon>}
-					invert={currentTheme !== "flat" && currentTheme !== "flat_compact"}
+					invert={currentTheme !== "base" && currentTheme !== "base_flat"}
 				></Button>
 			}
 		>

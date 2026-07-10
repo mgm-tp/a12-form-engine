@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -30,18 +30,18 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { type JSX, useContext } from "react";
+import { useContext } from "react";
+import type { JSX } from "react";
 import { useDispatch } from "react-redux";
 
-import { ActivityActions } from "@com.mgmtp.a12.client/client-core/lib/core/activity/index.js";
-import { ApplicationActions } from "@com.mgmtp.a12.client/client-core/lib/core/application/index.js";
+import { ActivityActions, ApplicationActions } from "@com.mgmtp.a12.client/client-core";
 
 import { INDEX_DESCRIPTOR } from "../modules/devappModule.js";
 import { DevappThemeContext } from "../ThemeContextProvider.js";
 
 export function Logo(): JSX.Element {
 	const { theme } = useContext(DevappThemeContext);
-	const suffix = theme.includes("flat") ? "_flat" : "";
+	const suffix = theme.includes("base") ? "_base" : "";
 	const logoURL = `./images/a12_logo${suffix}.svg`;
 
 	const dispatch = useDispatch();

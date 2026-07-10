@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -30,10 +30,11 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
+import type { Action as ReduxAction } from "redux";
 import type { SagaGenerator } from "typed-redux-saga";
 import { call, select, takeEvery } from "typed-redux-saga";
-import type { Action, AnyAction } from "typescript-fsa";
 
+import type { Action } from "@com.mgmtp.a12.client/typescript-fsa-redux-5-compat";
 import { LoggerFactory } from "@com.mgmtp.a12.utils/utils-logging";
 
 import { Events } from "../../../../../../../back-end/store/index.js";
@@ -57,7 +58,7 @@ type DownloadActionPayload = FormEngineActions.FormEngineEventActions<
 /** @internal */
 export function* downloadSaga(options?: FormEngineSagaOptions): SagaGenerator<void> {
 	yield* takeEvery(
-		(a: AnyAction): a is Action<DownloadActionPayload> =>
+		(a: ReduxAction): a is Action<DownloadActionPayload> =>
 			FormEngineActions.event.match(a) &&
 			Events.Attachments.downloadAttachment.match(a.payload.engineEvent),
 		function* ({ payload }) {

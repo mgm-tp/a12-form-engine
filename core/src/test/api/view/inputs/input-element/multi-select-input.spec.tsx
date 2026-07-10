@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -34,12 +34,11 @@ import { deepEqual, deepStrictEqual, equal, strictEqual } from "node:assert/stri
 import { mock } from "node:test";
 
 import { query } from "@com.mgmtp.a12.devtools/react";
-import type { DocumentModel } from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
-import type { Locale } from "@com.mgmtp.a12.utils/utils-localization/lib/main/index.js";
-import { defaultLocalizerFactory } from "@com.mgmtp.a12.utils/utils-localization/lib/main/index.js";
-import { provider } from "@com.mgmtp.a12.widgets/widgets-core/lib/common/main/device-detector.js";
-import type { SizeDetectorProps } from "@com.mgmtp.a12.widgets/widgets-core/lib/layout/size-detector/main/size-detector.api.js";
-import type { MultiselectProps } from "@com.mgmtp.a12.widgets/widgets-core/lib/multiselect/main/multiselect.api.js";
+import type { DocumentModel } from "@com.mgmtp.a12.kernel/kernel-md-facade";
+import type { Locale } from "@com.mgmtp.a12.utils/utils-localization";
+import { defaultLocalizerFactory } from "@com.mgmtp.a12.utils/utils-localization";
+import { provider } from "@com.mgmtp.a12.widgets/widgets-core";
+import type { SizeDetectorProps, MultiselectProps } from "@com.mgmtp.a12.widgets/widgets-core";
 
 import type { MultiSelectData } from "../../../../../models/index.js";
 import type { DispatchConfiguration } from "../../../../../view/index.js";
@@ -47,10 +46,10 @@ import { defaultMapDispatchToProps, EnumerableHelper } from "../../../../../view
 import { MultiSelectInput } from "../../../../../view/internal/components/form-engine/cells/controls/multi-select/multi-select-input.js";
 import type { RtlRenderWrapper } from "../../../../rtl-utils/render-wrapper.js";
 import { rtlRenderWrapperAsync } from "../../../../rtl-utils/render-wrapper.js";
+import { createModelPath } from "../../../../utils/createModelPath.js";
 import { DE_LOCALE, US_LOCALE } from "../../../../utils/localization.js";
-import { DocumentModelHelpers } from "../../../../utils/model-helpers.js";
 import { setupModelsFixture } from "../../../../utils/setupFixture.js";
-import { createModelPath } from "../../../../utils/test-model-helpers/dependent-enumeration.js";
+import { DocumentModelHelpers } from "../../../../utils/DocumentModelHelpers.js";
 
 import { inputTest } from "./generic-tests/input-tests.js";
 import { createProps } from "./generic-tests/input-utils.js";
@@ -59,7 +58,7 @@ const { Group, Field } = DocumentModelHelpers;
 
 describe("api.view.inputs", () => {
 	describe("MultiSelectInput", () => {
-		const models = setupModelsFixture("controls.picustypes");
+		const models = setupModelsFixture("controls.dmtypes");
 
 		const documentElementDataType: DocumentModel.Group = Group({
 			usageType: "multiselect",
@@ -67,7 +66,7 @@ describe("api.view.inputs", () => {
 		});
 
 		const path = [
-			{ elementName: "A12T_PicusTypes", index: 1 },
+			{ elementName: "A12T_DmTypes", index: 1 },
 			{ elementName: "MultiSelect", index: 1 },
 			{ elementName: "MultiSelect01", index: 1 }
 		];
@@ -75,7 +74,7 @@ describe("api.view.inputs", () => {
 		const baseProps = {
 			documentElement: documentElementDataType,
 			documentElementDataType,
-			component: "MultiSelect",
+			component: "Multiselect",
 			renderFunction: MultiSelectInput,
 			path,
 			formModelPath: createModelPath("foo", "bar")
@@ -112,7 +111,7 @@ describe("api.view.inputs", () => {
 				{
 					...baseProps,
 					breakTooltipsToNewLine: true,
-					component: "MultiSelect",
+					component: "Multiselect",
 					placeholderPropName: "placeholder"
 				},
 				{
@@ -135,7 +134,7 @@ describe("api.view.inputs", () => {
 					"with the correct arguments, where the enumeration options are in the order of the document model",
 				async () => {
 					const wrapper = await setup({ dispatchConfig });
-					const input = query(wrapper.widgetMap.MultiSelect).props();
+					const input = query(wrapper.widgetMap.Multiselect).props();
 					input.onChange?.([{ id: "key_green" }, { id: "key_blue" }] as MultiselectProps.Item[]);
 
 					strictEqual(
@@ -158,14 +157,14 @@ describe("api.view.inputs", () => {
 				const locale = US_LOCALE;
 				it("gives the correct localized hintTemplate as prop to the component", async () => {
 					const wrapper = await setup({ locale });
-					const component = query(wrapper.widgetMap.MultiSelect).props();
+					const component = query(wrapper.widgetMap.Multiselect).props();
 					equal(component.hintTemplate, "{count} out of {total} options");
 				});
 
 				describe("Items", () => {
 					it("gives the labels of the enumeration values to the component", async () => {
 						const wrapper = await setup({ locale });
-						const component = query(wrapper.widgetMap.MultiSelect).props();
+						const component = query(wrapper.widgetMap.Multiselect).props();
 						deepEqual(component.items, [
 							{ id: "key_blue", value: "key_blue", label: "Blue", selected: false },
 							{ id: "key_red", value: "key_red", label: "Red", selected: false },
@@ -179,14 +178,14 @@ describe("api.view.inputs", () => {
 				const locale = DE_LOCALE;
 				it("gives the correct localized hintTemplate as prop to the component", async () => {
 					const wrapper = await setup({ locale });
-					const component = query(wrapper.widgetMap.MultiSelect).props();
+					const component = query(wrapper.widgetMap.Multiselect).props();
 					equal(component.hintTemplate, "{count} von {total} Optionen");
 				});
 
 				describe("Items", () => {
 					it("gives the labels of the enumeration values to the component", async () => {
 						const wrapper = await setup({ locale });
-						const component = query(wrapper.widgetMap.MultiSelect).props();
+						const component = query(wrapper.widgetMap.Multiselect).props();
 						deepEqual(component.items, [
 							{ id: "key_blue", value: "key_blue", label: "Blau", selected: false },
 							{ id: "key_red", value: "key_red", label: "Rot", selected: false },
@@ -200,7 +199,7 @@ describe("api.view.inputs", () => {
 		describe("value", () => {
 			it("gives the ui value from the document to the value prop of the `MultiSelect`", async () => {
 				const wrapper = await setup({ value: [{ value: "key_blue" }, { value: "key_green" }] });
-				const component = query(wrapper.widgetMap.MultiSelect).props();
+				const component = query(wrapper.widgetMap.Multiselect).props();
 				const items = component.items;
 				deepEqual(items, [
 					{ id: "key_blue", value: "key_blue", label: "Blue", selected: true },
@@ -217,7 +216,7 @@ describe("api.view.inputs", () => {
 
 			it("renders the MultiSelectComponent with mobile=false", async () => {
 				const wrapper = await setup({ size: "sm" });
-				const component = query(wrapper.widgetMap.MultiSelect).props();
+				const component = query(wrapper.widgetMap.Multiselect).props();
 				equal(component.mobile, false);
 			});
 		});
@@ -229,7 +228,7 @@ describe("api.view.inputs", () => {
 
 			it("renders the MultiSelectComponent with mobile=true", async () => {
 				const wrapper = await setup({ size: "sm" });
-				const component = query(wrapper.widgetMap.MultiSelect).props();
+				const component = query(wrapper.widgetMap.Multiselect).props();
 				equal(component.mobile, true);
 			});
 		});

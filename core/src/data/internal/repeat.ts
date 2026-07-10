@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -30,26 +30,31 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { ModelPath } from "@com.mgmtp.a12.base/base-model-api/lib/main/model/index.js";
+import { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
 import type {
 	DocumentModel,
 	EntityInstancePath,
 	GroupInstance
-} from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
-import type {
-	Localizer,
-	ValueConversion
-} from "@com.mgmtp.a12.utils/utils-localization/lib/main/index.js";
+} from "@com.mgmtp.a12.kernel/kernel-md-facade";
+import type { Localizer, ValueConversion } from "@com.mgmtp.a12.utils/utils-localization";
 
-import type ExternalEnumerationProvider from "../../back-end/services/external-enumeration-provider.js";
+import type { IExternalEnumerationProvider } from "../../back-end/services/external-enumeration-provider.js";
 import { DataSelectors } from "../../back-end/store/internal/selectors/data.js";
 import { ModelSelectors } from "../../back-end/store/internal/selectors/models.js";
-import { UiStateSelectors } from "../../back-end/store/internal/selectors/ui-state.js";
+import {
+	InternalUiStateSelectors,
+	UiStateSelectors
+} from "../../back-end/store/internal/selectors/ui-state.js";
 import type { EngineState, EngineStore } from "../../back-end/store/internal/store.js";
 import { getDocumentPath } from "../../back-end/utils/internal/path.js";
-import { FormModel, findElementByFormModelPath } from "../../models/index.js";
+import type { FormModel } from "../../models/index.js";
+import { findElementByFormModelPath } from "../../models/index.js";
+import {
+	isFormModelFieldOverviewColumn,
+	isFormModelRepeat
+} from "../../models/internal/FormModelGuards.js";
 import type * as RepeatExpressionFilter from "../../models/internal/jison/repeatfilter.cjs";
-import { DocumentModelUtils } from "../../models/internal/utils/document-model-utils.js";
+import * as DocumentModelUtils from "../../models/internal/utils/document-model-utils.js";
 import { DocumentPath, DocumentUtils } from "../../models/internal/utils/document-utils.js";
 import { getModelPathElementName } from "../../models/internal/utils/form-model-path.js";
 import { filterRowsByFilterExpression } from "../../view/internal/components/form-engine/repeat/components/filter-expressions.js";
@@ -76,7 +81,7 @@ interface Options {
 	readonly state: EngineState;
 	readonly converter: ValueConversion;
 	readonly localizer: Localizer;
-	readonly externalEnumerationProvider?: ExternalEnumerationProvider;
+	readonly externalEnumerationProvider?: IExternalEnumerationProvider;
 	readonly repeatFormModelPath: ModelPath;
 }
 
@@ -87,16 +92,15 @@ interface OptimizationParameters {
 
 /**
  * @internal
- * @ignore
  */
-export namespace RepeatData {
+export const RepeatData = {
 	/**
 	 * @internal
 	 *
 	 * @param optimize Can be passed to return the repeat data without UI values. The optional sortColumn can be added
 	 * to select a single column whose UI value will be calculated if the sorting logic requires it.
 	 */
-	export function getRowsByPath(
+	getRowsByPath(
 		options: Options & {
 			readonly repeatDocumentPath: EntityInstancePath;
 			readonly optimize: OptimizationParameters;
@@ -116,7 +120,7 @@ export namespace RepeatData {
 			return { rows: [] };
 		}
 
-		if (!FormModel.Repeat.isInstance(repeat)) {
+		if (!isFormModelRepeat(repeat)) {
 			return { rows: [] };
 		}
 
@@ -126,7 +130,7 @@ export namespace RepeatData {
 			: [];
 
 		const rows: RepeatRow[] = plainRows
-			? plainRows.map((row, index) => {
+			? plainRows.map((_, index) => {
 					const rowPath: EntityInstancePath = addIndexToSegment(repeatDocumentPath, index);
 
 					return {
@@ -134,7 +138,7 @@ export namespace RepeatData {
 						rowIndexInDocument: index,
 						values: repeatOverviewColumns
 							? repeatOverviewColumns.map((column, i) => {
-									if (FormModel.FieldOverviewColumn.isInstance(column)) {
+									if (isFormModelFieldOverviewColumn(column)) {
 										const fce =
 											formModel.content.fieldConfiguration.fieldMap[
 												ModelPath.toString(column.elementPath)
@@ -172,37 +176,10 @@ export namespace RepeatData {
 			: [];
 
 		return { rows };
-	}
-
-	function needsUiValue(
-		parameters: OptimizationParameters,
-		column: FormModel.RepeatOverviewColumn,
-		documentModel: DocumentModel,
-		fce?: FormModel.FieldConfigurationEntry
-	): boolean {
-		const { sortColumnId, filterColumnIds } = parameters;
-		const isSorted = sortColumnId !== undefined && sortColumnId === column.id;
-		const isFiltered = filterColumnIds.some(id => id === getModelPathElementName(column));
-
-		if (FormModel.FieldOverviewColumn.isInstance(column)) {
-			const field = DocumentModelUtils.findByPath(documentModel, column.elementPath);
-			if (field.type === "Field") {
-				if (
-					(isSorted && mustBeConvertedForSorting(field.fieldType, fce)) ||
-					(isFiltered && mustBeConvertedForFiltering(field.fieldType, column, fce))
-				) {
-					return true;
-				}
-			}
-		} else {
-			// ExpressionOverviewColumn
-			return isSorted || isFiltered;
-		}
-		return false;
-	}
+	},
 
 	/** @internal */
-	export function processData(
+	processData(
 		options: Options & {
 			readonly data: Data;
 			readonly filterExpression?: RepeatExpressionFilter.ParsedFilterNode;
@@ -216,7 +193,7 @@ export namespace RepeatData {
 		const isEmptyTableAndWithoutFilter =
 			options.data.rows.length === 0 && options.filterExpression === undefined;
 
-		if (!FormModel.Repeat.isInstance(repeat) || isEmptyTableAndWithoutFilter) {
+		if (!isFormModelRepeat(repeat) || isEmptyTableAndWithoutFilter) {
 			return {
 				rows: [],
 				pageNumber: 1,
@@ -228,7 +205,7 @@ export namespace RepeatData {
 		const repeatStateEntry = UiStateSelectors.repeatInstanceStateEntry(options.repeatFormModelPath)(
 			options.state
 		);
-		const sortedAndFilteredData = sortAndFilterData(options);
+		const sortedAndFilteredData = RepeatData.sortAndFilterData(options);
 
 		if (sortedAndFilteredData.length > 0) {
 			return paginateRows(sortedAndFilteredData, repeat, repeatStateEntry);
@@ -244,10 +221,10 @@ export namespace RepeatData {
 			totalNumberOfRows: 0,
 			newRowShown: isNewRowRecentlyAdded ? false : undefined
 		};
-	}
+	},
 
 	/** @internal */
-	export function sortAndFilterData(options: {
+	sortAndFilterData(options: {
 		readonly data: Data;
 		readonly repeatFormModelPath: ModelPath;
 		readonly state: EngineState;
@@ -301,7 +278,7 @@ export namespace RepeatData {
 				)
 			: filteredRows;
 
-		const sortingState = UiStateSelectors.getCurrentSortingState(repeatFormModelPath)(
+		const sortingState = InternalUiStateSelectors.getCurrentSortingState(repeatFormModelPath)(
 			options.state
 		);
 		const sortedRows =
@@ -319,35 +296,10 @@ export namespace RepeatData {
 		const currentShownRows = newRow ? sortedRows.toSpliced(newRowIndex, 0, newRow) : sortedRows;
 
 		return currentShownRows;
-	}
-
-	function getNewRowInformation(options: {
-		readonly pageSize?: number;
-		readonly sortedFilteredRows: ReadonlyArray<RepeatRow>;
-		readonly acceptedRowState: "workingOn" | "recentlyAdded";
-		readonly repeatStateEntry?: EngineStore.Repeat.InstanceState | undefined;
-	}): { page: number; newRowShown: boolean } {
-		const { sortedFilteredRows, pageSize, repeatStateEntry } = options;
-		const { newRow: newRowEntry } = repeatStateEntry ? repeatStateEntry : { newRow: undefined };
-
-		let newRowShown = true;
-		let pageNumber: number | undefined;
-		if (newRowEntry && newRowEntry.rowState === options.acceptedRowState) {
-			const rowIndex = sortedFilteredRows.findIndex(row =>
-				DocumentPath.equal(row.path, newRowEntry.rowPath)
-			);
-			if (rowIndex < 0) {
-				newRowShown = false;
-			} else if (pageSize) {
-				pageNumber = getPageCount(rowIndex + 1, pageSize);
-			}
-		}
-
-		return { page: pageNumber || 1, newRowShown };
-	}
+	},
 
 	/** @internal */
-	export function getPageOfNewRow(
+	getPageOfNewRow(
 		options: Options & {
 			readonly repeat: FormModel.Repeat;
 			readonly repeatStateEntry?: EngineStore.Repeat.InstanceState;
@@ -368,7 +320,7 @@ export namespace RepeatData {
 		const rows = RepeatData.getRowsByPath({
 			...options,
 			repeatDocumentPath,
-			optimize: getOptimizationParameters(repeatFormModelPath, state)
+			optimize: RepeatData.getOptimizationParameters(repeatFormModelPath, state)
 		});
 
 		const sortedFilteredRows = RepeatData.sortAndFilterData({
@@ -385,10 +337,10 @@ export namespace RepeatData {
 			repeatStateEntry,
 			sortedFilteredRows
 		});
-	}
+	},
 
 	/** @internal */
-	export function getOptimizationParameters(
+	getOptimizationParameters(
 		repeatFormModelPath: ModelPath,
 		state: EngineState
 	): OptimizationParameters {
@@ -396,163 +348,14 @@ export namespace RepeatData {
 		const filterColumnIds = repeatStateEntry?.filters ? Object.keys(repeatStateEntry.filters) : [];
 
 		const sortColumn =
-			UiStateSelectors.getCurrentSortingState(repeatFormModelPath)(state)?.orderPath;
+			InternalUiStateSelectors.getCurrentSortingState(repeatFormModelPath)(state)?.orderPath;
 		const sortColumnId = sortColumn ? getColumnId(sortColumn, state) : undefined;
 
 		return { sortColumnId, filterColumnIds };
-	}
+	},
 
 	/** @internal */
-	function getColumnId(columnPath: ModelPath, state: EngineState): string | undefined {
-		const formModel = ModelSelectors.formModel()(state);
-		const modelColumn = findElementByFormModelPath(formModel, columnPath);
-		return modelColumn ? (modelColumn as FormModel.RepeatOverviewColumn).id : undefined;
-	}
-
-	/** @internal */
-	function paginateRows(
-		sortedFilteredRows: ReadonlyArray<RepeatRow>,
-		{ pageSize, repeatOverviewColumn }: FormModel.Repeat,
-		repeatStateEntry?: EngineStore.Repeat.InstanceState
-	): PaginatedRepeatData {
-		let pageNumber = repeatStateEntry ? repeatStateEntry.page || 1 : 1;
-
-		const newRowInformation = getNewRowInformation({
-			pageSize,
-			repeatStateEntry,
-			sortedFilteredRows,
-			acceptedRowState: "recentlyAdded"
-		});
-		const newRowShown = newRowInformation.newRowShown;
-
-		if (pageSize) {
-			const pageCount = getPageCount(sortedFilteredRows.length, pageSize);
-			if (pageCount < pageNumber) {
-				pageNumber = pageCount;
-			}
-		}
-
-		const rows = pageSize
-			? sortedFilteredRows.slice((pageNumber - 1) * pageSize, pageNumber * pageSize)
-			: sortedFilteredRows;
-
-		const summaryResult = calculateSummaryResult(repeatOverviewColumn ?? [], sortedFilteredRows);
-
-		return {
-			rows,
-			totalNumberOfPages: getPageCount(sortedFilteredRows.length, pageSize),
-			totalNumberOfRows: sortedFilteredRows.length,
-			pageNumber,
-			newRowShown,
-			summaryResult
-		};
-	}
-
-	function addIndexToSegment(path: EntityInstancePath, index: number): EntityInstancePath {
-		return [
-			...path.slice(0, path.length - 1),
-			{ elementName: path[path.length - 1].elementName, index: index + 1 }
-		];
-	}
-
-	function getPageCount(rows: number, pageSize?: number): number {
-		// We always render at least one page.
-		if (!pageSize || rows === 0) {
-			return 1;
-		} else {
-			return Math.ceil(rows / pageSize);
-		}
-	}
-
-	function mapForFieldOverviewColumn(options: {
-		readonly column: FormModel.FieldOverviewColumn;
-		readonly rowPath: EntityInstancePath;
-		readonly converter: ValueConversion;
-		readonly localizer: Localizer;
-		readonly state: EngineState;
-		readonly document: GroupInstance;
-		readonly repeatFormModelPath: ModelPath;
-		readonly repeatableColumnNames: string[];
-		readonly index: number;
-		readonly externalEnumerationProvider?: ExternalEnumerationProvider;
-		readonly computeUiValue: boolean;
-	}): Value {
-		const { state, column, document, rowPath, repeatFormModelPath, repeatableColumnNames, index } =
-			options;
-		const messages = UiStateSelectors.messages()(state);
-		const documentModel = ModelSelectors.documentModel()(state);
-		const formModel = ModelSelectors.formModel()(state);
-		const elementPath = column.elementPath;
-		const elementDocumentPath: EntityInstancePath = getDocumentPath(
-			documentModel,
-			elementPath,
-			rowPath
-		);
-
-		const jsonValue = DocumentUtils.getValue({ document, path: elementDocumentPath });
-		const messageState = messages[DocumentPath.toString(elementDocumentPath)];
-
-		const modelElement = DocumentModelUtils.findByPath(documentModel, elementDocumentPath);
-
-		return {
-			ui:
-				modelElement.type === "Field" && options.computeUiValue
-					? calculateUiValueForField(
-							documentModel,
-							formModel,
-							modelElement,
-							elementDocumentPath,
-							options.localizer,
-							options.converter,
-							DocumentModelUtils.conversionConfig(documentModel, elementDocumentPath),
-							messageState,
-							jsonValue,
-							formModel.content.fieldConfiguration.fieldMap[ModelPath.toString(column.elementPath)],
-							options.externalEnumerationProvider
-						)
-					: "",
-			data: jsonValue,
-			path: elementDocumentPath,
-			formModelPath: [...repeatFormModelPath, { elementName: repeatableColumnNames[index] }]
-		};
-	}
-
-	function mapForExpressionColumn(options: {
-		readonly column: FormModel.ExpressionOverviewColumn;
-		readonly document: GroupInstance;
-		readonly rowPath: EntityInstancePath;
-		readonly converter: ValueConversion;
-		readonly localizer: Localizer;
-		readonly state: EngineState;
-		readonly repeatFormModelPath: ModelPath;
-		readonly repeatableColumnNames: string[];
-		readonly index: number;
-		readonly externalEnumerationProvider?: ExternalEnumerationProvider;
-		readonly computeUiValue: boolean;
-	}): Value {
-		const { column, rowPath, repeatFormModelPath, repeatableColumnNames, index, document } =
-			options;
-		const expressionValue = options.computeUiValue
-			? getExpressionValue({
-					state: options.state,
-					converter: options.converter,
-					localizer: options.localizer,
-					expressionTree: column.expressionTree,
-					dataContext: rowPath,
-					document,
-					externalEnumerationProvider: options.externalEnumerationProvider
-				})
-			: "";
-		return {
-			ui: expressionValue,
-			data: expressionValue,
-			path: [],
-			formModelPath: [...repeatFormModelPath, { elementName: repeatableColumnNames[index] }]
-		};
-	}
-
-	/** @internal */
-	export function getProcessedData({
+	getProcessedData({
 		state,
 		converter,
 		localizer,
@@ -587,4 +390,204 @@ export namespace RepeatData {
 			tableInteractionDocument
 		});
 	}
+};
+
+function needsUiValue(
+	parameters: OptimizationParameters,
+	column: FormModel.RepeatOverviewColumn,
+	documentModel: DocumentModel,
+	fce?: FormModel.FieldConfigurationEntry
+): boolean {
+	const { sortColumnId, filterColumnIds } = parameters;
+	const isSorted = sortColumnId !== undefined && sortColumnId === column.id;
+	const isFiltered = filterColumnIds.some(id => id === getModelPathElementName(column));
+
+	if (isFormModelFieldOverviewColumn(column)) {
+		const field = DocumentModelUtils.findByPath(documentModel, column.elementPath);
+		if (field.type === "Field") {
+			if (
+				(isSorted && mustBeConvertedForSorting(field.fieldType, fce)) ||
+				(isFiltered && mustBeConvertedForFiltering(field.fieldType, column, fce))
+			) {
+				return true;
+			}
+		}
+	} else {
+		// ExpressionOverviewColumn
+		return isSorted || isFiltered;
+	}
+	return false;
+}
+
+function getNewRowInformation(options: {
+	readonly pageSize?: number;
+	readonly sortedFilteredRows: ReadonlyArray<RepeatRow>;
+	readonly acceptedRowState: "workingOn" | "recentlyAdded";
+	readonly repeatStateEntry?: EngineStore.Repeat.InstanceState | undefined;
+}): { page: number; newRowShown: boolean } {
+	const { sortedFilteredRows, pageSize, repeatStateEntry } = options;
+	const { newRow: newRowEntry } = repeatStateEntry ? repeatStateEntry : { newRow: undefined };
+
+	let newRowShown = true;
+	let pageNumber: number | undefined;
+	if (newRowEntry && newRowEntry.rowState === options.acceptedRowState) {
+		const rowIndex = sortedFilteredRows.findIndex(row =>
+			DocumentPath.equal(row.path, newRowEntry.rowPath)
+		);
+		if (rowIndex < 0) {
+			newRowShown = false;
+		} else if (pageSize) {
+			pageNumber = getPageCount(rowIndex + 1, pageSize);
+		}
+	}
+
+	return { page: pageNumber || 1, newRowShown };
+}
+
+/** @internal */
+function getColumnId(columnPath: ModelPath, state: EngineState): string | undefined {
+	const formModel = ModelSelectors.formModel()(state);
+	const modelColumn = findElementByFormModelPath(formModel, columnPath);
+	return modelColumn ? (modelColumn as FormModel.RepeatOverviewColumn).id : undefined;
+}
+
+/** @internal */
+function paginateRows(
+	sortedFilteredRows: ReadonlyArray<RepeatRow>,
+	{ pageSize, repeatOverviewColumn }: FormModel.Repeat,
+	repeatStateEntry?: EngineStore.Repeat.InstanceState
+): PaginatedRepeatData {
+	let pageNumber = repeatStateEntry ? repeatStateEntry.page || 1 : 1;
+
+	const newRowInformation = getNewRowInformation({
+		pageSize,
+		repeatStateEntry,
+		sortedFilteredRows,
+		acceptedRowState: "recentlyAdded"
+	});
+	const newRowShown = newRowInformation.newRowShown;
+
+	if (pageSize) {
+		const pageCount = getPageCount(sortedFilteredRows.length, pageSize);
+		if (pageCount < pageNumber) {
+			pageNumber = pageCount;
+		}
+	}
+
+	const rows = pageSize
+		? sortedFilteredRows.slice((pageNumber - 1) * pageSize, pageNumber * pageSize)
+		: sortedFilteredRows;
+
+	const summaryResult = calculateSummaryResult(repeatOverviewColumn ?? [], sortedFilteredRows);
+
+	return {
+		rows,
+		totalNumberOfPages: getPageCount(sortedFilteredRows.length, pageSize),
+		totalNumberOfRows: sortedFilteredRows.length,
+		pageNumber,
+		newRowShown,
+		summaryResult
+	};
+}
+
+function addIndexToSegment(path: EntityInstancePath, index: number): EntityInstancePath {
+	return [
+		...path.slice(0, path.length - 1),
+		{ elementName: path[path.length - 1].elementName, index: index + 1 }
+	];
+}
+
+function getPageCount(rows: number, pageSize?: number): number {
+	// We always render at least one page.
+	if (!pageSize || rows === 0) {
+		return 1;
+	} else {
+		return Math.ceil(rows / pageSize);
+	}
+}
+
+function mapForFieldOverviewColumn(options: {
+	readonly column: FormModel.FieldOverviewColumn;
+	readonly rowPath: EntityInstancePath;
+	readonly converter: ValueConversion;
+	readonly localizer: Localizer;
+	readonly state: EngineState;
+	readonly document: GroupInstance;
+	readonly repeatFormModelPath: ModelPath;
+	readonly repeatableColumnNames: string[];
+	readonly index: number;
+	readonly externalEnumerationProvider?: IExternalEnumerationProvider;
+	readonly computeUiValue: boolean;
+}): Value {
+	const { state, column, document, rowPath, repeatFormModelPath, repeatableColumnNames, index } =
+		options;
+	const messages = UiStateSelectors.messages()(state);
+	const documentModel = ModelSelectors.documentModel()(state);
+	const formModel = ModelSelectors.formModel()(state);
+	const elementPath = column.elementPath;
+	const elementDocumentPath: EntityInstancePath = getDocumentPath(
+		documentModel,
+		elementPath,
+		rowPath
+	);
+
+	const jsonValue = DocumentUtils.getValue({ document, path: elementDocumentPath });
+	const messageState = messages[DocumentPath.toString(elementDocumentPath)];
+
+	const modelElement = DocumentModelUtils.findByPath(documentModel, elementDocumentPath);
+
+	return {
+		ui:
+			modelElement.type === "Field" && options.computeUiValue
+				? calculateUiValueForField(
+						documentModel,
+						formModel,
+						modelElement,
+						elementDocumentPath,
+						options.localizer,
+						options.converter,
+						DocumentModelUtils.conversionConfig(documentModel, elementDocumentPath),
+						messageState,
+						jsonValue,
+						formModel.content.fieldConfiguration.fieldMap[ModelPath.toString(column.elementPath)],
+						options.externalEnumerationProvider
+					)
+				: "",
+		data: jsonValue,
+		path: elementDocumentPath,
+		formModelPath: [...repeatFormModelPath, { elementName: repeatableColumnNames[index] }]
+	};
+}
+
+function mapForExpressionColumn(options: {
+	readonly column: FormModel.ExpressionOverviewColumn;
+	readonly document: GroupInstance;
+	readonly rowPath: EntityInstancePath;
+	readonly converter: ValueConversion;
+	readonly localizer: Localizer;
+	readonly state: EngineState;
+	readonly repeatFormModelPath: ModelPath;
+	readonly repeatableColumnNames: string[];
+	readonly index: number;
+	readonly externalEnumerationProvider?: IExternalEnumerationProvider;
+	readonly computeUiValue: boolean;
+}): Value {
+	const { column, rowPath, repeatFormModelPath, repeatableColumnNames, index, document } = options;
+	const expressionValue = options.computeUiValue
+		? getExpressionValue({
+				state: options.state,
+				converter: options.converter,
+				localizer: options.localizer,
+				expressionTree: column.expressionTree,
+				dataContext: rowPath,
+				document,
+				externalEnumerationProvider: options.externalEnumerationProvider
+			})
+		: "";
+	return {
+		ui: expressionValue,
+		data: expressionValue,
+		path: [],
+		formModelPath: [...repeatFormModelPath, { elementName: repeatableColumnNames[index] }]
+	};
 }

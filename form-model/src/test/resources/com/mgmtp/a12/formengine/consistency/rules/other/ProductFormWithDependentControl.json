@@ -1,0 +1,222 @@
+{
+  "header": {
+    "id": "ProductFormWithDependentControl",
+    "modelType": "form",
+    "modelVersion": "39.0.0",
+    "locales": [
+      {
+        "code": "en"
+      }
+    ],
+    "modelReferences": [
+      {
+        "alias": "DM",
+        "modelType": "document",
+        "purpose": "data binding",
+        "reference": "ProductDomain"
+      }
+    ],
+    "annotations": [
+      {
+        "name": "roles",
+        "value": "admin"
+      }
+    ]
+  },
+  "content": {
+    "subHeaderBox": {
+      "id": "subHeaderBox"
+    },
+    "footerBox": {
+      "id": "footerBox"
+    },
+    "screens": [
+      {
+        "id": "screen-a050f",
+        "name": "product (Generated)",
+        "screenElements": [
+          {
+            "type": "ControlGrid",
+            "id": "controlgrid-0f93f",
+            "name": "product Controls",
+            "layout": {
+              "lg": "12"
+            },
+            "row": [
+              {
+                "type": "Row",
+                "id": "row-8e97c",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control-c1269",
+                    "elementRef": "F3"
+                  }
+                ]
+              },
+              {
+                "type": "Row",
+                "id": "row-072a1",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control-be277",
+                    "elementRef": "F5",
+                    "dependentControls": {
+                      "screenElement": [
+                        {
+                          "idref": "controlgrid-0f93f",
+                          "masterValue": "1"
+                        }
+                      ]
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "Row",
+                "id": "row-5d87d",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control-a5d5d",
+                    "elementRef": "F27"
+                  }
+                ]
+              },
+              {
+                "type": "Row",
+                "id": "row-01c24"
+              },
+              {
+                "type": "Row",
+                "id": "row-aa876",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control-223f5",
+                    "elementRef": "F8"
+                  }
+                ]
+              },
+              {
+                "type": "Row",
+                "id": "row-b1e3b",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control-f1696",
+                    "elementRef": "F28"
+                  }
+                ]
+              },
+              {
+                "type": "Row",
+                "id": "row-8945c",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control-87a78",
+                    "elementRef": "F29"
+                  }
+                ]
+              },
+              {
+                "type": "Row",
+                "id": "row-be778",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control-281d3",
+                    "elementRef": "F9"
+                  }
+                ]
+              }
+            ],
+            "verticalAlignment": "BOTTOM"
+          },
+          {
+            "type": "Section",
+            "id": "section-6e865",
+            "name": "logistics",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "logistics"
+                  }
+                ]
+              }
+            },
+            "screenElements": [
+              {
+                "type": "Section",
+                "id": "section-47ddc",
+                "name": "weight",
+                "title": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "weight"
+                      }
+                    ]
+                  }
+                },
+                "screenElements": [
+                  {
+                    "type": "ControlGrid",
+                    "id": "controlgrid-a4c28",
+                    "name": "weight Controls",
+                    "layout": {
+                      "lg": "12"
+                    },
+                    "row": [
+                      {
+                        "type": "Row",
+                        "id": "row-b37f7",
+                        "cell": [
+                          {
+                            "type": "Control",
+                            "id": "control-b4bee",
+                            "elementRef": "F5",
+                            "dependentControls": {
+                              "screenElement": [
+                                {
+                                  "idref": "section-6e865",
+                                  "masterValue": "1"
+                                }
+                              ]
+                            }
+                          }
+                        ]
+                      },
+                      {
+                        "type": "Row",
+                        "id": "row-607f1",
+                        "cell": [
+                          {
+                            "type": "Control",
+                            "id": "control-8ee01",
+                            "elementRef": "F16"
+                          }
+                        ]
+                      }
+                    ],
+                    "verticalAlignment": "BOTTOM"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "fieldConfiguration": {},
+    "groupConfiguration": {},
+    "defaults": {}
+  }
+}

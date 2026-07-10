@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -32,18 +32,17 @@
 
 import { partialDeepStrictEqual, throws } from "node:assert/strict";
 
-import type { Model as ModelAPI } from "@com.mgmtp.a12.base/base-model-api/lib/main/model/index.js";
-import type { Activity } from "@com.mgmtp.a12.client/client-core/lib/core/activity/index.js";
+import type { Model as ModelAPI } from "@com.mgmtp.a12.base/base-model-api";
+import type { Activity, Model } from "@com.mgmtp.a12.client/client-core";
 import {
 	ModuleRegistryProvider,
 	ModuleTestExtensions,
 	NEW_INSTANCE_IDENTIFIER
-} from "@com.mgmtp.a12.client/client-core/lib/core/application/index.js";
-import type { DynamicFlow } from "@com.mgmtp.a12.client/client-core/lib/core/configurationNG/index.js";
-import type { Model, ModelMap } from "@com.mgmtp.a12.client/client-core/lib/core/model/index.js";
-import type { ModelGraph } from "@com.mgmtp.a12.dataservices/dataservices-access/lib/Relationship/ModelGraph.js";
-import type { Locale } from "@com.mgmtp.a12.utils/utils-localization/lib/main/index.js";
-import { Settings } from "@com.mgmtp.a12.utils/utils-logging/lib/Settings.js";
+} from "@com.mgmtp.a12.client/client-core";
+import type { DynamicFlow, ModelMap } from "@com.mgmtp.a12.client/client-core";
+import type { ModelGraph } from "@com.mgmtp.a12.dataservices/dataservices-access";
+import type { Locale } from "@com.mgmtp.a12.utils/utils-localization";
+import { Settings } from "@com.mgmtp.a12.utils/utils-logging";
 
 import { DefaultRequestSelectorMap } from "../../../client-extensions/internal/extensions/platform-server-connectors/internal/providers/DefaultRequestSelectorMap.js";
 import {
@@ -52,6 +51,7 @@ import {
 	createStore,
 	createTestConfig
 } from "../../utils/client-helpers.js";
+import { createFormModelContent } from "../../utils/FormModelHelpers.js";
 
 interface Options {
 	readonly descriptor?: Activity.Descriptor;
@@ -101,7 +101,7 @@ describe("api.client-extensions.DefaultRequestSelectorMap", () => {
 						modelVersion: "1",
 						modelReferences: [{ reference: "DM", modelType: "document" }]
 					},
-					content: {}
+					content: createFormModelContent()
 				},
 				DM: {
 					header: { id: "DM", modelType: "document", modelVersion: "1" },
@@ -206,7 +206,7 @@ describe("api.client-extensions.DefaultRequestSelectorMap", () => {
 				modelMap: {
 					FM: {
 						header: { id: "FM", modelType: "form", modelVersion: "1", modelReferences: [] },
-						content: {}
+						content: createFormModelContent()
 					}
 				}
 			});
@@ -221,10 +221,13 @@ describe("api.client-extensions.DefaultRequestSelectorMap", () => {
 
 			const result = DefaultRequestSelectorMap.save(config)(state);
 
-			partialDeepStrictEqual(result, {
-				method: "ADD_DOCUMENT",
-				params: { documentModelName: "DM", locale: TEST_LOCALE.language }
-			});
+			partialDeepStrictEqual(result, [
+				{ method: "CHECK_UNIQUENESS", params: { documentModelName: "DM" } },
+				{
+					method: "ADD_DOCUMENT",
+					params: { documentModelName: "DM", locale: TEST_LOCALE.language }
+				}
+			]);
 		});
 
 		it("request properties are set correctly for modify", () => {
@@ -233,10 +236,13 @@ describe("api.client-extensions.DefaultRequestSelectorMap", () => {
 
 			const result = DefaultRequestSelectorMap.save(config)(state);
 
-			partialDeepStrictEqual(result, {
-				method: "MODIFY_DOCUMENT",
-				params: { docRef: "DM/1", locale: TEST_LOCALE.language }
-			});
+			partialDeepStrictEqual(result, [
+				{ method: "CHECK_UNIQUENESS", params: { docRef: "DM/1" } },
+				{
+					method: "MODIFY_DOCUMENT",
+					params: { docRef: "DM/1", locale: TEST_LOCALE.language }
+				}
+			]);
 		});
 	});
 

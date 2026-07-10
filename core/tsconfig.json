@@ -1,24 +1,12 @@
 {
-  "extends": "@com.mgmtp.a12.devtools/tsconfig",
-  "exclude": [
-    "node_modules",
-    "lib",
-    "target"
-  ],
-  "include": [
-    "src"
-  ],
-  "compilerOptions": {
-    "outDir": "./lib",
-    "types": [
-      "node",
-      "mocha"
-    ],
-    "skipLibCheck": true,
-    // TODO: Enable with A12-17671
-    //"verbatimModuleSyntax": true,
-    "isolatedModules": true,
-    "noUncheckedSideEffectImports": true,
-    "moduleDetection": "force"
-  }
+	"extends": "@com.mgmtp.a12.devtools/tsconfig",
+	"exclude": ["node_modules", "lib", "target"],
+	"include": ["src", "./@types"],
+	"compilerOptions": {
+		"rootDir": "./src",
+		"outDir": "./lib",
+		"types": ["node", "mocha"],
+		"skipLibCheck": true,
+		"noUnusedParameters": true
+	}
 }

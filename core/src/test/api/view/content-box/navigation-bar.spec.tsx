@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -34,23 +34,20 @@ import { notStrictEqual, strictEqual } from "node:assert/strict";
 
 import { query } from "@com.mgmtp.a12.devtools/react";
 
-import { DocumentHelpers } from "../../../utils/document-helpers.js";
-import type { FormModelHelpers } from "../../../utils/model-helpers.js";
-import { ModelHelpers } from "../../../utils/model-helpers.js";
+import { createDocumentPath } from "../../../utils/createDocumentPath.js";
+import { createModelPath } from "../../../utils/createModelPath.js";
 import { setupModelsFixture } from "../../../utils/setupFixture.js";
-import { BUTTONS } from "../../../utils/test-model-helpers/button.melies.js";
+import { BUTTONS } from "../../../utils/test-model-helpers/button.form.js";
+import type { ButtonDef } from "../../../utils/FormModelHelpers.js";
 
 import { setupForButtonTests, setupSubheaderButtonTests } from "./utils.js";
-
-const { createDocumentPath } = DocumentHelpers;
-const { createModelPath } = ModelHelpers;
 
 describe("api.view.content-box", () => {
 	const models = setupModelsFixture("buttons");
 
 	describe("NavigationBar", () => {
 		it("renders only sub-header buttons of type `NAVIGATION`", () => {
-			const buttons: FormModelHelpers.ButtonDef[] = [
+			const buttons: ButtonDef[] = [
 				{ type: "EVENT", label: "EVENT" },
 				{ type: "NAVIGATION", label: "NAVIGATION" }
 			];
@@ -74,9 +71,7 @@ describe("api.view.content-box", () => {
 		});
 
 		it("does not render if no sub-header buttons are visible", () => {
-			const buttons: FormModelHelpers.ButtonDef[] = [
-				{ type: "NAVIGATION", scope: "HIDDEN_IN_READONLY_MODE" }
-			];
+			const buttons: ButtonDef[] = [{ type: "NAVIGATION", scope: "HIDDEN_IN_READONLY_MODE" }];
 
 			const { componentMap } = setupSubheaderButtonTests({
 				models,
@@ -94,7 +89,7 @@ describe("api.view.content-box", () => {
 				readonly labelHidden?: boolean;
 				readonly setIcon?: boolean;
 			}) {
-				const button: FormModelHelpers.ButtonDef = {
+				const button: ButtonDef = {
 					type: "NAVIGATION",
 					scope: "HIDDEN_IN_READONLY_MODE"
 				};
@@ -333,7 +328,7 @@ describe("api.view.content-box", () => {
 		describe("Enablement", () => {
 			describe("if the engine is enabled", () => {
 				it("renders all the sub-header buttons of type `NAVIGATION` enabled", () => {
-					const buttons: FormModelHelpers.ButtonDef[] = [
+					const buttons: ButtonDef[] = [
 						{ type: "NAVIGATION", scope: "HIDDEN_IN_READONLY_MODE" },
 						{ type: "NAVIGATION" }
 					];
@@ -353,7 +348,7 @@ describe("api.view.content-box", () => {
 
 			describe("if the engine is disabled", () => {
 				it("renders all the sub-header buttons of type `NAVIGATION` disabled", () => {
-					const buttons: FormModelHelpers.ButtonDef[] = [
+					const buttons: ButtonDef[] = [
 						{ type: "NAVIGATION", scope: "HIDDEN_IN_READONLY_MODE" },
 						{ type: "NAVIGATION" }
 					];
@@ -374,7 +369,7 @@ describe("api.view.content-box", () => {
 
 			describe("if the engine is readonly", () => {
 				it("renders only the sub-header buttons of type `NAVIGATION` with scope !== 'HIDDEN_IN_READONLY_MODE'", () => {
-					const buttons: FormModelHelpers.ButtonDef[] = [
+					const buttons: ButtonDef[] = [
 						{ type: "NAVIGATION", label: "HIDDEN", scope: "HIDDEN_IN_READONLY_MODE" },
 						{ type: "NAVIGATION", label: "VISIBLE", scope: "DISABLED_IN_READONLY_MODE" },
 						{ type: "NAVIGATION", label: "VISIBLE", scope: "HIDDEN_IN_EDIT_MODE" },
@@ -396,7 +391,7 @@ describe("api.view.content-box", () => {
 				});
 
 				it("renders the sub-header buttons of type `NAVIGATION` with scope === 'DISABLED_IN_READONLY_MODE' as disabled", () => {
-					const buttons: FormModelHelpers.ButtonDef[] = [
+					const buttons: ButtonDef[] = [
 						{ type: "NAVIGATION", label: "DISABLED", scope: "DISABLED_IN_READONLY_MODE" },
 						{ type: "NAVIGATION", label: "ENABLED" }
 					];
@@ -424,7 +419,7 @@ describe("api.view.content-box", () => {
 
 			describe("if the engine is not readonly", () => {
 				it("renders only the sub-header buttons of type `NAVIGATION` with scope !== 'HIDDEN_IN_EDIT_MODE'", () => {
-					const buttons: FormModelHelpers.ButtonDef[] = [
+					const buttons: ButtonDef[] = [
 						{ type: "NAVIGATION", label: "HIDDEN", scope: "HIDDEN_IN_EDIT_MODE" },
 						{ type: "NAVIGATION", label: "VISIBLE", scope: "DISABLED_IN_EDIT_MODE" },
 						{ type: "NAVIGATION", label: "VISIBLE", scope: "HIDDEN_IN_READONLY_MODE" },
@@ -445,7 +440,7 @@ describe("api.view.content-box", () => {
 				});
 
 				it("renders the sub-header buttons of type `NAVIGATION` with scope === 'DISABLED_IN_EDIT_MODE' as disabled", () => {
-					const buttons: FormModelHelpers.ButtonDef[] = [
+					const buttons: ButtonDef[] = [
 						{ type: "NAVIGATION", label: "DISABLED", scope: "DISABLED_IN_EDIT_MODE" },
 						{ type: "NAVIGATION", label: "ENABLED" }
 					];
@@ -472,7 +467,7 @@ describe("api.view.content-box", () => {
 		});
 
 		it("renders the sub-header button of type `NAVIGATION` selected if user is on referred screen", () => {
-			const buttons: FormModelHelpers.ButtonDef[] = [{ type: "NAVIGATION", screen: "screen-1" }];
+			const buttons: ButtonDef[] = [{ type: "NAVIGATION", screen: "screen-1" }];
 
 			const { componentMap } = setupSubheaderButtonTests({
 				models,
@@ -487,7 +482,7 @@ describe("api.view.content-box", () => {
 		});
 
 		it("does not render the sub-header button of type `NAVIGATION` selected if user is not on referred screen", () => {
-			const buttons: FormModelHelpers.ButtonDef[] = [{ type: "NAVIGATION", screen: "screen-2" }];
+			const buttons: ButtonDef[] = [{ type: "NAVIGATION", screen: "screen-2" }];
 
 			const { componentMap } = setupSubheaderButtonTests({
 				models,
@@ -502,7 +497,7 @@ describe("api.view.content-box", () => {
 		});
 
 		it("does not render the sub-header button of type `NAVIGATION` if the target does not exist", () => {
-			const buttons: FormModelHelpers.ButtonDef[] = [{ type: "NAVIGATION", screen: "screen-3" }];
+			const buttons: ButtonDef[] = [{ type: "NAVIGATION", screen: "screen-3" }];
 
 			const { componentMap } = setupSubheaderButtonTests({
 				models,
@@ -514,7 +509,7 @@ describe("api.view.content-box", () => {
 
 		describe("sub-header button of type `NAVIGATION` with target `#previous`", () => {
 			it("renders if a previous screen is reachable", () => {
-				const buttons: FormModelHelpers.ButtonDef[] = [{ type: "NAVIGATION", screen: "#previous" }];
+				const buttons: ButtonDef[] = [{ type: "NAVIGATION", screen: "#previous" }];
 
 				const { componentMap } = setupSubheaderButtonTests({
 					models,
@@ -527,7 +522,7 @@ describe("api.view.content-box", () => {
 			});
 
 			it("does not render if no previous screen is reachable", () => {
-				const buttons: FormModelHelpers.ButtonDef[] = [{ type: "NAVIGATION", screen: "#previous" }];
+				const buttons: ButtonDef[] = [{ type: "NAVIGATION", screen: "#previous" }];
 
 				const { componentMap } = setupSubheaderButtonTests({
 					models,
@@ -541,7 +536,7 @@ describe("api.view.content-box", () => {
 
 		describe("sub-header button of type `NAVIGATION` with target `#next`", () => {
 			it("renders if a next screen is reachable", () => {
-				const buttons: FormModelHelpers.ButtonDef[] = [{ type: "NAVIGATION", screen: "#next" }];
+				const buttons: ButtonDef[] = [{ type: "NAVIGATION", screen: "#next" }];
 
 				const { componentMap } = setupSubheaderButtonTests({
 					models,
@@ -554,7 +549,7 @@ describe("api.view.content-box", () => {
 			});
 
 			it("does not render if no next screen is reachable", () => {
-				const buttons: FormModelHelpers.ButtonDef[] = [{ type: "NAVIGATION", screen: "#next" }];
+				const buttons: ButtonDef[] = [{ type: "NAVIGATION", screen: "#next" }];
 
 				const { componentMap } = setupSubheaderButtonTests({
 					models,
@@ -579,7 +574,7 @@ describe("api.view.content-box", () => {
 					}
 				];
 
-				const buttons: FormModelHelpers.ButtonDef[] = [
+				const buttons: ButtonDef[] = [
 					{ type: "NAVIGATION", scope: "HIDDEN_IN_READONLY_MODE" },
 					{ type: "NAVIGATION" }
 				];

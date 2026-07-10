@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -33,10 +33,10 @@
 import { strictEqual } from "node:assert/strict";
 
 import type { EngineStore, Models } from "../../../../../../../back-end/store/index.js";
-import { SetupHelpers } from "../../../../../../utils/setup.js";
 import { setupModelsFixture } from "../../../../../../utils/setupFixture.js";
 import { IDS as ReadonlyIds } from "../../../../../../utils/test-model-helpers/enablement.no-asterisks.js";
 import { IDS } from "../../../../../../utils/test-model-helpers/tooltips.js";
+import { loadModels } from "../../../../../../utils/setup.js";
 
 import { renderStringInput } from "../renderStringInput.js";
 
@@ -103,7 +103,7 @@ export function executeReadonlyOrDisabledTests() {
 
 	describe("and the ui state is disabled", () => {
 		it("renders a component with prop 'label' set to the formatted localized given label with no asterisk", () => {
-			const models = SetupHelpers.loadModels("controls.tooltips");
+			const models = loadModels("controls.tooltips");
 			assertLabel({
 				elementId: IDS.STRING_INPUT,
 				models,

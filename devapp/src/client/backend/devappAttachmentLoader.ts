@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -36,12 +36,9 @@ import {
 	platformAttachmentLoader,
 	RESOURCE_KEYS
 } from "@com.mgmtp.a12.formengine/formengine-core";
-import type { EntityInstancePath } from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
-import type {
-	Localizable,
-	LocalizationTreeMap
-} from "@com.mgmtp.a12.utils/utils-localization/lib/main/index.js";
-import { localizableFromLocalizationTreeMap } from "@com.mgmtp.a12.utils/utils-localization/lib/main/index.js";
+import type { EntityInstancePath } from "@com.mgmtp.a12.kernel/kernel-md-facade";
+import type { Localizable, LocalizationTreeMap } from "@com.mgmtp.a12.utils/utils-localization";
+import { localizableFromLocalizationTreeMap } from "@com.mgmtp.a12.utils/utils-localization";
 
 import { DEVAPP_MODE, sleep } from "../config/mode.js";
 

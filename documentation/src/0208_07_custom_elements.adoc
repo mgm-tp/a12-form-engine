@@ -8,7 +8,7 @@ Dual License
 This source file is part of the mgm A12 Platform and available under
 a choice of two different licenses:
 
-1. Open-Source License – EUPL v1.2
+1. Open-Source License - EUPL v1.2
    You may redistribute and/or modify this file under the terms of the
    European Union Public License, version 1.2 - see https://eupl.eu/.
 
@@ -35,7 +35,7 @@ LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
 
 The FormModelMap provides two special extension points for custom UI with complete own semantics:
 
-* CustomScreenElement: A custom element that can be placed inside a Screen, a Multi Column Section or a Section. It must handle an ID to output a unique HTML ID. Optionally a title, styles, annotations and a height can be passed to the element. 
+* CustomScreenElement: A custom element that can be placed inside a Screen, a Multi Column Section or a Section. It must handle an ID to output a unique HTML ID. Optionally a title, styles, annotations and a height can be passed to the element.
 * CustomCell: A custom element that can only be placed inside of a Row of a ControlGrid. It must handle an ID. Optionally annotations, offset and span can be passed to the element.
 
 Both elements need to be implemented by the consumer. To achieve this, a custom FormModelMap needs to be implemented which provides rendering code for the custom model elements:
@@ -64,4 +64,11 @@ The custom FormModelMap can then be passed via the Config object to the Form Eng
 The Form Engine will render a placeholder component if no custom component for CustomScreenElement or CustomCell is provided in the FormModelMap.
 
 It should be noted that these custom model elements have no predefined behavior. This means that information like the hidden, readonly and disabled status must be retrieved by the custom component itself. There are already API functionalities available to compute this kind of information, as described in <<form-engine_tutorials_rendering_enablements, Enablement of custom Form Model Elements>>.
+====
+
+[NOTE]
+====
+When styling your custom component rendered in place of a CustomScreenElement, its height can also be set using relative units like %, vh, etc.
+
+But you need to consider that using % needs a parent with a defined height, which is not the case for container elements like Sections or MultiColumnSections, as these have no height themselves. Thus, using a % height only works as expected, when placing custom elements as direct child of a Screen.
 ====

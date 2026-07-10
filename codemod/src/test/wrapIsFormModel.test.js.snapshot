@@ -1,0 +1,26 @@
+exports[`codemod.recipes.wrapIsFormModel > wraps isFormModel passed directly to array methods > should migrate wrapIsFormModel.ts correctly 1`] = `
+import { isFormModel } from "@com.mgmtp.a12.formengine/formengine-core";
+declare const models: unknown[];
+declare const model: unknown;
+// Should be wrapped: isFormModel passed directly to array methods
+const found = models.find(v => isFormModel(v));
+const filtered = models.filter(v => isFormModel(v));
+const hasModel = models.some(v => isFormModel(v));
+const allModels = models.every(v => isFormModel(v));
+const index = models.findIndex(v => isFormModel(v));
+models.forEach(v => isFormModel(v));
+const mapped = models.map(v => isFormModel(v));
+const flatMapped = models.flatMap(v => isFormModel(v));
+// Should NOT be wrapped: already called with explicit argument
+const found2 = models.find(m => isFormModel(m));
+const filtered2 = models.filter(m => isFormModel(m, true));
+// Should NOT be wrapped: direct call, not a callback
+if (isFormModel(model)) {
+    console.log("is form model");
+}
+// Should NOT be wrapped: direct call with second parameter
+if (isFormModel(model, true)) {
+    console.log("is form model ignoring runtime");
+}
+
+`;

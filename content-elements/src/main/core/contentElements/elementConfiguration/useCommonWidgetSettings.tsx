@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -32,9 +32,9 @@
 
 import { useContext } from "react";
 
-import { MessageTransformers } from "@com.mgmtp.a12.client/client-data/lib/data-mutation/validation-computation/messageTransformers.js";
-import type { Message } from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
-import type { Localizable } from "@com.mgmtp.a12.utils/utils-localization/lib/main/index.js";
+import { MessageTransformers } from "@com.mgmtp.a12.client/client-data";
+import type { Message } from "@com.mgmtp.a12.kernel/kernel-md-facade";
+import type { Localizable } from "@com.mgmtp.a12.utils/utils-localization";
 
 import type { BaseControlSettings } from "../../types/controlSettings.js";
 import type { BaseWidgetSettings } from "../../types/widgetSettings.js";
@@ -43,7 +43,7 @@ import { ComponentMapContext } from "../componentMap/componentMapContext.js";
 import { UiId } from "../generateUiId.js";
 import { messageHtmlId } from "../messageHtmlId.js";
 
-// TODO: internal? => currently used in EEP
+/** @internal */
 export const USE_COMMON_WIDGET_SETTINGS_WRAPPER = {
 	useCommonWidgetSettings
 };

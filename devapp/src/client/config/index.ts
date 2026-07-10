@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -35,18 +35,18 @@
  *
  * Configures configuration and services.
  */
+import type { LogLevel } from "@com.mgmtp.a12.utils/utils-logging";
 import { ConsoleLoggingStrategy, Settings } from "@com.mgmtp.a12.utils/utils-logging";
-import { LogLevel } from "@com.mgmtp.a12.utils/utils-logging/api.js";
 
 class DynamicConsoleLoggingStrategy extends ConsoleLoggingStrategy {
 	private static LocalStorageKey = "logLevel";
 
 	private static LogLevelMap: { readonly [key: string]: LogLevel | undefined } = {
-		TRACE: LogLevel.TRACE,
-		LOG: LogLevel.LOG,
-		INFO: LogLevel.INFO,
-		WARN: LogLevel.WARN,
-		ERROR: LogLevel.ERROR
+		TRACE: "trace",
+		LOG: "log",
+		INFO: "info",
+		WARN: "warn",
+		ERROR: "error"
 	};
 
 	private static getLogLevel(): LogLevel | undefined {
@@ -56,7 +56,7 @@ class DynamicConsoleLoggingStrategy extends ConsoleLoggingStrategy {
 
 	constructor() {
 		const logLevel = DynamicConsoleLoggingStrategy.getLogLevel();
-		super(console, logLevel || LogLevel.WARN);
+		super(console, logLevel ?? "warn");
 	}
 
 	digest(

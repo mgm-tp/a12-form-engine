@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -45,8 +45,8 @@ import type { PickerWrapperProps } from "../elementFragments/pickerWrapper.js";
 import type { SuffixProps } from "../elementFragments/suffix.js";
 import type { TooltipsProps } from "../elementFragments/tooltips.js";
 import type { ValidationMessagesProps } from "../elementFragments/validationMessages.js";
-import { type MessageListProps } from "../modules/messageGroupDisplay/messageList.js";
-import { type MessageListItemProps } from "../modules/messageGroupDisplay/messageListItem.js";
+import type { MessageListProps } from "../modules/messageGroupDisplay/messageList.js";
+import type { MessageListItemProps } from "../modules/messageGroupDisplay/messageListItem.js";
 
 /** @internal */
 export interface ComponentMap {

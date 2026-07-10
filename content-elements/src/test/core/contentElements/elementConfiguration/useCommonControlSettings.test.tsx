@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -37,29 +37,24 @@ import { renderHook } from "@testing-library/react";
 import type { PropsWithChildren } from "react";
 import { Provider } from "react-redux";
 
-import { ModelPath } from "@com.mgmtp.a12.base/base-model-api/lib/main/model/index.js";
+import { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
 import { DocumentPath } from "@com.mgmtp.a12.client/client-data";
 import {
 	ContentEngineContextProvider,
 	DocumentContext,
 	DocumentPathContextProvider
 } from "@com.mgmtp.a12.contentengine/contentengine-core";
-import type {
-	DocumentModel,
-	EntityInstancePath,
-	Message
-} from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
-import { LocalizerContext } from "@com.mgmtp.a12.utils/utils-localization-react/lib/main/index.js";
-import type { ValueConversionConfig } from "@com.mgmtp.a12.utils/utils-localization/lib/main/index.js";
+import type { DocumentModel } from "@com.mgmtp.a12.kernel/kernel-md-facade";
+import type { ValueConversionConfig } from "@com.mgmtp.a12.utils/utils-localization";
+import type { LocalizerContextProps } from "@com.mgmtp.a12.utils/utils-localization-react";
+import { LocalizerContext } from "@com.mgmtp.a12.utils/utils-localization-react";
 
 import type {
 	DynamicAmountSuffix,
 	StaticAmountSuffix
 } from "../../../../main/core/configuration/formElementConfig.js";
-import {
-	GET_LOCALIZED_MODEL_TEXTS_WRAPPER,
-	type LocalizedModelTexts
-} from "../../../../main/core/contentElements/elementConfiguration/getLocalizedModelTexts.js";
+import { GET_LOCALIZED_MODEL_TEXTS_WRAPPER } from "../../../../main/core/contentElements/elementConfiguration/getLocalizedModelTexts.js";
+import type { LocalizedModelTexts } from "../../../../main/core/contentElements/elementConfiguration/getLocalizedModelTexts.js";
 import { USE_COMMON_CONTROL_SETTINGS_WRAPPER } from "../../../../main/core/contentElements/elementConfiguration/useCommonControlSettings.js";
 import { TEXT_LINE_TYPE } from "../../../../main/core/contentElements/modules/textLine/textLineNode.js";
 import type {
@@ -74,6 +69,7 @@ import {
 } from "../../../../main/core/index.js";
 import { assertCalledWith } from "../../../assertions.js";
 import { mockDocumentContext } from "../../../mocks/mockDocumentContext.js";
+import { getMockMessage } from "../../../mocks/mockError.js";
 import { mockStore } from "../../../mocks/mockStore.js";
 
 function setupMocks(localizedTexts?: LocalizedModelTexts) {
@@ -519,16 +515,21 @@ describe("core.contentElements.elementConfiguration", () => {
 				const getUngroupedValidationMessages = mock.fn(() => []);
 
 				const allMessages = [
-					getMockError(DocumentPath.fromString("/root[1]/group[1]/element[1]"), [
-						DocumentPath.fromString("/root[1]/group[1]/element[1]")
-					]),
-					getMockError(DocumentPath.fromString("/root[1]/group[1]/otherElement[1]"), [
-						DocumentPath.fromString("/root[1]/group[1]/element[1]"),
-						DocumentPath.fromString("/root[1]/group[1]/otherElement[1]")
-					]),
-					getMockError(DocumentPath.fromString("/root[1]/group[1]/otherElement[1]"), [
-						DocumentPath.fromString("/root[1]/group[1]/otherElement[1]")
-					])
+					getMockMessage({
+						entityInstance: DocumentPath.fromString("/root[1]/group[1]/element[1]"),
+						referencedFields: [DocumentPath.fromString("/root[1]/group[1]/element[1]")]
+					}),
+					getMockMessage({
+						entityInstance: DocumentPath.fromString("/root[1]/group[1]/otherElement[1]"),
+						referencedFields: [
+							DocumentPath.fromString("/root[1]/group[1]/element[1]"),
+							DocumentPath.fromString("/root[1]/group[1]/otherElement[1]")
+						]
+					}),
+					getMockMessage({
+						entityInstance: DocumentPath.fromString("/root[1]/group[1]/otherElement[1]"),
+						referencedFields: [DocumentPath.fromString("/root[1]/group[1]/otherElement[1]")]
+					})
 				];
 
 				renderHook(
@@ -556,14 +557,16 @@ describe("core.contentElements.elementConfiguration", () => {
 				setupMocks();
 
 				const groupedValidationMessages = [
-					getMockError(DocumentPath.fromString("/root[1]/field1[1]"), [
-						DocumentPath.fromString("/root[1]/field1[1]")
-					])
+					getMockMessage({
+						entityInstance: DocumentPath.fromString("/root[1]/field1[1]"),
+						referencedFields: [DocumentPath.fromString("/root[1]/field1[1]")]
+					})
 				];
 				const ungroupedValidationMessages = [
-					getMockError(DocumentPath.fromString("/root[1]/field2[1]"), [
-						DocumentPath.fromString("/root[1]/field2[1]")
-					])
+					getMockMessage({
+						entityInstance: DocumentPath.fromString("/root[1]/field2[1]"),
+						referencedFields: [DocumentPath.fromString("/root[1]/field2[1]")]
+					})
 				];
 
 				const { result } = renderHook(
@@ -597,25 +600,9 @@ function getMockNode(controlProps?: Partial<BaseControlProps>) {
 	};
 }
 
-function getMockError(
-	entityInstance: EntityInstancePath,
-	referencedFields: EntityInstancePath[]
-): Message {
-	return {
-		errorCode: "",
-		errorText: [],
-		severity: "ERROR",
-		messageType: "VALUE_ERROR",
-		entityInstance,
-		referencedFields,
-		rulePath: "/test/rule",
-		refOmissionErrorResponsible: []
-	};
-}
-
 function createWrapper(options?: {
 	dataContext?: string;
-	localizerContext?: LocalizerContext.Type;
+	localizerContext?: LocalizerContextProps;
 	contentModelName?: string;
 	formElementConfig?: Partial<FormElementConfig>;
 	documentContext?: {
@@ -637,7 +624,6 @@ function createWrapper(options?: {
 
 	const defaultMessageFilter: MessageGroupFilter = {
 		id: "test-message-group",
-		editableElements: [],
 		getGroupedValidationMessages: () => [],
 		getUngroupedValidationMessages: () => []
 	};

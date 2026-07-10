@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -33,16 +33,19 @@
 import type { JSX } from "react";
 import { useContext } from "react";
 
-import { ModelPath } from "@com.mgmtp.a12.base/base-model-api/lib/main/model/index.js";
-import { LocalizerContext } from "@com.mgmtp.a12.utils/utils-localization-react/lib/main/index.js";
-import { localizableFromLocalizationTreeMap } from "@com.mgmtp.a12.utils/utils-localization/lib/main/index.js";
+import { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
+import { localizableFromLocalizationTreeMap } from "@com.mgmtp.a12.utils/utils-localization";
+import { LocalizerContext } from "@com.mgmtp.a12.utils/utils-localization-react";
 
 import {
 	DEFAULT_TRANSLATIONS,
 	RESOURCE_KEYS
 } from "../../../../../../back-end/localization/index.js";
 import { UiStateSelectors } from "../../../../../../back-end/store/internal/selectors/ui-state.js";
-import { FormModel } from "../../../../../../models/index.js";
+import {
+	isFormModelControl,
+	isFormModelEmbeddedRepeat
+} from "../../../../../../models/internal/FormModelGuards.js";
 import { ComponentMapContext } from "../../../../configuration/componentMap/component-map-context.js";
 import { WidgetMapContext } from "../../../../configuration/widget-map-context.js";
 
@@ -64,14 +67,12 @@ export function ErrorHint(props: RowActionButtonsProps): JSX.Element | null {
 
 	const repeat = props.repeat;
 
-	if (FormModel.EmbeddedRepeat.isInstance(repeat)) {
+	if (isFormModelEmbeddedRepeat(repeat)) {
 		const filtered = repeat.multiFileUpload
 			? errorMessagesForElement
 			: errorMessagesForElement.filter(e =>
 					repeat.controlGrid.row?.some(r =>
-						r.cell?.some(
-							c => FormModel.Control.isInstance(c) && ModelPath.equal(e.element, c.elementPath)
-						)
+						r.cell?.some(c => isFormModelControl(c) && ModelPath.equal(e.element, c.elementPath))
 					)
 				);
 

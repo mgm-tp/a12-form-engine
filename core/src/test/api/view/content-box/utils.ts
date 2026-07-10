@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -32,19 +32,19 @@
 
 import type { EngineStore, Models } from "../../../../back-end/store/index.js";
 import { getNullMock } from "../../../rtl-utils/mock-utils.js";
-import { DocumentHelpers } from "../../../utils/document-helpers.js";
-import { FormModelHelpers, ModelHelpers } from "../../../utils/model-helpers.js";
-import { SetupHelpers } from "../../../utils/setup.js";
-
-const { setupContentBoxRendererWithRtl } = SetupHelpers;
+import { createDocumentPath } from "../../../utils/createDocumentPath.js";
+import { createModelPath } from "../../../utils/createModelPath.js";
+import { createFormModel } from "../../../utils/FormModelHelpers.js";
+import type { ButtonDef, ButtonsDef } from "../../../utils/FormModelHelpers.js";
+import { setupContentBoxRendererWithRtl } from "../../../utils/setup.js";
 
 type SetupProps = {
 	readonly models: Models;
 	readonly buttons?: {
-		readonly subHeader?: FormModelHelpers.ButtonsDef;
-		readonly footer?: FormModelHelpers.ButtonsDef;
-		readonly screenSubHeader?: FormModelHelpers.ButtonsDef;
-		readonly screenFooter?: FormModelHelpers.ButtonsDef;
+		readonly subHeader?: ButtonsDef;
+		readonly footer?: ButtonsDef;
+		readonly screenSubHeader?: ButtonsDef;
+		readonly screenFooter?: ButtonsDef;
 	};
 	readonly isReadonly?: boolean;
 	readonly isDisabled?: boolean;
@@ -53,7 +53,7 @@ type SetupProps = {
 };
 
 type AllButtonSetup = Omit<SetupProps, "buttons"> & {
-	readonly buttons?: ReadonlyArray<FormModelHelpers.ButtonDef>;
+	readonly buttons?: ReadonlyArray<ButtonDef>;
 };
 
 export function setupFooterButtonTests({ buttons, ...rest }: AllButtonSetup) {
@@ -87,15 +87,15 @@ export function setupForButtonTests({
 	return setupContentBoxRendererWithRtl({
 		models: {
 			...models,
-			formModel: FormModelHelpers.createFormModel(models.formModel, buttons ?? {})
+			formModel: createFormModel(models.formModel, buttons ?? {})
 		},
 		ui: {
 			readonly: isReadonly,
 			disabled: isDisabled,
 			screenLocation: locationStack ?? [
 				{
-					path: DocumentHelpers.createDocumentPath(),
-					locationPath: ModelHelpers.createModelPath(screenName ?? "Screen1")
+					path: createDocumentPath(),
+					locationPath: createModelPath(screenName ?? "Screen1")
 				}
 			]
 		},

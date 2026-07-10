@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -33,7 +33,7 @@
 import { deepStrictEqual, ok, strictEqual } from "node:assert/strict";
 
 import { query, within } from "@com.mgmtp.a12.devtools/react";
-import type { LayoutGridProps } from "@com.mgmtp.a12.widgets/widgets-core/lib/layout/layout-grid/main/layout-grid.api.js";
+import type { LayoutGridProps } from "@com.mgmtp.a12.widgets/widgets-core";
 
 import type { Models } from "../../../../back-end/store/index.js";
 import { DefaultWidgetMap } from "../../../../view/index.js";
@@ -43,7 +43,7 @@ import type { RtlRenderWrapper } from "../../../rtl-utils/render-wrapper.js";
 import { assertExists } from "../../../utils/assertions.js";
 import type { Context } from "../../../utils/rtl-render-group.js";
 import { RenderGroupFixture } from "../../../utils/rtl-render-group.js";
-import { SetupHelpers } from "../../../utils/setup.js";
+import { loadModels, setupFormEngineRendererWithRtlAsync } from "../../../utils/setup.js";
 import { setupModelsFixture } from "../../../utils/setupFixture.js";
 import { IDS as TitleIds } from "../../../utils/test-model-helpers/aria-level.js";
 import { IDS } from "../../../utils/test-model-helpers/control-grid.js";
@@ -60,7 +60,7 @@ describe("api.view.layout", () => {
 			const models = setupModelsFixture("container", "container-visibility");
 
 			it("statically empty", async () => {
-				const wrapper = await SetupHelpers.setupFormEngineRendererWithRtlAsync({ models });
+				const wrapper = await setupFormEngineRendererWithRtlAsync({ models });
 				const controlGrid = within(wrapper.baseElement).queryByText(
 					"Control Grid should never be shown!"
 				);
@@ -69,13 +69,13 @@ describe("api.view.layout", () => {
 
 			const textToSearch = "Control Grid should not be shown if boolean field = true";
 			it("dependent child visible", async () => {
-				const wrapper = await SetupHelpers.setupFormEngineRendererWithRtlAsync({ models });
+				const wrapper = await setupFormEngineRendererWithRtlAsync({ models });
 				const controlGrid = within(wrapper.baseElement).queryByText(textToSearch);
 				ok(controlGrid);
 			});
 
 			it("dependent child hidden", async () => {
-				const wrapper = await SetupHelpers.setupFormEngineRendererWithRtlAsync({
+				const wrapper = await setupFormEngineRendererWithRtlAsync({
 					models,
 					data: { document: { rootGroup: { booleanField: true } } }
 				});
@@ -90,7 +90,7 @@ describe("api.view.layout", () => {
 
 		function RenderGroupFixtureForModels(models: Models): Context<RenderResult> {
 			return RenderGroupFixture<RenderResult>(async () => {
-				const wrapper = await SetupHelpers.setupFormEngineRendererWithRtlAsync({
+				const wrapper = await setupFormEngineRendererWithRtlAsync({
 					withWidgets: true,
 					config: {
 						widgetMap: mockFunctions(DefaultWidgetMap)
@@ -99,7 +99,7 @@ describe("api.view.layout", () => {
 				});
 
 				const colPropsById = (id: string) =>
-					query(wrapper.widgetMap.SizeContainerColumn).withId(id).props();
+					query(wrapper.widgetMap.LayoutGridColumn).withId(id).props();
 
 				return {
 					...wrapper,
@@ -195,7 +195,7 @@ describe("api.view.layout", () => {
 
 				function propsByCol(col: HTMLElement) {
 					return col.id
-						? query(render.wrapper.widgetMap.SizeContainerColumn).withId(col.id).props()
+						? query(render.wrapper.widgetMap.LayoutGridColumn).withId(col.id).props()
 						: undefined;
 				}
 			}
@@ -561,7 +561,7 @@ describe("api.view.layout", () => {
 			const models = setupModelsFixture("container", "controlgrid");
 
 			function setup(screenName?: string) {
-				return SetupHelpers.setupFormEngineRendererWithRtlAsync({
+				return setupFormEngineRendererWithRtlAsync({
 					models,
 					ui: screenName
 						? {
@@ -583,7 +583,7 @@ describe("api.view.layout", () => {
 					controlGridId: string,
 					alignment: "top" | "middle" | "bottom"
 				): Promise<void> {
-					const grid = query(render.wrapper.widgetMap.SizeContainer).withId(controlGridId).props();
+					const grid = query(render.wrapper.widgetMap.LayoutGrid).withId(controlGridId).props();
 					strictEqual(grid.verticalAlignment, alignment);
 				}
 
@@ -609,9 +609,7 @@ describe("api.view.layout", () => {
 
 		describe("title", () => {
 			describe("label", () => {
-				const { it, render } = RenderGroupFixtureForModels(
-					SetupHelpers.loadModels("a11y", "aria-level")
-				);
+				const { it, render } = RenderGroupFixtureForModels(loadModels("a11y", "aria-level"));
 				describe("with a multilingual label defined in the model", () => {
 					it("renders a title", () => {
 						const headline = within(render.wrapper.baseElement).getByTestId(
@@ -635,7 +633,7 @@ describe("api.view.layout", () => {
 			describe("with an expression label defined in the model", () => {
 				const expressionLabelModels = setupModelsFixture("localization", "expression-label");
 				it("renders a title", async () => {
-					const wrapper = await SetupHelpers.setupFormEngineRendererWithRtlAsync({
+					const wrapper = await setupFormEngineRendererWithRtlAsync({
 						models: expressionLabelModels,
 						data: { document: expressionLabelDocument }
 					});
@@ -648,7 +646,7 @@ describe("api.view.layout", () => {
 				});
 
 				it("renders a formatted title if the expression contained markdown formatting", async () => {
-					const wrapper = await SetupHelpers.setupFormEngineRendererWithRtlAsync({
+					const wrapper = await setupFormEngineRendererWithRtlAsync({
 						models: expressionLabelModels,
 						data: { document: expressionLabelDocument },
 						ui: formattedExpressionUiState

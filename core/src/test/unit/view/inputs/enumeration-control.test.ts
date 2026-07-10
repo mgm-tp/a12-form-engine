@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -32,24 +32,24 @@
 
 import { deepStrictEqual, fail } from "node:assert/strict";
 
-import { ModelPath } from "@com.mgmtp.a12.base/base-model-api/lib/main/model/index.js";
-import type { Locale } from "@com.mgmtp.a12.utils/utils-localization/lib/main/index.js";
-import { defaultLocalizerFactory } from "@com.mgmtp.a12.utils/utils-localization/lib/main/index.js";
+import { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
+import type { Locale } from "@com.mgmtp.a12.utils/utils-localization";
+import { defaultLocalizerFactory } from "@com.mgmtp.a12.utils/utils-localization";
 
 import type { Models } from "../../../../back-end/store/internal/store.js";
-import { DocumentModelUtils } from "../../../../models/internal/utils/document-model-utils.js";
+import * as DocumentModelUtils from "../../../../models/internal/utils/document-model-utils.js";
 import type { EnumerationValue } from "../../../../view/index.js";
 import * as EnumValues from "../../../../view/internal/utilities/enumerable/localizeAndFilterEnumerationValues.js";
 import { DE_LOCALE, US_LOCALE } from "../../../utils/localization.js";
-import { ModelHelpers } from "../../../utils/model-helpers.js";
-import { SetupHelpers } from "../../../utils/setup.js";
+import { setupRenderConfiguration } from "../../../utils/setup.js";
 import { setupModelsFixture } from "../../../utils/setupFixture.js";
+import { createModelPath } from "../../../utils/createModelPath.js";
 
 import { externalEnumerationProvider } from "../configurable_externalenumeration.js";
 
 describe("unit.view.inputs", () => {
 	describe("localizeAndFilterEnumerationValues", () => {
-		const picusTypeModels: Models = setupModelsFixture("controls.picustypes");
+		const dmTypeModels: Models = setupModelsFixture("controls.dmtypes");
 		const dependentEnumerationModels: Models = setupModelsFixture("dependencies.enumeration");
 
 		executeTestSuiteForLanguage(US_LOCALE);
@@ -60,10 +60,7 @@ describe("unit.view.inputs", () => {
 				describe("given the path to an enumeration field", () => {
 					describe("for which no dependent enumeration is set", () => {
 						it("returns a list of all enumeration values containing the key and the localized label", () => {
-							const pathToEnumerationField = ModelHelpers.createModelPath(
-								"A12T_DependentEnumeration",
-								"Model"
-							);
+							const pathToEnumerationField = createModelPath("A12T_DependentEnumeration", "Model");
 
 							const expectedValues: EnumerationValue[] =
 								locale.language === "en"
@@ -96,10 +93,7 @@ describe("unit.view.inputs", () => {
 
 					describe("for which a dependent enumeration is set", () => {
 						it("returns a list of only the enumeration values matching the condition containing the key and the localized label", () => {
-							const pathToEnumerationField = ModelHelpers.createModelPath(
-								"A12T_DependentEnumeration",
-								"Model"
-							);
+							const pathToEnumerationField = createModelPath("A12T_DependentEnumeration", "Model");
 							const expectedValues: EnumerationValue[] =
 								locale.language === "en"
 									? [
@@ -123,8 +117,8 @@ describe("unit.view.inputs", () => {
 
 					describe("for which alphabetical sorting is not set", () => {
 						it("returns a list of all enumeration values containing the key and the localized label which is not sorted", () => {
-							const pathToEnumerationField = ModelHelpers.createModelPath(
-								"A12T_PicusTypes",
+							const pathToEnumerationField = createModelPath(
+								"A12T_DmTypes",
 								"Enumeration",
 								"Enumeration011"
 							);
@@ -147,7 +141,7 @@ describe("unit.view.inputs", () => {
 							executeTestForEnumerationField({
 								expectedValues,
 								pathToEnumerationField,
-								models: picusTypeModels,
+								models: dmTypeModels,
 								locale
 							});
 						});
@@ -155,8 +149,8 @@ describe("unit.view.inputs", () => {
 
 					describe("for which alphabetical sorting is set", () => {
 						it("returns a list of all enumeration values containing the key and the localized label sorted by the label", () => {
-							const pathToEnumerationField = ModelHelpers.createModelPath(
-								"A12T_PicusTypes",
+							const pathToEnumerationField = createModelPath(
+								"A12T_DmTypes",
 								"Enumeration",
 								"AlphabeticalSorting",
 								"Enumeration01"
@@ -179,7 +173,7 @@ describe("unit.view.inputs", () => {
 							executeTestForEnumerationField({
 								expectedValues,
 								pathToEnumerationField,
-								models: picusTypeModels,
+								models: dmTypeModels,
 								locale
 							});
 						});
@@ -189,8 +183,8 @@ describe("unit.view.inputs", () => {
 				describe("given a path to a string field for which an external enumeration is defined", () => {
 					describe("for which alphabetical sorting is not set", () => {
 						it("returns a list of all enumeration values containing the key and the localized label which is not sorted", () => {
-							const pathToEnumerationField = ModelHelpers.createModelPath(
-								"A12T_PicusTypes",
+							const pathToEnumerationField = createModelPath(
+								"A12T_DmTypes",
 								"Enumeration",
 								"Enumeration05"
 							);
@@ -213,7 +207,7 @@ describe("unit.view.inputs", () => {
 							executeTestForExternalEnumerationField({
 								expectedValues,
 								pathToEnumerationField,
-								models: picusTypeModels,
+								models: dmTypeModels,
 								locale
 							});
 						});
@@ -221,8 +215,8 @@ describe("unit.view.inputs", () => {
 
 					describe("for which alphabetical sorting is set", () => {
 						it("returns a list of all enumeration values containing the key and the localized label sorted by the label", () => {
-							const pathToEnumerationField = ModelHelpers.createModelPath(
-								"A12T_PicusTypes",
+							const pathToEnumerationField = createModelPath(
+								"A12T_DmTypes",
 								"Enumeration",
 								"AlphabeticalSorting",
 								"Enumeration05"
@@ -245,7 +239,7 @@ describe("unit.view.inputs", () => {
 							executeTestForExternalEnumerationField({
 								expectedValues,
 								pathToEnumerationField,
-								models: picusTypeModels,
+								models: dmTypeModels,
 								locale
 							});
 						});
@@ -264,7 +258,7 @@ describe("unit.view.inputs", () => {
 
 		function executeTestForEnumerationField(options: TestOptions): void {
 			const { models, pathToEnumerationField, expectedValues, locale, document } = options;
-			const renderConfiguration = SetupHelpers.setupRenderConfiguration({
+			const renderConfiguration = setupRenderConfiguration({
 				models,
 				locale,
 				data: document ? { document } : undefined
@@ -296,7 +290,7 @@ describe("unit.view.inputs", () => {
 
 		function executeTestForExternalEnumerationField(options: TestOptions): void {
 			const { models, pathToEnumerationField, expectedValues, locale, document } = options;
-			const renderConfiguration = SetupHelpers.setupRenderConfiguration({
+			const renderConfiguration = setupRenderConfiguration({
 				models,
 				locale,
 				data: document ? { document } : undefined,

@@ -1,6 +1,6 @@
 {
   "name": "@com.mgmtp.a12.formengine/formengine-content-elements-editor",
-  "version": "38.5.0-SNAPSHOT",
+  "version": "39.0.0",
   "description": "Experimental content editor code for form content elements",
   "author": "mgm technology partners",
   "license": "(EUPL-1.2 OR LicenseRef-commercial)",
@@ -10,8 +10,11 @@
     "clean": "rimraf ./lib ./target cyclonedx.json",
     "build": "node --run compile && pnpm \"/^validate:.+/\"",
     "compile": "pnpm run \"/^compile:.*/\"",
+    "lint": "eslint --flag unstable_native_nodejs_ts_config . --cache",
+    "lint:fix": "node --run lint -- --fix",
+    "lint:onlyErrors": "node --run lint -- --quiet",
     "test": "mocha",
-    "compile:cycle-detection": "devtools detect-cycles \"./src/**/*.@(ts|tsx)\" --ignore-type-imports",
+    "compile:cycle-detection": "devtools detect-cycles \"./src/**/*.@(ts|tsx|d.ts|d.cts|d.mts)\" --ignore-type-imports",
     "compile:typescript": "tsc",
     "compile:svg": "cpy \"src/**/*.svg\" lib --cwd=. --parents",
     "validate:tsc": "devtools verify-ts-compat ./tsconfig.lib.json -p",
@@ -20,7 +23,7 @@
     "watch": "tsc --project ./tsconfig.dev.json --watch"
   },
   "dependencies": {
-    "typescript-fsa": "catalog:"
+    "@com.mgmtp.a12.client/typescript-fsa-redux-5-compat": "catalog:a12ranges"
   },
   "devDependencies": {
     "@com.mgmtp.a12.base/base-model-api": "catalog:a12",
@@ -31,8 +34,6 @@
     "@com.mgmtp.a12.contentengine/contentengine-editor": "catalog:a12",
     "@com.mgmtp.a12.devtools/build-tools": "catalog:a12",
     "@com.mgmtp.a12.devtools/tsconfig": "catalog:a12",
-    "@com.mgmtp.a12.devtools/eslint-config": "catalog:a12",
-    "@com.mgmtp.a12.devtools/prettier-config": "catalog:a12",
     "@com.mgmtp.a12.formengine/formengine-content-elements": "workspace:*",
     "@com.mgmtp.a12.kernel/kernel-core-runtime-api-ts": "catalog:a12",
     "@com.mgmtp.a12.kernel/kernel-md-facade": "catalog:a12",
@@ -43,8 +44,8 @@
     "@microsoft/api-extractor": "catalog:",
     "@types/mocha": "catalog:",
     "@types/react": "catalog:",
-    "@types/react-redux": "catalog:",
     "cpy-cli": "catalog:",
+    "eslint": "catalog:",
     "mocha": "catalog:",
     "react": "catalog:",
     "react-dnd": "catalog:",
@@ -78,6 +79,5 @@
     "THIRD_PARTY_NOTICES",
     "licenses"
   ],
-  "main": "./lib/index.js",
-  "types": "./lib/index.d.ts"
+  "exports": "./lib/index.js"
 }

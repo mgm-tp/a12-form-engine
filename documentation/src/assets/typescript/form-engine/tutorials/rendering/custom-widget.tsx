@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -35,15 +35,14 @@
 import type { JSX } from "react";
 import { createContext, useContext } from "react";
 
-import type { FormModelMap, WidgetMap } from "@com.mgmtp.a12.formengine/formengine-core";
 import {
-	FormModel,
 	DefaultFormModelMap,
-	DefaultWidgetMap
+	DefaultWidgetMap,
+	isFormModelControl
 } from "@com.mgmtp.a12.formengine/formengine-core";
-import { Button } from "@com.mgmtp.a12.widgets/widgets-core/lib/button/main/button.view.js";
-import { Icon } from "@com.mgmtp.a12.widgets/widgets-core/lib/icon/main/icon.view.js";
-import type { TextLineStatelessProps } from "@com.mgmtp.a12.widgets/widgets-core/lib/input/text-line/main/template/text-line.tpl.api.js";
+import type { FormModel, FormModelMap, WidgetMap } from "@com.mgmtp.a12.formengine/formengine-core";
+import { Button, Icon } from "@com.mgmtp.a12.widgets/widgets-core";
+import type { TextFieldProps } from "@com.mgmtp.a12.widgets/widgets-core";
 
 const CustomInputContext = createContext<{
 	formModelElement?: FormModel.Control | FormModel.BasicScreenElement;
@@ -51,15 +50,15 @@ const CustomInputContext = createContext<{
 
 export const CustomWidgetMap: WidgetMap = {
 	...DefaultWidgetMap,
-	TextLineStateless: (props: TextLineStatelessProps) => {
+	TextField: (props: TextFieldProps) => {
 		const customInputContext = useContext(CustomInputContext);
 		const element = customInputContext.formModelElement;
 		if (
 			element === undefined ||
-			!FormModel.Control.isInstance(element) ||
+			!isFormModelControl(element) ||
 			element.annotations === undefined
 		) {
-			return <DefaultWidgetMap.TextLineStateless {...props} />;
+			return <DefaultWidgetMap.TextField {...props} />;
 		}
 
 		const annotation = element.annotations[0];
@@ -67,7 +66,7 @@ export const CustomWidgetMap: WidgetMap = {
 			return <TextLineWithButton {...props} />;
 		}
 
-		return <DefaultWidgetMap.TextLineStateless {...props} />;
+		return <DefaultWidgetMap.TextField {...props} />;
 	}
 };
 
@@ -90,9 +89,9 @@ export const FormModelMapForWidgetMap: FormModelMap = {
 	}
 };
 
-function TextLineWithButton(props: TextLineStatelessProps): JSX.Element {
+function TextLineWithButton(props: TextFieldProps): JSX.Element {
 	return (
-		<DefaultWidgetMap.TextLineStateless
+		<DefaultWidgetMap.TextField
 			{...props}
 			addonAfter={
 				<>

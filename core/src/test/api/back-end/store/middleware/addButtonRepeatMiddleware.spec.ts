@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -32,24 +32,22 @@
 
 import { deepStrictEqual } from "node:assert/strict";
 
-import type { Store } from "redux";
-import type { Action, AnyAction } from "typescript-fsa";
+import type { Action as ReduxAction, Store } from "redux";
 
-import { ModelPath } from "@com.mgmtp.a12.base/base-model-api/lib/main/model/index.js";
-import type { GroupInstance } from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
+import { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
+import type { Action } from "@com.mgmtp.a12.client/typescript-fsa-redux-5-compat";
+import type { GroupInstance } from "@com.mgmtp.a12.kernel/kernel-md-facade";
 
 import type { EngineState } from "../../../../../back-end/store/index.js";
 import { Commands, Events } from "../../../../../back-end/store/index.js";
 import type { EngineStore, Models } from "../../../../../back-end/store/internal/store.js";
-import { MiddlewareHelpers } from "../../../../utils/back-end-helpers.js";
-import { DocumentHelpers } from "../../../../utils/document-helpers.js";
-import { ModelHelpers } from "../../../../utils/model-helpers.js";
-import { SetupHelpers } from "../../../../utils/setup.js";
+import { createDocumentPath } from "../../../../utils/createDocumentPath.js";
+import { createModelPath } from "../../../../utils/createModelPath.js";
+import { MiddlewareHelpers } from "../../../../utils/MiddlewareHelpers.js";
+import { createTestStore, loadData } from "../../../../utils/setup.js";
 import { setupFixture, setupModelsFixture } from "../../../../utils/setupFixture.js";
 import { DOCUMENT_MODEL, FORM_MODEL } from "../../../../utils/test-model-helpers/repeat.add.js";
 import { createValidationEntry } from "../../../../utils/validation.js";
-
-const { createTestStore } = SetupHelpers;
 
 describe("api.back-end.store.middleware", () => {
 	describe("addButtonRepeatMiddleware", () => {
@@ -57,7 +55,7 @@ describe("api.back-end.store.middleware", () => {
 			const middlewareSpy = setupFixture(() => MiddlewareHelpers.createMiddlewareSpy());
 			const models = setupModelsFixture("repeat.add");
 			const dataFixture = setupFixture(() => ({
-				data: SetupHelpers.loadData("repeat.add", "data", models.documentModel)
+				data: loadData("repeat.add", "data", models.documentModel)
 			}));
 
 			describe("if the payload contains a form-model path to an inline repeat", () => {
@@ -117,12 +115,10 @@ describe("api.back-end.store.middleware", () => {
 
 						const screenLocation: EngineStore.ScreenState = {
 							path: [],
-							locationPath: ModelHelpers.createModelPath("DetachedRepeat"),
+							locationPath: createModelPath("DetachedRepeat"),
 							repeatInstanceState: {
-								[ModelPath.toString(
-									ModelHelpers.createModelPath("DetachedRepeat", "embedded-repeat")
-								)]: {
-									expandedRowPath: DocumentHelpers.createDocumentPath(["repPageSize", 1]),
+								[ModelPath.toString(createModelPath("DetachedRepeat", "embedded-repeat"))]: {
+									expandedRowPath: createDocumentPath(["repPageSize", 1]),
 									page: 1
 								}
 							}
@@ -140,10 +136,7 @@ describe("api.back-end.store.middleware", () => {
 
 						const expectedAction = Commands.changeRepeatInstanceStateEntry({
 							locationPath: screenLocation.locationPath,
-							repeatFormModelPath: ModelHelpers.createModelPath(
-								"DetachedRepeat",
-								"embedded-repeat"
-							),
+							repeatFormModelPath: createModelPath("DetachedRepeat", "embedded-repeat"),
 							entry: {
 								expandedRowPath: undefined,
 								page: 1
@@ -153,10 +146,10 @@ describe("api.back-end.store.middleware", () => {
 						const actualActions = middlewareSpy.spy.mock.calls.map(c => c.arguments[0]);
 						const actualAction = actualActions.find(
 							a =>
-								a.payload.repeatFormModelPath &&
+								Commands.changeRepeatInstanceStateEntry.match(a) &&
 								ModelPath.equal(
 									a.payload.repeatFormModelPath,
-									ModelHelpers.createModelPath("DetachedRepeat", "embedded-repeat")
+									createModelPath("DetachedRepeat", "embedded-repeat")
 								)
 						);
 
@@ -169,9 +162,7 @@ describe("api.back-end.store.middleware", () => {
 						const modelPath = FORM_MODEL.DR.withNestedRepeats;
 						const store = setupStore({
 							models,
-							screenLocation: [
-								{ locationPath: ModelHelpers.createModelPath("DetachedRepeat"), path: [] }
-							],
+							screenLocation: [{ locationPath: createModelPath("DetachedRepeat"), path: [] }],
 							data: {}
 						});
 
@@ -207,19 +198,11 @@ describe("api.back-end.store.middleware", () => {
 								{ type: "GroupAdded", path: DOCUMENT_MODEL.rep },
 								{
 									type: "ValueChanged",
-									path: DocumentHelpers.createDocumentPath(
-										["rep"],
-										["nestedRepInitialRows", 2],
-										["computedField"]
-									)
+									path: createDocumentPath(["rep"], ["nestedRepInitialRows"], ["computedField"])
 								},
 								{
 									type: "ValueChanged",
-									path: DocumentHelpers.createDocumentPath(
-										["rep"],
-										["nestedRepInitialRows"],
-										["computedField"]
-									)
+									path: createDocumentPath(["rep"], ["nestedRepInitialRows", 2], ["computedField"])
 								}
 							]
 						});
@@ -265,7 +248,7 @@ describe("api.back-end.store.middleware", () => {
 									{ locationPath: [], path: [] },
 									{
 										locationPath: FORM_MODEL.DR.irInNestedDetachedRepeat,
-										path: DocumentHelpers.createDocumentPath(["rep"])
+										path: createDocumentPath(["rep"])
 									}
 								]
 							}
@@ -274,7 +257,7 @@ describe("api.back-end.store.middleware", () => {
 					});
 
 					const addEvent = Events.Repeat.addRow({
-						path: DocumentHelpers.createDocumentPath(["rep"], ["nestedRepInitialRows", 0]),
+						path: createDocumentPath(["rep"], ["nestedRepInitialRows", 0]),
 						repeatFormModelPath: FORM_MODEL.DR.irInNestedDetachedRepeat
 					});
 
@@ -302,7 +285,7 @@ describe("api.back-end.store.middleware", () => {
 									{ locationPath: [], path: [] },
 									{
 										locationPath: FORM_MODEL.DR.drInNestedDetachedRepeat,
-										path: DocumentHelpers.createDocumentPath(["rep"])
+										path: createDocumentPath(["rep"])
 									}
 								]
 							}
@@ -311,7 +294,7 @@ describe("api.back-end.store.middleware", () => {
 					});
 
 					const addEvent = Events.Repeat.addRow({
-						path: DocumentHelpers.createDocumentPath(["rep"], ["nestedRep", 0]),
+						path: createDocumentPath(["rep"], ["nestedRep", 0]),
 						repeatFormModelPath: FORM_MODEL.DR.drInNestedDetachedRepeat
 					});
 
@@ -346,7 +329,7 @@ describe("api.back-end.store.middleware", () => {
 									{ locationPath: [], path: [] },
 									{
 										locationPath: FORM_MODEL.DR.erInNestedDetachedRepeat,
-										path: DocumentHelpers.createDocumentPath(["rep"])
+										path: createDocumentPath(["rep"])
 									}
 								]
 							}
@@ -355,7 +338,7 @@ describe("api.back-end.store.middleware", () => {
 					});
 
 					const addEvent = Events.Repeat.addRow({
-						path: DocumentHelpers.createDocumentPath(["rep"], ["nestedRep", 0]),
+						path: createDocumentPath(["rep"], ["nestedRep", 0]),
 						repeatFormModelPath: FORM_MODEL.DR.erInNestedDetachedRepeat
 					});
 
@@ -380,9 +363,7 @@ describe("api.back-end.store.middleware", () => {
 						path: DOCUMENT_MODEL.repPageSize
 					});
 
-					const screenLocation = [
-						{ locationPath: ModelHelpers.createModelPath(options.screenName), path: [] }
-					];
+					const screenLocation = [{ locationPath: createModelPath(options.screenName), path: [] }];
 
 					return {
 						action,
@@ -429,12 +410,12 @@ describe("api.back-end.store.middleware", () => {
 							entry: {
 								page: 3,
 								newRow: {
-									rowPath: DocumentHelpers.createDocumentPath(["repPageSize", 5]),
+									rowPath: createDocumentPath(["repPageSize", 5]),
 									rowState: "workingOn"
 								},
 								...((options.repeatType === "embedded"
 									? {
-											expandedRowPath: DocumentHelpers.createDocumentPath(["repPageSize", 5]),
+											expandedRowPath: createDocumentPath(["repPageSize", 5]),
 											tableInteractionDocument: expectedNewDocument
 										}
 									: {}) satisfies EngineStore.Repeat.InstanceState)
@@ -467,10 +448,7 @@ describe("api.back-end.store.middleware", () => {
 							const expectedCommand = Commands.changeScreenState({
 								index: 0,
 								focusedComponent: {
-									formModelPath: ModelHelpers.createModelPath(
-										"DetachedRepeat",
-										"detached-repeat-repPageSize"
-									),
+									formModelPath: createModelPath("DetachedRepeat", "detached-repeat-repPageSize"),
 									subElement: "repeat-add"
 								}
 							});
@@ -484,7 +462,7 @@ describe("api.back-end.store.middleware", () => {
 							});
 							const actualActions = middlewareSpy.spy.mock.calls.map(c => c.arguments[0]);
 							const actualAction = actualActions.find(
-								a => a.type === expectedCommand.type && a.payload.index === 1
+								a => Commands.changeScreenState.match(a) && a.payload.index === 1
 							);
 							deepStrictEqual(actualAction, expectedCommand);
 						});
@@ -494,12 +472,12 @@ describe("api.back-end.store.middleware", () => {
 								"and a location path referencing the detail-screen",
 							() => {
 								const expectedCommand = Commands.pushScreen({
-									locationPath: ModelHelpers.createModelPath(
+									locationPath: createModelPath(
 										"DetachedRepeat",
 										"detached-repeat-repPageSize",
 										"detached-repeat-repPageSize-detail-screen"
 									),
-									path: DocumentHelpers.createDocumentPath(["repPageSize", 5])
+									path: createDocumentPath(["repPageSize", 5])
 								});
 								MiddlewareHelpers.assertAction(middlewareSpy.spy, expectedCommand);
 							}
@@ -535,9 +513,7 @@ describe("api.back-end.store.middleware", () => {
 						path: DOCUMENT_MODEL.repPageSize
 					});
 
-					const screenLocation = [
-						{ locationPath: ModelHelpers.createModelPath(options.screenName), path: [] }
-					];
+					const screenLocation = [{ locationPath: createModelPath(options.screenName), path: [] }];
 
 					return { screenLocation, action };
 				});
@@ -582,9 +558,7 @@ describe("api.back-end.store.middleware", () => {
 						path: DOCUMENT_MODEL.repInitialValues
 					});
 
-					const screenLocation = [
-						{ locationPath: ModelHelpers.createModelPath(options.screenName), path: [] }
-					];
+					const screenLocation = [{ locationPath: createModelPath(options.screenName), path: [] }];
 
 					return { screenLocation, action };
 				});
@@ -617,7 +591,7 @@ describe("api.back-end.store.middleware", () => {
 								},
 								{
 									type: "ValueChanged",
-									path: DocumentHelpers.createDocumentPath(["repInitialValues"], ["computedField"])
+									path: createDocumentPath(["repInitialValues"], ["computedField"])
 								}
 							]
 						});
@@ -638,7 +612,7 @@ describe("api.back-end.store.middleware", () => {
 					});
 					const screenLocation = [
 						{
-							locationPath: ModelHelpers.createModelPath(options.screenName),
+							locationPath: createModelPath(options.screenName),
 							path: []
 						}
 					];
@@ -667,12 +641,12 @@ describe("api.back-end.store.middleware", () => {
 							entry: {
 								page: 3,
 								newRow: {
-									rowPath: DocumentHelpers.createDocumentPath(["repPageSize", 5]),
+									rowPath: createDocumentPath(["repPageSize", 5]),
 									rowState: "workingOn"
 								},
 								...(options.repeatType === "embedded"
 									? ({
-											expandedRowPath: DocumentHelpers.createDocumentPath(["repPageSize", 5]),
+											expandedRowPath: createDocumentPath(["repPageSize", 5]),
 											tableInteractionDocument: expectedNewDocument
 										} satisfies EngineStore.Repeat.InstanceState)
 									: {})
@@ -694,9 +668,7 @@ describe("api.back-end.store.middleware", () => {
 						path: DOCUMENT_MODEL.repInitialValuesAndError
 					});
 
-					const screenLocation = [
-						{ locationPath: ModelHelpers.createModelPath(options.screenName), path: [] }
-					];
+					const screenLocation = [{ locationPath: createModelPath(options.screenName), path: [] }];
 
 					return {
 						screenLocation,
@@ -733,10 +705,7 @@ describe("api.back-end.store.middleware", () => {
 								},
 								{
 									type: "ValueChanged",
-									path: DocumentHelpers.createDocumentPath(
-										["repInitialValuesAndError"],
-										["computedField"]
-									)
+									path: createDocumentPath(["repInitialValuesAndError"], ["computedField"])
 								}
 							]
 						});
@@ -745,10 +714,7 @@ describe("api.back-end.store.middleware", () => {
 
 					it("dispatches Commands.setMessageState with the validation message", () => {
 						const validationEntry = createValidationEntry({
-							path: DocumentHelpers.createDocumentPath(
-								["repInitialValuesAndError"],
-								["computedField"]
-							),
+							path: createDocumentPath(["repInitialValuesAndError"], ["computedField"]),
 							errorText: [
 								{
 									key: "documentModel.ruleErrorMessage.repeat\\padd-document.repInitialValuesAndError.NewRule_1",
@@ -776,7 +742,7 @@ describe("api.back-end.store.middleware", () => {
 				screenLocation: EngineStore.ScreenState[];
 			}
 
-			function setupStore(options: StoreOptions): Store<EngineState, AnyAction> {
+			function setupStore(options: StoreOptions): Store<EngineState, ReduxAction> {
 				const dirty = options.dirty !== undefined;
 				const data = options.data;
 				return createTestStore({

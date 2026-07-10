@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -34,18 +34,12 @@ import { equal, notEqual } from "node:assert/strict";
 
 import type { ReactElement } from "react";
 
-import type { ModelPath } from "@com.mgmtp.a12.base/base-model-api/lib/main/model/index.js";
-import type { Attachment } from "@com.mgmtp.a12.dataservices/dataservices-access/lib/Attachment/attachment.js";
+import type { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
+import type { Attachment } from "@com.mgmtp.a12.dataservices/dataservices-access";
 import { query, within } from "@com.mgmtp.a12.devtools/react";
-import type {
-	DocumentModel,
-	EntityInstancePath
-} from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
-import type {
-	Locale,
-	Localizable
-} from "@com.mgmtp.a12.utils/utils-localization/lib/main/index.js";
-import { DataRoles } from "@com.mgmtp.a12.widgets/widgets-core/lib/common/main/data-roles.js";
+import type { DocumentModel, EntityInstancePath } from "@com.mgmtp.a12.kernel/kernel-md-facade";
+import type { Locale, Localizable } from "@com.mgmtp.a12.utils/utils-localization";
+import { DataRoles } from "@com.mgmtp.a12.widgets/widgets-core";
 
 import type { EngineStore } from "../../../../../../back-end/store/index.js";
 import type { Models } from "../../../../../../back-end/store/internal/store.js";
@@ -64,11 +58,9 @@ import { mockFunctions } from "../../../../../rtl-utils/mock-map.js";
 import type { RtlRenderWrapper } from "../../../../../rtl-utils/render-wrapper.js";
 import { rtlRenderWrapper } from "../../../../../rtl-utils/render-wrapper.js";
 import { DisableMockComponents } from "../../../../../utils/disable-mocks.js";
-import { SetupHelpers } from "../../../../../utils/setup.js";
+import { setupRenderConfiguration } from "../../../../../utils/setup.js";
 
 import { widgetMocksForInputTests } from "../inputTestWidgetMocks.js";
-
-const { setupRenderConfiguration } = SetupHelpers;
 
 export type TestComponentName = keyof (WidgetMap & ComponentMap);
 
@@ -401,7 +393,7 @@ export async function mountAndAssertSuffixesForTextLines<
 		renderFunction
 	});
 
-	const textAffix = within(wrapper.baseElement).queryByDataRole(DataRoles.Textline.TextAffix);
+	const textAffix = within(wrapper.baseElement).queryByDataRole(DataRoles.TextField.TextAffix);
 	equal(textAffix?.textContent, suffix, "Expected that text-affix equals given suffix.");
 }
 

@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -32,7 +32,11 @@
 
 import { DataSelectors, UiStateSelectors } from "../../../../back-end/store/index.js";
 import type { EngineState } from "../../../../back-end/store/internal/store.js";
-import { FormModel } from "../../../../models/index.js";
+import type { FormModel } from "../../../../models/index.js";
+import {
+	isFormModelEventButton,
+	isFormModelNavigationButton
+} from "../../../../models/internal/FormModelGuards.js";
 import type { EnablementByButtonName } from "../../configuration/engine-configuration.js";
 
 import { checkScope } from "./enablement-utilities.js";
@@ -60,9 +64,9 @@ export function isDisabled(options: {
 }): boolean {
 	const { formModelElement, state, enablements } = options;
 
-	if (formModelElement && FormModel.ButtonType.isEventButton(formModelElement)) {
+	if (formModelElement && isFormModelEventButton(formModelElement)) {
 		return isEventButtonDisabled(formModelElement, state, enablements?.buttons);
-	} else if (formModelElement && FormModel.ButtonType.isNavigationButton(formModelElement)) {
+	} else if (formModelElement && isFormModelNavigationButton(formModelElement)) {
 		return isNavigationButtonDisabled(formModelElement, state, enablements?.buttons);
 	}
 

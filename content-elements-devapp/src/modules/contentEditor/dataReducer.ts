@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -30,12 +30,8 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import type { Action } from "typescript-fsa";
-
-import type {
-	Activity,
-	ActivityReducers
-} from "@com.mgmtp.a12.client/client-core/lib/core/activity/index.js";
+import type { Action } from "@com.mgmtp.a12.client/typescript-fsa-redux-5-compat";
+import type { Activity, ActivityReducers } from "@com.mgmtp.a12.client/client-core";
 import {
 	ContentEditorDataHolder,
 	ContentEditorState,
@@ -44,16 +40,13 @@ import {
 } from "@com.mgmtp.a12.contentengine/contentengine-editor";
 
 import type { DmReferenceChangedPayload } from "./actions.js";
-import {
-	dmReferenceChanged,
-	initContentEditorSlices,
-	type InitContentEditorSlicesPayload
-} from "./actions.js";
+import { dmReferenceChanged, initContentEditorSlices } from "./actions.js";
+import type { InitContentEditorSlicesPayload } from "./actions.js";
 
 export const initContentEditorSlicesReducer: ActivityReducers.DataReducer = {
 	reduce(dataHolders, action, defaultDataHolder) {
 		return initContentEditorSlices.match(action)
-			? dataHolders?.map(handleInitContentEditorSlices(action, defaultDataHolder))
+			? dataHolders.map(handleInitContentEditorSlices(action, defaultDataHolder))
 			: dataHolders;
 	}
 };
@@ -81,7 +74,7 @@ function handleInitContentEditorSlices(
 export const dmReferenceChangedReducer: ActivityReducers.DataReducer = {
 	reduce(dataHolders, action, defaultDataHolder) {
 		return dmReferenceChanged.match(action)
-			? dataHolders?.map(handleDmReferenceChanged(action, defaultDataHolder))
+			? dataHolders.map(handleDmReferenceChanged(action, defaultDataHolder))
 			: dataHolders;
 	}
 };

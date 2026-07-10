@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -30,13 +30,10 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import type { Action, Dispatch, Middleware, MiddlewareAPI } from "redux";
+import type { Action, Middleware, MiddlewareAPI } from "redux";
 
-import {
-	ActivityActions,
-	ActivitySelectors
-} from "@com.mgmtp.a12.client/client-core/lib/core/activity/index.js";
-import type { Selector } from "@com.mgmtp.a12.client/client-core/lib/core/store/index.js";
+import { ActivityActions, ActivitySelectors } from "@com.mgmtp.a12.client/client-core";
+import type { Selector } from "@com.mgmtp.a12.client/client-core";
 
 import type { EngineState } from "../../../../../back-end/store/index.js";
 import {
@@ -50,7 +47,7 @@ import { FormEngineSelectors } from "./selectors.js";
 import type { uiStateReducer } from "./uiStateReducer.js";
 
 /**
- * @internal
+ * @a12internal
  *
  * Adapter for the Form-Engine middlewares, which extracts the Form-Engine
  * actions from every Client {@link FormEngineActions} and dispatches it with
@@ -170,8 +167,11 @@ function createMiddlewareAPIWrapper(
 /**
  * This function combines a chain of middlewares to a single dispatch function.
  */
-function createDispatcher(api: MiddlewareAPI, middlewares: Middleware[]): Dispatch {
-	return middlewares.reduceRight<Dispatch>(
+function createDispatcher(
+	api: MiddlewareAPI,
+	middlewares: Middleware[]
+): (action: unknown) => unknown {
+	return middlewares.reduceRight<(action: unknown) => unknown>(
 		(dispatcher, middleware) => middleware(api)(dispatcher),
 		action => action
 	);

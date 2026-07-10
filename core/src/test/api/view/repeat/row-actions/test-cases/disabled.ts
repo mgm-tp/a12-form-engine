@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -34,8 +34,8 @@ import type { EngineStore } from "../../../../../../back-end/store/index.js";
 import type { Models } from "../../../../../../back-end/store/internal/store.js";
 import type { EnablementByRow } from "../../../../../../view/internal/configuration/engine-configuration.js";
 import type { RtlRenderWrapper } from "../../../../../rtl-utils/render-wrapper.js";
-import { ModelHelpers } from "../../../../../utils/model-helpers.js";
-import { SetupHelpers } from "../../../../../utils/setup.js";
+import { createModelPath } from "../../../../../utils/createModelPath.js";
+import { loadData, setupFormEngineRendererWithRtl } from "../../../../../utils/setup.js";
 import { setupFixture, setupModelsFixture } from "../../../../../utils/setupFixture.js";
 import {
 	DR_ROW_ACTIONS,
@@ -56,11 +56,10 @@ import type {
 	TestCaseFactory,
 	TestCaseRender
 } from "./disabled/disabled-test-case-permutations.js";
-import {
-	noRender,
-	pickRender,
-	type RenderPermutation,
-	type TestGroupFactory
+import { noRender, pickRender } from "./disabled/disabled-test-case-permutations.js";
+import type {
+	RenderPermutation,
+	TestGroupFactory
 } from "./disabled/disabled-test-case-permutations.js";
 
 /**
@@ -86,7 +85,6 @@ export function executeTestForDisabled(): void {
 	// create data and models fixtures
 	const models = setupModelsFixture("test.custom-button-enablements");
 
-	const { loadData } = SetupHelpers;
 	const documents = setupFixture(() => {
 		const documentWith3Rows = loadData(
 			"test.custom-button-enablements",
@@ -1527,7 +1525,7 @@ function SetupTest(models: Models) {
 	}): RtlRenderWrapper {
 		const screenLocation: EngineStore.ScreenState[] = [
 			{
-				locationPath: ModelHelpers.createModelPath("rowActionButtons"),
+				locationPath: createModelPath("rowActionButtons"),
 				path: []
 			}
 		];
@@ -1536,7 +1534,7 @@ function SetupTest(models: Models) {
 			screenLocation.push(options.screenLocation);
 		}
 
-		return SetupHelpers.setupFormEngineRendererWithRtl({
+		return setupFormEngineRendererWithRtl({
 			models,
 			data: {
 				document: options.document ?? {},

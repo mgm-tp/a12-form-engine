@@ -2,7 +2,7 @@
   "header": {
     "id": "messageGroup-dm",
     "modelType": "document",
-    "modelVersion": "28.4.0",
+    "modelVersion": "29.4.0",
     "locales": [
       {
         "code": "en"
@@ -559,6 +559,75 @@
                           {
                             "locale": "en",
                             "text": "A needs to be filled."
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Group",
+                "id": "group_a0aab",
+                "name": "dataContext",
+                "Group": {
+                  "repeatability": 1,
+                  "elements": [
+                    {
+                      "type": "Group",
+                      "id": "group_2046b",
+                      "name": "repeatable",
+                      "Group": {
+                        "repeatability": 3,
+                        "elements": [
+                          {
+                            "type": "Field",
+                            "id": "field_4ff03",
+                            "name": "a",
+                            "Field": {
+                              "fieldType": {
+                                "type": "NumberType"
+                              },
+                              "label": [
+                                {
+                                  "locale": "en",
+                                  "text": "A"
+                                }
+                              ]
+                            }
+                          },
+                          {
+                            "type": "Field",
+                            "id": "field_05db8",
+                            "name": "b",
+                            "Field": {
+                              "fieldType": {
+                                "type": "NumberType"
+                              },
+                              "label": [
+                                {
+                                  "locale": "en",
+                                  "text": "B"
+                                }
+                              ]
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Rule",
+                      "id": "rule_5c5bc",
+                      "name": "ruleOnRepeatableGroup",
+                      "Rule": {
+                        "errorEntityRelPath": "../repeatable/a",
+                        "errorCode": "Error rule_5c5bc",
+                        "errorCondition": "NotAllFieldsFilled(repeatable*/a) or NotAllFieldsFilled(repeatable*/b)",
+                        "severity": "ERROR",
+                        "errorMessage": [
+                          {
+                            "locale": "en",
+                            "text": "All fields must be filled."
                           }
                         ]
                       }

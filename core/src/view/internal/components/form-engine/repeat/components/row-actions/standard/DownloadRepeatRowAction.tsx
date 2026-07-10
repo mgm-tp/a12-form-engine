@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -33,25 +33,28 @@
 import type { ReactElement } from "react";
 import { useContext } from "react";
 
-import type { GroupInstance } from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
+import type { GroupInstance } from "@com.mgmtp.a12.kernel/kernel-md-facade";
 
 import { DataSelectors, ModelSelectors } from "../../../../../../../../back-end/store/index.js";
 import { UiId } from "../../../../../../../../back-end/utils/internal/generateUiId.js";
 import { getDocumentPath } from "../../../../../../../../back-end/utils/internal/path.js";
-import { FormModel } from "../../../../../../../../models/internal/form-model.js";
 import {
-	DocumentPath,
-	DocumentUtils
+	DocumentUtils,
+	InternalDocumentPath
 } from "../../../../../../../../models/internal/utils/document-utils.js";
-import {
-	DefaultRepeatButtonNames,
-	type FormModelMap
-} from "../../../../../../configuration/engine-configuration.js";
+import { DefaultRepeatButtonNames } from "../../../../../../configuration/engine-configuration.js";
+import type { FormModelMap } from "../../../../../../configuration/engine-configuration.js";
 import { isDownloadButtonDisabled } from "../../../../../../utilities/enablements/disabled-row-actions.js";
 import { isStandardRowActionHidden } from "../../../../../../utilities/enablements/hidden-row-actions.js";
 import { DataContext } from "../../../../data-context.js";
 import { MenuContext } from "../../MenuContext.js";
 import type { RepeatRow } from "../../tableColumnTypes.js";
+import { AttachmentDataSelectors } from "../../../../../../../../back-end/store/internal/selectors/data.js";
+import {
+	isFormModelEmbeddedRepeat,
+	isFormModelInlineRepeat
+} from "../../../../../../../../models/index.js";
+import type { FormModel } from "../../../../../../../../models/index.js";
 
 import type { GetTitle } from "./GetTitle.js";
 import { RowActionButton } from "./RowActionButton.js";
@@ -70,10 +73,10 @@ export function DownloadRepeatRowAction(props: {
 	const renderAsListItem = useContext(MenuContext).renderAsListItem;
 	const dataContext = useContext(DataContext);
 
-	const unassignedIds = DataSelectors.Attachments.unassignedIds(renderOptions.state);
+	const unassignedIds = AttachmentDataSelectors.unassignedIds(renderOptions.state);
 
 	if (
-		(FormModel.InlineRepeat.isInstance(repeat) || FormModel.EmbeddedRepeat.isInstance(repeat)) &&
+		(isFormModelInlineRepeat(repeat) || isFormModelEmbeddedRepeat(repeat)) &&
 		repeat.multiFileUpload &&
 		repeat.multiFileUploadOptions
 	) {
@@ -82,7 +85,7 @@ export function DownloadRepeatRowAction(props: {
 		const hidden = isStandardRowActionHidden({
 			byRow: renderOptions.config.enablements?.byRow ?? {},
 			eventName: DefaultRepeatButtonNames.download,
-			rowIndex: DocumentPath.rowIndex(rowPath),
+			rowIndex: InternalDocumentPath.rowIndex(rowPath),
 			state: renderOptions.state,
 			repeat,
 			enabledInModel,
@@ -120,7 +123,7 @@ export function DownloadRepeatRowAction(props: {
 		const disabled = isDownloadButtonDisabled({
 			byRow: renderOptions.config.enablements?.byRow ?? {},
 			eventName: DefaultRepeatButtonNames.download,
-			rowIndex: DocumentPath.rowIndex(rowPath),
+			rowIndex: InternalDocumentPath.rowIndex(rowPath),
 			state: renderOptions.state,
 			repeat,
 			attachmentDocumentPath,

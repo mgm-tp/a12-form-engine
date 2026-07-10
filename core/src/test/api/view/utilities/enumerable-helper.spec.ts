@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -32,24 +32,18 @@
 
 import { deepStrictEqual } from "node:assert/strict";
 
-import type {
-	EntityInstancePath,
-	GroupInstance
-} from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
+import type { EntityInstancePath, GroupInstance } from "@com.mgmtp.a12.kernel/kernel-md-facade";
 import {
 	defaultDataFormats,
 	defaultLocalizerFactory
-} from "@com.mgmtp.a12.utils/utils-localization/lib/main/index.js";
+} from "@com.mgmtp.a12.utils/utils-localization";
 
 import { EnumerableHelper } from "../../../../view/internal/utilities/enumerable/enumerableHelper.js";
 import type { EnumerationValue } from "../../../../view/internal/utilities/enumerable/enumValue.js";
-import { DocumentHelpers } from "../../../utils/document-helpers.js";
+import { createDocumentPath } from "../../../utils/createDocumentPath.js";
 import { US_LOCALE } from "../../../utils/localization.js";
-import { SetupHelpers } from "../../../utils/setup.js";
+import { setupRenderConfiguration } from "../../../utils/setup.js";
 import { setupModelsFixture } from "../../../utils/setupFixture.js";
-
-const { setupRenderConfiguration } = SetupHelpers;
-const { createDocumentPath } = DocumentHelpers;
 
 describe("api.view.EnumerableHelper", () => {
 	const models = setupModelsFixture("dependencies.enumeration");

@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -35,7 +35,7 @@ import { mock } from "node:test";
 
 import { Fragment } from "react";
 
-import type { A12ApplicationConfig } from "@com.mgmtp.a12.client/client-core/lib/core/application/index.js";
+import type { A12ApplicationConfig } from "@com.mgmtp.a12.client/client-core";
 import { render } from "@com.mgmtp.a12.devtools/react";
 
 import {

@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -33,9 +33,10 @@
 import type { JSX } from "react";
 import { Fragment, useContext } from "react";
 
-import { LocalizerContext } from "@com.mgmtp.a12.utils/utils-localization-react/lib/main/index.js";
-import type { Localizable } from "@com.mgmtp.a12.utils/utils-localization/lib/main/index.js";
-import { BulletList } from "@com.mgmtp.a12.widgets/widgets-core/lib/bullet-list/main/bullet-list.view.js";
+import type { Localizable } from "@com.mgmtp.a12.utils/utils-localization";
+import { LocalizerContext } from "@com.mgmtp.a12.utils/utils-localization-react";
+
+import { WidgetMapContext } from "../../widgetMap/widgetMap-context.js";
 
 /**
  * @internal
@@ -59,6 +60,7 @@ export interface ValidationMessagesProps {
  */
 export function ValidationMessages(props: ValidationMessagesProps): JSX.Element | null {
 	const localizer = useContext(LocalizerContext).localizer;
+	const { BulletListUnordered, BulletListItem } = useContext(WidgetMapContext);
 
 	if (props.messages.length === 0) {
 		return null;
@@ -69,10 +71,10 @@ export function ValidationMessages(props: ValidationMessagesProps): JSX.Element 
 	}
 
 	return (
-		<BulletList.Unordered type="disc" indent={false} id={props.id}>
+		<BulletListUnordered type="disc" indent={false} id={props.id}>
 			{props.messages.map((errorMessage, index) => {
-				return <BulletList.Item key={index}>{localizer(...errorMessage) ?? ""}</BulletList.Item>;
+				return <BulletListItem key={index}>{localizer(...errorMessage) ?? ""}</BulletListItem>;
 			})}
-		</BulletList.Unordered>
+		</BulletListUnordered>
 	);
 }

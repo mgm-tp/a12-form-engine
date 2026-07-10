@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -37,10 +37,9 @@ import { waitFor } from "@testing-library/react";
 import { act, useState } from "react";
 import { Provider } from "react-redux";
 
-import { ActivityActions } from "@com.mgmtp.a12.client/client-core/lib/core/activity/index.js";
-import { NEW_INSTANCE_IDENTIFIER } from "@com.mgmtp.a12.client/client-core/lib/core/application/index.js";
+import { ActivityActions, NEW_INSTANCE_IDENTIFIER } from "@com.mgmtp.a12.client/client-core";
 import { render } from "@com.mgmtp.a12.devtools/react";
-import { Settings } from "@com.mgmtp.a12.utils/utils-logging/lib/Settings.js";
+import { Settings } from "@com.mgmtp.a12.utils/utils-logging";
 
 import { useFocus } from "../../../../client-extensions/internal/extensions/form-engine/internal/useFocus.js";
 import { createActivity, createStore } from "../../../utils/client-helpers.js";

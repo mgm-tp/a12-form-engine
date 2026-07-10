@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -30,17 +30,17 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { ModelPath } from "@com.mgmtp.a12.base/base-model-api/lib/main/model/index.js";
+import { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
 
+import { createModelPath } from "../../../../utils/createModelPath.js";
 import { RenderGroupFixture } from "../../../../utils/rtl-render-group.js";
-import { SetupHelpers } from "../../../../utils/setup.js";
 import { setupModelsFixture } from "../../../../utils/setupFixture.js";
-import { createModelPath } from "../../../../utils/test-model-helpers/dependent-enumeration.js";
 import { IR } from "../../../../utils/test-model-helpers/inline.repeat.js";
 import {
 	createDocumentForRepeat,
 	createNestedL6Entry
 } from "../../../../utils/test-model-helpers/repeat.js";
+import { setupFormEngineRendererWithRtlAsync } from "../../../../utils/setup.js";
 
 import { assertButtonEnablement } from "./assertButtonEnablement.js";
 
@@ -62,7 +62,7 @@ describe("api.view.repeat", () => {
 		describe("enable-disabled", async () => {
 			const { it, render } = RenderGroupFixture(
 				async () =>
-					await SetupHelpers.setupFormEngineRendererWithRtlAsync({
+					await setupFormEngineRendererWithRtlAsync({
 						models,
 						data: { document }
 					})
@@ -95,7 +95,7 @@ describe("api.view.repeat", () => {
 
 		describe("enable-disabled", () => {
 			it("disabled the move-down button when it is the last row", async () => {
-				const { widgetMap } = await SetupHelpers.setupFormEngineRendererWithRtlAsync({
+				const { widgetMap } = await setupFormEngineRendererWithRtlAsync({
 					models,
 					data: { document },
 					ui: {

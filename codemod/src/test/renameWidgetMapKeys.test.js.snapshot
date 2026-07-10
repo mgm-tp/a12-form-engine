@@ -1,0 +1,118 @@
+exports[`renameWidgetMapKeys > should migrate examples.tsx correctly 1`] = `
+import type { ComponentType } from "react";
+interface WidgetMap {
+    readonly DateTimePickerHeader: ComponentType<unknown>;
+    readonly TextField: ComponentType<unknown>;
+    readonly Multiselect: ComponentType<unknown>;
+    readonly LayoutGrid: ComponentType<unknown>;
+    readonly LayoutGridRow: ComponentType<unknown>;
+    readonly SizeContainerColumn: ComponentType<unknown>;
+    readonly ContentBoxNotificationArea: ComponentType<unknown>;
+    readonly MobileValidation: ComponentType<unknown>;
+    readonly MobileValidationBarOverview: ComponentType<unknown>;
+    readonly MobileValidationBarGraphic: ComponentType<unknown>;
+    readonly MobilePreviewList: ComponentType<unknown>;
+    readonly MobileValidationPreviewListItem: ComponentType<unknown>;
+    readonly MobileValidationActions: ComponentType<unknown>;
+    readonly MobileActionItem: ComponentType<unknown>;
+    readonly Button: ComponentType<unknown>;
+}
+declare const widgetMap: WidgetMap;
+// Test case 1: Property access -----------------------------------------------
+function test1() {
+    const textField = widgetMap.TextField;
+    const header = widgetMap.DateTimePickerHeader;
+    const grid = widgetMap.LayoutGrid;
+    const notification = widgetMap.ContentBoxNotificationArea;
+    const multi = widgetMap.Multiselect;
+    const validationBar = widgetMap.MobileValidation;
+    const overview = widgetMap.MobileValidationOverview;
+    const graphic = widgetMap.MobileValidationGraphic;
+    const previewList = widgetMap.MobileValidationPreviewList;
+    const previewListIem = widgetMap.MobileValidationPreviewListItem;
+    const action = widgetMap.MobileValidationActions;
+    const actionItem = widgetMap.MobileValidationActionItem;
+    return {
+        textField,
+        header,
+        grid,
+        notification,
+        multi,
+        validationBar,
+        overview,
+        graphic,
+        previewList,
+        previewListIem,
+        action,
+        actionItem
+    };
+}
+// Test case 2: Element access ------------------------------------------------
+function test2() {
+    const byString = widgetMap["TextField"];
+    return byString;
+}
+// Test case 3: Destructuring (shorthand) -------------------------------------
+function test3() {
+    const { TextField, LayoutGrid, LayoutGridRow } = widgetMap;
+    return { TextField, LayoutGrid, LayoutGridRow };
+}
+// Test case 4: Destructuring (aliased) ---------------------------------------
+function test4() {
+    const { DateTimePickerHeader: CustomHeader, Multiselect: CustomMulti } = widgetMap;
+    return { CustomHeader, CustomMulti };
+}
+// Test case 5: Property assignment in Partial<WidgetMap> ---------------------
+function test5() {
+    const override: Partial<WidgetMap> = {
+        TextField: () => null,
+        DateTimePickerHeader: () => null,
+        LayoutGrid: () => null,
+        ContentBoxNotificationArea: () => null,
+        MobileValidation: () => null,
+        MobileValidationActions: () => null,
+        MobileValidationPreviewListItem: () => null
+    };
+    return override;
+}
+// Test case 6: Shorthand property assignment ---------------------------------
+declare const Header2: ComponentType<unknown>;
+declare const TextLineStateless2: ComponentType<unknown>;
+function test6() {
+    const shortOverride: Partial<WidgetMap> = {
+        DateTimePickerHeader: Header2,
+        TextField: TextLineStateless2
+    };
+    return shortOverride;
+}
+// Test case 7: JSX usage — dot-access and destructured components ------------
+const JsxDotAccess = () => (<widgetMap.DateTimePickerHeader>
+		<widgetMap.TextField />
+	</widgetMap.DateTimePickerHeader>);
+function test7() {
+    const { DateTimePickerHeader, TextField } = widgetMap;
+    return () => (<DateTimePickerHeader>
+			<TextField />
+		</DateTimePickerHeader>);
+}
+// Test case 8: Same names on an unrelated type — must NOT change -------------
+interface UnrelatedShape {
+    readonly Header: string;
+    readonly TextLineStateless: string;
+    readonly MultiSelect: number;
+    readonly SizeContainer: boolean;
+}
+function test8() {
+    const unrelated: UnrelatedShape = {
+        Header: "keep-me",
+        TextLineStateless: "keep-me",
+        MultiSelect: 42,
+        SizeContainer: true
+    };
+    const keepHeader = unrelated.Header;
+    const keepTextLineStateless = unrelated["TextLineStateless"];
+    const { MultiSelect: keepMulti, SizeContainer: keepGrid } = unrelated;
+    return { keepHeader, keepTextLineStateless, keepMulti, keepGrid };
+}
+
+`;

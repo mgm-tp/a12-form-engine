@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -30,10 +30,10 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import type { Attachment } from "@com.mgmtp.a12.dataservices/dataservices-access/lib/Attachment/attachment.js";
+import type { Attachment } from "@com.mgmtp.a12.dataservices/dataservices-access";
 import type { AttachmentLoader, Events } from "@com.mgmtp.a12.formengine/formengine-core";
 import { RESOURCE_KEYS } from "@com.mgmtp.a12.formengine/formengine-core";
-import type { Localizable } from "@com.mgmtp.a12.utils/utils-localization/lib/main/index.js";
+import type { Localizable } from "@com.mgmtp.a12.utils/utils-localization";
 
 const base64URIMatcher = /^data:([^;]+);base64,(.*)$/;
 
@@ -55,7 +55,7 @@ async function base64Decoder(attachment: Attachment): Promise<string> {
 
 	const match = attachment.content.match(base64URIMatcher);
 
-	const [, contentType, b64Data] = match ?? [];
+	const [, contentType, b64Data] = match ?? ([] as string | undefined[]);
 	if (contentType === undefined || b64Data === undefined) {
 		throw new Error(`Downloading attachment not possible due to unsupported or corrupted data!`);
 	}

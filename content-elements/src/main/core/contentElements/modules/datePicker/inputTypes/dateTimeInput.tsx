@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -33,22 +33,20 @@
 import type { ReactNode } from "react";
 import { useContext, useRef, useState } from "react";
 
-import { DocumentPath } from "@com.mgmtp.a12.client/client-data/lib/core/api/path/documentPath.js";
-import {
-	useDocumentContext,
-	type ContentModel,
-	type NodeRendererProps
+import { DocumentPath } from "@com.mgmtp.a12.client/client-data";
+import { useDocumentContext } from "@com.mgmtp.a12.contentengine/contentengine-core";
+import type {
+	ContentModel,
+	NodeRendererProps
 } from "@com.mgmtp.a12.contentengine/contentengine-core";
-import { LocalizerContext } from "@com.mgmtp.a12.utils/utils-localization-react/lib/main/index.js";
-import { DateTimeUtils } from "@com.mgmtp.a12.widgets/widgets-core/lib/common/main/date-time/date-utils.js";
-import { provider as DeviceDetector } from "@com.mgmtp.a12.widgets/widgets-core/lib/common/main/device-detector.js";
-import type { DateTimePickerProps } from "@com.mgmtp.a12.widgets/widgets-core/lib/date-time-picker/main/date-time-picker.api.js";
-import type { YearRange } from "@com.mgmtp.a12.widgets/widgets-core/lib/input/year-month-selector/year-selector.api.js";
+import { LocalizerContext } from "@com.mgmtp.a12.utils/utils-localization-react";
+import { DateTimeUtils, provider as DeviceDetector } from "@com.mgmtp.a12.widgets/widgets-core";
+import type { DateTimePickerProps } from "@com.mgmtp.a12.widgets/widgets-core";
 
 import { FormElementContext } from "../../../../configuration/formElementContext.js";
 import { createResourceLocalizable } from "../../../../localization/createResourceLocalizable.js";
 import { RESOURCE_KEYS } from "../../../../localization/resources.js";
-import type { BaseControlProps, DatePickerConfig } from "../../../../types/controlProps.js";
+import type { BaseControlProps } from "../../../../types/controlProps.js";
 import { WidgetMapContext } from "../../../../widgetMap/widgetMap-context.js";
 import { ComponentMapContext } from "../../../componentMap/componentMapContext.js";
 import { createParseError } from "../../../createParseError.js";
@@ -56,6 +54,8 @@ import { USE_COMMON_CONTROL_SETTINGS_WRAPPER } from "../../../elementConfigurati
 import { USE_COMMON_WIDGET_SETTINGS_WRAPPER } from "../../../elementConfiguration/useCommonWidgetSettings.js";
 import { useFocus } from "../../../focus.js";
 import { nmTokensToString } from "../../../nmtokens.js";
+
+import { DateUtils } from "./dateUtils.js";
 
 /**
  * @internal
@@ -65,7 +65,7 @@ export function DateTimeInput(
 ): ReactNode {
 	const { localizer, conversion } = useContext(LocalizerContext);
 	const { BufferedTextLine, PickerWrapper } = useContext(ComponentMapContext);
-	const { Button, DateTimePicker, Header, Icon } = useContext(WidgetMapContext);
+	const { Button, DateTimePicker, DateTimePickerHeader, Icon } = useContext(WidgetMapContext);
 	const { onValueChanged, onParsingFailed } = useDocumentContext(c => c.event);
 	const { timeMode, disableDatePicker } = useContext(FormElementContext).config;
 
@@ -163,11 +163,14 @@ export function DateTimeInput(
 	const getLocalizedDateString = (value?: Date) =>
 		value && conversionConfig ? (conversion.formatValue(value, conversionConfig) ?? "") : "";
 
+	const isMobile = DeviceDetector.get() === "phone";
+
 	/**
 	 * FIXME: time zone wrong? initial datepicker selection is 2h off
 	 * In the Form Engine, too!!!
 	 */
 	const pickerProps: DateTimePickerProps = {
+		mobileMode: isMobile,
 		backLabel,
 		okLabel,
 		clearLabel,
@@ -176,11 +179,14 @@ export function DateTimeInput(
 		timeMode,
 		timezone: timeZone,
 		customTimeEditLabel: editTimeLabel,
-		yearRange: calculateYearRange(datePickerConfig), // TODO: already pre-compute in useCommonWidgetSettings?
+		yearRange: DateUtils.calculateYearRange(datePickerConfig), // TODO: already pre-compute in useCommonWidgetSettings?
 		onAccept: (value: Date) => {
 			setShowPicker(false);
 			handleTypedValueChange(value);
-			focusInput(uiId);
+
+			if (!isMobile) {
+				focusInput(uiId);
+			}
 		},
 		onChange: (date?: Date, time?: Date) => {
 			handlePickerChange(date, time);
@@ -192,9 +198,6 @@ export function DateTimeInput(
 		}
 	};
 
-	const shouldShowPicker = showPicker && pickerButtonRef.current !== undefined;
-	const isMobile = DeviceDetector.get() === "phone";
-
 	const pickerButton =
 		!disableDatePicker && readonly !== true ? (
 			<Button
@@ -205,7 +208,7 @@ export function DateTimeInput(
 					if (value instanceof Date) {
 						setPickerValue(value);
 					} else {
-						setPickerValue(calculateInitialDate(datePickerConfig));
+						setPickerValue(DateUtils.calculateInitialDate(datePickerConfig));
 					}
 				}}
 				buttonRef={ref => {
@@ -215,6 +218,19 @@ export function DateTimeInput(
 				id={uiId + "-picker"}
 			/>
 		) : null;
+
+	const mobileHeaderButton = isMobile ? (
+		<Button
+			id={uiId + "-header-button"}
+			icon={<Icon>close</Icon>}
+			invert
+			onClick={() => {
+				setShowPicker(false);
+			}}
+		/>
+	) : undefined;
+
+	const shouldShowPicker = showPicker && pickerButtonRef.current !== undefined;
 
 	return [
 		<BufferedTextLine
@@ -256,42 +272,14 @@ export function DateTimeInput(
 					updateElementPosition.current = handler;
 				}}
 			>
-				{isMobile ? (
-					<DateTimePicker
-						{...pickerProps}
-						mobileMode
-						customHeaderElement={
-							<Header
-								actionButtons={
-									<Button
-										icon
-										invert
-										onClick={() => {
-											setShowPicker(false);
-										}}
-									>
-										<Icon>close</Icon>
-									</Button>
-								}
-							>
-								{pickerValue ? getLocalizedDateString(pickerValue) : pickerHeaderPlaceholder}
-							</Header>
-						}
-						// FIXME: Why is onChange overwritten here?
-						onChange={date => {
-							setPickerValue(date);
-						}}
-					/>
-				) : (
-					<DateTimePicker
-						{...pickerProps}
-						customHeaderElement={
-							<Header>
-								{pickerValue ? getLocalizedDateString(pickerValue) : pickerHeaderPlaceholder}
-							</Header>
-						}
-					/>
-				)}
+				<DateTimePicker
+					{...pickerProps}
+					customHeaderElement={
+						<DateTimePickerHeader actionButtons={mobileHeaderButton}>
+							{pickerValue ? getLocalizedDateString(pickerValue) : pickerHeaderPlaceholder}
+						</DateTimePickerHeader>
+					}
+				/>
 			</PickerWrapper>
 		) : undefined
 	];
@@ -300,33 +288,4 @@ export function DateTimeInput(
 function focusInput(id: string): void {
 	const domNode = document.getElementById(id);
 	domNode?.focus();
-}
-
-function calculateYearRange(datePickerConfig: DatePickerConfig | undefined): YearRange | undefined {
-	if (datePickerConfig === undefined) {
-		return undefined;
-	}
-	const { minYear, maxYear, absolute } = datePickerConfig;
-	if (minYear === undefined || maxYear === undefined) {
-		return undefined;
-	}
-	if (absolute) {
-		return { start: minYear, end: maxYear };
-	} else {
-		const currentYear = new Date().getFullYear();
-		return { start: currentYear + minYear, end: currentYear + maxYear };
-	}
-}
-
-function calculateInitialDate(datePickerConfig?: DatePickerConfig): Date {
-	const initialDate = new Date();
-	const { absolute, preselectionYear } = datePickerConfig ?? {};
-
-	initialDate.setFullYear(
-		absolute
-			? preselectionYear || initialDate.getFullYear()
-			: initialDate.getFullYear() + (preselectionYear ?? 0)
-	);
-
-	return initialDate;
 }

@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -34,14 +34,14 @@ import { deepStrictEqual, strictEqual } from "node:assert/strict";
 
 import { act } from "@testing-library/react";
 
-import type { ModelPath } from "@com.mgmtp.a12.base/base-model-api/lib/main/model/index.js";
+import type { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
 import { query } from "@com.mgmtp.a12.devtools/react";
 
 import type { EngineStore } from "../../../../back-end/store/internal/store.js";
 import type { WidgetMap } from "../../../../view/index.js";
 import type { RtlRenderWrapper } from "../../../rtl-utils/render-wrapper.js";
+import { createModelPath } from "../../../utils/createModelPath.js";
 import { setupModelsFixture } from "../../../utils/setupFixture.js";
-import { createModelPath } from "../../../utils/test-model-helpers/repeat.infinite-scrolling.js";
 
 import type { StubbedDispatchConfig } from "./validation-bar-setup.js";
 import { createStubbedDispatchConfig, setupValidationBarTests } from "./validation-bar-setup.js";
@@ -88,7 +88,7 @@ describe("api.view.validation.Validation Bar", () => {
 					multipleCauses: true
 				});
 
-				const rows = query(widgetMap.SizeContainerRow).withTestId("row").groupByTestId();
+				const rows = query(widgetMap.LayoutGridRow).withTestId("row").groupByTestId();
 				strictEqual(rows.at(0).props().children, "Error String 1");
 				strictEqual(rows.at(1).props().children, "Multiple possible causes");
 

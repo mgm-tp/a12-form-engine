@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -34,21 +34,25 @@ import { deepStrictEqual, notStrictEqual } from "assert";
 import { ok, strictEqual } from "assert/strict";
 import { mock } from "node:test";
 
-import { useContext, type ComponentType } from "react";
+import { useContext } from "react";
+import type { ComponentType } from "react";
 
 import { DocumentPath, KernelMessage } from "@com.mgmtp.a12.client/client-data";
 import { DocumentContext } from "@com.mgmtp.a12.contentengine/contentengine-core";
 import { query } from "@com.mgmtp.a12.devtools/react";
 
 import { MessageGroupContainerModule } from "../../../../main/core/contentElements/modules/messageGroupContainer/messageGroupContainerModule.js";
-import type { EditableElementList } from "../../../../main/core/contentElements/modules/messageGroupContainer/useCollectEditableElements.js";
 import {
+	EditableElementsContext,
 	MESSAGE_GROUP_CONTAINER_TYPE,
-	MessageGroupContext,
-	type CollectedDocumentElementIds,
-	type MessageGroupContainerNode,
-	type MessageGroupContainerNodeProps,
-	type MessageGroupFilter
+	MessageGroupContext
+} from "../../../../main/core/index.js";
+import type {
+	CollectedDocumentElementIds,
+	EditableElementList,
+	MessageGroupContainerNode,
+	MessageGroupContainerNodeProps,
+	MessageGroupFilter
 } from "../../../../main/core/index.js";
 import { FORM_ELEMENTS_NAMESPACE } from "../../../../main/core/namespace.js";
 import { mockDocumentContext } from "../../../mocks/mockDocumentContext.js";
@@ -57,12 +61,22 @@ import { renderWrapper } from "../../../rtl-utils/render-wrapper.js";
 
 describe("core.contentElements", () => {
 	describe("MessageGroupContainer", () => {
-		it("renders a MessageGroupContext", () => {
+		it("renders a MessageGroupContext and an EditableElementsContext", () => {
 			const mockNode = getMockNode();
 
 			const editableElements = [
-				{ nodeId: "node1", elementId: "field1", label: [{ locale: "en", text: "label1" }] },
-				{ nodeId: "node2", elementId: "field2", label: [{ locale: "en", text: "label2" }] }
+				{
+					nodeId: "node1",
+					elementId: "field1",
+					documentPath: [],
+					label: [{ locale: "en", text: "label1" }]
+				},
+				{
+					nodeId: "node2",
+					elementId: "field2",
+					documentPath: [],
+					label: [{ locale: "en", text: "label2" }]
+				}
 			];
 
 			const AssertionComponent = setup(
@@ -76,10 +90,10 @@ describe("core.contentElements", () => {
 
 			const props = query(AssertionComponent).props();
 
-			strictEqual(props.context.id, mockNode.id);
-			deepStrictEqual(props.context.editableElements, editableElements);
-			notStrictEqual(props.context.getGroupedValidationMessages, undefined);
-			notStrictEqual(props.context.getUngroupedValidationMessages, undefined);
+			strictEqual(props.messageGroupContext.id, mockNode.id);
+			deepStrictEqual(props.editableElementsContext, editableElements);
+			notStrictEqual(props.messageGroupContext.getGroupedValidationMessages, undefined);
+			notStrictEqual(props.messageGroupContext.getUngroupedValidationMessages, undefined);
 		});
 
 		describe("get grouped/ungrouped validation messages", () => {
@@ -91,7 +105,8 @@ describe("core.contentElements", () => {
 
 				const props = query(AssertionComponent).props();
 
-				const { getGroupedValidationMessages, getUngroupedValidationMessages } = props.context;
+				const { getGroupedValidationMessages, getUngroupedValidationMessages } =
+					props.messageGroupContext;
 
 				const allMessages = setupMessages();
 
@@ -130,7 +145,8 @@ describe("core.contentElements", () => {
 
 				const props = query(AssertionComponent).props();
 
-				const { getGroupedValidationMessages, getUngroupedValidationMessages } = props.context;
+				const { getGroupedValidationMessages, getUngroupedValidationMessages } =
+					props.messageGroupContext;
 
 				const allMessages = setupMessages();
 
@@ -163,7 +179,8 @@ describe("core.contentElements", () => {
 
 				const props = query(AssertionComponent).props();
 
-				const { getGroupedValidationMessages, getUngroupedValidationMessages } = props.context;
+				const { getGroupedValidationMessages, getUngroupedValidationMessages } =
+					props.messageGroupContext;
 
 				const allMessages = setupMessages();
 
@@ -189,7 +206,8 @@ describe("core.contentElements", () => {
 
 				const props = query(AssertionComponent).props();
 
-				const { getGroupedValidationMessages, getUngroupedValidationMessages } = props.context;
+				const { getGroupedValidationMessages, getUngroupedValidationMessages } =
+					props.messageGroupContext;
 
 				const allMessages = setupMessages();
 
@@ -212,11 +230,23 @@ function setup(
 	mockNode: MessageGroupContainerNode,
 	groupedElements: CollectedDocumentElementIds = { fieldIds: [], groupIds: [] },
 	editableElements: EditableElementList = []
-): ComponentType<{ context: MessageGroupFilter }> {
-	const AssertionComponent: ComponentType<{ context: MessageGroupFilter }> = mock.fn();
+): ComponentType<{
+	messageGroupContext: MessageGroupFilter;
+	editableElementsContext: EditableElementList;
+}> {
+	const AssertionComponent: ComponentType<{
+		messageGroupContext: MessageGroupFilter;
+		editableElementsContext: EditableElementList;
+	}> = mock.fn();
 	const ContextConsumer = () => {
-		const context = useContext(MessageGroupContext);
-		return <AssertionComponent context={context} />;
+		const messageGroupContext = useContext(MessageGroupContext);
+		const editableElementsContext = useContext(EditableElementsContext);
+		return (
+			<AssertionComponent
+				messageGroupContext={messageGroupContext}
+				editableElementsContext={editableElementsContext}
+			/>
+		);
 	};
 
 	const baseDocContext = mockDocumentContext();

@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -30,13 +30,14 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { DocumentPath, KernelMessage } from "@com.mgmtp.a12.client/client-data";
-import type { Message } from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
+import { DocumentPath } from "@com.mgmtp.a12.client/client-data";
+import type { Message } from "@com.mgmtp.a12.kernel/kernel-md-facade";
 
+/** @internal */
 export function messageHtmlId(groupId: string, message: Message, uiIdPrefix?: string): string {
 	const errorField = DocumentPath.toString(message.entityInstance);
 	const errorTypeIdentifier =
-		KernelMessage.FORMAL_VALIDATION === message.rulePath ? message.errorCode : message.rulePath;
+		"formalValidation" === message.rulePath ? message.errorCode : message.rulePath;
 
 	return `${uiIdPrefix ? uiIdPrefix + "-" : ""}${groupId}-${errorField}-${errorTypeIdentifier}`;
 }

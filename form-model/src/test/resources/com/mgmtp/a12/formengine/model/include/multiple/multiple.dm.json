@@ -1,0 +1,127 @@
+{
+  "header": {
+    "id": "multiple.dm",
+    "modelType": "document",
+    "modelVersion": "29.4.0",
+    "locales": [
+      {
+        "code": "en"
+      }
+    ],
+    "labels": [],
+    "annotations": [],
+    "modelReferences": [
+      {
+        "modelType": "document",
+        "purpose": "include",
+        "reference": "baseGroup.dm"
+      },
+      {
+        "modelType": "document",
+        "purpose": "include",
+        "reference": "control-grid.dm"
+      }
+    ]
+  },
+  "content": {
+    "modelInfo": {
+      "name": "multiple.dm",
+      "immutable": false
+    },
+    "modelConfig": {
+      "decimalSeparator": ".",
+      "timeZone": "UTC",
+      "conditionLanguage": {
+        "code": "en_US"
+      }
+    },
+    "modelRoot": {
+      "rootGroups": [
+        {
+          "type": "Group",
+          "id": "group_91947",
+          "name": "cgGroup",
+          "Group": {
+            "repeatability": 1,
+            "elements": [
+              {
+                "type": "Group",
+                "id": "include_05759",
+                "name": "base",
+                "Group": {
+                  "repeatability": 1,
+                  "includeConfig": {
+                    "reference": "control-grid.dm"
+                  }
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "Group",
+          "id": "group_9edb7",
+          "name": "drGroup",
+          "Group": {
+            "repeatability": 1,
+            "elements": [
+              {
+                "type": "Group",
+                "id": "include_18bda",
+                "name": "baseGroup",
+                "Group": {
+                  "repeatability": 1000,
+                  "includeConfig": {
+                    "reference": "baseGroup.dm"
+                  }
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "Group",
+          "id": "group_86bca",
+          "name": "irGroup",
+          "Group": {
+            "repeatability": 1,
+            "elements": [
+              {
+                "type": "Group",
+                "id": "include_271a8",
+                "name": "baseGroup",
+                "Group": {
+                  "repeatability": 1000,
+                  "includeConfig": {
+                    "reference": "baseGroup.dm"
+                  }
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "Group",
+          "id": "group_673ee",
+          "name": "erGroup",
+          "Group": {
+            "repeatability": 1,
+            "elements": [
+              {
+                "type": "Group",
+                "id": "include_b95f3",
+                "name": "baseGroup",
+                "Group": {
+                  "repeatability": 1000,
+                  "includeConfig": {
+                    "reference": "baseGroup.dm"
+                  }
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

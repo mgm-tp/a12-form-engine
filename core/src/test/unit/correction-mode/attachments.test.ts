@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -33,6 +33,8 @@
 import { strictEqual } from "node:assert/strict";
 
 import { generateAttachment } from "../../api/view/inputs/input-element/generic-tests/input-utils.js";
+import { createDocumentPath } from "../../utils/createDocumentPath.js";
+import { createModelPath } from "../../utils/createModelPath.js";
 import { setupModelsFixture } from "../../utils/setupFixture.js";
 
 import type { CorrectionModeItem, GroupInstance } from "./correction-mode-test-utils.js";
@@ -41,8 +43,6 @@ import {
 	assertLink,
 	assertNumberOfLinks,
 	baseDocument,
-	createDocumentPath,
-	createModelPath,
 	DocumentUtils,
 	getLinks,
 	screen1,

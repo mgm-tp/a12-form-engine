@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -33,18 +33,23 @@
 import type { ReactElement } from "react";
 import { useContext } from "react";
 
-import type { ModelPath } from "@com.mgmtp.a12.base/base-model-api/lib/main/model/index.js";
-import type { Attachment } from "@com.mgmtp.a12.dataservices/dataservices-access/lib/Attachment/attachment.js";
-import type { DocumentModel } from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
-import { LocalizerContext } from "@com.mgmtp.a12.utils/utils-localization-react/lib/main/index.js";
+import type { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
+import type { Attachment } from "@com.mgmtp.a12.dataservices/dataservices-access";
+import type { DocumentModel } from "@com.mgmtp.a12.kernel/kernel-md-facade";
+import { LocalizerContext } from "@com.mgmtp.a12.utils/utils-localization-react";
 
 import { RESOURCE_KEYS } from "../../../../../../../back-end/localization/index.js";
 import { getLocalizedResource } from "../../../../../../../back-end/localization/internal/localize.js";
-import { DataSelectors } from "../../../../../../../back-end/store/index.js";
+import { AttachmentDataSelectors } from "../../../../../../../back-end/store/internal/selectors/data.js";
 import { ModelSelectors } from "../../../../../../../back-end/store/internal/selectors/models.js";
 import { UiStateSelectors } from "../../../../../../../back-end/store/internal/selectors/ui-state.js";
 import { findElementByFormModelPath } from "../../../../../../../models/internal/findElementByFormModelPath.js";
-import { FormModel } from "../../../../../../../models/internal/form-model.js";
+import type { FormModel } from "../../../../../../../models/internal/form-model.js";
+import {
+	isFormModelDetachedRepeat,
+	isFormModelEmbeddedRepeat,
+	isFormModelInlineRepeat
+} from "../../../../../../../models/internal/FormModelGuards.js";
 import { DocumentUtils } from "../../../../../../../models/internal/utils/document-utils.js";
 import { ComponentMapContext } from "../../../../../configuration/componentMap/component-map-context.js";
 import type { FormModelMap, Inputs } from "../../../../../configuration/engine-configuration.js";
@@ -105,8 +110,8 @@ export function AttachmentInput(props: Inputs.InputProps<DocumentModel.Group>): 
 			dispatchDownload={onAttachmentDownload}
 			dispatchCancel={onCancelAttachmentUpload}
 			thumbnail={attachmentThumbnail(attachment)(options.state)}
-			loading={DataSelectors.Attachments.isLoading(options.state, props.modelElement.elementPath)}
-			isUnassigned={DataSelectors.Attachments.isUnassigned(options.state, attachment)}
+			loading={AttachmentDataSelectors.isLoading(options.state, props.modelElement.elementPath)}
+			isUnassigned={AttachmentDataSelectors.isUnassigned(options.state, attachment)}
 		/>
 	);
 }
@@ -141,8 +146,7 @@ export function AttachmentForDetachedRepeatTable(
 				attachment={attachment}
 				thumbnail={attachmentThumbnail(attachment)(options.state)}
 				repeatRowHeight={
-					(FormModel.InlineRepeat.isInstance(repeat) ||
-						FormModel.DetachedRepeat.isInstance(repeat)) &&
+					(isFormModelInlineRepeat(repeat) || isFormModelDetachedRepeat(repeat)) &&
 					repeat.infiniteScrolling
 						? repeat.tableStyle?.rowHeight
 						: undefined
@@ -173,8 +177,8 @@ export function AttachmentForDetachedRepeatTable(
 			dispatchDownload={onAttachmentDownload}
 			dispatchCancel={onCancelAttachmentUpload}
 			thumbnail={attachmentThumbnail(attachment)(options.state)}
-			loading={DataSelectors.Attachments.isLoading(options.state, props.modelElement.elementPath)}
-			isUnassigned={DataSelectors.Attachments.isUnassigned(options.state, attachment)}
+			loading={AttachmentDataSelectors.isLoading(options.state, props.modelElement.elementPath)}
+			isUnassigned={AttachmentDataSelectors.isUnassigned(options.state, attachment)}
 		/>
 	);
 }
@@ -184,8 +188,7 @@ function isMultiFileUploadColumn(formModel: FormModel, formModelPath: ModelPath)
 	const parentElement = findElementByFormModelPath(formModel, parentPath);
 	return (
 		!!parentElement &&
-		(FormModel.InlineRepeat.isInstance(parentElement) ||
-			FormModel.EmbeddedRepeat.isInstance(parentElement)) &&
+		(isFormModelInlineRepeat(parentElement) || isFormModelEmbeddedRepeat(parentElement)) &&
 		!!parentElement.multiFileUpload
 	);
 }

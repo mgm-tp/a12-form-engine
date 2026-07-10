@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -30,18 +30,17 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { ModelPath } from "@com.mgmtp.a12.base/base-model-api/lib/main/model/index.js";
+import { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
 
 import type { EngineStore } from "../../../../../back-end/store/index.js";
 import { Commands, Events } from "../../../../../back-end/store/index.js";
 import type { Models } from "../../../../../back-end/store/internal/store.js";
-import { MiddlewareHelpers } from "../../../../utils/back-end-helpers.js";
-import { ModelHelpers } from "../../../../utils/model-helpers.js";
-import { SetupHelpers } from "../../../../utils/setup.js";
+import { createModelPath } from "../../../../utils/createModelPath.js";
+import { MiddlewareHelpers } from "../../../../utils/MiddlewareHelpers.js";
+import { createTestStore, loadData } from "../../../../utils/setup.js";
 import { setupFixture, setupModelsFixture } from "../../../../utils/setupFixture.js";
 import { IR } from "../../../../utils/test-model-helpers/inline.repeat.js";
 
-const { createTestStore } = SetupHelpers;
 describe("api.back-end.store.middleware", () => {
 	describe("onSortingChangeMiddleware", () => {
 		describe("handles Events.sortingChange", () => {
@@ -53,10 +52,7 @@ describe("api.back-end.store.middleware", () => {
 				middlewareSpy.spy.mock.resetCalls();
 			});
 
-			const repeatFormModelPath = ModelHelpers.createModelPath(
-				IR.SortingAndFiltering.screen,
-				"Repeat"
-			);
+			const repeatFormModelPath = createModelPath(IR.SortingAndFiltering.screen, "Repeat");
 			const orderPath = [...repeatFormModelPath, { elementName: "column1" }];
 
 			describe("given a payload with 'sorting=asc'", () => {
@@ -80,7 +76,7 @@ describe("api.back-end.store.middleware", () => {
 							repeatFormModelPath
 						}),
 						Commands.changeRepeatInstanceStateEntry({
-							locationPath: ModelHelpers.createModelPath(IR.SortingAndFiltering.screen),
+							locationPath: createModelPath(IR.SortingAndFiltering.screen),
 							entry: {
 								newRow: undefined,
 								page: 1,
@@ -115,7 +111,7 @@ describe("api.back-end.store.middleware", () => {
 							repeatFormModelPath
 						}),
 						Commands.changeRepeatInstanceStateEntry({
-							locationPath: ModelHelpers.createModelPath(IR.SortingAndFiltering.screen),
+							locationPath: createModelPath(IR.SortingAndFiltering.screen),
 							entry: {
 								newRow: undefined,
 								page: 1,
@@ -147,7 +143,7 @@ describe("api.back-end.store.middleware", () => {
 							repeatFormModelPath
 						}),
 						Commands.changeRepeatInstanceStateEntry({
-							locationPath: ModelHelpers.createModelPath(IR.SortingAndFiltering.screen),
+							locationPath: createModelPath(IR.SortingAndFiltering.screen),
 							entry: {
 								newRow: undefined,
 								page: 1
@@ -162,13 +158,13 @@ describe("api.back-end.store.middleware", () => {
 
 			describe("given a repeat with a page size and a current page > 1", () => {
 				it("resets the page to 1", () => {
-					const data = SetupHelpers.loadData("repeat", "data", models.documentModel);
+					const data = loadData("repeat", "data", models.documentModel);
 					setupStore({
 						data,
 						ui: {
 							screenLocation: [
 								{
-									locationPath: ModelHelpers.createModelPath(IR.SortingAndFiltering.screen),
+									locationPath: createModelPath(IR.SortingAndFiltering.screen),
 									path: [],
 									repeatInstanceState: {
 										[ModelPath.toString(repeatFormModelPath)]: {
@@ -197,7 +193,7 @@ describe("api.back-end.store.middleware", () => {
 							repeatFormModelPath
 						}),
 						Commands.changeRepeatInstanceStateEntry({
-							locationPath: ModelHelpers.createModelPath(IR.SortingAndFiltering.screen),
+							locationPath: createModelPath(IR.SortingAndFiltering.screen),
 							entry: {
 								newRow: undefined,
 								page: 1,

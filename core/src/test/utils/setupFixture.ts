@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -32,7 +32,8 @@
 
 import type { Models } from "../../back-end/store/internal/store.js";
 
-import { SetupHelpers } from "./setup.js";
+import { loadModels } from "./setup.js";
+import type { JsonAdapter } from "./setup.js";
 
 /**
  * Fixture for a record of plain objects. Must NOT contain any render wrappers!
@@ -96,12 +97,12 @@ export function setupArrayFixture<T>(func: () => T[]): T[] {
 export function setupModelsFixture(
 	group: string,
 	form?: string,
-	jsonAdapter?: SetupHelpers.JsonAdapter
+	jsonAdapter?: JsonAdapter
 ): Models {
 	let context: Models = {} as Models;
 
 	before(() => {
-		const ctx = SetupHelpers.loadModels(group, form, jsonAdapter);
+		const ctx = loadModels(group, form, jsonAdapter);
 		mergeIntoObject(ctx, context);
 	});
 

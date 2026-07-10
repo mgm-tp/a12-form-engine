@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -33,11 +33,11 @@
 import type { ReactElement } from "react";
 import { useContext } from "react";
 
-import type { DocumentModel } from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
-import { LocalizerContext } from "@com.mgmtp.a12.utils/utils-localization-react/lib/main/index.js";
+import type { DocumentModel } from "@com.mgmtp.a12.kernel/kernel-md-facade";
+import { LocalizerContext } from "@com.mgmtp.a12.utils/utils-localization-react";
 
 import { ModelSelectors } from "../../../../../../../back-end/store/index.js";
-import { DocumentModelUtils } from "../../../../../../../models/internal/utils/document-model-utils.js";
+import * as DocumentModelUtils from "../../../../../../../models/internal/utils/document-model-utils.js";
 import { ComponentMapContext } from "../../../../../configuration/componentMap/component-map-context.js";
 import type { Inputs } from "../../../../../configuration/engine-configuration.js";
 
@@ -55,6 +55,7 @@ export function StringInput(
 
 	const documentModel = ModelSelectors.documentModel()(options.state);
 
+	const { inputRef } = props;
 	const value = props.value;
 	const conversionConfig = DocumentModelUtils.useConversionConfig(documentModel, value.path);
 
@@ -87,8 +88,8 @@ export function StringInput(
 					: undefined
 			}
 			inputRef={(element: HTMLElement | null) => {
-				if (props.inputRef) {
-					props.inputRef.current = element;
+				if (inputRef) {
+					inputRef.current = element;
 				}
 			}}
 		/>

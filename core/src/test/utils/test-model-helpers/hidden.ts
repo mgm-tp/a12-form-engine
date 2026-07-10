@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -30,26 +30,26 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import type { GroupInstance } from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
+import type { GroupInstance } from "@com.mgmtp.a12.kernel/kernel-md-facade";
 
 import type { EngineStore } from "../../../back-end/store/internal/store.js";
 
-import { createDocumentPath, createModelPath } from "./dependent-enumeration.js";
+import { createDocumentPath } from "../createDocumentPath.js";
+import { createModelPath } from "../createModelPath.js";
 
-export namespace HIDDEN {
-	export const IR_ID = "a12-inlinerepeat-4bccb";
-	export const DR_ID = "a12-detachedrepeat-cd08e";
-	export const ER_ID = "a12-embeddedrepeat-0db90";
-	export const NESTED_ER_ID = "a12-embeddedrepeat-a9f5d";
-	export const STRINGFIELD2_ID = "a12-StringField2-field_68171";
-	export const DR_DATEFIELD_ID = "a12-fieldbasedrepeatoverviewcolumn-05240-bodycell-0";
-	export const ER_DATEFIELD_ID = "a12-fieldbasedrepeatoverviewcolumn-56c09-bodycell-0";
-	export const ER_EXPRESSION_CELL_ID = "a12-expressionrepeatoverviewcolumn-b8d65-bodycell-0";
-	export const NESTED_ER_EXPRESSION_CELL_ID = "a12-expressionrepeatoverviewcolumn-6d282-bodycell-0";
-
-	export const DATEFIELD_DEFAULT_VALUE = "01/06/2020";
-	export const STRINGFIELD3_DEFAULT_VALUE = "abc";
-}
+export const HIDDEN = {
+	IR_ID: "a12-inlinerepeat-4bccb",
+	DR_ID: "a12-detachedrepeat-cd08e",
+	ER_ID: "a12-embeddedrepeat-0db90",
+	NESTED_ER_ID: "a12-embeddedrepeat-a9f5d",
+	STRINGFIELD2_ID: "a12-StringField2-field_68171",
+	DR_DATEFIELD_ID: "a12-fieldbasedrepeatoverviewcolumn-05240-bodycell-0",
+	ER_DATEFIELD_ID: "a12-fieldbasedrepeatoverviewcolumn-56c09-bodycell-0",
+	ER_EXPRESSION_CELL_ID: "a12-expressionrepeatoverviewcolumn-b8d65-bodycell-0",
+	NESTED_ER_EXPRESSION_CELL_ID: "a12-expressionrepeatoverviewcolumn-6d282-bodycell-0",
+	DATEFIELD_DEFAULT_VALUE: "01/06/2020",
+	STRINGFIELD3_DEFAULT_VALUE: "abc"
+} as const;
 
 export function createNestedDrUiState(): Partial<EngineStore.UIState> {
 	return {

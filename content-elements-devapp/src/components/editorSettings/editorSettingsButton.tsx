@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -30,27 +30,30 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { useCallback, useContext, useMemo, useRef, useState, type JSX } from "react";
+import { useCallback, useContext, useMemo, useRef, useState } from "react";
+import type { JSX } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { css, styled } from "styled-components";
 
-import { ModelPath } from "@com.mgmtp.a12.base/base-model-api/lib/main/model/index.js";
-import { Model, ModelSelectors } from "@com.mgmtp.a12.client/client-core/lib/core/model/index.js";
+import { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
+import { Model, ModelSelectors } from "@com.mgmtp.a12.client/client-core";
 import type { ContentEditorState } from "@com.mgmtp.a12.contentengine/contentengine-editor";
 import {
 	ModelStateSelector,
 	useContentEditorContext,
 	useContentEditorState
 } from "@com.mgmtp.a12.contentengine/contentengine-editor";
-import { LocalizerContext } from "@com.mgmtp.a12.utils/utils-localization-react/lib/main/index.js";
-import { AttachedPortal } from "@com.mgmtp.a12.widgets/widgets-core/lib/attached-portal/main/attached-portal.view.js";
-import { Button } from "@com.mgmtp.a12.widgets/widgets-core/lib/button/main/button.view.js";
-import { ActionContentbox } from "@com.mgmtp.a12.widgets/widgets-core/lib/contentbox/main/action-contentbox/action-contentbox.view.js";
-import { StyledContentBoxContent } from "@com.mgmtp.a12.widgets/widgets-core/lib/contentbox/main/template/contentbox.tpl.styled.js";
-import type { DropDownItem } from "@com.mgmtp.a12.widgets/widgets-core/lib/dropdown/main/template/dropdown.tpl.api.js";
-import { Icon } from "@com.mgmtp.a12.widgets/widgets-core/lib/icon/main/icon.view.js";
-import { Autocomplete } from "@com.mgmtp.a12.widgets/widgets-core/lib/input/autocomplete/main/autocomplete.view.js";
-import { Select } from "@com.mgmtp.a12.widgets/widgets-core/lib/input/select/main/select.view.js";
+import { LocalizerContext } from "@com.mgmtp.a12.utils/utils-localization-react";
+import {
+	ActionContentbox,
+	AttachedPortal,
+	Autocomplete,
+	Button,
+	Icon,
+	Select,
+	StyledContentBoxContent
+} from "@com.mgmtp.a12.widgets/widgets-core";
+import type { DefaultThemeType, DropDownItem } from "@com.mgmtp.a12.widgets/widgets-core";
 
 import { createResourceLocalizable } from "../../localization/index.js";
 import { RESOURCE_KEYS } from "../../localization/keys.js";
@@ -199,7 +202,7 @@ function useBaseGroup() {
 }
 
 const StyledActionContentBox = styled(ActionContentbox)(({ theme }) => {
-	const { verticalSpacing } = theme.spacing;
+	const { verticalSpacing } = (theme as DefaultThemeType).spacing;
 
 	return css`
 		${StyledContentBoxContent} {

@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -31,22 +31,20 @@
  */
 
 // tag::content[]
-import { call, put, select, type SagaGenerator } from "typed-redux-saga";
+import { call, put, select } from "typed-redux-saga";
+import type { SagaGenerator } from "typed-redux-saga";
 
+import type { DataProvider, Model } from "@com.mgmtp.a12.client/client-core";
 import {
 	Activity,
 	ActivityActions,
 	ActivitySagas,
-	ActivitySelectors
-} from "@com.mgmtp.a12.client/client-core/lib/core/activity/index.js";
-import { NEW_INSTANCE_IDENTIFIER } from "@com.mgmtp.a12.client/client-core/lib/core/application/index.js";
-import type { DataProvider } from "@com.mgmtp.a12.client/client-core/lib/core/data/index.js";
-import type { Model } from "@com.mgmtp.a12.client/client-core/lib/core/model/index.js";
-import {
+	ActivitySelectors,
 	extractModelsInScenePayload,
 	ModelSagas,
+	NEW_INSTANCE_IDENTIFIER,
 	ReferencedModel
-} from "@com.mgmtp.a12.client/client-core/lib/core/model/index.js";
+} from "@com.mgmtp.a12.client/client-core";
 import type { FormModel } from "@com.mgmtp.a12.formengine/formengine-core";
 import {
 	createEmptyDocument,
@@ -54,8 +52,8 @@ import {
 	isFormModel,
 	preProcessDocument
 } from "@com.mgmtp.a12.formengine/formengine-core";
-import type { GroupInstance } from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
-import { DocumentServiceFactory } from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/facade.js";
+import type { GroupInstance } from "@com.mgmtp.a12.kernel/kernel-md-facade";
+import { DocumentServiceFactory } from "@com.mgmtp.a12.kernel/kernel-md-facade";
 
 // The kernel document service to be used for parsing and formatting of the dates in the document.
 const documentService = new DocumentServiceFactory().getDocumentService();
@@ -384,7 +382,7 @@ function* waitForModels(
 ): SagaGenerator<[FormModel, Model.DocumentAndValidationModel]> {
 	const models = yield* call(() => ModelSagas.waitForModelsLoaded(activity.id));
 
-	const formModel = models.find(isFormModel);
+	const formModel = models.find(m => isFormModel(m));
 	if (formModel === undefined) {
 		throw new Error("Expected a form model to be present.");
 	}

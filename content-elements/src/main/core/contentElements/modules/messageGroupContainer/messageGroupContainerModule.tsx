@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -30,24 +30,23 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { useContext, useMemo, type JSX } from "react";
-import { actionCreatorFactory } from "typescript-fsa";
+import { useContext, useMemo } from "react";
+import type { JSX } from "react";
 
-import { ModelPath } from "@com.mgmtp.a12.base/base-model-api/lib/main/model/index.js";
-import { KernelMessage } from "@com.mgmtp.a12.client/client-data/lib/data-mutation/validation-computation/message.js";
+import { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
+import { KernelMessage } from "@com.mgmtp.a12.client/client-data";
+import { actionCreatorFactory } from "@com.mgmtp.a12.client/typescript-fsa-redux-5-compat";
 import type {
 	ContentModel,
 	NodeRendererProps
 } from "@com.mgmtp.a12.contentengine/contentengine-core";
 import { ElementModule } from "@com.mgmtp.a12.contentengine/contentengine-core";
-import type {
-	EntityInstancePath,
-	Message
-} from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
+import type { EntityInstancePath, Message } from "@com.mgmtp.a12.kernel/kernel-md-facade";
 
 import { FORM_ELEMENTS_NAMESPACE } from "../../../namespace.js";
 import { FunctionMapContext } from "../../functionMap/functionMapContext.js";
 
+import { EditableElementsContext } from "./editableElementsContext.js";
 import type {
 	MessageGroupContainerNode,
 	MessageGroupContainerNodeProps
@@ -91,7 +90,6 @@ function MessageGroupContainerRenderer(
 
 		return {
 			id: props.node.id,
-			editableElements,
 			getGroupedValidationMessages: (messages: Message[]) =>
 				getGroupedValidationMessages(messages, resolvedProps),
 			getUngroupedValidationMessages: (messages: Message[]) => {
@@ -99,11 +97,13 @@ function MessageGroupContainerRenderer(
 				return messages.filter(msg => !groupedMessages.includes(msg));
 			}
 		};
-	}, [props.node.props, props.node.id, messageGroupPaths, editableElements]);
+	}, [props.node.props, props.node.id, messageGroupPaths]);
 
 	return (
 		<MessageGroupContext.Provider value={contextValue}>
-			{props.children}
+			<EditableElementsContext.Provider value={editableElements}>
+				{props.children}
+			</EditableElementsContext.Provider>
 		</MessageGroupContext.Provider>
 	);
 }

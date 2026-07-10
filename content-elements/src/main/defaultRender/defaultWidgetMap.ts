@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -32,32 +32,33 @@
 
 import { memo } from "react";
 
-import { AttachedPortal } from "@com.mgmtp.a12.widgets/widgets-core/lib/attached-portal/main/attached-portal.view.js";
-import { Button } from "@com.mgmtp.a12.widgets/widgets-core/lib/button/main/button.view.js";
-import { Header } from "@com.mgmtp.a12.widgets/widgets-core/lib/date-time-picker/main/date-time-picker.internal.js";
-import { DateTimePicker } from "@com.mgmtp.a12.widgets/widgets-core/lib/date-time-picker/main/date-time-picker.view.js";
-import { DatePickerDialog } from "@com.mgmtp.a12.widgets/widgets-core/lib/datepicker/main/date-picker.mobile.view.js";
-import { DatePicker } from "@com.mgmtp.a12.widgets/widgets-core/lib/datepicker/main/date-picker.view.js";
-import { Icon } from "@com.mgmtp.a12.widgets/widgets-core/lib/icon/main/icon.view.js";
-import { Autocomplete } from "@com.mgmtp.a12.widgets/widgets-core/lib/input/autocomplete/main/autocomplete.view.js";
-import { CheckboxGroup } from "@com.mgmtp.a12.widgets/widgets-core/lib/input/checkbox-group/main/checkbox-group.view.js";
-import { Checkbox } from "@com.mgmtp.a12.widgets/widgets-core/lib/input/checkbox/main/checkbox.view.js";
-import { Radio } from "@com.mgmtp.a12.widgets/widgets-core/lib/input/radio/main/radio.view.js";
-import { Select } from "@com.mgmtp.a12.widgets/widgets-core/lib/input/select/main/select.view.js";
-import { Switch } from "@com.mgmtp.a12.widgets/widgets-core/lib/input/switch/main/switch.view.js";
-import { TextAreaStateless } from "@com.mgmtp.a12.widgets/widgets-core/lib/input/text-area/main/template/text-area.tpl.view.js";
 import {
+	AttachedPortal,
+	Autocomplete,
+	BulletList,
+	Button,
+	Checkbox,
+	CheckboxGroup,
+	DatePicker,
+	DatePickerDialog,
+	DateTimePicker,
+	DateTimePickerHeader,
+	ErrorTooltip,
+	HintTooltip,
+	Icon,
+	List,
+	MessageBox,
+	ModalOverlay,
+	Multiselect,
+	Radio,
+	Select,
+	Switch,
 	TextAffix,
-	TextLineStateless
-} from "@com.mgmtp.a12.widgets/widgets-core/lib/input/text-line/main/template/text-line.tpl.view.js";
-import { List } from "@com.mgmtp.a12.widgets/widgets-core/lib/list/main/list.view.js";
-import { MessageBox } from "@com.mgmtp.a12.widgets/widgets-core/lib/message-box/main/message-box.view.js";
-import { ModalOverlay } from "@com.mgmtp.a12.widgets/widgets-core/lib/modal-overlay/main/modal-overlay.view.js";
-import { Multiselect } from "@com.mgmtp.a12.widgets/widgets-core/lib/multiselect/main/multiselect.view.js";
-import { TimePicker } from "@com.mgmtp.a12.widgets/widgets-core/lib/time-picker/main/time-picker.view.js";
-import { ErrorTooltip } from "@com.mgmtp.a12.widgets/widgets-core/lib/tooltip/error/main/error.view.js";
-import { HintTooltip } from "@com.mgmtp.a12.widgets/widgets-core/lib/tooltip/hint/main/hint.view.js";
-import { WarningTooltip } from "@com.mgmtp.a12.widgets/widgets-core/lib/tooltip/warning/main/warning.view.js";
+	TextAreaStateless,
+	TextField,
+	TimePicker,
+	WarningTooltip
+} from "@com.mgmtp.a12.widgets/widgets-core";
 
 import type { WidgetMap } from "../core/index.js";
 
@@ -66,10 +67,10 @@ export const DefaultWidgetMap: WidgetMap = {
 	// and onBlur because they are recreated every time in Widgets
 	// buffered.view.tsx
 	TextAreaStateless: memo(TextAreaStateless, propsAreEqualWithBlacklist(["onChange", "onBlur"])),
-	TextLineStateless,
+	TextField,
 	Autocomplete,
 	Select,
-	MultiSelect: Multiselect,
+	Multiselect,
 	Switch,
 	Checkbox,
 	CheckboxIndeterminate: Checkbox.Indeterminate,
@@ -83,6 +84,7 @@ export const DefaultWidgetMap: WidgetMap = {
 	DateTimePicker,
 	TimePicker,
 
+	MessageBox,
 	ErrorTooltip,
 	HintTooltip,
 	WarningTooltip,
@@ -90,14 +92,15 @@ export const DefaultWidgetMap: WidgetMap = {
 	TextAffix,
 
 	//Helpers
-	Header,
+	DateTimePickerHeader,
 	Button,
 	Icon,
 	ModalOverlay,
 	AttachedPortal,
+	BulletListUnordered: BulletList.Unordered,
+	BulletListItem: BulletList.Item,
 	List,
-	ListItem: List.Item,
-	MessageBox
+	ListItem: List.Item
 };
 
 /**

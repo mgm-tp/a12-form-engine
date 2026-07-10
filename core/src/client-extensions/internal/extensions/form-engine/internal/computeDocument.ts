@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -32,35 +32,43 @@
 
 import type {
 	Document,
+	GeneratedCodeRtConfig,
 	GroupInstance,
 	IGeneratedCodeAccessor
-} from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
-import { DocumentRtServiceFactory } from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/facade.js";
+} from "@com.mgmtp.a12.kernel/kernel-md-facade";
+import { DocumentRtServiceFactory } from "@com.mgmtp.a12.kernel/kernel-md-facade";
 
 import type { Change, EngineStore } from "../../../../../back-end/store/index.js";
 import { convertComputedFieldsWithErrorsToValidationMessages } from "../../../../../back-end/store/internal/kernel-adapter.js";
-import { DocumentPath, type ReadonlyObjectMap } from "../../../../../models/index.js";
+import { DocumentPath } from "../../../../../models/index.js";
+import type { ReadonlyObjectMap } from "../../../../../models/index.js";
 
 export function computeDocument(options: {
 	readonly document: GroupInstance;
 	readonly validatorProvider?: IGeneratedCodeAccessor;
-	readonly kernelConfiguration: {
-		readonly now?: Date;
-	};
+	readonly kernelOptions?: GeneratedCodeRtConfig;
 }): {
 	changes: ReadonlyObjectMap<Change>;
 	document: GroupInstance;
 	messages: ReadonlyObjectMap<EngineStore.Validation.Entry>;
 } {
-	const { document, validatorProvider, kernelConfiguration } = options;
+	const { document, validatorProvider, kernelOptions } = options;
+	const {
+		currentDateForTest,
+		customConditionFactory,
+		customFieldTypeFactory,
+		ignoreUnknownFields
+	} = kernelOptions ?? {};
 
 	if (!validatorProvider) {
 		return { document, messages: {}, changes: {} };
 	}
 
 	const documentService = DocumentRtServiceFactory.createDocumentRtService(validatorProvider, {
-		currentDateForTest: kernelConfiguration.now,
-		ignoreUnknownFields: true
+		currentDateForTest,
+		customConditionFactory,
+		customFieldTypeFactory,
+		ignoreUnknownFields: ignoreUnknownFields !== false
 	});
 
 	const computationResult = documentService.compute(document as Document);

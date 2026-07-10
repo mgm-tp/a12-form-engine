@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -32,11 +32,7 @@
 
 import { strictEqual } from "node:assert/strict";
 
-import type { ModelPath } from "@com.mgmtp.a12.base/base-model-api/lib/main/model/index.js";
-import type { DocumentModel } from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
-import { Locale } from "@com.mgmtp.a12.utils/utils-localization/lib/main/index.js";
-
-import type IExternalEnumerationProvider from "../../../../../back-end/services/external-enumeration-provider.js";
+import type { IExternalEnumerationProvider } from "../../../../../back-end/services/external-enumeration-provider.js";
 import { createEngineStore } from "../../../../../back-end/store/index.js";
 import type { EngineState } from "../../../../../back-end/store/internal/store.js";
 import type { FormModelMap } from "../../../../../view/index.js";
@@ -45,7 +41,7 @@ import {
 	DefaultExternalEnumerationProvider,
 	DefaultFormModelMap
 } from "../../../../../view/internal/configuration/Defaults.js";
-import { DE_LOCALE, US_LOCALE } from "../../../../utils/localization.js";
+import { DE_LOCALE } from "../../../../utils/localization.js";
 import { setupModelsFixture } from "../../../../utils/setupFixture.js";
 
 describe("api.back-end.store.defaults", () => {
@@ -144,16 +140,11 @@ describe("api.back-end.store.defaults", () => {
 		describe("externalEnumerationProvider", () => {
 			describe("called with an external enumeration provider", () => {
 				it("returns an object with the state and a config where the given external enumeration provider is set", () => {
-					const externalEnumerationProvider: IExternalEnumerationProvider = (
-						source: string,
-						path?: ModelPath
-					): DocumentModel.ReadonlyObjectMap<{ [key: string]: string | undefined }> => {
-						return {
-							key_1: {
-								en: "test"
-							}
-						};
-					};
+					const externalEnumerationProvider: IExternalEnumerationProvider = () => ({
+						key_1: {
+							en: "test"
+						}
+					});
 					const props = defaultMapStateToProps(engineState, {
 						config: { externalEnumerationProvider }
 					});
@@ -165,68 +156,6 @@ describe("api.back-end.store.defaults", () => {
 				it("returns an object with the state and a config where an empty DefaultExternalEnumerationProvider is set", () => {
 					const props = defaultMapStateToProps(engineState, { config: {} });
 					strictEqual(props.config.externalEnumerationProvider, DefaultExternalEnumerationProvider);
-				});
-			});
-		});
-
-		describe("timeMode", () => {
-			describe("called with a timeMode", () => {
-				it("returns an object with the state and a config where the given timeMode is set", () => {
-					const props12 = defaultMapStateToProps(engineState, { config: { timeMode: "12h" } });
-					strictEqual(props12.config.timeMode, "12h");
-
-					const props24 = defaultMapStateToProps(engineState, { config: { timeMode: "24h" } });
-					strictEqual(props24.config.timeMode, "24h");
-				});
-			});
-
-			describe("called with no timeMode", () => {
-				describe("locale=en_US", () => {
-					it("returns an object with the state and a config where 'timeMode=12h'", () => {
-						const engineStateUs = createEngineStore({
-							models,
-							locale: US_LOCALE,
-							data: {}
-						});
-						const props = defaultMapStateToProps(engineStateUs, {});
-						strictEqual(props.config.timeMode, "12h");
-					});
-				});
-
-				describe("locale=en_DE", () => {
-					it("returns an object with the state and a config where 'timeMode=24h'", () => {
-						const engineStateUs = createEngineStore({
-							models,
-							locale: Locale.fromString("en_DE") as Locale,
-							data: {}
-						});
-						const props = defaultMapStateToProps(engineStateUs, {});
-						strictEqual(props.config.timeMode, "24h");
-					});
-				});
-
-				describe("locale=de_DE", () => {
-					it("returns an object with the state and a config where 'timeMode=24h'", () => {
-						const engineStateUs = createEngineStore({
-							models,
-							locale: DE_LOCALE,
-							data: {}
-						});
-						const props = defaultMapStateToProps(engineStateUs, {});
-						strictEqual(props.config.timeMode, "24h");
-					});
-				});
-
-				describe("any other locale", () => {
-					it("returns an object with the state and a config where 'timeMode=24h'", () => {
-						const engineStateUs = createEngineStore({
-							models,
-							locale: Locale.fromString("my_LO") as Locale,
-							data: {}
-						});
-						const props = defaultMapStateToProps(engineStateUs, {});
-						strictEqual(props.config.timeMode, "24h");
-					});
 				});
 			});
 		});

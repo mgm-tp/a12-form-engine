@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -30,20 +30,19 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import type { AnyAction, Dispatch } from "redux";
+import type { Action, Dispatch } from "redux";
 
-import type {
-	EntityInstancePath,
-	GroupInstance
-} from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
+import type { EntityInstancePath, GroupInstance } from "@com.mgmtp.a12.kernel/kernel-md-facade";
 
 import {
 	DocumentPath,
 	DocumentUtils
 } from "../../../../../models/internal/utils/document-utils.js";
+import { ReadonlyObjectMap } from "../../../../../models/internal/utils/json.js";
 import { Commands } from "../../actions.js";
 import { KernelComputation } from "../../computation.js";
-import { isPartOfComputation } from "../../kernel-adapter.js";
+import { ChangeMapCreators } from "../../documentChange.js";
+import { isComputedField, isPartOfComputation } from "../../kernel-adapter.js";
 import { DataSelectors } from "../../selectors/data.js";
 import { ModelSelectors } from "../../selectors/models.js";
 import { UiStateSelectors } from "../../selectors/ui-state.js";
@@ -68,7 +67,7 @@ export function handleTypeIncompatibleFieldValueChange({
 }: {
 	path: EntityInstancePath;
 	state: EngineState;
-	dispatch: Dispatch<AnyAction>;
+	dispatch: Dispatch<Action>;
 	middlewareOptions: MiddlewareOptions;
 	validationParseError: EngineStore.Validation.ParseError;
 }): void {
@@ -77,8 +76,9 @@ export function handleTypeIncompatibleFieldValueChange({
 	const validationCode = ModelSelectors.validationCode()(state);
 
 	let newMessages = UiStateSelectors.messages()(state);
-
 	let newDocument = DocumentUtils.setValue(originalDocument, path, null, documentModel);
+	const changesToDispatch = ChangeMapCreators.createValueChanged(path);
+
 	if (validationCode && isPartOfComputation(validationCode, path)) {
 		({ document: newDocument, messages: newMessages } =
 			KernelComputation.internalComputeThenValidate({
@@ -87,13 +87,22 @@ export function handleTypeIncompatibleFieldValueChange({
 				middlewareOptions,
 				state
 			}));
+
+		newMessages = ReadonlyObjectMap.filter(newMessages, (key, entry) => {
+			if (
+				entry?.parseError !== undefined &&
+				isComputedField(validationCode, DocumentPath.fromString(key))
+			) {
+				return DocumentUtils.getAssignedObject(newDocument, DocumentPath.fromString(key)) != null;
+			}
+			return true;
+		});
 	}
+
 	if (newDocument !== originalDocument) {
-		updateDocument(dispatch, state, newDocument, [{ type: "ValueChanged", path }]);
+		updateDocument(dispatch, state, newDocument, [...ReadonlyObjectMap.values(changesToDispatch)]);
 	}
 	updateUiDirtyState(dispatch, state);
-	// update all messages, because it can be that after the computation other fields
-	// do not have an error message anymore (for example if their computed value was deleted)
 	newMessages = {
 		...newMessages,
 		[DocumentPath.toString(path)]: { parseError: validationParseError, validationMessages: [] }

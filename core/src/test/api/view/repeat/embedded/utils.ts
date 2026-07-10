@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -33,24 +33,18 @@
 import type { Mock } from "node:test";
 import { mock } from "node:test";
 
-import { ModelPath } from "@com.mgmtp.a12.base/base-model-api/lib/main/model/index.js";
-import type {
-	EntityInstancePath,
-	GroupInstance
-} from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
+import { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
+import type { EntityInstancePath, GroupInstance } from "@com.mgmtp.a12.kernel/kernel-md-facade";
 
 import type { Models } from "../../../../../back-end/store/internal/store.js";
 import type { DispatchConfiguration } from "../../../../../view/index.js";
 import { defaultMapDispatchToProps } from "../../../../../view/index.js";
 import { getComponentMocks } from "../../../../rtl-utils/getComponentMocks.js";
 import type { RtlRenderWrapper } from "../../../../rtl-utils/render-wrapper.js";
-import { DocumentHelpers } from "../../../../utils/document-helpers.js";
-import { SetupHelpers } from "../../../../utils/setup.js";
+import { createDocumentPath } from "../../../../utils/createDocumentPath.js";
+import { loadData, setupFormEngineRendererWithRtlAsync } from "../../../../utils/setup.js";
 import { setupFixture, setupModelsFixture } from "../../../../utils/setupFixture.js";
 import { ER } from "../../../../utils/test-model-helpers/embedded.repeat.js";
-
-const { loadData } = SetupHelpers;
-const { createDocumentPath } = DocumentHelpers;
 
 const topLevelLocationPath = [{ elementName: ER.SortingAndFiltering.screenSortingAndFiltering }];
 const repeatableGroupPath = createDocumentPath([ER.ROOT], [ER.repeatableGroup]);
@@ -105,7 +99,7 @@ export function setup(options: {
 }): Promise<RtlRenderWrapper> {
 	const repeatFormModelPath = ER.SortingAndFiltering.repeatFormModelPath;
 
-	return SetupHelpers.setupFormEngineRendererWithRtlAsync({
+	return setupFormEngineRendererWithRtlAsync({
 		models: options.testEnv.models(),
 		data: { document: options.testEnv.document() },
 		ui: {

@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -36,10 +36,10 @@ import { useSelector } from "react-redux";
 
 import { KernelMessage } from "@com.mgmtp.a12.client/client-data";
 import { useDocumentContext } from "@com.mgmtp.a12.contentengine/contentengine-core";
-import type { Message } from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
-import { LocalizerContext } from "@com.mgmtp.a12.utils/utils-localization-react/lib/main/index.js";
-import { addPrefix } from "@com.mgmtp.a12.widgets/widgets-core/lib/common/main/utils.js";
-import type { MessageBoxVariant } from "@com.mgmtp.a12.widgets/widgets-core/lib/message-box/main/message-box.api.js";
+import type { Message } from "@com.mgmtp.a12.kernel/kernel-md-facade";
+import { LocalizerContext } from "@com.mgmtp.a12.utils/utils-localization-react";
+import { addPrefix } from "@com.mgmtp.a12.widgets/widgets-core";
+import type { MessageBoxVariant } from "@com.mgmtp.a12.widgets/widgets-core";
 
 import { WidgetMapContext } from "../../../widgetMap/widgetMap-context.js";
 import { FunctionMapContext } from "../../functionMap/functionMapContext.js";

@@ -3,8 +3,10 @@
 	"exclude": ["node_modules", "lib", "target"],
 	"include": ["src/index.ts", "src/main/ts", "src/test/ts"],
 	"compilerOptions": {
+		"rootDir": "./src",
 		"outDir": "./lib",
 		"types": ["node", "mocha"],
-		"skipLibCheck": true
+		"skipLibCheck": true,
+		"erasableSyntaxOnly": true
 	}
 }

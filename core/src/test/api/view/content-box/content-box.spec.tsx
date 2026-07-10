@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -31,24 +31,23 @@
  */
 
 import { strictEqual } from "node:assert/strict";
-import { mock, type Mock } from "node:test";
+import { mock } from "node:test";
+import type { Mock } from "node:test";
 
 import type { PropsWithChildren } from "react";
 
 import { query } from "@com.mgmtp.a12.devtools/react";
-import { NavigationContentboxContext } from "@com.mgmtp.a12.widgets/widgets-core/lib/contentbox/main/action-contentbox/action-contentbox.view.js";
-import type { SizeDetectorProps } from "@com.mgmtp.a12.widgets/widgets-core/lib/layout/size-detector/main/size-detector.api.js";
+import { NavigationContentboxContext } from "@com.mgmtp.a12.widgets/widgets-core";
+import type { SizeDetectorProps } from "@com.mgmtp.a12.widgets/widgets-core";
 
 import type { Models } from "../../../../back-end/store/internal/store.js";
 import type { DispatchConfiguration } from "../../../../view/index.js";
 import { defaultMapDispatchToProps } from "../../../../view/index.js";
 import { mouseEventMock } from "../../../rtl-utils/mock-utils.js";
-import { DocumentHelpers } from "../../../utils/document-helpers.js";
-import { ModelHelpers } from "../../../utils/model-helpers.js";
-import { SetupHelpers } from "../../../utils/setup.js";
+import { createDocumentPath } from "../../../utils/createDocumentPath.js";
+import { createModelPath } from "../../../utils/createModelPath.js";
+import { setupContentBoxRendererWithRtl } from "../../../utils/setup.js";
 import { setupModelsFixture } from "../../../utils/setupFixture.js";
-
-const { setupContentBoxRendererWithRtl } = SetupHelpers;
 
 describe("api.view.content-box", () => {
 	const models = setupModelsFixture("buttons");
@@ -85,8 +84,8 @@ describe("api.view.content-box", () => {
 								locationPath: []
 							},
 							{
-								path: DocumentHelpers.createDocumentPath(["Root"], ["Nested_L1"]),
-								locationPath: ModelHelpers.createModelPath(
+								path: createDocumentPath(["Root"], ["Nested_L1"]),
+								locationPath: createModelPath(
 									"SortingAndFiltering",
 									"sec1",
 									"inline-repeat-Nested_L1",

@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -33,35 +33,29 @@
 import { lazy, Suspense } from "react";
 import { useSelector } from "react-redux";
 
-import type { Activity } from "@com.mgmtp.a12.client/client-core/lib/core/activity/index.js";
-import type { DynamicConfiguration } from "@com.mgmtp.a12.client/client-core/lib/core/configurationNG/index.js";
-import type { DataProvider } from "@com.mgmtp.a12.client/client-core/lib/core/data/index.js";
-import { NullRegionLayoutNG } from "@com.mgmtp.a12.client/client-core/lib/core/frame/index.js";
-import type { ViewNGProps } from "@com.mgmtp.a12.client/client-core/lib/core/view/index.js";
-import type { FormActivity, Config } from "@com.mgmtp.a12.formengine/formengine-core";
-import {
-	createDefaultMiddlewareOptions,
-	formEngineDataReducers,
-	formEngineSagas,
-	FormEngineViews
-} from "@com.mgmtp.a12.formengine/formengine-core";
+import type {
+	Activity,
+	DataProvider,
+	DynamicConfiguration,
+	ViewNGProps
+} from "@com.mgmtp.a12.client/client-core";
+import { NullRegionLayoutNG } from "@com.mgmtp.a12.client/client-core";
+import type { Config, FormActivity } from "@com.mgmtp.a12.formengine/formengine-core";
+import { FormEngineViews } from "@com.mgmtp.a12.formengine/formengine-core";
 
-import { devappAttachmentLoader } from "../backend/devappAttachmentLoader.js";
-import { instancesLoadingSaga } from "../config/instancesLoadingSaga.js";
 import { externalEnumerationProvider } from "../customizations/configurable_externalenumeration.js";
 import { CustomSelectorMap } from "../customizations/customSelectorMap.js";
-import { createPreviewFormEngineMiddlewares, nowProvider, previewReducers } from "../shared.js";
 import { isRecord } from "../typeguards.js";
 
 import { getCustomization } from "./customizationModule.js";
 import { selectCurrentFormName } from "./utils.js";
 
-const ResizablePreview = lazy(() => import("../views/PreviewView.js"));
+const CustomPreview = lazy(() => import("../views/PreviewView.js"));
 
 function LazyPreview(props: ViewNGProps) {
 	return (
 		<Suspense>
-			<ResizablePreview {...props} />
+			<CustomPreview {...props} />
 		</Suspense>
 	);
 }
@@ -85,12 +79,6 @@ export interface SaveInstanceConfig extends DataProvider.SaveConfig {
 	readonly dataHolders: [InstanceDataholder];
 }
 
-const defaultOptions = {
-	...createDefaultMiddlewareOptions(),
-	externalEnumerationProvider,
-	nowProvider
-};
-
 function DynamicView(props: ViewNGProps) {
 	const formName = useSelector(selectCurrentFormName);
 
@@ -107,27 +95,24 @@ function DynamicView(props: ViewNGProps) {
 
 	return (
 		<LazyPreview {...props}>
-			<FE {...props} {...customConfig} name="PreviewFE" />
+			<FE {...props} {...customConfig} />
 		</LazyPreview>
 	);
 }
 
 /**
- * A module that provides:
- *
- * - a scene that dynamically renders the FormEngine component
- * - the necessary setup for the FormEngine functionality (reducers, sagas, middlewares)
+ * A module that provides the dynamic scene for the FormEngine preview.
  *
  * ## Scene
- * The FormEngine Preview should be displayed full-screen (without having the menu of the AppFrame). To achieve this:
+ * The FormEngine Preview is displayed full-screen (without the AppFrame menu). To achieve this:
  * - the root layout is switched to `Null` on enter
- * - the `CONTENT` region is cleared before adding our view
+ * - the `CONTENT` region is cleared before adding the view
  *
  * ## Deep linking
  *
  * If the form activity is restored from a deep link, client code will try to determine the loadingState from
  * the matching scene (which doesn't exist yet, because the activity did not reach the store at that point).
- * To prevent this error, we always provided the scene here (using an empty scene change if there is no form).
+ * To prevent this error, we always provide the scene here (using an empty scene change if there is no form).
  *
  * ## Customization
  *
@@ -135,7 +120,6 @@ function DynamicView(props: ViewNGProps) {
  *
  * - the default `FormEngineView.FormEngine` component
  * - a default FE config (see above)
- * - default middleware options
  *
  * To customize these properties per form model name,
  * `DevappCustomization` modules can be registered.
@@ -177,28 +161,5 @@ export const formEngineModule: DynamicConfiguration = {
 				]
 			}
 		];
-	},
-	dataReducers() {
-		return [...formEngineDataReducers, ...previewReducers];
-	},
-	sagas() {
-		return [
-			...formEngineSagas({
-				attachmentLoader: devappAttachmentLoader
-			}),
-			instancesLoadingSaga
-		];
-	},
-	middlewares(state) {
-		const formName = selectCurrentFormName(state);
-
-		const customizations = getCustomization(formName);
-
-		return formName
-			? createPreviewFormEngineMiddlewares({
-					...defaultOptions,
-					...customizations?.middlewareOptions
-				})
-			: [];
 	}
 };

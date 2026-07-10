@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -30,19 +30,19 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { ActivityActions } from "@com.mgmtp.a12.client/client-core/lib/core/activity/index.js";
-import { ApplicationActions } from "@com.mgmtp.a12.client/client-core/lib/core/application/index.js";
 import type {
 	DynamicConfiguration,
 	DynamicFlow,
 	DynamicMenu,
 	DynamicRegion
-} from "@com.mgmtp.a12.client/client-core/lib/core/configurationNG/index.js";
+} from "@com.mgmtp.a12.client/client-core";
 import {
+	ActivityActions,
+	ApplicationActions,
 	ApplicationFrameLayoutNG,
 	NullRegionLayoutNG,
 	StackRegionLayoutNG
-} from "@com.mgmtp.a12.client/client-core/lib/core/frame/index.js";
+} from "@com.mgmtp.a12.client/client-core";
 
 import { Home } from "../components/home/home.js";
 

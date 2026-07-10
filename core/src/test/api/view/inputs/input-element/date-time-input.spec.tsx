@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -35,13 +35,9 @@ import type { Mock } from "node:test";
 import { mock } from "node:test";
 
 import { query } from "@com.mgmtp.a12.devtools/react";
-import type { DocumentModel } from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
-import type {
-	Locale,
-	Localizable,
-	Localizer
-} from "@com.mgmtp.a12.utils/utils-localization/lib/main/index.js";
-import { defaultLocalizerFactory } from "@com.mgmtp.a12.utils/utils-localization/lib/main/index.js";
+import type { DocumentModel } from "@com.mgmtp.a12.kernel/kernel-md-facade";
+import type { Locale, Localizable, Localizer } from "@com.mgmtp.a12.utils/utils-localization";
+import { defaultLocalizerFactory } from "@com.mgmtp.a12.utils/utils-localization";
 
 import { RESOURCE_KEYS } from "../../../../../back-end/localization/index.js";
 import type { FormModel } from "../../../../../models/index.js";
@@ -50,13 +46,14 @@ import { defaultMapDispatchToProps } from "../../../../../view/index.js";
 import { DateTimeInput } from "../../../../../view/internal/components/form-engine/cells/controls/date/date-time-input.js";
 import { DateUtils } from "../../../../../view/internal/components/form-engine/cells/controls/date/date-utilities.js";
 import { getComponentMocks } from "../../../../rtl-utils/getComponentMocks.js";
-import { rtlRenderWrapper, type RtlRenderWrapper } from "../../../../rtl-utils/render-wrapper.js";
-import { DocumentHelpers } from "../../../../utils/document-helpers.js";
+import { rtlRenderWrapper } from "../../../../rtl-utils/render-wrapper.js";
+import type { RtlRenderWrapper } from "../../../../rtl-utils/render-wrapper.js";
+import { createDocumentPath } from "../../../../utils/createDocumentPath.js";
+import { createModelPath } from "../../../../utils/createModelPath.js";
+import { DocumentModelHelpers } from "../../../../utils/DocumentModelHelpers.js";
 import { DE_LOCALE } from "../../../../utils/localization.js";
-import { DocumentModelHelpers } from "../../../../utils/model-helpers.js";
-import { SetupHelpers } from "../../../../utils/setup.js";
+import { setupFormEngineRendererWithRtlAsync } from "../../../../utils/setup.js";
 import { setupModelsFixture } from "../../../../utils/setupFixture.js";
-import { createModelPath } from "../../../../utils/test-model-helpers/dependent-enumeration.js";
 
 import { inputTest } from "./generic-tests/input-tests.js";
 import { createProps } from "./generic-tests/input-utils.js";
@@ -64,7 +61,7 @@ import { createProps } from "./generic-tests/input-utils.js";
 const { Field } = DocumentModelHelpers;
 describe("api.view.inputs", () => {
 	describe("DateTimeInput", () => {
-		const models = setupModelsFixture("controls.picustypes");
+		const models = setupModelsFixture("controls.dmtypes");
 		const timeZoneModels = setupModelsFixture("controls.date-timezone");
 
 		const documentElementDataType: DocumentModel.DateTimeType = {
@@ -74,17 +71,13 @@ describe("api.view.inputs", () => {
 		const baseProps = {
 			documentElement: Field({ fieldType: documentElementDataType }),
 			documentElementDataType,
-			component: "TextLineStateless",
+			component: "TextField",
 			renderFunction: DateTimeInput,
 			getProps: (wrapper: RtlRenderWrapper) => query(wrapper.componentMap.BufferedTextLine).props(),
 			formModelPath: createModelPath("foo", "bar")
 		};
-		const datePath = DocumentHelpers.createDocumentPath(
-			["A12T_PicusTypes"],
-			["DateAndDateTime"],
-			["DateTime01"]
-		);
-		const datePathTimeZone = DocumentHelpers.createDocumentPath(["root"], ["DateTime01"]);
+		const datePath = createDocumentPath(["A12T_DmTypes"], ["DateAndDateTime"], ["DateTime01"]);
+		const datePathTimeZone = createDocumentPath(["root"], ["DateTime01"]);
 
 		const datePickerConfig: FormModel.DatePickerConfig = {
 			absolute: true,
@@ -144,12 +137,8 @@ describe("api.view.inputs", () => {
 				() => models,
 				{
 					...baseProps,
-					component: "TextLineStateless",
-					path: DocumentHelpers.createDocumentPath(
-						["A12T_PicusTypes"],
-						["DateAndDateTime"],
-						["DateTime01"]
-					),
+					component: "TextField",
+					path: createDocumentPath(["A12T_DmTypes"], ["DateAndDateTime"], ["DateTime01"]),
 					placeholder: true
 				},
 				{ autoCompleteTest: false }
@@ -417,16 +406,8 @@ describe("api.view.inputs", () => {
 				deepEqual(dateTimeTextLineProps.enableDatePicker, false);
 			});
 
-			it("sets timeMode to the value from the Config", () => {
-				const {
-					wrapper: { componentMap }
-				} = setup({ customProps: { config: { timeMode: "12h" } } });
-				const dateTimeTextLineProps = query(componentMap.DateTimeTextLine).props();
-				deepEqual(dateTimeTextLineProps.timeMode, "12h");
-			});
-
 			it("sets timeZone to the value from the document model", async () => {
-				const { componentMap } = await SetupHelpers.setupFormEngineRendererWithRtlAsync({
+				const { componentMap } = await setupFormEngineRendererWithRtlAsync({
 					componentMap: getComponentMocks(),
 					models: timeZoneModels
 				});

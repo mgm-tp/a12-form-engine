@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -36,7 +36,7 @@ import { mock } from "node:test";
 
 import { act } from "@testing-library/react";
 
-import { ModelPath } from "@com.mgmtp.a12.base/base-model-api/lib/main/model/index.js";
+import { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
 import { query } from "@com.mgmtp.a12.devtools/react";
 
 import { UiStateSelectors } from "../../../../../back-end/store/index.js";
@@ -47,9 +47,12 @@ import type { EnablementByRow } from "../../../../../view/internal/configuration
 import { DefaultRepeatButtonNames } from "../../../../../view/internal/configuration/engine-configuration.js";
 import { mouseEventMock } from "../../../../rtl-utils/mock-utils.js";
 import type { RtlRenderWrapper } from "../../../../rtl-utils/render-wrapper.js";
-import { DocumentHelpers } from "../../../../utils/document-helpers.js";
-import { ModelHelpers } from "../../../../utils/model-helpers.js";
-import { SetupHelpers } from "../../../../utils/setup.js";
+import { createDocumentPath } from "../../../../utils/createDocumentPath.js";
+import { createModelPath } from "../../../../utils/createModelPath.js";
+import {
+	setupConnectedFormEngineWithRtl,
+	setupFormEngineRendererWithRtlAsync
+} from "../../../../utils/setup.js";
 import { setupModelsFixture } from "../../../../utils/setupFixture.js";
 import { ER } from "../../../../utils/test-model-helpers/embedded.repeat.js";
 import { FORM_MODEL } from "../../../../utils/test-model-helpers/repeat.add.js";
@@ -157,7 +160,7 @@ describe("api.view.repeat", () => {
 					document?: object;
 					dispatchConfig?: DispatchConfiguration;
 				}): Promise<RtlRenderWrapper> {
-					return SetupHelpers.setupFormEngineRendererWithRtlAsync({
+					return setupFormEngineRendererWithRtlAsync({
 						models,
 						ui: {
 							screenLocation: [
@@ -349,7 +352,7 @@ describe("api.view.repeat", () => {
 
 							deepStrictEqual(
 								addRow.mock.calls[0].arguments[0],
-								DocumentHelpers.createDocumentPath(["repInitialValues", 0])
+								createDocumentPath(["repInitialValues", 0])
 							);
 						}
 					);
@@ -392,7 +395,7 @@ describe("api.view.repeat", () => {
 										}
 									];
 
-									const wrapper = SetupHelpers.setupConnectedFormEngineWithRtl({
+									const wrapper = setupConnectedFormEngineWithRtl({
 										models: embeddedRepeatModels,
 										data: { document: doc },
 										ui: {
@@ -450,21 +453,21 @@ describe("api.view.repeat", () => {
 				it("calls addRow from the dispatch configuration with the form model path to the repeat", async () => {
 					const { dispatchConfig, addRow } = mockAddRow();
 
-					const wrapper = await SetupHelpers.setupFormEngineRendererWithRtlAsync({
+					const wrapper = await setupFormEngineRendererWithRtlAsync({
 						models,
 						ui: {
 							screenLocation: [
 								{
-									locationPath: ModelHelpers.createModelPath("DetachedRepeat"),
+									locationPath: createModelPath("DetachedRepeat"),
 									path: []
 								},
 								{
-									locationPath: ModelHelpers.createModelPath(
+									locationPath: createModelPath(
 										"DetachedRepeat",
 										"detached-repeat-rep",
 										"detached-repeat-rep-detail-screen"
 									),
-									path: DocumentHelpers.createDocumentPath(["rep", 2])
+									path: createDocumentPath(["rep", 2])
 								}
 							]
 						},
@@ -484,7 +487,7 @@ describe("api.view.repeat", () => {
 
 					deepStrictEqual(
 						addRow.mock.calls[0].arguments[0],
-						DocumentHelpers.createDocumentPath(["rep", 2], ["nestedRepInitialRows", 0])
+						createDocumentPath(["rep", 2], ["nestedRepInitialRows", 0])
 					);
 				});
 			});

@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -39,12 +39,12 @@
 import deepEqual from "fast-deep-equal";
 import type { JSX } from "react";
 import { memo, useMemo, useRef } from "react";
-import { connect } from "react-redux";
+import { connect, shallowEqual } from "react-redux";
 
-import { ActivitySelectors } from "@com.mgmtp.a12.client/client-core/lib/core/activity/index.js";
-import type { View } from "@com.mgmtp.a12.client/client-core/lib/core/view/index.js";
-import { ViewViews } from "@com.mgmtp.a12.client/client-core/lib/core/view/index.js";
+import type { View } from "@com.mgmtp.a12.client/client-core";
+import { ActivitySelectors, ViewViews } from "@com.mgmtp.a12.client/client-core";
 
+import type { PickOptional } from "../../../../../back-end/utils/internal/types.js";
 import type {
 	Config,
 	DefaultDispatchProps,
@@ -54,14 +54,32 @@ import type {
 	ScrollHandlerProps
 } from "../../../../../view/index.js";
 import { FormEngineRenderer, ScrollHandler } from "../../../../../view/index.js";
-import { createRenderGuardComponent } from "../../../core/view/internal/components/createRenderGuardComponent.js";
+import {
+	createRenderGuardComponent,
+	Placeholder
+} from "../../../core/view/internal/components/createRenderGuardComponent.js";
 
 import { FormEngineActions } from "./actions.js";
 import { FormEngineStateAdapter } from "./state.js";
 import { useFocus } from "./useFocus.js";
 import { useScrollToTop } from "./useScrollToTop.js";
 
-type EngineCompositionProps = View & FormEngineRendererPropsType & ScrollHandlerProps;
+export type EngineCompositionProps = Pick<View, "activityId" | "ariaLevel"> &
+	FormEngineRendererPropsType &
+	Omit<ScrollHandlerProps, "uiState" | "models" | "children">;
+
+/**
+ * FormEngineTpl can be rendered with optional state and config that are
+ * usually created by mapStateToProps and that are protected by the RenderGuard.
+ */
+export type FormEngineTplProps = PickOptional<EngineCompositionProps, "state" | "config">;
+
+/**
+ * FormEngine can be rendered with an incomplete config, that is extended by mapStateToProps.
+ * EventHandlers and state are forbidden, as they come from mapDispatchToProps / mapStateToProps.
+ */
+export type FormEngineProps = Omit<EngineCompositionProps, "eventHandlers" | "state" | "config"> &
+	Partial<Config>;
 
 function EngineComposition(props: EngineCompositionProps): JSX.Element | null {
 	const activityId = props.activityId;
@@ -87,8 +105,19 @@ function EngineComposition(props: EngineCompositionProps): JSX.Element | null {
 
 	return (
 		<ViewViews.ActivityContext.Provider value={activityContextValue}>
-			<ScrollHandler {...props} models={props.state.models} uiState={props.state.ui}>
-				<FormEngineRenderer {...props} scrollRef={scrollRef} />
+			<ScrollHandler
+				models={props.state.models}
+				uiState={props.state.ui}
+				disableRepeatBehavior={props.disableRepeatBehavior}
+				disableScrollToTopLevelScreen={props.disableScrollToTopLevelScreen}
+				uiIdPrefix={props.uiIdPrefix}
+			>
+				<FormEngineRenderer
+					config={props.config}
+					eventHandlers={props.eventHandlers}
+					state={props.state}
+					scrollRef={scrollRef}
+				/>
 			</ScrollHandler>
 		</ViewViews.ActivityContext.Provider>
 	);
@@ -98,31 +127,36 @@ function EngineComposition(props: EngineCompositionProps): JSX.Element | null {
 export const FormEngineViewTpl = createRenderGuardComponent(
 	memo(EngineComposition, areStatePropsEqual),
 	propsAreComplete,
-	shouldComponentUpdate
+	shouldComponentUpdate,
+	Placeholder,
+	false
 );
 
 /** @internal */
 export const FormEngineView = connect<
 	Partial<DefaultStateProps>,
 	DefaultDispatchProps,
-	View & Partial<Config> & Partial<ScrollHandlerProps>
+	FormEngineProps,
+	object
 >(
 	FormEngineStateAdapter.mapStateToProps,
 	FormEngineActions.mapDispatchToProps
 )(FormEngineViewTpl);
 
-function propsAreComplete(props: Partial<EngineCompositionProps>): props is EngineCompositionProps {
+function propsAreComplete(
+	props: Partial<Pick<EngineCompositionProps, "config" | "state">>
+): props is EngineCompositionProps {
 	const { config, state } = props;
 	return config !== undefined && state !== undefined;
 }
 
-function shouldComponentUpdate(state: object, props: Partial<EngineCompositionProps>): boolean {
-	if (props.activityId === undefined) {
-		return false;
-	}
-
+function shouldComponentUpdate(state: object, props: EngineCompositionProps): boolean {
 	const formEngineLoadingState = ActivitySelectors.loadingStateById(props.activityId)(state);
-	return formEngineLoadingState === "loaded" || formEngineLoadingState === "error";
+	return (
+		formEngineLoadingState === "loaded" ||
+		formEngineLoadingState === "error" ||
+		formEngineLoadingState === "without"
+	);
 }
 
 /**
@@ -130,10 +164,8 @@ function shouldComponentUpdate(state: object, props: Partial<EngineCompositionPr
  * `FormEngineStateAdapter.mapStateToProps` (and possibly also
  * `defaultMapStateToProps`). Therefore, we need to navigate down in the state
  * props objects until we have some stable props.
- *
- * @internal
  */
-export function areStatePropsEqual(
+function areStatePropsEqual(
 	prevProps: Partial<DefaultStateProps>,
 	curProps: Partial<DefaultStateProps>
 ): boolean {
@@ -142,27 +174,13 @@ export function areStatePropsEqual(
 	}
 
 	return (
-		areConfigsEqual(prevProps.config, curProps.config) &&
+		shallowEqual(prevProps.config, curProps.config) &&
 		prevProps.state.locale === curProps.state.locale &&
 		prevProps.state.data.dirty === curProps.state.data.dirty &&
 		prevProps.state.data.document === curProps.state.data.document &&
 		deepEqual(prevProps.state.data.attachmentState, curProps.state.data.attachmentState) &&
 		prevProps.state.models.documentModel === curProps.state.models.documentModel &&
 		prevProps.state.models.formModel === curProps.state.models.formModel &&
-		arePropsEqual(prevProps.state.ui, curProps.state.ui)
+		shallowEqual(prevProps.state.ui, curProps.state.ui)
 	);
-}
-
-function areConfigsEqual(c1: Config | undefined, c2: Config | undefined): boolean {
-	if (c1 === undefined || c2 === undefined) {
-		return c1 === c2;
-	}
-	return arePropsEqual(c1, c2);
-}
-
-// shortcut so that we don't have to list all props here
-function arePropsEqual<T extends object>(d1: T, d2: T): boolean {
-	const k1 = Object.keys(d1) as (keyof T)[];
-	const k2 = Object.keys(d2);
-	return k1.length === k2.length && k1.every(p1 => d1[p1] === d2[p1]);
 }

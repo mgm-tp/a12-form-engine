@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -30,16 +30,16 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { deepStrictEqual, strictEqual, notStrictEqual } from "node:assert/strict";
+import { deepStrictEqual, notStrictEqual, strictEqual } from "node:assert/strict";
 
-import type { EntityInstancePath } from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
+import type { EntityInstancePath } from "@com.mgmtp.a12.kernel/kernel-md-facade";
 
 import type { EngineStore } from "../../../../../../back-end/store/index.js";
 import { Events, UiStateSelectors } from "../../../../../../back-end/store/index.js";
 import { DocumentPath } from "../../../../../../models/index.js";
-import { SetupHelpers } from "../../../../../utils/setup.js";
+import { createDocumentPath } from "../../../../../utils/createDocumentPath.js";
+import { createTestStore } from "../../../../../utils/setup.js";
 import { setupModelsFixture } from "../../../../../utils/setupFixture.js";
-import { createDocumentPath } from "../../../../../utils/test-model-helpers/dependent-enumeration.js";
 import { createValidationEntry } from "../../../../../utils/validation.js";
 
 export function executeTestsForErrorMessages(): void {
@@ -52,7 +52,7 @@ export function executeTestsForErrorMessages(): void {
 		data?: Partial<EngineStore.DataState>;
 		ui?: Partial<EngineStore.UIState>;
 	} = {}) {
-		return SetupHelpers.createTestStore({
+		return createTestStore({
 			storeConfig: { models, data: data ?? {}, ui: ui ?? {} }
 		});
 	}

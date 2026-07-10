@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -30,17 +30,15 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { actionCreatorFactory } from "typescript-fsa";
-
-import type { ActivityActions } from "@com.mgmtp.a12.client/client-core/lib/core/activity/index.js";
-
-import type { EmptyDocumentDataProviderOptions } from "../backend/mock/mockCreateEmptyDataProvider.js";
+import type { ActivityActions } from "@com.mgmtp.a12.client/client-core";
+import { actionCreatorFactory } from "@com.mgmtp.a12.client/typescript-fsa-redux-5-compat";
+import type { GeneratedCodeRtConfig } from "@com.mgmtp.a12.kernel/kernel-md-facade";
 
 const factory = actionCreatorFactory("DEVAPP_PREVIEW");
 
 export interface NewDocumentRequestedPayload extends ActivityActions.ActivityActionPayload {
-	readonly options?: EmptyDocumentDataProviderOptions;
-	readonly preComputeNewDocuments?: boolean;
+	readonly kernelOptions?: GeneratedCodeRtConfig;
+	readonly preComputeNewDocuments: boolean;
 }
 
 export const newDocumentRequested = factory<NewDocumentRequestedPayload>("NEW_DOCUMENT_REQUESTED");

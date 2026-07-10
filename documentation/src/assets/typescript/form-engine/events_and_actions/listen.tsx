@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -31,15 +31,13 @@
  */
 
 // tag::listenExample[]
-import type { AnyAction, Middleware } from "redux";
-import { takeLatest, type SagaGenerator } from "typed-redux-saga";
-import type { Action } from "typescript-fsa";
+import type { Middleware, Action as ReduxAction } from "redux";
+import { takeLatest } from "typed-redux-saga";
+import type { SagaGenerator } from "typed-redux-saga";
 
-import {
-	Events,
-	FormEngineActions,
-	type EngineState
-} from "@com.mgmtp.a12.formengine/formengine-core";
+import type { Action } from "@com.mgmtp.a12.client/typescript-fsa-redux-5-compat";
+import { Events, FormEngineActions } from "@com.mgmtp.a12.formengine/formengine-core";
+import type { EngineState } from "@com.mgmtp.a12.formengine/formengine-core";
 // convenience type helper
 type EventButtonAction = Action<Events.EventButtonPayload>;
 
@@ -62,7 +60,7 @@ export const onEventButtonClickedMiddleware: Middleware<{}, EngineState> = () =>
 // Saga
 export function* onEventButtonClickedSaga(): SagaGenerator<void> {
 	yield* takeLatest<Action<FormEngineActions.FormEngineEventActions<EventButtonAction>>>(
-		(action: AnyAction) => {
+		(action: ReduxAction) => {
 			return (
 				FormEngineActions.event.match(action) &&
 				Events.eventButton.match(action.payload.engineEvent)

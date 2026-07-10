@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -41,44 +41,29 @@ export interface ReadonlyObjectMap<T> {
  * @internal
  * @ignore
  */
-export namespace ReadonlyObjectMap {
-	/**
-	 * @internal
-	 */
-	export function entries<T>(map: ReadonlyObjectMap<T>): [string, T][] {
+export const ReadonlyObjectMap = {
+	entries<T>(map: ReadonlyObjectMap<T>): [string, T][] {
 		return Object.entries(map).filter(([, v]) => v !== undefined) as [string, T][];
-	}
+	},
 
-	/**
-	 * @internal
-	 */
-	export function keys<T>(map: ReadonlyObjectMap<T>): string[] {
-		return entries(map).map(([k]) => k);
-	}
+	keys<T>(map: ReadonlyObjectMap<T>): string[] {
+		return ReadonlyObjectMap.entries(map).map(([k]) => k);
+	},
 
-	/**
-	 * @internal
-	 */
-	export function values<T>(map: ReadonlyObjectMap<T>): T[] {
-		return entries(map).map(([, v]) => v);
-	}
+	values<T>(map: ReadonlyObjectMap<T>): T[] {
+		return ReadonlyObjectMap.entries(map).map(([, v]) => v);
+	},
 
-	/**
-	 * @internal
-	 */
-	export function filter<T>(
+	filter<T>(
 		map: ReadonlyObjectMap<T>,
 		filterCb: (key: string, entry: T) => boolean
 	): ReadonlyObjectMap<T> {
-		return Object.fromEntries(entries(map).filter(([k, v]) => filterCb(k, v)));
-	}
+		return Object.fromEntries(ReadonlyObjectMap.entries(map).filter(([k, v]) => filterCb(k, v)));
+	},
 
-	/**
-	 * @internal
-	 */
-	export function removeByKey<T>(obj: ReadonlyObjectMap<T>, key: string): ReadonlyObjectMap<T> {
+	removeByKey<T>(obj: ReadonlyObjectMap<T>, key: string): ReadonlyObjectMap<T> {
 		const { [key]: _, ...rest } = obj;
 
 		return rest;
 	}
-}
+};

@@ -1,20 +1,25 @@
 {
   "name": "@com.mgmtp.a12.formengine/formengine-core",
-  "version": "38.5.0-SNAPSHOT",
+  "version": "39.0.0",
   "description": "Form-Engine",
   "author": "mgm technology partners",
   "license": "(EUPL-1.2 OR LicenseRef-commercial)",
   "type": "module",
   "sideEffects": false,
-  "main": "lib/index.js",
-  "types": "lib/index.d.ts",
+  "exports": {
+    ".": "./lib/index.js",
+    "./a12internal": "./lib/client-extensions/internal/extensions/form-engine/internal/engineMiddlewareAdapterFactory.js"
+  },
   "scripts": {
     "clean": "rimraf ./lib ./target cyclonedx.json",
     "build": "node --run compile && node --run typedoc && pnpm \"/^validate:.+/\"",
     "compile": "node --run copyJison && pnpm \"/^compile:.+/\"",
     "copyJison": "node ./scripts/initialize/jison.js",
     "compile:typescript": "tsc",
-    "compile:detect-cycles": "devtools detect-cycles \"./src/**/*.@(ts|tsx)\" --ignore-type-imports",
+    "compile:detect-cycles": "devtools detect-cycles \"./src/**/*.@(ts|tsx|d.ts|d.cts|d.mts)\" --ignore-type-imports",
+    "lint": "eslint --flag unstable_native_nodejs_ts_config . --cache",
+    "lint:fix": "node --run lint -- --fix",
+    "lint:onlyErrors": "node --run lint -- --quiet",
     "validate:tsc": "devtools verify-ts-compat ./tsconfig.lib.json -p",
     "validate:api": "api-extractor run --verbose",
     "update:api": "api-extractor run --local",
@@ -28,6 +33,7 @@
     "dev:unused-exports": "ts-unused-exports ./tsconfig.json $(find ./src/test -name *.ts -or -name *.tsx)"
   },
   "dependencies": {
+    "@com.mgmtp.a12.client/typescript-fsa-redux-5-compat": "catalog:a12ranges",
     "dompurify": "catalog:ranges",
     "fast-deep-equal": "catalog:ranges",
     "fp-ts": "catalog:ranges"
@@ -37,8 +43,8 @@
     "@com.mgmtp.a12.client/client-core": "catalog:a12",
     "@com.mgmtp.a12.dataservices/dataservices-access": "catalog:a12",
     "@com.mgmtp.a12.devtools/build-tools": "catalog:a12",
-    "@com.mgmtp.a12.devtools/tsconfig": "catalog:a12",
     "@com.mgmtp.a12.devtools/react": "catalog:a12",
+    "@com.mgmtp.a12.devtools/tsconfig": "catalog:a12",
     "@com.mgmtp.a12.expression/expression-core": "catalog:a12",
     "@com.mgmtp.a12.kernel/kernel-core-runtime-api-ts": "catalog:a12",
     "@com.mgmtp.a12.kernel/kernel-md-facade": "catalog:a12",
@@ -49,7 +55,7 @@
     "@com.mgmtp.a12.utils/utils-logging": "catalog:a12",
     "@com.mgmtp.a12.widgets/widgets-core": "catalog:a12",
     "@fp-ts/optic": "catalog:",
-    "effect": "catalog:",
+    "@jambit/eslint-plugin-typed-redux-saga": "catalog:",
     "@microsoft/api-extractor": "catalog:",
     "@testing-library/dom": "catalog:",
     "@testing-library/react": "catalog:",
@@ -59,8 +65,9 @@
     "@types/node": "catalog:",
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
-    "@types/react-redux": "catalog:",
     "c8": "catalog:",
+    "eslint": "catalog:",
+    "eslint-plugin-mocha": "catalog:",
     "glob": "catalog:",
     "global-jsdom": "catalog:",
     "jison": "catalog:",
@@ -80,7 +87,6 @@
     "typed-redux-saga": "catalog:",
     "typedoc": "catalog:",
     "typescript": "catalog:",
-    "typescript-fsa": "catalog:",
     "yargs": "catalog:"
   },
   "peerDependencies": {
@@ -108,5 +114,5 @@
     "licenses"
   ],
   "modelType": "form",
-  "modelVersion": ">=37.0.0 <=37.4.0"
+  "modelVersion": ">=39.0.0 <=39.0.0"
 }

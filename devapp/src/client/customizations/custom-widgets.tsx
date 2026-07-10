@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -34,26 +34,26 @@ import type { JSX } from "react";
 import { createContext, useContext, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import type { ModelPath } from "@com.mgmtp.a12.base/base-model-api/lib/main/model/index.js";
-import { ViewViews } from "@com.mgmtp.a12.client/client-core/lib/core/view/index.js";
-import type { FormModelMap, WidgetMap } from "@com.mgmtp.a12.formengine/formengine-core";
+import type { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
+import { ViewViews } from "@com.mgmtp.a12.client/client-core";
+import type { FormModel, FormModelMap, WidgetMap } from "@com.mgmtp.a12.formengine/formengine-core";
 import {
+	DefaultFormModelMap,
+	DefaultWidgetMap,
 	Events,
 	FormEngineActions,
 	FormEngineSelectors,
-	FormModel,
-	DefaultFormModelMap,
-	DefaultWidgetMap,
+	isFormModelControl,
+	isFormModelControlGrid,
 	useDocumentPathForInput
 } from "@com.mgmtp.a12.formengine/formengine-core";
+import type { DocumentModel, EntityInstancePath } from "@com.mgmtp.a12.kernel/kernel-md-facade";
+import { ContentBoxElements } from "@com.mgmtp.a12.widgets/widgets-core";
 import type {
-	DocumentModel,
-	EntityInstancePath
-} from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
-import { ContentBoxElements } from "@com.mgmtp.a12.widgets/widgets-core/lib/contentbox/main/template/contentbox.tpl.view.js";
-import type { DatePickerProps } from "@com.mgmtp.a12.widgets/widgets-core/lib/datepicker/main/date-picker.api.js";
-import type { TextLineStatelessProps } from "@com.mgmtp.a12.widgets/widgets-core/lib/input/text-line/main/template/text-line.tpl.api.js";
-import type { HeadlineProps } from "@com.mgmtp.a12.widgets/widgets-core/lib/typography/main/typography.api.js";
+	DatePickerProps,
+	HeadlineProps,
+	TextFieldProps
+} from "@com.mgmtp.a12.widgets/widgets-core";
 
 const CustomInputContext = createContext<{
 	formModelElement?: FormModel.Control | FormModel.BasicScreenElement;
@@ -61,15 +61,15 @@ const CustomInputContext = createContext<{
 
 export const CustomWidgetMap: WidgetMap = {
 	...DefaultWidgetMap,
-	TextLineStateless: (props: TextLineStatelessProps) => {
+	TextField: (props: TextFieldProps) => {
 		const customInputContext = useContext(CustomInputContext);
 		const element = customInputContext.formModelElement;
 		if (
 			element === undefined ||
-			!FormModel.Control.isInstance(element) ||
+			!isFormModelControl(element) ||
 			element.annotations === undefined
 		) {
-			return <DefaultWidgetMap.TextLineStateless {...props} />;
+			return <DefaultWidgetMap.TextField {...props} />;
 		}
 
 		const annotation = element.annotations[0];
@@ -79,7 +79,7 @@ export const CustomWidgetMap: WidgetMap = {
 			return <TextLineWithClearButton {...props} />;
 		}
 
-		return <DefaultWidgetMap.TextLineStateless {...props} />;
+		return <DefaultWidgetMap.TextField {...props} />;
 	},
 	TypographyHeadline: (props: HeadlineProps) => {
 		const customInputContext = useContext(CustomInputContext);
@@ -87,7 +87,7 @@ export const CustomWidgetMap: WidgetMap = {
 
 		if (
 			element === undefined ||
-			!FormModel.ControlGrid.isInstance(element) ||
+			!isFormModelControlGrid(element) ||
 			element.annotations === undefined
 		) {
 			return <DefaultWidgetMap.TypographyHeadline {...props} />;
@@ -115,7 +115,7 @@ export const CustomWidgetMap: WidgetMap = {
 
 		if (
 			element === undefined ||
-			!FormModel.Control.isInstance(element) ||
+			!isFormModelControl(element) ||
 			element.annotations === undefined
 		) {
 			return <DefaultWidgetMap.DatePicker {...props} />;
@@ -163,11 +163,11 @@ export const FormModelMapForWidgetMap: FormModelMap = {
 	}
 };
 
-function TextLineWithHelperModal(props: TextLineStatelessProps): JSX.Element {
+function TextLineWithHelperModal(props: TextFieldProps): JSX.Element {
 	const [isOpen, setModalOpen] = useState(false);
 	return (
 		<>
-			<DefaultWidgetMap.TextLineStateless
+			<DefaultWidgetMap.TextField
 				{...props}
 				addonAfter={
 					<>
@@ -210,7 +210,7 @@ function TextLineWithHelperModal(props: TextLineStatelessProps): JSX.Element {
 	);
 }
 
-function TextLineWithClearButton(props: TextLineStatelessProps): JSX.Element | null {
+function TextLineWithClearButton(props: TextFieldProps): JSX.Element | null {
 	const activityId = useContext(ViewViews.ActivityContext)?.activityId;
 
 	// Assuming the layout correctly sets the ActivityContext and the TextLine would never be rendered without activity
@@ -228,14 +228,14 @@ function TextLineWithClearButton(props: TextLineStatelessProps): JSX.Element | n
 }
 
 function TextLineWithClearButtonInternal(
-	props: TextLineStatelessProps & { activityId: string; documentModel: DocumentModel }
+	props: TextFieldProps & { activityId: string; documentModel: DocumentModel }
 ): JSX.Element {
 	const { activityId, documentModel } = props;
 	const dispatch = useDispatch();
 
 	const customInputContext = useContext(CustomInputContext);
 	const element = customInputContext.formModelElement;
-	const modelPath = element && FormModel.Control.isInstance(element) ? element.elementPath : [];
+	const modelPath = element && isFormModelControl(element) ? element.elementPath : [];
 	const documentPath = useDocumentPathForInput(modelPath, documentModel);
 
 	const onClearButtonClicked = (path: EntityInstancePath, formModelElementPath: ModelPath) => {
@@ -244,7 +244,7 @@ function TextLineWithClearButtonInternal(
 	};
 
 	return (
-		<DefaultWidgetMap.TextLineStateless
+		<DefaultWidgetMap.TextField
 			{...props}
 			suffixes={
 				<DefaultWidgetMap.Button

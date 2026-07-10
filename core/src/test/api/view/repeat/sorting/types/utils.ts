@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -30,26 +30,23 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import type { ModelPath } from "@com.mgmtp.a12.base/base-model-api/lib/main/model/index.js";
-import type { EntityInstancePath } from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
-import type { Locale } from "@com.mgmtp.a12.utils/utils-localization/lib/main/index.js";
+import type { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
+import type { EntityInstancePath } from "@com.mgmtp.a12.kernel/kernel-md-facade";
+import type { Locale } from "@com.mgmtp.a12.utils/utils-localization";
 import {
 	defaultDataFormats,
 	defaultLocalizerFactory,
 	defaultValueConversion
-} from "@com.mgmtp.a12.utils/utils-localization/lib/main/index.js";
+} from "@com.mgmtp.a12.utils/utils-localization";
 
-import type IExternalEnumerationProvider from "../../../../../../back-end/services/external-enumeration-provider.js";
+import type { IExternalEnumerationProvider } from "../../../../../../back-end/services/external-enumeration-provider.js";
 import { createEngineStore } from "../../../../../../back-end/store/index.js";
 import type { Models } from "../../../../../../back-end/store/internal/store.js";
 import { RepeatData } from "../../../../../../data/internal/repeat.js";
 import type { Value } from "../../../../../../view/index.js";
 import type { RepeatRow } from "../../../../../../view/internal/components/form-engine/repeat/components/tableColumnTypes.js";
-import { DocumentHelpers } from "../../../../../utils/document-helpers.js";
-import {
-	createDocumentPath,
-	createModelPath
-} from "../../../../../utils/test-model-helpers/dependent-enumeration.js";
+import { createDocumentPath } from "../../../../../utils/createDocumentPath.js";
+import { createModelPath } from "../../../../../utils/createModelPath.js";
 import { REPEAT_MODEL_PATH } from "../../filter/filter.utils.js";
 
 export function createRow(
@@ -59,7 +56,7 @@ export function createRow(
 	value: string | number | boolean | Date | null | object | undefined,
 	uiValue?: string
 ): RepeatRow {
-	const rowPath = DocumentHelpers.createDocumentPath(["Root"], ["Nested_L1", rowIndex + 1]);
+	const rowPath = createDocumentPath(["Root"], ["Nested_L1", rowIndex + 1]);
 	return {
 		path: rowPath,
 		rowIndexInDocument: rowIndex,

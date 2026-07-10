@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -36,18 +36,18 @@ import {
 	defaultDataFormats,
 	defaultLocalizerFactory,
 	defaultValueConversion
-} from "@com.mgmtp.a12.utils/utils-localization/lib/main/index.js";
+} from "@com.mgmtp.a12.utils/utils-localization";
 
 import { createEngineStore } from "../../../../../../back-end/store/index.js";
 import type { Models } from "../../../../../../back-end/store/internal/store.js";
 import { RepeatData } from "../../../../../../data/internal/repeat.js";
 import type { RepeatRow } from "../../../../../../view/internal/components/form-engine/repeat/components/tableColumnTypes.js";
 import { filterRows } from "../../../../../../view/internal/utilities/filtering.js";
+import { createDocumentPath } from "../../../../../utils/createDocumentPath.js";
+import { createModelPath } from "../../../../../utils/createModelPath.js";
 import { US_LOCALE } from "../../../../../utils/localization.js";
-import { ModelHelpers } from "../../../../../utils/model-helpers.js";
-import { SetupHelpers } from "../../../../../utils/setup.js";
 import { setupArrayFixture, setupFixture } from "../../../../../utils/setupFixture.js";
-import { createDocumentPath } from "../../../../../utils/test-model-helpers/dependent-enumeration.js";
+import { loadData } from "../../../../../utils/setup.js";
 
 import { emptySwitchFunctions } from "../filter-functions/empty-switch.js";
 import { textLineFunctions } from "../filter-functions/textline-filter.js";
@@ -58,9 +58,6 @@ import {
 	readonlyFilterTest,
 	REPEAT_MODEL_PATH
 } from "../filter.utils.js";
-
-const { createModelPath } = ModelHelpers;
-const { loadData } = SetupHelpers;
 
 export function describeTestForExpressionFilter(models: Models): void {
 	const EXPRESSION_COLUMN_NAME = "L1_Expression";

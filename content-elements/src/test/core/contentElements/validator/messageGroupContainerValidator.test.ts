@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -36,140 +36,144 @@ import type {
 	ContentModel,
 	NodeValidationContext
 } from "@com.mgmtp.a12.contentengine/contentengine-core";
-import type { DocumentModel } from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
+import type { DocumentModel } from "@com.mgmtp.a12.kernel/kernel-md-facade";
 
 import { MESSAGE_GROUP_CONTAINER_TYPE } from "../../../../main/core/contentElements/modules/messageGroupContainer/messageGroupContainerNode.js";
 import { messageGroupContainerValidator } from "../../../../main/core/contentElements/modules/messageGroupContainer/messageGroupContainerValidator.js";
 import { MESSAGE_GROUP_DISPLAY_TYPE } from "../../../../main/core/contentElements/modules/messageGroupDisplay/messageGroupDisplayNode.js";
 import { FORM_ELEMENTS_NAMESPACE } from "../../../../main/core/namespace.js";
 
-describe("MessageGroupContainerValidator", () => {
-	it("returns an error for a missing Document Model reference if the props contain any references", () => {
-		const testProps = [
-			{
-				fields: ["field"]
-			},
-			{
-				groups: ["group"]
-			},
-			{
-				rules: ["rule"]
-			}
-		];
+describe("core.contentElements.validator", () => {
+	describe("MessageGroupContainerValidator", () => {
+		it("returns an error for a missing Document Model reference if the props contain any references", () => {
+			const testProps = [
+				{
+					fields: ["field"]
+				},
+				{
+					groups: ["group"]
+				},
+				{
+					rules: ["rule"]
+				}
+			];
 
-		for (const props of testProps) {
+			for (const props of testProps) {
+				const messages = messageGroupContainerValidator(
+					validationContext(
+						testNode({
+							type: MESSAGE_GROUP_CONTAINER_TYPE,
+							...props
+						}),
+						true
+					)
+				);
+				deepStrictEqual(messages, [
+					{
+						severity: "Error",
+						message: `This element requires a Document Model.`
+					}
+				]);
+			}
+		});
+
+		// ensure consistent error state between model tree and settings panel
+		// (no references in the settings panel => no error for invalid references)
+		it("returns no error for a missing Document Model reference if the props do not contain any references", () => {
 			const messages = messageGroupContainerValidator(
 				validationContext(
 					testNode({
-						type: MESSAGE_GROUP_CONTAINER_TYPE,
-						...props
+						type: MESSAGE_GROUP_CONTAINER_TYPE
 					}),
 					true
 				)
 			);
+
+			deepStrictEqual(messages, []);
+		});
+
+		it("returns errors for invalid field or group references", () => {
+			const fieldId = "field";
+			const fieldPath = "/root/group/field";
+
+			const groupId = "group";
+			const groupPath = "/root/group";
+
+			const invalidId = "/invalid/path";
+
+			const messages = messageGroupContainerValidator(
+				validationContext(
+					testNode({
+						type: MESSAGE_GROUP_CONTAINER_TYPE,
+						fields: [groupId, invalidId],
+						groups: [fieldId, invalidId]
+					})
+				)
+			);
+
 			deepStrictEqual(messages, [
 				{
 					severity: "Error",
-					message: `This element requires a Document Model.`
+					message: `The path ${groupPath} points to a group. A field was expected.`
+				},
+				{
+					severity: "Error",
+					message: `No Document Model element found for id "${invalidId}".`
+				},
+				{
+					severity: "Error",
+					message: `The path ${fieldPath} points to a field. A group was expected.`
+				},
+				{
+					severity: "Error",
+					message: `No Document Model element found for id "${invalidId}".`
 				}
 			]);
-		}
-	});
+		});
 
-	// ensure consistent error state between model tree and settings panel
-	// (no references in the settings panel => no error for invalid references)
-	it("returns no error for a missing Document Model reference if the props do not contain any references", () => {
-		const messages = messageGroupContainerValidator(
-			validationContext(
-				testNode({
-					type: MESSAGE_GROUP_CONTAINER_TYPE
-				}),
-				true
-			)
-		);
+		it("returns a warning if the container does not contain a MessageGroupDisplay element", () => {
+			const messages = messageGroupContainerValidator(
+				validationContext(
+					testNode({
+						type: MESSAGE_GROUP_CONTAINER_TYPE,
+						fields: ["field"],
+						groups: ["group"],
+						withoutDisplay: true
+					})
+				)
+			);
 
-		deepStrictEqual(messages, []);
-	});
+			deepStrictEqual(messages, [
+				{
+					severity: "Warning",
+					message:
+						"This element does not contain any Message Group Display. " +
+						"Messages, that are grouped by this element's configuration might not be displayed anywhere if no Message Group Display element is added."
+				}
+			]);
+		});
 
-	it("returns errors for invalid field or group references", () => {
-		const fieldId = "field";
-		const fieldPath = "/root/group/field";
+		it("returns no messages if all field/group references are valid", () => {
+			const messages = messageGroupContainerValidator(
+				validationContext(
+					testNode({
+						type: MESSAGE_GROUP_CONTAINER_TYPE,
+						fields: ["field", "repeatableField"],
+						groups: ["group", "repeatableGroup"]
+					})
+				)
+			);
 
-		const groupId = "group";
-		const groupPath = "/root/group";
+			strictEqual(messages.length, 0);
+		});
 
-		const invalidId = "/invalid/path";
+		it("returns no messages for other nodes", () => {
+			const messages = messageGroupContainerValidator(
+				validationContext(testNode({ type: "test" }))
+			);
 
-		const messages = messageGroupContainerValidator(
-			validationContext(
-				testNode({
-					type: MESSAGE_GROUP_CONTAINER_TYPE,
-					fields: [groupId, invalidId],
-					groups: [fieldId, invalidId]
-				})
-			)
-		);
-
-		deepStrictEqual(messages, [
-			{
-				severity: "Error",
-				message: `The path ${groupPath} points to a group. A field was expected.`
-			},
-			{
-				severity: "Error",
-				message: `No Document Model element found for id "${invalidId}".`
-			},
-			{
-				severity: "Error",
-				message: `The path ${fieldPath} points to a field. A group was expected.`
-			},
-			{
-				severity: "Error",
-				message: `No Document Model element found for id "${invalidId}".`
-			}
-		]);
-	});
-
-	it("returns a warning if the container does not contain a MessageGroupDisplay element", () => {
-		const messages = messageGroupContainerValidator(
-			validationContext(
-				testNode({
-					type: MESSAGE_GROUP_CONTAINER_TYPE,
-					fields: ["field"],
-					groups: ["group"],
-					withoutDisplay: true
-				})
-			)
-		);
-
-		deepStrictEqual(messages, [
-			{
-				severity: "Warning",
-				message:
-					"This element does not contain any Message Group Display. " +
-					"Messages, that are grouped by this element's configuration might not be displayed anywhere if no Message Group Display element is added."
-			}
-		]);
-	});
-
-	it("returns no messages if all field/group references are valid", () => {
-		const messages = messageGroupContainerValidator(
-			validationContext(
-				testNode({
-					type: MESSAGE_GROUP_CONTAINER_TYPE,
-					fields: ["field", "repeatableField"],
-					groups: ["group", "repeatableGroup"]
-				})
-			)
-		);
-
-		strictEqual(messages.length, 0);
-	});
-
-	it("returns no messages for other nodes", () => {
-		const messages = messageGroupContainerValidator(validationContext(testNode({ type: "test" })));
-
-		strictEqual(messages.length, 0);
+			strictEqual(messages.length, 0);
+		});
 	});
 });
 

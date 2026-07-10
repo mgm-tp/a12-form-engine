@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -33,9 +33,9 @@
 import type { ReactElement } from "react";
 import { useContext } from "react";
 
-import { ModelPath } from "@com.mgmtp.a12.base/base-model-api/lib/main/model/index.js";
-import { LocalizerContext } from "@com.mgmtp.a12.utils/utils-localization-react/lib/main/index.js";
-import type { DropDownItem } from "@com.mgmtp.a12.widgets/widgets-core/lib/dropdown/main/template/dropdown.tpl.api.js";
+import { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
+import { LocalizerContext } from "@com.mgmtp.a12.utils/utils-localization-react";
+import type { DropDownItem } from "@com.mgmtp.a12.widgets/widgets-core";
 
 import { RESOURCE_KEYS } from "../../../../../../../back-end/localization/internal/languages/keys.js";
 import { getLocalizedResource } from "../../../../../../../back-end/localization/internal/localize.js";
@@ -43,7 +43,7 @@ import { ModelSelectors } from "../../../../../../../back-end/store/index.js";
 import type { StringValueDataType } from "../../../../../../../models/internal/utils/document-model-utils.js";
 import type { Inputs } from "../../../../../configuration/engine-configuration.js";
 import { WidgetMapContext } from "../../../../../configuration/widget-map-context.js";
-import { EnumerableHelper } from "../../../../../utilities/enumerable/enumerableHelper.js";
+import { InternalEnumerableHelper } from "../../../../../utilities/enumerable/enumerableHelper.js";
 import type { EnumerationValue } from "../../../../../utilities/enumerable/enumValue.js";
 
 import { useEnumerationBaseProps } from "../use-input-props.js";
@@ -51,7 +51,7 @@ import { useEnumerationBaseProps } from "../use-input-props.js";
 /** @internal */
 export function AutoCompleteInput(props: Inputs.InputProps<StringValueDataType>): ReactElement {
 	const { localizer } = useContext(LocalizerContext);
-
+	const { inputRef } = props;
 	const options = props.renderConfiguration.renderOptions;
 	const { enumerationOptions, selectedValue, placeholder, htmlInputProps, ...inputProps } =
 		useEnumerationBaseProps(props, localizer);
@@ -62,8 +62,8 @@ export function AutoCompleteInput(props: Inputs.InputProps<StringValueDataType>)
 			ModelPath.toString(props.modelElement.elementPath)
 		];
 
-	const allowAddingNewItem = EnumerableHelper.isCustomValuesAllowed(fce);
-	const caseSensitive = allowAddingNewItem && EnumerableHelper.isCaseSensitive(fce);
+	const allowAddingNewItem = InternalEnumerableHelper.isCustomValuesAllowed(fce);
+	const caseSensitive = allowAddingNewItem && InternalEnumerableHelper.isCaseSensitive(fce);
 
 	const hintTemplate = getLocalizedResource(RESOURCE_KEYS.autocomplete.hintTemplate, localizer);
 	const items = enumerationOptions.map<DropDownItem>(op => ({
@@ -88,8 +88,8 @@ export function AutoCompleteInput(props: Inputs.InputProps<StringValueDataType>)
 			inputPlaceHolder={placeholder}
 			inputProps={htmlInputProps}
 			inputRef={element => {
-				if (props.inputRef) {
-					props.inputRef.current = element;
+				if (inputRef) {
+					inputRef.current = element;
 				}
 			}}
 		/>

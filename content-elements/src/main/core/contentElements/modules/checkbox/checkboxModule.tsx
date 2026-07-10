@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -35,9 +35,11 @@ import { useContext, useRef } from "react";
 
 import {
 	useDocumentContext,
-	useTableScreenReaderContext,
-	type ContentModel,
-	type NodeRendererProps
+	useTableScreenReaderContext
+} from "@com.mgmtp.a12.contentengine/contentengine-core";
+import type {
+	ContentModel,
+	NodeRendererProps
 } from "@com.mgmtp.a12.contentengine/contentengine-core";
 
 import type { BaseControlProps } from "../../../types/controlProps.js";
@@ -45,8 +47,8 @@ import { WidgetMapContext } from "../../../widgetMap/widgetMap-context.js";
 import { createElementModule } from "../../createElementModule.js";
 import { USE_COMMON_CONTROL_SETTINGS_WRAPPER } from "../../elementConfiguration/useCommonControlSettings.js";
 import { USE_COMMON_WIDGET_SETTINGS_WRAPPER } from "../../elementConfiguration/useCommonWidgetSettings.js";
-import { nmTokensToString } from "../../nmtokens.js";
 import { useFocus } from "../../focus.js";
+import { nmTokensToString } from "../../nmtokens.js";
 
 import type { CheckboxNode } from "./checkboxNode.js";
 import { CHECKBOX_TYPE } from "./checkboxNode.js";
@@ -107,7 +109,7 @@ function CheckboxRenderer(
 		: inputProps;
 
 	const handleValueChange = (newValue: boolean) => {
-		if (conversionConfig?.type === "ConfirmType" && newValue === false) {
+		if (conversionConfig?.type === "ConfirmType" && !newValue) {
 			onValueChanged({ path: dataReference, value: null });
 		} else {
 			onValueChanged({ path: dataReference, value: newValue });

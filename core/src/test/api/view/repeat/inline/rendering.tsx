@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -35,7 +35,8 @@ import { strictEqual } from "node:assert/strict";
 import { query, within } from "@com.mgmtp.a12.devtools/react";
 
 import { assertCondition } from "../../../../../back-end/utils/internal/assertions.js";
-import { findElementByFormModelPath, FormModel } from "../../../../../models/index.js";
+import { findElementByFormModelPath } from "../../../../../models/index.js";
+import { isFormModelInlineRepeat } from "../../../../../models/internal/FormModelGuards.js";
 import {
 	INLINE_REPEAT,
 	REPEAT_CONTENT
@@ -45,7 +46,10 @@ import { DefaultComponentMap } from "../../../../../view/internal/configuration/
 import { TABLE } from "../../../../rtl-utils/data-roles.js";
 import { mockFunctions } from "../../../../rtl-utils/mock-map.js";
 import { rtlRenderWrapperAsync } from "../../../../rtl-utils/render-wrapper.js";
-import { SetupHelpers } from "../../../../utils/setup.js";
+import {
+	setupFormEngineRendererWithRtlAsync,
+	setupRenderConfiguration
+} from "../../../../utils/setup.js";
 import { setupModelsFixture } from "../../../../utils/setupFixture.js";
 import { IR } from "../../../../utils/test-model-helpers/inline.repeat.js";
 
@@ -55,7 +59,7 @@ export function executeRenderingTests() {
 		const inlineModels = setupModelsFixture("repeat", "inline");
 
 		it("renders an inline repeat without an upload area if multi file upload is not set", async () => {
-			const { componentMap } = await SetupHelpers.setupFormEngineRendererWithRtlAsync({
+			const { componentMap } = await setupFormEngineRendererWithRtlAsync({
 				componentMap: mockFunctions(DefaultComponentMap),
 				models: inlineModels
 			});
@@ -63,7 +67,7 @@ export function executeRenderingTests() {
 		});
 
 		it("renders an inline repeat with an upload area if multi file upload is set to true", async () => {
-			const { componentMap } = await SetupHelpers.setupFormEngineRendererWithRtlAsync({
+			const { componentMap } = await setupFormEngineRendererWithRtlAsync({
 				componentMap: mockFunctions(DefaultComponentMap),
 				models
 			});
@@ -81,9 +85,9 @@ export function executeRenderingTests() {
 				formModel,
 				IR.SortingAndFiltering.repeatFormModelPath
 			);
-			assertCondition(FormModel.InlineRepeat.isInstance(inlineRepeat));
+			assertCondition(isFormModelInlineRepeat(inlineRepeat));
 
-			const renderConfiguration = SetupHelpers.setupRenderConfiguration({
+			const renderConfiguration = setupRenderConfiguration({
 				models,
 				parentPath: IR.SortingAndFiltering.repeatFormModelPath.slice(0, -1)
 			});

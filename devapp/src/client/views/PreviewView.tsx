@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -30,35 +30,35 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { useRef, useState, type JSX } from "react";
+import { useRef, useState } from "react";
+import type { JSX } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
+import type { ViewNGProps } from "@com.mgmtp.a12.client/client-core";
 import {
 	Activity,
 	ActivityActions,
-	ActivitySelectors
-} from "@com.mgmtp.a12.client/client-core/lib/core/activity/index.js";
-import { NEW_INSTANCE_IDENTIFIER } from "@com.mgmtp.a12.client/client-core/lib/core/application/index.js";
-import { LocaleSelectors } from "@com.mgmtp.a12.client/client-core/lib/core/locale/index.js";
-import { NotificationActions } from "@com.mgmtp.a12.client/client-core/lib/core/notification/index.js";
-import type { ViewNGProps } from "@com.mgmtp.a12.client/client-core/lib/core/view/index.js";
+	ActivitySelectors,
+	LocaleSelectors,
+	NEW_INSTANCE_IDENTIFIER,
+	NotificationActions
+} from "@com.mgmtp.a12.client/client-core";
+import {
+	PreviewApplication,
+	setCustomTheme,
+	triggerComputeAndValidate
+} from "@com.mgmtp.a12.formengine/formengine-a12internal-preview";
 import type { FormActivity } from "@com.mgmtp.a12.formengine/formengine-core";
 import { FormEngineSelectors } from "@com.mgmtp.a12.formengine/formengine-core";
-import type { DocumentModel } from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
-import { DocumentServiceFactory } from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/facade.js";
-import { DefaultLocalizerContextProvider } from "@com.mgmtp.a12.utils/utils-localization-react/lib/main/index.js";
-import { localizableFromLocalizationTreeMap } from "@com.mgmtp.a12.utils/utils-localization/lib/main/localization/LocalizableFactory.js";
-import { ApplicationHeader } from "@com.mgmtp.a12.widgets/widgets-core/lib/application-header/main/application-header.view.js";
-import type { Container } from "@com.mgmtp.a12.widgets/widgets-core/lib/common/main/base-props.js";
-import { ContentBoxElements } from "@com.mgmtp.a12.widgets/widgets-core/lib/contentbox/main/template/contentbox.tpl.view.js";
-import { SizeContext } from "@com.mgmtp.a12.widgets/widgets-core/lib/layout/size-detector/main/size-context.js";
-import { useWindowSize } from "@com.mgmtp.a12.widgets/widgets-core/lib/layout/size-detector/main/size-detector.view.js";
-import type { DefaultThemeType } from "@com.mgmtp.a12.widgets/widgets-core/lib/theme/schema.js";
+import type { DocumentModel } from "@com.mgmtp.a12.kernel/kernel-md-facade";
+import { DocumentServiceFactory } from "@com.mgmtp.a12.kernel/kernel-md-facade";
+import { localizableFromLocalizationTreeMap } from "@com.mgmtp.a12.utils/utils-localization";
+import { DefaultLocalizerContextProvider } from "@com.mgmtp.a12.utils/utils-localization-react";
+import { ApplicationHeader, ContentBoxElements } from "@com.mgmtp.a12.widgets/widgets-core";
+import type { Container, DefaultThemeType } from "@com.mgmtp.a12.widgets/widgets-core";
 
-import { ErrorBox } from "../components/ErrorBox.js";
 import { VersionHeaderInfo } from "../components/VersionHeaderInfo.js";
 import { devappTranslationSource } from "../config/devappTranslationSource.js";
-import { PreviewApplication, setCustomTheme, triggerComputeAndValidate } from "../shared.js";
 
 import { HiddenFileInput } from "./HiddenFileInput.js";
 import type { ModalType } from "./modal.js";
@@ -73,6 +73,8 @@ const tmpAnchorElement = document.createElement("a");
 
 export interface PreviewProps extends ViewNGProps, Container {}
 
+type FileUploadType = "document" | "theme";
+
 /**
  * A wrapper component for the FormEngine view
  *
@@ -81,19 +83,7 @@ export interface PreviewProps extends ViewNGProps, Container {}
  * - extend the default sidebar with buttons
  * - visualize activity errors at the top
  */
-export default function ResizablePreview(props: PreviewProps): JSX.Element {
-	const { breakPoint } = useWindowSize();
-
-	return (
-		<SizeContext.Provider value={{ currentSize: breakPoint.size }}>
-			<CustomPreviewApp {...props} />
-		</SizeContext.Provider>
-	);
-}
-
-type FileUploadType = "document" | "theme";
-
-function CustomPreviewApp(props: PreviewProps): JSX.Element {
+export default function CustomPreviewApp(props: PreviewProps): JSX.Element {
 	const { activityId } = props;
 
 	const dispatch = useDispatch();
@@ -118,7 +108,6 @@ function CustomPreviewApp(props: PreviewProps): JSX.Element {
 				leftSlots={[BackButton, <span key="name">Form Engine DevApp</span>]}
 				rightSlots={[<VersionHeaderInfo key="version" />]}
 			/>
-			<ErrorBox activityId={activityId} />
 		</>
 	);
 
@@ -132,7 +121,11 @@ function CustomPreviewApp(props: PreviewProps): JSX.Element {
 	const { id, modelId, ...feDocument } =
 		useSelector(
 			state =>
-				(ActivitySelectors.data(activityId)(state) as FormActivity.Data.SingleDocumentData).document
+				(
+					ActivitySelectors.data(activityId)(state) as
+						| FormActivity.Data.SingleDocumentData
+						| undefined
+				)?.document
 		) ?? {};
 
 	function handleOnDataUploaded(data: object): void {
@@ -207,7 +200,7 @@ function CustomPreviewApp(props: PreviewProps): JSX.Element {
 		},
 		onImportData: () => {
 			fileUploadType.current = "document";
-			fileUploadElementRef?.current?.click();
+			fileUploadElementRef.current?.click();
 		},
 		onSaveData: () => {
 			if (localStorage.getItem(DATA_LS_KEY) === null) {
@@ -235,7 +228,7 @@ function CustomPreviewApp(props: PreviewProps): JSX.Element {
 		},
 		onImportTheme: () => {
 			fileUploadType.current = "theme";
-			fileUploadElementRef?.current?.click();
+			fileUploadElementRef.current?.click();
 		}
 	});
 

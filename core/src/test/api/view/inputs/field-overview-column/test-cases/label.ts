@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -33,11 +33,11 @@
 import { equal } from "node:assert/strict";
 
 import { query, within } from "@com.mgmtp.a12.devtools/react";
-import { DataRoles } from "@com.mgmtp.a12.widgets/widgets-core/lib/common/main/data-roles.js";
+import { DataRoles } from "@com.mgmtp.a12.widgets/widgets-core";
 
 import { getComponentMocks } from "../../../../../rtl-utils/getComponentMocks.js";
 import { US_LOCALE } from "../../../../../utils/localization.js";
-import { SetupHelpers } from "../../../../../utils/setup.js";
+import { setupFormEngineRendererWithRtlAsync } from "../../../../../utils/setup.js";
 import { setupModelsFixture } from "../../../../../utils/setupFixture.js";
 import {
 	expressionLabelDocument,
@@ -54,7 +54,7 @@ export function executeTestForFieldOverviewColumnLabel(): void {
 
 	describe("given a multilingual label", () => {
 		it("renders a component with prop 'label' = the given label", async () => {
-			const wrapper = await SetupHelpers.setupFormEngineRendererWithRtlAsync({
+			const wrapper = await setupFormEngineRendererWithRtlAsync({
 				componentMap: getComponentMocks(),
 				models: computationModels,
 				locale: US_LOCALE,
@@ -84,7 +84,7 @@ export function executeTestForFieldOverviewColumnLabel(): void {
 
 	describe("given an expression label", () => {
 		it("renders a component with prop 'label' = the given label", async () => {
-			const wrapper = await SetupHelpers.setupFormEngineRendererWithRtlAsync({
+			const wrapper = await setupFormEngineRendererWithRtlAsync({
 				config: {
 					widgetMap: widgetMocksForInputTests()
 				},
@@ -98,13 +98,13 @@ export function executeTestForFieldOverviewColumnLabel(): void {
 				`a12-${ExpressionLabelIds.INLINE_FIELD_OVERVIEW_COLUMN}-bodycell-0`
 			);
 
-			const expressionSpan = within(cell).getByDataRole(DataRoles.Textline.Label);
+			const expressionSpan = within(cell).getByDataRole(DataRoles.TextField.Label);
 			equal(expressionSpan.textContent, "Field Based Column: TestValue");
 		});
 
 		describe("that contains markdown formatting", () => {
 			it("renders a component with prop 'label' = the formatted given label", async () => {
-				const wrapper = await SetupHelpers.setupFormEngineRendererWithRtlAsync({
+				const wrapper = await setupFormEngineRendererWithRtlAsync({
 					config: {
 						widgetMap: widgetMocksForInputTests()
 					},
@@ -120,7 +120,7 @@ export function executeTestForFieldOverviewColumnLabel(): void {
 				);
 
 				const expressionSpan = within(cell).getByDataRole(
-					DataRoles.Textline.Label
+					DataRoles.TextField.Label
 				).firstElementChild;
 				equal(expressionSpan?.innerHTML, "Field Overview Column crossed out: <del>TestValue</del>");
 			});
@@ -130,14 +130,14 @@ export function executeTestForFieldOverviewColumnLabel(): void {
 	describe("given no column label", () => {
 		describe("but given a multilingual label in the field configuration", () => {
 			it("renders a component with prop 'label' = the field configuration label", async () => {
-				const wrapper = await SetupHelpers.setupFormEngineRendererWithRtlAsync({
+				const wrapper = await setupFormEngineRendererWithRtlAsync({
 					componentMap: getComponentMocks(),
 					models: localizationModels,
 					locale: US_LOCALE,
 					data: { document: expressionLabelDocument }
 				});
 				const input = query(wrapper.componentMap.BufferedTextLine)
-					.withId(LOCALIZATION.ID_INLINE_REPEAT_COLUMN_LABEL_PICUS_FIELD_CONFIG)
+					.withId(LOCALIZATION.ID_INLINE_REPEAT_COLUMN_LABEL_FIELD_CONFIG)
 					.props();
 				equal(input.label, "FieldConfigLabel.en");
 			});
@@ -145,7 +145,7 @@ export function executeTestForFieldOverviewColumnLabel(): void {
 
 		describe("but given an expression label in the field configuration", () => {
 			it("renders a component with prop 'label' = the document model label", async () => {
-				const wrapper = await SetupHelpers.setupFormEngineRendererWithRtlAsync({
+				const wrapper = await setupFormEngineRendererWithRtlAsync({
 					componentMap: getComponentMocks(),
 					models: expressionLabelModels,
 					locale: US_LOCALE,
@@ -163,14 +163,14 @@ export function executeTestForFieldOverviewColumnLabel(): void {
 
 		describe("and no label in the field configuration", () => {
 			it("renders a component with prop 'label' = the document model label", async () => {
-				const wrapper = await SetupHelpers.setupFormEngineRendererWithRtlAsync({
+				const wrapper = await setupFormEngineRendererWithRtlAsync({
 					componentMap: getComponentMocks(),
 					models: localizationModels,
 					locale: US_LOCALE,
 					data: { document: expressionLabelDocument }
 				});
 				const input = query(wrapper.componentMap.BufferedTextLine)
-					.withId(LOCALIZATION.ID_INLINE_REPEAT_COLUMN_LABEL_PICUS)
+					.withId(LOCALIZATION.ID_INLINE_REPEAT_COLUMN_LABEL)
 					.props();
 				equal(input.label, "DocumentModelLabel.en");
 			});
@@ -179,7 +179,7 @@ export function executeTestForFieldOverviewColumnLabel(): void {
 
 	describe("labelHiddenButRead", () => {
 		it("always renders a component with prop 'hideLabel' = true", async () => {
-			const wrapper = await SetupHelpers.setupFormEngineRendererWithRtlAsync({
+			const wrapper = await setupFormEngineRendererWithRtlAsync({
 				componentMap: getComponentMocks(),
 				models: computationModels,
 				locale: US_LOCALE,

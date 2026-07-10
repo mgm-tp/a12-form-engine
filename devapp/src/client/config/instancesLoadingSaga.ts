@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -30,15 +30,20 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { call, put, select, takeEvery, type SagaGenerator } from "typed-redux-saga";
-import type { Action, AnyAction } from "typescript-fsa";
+import type { Action as ReduxAction } from "redux";
+import { call, put, select, takeEvery } from "typed-redux-saga";
+import type { SagaGenerator } from "typed-redux-saga";
 
-import { ActivityActions } from "@com.mgmtp.a12.client/client-core/lib/core/activity/index.js";
-import { Model, ModelSagas } from "@com.mgmtp.a12.client/client-core/lib/core/model/index.js";
-import { LocaleSelectors } from "@com.mgmtp.a12.client/client-core/lib/core/locale/index.js";
+import {
+	ActivityActions,
+	LocaleSelectors,
+	Model,
+	ModelSagas
+} from "@com.mgmtp.a12.client/client-core";
+import type { Action } from "@com.mgmtp.a12.client/typescript-fsa-redux-5-compat";
+import { setDocumentNames } from "@com.mgmtp.a12.formengine/formengine-a12internal-preview";
 
 import { loadInstances } from "../backend/handleInstances.js";
-import { setDocumentNames } from "../shared.js";
 
 /**
  * Load the list of document names when the Form Engine view for a specific model is opened.
@@ -48,7 +53,7 @@ import { setDocumentNames } from "../shared.js";
  */
 export function* instancesLoadingSaga(): SagaGenerator<void> {
 	yield* takeEvery(
-		(action: AnyAction) =>
+		(action: ReduxAction) =>
 			ActivityActions.push.match(action) && !!action.payload.activity.descriptor.instance,
 		handleInstancesLoading
 	);

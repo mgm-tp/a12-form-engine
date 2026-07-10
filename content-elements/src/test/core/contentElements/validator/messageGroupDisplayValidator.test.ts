@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -42,57 +42,59 @@ import { MESSAGE_GROUP_DISPLAY_TYPE } from "../../../../main/core/contentElement
 import { messageGroupDisplayValidator } from "../../../../main/core/contentElements/modules/messageGroupDisplay/messageGroupDisplayValidator.js";
 import { FORM_ELEMENTS_NAMESPACE } from "../../../../main/core/namespace.js";
 
-describe("MessageGroupDisplayValidator", () => {
-	it("returns a warning if the element is not nested in any MessageGroupContainer", () => {
-		const messages = messageGroupDisplayValidator(
-			validationContext(
-				testNode({ type: MESSAGE_GROUP_DISPLAY_TYPE, id: "displayWithoutContainer" })
-			)
-		);
+describe("core.contentElements.validator", () => {
+	describe("MessageGroupDisplayValidator", () => {
+		it("returns a warning if the element is not nested in any MessageGroupContainer", () => {
+			const messages = messageGroupDisplayValidator(
+				validationContext(
+					testNode({ type: MESSAGE_GROUP_DISPLAY_TYPE, id: "displayWithoutContainer" })
+				)
+			);
 
-		deepStrictEqual(messages, [
-			{
-				severity: "Warning",
-				message:
-					"This element is not nested in any Message Group Container. " +
-					"A Message Group Display without a Message Group Container will not display any messages."
-			}
-		]);
-	});
+			deepStrictEqual(messages, [
+				{
+					severity: "Warning",
+					message:
+						"This element is not nested in any Message Group Container. " +
+						"A Message Group Display without a Message Group Container will not display any messages."
+				}
+			]);
+		});
 
-	it("returns a warning if the node has children", () => {
-		const messages = messageGroupDisplayValidator(
-			validationContext(
-				testNode({
-					type: MESSAGE_GROUP_DISPLAY_TYPE,
-					id: "displayInContainer",
-					children: [testNode({ type: "test", id: "test1" })]
-				})
-			)
-		);
+		it("returns a warning if the node has children", () => {
+			const messages = messageGroupDisplayValidator(
+				validationContext(
+					testNode({
+						type: MESSAGE_GROUP_DISPLAY_TYPE,
+						id: "displayInContainer",
+						children: [testNode({ type: "test", id: "test1" })]
+					})
+				)
+			);
 
-		deepStrictEqual(messages, [
-			{
-				severity: "Warning",
-				message: "Child elements are not supported for this element."
-			}
-		]);
-	});
+			deepStrictEqual(messages, [
+				{
+					severity: "Warning",
+					message: "Child elements are not supported for this element."
+				}
+			]);
+		});
 
-	it("returns no messages if the element is nested in a MessageGroupContainer", () => {
-		const messages = messageGroupDisplayValidator(
-			validationContext(testNode({ type: MESSAGE_GROUP_DISPLAY_TYPE, id: "displayInContainer" }))
-		);
+		it("returns no messages if the element is nested in a MessageGroupContainer", () => {
+			const messages = messageGroupDisplayValidator(
+				validationContext(testNode({ type: MESSAGE_GROUP_DISPLAY_TYPE, id: "displayInContainer" }))
+			);
 
-		strictEqual(messages.length, 0);
-	});
+			strictEqual(messages.length, 0);
+		});
 
-	it("returns no messages for other nodes", () => {
-		const messages = messageGroupDisplayValidator(
-			validationContext(testNode({ type: "test", id: "test1" }))
-		);
+		it("returns no messages for other nodes", () => {
+			const messages = messageGroupDisplayValidator(
+				validationContext(testNode({ type: "test", id: "test1" }))
+			);
 
-		strictEqual(messages.length, 0);
+			strictEqual(messages.length, 0);
+		});
 	});
 });
 

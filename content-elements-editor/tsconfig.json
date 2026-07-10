@@ -1,19 +1,18 @@
 {
 	"extends": "@com.mgmtp.a12.devtools/tsconfig",
 	"exclude": ["node_modules", "lib", "target"],
-	"include": ["./src/**/*"],
+	"include": ["./src/**/*", "./@types"],
 	"compilerOptions": {
 		"outDir": "./lib",
 		"rootDir": "./src",
 		"types": [
 			"node",
-			"mocha",
-			"@com.mgmtp.a12.widgets/widgets-core/lib/@types/styled-components/index.d.ts"
+			"mocha"
+			//TODO: Add back in with the fix in the Widgets pre.4 release and adjust type casts
+			// neccessary to access theme properties in custom styled components
+			//"@com.mgmtp.a12.widgets/widgets-core/types/styled-components"
 		],
 		"skipLibCheck": true,
-		"verbatimModuleSyntax": true,
-		"isolatedModules": true,
-		"noUncheckedSideEffectImports": true,
-		"moduleDetection": "force"
+		"erasableSyntaxOnly": true
 	}
 }

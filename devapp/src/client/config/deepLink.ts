@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -30,14 +30,13 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import type { Action, AnyAction } from "typescript-fsa";
-
-import type { Activity } from "@com.mgmtp.a12.client/client-core/lib/core/activity/index.js";
+import type { Activity } from "@com.mgmtp.a12.client/client-core";
 import {
 	ActivityActions,
-	ActivitySelectors
-} from "@com.mgmtp.a12.client/client-core/lib/core/activity/index.js";
-import { StoreFactories } from "@com.mgmtp.a12.client/client-core/lib/core/store/index.js";
+	ActivitySelectors,
+	StoreFactories
+} from "@com.mgmtp.a12.client/client-core";
+import type { Action } from "@com.mgmtp.a12.client/typescript-fsa-redux-5-compat";
 
 import { INDEX_DEEP_LINK_HASH, INDEX_DESCRIPTOR } from "../modules/devappModule.js";
 import { isInstanceDescriptor } from "../modules/formEngineModule.js";
@@ -95,7 +94,7 @@ export const manipulatePushActionsForDeepLinkingMiddleware = StoreFactories.crea
  * - the ModelIndex
  * - the form engine for a specific instance
  */
-function needsDataLoading(action: AnyAction): action is Action<ActivityActions.PushPayload> {
+function needsDataLoading(action: unknown): action is Action<ActivityActions.PushPayload> {
 	return (
 		ActivityActions.push.match(action) &&
 		(action.payload.activity.descriptor.feature === INDEX_DESCRIPTOR.feature ||

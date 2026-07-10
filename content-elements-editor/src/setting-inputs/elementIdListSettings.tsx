@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -30,10 +30,11 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { useCallback, useMemo, type JSX } from "react";
-import type { Action } from "typescript-fsa";
+import { useCallback, useMemo } from "react";
+import type { JSX } from "react";
 
-import { ModelPath } from "@com.mgmtp.a12.base/base-model-api/lib/main/model/index.js";
+import { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
+import type { Action } from "@com.mgmtp.a12.client/typescript-fsa-redux-5-compat";
 import type {
 	DocumentModelService,
 	SettingPath
@@ -46,20 +47,20 @@ import {
 	useContentEditorState,
 	useSettingState
 } from "@com.mgmtp.a12.contentengine/contentengine-editor";
-import type { DocumentModel } from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
-import { Button } from "@com.mgmtp.a12.widgets/widgets-core/lib/button/main/button.view.js";
-import type { DropDownItem } from "@com.mgmtp.a12.widgets/widgets-core/lib/dropdown/main/template/dropdown.tpl.api.js";
-import { Icon } from "@com.mgmtp.a12.widgets/widgets-core/lib/icon/main/icon.view.js";
-import { Autocomplete } from "@com.mgmtp.a12.widgets/widgets-core/lib/input/autocomplete/main/autocomplete.view.js";
-import type { BaseColumnType } from "@com.mgmtp.a12.widgets/widgets-core/lib/table/new-api/column.api.js";
-import type {
-	TableComponentRenderers,
-	TableRenderPropsType
-} from "@com.mgmtp.a12.widgets/widgets-core/lib/table/new-api/table-renderer.api.js";
+import type { DocumentModel } from "@com.mgmtp.a12.kernel/kernel-md-facade";
 import {
+	Button,
+	Icon,
+	Autocomplete,
 	DefaultTableComponentRenderers,
 	Table
-} from "@com.mgmtp.a12.widgets/widgets-core/lib/table/new-api/table.view.js";
+} from "@com.mgmtp.a12.widgets/widgets-core";
+import type {
+	DropDownItem,
+	BaseColumnType,
+	TableComponentRenderers,
+	TableRenderPropsType
+} from "@com.mgmtp.a12.widgets/widgets-core";
 
 import type { ChangeEntryPayload, DeleteEntryPayload } from "../controllers/stringListActions.js";
 import { AddEntry, ChangeEntry, DeleteEntry } from "../controllers/stringListActions.js";

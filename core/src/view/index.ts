@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -74,7 +74,12 @@ export type {
 	FormModelMap
 } from "./internal/configuration/engine-configuration.js";
 export { useDocumentPathForInput } from "./internal/utilities/document-path.js";
-export { Enablements } from "./internal/utilities/enablements/index.js";
+export {
+	Enablements,
+	isDisabled,
+	isHidden,
+	isReadonly
+} from "./internal/utilities/enablements/index.js";
 export { EnumerableHelper } from "./internal/utilities/enumerable/enumerableHelper.js";
 export type { EnumerationValue } from "./internal/utilities/enumerable/enumValue.js";
 export type { Value } from "./internal/utilities/value.js";

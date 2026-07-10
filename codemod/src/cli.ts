@@ -9,7 +9,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -35,17 +35,23 @@ import { createCodemodCLI } from "@com.mgmtp.a12.devtools/codemod";
 
 import pkg from "../package.json" with { type: "json" };
 
-import { moveCorrectionModeItemRecipe } from "./recipes/moveCorrectionModeItem.js";
-import { preferTopLevelImportsRecipe } from "./recipes/preferTopLevel.js";
-import { rewriteImportEqualDeclarationsRecipe } from "./recipes/rewriteImportEqualDeclarations.js";
+import { removeFormEngineViewPropsRecipe } from "./recipes/removeFormEngineViewProps.js";
+import { renameWidgetMapKeys } from "./recipes/renameWidgetMapKeys.js";
+import { replaceFormModelIsInstanceRecipe } from "./recipes/replaceFormModelIsInstance.js";
+import { replaceFormModelRepeatPath } from "./recipes/replaceFormModelRepeatPath.js";
+import { replaceFormModelStylableRecipe } from "./recipes/replaceFormModelStylable.js";
+import { wrapIsFormModelRecipe } from "./recipes/wrapIsFormModel.js";
 
 createCodemodCLI({
 	name: pkg.name,
-	description: "Codemod tooling for assisting migrations of A12 Form Engine",
 	version: pkg.version,
+	description: "Codemod tooling for assisting migrations of A12 Form Engine",
 	recipes: [
-		preferTopLevelImportsRecipe,
-		rewriteImportEqualDeclarationsRecipe,
-		moveCorrectionModeItemRecipe
+		replaceFormModelRepeatPath,
+		removeFormEngineViewPropsRecipe,
+		replaceFormModelIsInstanceRecipe,
+		replaceFormModelStylableRecipe,
+		wrapIsFormModelRecipe,
+		renameWidgetMapKeys
 	]
 });

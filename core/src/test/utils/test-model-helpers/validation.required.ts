@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -30,7 +30,7 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-export namespace IDS {
-	export const BOOLEAN_INPUT_REQUIRED = "a12-RequiredBoolean-fieldimpl_92872";
-	export const STRING_INPUT_NOT_REQUIRED = "a12-OptionalString-F3";
-}
+export const IDS = {
+	BOOLEAN_INPUT_REQUIRED: "a12-RequiredBoolean-fieldimpl_92872",
+	STRING_INPUT_NOT_REQUIRED: "a12-OptionalString-F3"
+} as const;

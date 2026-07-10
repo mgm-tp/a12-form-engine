@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -36,8 +36,8 @@ import { query, within } from "@com.mgmtp.a12.devtools/react";
 
 import { EXPANDED_ROW } from "../../../../rtl-utils/data-roles.js";
 import { mouseEventMock } from "../../../../rtl-utils/mock-utils.js";
-import { DocumentHelpers } from "../../../../utils/document-helpers.js";
 import { ER } from "../../../../utils/test-model-helpers/embedded.repeat.js";
+import { createDocumentPath } from "../../../../utils/createDocumentPath.js";
 
 import type { EmbeddedRepeatTestEnv } from "./utils.js";
 import { setup } from "./utils.js";
@@ -49,7 +49,7 @@ export function expandedRowTest(testEnv: EmbeddedRepeatTestEnv): void {
 		it("renders the referenced row as an expanded row with a control-grid", async () => {
 			const wrapper = await setup({
 				testEnv,
-				expandedRowPath: DocumentHelpers.createDocumentPath(["Root"], ["Nested_L1", 2])
+				expandedRowPath: createDocumentPath(["Root"], ["Nested_L1", 2])
 			});
 
 			const expandedRow = within(wrapper.baseElement).getById(
@@ -61,7 +61,7 @@ export function expandedRowTest(testEnv: EmbeddedRepeatTestEnv): void {
 		it("renders the expanded row with highlightVariant=info", async () => {
 			const { tableMap } = await setup({
 				testEnv,
-				expandedRowPath: DocumentHelpers.createDocumentPath(["Root"], ["Nested_L1", 2])
+				expandedRowPath: createDocumentPath(["Root"], ["Nested_L1", 2])
 			});
 
 			const bodyRowProps = query(tableMap.TableTemplate.BodyRow)
@@ -74,7 +74,7 @@ export function expandedRowTest(testEnv: EmbeddedRepeatTestEnv): void {
 		it("renders the expanded row with a footer containing a close button and the row action buttons", async () => {
 			const { baseElement, widgetMap } = await setup({
 				testEnv,
-				expandedRowPath: DocumentHelpers.createDocumentPath(["Root"], ["Nested_L1", 2])
+				expandedRowPath: createDocumentPath(["Root"], ["Nested_L1", 2])
 			});
 
 			const expandedRowFooter = within(baseElement).getByTestId(
@@ -114,7 +114,7 @@ export function expandedRowTest(testEnv: EmbeddedRepeatTestEnv): void {
 			it("triggers 'onCloseEmbeddedRepeatRow'", async () => {
 				const { widgetMap } = await setup({
 					testEnv,
-					expandedRowPath: DocumentHelpers.createDocumentPath(["Root"], ["Nested_L1", 2])
+					expandedRowPath: createDocumentPath(["Root"], ["Nested_L1", 2])
 				});
 
 				const closeButtonProps = query(widgetMap.Button)
@@ -143,7 +143,7 @@ export function expandedRowTest(testEnv: EmbeddedRepeatTestEnv): void {
 			// Setup set an expanded row for another repeat
 			const { baseElement } = await setup({
 				testEnv,
-				expandedRowPath: DocumentHelpers.createDocumentPath(["Root"], ["Nested_L1", 2])
+				expandedRowPath: createDocumentPath(["Root"], ["Nested_L1", 2])
 			});
 
 			const roRepeat = within(baseElement).getById(`${ER.SortingAndFiltering.ID_ER_RO}-table`);

@@ -1,0 +1,125 @@
+{
+  "header": {
+    "id": "responsiveLayoutVisitorTestTrueFormModel",
+    "modelType": "form",
+    "modelVersion": "39.0.0",
+    "locales": [
+      {
+        "code": "en"
+      }
+    ],
+    "annotations": [
+      {
+        "name": "roles",
+        "value": "admin"
+      }
+    ],
+    "modelReferences": [
+      {
+        "alias": "DM",
+        "modelType": "document",
+        "purpose": "data binding",
+        "reference": "formLayoutRuleTestDocumentModel"
+      }
+    ]
+  },
+  "content": {
+    "subHeaderBox": {
+      "id": "subHeaderBox1"
+    },
+    "footerBox": {
+      "id": "footerBox1"
+    },
+    "screens": [
+      {
+        "id": "screen1",
+        "name": "Screen1",
+        "screenElements": [
+          {
+            "type": "ControlGrid",
+            "id": "controlgrid-a76ff",
+            "name": "cg",
+            "layout": {
+              "lg": "3-9",
+              "md": "6-8",
+              "sm": "6-12"
+            },
+            "row": [
+              {
+                "type": "Row",
+                "id": "row-bb67a",
+                "name": "r1",
+                "cell": [
+                  {
+                    "type": "Control",
+                    "id": "control-52eb8",
+                    "elementRef": "field_b0a9a"
+                  },
+                  {
+                    "type": "Control",
+                    "id": "control-fb979",
+                    "elementRef": "field_972f1"
+                  }
+                ]
+              }
+            ],
+            "verticalAlignment": "TOP"
+          },
+          {
+            "type": "MultiColumnSection",
+            "id": "multicolumnsection-c1693",
+            "name": "mcs",
+            "layout": {
+              "lg": "6-6",
+              "md": "6-6",
+              "sm": "12-12"
+            },
+            "screenElements": [
+              {
+                "type": "ControlGrid",
+                "id": "controlgrid-48f2e",
+                "name": "cg1",
+                "row": [
+                  {
+                    "type": "Row",
+                    "id": "row-a569e",
+                    "cell": [
+                      {
+                        "type": "Control",
+                        "id": "control-ba056",
+                        "elementRef": "field_b38b1"
+                      }
+                    ]
+                  }
+                ],
+                "verticalAlignment": "TOP"
+              },
+              {
+                "type": "ControlGrid",
+                "id": "controlgrid-2eb1e",
+                "name": "cg2",
+                "row": [
+                  {
+                    "type": "Row",
+                    "id": "row-7d0e1",
+                    "cell": [
+                      {
+                        "type": "Control",
+                        "id": "control-755bd",
+                        "elementRef": "field_c223f"
+                      }
+                    ]
+                  }
+                ],
+                "verticalAlignment": "TOP"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "fieldConfiguration": {},
+    "groupConfiguration": {},
+    "defaults": {}
+  }
+}

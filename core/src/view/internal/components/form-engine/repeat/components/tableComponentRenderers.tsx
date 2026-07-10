@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -33,23 +33,28 @@
 import type { JSX } from "react";
 import { useContext } from "react";
 
-import { ModelPath } from "@com.mgmtp.a12.base/base-model-api/lib/main/model/index.js";
-import { LocalizerContext } from "@com.mgmtp.a12.utils/utils-localization-react/lib/main/index.js";
+import { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
+import { LocalizerContext } from "@com.mgmtp.a12.utils/utils-localization-react";
 import type {
 	TableComponentRenderers,
 	TableRenderPropsType
-} from "@com.mgmtp.a12.widgets/widgets-core/lib/table/new-api/table-renderer.api.js";
+} from "@com.mgmtp.a12.widgets/widgets-core";
 
 import { RESOURCE_KEYS } from "../../../../../../back-end/localization/index.js";
 import { getLocalizedResource } from "../../../../../../back-end/localization/internal/localize.js";
-import {
-	DataSelectors,
-	ModelSelectors,
-	UiStateSelectors
-} from "../../../../../../back-end/store/index.js";
+import { ModelSelectors, UiStateSelectors } from "../../../../../../back-end/store/index.js";
+import { AttachmentDataSelectors } from "../../../../../../back-end/store/internal/selectors/data.js";
 import { UiId } from "../../../../../../back-end/utils/internal/generateUiId.js";
 import { getDocumentPath } from "../../../../../../back-end/utils/internal/path.js";
-import { DocumentPath, FormModel } from "../../../../../../models/index.js";
+import { DocumentPath } from "../../../../../../models/index.js";
+import {
+	isFormModelEmbeddedRepeat,
+	isFormModelInlineRepeat
+} from "../../../../../../models/internal/FormModelGuards.js";
+import {
+	stylableToClassName,
+	styleToClassName
+} from "../../../../../../models/internal/stylableToClassName.js";
 import { ComponentMapContext } from "../../../../configuration/componentMap/component-map-context.js";
 import { DefaultRepeatButtonNames } from "../../../../configuration/engine-configuration.js";
 import { WidgetMapContext } from "../../../../configuration/widget-map-context.js";
@@ -60,6 +65,7 @@ import {
 import { DataContext } from "../../data-context.js";
 import { createExpressionColumn } from "../../model-components.js";
 import { getLabelAsHtml } from "../../model-element-labels.js";
+import { InternalDocumentPath } from "../../../../../../models/internal/utils/document-utils.js";
 
 import type { TableWidgetMap } from "../table-widget-map.js";
 import { TableWidgetMapContext } from "../table-widget-map.js";
@@ -208,7 +214,7 @@ export function useTableComponentRenderers(
 
 		const className =
 			RepeatTableColumn.isFieldColumn(column) || RepeatTableColumn.isExpressionColumn(column)
-				? FormModel.styleToClassName(column.modelElement.headerStyle)
+				? styleToClassName(column.modelElement.headerStyle)
 				: undefined;
 
 		const testModelElementId = RepeatTableColumn.isColumnWithModelElement(column)
@@ -292,7 +298,7 @@ export function useTableComponentRenderers(
 		} else {
 			const className =
 				RepeatTableColumn.isFieldColumn(column) || RepeatTableColumn.isExpressionColumn(column)
-					? FormModel.stylableToClassName(column.modelElement)
+					? stylableToClassName(column.modelElement)
 					: undefined;
 			const uiId = UiId.generateForRepeatTableBodyCell({
 				id: column.modelElement.id,
@@ -424,7 +430,7 @@ function TableBodyRow(props: TableBodyRowProps): JSX.Element {
 		options.state
 	);
 
-	const unassignedIds = DataSelectors.Attachments.unassignedIds(options.state);
+	const unassignedIds = AttachmentDataSelectors.unassignedIds(options.state);
 
 	const uiId = UiId.generateForRepeatTableBodyRow({
 		id: modelElement.id,
@@ -439,8 +445,7 @@ function TableBodyRow(props: TableBodyRowProps): JSX.Element {
 
 	const documentModel = ModelSelectors.documentModel()(options.state);
 	const attachmentDocumentPath =
-		(FormModel.InlineRepeat.isInstance(modelElement) ||
-			FormModel.EmbeddedRepeat.isInstance(modelElement)) &&
+		(isFormModelInlineRepeat(modelElement) || isFormModelEmbeddedRepeat(modelElement)) &&
 		modelElement.multiFileUploadOptions
 			? getDocumentPath(documentModel, modelElement.multiFileUploadOptions.elementPath, row.path)
 			: undefined;
@@ -459,7 +464,7 @@ function TableBodyRow(props: TableBodyRowProps): JSX.Element {
 			: isStandardRowActionDisabled({
 					byRow: options.config.enablements?.byRow ?? {},
 					eventName: props.defaultRowAction.eventName,
-					rowIndex: DocumentPath.rowIndex(row.path),
+					rowIndex: InternalDocumentPath.rowIndex(row.path),
 					state: options.state,
 					repeat: modelElement
 				})

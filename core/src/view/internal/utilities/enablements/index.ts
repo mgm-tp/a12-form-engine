@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -33,6 +33,10 @@
 import { isDisabled } from "./disabled.js";
 import { isHidden } from "./hidden.js";
 import { isReadonly } from "./readonly.js";
+
+export { isDisabled } from "./disabled.js";
+export { isHidden } from "./hidden.js";
+export { isReadonly } from "./readonly.js";
 
 export const Enablements = {
 	isHidden,

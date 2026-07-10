@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -34,17 +34,17 @@ import { css, styled } from "styled-components";
 
 import {
 	BufferedInput,
-	HTMLInputAdapter
-} from "@com.mgmtp.a12.widgets/widgets-core/lib/input/buffered/main/buffered.view.js";
-import { CustomSelect } from "@com.mgmtp.a12.widgets/widgets-core/lib/input/select/main/custom-select.view.js";
-import type { CustomSelectProps } from "@com.mgmtp.a12.widgets/widgets-core/lib/input/select/main/select.api.js";
-import { StyledSelectTemplate } from "@com.mgmtp.a12.widgets/widgets-core/lib/input/select/main/select.styled.js";
-import { StyledSwitchControl } from "@com.mgmtp.a12.widgets/widgets-core/lib/input/switch/main/switch.styled.js";
-import { Switch } from "@com.mgmtp.a12.widgets/widgets-core/lib/input/switch/main/switch.view.js";
-import { TextAreaStateless } from "@com.mgmtp.a12.widgets/widgets-core/lib/input/text-area/main/template/text-area.tpl.view.js";
-import { TextLineStateless } from "@com.mgmtp.a12.widgets/widgets-core/lib/input/text-line/main/template/text-line.tpl.view.js";
+	CustomSelect,
+	HTMLInputAdapter,
+	StyledSelectTemplate,
+	StyledSwitchControl,
+	Switch,
+	TextAreaStateless,
+	TextField
+} from "@com.mgmtp.a12.widgets/widgets-core";
+import type { CustomSelectProps, DefaultThemeType } from "@com.mgmtp.a12.widgets/widgets-core";
 
-const WidgetsBufferedInput = BufferedInput(HTMLInputAdapter(TextLineStateless));
+const WidgetsBufferedInput = BufferedInput(HTMLInputAdapter(TextField));
 const WidgetsBufferedArea = BufferedInput(HTMLInputAdapter(TextAreaStateless));
 
 // FIXME: Copied from Content Engine internal
@@ -86,7 +86,8 @@ export const StyledSelect = styled(CustomSelect)<CustomSelectProps & { $width?: 
 		flex-grow: 0;
 
 		${StyledSelectTemplate.StyledFieldSelectWrapper} {
-			border: ${readonly && `1px solid ${theme.colors.interaction.readonly.color}`};
+			border: ${readonly &&
+			`1px solid ${(theme as DefaultThemeType).colors.interaction.readonly.color}`};
 			flex-grow: 0;
 		}
 

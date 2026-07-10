@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -30,74 +30,67 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { ModelHelpers } from "../model-helpers.js";
+import { createModelPath } from "../createModelPath.js";
 
-const { createModelPath } = ModelHelpers;
+const screenSortingAndFiltering = "SortingAndFiltering";
+
+const erRepeatPath = createModelPath(screenSortingAndFiltering, "sec3", "ER_Nested");
+
 // Constants for the Embedded Repeat example
-export namespace ER {
-	export const ROOT = "Root";
-	export const repeatableGroup = "Nested_L1";
-
-	export namespace SortingAndFiltering {
-		export const screenSortingAndFiltering = "SortingAndFiltering";
-		export const repeatFormModelPath = createModelPath(
+export const ER = {
+	ROOT: "Root",
+	repeatableGroup: "Nested_L1",
+	SortingAndFiltering: {
+		screenSortingAndFiltering,
+		repeatFormModelPath: createModelPath(
 			screenSortingAndFiltering,
 			"sec1",
 			"embedded-repeat-Nested_L1"
-		);
-		export const er_locationPath = createModelPath(
+		),
+		er_locationPath: createModelPath(
 			screenSortingAndFiltering,
 			"sec1",
 			"embedded-repeat-Nested_L1",
 			"cg"
-		);
-
-		export const ID_ER = "a12-inlinerepeat-da601";
-		export const ID_ER_RO = "a12-inlinerepeat-5d3b7";
-		export const ID_ER_ADD_BUTTON = "a12-add-button-inlinerepeat-da601";
-
-		export const ID_COLUMN_L1_STRING = "a12-fieldbasedrepeatoverviewcolumn-2c388-bodycell-0";
-		export const ID_COLUMN_L1_NUMBER = "a12-fieldbasedrepeatoverviewcolumn-adcda-bodycell-0";
-		export const ID_COLUMN_L1_BOOLEAN = "a12-fieldbasedrepeatoverviewcolumn-1ccd0-bodycell-0";
-		export const ID_COLUMN_L1_CONFIRM = "a12-fieldbasedrepeatoverviewcolumn-577a0-bodycell-0";
-		export const ID_COLUMN_L1_ENUMERATION = "a12-fieldbasedrepeatoverviewcolumn-07a2d-bodycell-0";
-		export const ID_COLUMN_L1_DATE = "a12-fieldbasedrepeatoverviewcolumn-2f3cf-bodycell-0";
-		export const ID_COLUMN_L1_DATETIME = "a12-fieldbasedrepeatoverviewcolumn-98625-bodycell-0";
-		export const ID_COLUMN_L1_TIME = "a12-fieldbasedrepeatoverviewcolumn-35944-bodycell-0";
-		export const ID_COLUMN_L1_MULTI_SELECT = "a12-fieldbasedrepeatoverviewcolumn-8a0b8-bodycell-0";
-		export const ID_COLUMN_L1_EXPRESSION = "a12-expressionrepeatoverviewcolumn-bae04-bodycell-0";
-
-		export const ID_EXPANDED_ROW = "a12-inlinerepeat-da601-expandedrow";
-		export const ID_EXPANDED_ROW_CONTROL_GRID = "a12-controlgrid-b0013";
-		export const ID_BODY_ROW = "a12-inlinerepeat-da601-bodyrow";
-		export const ID_CLOSE_BUTTON = "a12-close-button-inlinerepeat-da601";
-		export const ID_EDIT_BUTTON = "a12-edit-button-inlinerepeat-da601";
-		export const ID_REMOVE_BUTTON = "a12-remove-button-inlinerepeat-da601";
-		export const ID_CUSTOM_BUTTON = "a12-custom-event-button-inlinerepeat-da601";
-
-		export const erRepeatPath = createModelPath(screenSortingAndFiltering, "sec3", "ER_Nested");
-		export const erDetailControlGridPath = [...erRepeatPath, ...createModelPath("cg")];
+		),
+		ID_ER: "a12-inlinerepeat-da601",
+		ID_ER_RO: "a12-inlinerepeat-5d3b7",
+		ID_ER_ADD_BUTTON: "a12-add-button-inlinerepeat-da601",
+		ID_COLUMN_L1_STRING: "a12-fieldbasedrepeatoverviewcolumn-2c388-bodycell-0",
+		ID_COLUMN_L1_NUMBER: "a12-fieldbasedrepeatoverviewcolumn-adcda-bodycell-0",
+		ID_COLUMN_L1_BOOLEAN: "a12-fieldbasedrepeatoverviewcolumn-1ccd0-bodycell-0",
+		ID_COLUMN_L1_CONFIRM: "a12-fieldbasedrepeatoverviewcolumn-577a0-bodycell-0",
+		ID_COLUMN_L1_ENUMERATION: "a12-fieldbasedrepeatoverviewcolumn-07a2d-bodycell-0",
+		ID_COLUMN_L1_DATE: "a12-fieldbasedrepeatoverviewcolumn-2f3cf-bodycell-0",
+		ID_COLUMN_L1_DATETIME: "a12-fieldbasedrepeatoverviewcolumn-98625-bodycell-0",
+		ID_COLUMN_L1_TIME: "a12-fieldbasedrepeatoverviewcolumn-35944-bodycell-0",
+		ID_COLUMN_L1_MULTI_SELECT: "a12-fieldbasedrepeatoverviewcolumn-8a0b8-bodycell-0",
+		ID_COLUMN_L1_EXPRESSION: "a12-expressionrepeatoverviewcolumn-bae04-bodycell-0",
+		ID_EXPANDED_ROW: "a12-inlinerepeat-da601-expandedrow",
+		ID_EXPANDED_ROW_CONTROL_GRID: "a12-controlgrid-b0013",
+		ID_BODY_ROW: "a12-inlinerepeat-da601-bodyrow",
+		ID_CLOSE_BUTTON: "a12-close-button-inlinerepeat-da601",
+		ID_EDIT_BUTTON: "a12-edit-button-inlinerepeat-da601",
+		ID_REMOVE_BUTTON: "a12-remove-button-inlinerepeat-da601",
+		ID_CUSTOM_BUTTON: "a12-custom-event-button-inlinerepeat-da601",
+		erRepeatPath,
+		erDetailControlGridPath: [...erRepeatPath, ...createModelPath("cg")]
+	},
+	ColumnProperties: {
+		screen: "ColumnProperties",
+		ID_REPEAT_PINNING: "a12-inlinerepeat-a44be",
+		ID_COLUMN_WIDTH: "a12-inlinerepeat-b99b2",
+		ID_LEFT_1: "a12-fieldbasedrepeatoverviewcolumn-75664-cell-0",
+		ID_LEFT_2: "a12-fieldbasedrepeatoverviewcolumn-abb7c-cell-0",
+		ID_NONE_1: "a12-fieldbasedrepeatoverviewcolumn-03a0f-cell-0",
+		ID_NONE_2: "a12-fieldbasedrepeatoverviewcolumn-6dc91-cell-0",
+		ID_RIGHT_1: "a12-fieldbasedrepeatoverviewcolumn-bb84e-cell-0",
+		ID_RIGHT_2: "a12-fieldbasedrepeatoverviewcolumn-150ee-cell-0",
+		ID_REPEAT_VERTICAL_ALIGNMENT: "a12-embeddedrepeat-356ab"
+	},
+	TableStyle: {
+		ID_COLUMN_L1_STRING: "a12-fieldbasedrepeatoverviewcolumn-5a7bf-bodycell-0",
+		ID_COLUMN_L1_MULTI_SELECT: "a12-fieldbasedrepeatoverviewcolumn-4df6c-bodycell-0",
+		ID_COLUMN_L1_EXPRESSION: "a12-expressionrepeatoverviewcolumn-2d340-bodycell-0"
 	}
-
-	export namespace ColumnProperties {
-		export const screen = "ColumnProperties";
-
-		export const ID_REPEAT_PINNING = "a12-inlinerepeat-a44be";
-		export const ID_COLUMN_WIDTH = "a12-inlinerepeat-b99b2";
-
-		export const ID_LEFT_1 = "a12-fieldbasedrepeatoverviewcolumn-75664-cell-0";
-		export const ID_LEFT_2 = "a12-fieldbasedrepeatoverviewcolumn-abb7c-cell-0";
-		export const ID_NONE_1 = "a12-fieldbasedrepeatoverviewcolumn-03a0f-cell-0";
-		export const ID_NONE_2 = "a12-fieldbasedrepeatoverviewcolumn-6dc91-cell-0";
-		export const ID_RIGHT_1 = "a12-fieldbasedrepeatoverviewcolumn-bb84e-cell-0";
-		export const ID_RIGHT_2 = "a12-fieldbasedrepeatoverviewcolumn-150ee-cell-0";
-
-		export const ID_REPEAT_VERTICAL_ALIGNMENT = "a12-embeddedrepeat-356ab";
-	}
-
-	export namespace TableStyle {
-		export const ID_COLUMN_L1_STRING = "a12-fieldbasedrepeatoverviewcolumn-5a7bf-bodycell-0";
-		export const ID_COLUMN_L1_MULTI_SELECT = "a12-fieldbasedrepeatoverviewcolumn-4df6c-bodycell-0";
-		export const ID_COLUMN_L1_EXPRESSION = "a12-expressionrepeatoverviewcolumn-2d340-bodycell-0";
-	}
-}
+} as const;

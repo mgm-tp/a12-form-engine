@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -33,9 +33,9 @@
 import { deepStrictEqual, rejects, strictEqual } from "node:assert/strict";
 import { mock } from "node:test";
 
-import type { AttachmentHeader } from "@com.mgmtp.a12.dataservices/dataservices-access/lib/Attachment/attachment.js";
-import { Dispatcher } from "@com.mgmtp.a12.dataservices/dataservices-access/lib/dispatch/index.js";
-import { localizableFromLocalizationTreeMap } from "@com.mgmtp.a12.utils/utils-localization/lib/main/index.js";
+import type { AttachmentHeader } from "@com.mgmtp.a12.dataservices/dataservices-access";
+import { Dispatcher } from "@com.mgmtp.a12.dataservices/dataservices-access";
+import { localizableFromLocalizationTreeMap } from "@com.mgmtp.a12.utils/utils-localization";
 
 import { DEFAULT_TRANSLATIONS, RESOURCE_KEYS } from "../../../back-end/localization/index.js";
 import { platformAttachmentLoader } from "../../../client-extensions/index.js";

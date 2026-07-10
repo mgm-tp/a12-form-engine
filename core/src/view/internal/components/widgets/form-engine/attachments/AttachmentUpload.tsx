@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -33,9 +33,9 @@
 import type { JSX } from "react";
 import { useContext, useRef, useState } from "react";
 
-import { LocalizerContext } from "@com.mgmtp.a12.utils/utils-localization-react/lib/main/index.js";
-import type { LocalizableArgs } from "@com.mgmtp.a12.utils/utils-localization/lib/main/index.js";
-import type { DefaultFileUploadProps } from "@com.mgmtp.a12.widgets/widgets-core/lib/file-upload/main/default/default-file-upload.api.js";
+import type { LocalizableArgs } from "@com.mgmtp.a12.utils/utils-localization";
+import { LocalizerContext } from "@com.mgmtp.a12.utils/utils-localization-react";
+import type { DefaultFileUploadProps } from "@com.mgmtp.a12.widgets/widgets-core";
 
 import { createResourceLocalizable } from "../../../../../../back-end/localization/internal/factory.js";
 import { RESOURCE_KEYS } from "../../../../../../back-end/localization/internal/languages/keys.js";

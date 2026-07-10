@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -30,12 +30,10 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import type {
-	Localizer,
-	ValueConversion
-} from "@com.mgmtp.a12.utils/utils-localization/lib/main/index.js";
+import type { GeneratedCodeRtConfig } from "@com.mgmtp.a12.kernel/kernel-md-facade";
+import type { Localizer, ValueConversion } from "@com.mgmtp.a12.utils/utils-localization";
 
-import type ExternalEnumerationProvider from "../../../services/external-enumeration-provider.js";
+import type { IExternalEnumerationProvider } from "../../../services/external-enumeration-provider.js";
 
 import type { EngineStore } from "../store.js";
 
@@ -56,14 +54,17 @@ export interface MiddlewareOptions extends Localization, Conversion {
 	 * Mind: You need to register your external enumeration provider here, as well as
 	 * in your configuration (`Config`) which you hand as props to the view!
 	 */
-	readonly externalEnumerationProvider?: ExternalEnumerationProvider;
+	readonly externalEnumerationProvider?: IExternalEnumerationProvider;
 
 	/**
-	 * Provides the `now` value used in kernel computation/validation.
+	 * Use additional kernel options used in kernel computation/validation.
 	 *
-	 * Only used for the devapp/preview.
+	 * To use state-dependent logic, define the function with access to the
+	 * store.
+	 *
+	 * Please note that the default for ignoreUnknownFields is true.
 	 */
-	readonly nowProvider?: EngineStore.Provider<Date | undefined>;
+	readonly kernelOptionsProvider?: KernelOptionsProvider;
 
 	/**
 	 * Property to disable the validation:
@@ -73,6 +74,8 @@ export interface MiddlewareOptions extends Localization, Conversion {
 	 */
 	readonly disableRepeatValidationOnLeaving?: boolean;
 }
+
+export type KernelOptionsProvider = EngineStore.Provider<GeneratedCodeRtConfig>;
 
 /**
  * Data structure for Conversion related types.

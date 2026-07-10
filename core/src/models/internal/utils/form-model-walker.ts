@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -32,7 +32,27 @@
 
 import type { NonEmptyArray } from "fp-ts/lib/NonEmptyArray.js";
 
-import { FormModel } from "../form-model.js";
+import {
+	isFormModel,
+	isFormModelButtonPanel,
+	isFormModelButtonType,
+	isFormModelContent,
+	isFormModelControl,
+	isFormModelControlGrid,
+	isFormModelDetachedRepeat,
+	isFormModelEmbeddedRepeat,
+	isFormModelExpressionCell,
+	isFormModelHeaderFooterType,
+	isFormModelInlineRepeat,
+	isFormModelMultiColumnSection,
+	isFormModelRepeatOverviewColumn,
+	isFormModelRow,
+	isFormModelScreen,
+	isFormModelSection,
+	isFormModelTextCell
+} from "../../../models/internal/FormModelGuards.js";
+
+import type { FormModel } from "../form-model.js";
 
 /**
  * @internal
@@ -70,11 +90,7 @@ export interface ModelVisitor {
 }
 
 /** @internal */
-export enum VisitProcess {
-	ContinueTraversal,
-	ContinueButDoNotGoDeeper,
-	Stop
-}
+export type VisitProcess = "ContinueTraversal" | "ContinueButDoNotGoDeeper" | "Stop";
 
 /**
  * @internal
@@ -88,41 +104,44 @@ export enum VisitProcess {
  */
 export class ModelWalker {
 	private path: object[] = [];
-	constructor(private visitor: ModelVisitor) {}
+	private visitor: ModelVisitor;
+	constructor(visitor: ModelVisitor) {
+		this.visitor = visitor;
+	}
 
 	acceptGeneric(formModelElement: object): void {
-		if (FormModel.isInstance(formModelElement)) {
+		if (isFormModel(formModelElement)) {
 			this.acceptModel(formModelElement);
-		} else if (FormModel.Content.isInstance(formModelElement)) {
+		} else if (isFormModelContent(formModelElement)) {
 			this.acceptContent(formModelElement);
-		} else if (FormModel.HeaderFooterType.isInstance(formModelElement)) {
+		} else if (isFormModelHeaderFooterType(formModelElement)) {
 			this.acceptHeaderFooter(formModelElement);
-		} else if (FormModel.Screen.isInstance(formModelElement)) {
+		} else if (isFormModelScreen(formModelElement)) {
 			this.acceptScreen(formModelElement);
-		} else if (FormModel.ButtonType.isInstance(formModelElement)) {
+		} else if (isFormModelButtonType(formModelElement)) {
 			this.acceptButton(formModelElement);
-		} else if (FormModel.ButtonPanel.isInstance(formModelElement)) {
+		} else if (isFormModelButtonPanel(formModelElement)) {
 			this.acceptButtonPanel(formModelElement);
-		} else if (FormModel.Section.isInstance(formModelElement)) {
+		} else if (isFormModelSection(formModelElement)) {
 			this.acceptSection(formModelElement);
-		} else if (FormModel.MultiColumnSection.isInstance(formModelElement)) {
+		} else if (isFormModelMultiColumnSection(formModelElement)) {
 			this.acceptMultiColumnSection(formModelElement);
-		} else if (FormModel.ControlGrid.isInstance(formModelElement)) {
+		} else if (isFormModelControlGrid(formModelElement)) {
 			this.acceptControlGrid(formModelElement);
-		} else if (FormModel.Row.isInstance(formModelElement)) {
+		} else if (isFormModelRow(formModelElement)) {
 			this.acceptRow(formModelElement);
-		} else if (FormModel.InlineRepeat.isInstance(formModelElement)) {
+		} else if (isFormModelInlineRepeat(formModelElement)) {
 			this.acceptInlineRepeat(formModelElement);
-		} else if (FormModel.DetachedRepeat.isInstance(formModelElement)) {
+		} else if (isFormModelDetachedRepeat(formModelElement)) {
 			this.acceptDetachedRepeat(formModelElement);
-		} else if (FormModel.EmbeddedRepeat.isInstance(formModelElement)) {
+		} else if (isFormModelEmbeddedRepeat(formModelElement)) {
 			this.acceptEmbeddedRepeat(formModelElement);
-		} else if (FormModel.RepeatOverviewColumn.isInstance(formModelElement)) {
+		} else if (isFormModelRepeatOverviewColumn(formModelElement)) {
 			this.acceptRepeatOverviewColumn(formModelElement);
 		} else if (
-			FormModel.ExpressionCell.isInstance(formModelElement) ||
-			FormModel.TextCell.isInstance(formModelElement) ||
-			FormModel.Control.isInstance(formModelElement)
+			isFormModelExpressionCell(formModelElement) ||
+			isFormModelTextCell(formModelElement) ||
+			isFormModelControl(formModelElement)
 		) {
 			this.acceptCell(formModelElement);
 		}
@@ -133,12 +152,9 @@ export class ModelWalker {
 	}
 
 	acceptContent(content: FormModel.Content): void {
-		let process = VisitProcess.ContinueTraversal;
-
 		if (this.visitor.visitContent) {
 			try {
-				process = this.visitor.visitContent(content);
-				if (VisitProcess.Stop === process) {
+				if ("Stop" === this.visitor.visitContent(content)) {
 					return;
 				}
 				// eslint-disable-next-line no-empty
@@ -192,12 +208,12 @@ export class ModelWalker {
 	}
 
 	acceptFieldConfigurationEntry(fce: FormModel.FieldConfigurationEntry): boolean {
-		let process = VisitProcess.ContinueTraversal;
+		let process = "ContinueTraversal";
 		try {
 			if (this.visitor.visitFieldConfigurationEntry) {
 				process = this.visitor.visitFieldConfigurationEntry(fce);
 			}
-			return VisitProcess.Stop !== process;
+			return "Stop" !== process;
 			// eslint-disable-next-line no-empty
 		} finally {
 		}
@@ -216,34 +232,34 @@ export class ModelWalker {
 
 	acceptScreen(screen: FormModel.Screen): boolean {
 		this.enter(screen);
-		let process = VisitProcess.ContinueTraversal;
+		let process = "ContinueTraversal";
 		try {
 			if (this.visitor.visitScreen) {
 				process = this.visitor.visitScreen(screen);
 			}
-			if (VisitProcess.ContinueTraversal === process) {
+			if ("ContinueTraversal" === process) {
 				if (screen.subHeaderBox !== undefined) {
 					if (!this.acceptHeaderFooter(screen.subHeaderBox)) {
-						process = VisitProcess.Stop;
+						process = "Stop";
 					}
 				}
-				if (VisitProcess.ContinueTraversal === process) {
+				if ("ContinueTraversal" === process) {
 					for (const screenElement of screen.screenElements) {
 						if (!this.acceptScreenElement(screenElement)) {
-							process = VisitProcess.Stop;
+							process = "Stop";
 							break;
 						}
 					}
 				}
-				if (VisitProcess.ContinueTraversal === process) {
+				if ("ContinueTraversal" === process) {
 					if (screen.footerBox !== undefined) {
 						if (!this.acceptHeaderFooter(screen.footerBox)) {
-							process = VisitProcess.Stop;
+							process = "Stop";
 						}
 					}
 				}
 			}
-			return VisitProcess.Stop !== process;
+			return "Stop" !== process;
 		} finally {
 			this.leave();
 		}
@@ -282,21 +298,21 @@ export class ModelWalker {
 
 	acceptButtonPanel(panel: FormModel.ButtonPanel): boolean {
 		this.enter(panel);
-		let process = VisitProcess.ContinueTraversal;
+		let process = "ContinueTraversal";
 		try {
 			if (this.visitor.visitButtonPanel) {
 				process = this.visitor.visitButtonPanel(panel);
 			}
 			const buttons = panel.button;
-			if (VisitProcess.ContinueTraversal === process && buttons) {
+			if ("ContinueTraversal" === process && buttons) {
 				for (const button of buttons) {
 					if (!this.acceptButton(button)) {
-						process = VisitProcess.Stop;
+						process = "Stop";
 						break;
 					}
 				}
 			}
-			return VisitProcess.Stop !== process;
+			return "Stop" !== process;
 		} finally {
 			this.leave();
 		}
@@ -304,12 +320,12 @@ export class ModelWalker {
 
 	acceptButton(button: FormModel.ButtonType): boolean {
 		this.enter(button);
-		let process = VisitProcess.ContinueTraversal;
+		let process = "ContinueTraversal";
 		try {
 			if (this.visitor.visitButton) {
 				process = this.visitor.visitButton(button);
 			}
-			return VisitProcess.Stop !== process;
+			return "Stop" !== process;
 		} finally {
 			this.leave();
 		}
@@ -317,21 +333,21 @@ export class ModelWalker {
 
 	acceptControlGrid(grid: FormModel.ControlGrid): boolean {
 		this.enter(grid);
-		let process = VisitProcess.ContinueTraversal;
+		let process = "ContinueTraversal";
 		try {
 			if (this.visitor.visitControlGrid) {
 				process = this.visitor.visitControlGrid(grid);
 			}
 			const rows = grid.row;
-			if (VisitProcess.ContinueTraversal === process && rows) {
+			if ("ContinueTraversal" === process && rows) {
 				for (const row of rows) {
 					if (!this.acceptRow(row)) {
-						process = VisitProcess.Stop;
+						process = "Stop";
 						break;
 					}
 				}
 			}
-			return VisitProcess.Stop !== process;
+			return "Stop" !== process;
 		} finally {
 			this.leave();
 		}
@@ -339,21 +355,21 @@ export class ModelWalker {
 
 	acceptRow(row: FormModel.Row): boolean {
 		this.enter(row);
-		let process = VisitProcess.ContinueTraversal;
+		let process = "ContinueTraversal";
 		try {
 			if (this.visitor.visitRow) {
 				process = this.visitor.visitRow(row);
 			}
 			const cells = row.cell;
-			if (VisitProcess.ContinueTraversal === process && cells) {
+			if ("ContinueTraversal" === process && cells) {
 				for (const cell of cells) {
 					if (!this.acceptCell(cell)) {
-						process = VisitProcess.Stop;
+						process = "Stop";
 						break;
 					}
 				}
 			}
-			return VisitProcess.Stop !== process;
+			return "Stop" !== process;
 		} finally {
 			this.leave();
 		}
@@ -361,33 +377,30 @@ export class ModelWalker {
 
 	acceptCell(cell: FormModel.CellType): boolean {
 		this.enter(cell);
-		let continueProcess = true;
+
 		try {
 			switch (cell.type) {
 				case "Control":
-					continueProcess =
-						this.visitor.visitControl === undefined ||
-						this.visitor.visitControl(cell) !== VisitProcess.Stop;
-					break;
+					return (
+						this.visitor.visitControl === undefined || this.visitor.visitControl(cell) !== "Stop"
+					);
 				case "ExpressionCell":
-					continueProcess =
+					return (
 						this.visitor.visitExpressionCell === undefined ||
-						this.visitor.visitExpressionCell(cell) !== VisitProcess.Stop;
-					break;
+						this.visitor.visitExpressionCell(cell) !== "Stop"
+					);
 				case "TextCell":
-					continueProcess =
-						this.visitor.visitTextCell === undefined ||
-						this.visitor.visitTextCell(cell) !== VisitProcess.Stop;
-					break;
+					return (
+						this.visitor.visitTextCell === undefined || this.visitor.visitTextCell(cell) !== "Stop"
+					);
 				case "CustomCell":
-					continueProcess =
+					return (
 						this.visitor.visitCustomCell === undefined ||
-						this.visitor.visitCustomCell(cell) !== VisitProcess.Stop;
-					break;
+						this.visitor.visitCustomCell(cell) !== "Stop"
+					);
 				default:
 					throw new Error();
 			}
-			return continueProcess;
 		} finally {
 			this.leave();
 		}
@@ -395,35 +408,33 @@ export class ModelWalker {
 
 	acceptDetachedRepeat(repeat: FormModel.DetachedRepeat): boolean {
 		this.enter(repeat);
-		let process = VisitProcess.ContinueTraversal;
+		let process = "ContinueTraversal";
 		try {
 			if (this.visitor.visitDetachedRepeat) {
 				process = this.visitor.visitDetachedRepeat(repeat);
 			}
 			const columns = repeat.repeatOverviewColumn;
-			if (VisitProcess.ContinueTraversal === process && columns) {
+			if ("ContinueTraversal" === process && columns) {
 				for (const c of columns) {
 					if (!this.acceptRepeatOverviewColumn(c)) {
-						process = VisitProcess.Stop;
+						process = "Stop";
 						break;
 					}
 				}
 			}
 			const rowActions = repeat.rowActionGroup?.action;
-			if (VisitProcess.ContinueTraversal === process && rowActions) {
+			if ("ContinueTraversal" === process && rowActions) {
 				for (const r of rowActions) {
 					if (!this.acceptRowAction(r)) {
-						process = VisitProcess.Stop;
+						process = "Stop";
 						break;
 					}
 				}
 			}
-			if (VisitProcess.ContinueTraversal === process) {
-				process = this.acceptScreen(repeat.detailScreen as FormModel.Screen)
-					? process
-					: VisitProcess.Stop;
+			if ("ContinueTraversal" === process) {
+				process = this.acceptScreen(repeat.detailScreen as FormModel.Screen) ? process : "Stop";
 			}
-			return VisitProcess.Stop !== process;
+			return "Stop" !== process;
 		} finally {
 			this.leave();
 		}
@@ -431,24 +442,24 @@ export class ModelWalker {
 
 	acceptRepeatOverviewColumn(column: FormModel.RepeatOverviewColumn): boolean {
 		this.enter(column);
-		let process = VisitProcess.ContinueTraversal;
+		let process = "ContinueTraversal";
 		try {
 			if (this.visitor.visitRepeatOverviewColumn) {
 				process = this.visitor.visitRepeatOverviewColumn(column);
 			}
-			return VisitProcess.Stop !== process;
+			return "Stop" !== process;
 		} finally {
 			this.leave();
 		}
 	}
 
 	acceptRowAction(action: FormModel.RowAction): boolean {
-		let process = VisitProcess.ContinueTraversal;
+		let process = "ContinueTraversal";
 		try {
 			if (this.visitor.visitRowAction) {
 				process = this.visitor.visitRowAction(action);
 			}
-			return VisitProcess.Stop !== process;
+			return "Stop" !== process;
 			// eslint-disable-next-line no-empty
 		} finally {
 		}
@@ -456,30 +467,30 @@ export class ModelWalker {
 
 	acceptInlineRepeat(repeat: FormModel.InlineRepeat): boolean {
 		this.enter(repeat);
-		let process = VisitProcess.ContinueTraversal;
+		let process = "ContinueTraversal";
 		try {
 			if (this.visitor.visitInlineRepeat) {
 				process = this.visitor.visitInlineRepeat(repeat);
 			}
 			const columns = repeat.repeatOverviewColumn;
-			if (VisitProcess.ContinueTraversal === process && columns) {
+			if ("ContinueTraversal" === process && columns) {
 				for (const c of columns) {
 					if (!this.acceptRepeatOverviewColumn(c)) {
-						process = VisitProcess.Stop;
+						process = "Stop";
 						break;
 					}
 				}
 			}
 			const rowActions = repeat.rowActionGroup?.action;
-			if (VisitProcess.ContinueTraversal === process && rowActions) {
+			if ("ContinueTraversal" === process && rowActions) {
 				for (const r of rowActions) {
 					if (!this.acceptRowAction(r)) {
-						process = VisitProcess.Stop;
+						process = "Stop";
 						break;
 					}
 				}
 			}
-			return VisitProcess.Stop !== process;
+			return "Stop" !== process;
 		} finally {
 			this.leave();
 		}
@@ -487,33 +498,33 @@ export class ModelWalker {
 
 	acceptEmbeddedRepeat(repeat: FormModel.EmbeddedRepeat): boolean {
 		this.enter(repeat);
-		let process = VisitProcess.ContinueTraversal;
+		let process = "ContinueTraversal";
 		try {
 			if (this.visitor.visitEmbeddedRepeat) {
 				process = this.visitor.visitEmbeddedRepeat(repeat);
 			}
 			const columns = repeat.repeatOverviewColumn;
-			if (VisitProcess.ContinueTraversal === process && columns) {
+			if ("ContinueTraversal" === process && columns) {
 				for (const c of columns) {
 					if (!this.acceptRepeatOverviewColumn(c)) {
-						process = VisitProcess.Stop;
+						process = "Stop";
 						break;
 					}
 				}
 			}
 			const rowActions = repeat.rowActionGroup?.action;
-			if (VisitProcess.ContinueTraversal === process && rowActions) {
+			if ("ContinueTraversal" === process && rowActions) {
 				for (const r of rowActions) {
 					if (!this.acceptRowAction(r)) {
-						process = VisitProcess.Stop;
+						process = "Stop";
 						break;
 					}
 				}
 			}
-			if (VisitProcess.ContinueTraversal === process) {
-				process = this.acceptControlGrid(repeat.controlGrid) ? process : VisitProcess.Stop;
+			if ("ContinueTraversal" === process) {
+				process = this.acceptControlGrid(repeat.controlGrid) ? process : "Stop";
 			}
-			return VisitProcess.Stop !== process;
+			return "Stop" !== process;
 		} finally {
 			this.leave();
 		}
@@ -521,21 +532,21 @@ export class ModelWalker {
 
 	acceptMultiColumnSection(section: FormModel.MultiColumnSection): boolean {
 		this.enter(section);
-		let process = VisitProcess.ContinueTraversal;
+		let process = "ContinueTraversal";
 		try {
 			if (this.visitor.visitMultiColumnSection) {
 				process = this.visitor.visitMultiColumnSection(section);
 			}
 			const elements = section.screenElements;
-			if (VisitProcess.ContinueTraversal === process && elements) {
+			if ("ContinueTraversal" === process && elements) {
 				for (const se of elements) {
 					if (!this.acceptScreenElement(se)) {
-						process = VisitProcess.Stop;
+						process = "Stop";
 						break;
 					}
 				}
 			}
-			return VisitProcess.Stop !== process;
+			return "Stop" !== process;
 		} finally {
 			this.leave();
 		}
@@ -543,21 +554,21 @@ export class ModelWalker {
 
 	acceptSection(section: FormModel.Section): boolean {
 		this.enter(section);
-		let process = VisitProcess.ContinueTraversal;
+		let process = "ContinueTraversal";
 		try {
 			if (this.visitor.visitSection) {
 				process = this.visitor.visitSection(section);
 			}
 			const elements = section.screenElements;
-			if (VisitProcess.ContinueTraversal === process && elements) {
+			if ("ContinueTraversal" === process && elements) {
 				for (const se of elements) {
 					if (!this.acceptScreenElement(se)) {
-						process = VisitProcess.Stop;
+						process = "Stop";
 						break;
 					}
 				}
 			}
-			return VisitProcess.Stop !== process;
+			return "Stop" !== process;
 		} finally {
 			this.leave();
 		}
@@ -565,12 +576,12 @@ export class ModelWalker {
 
 	acceptCustomScreenElement(customScreenElement: FormModel.CustomScreenElement): boolean {
 		this.enter(customScreenElement);
-		let process = VisitProcess.ContinueTraversal;
+		let process = "ContinueTraversal";
 		try {
 			if (this.visitor.visitCustomScreenElement) {
 				process = this.visitor.visitCustomScreenElement(customScreenElement);
 			}
-			return VisitProcess.Stop !== process;
+			return "Stop" !== process;
 		} finally {
 			this.leave();
 		}

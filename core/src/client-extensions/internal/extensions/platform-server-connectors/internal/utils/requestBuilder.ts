@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -31,15 +31,13 @@
  */
 
 import type {
+	DocumentJsonRpc2Request,
 	LoadAttachmentUrlJsonRpc2,
-	LoadThumbnailUrlsJsonRpc2
-} from "@com.mgmtp.a12.dataservices/dataservices-access/lib/Attachment/attachment.js";
-import type { DocumentJsonRpc2Request } from "@com.mgmtp.a12.dataservices/dataservices-access/lib/Document/index.js";
-import type {
+	LoadThumbnailUrlsJsonRpc2,
 	Query,
 	QueryJsonRpc2Request
-} from "@com.mgmtp.a12.dataservices/dataservices-access/lib/query/index.js";
-import type { Locale } from "@com.mgmtp.a12.utils/utils-localization/lib/main/index.js";
+} from "@com.mgmtp.a12.dataservices/dataservices-access";
+import type { Locale } from "@com.mgmtp.a12.utils/utils-localization";
 
 let requestCounter = 0;
 
@@ -117,6 +115,23 @@ export const RequestBuilder = {
 			id: `LOAD_THUMBNAIL_URLS_INTERNAL-${requestCounter++}`,
 			method: "LOAD_THUMBNAIL_URLS_INTERNAL",
 			params: {}
+		};
+	},
+
+	checkUniqueness(
+		documentModelName: string,
+		document: object,
+		docRef: string | undefined
+	): DocumentJsonRpc2Request.CheckUniquenessJsonRpc2Request {
+		return {
+			jsonrpc: "2.0",
+			id: `CHECK_UNIQUENESS-${requestCounter++}`,
+			method: "CHECK_UNIQUENESS",
+			params: {
+				documentModelName,
+				document,
+				docRef
+			}
 		};
 	}
 };

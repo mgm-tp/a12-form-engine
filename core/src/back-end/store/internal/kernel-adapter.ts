@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -30,24 +30,29 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { ModelPath } from "@com.mgmtp.a12.base/base-model-api/lib/main/model/index.js";
-import type * as Collections from "@com.mgmtp.a12.kernel/kernel-core-runtime-api-ts/lib/main/js/a12internal/CollectionsWrapper.js";
-import type { IMetaField } from "@com.mgmtp.a12.kernel/kernel-core-runtime-api-ts/lib/main/js/a12internal/meta/IMetaField.js";
-import { IMetaKeys } from "@com.mgmtp.a12.kernel/kernel-core-runtime-api-ts/lib/main/js/a12internal/utils/IMetaKeys.js";
-import { IIdentifier } from "@com.mgmtp.a12.kernel/kernel-core-runtime-api-ts/lib/main/js/a12internal/validation/IIdentifier.js";
-import type { IResult } from "@com.mgmtp.a12.kernel/kernel-core-runtime-api-ts/lib/main/js/a12internal/validation/IResult.js";
-import { ErrorType } from "@com.mgmtp.a12.kernel/kernel-core-runtime-api-ts/lib/main/js/a12internal/validation/IResult.js";
-import type { ExternalComputation } from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/a12internal/compute.js";
-import { DocumentRtServiceFactoryA12internal } from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/a12internal/compute.js";
+import { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
+import type * as Collections from "@com.mgmtp.a12.kernel/kernel-core-runtime-api-ts/a12internal";
+import type {
+	IMetaField,
+	IResult
+} from "@com.mgmtp.a12.kernel/kernel-core-runtime-api-ts/a12internal";
+import {
+	ErrorType,
+	IIdentifier,
+	IMetaKeys
+} from "@com.mgmtp.a12.kernel/kernel-core-runtime-api-ts/a12internal";
 import type {
 	ComputedFieldInstance,
 	Document,
 	EntityInstancePath,
+	GeneratedCodeRtConfig,
 	GroupInstance,
 	IGeneratedCodeAccessor,
 	Message
-} from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
-import type { Localizable } from "@com.mgmtp.a12.utils/utils-localization/lib/main/index.js";
+} from "@com.mgmtp.a12.kernel/kernel-md-facade";
+import { DocumentRtServiceFactoryA12internal } from "@com.mgmtp.a12.kernel/kernel-md-facade/a12internal";
+import type { ExternalComputation } from "@com.mgmtp.a12.kernel/kernel-md-facade/a12internal";
+import type { Localizable } from "@com.mgmtp.a12.utils/utils-localization";
 
 import { DocumentPath } from "../../../models/internal/utils/document-utils.js";
 import type { ReadonlyObjectMap } from "../../../models/internal/utils/json.js";
@@ -80,7 +85,7 @@ interface ComputeOptions {
 	readonly externalComputations: ExternalComputation[];
 	readonly changes?: ReadonlyObjectMap<Change>;
 
-	readonly now?: Date;
+	readonly kernelOptions?: GeneratedCodeRtConfig;
 }
 
 /** @internal */
@@ -96,11 +101,17 @@ export interface DetailedUpdateResultWithParsingErrors extends DetailedUpdateRes
  *
  * If no value could be computed, the given document is returned unchanged.
  *
- * @returns the updated document and a list of parsing error messages
+ * @returns the updated document, field changes and a list of parsing error messages
  *
  */
 export function computeWithKernel(options: ComputeOptions): DetailedUpdateResultWithParsingErrors {
-	const { document, validatorProvider, externalComputations, now, changes } = options;
+	const { document, validatorProvider, externalComputations, changes, kernelOptions } = options;
+	const {
+		currentDateForTest,
+		customConditionFactory,
+		customFieldTypeFactory,
+		ignoreUnknownFields
+	} = kernelOptions || {};
 
 	const fieldValueChanges = changes
 		? Object.values(changes).reduce<EntityInstancePath[]>((acc, change) => {
@@ -122,8 +133,10 @@ export function computeWithKernel(options: ComputeOptions): DetailedUpdateResult
 	const documentService = DocumentRtServiceFactoryA12internal.createDocumentRtService(
 		validatorProvider,
 		{
-			currentDateForTest: now,
-			ignoreUnknownFields: true
+			currentDateForTest,
+			customConditionFactory,
+			customFieldTypeFactory,
+			ignoreUnknownFields: ignoreUnknownFields !== false
 		}
 	);
 
@@ -138,7 +151,6 @@ export function computeWithKernel(options: ComputeOptions): DetailedUpdateResult
 	const newDoc = computationResult.appliedTo(document as Document);
 
 	const changedFields = convertComputedFieldInstancesToChanges(
-		document,
 		computationResult.computedFieldInstancesWithChanges,
 		computationResult.clearedFieldInstances
 	);
@@ -155,7 +167,6 @@ export function computeWithKernel(options: ComputeOptions): DetailedUpdateResult
  * Export for testing
  */
 export function convertComputedFieldInstancesToChanges(
-	document: GroupInstance,
 	computedFieldInstances: ComputedFieldInstance[],
 	clearedFieldInstances: ComputedFieldInstance[]
 ): ReadonlyObjectMap<Change> {
@@ -378,14 +389,14 @@ export class ValidationResult implements IResult {
 		severity: "ERROR" | "WARNING" | "INFO"
 	): void {
 		this.messages.push({
-			element: Identifiers.toDocumentPath(errorField),
+			element: toDocumentPath(errorField),
 			errorText: errorMessage,
 			errorCode,
 			errorKey: ruleName,
 			severity,
 			referencedFields: Array.from(
 				type === ErrorType.OMISSION_ERROR ? refOmissionErrorResponsible : referencedFields
-			).map(Identifiers.toDocumentPath)
+			).map(toDocumentPath)
 		});
 	}
 
@@ -398,12 +409,10 @@ export class ValidationResult implements IResult {
 	}
 }
 
-namespace Identifiers {
-	export function toDocumentPath(id: IIdentifier): EntityInstancePath {
-		return id
-			.getName()
-			.split(IIdentifier.SEPARATOR)
-			.slice(1)
-			.map((elementName, i) => ({ elementName, index: id.getIndices()[i] }));
-	}
+export function toDocumentPath(id: IIdentifier): EntityInstancePath {
+	return id
+		.getName()
+		.split(IIdentifier.SEPARATOR)
+		.slice(1)
+		.map((elementName, i) => ({ elementName, index: id.getIndices()[i] }));
 }

@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -30,14 +30,11 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import type { DateRange } from "@com.mgmtp.a12.widgets/widgets-core/lib/datepicker/main/date-range.api.js";
-import type { YearRange } from "@com.mgmtp.a12.widgets/widgets-core/lib/input/year-month-selector/year-selector.api.js";
+import type { DateRange, YearRange } from "@com.mgmtp.a12.widgets/widgets-core";
 
-import type { ClockMode } from "../../../configuration/engine-configuration.js";
+import type { BufferedTextLineProps } from "./buffered-text-line.js";
 
-import type { BufferedTextLine } from "./buffered-text-line.js";
-
-interface BaseDateTextLineProps extends BufferedTextLine.PropsType {
+interface BaseDateTextLineProps extends BufferedTextLineProps {
 	readonly id: string;
 	readonly enableDatePicker?: boolean;
 	readonly timeZone?: string;
@@ -67,7 +64,6 @@ export interface DateTimeTextLineProps extends BaseDateTextLineProps {
 	readonly placeholderText: string;
 
 	readonly yearRange?: YearRange;
-	readonly timeMode?: ClockMode;
 
 	onTypedValueSubmit(date: Date): void;
 	getLocalizedDateString(date: Date | null): string;

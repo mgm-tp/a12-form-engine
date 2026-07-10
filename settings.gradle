@@ -1,122 +1,15 @@
-import groovy.yaml.YamlSlurper
-
-buildscript {
-    repositories {
-        mavenCentral()
-    }
-
-    dependencies {
-        classpath 'org.apache.groovy:groovy-yaml:4.0.28'
-    }
-}
+rootProject.name = 'form-engine'
 
 dependencyResolutionManagement {
-    final def a12Version = getA12Versions()
-
     versionCatalogs {
-        gradlePluginLibs {
-            version('spotbugs-plugin', '6.4.4')
-            version('cyclonedx-plugin', '3.0.1')
-            version('spotless-plugin', '7.0.2')
-            version('asciidoc', '4.0.4')
-            version('shadow', '9.2.2')
-            version('docker', '9.4.0')
-
-            library('spotbugs-plugin', 'com.github.spotbugs.snom', 'spotbugs-gradle-plugin').versionRef('spotbugs-plugin')
-            library('cyclonedx-plugin', 'org.cyclonedx', 'cyclonedx-gradle-plugin').versionRef('cyclonedx-plugin')
-            library('spotless-plugin', 'com.diffplug.spotless', 'spotless-plugin-gradle').versionRef('spotless-plugin')
-            library('docker-plugin', 'com.bmuschko', 'gradle-docker-plugin').versionRef('docker')
-
-            plugin('spotbugs', 'com.github.spotbugs').versionRef('spotbugs-plugin')
-            plugin('cyclonedx', 'org.cyclonedx.bom').versionRef('cyclonedx-plugin')
-            plugin('spotless', 'com.diffplug.spotless').versionRef('spotless-plugin')
-            plugin('asciidoc', 'org.asciidoctor.jvm.convert').versionRef('asciidoc')
-            plugin('shadow', 'com.gradleup.shadow').versionRef('shadow')
-            plugin('docker', 'com.bmuschko.docker-remote-api').versionRef('docker')
-        }
-
-        a12Plugins {
-            version('prepare-models', '0.6.0')
-            version('devtools-deploy', '0.5.5')
-            version('devtools-performance-tests', '0.2.0')
-            version('artifact-publish', '0.4.0-rc.1')
-
-            plugin('prepare-models', 'com.mgmtp.a12.devtools.plugins.prepare-models').versionRef('prepare-models')
-            if (file('docker').exists()) {
-                library('artifact-publish-plugin', 'com.mgmtp.a12.bd.artifact-publish', 'com.mgmtp.a12.bd.artifact-publish.gradle.plugin').versionRef('artifact-publish')
-                library('devtools-deploy-plugin', 'com.mgmtp.a12.devtools.plugins.deployment', 'com.mgmtp.a12.devtools.plugins.deployment.gradle.plugin').versionRef('devtools-deploy')
-                plugin('devtools-deploy', 'com.mgmtp.a12.devtools.plugins.deployment').versionRef('devtools-deploy')
+        if (file('gradle/a12-internal.versions.toml').exists()) {
+            create('a12Internal') {
+                from(files('gradle/a12-internal.versions.toml'))
             }
-            if (file('performance-tests').exists()) {
-                plugin('devtools-performance-tests', 'com.mgmtp.a12.devtools.plugins.performance-test').versionRef('devtools-performance-tests')
-            }
-        }
-
-        a12Libs {
-            version('dataservices', a12Version.dataservices)
-            version('build-utilities', '0.3.0')
-
-
-            library('build-utilities', 'com.mgmtp.a12.devtools.plugins', 'build-utilities').versionRef('build-utilities')
-
-            // A12 data services bom to manage versions of common dependencies
-            library('dataservices-bom', 'com.mgmtp.a12.dataservices', 'dataservices-parent').versionRef('dataservices')
-
-            // Libraries that will use versions from the dataservices bom
-            library('base-model-api', 'com.mgmtp.a12.base', 'base-model-api').withoutVersion()
-            library('base-model-consistency', 'com.mgmtp.a12.base', 'base-model-consistency').withoutVersion()
-            library('base-model-marshalling', 'com.mgmtp.a12.base', 'base-model-marshalling').withoutVersion()
-
-            library('kernel-md-model', 'com.mgmtp.a12.kernel', 'kernel-md-model').withoutVersion()
-            library('kernel-md-document-api', 'com.mgmtp.a12.kernel', 'kernel-md-document-api').withoutVersion()
-            library('kernel-md-facade', 'com.mgmtp.a12.kernel', 'kernel-md-facade').withoutVersion()
-            library('kernel-core-codegen-entities', 'com.mgmtp.a12.kernel', 'kernel-core-codegen-entities').withoutVersion()
-            library('kernel-core-parsetree-api', 'com.mgmtp.a12.kernel', 'kernel-core-parsetree-api').withoutVersion()
-            library('kernel-tool-model-migration', 'com.mgmtp.a12.kernel', 'kernel-tool-model-migration').withoutVersion()
-
-            library('dataservices-core-metadata', 'com.mgmtp.a12.dataservices', 'dataservices-core-metadata').withoutVersion()
-            library('dataservices-core-tooling', 'com.mgmtp.a12.dataservices', 'dataservices-core-tooling').withoutVersion()
-            library('dataservices-server-app', 'com.mgmtp.a12.dataservices', 'dataservices-server-app').withoutVersion()
-        }
-
-        libs {
-            // A12 data services bom to manage versions of common dependencies
-            version('dataservices', a12Version.dataservices)
-            library('dataservices-bom', 'com.mgmtp.a12.dataservices', 'dataservices-parent').versionRef('dataservices')
-
-            // Jackson - versions taken from the data services bom
-            library('jackson-core', 'com.fasterxml.jackson.core', 'jackson-core').withoutVersion()
-            library('jackson-databind', 'com.fasterxml.jackson.core', 'jackson-databind').withoutVersion()
-            library('jackson-annotations', 'com.fasterxml.jackson.core', 'jackson-annotations').withoutVersion()
-
-            // Apache Commons
-            library('commons-io', 'commons-io', 'commons-io').version('2.20.0')
-            library('commons-lang3', 'org.apache.commons', 'commons-lang3').version('3.19.0')
-            library('commons-collections4', 'org.apache.commons', 'commons-collections4').version('4.5.0')
-            library('commons-cli', 'commons-cli', 'commons-cli').version('1.10.0')
-
-            // Logging
-            version('slf4j', '2.0.17')
-            library('slf4j-api', 'org.slf4j', 'slf4j-api').versionRef('slf4j')
-            library('logback-classic', 'ch.qos.logback', 'logback-classic').version('1.5.18')
-
-            // Testing
-            version('testng', '7.11.0')
-            library('testng', 'org.testng', 'testng').versionRef('testng')
-            library('hamcrest', 'org.hamcrest', 'hamcrest').version('3.0')
-            library('jsonassert', 'org.skyscreamer', 'jsonassert').version('1.5.3')
-
-            // Other libraries
-            library('groovy-yaml', 'org.apache.groovy', 'groovy-yaml').version('4.0.28')
-            library('gson', 'com.google.code.gson', 'gson').version('2.13.2')
-            library('metainf-services', 'org.kohsuke.metainf-services', 'metainf-services').version('1.11')
-            library('nashorn-core', 'org.openjdk.nashorn', 'nashorn-core').version('15.6')
-            library('lombok', 'org.projectlombok', 'lombok').version('1.18.42')
         }
     }
 }
 
-rootProject.name = 'form-engine'
 include(
     ":core",
     ":content-elements",
@@ -130,9 +23,10 @@ include(
     ':serialization-integration-test',
     ':form-parent',
     ':form-model',
-    ':computation-relevancy-analyzer',
     ':generator',
-    ':modelGraph'
+    ':modelGraph',
+    ':java-codemod',
+    ':preview'
 )
 
 ['security', 'docker', 'performance-tests'].each { name ->
@@ -141,14 +35,4 @@ include(
     }
 }
 
-project(':devappServices').projectDir = file('devapp/src/server/services')
-
-HashMap<String, String> getA12Versions() {
-    Closure<String> getVersion = { new YamlSlurper().parse(file('./pnpm-workspace.yaml')).catalogs.a12[it] }
-
-    return [
-            dataservices : getVersion('@com.mgmtp.a12.dataservices/dataservices-access'),
-    ]
-}
-
-gradle.ext.a12Versions = getA12Versions()
+project(':devappServices').projectDir = file('devapp/resources/server/')

@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -32,7 +32,7 @@
 
 import type { JSX, PropsWithChildren } from "react";
 
-import { type WidgetMap } from "../../view/index.js";
+import type { WidgetMap } from "../../view/index.js";
 
 import { Input_Widgets } from "../api/view/inputs/input-element/input-widgets.js";
 

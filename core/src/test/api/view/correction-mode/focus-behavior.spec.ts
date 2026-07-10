@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -37,13 +37,14 @@ import { scheduler } from "node:timers/promises";
 
 import { act } from "@testing-library/react";
 
-import { provider as deviceDetector } from "@com.mgmtp.a12.widgets/widgets-core/lib/common/main/device-detector.js";
+import { provider as deviceDetector } from "@com.mgmtp.a12.widgets/widgets-core";
 
-import { Commands, Events, type EngineStore } from "../../../../back-end/store/index.js";
+import { Commands, Events } from "../../../../back-end/store/index.js";
+import type { EngineStore } from "../../../../back-end/store/index.js";
 import { UiId } from "../../../../back-end/utils/internal/generateUiId.js";
-import { DocumentHelpers } from "../../../utils/document-helpers.js";
+import { createDocumentPath } from "../../../utils/createDocumentPath.js";
 import { getSingleElementScrollIntoView } from "../../../utils/scroll-into-view.js";
-import { SetupHelpers } from "../../../utils/setup.js";
+import { setupConnectedFormEngineWithRtlAsync } from "../../../utils/setup.js";
 import { setupModelsFixture } from "../../../utils/setupFixture.js";
 import { createValidationEntry } from "../../../utils/validation.js";
 
@@ -229,8 +230,8 @@ describe("api.view.Correction-Mode-Focus-Behavior", () => {
 				}
 			],
 			messages: {
-				...createValidationEntry({ path: DocumentHelpers.createDocumentPath(["root"], ["F2M"]) }),
-				...createValidationEntry({ path: DocumentHelpers.createDocumentPath(["root"], ["F1"]) })
+				...createValidationEntry({ path: createDocumentPath(["root"], ["F2M"]) }),
+				...createValidationEntry({ path: createDocumentPath(["root"], ["F1"]) })
 			},
 			validationBar: {
 				visible: options.validationBarVisible ?? false,
@@ -256,7 +257,7 @@ describe("api.view.Correction-Mode-Focus-Behavior", () => {
 			document: { ...getBaseDocument(), root: { F1: 1, G1R: [{ F1R1: 1, G1R2: {} }] } }
 		};
 
-		const wrapper = await SetupHelpers.setupConnectedFormEngineWithRtlAsync({
+		const wrapper = await setupConnectedFormEngineWithRtlAsync({
 			withScrollHandler: true,
 			models,
 			ui,

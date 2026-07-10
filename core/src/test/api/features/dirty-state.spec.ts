@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -35,10 +35,9 @@ import { ok, strictEqual } from "node:assert/strict";
 import { userEvent } from "@testing-library/user-event";
 import type { ChangeEvent } from "react";
 import { act } from "react";
-import type { Store } from "redux";
-import type { AnyAction } from "typescript-fsa";
+import type { Action, Store } from "redux";
 
-import { ModelPath } from "@com.mgmtp.a12.base/base-model-api/lib/main/model/index.js";
+import { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
 import { query, screen, within } from "@com.mgmtp.a12.devtools/react";
 
 import type { EngineState, EngineStore } from "../../../back-end/store/index.js";
@@ -47,15 +46,16 @@ import type { WidgetMap } from "../../../view/index.js";
 import { DefaultWidgetMap } from "../../../view/index.js";
 import { mouseEventMock } from "../../rtl-utils/mock-utils.js";
 import type { RtlRenderWrapper } from "../../rtl-utils/render-wrapper.js";
+import { createModelPath } from "../../utils/createModelPath.js";
 import { US_LOCALE } from "../../utils/localization.js";
-import { ModelHelpers } from "../../utils/model-helpers.js";
 import { findClickConfirm } from "../../utils/row-action-buttons.js";
-import { createScreenLocationMock, SetupHelpers } from "../../utils/setup.js";
+import { createScreenLocationMock, setupConnectedFormEngineWithRtl } from "../../utils/setup.js";
+import type { StoreConfig } from "../../utils/setup.js";
 import { setupModelsFixture } from "../../utils/setupFixture.js";
-import { DIRTY_STATE } from "../../utils/test-model-helpers/control.dirty-state.js";
-
-const { setupConnectedFormEngineWithRtl } = SetupHelpers;
-const { createModelPath } = ModelHelpers;
+import {
+	DIRTY_SCREEN_NAME,
+	DIRTY_STATE
+} from "../../utils/test-model-helpers/control.dirty-state.js";
 
 /**
  * TESTED BEHAVIOR
@@ -79,9 +79,11 @@ describe("api.features", () => {
 	describe("dirty-states", () => {
 		// eslint-disable-next-line mocha/no-setup-in-describe
 		const models = setupModelsFixture("controls.dirty-states");
+		// eslint-disable-next-line mocha/no-setup-in-describe
+		const user = userEvent.setup();
 
 		function setup(options: {
-			storeConfig?: Partial<SetupHelpers.StoreConfig>;
+			storeConfig?: Partial<StoreConfig>;
 			earlyDetectDirtyControl?: boolean;
 			widgetMap?: Partial<WidgetMap>;
 		}): {
@@ -116,7 +118,7 @@ describe("api.features", () => {
 			function createRootScreenState(): EngineStore.ScreenState {
 				return {
 					path: [],
-					locationPath: createModelPath(DIRTY_STATE.SCREEN_NAME),
+					locationPath: createModelPath(DIRTY_SCREEN_NAME),
 					repeatInstanceState: {
 						[ModelPath.toString(DIRTY_STATE.DR_FORM_MODEL_PATH)]: { page: 1 }
 					}
@@ -216,7 +218,7 @@ describe("api.features", () => {
 					expectedScreenDirtyState: true
 				});
 
-				await findClickConfirm(rtlWrapper, `${DIRTY_STATE.DR_CANCEL_EDIT_BUTTON}`);
+				await findClickConfirm(rtlWrapper, DIRTY_STATE.DR_CANCEL_EDIT_BUTTON);
 
 				assertDirtyState({ store, expectedDataDirtyState: false });
 			});
@@ -287,14 +289,14 @@ describe("api.features", () => {
 						expectedScreenDirtyState: true
 					});
 
-					await findClickConfirm(rtlWrapper, `${DIRTY_STATE.NESTED_DR_CANCEL_EDIT_BUTTON}`);
+					await findClickConfirm(rtlWrapper, DIRTY_STATE.NESTED_DR_CANCEL_EDIT_BUTTON);
 
 					assertDirtyState({ store, expectedDataDirtyState: false });
 				}
 			);
 
 			function assertDirtyState(options: {
-				store: Store<EngineState, AnyAction>;
+				store: Store<EngineState, Action>;
 				expectedDataDirtyState: boolean;
 				expectedScreenDirtyState?: boolean;
 			}): void {
@@ -327,14 +329,13 @@ describe("api.features", () => {
 					`does not set the ${stateToBeTested} dirty state on touching the value of a string control, ` +
 						`but the ${stateToBeTested} dirty state is set after submitting it`,
 					async () => {
-						const user = userEvent.setup();
 						const { store } = setup({
 							storeConfig: {
 								ui: { screenLocation }
 							},
 							earlyDetectDirtyControl: false,
 							widgetMap: {
-								TextLineStateless: DefaultWidgetMap.TextLineStateless
+								TextField: DefaultWidgetMap.TextField
 							}
 						});
 
@@ -361,14 +362,13 @@ describe("api.features", () => {
 					`does not set the ${stateToBeTested} dirty state on touching the value of a number control, ` +
 						`but the ${stateToBeTested} dirty state is set after submitting it`,
 					async () => {
-						const user = userEvent.setup();
 						const { store } = setup({
 							storeConfig: {
 								ui: { screenLocation }
 							},
 							earlyDetectDirtyControl: false,
 							widgetMap: {
-								TextLineStateless: DefaultWidgetMap.TextLineStateless
+								TextField: DefaultWidgetMap.TextField
 							}
 						});
 
@@ -546,14 +546,13 @@ describe("api.features", () => {
 					`does not set the ${stateToBeTested} dirty state on touching the value of a date control (input), ` +
 						`but the ${stateToBeTested} dirty state is set after submitting it`,
 					async () => {
-						const user = userEvent.setup();
 						const { store } = setup({
 							storeConfig: {
 								ui: { screenLocation }
 							},
 							earlyDetectDirtyControl: false,
 							widgetMap: {
-								TextLineStateless: DefaultWidgetMap.TextLineStateless
+								TextField: DefaultWidgetMap.TextField
 							}
 						});
 
@@ -577,14 +576,13 @@ describe("api.features", () => {
 				);
 
 				it(`sets the ${stateToBeTested} dirty state on changing the value of a date control (picker)`, async () => {
-					const user = userEvent.setup();
 					const { store, widgetMap } = setup({
 						storeConfig: {
 							ui: { screenLocation }
 						},
 						earlyDetectDirtyControl: false,
 						widgetMap: {
-							TextLineStateless: DefaultWidgetMap.TextLineStateless,
+							TextField: DefaultWidgetMap.TextField,
 							Button: DefaultWidgetMap.Button
 						}
 					});
@@ -616,14 +614,13 @@ describe("api.features", () => {
 					`does not set the ${stateToBeTested} dirty state on touching the value of a date time control (input), ` +
 						`but the ${stateToBeTested} dirty state is set after submitting it`,
 					async () => {
-						const user = userEvent.setup();
 						const { store } = setup({
 							storeConfig: {
 								ui: { screenLocation }
 							},
 							earlyDetectDirtyControl: false,
 							widgetMap: {
-								TextLineStateless: DefaultWidgetMap.TextLineStateless
+								TextField: DefaultWidgetMap.TextField
 							}
 						});
 
@@ -647,14 +644,13 @@ describe("api.features", () => {
 				);
 
 				it(`sets the ${stateToBeTested} dirty state on changing the value of a date time control (picker)`, async () => {
-					const user = userEvent.setup();
 					const { store, widgetMap } = setup({
 						storeConfig: {
 							ui: { screenLocation }
 						},
 						earlyDetectDirtyControl: false,
 						widgetMap: {
-							TextLineStateless: DefaultWidgetMap.TextLineStateless,
+							TextField: DefaultWidgetMap.TextField,
 							Button: DefaultWidgetMap.Button
 						}
 					});
@@ -686,7 +682,6 @@ describe("api.features", () => {
 					`does not set the ${stateToBeTested} dirty state on touching the value of a time control (input), ` +
 						`but the ${stateToBeTested} dirty state is set after submitting it`,
 					async () => {
-						const user = userEvent.setup();
 						const { store } = setup({
 							storeConfig: {
 								ui: { screenLocation }
@@ -699,7 +694,7 @@ describe("api.features", () => {
 
 						assertDirtyState({ store, expectedDataDirtyState: false });
 
-						const input = screen.getByLabelText("Time Input", { selector: "input" });
+						const input = screen.getByRole("textbox", { name: "Time Input" });
 
 						await user.click(input);
 						await user.keyboard("12:00 AM");
@@ -716,7 +711,7 @@ describe("api.features", () => {
 					}
 				);
 
-				it(`sets the ${stateToBeTested} dirty state on changing the value of a time control (picker)`, async () => {
+				it(`sets the ${stateToBeTested} dirty state on changing the value of a time control (picker)`, () => {
 					const { store, widgetMap } = setup({
 						storeConfig: {
 							ui: { screenLocation }
@@ -728,7 +723,7 @@ describe("api.features", () => {
 
 					const timePicker = query(widgetMap.TimePicker).withProp("label", "Time Input");
 
-					await act(() => {
+					act(() => {
 						timePicker.props().onChange?.(new Date());
 					});
 
@@ -743,7 +738,7 @@ describe("api.features", () => {
 
 		describe("The ui dirty-state", () => {
 			function assertUIDirtyState(options: {
-				store: Store<EngineState, AnyAction>;
+				store: Store<EngineState, Action>;
 				expectedUIDirtyState: boolean;
 			}): void {
 				const { store, expectedUIDirtyState } = options;
@@ -756,17 +751,16 @@ describe("api.features", () => {
 
 			describe("will turn true if a conversion error occurred", () => {
 				it("sets the ui dirty state on conversion error and does not change it back after resolving the error", async () => {
-					const user = userEvent.setup();
 					const { store } = setup({
 						earlyDetectDirtyControl: false,
 						widgetMap: {
-							TextLineStateless: DefaultWidgetMap.TextLineStateless
+							TextField: DefaultWidgetMap.TextField
 						}
 					});
 
 					assertUIDirtyState({ store, expectedUIDirtyState: false });
 
-					const input = screen.getByLabelText("Number Input");
+					const input = screen.getByRole("textbox", { name: "Number Input" });
 
 					await user.click(input);
 					await user.keyboard("a");
@@ -800,17 +794,16 @@ describe("api.features", () => {
 			 */
 			describe("will turn true if earlyDetectDirtyControl is true and a value of a control is touched", () => {
 				it("sets the ui dirty state on touching the value of a string control", async () => {
-					const user = userEvent.setup();
 					const { store } = setup({
 						earlyDetectDirtyControl: true,
 						widgetMap: {
-							TextLineStateless: DefaultWidgetMap.TextLineStateless
+							TextField: DefaultWidgetMap.TextField
 						}
 					});
 
 					assertUIDirtyState({ store, expectedUIDirtyState: false });
 
-					const input = screen.getByLabelText("String Input");
+					const input = screen.getByRole("textbox", { name: "String Input" });
 
 					await user.click(input);
 					await user.keyboard("a");
@@ -823,17 +816,16 @@ describe("api.features", () => {
 				});
 
 				it("sets the ui dirty state on touching the value of a number control", async () => {
-					const user = userEvent.setup();
 					const { store } = setup({
 						earlyDetectDirtyControl: true,
 						widgetMap: {
-							TextLineStateless: DefaultWidgetMap.TextLineStateless
+							TextField: DefaultWidgetMap.TextField
 						}
 					});
 
 					assertUIDirtyState({ store, expectedUIDirtyState: false });
 
-					const input = screen.getByLabelText("Number Input");
+					const input = screen.getByRole("textbox", { name: "Number Input" });
 
 					await user.click(input);
 					await user.keyboard("1");
@@ -846,17 +838,16 @@ describe("api.features", () => {
 				});
 
 				it("sets the ui dirty state on touching the value of a date control (input)", async () => {
-					const user = userEvent.setup();
 					const { store } = setup({
 						earlyDetectDirtyControl: true,
 						widgetMap: {
-							TextLineStateless: DefaultWidgetMap.TextLineStateless
+							TextField: DefaultWidgetMap.TextField
 						}
 					});
 
 					assertUIDirtyState({ store, expectedUIDirtyState: false });
 
-					const input = screen.getByLabelText("Date Input");
+					const input = screen.getByRole("textbox", { name: "Date Input" });
 
 					await user.click(input);
 					await user.keyboard("01/01/1970");
@@ -869,17 +860,16 @@ describe("api.features", () => {
 				});
 
 				it("sets the ui dirty state on touching the value of a date time control (input)", async () => {
-					const user = userEvent.setup();
 					const { store } = setup({
 						earlyDetectDirtyControl: true,
 						widgetMap: {
-							TextLineStateless: DefaultWidgetMap.TextLineStateless
+							TextField: DefaultWidgetMap.TextField
 						}
 					});
 
 					assertUIDirtyState({ store, expectedUIDirtyState: false });
 
-					const input = screen.getByLabelText("Date Time Input");
+					const input = screen.getByRole("textbox", { name: "Date Time Input" });
 
 					await user.click(input);
 					await user.keyboard("01/01/1970 12:00 AM");
@@ -892,7 +882,6 @@ describe("api.features", () => {
 				});
 
 				it("sets the ui dirty state on touching the value of a time control", async () => {
-					const user = userEvent.setup();
 					const { store } = setup({
 						earlyDetectDirtyControl: true,
 						widgetMap: {
@@ -902,7 +891,7 @@ describe("api.features", () => {
 
 					assertUIDirtyState({ store, expectedUIDirtyState: false });
 
-					const input = screen.getByLabelText("Time Input", { selector: "input" });
+					const input = screen.getByRole("textbox", { name: "Time Input" });
 
 					await user.click(input);
 					await user.keyboard("12:00 AM");
@@ -917,11 +906,10 @@ describe("api.features", () => {
 
 			describe("will not turn true if earlyDetectDirtyControl is false and a value of a control is touched", () => {
 				it("does not set the ui dirty state on touching or submitting the value of a string control", async () => {
-					const user = userEvent.setup();
 					const { store } = setup({
 						earlyDetectDirtyControl: false,
 						widgetMap: {
-							TextLineStateless: DefaultWidgetMap.TextLineStateless
+							TextField: DefaultWidgetMap.TextField
 						}
 					});
 
@@ -940,11 +928,10 @@ describe("api.features", () => {
 				});
 
 				it("does not set the ui dirty state on touching or submitting the value of a number control", async () => {
-					const user = userEvent.setup();
 					const { store } = setup({
 						earlyDetectDirtyControl: false,
 						widgetMap: {
-							TextLineStateless: DefaultWidgetMap.TextLineStateless
+							TextField: DefaultWidgetMap.TextField
 						}
 					});
 
@@ -1045,7 +1032,7 @@ describe("api.features", () => {
 					assertUIDirtyState({ store, expectedUIDirtyState: false });
 				});
 
-				it("does not set the ui dirty state on changing the value of an enumeration control (inline)", async () => {
+				it("does not set the ui dirty state on changing the value of an enumeration control (inline)", () => {
 					const { widgetMap, store } = setup({
 						earlyDetectDirtyControl: false
 					});
@@ -1054,7 +1041,7 @@ describe("api.features", () => {
 
 					const radio = query(widgetMap.Radio).withProp("label", "Enumeration Input (inline)");
 
-					await act(() => {
+					act(() => {
 						radio.props().onValueChanged?.("1");
 					});
 
@@ -1062,17 +1049,16 @@ describe("api.features", () => {
 				});
 
 				it("does not set the ui dirty state on touching or submitting the value of a date control (input)", async () => {
-					const user = userEvent.setup();
 					const { store } = setup({
 						earlyDetectDirtyControl: false,
 						widgetMap: {
-							TextLineStateless: DefaultWidgetMap.TextLineStateless
+							TextField: DefaultWidgetMap.TextField
 						}
 					});
 
 					assertUIDirtyState({ store, expectedUIDirtyState: false });
 
-					const input = screen.getByLabelText("Date Input");
+					const input = screen.getByRole("textbox", { name: "Date Input" });
 
 					await user.click(input);
 					await user.keyboard("01/01/1970");
@@ -1085,11 +1071,10 @@ describe("api.features", () => {
 				});
 
 				it("does not set the ui dirty state on changing the value of a date control (picker)", async () => {
-					const user = userEvent.setup();
 					const { store, widgetMap } = setup({
 						earlyDetectDirtyControl: false,
 						widgetMap: {
-							TextLineStateless: DefaultWidgetMap.TextLineStateless,
+							TextField: DefaultWidgetMap.TextField,
 							Button: DefaultWidgetMap.Button
 						}
 					});
@@ -1114,17 +1099,16 @@ describe("api.features", () => {
 				});
 
 				it("does not set the ui dirty state on touching or submitting the value of a date time control (input)", async () => {
-					const user = userEvent.setup();
 					const { store } = setup({
 						earlyDetectDirtyControl: false,
 						widgetMap: {
-							TextLineStateless: DefaultWidgetMap.TextLineStateless
+							TextField: DefaultWidgetMap.TextField
 						}
 					});
 
 					assertUIDirtyState({ store, expectedUIDirtyState: false });
 
-					const input = screen.getByLabelText("Date Time Input");
+					const input = screen.getByRole("textbox", { name: "Date Time Input" });
 
 					await user.click(input);
 					await user.keyboard("01/01/1970 12:00 AM");
@@ -1137,11 +1121,10 @@ describe("api.features", () => {
 				});
 
 				it("does not set the ui dirty state on changing the value of a date time control (picker)", async () => {
-					const user = userEvent.setup();
 					const { store, widgetMap } = setup({
 						earlyDetectDirtyControl: false,
 						widgetMap: {
-							TextLineStateless: DefaultWidgetMap.TextLineStateless,
+							TextField: DefaultWidgetMap.TextField,
 							Button: DefaultWidgetMap.Button
 						}
 					});
@@ -1166,7 +1149,6 @@ describe("api.features", () => {
 				});
 
 				it("does not set the ui dirty state on touching or submitting the value of a time control (input)", async () => {
-					const user = userEvent.setup();
 					const { store } = setup({
 						earlyDetectDirtyControl: false,
 						widgetMap: {
@@ -1176,7 +1158,7 @@ describe("api.features", () => {
 
 					assertUIDirtyState({ store, expectedUIDirtyState: false });
 
-					const input = screen.getByLabelText("Time Input", { selector: "input" });
+					const input = screen.getByRole("textbox", { name: "Time Input" });
 
 					await user.click(input);
 					await user.keyboard("12:00 AM");
@@ -1188,7 +1170,7 @@ describe("api.features", () => {
 					assertUIDirtyState({ store, expectedUIDirtyState: false });
 				});
 
-				it("does not set the ui dirty state on changing the value of a time control (picker)", async () => {
+				it("does not set the ui dirty state on changing the value of a time control (picker)", () => {
 					const { store, widgetMap } = setup({
 						earlyDetectDirtyControl: false
 					});
@@ -1197,7 +1179,7 @@ describe("api.features", () => {
 
 					const timePicker = query(widgetMap.TimePicker).withProp("label", "Time Input");
 
-					await act(() => {
+					act(() => {
 						timePicker.props().onChange?.(new Date());
 					});
 

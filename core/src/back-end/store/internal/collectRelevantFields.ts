@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -30,21 +30,33 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { last, type NonEmptyArray } from "fp-ts/lib/NonEmptyArray.js";
+import { last } from "fp-ts/lib/NonEmptyArray.js";
+import type { NonEmptyArray } from "fp-ts/lib/NonEmptyArray.js";
 
-import { ModelPath } from "@com.mgmtp.a12.base/base-model-api/lib/main/model/index.js";
+import { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
 import type {
 	DocumentModel,
 	EntityInstancePath,
 	GroupInstance
-} from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
+} from "@com.mgmtp.a12.kernel/kernel-md-facade";
 
-import { findElementByFormModelPath, FormModel } from "../../../models/index.js";
-import { DocumentModelUtils } from "../../../models/internal/utils/document-model-utils.js";
+import type { FormModel } from "../../../models/index.js";
+import { findElementByFormModelPath } from "../../../models/index.js";
+import {
+	isFormModelEmbeddedRepeat,
+	isFormModelFieldOverviewColumn,
+	isFormModelInlineRepeat,
+	isFormModelScreen,
+	isFormModelScreenElement
+} from "../../../models/internal/FormModelGuards.js";
+import * as DocumentModelUtils from "../../../models/internal/utils/document-model-utils.js";
 import { DocumentPath, DocumentUtils } from "../../../models/internal/utils/document-utils.js";
 import { FormModelPath } from "../../../models/internal/utils/form-model-path.js";
-import type { ModelVisitor } from "../../../models/internal/utils/form-model-walker.js";
-import { ModelWalker, VisitProcess } from "../../../models/internal/utils/form-model-walker.js";
+import type {
+	ModelVisitor,
+	VisitProcess
+} from "../../../models/internal/utils/form-model-walker.js";
+import { ModelWalker } from "../../../models/internal/utils/form-model-walker.js";
 import { isHidden } from "../../../view/internal/utilities/enablements/hidden.js";
 import { getDocumentPath } from "../../utils/internal/path.js";
 
@@ -146,9 +158,9 @@ export function collectRelevantFields(
 		rowPath
 	);
 
-	if (FormModel.Screen.isInstance(element)) {
+	if (isFormModelScreen(element)) {
 		new ModelWalker(relevantFieldsVisitor).acceptScreen(element);
-	} else if (FormModel.ScreenElement.isInstance(element)) {
+	} else if (isFormModelScreenElement(element)) {
 		new ModelWalker(relevantFieldsVisitor).acceptScreenElement(element);
 	} else {
 		throw new Error(
@@ -159,17 +171,27 @@ export function collectRelevantFields(
 }
 
 class RelevantFieldsVisitor implements ModelVisitor {
-	private formModel: FormModel;
-	private documentModel: DocumentModel;
-	private document: GroupInstance;
+	private readonly formModel: FormModel;
+	private readonly documentModel: DocumentModel;
+	private readonly document: GroupInstance;
+	private readonly formModelPathStack: NonEmptyArray<ModelPath>;
+	private readonly state: EngineState;
+	private readonly context: EntityInstancePath;
+	private readonly elementPaths: RelevantFieldsMap;
+	private readonly rowPath?: EntityInstancePath;
 
 	constructor(
-		readonly formModelPathStack: NonEmptyArray<ModelPath>,
-		readonly state: EngineState,
-		readonly context: EntityInstancePath,
-		readonly elementPaths: RelevantFieldsMap,
-		readonly rowPath?: EntityInstancePath
+		formModelPathStack: NonEmptyArray<ModelPath>,
+		state: EngineState,
+		context: EntityInstancePath,
+		elementPaths: RelevantFieldsMap,
+		rowPath?: EntityInstancePath
 	) {
+		this.formModelPathStack = formModelPathStack;
+		this.state = state;
+		this.context = context;
+		this.elementPaths = elementPaths;
+		this.rowPath = rowPath;
 		this.formModel = ModelSelectors.formModel()(state);
 		this.documentModel = ModelSelectors.documentModel()(state);
 		this.document = DataSelectors.document()(state) as GroupInstance;
@@ -190,12 +212,12 @@ class RelevantFieldsVisitor implements ModelVisitor {
 				dataContext: this.context,
 				state: this.state
 			})
-			? VisitProcess.ContinueButDoNotGoDeeper
-			: VisitProcess.ContinueTraversal;
+			? "ContinueButDoNotGoDeeper"
+			: "ContinueTraversal";
 	}
 
 	visitDetachedRepeat(): VisitProcess {
-		return VisitProcess.ContinueButDoNotGoDeeper;
+		return "ContinueButDoNotGoDeeper";
 	}
 
 	visitInlineRepeat(repeat: FormModel.InlineRepeat): VisitProcess {
@@ -206,11 +228,11 @@ class RelevantFieldsVisitor implements ModelVisitor {
 				state: this.state
 			})
 		) {
-			return VisitProcess.ContinueButDoNotGoDeeper;
+			return "ContinueButDoNotGoDeeper";
 		}
 		const documentPath = getDocumentPath(this.documentModel, repeat.groupPath, this.context);
 		const rows = DocumentUtils.getRows(this.document, documentPath);
-		return rows.length > 0 ? VisitProcess.ContinueTraversal : VisitProcess.ContinueButDoNotGoDeeper;
+		return rows.length > 0 ? "ContinueTraversal" : "ContinueButDoNotGoDeeper";
 	}
 
 	visitEmbeddedRepeat(repeat: FormModel.EmbeddedRepeat): VisitProcess {
@@ -221,11 +243,11 @@ class RelevantFieldsVisitor implements ModelVisitor {
 				state: this.state
 			})
 		) {
-			return VisitProcess.ContinueButDoNotGoDeeper;
+			return "ContinueButDoNotGoDeeper";
 		}
 		const documentPath = getDocumentPath(this.documentModel, repeat.groupPath, this.context);
 		const rows = DocumentUtils.getRows(this.document, documentPath);
-		return rows.length > 0 ? VisitProcess.ContinueTraversal : VisitProcess.ContinueButDoNotGoDeeper;
+		return rows.length > 0 ? "ContinueTraversal" : "ContinueButDoNotGoDeeper";
 	}
 
 	visitControlGrid(grid: FormModel.ControlGrid): VisitProcess {
@@ -234,8 +256,8 @@ class RelevantFieldsVisitor implements ModelVisitor {
 			dataContext: this.context,
 			state: this.state
 		})
-			? VisitProcess.ContinueButDoNotGoDeeper
-			: VisitProcess.ContinueTraversal;
+			? "ContinueButDoNotGoDeeper"
+			: "ContinueTraversal";
 	}
 
 	visitMultiColumnSection(section: FormModel.MultiColumnSection): VisitProcess {
@@ -244,13 +266,13 @@ class RelevantFieldsVisitor implements ModelVisitor {
 			dataContext: this.context,
 			state: this.state
 		})
-			? VisitProcess.ContinueButDoNotGoDeeper
-			: VisitProcess.ContinueTraversal;
+			? "ContinueButDoNotGoDeeper"
+			: "ContinueTraversal";
 	}
 
 	visitRepeatOverviewColumn(repeatColumn: FormModel.RepeatOverviewColumn): VisitProcess {
-		if (!FormModel.FieldOverviewColumn.isInstance(repeatColumn)) {
-			return VisitProcess.ContinueButDoNotGoDeeper;
+		if (!isFormModelFieldOverviewColumn(repeatColumn)) {
+			return "ContinueButDoNotGoDeeper";
 		}
 
 		// find out whether this is a column in an inline repeat
@@ -259,7 +281,7 @@ class RelevantFieldsVisitor implements ModelVisitor {
 		const repeatFormModelPath = formModelPath.slice(0, -1);
 		const repeat = findElementByFormModelPath(this.formModel, repeatFormModelPath);
 
-		if (repeat !== undefined && FormModel.InlineRepeat.isInstance(repeat)) {
+		if (repeat !== undefined && isFormModelInlineRepeat(repeat)) {
 			// the visibility of this column's cells has to be checked for each repeatable group instance individually
 			// since the data within each group instance can influence the evaluation of e.g. dependent field
 			const repeatDocumentPath = getDocumentPath(
@@ -272,7 +294,7 @@ class RelevantFieldsVisitor implements ModelVisitor {
 
 			const resultBuffer: RelevantFieldPaths[] = [];
 
-			repeatableGroupInstances.forEach((row, index) => {
+			repeatableGroupInstances.forEach((_, index) => {
 				// Replace the last index to get the row document path. Add 1 to the index, because it is 1-based.
 				const repeatRowDocumentPath = this.setLastDocumentPathIndex(repeatDocumentPath, index + 1);
 
@@ -324,7 +346,7 @@ class RelevantFieldsVisitor implements ModelVisitor {
 			}
 		}
 
-		return VisitProcess.ContinueTraversal;
+		return "ContinueTraversal";
 	}
 
 	visitControl(control: FormModel.Control): VisitProcess {
@@ -332,7 +354,7 @@ class RelevantFieldsVisitor implements ModelVisitor {
 		const parentOfCgPath = formModelPath.slice(0, -3);
 		const parentOfCg = findElementByFormModelPath(this.formModel, parentOfCgPath);
 
-		if (FormModel.EmbeddedRepeat.isInstance(parentOfCg)) {
+		if (isFormModelEmbeddedRepeat(parentOfCg)) {
 			const repeatDocumentPath = getDocumentPath(
 				this.documentModel,
 				parentOfCg.groupPath,
@@ -343,7 +365,7 @@ class RelevantFieldsVisitor implements ModelVisitor {
 
 			const resultBuffer: RelevantFieldPaths[] = [];
 
-			repeatableGroupInstances.forEach((row, index) => {
+			repeatableGroupInstances.forEach((_, index) => {
 				// Replace the last index to get the row document path. Add 1 to the index, because it is 1-based.
 				const repeatRowDocumentPath = this.setLastDocumentPathIndex(repeatDocumentPath, index + 1);
 
@@ -393,7 +415,7 @@ class RelevantFieldsVisitor implements ModelVisitor {
 			paths.forEach(p => this.elementPaths.add(p));
 		}
 
-		return VisitProcess.ContinueTraversal;
+		return "ContinueTraversal";
 	}
 
 	/**

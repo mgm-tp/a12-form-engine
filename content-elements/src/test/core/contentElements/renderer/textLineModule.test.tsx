@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -33,18 +33,12 @@
 import { deepStrictEqual, notStrictEqual, strictEqual } from "node:assert/strict";
 import { mock } from "node:test";
 
-import type { ParseError } from "@com.mgmtp.a12.client/client-data";
-import { DocumentPath, KernelMessage } from "@com.mgmtp.a12.client/client-data";
 import { DocumentContext } from "@com.mgmtp.a12.contentengine/contentengine-core";
 import { query } from "@com.mgmtp.a12.devtools/react";
-import type { Message } from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
-import { LocalizerContext } from "@com.mgmtp.a12.utils/utils-localization-react/lib/main/index.js";
-import type { ValueConversion } from "@com.mgmtp.a12.utils/utils-localization/lib/main/index.js";
+import type { Message } from "@com.mgmtp.a12.kernel/kernel-md-facade";
+import type { LocalizerContextProps } from "@com.mgmtp.a12.utils/utils-localization-react";
+import { LocalizerContext } from "@com.mgmtp.a12.utils/utils-localization-react";
 
-import { USE_COMMON_CONTROL_SETTINGS_WRAPPER } from "../../../../main/core/contentElements/elementConfiguration/useCommonControlSettings.js";
-import { USE_COMMON_WIDGET_SETTINGS_WRAPPER } from "../../../../main/core/contentElements/elementConfiguration/useCommonWidgetSettings.js";
-import { DefaultFunctionMap } from "../../../../main/core/contentElements/functionMap/defaultFunctionMap.js";
-import { FunctionMapContext } from "../../../../main/core/contentElements/functionMap/functionMapContext.js";
 import { TextLineModule } from "../../../../main/core/contentElements/modules/textLine/textLineModule.js";
 import type { TextLineNode } from "../../../../main/core/contentElements/modules/textLine/textLineNode.js";
 import { TEXT_LINE_TYPE } from "../../../../main/core/contentElements/modules/textLine/textLineNode.js";
@@ -57,27 +51,11 @@ import {
 	assertCalledWith,
 	assertCalledWithArgument
 } from "../../../assertions.js";
+import { getMockLocalization } from "../../../mocks/getMockLocalization.js";
 import { mockDocumentContext } from "../../../mocks/mockDocumentContext.js";
-import { getMockMessage } from "../../../mocks/mockError.js";
+import { getMockMessage, mockConversionError, mockParseError } from "../../../mocks/mockError.js";
+import { setupMockHooks } from "../../../mocks/setupMockHooks.js";
 import { renderWrapper } from "../../../rtl-utils/render-wrapper.js";
-
-function setupMocks(controlSettings = getMockControlSettings()) {
-	return {
-		useControlSettingsMock: mock.method(
-			USE_COMMON_CONTROL_SETTINGS_WRAPPER,
-			"useCommonControlSettings",
-			() => controlSettings
-		),
-		useWidgetSettingsMock: mock.method(
-			USE_COMMON_WIDGET_SETTINGS_WRAPPER,
-			"useCommonWidgetSettings",
-			mock.fn(getMockWidgetSettings)
-		),
-		useFocusFieldMock: mock.fn(),
-		useFocusFirstErrorMock: mock.fn(),
-		useFocusInputMock: mock.fn()
-	};
-}
 
 describe("core.contentElements", () => {
 	describe("TextLine", () => {
@@ -91,9 +69,10 @@ describe("core.contentElements", () => {
 			const mockControlSettings = getMockControlSettings();
 			const mockWidgetSettings = getMockWidgetSettings();
 
-			setupMocks();
-
-			const { componentMap } = renderWrapper(<TextLineModule.renderer node={getMockNode()} />);
+			const { componentMap } = setup({
+				controlSettings: mockControlSettings,
+				widgetSettings: mockWidgetSettings
+			});
 
 			const props = query(componentMap.BufferedTextLine).props();
 
@@ -101,10 +80,8 @@ describe("core.contentElements", () => {
 			strictEqual(props["label"], mockWidgetSettings.label);
 			strictEqual(props["readonly"], mockWidgetSettings.readonly);
 			strictEqual(props["hideLabel"], mockWidgetSettings.hideLabel);
-			strictEqual(props["addonAfter"], undefined);
-			strictEqual(props["tooltips"], mockWidgetSettings.tooltips);
 			strictEqual(props["helperText"], mockWidgetSettings.helperText);
-			strictEqual(props["placeholder"], mockControlSettings.placeholder); // TODO: why is the placeholder the only localized text, that's not in the widget settings?
+			strictEqual(props["placeholder"], mockControlSettings.placeholder);
 			strictEqual(props["suffixes"], mockWidgetSettings.suffixes);
 			strictEqual(props["value"], mockWidgetSettings.formattedValue);
 			strictEqual(props["error"], mockWidgetSettings.error);
@@ -115,184 +92,225 @@ describe("core.contentElements", () => {
 			strictEqual(props["infoMessage"], mockWidgetSettings.infos);
 			deepStrictEqual(props["inputProps"], mockWidgetSettings.inputProps);
 			notStrictEqual(props["inputRef"], undefined);
-			strictEqual(props["ariaDescribedby"], nmTokensToString(mockWidgetSettings.ariaDescribedBy)); // TODO: additional test for this post-processing?
 		});
 
-		it("calls useCommonControlSettings with the given node", () => {
-			const mockNode = getMockNode();
+		describe("Tooltips", () => {
+			it("sets tooltips in addOnAfter if tooltipsOnTop is not set", () => {
+				const mockWidgetSettings = getMockWidgetSettings();
 
-			const { useControlSettingsMock } = setupMocks();
-
-			renderWrapper(<TextLineModule.renderer node={mockNode} />);
-
-			assertCalledWith(useControlSettingsMock, mockNode);
-		});
-
-		it("calls useCommonWidgetSettings with the result from useCommonControlSettings", () => {
-			const mockNode = getMockNode();
-			const mockControlSettings = getMockControlSettings();
-
-			const { useWidgetSettingsMock } = setupMocks();
-
-			renderWrapper(<TextLineModule.renderer node={mockNode} />);
-
-			assertCalledWith(useWidgetSettingsMock, mockControlSettings);
-		});
-
-		describe("focus hooks", () => {
-			function setupFocusTest(options?: {
-				groupedMessages?: Message[];
-				ungroupedMessages?: Message[];
-			}) {
-				const { useFocusFieldMock, useFocusFirstErrorMock, useFocusInputMock } = setupMocks(
-					getMockControlSettings(options)
-				);
-
-				renderWrapper(
-					<FunctionMapContext.Provider
-						value={{
-							...DefaultFunctionMap,
-							useFocusField: useFocusFieldMock,
-							useFocusFirstError: useFocusFirstErrorMock,
-							useFocusInput: useFocusInputMock
-						}}
-					>
-						<TextLineModule.renderer node={getMockNode()} />
-					</FunctionMapContext.Provider>
-				);
-
-				return { useFocusFieldMock, useFocusFirstErrorMock, useFocusInputMock };
-			}
-
-			it("calls focus hooks when rendered", () => {
-				const { useFocusFieldMock, useFocusFirstErrorMock, useFocusInputMock } = setupFocusTest();
-
-				assertCallCount(useFocusFieldMock, 1);
-				assertCallCount(useFocusFirstErrorMock, 1);
-				assertCalledWithArgument(useFocusFirstErrorMock, 0, false);
-				assertCallCount(useFocusInputMock, 1);
-			});
-
-			it("calls useFocusFirstError with true when an ungrouped error exists", () => {
-				const { useFocusFirstErrorMock } = setupFocusTest({
-					ungroupedMessages: [getMockMessage({ severity: "ERROR" })]
+				const { componentMap } = setup({
+					widgetSettings: mockWidgetSettings
 				});
 
-				assertCalledWithArgument(useFocusFirstErrorMock, 0, true);
+				const props = query(componentMap.BufferedTextLine).props();
+
+				strictEqual(props.addonAfter, mockWidgetSettings.tooltips);
+				strictEqual(props.tooltips, undefined);
 			});
 
-			it("calls useFocusFirstError with false when no ungrouped error exists", () => {
-				const { useFocusFirstErrorMock } = setupFocusTest({
-					ungroupedMessages: [
-						getMockMessage({ severity: "WARNING" }),
-						getMockMessage({ severity: "INFO" })
-					],
-					groupedMessages: [
-						getMockMessage({ severity: "ERROR" }),
-						getMockMessage({ severity: "WARNING" }),
-						getMockMessage({ severity: "INFO" })
-					]
+			it("sets tooltips in tooltips prop if tooltipsOnTop is set", () => {
+				const mockWidgetSettings = getMockWidgetSettings({ tooltipsOnTop: true });
+
+				const { componentMap } = setup({
+					widgetSettings: mockWidgetSettings
 				});
 
-				assertCalledWithArgument(useFocusFirstErrorMock, 0, false);
+				const props = query(componentMap.BufferedTextLine).props();
+
+				strictEqual(props.addonAfter, undefined);
+				strictEqual(props.tooltips, mockWidgetSettings.tooltips);
 			});
 		});
 
-		it("calls valueChanged from the document context when a valid value was entered", () => {
-			const mockNode = getMockNode();
-			const mockControlSettings = getMockControlSettings();
+		describe("ariaDescribedBy", () => {
+			it("sets undefined if ariaDescribedBy is empty", () => {
+				const { componentMap } = setup();
 
-			setupMocks();
+				const props = query(componentMap.BufferedTextLine).props();
 
-			const mockDocContext = mockDocumentContext();
+				strictEqual(props.ariaDescribedby, undefined);
+			});
 
-			const { componentMap } = renderWrapper(
-				<LocalizerContext.Provider value={getMockLocalization(() => ({ value: 69 }))}>
-					<DocumentContext.Provider value={mockDocContext}>
-						<TextLineModule.renderer node={mockNode} />
-					</DocumentContext.Provider>
-				</LocalizerContext.Provider>
-			);
+			it("converts tokens into a single string if ariaDescribedBy is not empty", () => {
+				const mockWidgetSettings = getMockWidgetSettings({
+					ariaDescribedBy: ["token1", "token2"]
+				});
 
-			const props = query(componentMap.BufferedTextLine).props();
-			props.onValueSubmit("69");
+				const { componentMap } = setup({
+					widgetSettings: mockWidgetSettings
+				});
 
-			assertCalledWith(mockDocContext.event.onValueChanged, {
-				path: mockControlSettings.dataReference,
-				value: 69,
-				userValue: "69"
+				const props = query(componentMap.BufferedTextLine).props();
+
+				strictEqual(props.ariaDescribedby, nmTokensToString(mockWidgetSettings.ariaDescribedBy));
 			});
 		});
 
-		it("calls parsingFailed from the document context when an invalid value was entered", () => {
-			const mockNode = getMockNode();
-			const mockControlSettings = getMockControlSettings();
+		describe("Value Change", () => {
+			it("calls valueChanged from the document context when a valid value was entered", () => {
+				const mockControlSettings = getMockControlSettings();
+				const mockDocContext = mockDocumentContext();
 
-			setupMocks();
+				const { componentMap } = setup({
+					controlSettings: mockControlSettings,
+					docContext: mockDocContext,
+					localizerContext: getMockLocalization({ parseValue: () => ({ value: 69 }) })
+				});
 
-			const parseError: ValueConversion.ParseError = {
-				errorCode: "",
-				errorKey: "",
-				errorText: { key: "" },
-				severity: "ERROR" as const
-			};
+				const props = query(componentMap.BufferedTextLine).props();
+				props.onValueSubmit("69");
 
-			const expectedError: ParseError = {
-				message: {
-					errorCode: parseError.errorCode,
-					errorText: [parseError.errorText],
-					severity: "ERROR",
-					messageType: "VALUE_ERROR",
-					entityInstance: DocumentPath.fromString(mockControlSettings.dataReference),
-					referencedFields: [DocumentPath.fromString(mockControlSettings.dataReference)],
-					rulePath: KernelMessage.FORMAL_VALIDATION,
-					refOmissionErrorResponsible: []
-				},
-				value: "abc"
-			};
+				assertCalledWith(mockDocContext.event.onValueChanged, {
+					path: mockControlSettings.dataReference,
+					value: 69,
+					userValue: "69"
+				});
+			});
 
-			const mockDocContext = mockDocumentContext();
+			it("calls parsingFailed from the document context when an invalid value was entered", () => {
+				const mockControlSettings = getMockControlSettings();
+				const parseError = mockConversionError();
+				const expectedError = mockParseError(parseError, mockControlSettings.dataReference, "abc");
+				const mockDocContext = mockDocumentContext();
 
-			const { componentMap } = renderWrapper(
-				<LocalizerContext.Provider value={getMockLocalization(() => ({ parseError }))}>
-					<DocumentContext.Provider value={mockDocContext}>
-						<TextLineModule.renderer node={mockNode} />
-					</DocumentContext.Provider>
-				</LocalizerContext.Provider>
-			);
+				const { componentMap } = setup({
+					controlSettings: mockControlSettings,
+					docContext: mockDocContext,
+					localizerContext: getMockLocalization({ parseValue: () => ({ parseError }) })
+				});
 
-			const props = query(componentMap.BufferedTextLine).props();
-			props.onValueSubmit("abc");
+				const props = query(componentMap.BufferedTextLine).props();
+				props.onValueSubmit("abc");
 
-			assertCalledWith(mockDocContext.event.onParsingFailed, {
-				dataReference: mockControlSettings.dataReference,
-				parseError: expectedError
+				assertCalledWith(mockDocContext.event.onParsingFailed, {
+					dataReference: mockControlSettings.dataReference,
+					parseError: expectedError
+				});
+			});
+
+			it("calls conversion.parseValue with the trimmed value if the input is non-empty", () => {
+				const mockControlSettings = getMockControlSettings();
+				const mockParseValue = mock.fn(() => ({}));
+
+				const { componentMap } = setup({
+					controlSettings: mockControlSettings,
+					localizerContext: getMockLocalization({ parseValue: mockParseValue })
+				});
+
+				const props = query(componentMap.BufferedTextLine).props();
+				props.onValueSubmit("   42   ");
+
+				assertCalledWith(mockParseValue, "42", mockControlSettings.conversionConfig);
 			});
 		});
 
-		it("calls conversion.parseValue with the trimmed value if the input is non-empty", () => {
-			const mockNode = getMockNode();
-			const mockControlSettings = getMockControlSettings();
+		describe("Hooks", () => {
+			it("calls useCommonControlSettings with the given node", () => {
+				const mockNode = getMockNode();
 
-			setupMocks();
+				const { useControlSettingsMock } = setupMockHooks({
+					controlSettings: getMockControlSettings(),
+					widgetSettings: getMockWidgetSettings()
+				});
 
-			const mockParseValue = mock.fn(() => ({}));
+				renderWrapper(<TextLineModule.renderer node={mockNode} />);
 
-			const { componentMap } = renderWrapper(
-				<LocalizerContext.Provider value={getMockLocalization(mockParseValue)}>
-					<DocumentContext.Provider value={mockDocumentContext()}>
-						<TextLineModule.renderer node={mockNode} />
-					</DocumentContext.Provider>
-				</LocalizerContext.Provider>
-			);
+				assertCalledWith(useControlSettingsMock, mockNode);
+			});
 
-			const props = query(componentMap.BufferedTextLine).props();
-			props.onValueSubmit("   42   ");
+			it("calls useCommonWidgetSettings with the result from useCommonControlSettings", () => {
+				const mockControlSettings = getMockControlSettings();
 
-			assertCalledWith(mockParseValue, "42", mockControlSettings.conversionConfig);
+				const { useWidgetSettingsMock } = setupMockHooks({
+					controlSettings: mockControlSettings,
+					widgetSettings: getMockWidgetSettings()
+				});
+
+				renderWrapper(<TextLineModule.renderer node={getMockNode()} />);
+
+				assertCalledWith(useWidgetSettingsMock, mockControlSettings);
+			});
+
+			describe("focus hooks", () => {
+				function setupFocusTest(options?: {
+					groupedMessages?: Message[];
+					ungroupedMessages?: Message[];
+				}) {
+					const mockControlSettings = getMockControlSettings({
+						groupedMessages: options?.groupedMessages,
+						ungroupedMessages: options?.ungroupedMessages
+					});
+					const mockWidgetSettings = getMockWidgetSettings();
+
+					setupMockHooks({
+						controlSettings: mockControlSettings,
+						widgetSettings: mockWidgetSettings
+					});
+
+					return renderWrapper(<TextLineModule.renderer node={getMockNode()} />);
+				}
+
+				it("calls focus hooks when rendered", () => {
+					const { functionMap } = setupFocusTest();
+
+					assertCallCount(functionMap.useFocusField, 1);
+					assertCallCount(functionMap.useFocusFirstError, 1);
+					assertCalledWithArgument(functionMap.useFocusFirstError, 0, false);
+					assertCallCount(functionMap.useFocusInput, 1);
+				});
+
+				it("calls useFocusFirstError with true when an ungrouped error exists", () => {
+					const { functionMap } = setupFocusTest({
+						ungroupedMessages: [getMockMessage({ severity: "ERROR" })]
+					});
+
+					assertCalledWithArgument(functionMap.useFocusFirstError, 0, true);
+				});
+
+				it("calls useFocusFirstError with false when no ungrouped error exists", () => {
+					const { functionMap } = setupFocusTest({
+						ungroupedMessages: [
+							getMockMessage({ severity: "WARNING" }),
+							getMockMessage({ severity: "INFO" })
+						],
+						groupedMessages: [
+							getMockMessage({ severity: "ERROR" }),
+							getMockMessage({ severity: "WARNING" }),
+							getMockMessage({ severity: "INFO" })
+						]
+					});
+
+					assertCalledWithArgument(functionMap.useFocusFirstError, 0, false);
+				});
+			});
 		});
 	});
 });
+
+function setup(options?: {
+	controlSettings?: BaseControlSettings;
+	widgetSettings?: BaseWidgetSettings;
+	docContext?: DocumentContext;
+	localizerContext?: LocalizerContextProps;
+	node?: TextLineNode;
+}) {
+	const controlSettings = options?.controlSettings ?? getMockControlSettings();
+	const widgetSettings = options?.widgetSettings ?? getMockWidgetSettings();
+
+	setupMockHooks({ controlSettings, widgetSettings });
+
+	const mockDocContext = options?.docContext ?? mockDocumentContext();
+	const mockLocalizerContext = options?.localizerContext ?? getMockLocalization();
+	const node = options?.node ?? getMockNode();
+
+	return renderWrapper(
+		<LocalizerContext.Provider value={mockLocalizerContext}>
+			<DocumentContext.Provider value={mockDocContext}>
+				<TextLineModule.renderer node={node} />
+			</DocumentContext.Provider>
+		</LocalizerContext.Provider>
+	);
+}
 
 function getMockNode(): TextLineNode {
 	return {
@@ -334,8 +352,9 @@ function getMockControlSettings(options?: {
 	};
 }
 
-function getMockWidgetSettings(): BaseWidgetSettings {
+function getMockWidgetSettings(options?: Partial<BaseWidgetSettings>): BaseWidgetSettings {
 	return {
+		value: undefined,
 		formattedValue: "test-value",
 		label: "test-label",
 		hideLabel: true,
@@ -348,26 +367,10 @@ function getMockWidgetSettings(): BaseWidgetSettings {
 		warnings: "WARNINGS",
 		infos: "INFOS",
 		tooltips: "TOOLTIPS",
-		tooltipsOnTop: true,
+		tooltipsOnTop: options?.tooltipsOnTop,
 		suffixes: "SUFFIXES",
 		inputProps: { "aria-required": true },
-		ariaDescribedBy: ["test-aria1", "test-aria2"],
-		value: undefined
-	};
-}
-
-function getMockLocalization(parseValue?: ValueConversion["parseValue"]): LocalizerContext.Type {
-	return {
-		locale: { language: "en", country: "US" },
-		localizer: () => "",
-		conversion: {
-			parseValue:
-				parseValue ??
-				(() => ({
-					value: ""
-				})),
-			formatValue: () => ""
-		},
-		dataFormats: {}
+		ariaDescribedBy: [],
+		...(options ?? {})
 	};
 }

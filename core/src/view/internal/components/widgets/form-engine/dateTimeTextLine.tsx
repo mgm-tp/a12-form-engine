@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -32,8 +32,7 @@
 
 import { useContext, useRef, useState } from "react";
 
-import { DateTimeUtils } from "@com.mgmtp.a12.widgets/widgets-core/lib/common/main/date-time/date-utils.js";
-import { provider as DeviceDetector } from "@com.mgmtp.a12.widgets/widgets-core/lib/common/main/device-detector.js";
+import { DateTimeUtils, provider as DeviceDetector } from "@com.mgmtp.a12.widgets/widgets-core";
 
 import { ComponentMapContext } from "../../../configuration/componentMap/component-map-context.js";
 import { WidgetMapContext } from "../../../configuration/widget-map-context.js";
@@ -43,7 +42,7 @@ import { DatePrefixButton } from "./datePrefixButton.js";
 
 /** @internal */
 export function DateTimeTextLine(props: DateTimeTextLineProps) {
-	const { Button, DateTimePicker, Header, Icon } = useContext(WidgetMapContext);
+	const { Button, DateTimePicker, DateTimePickerHeader, Icon } = useContext(WidgetMapContext);
 	const { BufferedTextLine, PickerWrapper } = useContext(ComponentMapContext);
 	const {
 		addonAfter,
@@ -77,7 +76,6 @@ export function DateTimeTextLine(props: DateTimeTextLineProps) {
 		suffixes,
 		timeZone,
 		tooltips,
-		timeMode,
 		value,
 		warning,
 		warningMessage,
@@ -116,11 +114,7 @@ export function DateTimeTextLine(props: DateTimeTextLineProps) {
 	};
 
 	const handleDatePickerSelection = (date: Date | undefined, time: Date | undefined): void => {
-		if (!date && !time) {
-			return;
-		}
-
-		setTempDateTime(DateTimeUtils.combineDateAndTime(date, time));
+		setTempDateTime(!date && !time ? undefined : DateTimeUtils.combineDateAndTime(date, time));
 	};
 
 	const handleClosePicker = (): void => {
@@ -190,7 +184,6 @@ export function DateTimeTextLine(props: DateTimeTextLineProps) {
 							clearLabel={clearLabel}
 							value={tempDateTime}
 							timeRequired={true}
-							timeMode={timeMode}
 							timezone={timeZone}
 							customTimeEditLabel={editTimeLabel}
 							yearRange={yearRange}
@@ -199,7 +192,7 @@ export function DateTimeTextLine(props: DateTimeTextLineProps) {
 							onScreenChange={handleScreenChange}
 							mobileMode
 							customHeaderElement={
-								<Header
+								<DateTimePickerHeader
 									actionButtons={
 										<Button icon invert onClick={handleClosePicker}>
 											<Icon>close</Icon>
@@ -207,7 +200,7 @@ export function DateTimeTextLine(props: DateTimeTextLineProps) {
 									}
 								>
 									{tempDateTime ? getLocalizedDateString(tempDateTime) : placeholderText}
-								</Header>
+								</DateTimePickerHeader>
 							}
 						/>
 					) : (
@@ -216,7 +209,6 @@ export function DateTimeTextLine(props: DateTimeTextLineProps) {
 							okLabel={okLabel}
 							clearLabel={clearLabel}
 							timeRequired={true}
-							timeMode={timeMode}
 							timezone={timeZone}
 							value={tempDateTime}
 							customTimeEditLabel={editTimeLabel}
@@ -225,9 +217,9 @@ export function DateTimeTextLine(props: DateTimeTextLineProps) {
 							onChange={handleDatePickerSelection}
 							onScreenChange={handleScreenChange}
 							customHeaderElement={
-								<Header>
+								<DateTimePickerHeader>
 									{tempDateTime ? getLocalizedDateString(tempDateTime) : placeholderText}
-								</Header>
+								</DateTimePickerHeader>
 							}
 						/>
 					)}

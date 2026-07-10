@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -33,12 +33,13 @@
 import type { ReactElement } from "react";
 import { useContext } from "react";
 
-import { LocalizerContext } from "@com.mgmtp.a12.utils/utils-localization-react/lib/main/index.js";
-import type { ButtonGroupProps } from "@com.mgmtp.a12.widgets/widgets-core/lib/button-group/main/button-group.api.js";
+import { LocalizerContext } from "@com.mgmtp.a12.utils/utils-localization-react";
+import type { ButtonGroupProps } from "@com.mgmtp.a12.widgets/widgets-core";
 
 import { UiStateSelectors } from "../../../../../back-end/store/index.js";
 import { UiId } from "../../../../../back-end/utils/internal/generateUiId.js";
-import { FormModel } from "../../../../../models/index.js";
+import type { FormModel } from "../../../../../models/index.js";
+import { stylableToClassName } from "../../../../../models/internal/stylableToClassName.js";
 import { FormModelPath } from "../../../../../models/internal/utils/form-model-path.js";
 import { ComponentMapContext } from "../../../configuration/componentMap/component-map-context.js";
 import type { FormModelMap } from "../../../configuration/engine-configuration.js";
@@ -75,7 +76,7 @@ export function createButtonPanelProps(
 	return {
 		id: id,
 		alignment,
-		className: FormModel.stylableToClassName(element)
+		className: stylableToClassName(element)
 	};
 }
 

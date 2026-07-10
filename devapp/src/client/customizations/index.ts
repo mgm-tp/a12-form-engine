@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -30,17 +30,12 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { CustomFieldTypeService } from "@com.mgmtp.a12.kernel/kernel-core-runtime-api-ts/lib/main/js/custom/impl/CustomFieldTypeService.js";
-import { DocumentRtCustomExtensionService } from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
-
 import type { DevappCustomization } from "../modules/customizationModule.js";
 import { registerCustomization } from "../modules/customizationModule.js";
 
 import { onValueSelected } from "./configurable_externalenumeration.js";
 import { CustomButtonEnablementEngine } from "./custom-button-enablement.js";
-import { customConditionsFactory } from "./custom-conditions.js";
 import { CustomFormModelMapForCustomControl } from "./custom-control.js";
-import { customFieldTypeFactory } from "./custom-field-type.js";
 import {
 	CustomFormModelMapForCustomInput,
 	CustomWidgetMapForCustomInput
@@ -128,12 +123,4 @@ export function registerDevappCustomizations(): void {
 	];
 
 	CUSTOMIZATIONS.forEach(registerCustomization);
-
-	// There is no way to unregister. Should be no issue for other forms.
-	// TODO: will be fixed with A12-16990
-	// eslint-disable-next-line @typescript-eslint/no-deprecated
-	DocumentRtCustomExtensionService.registerCustomConditions(customConditionsFactory);
-	// TODO: will be fixed with A12-16990
-	// eslint-disable-next-line @typescript-eslint/no-deprecated
-	CustomFieldTypeService.getInstance().register(customFieldTypeFactory);
 }

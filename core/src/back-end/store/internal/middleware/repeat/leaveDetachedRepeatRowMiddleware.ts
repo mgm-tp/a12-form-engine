@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -32,10 +32,12 @@
 
 import type { Middleware, MiddlewareAPI } from "redux";
 
-import { ModelPath } from "@com.mgmtp.a12.base/base-model-api/lib/main/model/index.js";
+import { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
 
 import { RepeatData } from "../../../../../data/internal/repeat.js";
-import { findElementByFormModelPath, FormModel } from "../../../../../models/index.js";
+import type { FormModel } from "../../../../../models/index.js";
+import { findElementByFormModelPath } from "../../../../../models/index.js";
+import { isFormModelRepeat } from "../../../../../models/internal/FormModelGuards.js";
 import { Commands, Events } from "../../actions.js";
 import { collectRelevantFields } from "../../collectRelevantFields.js";
 import { ModelSelectors } from "../../selectors/models.js";
@@ -61,11 +63,11 @@ export function leaveDetachedRepeatRowMiddleware(
 			const repeatFormModelPath = ModelPath.parentPath(locationPath);
 
 			const repeat = findElementByFormModelPath(formModel, repeatFormModelPath);
-			if (!repeat || !FormModel.Repeat.isInstance(repeat)) {
+			if (!repeat || !isFormModelRepeat(repeat)) {
 				throw new Error("Expected to get path to a repeat!");
 			}
 
-			let screenWasDropped = false;
+			let screenWasDropped: boolean;
 
 			if (!cancelDetachedScreen) {
 				screenWasDropped = applyScreenChanges({

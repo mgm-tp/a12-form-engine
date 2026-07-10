@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -33,16 +33,14 @@
 /* eslint-disable mocha/no-setup-in-describe */
 
 import { query } from "@com.mgmtp.a12.devtools/react";
-import type { GroupInstance } from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
+import type { GroupInstance } from "@com.mgmtp.a12.kernel/kernel-md-facade";
 
 import type { Config } from "../../../view/internal/configuration/engine-configuration.js";
 import type { RtlRenderWrapper } from "../../rtl-utils/render-wrapper.js";
-import { SetupHelpers } from "../../utils/setup.js";
+import { createModelPath } from "../../utils/createModelPath.js";
+import { setupFormEngineRendererWithRtl } from "../../utils/setup.js";
 import { setupModelsFixture } from "../../utils/setupFixture.js";
 import { createDocument, IDS } from "../../utils/test-model-helpers/dependent-control.js";
-import { createModelPath } from "../../utils/test-model-helpers/dependent-enumeration.js";
-
-const { setupFormEngineRendererWithRtl } = SetupHelpers;
 
 describe("api.features", () => {
 	describe("dependent-control", () => {

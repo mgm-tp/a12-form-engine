@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -33,24 +33,21 @@
 import type { ReactNode } from "react";
 import { useContext, useRef, useState } from "react";
 
-import { DocumentPath } from "@com.mgmtp.a12.client/client-data/lib/core/api/path/documentPath.js";
-import { isDateRangeArray } from "@com.mgmtp.a12.client/client-data/lib/kernel-extension/dateRange.js";
-import {
-	useDocumentContext,
-	type ContentModel,
-	type NodeRendererProps
+import { DocumentPath, isDateRangeArray } from "@com.mgmtp.a12.client/client-data";
+import { useDocumentContext } from "@com.mgmtp.a12.contentengine/contentengine-core";
+import type {
+	ContentModel,
+	NodeRendererProps
 } from "@com.mgmtp.a12.contentengine/contentengine-core";
-import type { DocumentModel } from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
-import { LocalizerContext } from "@com.mgmtp.a12.utils/utils-localization-react/lib/main/index.js";
-import { provider as DeviceDetector } from "@com.mgmtp.a12.widgets/widgets-core/lib/common/main/device-detector.js";
-import type { DatePickerProps } from "@com.mgmtp.a12.widgets/widgets-core/lib/datepicker/main/date-picker.api.js";
-import type { DateRange } from "@com.mgmtp.a12.widgets/widgets-core/lib/datepicker/main/date-range.api.js";
-import type { YearRange } from "@com.mgmtp.a12.widgets/widgets-core/lib/input/year-month-selector/year-selector.api.js";
+import type { DocumentModel } from "@com.mgmtp.a12.kernel/kernel-md-facade";
+import { LocalizerContext } from "@com.mgmtp.a12.utils/utils-localization-react";
+import { provider as DeviceDetector } from "@com.mgmtp.a12.widgets/widgets-core";
+import type { DatePickerProps, DateRange } from "@com.mgmtp.a12.widgets/widgets-core";
 
 import { FormElementContext } from "../../../../configuration/formElementContext.js";
 import { createResourceLocalizable } from "../../../../localization/createResourceLocalizable.js";
 import { RESOURCE_KEYS } from "../../../../localization/resources.js";
-import type { BaseControlProps, DatePickerConfig } from "../../../../types/controlProps.js";
+import type { BaseControlProps } from "../../../../types/controlProps.js";
 import { WidgetMapContext } from "../../../../widgetMap/widgetMap-context.js";
 import { ComponentMapContext } from "../../../componentMap/componentMapContext.js";
 import { createParseError } from "../../../createParseError.js";
@@ -58,6 +55,8 @@ import { USE_COMMON_CONTROL_SETTINGS_WRAPPER } from "../../../elementConfigurati
 import { USE_COMMON_WIDGET_SETTINGS_WRAPPER } from "../../../elementConfiguration/useCommonWidgetSettings.js";
 import { useFocus } from "../../../focus.js";
 import { nmTokensToString } from "../../../nmtokens.js";
+
+import { DateUtils } from "./dateUtils.js";
 
 /**
  * @internal
@@ -152,8 +151,7 @@ export function DateRangeInput(
 	};
 
 	const getLocalizedDateString = (dateRange?: DateRange) =>
-		dateRange !== undefined &&
-		dateRange.from !== undefined &&
+		dateRange?.from !== undefined &&
 		dateRange.from !== null &&
 		dateRange.to !== undefined &&
 		dateRange.to !== null &&
@@ -166,7 +164,7 @@ export function DateRangeInput(
 			...(pickerValue?.from ? [pickerValue.from] : []),
 			{ from: pickerValue?.from, to: pickerValue?.to }
 		],
-		yearRange: calculateYearRange(datePickerConfig), // TODO: already pre-compute in useCommonWidgetSettings?
+		yearRange: DateUtils.calculateYearRange(datePickerConfig), // TODO: already pre-compute in useCommonWidgetSettings?
 		timezone: timeZone
 	};
 
@@ -183,7 +181,7 @@ export function DateRangeInput(
 					if (isDateRangeArray(value)) {
 						setPickerValue({ from: value[0], to: value[1] });
 					} else {
-						setPickerValue(calculateInitialDateRange(datePickerConfig));
+						setPickerValue(DateUtils.calculateInitialDateRange(datePickerConfig));
 					}
 				}}
 				buttonRef={ref => {
@@ -307,33 +305,4 @@ function isFullDateRange(dmElement: DocumentModel.Element) {
 	return dmElement.type === "Field" && dmElement.fieldType.type === "DateRangeType"
 		? dmElement.fieldType.format === "yyyy-MM-dd"
 		: false;
-}
-
-function calculateYearRange(datePickerConfig: DatePickerConfig | undefined): YearRange | undefined {
-	if (datePickerConfig === undefined) {
-		return undefined;
-	}
-	const { minYear, maxYear, absolute } = datePickerConfig;
-	if (minYear === undefined || maxYear === undefined) {
-		return undefined;
-	}
-	if (absolute) {
-		return { start: minYear, end: maxYear };
-	} else {
-		const currentYear = new Date().getFullYear();
-		return { start: currentYear + minYear, end: currentYear + maxYear };
-	}
-}
-
-function calculateInitialDateRange(datePickerConfig?: DatePickerConfig): DateRange {
-	const initialDate = new Date();
-	const { absolute, preselectionYear } = datePickerConfig ?? {};
-
-	initialDate.setFullYear(
-		absolute
-			? preselectionYear || initialDate.getFullYear()
-			: initialDate.getFullYear() + (preselectionYear ?? 0)
-	);
-
-	return { from: initialDate };
 }

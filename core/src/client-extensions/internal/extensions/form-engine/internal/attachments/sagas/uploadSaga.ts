@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -30,12 +30,13 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
+import type { Action as ReduxAction } from "redux";
 import type { SagaGenerator } from "typed-redux-saga";
 import { call, cancel, fork, put, select, takeEvery } from "typed-redux-saga";
-import type { Action, AnyAction } from "typescript-fsa";
 
-import { Attachment } from "@com.mgmtp.a12.dataservices/dataservices-access/lib/Attachment/attachment.js";
-import { LoggerFactory } from "@com.mgmtp.a12.utils/utils-logging/lib/factory.js";
+import type { Action } from "@com.mgmtp.a12.client/typescript-fsa-redux-5-compat";
+import { Attachment } from "@com.mgmtp.a12.dataservices/dataservices-access";
+import { LoggerFactory } from "@com.mgmtp.a12.utils/utils-logging";
 
 import { Events } from "../../../../../../../back-end/store/index.js";
 import { assertCondition } from "../../../../../../../back-end/utils/internal/assertions.js";
@@ -61,7 +62,7 @@ type UploadActionPayload = FormEngineActions.FormEngineEventActions<
 /** @internal */
 export function* uploadSaga(options?: FormEngineSagaOptions): SagaGenerator<void> {
 	yield* takeEvery(
-		(a: AnyAction): a is Action<UploadActionPayload> =>
+		(a: ReduxAction): a is Action<UploadActionPayload> =>
 			FormEngineActions.event.match(a) &&
 			Events.Attachments.uploadAttachments.match(a.payload.engineEvent),
 		function* ({ payload }) {

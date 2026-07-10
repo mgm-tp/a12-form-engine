@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -30,35 +30,41 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { DocumentHelpers } from "../document-helpers.js";
-import { ModelHelpers } from "../model-helpers.js";
+import { createDocumentPath } from "../createDocumentPath.js";
+import { createModelPath } from "../createModelPath.js";
 
-const { createDocumentPath } = DocumentHelpers;
-const { createModelPath } = ModelHelpers;
+export const DIRTY_SCREEN_NAME = "Screen1";
+export const DIRTY_DR_NAME = "detached-repeat-repeatableGroup";
+export const DIRTY_NESTED_DR_NAME = "detached-repeat-nestedRepeatableGroup";
 
-export namespace DIRTY_STATE {
-	export const SCREEN_NAME = "Screen1";
-	export const DR_NAME = "detached-repeat-repeatableGroup";
-	export const DR_FORM_MODEL_PATH = createModelPath(SCREEN_NAME, DR_NAME);
-	export const DR_LOCATION_PATH = createModelPath(SCREEN_NAME, DR_NAME, `${DR_NAME}-detail-screen`);
-	export const REP_GROUP_DOCUMENT_PATH = createDocumentPath(["root"], ["repeatableGroup", 1]);
-	export const DR_COMMIT_EDIT_BUTTON = "a12-edit-apply-button-detachedrepeat-ad417";
-	export const DR_CANCEL_EDIT_BUTTON = "a12-edit-cancel-button-detachedrepeat-ad417";
+export const DIRTY_STATE = {
+	DR_FORM_MODEL_PATH: createModelPath(DIRTY_SCREEN_NAME, DIRTY_DR_NAME),
+	DR_LOCATION_PATH: createModelPath(
+		DIRTY_SCREEN_NAME,
+		DIRTY_DR_NAME,
+		`${DIRTY_DR_NAME}-detail-screen`
+	),
+	REP_GROUP_DOCUMENT_PATH: createDocumentPath(["root"], ["repeatableGroup", 1]),
+	DR_COMMIT_EDIT_BUTTON: "a12-edit-apply-button-detachedrepeat-ad417",
+	DR_CANCEL_EDIT_BUTTON: "a12-edit-cancel-button-detachedrepeat-ad417",
 
-	export const NESTED_DR_NAME = "detached-repeat-nestedRepeatableGroup";
-	export const NESTED_DR_FORM_MODEL_PATH = createModelPath(SCREEN_NAME, DR_NAME, NESTED_DR_NAME);
-	export const NESTED_DR_LOCATION_PATH = createModelPath(
-		SCREEN_NAME,
-		DR_NAME,
-		`${DR_NAME}-detail-screen`,
-		NESTED_DR_NAME,
-		`${NESTED_DR_NAME}-detail-screen`
-	);
-	export const NESTED_REP_GROUP_DOCUMENT_PATH = createDocumentPath(
+	NESTED_DR_FORM_MODEL_PATH: createModelPath(
+		DIRTY_SCREEN_NAME,
+		DIRTY_DR_NAME,
+		DIRTY_NESTED_DR_NAME
+	),
+	NESTED_DR_LOCATION_PATH: createModelPath(
+		DIRTY_SCREEN_NAME,
+		DIRTY_DR_NAME,
+		`${DIRTY_DR_NAME}-detail-screen`,
+		DIRTY_NESTED_DR_NAME,
+		`${DIRTY_NESTED_DR_NAME}-detail-screen`
+	),
+	NESTED_REP_GROUP_DOCUMENT_PATH: createDocumentPath(
 		["root"],
 		["repeatableGroup", 1],
 		["nestedRepeatableGroup", 1]
-	);
-	export const NESTED_DR_COMMIT_EDIT_BUTTON = "a12-edit-apply-button-detachedrepeat-28d1f";
-	export const NESTED_DR_CANCEL_EDIT_BUTTON = "a12-edit-cancel-button-detachedrepeat-28d1f";
-}
+	),
+	NESTED_DR_COMMIT_EDIT_BUTTON: "a12-edit-apply-button-detachedrepeat-28d1f",
+	NESTED_DR_CANCEL_EDIT_BUTTON: "a12-edit-cancel-button-detachedrepeat-28d1f"
+} as const;

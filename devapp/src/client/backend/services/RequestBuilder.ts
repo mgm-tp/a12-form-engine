@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -31,13 +31,13 @@
  */
 
 import type {
+	DocumentJsonRpc2Request,
 	LoadAttachmentUrlJsonRpc2,
-	LoadThumbnailUrlsJsonRpc2
-} from "@com.mgmtp.a12.dataservices/dataservices-access/lib/Attachment/attachment.js";
-import type { DocumentJsonRpc2Request } from "@com.mgmtp.a12.dataservices/dataservices-access/lib/Document/index.js";
-import type { Query } from "@com.mgmtp.a12.dataservices/dataservices-access/lib/query/Query.js";
-import type { QueryJsonRpc2Request } from "@com.mgmtp.a12.dataservices/dataservices-access/lib/query/Request.js";
-import type { Locale } from "@com.mgmtp.a12.utils/utils-localization/lib/main/index.js";
+	LoadThumbnailUrlsJsonRpc2,
+	Query,
+	QueryJsonRpc2Request
+} from "@com.mgmtp.a12.dataservices/dataservices-access";
+import type { Locale } from "@com.mgmtp.a12.utils/utils-localization";
 
 let requestCounter = 0;
 

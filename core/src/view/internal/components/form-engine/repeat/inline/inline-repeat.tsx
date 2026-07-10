@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -32,7 +32,8 @@
 
 import type { ReactElement } from "react";
 
-import { FormModel } from "../../../../../../models/index.js";
+import type { FormModel } from "../../../../../../models/index.js";
+import { isFormModelExpressionOverviewColumn } from "../../../../../../models/internal/FormModelGuards.js";
 import { INLINE_REPEAT } from "../../data-roles.js";
 
 import { RepeatBodyRow } from "../components/body/RepeatBodyRow.js";
@@ -65,7 +66,7 @@ const additionalColumns: [RepeatTableColumn] = [
 export function InlineRepeat(props: InlineRepeatProps): ReactElement {
 	const repeatOverviewColumn = props.modelElement.repeatOverviewColumn;
 	const defaultColumnVerticalAlignment = repeatOverviewColumn?.some(c =>
-		FormModel.ExpressionOverviewColumn.isInstance(c)
+		isFormModelExpressionOverviewColumn(c)
 	)
 		? "middle"
 		: "top";

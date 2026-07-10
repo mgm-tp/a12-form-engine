@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -30,17 +30,15 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import type { EntityInstancePath } from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
-import type {
-	Localizer,
-	ValueConversion
-} from "@com.mgmtp.a12.utils/utils-localization/lib/main/index.js";
-import type { ButtonProps } from "@com.mgmtp.a12.widgets/widgets-core/lib/button/main/button.api.js";
-import type { MenuItem } from "@com.mgmtp.a12.widgets/widgets-core/lib/menu/main/menu.api.js";
+import type { EntityInstancePath } from "@com.mgmtp.a12.kernel/kernel-md-facade";
+import type { Localizer, ValueConversion } from "@com.mgmtp.a12.utils/utils-localization";
+import type { ButtonProps, MenuItem } from "@com.mgmtp.a12.widgets/widgets-core";
 
 import { UiId } from "../../../../../back-end/utils/internal/generateUiId.js";
 import type { RequiredButUndefined } from "../../../../../back-end/utils/internal/types.js";
-import { FormModel, FormModelPath } from "../../../../../models/index.js";
+import type { FormModel } from "../../../../../models/index.js";
+import { FormModelPath } from "../../../../../models/index.js";
+import { stylableToClassName } from "../../../../../models/internal/stylableToClassName.js";
 import type { ComponentMap } from "../../../configuration/componentMap/component-map.js";
 import type { WidgetMap } from "../../../configuration/widget-map.js";
 import { isDisabled } from "../../../utilities/enablements/disabled.js";
@@ -143,7 +141,7 @@ export function getButtonProps(props: {
 		ariaLabel: calculateAriaLabel({ label, description, fallbackLabel }),
 		icon,
 		disabled,
-		className: FormModel.stylableToClassName(button.buttonStyling),
+		className: stylableToClassName(button.buttonStyling),
 		labelHidden: button.buttonStyling?.labelHidden
 	};
 }

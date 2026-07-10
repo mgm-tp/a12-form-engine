@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -32,23 +32,25 @@
 
 import { equal, fail } from "node:assert/strict";
 
-import type { ModelPath } from "@com.mgmtp.a12.base/base-model-api/lib/main/model/index.js";
+import type { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
 import { query, within } from "@com.mgmtp.a12.devtools/react";
 import { ExpressionBuilder } from "@com.mgmtp.a12.expression/expression-core";
 
 import { UiId } from "../../../../../back-end/utils/internal/generateUiId.js";
 import type { Mutable } from "../../../../../back-end/utils/internal/types.js";
-import { findElementByFormModelPath, FormModel } from "../../../../../models/index.js";
+import type { FormModel } from "../../../../../models/index.js";
+import { findElementByFormModelPath } from "../../../../../models/index.js";
+import { isFormModelRepeat } from "../../../../../models/internal/FormModelGuards.js";
 import type { TableWidgetMap } from "../../../../../view/internal/components/form-engine/repeat/table-widget-map.js";
 import type { RtlRenderWrapper } from "../../../../rtl-utils/render-wrapper.js";
-import { ModelHelpers } from "../../../../utils/model-helpers.js";
-import { SetupHelpers } from "../../../../utils/setup.js";
+import { createModelPath } from "../../../../utils/createModelPath.js";
+import { setupFormEngineRendererWithRtlAsync } from "../../../../utils/setup.js";
 import { setupModelsFixture } from "../../../../utils/setupFixture.js";
 
 describe("api.view.repeat", () => {
 	describe("Title", () => {
 		describe("Inline-Repeat", () => {
-			const inlineRepeatModelPath = ModelHelpers.createModelPath(
+			const inlineRepeatModelPath = createModelPath(
 				"title",
 				"Inline Repeat",
 				"sec1",
@@ -58,7 +60,7 @@ describe("api.view.repeat", () => {
 		});
 
 		describe("Detached-Repeat", () => {
-			const detachedRepeatModelPath = ModelHelpers.createModelPath(
+			const detachedRepeatModelPath = createModelPath(
 				"title",
 				"Detached Repeat",
 				"sec1",
@@ -68,7 +70,7 @@ describe("api.view.repeat", () => {
 		});
 
 		describe("Embedded-Repeat", () => {
-			const embeddedRepeatModelPath = ModelHelpers.createModelPath(
+			const embeddedRepeatModelPath = createModelPath(
 				"title",
 				"Embedded Repeat",
 				"sec1",
@@ -86,7 +88,7 @@ function executeTestForTitle(formModelPathToRepeat: ModelPath): void {
 	before(() => {
 		const repeat = findElementByFormModelPath(models.formModel, formModelPathToRepeat);
 
-		if (!repeat || !FormModel.Repeat.isInstance(repeat)) {
+		if (!repeat || !isFormModelRepeat(repeat)) {
 			fail("Wrong setup. Given model path does not return a repeat!");
 		}
 
@@ -110,7 +112,7 @@ function executeTestForTitle(formModelPathToRepeat: ModelPath): void {
 					}
 				};
 
-				return { wrapper: SetupHelpers.setupFormEngineRendererWithRtlAsync({ models }) };
+				return { wrapper: setupFormEngineRendererWithRtlAsync({ models }) };
 			};
 
 			it("renders a title component", async () => {
@@ -132,7 +134,7 @@ function executeTestForTitle(formModelPathToRepeat: ModelPath): void {
 						text: [{ text: REPEAT_TITLE, locale: "en" }]
 					}
 				};
-				return { wrapper: SetupHelpers.setupFormEngineRendererWithRtlAsync({ models }) };
+				return { wrapper: setupFormEngineRendererWithRtlAsync({ models }) };
 			};
 
 			it("renders a title component", async () => {
@@ -154,7 +156,7 @@ function executeTestForTitle(formModelPathToRepeat: ModelPath): void {
 						text: [{ text: REPEAT_TITLE, locale: "en" }]
 					}
 				};
-				return { wrapper: SetupHelpers.setupFormEngineRendererWithRtlAsync({ models }) };
+				return { wrapper: setupFormEngineRendererWithRtlAsync({ models }) };
 			};
 
 			it("renders no title component", async () => {
@@ -181,7 +183,7 @@ function executeTestForTitle(formModelPathToRepeat: ModelPath): void {
 					expressionTree: ExpressionBuilder.build(EXPRESSION_TITLE)
 				};
 				return {
-					wrapper: SetupHelpers.setupFormEngineRendererWithRtlAsync({
+					wrapper: setupFormEngineRendererWithRtlAsync({
 						models,
 						data: { document: { root: { nonrep: { string1: REPEAT_TITLE } } } }
 					})
@@ -207,7 +209,7 @@ function executeTestForTitle(formModelPathToRepeat: ModelPath): void {
 					expressionTree: ExpressionBuilder.build(EXPRESSION_TITLE)
 				};
 				return {
-					wrapper: SetupHelpers.setupFormEngineRendererWithRtlAsync({
+					wrapper: setupFormEngineRendererWithRtlAsync({
 						models,
 						data: { document: { root: { nonrep: { string1: REPEAT_TITLE } } } }
 					})
@@ -233,7 +235,7 @@ function executeTestForTitle(formModelPathToRepeat: ModelPath): void {
 					expressionTree: ExpressionBuilder.build(EXPRESSION_TITLE)
 				};
 				return {
-					wrapper: SetupHelpers.setupFormEngineRendererWithRtlAsync({
+					wrapper: setupFormEngineRendererWithRtlAsync({
 						models,
 						data: { document: { root: { nonrep: { string1: REPEAT_TITLE } } } }
 					})
@@ -260,7 +262,7 @@ function executeTestForTitle(formModelPathToRepeat: ModelPath): void {
 					text: []
 				}
 			};
-			const wrapper = await SetupHelpers.setupFormEngineRendererWithRtlAsync({ models });
+			const wrapper = await setupFormEngineRendererWithRtlAsync({ models });
 
 			findAndAssertTitle({ wrapper });
 		});

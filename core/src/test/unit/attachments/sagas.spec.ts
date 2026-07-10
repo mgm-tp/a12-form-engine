@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -34,10 +34,10 @@ import { deepStrictEqual, notStrictEqual, strictEqual } from "node:assert/strict
 import type { Mock } from "node:test";
 import { mock } from "node:test";
 
+import type { Action } from "redux";
 import { expectSaga } from "redux-saga-test-plan";
-import type { AnyAction } from "typescript-fsa";
 
-import { Settings } from "@com.mgmtp.a12.utils/utils-logging/lib/Settings.js";
+import { Settings } from "@com.mgmtp.a12.utils/utils-logging";
 
 import { Events } from "../../../back-end/store/index.js";
 import type { AttachmentLoader, FormEngineSagaOptions } from "../../../client-extensions/index.js";
@@ -47,11 +47,8 @@ import { cancelSaga } from "../../../client-extensions/internal/extensions/form-
 import { deleteSaga } from "../../../client-extensions/internal/extensions/form-engine/internal/attachments/sagas/deleteSaga.js";
 import { downloadSaga } from "../../../client-extensions/internal/extensions/form-engine/internal/attachments/sagas/downloadSaga.js";
 import { uploadSaga } from "../../../client-extensions/internal/extensions/form-engine/internal/attachments/sagas/uploadSaga.js";
-import { DocumentHelpers } from "../../utils/document-helpers.js";
-import { ModelHelpers } from "../../utils/model-helpers.js";
-
-const { createModelPath } = ModelHelpers;
-const { createDocumentPath } = DocumentHelpers;
+import { createDocumentPath } from "../../utils/createDocumentPath.js";
+import { createModelPath } from "../../utils/createModelPath.js";
 
 describe("unit.attachments.sagas", () => {
 	const activityId = "1";
@@ -100,7 +97,7 @@ describe("unit.attachments.sagas", () => {
 				retrieveDownloadLink: async () => ""
 			} satisfies AttachmentLoader;
 
-			function runSaga(triggerAction: AnyAction, options?: FormEngineSagaOptions) {
+			function runSaga(triggerAction: Action, options?: FormEngineSagaOptions) {
 				return expectSaga(uploadSaga, {
 					attachmentLoader: attachmentLoaderMock,
 					documentDescriptorSelector: () => ({ documentId: "", documentModelName: "" }),
@@ -200,8 +197,7 @@ describe("unit.attachments.sagas", () => {
 						engineEvent: Events.Attachments.uploadAttachments({
 							files: [attachment1, attachment2],
 							formModelElementPath: formModelRepeatPath,
-							pathToRepeatGroup,
-							formModelRepeatPath: []
+							pathToRepeatGroup
 						})
 					});
 
@@ -240,7 +236,7 @@ describe("unit.attachments.sagas", () => {
 			deleteFile: async () => {}
 		} satisfies AttachmentLoader;
 
-		function runSaga(triggerAction: AnyAction, options?: FormEngineSagaOptions) {
+		function runSaga(triggerAction: Action, options?: FormEngineSagaOptions) {
 			return expectSaga(deleteSaga, {
 				attachmentLoader: attachmentLoaderMock,
 				documentDescriptorSelector: () => ({ documentId: "", documentModelName: "" }),
@@ -319,7 +315,7 @@ describe("unit.attachments.sagas", () => {
 				retrieveDownloadLink: async () => "url"
 			} satisfies AttachmentLoader;
 
-			function runSaga(triggerAction: AnyAction, options?: FormEngineSagaOptions) {
+			function runSaga(triggerAction: Action, options?: FormEngineSagaOptions) {
 				return expectSaga(downloadSaga, {
 					attachmentLoader: attachmentLoaderMock,
 					documentDescriptorSelector: () => ({ documentId: "", documentModelName: "" }),

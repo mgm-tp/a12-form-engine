@@ -1,13 +1,15 @@
 {
 	"extends": "@com.mgmtp.a12.devtools/tsconfig",
-	"include": ["./src"],
+	"include": ["./src", "./@types"],
 	"compilerOptions": {
-		"isolatedModules": false,
 		"noEmit": true,
 		"types": [
-			"node",
-			"@com.mgmtp.a12.widgets/widgets-core/lib/@types/styled-components/index.d.ts"
+			"node"
+			//TODO: Add back in with the fix in the Widgets pre.4 release and adjust type casts
+			// neccessary to access theme properties in custom styled components
+			//"@com.mgmtp.a12.widgets/widgets-core/types/styled-components"
 		],
-		"skipLibCheck": true
+		"skipLibCheck": true,
+		"erasableSyntaxOnly": true
 	}
 }

@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -32,11 +32,6 @@
 
 import { flow } from "fp-ts/lib/function.js";
 
-import type {
-	A12ApplicationConfig,
-	ApplicationWithConfiguredFeature,
-	RequireFeatures
-} from "@com.mgmtp.a12.client/client-core/lib/core/application/index.js";
 import {
 	addAdditionalMiddlewares,
 	addCustomSagas,
@@ -46,11 +41,16 @@ import {
 	combineFeatures,
 	modifyView,
 	setConfigured
-} from "@com.mgmtp.a12.client/client-core/lib/core/application/index.js";
+} from "@com.mgmtp.a12.client/client-core";
+import type {
+	A12ApplicationConfig,
+	ApplicationWithConfiguredFeature,
+	RequireFeatures
+} from "@com.mgmtp.a12.client/client-core";
 import {
 	addModelProcessors,
 	addSupportedModelVersion
-} from "@com.mgmtp.a12.client/client-core/lib/extensions/modelLoader/index.js";
+} from "@com.mgmtp.a12.client/client-core/modelLoader";
 
 import type { MiddlewareOptions } from "../../../../back-end/store/index.js";
 import type { Config } from "../../../../view/index.js";
@@ -69,13 +69,11 @@ import type { PlatformSingleDocumentDataProviderOptions } from "../../extensions
 import { createPlatformSingleDocumentDataProvider } from "../../extensions/platform-server-connectors/internal/providers/PlatformSingleDocumentDataProvider.js";
 
 const MODEL_TYPE = "form";
-const SUPPORTED_MODEL_VERSIONS = ">=37.0.0 <=37.4.0";
+const SUPPORTED_MODEL_VERSIONS = ">=39.0.0 <=39.0.0";
 
 // we use module augmentation to extend the A12ApplicationConfig type with more options
 // for users, this is applied once they import anything from this file
-// we must use the "internal" path as TS does not support module augmentation for re-exported types
-// see https://github.com/microsoft/TypeScript/issues/12607
-declare module "@com.mgmtp.a12.client/client-core/lib/core/application/internal/factories/applicationConfig.js" {
+declare module "@com.mgmtp.a12.client/client-core" {
 	interface A12ApplicationConfig {
 		readonly formEngine?: {
 			readonly viewConfig?: Partial<Config>;

@@ -1,0 +1,64 @@
+buildscript {
+    // Adds the dataservices BOM to buildscript classpath to resolve Spring Boot plugin version
+    // Provides dataServicesVersion for use in the dependencies block
+    dependencies {
+        classpath platform(libs.dataservices.bom)
+        classpath 'org.springframework.boot:spring-boot-gradle-plugin'
+    }
+}
+
+plugins {
+    id 'java'
+}
+
+// Apply the spring boot plugin with the version resolved in the buildscript dependencies
+apply plugin: 'org.springframework.boot'
+
+dependencies {
+    implementation libs.dataservices.server.app
+}
+
+layout.buildDirectory = layout.projectDirectory.dir('../../dist/server')
+
+tasks.register("_clean", Delete) {
+    delete layout.buildDirectory
+}
+
+tasks.named("clean") {
+    dependsOn tasks.named("_clean")
+}
+
+tasks.named("processResources") {
+    dependsOn ':exampleModels:prepareModels'
+}
+
+springBoot {
+    mainClass = 'com.mgmtp.a12.dataservices.server.app.ServerApplication'
+}
+
+bootJar {
+    archiveBaseName = 'form-engine-devapp'
+    includeEmptyDirs = false
+
+    from('../rpcRequests') {
+        include '*.json'
+        into '/BOOT-INF/classes/devapp/rpcRequests'
+    }
+
+    from('../../dist/models') {
+        include '*.json'
+        into '/BOOT-INF/classes/devapp/models'
+    }
+}
+
+tasks.register("runJar", JavaExec) {
+    dependsOn(tasks.named('bootJar'))
+
+    workingDir = new File("${projectDir.path}/../../")
+
+    systemProperty 'server.port', System.getenv('SERVER_PORT') ?: '14001'
+    systemProperty 'server.data.location', './dist/server/data'
+
+    mainClass = '-jar'
+    args bootJar.archiveFile.get().toString()
+}

@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -30,23 +30,19 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import type { AnyAction, Store } from "redux";
+import type { Action, Store } from "redux";
 
 import { Commands, Events } from "../../../../../back-end/store/index.js";
 import type { EngineState, EngineStore } from "../../../../../back-end/store/internal/store.js";
-import { MiddlewareHelpers } from "../../../../utils/back-end-helpers.js";
-import { DocumentHelpers } from "../../../../utils/document-helpers.js";
+import { MiddlewareHelpers } from "../../../../utils/MiddlewareHelpers.js";
+import { createDocumentPath } from "../../../../utils/createDocumentPath.js";
+import { createModelPath } from "../../../../utils/createModelPath.js";
 import { US_LOCALE } from "../../../../utils/localization.js";
-import { ModelHelpers } from "../../../../utils/model-helpers.js";
-import { SetupHelpers } from "../../../../utils/setup.js";
+import { createTestStore, loadData } from "../../../../utils/setup.js";
 import { setupFixture, setupModelsFixture } from "../../../../utils/setupFixture.js";
 import { DR } from "../../../../utils/test-model-helpers/detached.repeat.js";
 import { IR } from "../../../../utils/test-model-helpers/inline.repeat.js";
 import { REPEAT, createDocumentForRepeat } from "../../../../utils/test-model-helpers/repeat.js";
-
-const { createModelPath } = ModelHelpers;
-const { createTestStore } = SetupHelpers;
-const { createDocumentPath } = DocumentHelpers;
 
 describe("api.back-end.store.middleware", () => {
 	describe("cloneButtonRepeatMiddleware", () => {
@@ -79,7 +75,7 @@ describe("api.back-end.store.middleware", () => {
 
 			function setupApp(data: Partial<EngineStore.DataState> = createData(1)): Store<
 				EngineState,
-				AnyAction
+				Action
 			> & {
 				readonly dispatch: unknown;
 			} {
@@ -127,11 +123,11 @@ describe("api.back-end.store.middleware", () => {
 						changes: [
 							{
 								type: "GroupAdded",
-								path: DocumentHelpers.createDocumentPath(["Root"], ["Nested_L6"])
+								path: createDocumentPath(["Root"], ["Nested_L6"])
 							},
 							{
 								type: "ValueChanged",
-								path: DocumentHelpers.createDocumentPath(["Root"], ["L6_Number_Sum"])
+								path: createDocumentPath(["Root"], ["L6_Number_Sum"])
 							}
 						]
 					};
@@ -182,11 +178,11 @@ describe("api.back-end.store.middleware", () => {
 						changes: [
 							{
 								type: "GroupAdded",
-								path: DocumentHelpers.createDocumentPath(["Root"], ["Nested_L6"])
+								path: createDocumentPath(["Root"], ["Nested_L6"])
 							},
 							{
 								type: "ValueChanged",
-								path: DocumentHelpers.createDocumentPath(["Root"], ["L6_Number_Sum"])
+								path: createDocumentPath(["Root"], ["L6_Number_Sum"])
 							}
 						]
 					};
@@ -305,7 +301,7 @@ describe("api.back-end.store.middleware", () => {
 				const models = setupModelsFixture("repeat", "detached");
 
 				it("dispatches a Commands.changeScreenState action to set the dirty state of the screen", () => {
-					const document = SetupHelpers.loadData("repeat", "data", models.documentModel);
+					const document = loadData("repeat", "data", models.documentModel);
 					const store = createTestStore({
 						storeConfig: {
 							models,
@@ -315,7 +311,7 @@ describe("api.back-end.store.middleware", () => {
 									{ locationPath: [], path: [] },
 									{
 										locationPath: DR.NestedRepeat.nested_dr_dr_locationPath,
-										path: DocumentHelpers.createDocumentPath(["Root"], ["Nested_L1"])
+										path: createDocumentPath(["Root"], ["Nested_L1"])
 									}
 								]
 							}
@@ -324,7 +320,7 @@ describe("api.back-end.store.middleware", () => {
 					});
 
 					const cloneRowEvent = Events.Repeat.cloneRowTriggered({
-						rowPath: DocumentHelpers.createDocumentPath(["Root"], ["Nested_L1"], ["Nested_L2"]),
+						rowPath: createDocumentPath(["Root"], ["Nested_L1"], ["Nested_L2"]),
 						repeatFormModelPath: [
 							...DR.NestedRepeat.nested_dr_dr_locationPath,
 							{ elementName: "inline-repeat-Nested_L2" }

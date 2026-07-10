@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -30,25 +30,28 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import type { Modifier } from "@com.mgmtp.a12.client/client-core/lib/core/lenses.js";
+import type { Modifier } from "@com.mgmtp.a12.client/client-core";
 import type {
 	Document,
 	DocumentValidationResult,
 	EntityInstancePath,
+	GeneratedCodeRtConfig,
 	GroupInstance,
 	IGeneratedCodeAccessor,
 	Message
-} from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
-import { DocumentRtServiceFactory } from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/facade.js";
+} from "@com.mgmtp.a12.kernel/kernel-md-facade";
+import { DocumentRtServiceFactory } from "@com.mgmtp.a12.kernel/kernel-md-facade";
 
 import type { FormModel } from "../../../models/index.js";
-import { DocumentPath } from "../../../models/internal/utils/document-utils.js";
+import {
+	DocumentPath,
+	InternalDocumentPath
+} from "../../../models/internal/utils/document-utils.js";
 import { ReadonlyObjectMap } from "../../../models/internal/utils/json.js";
 import { assertExists } from "../../utils/internal/assertions.js";
 
 import { collectRelevantFields } from "./collectRelevantFields.js";
 import { isFieldGlobal, mapMessageTypes } from "./kernel-adapter.js";
-import type { MiddlewareOptions } from "./middleware/middleware-options.js";
 import { DataSelectors } from "./selectors/data.js";
 import { ModelSelectors } from "./selectors/models.js";
 import type { Selector } from "./selectors/selectors.js";
@@ -67,12 +70,19 @@ import { EngineStore } from "./store.js";
 export function validateElements(options: {
 	document: GroupInstance;
 	initialMessages: ReadonlyObjectMap<EngineStore.Validation.Entry>;
-	now?: Date;
+	kernelOptions?: GeneratedCodeRtConfig;
 	relevantElements: EntityInstancePath[];
 	type: "full" | "partial" | "field";
 	validatorProvider?: IGeneratedCodeAccessor;
 }): ReadonlyObjectMap<EngineStore.Validation.Entry> {
-	const { document, initialMessages, now, relevantElements, type, validatorProvider } = options;
+	const { document, initialMessages, kernelOptions, relevantElements, type, validatorProvider } =
+		options;
+	const {
+		currentDateForTest,
+		customConditionFactory,
+		customFieldTypeFactory,
+		ignoreUnknownFields
+	} = kernelOptions || {};
 
 	if (relevantElements.length === 0) {
 		return initialMessages;
@@ -80,8 +90,10 @@ export function validateElements(options: {
 	assertExists(validatorProvider, "partial validation requires A12 Kernel validation code");
 
 	const documentService = DocumentRtServiceFactory.createDocumentRtService(validatorProvider, {
-		currentDateForTest: now,
-		ignoreUnknownFields: true
+		currentDateForTest,
+		customConditionFactory,
+		customFieldTypeFactory,
+		ignoreUnknownFields: ignoreUnknownFields !== false
 	});
 
 	const existingErrors = findExistingFormalErrors(initialMessages);
@@ -207,15 +219,24 @@ export function valid(
  */
 export function fullValidation(
 	state: EngineState,
-	middlewareOptions: MiddlewareOptions
+	kernelOptions?: GeneratedCodeRtConfig
 ): EngineStore.Validation.Message[] {
+	const {
+		currentDateForTest,
+		customConditionFactory,
+		customFieldTypeFactory,
+		ignoreUnknownFields
+	} = kernelOptions || {};
+
 	const validatorProvider = ModelSelectors.validationCode()(state);
 	assertExists(validatorProvider, "full validation requires A12 Kernel validation code");
 	const document = DataSelectors.relevantDocument()(state) as Document;
 
 	const documentService = DocumentRtServiceFactory.createDocumentRtService(validatorProvider, {
-		currentDateForTest: middlewareOptions.nowProvider?.(state),
-		ignoreUnknownFields: true
+		currentDateForTest,
+		customConditionFactory,
+		customFieldTypeFactory,
+		ignoreUnknownFields: ignoreUnknownFields !== false
 	});
 
 	const messages = UiStateSelectors.messages()(state);
@@ -277,7 +298,7 @@ export function updateValidationEntries(
 	type Entry = EngineStore.Validation.Entry;
 	type Mutation = [string, (entry: Entry | undefined) => Entry | undefined];
 
-	const stringPaths = instances.map(DocumentPath.toStringOrRegExp);
+	const stringPaths = instances.map(InternalDocumentPath.toStringOrRegExp);
 
 	const shouldMessageBeRemoved = (path: string): boolean => {
 		if (type === "full") {

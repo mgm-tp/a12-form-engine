@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -31,14 +31,15 @@
  */
 
 import type { ComponentType } from "react";
-import { type ReactElement } from "react";
+import type { ReactElement } from "react";
 
-import type { LayoutGridProps } from "@com.mgmtp.a12.widgets/widgets-core/lib/layout/layout-grid/main/layout-grid.api.js";
+import type { LayoutGridProps } from "@com.mgmtp.a12.widgets/widgets-core";
 
 import { ModelSelectors } from "../../../../../back-end/store/index.js";
 import { UiId } from "../../../../../back-end/utils/internal/generateUiId.js";
-import { FormModel } from "../../../../../models/index.js";
-import { DocumentModelUtils } from "../../../../../models/internal/utils/document-model-utils.js";
+import type { FormModel } from "../../../../../models/index.js";
+import { isFormModelControl } from "../../../../../models/internal/FormModelGuards.js";
+import * as DocumentModelUtils from "../../../../../models/internal/utils/document-model-utils.js";
 import type { FormModelMap } from "../../../configuration/engine-configuration.js";
 import { HelperClasses } from "../../../utilities/css-classes.js";
 import { nmTokensToString } from "../../../utilities/nmtokens.js";
@@ -58,9 +59,9 @@ export function createCell(props: {
 	element: FormModel.Cell;
 	config: FormModelMap.RenderConfiguration;
 	currentIndex: number;
-	SizeContainerColumn: ComponentType<LayoutGridProps.ColumnProps>;
+	LayoutGridColumn: ComponentType<LayoutGridProps.ColumnProps>;
 }): ReactElement | null {
-	const { element, config, currentIndex, SizeContainerColumn } = props;
+	const { element, config, currentIndex, LayoutGridColumn } = props;
 	const { renderOptions: options } = config;
 
 	const cellId = UiId.generate({
@@ -74,7 +75,7 @@ export function createCell(props: {
 	if (cellInput !== null) {
 		const classes = [];
 
-		if (FormModel.Control.isInstance(element)) {
+		if (isFormModelControl(element)) {
 			const documentElement = DocumentModelUtils.findByPath(
 				ModelSelectors.documentModel()(options.state),
 				element.elementPath
@@ -95,13 +96,13 @@ export function createCell(props: {
 		}
 
 		return (
-			<SizeContainerColumn
+			<LayoutGridColumn
 				id={cellId}
 				className={nmTokensToString(classes)}
 				key={String(currentIndex)}
 			>
 				{cellInput}
-			</SizeContainerColumn>
+			</LayoutGridColumn>
 		);
 	}
 

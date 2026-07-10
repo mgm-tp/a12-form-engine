@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -31,12 +31,17 @@
  */
 
 import type { Middleware, MiddlewareAPI } from "redux";
-import type { Action } from "typescript-fsa";
 
-import { ModelPath } from "@com.mgmtp.a12.base/base-model-api/lib/main/model/index.js";
-import type { GroupInstance } from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
+import type { Action } from "@com.mgmtp.a12.client/typescript-fsa-redux-5-compat";
+import { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
+import type { GroupInstance } from "@com.mgmtp.a12.kernel/kernel-md-facade";
 
-import { findElementByFormModelPath, FormModel } from "../../../../../models/index.js";
+import type { FormModel } from "../../../../../models/index.js";
+import { findElementByFormModelPath } from "../../../../../models/index.js";
+import {
+	isFormModelDetachedRepeat,
+	isFormModelEmbeddedRepeat
+} from "../../../../../models/internal/FormModelGuards.js";
 import { Commands, Events } from "../../actions.js";
 import { DataSelectors } from "../../selectors/data.js";
 import { ModelSelectors } from "../../selectors/models.js";
@@ -78,18 +83,15 @@ export const editButtonRepeatMiddleware: Middleware<{}, EngineState> = api => ne
 			);
 		}
 
-		if (
-			!FormModel.DetachedRepeat.isInstance(repeat) &&
-			!FormModel.EmbeddedRepeat.isInstance(repeat)
-		) {
+		if (!isFormModelDetachedRepeat(repeat) && !isFormModelEmbeddedRepeat(repeat)) {
 			throw new Error("This Action is only applicable for detached and embedded repeats!");
 		}
 
-		if (FormModel.DetachedRepeat.isInstance(repeat)) {
+		if (isFormModelDetachedRepeat(repeat)) {
 			openDetachedRepeatScreen(api, state, action, repeat);
 		}
 
-		if (FormModel.EmbeddedRepeat.isInstance(repeat)) {
+		if (isFormModelEmbeddedRepeat(repeat)) {
 			editRowInEmbeddedRepeat(api, state, action, rowIndex);
 		}
 	}

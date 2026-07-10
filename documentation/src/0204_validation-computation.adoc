@@ -8,7 +8,7 @@ Dual License
 This source file is part of the mgm A12 Platform and available under
 a choice of two different licenses:
 
-1. Open-Source License – EUPL v1.2
+1. Open-Source License - EUPL v1.2
    You may redistribute and/or modify this file under the terms of the
    European Union Public License, version 1.2 - see https://eupl.eu/.
 
@@ -134,6 +134,17 @@ Example: Given an Inline Repeat referencing the group `/root/G1/G2` and a column
 
 * If `F` is UI-relevant in every row of this Inline Repeat, the Form Engine will consider the wildcard path `/root[1]/G1[5]/G2[0]/F[1]` as UI-relevant.
 * If `F` is not UI-relevant in the second row, the Form Engine will only consider individual paths as UI-relevant: `/root[1]/G1[5]/G2[1]/F[1]`, `/root[1]/G1[5]/G2[3]/F[1]`, ...
+
+====== Special Behavior for Repeats with Multi File Upload
+
+When uploading Attachments in a Repeat with the Multi File Upload functionality enabled, after upload, the following validations are triggered immediately:
+
+* Validations for the fields of the attachment group (fields in groups with `usageType="attachment"`)
+* Validations for fields that have validation errors specifically because the attachment field values (such as `attachment_id`, `size`, or `mime_type`) were set — detected by comparing validation results with and without the uploaded attachment values
+
+The second category uses a two-pass comparison: the Form Engine validates the newly created row both with and without the attachment field values. Fields that have a new validation error only in the presence of the attachment values show the validation error immediately. This covers cases such as a field with an initial value whose validation rule references an attachment field.
+
+Fields that are not affected by the attachment field values themselves - for example required fields the user has not yet had a chance to fill in, fields with initial values set only because a new row was created, or computed fields not related to attachment field values - are validated only once the Repeat row or the Repeat table is left.
 
 ==== Usage of the Kernel API
 

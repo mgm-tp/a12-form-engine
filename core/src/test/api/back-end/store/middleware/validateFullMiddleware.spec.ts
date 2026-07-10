@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -30,16 +30,14 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import type { Action } from "typescript-fsa";
+import type { Action } from "@com.mgmtp.a12.client/typescript-fsa-redux-5-compat";
 
 import { Commands } from "../../../../../back-end/store/index.js";
 import { DocumentPath } from "../../../../../models/internal/utils/document-utils.js";
-import { MiddlewareHelpers } from "../../../../utils/back-end-helpers.js";
-import { DocumentHelpers } from "../../../../utils/document-helpers.js";
-import { SetupHelpers } from "../../../../utils/setup.js";
+import { MiddlewareHelpers } from "../../../../utils/MiddlewareHelpers.js";
+import { createDocumentPath } from "../../../../utils/createDocumentPath.js";
+import { createTestStore } from "../../../../utils/setup.js";
 import { setupFixture, setupModelsFixture } from "../../../../utils/setupFixture.js";
-
-const { createTestStore } = SetupHelpers;
 
 describe("api.back-end.store.middleware", () => {
 	describe("validateFullMiddlewareFactory", () => {
@@ -133,7 +131,7 @@ describe("api.back-end.store.middleware", () => {
 						setupStore({ root: { F2M: 33 } }).dispatch(actionToDispatch);
 					});
 
-					const FIELD_PATH = DocumentHelpers.createDocumentPath(["root"], ["F2M"]);
+					const FIELD_PATH = createDocumentPath(["root"], ["F2M"]);
 
 					const setMessageState = Commands.setMessageState({
 						messages: {

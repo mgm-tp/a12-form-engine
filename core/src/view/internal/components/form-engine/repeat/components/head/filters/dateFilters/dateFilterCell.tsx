@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -33,9 +33,9 @@
 import type { ComponentType, ReactElement } from "react";
 import { useContext } from "react";
 
-import type { DocumentModel } from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
-import { LocalizerContext } from "@com.mgmtp.a12.utils/utils-localization-react/lib/main/index.js";
-import type { DateRangeConversionConfig } from "@com.mgmtp.a12.utils/utils-localization/lib/main/index.js";
+import type { DocumentModel } from "@com.mgmtp.a12.kernel/kernel-md-facade";
+import type { DateRangeConversionConfig } from "@com.mgmtp.a12.utils/utils-localization";
+import { LocalizerContext } from "@com.mgmtp.a12.utils/utils-localization-react";
 
 import { RESOURCE_KEYS } from "../../../../../../../../../back-end/localization/index.js";
 import { getLocalizedResource } from "../../../../../../../../../back-end/localization/internal/localize.js";
@@ -52,7 +52,7 @@ import type {
 import { isRangeFilter } from "../../../../../../../../../back-end/store/internal/store.js";
 import { UiId } from "../../../../../../../../../back-end/utils/internal/generateUiId.js";
 import { getDocumentPath } from "../../../../../../../../../back-end/utils/internal/path.js";
-import { DocumentModelUtils } from "../../../../../../../../../models/internal/utils/document-model-utils.js";
+import * as DocumentModelUtils from "../../../../../../../../../models/internal/utils/document-model-utils.js";
 import { ComponentMapContext } from "../../../../../../../configuration/componentMap/component-map-context.js";
 import type { ValidationMessagesProps } from "../../../../../../widgets/validationMessages.js";
 import { DateFragmentFilter } from "../../../../../cells/controls/date/date-fragment-input.js";
@@ -64,7 +64,7 @@ import { TimeFilter } from "../../../../../cells/controls/date/time-input.js";
 import { EmptyFilterInput } from "../emptyFilterInput.js";
 import type { DateFilterCellProps } from "../filter-cell.js";
 
-import DateRangeClosedEndFilterCell from "./dateRangeClosedEndFilterCell.js";
+import { DateRangeClosedEndFilterCell } from "./dateRangeClosedEndFilterCell.js";
 
 /** @internal */
 export function DateFilterCell(props: DateFilterCellProps): ReactElement {

@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -33,11 +33,12 @@
 import type { ReactElement } from "react";
 import { Fragment, useContext } from "react";
 
-import { LocalizerContext } from "@com.mgmtp.a12.utils/utils-localization-react/lib/main/index.js";
-import type { LayoutGridProps } from "@com.mgmtp.a12.widgets/widgets-core/lib/layout/layout-grid/main/layout-grid.api.js";
+import { LocalizerContext } from "@com.mgmtp.a12.utils/utils-localization-react";
+import type { LayoutGridProps } from "@com.mgmtp.a12.widgets/widgets-core";
 
 import { UiId } from "../../../../../back-end/utils/internal/generateUiId.js";
-import { FormModel } from "../../../../../models/index.js";
+import type { FormModel } from "../../../../../models/index.js";
+import { stylableToClassName } from "../../../../../models/internal/stylableToClassName.js";
 import { FormModelPath } from "../../../../../models/internal/utils/form-model-path.js";
 import { ComponentMapContext } from "../../../configuration/componentMap/component-map-context.js";
 import type { FormModelMap } from "../../../configuration/engine-configuration.js";
@@ -54,7 +55,7 @@ import { transformToColumnNumbers } from "./transformToColumnNumbers.js";
 /**
  * @internal
  *
- * Maps a GridLayout from the form-model to a RenderModel.SizeContainer element
+ * Maps a GridLayout from the form-model to a RenderModel.LayoutGrid element
  */
 export function createGridLayout(
 	element: FormModel.ControlGrid,
@@ -67,7 +68,7 @@ export function createGridLayout(
 	});
 	return {
 		id: id,
-		className: FormModel.stylableToClassName(element)
+		className: stylableToClassName(element)
 	};
 }
 
@@ -81,7 +82,7 @@ export function ControlGrid(props: {
 
 	const { localizer, conversion } = useContext(LocalizerContext);
 	const componentMap = useContext(ComponentMapContext);
-	const { SizeContainer } = useContext(WidgetMapContext);
+	const { LayoutGrid } = useContext(WidgetMapContext);
 	const dataContext = useContext(DataContext);
 
 	const { Title } = componentMap;
@@ -138,7 +139,7 @@ export function ControlGrid(props: {
 	});
 
 	return (
-		<SizeContainer
+		<LayoutGrid
 			key={layoutGridProps.id}
 			{...layoutGridProps}
 			verticalAlignment={getVerticalAlignment(modelElement.verticalAlignment)}
@@ -162,7 +163,7 @@ export function ControlGrid(props: {
 			) : (
 				children
 			)}
-		</SizeContainer>
+		</LayoutGrid>
 	);
 }
 

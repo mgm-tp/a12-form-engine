@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -35,12 +35,10 @@ import { mock } from "node:test";
 
 import { query } from "@com.mgmtp.a12.devtools/react";
 
-import { createEngineStore } from "../../../../back-end/store/index.js";
 import { createConfig } from "../../../../view/internal/configuration/Defaults.js";
 import { getWidgetMocks } from "../../../rtl-utils/getWidgetMocks.js";
-import { DE_LOCALE } from "../../../utils/localization.js";
-import { SetupHelpers } from "../../../utils/setup.js";
-import { setupFixture, setupModelsFixture } from "../../../utils/setupFixture.js";
+import { setupFormEngineRendererWithRtlAsync } from "../../../utils/setup.js";
+import { setupModelsFixture } from "../../../utils/setupFixture.js";
 
 const CustomContentBox = mock.fn(() => <div>CUSTOM</div>);
 const WIDGET_MAP = { ...getWidgetMocks(), ActionContentbox: CustomContentBox };
@@ -49,60 +47,37 @@ describe("api.view.engine-configuration", () => {
 	const models = setupModelsFixture("buttons");
 	describe("widgetMap", () => {
 		it("will be set to the config if it is given", () => {
-			const state = createEngineStore({
-				models,
-				data: {},
-				locale: DE_LOCALE
+			const config = createConfig({
+				widgetMap: WIDGET_MAP
 			});
-			const config = createConfig(
-				{
-					widgetMap: WIDGET_MAP
-				},
-				state
-			);
 			strictEqual(config.widgetMap, WIDGET_MAP, "given widgetMap set to config");
 		});
 	});
 
 	describe("ariaLevel", () => {
-		const fixture = setupFixture(() => {
-			const state = createEngineStore({
-				models,
-				data: {},
-				locale: DE_LOCALE
-			});
-
-			return {
-				state
-			};
-		});
-
 		it("is set to the given value in the config", () => {
-			const config = createConfig(
-				{
-					ariaLevel: 2
-				},
-				fixture.state
-			);
+			const config = createConfig({
+				ariaLevel: 2
+			});
 			strictEqual(config.ariaLevel, 2, "given aria level set in config");
 		});
 
 		it("defaults to 1 in the config if not given", () => {
-			const config = createConfig({}, fixture.state);
+			const config = createConfig({});
 			strictEqual(config.ariaLevel, 1, "default aria level 1 set in config");
 		});
 	});
 
 	describe("ContentBox", () => {
 		it("uses the `ActionContentbox` widget as default", async () => {
-			const wrapper = await SetupHelpers.setupFormEngineRendererWithRtlAsync({
+			const wrapper = await setupFormEngineRendererWithRtlAsync({
 				models
 			});
 			query(wrapper.widgetMap.ActionContentbox).assertRendered();
 		});
 
 		it("will use a different component instead of the `ActionContentbox` widget if it is configured", async () => {
-			SetupHelpers.setupFormEngineRendererWithRtlAsync({
+			setupFormEngineRendererWithRtlAsync({
 				models,
 				config: {
 					widgetMap: WIDGET_MAP

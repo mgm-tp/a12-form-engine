@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -31,11 +31,11 @@
  */
 
 import { query } from "@com.mgmtp.a12.devtools/react";
-import type { Locale } from "@com.mgmtp.a12.utils/utils-localization/lib/main/index.js";
+import type { Locale } from "@com.mgmtp.a12.utils/utils-localization";
 
 import type { EngineStore, Models } from "../../../../../../back-end/store/index.js";
 import { getInputMocks } from "../../../../../rtl-utils/getInputMocks.js";
-import { SetupHelpers } from "../../../../../utils/setup.js";
+import { setupFormEngineRendererWithRtl } from "../../../../../utils/setup.js";
 
 /**
  * Renders models that contain a specific StringInput. Returns
@@ -51,7 +51,7 @@ export function renderStringInput(opts: {
 }) {
 	const { locale, models, document, elementId, uiState } = opts;
 	const inputMap = getInputMocks();
-	SetupHelpers.setupFormEngineRendererWithRtl({
+	setupFormEngineRendererWithRtl({
 		locale,
 		models,
 		data: document ? { document } : undefined,

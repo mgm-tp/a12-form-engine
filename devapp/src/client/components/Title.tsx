@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -30,14 +30,17 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { useContext, type JSX } from "react";
+import { useContext } from "react";
+import type { JSX } from "react";
 import { useDispatch } from "react-redux";
 import { styled } from "styled-components";
 
-import { ActivityActions } from "@com.mgmtp.a12.client/client-core/lib/core/activity/index.js";
-import { ApplicationActions } from "@com.mgmtp.a12.client/client-core/lib/core/application/index.js";
-import { LOCALE_RESOURCE_KEYS } from "@com.mgmtp.a12.client/client-core/lib/core/locale/index.js";
-import { LocalizerContext } from "@com.mgmtp.a12.utils/utils-localization-react/lib/main/index.js";
+import {
+	ActivityActions,
+	ApplicationActions,
+	LOCALE_RESOURCE_KEYS
+} from "@com.mgmtp.a12.client/client-core";
+import { LocalizerContext } from "@com.mgmtp.a12.utils/utils-localization-react";
 
 import { INDEX_DESCRIPTOR } from "../modules/devappModule.js";
 

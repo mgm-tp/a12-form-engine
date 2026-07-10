@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -34,16 +34,12 @@ import { strictEqual } from "node:assert/strict";
 
 import type { Models } from "../../../../../back-end/store/index.js";
 import type { WidgetMap } from "../../../../../view/index.js";
-import { DocumentHelpers } from "../../../../utils/document-helpers.js";
-import { ModelHelpers } from "../../../../utils/model-helpers.js";
-import { SetupHelpers } from "../../../../utils/setup.js";
-import { BUTTONS } from "../../../../utils/test-model-helpers/button.melies.js";
+import { createDocumentPath } from "../../../../utils/createDocumentPath.js";
+import { createModelPath } from "../../../../utils/createModelPath.js";
+import { BUTTONS } from "../../../../utils/test-model-helpers/button.form.js";
+import { setupFormEngineRendererWithRtl } from "../../../../utils/setup.js";
 
-import triggerProps from "./trigger.js";
-
-const { setupFormEngineRendererWithRtl } = SetupHelpers;
-const { createDocumentPath } = DocumentHelpers;
-const { createModelPath } = ModelHelpers;
+import { triggerProps } from "./trigger.js";
 
 export function testLabelHidden(params: {
 	models: Models;

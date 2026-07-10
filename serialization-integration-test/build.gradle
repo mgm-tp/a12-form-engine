@@ -1,6 +1,6 @@
 buildscript {
     dependencies {
-        classpath a12Libs.build.utilities
+        classpath libs.build.utilities
     }
 }
 
@@ -11,9 +11,9 @@ plugins {
 import com.mgmtp.a12.devtools.gradle.plugins.buildutils.tasks.LeadingBuildTask
 
 dependencies {
-    testImplementation platform(a12Libs.dataservices.bom)
+    testImplementation platform(libs.dataservices.bom)
 
-    testImplementation a12Libs.base.model.api
+    testImplementation libs.base.model.api
     testImplementation fileTree('../form-model/build/libs') {
         builtBy ':form-model:build'
         include 'form-model-*.jar'

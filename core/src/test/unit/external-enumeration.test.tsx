@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -33,18 +33,17 @@
 import { strictEqual } from "node:assert/strict";
 import { mock } from "node:test";
 
-import { ModelPath } from "@com.mgmtp.a12.base/base-model-api/lib/main/model/index.js";
+import { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
 import { query, within } from "@com.mgmtp.a12.devtools/react";
+import type { DocumentModel, EntityInstancePath } from "@com.mgmtp.a12.kernel/kernel-md-facade";
+import { DataRoles } from "@com.mgmtp.a12.widgets/widgets-core";
 import type {
-	DocumentModel,
-	EntityInstancePath
-} from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
-import { DataRoles } from "@com.mgmtp.a12.widgets/widgets-core/lib/common/main/data-roles.js";
-import type { DropDownItem } from "@com.mgmtp.a12.widgets/widgets-core/lib/dropdown/main/template/dropdown.tpl.api.js";
-import type { AutocompleteProps } from "@com.mgmtp.a12.widgets/widgets-core/lib/input/autocomplete/main/autocomplete.api.js";
-import type { MultiselectProps } from "@com.mgmtp.a12.widgets/widgets-core/lib/multiselect/main/multiselect.api.js";
+	DropDownItem,
+	AutocompleteProps,
+	MultiselectProps
+} from "@com.mgmtp.a12.widgets/widgets-core";
 
-import type ExternalEnumerationProvider from "../../back-end/services/external-enumeration-provider.js";
+import type { IExternalEnumerationProvider } from "../../back-end/services/external-enumeration-provider.js";
 import { Commands, Events } from "../../back-end/store/index.js";
 import type { EngineStore } from "../../back-end/store/internal/store.js";
 import type { WidgetMap } from "../../view/index.js";
@@ -52,10 +51,16 @@ import { DefaultComponentMap } from "../../view/internal/configuration/component
 
 import { mockFunctions } from "../rtl-utils/mock-map.js";
 import type { RtlRenderWrapper } from "../rtl-utils/render-wrapper.js";
-import { MiddlewareHelpers } from "../utils/back-end-helpers.js";
-import { DocumentHelpers } from "../utils/document-helpers.js";
+import { createDocumentPath } from "../utils/createDocumentPath.js";
+import { createModelPath } from "../utils/createModelPath.js";
+import { MiddlewareHelpers } from "../utils/MiddlewareHelpers.js";
 import { RenderGroupFixture } from "../utils/rtl-render-group.js";
-import { SetupHelpers } from "../utils/setup.js";
+import {
+	createRepeatInstanceStateEntry,
+	createTestStore,
+	loadData,
+	setupFormEngineRendererWithRtlAsync
+} from "../utils/setup.js";
 import { setupFixture, setupModelsFixture } from "../utils/setupFixture.js";
 import {
 	CONTROLS,
@@ -63,10 +68,7 @@ import {
 	EMBEDDED_REPEAT,
 	INLINE_REPEAT
 } from "../utils/test-model-helpers/controls.externalenumeration.js";
-import { createModelPath } from "../utils/test-model-helpers/dependent-enumeration.js";
 import { queryRadioItemsProps } from "../utils/test-model-helpers/radio-item-query.js";
-
-const { loadData, createTestStore, createRepeatInstanceStateEntry } = SetupHelpers;
 
 describe("unit.view.External enumeration", () => {
 	const models = setupModelsFixture("controls.externalenumeration");
@@ -85,7 +87,7 @@ describe("unit.view.External enumeration", () => {
 		} = {}
 	): Promise<RtlRenderWrapper> {
 		const componentMap = mockFunctions(DefaultComponentMap);
-		return SetupHelpers.setupFormEngineRendererWithRtlAsync({
+		return setupFormEngineRendererWithRtlAsync({
 			componentMap,
 			models,
 			data: { document: fixture.document },
@@ -232,7 +234,7 @@ describe("unit.view.External enumeration", () => {
 
 		describe("Given a multi select with an external enumeration", () => {
 			it("renders a MultiSelect enumeration control that uses the given enumeration provider", async () => {
-				const items = query(render.wrapper.widgetMap.MultiSelect)
+				const items = query(render.wrapper.widgetMap.Multiselect)
 					.withId(CONTROLS.ID_MULTI_SELECT_EXTERNAL_ENUM)
 					.props().items as MultiselectProps.Item[];
 
@@ -336,7 +338,7 @@ describe("unit.view.External enumeration", () => {
 
 			describe("Given a multi select with an external enumeration", () => {
 				it("renders a MultiSelect enumeration control that uses the given enumeration provider", async () => {
-					const input = query(render.wrapper.widgetMap.MultiSelect)
+					const input = query(render.wrapper.widgetMap.Multiselect)
 						.withId(INLINE_REPEAT.ID_MULTI_SELECT_EXTERNAL_ENUM)
 						.props();
 
@@ -397,7 +399,7 @@ describe("unit.view.External enumeration", () => {
 								...repeatInstanceStateEntry,
 								newRow: {
 									rowState: "recentlyAdded",
-									rowPath: DocumentHelpers.createDocumentPath(["Root"], ["Config"], ["NewGroup_1"])
+									rowPath: createDocumentPath(["Root"], ["Config"], ["NewGroup_1"])
 								}
 							}
 						})
@@ -506,7 +508,7 @@ describe("unit.view.External enumeration", () => {
 
 			describe("Given a multi select with an external enumeration", () => {
 				it("renders a MultiSelect enumeration control that uses the given enumeration provider", async () => {
-					const input = query(render.wrapper.widgetMap.MultiSelect)
+					const input = query(render.wrapper.widgetMap.Multiselect)
 						.withId(DETACHED_REPEAT.ID_MULTI_SELECT_EXTERNAL_ENUM)
 						.props();
 
@@ -643,7 +645,7 @@ describe("unit.view.External enumeration", () => {
 
 			describe("Given a multi select with an external enumeration", () => {
 				it("renders a MultiSelect enumeration control that uses the given enumeration provider", async () => {
-					const input = query(render.wrapper.widgetMap.MultiSelect)
+					const input = query(render.wrapper.widgetMap.Multiselect)
 						.withId(EMBEDDED_REPEAT.ID_MULTI_SELECT_EXTERNAL_ENUM)
 						.props();
 
@@ -775,7 +777,7 @@ describe("unit.view.External enumeration", () => {
 	});
 });
 
-const externalEnumerationProvider: ExternalEnumerationProvider =
+const externalEnumerationProvider: IExternalEnumerationProvider =
 	(): DocumentModel.ReadonlyObjectMap<{ [key: string]: string | undefined }> => {
 		return {
 			Munich_key: { en: "Munich" },

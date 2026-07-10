@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -32,19 +32,18 @@
 
 import type { Store } from "redux";
 
-import { ApplicationActions } from "@com.mgmtp.a12.client/client-core/lib/core/application/index.js";
-import { ModelActions } from "@com.mgmtp.a12.client/client-core/lib/core/model/index.js";
-import { NotificationActions } from "@com.mgmtp.a12.client/client-core/lib/core/notification/index.js";
-import { ModelGraph } from "@com.mgmtp.a12.dataservices/dataservices-access/lib/Relationship/index.js";
 import {
-	ConnectorLocator,
-	RestServerConnector
-} from "@com.mgmtp.a12.utils/utils-connector/lib/main/index.js";
+	ApplicationActions,
+	ModelActions,
+	NotificationActions
+} from "@com.mgmtp.a12.client/client-core";
+import { ModelGraph } from "@com.mgmtp.a12.dataservices/dataservices-access";
+import { ConnectorLocator, RestServerConnector } from "@com.mgmtp.a12.utils/utils-connector";
 
 import { createServerConnectionFailedErrorMessage } from "../utils.js";
 
 import { JwtTokenFilter } from "./JwtTokenFilter.js";
-import { waitForServer } from "./wait.js";
+import { waitForServer } from "./waitForServer.js";
 
 // has to match with "resources/server/src/main/resources/users.yaml"
 const DEV_CREDENTIALS = { username: "dev", password: "dev" };

@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -33,17 +33,15 @@
 import { deepStrictEqual, ok, strictEqual } from "node:assert/strict";
 
 import { within } from "@com.mgmtp.a12.devtools/react";
-import { defaultLocalizerFactory } from "@com.mgmtp.a12.utils/utils-localization/lib/main/index.js";
+import { defaultLocalizerFactory } from "@com.mgmtp.a12.utils/utils-localization";
 
 import { RESOURCE_KEYS } from "../../../../../back-end/localization/internal/languages/keys.js";
 import { getLocalizedResource } from "../../../../../back-end/localization/internal/localize.js";
 import { BULLET_LIST_ITEM, BULLET_LIST_UNORDERED } from "../../../../rtl-utils/data-roles.js";
 import { US_LOCALE } from "../../../../utils/localization.js";
-import { SetupHelpers } from "../../../../utils/setup.js";
+import { loadData, setupFormEngineRendererWithRtlAsync } from "../../../../utils/setup.js";
 import { setupModelsFixture } from "../../../../utils/setupFixture.js";
 import { createDocumentForRepeat } from "../../../../utils/test-model-helpers/repeat.js";
-
-const { loadData } = SetupHelpers;
 
 export function executeValueTests(options: {
 	repeatForm: "embedded" | "detached";
@@ -65,7 +63,7 @@ export function executeValueTests(options: {
 		describe("based on a string field", () => {
 			it("shows the formatted string", async () => {
 				const document = createDocumentForRepeat({ nestedL1: [{ L1_String: "A" }] });
-				const wrapper = await SetupHelpers.setupFormEngineRendererWithRtlAsync({
+				const wrapper = await setupFormEngineRendererWithRtlAsync({
 					models,
 					data: { document }
 				});
@@ -77,7 +75,7 @@ export function executeValueTests(options: {
 				it("shows the value and a <br /> tag for each line break", async () => {
 					const text = "<br>C <br>D <br>E <br>";
 					const document = createDocumentForRepeat({ nestedL1: [{ L1_String: text }] });
-					const wrapper = await SetupHelpers.setupFormEngineRendererWithRtlAsync({
+					const wrapper = await setupFormEngineRendererWithRtlAsync({
 						models,
 						data: { document }
 					});
@@ -94,7 +92,7 @@ export function executeValueTests(options: {
 			describe("and the underlying field string contains XSS code", () => {
 				it("shows the sanitized value", async () => {
 					const xssValueDocument = loadData("repeat", "dataForXssValueTest", models.documentModel);
-					const wrapper = await SetupHelpers.setupFormEngineRendererWithRtlAsync({
+					const wrapper = await setupFormEngineRendererWithRtlAsync({
 						models,
 						data: { document: xssValueDocument }
 					});
@@ -108,7 +106,7 @@ export function executeValueTests(options: {
 		describe("based on a number field", () => {
 			it("shows the formatted number", async () => {
 				const document = createDocumentForRepeat({ nestedL1: [{ L1_Number: 1 }] });
-				const wrapper = await SetupHelpers.setupFormEngineRendererWithRtlAsync({
+				const wrapper = await setupFormEngineRendererWithRtlAsync({
 					models,
 					data: { document }
 				});
@@ -123,7 +121,7 @@ export function executeValueTests(options: {
 				const localizer = defaultLocalizerFactory({ locale: US_LOCALE });
 
 				const document = createDocumentForRepeat({ nestedL1: [{ L1_Boolean: true }] });
-				const wrapper = await SetupHelpers.setupFormEngineRendererWithRtlAsync({
+				const wrapper = await setupFormEngineRendererWithRtlAsync({
 					models,
 					data: { document },
 					localizer
@@ -142,7 +140,7 @@ export function executeValueTests(options: {
 				const localizer = defaultLocalizerFactory({ locale: US_LOCALE });
 
 				const document = createDocumentForRepeat({ nestedL1: [{ L1_Boolean: false }] });
-				const wrapper = await SetupHelpers.setupFormEngineRendererWithRtlAsync({
+				const wrapper = await setupFormEngineRendererWithRtlAsync({
 					models,
 					data: { document },
 					localizer
@@ -160,7 +158,7 @@ export function executeValueTests(options: {
 				const localizer = defaultLocalizerFactory({ locale: US_LOCALE });
 
 				const document = createDocumentForRepeat({ nestedL1: [{ L1_Boolean: null }] });
-				const wrapper = await SetupHelpers.setupFormEngineRendererWithRtlAsync({
+				const wrapper = await setupFormEngineRendererWithRtlAsync({
 					models,
 					data: { document },
 					localizer
@@ -177,7 +175,7 @@ export function executeValueTests(options: {
 				const localizer = defaultLocalizerFactory({ locale: US_LOCALE });
 
 				const document = createDocumentForRepeat({ nestedL1: [{ L1_Confirm: true }] });
-				const wrapper = await SetupHelpers.setupFormEngineRendererWithRtlAsync({
+				const wrapper = await setupFormEngineRendererWithRtlAsync({
 					models,
 					data: { document },
 					localizer,
@@ -197,7 +195,7 @@ export function executeValueTests(options: {
 				const localizer = defaultLocalizerFactory({ locale: US_LOCALE });
 
 				const document = createDocumentForRepeat({ nestedL1: [{ L1_Confirm: null }] });
-				const wrapper = await SetupHelpers.setupFormEngineRendererWithRtlAsync({
+				const wrapper = await setupFormEngineRendererWithRtlAsync({
 					models,
 					data: { document },
 					localizer
@@ -213,7 +211,7 @@ export function executeValueTests(options: {
 		describe("based on a enumeration field", () => {
 			it("shows the localized enumeration value", async () => {
 				const document = createDocumentForRepeat({ nestedL1: [{ L1_Enumeration: "V1" }] });
-				const wrapper = await SetupHelpers.setupFormEngineRendererWithRtlAsync({
+				const wrapper = await setupFormEngineRendererWithRtlAsync({
 					models,
 					data: { document }
 				});
@@ -229,7 +227,7 @@ export function executeValueTests(options: {
 				const document = createDocumentForRepeat({
 					nestedL1: [{ L1_Date: new Date("2018-05-14") }]
 				});
-				const wrapper = await SetupHelpers.setupFormEngineRendererWithRtlAsync({
+				const wrapper = await setupFormEngineRendererWithRtlAsync({
 					models,
 					data: { document }
 				});
@@ -245,7 +243,7 @@ export function executeValueTests(options: {
 				const document = createDocumentForRepeat({
 					nestedL1: [{ L1_DateTime: new Date("2019-05-13T08:00:00.000Z") }]
 				});
-				const wrapper = await SetupHelpers.setupFormEngineRendererWithRtlAsync({
+				const wrapper = await setupFormEngineRendererWithRtlAsync({
 					models,
 					data: { document }
 				});
@@ -261,7 +259,7 @@ export function executeValueTests(options: {
 				const document = createDocumentForRepeat({
 					nestedL1: [{ L1_Time: new Date("1970-01-01T05:10:00.000Z") }]
 				});
-				const wrapper = await SetupHelpers.setupFormEngineRendererWithRtlAsync({
+				const wrapper = await setupFormEngineRendererWithRtlAsync({
 					models,
 					data: { document }
 				});
@@ -277,7 +275,7 @@ export function executeValueTests(options: {
 				const document = createDocumentForRepeat({
 					nestedL1: [{ L1_MultiSelect: [{ value: "V1" }] }]
 				});
-				const wrapper = await SetupHelpers.setupFormEngineRendererWithRtlAsync({
+				const wrapper = await setupFormEngineRendererWithRtlAsync({
 					models,
 					data: { document }
 				});
@@ -291,7 +289,7 @@ export function executeValueTests(options: {
 				const document = createDocumentForRepeat({
 					nestedL1: [{ L1_MultiSelect: [{ value: "V1" }, { value: "V2" }] }]
 				});
-				const wrapper = await SetupHelpers.setupFormEngineRendererWithRtlAsync({
+				const wrapper = await setupFormEngineRendererWithRtlAsync({
 					models,
 					data: { document }
 				});

@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -30,15 +30,22 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { type JSX, useContext, useEffect, useRef } from "react";
+import { useContext, useEffect, useRef } from "react";
+import type { JSX } from "react";
 
-import { ModelPath } from "@com.mgmtp.a12.base/base-model-api/lib/main/model/index.js";
-import { LocalizerContext } from "@com.mgmtp.a12.utils/utils-localization-react/lib/main/index.js";
+import { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
+import { LocalizerContext } from "@com.mgmtp.a12.utils/utils-localization-react";
 
 import type { EngineState } from "../../../../../../back-end/store/index.js";
 import { UiStateSelectors } from "../../../../../../back-end/store/index.js";
 import { UiId } from "../../../../../../back-end/utils/internal/generateUiId.js";
-import { FormModel } from "../../../../../../models/index.js";
+import type { FormModel } from "../../../../../../models/index.js";
+import {
+	isFormModelControl,
+	isFormModelDetachedRepeat,
+	isFormModelEmbeddedRepeat,
+	isFormModelInlineRepeat
+} from "../../../../../../models/internal/FormModelGuards.js";
 import { DefaultRepeatButtonNames } from "../../../../configuration/engine-configuration.js";
 import { WidgetMapContext } from "../../../../configuration/widget-map-context.js";
 import { UtilityClasses } from "../../../../utilities/css-classes.js";
@@ -106,7 +113,7 @@ export function RepeatContent(
 	);
 
 	const additionalLeftColumns =
-		FormModel.DetachedRepeat.isInstance(modelElement) || showValidationColumn
+		isFormModelDetachedRepeat(modelElement) || showValidationColumn
 			? props.additionalLeftColumns
 			: props.additionalLeftColumns?.filter(col => col.type !== "validation");
 
@@ -173,11 +180,11 @@ export function useShowValidationColumn(
 	modelElement: FormModel.Repeat,
 	repeatFormModelPath: ModelPath
 ): boolean {
-	const showValidationColumn = FormModel.EmbeddedRepeat.isInstance(modelElement)
+	const showValidationColumn = isFormModelEmbeddedRepeat(modelElement)
 		? modelElement.multiFileUpload
 			? hasAtLeastOneValidationError(rows, state)
 			: hasAtLeastOneValidationErrorForVisibleField(rows, modelElement, state)
-		: FormModel.InlineRepeat.isInstance(modelElement) && modelElement.multiFileUpload
+		: isFormModelInlineRepeat(modelElement) && modelElement.multiFileUpload
 			? hasAtLeastOneValidationErrorForNonVisibleField(
 					rows,
 					modelElement,
@@ -236,9 +243,7 @@ function hasAtLeastOneValidationErrorForVisibleField(
 
 		return errorMessagesForRow.some(e =>
 			repeat.controlGrid.row?.some(r =>
-				r.cell?.some(
-					c => FormModel.Control.isInstance(c) && ModelPath.equal(e.element, c.elementPath)
-				)
+				r.cell?.some(c => isFormModelControl(c) && ModelPath.equal(e.element, c.elementPath))
 			)
 		);
 	});

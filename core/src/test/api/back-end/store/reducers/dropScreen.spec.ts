@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -34,10 +34,9 @@ import { deepStrictEqual } from "node:assert/strict";
 
 import { Commands, UiStateSelectors } from "../../../../../back-end/store/index.js";
 import type { EngineStore } from "../../../../../back-end/store/internal/store.js";
-import { SetupHelpers } from "../../../../utils/setup.js";
-import { createModelPath } from "../../../../utils/test-model-helpers/dependent-enumeration.js";
+import { createModelPath } from "../../../../utils/createModelPath.js";
+import { createTestStore } from "../../../../utils/setup.js";
 
-const { createTestStore } = SetupHelpers;
 describe("api.back-end.store.reducers", () => {
 	describe("dropScreen", () => {
 		it("removes the last screen of the screen location stack slice", () => {

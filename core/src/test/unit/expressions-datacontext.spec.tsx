@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -32,22 +32,20 @@
 
 import { strictEqual } from "node:assert/strict";
 
-import { ModelPath } from "@com.mgmtp.a12.base/base-model-api/lib/main/model/index.js";
+import { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
 import { query } from "@com.mgmtp.a12.devtools/react";
 
 import type { EngineStore } from "../../back-end/store/internal/store.js";
-import type { BufferedTextLine } from "../../view/internal/components/widgets/form-engine/buffered-text-line.js";
+import type { BufferedTextLineProps } from "../../view/internal/components/widgets/form-engine/buffered-text-line.js";
 
 import { getComponentMocks } from "../rtl-utils/getComponentMocks.js";
 import { mockFunctions } from "../rtl-utils/mock-map.js";
 import type { RtlRenderWrapper } from "../rtl-utils/render-wrapper.js";
-import { DocumentHelpers } from "../utils/document-helpers.js";
-import { SetupHelpers } from "../utils/setup.js";
+import { createDocumentPath } from "../utils/createDocumentPath.js";
+import { loadData, setupFormEngineRendererWithRtlAsync } from "../utils/setup.js";
 import { setupFixture, setupFixtureObject, setupModelsFixture } from "../utils/setupFixture.js";
 import { DOCUMENT, MODEL_PATH } from "../utils/test-model-helpers/test-expression-datacontext.js";
 
-const { loadData } = SetupHelpers;
-const { createDocumentPath } = DocumentHelpers;
 describe("unit.Expression-Data-Context", () => {
 	const models = setupModelsFixture("test.expression-datacontext");
 	const fixture = setupFixture(() => ({
@@ -109,7 +107,7 @@ describe("unit.Expression-Data-Context", () => {
 		screenLocation: EngineStore.ScreenState[];
 	}): Promise<RtlRenderWrapper> {
 		// label is needed for tests
-		const BufferedTextLine: React.ComponentType<BufferedTextLine.PropsType> = props => (
+		const BufferedTextLine: React.ComponentType<BufferedTextLineProps> = props => (
 			<div>{props.label}</div>
 		);
 
@@ -118,7 +116,7 @@ describe("unit.Expression-Data-Context", () => {
 			BufferedTextLine
 		});
 
-		return SetupHelpers.setupFormEngineRendererWithRtlAsync({
+		return setupFormEngineRendererWithRtlAsync({
 			componentMap,
 			models,
 			data: { document: fixture.document },

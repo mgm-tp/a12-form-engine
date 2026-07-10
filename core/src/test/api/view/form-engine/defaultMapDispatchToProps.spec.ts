@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -35,13 +35,13 @@ import { mock } from "node:test";
 
 import type { Dispatch } from "redux";
 
-import type { ModelPath } from "@com.mgmtp.a12.base/base-model-api/lib/main/model/index.js";
-import type { Attachment } from "@com.mgmtp.a12.dataservices/dataservices-access/lib/Attachment/attachment.js";
+import type { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
+import type { Attachment } from "@com.mgmtp.a12.dataservices/dataservices-access";
 import type {
 	EntityInstancePath,
 	FieldInstanceValue
-} from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
-import type { ValueConversion } from "@com.mgmtp.a12.utils/utils-localization/lib/main/index.js";
+} from "@com.mgmtp.a12.kernel/kernel-md-facade";
+import type { ValueConversionParseError } from "@com.mgmtp.a12.utils/utils-localization";
 
 import type { CorrectionModeItem } from "../../../../back-end/store/internal/CorrectionModeItem.js";
 import type {
@@ -50,7 +50,7 @@ import type {
 	RepeatFilter
 } from "../../../../back-end/store/internal/store.js";
 import { defaultMapDispatchToProps } from "../../../../view/index.js";
-import { ModelHelpers } from "../../../utils/model-helpers.js";
+import { createModelPath } from "../../../utils/createModelPath.js";
 
 const FORM_ENGINE_EVENT_PREFIX = "form-engine/event/";
 
@@ -115,7 +115,7 @@ describe("api.view.defaultMapDispatchToProps", () => {
 						errorKey: "testKey",
 						errorCode: "testCode",
 						severity: "ERROR"
-					} as ValueConversion.ParseError
+					} as ValueConversionParseError
 				]
 			];
 			checkDispatchedEvent(
@@ -380,10 +380,7 @@ describe("api.view.defaultMapDispatchToProps", () => {
 
 			it("Events.Repeat.changeColumnWidth action with the respective payload if onColumnWidthChange was called ", () => {
 				const parameters = [
-					[
-						"columnPath",
-						ModelHelpers.createModelPath("screen1", "dummySec", "dummyRepeat", "dummyColumn")
-					],
+					["columnPath", createModelPath("screen1", "dummySec", "dummyRepeat", "dummyColumn")],
 					["width", 4]
 				];
 				checkDispatchedEvent(

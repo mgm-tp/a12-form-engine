@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -30,21 +30,20 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import type { Dispatch } from "redux";
-import type { AnyAction } from "typescript-fsa";
+import type { Action, Dispatch } from "redux";
 
-import type { ModelPath } from "@com.mgmtp.a12.base/base-model-api/lib/main/model/index.js";
+import type { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
 import type {
 	EntityInstancePath,
 	FieldInstanceValue,
 	GroupInstance
-} from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
+} from "@com.mgmtp.a12.kernel/kernel-md-facade";
 
 import { ReadonlyObjectMap } from "../../../../../models/internal/utils/json.js";
 import { Commands } from "../../actions.js";
 import { validateChangesAndUpdateMessages } from "../../change-validation.js";
 import { collectRelevantFields } from "../../collectRelevantFields.js";
-import type { Change } from "../../documentChange.js";
+import { isComputedField } from "../../kernel-adapter.js";
 import { messageStateIsEqual } from "../../messageStateIsEqual.js";
 import { DataSelectors } from "../../selectors/data.js";
 import { ModelSelectors } from "../../selectors/models.js";
@@ -70,80 +69,79 @@ export function handleFieldValueChange({
 }: {
 	path: EntityInstancePath;
 	state: EngineState;
-	dispatch: Dispatch<AnyAction>;
+	dispatch: Dispatch<Action>;
 	middlewareOptions: MiddlewareOptions;
 	value: FieldInstanceValue;
 	formModelElementPath?: ModelPath;
 }): void {
 	const document = DataSelectors.document()(state) as GroupInstance;
-	let newDocument = document;
 	const documentModel = ModelSelectors.documentModel()(state);
 	const validationCode = ModelSelectors.validationCode()(state);
 	const formModel = ModelSelectors.formModel()(state);
-
 	const initialMessages = UiStateSelectors.messages()(state);
-	let newMessages = initialMessages;
 
-	let changes: ReadonlyObjectMap<Change> | undefined;
-	({
-		document: newDocument,
-		messages: newMessages,
-		changes
+	const {
+		document: documentAfterField,
+		messages: messagesAfterField,
+		changes: fieldChanges
 	} = updateFieldInstance({
 		state,
 		documentPath: path,
 		value,
-		document: newDocument,
-		messages: newMessages,
-		options: middlewareOptions,
+		document,
+		messages: initialMessages,
+		middlewareOptions,
 		validationCode,
 		formModelElementPath
-	}));
+	});
 
-	if (changes !== undefined) {
-		const result = updateDependencies({
-			state,
-			document: newDocument,
-			options: middlewareOptions,
-			changes
-		});
-
-		newDocument = result.document;
-		changes = result.changes;
-
-		/**
-		 * FIXME: This is only necessary to collect the set of relevant fields
-		 * on the updated document.
-		 * It should be removed again with A12E-3365
-		 */
-		const intermediateState: EngineState = {
-			...state,
-			data: {
-				...state.data,
-				document: newDocument
-			}
-		};
-
-		const relevantFieldPaths = collectRelevantFields(intermediateState).map(
-			field => field.documentPath
-		);
-
-		newMessages = validateChangesAndUpdateMessages({
-			changes: changes,
-			document: newDocument,
-			initialMessages,
-			kernelConfiguration: {
-				now: middlewareOptions.nowProvider?.(state)
-			},
-			models: { documentModel, formModel, validatorProvider: validationCode },
-			parsingErrorsAfterComputation: result.parseErrors,
-			relevantFieldPaths
-		});
-
-		updateDocument(dispatch, state, newDocument, [...ReadonlyObjectMap.values(changes)]);
+	if (fieldChanges === undefined) {
+		if (!messageStateIsEqual(initialMessages, messagesAfterField)) {
+			dispatch(Commands.setMessageState({ messages: messagesAfterField }));
+		}
+		return;
 	}
 
-	if (!messageStateIsEqual(initialMessages, newMessages)) {
-		dispatch(Commands.setMessageState({ messages: newMessages }));
+	const {
+		changes: computationResultChanges,
+		document: computationResultDocument,
+		parseErrors
+	} = updateDependencies({
+		state,
+		document: documentAfterField,
+		kernelOptions: middlewareOptions.kernelOptionsProvider?.(state),
+		changes: fieldChanges
+	});
+
+	const intermediateState: EngineState = {
+		...state,
+		data: { ...state.data, document: computationResultDocument }
+	};
+	const relevantFieldPaths = collectRelevantFields(intermediateState).map(
+		field => field.documentPath
+	);
+
+	const computedFieldPredicate =
+		validationCode !== undefined
+			? (path: EntityInstancePath) => isComputedField(validationCode, path)
+			: undefined;
+
+	const finalMessages = validateChangesAndUpdateMessages({
+		changes: computationResultChanges,
+		document: computationResultDocument,
+		initialMessages,
+		kernelOptions: middlewareOptions.kernelOptionsProvider?.(state),
+		models: { documentModel, formModel, validatorProvider: validationCode },
+		parsingErrorsAfterComputation: parseErrors,
+		relevantFieldPaths,
+		isComputedField: computedFieldPredicate
+	});
+
+	updateDocument(dispatch, state, computationResultDocument, [
+		...ReadonlyObjectMap.values(computationResultChanges)
+	]);
+
+	if (!messageStateIsEqual(initialMessages, finalMessages)) {
+		dispatch(Commands.setMessageState({ messages: finalMessages }));
 	}
 }

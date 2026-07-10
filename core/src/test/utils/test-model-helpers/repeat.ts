@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -30,25 +30,24 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import type { GroupInstance } from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
+import type { GroupInstance } from "@com.mgmtp.a12.kernel/kernel-md-facade";
 
-export namespace REPEAT {
-	export const rootGroup = "Root";
-	export const nestedL6 = "Nested_L6";
-	export const L6_Number = "L6_Number";
-	export const L6_String = "L6_String";
-	export const nestedL1 = "Nested_L1";
-	export const nestedGroup = "nestedGroup";
-	export const L1_String = "L1_String";
-	export const L1_Number = "L1_Number";
-	export const L1_Time = "L1_Time";
-	export const L0_Number = "L0_Number";
-
-	export const nestedL9 = "Nested_L9";
-	export const L9_String = "L9_String";
-	export const L9_Number = "L9_Number";
-	export const L9_Invisible = "L9_Invisible";
-}
+export const REPEAT = {
+	rootGroup: "Root",
+	nestedL6: "Nested_L6",
+	L6_Number: "L6_Number",
+	L6_String: "L6_String",
+	nestedL1: "Nested_L1",
+	nestedGroup: "nestedGroup",
+	L1_String: "L1_String",
+	L1_Number: "L1_Number",
+	L1_Time: "L1_Time",
+	L0_Number: "L0_Number",
+	nestedL9: "Nested_L9",
+	L9_String: "L9_String",
+	L9_Number: "L9_Number",
+	L9_Invisible: "L9_Invisible"
+} as const;
 
 export function createDocumentForRepeat(values: {
 	nestedL1?: GroupInstance[];

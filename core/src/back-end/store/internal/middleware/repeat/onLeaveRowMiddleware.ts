@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -32,8 +32,12 @@
 
 import type { Middleware } from "redux";
 
+import {
+	isFormModelEmbeddedRepeat,
+	isFormModelInlineRepeat,
+	isFormModelRepeat
+} from "../../../../../models/internal/FormModelGuards.js";
 import { findElementByFormModelPath } from "../../../../../models/internal/findElementByFormModelPath.js";
-import { FormModel } from "../../../../../models/internal/form-model.js";
 import { FormModelPath } from "../../../../../models/internal/utils/form-model-path.js";
 import { Events } from "../../actions.js";
 import { collectRelevantFields } from "../../collectRelevantFields.js";
@@ -59,7 +63,7 @@ export function onLeaveRowMiddlewareFactory(options: MiddlewareOptions): Middlew
 			const repeatFormModelPath = action.payload.repeatFormModelPath;
 			const repeat = findElementByFormModelPath(formModel, repeatFormModelPath);
 
-			if (!repeat || !FormModel.Repeat.isInstance(repeat)) {
+			if (!repeat || !isFormModelRepeat(repeat)) {
 				throw new Error("Expected to get path to a repeat!");
 			}
 
@@ -75,9 +79,9 @@ export function onLeaveRowMiddlewareFactory(options: MiddlewareOptions): Middlew
 
 			if (
 				!options.disableRepeatValidationOnLeaving &&
-				(FormModel.InlineRepeat.isInstance(repeat) || FormModel.EmbeddedRepeat.isInstance(repeat))
+				(isFormModelInlineRepeat(repeat) || isFormModelEmbeddedRepeat(repeat))
 			) {
-				const initialFormModelPath = FormModel.InlineRepeat.isInstance(repeat)
+				const initialFormModelPath = isFormModelInlineRepeat(repeat)
 					? repeatFormModelPath
 					: FormModelPath.extend(repeatFormModelPath, repeat.controlGrid);
 

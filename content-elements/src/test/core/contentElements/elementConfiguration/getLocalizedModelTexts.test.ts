@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -32,16 +32,12 @@
 
 import { strictEqual } from "node:assert/strict";
 
-import {
-	defaultLocalizerFactory,
-	type LocalizedText
-} from "@com.mgmtp.a12.utils/utils-localization/lib/main/index.js";
+import { defaultLocalizerFactory } from "@com.mgmtp.a12.utils/utils-localization";
+import type { LocalizedText } from "@com.mgmtp.a12.utils/utils-localization";
 
 import type { BaseControlProps, MarkingOfRequiredFields } from "../../../../index.js";
-import {
-	GET_LOCALIZED_MODEL_TEXTS_WRAPPER,
-	type LocalizedModelTexts
-} from "../../../../main/core/contentElements/elementConfiguration/getLocalizedModelTexts.js";
+import { GET_LOCALIZED_MODEL_TEXTS_WRAPPER } from "../../../../main/core/contentElements/elementConfiguration/getLocalizedModelTexts.js";
+import type { LocalizedModelTexts } from "../../../../main/core/contentElements/elementConfiguration/getLocalizedModelTexts.js";
 
 describe("core.contentElements.elementConfiguration", () => {
 	describe("getLocalizedModelTexts", () => {

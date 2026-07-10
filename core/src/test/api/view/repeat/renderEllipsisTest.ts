@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -31,10 +31,10 @@
  */
 
 import { within } from "@com.mgmtp.a12.devtools/react";
-import type { GroupInstance } from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
+import type { GroupInstance } from "@com.mgmtp.a12.kernel/kernel-md-facade";
 
 import type { Models } from "../../../../back-end/store/index.js";
-import { SetupHelpers } from "../../../utils/setup.js";
+import { setupFormEngineRendererWithRtlAsync } from "../../../utils/setup.js";
 
 // common render function used by ellipsis tests
 export async function renderEllipsisTest(options: {
@@ -44,7 +44,7 @@ export async function renderEllipsisTest(options: {
 	id: string;
 }): Promise<HTMLElement> {
 	const { models, document, screenName, id } = options;
-	const { baseElement } = await SetupHelpers.setupFormEngineRendererWithRtlAsync({
+	const { baseElement } = await setupFormEngineRendererWithRtlAsync({
 		models,
 		data: { document },
 		ui: screenName

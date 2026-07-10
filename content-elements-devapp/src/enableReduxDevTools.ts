@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -32,7 +32,8 @@
 
 import { composeWithDevTools } from "@redux-devtools/extension";
 
-import type { ComposeEnhancer } from "@com.mgmtp.a12.client/client-core/lib/core/application/index.js";
+import { actionSanitizer } from "@com.mgmtp.a12.client/client-core";
+import type { ComposeEnhancer } from "@com.mgmtp.a12.client/client-core";
 
 export function enableReduxDevTools(): ComposeEnhancer {
 	return composeWithDevTools({
@@ -40,6 +41,7 @@ export function enableReduxDevTools(): ComposeEnhancer {
 		serialize: {
 			replacer: (key, value) =>
 				key === "generatedCodeAccessor" || key === "validatorProvider" ? "" : value
-		}
+		},
+		actionSanitizer
 	}) as ComposeEnhancer;
 }

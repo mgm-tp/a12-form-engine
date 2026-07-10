@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -30,24 +30,18 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { ModelPath } from "@com.mgmtp.a12.base/base-model-api/lib/main/model/index.js";
-import type {
-	DocumentModel,
-	EntityInstancePath
-} from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
-import type {
-	Localizer,
-	ValueConversion
-} from "@com.mgmtp.a12.utils/utils-localization/lib/main/index.js";
+import { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
+import type { DocumentModel, EntityInstancePath } from "@com.mgmtp.a12.kernel/kernel-md-facade";
+import type { Localizer, ValueConversion } from "@com.mgmtp.a12.utils/utils-localization";
 
-import type ExternalEnumerationProvider from "../../back-end/services/external-enumeration-provider.js";
+import type { IExternalEnumerationProvider } from "../../back-end/services/external-enumeration-provider.js";
 import { ModelSelectors } from "../../back-end/store/internal/selectors/models.js";
 import type { EngineState } from "../../back-end/store/internal/store.js";
 import { FormModelSelectors } from "../../back-end/store/internal/suffix.js";
 import { assertUnreachable } from "../../back-end/utils/internal/assertions.js";
 import { FormModelUtils } from "../../models/internal/utils/form-model-utils.js";
 import { evaluateNotRelevantForDocumentElement } from "../../view/internal/utilities/enablements/hidden.js";
-import { EnumerableHelper } from "../../view/internal/utilities/enumerable/enumerableHelper.js";
+import { InternalEnumerableHelper } from "../../view/internal/utilities/enumerable/enumerableHelper.js";
 import type { Value } from "../../view/internal/utilities/value.js";
 
 type NonEnumerableFieldType = Exclude<
@@ -63,7 +57,7 @@ export function getFieldTextValue(options: {
 	localizer: Localizer;
 	path: EntityInstancePath;
 	field: DocumentModel.Field;
-	externalEnumerationProvider?: ExternalEnumerationProvider;
+	externalEnumerationProvider?: IExternalEnumerationProvider;
 	value: Value;
 }): string {
 	const { path, field, value } = options;
@@ -75,7 +69,7 @@ export function getFieldTextValue(options: {
 	const fce = formModel.content.fieldConfiguration.fieldMap[ModelPath.toString(path)];
 	// Because external enumerations are type string the enumeration check has to be done before the string check
 	if (FormModelUtils.isEnumerable(field.fieldType, fce)) {
-		const enumValue = EnumerableHelper.getEnumerationValue({
+		const enumValue = InternalEnumerableHelper.getEnumerationValue({
 			...options,
 			model: ModelSelectors.documentModel()(options.state),
 			path,
@@ -83,7 +77,7 @@ export function getFieldTextValue(options: {
 		});
 		return !enumValue &&
 			typeof value.data === "string" &&
-			EnumerableHelper.isCustomValuesAllowed(fce)
+			InternalEnumerableHelper.isCustomValuesAllowed(fce)
 			? value.data
 			: enumValue;
 	} else {

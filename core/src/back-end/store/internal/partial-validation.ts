@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -32,15 +32,17 @@
 
 import type { Dispatch } from "redux";
 
-import { ModelPath } from "@com.mgmtp.a12.base/base-model-api/lib/main/model/index.js";
-import type {
-	EntityInstancePath,
-	GroupInstance
-} from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
+import { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
+import type { EntityInstancePath, GroupInstance } from "@com.mgmtp.a12.kernel/kernel-md-facade";
 
-import type { ReadonlyObjectMap } from "../../../models/index.js";
-import { findElementByFormModelPath, FormModel } from "../../../models/index.js";
-import { DocumentPath } from "../../../models/internal/utils/document-utils.js";
+import { findElementByFormModelPath, ReadonlyObjectMap } from "../../../models/index.js";
+import type { FormModel } from "../../../models/index.js";
+import {
+	isFormModelControl,
+	isFormModelFieldOverviewColumn,
+	isFormModelSection
+} from "../../../models/internal/FormModelGuards.js";
+import { DocumentPath, DocumentUtils } from "../../../models/internal/utils/document-utils.js";
 
 import { Commands } from "./actions.js";
 import type { RelevantFieldPaths } from "./collectRelevantFields.js";
@@ -71,20 +73,22 @@ export function validatePartlyWithFocusHandling(options: {
 	const { state, dispatch, middlewareOptions, relevantElements, focusFirstError } = options;
 	const formModel = ModelSelectors.formModel()(state);
 	const sectionState = UiStateSelectors.sectionState()(state);
-	const initialMessages = UiStateSelectors.messages()(state);
+	const storeMessages = UiStateSelectors.messages()(state);
 	const validatorProvider = ModelSelectors.validationCode()(state);
 	const document = DataSelectors.document()(state) as GroupInstance;
+
+	const initialMessages = removeStaleParseErrors(storeMessages, document);
 
 	const messages = validateElements({
 		document,
 		initialMessages,
-		now: middlewareOptions.nowProvider?.(state),
+		kernelOptions: middlewareOptions.kernelOptionsProvider?.(state),
 		relevantElements: getEffectiveRelevantFields(relevantElements.map(e => e.documentPath)),
 		validatorProvider,
 		type: "partial"
 	});
 
-	if (!messageStateIsEqual(messages, initialMessages)) {
+	if (!messageStateIsEqual(messages, storeMessages)) {
 		dispatch(Commands.setMessageState({ messages }));
 	}
 
@@ -136,12 +140,12 @@ function findFirstErrorElement(
 		const path = errorPaths.find(path => DocumentPath.matches(path, visibleField.documentPath));
 		if (path && isReachable(formModel, visibleField.formModelPath, sectionState)) {
 			const element = findElementByFormModelPath(formModel, visibleField.formModelPath);
-			if (element && FormModel.FieldOverviewColumn.isInstance(element)) {
+			if (element && isFormModelFieldOverviewColumn(element)) {
 				return {
 					formModelPath: visibleField.formModelPath,
 					index: path[path.length - 2].index - 1
 				};
-			} else if (element && FormModel.Control.isInstance(element)) {
+			} else if (element && isFormModelControl(element)) {
 				return {
 					formModelPath: visibleField.formModelPath
 				};
@@ -152,6 +156,28 @@ function findFirstErrorElement(
 	return undefined;
 }
 
+/**
+ * Removes parse errors that are no longer consistent with the document.
+ * When a parse error is created, the document value is set to null.
+ * If the document value is no longer null, the data was externally reset
+ * (e.g. via setData) and the parse error is stale.
+ */
+function removeStaleParseErrors(
+	messages: ReadonlyObjectMap<EngineStore.Validation.Entry>,
+	document: GroupInstance
+): ReadonlyObjectMap<EngineStore.Validation.Entry> {
+	function isStaleParseError(key: string, entry: EngineStore.Validation.Entry): boolean {
+		if (entry.parseError === undefined) {
+			return false;
+		}
+		const path = DocumentPath.fromString(key);
+		const documentValue = DocumentUtils.getValue({ document, path });
+		return documentValue !== null;
+	}
+
+	return ReadonlyObjectMap.filter(messages, (key, entry) => !isStaleParseError(key, entry));
+}
+
 function isReachable(
 	formModel: FormModel,
 	elementPath: ModelPath,
@@ -160,7 +186,7 @@ function isReachable(
 	for (let i = 0; i < elementPath.length - 1; i++) {
 		const path = elementPath.slice(0, i + 1);
 		const parent = findElementByFormModelPath(formModel, path);
-		if (parent && FormModel.Section.isInstance(parent)) {
+		if (parent && isFormModelSection(parent)) {
 			const stateOfSection = sectionState[ModelPath.toString(path)];
 			if (stateOfSection === false) {
 				return false;

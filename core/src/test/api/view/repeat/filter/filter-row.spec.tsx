@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -34,9 +34,9 @@ import { deepStrictEqual, ok, strictEqual } from "node:assert/strict";
 import type { Mock } from "node:test";
 import { mock } from "node:test";
 
-import { ModelPath } from "@com.mgmtp.a12.base/base-model-api/lib/main/model/index.js";
+import { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
 import { query, within } from "@com.mgmtp.a12.devtools/react";
-import type { ButtonProps } from "@com.mgmtp.a12.widgets/widgets-core/lib/button/main/button.api.js";
+import type { ButtonProps } from "@com.mgmtp.a12.widgets/widgets-core";
 
 import { UiId } from "../../../../../back-end/utils/internal/generateUiId.js";
 import type { DispatchConfiguration } from "../../../../../view/index.js";
@@ -49,11 +49,11 @@ import { ACTION_CELL, MESSAGE, TABLE_BODY, TABLE_HEAD } from "../../../../rtl-ut
 import { getWidgetMocks } from "../../../../rtl-utils/getWidgetMocks.js";
 import { mouseEventMock } from "../../../../rtl-utils/mock-utils.js";
 import type { RtlRenderWrapper } from "../../../../rtl-utils/render-wrapper.js";
+import { createModelPath } from "../../../../utils/createModelPath.js";
 import { DisableMockComponents } from "../../../../utils/disable-mocks.js";
-import { ModelHelpers } from "../../../../utils/model-helpers.js";
 import type { Context } from "../../../../utils/rtl-render-group.js";
 import { RenderGroupFixture } from "../../../../utils/rtl-render-group.js";
-import { SetupHelpers } from "../../../../utils/setup.js";
+import { loadData, setupConnectedFormEngineWithRtlAsync } from "../../../../utils/setup.js";
 import { setupFixture, setupModelsFixture } from "../../../../utils/setupFixture.js";
 import { IR } from "../../../../utils/test-model-helpers/inline.repeat.js";
 
@@ -62,10 +62,10 @@ import { createUIState, REPEAT_MODEL_PATH } from "./filter.utils.js";
 describe("api.view.repeat", () => {
 	describe("Filter Row", () => {
 		const COLUMN_NAME = IR.SortingAndFiltering.ID_L1_STRING_COLUMN;
-		const REPEAT_PATH = ModelHelpers.createModelPath(...REPEAT_MODEL_PATH);
+		const REPEAT_PATH = createModelPath(...REPEAT_MODEL_PATH);
 		const models = setupModelsFixture("repeat", "inline");
 		const fixture = setupFixture(() => ({
-			document: SetupHelpers.loadData("repeat", "data", models.documentModel)
+			document: loadData("repeat", "data", models.documentModel)
 		}));
 
 		const getRepeat: (start: HTMLElement) => HTMLElement = start =>
@@ -332,7 +332,7 @@ describe("api.view.repeat", () => {
 				BufferedTextLine: mock.fn(BufferedTextLine)
 			};
 
-			return SetupHelpers.setupConnectedFormEngineWithRtlAsync({
+			return setupConnectedFormEngineWithRtlAsync({
 				componentMap,
 				config: {
 					widgetMap
@@ -346,7 +346,7 @@ describe("api.view.repeat", () => {
 							containsFilter && filterValue
 								? {
 										[COLUMN_NAME]: {
-											columnPath: ModelHelpers.createModelPath(...REPEAT_MODEL_PATH, COLUMN_NAME),
+											columnPath: createModelPath(...REPEAT_MODEL_PATH, COLUMN_NAME),
 											filter: {
 												filterValue
 											}

@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -32,19 +32,17 @@
 
 import { deepStrictEqual } from "node:assert/strict";
 
-import type { Locale } from "@com.mgmtp.a12.utils/utils-localization/lib/main/index.js";
+import type { Locale } from "@com.mgmtp.a12.utils/utils-localization";
 
 import type { Models } from "../../../../../../back-end/store/internal/store.js";
 import type { RepeatRow } from "../../../../../../view/internal/components/form-engine/repeat/components/tableColumnTypes.js";
 import { sort } from "../../../../../../view/internal/utilities/sorting.js";
-import { ModelHelpers } from "../../../../../utils/model-helpers.js";
 import { setupArrayFixture } from "../../../../../utils/setupFixture.js";
 import { IR } from "../../../../../utils/test-model-helpers/inline.repeat.js";
 import { REPEAT_MODEL_PATH } from "../../filter/filter.utils.js";
+import { createModelPath } from "../../../../../utils/createModelPath.js";
 
 import { createRow } from "./utils.js";
-
-const { createModelPath } = ModelHelpers;
 
 export function executeTestForEnumerationSorting(models: Models, locale: Locale): void {
 	const COLUMN_PATH = createModelPath(

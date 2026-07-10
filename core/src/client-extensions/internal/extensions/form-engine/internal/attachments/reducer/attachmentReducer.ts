@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -30,13 +30,11 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import type { Action, AnyAction } from "typescript-fsa";
+import type { Action as ReduxAction } from "redux";
 
-import { THUMBNAIL_SLICE } from "@com.mgmtp.a12.client/client-core/lib/core/activity/a12-internal/thumbnails/slice.js";
-import type {
-	Activity,
-	ActivityReducers
-} from "@com.mgmtp.a12.client/client-core/lib/core/activity/index.js";
+import type { Activity, ActivityReducers } from "@com.mgmtp.a12.client/client-core";
+import { THUMBNAIL_SLICE } from "@com.mgmtp.a12.client/client-core/a12internal";
+import type { Action } from "@com.mgmtp.a12.client/typescript-fsa-redux-5-compat";
 
 import type { EngineStore } from "../../../../../../../back-end/store/index.js";
 import { Events } from "../../../../../../../back-end/store/internal/actions.js";
@@ -93,7 +91,7 @@ function reduceDefaultDh(
 }
 
 function isAttachmentRelatedAction(
-	action: AnyAction
+	action: ReduxAction
 ): action is Action<FormEngineActions.FormEngineEventActions | UploadDonePayload> {
 	return (
 		uploadDone.match(action) ||

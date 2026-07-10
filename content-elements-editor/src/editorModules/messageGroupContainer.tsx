@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -43,14 +43,15 @@ import {
 	createDocumentModelService,
 	EditorElementModule,
 	GlobalSearch,
-	SettingTemplate,
-	type DocumentModelService,
-	type NodeSettingProps
+	SettingTemplate
+} from "@com.mgmtp.a12.contentengine/contentengine-editor";
+import type {
+	DocumentModelService,
+	NodeSettingProps
 } from "@com.mgmtp.a12.contentengine/contentengine-editor";
 import type { MessageGroupContainerNode } from "@com.mgmtp.a12.formengine/formengine-content-elements";
 import { FormElementsModules } from "@com.mgmtp.a12.formengine/formengine-content-elements";
-import { MessageBox } from "@com.mgmtp.a12.widgets/widgets-core/lib/message-box/main/message-box.view.js";
-import { TextOutput } from "@com.mgmtp.a12.widgets/widgets-core/lib/text-output/main/text-output.view.js";
+import { MessageBox, TextOutput } from "@com.mgmtp.a12.widgets/widgets-core";
 
 import { createStringListController } from "../controllers/stringListController.js";
 import { AutoCollectNodesSetting } from "../setting-inputs/autoCollectNodesSetting.js";

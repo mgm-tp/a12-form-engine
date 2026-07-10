@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -30,26 +30,32 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { type ReactElement } from "react";
+import type { ReactElement } from "react";
 
-import type { ModelPath } from "@com.mgmtp.a12.base/base-model-api/lib/main/model/index.js";
-import type { EntityInstancePath } from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
+import type { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
+import type { EntityInstancePath } from "@com.mgmtp.a12.kernel/kernel-md-facade";
 import type {
 	Localizable,
 	Localizer,
 	ValueConversion
-} from "@com.mgmtp.a12.utils/utils-localization/lib/main/index.js";
+} from "@com.mgmtp.a12.utils/utils-localization";
 
 import { createLocalizableFactory } from "../../../../back-end/localization/internal/localization.js";
+import { isFieldRequired } from "../../../../back-end/store/internal/kernel-adapter.js";
 import { ModelSelectors } from "../../../../back-end/store/internal/selectors/models.js";
 import { UiStateSelectors } from "../../../../back-end/store/internal/selectors/ui-state.js";
 import { getExpressionValue } from "../../../../data/internal/expression-cell-value.js";
-import { FormModel } from "../../../../models/internal/form-model.js";
+import type { FormModel } from "../../../../models/internal/form-model.js";
+import {
+	isFormModelButtonType,
+	isFormModelFieldBasedInputType,
+	isFormModelRepeatOverviewColumn,
+	isFormModelRowAction
+} from "../../../../models/internal/FormModelGuards.js";
 import type { ComponentMap } from "../../configuration/componentMap/component-map.js";
 import type { FormModelMap } from "../../configuration/engine-configuration.js";
-import { isFieldRequired } from "../../../../back-end/store/internal/kernel-adapter.js";
 
-import { type HtmlTextProps } from "../widgets/form-engine/text.js";
+import type { HtmlTextProps } from "../widgets/form-engine/text.js";
 
 /**
  * Returns the localized title label or undefined.
@@ -149,15 +155,13 @@ export function getLabel(props: {
 }): string | undefined {
 	const { options, element, formModelPath, dataContext, localizer, converter, fce } = props;
 	const label =
-		FormModel.ButtonType.isInstance(element) || FormModel.RowAction.isInstance(element)
+		isFormModelButtonType(element) || isFormModelRowAction(element)
 			? element.buttonStyling?.label
 			: element.label;
 	const expressionTree =
 		label?.type === "Expression"
 			? label.expressionTree
-			: !label &&
-				  fce?.label?.type === "Expression" &&
-				  !FormModel.RepeatOverviewColumn.isInstance(element)
+			: !label && fce?.label?.type === "Expression" && !isFormModelRepeatOverviewColumn(element)
 				? fce.label.expressionTree
 				: undefined;
 
@@ -177,16 +181,16 @@ export function getLabel(props: {
 			ModelSelectors.formModel()(options.state)
 		);
 
-		let localizables: Localizable[] = [];
+		let localizables: Localizable[];
 
-		if (FormModel.FieldBasedInputType.isInstance(element)) {
+		if (isFormModelFieldBasedInputType(element)) {
 			localizables = UiStateSelectors.InputLocalization.labelLocalizables(
 				formModelPath,
 				element
 			)(options.state);
-		} else if (FormModel.RepeatOverviewColumn.isInstance(element)) {
+		} else if (isFormModelRepeatOverviewColumn(element)) {
 			localizables = localizableFactory.repeatOverviewColumnTitle(element, formModelPath);
-		} else if (FormModel.RowAction.isInstance(element)) {
+		} else if (isFormModelRowAction(element)) {
 			localizables = localizableFactory.repeatRowActionLabel(formModelPath, element);
 		} else {
 			localizables = localizableFactory.componentLabel(element, formModelPath);
@@ -211,7 +215,7 @@ export function getLabelAsHtml(
 	fce?: FormModel.FieldConfigurationEntry
 ): ReactElement<HtmlTextProps> | string | undefined {
 	const label =
-		FormModel.ButtonType.isInstance(element) || FormModel.RowAction.isInstance(element)
+		isFormModelButtonType(element) || isFormModelRowAction(element)
 			? element.buttonStyling?.label
 			: element.label;
 
@@ -220,7 +224,7 @@ export function getLabelAsHtml(
 		(label?.type === "Expression" ||
 			(!label &&
 				fce?.label?.type === "Expression" &&
-				!FormModel.RepeatOverviewColumn.isInstance(element))) ? (
+				!isFormModelRepeatOverviewColumn(element))) ? (
 		<componentMap.HtmlTextSpan
 			content={labelContent}
 			data-testid={"id" in element ? `${element.id}-htmlTextSpan` : undefined}
@@ -247,7 +251,7 @@ export function getDescription(props: {
 		ModelSelectors.formModel()(options.state)
 	);
 
-	const localizables = FormModel.RowAction.isInstance(element)
+	const localizables = isFormModelRowAction(element)
 		? localizableFactory.repeatRowActionDescription(formModelPath, element)
 		: localizableFactory.componentDescription(element, formModelPath);
 

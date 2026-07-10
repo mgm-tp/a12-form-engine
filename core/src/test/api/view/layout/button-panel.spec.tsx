@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -33,20 +33,24 @@
 import { ok, strictEqual } from "node:assert/strict";
 
 import { screen, within } from "@com.mgmtp.a12.devtools/react";
-import { DataRoles } from "@com.mgmtp.a12.widgets/widgets-core/lib/common/main/data-roles.js";
+import { DataRoles } from "@com.mgmtp.a12.widgets/widgets-core";
 
 import { assertCondition } from "../../../../back-end/utils/internal/assertions.js";
-import { findElementByFormModelPath, FormModel } from "../../../../models/index.js";
+import { findElementByFormModelPath } from "../../../../models/index.js";
+import { isFormModelButtonPanel } from "../../../../models/internal/FormModelGuards.js";
 import type { WidgetMap } from "../../../../view/index.js";
 import { ButtonPanel } from "../../../../view/internal/components/form-engine/buttons/button-panel.js";
 import { BUTTON_PANEL } from "../../../../view/internal/components/form-engine/data-roles.js";
 import { rtlRenderWrapperAsync } from "../../../rtl-utils/render-wrapper.js";
 import { assertExists } from "../../../utils/assertions.js";
-import { ModelHelpers } from "../../../utils/model-helpers.js";
-import { SetupHelpers } from "../../../utils/setup.js";
+import { createModelPath } from "../../../utils/createModelPath.js";
+import {
+	setupFormEngineRendererWithRtlAsync,
+	setupRenderConfiguration
+} from "../../../utils/setup.js";
 import { setupModelsFixture } from "../../../utils/setupFixture.js";
 import { IDS } from "../../../utils/test-model-helpers/aria-level.js";
-import { BUTTONS } from "../../../utils/test-model-helpers/button.melies.js";
+import { BUTTONS } from "../../../utils/test-model-helpers/button.form.js";
 import {
 	expressionLabelDocument,
 	IDS as ExpressionLabelIds,
@@ -60,7 +64,7 @@ describe("api.view.layout", () => {
 		const models = setupModelsFixture("container", "container-visibility");
 		describe("when empty", () => {
 			it("is hidden", async () => {
-				const wrapper = await SetupHelpers.setupFormEngineRendererWithRtlAsync({
+				const wrapper = await setupFormEngineRendererWithRtlAsync({
 					models
 				});
 
@@ -71,14 +75,14 @@ describe("api.view.layout", () => {
 
 		describe("with HIDDEN_IN_READONLY_MODE", () => {
 			it("is visible when readonly=false", async () => {
-				const wrapper = await SetupHelpers.setupFormEngineRendererWithRtlAsync({
+				const wrapper = await setupFormEngineRendererWithRtlAsync({
 					models
 				});
 				const buttonPanel = within(wrapper.baseElement).queryById("a12-buttonpanel-a7f42");
 				ok(buttonPanel);
 			});
 			it("is hidden when readonly=true", async () => {
-				const wrapper = await SetupHelpers.setupFormEngineRendererWithRtlAsync({
+				const wrapper = await setupFormEngineRendererWithRtlAsync({
 					models,
 					ui: {
 						readonly: true
@@ -95,7 +99,7 @@ describe("api.view.layout", () => {
 
 			describe("with a multilingual label defined in the model", () => {
 				it("renders a title", async () => {
-					const wrapper = await SetupHelpers.setupFormEngineRendererWithRtlAsync({
+					const wrapper = await setupFormEngineRendererWithRtlAsync({
 						models: a11yModels
 					});
 
@@ -105,7 +109,7 @@ describe("api.view.layout", () => {
 
 			describe("with an expression label defined in the model", () => {
 				it("renders a title", async () => {
-					const wrapper = await SetupHelpers.setupFormEngineRendererWithRtlAsync({
+					const wrapper = await setupFormEngineRendererWithRtlAsync({
 						models: expressionLabelModels,
 						data: { document: expressionLabelDocument }
 					});
@@ -121,7 +125,7 @@ describe("api.view.layout", () => {
 					const widgetMap: Partial<WidgetMap> = {
 						TypographyHeadline
 					};
-					const wrapper = await SetupHelpers.setupFormEngineRendererWithRtlAsync({
+					const wrapper = await setupFormEngineRendererWithRtlAsync({
 						config: {
 							widgetMap
 						},
@@ -145,7 +149,7 @@ describe("api.view.layout", () => {
 
 			describe("with no label defined in the model", () => {
 				it("doesn't render a title", async () => {
-					const wrapper = await SetupHelpers.setupFormEngineRendererWithRtlAsync({
+					const wrapper = await setupFormEngineRendererWithRtlAsync({
 						models: a11yModels
 					});
 
@@ -165,11 +169,11 @@ describe("api.view.layout", () => {
 				const { formModel } = models;
 				const buttonPanel = findElementByFormModelPath(formModel, BUTTONS.buttonPanel);
 				assertExists(buttonPanel);
-				assertCondition(FormModel.ButtonPanel.isInstance(buttonPanel));
+				assertCondition(isFormModelButtonPanel(buttonPanel));
 
-				const renderConfiguration = SetupHelpers.setupRenderConfiguration({
+				const renderConfiguration = setupRenderConfiguration({
 					models,
-					parentPath: ModelHelpers.createModelPath(BUTTONS.screen1)
+					parentPath: createModelPath(BUTTONS.screen1)
 				});
 
 				await rtlRenderWrapperAsync(

@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -39,6 +39,7 @@ import type {
 
 import type { BaseControlProps } from "../../index.js";
 import type { ComponentMap } from "../../main/core/contentElements/componentMap/componentMap.js";
+import { DefaultComponentMap } from "../../main/core/contentElements/componentMap/defaultComponentMap.js";
 import type { BufferedTextAreaProps } from "../../main/core/contentElements/elementFragments/bufferedTextArea.js";
 import type { BufferedTextLineProps } from "../../main/core/contentElements/elementFragments/bufferedTextLine.js";
 import type { PickerWrapperProps } from "../../main/core/contentElements/elementFragments/pickerWrapper.js";
@@ -47,7 +48,6 @@ import type { TooltipsProps } from "../../main/core/contentElements/elementFragm
 import type { ValidationMessagesProps } from "../../main/core/contentElements/elementFragments/validationMessages.js";
 import type { MessageListProps } from "../../main/core/contentElements/modules/messageGroupDisplay/messageList.js";
 import type { MessageListItemProps } from "../../main/core/contentElements/modules/messageGroupDisplay/messageListItem.js";
-import { DefaultComponentMap } from "../../main/core/contentElements/componentMap/defaultComponentMap.js";
 
 import {
 	BUFFERED_TEXT_AREA,

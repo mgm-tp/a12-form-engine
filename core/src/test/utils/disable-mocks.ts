@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -32,7 +32,8 @@
 
 import { act } from "react";
 
-import { mockFunctions, type Mocked } from "../rtl-utils/mock-map.js";
+import { mockFunctions } from "../rtl-utils/mock-map.js";
+import type { Mocked } from "../rtl-utils/mock-map.js";
 
 /**
  * Functions to switch between React component implementations by settings an
@@ -43,34 +44,19 @@ import { mockFunctions, type Mocked } from "../rtl-utils/mock-map.js";
  * For now, you need to run the tests manually with
  * DISABLE_MOCK_COMPONENTS="true" (see launch.json).
  */
-export namespace DisableMockComponents {
-	function areMocksDisabled(): boolean {
-		return "true" === process.env.DISABLE_MOCK_COMPONENTS;
-	}
-
+export const DisableMockComponents = {
 	/**
 	 * Maps a mock map to one that can be disabled (=replaced with the productive
 	 * map) by env variable.
 	 *
 	 * Also wraps each function with a node mock (This could be separated).
 	 */
-	export function components<T>(disabled: () => T) {
+	components<T>(disabled: () => T) {
 		return function (mocks: () => T): Mocked<T> {
 			const f = areMocksDisabled() ? disabled : mocks;
 			return mockFunctions(f());
 		};
-	}
-
-	export interface WithWidgetsOptions {
-		readonly withWidgets?: true;
-	}
-
-	export interface RenderFunc<ArgsType, ReturnType> {
-		(options: ArgsType): ReturnType;
-	}
-	export interface AsyncRenderFunc<ArgsType, ReturnType> {
-		(options: ArgsType): Promise<ReturnType>;
-	}
+	},
 
 	/**
 	 * Map a render function to one where some wrappers are activated that
@@ -78,7 +64,7 @@ export namespace DisableMockComponents {
 	 * Unfortunately, the resulting render needs to be async, because widgets
 	 * have some effects that require act.
 	 */
-	export function render<OptsType extends WithWidgetsOptions, RenderResultType>(
+	render<OptsType extends WithWidgetsOptions, RenderResultType>(
 		f: RenderFunc<OptsType, RenderResultType>
 	): AsyncRenderFunc<OptsType, RenderResultType> {
 		return options => {
@@ -86,13 +72,28 @@ export namespace DisableMockComponents {
 			return act(() => f(opts));
 		};
 	}
+};
 
-	function optionsWithDisabledMockComponents<OptsType extends WithWidgetsOptions>(
-		o: OptsType
-	): OptsType {
-		return {
-			...o,
-			withWidgets: true
-		};
-	}
+export interface WithWidgetsOptions {
+	readonly withWidgets?: true;
+}
+
+export interface RenderFunc<ArgsType, ReturnType> {
+	(options: ArgsType): ReturnType;
+}
+export interface AsyncRenderFunc<ArgsType, ReturnType> {
+	(options: ArgsType): Promise<ReturnType>;
+}
+
+function areMocksDisabled(): boolean {
+	return "true" === process.env.DISABLE_MOCK_COMPONENTS;
+}
+
+function optionsWithDisabledMockComponents<OptsType extends WithWidgetsOptions>(
+	o: OptsType
+): OptsType {
+	return {
+		...o,
+		withWidgets: true
+	};
 }

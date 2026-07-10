@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -30,73 +30,87 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { ModelPath } from "@com.mgmtp.a12.base/base-model-api/lib/main/model/index.js";
-import type { DocumentModel } from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
+import { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
+import type { DocumentModel } from "@com.mgmtp.a12.kernel/kernel-md-facade";
 
-import { FormModel } from "../form-model.js";
+import {
+	isFormModel,
+	isFormModelButtonPanel,
+	isFormModelControlGrid,
+	isFormModelDetachedRepeat,
+	isFormModelEmbeddedRepeat,
+	isFormModelHeaderFooterType,
+	isFormModelInlineRepeat,
+	isFormModelMultiColumnSection,
+	isFormModelRow,
+	isFormModelScreen,
+	isFormModelSection
+} from "../../../models/internal/FormModelGuards.js";
+
+import type { FormModel } from "../form-model.js";
 
 import { findEditableElements } from "./EditableElement.js";
 import { getModelPathElementName } from "./form-model-path.js";
+
+type MatchGuard = <T extends object>(element: T | undefined) => T | undefined;
+
+/** Returns the element if it matches the path segment or undefined otherwise. */
+function createMatchGuard(name: string): MatchGuard {
+	return function matchGuard(element) {
+		if (element === undefined) {
+			return undefined;
+		}
+
+		// Using modelPathRepresentation is slow in comparison to use `element.name || element.id`
+		const elementName = getModelPathElementName(element);
+		return elementName === name ? element : undefined;
+	};
+}
 
 /**
  * @internal
  * @ignore
  */
-export namespace FormModelUtils {
-	type MatchGuard = <T extends object>(element: T | undefined) => T | undefined;
-
-	/** Returns the element if it matches the path segment or undefined otherwise. */
-	function createMatchGuard(name: string): MatchGuard {
-		return function matchGuard(element) {
-			if (element === undefined) {
-				return undefined;
-			}
-
-			// Using modelPathRepresentation is slow in comparison to use `element.name || element.id`
-			const elementName = getModelPathElementName(element);
-			return elementName === name ? element : undefined;
-		};
-	}
-
+export const FormModelUtils = {
 	/** @internal */
-	export function getChild(formModelElement: object, name: string): object | undefined {
+	getChild(formModelElement: object, name: string): object | undefined {
 		const matchGuard = createMatchGuard(name);
 
-		if (FormModel.isInstance(formModelElement)) {
+		if (isFormModel(formModelElement)) {
 			return (
 				formModelElement.content.screens.find(matchGuard) ||
 				matchGuard(formModelElement.content.subHeaderBox) ||
 				matchGuard(formModelElement.content.footerBox)
 			);
-		} else if (FormModel.Screen.isInstance(formModelElement)) {
+		} else if (isFormModelScreen(formModelElement)) {
 			return (
 				formModelElement.screenElements.find(matchGuard) ||
 				matchGuard(formModelElement.subHeaderBox) ||
 				matchGuard(formModelElement.footerBox)
 			);
-		} else if (FormModel.HeaderFooterType.isInstance(formModelElement)) {
+		} else if (isFormModelHeaderFooterType(formModelElement)) {
 			return (
 				formModelElement.majorButtons?.button?.find(matchGuard) ||
 				formModelElement.minorButtons?.button?.find(matchGuard)
 			);
-		} else if (FormModel.ButtonPanel.isInstance(formModelElement)) {
+		} else if (isFormModelButtonPanel(formModelElement)) {
 			return formModelElement.button?.find(matchGuard);
-		} else if (FormModel.Section.isInstance(formModelElement)) {
+		} else if (isFormModelSection(formModelElement)) {
 			return formModelElement.screenElements?.find(matchGuard);
-		} else if (FormModel.MultiColumnSection.isInstance(formModelElement)) {
+		} else if (isFormModelMultiColumnSection(formModelElement)) {
 			return formModelElement.screenElements?.find(matchGuard);
-		} else if (FormModel.ControlGrid.isInstance(formModelElement)) {
+		} else if (isFormModelControlGrid(formModelElement)) {
 			return formModelElement.row?.find(matchGuard);
-		} else if (FormModel.Row.isInstance(formModelElement)) {
+		} else if (isFormModelRow(formModelElement)) {
 			return formModelElement.cell?.find(matchGuard);
-		} else if (FormModel.InlineRepeat.isInstance(formModelElement)) {
+		} else if (isFormModelInlineRepeat(formModelElement)) {
 			return formModelElement.repeatOverviewColumn?.find(matchGuard);
-		} else if (FormModel.DetachedRepeat.isInstance(formModelElement)) {
+		} else if (isFormModelDetachedRepeat(formModelElement)) {
 			return (
 				formModelElement.repeatOverviewColumn?.find(matchGuard) ||
 				matchGuard(formModelElement.detailScreen)
 			);
-		} else if (FormModel.EmbeddedRepeat.isInstance(formModelElement)) {
+		} else if (isFormModelEmbeddedRepeat(formModelElement)) {
 			return (
 				formModelElement.repeatOverviewColumn?.find(matchGuard) ||
 				matchGuard(formModelElement.controlGrid)
@@ -104,17 +118,14 @@ export namespace FormModelUtils {
 		} else {
 			return undefined;
 		}
-	}
+	},
 
 	/** @internal */
-	export function findPathElementsByFormModelPath(
-		currentElement: object,
-		targetPath: ModelPath
-	): object[] {
+	findPathElementsByFormModelPath(currentElement: object, targetPath: ModelPath): object[] {
 		const result = [currentElement];
 
 		for (let i = 0; i < targetPath.length; i++) {
-			const element = getChild(result[i], targetPath[i].elementName);
+			const element = FormModelUtils.getChild(result[i], targetPath[i].elementName);
 			if (element === undefined) {
 				throw new Error(`Invalid Form Model Path: ${ModelPath.toString(targetPath)}`);
 			}
@@ -123,10 +134,10 @@ export namespace FormModelUtils {
 		}
 
 		return result;
-	}
+	},
 
 	/** @internal */
-	export function findFirstOccurrenceOfControlByDocumentPath(
+	findFirstOccurrenceOfControlByDocumentPath(
 		currentElement: object,
 		documentModelPath: ModelPath
 	): { formModelPath: ModelPath; element: FormModel.FieldBasedInputType } | undefined {
@@ -143,23 +154,23 @@ export namespace FormModelUtils {
 		}
 
 		return undefined;
-	}
+	},
 
 	/** @internal */
-	export function isExternalEnum(
+	isExternalEnum(
 		dataType: DocumentModel.FieldType,
 		fce?: FormModel.FieldConfigurationEntry
 	): boolean {
 		return (
 			dataType.type === "StringType" && fce !== undefined && fce.externalEnumeration !== undefined
 		);
-	}
+	},
 
 	/** @internal */
-	export function isEnumerable(
+	isEnumerable(
 		dataType: DocumentModel.FieldType,
 		fce?: FormModel.FieldConfigurationEntry
 	): boolean {
-		return dataType.type === "EnumerationType" || isExternalEnum(dataType, fce);
+		return dataType.type === "EnumerationType" || FormModelUtils.isExternalEnum(dataType, fce);
 	}
-}
+};

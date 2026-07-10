@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -33,20 +33,18 @@
 import { useContext } from "react";
 import { useSelector } from "react-redux";
 
-import { ModelPath } from "@com.mgmtp.a12.base/base-model-api/lib/main/model/index.js";
-import type { DataReference } from "@com.mgmtp.a12.client/client-data/lib/core/api/data-reference.js";
+import { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
+import type { DataReference } from "@com.mgmtp.a12.client/client-data";
 import {
 	DocumentPath,
 	getDocumentPath,
-	getDocumentPathForRepeatableGroup
-} from "@com.mgmtp.a12.client/client-data/lib/core/api/path/documentPath.js";
-import { validationMessagesForFieldReference as messagesForFieldReference } from "@com.mgmtp.a12.client/client-data/lib/data-mutation/validation-computation/messagesForFieldReference.js";
-import {
+	getDocumentPathForRepeatableGroup,
 	isDateRangeArray,
 	isMultiSelectData,
 	isMultiSelectDataEqual,
-	messagesForDataContext
-} from "@com.mgmtp.a12.client/client-data/lib/index.js";
+	messagesForDataContext,
+	validationMessagesForFieldReference as messagesForFieldReference
+} from "@com.mgmtp.a12.client/client-data";
 import type { ContentModel } from "@com.mgmtp.a12.contentengine/contentengine-core";
 import {
 	useDocumentContext,
@@ -57,12 +55,9 @@ import type {
 	EntityInstancePath,
 	GroupInstance,
 	Message
-} from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
-import { LocalizerContext } from "@com.mgmtp.a12.utils/utils-localization-react/lib/main/index.js";
-import type {
-	SupportedType,
-	ValueConversionConfig
-} from "@com.mgmtp.a12.utils/utils-localization/lib/main/index.js";
+} from "@com.mgmtp.a12.kernel/kernel-md-facade";
+import type { SupportedType, ValueConversionConfig } from "@com.mgmtp.a12.utils/utils-localization";
+import { LocalizerContext } from "@com.mgmtp.a12.utils/utils-localization-react";
 
 import type { AmountSuffix } from "../../configuration/formElementConfig.js";
 import { FormElementContext } from "../../configuration/formElementContext.js";
@@ -72,14 +67,12 @@ import { assertObject } from "../../utils/assertions.js";
 
 import { arraysDeepEqual } from "../arraysDeepEqual.js";
 import { UiId } from "../generateUiId.js";
-import {
-	MessageGroupContext,
-	type MessageGroupFilter
-} from "../modules/messageGroupContainer/messageGroupContext.js";
+import { MessageGroupContext } from "../modules/messageGroupContainer/messageGroupContext.js";
+import type { MessageGroupFilter } from "../modules/messageGroupContainer/messageGroupContext.js";
 
 import { GET_LOCALIZED_MODEL_TEXTS_WRAPPER } from "./getLocalizedModelTexts.js";
 
-// TODO: internal? => currently used in EEP
+/** @internal */
 export const USE_COMMON_CONTROL_SETTINGS_WRAPPER = {
 	useCommonControlSettings
 };

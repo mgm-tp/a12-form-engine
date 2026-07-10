@@ -1,0 +1,51 @@
+{
+  "header": {
+    "id": "ProductFormWithInvalidGroupRefInGroupConfiguration",
+    "modelType": "form",
+    "modelVersion": "39.0.0",
+    "locales": [
+      {
+        "code": "en"
+      }
+    ],
+    "modelReferences": [
+      {
+        "alias": "DM",
+        "modelType": "document",
+        "purpose": "data binding",
+        "reference": "ProductDomain"
+      }
+    ],
+    "annotations": [
+      {
+        "name": "roles",
+        "value": "admin"
+      }
+    ]
+  },
+  "content": {
+    "subHeaderBox": {
+      "id": "subHeaderBox"
+    },
+    "footerBox": {
+      "id": "footerBox"
+    },
+    "screens": [
+      {
+        "id": "screen-a050f",
+        "name": "product (Generated)",
+        "screenElements": []
+      }
+    ],
+    "fieldConfiguration": {},
+    "groupConfiguration": {
+      "group": [
+        {
+          "groupRef": "G00",
+          "numberOfInitialRows": 5
+        }
+      ]
+    },
+    "defaults": {}
+  }
+}

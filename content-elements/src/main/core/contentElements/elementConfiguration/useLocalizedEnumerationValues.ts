@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -33,24 +33,22 @@
 import { useContext } from "react";
 import { useSelector } from "react-redux";
 
-import { ModelPath } from "@com.mgmtp.a12.base/base-model-api/lib/main/model/index.js";
-import type { DataReference } from "@com.mgmtp.a12.client/client-data/lib/core/api/data-reference.js";
-import { DocumentPath } from "@com.mgmtp.a12.client/client-data/lib/core/api/path/documentPath.js";
-import { DocumentModelLocalizableFactory } from "@com.mgmtp.a12.client/client-data/lib/kernel-extension/documentModelLocalizableFactory.js";
+import { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
+import type { DataReference } from "@com.mgmtp.a12.client/client-data";
+import { DocumentModelLocalizableFactory, DocumentPath } from "@com.mgmtp.a12.client/client-data";
 import {
 	useDocumentContext,
 	useDocumentPathContext
 } from "@com.mgmtp.a12.contentengine/contentengine-core";
-import { LocalizerContext } from "@com.mgmtp.a12.utils/utils-localization-react/lib/main/index.js";
-import { Locale } from "@com.mgmtp.a12.utils/utils-localization/lib/main/index.js";
+import { Locale } from "@com.mgmtp.a12.utils/utils-localization";
+import { LocalizerContext } from "@com.mgmtp.a12.utils/utils-localization-react";
 
 import { createResourceLocalizable } from "../../localization/createResourceLocalizable.js";
 import { RESOURCE_KEYS } from "../../localization/resources.js";
 
 import { arraysDeepEqual } from "../arraysDeepEqual.js";
 
-// TODO: internal? => other hooks like this are currently used in EEP
-// (useCommonControlSettings, useCommonWidgetSettings)
+/** @internal */
 export const USE_LOCALIZED_ENUMERATION_VALUES_WRAPPER = {
 	useLocalizedEnumerationValues
 };

@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -33,20 +33,19 @@
 import React, { useContext, useState } from "react";
 import { useSelector } from "react-redux";
 
-import {
-	Activity,
-	ActivitySelectors
-} from "@com.mgmtp.a12.client/client-core/lib/core/activity/index.js";
+import { Activity, ActivitySelectors } from "@com.mgmtp.a12.client/client-core";
 import type { NotRelevantConfig } from "@com.mgmtp.a12.client/client-data";
 import { filterDocumentByRelevance, isSetDgCl } from "@com.mgmtp.a12.client/client-data";
-import type { DocumentModel } from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
-import { LocalizerContext } from "@com.mgmtp.a12.utils/utils-localization-react/lib/main/index.js";
-import { Button } from "@com.mgmtp.a12.widgets/widgets-core/lib/button/main/button.view.js";
-import { ActionContentbox } from "@com.mgmtp.a12.widgets/widgets-core/lib/contentbox/main/action-contentbox/action-contentbox.view.js";
-import { ContentBoxElements } from "@com.mgmtp.a12.widgets/widgets-core/lib/contentbox/main/template/contentbox.tpl.view.js";
-import { Icon } from "@com.mgmtp.a12.widgets/widgets-core/lib/icon/main/icon.view.js";
-import { Checkbox } from "@com.mgmtp.a12.widgets/widgets-core/lib/input/checkbox/main/checkbox.view.js";
-import { ModalOverlay } from "@com.mgmtp.a12.widgets/widgets-core/lib/modal-overlay/main/modal-overlay.view.js";
+import type { DocumentModel } from "@com.mgmtp.a12.kernel/kernel-md-facade";
+import { LocalizerContext } from "@com.mgmtp.a12.utils/utils-localization-react";
+import {
+	Button,
+	ActionContentbox,
+	ContentBoxElements,
+	Icon,
+	Checkbox,
+	ModalOverlay
+} from "@com.mgmtp.a12.widgets/widgets-core";
 
 import { createResourceLocalizable } from "../../localization/index.js";
 import { RESOURCE_KEYS } from "../../localization/keys.js";
@@ -68,7 +67,7 @@ export const DebugDocumentButton = (props: { activityId: string }): React.JSX.El
 				? rootDoc.document
 				: filterDocumentByRelevance(
 						rootDoc.document,
-						rootDoc.documentModel as DocumentModel,
+						rootDoc.documentModel as unknown as DocumentModel, // TODO: remove
 						rootDoc.notRelevantConfigs as NotRelevantConfig[]
 					);
 

@@ -1,0 +1,132 @@
+{
+  "header": {
+    "id": "ProductFormWithInvalidFieldInRepeatOverviewColumn",
+    "modelType": "form",
+    "modelVersion": "39.0.0",
+    "locales": [
+      {
+        "code": "en"
+      }
+    ],
+    "modelReferences": [
+      {
+        "alias": "DM",
+        "modelType": "document",
+        "purpose": "data binding",
+        "reference": "ProductDomain"
+      }
+    ],
+    "annotations": [
+      {
+        "name": "roles",
+        "value": "admin"
+      }
+    ]
+  },
+  "content": {
+    "subHeaderBox": {
+      "id": "subHeaderBox"
+    },
+    "footerBox": {
+      "id": "footerBox"
+    },
+    "screens": [
+      {
+        "id": "screen-a050f",
+        "name": "product (Generated)",
+        "screenElements": [
+          {
+            "type": "DetachedRepeat",
+            "id": "detachedrepeat-80a4e",
+            "name": "externalNumber",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "external Number"
+                  }
+                ]
+              }
+            },
+            "repeatOverviewColumn": [
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldOverviewColumn-1",
+                "elementRef": "F5"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldOverviewColumn-2",
+                "elementRef": "ABC"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldOverviewColumn-3",
+                "elementRef": "G4"
+              }
+            ],
+            "groupRef": "G4",
+            "enableAdd": true,
+            "enableRemove": true,
+            "enableReorder": true,
+            "detailScreen": {
+              "id": "screen-e75f1",
+              "name": "Details",
+              "screenElements": [
+                {
+                  "type": "ControlGrid",
+                  "id": "controlgrid-093bf",
+                  "name": "externalNumber Controls",
+                  "layout": {
+                    "lg": "12"
+                  },
+                  "row": [
+                    {
+                      "type": "Row",
+                      "id": "row-e0428",
+                      "cell": [
+                        {
+                          "type": "Control",
+                          "id": "control-0aa25",
+                          "elementRef": "F5"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "Row",
+                      "id": "row-b8331",
+                      "cell": [
+                        {
+                          "type": "Control",
+                          "id": "control-a4dca",
+                          "elementRef": "F6"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "Row",
+                      "id": "row-b8332",
+                      "cell": [
+                        {
+                          "type": "Control",
+                          "id": "control-a4dgd",
+                          "elementRef": "F7"
+                        }
+                      ]
+                    }
+                  ],
+                  "verticalAlignment": "BOTTOM"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "fieldConfiguration": {},
+    "groupConfiguration": {},
+    "defaults": {}
+  }
+}

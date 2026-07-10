@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -32,9 +32,9 @@
 
 import { deepStrictEqual, fail, strictEqual } from "node:assert/strict";
 
-import type { AnyAction } from "redux";
+import type { Action } from "redux";
 
-import type { EntityInstancePath } from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
+import type { EntityInstancePath } from "@com.mgmtp.a12.kernel/kernel-md-facade";
 
 import { Commands } from "../../back-end/store/index.js";
 import { DocumentPath } from "../../models/internal/utils/document-utils.js";
@@ -42,7 +42,7 @@ import { DocumentPath } from "../../models/internal/utils/document-utils.js";
 import type { RtlRenderWrapper } from "../rtl-utils/render-wrapper.js";
 
 export function validateSetErrorMessageStateAction(
-	action: AnyAction,
+	action: Action,
 	errorMessagePath: EntityInstancePath
 ): void {
 	if (Commands.setMessageState.match(action)) {
@@ -60,23 +60,22 @@ export function validateSetErrorMessageStateAction(
 	}
 }
 
-function findElementById(wrapper: RtlRenderWrapper, id: string, element?: string) {
+function findElementById(wrapper: RtlRenderWrapper, id: string) {
 	return wrapper.baseElement.querySelectorAll(`*[id="${id}"]`);
 }
 
 export function assertUniqueId(params: {
 	wrapper: RtlRenderWrapper;
-	element?: string;
 	id: string;
 	assertions?: "GROUP"[];
 }) {
-	const { wrapper, element, id, assertions } = params;
+	const { wrapper, id, assertions } = params;
 
-	const htmlElement = findElementById(wrapper, id, element);
+	const htmlElement = findElementById(wrapper, id);
 	strictEqual(htmlElement.length, 1, `Cannot find element with id ${id} `);
 
-	if (assertions && assertions.indexOf("GROUP") > -1) {
-		const groupElement = findElementById(wrapper, `${id}-group`, "div");
+	if (assertions?.includes("GROUP")) {
+		const groupElement = findElementById(wrapper, `${id}-group`);
 		strictEqual(groupElement.length, 1, `Cannot find group div element with id ${id}-group `);
 	}
 }

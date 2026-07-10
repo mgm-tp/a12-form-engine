@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -30,18 +30,35 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import type { ModelPath } from "@com.mgmtp.a12.base/base-model-api/lib/main/model/index.js";
-import type {
-	EntityInstancePath,
-	GroupInstance
-} from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
+import type { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
+import type { EntityInstancePath, GroupInstance } from "@com.mgmtp.a12.kernel/kernel-md-facade";
 
 import { DataSelectors } from "../../../../back-end/store/internal/selectors/data.js";
 import { ModelSelectors } from "../../../../back-end/store/internal/selectors/models.js";
 import { UiStateSelectors } from "../../../../back-end/store/internal/selectors/ui-state.js";
 import type { EngineState } from "../../../../back-end/store/internal/store.js";
-import { FormModel } from "../../../../models/internal/form-model.js";
-import { DocumentModelUtils } from "../../../../models/internal/utils/document-model-utils.js";
+import type { FormModel } from "../../../../models/internal/form-model.js";
+import {
+	isFormModelButtonPanel,
+	isFormModelControl,
+	isFormModelControlGrid,
+	isFormModelCustomCell,
+	isFormModelCustomScreenElement,
+	isFormModelDetachedRepeat,
+	isFormModelEmbeddedRepeat,
+	isFormModelEventButton,
+	isFormModelExpressionCell,
+	isFormModelExpressionOverviewColumn,
+	isFormModelFieldOverviewColumn,
+	isFormModelInlineRepeat,
+	isFormModelMultiColumnSection,
+	isFormModelNavigationButton,
+	isFormModelRow,
+	isFormModelScreen,
+	isFormModelSection,
+	isFormModelTextCell
+} from "../../../../models/internal/FormModelGuards.js";
+import * as DocumentModelUtils from "../../../../models/internal/utils/document-model-utils.js";
 import { IndexedControl } from "../../../../models/internal/utils/document-utils.js";
 import { calcTargetScreenName } from "../../../../models/internal/utils/targetScreenName.js";
 import type { EnablementByButtonName } from "../../configuration/engine-configuration.js";
@@ -111,7 +128,7 @@ export function isHidden(options: {
 	const document = DataSelectors.document()(state) as GroupInstance;
 
 	function isChildHidden(child: object): boolean {
-		const extendedDataContext = FormModel.Control.isInstance(child)
+		const extendedDataContext = isFormModelControl(child)
 			? IndexedControl.getContextOfControlWithIndex({
 					elementPath: child.elementPath,
 					controlIndex: child.index,
@@ -139,39 +156,39 @@ export function isHiddenElement(
 	state: EngineState,
 	enablementByButtonName?: EnablementByButtonName
 ): boolean {
-	if (FormModel.Section.isInstance(element)) {
+	if (isFormModelSection(element)) {
 		return isSectionHidden(element, context, state);
-	} else if (FormModel.MultiColumnSection.isInstance(element)) {
+	} else if (isFormModelMultiColumnSection(element)) {
 		return isMultiColumnSectionHidden(element, context, state);
-	} else if (FormModel.ControlGrid.isInstance(element)) {
+	} else if (isFormModelControlGrid(element)) {
 		return isControlGridHidden(element, context, state);
-	} else if (FormModel.ButtonPanel.isInstance(element)) {
+	} else if (isFormModelButtonPanel(element)) {
 		return isButtonPanelHidden(element, context, state);
-	} else if (FormModel.CustomScreenElement.isInstance(element)) {
+	} else if (isFormModelCustomScreenElement(element)) {
 		return isCustomScreenElementHidden(element, context, state);
-	} else if (FormModel.InlineRepeat.isInstance(element)) {
+	} else if (isFormModelInlineRepeat(element)) {
 		return isInlineRepeatHidden(element, context, state);
-	} else if (FormModel.DetachedRepeat.isInstance(element)) {
+	} else if (isFormModelDetachedRepeat(element)) {
 		return isDetachedRepeatHidden(element, context, state);
-	} else if (FormModel.EmbeddedRepeat.isInstance(element)) {
+	} else if (isFormModelEmbeddedRepeat(element)) {
 		return isEmbeddedRepeatHidden(element, context, state);
-	} else if (FormModel.Row.isInstance(element)) {
+	} else if (isFormModelRow(element)) {
 		return isRowHidden(element, context, state);
-	} else if (FormModel.Control.isInstance(element)) {
+	} else if (isFormModelControl(element)) {
 		return isControlHidden(element, context, state);
-	} else if (FormModel.FieldOverviewColumn.isInstance(element)) {
+	} else if (isFormModelFieldOverviewColumn(element)) {
 		return isFieldOverviewColumnHidden(element, context, state);
-	} else if (FormModel.TextCell.isInstance(element)) {
+	} else if (isFormModelTextCell(element)) {
 		return isTextCellHidden(element, context, state);
-	} else if (FormModel.ExpressionCell.isInstance(element)) {
+	} else if (isFormModelExpressionCell(element)) {
 		return isExpressionCellHidden(element, context, state);
-	} else if (FormModel.ExpressionOverviewColumn.isInstance(element)) {
+	} else if (isFormModelExpressionOverviewColumn(element)) {
 		return isExpressionOverviewColumnHidden(element, context, state);
-	} else if (FormModel.CustomCell.isInstance(element)) {
+	} else if (isFormModelCustomCell(element)) {
 		return isCustomCellHidden(element, context, state);
-	} else if (FormModel.ButtonType.isNavigationButton(element)) {
+	} else if (isFormModelNavigationButton(element)) {
 		return isNavigationButtonHidden(element, state, enablementByButtonName);
-	} else if (FormModel.ButtonType.isEventButton(element)) {
+	} else if (isFormModelEventButton(element)) {
 		return isEventButtonHidden(element, state, enablementByButtonName);
 	}
 
@@ -454,17 +471,17 @@ function isEventButtonHidden(
 }
 
 function getRelativeChildren(element: object): readonly object[] | undefined {
-	if (FormModel.Screen.isInstance(element)) {
+	if (isFormModelScreen(element)) {
 		return element.screenElements ?? [];
-	} else if (FormModel.Section.isInstance(element)) {
+	} else if (isFormModelSection(element)) {
 		return element.screenElements ?? [];
-	} else if (FormModel.MultiColumnSection.isInstance(element)) {
+	} else if (isFormModelMultiColumnSection(element)) {
 		return element.screenElements ?? [];
-	} else if (FormModel.ControlGrid.isInstance(element)) {
+	} else if (isFormModelControlGrid(element)) {
 		return element.row ?? [];
-	} else if (FormModel.Row.isInstance(element)) {
+	} else if (isFormModelRow(element)) {
 		return element.cell ?? [];
-	} else if (FormModel.ButtonPanel.isInstance(element)) {
+	} else if (isFormModelButtonPanel(element)) {
 		return element.button ?? [];
 	}
 

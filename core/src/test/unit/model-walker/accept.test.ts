@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -32,14 +32,18 @@
 
 import { strictEqual } from "node:assert/strict";
 
-import { last, type NonEmptyArray } from "fp-ts/lib/NonEmptyArray.js";
+import { last } from "fp-ts/lib/NonEmptyArray.js";
+import type { NonEmptyArray } from "fp-ts/lib/NonEmptyArray.js";
 
-import type { ModelPath } from "@com.mgmtp.a12.base/base-model-api/lib/main/model/index.js";
+import type { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
 
 import type { FormModel } from "../../../models/index.js";
 import { FormModelPath } from "../../../models/internal/utils/form-model-path.js";
-import type { ModelVisitor } from "../../../models/internal/utils/form-model-walker.js";
-import { ModelWalker, VisitProcess } from "../../../models/internal/utils/form-model-walker.js";
+import type {
+	ModelVisitor,
+	VisitProcess
+} from "../../../models/internal/utils/form-model-walker.js";
+import { ModelWalker } from "../../../models/internal/utils/form-model-walker.js";
 import {
 	createButton,
 	createButtonPanel,
@@ -62,7 +66,7 @@ describe("unit.models.form-model-walker.accept", () => {
 	/**
 	 * The following test cases check the accept methods of the model walker by creating suitable form models that
 	 * also give hints to the visitor on how to control the traversal..
-	 * The visitor returns VisitProcess.STOP or VisitProcess.ContinueButDoNotGoDeeper if it encounters a model
+	 * The visitor returns "STOP" or "ContinueButDoNotGoDeeper" if it encounters a model
 	 * element id containing the respective "stop" or "doNotGoDeeper" string. Every other id will just result in
 	 * continued traversal.
 	 * The assertions only test the number of visited elements since the traversal order test already covers the
@@ -273,8 +277,8 @@ describe("unit.models.form-model-walker.accept", () => {
 	describe("acceptButton", () => {
 		it("stops if visitButton returns STOP", () => {
 			const visitor: ModelVisitor = {
-				visitButton(column: FormModel.ButtonType): VisitProcess {
-					return VisitProcess.Stop;
+				visitButton(): VisitProcess {
+					return "Stop";
 				}
 			};
 			const returnValue = new ModelWalker(visitor).acceptButton({} as FormModel.ButtonType);
@@ -375,8 +379,8 @@ describe("unit.models.form-model-walker.accept", () => {
 	describe("acceptCell", () => {
 		it("stops if visitControl returns STOP", () => {
 			const visitor: ModelVisitor = {
-				visitControl(column: FormModel.Control): VisitProcess {
-					return VisitProcess.Stop;
+				visitControl(): VisitProcess {
+					return "Stop";
 				}
 			};
 			const mockCell = { type: "Control" } as FormModel.Control;
@@ -387,8 +391,8 @@ describe("unit.models.form-model-walker.accept", () => {
 
 		it("stops if visitExpressionCell returns STOP", () => {
 			const visitor: ModelVisitor = {
-				visitExpressionCell(column: FormModel.ExpressionCell): VisitProcess {
-					return VisitProcess.Stop;
+				visitExpressionCell(): VisitProcess {
+					return "Stop";
 				}
 			};
 			const mockCell = { type: "ExpressionCell" } as FormModel.ExpressionCell;
@@ -399,8 +403,8 @@ describe("unit.models.form-model-walker.accept", () => {
 
 		it("stops if visitTextCell returns STOP", () => {
 			const visitor: ModelVisitor = {
-				visitTextCell(column: FormModel.TextCell): VisitProcess {
-					return VisitProcess.Stop;
+				visitTextCell(): VisitProcess {
+					return "Stop";
 				}
 			};
 			const mockCell = { type: "TextCell" } as FormModel.TextCell;
@@ -578,8 +582,8 @@ describe("unit.models.form-model-walker.accept", () => {
 	describe("acceptRepeatOverviewColumn", () => {
 		it("stops if visitRepeatOverviewColumn returns STOP", () => {
 			const visitor: ModelVisitor = {
-				visitRepeatOverviewColumn(column: FormModel.RepeatOverviewColumn): VisitProcess {
-					return VisitProcess.Stop;
+				visitRepeatOverviewColumn(): VisitProcess {
+					return "Stop";
 				}
 			};
 
@@ -705,11 +709,11 @@ class TrackingVisitor implements ModelVisitor {
 
 	signalProcess(identifier: string): VisitProcess {
 		if (identifier === "stop") {
-			return VisitProcess.Stop;
+			return "Stop";
 		} else if (identifier === "doNotGoDeeper") {
-			return VisitProcess.ContinueButDoNotGoDeeper;
+			return "ContinueButDoNotGoDeeper";
 		} else {
-			return VisitProcess.ContinueTraversal;
+			return "ContinueTraversal";
 		}
 	}
 

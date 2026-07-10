@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -37,6 +37,8 @@ import { ModelSelectors, UiStateSelectors } from "../../../../back-end/store/ind
 import { UiId } from "../../../../back-end/utils/internal/generateUiId.js";
 import type { FormModelMap } from "../../configuration/engine-configuration.js";
 import { UtilityClasses } from "../../utilities/css-classes.js";
+import { nmTokensToString } from "../../utilities/nmtokens.js";
+import { InternalUiStateSelectors } from "../../../../back-end/store/internal/selectors/ui-state.js";
 
 import type { ScrollApi } from "../scroll-api.js";
 
@@ -70,7 +72,7 @@ export function FormEngineComponent(props: FormEngineComponentProps): ReactEleme
 		return null;
 	} else {
 		const currentScreenLocation = UiStateSelectors.currentScreenLocation()(options.state);
-		const currentScreen = UiStateSelectors.currentScreen()(options.state);
+		const currentScreen = InternalUiStateSelectors.currentScreen()(options.state);
 
 		const screen = currentScreen
 			? createScreen(currentScreen, {
@@ -87,7 +89,7 @@ export function FormEngineComponent(props: FormEngineComponentProps): ReactEleme
 				id={id}
 				tabIndex={-1}
 				data-role="form"
-				className={UtilityClasses.OUTLINE_NONE}
+				className={nmTokensToString([UtilityClasses.OUTLINE_NONE, UtilityClasses.HEIGHT_FULL])}
 				ref={formWrapperElement}
 			>
 				<InputRefContext.Provider value={inputRef}>{screen}</InputRefContext.Provider>

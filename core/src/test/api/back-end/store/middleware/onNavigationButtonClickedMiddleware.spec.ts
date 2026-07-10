@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -32,22 +32,20 @@
 
 import type { Mock } from "node:test";
 
-import type { Action, AnyAction, Middleware, Store } from "redux";
+import type { Action, Middleware, Store } from "redux";
 
-import { ModelPath } from "@com.mgmtp.a12.base/base-model-api/lib/main/model/index.js";
+import { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
 
 import { Commands, Events } from "../../../../../back-end/store/index.js";
 import type { EngineState, EngineStore } from "../../../../../back-end/store/internal/store.js";
 import type { FormModel, ReadonlyObjectMap } from "../../../../../models/index.js";
 import { DocumentPath } from "../../../../../models/internal/utils/document-utils.js";
-import { MiddlewareHelpers } from "../../../../utils/back-end-helpers.js";
-import { DocumentHelpers } from "../../../../utils/document-helpers.js";
-import { ModelHelpers } from "../../../../utils/model-helpers.js";
-import { SetupHelpers } from "../../../../utils/setup.js";
+import { createDocumentPath } from "../../../../utils/createDocumentPath.js";
+import { createModelPath } from "../../../../utils/createModelPath.js";
+import { MiddlewareHelpers } from "../../../../utils/MiddlewareHelpers.js";
+import { createTestStore } from "../../../../utils/setup.js";
 import { setupModelsFixture } from "../../../../utils/setupFixture.js";
 import { createValidationEntryWithParsingError } from "../../../../utils/validation.js";
-
-const { createTestStore } = SetupHelpers;
 
 describe("api.back-end.store.middleware", () => {
 	describe("onNavigationButtonClickedMiddleware", () => {
@@ -70,7 +68,7 @@ describe("api.back-end.store.middleware", () => {
 
 				describe("if a row in an embedded repeat is expanded", () => {
 					it("dispatches Commands.changeRepeatInstanceStateEntry", () => {
-						const repeatFormModelPath = ModelHelpers.createModelPath("Screen1", "Embedded-Repeat");
+						const repeatFormModelPath = createModelPath("Screen1", "Embedded-Repeat");
 						const { spy, middleware } = MiddlewareHelpers.createMiddlewareSpy([]);
 						const store = createApp({
 							document: {
@@ -81,21 +79,18 @@ describe("api.back-end.store.middleware", () => {
 							screen: "Screen1",
 							repeatInstanceState: {
 								[ModelPath.toString(repeatFormModelPath)]: {
-									expandedRowPath: DocumentHelpers.createDocumentPath(
-										["A12T_Buttons"],
-										["Group", 2]
-									)
+									expandedRowPath: createDocumentPath(["A12T_Buttons"], ["Group", 2])
 								}
 							}
 						});
 						store.dispatch(Events.navigationButton({ target: "#next" }));
 
 						const expectedCommand = Commands.changeRepeatInstanceStateEntry({
-							locationPath: ModelHelpers.createModelPath("Screen1"),
+							locationPath: createModelPath("Screen1"),
 							entry: {
 								expandedRowPath: undefined
 							},
-							repeatFormModelPath: ModelHelpers.createModelPath("Screen1", "Embedded-Repeat")
+							repeatFormModelPath: createModelPath("Screen1", "Embedded-Repeat")
 						});
 
 						MiddlewareHelpers.assertAction(spy, expectedCommand);
@@ -365,7 +360,7 @@ describe("api.back-end.store.middleware", () => {
 			validation
 		}: WithParseErrorParams): void {
 			const { spy, middleware } = createMiddlewareSpyForNavWithValidation();
-			const numberFieldPath = DocumentHelpers.createDocumentPath(["A12T_Buttons"], ["NumberField"]);
+			const numberFieldPath = createDocumentPath(["A12T_Buttons"], ["NumberField"]);
 			const messages = createValidationEntryWithParsingError(
 				numberFieldPath,
 				"A",
@@ -402,7 +397,7 @@ describe("api.back-end.store.middleware", () => {
 		}: WithValidationWarningOrInfoParams): void {
 			const { spy, middleware } = createMiddlewareSpyForNavWithValidation();
 
-			const errorPath = DocumentHelpers.createDocumentPath(["A12T_Buttons"], ["RequiredField"]);
+			const errorPath = createDocumentPath(["A12T_Buttons"], ["RequiredField"]);
 
 			const messages: Messages = {
 				[DocumentPath.toString(errorPath)]: {
@@ -489,7 +484,7 @@ describe("api.back-end.store.middleware", () => {
 		}: WithValidationWarningOrInfoParams): void {
 			const { spy, middleware } = createMiddlewareSpyForNavWithValidation();
 
-			const errorPath = DocumentHelpers.createDocumentPath(["A12T_Buttons"], ["RequiredField"]);
+			const errorPath = createDocumentPath(["A12T_Buttons"], ["RequiredField"]);
 
 			const messages: Messages = {
 				[DocumentPath.toString(errorPath)]: {
@@ -585,8 +580,8 @@ describe("api.back-end.store.middleware", () => {
 		}: WithValidationErrorParams): void {
 			const { spy, middleware } = createMiddlewareSpyForNavWithValidation();
 
-			const errorPath = DocumentHelpers.createDocumentPath(["A12T_Buttons"], ["RequiredField"]);
-			const booleanPath = DocumentHelpers.createDocumentPath(["A12T_Buttons"], ["BooleanField"]);
+			const errorPath = createDocumentPath(["A12T_Buttons"], ["RequiredField"]);
+			const booleanPath = createDocumentPath(["A12T_Buttons"], ["BooleanField"]);
 
 			const messages: Messages = {
 				[DocumentPath.toString(errorPath)]: {
@@ -631,7 +626,7 @@ describe("api.back-end.store.middleware", () => {
 			const expectedAction = Commands.changeScreenState({
 				index: 0,
 				focusedComponent: {
-					formModelPath: ModelHelpers.createModelPath("Screen2"),
+					formModelPath: createModelPath("Screen2"),
 					subElement: "current-screen"
 				}
 			});
@@ -640,7 +635,7 @@ describe("api.back-end.store.middleware", () => {
 		}
 
 		function createMiddlewareSpyForNavWithValidation(): {
-			readonly spy: Mock<(a: AnyAction) => AnyAction>;
+			readonly spy: Mock<(a: Action) => Action>;
 			readonly middleware: Middleware;
 		} {
 			/**

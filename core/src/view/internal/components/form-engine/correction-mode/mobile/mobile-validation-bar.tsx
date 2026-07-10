@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -33,8 +33,8 @@
 import type { JSX, ReactElement } from "react";
 import { useContext, useEffect, useRef } from "react";
 
-import { LocalizerContext } from "@com.mgmtp.a12.utils/utils-localization-react/lib/main/index.js";
-import type { Localizable } from "@com.mgmtp.a12.utils/utils-localization/lib/main/index.js";
+import type { Localizable } from "@com.mgmtp.a12.utils/utils-localization";
+import { LocalizerContext } from "@com.mgmtp.a12.utils/utils-localization-react";
 
 import { RESOURCE_KEYS } from "../../../../../../back-end/localization/internal/languages/keys.js";
 import { getLocalizedResource } from "../../../../../../back-end/localization/internal/localize.js";
@@ -60,8 +60,7 @@ export function MobileValidationBar(props: {
 	currentMessageKey?: string;
 }): ReactElement {
 	const { messages, currentMessageKey, showModal, options } = props;
-	const { Icon, MobileValidationBarGraphic, MobileValidationBarOverview } =
-		useContext(WidgetMapContext);
+	const { Icon, MobileValidationGraphic, MobileValidationOverview } = useContext(WidgetMapContext);
 	const { localizer, conversion } = useContext(LocalizerContext);
 
 	const index =
@@ -90,39 +89,39 @@ export function MobileValidationBar(props: {
 	const numberOfInfos = String(validationMessages.filter(m => m.type === "info").length);
 
 	const errorGraphicOverview = (
-		<MobileValidationBarGraphic variant="error" key="error" a11yTitleSupport>
+		<MobileValidationGraphic variant="error" key="error" a11yTitleSupport>
 			{numberOfErrors}
-		</MobileValidationBarGraphic>
+		</MobileValidationGraphic>
 	);
 
 	const warningGraphicOverview = (
-		<MobileValidationBarGraphic variant="warning" key="warning" a11yTitleSupport>
+		<MobileValidationGraphic variant="warning" key="warning" a11yTitleSupport>
 			{numberOfWarnings}
-		</MobileValidationBarGraphic>
+		</MobileValidationGraphic>
 	);
 
 	const infoGraphicOverview = (
-		<MobileValidationBarGraphic variant="info" key="info" a11yTitleSupport>
+		<MobileValidationGraphic variant="info" key="info" a11yTitleSupport>
 			{numberOfInfos}
-		</MobileValidationBarGraphic>
+		</MobileValidationGraphic>
 	);
 
 	const errorGraphicModal = (
-		<MobileValidationBarGraphic variant="error" key="error">
+		<MobileValidationGraphic variant="error" key="error">
 			{numberOfErrors}
-		</MobileValidationBarGraphic>
+		</MobileValidationGraphic>
 	);
 
 	const warningGraphicModal = (
-		<MobileValidationBarGraphic variant="warning" key="warning">
+		<MobileValidationGraphic variant="warning" key="warning">
 			{numberOfWarnings}
-		</MobileValidationBarGraphic>
+		</MobileValidationGraphic>
 	);
 
 	const infoGraphicModal = (
-		<MobileValidationBarGraphic variant="info" key="info">
+		<MobileValidationGraphic variant="info" key="info">
 			{numberOfWarnings}
-		</MobileValidationBarGraphic>
+		</MobileValidationGraphic>
 	);
 
 	const validationBarMessage: ValidationBarItem | undefined = validationBarMessages[index];
@@ -158,7 +157,7 @@ export function MobileValidationBar(props: {
 
 	return (
 		<>
-			<MobileValidationBarOverview
+			<MobileValidationOverview
 				id={UiId.generateForValidationBar({ uiIdPrefix: props.options.config.uiIdPrefix })}
 				variant={mostSeriousMessageSeverity(validationBarMessages)}
 				onClick={
@@ -190,13 +189,14 @@ function PreviewList(props: {
 	onIssueIndexChange(index: number): void;
 }): ReactElement {
 	const localizer = useContext(LocalizerContext).localizer;
-	const { MobilePreviewList, MobilePreviewListIem } = useContext(WidgetMapContext);
+	const { MobileValidationPreviewList, MobileValidationPreviewListItem } =
+		useContext(WidgetMapContext);
 
 	return (
-		<MobilePreviewList>
+		<MobileValidationPreviewList>
 			{props.messages.map((message, index) => {
 				const mobilePreviewItem = (
-					<MobilePreviewListIem
+					<MobileValidationPreviewListItem
 						variant={message.type}
 						text={localizer(...message.text) ?? ""}
 						maxLineOfText={2}
@@ -208,7 +208,7 @@ function PreviewList(props: {
 
 				return mobilePreviewItem;
 			})}
-		</MobilePreviewList>
+		</MobileValidationPreviewList>
 	);
 }
 
@@ -236,9 +236,9 @@ function ModalView(props: {
 		Button,
 		Icon,
 		ModalOverlay,
-		MobileValidationBar,
+		MobileValidation,
 		MobileValidationContent,
-		MobileValidationBarGraphic
+		MobileValidationGraphic
 	} = useContext(WidgetMapContext);
 
 	const validationBarModalRef = useRef<HTMLDivElement>(null);
@@ -256,12 +256,12 @@ function ModalView(props: {
 
 	const leftElement =
 		index !== undefined ? (
-			<MobileValidationBarGraphic variant={messages[index].type}>
+			<MobileValidationGraphic variant={messages[index].type}>
 				{[
 					getLocalizedResource(RESOURCE_KEYS.validation[messages[index].type], localizer),
 					` (${index + 1}/${messages.length})`
 				]}
-			</MobileValidationBarGraphic>
+			</MobileValidationGraphic>
 		) : (
 			<>
 				{props.errorGraphic} {props.warningGraphic} {props.infoGraphic}
@@ -297,7 +297,7 @@ function ModalView(props: {
 			closeOnOutsideClick
 			onClose={() => props.options.eventHandlers.correctionMode.validationBar.onExpand(false, true)}
 		>
-			<MobileValidationBar
+			<MobileValidation
 				variant={index !== undefined ? messages[index].type : mostSeriousMessageSeverity(messages)}
 				headingTitle={leftElement}
 				headingSuffixes={closeButton}
@@ -322,7 +322,7 @@ function ModalView(props: {
 						/>
 					</MobileValidationContent>
 				)}
-			</MobileValidationBar>
+			</MobileValidation>
 		</ModalOverlay>
 	);
 }
@@ -338,7 +338,8 @@ function Footer(props: {
 	onIssueIndexChange(index: number | undefined): void;
 }): JSX.Element {
 	const localizer = useContext(LocalizerContext).localizer;
-	const { Button, Icon, MobileAction, MobileActionItem } = useContext(WidgetMapContext);
+	const { Button, Icon, MobileValidationActions, MobileValidationActionItem } =
+		useContext(WidgetMapContext);
 	const isDisabled = UiStateSelectors.disabled()(props.options.state);
 
 	const previousButton = (
@@ -372,11 +373,11 @@ function Footer(props: {
 	);
 
 	const actions = (
-		<MobileAction>
-			<MobileActionItem>{previousButton}</MobileActionItem>
-			<MobileActionItem>{showAllButton}</MobileActionItem>
-			<MobileActionItem>{nextButton}</MobileActionItem>
-		</MobileAction>
+		<MobileValidationActions>
+			<MobileValidationActionItem>{previousButton}</MobileValidationActionItem>
+			<MobileValidationActionItem>{showAllButton}</MobileValidationActionItem>
+			<MobileValidationActionItem>{nextButton}</MobileValidationActionItem>
+		</MobileValidationActions>
 	);
 
 	return actions;

@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -34,10 +34,8 @@ import { strictEqual } from "node:assert/strict";
 
 import { within } from "@com.mgmtp.a12.devtools/react";
 
-import { SetupHelpers } from "../../../../utils/setup.js";
+import { loadData, setupFormEngineRendererWithRtlAsync } from "../../../../utils/setup.js";
 import { setupFixture, setupModelsFixture } from "../../../../utils/setupFixture.js";
-
-const { loadData } = SetupHelpers;
 
 export function executeSuffixTests(options: { bodyCellId: string }): void {
 	const models = setupModelsFixture("controls.suffix");
@@ -49,7 +47,7 @@ export function executeSuffixTests(options: { bodyCellId: string }): void {
 	describe("given a suffix defined in the fieldConfigurationEntry for a number field", () => {
 		describe("and given no number field value", () => {
 			it("shows a table cell containing the suffix", async () => {
-				const wrapper = await SetupHelpers.setupFormEngineRendererWithRtlAsync({
+				const wrapper = await setupFormEngineRendererWithRtlAsync({
 					models,
 					data: { document: fixture.emptyRowsDocument }
 				});
@@ -61,7 +59,7 @@ export function executeSuffixTests(options: { bodyCellId: string }): void {
 
 		describe("and given a number field value", () => {
 			it("shows a table cell containing the formatted value and suffix separated by a space", async () => {
-				const wrapper = await SetupHelpers.setupFormEngineRendererWithRtlAsync({
+				const wrapper = await setupFormEngineRendererWithRtlAsync({
 					models,
 					data: { document: fixture.document }
 				});

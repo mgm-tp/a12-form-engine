@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -32,25 +32,20 @@
 
 import { call, put, select } from "typed-redux-saga";
 
-import type { ActivityActions } from "@com.mgmtp.a12.client/client-core/lib/core/activity/index.js";
+import type { ActivityActions, DataProvider } from "@com.mgmtp.a12.client/client-core";
 import {
 	Activity,
-	ActivitySelectors
-} from "@com.mgmtp.a12.client/client-core/lib/core/activity/index.js";
-import { NEW_INSTANCE_IDENTIFIER } from "@com.mgmtp.a12.client/client-core/lib/core/application/index.js";
-import type { DataProvider } from "@com.mgmtp.a12.client/client-core/lib/core/data/index.js";
-import {
+	ActivitySelectors,
 	extractModelsInScenePayload,
 	ModelSelectors,
-	ReferencedModel
-} from "@com.mgmtp.a12.client/client-core/lib/core/model/index.js";
-import { StoreSagas } from "@com.mgmtp.a12.client/client-core/lib/core/store/index.js";
+	NEW_INSTANCE_IDENTIFIER,
+	ReferencedModel,
+	StoreSagas
+} from "@com.mgmtp.a12.client/client-core";
+import { kernelOptionsProvider } from "@com.mgmtp.a12.formengine/formengine-a12internal-preview";
 
 import { newDocumentRequested } from "../../reducer/actions.js";
 
-export interface EmptyDocumentDataProviderOptions {
-	readonly now?: Date;
-}
 /**
  * This DataProvider creates new A12 Documents.
  *
@@ -68,9 +63,7 @@ export interface EmptyDocumentDataProviderOptions {
  * Furthermore, if Activity.Descriptor.model is set, it must contain the ID of
  * the Document Model for which the Document should be created.
  */
-export function mockCreateEmptyDocumentDataProvider(
-	options?: EmptyDocumentDataProviderOptions
-): DataProvider {
+export function mockCreateEmptyDocumentDataProvider(): DataProvider {
 	const name = "EmptyDocumentDataProvider";
 	return {
 		name,
@@ -102,11 +95,13 @@ export function mockCreateEmptyDocumentDataProvider(
 
 			yield* call(() => StoreSagas.waitFor(ModelSelectors.allLoadedModelsInScene(activityId)));
 
+			const options = yield* select(kernelOptionsProvider);
+
 			yield* put(
 				newDocumentRequested({
 					activityId,
-					options,
-					preComputeNewDocuments: config.details.preComputeNewDocuments
+					kernelOptions: options,
+					preComputeNewDocuments: false === config.details.preComputeNewDocuments
 				})
 			);
 		}

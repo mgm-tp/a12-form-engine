@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -33,13 +33,13 @@
 import { deepStrictEqual, strictEqual } from "node:assert/strict";
 
 import { setupModelsFixture } from "../../utils/setupFixture.js";
+import { createDocumentPath } from "../../utils/createDocumentPath.js";
+import { createModelPath } from "../../utils/createModelPath.js";
 
 import {
 	assertLink,
 	assertNumberOfLinks,
 	baseDocument,
-	createDocumentPath,
-	createModelPath,
 	DocumentUtils,
 	f1r1r1Dr11,
 	f1r1r1Er11,

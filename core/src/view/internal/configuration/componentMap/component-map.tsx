@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -44,8 +44,8 @@ import type {
 	AttachmentUploadProps,
 	MultiAttachmentUploadProps
 } from "../../components/widgets/form-engine/attachments/attachmentUploadProps.js";
-import type { BufferedTextArea } from "../../components/widgets/form-engine/buffered-text-area.js";
-import type { BufferedTextLine } from "../../components/widgets/form-engine/buffered-text-line.js";
+import type { BufferedTextAreaProps } from "../../components/widgets/form-engine/buffered-text-area.js";
+import type { BufferedTextLineProps } from "../../components/widgets/form-engine/buffered-text-line.js";
 import type { ConfirmationButtonProps } from "../../components/widgets/form-engine/confirmationButton.js";
 import type {
 	DateRangeTextLineProps,
@@ -71,8 +71,8 @@ export interface ComponentMap {
 	readonly MultiAttachmentUpload: ComponentType<MultiAttachmentUploadProps>;
 
 	// Control Elements
-	readonly BufferedTextLine: ComponentType<BufferedTextLine.PropsType>;
-	readonly BufferedTextArea: ComponentType<BufferedTextArea.PropsType>;
+	readonly BufferedTextLine: ComponentType<BufferedTextLineProps>;
+	readonly BufferedTextArea: ComponentType<BufferedTextAreaProps>;
 	readonly HtmlTextDiv: ComponentType<HtmlTextProps>;
 	readonly HtmlTextSpan: ComponentType<HtmlTextProps>;
 	readonly AttachmentPreview: ComponentType<AttachmentPreviewProps>;

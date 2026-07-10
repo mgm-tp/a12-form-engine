@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -30,33 +30,33 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import type { DocumentModel } from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
+import type { DocumentModel } from "@com.mgmtp.a12.kernel/kernel-md-facade";
 
 import { ModelSelectors } from "../../../../../../back-end/store/internal/selectors/models.js";
 import { UiStateSelectors } from "../../../../../../back-end/store/internal/selectors/ui-state.js";
 import type { EngineState } from "../../../../../../back-end/store/internal/store.js";
 import { isObjectEmpty } from "../../../../../../back-end/utils/internal/guards.js";
 import type { FormModel } from "../../../../../../models/index.js";
-import { DocumentModelUtils } from "../../../../../../models/internal/utils/document-model-utils.js";
+import * as DocumentModelUtils from "../../../../../../models/internal/utils/document-model-utils.js";
 import type { FormModelMap } from "../../../../configuration/engine-configuration.js";
 
 /**
  * @internal
  * @ignore
  */
-export namespace RepeatUtils {
+export const RepeatUtils = {
 	/** @internal */
-	export function isFilterRowOpen(config: FormModelMap.RenderConfiguration): boolean {
+	isFilterRowOpen(config: FormModelMap.RenderConfiguration): boolean {
 		const { parentPath: repeatFormModelPath } = config;
 		const repeatStaticStateEntry = UiStateSelectors.repeatStaticStateEntry(repeatFormModelPath)(
 			config.renderOptions.state
 		);
 
 		return repeatStaticStateEntry !== undefined && repeatStaticStateEntry.filterRowOpen === true;
-	}
+	},
 
 	/** @internal */
-	export function hasActiveFilters(config: FormModelMap.RenderConfiguration): boolean {
+	hasActiveFilters(config: FormModelMap.RenderConfiguration): boolean {
 		const { parentPath: repeatFormModelPath } = config;
 		const repeatStaticStateEntry = UiStateSelectors.repeatStaticStateEntry(repeatFormModelPath)(
 			config.renderOptions.state
@@ -65,9 +65,9 @@ export namespace RepeatUtils {
 		return repeatStaticStateEntry && repeatStaticStateEntry.filters
 			? !isObjectEmpty(repeatStaticStateEntry.filters)
 			: false;
-	}
+	},
 
-	export function isTableEmptyByFiltering(
+	isTableEmptyByFiltering(
 		totalNumberOfRows: number,
 		totalNumberOfProcessedDataRows: number,
 		isRepeatWithFilterExpression: boolean,
@@ -81,10 +81,10 @@ export namespace RepeatUtils {
 		}
 
 		return isRepeatWithFilterExpression || RepeatUtils.hasActiveFilters(config);
-	}
+	},
 
 	/** @internal */
-	export function mayAdd(repeat: FormModel.Repeat, rowCount: number, state: EngineState): boolean {
+	mayAdd(repeat: FormModel.Repeat, rowCount: number, state: EngineState): boolean {
 		const documentElement = DocumentModelUtils.findByPath(
 			ModelSelectors.documentModel()(state),
 			repeat.groupPath
@@ -96,14 +96,10 @@ export namespace RepeatUtils {
 		}
 
 		return true;
-	}
+	},
 
 	/** @internal */
-	export function maxRepeatabilityReached(
-		repeat: FormModel.Repeat,
-		rowCount: number,
-		state: EngineState
-	): boolean {
+	maxRepeatabilityReached(repeat: FormModel.Repeat, rowCount: number, state: EngineState): boolean {
 		const documentElement = DocumentModelUtils.findByPath(
 			ModelSelectors.documentModel()(state),
 			repeat.groupPath
@@ -115,12 +111,12 @@ export namespace RepeatUtils {
 		}
 
 		return false;
-	}
+	},
 
 	/** @internal */
-	export function getRepeatability(repeat: FormModel.Repeat, documentModel: DocumentModel): number {
+	getRepeatability(repeat: FormModel.Repeat, documentModel: DocumentModel): number {
 		const documentElement = DocumentModelUtils.findByPath(documentModel, repeat.groupPath);
 
 		return documentElement?.type === "Group" ? documentElement.repeatability : 0;
 	}
-}
+};

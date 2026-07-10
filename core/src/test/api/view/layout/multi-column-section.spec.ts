@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -33,10 +33,9 @@
 import { deepStrictEqual, ok, strictEqual } from "node:assert/strict";
 
 import { query, within } from "@com.mgmtp.a12.devtools/react";
-import { DataRoles } from "@com.mgmtp.a12.widgets/widgets-core/lib/common/main/data-roles.js";
+import { DataRoles } from "@com.mgmtp.a12.widgets/widgets-core";
 
 import type { WidgetMap } from "../../../../view/index.js";
-import { SetupHelpers } from "../../../utils/setup.js";
 import { setupModelsFixture } from "../../../utils/setupFixture.js";
 import { IDS } from "../../../utils/test-model-helpers/aria-level.js";
 import {
@@ -45,6 +44,7 @@ import {
 	formattedExpressionUiState
 } from "../../../utils/test-model-helpers/expression-label.js";
 import { IDS as ResponsiveIds } from "../../../utils/test-model-helpers/responsive-grid.js";
+import { setupFormEngineRendererWithRtlAsync } from "../../../utils/setup.js";
 
 import { TypographyHeadline } from "./typography-headline-mock.js";
 
@@ -54,7 +54,7 @@ describe("api.view.layout", () => {
 			const models = setupModelsFixture("container", "container-visibility");
 
 			it("is hidden", async () => {
-				const wrapper = await SetupHelpers.setupFormEngineRendererWithRtlAsync({
+				const wrapper = await setupFormEngineRendererWithRtlAsync({
 					models
 				});
 
@@ -63,7 +63,7 @@ describe("api.view.layout", () => {
 			});
 
 			it("is visible when any child is visible", async () => {
-				const wrapper = await SetupHelpers.setupFormEngineRendererWithRtlAsync({
+				const wrapper = await setupFormEngineRendererWithRtlAsync({
 					models
 				});
 
@@ -72,7 +72,7 @@ describe("api.view.layout", () => {
 			});
 
 			it("is hidden when all children are hidden", async () => {
-				const wrapper = await SetupHelpers.setupFormEngineRendererWithRtlAsync({
+				const wrapper = await setupFormEngineRendererWithRtlAsync({
 					models,
 					data: {
 						document: {
@@ -96,9 +96,9 @@ describe("api.view.layout", () => {
 				const ID_MCS_ROW = "a12-section-f64d6-row";
 
 				it("renders the layout correctly", async () => {
-					const wrapper = await SetupHelpers.setupFormEngineRendererWithRtlAsync({ models });
+					const wrapper = await setupFormEngineRendererWithRtlAsync({ models });
 
-					const row = query(wrapper.widgetMap.SizeContainerRow).withTestId(ID_MCS_ROW).props();
+					const row = query(wrapper.widgetMap.LayoutGridRow).withTestId(ID_MCS_ROW).props();
 
 					deepStrictEqual(row.layoutConfig?.layout.lg, [4, 4, 4], "Wrong layout");
 				});
@@ -110,11 +110,9 @@ describe("api.view.layout", () => {
 
 			describe("given a three-column layout with lg 3-6-3, md 2-2-8 and sm 12-6-6", () => {
 				it("renders the layout correctly", async () => {
-					const wrapper = await SetupHelpers.setupFormEngineRendererWithRtlAsync({ models });
+					const wrapper = await setupFormEngineRendererWithRtlAsync({ models });
 
-					const row = query(wrapper.widgetMap.SizeContainerRow)
-						.withTestId(ResponsiveIds.MCS)
-						.props();
+					const row = query(wrapper.widgetMap.LayoutGridRow).withTestId(ResponsiveIds.MCS).props();
 
 					const expected = {
 						lg: [3, 6, 3],
@@ -133,7 +131,7 @@ describe("api.view.layout", () => {
 
 			describe("with a multilingual label defined in the model", () => {
 				it("renders a title", async () => {
-					const wrapper = await SetupHelpers.setupFormEngineRendererWithRtlAsync({
+					const wrapper = await setupFormEngineRendererWithRtlAsync({
 						models: a11yModels
 					});
 
@@ -147,7 +145,7 @@ describe("api.view.layout", () => {
 
 			describe("with an expression label defined in the model", () => {
 				it("renders a title", async () => {
-					const wrapper = await SetupHelpers.setupFormEngineRendererWithRtlAsync({
+					const wrapper = await setupFormEngineRendererWithRtlAsync({
 						models: expressionLabelModels,
 						data: { document: expressionLabelDocument }
 					});
@@ -163,7 +161,7 @@ describe("api.view.layout", () => {
 					const widgetMap: Partial<WidgetMap> = {
 						TypographyHeadline
 					};
-					const wrapper = await SetupHelpers.setupFormEngineRendererWithRtlAsync({
+					const wrapper = await setupFormEngineRendererWithRtlAsync({
 						config: {
 							widgetMap
 						},
@@ -186,7 +184,7 @@ describe("api.view.layout", () => {
 
 			describe("with no label defined in the model", () => {
 				it("doesn't render a title", async () => {
-					const wrapper = await SetupHelpers.setupFormEngineRendererWithRtlAsync({
+					const wrapper = await setupFormEngineRendererWithRtlAsync({
 						models: a11yModels
 					});
 

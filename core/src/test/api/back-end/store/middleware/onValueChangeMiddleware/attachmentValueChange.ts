@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -30,25 +30,19 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import type { ModelPath } from "@com.mgmtp.a12.base/base-model-api/lib/main/model/index.js";
-import type {
-	EntityInstancePath,
-	GroupInstance
-} from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
+import type { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
+import type { EntityInstancePath, GroupInstance } from "@com.mgmtp.a12.kernel/kernel-md-facade";
 
 import { Commands, Events } from "../../../../../../back-end/store/index.js";
 import type { Change } from "../../../../../../back-end/store/internal/documentChange.js";
 import type { EngineStore } from "../../../../../../back-end/store/internal/store.js";
 import { DocumentPath } from "../../../../../../models/internal/utils/document-utils.js";
-import { MiddlewareHelpers } from "../../../../../utils/back-end-helpers.js";
-import { DocumentHelpers } from "../../../../../utils/document-helpers.js";
-import { SetupHelpers } from "../../../../../utils/setup.js";
+import { createDocumentPath } from "../../../../../utils/createDocumentPath.js";
+import { MiddlewareHelpers } from "../../../../../utils/MiddlewareHelpers.js";
+import { createTestStore, loadModels } from "../../../../../utils/setup.js";
 import { setupFixture, setupModelsFixture } from "../../../../../utils/setupFixture.js";
 import { CONTROLS_INDEX } from "../../../../../utils/test-model-helpers/controls.index.js";
-import { createDocumentPath } from "../../../../../utils/test-model-helpers/dependent-enumeration.js";
 import { DR } from "../../../../../utils/test-model-helpers/detached.repeat.js";
-
-const { createTestStore } = SetupHelpers;
 
 export function executeTestsForAttachmentValueChange(): void {
 	const middlewareSpy = setupFixture(() => MiddlewareHelpers.createMiddlewareSpy());
@@ -70,7 +64,7 @@ export function executeTestsForAttachmentValueChange(): void {
 		middlewareSpy.spy.mock.resetCalls();
 	});
 
-	const pathToAttachment = DocumentHelpers.createDocumentPath(["root"], ["attachment"]);
+	const pathToAttachment = createDocumentPath(["root"], ["attachment"]);
 	const attachmentValue = {
 		attachment_id: "1",
 		category: null,
@@ -142,7 +136,7 @@ export function executeTestsForAttachmentValueChange(): void {
 
 		describe("and a detached repeat detail screen is opened", () => {
 			it("dispatches Commands.changeScreenState with dirty=true", () => {
-				const models = SetupHelpers.loadModels("repeat", "detached");
+				const models = loadModels("repeat", "detached");
 				const store = createTestStore({
 					storeConfig: {
 						models,
@@ -152,7 +146,7 @@ export function executeTestsForAttachmentValueChange(): void {
 								{ locationPath: [], path: [] },
 								{
 									locationPath: DR.NestedRepeat.nested_dr_dr_locationPath,
-									path: DocumentHelpers.createDocumentPath(["Root"], ["Nested_L1"])
+									path: createDocumentPath(["Root"], ["Nested_L1"])
 								}
 							]
 						}
@@ -161,7 +155,7 @@ export function executeTestsForAttachmentValueChange(): void {
 				});
 
 				const valueChangeEvent = Events.attachmentValueChange({
-					path: DocumentHelpers.createDocumentPath(["Root"], ["Nested_L1"], ["L1_Attachment"]),
+					path: createDocumentPath(["Root"], ["Nested_L1"], ["L1_Attachment"]),
 					value: attachmentValue,
 					formModelElementPath: []
 				});
@@ -267,10 +261,7 @@ export function executeTestsForAttachmentValueChange(): void {
 
 	describe("Validation messages changed", () => {
 		describe("Control", () => {
-			const pathToFileName = [
-				...pathToAttachment,
-				...DocumentHelpers.createDocumentPath(["original_filename"])
-			];
+			const pathToFileName = [...pathToAttachment, ...createDocumentPath(["original_filename"])];
 			const fileNameError: EngineStore.Validation.Message = {
 				element: pathToFileName,
 				errorCode: "Error rule_205f5",
@@ -291,7 +282,7 @@ export function executeTestsForAttachmentValueChange(): void {
 
 			const pathToInternaFileName = [
 				...pathToAttachment,
-				...DocumentHelpers.createDocumentPath(["internal_filename"])
+				...createDocumentPath(["internal_filename"])
 			];
 			const internalFileNameError: EngineStore.Validation.Message = {
 				element: pathToInternaFileName,
@@ -388,15 +379,11 @@ export function executeTestsForAttachmentValueChange(): void {
 		});
 
 		describe("FieldOverviewColumn", () => {
-			const pathToAttachmentInRepeat = DocumentHelpers.createDocumentPath(
-				["root"],
-				["repeat"],
-				["attachment"]
-			);
+			const pathToAttachmentInRepeat = createDocumentPath(["root"], ["repeat"], ["attachment"]);
 
 			const pathToFileName = [
 				...pathToAttachmentInRepeat,
-				...DocumentHelpers.createDocumentPath(["original_filename"])
+				...createDocumentPath(["original_filename"])
 			];
 			const fileNameError: EngineStore.Validation.Message = {
 				element: pathToFileName,
@@ -418,7 +405,7 @@ export function executeTestsForAttachmentValueChange(): void {
 
 			const pathToInternaFileName = [
 				...pathToAttachmentInRepeat,
-				...DocumentHelpers.createDocumentPath(["internal_filename"])
+				...createDocumentPath(["internal_filename"])
 			];
 			const internalFileNameError: EngineStore.Validation.Message = {
 				element: pathToInternaFileName,

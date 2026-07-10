@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -35,16 +35,14 @@ import { deepStrictEqual, notStrictEqual } from "node:assert/strict";
 import type { FilterParseError, Models } from "../../../../../../back-end/store/internal/store.js";
 import type { RepeatRow } from "../../../../../../view/internal/components/form-engine/repeat/components/tableColumnTypes.js";
 import { filterRows } from "../../../../../../view/internal/utilities/filtering.js";
-import { ModelHelpers } from "../../../../../utils/model-helpers.js";
 import { setupArrayFixture } from "../../../../../utils/setupFixture.js";
+import { createModelPath } from "../../../../../utils/createModelPath.js";
 
 import { emptySwitchFunctions } from "../filter-functions/empty-switch.js";
 import { textLineFunctions } from "../filter-functions/textline-filter.js";
 import { changeFilterValueTest, clearFilterValueTest, REPEAT_MODEL_PATH } from "../filter.utils.js";
 
 import { createRow } from "./utils.js";
-
-const { createModelPath } = ModelHelpers;
 
 export function executeTestForDateRangeFilter(models: Models, timeZoneModels: Models): void {
 	const ERROR_MESSAGE: FilterParseError = {

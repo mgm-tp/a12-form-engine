@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -32,11 +32,11 @@
 
 import { notEqual, strictEqual } from "node:assert/strict";
 
-import type { DocumentModel } from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
-import type { Localizer } from "@com.mgmtp.a12.utils/utils-localization/lib/main/index.js";
+import type { DocumentModel } from "@com.mgmtp.a12.kernel/kernel-md-facade";
+import type { Localizer } from "@com.mgmtp.a12.utils/utils-localization";
 
-import type IExternalEnumerationProvider from "../../../../../back-end/services/external-enumeration-provider.js";
-import type { EngineStore } from "../../../../../back-end/store/index.js";
+import type { IExternalEnumerationProvider } from "../../../../../back-end/services/external-enumeration-provider.js";
+import type { EngineStore, KernelOptionsProvider } from "../../../../../back-end/store/index.js";
 import { createDefaultMiddlewareOptions } from "../../../../../back-end/store/index.js";
 
 describe("api.back-end.store.defaults", () => {
@@ -79,19 +79,23 @@ describe("api.back-end.store.defaults", () => {
 			});
 		});
 
-		describe("nowProvider", () => {
-			describe("called with a now provider", () => {
-				it("returns an object where the given now provider is set", () => {
-					const nowProvider: EngineStore.Provider<Date | undefined> = () => new Date();
-					const middlewareOptions = createDefaultMiddlewareOptions({ nowProvider });
-					strictEqual(middlewareOptions.nowProvider, nowProvider);
+		describe("kernelOptions", () => {
+			describe("called with kernel options", () => {
+				it("returns an object where the given kernel options are set", () => {
+					const kernelOptions: KernelOptionsProvider = () => ({
+						currentDateForTest: new Date()
+					});
+					const middlewareOptions = createDefaultMiddlewareOptions({
+						kernelOptionsProvider: kernelOptions
+					});
+					strictEqual(middlewareOptions.kernelOptionsProvider, kernelOptions);
 				});
 			});
 
-			describe("called without a now provider", () => {
-				it("returns an object without a now provider set", () => {
-					const middlewareOptions = createDefaultMiddlewareOptions({});
-					strictEqual(middlewareOptions.nowProvider, undefined);
+			describe("called without kernel options", () => {
+				it("returns an object without kernel options set", () => {
+					const middlewareOptions = createDefaultMiddlewareOptions();
+					strictEqual(middlewareOptions.kernelOptionsProvider, undefined);
 				});
 			});
 		});
