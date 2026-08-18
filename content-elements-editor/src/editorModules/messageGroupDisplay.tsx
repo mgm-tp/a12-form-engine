@@ -109,7 +109,6 @@ function MessageGroupDisplayEditingRenderer(
 			<MessageGroupContext.Provider
 				value={{
 					id: "foo",
-					editableElements: [],
 					getGroupedValidationMessages: () => [
 						{
 							type: "FieldConstraintError",

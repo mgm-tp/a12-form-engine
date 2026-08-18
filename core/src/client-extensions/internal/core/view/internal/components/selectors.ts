@@ -39,7 +39,7 @@ import { assertExists } from "../../../../../../back-end/utils/internal/assertio
 
 type ModelTypeGuard<T extends ModelAPI> = (m: ModelAPI) => m is T;
 
-function defaultModelTypeGuard<T extends ModelAPI>(model: ModelAPI): model is T {
+function defaultModelTypeGuard<T extends ModelAPI>(_model: ModelAPI): _model is T {
 	return true;
 }
 

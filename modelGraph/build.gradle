@@ -1,8 +1,7 @@
 buildscript {
-    apply from: rootProject.file('scripts/buildscript-platforms.gradle')
-
     dependencies {
-        classpath a12Libs.dataservices.core.tooling
+        classpath platform(libs.dataservices.bom)
+        classpath libs.dataservices.core.tooling
     }
 }
 

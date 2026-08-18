@@ -637,7 +637,6 @@ function createWrapper(options?: {
 
 	const defaultMessageFilter: MessageGroupFilter = {
 		id: "test-message-group",
-		editableElements: [],
 		getGroupedValidationMessages: () => [],
 		getUngroupedValidationMessages: () => []
 	};

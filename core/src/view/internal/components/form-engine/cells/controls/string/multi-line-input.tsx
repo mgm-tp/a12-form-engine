@@ -72,9 +72,9 @@ export function MultilineInput(
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 		[
 			options.eventHandlers,
-			// eslint-disable-next-line react-hooks/exhaustive-deps
+			// eslint-disable-next-line react-hooks/exhaustive-deps, react-hooks/use-memo
 			ModelPath.toString(props.formModelPath),
-			// eslint-disable-next-line react-hooks/exhaustive-deps
+			// eslint-disable-next-line react-hooks/exhaustive-deps, react-hooks/use-memo
 			DocumentPath.toString(value.path)
 		]
 	);

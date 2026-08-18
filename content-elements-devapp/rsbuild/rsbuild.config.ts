@@ -36,8 +36,6 @@ import { defineConfig, rspack } from "@rsbuild/core";
 import { pluginReact } from "@rsbuild/plugin-react";
 import { RsdoctorRspackPlugin } from "@rsdoctor/rspack-plugin";
 
-import ceCorePkg from "@com.mgmtp.a12.contentengine/contentengine-core/package.json" with { type: "json" };
-
 import packageJson from "../package.json" with { type: "json" };
 
 const commitHash = execSync("git rev-parse HEAD || exit 0", {
@@ -72,10 +70,6 @@ export default defineConfig(({ envMode, env }) => {
 				__VERSION__: JSON.stringify(version),
 				__COMMIT_HASH__: JSON.stringify(commitHash),
 				SC_DISABLE_SPEEDY: false,
-				__A12_MODEL_VERSIONS__: JSON.stringify({
-					// CE does not have modelType defined in package.json
-					content: ceCorePkg.modelVersion
-				}),
 				__DEVAPP_MODE__: JSON.stringify(devappMode)
 			}
 		},

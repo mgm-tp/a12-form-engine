@@ -89,6 +89,7 @@ export const PreviewThemeContextProvider = (props: PreviewThemeContextProviderPr
 	useEffect(() => {
 		if (customTheme && selectedTheme && DEFAULT_THEMES.includes(selectedTheme)) {
 			// reset the selected theme if a custom theme was updated that is not in the theme list
+			// eslint-disable-next-line react-hooks/set-state-in-effect
 			setSelectedTheme(null);
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps

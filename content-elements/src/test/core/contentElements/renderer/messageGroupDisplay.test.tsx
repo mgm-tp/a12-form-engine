@@ -85,7 +85,6 @@ function setup(options?: {
 			<MessageGroupContext.Provider
 				value={{
 					id: messageGroupId ?? "",
-					editableElements: [],
 					getGroupedValidationMessages: () => [],
 					getUngroupedValidationMessages: () => []
 				}}

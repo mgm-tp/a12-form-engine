@@ -77,6 +77,7 @@ export * from "./modules/switch/switchNode.js";
 export * from "./modules/textArea/textAreaNode.js";
 export * from "./modules/textLine/textLineNode.js";
 
+export * from "./modules/messageGroupContainer/editableElementsContext.js";
 export * from "./modules/messageGroupContainer/messageGroupContext.js";
 export * from "./modules/messageGroupContainer/useCollectDocumentElementIds.js";
 export * from "./modules/messageGroupContainer/useCollectEditableElements.js";

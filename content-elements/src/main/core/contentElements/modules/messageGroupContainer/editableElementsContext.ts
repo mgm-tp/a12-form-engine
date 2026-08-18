@@ -32,16 +32,12 @@
 
 import { createContext } from "react";
 
-import type { Message } from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
+import type { EditableElementList } from "./useCollectEditableElements.js";
 
-export interface MessageGroupFilter {
-	readonly id?: string;
-	getGroupedValidationMessages(entries: Message[]): Message[];
-	getUngroupedValidationMessages(entries: Message[]): Message[];
-}
-
-export const MessageGroupContext = createContext<MessageGroupFilter>({
-	id: undefined,
-	getGroupedValidationMessages: () => [],
-	getUngroupedValidationMessages: () => []
-});
+/**
+ * Provides the list of editable elements collected by the nearest
+ * MessageGroupContainerModule. Consumers that only need this list
+ * should use this context instead of MessageGroupContext so they do
+ * not rerender when unrelated message-group state changes.
+ */
+export const EditableElementsContext = createContext<EditableElementList>([]);

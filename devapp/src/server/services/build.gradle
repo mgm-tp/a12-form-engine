@@ -1,6 +1,6 @@
 buildscript {
     dependencies {
-        classpath platform(a12Libs.dataservices.bom)
+        classpath platform(libs.dataservices.bom)
         classpath 'org.springframework.boot:spring-boot-gradle-plugin'
     }
 }
@@ -13,8 +13,7 @@ plugins {
 apply plugin: 'org.springframework.boot'
 
 dependencies {
-    // A12 Dataservices
-    implementation a12Libs.dataservices.server.app
+    implementation libs.dataservices.server.app
 }
 
 layout.buildDirectory = file('../../../dist/server')

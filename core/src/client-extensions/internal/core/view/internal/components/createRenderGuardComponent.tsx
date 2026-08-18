@@ -109,7 +109,7 @@ export function createRenderGuardComponent<T extends {} = {}>(
 		 * complete, is not an issue, because `shouldComponentUpdate` prevents
 		 * that this case occur and therefore `render` is not executed at all.
 		 */
-		private renderComponent(props: Partial<T>): props is T {
+		private renderComponent(_props: Partial<T>): _props is T {
 			return this.componentIsInitialized || this.props.propsAreComplete;
 		}
 

@@ -1,17 +1,16 @@
 buildscript {
     dependencies {
         classpath libs.groovy.yaml
-        classpath gradlePluginLibs.spotbugs.plugin
-        classpath a12Libs.build.utilities
+        classpath libs.build.utilities
     }
 }
 
 plugins {
     // make plugin available to subprojects without creating multiple instances
-    alias(gradlePluginLibs.plugins.docker) apply false
-    alias(gradlePluginLibs.plugins.spotless) apply false
-    alias(gradlePluginLibs.plugins.spotbugs) apply false
-    alias(gradlePluginLibs.plugins.cyclonedx) apply false
+    alias(libs.plugins.docker) apply false
+    alias(libs.plugins.spotless) apply false
+    alias(libs.plugins.spotbugs) apply false
+    alias(libs.plugins.cyclonedx) apply false
 }
 
 import com.github.spotbugs.snom.Confidence
@@ -88,7 +87,7 @@ subprojects {
 
             // A12 Data Services platform used for centralized version management for all subprojects
             dependencies {
-                api platform(a12Libs.dataservices.bom)
+                api platform(libs.dataservices.bom)
             }
 
             tasks.withType(JavaCompile).configureEach {

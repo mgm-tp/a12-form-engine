@@ -1,0 +1,76 @@
+[versions]
+# A12 — manually kept in sync with pnpm-workspace.yaml (catalogs.a12).
+# Validated by scripts/validateA12Peers.ts so it cannot drift unnoticed.
+dataservices = "38.4.2"               # @com.mgmtp.a12.dataservices/dataservices-access
+build-utilities = "0.3.0"
+prepare-models = "0.6.0"
+
+# Gradle plugins (third-party)
+spotbugs = "6.4.4"
+cyclonedx = "3.0.1"
+spotless = "7.0.2"
+asciidoc = "4.0.4"
+shadow = "9.2.2"
+docker = "9.4.0"
+
+# Third-party libraries
+slf4j = "2.0.17"
+testng = "7.11.0"
+
+[libraries]
+# --- A12 build tooling ---
+build-utilities = { module = "com.mgmtp.a12.devtools.plugins:build-utilities", version.ref = "build-utilities" }
+
+# --- A12 data services BOM (centralized version management) ---
+dataservices-bom = { module = "com.mgmtp.a12.dataservices:dataservices-parent", version.ref = "dataservices" }
+
+# --- A12 libraries (versions provided by the dataservices BOM) ---
+base-model-api = { module = "com.mgmtp.a12.base:base-model-api" }
+base-model-consistency = { module = "com.mgmtp.a12.base:base-model-consistency" }
+base-model-marshalling = { module = "com.mgmtp.a12.base:base-model-marshalling" }
+kernel-core-codegen-entities = { module = "com.mgmtp.a12.kernel:kernel-core-codegen-entities" }
+kernel-core-parsetree-api = { module = "com.mgmtp.a12.kernel:kernel-core-parsetree-api" }
+kernel-md-model = { module = "com.mgmtp.a12.kernel:kernel-md-model" }
+kernel-md-document-api = { module = "com.mgmtp.a12.kernel:kernel-md-document-api" }
+kernel-md-facade = { module = "com.mgmtp.a12.kernel:kernel-md-facade" }
+kernel-tool-model-migration = { module = "com.mgmtp.a12.kernel:kernel-tool-model-migration" }
+dataservices-core-metadata = { module = "com.mgmtp.a12.dataservices:dataservices-core-metadata" }
+dataservices-core-tooling = { module = "com.mgmtp.a12.dataservices:dataservices-core-tooling" }
+dataservices-server-app = { module = "com.mgmtp.a12.dataservices:dataservices-server-app" }
+
+# --- Jackson (versions from the dataservices BOM) ---
+jackson-core = { module = "com.fasterxml.jackson.core:jackson-core" }
+jackson-databind = { module = "com.fasterxml.jackson.core:jackson-databind" }
+jackson-annotations = { module = "com.fasterxml.jackson.core:jackson-annotations" }
+
+# --- Apache Commons ---
+commons-io = { module = "commons-io:commons-io", version = "2.20.0" }
+commons-lang3 = { module = "org.apache.commons:commons-lang3", version = "3.19.0" }
+commons-collections4 = { module = "org.apache.commons:commons-collections4", version = "4.5.0" }
+commons-cli = { module = "commons-cli:commons-cli", version = "1.10.0" }
+
+# --- Logging ---
+slf4j-api = { module = "org.slf4j:slf4j-api", version.ref = "slf4j" }
+logback-classic = { module = "ch.qos.logback:logback-classic", version = "1.5.18" }
+
+# --- Testing ---
+testng = { module = "org.testng:testng", version.ref = "testng" }
+hamcrest = { module = "org.hamcrest:hamcrest", version = "3.0" }
+jsonassert = { module = "org.skyscreamer:jsonassert", version = "1.5.3" }
+
+# --- Other third-party ---
+groovy-yaml = { module = "org.apache.groovy:groovy-yaml", version = "4.0.28" }
+gson = { module = "com.google.code.gson:gson", version = "2.13.2" }
+metainf-services = { module = "org.kohsuke.metainf-services:metainf-services", version = "1.11" }
+nashorn-core = { module = "org.openjdk.nashorn:nashorn-core", version = "15.6" }
+lombok = { module = "org.projectlombok:lombok", version = "1.18.42" }
+docker-plugin = { module = "com.bmuschko:gradle-docker-plugin", version.ref = "docker" }
+
+[plugins]
+prepare-models = { id = "com.mgmtp.a12.devtools.plugins.prepare-models", version.ref = "prepare-models" }
+spotbugs = { id = "com.github.spotbugs", version.ref = "spotbugs" }
+cyclonedx = { id = "org.cyclonedx.bom", version.ref = "cyclonedx" }
+spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }
+asciidoc = { id = "org.asciidoctor.jvm.convert", version.ref = "asciidoc" }
+shadow = { id = "com.gradleup.shadow", version.ref = "shadow" }
+docker = { id = "com.bmuschko.docker-remote-api", version.ref = "docker" }

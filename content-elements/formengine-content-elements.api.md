@@ -21,6 +21,7 @@ import type { DateTimePickerProps } from '@com.mgmtp.a12.widgets/widgets-core/li
 import type { DocumentModel } from '@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js';
 import type { ElementLibrary } from '@com.mgmtp.a12.contentengine/contentengine-core';
 import { ElementModule } from '@com.mgmtp.a12.contentengine/contentengine-core';
+import type { EntityInstancePath } from '@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js';
 import type { ErrorTooltipProps } from '@com.mgmtp.a12.widgets/widgets-core/lib/tooltip/error/main/error.api.js';
 import type { HeaderProps } from '@com.mgmtp.a12.widgets/widgets-core/lib/date-time-picker/main/date-time-picker.internal.js';
 import type { HintTooltipProps } from '@com.mgmtp.a12.widgets/widgets-core/lib/tooltip/hint/main/hint.api.js';
@@ -32,6 +33,7 @@ import type { KernelTypes as KernelTypes_2 } from '@com.mgmtp.a12.client/client-
 import type { ListItemProps } from '@com.mgmtp.a12.widgets/widgets-core/lib/list/main/list.api.js';
 import type { ListProps } from '@com.mgmtp.a12.widgets/widgets-core/lib/list/main/list.api.js';
 import type { LocalizedModelText } from '@com.mgmtp.a12.utils/utils-localization/lib/main/index.js';
+import type { LocalizedModelText as LocalizedModelText_2 } from '@com.mgmtp.a12.utils/utils-localization';
 import type { Message } from '@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js';
 import type { MessageBoxProps } from '@com.mgmtp.a12.widgets/widgets-core/lib/message-box/main/message-box.api.js';
 import type { ModalOverlayProps } from '@com.mgmtp.a12.widgets/widgets-core/lib/modal-overlay/main/modal-overlay.api.js';
@@ -293,17 +295,29 @@ export interface DynamicAmountSuffix {
 }
 
 // @public (undocumented)
-export interface EditableElement {
+export interface EditableElement extends Omit<EditableModelElement, "elementId"> {
+    // (undocumented)
+    readonly documentPath: EntityInstancePath;
+}
+
+// @public
+export type EditableElementList = EditableElement[];
+
+// @public
+export const EditableElementsContext: Context<EditableElementList>;
+
+// @public (undocumented)
+export interface EditableModelElement {
     // (undocumented)
     readonly elementId: string;
     // (undocumented)
-    readonly label?: LocalizedModelText;
+    readonly label?: LocalizedModelText_2;
     // (undocumented)
     readonly nodeId: string;
 }
 
 // @public
-export type EditableElementList = EditableElement[];
+export type EditableModelElementExtractor = (node: ContentModel.Node) => EditableModelElement | null;
 
 // @public (undocumented)
 export type EnumerationItem = {
@@ -418,7 +432,6 @@ export interface MessageGroupDisplayNodeProps {
 
 // @public (undocumented)
 export interface MessageGroupFilter {
-    readonly editableElements: EditableElementList;
     // (undocumented)
     getGroupedValidationMessages(entries: Message[]): Message[];
     // (undocumented)
@@ -568,7 +581,7 @@ export const USE_LOCALIZED_ENUMERATION_VALUES_WRAPPER: {
 export function useCollectDocumentElementIds(node?: ContentModel.Node): CollectedDocumentElementIds;
 
 // @public
-export function useCollectEditableElements(node: MessageGroupContainerNode): EditableElementList;
+export function useCollectEditableElements(node: MessageGroupContainerNode, additionalExtractor?: EditableModelElementExtractor): EditableElementList;
 
 // @public
 export function useCommonControlSettings(node: ContentModel.Node<BaseControlProps>): BaseControlSettings;

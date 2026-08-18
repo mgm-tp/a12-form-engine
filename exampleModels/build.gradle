@@ -8,19 +8,18 @@ import java.nio.file.Paths
 import static groovy.io.FileType.FILES
 
 buildscript {
-    apply from: rootProject.file('scripts/buildscript-platforms.gradle')
-
     dependencies {
-        classpath a12Libs.build.utilities
-        classpath a12Libs.kernel.md.model
-        classpath a12Libs.kernel.md.facade
-        classpath a12Libs.kernel.tool.model.migration
+        classpath platform(libs.dataservices.bom)
+        classpath libs.build.utilities
+        classpath libs.kernel.md.model
+        classpath libs.kernel.md.facade
+        classpath libs.kernel.tool.model.migration
         classpath libs.logback.classic
     }
 }
 
 plugins {
-    alias(a12Plugins.plugins.prepare.models)
+    alias(libs.plugins.prepare.models)
 }
 
 prepareModels {

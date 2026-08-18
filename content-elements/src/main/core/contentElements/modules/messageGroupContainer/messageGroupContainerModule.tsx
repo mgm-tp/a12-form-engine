@@ -48,6 +48,7 @@ import type {
 import { FORM_ELEMENTS_NAMESPACE } from "../../../namespace.js";
 import { FunctionMapContext } from "../../functionMap/functionMapContext.js";
 
+import { EditableElementsContext } from "./editableElementsContext.js";
 import type {
 	MessageGroupContainerNode,
 	MessageGroupContainerNodeProps
@@ -91,7 +92,6 @@ function MessageGroupContainerRenderer(
 
 		return {
 			id: props.node.id,
-			editableElements,
 			getGroupedValidationMessages: (messages: Message[]) =>
 				getGroupedValidationMessages(messages, resolvedProps),
 			getUngroupedValidationMessages: (messages: Message[]) => {
@@ -99,11 +99,13 @@ function MessageGroupContainerRenderer(
 				return messages.filter(msg => !groupedMessages.includes(msg));
 			}
 		};
-	}, [props.node.props, props.node.id, messageGroupPaths, editableElements]);
+	}, [props.node.props, props.node.id, messageGroupPaths]);
 
 	return (
 		<MessageGroupContext.Provider value={contextValue}>
-			{props.children}
+			<EditableElementsContext.Provider value={editableElements}>
+				{props.children}
+			</EditableElementsContext.Provider>
 		</MessageGroupContext.Provider>
 	);
 }

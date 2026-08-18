@@ -32,15 +32,22 @@
 
 import { deepStrictEqual } from "node:assert/strict";
 
+import { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
+import { DocumentPath } from "@com.mgmtp.a12.client/client-data";
 import type { ContentModel } from "@com.mgmtp.a12.contentengine/contentengine-core";
 import type { LocalizedModelText } from "@com.mgmtp.a12.utils/utils-localization/lib/main/index.js";
+import type { DocumentModel } from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
 
 import { CHECKBOX_TYPE } from "../../../../../main/core/contentElements/modules/checkbox/checkboxNode.js";
 import {
 	MESSAGE_GROUP_CONTAINER_TYPE,
 	type MessageGroupContainerNode
 } from "../../../../../main/core/contentElements/modules/messageGroupContainer/messageGroupContainerNode.js";
-import { collectEditableElements } from "../../../../../main/core/contentElements/modules/messageGroupContainer/useCollectEditableElements.js";
+import {
+	collectEditableModelElements,
+	getRelevantPathsInContext,
+	type EditableModelElementExtractor
+} from "../../../../../main/core/contentElements/modules/messageGroupContainer/useCollectEditableElements.js";
 import {
 	MESSAGE_GROUP_DISPLAY_TYPE,
 	type MessageGroupDisplayNode
@@ -49,96 +56,221 @@ import { TEXT_LINE_TYPE } from "../../../../../main/core/contentElements/modules
 import type { BaseControlProps } from "../../../../../main/core/index.js";
 import { FORM_ELEMENTS_NAMESPACE } from "../../../../../main/core/namespace.js";
 
-describe("collectEditableElements", () => {
-	it("should return empty results when MessageGroupContainer has no children", () => {
-		const node = createMessageGroupContainerNode();
-		deepStrictEqual(collectEditableElements(node), []);
+describe("core.contentElements", () => {
+	describe("collectEditableModelElements", () => {
+		it("should return empty results when MessageGroupContainer has no children", () => {
+			const node = createMessageGroupContainerNode();
+			deepStrictEqual(collectEditableModelElements(node), []);
+		});
+
+		it("should collect elements from deeply nested structures", () => {
+			const deepInput = createCheckboxNode("deep-field", testLabel("deep-field"));
+			const deepInputFromAnotherMessageGroup = createTextLineNode(
+				"deep-field-from-another-message-group",
+				testLabel("deep-field-from-another-message-group")
+			);
+			const middleInput = createTextLineNode("middle-field", testLabel("middle-field"));
+			const rootInput = createTextLineNode("root-field", testLabel("root-field"));
+			const anotherRootInput = createCheckboxNode(
+				"another-root-field",
+				testLabel("another-root-field")
+			);
+
+			const deepContainer = createGenericContainerNode("deep-container", [
+				createGenericContainerNode("deeper-container", [deepInput])
+			]);
+			const deepMessageGroupContainer = createMessageGroupContainerNode([
+				deepInputFromAnotherMessageGroup
+			]);
+			const middleContainer = createGenericContainerNode("middle-container", [
+				middleInput,
+				deepContainer,
+				deepMessageGroupContainer
+			]);
+
+			const node = createMessageGroupContainerNode([rootInput, middleContainer, anotherRootInput]);
+
+			const expectedElements = [
+				rootInput,
+				middleInput,
+				deepInput,
+				deepInputFromAnotherMessageGroup,
+				anotherRootInput
+			].map(element => ({
+				nodeId: element.id,
+				elementId: element.props.elementId,
+				label: testLabel(element.props.elementId)
+			}));
+
+			deepStrictEqual(collectEditableModelElements(node), expectedElements);
+		});
+
+		it("should collect elements from multiple MessageGroupDisplay nodes correctly", () => {
+			const firstDisplay = createMessageGroupDisplayNode([createTextLineNode("hidden-field1")]);
+
+			const secondDisplay = createMessageGroupDisplayNode([createCheckboxNode("hidden-field2")]);
+
+			const node = createMessageGroupContainerNode([
+				createTextLineNode("visible-field1"),
+				firstDisplay,
+				createCheckboxNode("visible-field2"),
+				secondDisplay
+			]);
+
+			deepStrictEqual(collectEditableModelElements(node), [
+				{ nodeId: "textline-visible-field1", elementId: "visible-field1", label: undefined },
+				{ nodeId: "checkbox-visible-field2", elementId: "visible-field2", label: undefined }
+			]);
+		});
+
+		it("should skip elements nested in MessageGroupDisplay", () => {
+			const messageGroupDisplay = createMessageGroupDisplayNode([
+				createTextLineNode("should-not-be-included")
+			]);
+
+			const node = createMessageGroupContainerNode([
+				createTextLineNode("included-field"),
+				messageGroupDisplay
+			]);
+
+			deepStrictEqual(collectEditableModelElements(node), [
+				{ nodeId: "textline-included-field", elementId: "included-field", label: undefined }
+			]);
+		});
+
+		it("should skip non-form element nodes", () => {
+			const node = createMessageGroupContainerNode([
+				createTextLineNode("form-field"),
+				createNonFormElementNode()
+			]);
+
+			deepStrictEqual(collectEditableModelElements(node), [
+				{ nodeId: "textline-form-field", elementId: "form-field", label: undefined }
+			]);
+		});
+
+		it("should collect custom nodes using additionalExtractor", () => {
+			const customNode = createNonFormElementNode();
+			const node = createMessageGroupContainerNode([createTextLineNode("form-field"), customNode]);
+
+			const additionalExtractor: EditableModelElementExtractor = n =>
+				n.id === customNode.id
+					? { nodeId: n.id, elementId: "custom-element-id", label: testLabel("custom-label") }
+					: null;
+
+			deepStrictEqual(collectEditableModelElements(node, additionalExtractor), [
+				{ nodeId: "textline-form-field", elementId: "form-field", label: undefined },
+				{ nodeId: customNode.id, elementId: "custom-element-id", label: testLabel("custom-label") }
+			]);
+		});
+
+		it("should not collect custom nodes when additionalExtractor returns null", () => {
+			const node = createMessageGroupContainerNode([
+				createTextLineNode("form-field"),
+				createNonFormElementNode()
+			]);
+
+			const additionalExtractor: EditableModelElementExtractor = () => null;
+
+			deepStrictEqual(collectEditableModelElements(node, additionalExtractor), [
+				{ nodeId: "textline-form-field", elementId: "form-field", label: undefined }
+			]);
+		});
 	});
 
-	it("should collect elements from deeply nested structures", () => {
-		const deepInput = createCheckboxNode("deep-field", testLabel("deep-field"));
-		const deepInputFromAnotherMessageGroup = createTextLineNode(
-			"deep-field-from-another-message-group",
-			testLabel("deep-field-from-another-message-group")
-		);
-		const middleInput = createTextLineNode("middle-field", testLabel("middle-field"));
-		const rootInput = createTextLineNode("root-field", testLabel("root-field"));
-		const anotherRootInput = createCheckboxNode(
-			"another-root-field",
-			testLabel("another-root-field")
-		);
+	describe("getRelevantPathsInContext", () => {
+		it("does not return paths for non-existing data contexts", () => {
+			const result = getRelevantPathsInContext({
+				elementId: "test-id",
+				dataContext: [],
+				getModelPathById: () => ModelPath.fromString("/root/repeatable/nestedRepeatable/field"),
+				getElementByPath,
+				getRowCount: dataRef => (dataRef === "/root[1]/repeatable[2]/nestedRepeatable[0]" ? 0 : 3),
+				getNotRelevant: () => false
+			});
 
-		const deepContainer = createGenericContainerNode("deep-container", [
-			createGenericContainerNode("deeper-container", [deepInput])
-		]);
-		const deepMessageGroupContainer = createMessageGroupContainerNode([
-			deepInputFromAnotherMessageGroup
-		]);
-		const middleContainer = createGenericContainerNode("middle-container", [
-			middleInput,
-			deepContainer,
-			deepMessageGroupContainer
-		]);
+			deepStrictEqual(result, [
+				DocumentPath.fromString("/root[1]/repeatable[1]/nestedRepeatable[1]/field[1]"),
+				DocumentPath.fromString("/root[1]/repeatable[1]/nestedRepeatable[2]/field[1]"),
+				DocumentPath.fromString("/root[1]/repeatable[1]/nestedRepeatable[3]/field[1]"),
+				DocumentPath.fromString("/root[1]/repeatable[3]/nestedRepeatable[1]/field[1]"),
+				DocumentPath.fromString("/root[1]/repeatable[3]/nestedRepeatable[2]/field[1]"),
+				DocumentPath.fromString("/root[1]/repeatable[3]/nestedRepeatable[3]/field[1]")
+			]);
+		});
 
-		const node = createMessageGroupContainerNode([rootInput, middleContainer, anotherRootInput]);
+		it("does not return paths for non-relevant elements", () => {
+			const result = getRelevantPathsInContext({
+				elementId: "test-id",
+				dataContext: [],
+				getModelPathById: () => ModelPath.fromString("/root/repeatable/field"),
+				getElementByPath,
+				getRowCount: () => 3,
+				getNotRelevant: dataRef => (dataRef === "/root[1]/repeatable[2]/field[1]" ? true : false)
+			});
 
-		const expectedElements = [
-			rootInput,
-			middleInput,
-			deepInput,
-			deepInputFromAnotherMessageGroup,
-			anotherRootInput
-		].map(element => ({
-			nodeId: element.id,
-			elementId: element.props.elementId,
-			label: testLabel(element.props.elementId)
-		}));
+			deepStrictEqual(result, [
+				DocumentPath.fromString("/root[1]/repeatable[1]/field[1]"),
+				DocumentPath.fromString("/root[1]/repeatable[3]/field[1]")
+			]);
+		});
 
-		deepStrictEqual(collectEditableElements(node), expectedElements);
-	});
+		it("does not expand path segments for multi-selects", () => {
+			const result = getRelevantPathsInContext({
+				elementId: "test-id",
+				dataContext: [],
+				getModelPathById: () => ModelPath.fromString("/root/repeatable/multiSelect"),
+				getElementByPath,
+				getRowCount: () => 3,
+				getNotRelevant: () => false
+			});
 
-	it("should collect elements from multiple MessageGroupDisplay nodes correctly", () => {
-		const firstDisplay = createMessageGroupDisplayNode([createTextLineNode("hidden-field1")]);
+			deepStrictEqual(result, [
+				DocumentPath.fromString("/root[1]/repeatable[1]/multiSelect[0]"),
+				DocumentPath.fromString("/root[1]/repeatable[2]/multiSelect[0]"),
+				DocumentPath.fromString("/root[1]/repeatable[3]/multiSelect[0]")
+			]);
+		});
 
-		const secondDisplay = createMessageGroupDisplayNode([createCheckboxNode("hidden-field2")]);
+		it("does not expand path segments for repeatable groups outside of the current data context", () => {
+			const result = getRelevantPathsInContext({
+				elementId: "test-id",
+				dataContext: DocumentPath.fromString("/root[1]/repeatable[2]"),
+				getModelPathById: () => ModelPath.fromString("/root/repeatable/nestedRepeatable/field"),
+				getElementByPath,
+				getRowCount: () => 3,
+				getNotRelevant: () => false
+			});
 
-		const node = createMessageGroupContainerNode([
-			createTextLineNode("visible-field1"),
-			firstDisplay,
-			createCheckboxNode("visible-field2"),
-			secondDisplay
-		]);
+			deepStrictEqual(result, [
+				DocumentPath.fromString("/root[1]/repeatable[2]/nestedRepeatable[1]/field[1]"),
+				DocumentPath.fromString("/root[1]/repeatable[2]/nestedRepeatable[2]/field[1]"),
+				DocumentPath.fromString("/root[1]/repeatable[2]/nestedRepeatable[3]/field[1]")
+			]);
+		});
 
-		deepStrictEqual(collectEditableElements(node), [
-			{ nodeId: "textline-visible-field1", elementId: "visible-field1", label: undefined },
-			{ nodeId: "checkbox-visible-field2", elementId: "visible-field2", label: undefined }
-		]);
-	});
+		it("expands path segments for repeatable groups based on the document", () => {
+			const result = getRelevantPathsInContext({
+				elementId: "test-id",
+				dataContext: [],
+				getModelPathById: () => ModelPath.fromString("/root/repeatable/nestedRepeatable/field"),
+				getElementByPath,
+				getRowCount: () => 3,
+				getNotRelevant: () => false
+			});
 
-	it("should skip elements nested in MessageGroupDisplay", () => {
-		const messageGroupDisplay = createMessageGroupDisplayNode([
-			createTextLineNode("should-not-be-included")
-		]);
-
-		const node = createMessageGroupContainerNode([
-			createTextLineNode("included-field"),
-			messageGroupDisplay
-		]);
-
-		deepStrictEqual(collectEditableElements(node), [
-			{ nodeId: "textline-included-field", elementId: "included-field", label: undefined }
-		]);
-	});
-
-	it("should skip non-form element nodes", () => {
-		const node = createMessageGroupContainerNode([
-			createTextLineNode("form-field"),
-			createNonFormElementNode()
-		]);
-
-		deepStrictEqual(collectEditableElements(node), [
-			{ nodeId: "textline-form-field", elementId: "form-field", label: undefined }
-		]);
+			deepStrictEqual(result, [
+				DocumentPath.fromString("/root[1]/repeatable[1]/nestedRepeatable[1]/field[1]"),
+				DocumentPath.fromString("/root[1]/repeatable[1]/nestedRepeatable[2]/field[1]"),
+				DocumentPath.fromString("/root[1]/repeatable[1]/nestedRepeatable[3]/field[1]"),
+				DocumentPath.fromString("/root[1]/repeatable[2]/nestedRepeatable[1]/field[1]"),
+				DocumentPath.fromString("/root[1]/repeatable[2]/nestedRepeatable[2]/field[1]"),
+				DocumentPath.fromString("/root[1]/repeatable[2]/nestedRepeatable[3]/field[1]"),
+				DocumentPath.fromString("/root[1]/repeatable[3]/nestedRepeatable[1]/field[1]"),
+				DocumentPath.fromString("/root[1]/repeatable[3]/nestedRepeatable[2]/field[1]"),
+				DocumentPath.fromString("/root[1]/repeatable[3]/nestedRepeatable[3]/field[1]")
+			]);
+		});
 	});
 });
 
@@ -211,5 +343,52 @@ function createGenericContainerNode(id: string, children?: ContentModel.Node[]):
 		type: "Container",
 		props: {},
 		children
+	};
+}
+
+function getElementByPath(path: ModelPath): DocumentModel.Element {
+	switch (true) {
+		case ModelPath.equal(path, ModelPath.fromString("/root")): {
+			return group();
+		}
+		case ModelPath.equal(path, ModelPath.fromString("/root/repeatable")):
+		case ModelPath.equal(path, ModelPath.fromString("/root/repeatable/nestedRepeatable")): {
+			return group(5);
+		}
+		case ModelPath.equal(path, ModelPath.fromString("/root/repeatable/multiSelect")): {
+			return multiSelect();
+		}
+		default:
+			return field();
+	}
+}
+
+function field(): DocumentModel.Field {
+	return {
+		id: "field",
+		name: "field",
+		type: "Field",
+		fieldType: { type: "StringType" }
+	};
+}
+
+function group(repeatability?: number): DocumentModel.Group {
+	return {
+		id: "group",
+		name: "group",
+		type: "Group",
+		repeatability: repeatability ?? 1,
+		elements: []
+	};
+}
+
+function multiSelect(): DocumentModel.Group {
+	return {
+		id: "multi-select",
+		name: "multi-select",
+		type: "Group",
+		usageType: "multi-select",
+		repeatability: 999,
+		elements: []
 	};
 }

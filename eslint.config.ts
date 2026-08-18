@@ -111,6 +111,7 @@ const ignores = [
 	"codemod/src/testData",
 	"computation-relevancy-analyzer",
 	"docker",
+	"documentation/src/assets/typedoc",
 	"exampleModels",
 	"form-model",
 	"form-parent",
@@ -154,7 +155,10 @@ export default defineConfig(
 			"@typescript-eslint/no-empty-object-type": "warn",
 			"@typescript-eslint/no-invalid-void-type": "warn",
 			"@typescript-eslint/no-non-null-assertion": "warn",
-			"@typescript-eslint/no-unused-vars": ["error", { ignoreRestSiblings: true }],
+			"@typescript-eslint/no-unused-vars": [
+				"error",
+				{ ignoreRestSiblings: true, argsIgnorePattern: "^_" }
+			],
 			"notice/notice": [
 				"error",
 				{
