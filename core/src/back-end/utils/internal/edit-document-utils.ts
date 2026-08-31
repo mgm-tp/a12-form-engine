@@ -47,7 +47,6 @@ import { EngineStore } from "../../store/internal/store.js";
 export interface UpdateResult {
 	readonly document: GroupInstance;
 	readonly messages: ReadonlyObjectMap<EngineStore.Validation.Entry>;
-	readonly changed: boolean;
 }
 
 /**
@@ -72,7 +71,7 @@ export const DataUtils = {
 		const newDocument = DocumentUtils.moveRow(json, rowPath, delta, documentModel);
 		const newMessages: ReadonlyObjectMap<EngineStore.Validation.Entry> =
 			EngineStore.Validation.Message.updateMessagesPaths(messages, rowPath, documentModel, delta);
-		return { document: newDocument, messages: newMessages, changed: true };
+		return { document: newDocument, messages: newMessages };
 	},
 
 	/**

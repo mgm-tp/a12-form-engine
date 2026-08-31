@@ -1,7 +1,11 @@
 buildscript {
     dependencies {
         classpath platform(libs.dataservices.bom)
-        classpath libs.build.utilities
+        // build-utilities >=0.4.1 pulls org.apache.groovy:groovy-yaml (→ apache groovy 5.x),
+        // which clashes with the legacy codehaus groovy 3.x that kernel-md-facade needs on this
+        // buildscript classpath. This project only uses build-utilities' model helpers (never the
+        // groovy-yaml path), so exclude apache groovy here.
+        classpath(libs.build.utilities) { exclude group: 'org.apache.groovy' }
         classpath libs.dataservices.modelgraph
         classpath libs.kernel.md.facade
         classpath libs.logback.classic
@@ -13,7 +17,7 @@ plugins {
 }
 
 prepareModels {
-    generateValidationCodeInConverter = true
+    generateValidationCode = true
 }
 
 tasks.named('clean') {

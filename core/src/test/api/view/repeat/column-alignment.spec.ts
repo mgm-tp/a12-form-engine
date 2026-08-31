@@ -61,13 +61,9 @@ describe("api.view.repeat", () => {
 			colCount: number;
 			alignment: "specificHorizontalAlignment" | "specificVerticalAlignment";
 			expectedAlignmentHead?:
-				| FormModel.HorizontalAlignment
-				| FormModel.VerticalAlignment
-				| "default";
+				FormModel.HorizontalAlignment | FormModel.VerticalAlignment | "default";
 			expectedAlignmentBody:
-				| FormModel.HorizontalAlignment
-				| FormModel.VerticalAlignment
-				| "default";
+				FormModel.HorizontalAlignment | FormModel.VerticalAlignment | "default";
 		}
 
 		function setup(models: Models, screenName: string): Promise<RtlRenderWrapper> {

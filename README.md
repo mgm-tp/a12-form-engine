@@ -82,6 +82,16 @@ gradle assemble
 
 #### How to Test
 
+`assemble` builds, `check` tests. The two are independent, so `check` runs the tests
+against the output of a previous `assemble` rather than building anything itself. On a
+clean checkout, run both:
+
+```sh
+gradle build
+```
+
+Once the sources have been assembled, the tests can be re-run on their own:
+
 ```sh
 gradle check
 ```
@@ -95,7 +105,7 @@ gradle clean
 #### Code Quality
 
 ```sh
-gradle verify
+gradle nodeVerify
 ```
 
 #### How to Run

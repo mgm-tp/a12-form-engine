@@ -1,11 +1,11 @@
 {
   "name": "content-elements-devapp",
-  "version": "39.0.0",
+  "version": "39.0.1",
   "description": "Devapp for form content elements",
   "private": true,
   "type": "module",
   "scripts": {
-    "clean": "rimraf ./lib ./target",
+    "clean": "git clean -fdX -- lib target",
     "build": "node --run compile",
     "compile": "pnpm run \"/^compile:.*/\"",
     "compile:typescript": "tsc",
@@ -49,7 +49,6 @@
     "@types/react-dom": "catalog:",
     "date-fns": "catalog:",
     "eslint": "catalog:",
-    "rimraf": "catalog:",
     "react": "catalog:",
     "react-dnd": "catalog:",
     "react-dom": "catalog:",

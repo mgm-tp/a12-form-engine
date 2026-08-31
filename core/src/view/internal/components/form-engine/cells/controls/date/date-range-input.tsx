@@ -166,7 +166,12 @@ export function DateRangeInput(
 			onValueSubmit={(dateRange: string) => {
 				const result = conversion.parseValue(dateRange.trim(), conversionConfig);
 				if (result.parseError) {
-					options.eventHandlers.onParseError(value.path, dateRange, result.parseError);
+					options.eventHandlers.onParseError(
+						value.path,
+						dateRange,
+						result.parseError,
+						props.formModelPath
+					);
 				} else {
 					options.eventHandlers.onValueChange(value.path, result.value!, props.formModelPath);
 				}

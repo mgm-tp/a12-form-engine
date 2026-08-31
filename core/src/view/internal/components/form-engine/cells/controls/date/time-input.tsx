@@ -92,7 +92,12 @@ export function TimeInput(props: Inputs.InputProps<DocumentModel.TimeType>): Rea
 				const result = conversion.parseValue(params.value.trim(), conversionConfig);
 
 				if (result.parseError) {
-					options.eventHandlers.onParseError(documentPath, params.value, result.parseError);
+					options.eventHandlers.onParseError(
+						documentPath,
+						params.value,
+						result.parseError,
+						props.formModelPath
+					);
 				}
 			}}
 			onInputChange={() => inputTouched(options)}

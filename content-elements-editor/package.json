@@ -1,13 +1,13 @@
 {
   "name": "@com.mgmtp.a12.formengine/formengine-content-elements-editor",
-  "version": "39.0.0",
+  "version": "39.0.1",
   "description": "Experimental content editor code for form content elements",
   "author": "mgm technology partners",
   "license": "(EUPL-1.2 OR LicenseRef-commercial)",
   "type": "module",
   "sideEffects": false,
   "scripts": {
-    "clean": "rimraf ./lib ./target cyclonedx.json",
+    "clean": "git clean -fdX -- lib target cyclonedx.json",
     "build": "node --run compile && pnpm \"/^validate:.+/\"",
     "compile": "pnpm run \"/^compile:.*/\"",
     "lint": "eslint --flag unstable_native_nodejs_ts_config . --cache",
@@ -23,7 +23,7 @@
     "watch": "tsc --project ./tsconfig.dev.json --watch"
   },
   "dependencies": {
-    "@com.mgmtp.a12.client/typescript-fsa-redux-5-compat": "catalog:a12ranges"
+    "@com.mgmtp.a12.client/typescript-fsa-redux-5-compat": "catalog:a12"
   },
   "devDependencies": {
     "@com.mgmtp.a12.base/base-model-api": "catalog:a12",
@@ -51,23 +51,22 @@
     "react-dnd": "catalog:",
     "react-redux": "catalog:",
     "redux": "catalog:",
-    "rimraf": "catalog:",
     "source-map-support": "catalog:",
     "styled-components": "catalog:",
     "typescript": "catalog:"
   },
   "peerDependencies": {
-    "@com.mgmtp.a12.base/base-model-api": "catalog:a12ranges",
-    "@com.mgmtp.a12.client/client-data": "catalog:a12ranges",
-    "@com.mgmtp.a12.contentengine/contentengine-core": "catalog:a12ranges",
-    "@com.mgmtp.a12.contentengine/contentengine-default-element-library": "catalog:a12ranges",
-    "@com.mgmtp.a12.contentengine/contentengine-editor": "catalog:a12ranges",
+    "@com.mgmtp.a12.base/base-model-api": "catalog:a12",
+    "@com.mgmtp.a12.client/client-data": "catalog:a12",
+    "@com.mgmtp.a12.contentengine/contentengine-core": "catalog:a12",
+    "@com.mgmtp.a12.contentengine/contentengine-default-element-library": "catalog:a12",
+    "@com.mgmtp.a12.contentengine/contentengine-editor": "catalog:a12",
     "@com.mgmtp.a12.formengine/formengine-content-elements": "workspace:*",
-    "@com.mgmtp.a12.kernel/kernel-md-facade": "catalog:a12ranges",
-    "@com.mgmtp.a12.utils/utils-localization": "catalog:a12ranges",
-    "@com.mgmtp.a12.utils/utils-localization-react": "catalog:a12ranges",
-    "@com.mgmtp.a12.widgets/widgets-core": "catalog:a12ranges",
-    "react": "catalog:ranges"
+    "@com.mgmtp.a12.kernel/kernel-md-facade": "catalog:a12",
+    "@com.mgmtp.a12.utils/utils-localization": "catalog:a12",
+    "@com.mgmtp.a12.utils/utils-localization-react": "catalog:a12",
+    "@com.mgmtp.a12.widgets/widgets-core": "catalog:a12",
+    "react": "catalog:"
   },
   "files": [
     "lib",

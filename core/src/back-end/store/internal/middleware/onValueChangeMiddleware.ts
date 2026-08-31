@@ -69,7 +69,8 @@ export function onValueChangeMiddlewareFactory(middlewareOptions: MiddlewareOpti
 				state: api.getState(),
 				dispatch: api.dispatch,
 				middlewareOptions,
-				validationParseError
+				validationParseError,
+				formModelElementPath: action.payload.formModelElementPath
 			});
 		} else if (Events.valueChange.match(action)) {
 			handleFieldValueChange({

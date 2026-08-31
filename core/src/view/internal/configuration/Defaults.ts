@@ -135,9 +135,10 @@ export function defaultMapDispatchToProps(dispatch: Dispatch): DefaultDispatchPr
 			onParseError(
 				path: EntityInstancePath,
 				uiValue: string,
-				error: ValueConversionParseError
+				error: ValueConversionParseError,
+				formModelElementPath: ModelPath
 			): void {
-				dispatch(Events.parseError({ path, uiValue, error }));
+				dispatch(Events.parseError({ path, uiValue, error, formModelElementPath }));
 			},
 			onCollapseSection(collapse: boolean, path: ModelPath): void {
 				dispatch(Events.collapseSection({ path, collapse }));

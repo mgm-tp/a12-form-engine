@@ -1,6 +1,5 @@
 buildscript {
     dependencies {
-        classpath libs.groovy.yaml
         classpath libs.build.utilities
     }
 }
@@ -12,20 +11,22 @@ plugins {
     alias(libs.plugins.spotbugs) apply false
     alias(libs.plugins.cyclonedx) apply false
     alias(libs.plugins.version.catalog.update)
+    alias(libs.plugins.node.gradle)
+    alias(libs.plugins.integration)
 }
 
+import com.github.gradle.node.pnpm.task.PnpmInstallTask
+import com.github.gradle.node.pnpm.task.PnpmTask
 import com.github.spotbugs.snom.Confidence
 import com.github.spotbugs.snom.Effort
 import com.mgmtp.a12.devtools.gradle.plugins.buildutils.Helper
-import com.mgmtp.a12.devtools.gradle.plugins.buildutils.tasks.LeadingBuildTask
 import com.mgmtp.a12.devtools.gradle.plugins.buildutils.tasks.PackageJsonModifierTask
 import groovy.json.JsonSlurper
 import groovy.yaml.YamlSlurper
 import org.cyclonedx.model.ExternalReference
 import nl.littlerobots.vcu.plugin.resolver.VersionSelectors
+import org.apache.tools.ant.taskdefs.condition.Os
 
-import java.nio.file.Files
-import java.nio.file.Path
 import java.nio.file.Paths
 
 /** Define a proper version in build */
@@ -36,11 +37,79 @@ String globalVersion = Helper.getVersion(
 )
 
 String getPnpmVersion() {
-    return (new JsonSlurper().parse(file('package.json'))['packageManager'] as String).split('\\+')[0]
+    final String packageManager = new JsonSlurper().parse(file('package.json'))['packageManager'] as String
+    return packageManager.split('@')[1]
+}
+String getPnpmCommand() {
+    String pnpm = (Os.isFamily(Os.FAMILY_WINDOWS)) ? 'pnpm.cmd' : 'bin/pnpm'
+    return Paths.get("${node.pnpmWorkDir.get()}/pnpm-v${getPnpmVersion()}/${pnpm}")
+        .toString()
+        .replace(System.getProperty('file.separator'), '/')
 }
 
 ext {
-    pnpmVersion = pnpmVersion
+    pnpmVersion = getPnpmVersion()
+    // On CI there is no pnpm on PATH; gradle-node-plugin downloads one into node.pnpmWorkDir.
+    // Tasks that shell out to pnpm themselves instead of using a PnpmTask must go through this.
+    pnpmExecutable = System.getenv('CI') ? getPnpmCommand() : 'pnpm'
+}
+
+node {
+    // as mentioned in the documentation, it's recommended to disable automatic task creation
+    enableTaskRules = false
+}
+
+void verifyPnpmOnPath() {
+    final String executable = Os.isFamily(Os.FAMILY_WINDOWS) ? 'pnpm.cmd' : 'pnpm'
+    final boolean available = (System.getenv('PATH') ?: '')
+        .split(File.pathSeparator)
+        .any { new File(it, executable).canExecute() }
+
+    if (!available) {
+        throw new GradleException(
+            "pnpm is not installed on your system. Please install with 'npm install -g pnpm@${getPnpmVersion()}'"
+        )
+    }
+}
+
+if (System.getenv('CI')) {
+    final String resolvedPnpmVersion = getPnpmVersion()
+    final String resolvedPnpmCommand = getPnpmCommand()
+    node {
+        pnpmVersion = resolvedPnpmVersion
+        pnpmCommand = resolvedPnpmCommand
+    }
+}
+
+tasks.named('pnpmSetup') {
+    // locally we use the pnpm from PATH, so there is nothing to install
+    enabled = System.getenv('CI') != null
+}
+
+tasks.named('pnpmInstall') {
+    mustRunAfter(tasks.named('setVersion'))
+
+    if (!System.getenv('CI')) {
+        doFirst { verifyPnpmOnPath() }
+    }
+}
+
+tasks.withType(PnpmInstallTask).configureEach {
+    // Leave incremental-install decisions entirely to pnpm rather than Gradle. pnpm runs its own
+    // fast up-to-date check against the lock file on every invocation and does nothing when
+    // installed dependencies already match, so Gradle's tracking here only adds risk and cost:
+    //  - Correctness: pnpm resolves versions from more than the root package.json (which is the
+    //    plugin's only declared @InputFile) - workspace member package.json files, and
+    //    catalog/catalogs/overrides/patchedDependencies in pnpm-workspace.yaml. Any of these can
+    //    change without touching the root package.json, leaving Gradle's up-to-date check stale.
+    //  - Cost: the plugin declares node_modules as an @OutputDirectory, but pnpm links workspace
+    //    and transitive packages into it via relative symlinks whose peer-dependency loops yield
+    //    ever-longer unique absolute paths. Gradle 9.6's DirectorySnapshotter cannot detect the
+    //    cycle and recurses until it exhausts the daemon heap.
+    // Untracking the task (see gradle-node-plugin#287, endorsed by the maintainer) sidesteps both:
+    // pnpm owns correctness, and Gradle no longer snapshots node_modules. Trade-off: the task
+    // never reports UP-TO-DATE and always invokes pnpm's (fast) check.
+    doNotTrackState('pnpm runs its own incremental install; see gradle-node-plugin#287')
 }
 
 allprojects {
@@ -55,6 +124,22 @@ allprojects {
         def loggingConfiguration = rootProject.file('logback.xml').absolutePath
         systemProperty 'logback.logLevel', project.findProperty('logLevel')
         systemProperty 'logging.config', loggingConfiguration
+    }
+
+    // TODO A12-19152: remove once dataservices ships a release pinning jsonrpc4j 2.0.0.
+    // The dataservices 39.0.x BOM constrains com.mgmtp.a12.jsonrpc4j:jsonrpc4j to the
+    // pre-release 2.0.0-dev.0, which was removed from artifactory on 2026-08-01, so any
+    // build with a cold cache fails to resolve. 2.0.0 is the published release of the
+    // same code and declares identical dependencies.
+    configurations.configureEach {
+        resolutionStrategy.eachDependency { details ->
+            if (details.requested.group == 'com.mgmtp.a12.jsonrpc4j'
+                && details.requested.name == 'jsonrpc4j'
+                && details.requested.version == '2.0.0-dev.0') {
+                details.useVersion '2.0.0'
+                details.because 'A12-19152: 2.0.0-dev.0 is not published; 2.0.0 is the released equivalent'
+            }
+        }
     }
 }
 
@@ -223,7 +308,7 @@ subprojects {
             includeConfigs = ['runtimeClasspath']
 
             externalReferences = [
-                new ExternalReference(type: ExternalReference.Type.VCS, url: "https://git.geta12.com")
+                new ExternalReference(type: ExternalReference.Type.VCS, url: 'https://git.geta12.com')
             ]
         }
 
@@ -287,7 +372,7 @@ project(':documentation') {
     spotless {
         format('asciidoc') {
             target '**/*.adoc'
-            targetExclude("**/node_modules/**", "**/build/**")
+            targetExclude('**/node_modules/**', '**/build/**')
 
             licenseHeaderFile(rootProject.file('license_header.txt'), '^[=\\[]')
             // transform C-style header to asciidoc block comments
@@ -298,70 +383,61 @@ project(':documentation') {
     }
 }
 
-tasks.register('configurePnpm', LeadingBuildTask) {
-    doLast {
-        if (System.getenv('CI')) {
-            println "Installing $pnpmVersion"
-
-            final Path installDir = Path.of("${rootDir}/.npm")
-            Files.createDirectories(installDir)
-
-            execCommandLine 'npm', 'install', '-g', '--prefix', installDir.toString(), pnpmVersion
-        } else {
-            def os = System.getProperty('os.name').toLowerCase()
-            def pnpmCommand = os.contains('win') ? 'where pnpm' : 'which pnpm'
-            def result = pnpmCommand.execute().text.trim()
-
-            if (result) {
-                println "pnpm is available at: $result"
-            } else {
-                throw new GradleException("pnpm is not installed on your system. Please install with 'npm install -g $pnpmVersion'")
-            }
-        }
-    }
+tasks.register('nodeVerify', PnpmTask) {
+    dependsOn(tasks.named('pnpmInstall'))
+    pnpmCommand.set(['verify'])
 }
 
-tasks.register('installDependencies', LeadingBuildTask) {
-    dependsOn(tasks.named('configurePnpm'))
-    mustRunAfter(tasks.named('setVersion'))
-    doLast { execCommandLine 'pnpm', 'install' }
-}
-
-tasks.register('verify', LeadingBuildTask) {
-    dependsOn(tasks.named('installDependencies'))
-    doLast { execCommandLine 'node', '--run', 'verify' }
-}
-
-tasks.register('_clean', LeadingBuildTask) {
-    dependsOn(tasks.named('installDependencies'))
-    doLast { execCommandLine 'node', '--run', 'clean' }
-}
-
-tasks.named('clean') {
-    dependsOn(tasks.named('_clean'))
-}
-
-tasks.register('_assemble', LeadingBuildTask) {
-    dependsOn(tasks.named('verify'), project(':modelGraph').tasks.named('assemble'))
-    doLast { execCommandLine 'node', '--run', 'build' }
+tasks.register('nodeAssemble', PnpmTask) {
+    dependsOn(tasks.named('nodeVerify'))
+    dependsOn(project(':modelGraph').tasks.named('assemble'))
+    pnpmCommand.set(['build'])
 }
 
 tasks.named('assemble') {
-    dependsOn(tasks.named('_assemble'))
+    dependsOn(tasks.named('nodeAssemble'))
 }
 
-tasks.register('_check', LeadingBuildTask) {
-    mustRunAfter(tasks.named('assemble'))
+tasks.register('assembleWithoutDocker') {
+    group = 'build'
+    description = 'Convenience task to run assemble without docker'
 
-    doLast {
-        execCommandLine(['node', '--run', 'test']) {
-            environment 'NODE_ENV', 'test'
+    dependsOn(tasks.named('nodeAssemble'))
+    subprojects.each { subproject ->
+        if (subproject.name != 'docker') {
+            dependsOn(subproject.tasks.named('assemble'))
         }
     }
 }
 
+tasks.register('nodeTest', PnpmTask) {
+    // The two lifecycle branches are kept strictly separate: `assemble` turns TypeScript into
+    // JavaScript, `check` only runs the tests against the `lib` output that `assemble` produced (and
+    // against the generated models under exampleModels/build). Nothing is compiled here, so `gradle
+    // check` on its own fails on a clean checkout - use `gradle build`, or `gradle assemble check`.
+    dependsOn(tasks.named('pnpmInstall'))
+
+    // `build` depends on both `assemble` and `check` but does not order them, so this constraint is
+    // what actually makes `gradle build` run the assembly first. It only applies when both branches
+    // are in the task graph, which leaves `gradle check` free to fail fast on a clean checkout.
+    mustRunAfter(tasks.named('nodeAssemble'))
+
+    pnpmCommand.set(['test'])
+    environment.put('NODE_ENV', 'test')
+}
+
 tasks.named('check') {
-    dependsOn(tasks.named('_check'))
+    // nodeVerify used to be reached transitively via nodeTest -> nodeAssemble
+    dependsOn(tasks.named('nodeTest'), tasks.named('nodeVerify'))
+}
+
+tasks.register('nodeClean', PnpmTask) {
+    dependsOn(tasks.named('pnpmInstall'))
+    pnpmCommand.set(['clean'])
+}
+
+tasks.named('clean') {
+    dependsOn(tasks.named('nodeClean'))
 }
 
 tasks.register('setVersion', PackageJsonModifierTask) {

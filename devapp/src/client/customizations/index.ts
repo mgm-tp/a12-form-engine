@@ -30,6 +30,8 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
+import { MasterDetailRegionLayoutNG } from "@com.mgmtp.a12.client/client-core";
+
 import type { DevappCustomization } from "../modules/customizationModule.js";
 import { registerCustomization } from "../modules/customizationModule.js";
 
@@ -41,6 +43,7 @@ import {
 	CustomWidgetMapForCustomInput
 } from "./custom-input-as-widget.js";
 import { CustomWidgetMap, FormModelMapForWidgetMap } from "./custom-widgets.js";
+import { MasterDetailFocusDetailEngine, MasterDetailFocusEngine } from "./master-detail-focus.js";
 import { alertInvalidAddRowMiddleware } from "./middlewares/alertInvalidAddRowMiddleware.js";
 import { navigationByEventButtonExampleMiddleware } from "./middlewares/navigationByEventButtonExampleMiddleware.js";
 import { uncollapseAllSectionsMiddleware } from "./middlewares/uncollapseAllSectionsMiddleware.js";
@@ -96,6 +99,18 @@ export function registerDevappCustomizations(): void {
 			FormEngineView: TestCustomButtonEnablementEngine
 		},
 		{ formModelName: "customization.scroll-api-form", FormEngineView: ScrollApiEngine },
+		{
+			formModelName: "customization.masterDetailFocus-form",
+			FormEngineView: MasterDetailFocusEngine,
+			layout: MasterDetailRegionLayoutNG,
+			// nesting multiple preview applications is not supported
+			withoutPreview: true
+		},
+		{
+			formModelName: "customization.masterDetailFocus.detail-form",
+			FormEngineView: MasterDetailFocusDetailEngine,
+			withoutPreview: true
+		},
 		{
 			formModelName: "test.unmarshallFormModel-form",
 			config: { formModelMap: CustomFormModelMapForUnmarshallFormModelExample }

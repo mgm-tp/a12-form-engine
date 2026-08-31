@@ -245,5 +245,31 @@ export const ModelIndexDataLoader: DataLoader = {
 	}
 };
 
+interface FormsListGroup {
+	readonly name: string;
+	readonly forms: readonly string[];
+}
+
+interface FormsList {
+	readonly groups: readonly FormsListGroup[];
+}
+
+/**
+ * A "detail" form (e.g. `customization.masterDetailFocus.detail-form`) only exists as another
+ * form's MasterDetail detail pane - colocated with its parent example for discoverability, but
+ * not meant to show up as its own tile here.
+ */
+function isDetailOnlyForm(form: string): boolean {
+	return form === "detail";
+}
+
 const loadIndex = (indexName = "index") =>
-	fetch(`modelIndex/${indexName}.json`).then(response => response.json());
+	fetch(`modelIndex/${indexName}.json`)
+		.then(response => response.json() as Promise<FormsList>)
+		.then(formsList => ({
+			...formsList,
+			groups: formsList.groups.map(group => ({
+				...group,
+				forms: group.forms.filter(form => !isDetailOnlyForm(form))
+			}))
+		}));

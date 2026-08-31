@@ -465,7 +465,7 @@ export interface DispatchConfiguration {
     onAttachmentDelete(attachment: Attachment, attachmentPath: EntityInstancePath): void;
     onAttachmentDownload(attachment: Attachment, attachmentPath: EntityInstancePath): void;
     onAttachmentUpload(files: AttachmentFile[], formModelElementPath: ModelPath, pathToRepeatGroup?: EntityInstancePath, duplicateStrategy?: DuplicateStrategy, existingFiles?: ExistingFile[]): void;
-    onAttachmentValueChange(path: EntityInstancePath, value: Attachment, formModelElementPath: ModelPath): void;
+    onAttachmentValueChange(path: EntityInstancePath, value: Attachment, formModelElementPath?: ModelPath): void;
     onCancelAttachmentUpload(): void;
     onCollapseSection(collapse: boolean, path: ModelPath): void;
     onEventButton(eventName: string, buttonPath: ModelPath, validation?: FormModel.ButtonValidationEnum): void;
@@ -474,10 +474,10 @@ export interface DispatchConfiguration {
         path: EntityInstancePath;
         value: Attachment;
     }[]): void;
-    onMultiSelectValueChange(path: EntityInstancePath, value: MultiSelectData, formModelElementPath: ModelPath): void;
+    onMultiSelectValueChange(path: EntityInstancePath, value: MultiSelectData, formModelElementPath?: ModelPath): void;
     onNavigationButton(target: string, validation?: FormModel.ButtonValidationEnum): void;
-    onParseError(path: EntityInstancePath, uiValue: string, error: ValueConversionParseError): void;
-    onValueChange(path: EntityInstancePath, value: FieldInstanceValue, formModelElementPath: ModelPath): void;
+    onParseError(path: EntityInstancePath, uiValue: string, error: ValueConversionParseError, formModelElementPath?: ModelPath): void;
+    onValueChange(path: EntityInstancePath, value: FieldInstanceValue, formModelElementPath?: ModelPath): void;
     readonly repeat: DispatchConfiguration.Repeat;
 }
 
@@ -843,6 +843,7 @@ export namespace Events {
     }
     export interface ParseErrorPayload {
         readonly error: ValueConversionParseError;
+        readonly formModelElementPath?: ModelPath;
         readonly path: EntityInstancePath;
         readonly uiValue: string;
     }

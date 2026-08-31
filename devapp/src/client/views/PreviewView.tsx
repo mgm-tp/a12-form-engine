@@ -123,8 +123,7 @@ export default function CustomPreviewApp(props: PreviewProps): JSX.Element {
 			state =>
 				(
 					ActivitySelectors.data(activityId)(state) as
-						| FormActivity.Data.SingleDocumentData
-						| undefined
+						FormActivity.Data.SingleDocumentData | undefined
 				)?.document
 		) ?? {};
 

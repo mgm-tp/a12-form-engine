@@ -30,7 +30,20 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { register } from "node:module";
-import { pathToFileURL } from "node:url";
+import { registerHooks } from "node:module";
 
-register(pathToFileURL("./scripts/mocha/svg-loader-hook.js"), import.meta.url);
+/**
+ * Synchronous, in-thread Node.js module hook to mock SVG imports.
+ */
+registerHooks({
+	load(url, context, nextLoad) {
+		if (url.endsWith(".svg")) {
+			return {
+				format: "module",
+				shortCircuit: true,
+				source: 'export default "mocked-svg-path";'
+			};
+		}
+		return nextLoad(url, context);
+	}
+});

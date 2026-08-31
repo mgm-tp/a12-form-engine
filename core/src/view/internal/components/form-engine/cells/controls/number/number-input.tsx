@@ -73,7 +73,12 @@ export function NumberInput(
 				const result = conversion.parseValue(newValue.trim(), conversionConfig);
 
 				if (result.parseError) {
-					options.eventHandlers.onParseError(value.path, newValue, result.parseError);
+					options.eventHandlers.onParseError(
+						value.path,
+						newValue,
+						result.parseError,
+						props.formModelPath
+					);
 				} else {
 					options.eventHandlers.onValueChange(value.path, result.value!, props.formModelPath);
 				}

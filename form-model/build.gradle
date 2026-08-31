@@ -85,9 +85,87 @@ tasks.register('consistencyCheckJar', Jar) {
     description = 'Creates an executable JAR for the ConsistencyCheckCLI tool'
 }
 
+def patchSourceDir = prepareModels.inputDir.get()
+def patchedOutputDir = layout.buildDirectory.dir('generated/patchedTestResources')
+
+tasks.register('validatePatches') {
+    description = 'Validates that all .json.patch files apply cleanly to their corresponding .json files'
+    group = 'verification'
+
+    def sourceDir = patchSourceDir.asFile
+    inputs.files(fileTree(dir: sourceDir, include: '**/*.json.patch'))
+
+    doLast {
+        def execOps = services.get(ExecOperations)
+        def failingPatches = []
+        fileTree(dir: sourceDir, include: '**/*.json.patch').each { patchFile ->
+            def result = execOps.exec {
+                workingDir = sourceDir
+                environment 'GIT_DIR', ''
+                commandLine 'git', 'apply', '--check', '--no-index', '-p1', patchFile.absolutePath
+                ignoreExitValue = true
+            }
+            if (result.exitValue != 0) {
+                failingPatches << patchFile.absolutePath
+            }
+        }
+        if (failingPatches) {
+            throw new GradleException("The following patches are not applicable:\n${failingPatches.join('\n')}")
+        }
+    }
+}
+
+tasks.register('applyTestPatches') {
+    description = 'Applies .json.patch files to produce broken test fixtures in the build directory'
+    group = 'verification'
+    dependsOn(tasks.named('validatePatches'))
+
+    def sourceDir = patchSourceDir.asFile
+    def patchFiles = fileTree(dir: sourceDir, include: '**/*.json.patch')
+    inputs.files(patchFiles)
+    inputs.files(patchFiles.collect { patchFile ->
+        new File(sourceDir, sourceDir.toPath().relativize(patchFile.toPath()).toString().replace('.json.patch', '.json'))
+    })
+    outputs.dir(patchedOutputDir)
+
+    doLast {
+        def execOps = services.get(ExecOperations)
+        def outDir = patchedOutputDir.get().asFile
+        outDir.deleteDir()
+        fileTree(dir: sourceDir, include: '**/*.json.patch').each { patchFile ->
+            def relJson = sourceDir.toPath().relativize(patchFile.toPath()).toString().replace('.json.patch', '.json')
+            def outFile = new File(outDir, relJson)
+            outFile.parentFile.mkdirs()
+            outFile.bytes = new File(sourceDir, relJson).bytes
+            execOps.exec {
+                workingDir = outDir
+                environment 'GIT_DIR', ''
+                commandLine 'git', 'apply', '--no-index', '-p1', patchFile.absolutePath
+            }
+        }
+    }
+}
+
+tasks.named('processTestResources') {
+    exclude '**/*.json.patch'
+    exclude { element ->
+        element.name.endsWith('.json') &&
+            new File(element.file.parentFile, element.name.replace('.json', '.json.patch')).exists()
+    }
+}
+
+tasks.named('check') {
+    dependsOn(tasks.named('validatePatches'))
+}
+
+tasks.named('test') {
+    dependsOn(tasks.named('applyTestPatches'))
+    classpath = files(patchedOutputDir) + classpath
+}
+
 // Copy expression parser JS file during resource processing
 tasks.register('copyExpressionParser', Copy) {
-    dependsOn(rootProject.tasks.named('installDependencies'))
+    dependsOn(rootProject.tasks.named('pnpmInstall'))
     mustRunAfter(rootProject.tasks.named('copyLicenseFilesTocore'))
 
     from layout.projectDirectory.file('../core/node_modules/@com.mgmtp.a12.expression/expression-core/dist/parser.js')

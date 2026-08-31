@@ -61,8 +61,7 @@ import {
 
 import { FormEngineActions } from "./actions.js";
 import { FormEngineStateAdapter } from "./state.js";
-import { useFocus } from "./useFocus.js";
-import { useScrollToTop } from "./useScrollToTop.js";
+import { useScrollBehavior } from "./useScrollBehavior.js";
 
 export type EngineCompositionProps = Pick<View, "activityId" | "ariaLevel"> &
 	FormEngineRendererPropsType &
@@ -87,15 +86,10 @@ function EngineComposition(props: EngineCompositionProps): JSX.Element | null {
 	const internalScrollRef = useRef<ScrollApi>(null);
 	const scrollRef = props.scrollRef ?? internalScrollRef;
 
-	useScrollToTop({
+	useScrollBehavior({
 		scrollRef,
 		activityId,
 		disable: props.disableScrollToTopLevelScreen
-	});
-
-	useFocus({
-		scrollRef,
-		activityId
 	});
 
 	const activityContextValue = useMemo(

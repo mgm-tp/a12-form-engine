@@ -92,12 +92,7 @@ function errorMessage(): ValidationMessage {
 
 function field(
 	fieldType:
-		| "DateType"
-		| "DateTimeType"
-		| "TimeType"
-		| "DateFragmentType"
-		| "DateRangeType"
-		| "StringType"
+		"DateType" | "DateTimeType" | "TimeType" | "DateFragmentType" | "DateRangeType" | "StringType"
 ): DocumentModel.Element {
 	return {
 		id: "id",

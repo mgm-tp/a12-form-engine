@@ -37,15 +37,15 @@ import type {
 	Activity,
 	DataProvider,
 	DynamicConfiguration,
+	DynamicScene,
 	ViewNGProps
 } from "@com.mgmtp.a12.client/client-core";
-import { NullRegionLayoutNG } from "@com.mgmtp.a12.client/client-core";
+import { ActivitySelectors, NullRegionLayoutNG } from "@com.mgmtp.a12.client/client-core";
 import type { Config, FormActivity } from "@com.mgmtp.a12.formengine/formengine-core";
 import { FormEngineViews } from "@com.mgmtp.a12.formengine/formengine-core";
 
 import { externalEnumerationProvider } from "../customizations/configurable_externalenumeration.js";
 import { CustomSelectorMap } from "../customizations/customSelectorMap.js";
-import { isRecord } from "../typeguards.js";
 
 import { getCustomization } from "./customizationModule.js";
 import { selectCurrentFormName } from "./utils.js";
@@ -67,8 +67,25 @@ export interface InstanceDataholder extends Activity.DataHolder<FormActivity.Dat
 	};
 }
 
-export function isInstanceDescriptor(value: unknown): boolean {
-	return isRecord(value) && value.instance !== undefined && value.formName !== undefined;
+export function isInstanceDescriptor(descriptor?: Activity.Descriptor): boolean {
+	return (
+		descriptor?.instance !== undefined &&
+		descriptor.formName !== undefined &&
+		descriptor.isDetail === undefined
+	);
+}
+
+/**
+ * Matches "detail" instance activities, created alongside an already-open instance activity to
+ * add a further view into the same region (e.g. for a MasterDetail example) instead of replacing
+ * it. See `DevappCustomization.layout`.
+ */
+export function isInstanceDetailDescriptor(descriptor?: Activity.Descriptor): boolean {
+	return (
+		descriptor?.instance !== undefined &&
+		descriptor.formName !== undefined &&
+		descriptor.isDetail !== undefined
+	);
 }
 
 export interface LoadInstanceConfig extends DataProvider.LoadConfig {
@@ -80,9 +97,24 @@ export interface SaveInstanceConfig extends DataProvider.SaveConfig {
 }
 
 function DynamicView(props: ViewNGProps) {
-	const formName = useSelector(selectCurrentFormName);
+	// Looked up per-activity (rather than via `selectCurrentFormName`) so that a "detail" view
+	// added alongside the main instance activity (see `detail-instance-scene` below) resolves its
+	// own customization instead of the main activity's.
+	const formName = useSelector(
+		ActivitySelectors.activityPropById(props.activityId, activity => activity.descriptor.formName)
+	);
 
-	const { FormEngineView, config } = getCustomization(formName) ?? {};
+	// The activity behind this view can be cancelled (e.g. a MasterDetail detail pane being
+	// replaced) while this component is still mounted, playing its exit transition - `formName`
+	// then resolves to undefined. Rendering nothing here is deliberate: falling through to
+	// `getCustomization(undefined) ?? {}` would default `withoutPreview` to false, wrapping stale
+	// content in the full `LazyPreview`/`PreviewView` app shell for the remainder of the exit
+	// transition instead of just fading out.
+	if (formName === undefined) {
+		return null;
+	}
+
+	const { FormEngineView, config, withoutPreview } = getCustomization(formName) ?? {};
 
 	const FE = FormEngineView ?? FormEngineViews.FormEngine;
 
@@ -93,11 +125,55 @@ function DynamicView(props: ViewNGProps) {
 		...config
 	};
 
-	return (
+	// Keyed by activityId: the region layout (e.g. `MasterDetailRegionLayoutNG`) keys its panes by
+	// position, not activity, so replacing one detail activity with another re-renders this same
+	// `FE` instance in place. Without a key here, the FormEngine render guard (which never shows
+	// its placeholder again once initialized) would keep showing the *previous* activity's content
+	// until the new one's model finishes loading, instead of resetting for the new activity.
+	return withoutPreview ? (
+		// PreviewApplication normally establishes the page height (`height: 100%`, cascading from a
+		// sized ancestor); without it there is nothing to size against, so it is set explicitly here.
+		<div style={{ height: "100vh" }}>
+			<FE key={props.activityId} {...props} {...customConfig} />
+		</div>
+	) : (
 		<LazyPreview {...props}>
-			<FE {...props} {...customConfig} />
+			<FE key={props.activityId} {...props} {...customConfig} />
 		</LazyPreview>
 	);
+}
+
+/**
+ * Detail activities can use a different form than the main instance activity (e.g. a "master"
+ * settings form spawning a differently-modeled "detail" form). Since a `DynamicScene`'s
+ * `sceneChange` is static (not a function of the specific matching activity), one scene per
+ * distinct detail form name currently present is generated here instead.
+ */
+function detailInstanceScenes(state: object): DynamicScene[] {
+	const detailFormNames = new Set<string>();
+
+	for (const activity of Object.values(ActivitySelectors.activities()(state))) {
+		const descriptor = activity?.descriptor;
+		if (descriptor && isInstanceDetailDescriptor(descriptor) && descriptor.formName) {
+			detailFormNames.add(descriptor.formName);
+		}
+	}
+
+	return Array.from(detailFormNames).map(detailFormName => ({
+		name: `detail-instance-scene-${detailFormName}`,
+		matches: descriptor =>
+			isInstanceDetailDescriptor(descriptor) && descriptor.formName === detailFormName,
+		sceneChange: {
+			onEnter: [
+				{
+					type: "DYNAMIC_ADD_VIEW",
+					component: DynamicView,
+					region: "/CONTENT",
+					models: [{ modelType: "form", name: detailFormName }]
+				}
+			]
+		}
+	}));
 }
 
 /**
@@ -128,6 +204,7 @@ export const formEngineModule: DynamicConfiguration = {
 	id: "default-single-instance-module",
 	flows(state) {
 		const formName = selectCurrentFormName(state);
+		const customization = getCustomization(formName);
 
 		return [
 			{
@@ -146,7 +223,8 @@ export const formEngineModule: DynamicConfiguration = {
 										},
 										{
 											type: "DYNAMIC_CLEAR_REGION",
-											region: "/CONTENT"
+											region: "/CONTENT",
+											layout: customization?.layout
 										},
 										{
 											type: "DYNAMIC_ADD_VIEW",
@@ -157,7 +235,8 @@ export const formEngineModule: DynamicConfiguration = {
 									]
 								}
 							: {}
-					}
+					},
+					...detailInstanceScenes(state)
 				]
 			}
 		];

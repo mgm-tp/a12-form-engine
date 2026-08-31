@@ -58,9 +58,7 @@ describe("unit.view.validation.correctionMode.visibilityAndUnfixable", () => {
 					MasterFieldDependentControl: true
 				},
 				repeatableGroup: [
-					{
-						/** Empty first row */
-					},
+					{/** Empty first row */},
 					{
 						MasterFields: {
 							MasterFieldDependentFieldRep: true,
@@ -71,9 +69,7 @@ describe("unit.view.validation.correctionMode.visibilityAndUnfixable", () => {
 							DependentGroup: {}
 						},
 						nestedRepeatableGroup: [
-							{
-								/** Empty first row */
-							},
+							{/** Empty first row */},
 							{
 								MasterFields: {
 									MasterFieldDependentFieldNestedRep: true,

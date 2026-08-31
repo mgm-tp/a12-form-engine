@@ -1,0 +1,56 @@
+{
+  "header": {
+    "id": "screen-parent-detached-repeat",
+    "modelType": "form",
+    "modelVersion": "39.0.0",
+    "locales": [
+      {
+        "code": "en"
+      }
+    ],
+    "modelReferences": [
+      {
+        "alias": "DM",
+        "modelType": "document",
+        "purpose": "data binding",
+        "reference": "MixinFixturesDocumentModel"
+      }
+    ],
+    "annotations": [
+      {
+        "name": "roles",
+        "value": "admin"
+      }
+    ]
+  },
+  "content": {
+    "subHeaderBox": {
+      "id": "subHeaderBox1"
+    },
+    "footerBox": {
+      "id": "footerBox1"
+    },
+    "screens": [
+      {
+        "id": "s1",
+        "name": "Screen1",
+        "screenElements": [
+          {
+            "type": "DetachedRepeat",
+            "id": "dr1",
+            "name": "detachedRepeat1",
+            "groupRef": "repeatGroup1",
+            "detailScreen": {
+              "id": "detail1",
+              "name": "detailScreen1",
+              "screenElements": []
+            }
+          }
+        ]
+      }
+    ],
+    "fieldConfiguration": {},
+    "groupConfiguration": {},
+    "defaults": {}
+  }
+}

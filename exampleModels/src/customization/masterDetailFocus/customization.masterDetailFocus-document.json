@@ -1,0 +1,128 @@
+{
+  "header": {
+    "id": "customization.masterDetailFocus-document",
+    "modelType": "document",
+    "modelVersion": "29.4.0",
+    "locales": [
+      {
+        "code": "de"
+      },
+      {
+        "code": "en"
+      }
+    ],
+    "annotations": [
+      {
+        "name": "roles",
+        "value": "admin"
+      }
+    ],
+    "modelReferences": []
+  },
+  "content": {
+    "modelInfo": {
+      "name": "customization.masterDetailFocus-document"
+    },
+    "modelConfig": {
+      "decimalSeparator": ".",
+      "timeZone": "UTC",
+      "conditionLanguage": {
+        "code": "en_US"
+      }
+    },
+    "modelRoot": {
+      "rootGroups": [
+        {
+          "type": "Group",
+          "id": "group_1a2b3",
+          "name": "settings",
+          "Group": {
+            "repeatability": 1,
+            "elements": [
+              {
+                "type": "Field",
+                "id": "field_delay01",
+                "name": "openDetailDelayMsField",
+                "Field": {
+                  "fieldType": {
+                    "type": "NumberType"
+                  },
+                  "label": [
+                    {
+                      "locale": "de",
+                      "text": "Verzoegerung des Model-Ladevorgangs"
+                    },
+                    {
+                      "locale": "en",
+                      "text": "Detail model load delay (ms)"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Field",
+                "id": "field_anim01",
+                "name": "animationDurationMsField",
+                "Field": {
+                  "fieldType": {
+                    "type": "NumberType"
+                  },
+                  "label": [
+                    {
+                      "locale": "de",
+                      "text": "Animationsdauer"
+                    },
+                    {
+                      "locale": "en",
+                      "text": "MasterDetail pane animation duration (ms)"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Field",
+                "id": "field_safety01",
+                "name": "reopenSafetyDelayMsField",
+                "Field": {
+                  "fieldType": {
+                    "type": "NumberType"
+                  },
+                  "label": [
+                    {
+                      "locale": "de",
+                      "text": "Sicherheitsverzoegerung"
+                    },
+                    {
+                      "locale": "en",
+                      "text": "Safety delay before reopening detail (ms)"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Field",
+                "id": "field_countdown01",
+                "name": "reopenCountdownDisplayField",
+                "Field": {
+                  "fieldType": {
+                    "type": "StringType"
+                  },
+                  "label": [
+                    {
+                      "locale": "de",
+                      "text": "Countdown"
+                    },
+                    {
+                      "locale": "en",
+                      "text": "Countdown"
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

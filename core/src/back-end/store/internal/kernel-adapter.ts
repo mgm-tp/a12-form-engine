@@ -261,8 +261,7 @@ export function isFieldRequired(
 ): boolean {
 	const id = ModelPath.toString(fieldPath);
 	const metaField = validatorProvider?.getMetaModel().getValue(IMetaKeys.MODEL_META_FIELD, id) as
-		| IMetaField
-		| undefined;
+		IMetaField | undefined;
 
 	// Attachment/MultiSelect can never be required
 	if (metaField === undefined) {

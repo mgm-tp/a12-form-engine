@@ -86,8 +86,9 @@ export const StyledSelect = styled(CustomSelect)<CustomSelectProps & { $width?: 
 		flex-grow: 0;
 
 		${StyledSelectTemplate.StyledFieldSelectWrapper} {
-			border: ${readonly &&
-			`1px solid ${(theme as DefaultThemeType).colors.interaction.readonly.color}`};
+			border: ${
+				readonly && `1px solid ${(theme as DefaultThemeType).colors.interaction.readonly.color}`
+			};
 			flex-grow: 0;
 		}
 

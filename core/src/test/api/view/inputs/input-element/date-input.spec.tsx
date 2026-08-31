@@ -255,7 +255,8 @@ describe("api.view.inputs", () => {
 					deepStrictEqual(dispatchConfig.onParseError.mock.calls[0].arguments, [
 						datePath,
 						"abc",
-						expectedParseError
+						expectedParseError,
+						baseProps.formModelPath
 					]);
 				});
 			});

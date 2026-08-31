@@ -270,10 +270,7 @@ describe("api.view.repeat", () => {
 		}
 
 		type StubbedFunctions =
-			| "onClearFilters"
-			| "onFilterParseError"
-			| "onFilterValueChange"
-			| "onShowFilter";
+			"onClearFilters" | "onFilterParseError" | "onFilterValueChange" | "onShowFilter";
 
 		type RepeatDispatchMocks = DispatchConfiguration.Repeat &
 			Record<StubbedFunctions, Mock<() => unknown>>;

@@ -1,0 +1,244 @@
+{
+  "header": {
+    "id": "customization.masterDetailFocus-form",
+    "modelType": "form",
+    "modelVersion": "39.0.0",
+    "locales": [
+      {
+        "code": "de"
+      },
+      {
+        "code": "en"
+      }
+    ],
+    "annotations": [
+      {
+        "name": "roles",
+        "value": "admin"
+      }
+    ],
+    "modelReferences": [
+      {
+        "alias": "DM",
+        "modelType": "document",
+        "purpose": "data binding",
+        "reference": "customization.masterDetailFocus-document"
+      }
+    ]
+  },
+  "content": {
+    "subHeaderBox": {
+      "id": "subHeaderBox1",
+      "majorButtons": {
+        "button": [
+          {
+            "type": "EVENT",
+            "id": "button-3dc7c",
+            "name": "open-detail",
+            "buttonStyling": {
+              "label": {
+                "type": "Multilingual",
+                "multilingualText": {
+                  "text": [
+                    {
+                      "locale": "de",
+                      "text": "open-detail"
+                    },
+                    {
+                      "locale": "en",
+                      "text": "open-detail"
+                    }
+                  ]
+                }
+              },
+              "priority": "PRIMARY"
+            },
+            "event": "open-detail",
+            "scope": "ALWAYS"
+          },
+          {
+            "type": "EVENT",
+            "id": "button-3f9a1",
+            "name": "return-to-index",
+            "buttonStyling": {
+              "label": {
+                "type": "Multilingual",
+                "multilingualText": {
+                  "text": [
+                    {
+                      "locale": "de",
+                      "text": "return-to-index"
+                    },
+                    {
+                      "locale": "en",
+                      "text": "return-to-index"
+                    }
+                  ]
+                }
+              },
+              "priority": "SECONDARY"
+            },
+            "event": "return-to-index",
+            "scope": "ALWAYS"
+          }
+        ]
+      }
+    },
+    "footerBox": {
+      "id": "footerBox1"
+    },
+    "screens": [
+      {
+        "id": "screen1",
+        "name": "Screen1",
+        "screenElements": [
+          {
+            "type": "ControlGrid",
+            "id": "controlgrid-512c7",
+            "name": "cg",
+            "row": [
+              {
+                "type": "Row",
+                "id": "row-294c3",
+                "cell": [
+                  {
+                    "type": "TextCell",
+                    "id": "textcell-2d2cf",
+                    "name": "description",
+                    "content": {
+                      "text": [
+                        {
+                          "locale": "en",
+                          "text": "This is the master pane of the devapp's MasterDetail focus example. Clicking \"open-detail\" creates a second activity for the detail form, added as a further view into the MasterDetail region layout."
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            ],
+            "verticalAlignment": "TOP"
+          },
+          {
+            "type": "Section",
+            "id": "section_debug01",
+            "name": "debug",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "de",
+                    "text": "Debug"
+                  },
+                  {
+                    "locale": "en",
+                    "text": "Debug"
+                  }
+                ]
+              }
+            },
+            "collapsible": true,
+            "initiallyCollapsed": true,
+            "screenElements": [
+              {
+                "type": "ControlGrid",
+                "id": "controlgrid_debug01",
+                "name": "cg-debug",
+                "row": [
+                  {
+                    "type": "Row",
+                    "id": "row_debug_description01",
+                    "cell": [
+                      {
+                        "type": "TextCell",
+                        "id": "textcell_debug_description01",
+                        "name": "debug-description",
+                        "content": {
+                          "text": [
+                            {
+                              "locale": "en",
+                              "text": "Adjust the fields below to explore the resulting focus timing race. While \"open-detail\" is reopening an already-open detail (see the countdown below), the button is disabled, but the fields stay editable - any changes made during that wait only take effect on the *next* \"open-detail\" click, not the one already in progress."
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "type": "Row",
+                    "id": "row_delay01",
+                    "name": "Delay",
+                    "cell": [
+                      {
+                        "type": "Control",
+                        "id": "control_delay01",
+                        "elementRef": "field_delay01"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "Row",
+                    "id": "row_anim01",
+                    "name": "Animation",
+                    "cell": [
+                      {
+                        "type": "Control",
+                        "id": "control_anim01",
+                        "elementRef": "field_anim01"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "Row",
+                    "id": "row_safety01",
+                    "name": "Safety delay",
+                    "cell": [
+                      {
+                        "type": "Control",
+                        "id": "control_safety01",
+                        "elementRef": "field_safety01"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "Row",
+                    "id": "row_countdown01",
+                    "name": "Countdown",
+                    "cell": [
+                      {
+                        "type": "Control",
+                        "id": "control_countdown01",
+                        "readonly": true,
+                        "elementRef": "field_countdown01"
+                      }
+                    ]
+                  }
+                ],
+                "verticalAlignment": "TOP"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "fieldConfiguration": {
+      "field": [
+        {
+          "initialValue": "0",
+          "elementRef": "field_delay01"
+        },
+        {
+          "initialValue": "300",
+          "elementRef": "field_anim01"
+        },
+        {
+          "initialValue": "100",
+          "elementRef": "field_safety01"
+        }
+      ]
+    },
+    "groupConfiguration": {},
+    "defaults": {}
+  }
+}

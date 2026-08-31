@@ -1,6 +1,6 @@
 {
   "name": "@com.mgmtp.a12.formengine/form-model-generator",
-  "version": "39.0.0",
+  "version": "39.0.1",
   "description": "Form Model Generator",
   "author": "mgm technology partners",
   "license": "(EUPL-1.2 OR LicenseRef-commercial)",
@@ -8,8 +8,9 @@
   "sideEffects": false,
   "exports": "./lib/main/ts/generator/index.js",
   "scripts": {
-    "clean": "rimraf ./lib ./target cyclonedx.json",
-    "build": "pnpm run \"/^compile:.*/\"",
+    "clean": "git clean -fdX -- lib target cyclonedx.json",
+    "build": "node --run compile",
+    "compile": "pnpm run \"/^compile:.*/\"",
     "compile:version": "node scripts/version.js",
     "compile:typescript": "tsc && tsc --project ./tsconfig.lib.json",
     "compile:detect-cycles": "devtools detect-cycles \"./src/**/*.@(ts|tsx|d.ts|d.cts|d.mts)\"",
@@ -32,7 +33,6 @@
     "@types/node": "catalog:",
     "eslint": "catalog:",
     "mocha": "catalog:",
-    "rimraf": "catalog:",
     "source-map-support": "catalog:",
     "typescript": "catalog:"
   },

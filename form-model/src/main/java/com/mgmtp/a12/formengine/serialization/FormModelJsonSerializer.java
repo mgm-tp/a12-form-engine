@@ -240,6 +240,7 @@ abstract class DefaultsTypeMixin {
 	@JsonSubTypes.Type(value = StaticAmountSuffixType.class, name = "static"),
 	@JsonSubTypes.Type(value = DynamicAmountSuffixType.class, name = "dynamic"),
 })
+@JsonIgnoreProperties({ "type" })
 abstract class AmountSuffixTypeMixin {
 }
 
@@ -250,12 +251,10 @@ interface AnnotationMixin {
 }
 
 abstract class ButtonPanelTypeMixin {
-
 	@JsonManagedReference(value = "buttonParent")
 	List<ButtonType> button;
 }
 
-@JsonIgnoreProperties({ "parent" })
 abstract class ButtonTypeMixin {
 	@JsonSerialize(converter = MarkerConverter.class)
 	boolean showReadonly;

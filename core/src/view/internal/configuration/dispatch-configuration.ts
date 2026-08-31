@@ -68,13 +68,25 @@ export interface DispatchConfiguration {
 	/** Called when an input is touched */
 	onInputTouched(): void;
 
-	/** Called when an attachment is downloaded */
+	/** Called when an attachment is downloaded
+	 * @param attachment the attachment, that should be downloaded
+	 * @param attachmentPath the path to the attachment in the document
+	 */
 	onAttachmentDownload(attachment: Attachment, attachmentPath: EntityInstancePath): void;
 
-	/** Called when an attachment is deleted */
+	/** Called when an attachment is deleted
+	 * @param attachment the attachment, that should be deleted from the document
+	 * @param attachmentPath the path to the attachment in the document
+	 */
 	onAttachmentDelete(attachment: Attachment, attachmentPath: EntityInstancePath): void;
 
-	/** Called when attachments are uploaded */
+	/** Called when attachments are uploaded
+	 * @param files the files to be uploaded
+	 * @param formModelElementPath the path to the corresponding form model control, required for indexed controls
+	 * @param pathToRepeatGroup if multi-file upload, the path to the group the repeat corresponds to
+	 * @param duplicateStrategy if multi-file upload, how to handle duplicates
+	 * @param existingFiles if multi-file upload, the existingFiles that were already uploaded
+	 */
 	onAttachmentUpload(
 		files: AttachmentFile[],
 		formModelElementPath: ModelPath,
@@ -90,11 +102,12 @@ export interface DispatchConfiguration {
 	 * Called when an UI-value changed.
 	 * @param path the path to the field in the document
 	 * @param value an already parsed value which should be changed in the document
+	 * @param formModelElementPath the path to the corresponding form model control, required for indexed controls
 	 */
 	onValueChange(
 		path: EntityInstancePath,
 		value: FieldInstanceValue,
-		formModelElementPath: ModelPath
+		formModelElementPath?: ModelPath
 	): void;
 
 	/**
@@ -102,14 +115,24 @@ export interface DispatchConfiguration {
 	 * @param path the path to the field in the document
 	 * @param uiValue invalid entered value
 	 * @param error the error which occurred
+	 * @param formModelElementPath the path to the corresponding form model control, required for indexed controls
 	 */
-	onParseError(path: EntityInstancePath, uiValue: string, error: ValueConversionParseError): void;
+	onParseError(
+		path: EntityInstancePath,
+		uiValue: string,
+		error: ValueConversionParseError,
+		formModelElementPath?: ModelPath
+	): void;
 
-	/** Called when an attachment value changed. */
+	/** Called when an attachment value changed.
+	 * @param path the path to the field in the document
+	 * @param value the attachment, that should be added to the document
+	 * @param formModelElementPath the path to the corresponding form model control, required for indexed controls
+	 */
 	onAttachmentValueChange(
 		path: EntityInstancePath,
 		value: Attachment,
-		formModelElementPath: ModelPath
+		formModelElementPath?: ModelPath
 	): void;
 
 	/**
@@ -129,11 +152,15 @@ export interface DispatchConfiguration {
 		toBeReplaced?: { path: EntityInstancePath; value: Attachment }[]
 	): void;
 
-	/** Called when a multi-select value changed. */
+	/** Called when a multi-select value changed.
+	 * @param path the path to the field in the document
+	 * @param value the multi-select value, that should be added to the document
+	 * @param formModelElementPath the path to the corresponding form model control, required for indexed controls
+	 */
 	onMultiSelectValueChange(
 		path: EntityInstancePath,
 		value: MultiSelectData,
-		formModelElementPath: ModelPath
+		formModelElementPath?: ModelPath
 	): void;
 
 	/**

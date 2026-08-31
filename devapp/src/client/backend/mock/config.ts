@@ -36,14 +36,18 @@ import { ModelActions } from "@com.mgmtp.a12.client/client-core";
 import { createHttpModelLoader } from "@com.mgmtp.a12.client/client-core/modelLoader";
 import { FormModelProcessor } from "@com.mgmtp.a12.formengine/formengine-core";
 
+import { withMasterDetailFocusModelLoadDelay } from "../../customizations/master-detail-focus.js";
+
 import { mockCreateEmptyDocumentDataProvider } from "./mockCreateEmptyDataProvider.js";
 import { mockSingleDocumentDataProvider } from "./mockDataProvider.js";
 
 export const mockConfig = {
-	modelLoader: createHttpModelLoader({
-		basePath: "models/",
-		modelProcessors: [FormModelProcessor]
-	}),
+	modelLoader: withMasterDetailFocusModelLoadDelay(
+		createHttpModelLoader({
+			basePath: "models/",
+			modelProcessors: [FormModelProcessor]
+		})
+	),
 	dataHandlers: [mockCreateEmptyDocumentDataProvider(), mockSingleDocumentDataProvider]
 };
 

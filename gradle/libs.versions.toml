@@ -1,16 +1,17 @@
 # Run gradle versionCatalogUpdate --interactive to update this file
 [versions]
-build-utilities = "0.3.1"
-dataservices = "39.0.1"
-prepare-models = "0.9.0"
+build-utilities = "0.4.2"
+dataservices = "39.0.3"
+integration = "0.1.8"
+prepare-models = "0.10.0"
 # Gradle plugins (third-party)
-asciidoc = "4.0.5"
 cyclonedx = "3.2.4"
 docker = "10.0.0"
 shadow = "9.4.2"
 spotbugs = "6.5.6"
 spotless = "8.7.0"
 version-catalog-update = "1.1.0"
+node-gradle = "7.1.0"
 # Third-party libraries
 commons-cli = "1.11.0"
 commons-collections4 = "4.5.0"
@@ -66,11 +67,12 @@ metainf-services = { module = "org.kohsuke.metainf-services:metainf-services", v
 nashorn-core = { module = "org.openjdk.nashorn:nashorn-core", version.ref = "nashorn-core" }
 
 [plugins]
-asciidoc = { id = "org.asciidoctor.jvm.convert", version.ref = "asciidoc" }
 cyclonedx = { id = "org.cyclonedx.bom", version.ref = "cyclonedx" }
 docker = { id = "com.bmuschko.docker-remote-api", version.ref = "docker" }
+integration = { id = "com.mgmtp.a12.devtools.plugins.integration", version.ref = "integration" }
 prepare-models = { id = "com.mgmtp.a12.devtools.plugins.prepare-models", version.ref = "prepare-models" }
 shadow = { id = "com.gradleup.shadow", version.ref = "shadow" }
 spotbugs = { id = "com.github.spotbugs", version.ref = "spotbugs" }
 spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }
 version-catalog-update = { id = "nl.littlerobots.version-catalog-update", version.ref = "version-catalog-update" }
+node-gradle = { id = "com.github.node-gradle.node", version.ref = "node-gradle" }

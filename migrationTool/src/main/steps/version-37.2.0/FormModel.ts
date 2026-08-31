@@ -359,14 +359,7 @@ export namespace FormModel {
 	}
 
 	export type PlaceholderIconType =
-		| "default"
-		| "image"
-		| "text"
-		| "spreadsheet"
-		| "pdf"
-		| "video"
-		| "sound"
-		| "none";
+		"default" | "image" | "text" | "spreadsheet" | "pdf" | "video" | "sound" | "none";
 
 	export type AttachmentDefaultActionType = "replace" | "download";
 
@@ -1436,11 +1429,7 @@ export namespace FormModel {
 		| CustomScreenElement;
 
 	export type LabeledComponent =
-		| ButtonType
-		| RowAction
-		| FieldBasedInput
-		| ExpressionCell
-		| ExpressionOverviewColumn;
+		ButtonType | RowAction | FieldBasedInput | ExpressionCell | ExpressionOverviewColumn;
 
 	export type ComponentWithDescription = ButtonType | RowAction;
 }

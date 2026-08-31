@@ -32,7 +32,7 @@
 
 import type { ComponentType } from "react";
 
-import type { Module } from "@com.mgmtp.a12.client/client-core";
+import type { LayoutNG, Module } from "@com.mgmtp.a12.client/client-core";
 import { ModuleRegistryProvider } from "@com.mgmtp.a12.client/client-core";
 import type { FormEngineViews, Config } from "@com.mgmtp.a12.formengine/formengine-core";
 
@@ -52,6 +52,19 @@ export interface DevappCustomization extends Omit<Module, "id"> {
 
 	readonly config?: Partial<Config>;
 
+	/**
+	 * Overrides the layout used for the `/CONTENT` region while this form model is open, e.g. to
+	 * use `MasterDetailRegionLayoutNG` for examples that add further views into that region.
+	 */
+	readonly layout?: LayoutNG;
+
+	/**
+	 * Skips wrapping the form in the devapp preview application (header/menu/sidebar). Needed for
+	 * examples that render multiple views into `/CONTENT` at once, since nesting multiple
+	 * `PreviewApplication`s is not supported.
+	 */
+	readonly withoutPreview?: boolean;
+
 	readonly FormEngineView?: ComponentType<FormEngineViews.FormEngineProps>;
 }
 
@@ -59,8 +72,7 @@ export function getCustomization(currentForm?: string) {
 	return ModuleRegistryProvider.getInstance()
 		.getAllModules()
 		.find(mod => "formModelName" in mod && currentForm === mod.formModelName) as
-		| DevappCustomization
-		| undefined;
+		DevappCustomization | undefined;
 }
 
 /**

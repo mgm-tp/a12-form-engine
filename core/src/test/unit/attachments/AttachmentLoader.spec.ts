@@ -147,10 +147,8 @@ describe("unit.attachments.AttachmentLoader", () => {
 							)
 				);
 
-				const jsonMock = mock.method(
-					Dispatcher,
-					"rest",
-					(): Promise<(typeof results)[number]> => Promise.reject("error1")
+				const jsonMock = mock.method(Dispatcher, "rest", (): Promise<(typeof results)[number]> =>
+					Promise.reject("error1")
 				);
 				jsonMock.mock.mockImplementationOnce(async () => results[0]);
 

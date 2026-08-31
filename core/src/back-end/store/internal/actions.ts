@@ -81,7 +81,7 @@ export namespace Events {
 		readonly path: EntityInstancePath;
 		/** The changed value. */
 		readonly value: FieldInstanceValue;
-		/** Path to the triggering form model element */
+		/** Path to the triggering form model element, required if the element is an indexed control */
 		readonly formModelElementPath?: ModelPath;
 	}
 
@@ -99,6 +99,8 @@ export namespace Events {
 		readonly uiValue: string;
 		/** The parsing error. */
 		readonly error: ValueConversionParseError;
+		/** Path to the triggering form model element, required if the element is an indexed control  */
+		readonly formModelElementPath?: ModelPath;
 	}
 
 	/**
@@ -113,7 +115,7 @@ export namespace Events {
 		readonly path: EntityInstancePath;
 		/** The changed value. */
 		readonly value: Attachment;
-		/** Path to the triggering form model element */
+		/** Path to the triggering form model element, required if the element is an indexed control  */
 		readonly formModelElementPath?: ModelPath;
 	}
 
@@ -129,7 +131,7 @@ export namespace Events {
 		readonly path: EntityInstancePath;
 		/** The changed value. */
 		readonly value: MultiSelectData;
-		/** Path to the triggering form model element */
+		/** Path to the triggering form model element, required if the element is an indexed control  */
 		readonly formModelElementPath?: ModelPath;
 	}
 

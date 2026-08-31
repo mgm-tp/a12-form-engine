@@ -9,7 +9,11 @@ import static groovy.io.FileType.FILES
 buildscript {
     dependencies {
         classpath platform(libs.dataservices.bom)
-        classpath libs.build.utilities
+        // build-utilities >=0.4.1 pulls org.apache.groovy:groovy-yaml (→ apache groovy 5.x),
+        // which clashes with the legacy codehaus groovy 3.x that kernel-md-facade needs on this
+        // buildscript classpath. :exampleModels only uses ModelHelper / prepareModels from
+        // build-utilities (never the groovy-yaml path), so exclude apache groovy here.
+        classpath(libs.build.utilities) { exclude group: 'org.apache.groovy' }
         classpath libs.kernel.md.facade
         classpath libs.logback.classic
     }
@@ -21,7 +25,7 @@ plugins {
 
 prepareModels {
     outputDir = layout.buildDirectory.dir('models')
-    generateValidationCodeInConverter = true
+    generateValidationCode = true
 
     eachFileAction.set({ details ->
         details.path = ModelHelper.isFormModel(details.file) ? details.name : "../data/${details.name}"

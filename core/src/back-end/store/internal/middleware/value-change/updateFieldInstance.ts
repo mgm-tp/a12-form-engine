@@ -41,7 +41,6 @@ import type {
 
 import type { MultiSelectData } from "../../../../../models/index.js";
 import {
-	DocumentPath,
 	DocumentUtils,
 	IndexedControl
 } from "../../../../../models/internal/utils/document-utils.js";
@@ -87,7 +86,7 @@ export function updateFieldInstance({
 			kernelOptions: options.kernelOptionsProvider?.(state),
 			models: { documentModel, formModel, validatorProvider: validationCode }
 		});
-		return { changed: hasSyntaxError(messages, documentPath), messages, document };
+		return { messages, document };
 	}
 
 	document = formModelElementPath
@@ -100,24 +99,19 @@ export function updateFieldInstance({
 			)
 		: document;
 
-	document = DocumentUtils.setValue(document, documentPath, value, documentModel);
+	try {
+		document = DocumentUtils.setValue(document, documentPath, value, documentModel);
+	} catch (e) {
+		const errorMessage = e instanceof Error ? `\n${e.message}` : "";
+		throw new Error(`Field did not exist in document.${errorMessage}`, { cause: e });
+	}
 
 	return {
-		changed: true,
 		document,
 		messages,
 		changes: ChangeMapCreators.createValueChanged(documentPath)
 	};
 }
-
-function hasSyntaxError(
-	messages: ReadonlyObjectMap<EngineStore.Validation.Entry>,
-	path: EntityInstancePath
-): boolean {
-	const error = messages[DocumentPath.toString(path)];
-	return error !== undefined && error.parseError !== undefined;
-}
-
 interface UpdateFieldInstanceArgs {
 	readonly state: EngineState;
 	readonly documentPath: EntityInstancePath;

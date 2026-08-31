@@ -1,300 +1,305 @@
 {
-    "header": {
-        "id": "ProductFormWithWrongNavigationButtons",
-        "modelType": "form",
-        "modelVersion": "39.0.0",
-        "locales": [
-            {
-                "code": "en"
-            }
-        ],
-        "modelReferences": [
-            {
-                "alias": "DM",
-                "modelType": "document",
-                "purpose": "data binding",
-                "reference": "EmptyTestModel"
-            }
-        ],
-        "annotations": [
-            {
-                "name": "roles",
-                "value": "admin"
-            }
-        ]
-    },
-    "content": {
-        "subHeaderBox": {
-            "id": "subHeaderBox",
-            "majorButtons": {
-                "button": [
+  "header": {
+    "id": "ProductFormWithWrongNavigationButtons",
+    "modelType": "form",
+    "modelVersion": "39.0.0",
+    "locales": [
+      {
+        "code": "en"
+      }
+    ],
+    "modelReferences": [
+      {
+        "alias": "DM",
+        "modelType": "document",
+        "purpose": "data binding",
+        "reference": "EmptyTestModel"
+      }
+    ],
+    "annotations": [
+      {
+        "name": "roles",
+        "value": "admin"
+      }
+    ]
+  },
+  "content": {
+    "subHeaderBox": {
+      "id": "subHeaderBox",
+      "majorButtons": {
+        "button": [
+          {
+            "type": "NAVIGATION",
+            "id": "button-d2242",
+            "name": "FormSubheaderButton",
+            "buttonStyling": {
+              "label": {
+                "type": "Multilingual",
+                "multilingualText": {
+                  "text": [
                     {
-                        "type": "NAVIGATION",
-                        "id": "button-d2242",
-                        "name": "FormSubheaderButton",
-                        "buttonStyling": {
-                            "label": {
-                                "type": "Multilingual",
-                                "multilingualText": {
-                                    "text": [
-                                        {
-                                            "locale": "en"
-                                        }
-                                    ]
-                                }
-                            },
-                            "priority": "SECONDARY"
-                        },
-                        "target": "invalidScreen1",
-                        "scope": "HIDDEN_IN_READONLY_MODE"
+                      "text": "Label",
+                      "locale": "en"
                     }
-                ]
-            }
+                  ]
+                }
+              },
+              "priority": "SECONDARY"
+            },
+            "target": "invalidScreen1",
+            "scope": "HIDDEN_IN_READONLY_MODE"
+          }
+        ]
+      }
+    },
+    "footerBox": {
+      "id": "footerBox",
+      "minorButtons": {
+        "button": [
+          {
+            "type": "NAVIGATION",
+            "id": "button-bf8b3",
+            "name": "FormFooterButton",
+            "buttonStyling": {
+              "label": {
+                "type": "Multilingual",
+                "multilingualText": {
+                  "text": [
+                    {
+                      "text": "Label",
+                      "locale": "en"
+                    }
+                  ]
+                }
+              },
+              "priority": "SECONDARY"
+            },
+            "target": "invalidScreen2",
+            "scope": "HIDDEN_IN_READONLY_MODE"
+          }
+        ]
+      }
+    },
+    "screens": [
+      {
+        "id": "screen-a050f",
+        "name": "product (Generated)",
+        "subHeaderBox": {
+          "id": "headerfooter-2fd3e",
+          "majorButtons": {
+            "button": [
+              {
+                "type": "NAVIGATION",
+                "id": "button-555d0",
+                "name": "ScreenSubheaderNavigationButton",
+                "buttonStyling": {
+                  "label": {
+                    "type": "Multilingual",
+                    "multilingualText": {
+                      "text": [
+                        {
+                          "text": "Label",
+                          "locale": "en"
+                        }
+                      ]
+                    }
+                  },
+                  "priority": "SECONDARY"
+                },
+                "target": "invalidScreen3",
+                "scope": "HIDDEN_IN_READONLY_MODE"
+              }
+            ]
+          }
         },
         "footerBox": {
-            "id": "footerBox",
-            "minorButtons": {
-                "button": [
-                    {
-                        "type": "NAVIGATION",
-                        "id": "button-bf8b3",
-                        "name": "FormFooterButton",
-                        "buttonStyling": {
-                            "label": {
-                                "type": "Multilingual",
-                                "multilingualText": {
-                                    "text": [
-                                        {
-                                            "locale": "en"
-                                        }
-                                    ]
-                                }
-                            },
-                            "priority": "SECONDARY"
-                        },
-                        "target": "invalidScreen2",
-                        "scope": "HIDDEN_IN_READONLY_MODE"
+          "id": "headerfooter-6eae0",
+          "minorButtons": {
+            "button": [
+              {
+                "type": "NAVIGATION",
+                "id": "button-02af5",
+                "name": "ScreenFooterNavigationButton",
+                "buttonStyling": {
+                  "label": {
+                    "type": "Multilingual",
+                    "multilingualText": {
+                      "text": [
+                        {
+                          "text": "Label",
+                          "locale": "en"
+                        }
+                      ]
                     }
-                ]
-            }
+                  },
+                  "priority": "SECONDARY"
+                },
+                "target": "invalidScreen4",
+                "scope": "HIDDEN_IN_READONLY_MODE"
+              }
+            ]
+          }
         },
-        "screens": [
+        "screenElements": [
+          {
+            "type": "ButtonPanel",
+            "id": "buttonpanel-8c03d",
+            "name": "buttons",
+            "button": [
+              {
+                "type": "NAVIGATION",
+                "id": "button-c374e",
+                "name": "next",
+                "buttonStyling": {
+                  "label": {
+                    "type": "Multilingual",
+                    "multilingualText": {
+                      "text": [
+                        {
+                          "text": "next",
+                          "locale": "en"
+                        }
+                      ]
+                    }
+                  },
+                  "priority": "SECONDARY"
+                },
+                "target": "screen2",
+                "validation": "partial",
+                "scope": "HIDDEN_IN_READONLY_MODE"
+              },
+              {
+                "type": "EVENT",
+                "id": "button-e2433",
+                "name": "next2",
+                "buttonStyling": {
+                  "label": {
+                    "type": "Multilingual",
+                    "multilingualText": {
+                      "text": [
+                        {
+                          "text": "next2",
+                          "locale": "en"
+                        }
+                      ]
+                    }
+                  },
+                  "priority": "PRIMARY"
+                },
+                "event": "screen2",
+                "scope": "HIDDEN_IN_READONLY_MODE"
+              },
+              {
+                "type": "EVENT",
+                "id": "button-6d6d9",
+                "name": "next3",
+                "buttonStyling": {
+                  "label": {
+                    "type": "Multilingual",
+                    "multilingualText": {
+                      "text": [
+                        {
+                          "text": "next",
+                          "locale": "en"
+                        }
+                      ]
+                    }
+                  },
+                  "priority": "PRIMARY"
+                },
+                "event": "submission-screen2",
+                "scope": "HIDDEN_IN_READONLY_MODE"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "fieldConfiguration": {},
+    "groupConfiguration": {},
+    "defaults": {
+      "buttonLabels": {
+        "ADD": {
+          "text": [
             {
-                "id": "screen-a050f",
-                "name": "product (Generated)",
-                "subHeaderBox": {
-                    "id": "headerfooter-2fd3e",
-                    "majorButtons": {
-                        "button": [
-                            {
-                                "type": "NAVIGATION",
-                                "id": "button-555d0",
-                                "name": "ScreenSubheaderNavigationButton",
-                                "buttonStyling": {
-                                    "label": {
-                                        "type": "Multilingual",
-                                        "multilingualText": {
-                                            "text": [
-                                                {
-                                                    "locale": "en"
-                                                }
-                                            ]
-                                        }
-                                    },
-                                    "priority": "SECONDARY"
-                                },
-                                "target": "invalidScreen3",
-                                "scope": "HIDDEN_IN_READONLY_MODE"
-                            }
-                        ]
-                    }
-                },
-                "footerBox": {
-                    "id": "headerfooter-6eae0",
-                    "minorButtons": {
-                        "button": [
-                            {
-                                "type": "NAVIGATION",
-                                "id": "button-02af5",
-                                "name": "ScreenFooterNavigationButton",
-                                "buttonStyling": {
-                                    "label": {
-                                        "type": "Multilingual",
-                                        "multilingualText": {
-                                            "text": [
-                                                {
-                                                    "locale": "en"
-                                                }
-                                            ]
-                                        }
-                                    },
-                                    "priority": "SECONDARY"
-                                },
-                                "target": "invalidScreen4",
-                                "scope": "HIDDEN_IN_READONLY_MODE"
-                            }
-                        ]
-                    }
-                },
-                "screenElements": [
-                    {
-                        "type": "ButtonPanel",
-                        "id": "buttonpanel-8c03d",
-                        "name": "buttons",
-                        "button": [
-                            {
-                                "type": "NAVIGATION",
-                                "id": "button-c374e",
-                                "name": "next",
-                                "buttonStyling": {
-                                    "label": {
-                                        "type": "Multilingual",
-                                        "multilingualText": {
-                                            "text": [
-                                                {
-                                                    "text": "next",
-                                                    "locale": "en"
-                                                }
-                                            ]
-                                        }
-                                    },
-                                    "priority": "SECONDARY"
-                                },
-                                "target": "screen2",
-                                "validation": "partial",
-                                "scope": "HIDDEN_IN_READONLY_MODE"
-                            },
-                            {
-                                "type": "EVENT",
-                                "id": "button-e2433",
-                                "name": "next2",
-                                "buttonStyling": {
-                                    "label": {
-                                        "type": "Multilingual",
-                                        "multilingualText": {
-                                            "text": [
-                                                {
-                                                    "text": "next2",
-                                                    "locale": "en"
-                                                }
-                                            ]
-                                        }
-                                    },
-                                    "priority": "PRIMARY"
-                                },
-                                "event": "screen2",
-                                "scope": "HIDDEN_IN_READONLY_MODE"
-                            },
-                            {
-                                "type": "EVENT",
-                                "id": "button-6d6d9",
-                                "name": "next3",
-                                "buttonStyling": {
-                                    "label": {
-                                        "type": "Multilingual",
-                                        "multilingualText": {
-                                            "text": [
-                                                {
-                                                    "text": "next",
-                                                    "locale": "en"
-                                                }
-                                            ]
-                                        }
-                                    },
-                                    "priority": "PRIMARY"
-                                },
-                                "event": "submission-screen2",
-                                "target": "screen2",
-                                "scope": "HIDDEN_IN_READONLY_MODE"
-                            }
-                        ]
-                    }
-                ]
+              "text": "add",
+              "locale": "en"
             }
-        ],
-        "fieldConfiguration": {},
-        "groupConfiguration": {},
-        "defaults": {
-            "buttonLabels": {
-                "ADD": {
-                    "text": [
-                        {
-                            "text": "add",
-                            "locale": "en"
-                        }
-                    ]
-                },
-                "COMMIT_ADD": {
-                    "text": [
-                        {
-                            "text": "add",
-                            "locale": "en"
-                        }
-                    ]
-                },
-                "APPLY": {
-                    "text": [
-                        {
-                            "text": "apply",
-                            "locale": "en"
-                        }
-                    ]
-                },
-                "EDIT": {
-                    "text": [
-                        {
-                            "text": "edit",
-                            "locale": "en"
-                        }
-                    ]
-                },
-                "REMOVE": {
-                    "text": [
-                        {
-                            "text": "remove",
-                            "locale": "en"
-                        }
-                    ]
-                },
-                "VIEW": {
-                    "text": [
-                        {
-                            "text": "view",
-                            "locale": "en"
-                        }
-                    ]
-                },
-                "CANCEL": {
-                    "text": [
-                        {
-                            "text": "cancel",
-                            "locale": "en"
-                        }
-                    ]
-                },
-                "RETURN": {
-                    "text": [
-                        {
-                            "text": "return",
-                            "locale": "en"
-                        }
-                    ]
-                },
-                "UP": {
-                    "text": [
-                        {
-                            "locale": "en"
-                        }
-                    ]
-                },
-                "DOWN": {
-                    "text": [
-                        {
-                            "locale": "en"
-                        }
-                    ]
-                }
+          ]
+        },
+        "COMMIT_ADD": {
+          "text": [
+            {
+              "text": "add",
+              "locale": "en"
             }
+          ]
+        },
+        "APPLY": {
+          "text": [
+            {
+              "text": "apply",
+              "locale": "en"
+            }
+          ]
+        },
+        "EDIT": {
+          "text": [
+            {
+              "text": "edit",
+              "locale": "en"
+            }
+          ]
+        },
+        "REMOVE": {
+          "text": [
+            {
+              "text": "remove",
+              "locale": "en"
+            }
+          ]
+        },
+        "VIEW": {
+          "text": [
+            {
+              "text": "view",
+              "locale": "en"
+            }
+          ]
+        },
+        "CANCEL": {
+          "text": [
+            {
+              "text": "cancel",
+              "locale": "en"
+            }
+          ]
+        },
+        "RETURN": {
+          "text": [
+            {
+              "text": "return",
+              "locale": "en"
+            }
+          ]
+        },
+        "UP": {
+          "text": [
+            {
+              "text": "Label",
+              "locale": "en"
+            }
+          ]
+        },
+        "DOWN": {
+          "text": [
+            {
+              "text": "Label",
+              "locale": "en"
+            }
+          ]
         }
+      }
     }
+  }
 }

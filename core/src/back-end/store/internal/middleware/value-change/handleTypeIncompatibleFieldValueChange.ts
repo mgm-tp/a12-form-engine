@@ -32,16 +32,16 @@
 
 import type { Action, Dispatch } from "redux";
 
+import type { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
 import type { EntityInstancePath, GroupInstance } from "@com.mgmtp.a12.kernel/kernel-md-facade";
 
+import { ReadonlyObjectMap } from "../../../../../models/index.js";
 import {
 	DocumentPath,
 	DocumentUtils
 } from "../../../../../models/internal/utils/document-utils.js";
-import { ReadonlyObjectMap } from "../../../../../models/internal/utils/json.js";
 import { Commands } from "../../actions.js";
 import { KernelComputation } from "../../computation.js";
-import { ChangeMapCreators } from "../../documentChange.js";
 import { isComputedField, isPartOfComputation } from "../../kernel-adapter.js";
 import { DataSelectors } from "../../selectors/data.js";
 import { ModelSelectors } from "../../selectors/models.js";
@@ -52,6 +52,7 @@ import type { MiddlewareOptions } from "../middleware-options.js";
 import { updateUiDirtyState } from "../updateDirtyState.js";
 
 import { updateDocument } from "./updateDocument.js";
+import { updateFieldInstance } from "./updateFieldInstance.js";
 
 /**
  * @internal
@@ -63,21 +64,33 @@ export function handleTypeIncompatibleFieldValueChange({
 	state,
 	dispatch,
 	middlewareOptions,
-	validationParseError
+	validationParseError,
+	formModelElementPath
 }: {
 	path: EntityInstancePath;
 	state: EngineState;
 	dispatch: Dispatch<Action>;
 	middlewareOptions: MiddlewareOptions;
 	validationParseError: EngineStore.Validation.ParseError;
+	formModelElementPath?: ModelPath;
 }): void {
 	const originalDocument = DataSelectors.document()(state) as GroupInstance;
-	const documentModel = ModelSelectors.documentModel()(state);
 	const validationCode = ModelSelectors.validationCode()(state);
 
-	let newMessages = UiStateSelectors.messages()(state);
-	let newDocument = DocumentUtils.setValue(originalDocument, path, null, documentModel);
-	const changesToDispatch = ChangeMapCreators.createValueChanged(path);
+	const messages = UiStateSelectors.messages()(state);
+
+	const result = updateFieldInstance({
+		state,
+		documentPath: path,
+		value: null,
+		document: originalDocument,
+		messages,
+		middlewareOptions,
+		validationCode,
+		formModelElementPath
+	});
+
+	let { messages: newMessages, document: newDocument } = result;
 
 	if (validationCode && isPartOfComputation(validationCode, path)) {
 		({ document: newDocument, messages: newMessages } =
@@ -99,8 +112,8 @@ export function handleTypeIncompatibleFieldValueChange({
 		});
 	}
 
-	if (newDocument !== originalDocument) {
-		updateDocument(dispatch, state, newDocument, [...ReadonlyObjectMap.values(changesToDispatch)]);
+	if (newDocument !== originalDocument && result.changes) {
+		updateDocument(dispatch, state, newDocument, [...ReadonlyObjectMap.values(result.changes)]);
 	}
 	updateUiDirtyState(dispatch, state);
 	newMessages = {

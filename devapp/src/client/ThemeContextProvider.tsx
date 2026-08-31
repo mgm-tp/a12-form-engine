@@ -35,7 +35,7 @@ import type { JSX } from "react";
 import { StyleSheetManager, ThemeProvider } from "styled-components";
 
 import { shouldForwardProp, GlobalStyles, getBaseTheme } from "@com.mgmtp.a12.widgets/widgets-core";
-import type { Container } from "@com.mgmtp.a12.widgets/widgets-core";
+import type { Container, DefaultThemeType } from "@com.mgmtp.a12.widgets/widgets-core";
 
 const THEMES = ["base", "base_flat"] as const;
 type Theme = (typeof THEMES)[number];
@@ -44,6 +44,14 @@ interface DevappThemeContextProps {
 	readonly themes: readonly Theme[];
 	readonly theme: Theme;
 	setTheme(theme: Theme): void;
+
+	/**
+	 * Overrides `components.masterDetailLayout.pane.animationDuration` for examples that need to
+	 * slow down or speed up the MasterDetail pane transition to make a timing issue observable.
+	 * `undefined` restores the theme's own default.
+	 */
+	readonly masterDetailAnimationDurationMs: number | undefined;
+	setMasterDetailAnimationDurationMs(ms: number | undefined): void;
 }
 
 const invalidState = new Proxy({} as DevappThemeContextProps, {
@@ -58,21 +66,51 @@ export const DevappThemeContext = createContext<DevappThemeContextProps>(invalid
 
 export function DevappThemeContextProvider(props: Container): JSX.Element {
 	const [theme, setTheme] = useState<Theme>(getInitialTheme);
+	const [masterDetailAnimationDurationMs, setMasterDetailAnimationDurationMs] = useState<
+		number | undefined
+	>(undefined);
 
 	const onSelectTheme = useCallback((theme: Theme) => {
 		setTheme(theme);
 		localStorage.setItem("theme", theme);
 	}, []);
 
-	const currentTheme = useMemo(() => {
+	const baseTheme = useMemo(() => {
 		if (theme === "base_flat") {
 			return getBaseTheme({ spacing: { base: 16 } });
 		}
 		return getBaseTheme();
 	}, [theme]);
 
+	const currentTheme = useMemo((): DefaultThemeType => {
+		if (masterDetailAnimationDurationMs === undefined) {
+			return baseTheme;
+		}
+		return {
+			...baseTheme,
+			components: {
+				...baseTheme.components,
+				masterDetailLayout: {
+					...baseTheme.components.masterDetailLayout,
+					pane: {
+						...baseTheme.components.masterDetailLayout.pane,
+						animationDuration: `${masterDetailAnimationDurationMs}ms`
+					}
+				}
+			}
+		};
+	}, [baseTheme, masterDetailAnimationDurationMs]);
+
 	return (
-		<DevappThemeContext.Provider value={{ themes: THEMES, theme, setTheme: onSelectTheme }}>
+		<DevappThemeContext.Provider
+			value={{
+				themes: THEMES,
+				theme,
+				setTheme: onSelectTheme,
+				masterDetailAnimationDurationMs,
+				setMasterDetailAnimationDurationMs
+			}}
+		>
 			<StyleSheetManager shouldForwardProp={shouldForwardProp}>
 				<ThemeProvider theme={currentTheme}>
 					<GlobalStyles />

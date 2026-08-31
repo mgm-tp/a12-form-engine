@@ -49,31 +49,8 @@ const yaml = await readFile(join(REPO_ROOT, "pnpm-workspace.yaml"), {
 	encoding: "utf-8"
 });
 
-const { a12, a12ranges } = parseYaml(yaml).catalogs;
+const { a12 } = parseYaml(yaml).catalogs;
 const a12Keys = Object.keys(a12);
-
-Object.entries(a12ranges).forEach(([name, range]) => {
-	const actualVersion = a12[name];
-
-	if (typeof range !== "string") {
-		errors.push(`${name}: range is not a string`);
-		return;
-	}
-
-	if (semver.prerelease(actualVersion)) {
-		if (actualVersion !== range) {
-			errors.push(`${name}@${actualVersion} is a pre-release, the range should exactly match it.`);
-		}
-	} else {
-		if (semver.prerelease(range)) {
-			errors.push(
-				`${name}@${actualVersion} is not a pre-release, the range must not be one as well`
-			);
-		} else if (!semver.subset(actualVersion, range)) {
-			errors.push(`${name}@${actualVersion} does not satisfy ${range}!`);
-		}
-	}
-});
 
 // Validate dependencies from libs.versions.toml
 
@@ -87,10 +64,19 @@ const tomlVersions = parseToml(libsToml).versions as TomlTable;
 // We cannot use the same name as toml forbids certain special characters.
 Object.entries(tomlVersions).forEach(([tomlDep, tomlVersion]) => {
 	const a12dep = a12Keys.find(key => key.includes(tomlDep));
+	const range = a12dep && a12[a12dep];
 
-	if (a12dep && a12[a12dep] !== tomlVersion) {
+	if (!a12dep || typeof range !== "string" || typeof tomlVersion !== "string") {return;}
+
+	if (semver.prerelease(tomlVersion)) {
+		if (tomlVersion !== range) {
+			errors.push(`${tomlDep}@${tomlVersion} is a pre-release, the range should exactly match it.`);
+		}
+	} else if (semver.prerelease(range)) {
+		errors.push(`${tomlDep}@${tomlVersion} is not a pre-release, the range must not be one as well`);
+	} else if (!semver.satisfies(tomlVersion, range)) {
 		errors.push(
-			`Gradle libs dependency ${tomlDep}@${tomlVersion} should exactly match its workspace version ${a12dep}@${a12[a12dep]}`
+			`Gradle libs dependency ${tomlDep}@${tomlVersion} does not satisfy its workspace range ${a12dep}@${range}`
 		);
 	}
 });

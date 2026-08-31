@@ -116,7 +116,8 @@ describe("api.view.defaultMapDispatchToProps", () => {
 						errorCode: "testCode",
 						severity: "ERROR"
 					} as ValueConversionParseError
-				]
+				],
+				["formModelElementPath", [] as ModelPath]
 			];
 			checkDispatchedEvent(
 				mapDispatchToProps.eventHandlers.onParseError,

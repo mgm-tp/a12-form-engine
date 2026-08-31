@@ -1,6 +1,6 @@
 {
   "name": "@com.mgmtp.a12.formengine/formengine-devapp",
-  "version": "39.0.0",
+  "version": "39.0.1",
   "description": "Form Engine Devapp",
   "author": "mgm technology partners",
   "license": "(EUPL-1.2 OR LicenseRef-commercial)",
@@ -10,7 +10,7 @@
     "./src/client/config/index.ts"
   ],
   "scripts": {
-    "clean": "rimraf ./dist",
+    "clean": "git clean -fdX -- dist",
     "build": "node --run compile && rsbuild build -c rsbuild/rsbuild.config.ts",
     "compile": "tsc",
     "lint": "eslint --flag unstable_native_nodejs_ts_config . --cache",
@@ -53,7 +53,7 @@
     "cpy-cli": "catalog:",
     "date-fns": "catalog:",
     "eslint": "catalog:",
-    "fp-ts": "catalog:ranges",
+    "fp-ts": "catalog:",
     "picocolors": "catalog:",
     "react": "catalog:",
     "react-dnd": "catalog:",
@@ -61,7 +61,6 @@
     "react-redux": "catalog:",
     "redux": "catalog:",
     "redux-saga": "catalog:",
-    "rimraf": "catalog:",
     "semver": "catalog:",
     "source-map-loader": "catalog:",
     "styled-components": "catalog:",

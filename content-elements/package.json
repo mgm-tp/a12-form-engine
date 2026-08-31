@@ -1,13 +1,13 @@
 {
   "name": "@com.mgmtp.a12.formengine/formengine-content-elements",
-  "version": "39.0.0",
+  "version": "39.0.1",
   "description": "Experimental form content elements to be used in content models",
   "author": "mgm technology partners",
   "license": "(EUPL-1.2 OR LicenseRef-commercial)",
   "type": "module",
   "sideEffects": false,
   "scripts": {
-    "clean": "rimraf ./lib ./target cyclonedx.json",
+    "clean": "git clean -fdX -- lib target cyclonedx.json",
     "build": "node --run compile && pnpm \"/^validate:.+/\"",
     "test": "mocha",
     "compile": "pnpm run \"/^compile:.*/\"",
@@ -23,8 +23,8 @@
     "analyze-component-dependencies": "devtools analyze-dependencies \"./src/main/**/*.@(ts|tsx|d.ts|d.cts|d.mts)\" \"src/main/(?:(core/[^/]+|defaultRender|defaultSetup))/.*\""
   },
   "dependencies": {
-    "@com.mgmtp.a12.client/typescript-fsa-redux-5-compat": "catalog:a12ranges",
-    "fast-deep-equal": "catalog:ranges"
+    "@com.mgmtp.a12.client/typescript-fsa-redux-5-compat": "catalog:a12",
+    "fast-deep-equal": "catalog:"
   },
   "devDependencies": {
     "@com.mgmtp.a12.base/base-model-api": "catalog:a12",
@@ -53,22 +53,21 @@
     "react-dnd": "catalog:",
     "react-redux": "catalog:",
     "redux": "catalog:",
-    "rimraf": "catalog:",
     "source-map-support": "catalog:",
     "typescript": "catalog:"
   },
   "peerDependencies": {
-    "@com.mgmtp.a12.base/base-model-api": "catalog:a12ranges",
-    "@com.mgmtp.a12.client/client-core": "catalog:a12ranges",
-    "@com.mgmtp.a12.client/client-data": "catalog:a12ranges",
-    "@com.mgmtp.a12.contentengine/contentengine-core": "catalog:a12ranges",
-    "@com.mgmtp.a12.kernel/kernel-md-facade": "catalog:a12ranges",
-    "@com.mgmtp.a12.utils/utils-localization": "catalog:a12ranges",
-    "@com.mgmtp.a12.utils/utils-localization-react": "catalog:a12ranges",
-    "@com.mgmtp.a12.widgets/widgets-core": "catalog:a12ranges",
-    "react": "catalog:ranges",
-    "react-redux": "catalog:ranges",
-    "redux": "catalog:ranges"
+    "@com.mgmtp.a12.base/base-model-api": "catalog:a12",
+    "@com.mgmtp.a12.client/client-core": "catalog:a12",
+    "@com.mgmtp.a12.client/client-data": "catalog:a12",
+    "@com.mgmtp.a12.contentengine/contentengine-core": "catalog:a12",
+    "@com.mgmtp.a12.kernel/kernel-md-facade": "catalog:a12",
+    "@com.mgmtp.a12.utils/utils-localization": "catalog:a12",
+    "@com.mgmtp.a12.utils/utils-localization-react": "catalog:a12",
+    "@com.mgmtp.a12.widgets/widgets-core": "catalog:a12",
+    "react": "catalog:",
+    "react-redux": "catalog:",
+    "redux": "catalog:"
   },
   "files": [
     "lib",

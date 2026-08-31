@@ -1,14 +1,15 @@
 {
   "name": "@com.mgmtp.a12.formengine/formengine-codemod",
-  "version": "39.0.0",
+  "version": "39.0.1",
   "description": "Codemod for Form Engine",
   "author": "mgm technology partners",
   "license": "(EUPL-1.2 OR LicenseRef-commercial)",
   "bin": "lib/cli.js",
   "type": "module",
   "scripts": {
-    "clean": "rimraf ./lib",
-    "build": "tsc",
+    "clean": "git clean -fdX -- lib",
+    "build": "node --run compile",
+    "compile": "tsc",
     "watch": "tsc --watch",
     "runner": "node --import ./scripts/resolveSnapshot.ts --test --test-reporter=dot",
     "test": "node --run runner -- \"lib/test/*.test.js\"",
@@ -21,12 +22,11 @@
     "@com.mgmtp.a12.devtools/tsconfig": "catalog:a12",
     "@types/node": "catalog:",
     "eslint": "catalog:",
-    "rimraf": "catalog:",
     "typescript": "catalog:"
   },
   "dependencies": {
     "@com.mgmtp.a12.devtools/codemod": "catalog:a12",
-    "ts-morph": "catalog:ranges"
+    "ts-morph": "catalog:"
   },
   "files": [
     "lib",

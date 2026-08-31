@@ -75,7 +75,12 @@ export function StringWithHintListInput(
 			if (autoCompleteValue != null) {
 				const result = conversion.parseValue(autoCompleteValue, conversionConfig);
 				if (result.parseError) {
-					options.eventHandlers.onParseError(value.path, autoCompleteValue, result.parseError);
+					options.eventHandlers.onParseError(
+						value.path,
+						autoCompleteValue,
+						result.parseError,
+						props.formModelPath
+					);
 				} else {
 					options.eventHandlers.onValueChange(value.path, result.value!, props.formModelPath);
 				}

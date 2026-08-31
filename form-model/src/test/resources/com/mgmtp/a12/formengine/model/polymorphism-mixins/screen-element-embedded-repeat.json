@@ -1,0 +1,56 @@
+{
+  "header": {
+    "id": "screen-element-embedded-repeat",
+    "modelType": "form",
+    "modelVersion": "39.0.0",
+    "locales": [
+      {
+        "code": "en"
+      }
+    ],
+    "modelReferences": [
+      {
+        "alias": "DM",
+        "modelType": "document",
+        "purpose": "data binding",
+        "reference": "MixinFixturesDocumentModel"
+      }
+    ],
+    "annotations": [
+      {
+        "name": "roles",
+        "value": "admin"
+      }
+    ]
+  },
+  "content": {
+    "subHeaderBox": {
+      "id": "subHeaderBox1"
+    },
+    "footerBox": {
+      "id": "footerBox1"
+    },
+    "screens": [
+      {
+        "id": "s1",
+        "name": "Screen1",
+        "screenElements": [
+          {
+            "type": "EmbeddedRepeat",
+            "id": "er1",
+            "name": "embeddedRepeat1",
+            "groupRef": "repeatGroup1",
+            "controlGrid": {
+              "type": "ControlGrid",
+              "id": "g1",
+              "name": "controlGrid1"
+            }
+          }
+        ]
+      }
+    ],
+    "fieldConfiguration": {},
+    "groupConfiguration": {},
+    "defaults": {}
+  }
+}
