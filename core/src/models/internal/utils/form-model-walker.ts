@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -133,16 +133,10 @@ export class ModelWalker {
 	}
 
 	acceptContent(content: FormModel.Content): void {
-		let process = VisitProcess.ContinueTraversal;
-
 		if (this.visitor.visitContent) {
-			try {
-				process = this.visitor.visitContent(content);
-				if (VisitProcess.Stop === process) {
-					return;
-				}
-				// eslint-disable-next-line no-empty
-			} finally {
+			const process = this.visitor.visitContent(content);
+			if (VisitProcess.Stop === process) {
+				return;
 			}
 		}
 
@@ -193,14 +187,10 @@ export class ModelWalker {
 
 	acceptFieldConfigurationEntry(fce: FormModel.FieldConfigurationEntry): boolean {
 		let process = VisitProcess.ContinueTraversal;
-		try {
-			if (this.visitor.visitFieldConfigurationEntry) {
-				process = this.visitor.visitFieldConfigurationEntry(fce);
-			}
-			return VisitProcess.Stop !== process;
-			// eslint-disable-next-line no-empty
-		} finally {
+		if (this.visitor.visitFieldConfigurationEntry) {
+			process = this.visitor.visitFieldConfigurationEntry(fce);
 		}
+		return VisitProcess.Stop !== process;
 	}
 
 	enter(formModelElement: object): void {
@@ -444,14 +434,10 @@ export class ModelWalker {
 
 	acceptRowAction(action: FormModel.RowAction): boolean {
 		let process = VisitProcess.ContinueTraversal;
-		try {
-			if (this.visitor.visitRowAction) {
-				process = this.visitor.visitRowAction(action);
-			}
-			return VisitProcess.Stop !== process;
-			// eslint-disable-next-line no-empty
-		} finally {
+		if (this.visitor.visitRowAction) {
+			process = this.visitor.visitRowAction(action);
 		}
+		return VisitProcess.Stop !== process;
 	}
 
 	acceptInlineRepeat(repeat: FormModel.InlineRepeat): boolean {

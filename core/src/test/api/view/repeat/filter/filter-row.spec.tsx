@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -270,10 +270,7 @@ describe("api.view.repeat", () => {
 		}
 
 		type StubbedFunctions =
-			| "onClearFilters"
-			| "onFilterParseError"
-			| "onFilterValueChange"
-			| "onShowFilter";
+			"onClearFilters" | "onFilterParseError" | "onFilterValueChange" | "onShowFilter";
 
 		type RepeatDispatchMocks = DispatchConfiguration.Repeat &
 			Record<StubbedFunctions, Mock<() => unknown>>;

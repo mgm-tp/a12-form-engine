@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -81,12 +81,10 @@ export function OnSort(
 	}
 	return params => {
 		const sortColumn = params.column;
-		if (
-			!(
-				RepeatTableColumn.isFieldColumn(sortColumn) ||
-				RepeatTableColumn.isExpressionColumn(sortColumn)
-			)
-		) {
+		if (!(
+			RepeatTableColumn.isFieldColumn(sortColumn) ||
+			RepeatTableColumn.isExpressionColumn(sortColumn)
+		)) {
 			return;
 		}
 
@@ -101,12 +99,10 @@ export function OnSort(
 		let sorting: UiStateSelectors.SortingOrder;
 		if (currentSortingState) {
 			const currentSortingStateColumn = currentSortingState.column;
-			if (
-				!(
-					RepeatTableColumn.isFieldColumn(currentSortingStateColumn) ||
-					RepeatTableColumn.isExpressionColumn(currentSortingStateColumn)
-				)
-			) {
+			if (!(
+				RepeatTableColumn.isFieldColumn(currentSortingStateColumn) ||
+				RepeatTableColumn.isExpressionColumn(currentSortingStateColumn)
+			)) {
 				return;
 			}
 			sorting = ModelPath.equal(currentSortingStateColumn.modelPath, sortColumn.modelPath)

@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -32,6 +32,7 @@
 
 import { constants } from "node:buffer";
 import { execSync } from "node:child_process";
+import { env as processEnv } from "node:process";
 
 import pkg from "../package.json" with { type: "json" };
 import type { DependencyTreeTableNode } from "../src/client/components/DependencyTreeTable.ts";
@@ -41,6 +42,9 @@ interface DependencyTree {
 	readonly version: string;
 	readonly dependencies?: Record<string, Omit<DependencyTree, "name">>;
 }
+
+// package.json is not stamped until publish, so the build version has to come from gradle
+const rootVersion = processEnv.RELEASE_VERSION ?? pkg.version;
 
 export function createDependencyTreeRoot(): DependencyTreeTableNode {
 	const dependencyTree = JSON.parse(
@@ -55,7 +59,7 @@ export function createDependencyTreeRoot(): DependencyTreeTableNode {
 	return {
 		id: rootId,
 		children: createNodes(rootId, dependencyTree.dependencies),
-		data: [dependencyTree.name, dependencyTree.version]
+		data: [dependencyTree.name, rootVersion]
 	};
 }
 
@@ -66,7 +70,7 @@ function createNodes(
 	return deps
 		? Object.entries(deps).map(([name, { version, dependencies }]) => {
 				// because of workspaces, the version of formengine/core is just a link
-				const actualVersion = version.startsWith("link:") ? pkg.version : version;
+				const actualVersion = version.startsWith("link:") ? rootVersion : version;
 
 				const id = `${parent}-${name}-${actualVersion}`;
 				return {

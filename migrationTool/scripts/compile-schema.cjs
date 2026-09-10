@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -29,19 +29,9 @@
  * NON-INFRINGEMENT, EXCEPT WHERE SUCH DISCLAIMERS ARE HELD TO BE
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
+const { execSync } = require("node:child_process");
 
-// Asciidoctor types are either missing or wrong for ESM usage
-
-declare module "asciidoctor" {
-	import type { Asciidoctor } from "asciidoctor/types/index.js";
-
-	/** Creates a new asciidoctor instance */
-	export default function factory(): Asciidoctor;
-}
-
-declare module "asciidoctor-highlight.js" {
-	import type { Asciidoctor } from "asciidoctor/types/index.js";
-
-	/** Registers the highlight.js extension with the given registry */
-	export function register(registry: Asciidoctor["Extensions"]): Asciidoctor["Extensions"];
-}
+// CI builds need the compiled JSON schema; local dev skips it to save time.
+// Both branches are static literals (no external input), so shell interpolation is safe here.
+const command = process.env.CI ? "migration-tool-utils compile" : "migration-tool-utils compile --no-schema";
+execSync(command, { stdio: "inherit" });

@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -31,6 +31,7 @@
  */
 
 import { execSync } from "node:child_process";
+import { env as processEnv } from "node:process";
 
 import { defineConfig, type ProxyConfig, rspack } from "@rsbuild/core";
 import { pluginReact } from "@rsbuild/plugin-react";
@@ -70,7 +71,7 @@ function setupProxy(envMode: string): ProxyConfig | undefined {
 export default defineConfig(({ envMode, env }) => {
 	// for deployments we always use mock mode
 	const devappMode = env === "production" ? "mock" : (envMode ?? "mock");
-	const version = `${packageJson.version} [${devappMode.toUpperCase()}]`;
+	const version = `${processEnv.RELEASE_VERSION ?? packageJson.version} [${devappMode.toUpperCase()}]`;
 
 	return {
 		server: {

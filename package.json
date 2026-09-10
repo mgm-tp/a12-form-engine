@@ -1,6 +1,6 @@
 {
   "name": "@com.mgmtp.a12.formengine/root",
-  "version": "38.4.2",
+  "version": "38.4.3",
   "a12ReleaseLine": "2025.06",
   "description": "Form Engine Workspaces Root",
   "author": "mgm technology partners",
@@ -12,7 +12,6 @@
   },
   "private": true,
   "scripts": {
-    "postinstall": "node ./scripts/validateA12Peers.ts",
     "clean": "pnpm run -r --parallel clean",
     "verify": "pnpm run \"/^(format|lint:onlyErrors|spellcheck)$/\"",
     "verify:fix": "pnpm run \"/^(format:fix|lint:fix)$/\"",
@@ -44,7 +43,8 @@
     "prettier": "catalog:",
     "react": "catalog:",
     "semver": "catalog:",
+    "smol-toml": "catalog:",
     "yaml": "catalog:"
   },
-  "packageManager": "pnpm@11.1.2"
+  "packageManager": "pnpm@11.17.0"
 }

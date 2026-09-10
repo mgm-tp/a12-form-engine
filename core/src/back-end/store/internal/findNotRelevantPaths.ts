@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -106,8 +106,7 @@ export function findNotRelevantPaths(document: Document, models: Models): Entity
 			} else {
 				result = currentOmittedPaths;
 			}
-			// eslint-disable-next-line @typescript-eslint/no-unused-vars
-		} catch (error) {
+		} catch {
 			// the current element does not exist in the DM -> we keep its path since there cannot be a dependency
 			result = currentOmittedPaths;
 		}

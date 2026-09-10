@@ -1,6 +1,6 @@
 {
   "name": "@com.mgmtp.a12.formengine/formengine-model-migration",
-  "version": "38.4.2",
+  "version": "38.4.3",
   "description": "form model migration CLI tool",
   "author": "mgm technology partners",
   "license": "(EUPL-1.2 OR LicenseRef-commercial)",
@@ -8,9 +8,7 @@
   "scripts": {
     "clean": "rimraf ./target ./lib cyclonedx.json",
     "build": "pnpm run \"/^compile:[a-z]*$/\"",
-    "compile:typescript": "devtools per-env",
-    "compile:typescript:production": "migration-tool-utils compile",
-    "compile:typescript:development": "migration-tool-utils compile --no-schema",
+    "compile:schema": "node ./scripts/compile-schema.cjs",
     "test:coverage": "c8 mocha",
     "test": "mocha",
     "typescript": "tsc --project ./tsconfig.dev.json",

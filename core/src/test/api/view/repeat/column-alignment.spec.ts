@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -63,13 +63,9 @@ describe("api.view.repeat", () => {
 			colCount: number;
 			alignment: "specificHorizontalAlignment" | "specificVerticalAlignment";
 			expectedAlignmentHead?:
-				| FormModel.HorizontalAlignment
-				| FormModel.VerticalAlignment
-				| "default";
+				FormModel.HorizontalAlignment | FormModel.VerticalAlignment | "default";
 			expectedAlignmentBody:
-				| FormModel.HorizontalAlignment
-				| FormModel.VerticalAlignment
-				| "default";
+				FormModel.HorizontalAlignment | FormModel.VerticalAlignment | "default";
 		}
 
 		function setup(models: Models, screenName: string): Promise<RtlRenderWrapper> {

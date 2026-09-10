@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -30,7 +30,7 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
+import { createContext, useCallback, useContext, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { ThemeProvider } from "styled-components";
 
@@ -39,6 +39,7 @@ import { compactTheme } from "@com.mgmtp.a12.widgets/widgets-core/lib/theme/comp
 import { defaultTheme } from "@com.mgmtp.a12.widgets/widgets-core/lib/theme/default/default-theme.js";
 import { flatCompactTheme } from "@com.mgmtp.a12.widgets/widgets-core/lib/theme/flat-compact/flat-compact-theme.js";
 import { flatTheme } from "@com.mgmtp.a12.widgets/widgets-core/lib/theme/flat/flat-theme.js";
+import type { DefaultThemeType } from "@com.mgmtp.a12.widgets/widgets-core/lib/theme/schema.js";
 
 import { THEME_LS_KEY } from "./localStorageKeys.js";
 import { customThemeSelected, selectCustomTheme, selectCustomThemeNames } from "./previewSlice.js";
@@ -72,6 +73,7 @@ export const PreviewThemeContextProvider = (props: PreviewThemeContextProviderPr
 	const customThemeNames = useSelector(state => selectCustomThemeNames(state, activityId));
 	const customTheme = useSelector(state => selectCustomTheme(state, activityId));
 	const [selectedTheme, setSelectedTheme] = useState<string | null>(getInitialTheme);
+	const [prevCustomTheme, setPrevCustomTheme] = useState<DefaultThemeType | undefined>(undefined);
 
 	const selectTheme = useCallback(
 		(theme: string) => {
@@ -86,14 +88,12 @@ export const PreviewThemeContextProvider = (props: PreviewThemeContextProviderPr
 		[activityId, customThemeNames, dispatch]
 	);
 
-	useEffect(() => {
+	if (customTheme !== prevCustomTheme) {
+		setPrevCustomTheme(customTheme);
 		if (customTheme && selectedTheme && DEFAULT_THEMES.includes(selectedTheme)) {
-			// reset the selected theme if a custom theme was updated that is not in the theme list
-			// eslint-disable-next-line react-hooks/set-state-in-effect
 			setSelectedTheme(null);
 		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [customTheme]);
+	}
 
 	return (
 		<PreviewThemeContext.Provider

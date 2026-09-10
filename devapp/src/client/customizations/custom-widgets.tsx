@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -38,12 +38,12 @@ import type { ModelPath } from "@com.mgmtp.a12.base/base-model-api/lib/main/mode
 import { ViewViews } from "@com.mgmtp.a12.client/client-core/lib/core/view/index.js";
 import type { FormModelMap, WidgetMap } from "@com.mgmtp.a12.formengine/formengine-core";
 import {
+	DefaultFormModelMap,
+	DefaultWidgetMap,
 	Events,
 	FormEngineActions,
 	FormEngineSelectors,
 	FormModel,
-	DefaultFormModelMap,
-	DefaultWidgetMap,
 	useDocumentPathForInput
 } from "@com.mgmtp.a12.formengine/formengine-core";
 import type {
@@ -213,20 +213,25 @@ function TextLineWithHelperModal(props: TextLineStatelessProps): JSX.Element {
 function TextLineWithClearButton(props: TextLineStatelessProps): JSX.Element | null {
 	const activityId = useContext(ViewViews.ActivityContext)?.activityId;
 
-	// Assuming the layout correctly sets the ActivityContext and the TextLine would never be rendered without activity
-	// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-	const documentModel = useSelector(FormEngineSelectors.models(activityId!))?.documentModel;
+	return activityId !== undefined ? (
+		<TextLineWithClearButtonValidActivityId {...props} activityId={activityId} />
+	) : null;
+}
+
+function TextLineWithClearButtonValidActivityId(
+	props: TextLineStatelessProps & { activityId: string }
+): JSX.Element | null {
+	const { activityId } = props;
+	const documentModel = useSelector(FormEngineSelectors.models(activityId))?.documentModel;
 
 	return documentModel ? (
 		<TextLineWithClearButtonInternal
 			{...props}
-			// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-			activityId={activityId!}
+			activityId={activityId}
 			documentModel={documentModel}
 		/>
 	) : null;
 }
-
 function TextLineWithClearButtonInternal(
 	props: TextLineStatelessProps & { activityId: string; documentModel: DocumentModel }
 ): JSX.Element {

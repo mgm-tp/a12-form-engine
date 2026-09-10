@@ -1,15 +1,15 @@
+# Run gradle versionCatalogUpdate --interactive to update this file
 [versions]
-# A12 — manually kept in sync with pnpm-workspace.yaml (catalogs.a12).
-# Validated by scripts/validateA12Peers.ts so it cannot drift unnoticed.
-dataservices = "38.4.2"               # @com.mgmtp.a12.dataservices/dataservices-access
-build-utilities = "0.3.0"
+dataservices = "38.4.5"
+build-utilities = "0.7.0"
+integration = "0.1.10"
+version-catalog-update = "1.1.0"
 prepare-models = "0.6.0"
 
 # Gradle plugins (third-party)
 spotbugs = "6.4.4"
 cyclonedx = "3.0.1"
 spotless = "7.0.2"
-asciidoc = "4.0.4"
 shadow = "9.2.2"
 docker = "9.4.0"
 
@@ -67,10 +67,11 @@ lombok = { module = "org.projectlombok:lombok", version = "1.18.42" }
 docker-plugin = { module = "com.bmuschko:gradle-docker-plugin", version.ref = "docker" }
 
 [plugins]
+integration = { id = "com.mgmtp.a12.devtools.plugins.integration", version.ref = "integration" }
+version-catalog-update = { id = "nl.littlerobots.version-catalog-update", version.ref = "version-catalog-update" }
 prepare-models = { id = "com.mgmtp.a12.devtools.plugins.prepare-models", version.ref = "prepare-models" }
 spotbugs = { id = "com.github.spotbugs", version.ref = "spotbugs" }
 cyclonedx = { id = "org.cyclonedx.bom", version.ref = "cyclonedx" }
 spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }
-asciidoc = { id = "org.asciidoctor.jvm.convert", version.ref = "asciidoc" }
 shadow = { id = "com.gradleup.shadow", version.ref = "shadow" }
 docker = { id = "com.bmuschko.docker-remote-api", version.ref = "docker" }

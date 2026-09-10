@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -63,6 +63,8 @@ export function MultilineInput(
 	 * Also note that no conversion is done, because a multi-line-input can only
 	 * hold strings - which don't need conversion.
 	 */
+	const formModelPathStr = ModelPath.toString(props.formModelPath);
+	const valuePathStr = DocumentPath.toString(value.path);
 	const onValueSubmit = useCallback(
 		(newValue: string) => {
 			const result = newValue.trim();
@@ -70,13 +72,7 @@ export function MultilineInput(
 			options.eventHandlers.onValueChange(value.path, change, props.formModelPath);
 		},
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-		[
-			options.eventHandlers,
-			// eslint-disable-next-line react-hooks/exhaustive-deps, react-hooks/use-memo
-			ModelPath.toString(props.formModelPath),
-			// eslint-disable-next-line react-hooks/exhaustive-deps, react-hooks/use-memo
-			DocumentPath.toString(value.path)
-		]
+		[options.eventHandlers, formModelPathStr, valuePathStr]
 	);
 
 	return (

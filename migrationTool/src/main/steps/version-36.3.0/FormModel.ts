@@ -8,7 +8,7 @@
  * This source file is part of the mgm A12 Platform and available under
  * a choice of two different licenses:
  *
- * 1. Open-Source License – EUPL v1.2
+ * 1. Open-Source License - EUPL v1.2
  *    You may redistribute and/or modify this file under the terms of the
  *    European Union Public License, version 1.2 - see https://eupl.eu/.
  *
@@ -318,14 +318,7 @@ export namespace FormModel {
 	}
 
 	export type PlaceholderIconType =
-		| "default"
-		| "image"
-		| "text"
-		| "spreadsheet"
-		| "pdf"
-		| "video"
-		| "sound"
-		| "none";
+		"default" | "image" | "text" | "spreadsheet" | "pdf" | "video" | "sound" | "none";
 
 	export type AttachmentDefaultActionType = "replace" | "download";
 
@@ -1389,19 +1382,10 @@ export namespace FormModel {
 		| ScreenElement;
 
 	export type TitledComponent =
-		| ButtonPanel
-		| Section
-		| MultiColumnSection
-		| ControlGrid
-		| Row
-		| Repeat
-		| CustomScreenElement;
+		ButtonPanel | Section | MultiColumnSection | ControlGrid | Row | Repeat | CustomScreenElement;
 
 	export type LabeledComponent =
-		| ButtonType
-		| FieldBasedInput
-		| ExpressionCell
-		| ExpressionOverviewColumn;
+		ButtonType | FieldBasedInput | ExpressionCell | ExpressionOverviewColumn;
 
 	export type ComponentWithDescription = ButtonType | RowAction;
 }

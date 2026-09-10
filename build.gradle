@@ -1,6 +1,5 @@
 buildscript {
     dependencies {
-        classpath libs.groovy.yaml
         classpath libs.build.utilities
     }
 }
@@ -8,9 +7,11 @@ buildscript {
 plugins {
     // make plugin available to subprojects without creating multiple instances
     alias(libs.plugins.docker) apply false
-    alias(libs.plugins.spotless) apply false
+    alias(libs.plugins.spotless)
     alias(libs.plugins.spotbugs) apply false
     alias(libs.plugins.cyclonedx) apply false
+    alias(libs.plugins.integration)
+    alias(libs.plugins.version.catalog.update)
 }
 
 import com.github.spotbugs.snom.Confidence
@@ -25,10 +26,12 @@ import org.cyclonedx.model.ExternalReference
 import java.nio.file.Files
 import java.nio.file.Path
 import java.nio.file.Paths
+import nl.littlerobots.vcu.plugin.resolver.VersionSelectors
 
 /** Define a proper version in build */
 String globalVersion = Helper.getVersion(
-    file('package.json'),
+    providers,
+    layout.projectDirectory.file('package.json'),
     project.findProperty('version') as String,
     project.findProperty('use') as String
 )
@@ -57,9 +60,25 @@ allprojects {
     }
 }
 
+// Asciidoc licence headers are configured on the root project so that they also
+// cover projects excluded from the java-library block below (e.g. :documentation).
+spotless {
+    format 'asciidoc', {
+        target '**/*.adoc'
+        targetExclude("**/node_modules/**", "**/lib/**", "**/build/**")
+        licenseHeaderFile(rootProject.file('license_header.txt'), '^[=\\[]')
+        // transform C-style header to asciidoc block comments
+        replaceRegex 'Convert C-style block start to asciidoc block comment start', '^/\\*', '////'
+        replaceRegex 'Convert C-style block end to asciidoc block comment end', '^ \\*/', '////\n'
+        replaceRegex 'Remove asterisk prefixes', '^ \\* ?', ''
+    }
+}
+
 if (file('publish/build.gradle').exists()) {
     apply from: 'publish/build.gradle'
 }
+
+final def dataservicesBom = libs.dataservices.bom
 
 // Shared configuration for Java library projects
 subprojects {
@@ -87,7 +106,7 @@ subprojects {
 
             // A12 Data Services platform used for centralized version management for all subprojects
             dependencies {
-                api platform(libs.dataservices.bom)
+                api platform(dataservicesBom)
             }
 
             tasks.withType(JavaCompile).configureEach {
@@ -188,7 +207,7 @@ subprojects {
         }
 
         tasks.named('cyclonedxDirectBom') {
-            jsonOutput.set(rootProject.file("build/${project.name}-cyclonedx/cyclonedx.json"))
+            jsonOutput.set(project.layout.buildDirectory.file('cyclonedx.json'))
             xmlOutput.unsetConvention()
 
             includeBuildSystem = false
@@ -297,7 +316,9 @@ tasks.named('clean') {
 
 tasks.register('_assemble', LeadingBuildTask) {
     dependsOn(tasks.named('verify'), project(':modelGraph').tasks.named('assemble'))
-    doLast { execCommandLine 'node', '--run', 'build' }
+    // the devapp bundles bake the version in at build time and package.json is not stamped
+    // until publish, so the value has to come from gradle
+    doLast { execCommandLine(['node', '--run', 'build']) { environment 'RELEASE_VERSION', globalVersion } }
 }
 
 tasks.named('assemble') {
@@ -318,8 +339,20 @@ tasks.named('check') {
     dependsOn(tasks.named('_check'))
 }
 
+// review builds resolve to the plain -SNAPSHOT version, so stamping would rewrite all
+// workspace package.json files to what they already contain
+final boolean stampVersion = project.hasProperty('use')
+
 tasks.register('setVersion', PackageJsonModifierTask) {
+    onlyIf { stampVersion }
     packageDirs = new YamlSlurper().parse(file('./pnpm-workspace.yaml')).packages
         .collect({ file(it) }) + file('.')
     change = Helper.createSetVersion(version)
+}
+
+versionCatalogUpdate {
+    sortByKey = false
+    versionSelector {
+        VersionSelectors.PREFER_STABLE.select(it) && !it.candidate.version.contains('SNAPSHOT')
+    }
 }

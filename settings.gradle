@@ -2,10 +2,6 @@ rootProject.name = 'form-engine'
 
 dependencyResolutionManagement {
     versionCatalogs {
-        // `libs` is auto-imported from gradle/libs.versions.toml — no declaration needed.
-        // Internal-only dependencies live in a separate catalog that is absent from OSS
-        // checkouts (the file is listed in .ossignore). This single guard replaces the
-        // old per-entry `if (file('docker'))` / `if (file('performance-tests'))` checks.
         if (file('gradle/a12-internal.versions.toml').exists()) {
             create('a12Internal') {
                 from(files('gradle/a12-internal.versions.toml'))
