@@ -63,14 +63,8 @@ export const onExpansionChangeTriggeredMiddleware: Middleware<{}, EngineState> =
 				})
 			);
 
-			const currentScreenLocationIndex = UiStateSelectors.screenLocationStack()(state).length - 1;
 			if (DeviceDetector.get() === "phone") {
-				api.dispatch(
-					Commands.changeScreenState({
-						index: currentScreenLocationIndex,
-						focusedComponent: { formModelPath: [], subElement: "validation-bar" }
-					})
-				);
+				api.dispatch(Commands.CorrectionMode.focusValidationBar());
 			}
 		}
 		return result;

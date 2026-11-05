@@ -30,8 +30,6 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-/* eslint-disable mocha/no-setup-in-describe */
-
 import { query } from "@com.mgmtp.a12.devtools/react";
 import type { GroupInstance } from "@com.mgmtp.a12.kernel/kernel-md-facade";
 

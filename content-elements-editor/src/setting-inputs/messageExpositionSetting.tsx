@@ -36,26 +36,43 @@ import type { JSX } from "react";
 import type { KeywordLengthSettingState } from "@com.mgmtp.a12.contentengine/contentengine-editor";
 import { SettingEvents, useSettingState } from "@com.mgmtp.a12.contentengine/contentengine-editor";
 
-import { messageExpositionItems } from "../dropdownItems.js";
+import type { TrueSettingState } from "../controllers/trueController.js";
+import { messageExpositionItems, tooltipPositionItems } from "../dropdownItems.js";
 
 import { SelectSetting } from "./selectSetting.js";
-import { SwitchSetting } from "./switchSetting.js";
+import { displayedTooltipPosition, tooltipsOnTopFor } from "./tooltipPosition.js";
 
 /** @internal */
 export function MessageExpositionSetting(): JSX.Element {
 	const messageExpositionPath = ["messageExposition"];
+	const tooltipPositionPath = ["tooltipPosition"];
 	const tooltipsOnTopPath = ["tooltipsOnTop"];
 
 	const [messageExpositionSetting, dispatchMessageExposition] =
 		useSettingState<KeywordLengthSettingState>(messageExpositionPath);
-	const [, dispatchTooltipsOnTop] = useSettingState<KeywordLengthSettingState>(tooltipsOnTopPath);
+	const [tooltipPositionSetting, dispatchTooltipPosition] =
+		useSettingState<KeywordLengthSettingState>(tooltipPositionPath);
+	const [tooltipsOnTopSetting, dispatchTooltipsOnTop] =
+		useSettingState<TrueSettingState>(tooltipsOnTopPath);
 
+	// The deprecated tooltipsOnTop is kept in sync, as runtimes that don't know tooltipPosition still read it.
+	const onValueChangedTooltipPosition = useCallback(
+		(newValue: string) => {
+			dispatchTooltipPosition(SettingEvents.onChangeUnit({ unit: newValue }));
+			dispatchTooltipsOnTop(
+				SettingEvents.onChangeValue({ value: tooltipsOnTopFor(newValue) ? "true" : "" })
+			);
+		},
+		[dispatchTooltipPosition, dispatchTooltipsOnTop]
+	);
+
+	// The tooltip position only applies to the TOOLTIP exposition, so it is reset to the default on any change.
 	const onValueChangedMessageExposition = useCallback(
 		(newValue: string) => {
 			dispatchMessageExposition(SettingEvents.onChangeUnit({ unit: newValue }));
-			dispatchTooltipsOnTop(SettingEvents.onChangeValue({ value: "" }));
+			onValueChangedTooltipPosition("BESIDE");
 		},
-		[dispatchMessageExposition, dispatchTooltipsOnTop]
+		[dispatchMessageExposition, onValueChangedTooltipPosition]
 	);
 
 	return (
@@ -68,7 +85,17 @@ export function MessageExpositionSetting(): JSX.Element {
 				onValueChanged={onValueChangedMessageExposition}
 			/>
 			{messageExpositionSetting.dropdownProps.value === "TOOLTIP" && (
-				<SwitchSetting label={"Show tooltips on top"} settingPath={tooltipsOnTopPath} />
+				<SelectSetting
+					label={"Tooltip position"}
+					settingPath={tooltipPositionPath}
+					items={tooltipPositionItems}
+					width={120}
+					displayedValue={displayedTooltipPosition(
+						tooltipPositionSetting.dropdownProps.value,
+						tooltipsOnTopSetting
+					)}
+					onValueChanged={onValueChangedTooltipPosition}
+				/>
 			)}
 		</>
 	);

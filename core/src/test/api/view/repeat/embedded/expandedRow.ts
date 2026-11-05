@@ -36,8 +36,8 @@ import { query, within } from "@com.mgmtp.a12.devtools/react";
 
 import { EXPANDED_ROW } from "../../../../rtl-utils/data-roles.js";
 import { mouseEventMock } from "../../../../rtl-utils/mock-utils.js";
-import { ER } from "../../../../utils/test-model-helpers/embedded.repeat.js";
 import { createDocumentPath } from "../../../../utils/createDocumentPath.js";
+import { ER } from "../../../../utils/test-model-helpers/embedded.repeat.js";
 
 import type { EmbeddedRepeatTestEnv } from "./utils.js";
 import { setup } from "./utils.js";

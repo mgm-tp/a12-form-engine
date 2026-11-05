@@ -62,12 +62,14 @@ class DependentFieldChecker extends AbstractReferenceChecker {
 		if (dependentField != null) {
 			problems.addAll(checkDmFieldInDependentType(
 				dependentField.getMasterField(),
+				fieldConfigurationEntry.getElementRef(),
 				true,
 				FormModelCategory.MISSING_DM_FIELD_IN_DEPENDENT_FIELD_MASTER
 			));
 			for (final DependentFieldCaseType dependentFieldCase : dependentField.getCase()) {
 				problems.addAll(checkDmFieldInDependentType(
 					dependentFieldCase.getFieldRef(),
+					fieldConfigurationEntry.getElementRef(),
 					false,
 					FormModelCategory.MISSING_DM_FIELD_IN_DEPENDENT_FIELD_CASE
 				));

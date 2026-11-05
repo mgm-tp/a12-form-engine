@@ -36,14 +36,13 @@ import { renderHook } from "@testing-library/react";
 import type { ReactNode } from "react";
 import { Provider } from "react-redux";
 
-import { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
 import { DocumentPath } from "@com.mgmtp.a12.client/client-data";
-import { DocumentContext } from "@com.mgmtp.a12.contentengine/contentengine-core";
 import type { DocumentContext as DocumentContextType } from "@com.mgmtp.a12.contentengine/contentengine-core";
+import { DocumentContext } from "@com.mgmtp.a12.contentengine/contentengine-core";
 import type { DocumentModel, Message } from "@com.mgmtp.a12.kernel/kernel-md-facade";
 import type { LocalizedModelText, Localizer } from "@com.mgmtp.a12.utils/utils-localization";
-import { LocalizerContext } from "@com.mgmtp.a12.utils/utils-localization-react";
 import type { LocalizerContextProps } from "@com.mgmtp.a12.utils/utils-localization-react";
+import { LocalizerContext } from "@com.mgmtp.a12.utils/utils-localization-react";
 
 import { FormElementContext } from "../../../../../main/core/configuration/formElementContext.js";
 import type { FunctionMap } from "../../../../../main/core/contentElements/functionMap/functionMap.js";
@@ -167,54 +166,32 @@ describe("core.contentElements", () => {
 			]);
 		});
 
-		it("should handle runtime node IDs correctly", () => {
-			const idToPath: { [key: string]: string } = {
-				["field1"]: "/group1/field1",
-				["field2"]: "/group2/field2",
-				["field3"]: "/group3/field3"
+		it("addresses the node with the runtime node id it was rendered with", () => {
+			// what the expanded tree reports for a control inside the second instance of a group
+			const runtimeNodeId = "textline-street@/addresses[2]";
+
+			const editableElement: EditableElement = {
+				nodeId: runtimeNodeId,
+				documentPath: DocumentPath.fromString("/addresses[2]/street[1]")
 			};
 
-			const editableElements: EditableElement[] = [
-				{ nodeId: "node-field1", documentPath: DocumentPath.fromString("/group1[1]/field1[1]") },
-				{ nodeId: "node-field2", documentPath: DocumentPath.fromString("/group2[2]/field2[1]") },
-				{ nodeId: "node-field3", documentPath: DocumentPath.fromString("/group3[3]/field3[1]") }
-			];
-
-			const message = createMessage([
-				"/group2[2]/field2[1]",
-				"/group3[3]/field3[1]",
-				"/group1[1]/field1[1]"
-			]);
-
-			const computeVirtualNodeId = (dataContext: string, nodeId: string) =>
-				`${dataContext}-${nodeId}`;
-
-			const uiIdPrefix = "test-prefix";
+			const message = createMessage(["/addresses[2]/street[1]"]);
 
 			const { result } = renderHook(() => useLinkData(message), {
 				wrapper: createWrapper({
-					editableElements,
-					uiIdPrefix,
-					computeVirtualNodeId,
-					// only the first path segment should be considered as a repeatable group for data context resolution
+					editableElements: [editableElement],
 					getElementByPath: (_, path) =>
 						path.length === 1 ? createRepeatableGroup() : ({} as never)
 				})
 			});
 
-			const expectedRuntimeIds = [1, 2, 3].map(n =>
+			strictEqual(
+				result.current[0].nodeId,
 				UiId.generateForControl({
-					controlId: computeVirtualNodeId(`/group${n}[${n}]`, `node-field${n}`),
-					elementPath: ModelPath.fromString(idToPath[`field${n}`]),
-					uiIdPrefix
+					controlId: runtimeNodeId,
+					elementPath: editableElement.documentPath
 				})
 			);
-
-			strictEqual(result.current.length, expectedRuntimeIds.length);
-
-			for (const [idx, expectedNodeId] of expectedRuntimeIds.entries()) {
-				strictEqual(result.current[idx].nodeId, expectedNodeId);
-			}
 		});
 
 		it("should handle label fallbacks correctly", () => {
@@ -262,7 +239,6 @@ interface TestSetupOptions {
 	readonly localizer?: Localizer;
 	readonly getElementByPath?: DocumentContextType["model"]["getElementByPath"];
 	readonly getDocumentModelName?: DocumentContextType["model"]["getDocumentModelName"];
-	readonly computeVirtualNodeId?: FunctionMap["computeVirtualNodeId"];
 }
 
 function createWrapper(options: TestSetupOptions = {}) {
@@ -272,8 +248,7 @@ function createWrapper(options: TestSetupOptions = {}) {
 		uiIdPrefix,
 		localizer,
 		getElementByPath = () => ({}) as never,
-		getDocumentModelName = () => "test-dm",
-		computeVirtualNodeId = (_, nodeId) => nodeId
+		getDocumentModelName = () => "test-dm"
 	} = options;
 
 	return ({ children }: { children: ReactNode }) => {
@@ -288,8 +263,7 @@ function createWrapper(options: TestSetupOptions = {}) {
 			}
 		};
 		const mockFunctionContext: FunctionMap = {
-			...getFunctionMocks(),
-			computeVirtualNodeId
+			...getFunctionMocks()
 		};
 		const baseLocalization = getMockLocalization();
 		const mockLocalization: LocalizerContextProps = {

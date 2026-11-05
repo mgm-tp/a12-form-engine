@@ -50,7 +50,8 @@ export function createParseError(
 			entityInstance: documentPath,
 			referencedFields: [documentPath],
 			rulePath: KernelMessage.FORMAL_VALIDATION,
-			refOmissionErrorResponsible: []
+			refOmissionErrorResponsible: [],
+			groupsOfPossiblyCausingEntities: []
 		},
 		value: errorValue
 	};

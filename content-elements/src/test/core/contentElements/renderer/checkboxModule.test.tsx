@@ -76,7 +76,7 @@ describe("core.contentElements", () => {
 			strictEqual(props["readonly"], mockWidgetSettings.readonly);
 			strictEqual(props["hideLabel"], mockWidgetSettings.hideLabel);
 			strictEqual(props["tooltips"], mockWidgetSettings.tooltips);
-			strictEqual(props["breakTooltipsToNewLine"], mockWidgetSettings.tooltipsOnTop);
+			strictEqual(props["breakTooltipsToNewLine"], mockWidgetSettings.breakTooltipsToNewLine);
 			strictEqual(props["helperText"], mockWidgetSettings.helperText);
 			strictEqual(props["error"], mockWidgetSettings.error);
 			strictEqual(props["errorMessage"], mockWidgetSettings.errors);
@@ -354,7 +354,7 @@ function getMockWidgetSettings(options?: Partial<BaseWidgetSettings>): BaseWidge
 		warnings: "WARNINGS",
 		infos: "INFOS",
 		tooltips: "TOOLTIPS",
-		tooltipsOnTop: true,
+		breakTooltipsToNewLine: "above",
 		inputProps: { "aria-required": true },
 		ariaDescribedBy: [],
 		...(options ?? {})

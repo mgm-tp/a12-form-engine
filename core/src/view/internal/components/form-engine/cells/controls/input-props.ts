@@ -32,6 +32,8 @@
 
 import type { ReactElement, ReactNode } from "react";
 
+import type { FormModel } from "../../../../../../models/index.js";
+
 /** @internal */
 export interface ControlProps {
 	readonly id: string;
@@ -49,6 +51,7 @@ export interface ControlProps {
 	readonly hideLabel?: boolean;
 	readonly truncateSuffix?: boolean;
 	readonly placeholder?: string;
+	readonly tooltipPosition?: FormModel.TooltipPosition;
 
 	readonly htmlInputProps?: {
 		"aria-required"?: boolean;

@@ -43,8 +43,8 @@ import {
 	DocumentUtils,
 	InternalDocumentPath
 } from "../../../../../models/internal/utils/document-utils.js";
-import { ReadonlyObjectMap } from "../../../../../models/internal/utils/json.js";
 import { createGroupInstance } from "../../../../../models/internal/utils/model-utils.js";
+import { ReadonlyObjectMap } from "../../../../../models/internal/utils/ReadonlyObjectMap.js";
 import { getDocumentPath } from "../../../../utils/internal/path.js";
 import { Commands, Events } from "../../actions.js";
 import { validateChangesAndUpdateMessages } from "../../change-validation.js";

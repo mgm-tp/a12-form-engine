@@ -41,57 +41,34 @@ tasks.named('clean') {
     delete layout.projectDirectory.dir('target')
 }
 
+/** the devapp renders the index as this many tile columns, see ModelsOverview */
+final int TILE_COLUMN_COUNT = 4
+
 tasks.register('generateFormModelList') {
     dependsOn(tasks.named('prepareModels'))
 
     final def outputFile = layout.buildDirectory.file('modelIndex/index.json')
     outputs.file outputFile
 
-    final def basePath = layout.projectDirectory.dir('src').getAsFile().path
-    final Path pathBase = Paths.get(basePath)
+    final def sourceDir = layout.projectDirectory.dir('src')
+    // Declaring the whole tree and walking it only in doLast. Registering each model as an input
+    // while walking at configuration time missed models added under a reused configuration cache
+    // entry, and failed the build outright once one was deleted.
+    final def modelFiles = fileTree(sourceDir) { include '**/*.json' }
+    inputs.files modelFiles
 
-    final def formslist = ['groups': []]
-    final int fileEndingLength = '-form.json'.length()
-
-    new File(basePath).eachDir { final dir ->
-        dir.traverse(type: FILES) {
-            if (dir.name == 'debug') {
-                if (ModelHelper.isFormModel(it)) {
-                    def group = formslist.groups.find { it.name == 'debug' }
-                    if (group == null) {
-                        group = ['name': 'debug', 'forms': []]
-                        formslist.groups.add(group)
-                    }
-                    group.forms.add(it.name.substring(0, it.name.length() - '.json'.length()).replace('.', ''))
-
-                    inputs.file it
-                }
-            } else {
-                if (it.name.endsWith('-form.json')) {
-                    final Path pathRelative = pathBase.relativize(Paths.get(it.path))
-                    final String groupName = pathRelative.getParent().toString().replace('/', '.').replace('\\', '.')
-
-                    def group = formslist.groups.find { it.name == groupName }
-                    if (group == null) {
-                        group = ['name': groupName, 'forms': []]
-                        formslist.groups.add(group)
-                    }
-                    group.forms.add(it.name.substring(groupName.length(), it.name.length() - fileEndingLength).replace('.', ''))
-
-                    inputs.file it
-                }
-            }
-        }
-    }
+    final Path sourcePath = sourceDir.getAsFile().toPath()
 
     doLast {
-        formslist.groups.sort { it.name }
-        outputFile.get().asFile.write(new JsonBuilder(formslist).toPrettyString())
+        final def groups = ModelIndex.toGroups(modelFiles.files, sourcePath)
+
+        outputFile.get().asFile.write(
+            new JsonBuilder(ModelIndex.of(groups, TILE_COLUMN_COUNT)).toPrettyString())
     }
 }
 
 tasks.register('generateInstances') {
-    final def inputFiles = fileTree(dir: prepareModels.inputDir, include: '*/**.json')
+    final def inputFiles = fileTree(dir: prepareModels.inputDir, include: '**/*.json')
     inputs.files inputFiles.filter { !ModelHelper.isFormModel(it) }
 
     final def outputFile = file('build/data/instances.json')
@@ -101,7 +78,8 @@ tasks.register('generateInstances') {
         def dataList = [:]
 
         inputFiles.filter { ModelHelper.isDocumentModel(it) }.each { file ->
-            final def dataFiles = fileTree(dir: file.parentFile, include: '*.json').filter { !ModelHelper.isDocumentModel(it) && !ModelHelper.isFormModel(it) }
+            final def dataFiles = (file.parentFile.listFiles() ?: [] as File[])
+                .findAll { it.name.endsWith('.json') && !ModelHelper.isDocumentModel(it) && !ModelHelper.isFormModel(it) }
             dataList[file.name.replaceAll(/\.json$/, '')] = dataFiles.collect { it.name }
         }
 
@@ -113,3 +91,118 @@ tasks.named('assemble') {
     dependsOn(tasks.named('generateFormModelList'), tasks.named('generateInstances'))
 }
 
+/**
+ * Builds the model index the way the devapp renders it: tiles of form links,
+ * already distributed over the tile columns. The devapp fetches the result and
+ * puts it into state unchanged, so nothing here is recomputed at runtime.
+ */
+class ModelIndex {
+
+    private static final String FORM_FILE_SUFFIX = '-form.json'
+
+    static Map of(final List groups, final int columnCount) {
+        ['columns': toColumns(toTiles(groups), columnCount)]
+    }
+
+    /**
+     * Collects the form models below `sourcePath` into `[name, forms]` groups, one per directory.
+     * Models directly in `sourcePath` belong to no group and are skipped.
+     */
+    static List toGroups(final Collection modelFiles, final Path sourcePath) {
+        final Map groups = [:]
+
+        modelFiles.sort().each { final file ->
+            final Path relative = sourcePath.relativize(file.toPath())
+
+            if (relative.nameCount < 2) {
+                return
+            }
+
+            final boolean isDebug = relative.getName(0).toString() == 'debug'
+
+            if (isDebug ? ModelHelper.isFormModel(file) : file.name.endsWith(FORM_FILE_SUFFIX)) {
+                final String groupName = isDebug ? 'debug' : toGroupName(relative)
+                groups.computeIfAbsent(groupName) { ['name': groupName, 'forms': []] }
+                    .forms.add(toFormName(file.name, groupName, isDebug))
+            }
+        }
+
+        groups.values().sort { it.name }
+    }
+
+    private static String toGroupName(final Path relative) {
+        relative.getParent().toString().replace('/', '.').replace('\\', '.')
+    }
+
+    private static String toFormName(final String fileName, final String groupName, final boolean isDebug) {
+        final int start = isDebug ? 0 : groupName.length()
+        final int end = fileName.length() - (isDebug ? '.json'.length() : FORM_FILE_SUFFIX.length())
+
+        fileName.substring(start, end).replace('.', '')
+    }
+
+    /** All groups sharing a base name, e.g. every `controls.*` group, become one tile. */
+    private static List toTiles(final List groups) {
+        groups.groupBy { toBaseName(it.name) }.collect { final baseName, final sharingBaseName ->
+            ['name' : baseName,
+             'forms': sharingBaseName.collectMany { toFormLinks(it) }.sort { a, b -> a.label <=> b.label }]
+        }
+    }
+
+    private static String toBaseName(final String groupName) {
+        groupName.split('\\.')[0]
+    }
+
+    private static List toFormLinks(final Map group) {
+        group.forms.findAll { !isDetailOnlyForm(it) }.collect { final form ->
+            ['label'  : toFormLabel(group.name, form),
+             'modelId': toFormModelId(group.name, form)]
+        }
+    }
+
+    /**
+     * A "detail" form (e.g. `customization.masterDetailFocus.detail-form`) only exists as another
+     * form's MasterDetail detail pane - colocated with its parent example for discoverability, but
+     * not meant to show up as its own tile entry.
+     */
+    private static boolean isDetailOnlyForm(final String form) {
+        form == 'detail'
+    }
+
+    private static String toFormLabel(final String groupName, final String form) {
+        final String subGroup = groupName.split('\\.').drop(1).join('.')
+        final String separator = subGroup != '' && form != '' ? '.' : ''
+        final String label = subGroup == 'debug' ? form : "${subGroup}${separator}${form}"
+
+        label.isEmpty() ? groupName : label
+    }
+
+    private static String toFormModelId(final String groupName, final String form) {
+        groupName == 'debug' ? form : "${groupName}${form.isEmpty() ? '' : '.' + form}-form".toString()
+    }
+
+    /**
+     * Fills the columns left to right, moving on once a column holds its share of the forms, so
+     * the tiles keep the reading order of the model index.
+     */
+    private static List toColumns(final List tiles, final int columnCount) {
+        final int totalForms = tiles.inject(0) { final sum, final tile -> sum + tile.forms.size() }
+        final int formsPerColumn = Math.max(1, (int) Math.ceil(totalForms / (double) columnCount))
+        final List columns = (1..columnCount).collect { ['tiles': []] }
+
+        int column = 0
+        int formsInColumn = 0
+
+        tiles.each { final tile ->
+            if (formsInColumn > 0 && formsInColumn + tile.forms.size() > formsPerColumn && column < columnCount - 1) {
+                column++
+                formsInColumn = 0
+            }
+
+            columns[column].tiles.add(tile)
+            formsInColumn += tile.forms.size()
+        }
+
+        columns
+    }
+}

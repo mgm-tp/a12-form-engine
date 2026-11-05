@@ -29,6 +29,7 @@
  * NON-INFRINGEMENT, EXCEPT WHERE SUCH DISCLAIMERS ARE HELD TO BE
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
+
 import type { JSX, PropsWithChildren, RefObject } from "react";
 import { StyleSheetManager, ThemeProvider } from "styled-components";
 
@@ -49,7 +50,7 @@ import {
 } from "@com.mgmtp.a12.widgets/widgets-core";
 import type { SizeDetectorProps } from "@com.mgmtp.a12.widgets/widgets-core";
 
-import type { EngineStore, Models } from "../../back-end/store/index.js";
+import type { EngineState, EngineStore, Models } from "../../back-end/store/index.js";
 import type { PickPartial } from "../../back-end/utils/internal/types.js";
 import type { Config, DispatchConfiguration, ScrollApi } from "../../view/index.js";
 import {
@@ -67,6 +68,7 @@ import {
 	DefaultInputMap,
 	InputMapContext
 } from "../../view/internal/configuration/componentMap/input/input.js";
+import { EngineStoreContext } from "../../view/internal/configuration/engine-store-context.js";
 import { WidgetMapContext } from "../../view/internal/configuration/widget-map-context.js";
 import type { WidgetMap } from "../../view/internal/configuration/widget-map.js";
 
@@ -104,6 +106,13 @@ export interface RtlRenderWrapperOptions {
 	tableMap?: TableWidgetMap;
 	filterCellMap?: FilterCellMap;
 	withWidgets?: true;
+	/**
+	 * The engine state to provide via `EngineStoreContext`, for components (like `MarkdownInput`)
+	 * that read the engine's own store directly rather than through props. This test harness's
+	 * `state` is a static snapshot, not a real store, so `subscribe` never fires - fine for
+	 * anything that only reads the current state, not for asserting on a later state change.
+	 */
+	engineState?: EngineState;
 }
 
 export function rtlRenderWrapper(
@@ -130,6 +139,18 @@ export function rtlRenderWrapper(
 		...options?.widgetMap
 	};
 
+	const uiWithWidgetMap = (
+		<WidgetMapContext.Provider value={widgetMap}>{ui}</WidgetMapContext.Provider>
+	);
+	const engineState = options?.engineState;
+	const uiWithEngineStore = engineState ? (
+		<EngineStoreContext.Provider value={{ getState: () => engineState, subscribe: () => () => {} }}>
+			{uiWithWidgetMap}
+		</EngineStoreContext.Provider>
+	) : (
+		uiWithWidgetMap
+	);
+
 	const uiWithContexts = (
 		<LocalizerContext.Provider value={{ localizer, locale, dataFormats, conversion }}>
 			<SizeContext.Provider value={{ currentSize: options?.size }}>
@@ -137,7 +158,7 @@ export function rtlRenderWrapper(
 					<InputMapContext.Provider value={inputMap}>
 						<FilterCellMapContext.Provider value={filterCellMap}>
 							<TableWidgetMapContext.Provider value={tableMap}>
-								<WidgetMapContext.Provider value={widgetMap}>{ui}</WidgetMapContext.Provider>
+								{uiWithEngineStore}
 							</TableWidgetMapContext.Provider>
 						</FilterCellMapContext.Provider>
 					</InputMapContext.Provider>

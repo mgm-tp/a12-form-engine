@@ -31,22 +31,15 @@
  */
 
 // tag::content[]
-import type { ComponentType, JSX, ReactNode } from "react";
-import { connect } from "react-redux";
+import type { JSX, ReactNode } from "react";
 
-import type {
-	Config,
-	DefaultDispatchProps,
-	DefaultOwnProps,
-	DefaultStateProps,
-	EngineState,
-	ScrollHandlerProps
-} from "@com.mgmtp.a12.formengine/formengine-core";
+import type { Config, DefaultOwnProps } from "@com.mgmtp.a12.formengine/formengine-core";
 import {
-	defaultMapDispatchToProps,
-	defaultMapStateToProps,
 	FormEngineRenderer,
-	ScrollHandler
+	ScrollHandler,
+	useDefaultDispatchProps,
+	useDefaultStateProps,
+	useScrollHandlerProps
 } from "@com.mgmtp.a12.formengine/formengine-core";
 
 export function Engine(props: { readonly uiIdPrefix?: string }): JSX.Element {
@@ -65,28 +58,22 @@ export function Engine(props: { readonly uiIdPrefix?: string }): JSX.Element {
 }
 
 /**
- * Create the connected components.
+ * Read the connected state via hooks.
  * It is important that the ScrollHandler receives the same uiIdPrefix than the FormEngine
  */
-const ScrollHandlerConnected: ComponentType<{
+function ScrollHandlerConnected(props: {
 	readonly uiIdPrefix?: string;
 	readonly children?: ReactNode;
-}> = connect<ScrollHandlerProps, {}, { readonly uiIdPrefix?: string }, EngineState>(
-	function mapStateToProps(state) {
-		return {
-			uiState: state.ui,
-			models: state.models
-		};
-	}
-)(ScrollHandler);
+}): JSX.Element {
+	const stateProps = useScrollHandlerProps();
 
-const EngineConnected = connect<
-	DefaultStateProps,
-	DefaultDispatchProps,
-	DefaultOwnProps,
-	EngineState
->(
-	defaultMapStateToProps,
-	defaultMapDispatchToProps
-)(FormEngineRenderer);
+	return <ScrollHandler {...props} {...stateProps} />;
+}
+
+function EngineConnected(props: DefaultOwnProps): JSX.Element {
+	const stateProps = useDefaultStateProps(props);
+	const dispatchProps = useDefaultDispatchProps();
+
+	return <FormEngineRenderer {...props} {...stateProps} {...dispatchProps} />;
+}
 // end::content[]

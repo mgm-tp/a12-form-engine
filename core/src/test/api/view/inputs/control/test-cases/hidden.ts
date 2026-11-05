@@ -34,10 +34,10 @@ import { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
 import type { EntityInstancePath } from "@com.mgmtp.a12.kernel/kernel-md-facade";
 
 import type { EngineStore } from "../../../../../../back-end/store/index.js";
+import { createModelPath } from "../../../../../utils/createModelPath.js";
 import { setupModelsFixture } from "../../../../../utils/setupFixture.js";
 import { DEP_INDEXED } from "../../../../../utils/test-model-helpers/dependencies-indexed.js";
 import { DEP_ELEMENT } from "../../../../../utils/test-model-helpers/dependent-element.js";
-import { createModelPath } from "../../../../../utils/createModelPath.js";
 
 import { executeHiddenPropTest } from "../executeHiddenPropTest.js";
 

@@ -41,7 +41,7 @@ import { Button } from "@com.mgmtp.a12.widgets/widgets-core";
 import type { ButtonProps, ActionContentboxProps } from "@com.mgmtp.a12.widgets/widgets-core";
 
 import type { EngineStore } from "../../../../../back-end/store/internal/store.js";
-import type { ReadonlyObjectMap } from "../../../../../models/internal/utils/json.js";
+import type { ReadonlyObjectMap } from "../../../../../models/internal/utils/ReadonlyObjectMap.js";
 import type { ConfirmationButtonProps } from "../../../../../view/internal/components/widgets/form-engine/confirmationButton.js";
 import { ConfirmationButton } from "../../../../../view/internal/components/widgets/form-engine/confirmationButton.js";
 import type { ComponentMap } from "../../../../../view/internal/configuration/componentMap/component-map.js";

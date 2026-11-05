@@ -34,8 +34,9 @@ import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { mock } from "node:test";
 
-import type { ComponentType, PropsWithChildren } from "react";
-import { connect, Provider } from "react-redux";
+import type { ComponentType, JSX, PropsWithChildren } from "react";
+import { memo, useMemo } from "react";
+import { Provider, shallowEqual, useDispatch, useSelector } from "react-redux";
 import type { Middleware, Store } from "redux";
 import { applyMiddleware, compose, legacy_createStore as createStore } from "redux";
 
@@ -60,9 +61,7 @@ import type { FormModel } from "../../models/index.js";
 import { defaultValueParser, unmarshallFormModel } from "../../models/index.js";
 import type {
 	Config,
-	DefaultDispatchProps,
 	DefaultOwnProps,
-	DefaultStateProps,
 	DispatchConfiguration,
 	FormEngineRendererPropsType,
 	FormModelMap,
@@ -328,7 +327,8 @@ function setupComponentWithRtl(
 			tableMap: options.tableMap,
 			completeWidgetMap: widgetMap,
 			withWidgets: options.withWidgets,
-			size: options.size
+			size: options.size,
+			engineState: state
 		}
 	);
 }
@@ -373,23 +373,38 @@ function scrollHandlerMapStateToProps(
 	};
 }
 
-const ScrollHandlerConnected = connect(scrollHandlerMapStateToProps)(ScrollHandler);
+const ScrollHandlerConnected = memo(function ScrollHandlerConnected(
+	props: PropsWithChildren<Partial<ScrollHandlerProps>>
+): JSX.Element {
+	const stateProps = useSelector(
+		(state: EngineState) => scrollHandlerMapStateToProps(state, props),
+		shallowEqual
+	);
+
+	return <ScrollHandler {...props} {...stateProps} />;
+});
 
 type CustomOwnProps = DefaultOwnProps & { customEventHandlers?: Partial<DispatchConfiguration> };
 
-const EngineConnected = connect<
-	DefaultStateProps,
-	DefaultDispatchProps,
-	CustomOwnProps,
-	EngineState
->(defaultMapStateToProps, function mapDispatchToProps(dispatch, ownProps) {
-	return {
-		eventHandlers: {
-			...defaultMapDispatchToProps(dispatch).eventHandlers,
-			...ownProps.customEventHandlers
-		}
-	};
-})(FormEngineRenderer);
+const EngineConnected = memo(function EngineConnected(props: CustomOwnProps): JSX.Element {
+	const stateProps = useSelector(
+		(state: EngineState) => defaultMapStateToProps(state, props),
+		(a, b) => a.state === b.state && shallowEqual(a.config, b.config)
+	);
+	const dispatch = useDispatch();
+	const { customEventHandlers } = props;
+	const dispatchProps = useMemo(
+		() => ({
+			eventHandlers: {
+				...defaultMapDispatchToProps(dispatch).eventHandlers,
+				...customEventHandlers
+			}
+		}),
+		[dispatch, customEventHandlers]
+	);
+
+	return <FormEngineRenderer {...props} {...stateProps} {...dispatchProps} />;
+});
 
 /**
  * Can be used in a rtl unit test where the subtree of the component under test is irrelevant.

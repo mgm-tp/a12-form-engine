@@ -37,7 +37,7 @@ import type { GroupInstance } from "@com.mgmtp.a12.kernel/kernel-md-facade";
 import { findElementByFormModelPath } from "../../../../../models/index.js";
 import { isFormModelRepeat } from "../../../../../models/internal/FormModelGuards.js";
 import { DocumentUtils } from "../../../../../models/internal/utils/document-utils.js";
-import { ReadonlyObjectMap } from "../../../../../models/internal/utils/json.js";
+import { ReadonlyObjectMap } from "../../../../../models/internal/utils/ReadonlyObjectMap.js";
 import { Commands, Events } from "../../actions.js";
 import { KernelComputation } from "../../computation.js";
 import { messageStateIsEqual } from "../../messageStateIsEqual.js";

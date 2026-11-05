@@ -44,6 +44,7 @@ import * as DocumentModelUtils from "../../../../../../../models/internal/utils/
 import type { Inputs } from "../../../../../configuration/engine-configuration.js";
 import { WidgetMapContext } from "../../../../../configuration/widget-map-context.js";
 import { ContentWithNewLines } from "../../../../../utilities/contentWithNewLines.js";
+import { toWidgetsTooltipPosition } from "../../../../../utilities/tooltipPosition.js";
 import { isEmpty } from "../../../../../utilities/value.js";
 
 import { getDisplayLabels } from "../boolean/display-label.js";
@@ -78,10 +79,7 @@ export function TextOutput(props: TextOutputProps): ReactElement {
 			{...textOutputProps}
 			label={props.modelElement.labelHiddenButRead ? undefined : props.modelElement.label}
 			noData={noData !== undefined}
-			addonAfter={
-				props.modelElement.tooltipsOnTop !== true ? textOutputProps.addonAfter : undefined
-			}
-			tooltips={props.modelElement.tooltipsOnTop ? textOutputProps.addonAfter : undefined}
+			tooltipPosition={toWidgetsTooltipPosition(props.modelElement.tooltipPosition)}
 			disableParagraphWrapping={props.disableParagraphWrapping}
 			alignment={props.alignment}
 		>

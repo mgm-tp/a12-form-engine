@@ -1,0 +1,80 @@
+{
+  "header": {
+    "id": "FormModelMarkdownEditorExpositionValid",
+    "modelType": "form",
+    "modelVersion": "39.3.0",
+    "locales": [
+      {
+        "code": "en"
+      }
+    ],
+    "annotations": [
+      {
+        "name": "roles",
+        "value": "admin"
+      }
+    ],
+    "modelReferences": [
+      {
+        "alias": "DM",
+        "modelType": "document",
+        "purpose": "data binding",
+        "reference": "DocumentModelMarkdownEditorExposition"
+      }
+    ]
+  },
+  "content": {
+    "subHeaderBox": {
+      "id": "subHeaderBox1"
+    },
+    "footerBox": {
+      "id": "footerBox1"
+    },
+    "screens": [
+      {
+        "id": "screen1",
+        "name": "Screen1",
+        "screenElements": [
+          {
+            "type": "InlineRepeat",
+            "id": "repeat_valid",
+            "name": "repeat-valid",
+            "repeatOverviewColumn": [
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "column_repeat_valid",
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "elementRef": "field_3"
+              }
+            ],
+            "groupRef": "group_rep",
+            "enableAdd": true,
+            "enableRemove": true,
+            "multiFileUpload": true,
+            "multiFileUploadOptions": {
+              "elementRef": "field_3"
+            }
+          }
+        ]
+      }
+    ],
+    "fieldConfiguration": {
+      "field": [
+        {
+          "isMarkdownEditor": true,
+          "markdownAttachmentRepeat": "repeat_valid",
+          "elementRef": "field_1"
+        },
+        {
+          "exposition": "AREA",
+          "elementRef": "field_2"
+        }
+      ]
+    },
+    "groupConfiguration": {},
+    "defaults": {}
+  }
+}

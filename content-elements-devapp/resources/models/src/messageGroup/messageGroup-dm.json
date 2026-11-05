@@ -2,7 +2,7 @@
   "header": {
     "id": "messageGroup-dm",
     "modelType": "document",
-    "modelVersion": "29.4.0",
+    "modelVersion": "29.8.0",
     "locales": [
       {
         "code": "en"
@@ -628,6 +628,81 @@
                           {
                             "locale": "en",
                             "text": "All fields must be filled."
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Group",
+                "id": "group_c1a72",
+                "name": "customInputs",
+                "Group": {
+                  "repeatability": 1,
+                  "elements": [
+                    {
+                      "type": "Field",
+                      "id": "field_b3f61",
+                      "name": "preconditionField",
+                      "Field": {
+                        "fieldType": {
+                          "type": "ConfirmType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "Precondition Field"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_9d24a",
+                      "name": "builtIn",
+                      "Field": {
+                        "fieldType": {
+                          "type": "NumberType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "Built-in Input"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_2f6b1",
+                      "name": "custom",
+                      "Field": {
+                        "fieldType": {
+                          "type": "NumberType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "Custom Input"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Rule",
+                      "id": "rule_7c9a2",
+                      "name": "bothFilled",
+                      "Rule": {
+                        "errorEntityRelPath": "../builtIn",
+                        "errorCode": "Error rule_7c9a2",
+                        "errorCondition": "FieldFilled(preconditionField) and (FieldNotFilled(builtIn) or FieldNotFilled(custom))",
+                        "severity": "ERROR",
+                        "errorMessage": [
+                          {
+                            "locale": "en",
+                            "text": "Both the built-in and the custom input must be filled."
                           }
                         ]
                       }

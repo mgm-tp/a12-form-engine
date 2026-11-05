@@ -37,92 +37,51 @@ import type { ViewNGProps } from "@com.mgmtp.a12.client/client-core";
 import { ActivitySelectors } from "@com.mgmtp.a12.client/client-core";
 import { LayoutGrid } from "@com.mgmtp.a12.widgets/widgets-core";
 
-import type { Group } from "./DevappTile.js";
-import { DevappTile } from "./DevappTile.js";
+import type { ModelIndex } from "../modelIndex.js";
 
-interface FormsList {
-	readonly groups: { name: string; forms: string[] }[];
-}
+import { DevappTile } from "./DevappTile.js";
+import { DocumentationTile, documentationAvailable } from "./DocumentationTile.js";
 
 interface ModelsOverviewProps {
-	readonly devAppModelsList?: FormsList;
+	readonly devAppModelsList?: ModelIndex;
 }
 
-interface WorkingList {
-	readonly name: string;
-	readonly group: Group[];
-	numberOfForms: number;
-}
+/** four tile columns fill the twelve-column grid, halving down to one below lg */
+const TILE_COLUMN_SIZE = { sm: 12, md: 6, lg: 3 } as const;
+const FULL_WIDTH = { lg: 12 } as const;
+const TILE_COLOR = "#056294";
+
+const { Grid, Row, Column } = LayoutGrid;
 
 export default function ModelsOverview(props: ViewNGProps): JSX.Element {
 	const { devAppModelsList } = useSelector(
 		ActivitySelectors.data(props.activityId)
 	) as ModelsOverviewProps;
 
-	const list: { [key: string]: WorkingList } = {};
-
-	for (const entry of devAppModelsList?.groups ?? []) {
-		const baseName = entry.name.split(".")[0];
-		if (!(baseName in list)) {
-			list[baseName] = {
-				name: baseName,
-				group: [],
-				numberOfForms: 0
-			};
-		}
-
-		list[baseName].group.push({
-			name: entry.name,
-			forms: entry.forms
-		});
-
-		list[baseName].numberOfForms += entry.forms.length;
-	}
-
-	const keys = Object.keys(list);
-	let currentModels = 0;
-
-	const columns: number[][] = [[], [], [], []];
-	let currentTileArray = 0;
-	for (let i = 0; i < keys.length; i++) {
-		currentModels += list[keys[i]].numberOfForms;
-		if (currentModels > 29 && currentTileArray < columns.length - 1) {
-			currentModels = list[keys[i]].numberOfForms;
-			currentTileArray++;
-		}
-
-		columns[currentTileArray].push(i);
-	}
-
 	return (
-		<>
-			<LayoutGrid.Grid disableNegativeMargin>
-				<LayoutGrid.Row>
-					{columns.map((rows, index) => {
-						return (
-							<LayoutGrid.Column key={index} size={{ sm: 9, md: 8, lg: 2 }}>
-								<LayoutGrid.Grid>
-									{rows.map((row, index) => {
-										return (
-											<LayoutGrid.Row key={index}>
-												<LayoutGrid.Column size={{ sm: 9, md: 8, lg: 12 }}>
-													<DevappTile
-														color="#056294"
-														removeBaseName
-														index={row}
-														list={list}
-														key={row}
-													/>
-												</LayoutGrid.Column>
-											</LayoutGrid.Row>
-										);
-									})}
-								</LayoutGrid.Grid>
-							</LayoutGrid.Column>
-						);
-					})}
-				</LayoutGrid.Row>
-			</LayoutGrid.Grid>
-		</>
+		<Grid disableNegativeMargin>
+			<Row>
+				{(devAppModelsList?.columns ?? []).map((column, columnIndex) => (
+					<Column key={columnIndex} size={TILE_COLUMN_SIZE}>
+						<Grid>
+							{columnIndex === 0 && documentationAvailable && (
+								<Row>
+									<Column size={FULL_WIDTH}>
+										<DocumentationTile ariaLevel={props.ariaLevel} />
+									</Column>
+								</Row>
+							)}
+							{column.tiles.map(tile => (
+								<Row key={tile.name}>
+									<Column size={FULL_WIDTH}>
+										<DevappTile tile={tile} color={TILE_COLOR} ariaLevel={props.ariaLevel} />
+									</Column>
+								</Row>
+							))}
+						</Grid>
+					</Column>
+				))}
+			</Row>
+		</Grid>
 	);
 }

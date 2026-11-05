@@ -30,23 +30,27 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import type { Action } from "@com.mgmtp.a12.client/typescript-fsa-redux-5-compat";
 import { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
+import type { Action } from "@com.mgmtp.a12.client/typescript-fsa-redux-5-compat";
 import type { EntityInstancePath } from "@com.mgmtp.a12.kernel/kernel-md-facade";
 import type { Locale, Localizable } from "@com.mgmtp.a12.utils/utils-localization";
 
+import { findElementByFormModelPath } from "../../../../models/internal/findElementByFormModelPath.js";
+import type { FormModel } from "../../../../models/internal/form-model.js";
 import {
 	isFormModelControl,
 	isFormModelFieldOverviewColumn,
 	isFormModelRepeat,
 	isFormModelScreen
 } from "../../../../models/internal/FormModelGuards.js";
-import { findElementByFormModelPath } from "../../../../models/internal/findElementByFormModelPath.js";
-import type { FormModel } from "../../../../models/internal/form-model.js";
-import { InternalDocumentPath } from "../../../../models/internal/utils/document-utils.js";
-import { ReadonlyObjectMap } from "../../../../models/internal/utils/json.js";
+import {
+	DocumentPath,
+	InternalDocumentPath
+} from "../../../../models/internal/utils/document-utils.js";
+import { ReadonlyObjectMap } from "../../../../models/internal/utils/ReadonlyObjectMap.js";
 import type { LocalizableFactory } from "../../../localization/internal/localization.js";
 import { createLocalizableFactory } from "../../../localization/internal/localization.js";
+import { isObjectEmpty } from "../../../utils/internal/guards.js";
 
 import type { EngineStore, RepeatFilter } from "../store.js";
 
@@ -242,6 +246,35 @@ export const UiStateSelectors = {
 				: messagesForField;
 		};
 	},
+
+	/**
+	 * @experimental
+	 * @param modelPath The model path of the Custom Screen Element
+	 * @param dataContext The data context (if the Custom Screen Element is used inside a DR detail screen)
+	 * @param filter The requested severity level, lower case as in `messagesByPath`
+	 * @returns a selector to select the custom validation messages for one Custom Screen Element
+	 *
+	 * Temporary API for A12-15373. Replaced by the unified validation state in 2027.06 (breaking).
+	 */
+	customMessagesByPath(
+		modelPath: ModelPath,
+		dataContext: EntityInstancePath,
+		filter?: Lowercase<EngineStore.Validation.MessageSeverity>
+	): Selector<EngineStore.Validation.CustomMessage[]> {
+		const selectCustomMessages = InternalUiStateSelectors.customMessages();
+		return state => {
+			const allCustomMessages = selectCustomMessages(state);
+			const messagesForElement = filterCustomMessagesByPath(
+				allCustomMessages,
+				modelPath,
+				dataContext
+			);
+
+			return filter
+				? messagesForElement.filter(m => m.severity === filter.toUpperCase())
+				: messagesForElement;
+		};
+	},
 	/** @returns a selector that selects the readonly property. */
 	readonly(): Selector<boolean> {
 		return state => engineState(state).ui.readonly;
@@ -305,6 +338,21 @@ export const UiStateSelectors = {
 
 /** @internal */
 export const InternalUiStateSelectors = {
+	/**
+	 * Whether the validation state holds any message at all. Both slices have to be consulted,
+	 * because a Custom Screen Element can be the only thing that reported an error.
+	 */
+	hasAnyMessages(): Selector<boolean> {
+		return state =>
+			!isObjectEmpty(UiStateSelectors.messages()(state)) ||
+			!isObjectEmpty(InternalUiStateSelectors.customMessages()(state));
+	},
+
+	/** @returns a selector that selects all custom form element validation messages. */
+	customMessages(): Selector<ReadonlyObjectMap<EngineStore.Validation.CustomEntry>> {
+		return state => engineState(state).ui.customMessages ?? {};
+	},
+
 	/** @returns a selector that selects the ui userValidation state. */
 	actionConfirmationRequested(): Selector<
 		| {
@@ -438,4 +486,24 @@ export function filterMessagesByPath(
 		}
 	}
 	return messageByPath;
+}
+
+/** @internal */
+export function filterCustomMessagesByPath(
+	customMessages: ReadonlyObjectMap<EngineStore.Validation.CustomEntry>,
+	modelPath: ModelPath,
+	dataContext: EntityInstancePath
+): EngineStore.Validation.CustomMessage[] {
+	const result: EngineStore.Validation.CustomMessage[] = [];
+	for (const entry of Object.values(customMessages)) {
+		// DocumentPath.matches: index 0 is a wildcard in both directions (documented contract)
+		if (
+			entry &&
+			ModelPath.equal(entry.formModelPath, modelPath) &&
+			DocumentPath.matches(entry.dataContext, dataContext)
+		) {
+			result.push(...entry.validationMessages);
+		}
+	}
+	return result;
 }

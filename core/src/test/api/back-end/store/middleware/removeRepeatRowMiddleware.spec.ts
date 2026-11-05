@@ -42,10 +42,10 @@ import {
 	DocumentPath,
 	DocumentUtils
 } from "../../../../../models/internal/utils/document-utils.js";
-import type { ReadonlyObjectMap } from "../../../../../models/internal/utils/json.js";
-import { MiddlewareHelpers } from "../../../../utils/MiddlewareHelpers.js";
+import type { ReadonlyObjectMap } from "../../../../../models/internal/utils/ReadonlyObjectMap.js";
 import { createDocumentPath } from "../../../../utils/createDocumentPath.js";
 import { createModelPath } from "../../../../utils/createModelPath.js";
+import { MiddlewareHelpers } from "../../../../utils/MiddlewareHelpers.js";
 import { createTestStore, loadData } from "../../../../utils/setup.js";
 import { setupFixture, setupModelsFixture } from "../../../../utils/setupFixture.js";
 import { DOCUMENT_PATHS } from "../../../../utils/test-model-helpers/computation.js";

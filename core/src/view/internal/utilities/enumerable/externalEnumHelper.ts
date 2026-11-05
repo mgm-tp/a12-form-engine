@@ -36,7 +36,7 @@ import type { LocalizedText, Localizer } from "@com.mgmtp.a12.utils/utils-locali
 import type { IExternalEnumerationProvider } from "../../../../back-end/services/external-enumeration-provider.js";
 import { MissingExternalEnumerationProvider } from "../../../../back-end/services/external-enumeration-provider.js";
 import type { FormModel } from "../../../../models/internal/form-model.js";
-import type { ReadonlyObjectMap } from "../../../../models/internal/utils/json.js";
+import type { ReadonlyObjectMap } from "../../../../models/internal/utils/ReadonlyObjectMap.js";
 
 import { localizeEnumerationValue } from "./localizeEnumerationValue.js";
 

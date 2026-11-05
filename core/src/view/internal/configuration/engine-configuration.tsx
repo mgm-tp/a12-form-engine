@@ -38,6 +38,7 @@ import type { Localizable } from "@com.mgmtp.a12.utils/utils-localization";
 import type { Column, LayoutGridProps } from "@com.mgmtp.a12.widgets/widgets-core";
 
 import type { IExternalEnumerationProvider } from "../../../back-end/services/external-enumeration-provider.js";
+// oxlint-disable-next-line no-unused-vars -- the import is what lets TypeDoc resolve {@link createEngineMiddlewares}
 import type { createEngineMiddlewares } from "../../../back-end/store/internal/middleware/middleware-factory.js";
 import type { EngineState } from "../../../back-end/store/internal/store.js";
 import type { FormModel } from "../../../models/index.js";
@@ -45,10 +46,8 @@ import type { FormModel } from "../../../models/index.js";
 import type { ScrollApi } from "../components/scroll-api.js";
 import type { Value } from "../utilities/value.js";
 
-import type { DefaultFormModelMap } from "./Defaults.js";
-import type { DefaultWidgetMap } from "./DefaultWidgetMap.js";
 import type { DispatchConfiguration } from "./dispatch-configuration.js";
-import type { DefaultSelectorMap, SelectorMap } from "./selectorContext.js";
+import type { SelectorMap } from "./selectorContext.js";
 import type { WidgetMap } from "./widget-map.js";
 
 export namespace FormModelMap {
@@ -68,6 +67,21 @@ export namespace FormModelMap {
 	export interface FormModelMapEntry<T, P = {}> {
 		/** React component which is rendered. */
 		readonly component: ComponentType<FormModelComponentProps<T> & P>;
+	}
+
+	/**
+	 * Additional props the Form Engine passes to a Custom Screen Element component.
+	 */
+	export interface CustomScreenElementProps {
+		/**
+		 * The HTML id the Form Engine looks for when it scrolls to this element, already carrying
+		 * the configured `uiIdPrefix`. Put it on the rendered root element, so that several form
+		 * engines on one page stay distinguishable.
+		 *
+		 * Optional only for compatibility: rendering the raw `modelElement.id` instead still works,
+		 * but it produces duplicate HTML ids. This becomes mandatory in the next breaking release.
+		 */
+		readonly uiId?: string;
 	}
 
 	/**
@@ -186,7 +200,10 @@ export interface FormModelMap {
 	readonly CustomCell: FormModelMap.FormModelMapEntry<FormModel.CustomCell>;
 
 	/** Entry for {@link FormModel.CustomScreenElement} */
-	readonly CustomScreenElement: FormModelMap.FormModelMapEntry<FormModel.CustomScreenElement>;
+	readonly CustomScreenElement: FormModelMap.FormModelMapEntry<
+		FormModel.CustomScreenElement,
+		FormModelMap.CustomScreenElementProps
+	>;
 }
 
 /** @internal */
@@ -268,7 +285,7 @@ export namespace Inputs {
 		readonly messageExposition?: FormModel.MessageExpositionPresentation;
 
 		/** This property is set to true if tooltips should be displayed above the input field. */
-		readonly tooltipsOnTop?: boolean;
+		readonly tooltipPosition?: FormModel.TooltipPosition;
 
 		/** Whether the label of the input should be hidden but readable for screen readers */
 		readonly labelHiddenButRead?: boolean;
@@ -308,6 +325,22 @@ export namespace Inputs {
 
 		/** Configuration for an attachment */
 		readonly attachmentConfig?: FormModel.AttachmentConfig;
+
+		/**
+		 * @experimental
+		 *
+		 * Temporary flag (A12E-3691) to render this field with the `WidgetMap.MarkdownEditor`
+		 * widget instead of using `exposition`.
+		 */
+		readonly isMarkdownEditor?: boolean;
+
+		/**
+		 * @experimental
+		 *
+		 * For a field with `isMarkdownEditor` true: where embedded images are stored as
+		 * attachments.
+		 */
+		readonly markdownAttachmentRepeatPath?: ModelPath;
 
 		/** If true, a multi-select value is shown as comma separated string. */
 		readonly showCommaSeparated?: boolean;

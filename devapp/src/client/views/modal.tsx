@@ -32,8 +32,8 @@
 
 import type { ComponentType, ReactNode } from "react";
 
-import { localizableFromLocalizationTreeMap } from "@com.mgmtp.a12.utils/utils-localization";
 import { PreviewDataModal } from "@com.mgmtp.a12.formengine/formengine-a12internal-preview";
+import { localizableFromLocalizationTreeMap } from "@com.mgmtp.a12.utils/utils-localization";
 
 import { devappTranslationSource } from "../config/devappTranslationSource.js";
 

@@ -70,7 +70,7 @@ class NavigationButtonChecker extends AbstractButtonChecker {
 			problems.add(new ConsistencyProblem(
 				modelName,
 				FormModelCategory.FORM_MODEL_NAVIGATION_BUTTON_MISSING_TARGET,
-				new FormModelProblemSource(button.getId()),
+				FormModelProblemSource.involving(button.getId()),
 				button.getName()
 			));
 			return;
@@ -79,7 +79,7 @@ class NavigationButtonChecker extends AbstractButtonChecker {
 			problems.add(new ConsistencyProblem(
 				modelName,
 				FormModelCategory.FORM_MODEL_NAVIGATION_BUTTON_WRONG_TARGET_VALUE,
-				new FormModelProblemSource(button.getId()),
+				FormModelProblemSource.involving(button.getId()),
 				button.getName(),
 				buttonTarget,
 				printCollection(screenIds),
@@ -93,7 +93,7 @@ class NavigationButtonChecker extends AbstractButtonChecker {
 			problems.add(new ConsistencyProblem(
 				modelName,
 				FormModelCategory.FORM_MODEL_NAVIGATION_BUTTON_EVENT_SET,
-				new FormModelProblemSource(button.getId()),
+				FormModelProblemSource.involving(button.getId()),
 				button.getName()
 			));
 		}

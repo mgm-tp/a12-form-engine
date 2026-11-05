@@ -30,11 +30,13 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
+import type { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
 import type { DocumentModelSearchService } from "@com.mgmtp.a12.kernel/kernel-md-facade";
 
 import type { DeepMutable, Mutable } from "../../../back-end/utils/internal/types.js";
 
 import type { FormModel } from "../form-model.js";
+import { getModelPathElementName } from "../utils/form-model-path.js";
 import type { VisitProcess } from "../utils/form-model-walker.js";
 import { ModelWalker } from "../utils/form-model-walker.js";
 import type { ModelVisitor } from "../utils/form-model-walker.js";
@@ -43,8 +45,39 @@ import type { ModelVisitor } from "../utils/form-model-walker.js";
 export function addPaths(formModel: FormModel, dmSearchService: DocumentModelSearchService): void {
 	addPathToContent(formModel, dmSearchService);
 	addPathToControls(formModel, dmSearchService);
-	addPathToFieldConfiguration(formModel, dmSearchService);
+	addPathToFieldConfiguration(formModel, dmSearchService, buildRepeatPathsById(formModel));
 	addPathToGroupConfiguration(formModel, dmSearchService);
+}
+
+/**
+ * `markdownAttachmentRepeat` on a `FieldConfigurationEntry` refers to a `Repeat`, by its own form
+ * model id - unlike everything else this module resolves, which are all document model ids,
+ * resolvable via `dmSearchService`. This builds the form-model-side equivalent: every
+ * `InlineRepeat`/`EmbeddedRepeat`/`DetachedRepeat`'s own id mapped to its own form model path,
+ * by walking the form model once and tracking the path as it goes (mirroring how
+ * `FormModelPath.extend` builds a path at render time, one ancestor at a time).
+ */
+function buildRepeatPathsById(formModel: FormModel): Map<string, ModelPath> {
+	const pathsById = new Map<string, ModelPath>();
+	let currentPath: ModelPath = [];
+
+	function recordRepeat(repeat: { id: string }): VisitProcess {
+		pathsById.set(repeat.id, currentPath);
+		return "ContinueTraversal";
+	}
+
+	const visitor: ModelVisitor = {
+		enter(elementStack) {
+			currentPath = elementStack.map(element => ({
+				elementName: getModelPathElementName(element as { name?: string; id?: string })
+			}));
+		},
+		visitInlineRepeat: recordRepeat,
+		visitEmbeddedRepeat: recordRepeat,
+		visitDetachedRepeat: recordRepeat
+	};
+	new ModelWalker(visitor).acceptModel(formModel);
+	return pathsById;
 }
 
 function addPathToContent(formModel: FormModel, dmSearchService: DocumentModelSearchService): void {
@@ -134,7 +167,8 @@ function addPathToControls(
 
 function addPathToFieldConfiguration(
 	formModel: FormModel,
-	dmSearchService: DocumentModelSearchService
+	dmSearchService: DocumentModelSearchService,
+	repeatPathsById: Map<string, ModelPath>
 ): void {
 	const mutableModel = formModel as DeepMutable<FormModel>;
 	if (mutableModel.content.fieldConfiguration.field === undefined) {
@@ -165,6 +199,13 @@ function addPathToFieldConfiguration(
 				if (caze.fieldRef) {
 					caze.fieldPath = dmSearchService.getPathById(caze.fieldRef);
 				}
+			}
+		}
+		if (fc.markdownAttachmentRepeat) {
+			const markdownAttachmentRepeatPath = repeatPathsById.get(fc.markdownAttachmentRepeat);
+
+			if (markdownAttachmentRepeatPath) {
+				fc.markdownAttachmentRepeatPath = markdownAttachmentRepeatPath;
 			}
 		}
 	}

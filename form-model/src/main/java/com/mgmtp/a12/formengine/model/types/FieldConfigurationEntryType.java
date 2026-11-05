@@ -58,6 +58,8 @@ public class FieldConfigurationEntryType implements Serializable, Annotated {
 	protected AttachmentConfigType attachmentConfig;
 	protected IconType icon;
 	protected LabelPlacementEnumType labelPlacement;
+	protected Boolean isMarkdownEditor;
+	protected String markdownAttachmentRepeat;
 
 	public LabelType getLabel() {
 		return label;
@@ -242,6 +244,39 @@ public class FieldConfigurationEntryType implements Serializable, Annotated {
 		return (this.attachmentConfig != null);
 	}
 
+	/**
+	 * Temporary flag (A12E-3691) to render this field with the MarkdownEditor widget instead of
+	 * using exposition. Mutually exclusive with exposition, which must be left unset when this
+	 * is true.
+	 */
+	public Boolean getIsMarkdownEditor() {
+		return isMarkdownEditor;
+	}
+
+	public void setIsMarkdownEditor(final Boolean value) {
+		this.isMarkdownEditor = value;
+	}
+
+	public boolean isIsMarkdownEditorSet() {
+		return (this.isMarkdownEditor != null);
+	}
+
+	/**
+	 * For a field with isMarkdownEditor true: the elementRef of a Repeat configured with
+	 * multiFileUploadOptions, used to store images embedded in the markdown as attachments.
+	 */
+	public String getMarkdownAttachmentRepeat() {
+		return markdownAttachmentRepeat;
+	}
+
+	public void setMarkdownAttachmentRepeat(final String value) {
+		this.markdownAttachmentRepeat = value;
+	}
+
+	public boolean isMarkdownAttachmentRepeatSet() {
+		return (this.markdownAttachmentRepeat != null);
+	}
+
 	public FieldConfigurationEntryType withLabel(final LabelType value) {
 		setLabel(value);
 		return this;
@@ -359,6 +394,16 @@ public class FieldConfigurationEntryType implements Serializable, Annotated {
 
 	public FieldConfigurationEntryType withLabelPlacement(final LabelPlacementEnumType value) {
 		setLabelPlacement(value);
+		return this;
+	}
+
+	public FieldConfigurationEntryType withIsMarkdownEditor(final Boolean value) {
+		setIsMarkdownEditor(value);
+		return this;
+	}
+
+	public FieldConfigurationEntryType withMarkdownAttachmentRepeat(final String value) {
+		setMarkdownAttachmentRepeat(value);
 		return this;
 	}
 

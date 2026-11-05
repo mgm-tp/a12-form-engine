@@ -89,9 +89,9 @@ export function ActionButtons(props: ActionButtonsProps): ReactElement | null {
 			{
 				<ButtonGroupContainer
 					collapsingDirection="right-to-left"
-					// eslint-disable-next-line @typescript-eslint/no-deprecated
+					// oxlint-disable-next-line typescript/no-deprecated
 					leftSlot={majorButtons}
-					// eslint-disable-next-line @typescript-eslint/no-deprecated
+					// oxlint-disable-next-line typescript/no-deprecated
 					rightSlot={minorButtons}
 					responsive
 				/>

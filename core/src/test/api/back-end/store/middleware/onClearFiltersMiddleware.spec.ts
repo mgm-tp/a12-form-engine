@@ -34,9 +34,9 @@ import { deepStrictEqual, strictEqual } from "node:assert/strict";
 
 import { Commands, Events } from "../../../../../back-end/store/index.js";
 import type { EngineStore } from "../../../../../back-end/store/internal/store.js";
-import { MiddlewareHelpers } from "../../../../utils/MiddlewareHelpers.js";
 import { createModelPath } from "../../../../utils/createModelPath.js";
 import { US_LOCALE } from "../../../../utils/localization.js";
+import { MiddlewareHelpers } from "../../../../utils/MiddlewareHelpers.js";
 import { createTestStore } from "../../../../utils/setup.js";
 import { setupFixture } from "../../../../utils/setupFixture.js";
 import { REPEAT_MODEL_PATH } from "../../../view/repeat/filter/filter.utils.js";

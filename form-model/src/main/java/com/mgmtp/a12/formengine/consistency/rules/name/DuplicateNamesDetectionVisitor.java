@@ -36,6 +36,7 @@ import com.mgmtp.a12.formengine.model.types.ButtonPanelType;
 import com.mgmtp.a12.formengine.model.types.ControlGridType;
 import com.mgmtp.a12.formengine.model.types.DetachedRepeatType;
 import com.mgmtp.a12.formengine.model.types.HeaderFooterType;
+import com.mgmtp.a12.formengine.model.types.Id;
 import com.mgmtp.a12.formengine.model.types.InlineRepeatType;
 import com.mgmtp.a12.formengine.model.types.Named;
 import com.mgmtp.a12.formengine.model.types.RepeatType;
@@ -45,6 +46,7 @@ import com.mgmtp.a12.formengine.model.types.SectionType;
 import com.mgmtp.a12.formengine.model.visitor.ModelVisitor;
 
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
@@ -58,6 +60,10 @@ public class DuplicateNamesDetectionVisitor extends ModelVisitor {
 
 	public interface Handler {
 
+		/**
+		 * Handles the duplicate names found below one element. Implementations that need to know which children
+		 * carry them override {@link #handle(FormModel, Object, String, String, Set, Set)} as well.
+		 */
 		void handle(
 			FormModel model,
 			Object modelElement,
@@ -65,6 +71,24 @@ public class DuplicateNamesDetectionVisitor extends ModelVisitor {
 			String elementName,
 			Set<String> duplicateChildNames
 		);
+
+		/**
+		 * Handles the duplicate names found below one element, together with the ids of the children carrying them.
+		 * This is what the visitor calls; the default drops the ids and hands the names to
+		 * {@link #handle(FormModel, Object, String, String, Set)}.
+		 *
+		 * @param duplicateChildIds ids of the children carrying one of the duplicate names, in model order
+		 */
+		default void handle(
+			final FormModel model,
+			final Object modelElement,
+			final String modelElementId,
+			final String elementName,
+			final Set<String> duplicateChildNames,
+			final Set<String> duplicateChildIds
+		) {
+			handle(model, modelElement, modelElementId, elementName, duplicateChildNames);
+		}
 	}
 
 	private final FormModel model;
@@ -85,7 +109,8 @@ public class DuplicateNamesDetectionVisitor extends ModelVisitor {
 				screen,
 				screen.getId(),
 				screen.getName(),
-				screenElementDuplicates
+				screenElementDuplicates,
+				findDuplicateChildIds(screen.getScreenElements(), screenElementDuplicates)
 			);
 		}
 		return super.visitScreen(screen);
@@ -101,7 +126,8 @@ public class DuplicateNamesDetectionVisitor extends ModelVisitor {
 				section,
 				section.getId(),
 				section.getName(),
-				duplicates
+				duplicates,
+				findDuplicateChildIds(section.getScreenElement(), duplicates)
 			);
 		}
 		return super.visitSection(section);
@@ -120,19 +146,20 @@ public class DuplicateNamesDetectionVisitor extends ModelVisitor {
 	}
 
 	private void checkExpressionColumns(final RepeatType repeat) {
-		final Set<String> duplicates =
-			findDuplicatesInStream(
-				repeat.getRepeatOverviewColumn()
-					  .stream()
-					  .filter(roc -> roc instanceof Named)
-					  .map(Named.class::cast));
+		final List<Named> namedColumns = repeat.getRepeatOverviewColumn()
+			.stream()
+			.filter(roc -> roc instanceof Named)
+			.map(Named.class::cast)
+			.toList();
+		final Set<String> duplicates = findDuplicateChildNames(namedColumns);
 		if (!duplicates.isEmpty()) {
 			handler.handle(
 				model,
 				repeat,
 				repeat.getId(),
 				repeat.getName(),
-				duplicates
+				duplicates,
+				findDuplicateChildIds(namedColumns, duplicates)
 			);
 		}
 	}
@@ -146,7 +173,8 @@ public class DuplicateNamesDetectionVisitor extends ModelVisitor {
 				grid,
 				grid.getId(),
 				grid.getName(),
-				duplicates
+				duplicates,
+				findDuplicateChildIds(grid.getRow(), duplicates)
 			);
 		}
 		return super.visitControlGrid(grid);
@@ -155,19 +183,20 @@ public class DuplicateNamesDetectionVisitor extends ModelVisitor {
 	@Override
 	public boolean visitRow(final RowType row) {
 		// note: rows contain controls, expressions or texts; controls do not have names / implement Named
-		final Set<String> duplicates = findDuplicatesInStream(
-			row.getCell()
-			   .stream()
-			   .filter(e -> e instanceof Named)
-			   .map(Named.class::cast)
-		);
+		final List<Named> namedCells = row.getCell()
+			.stream()
+			.filter(e -> e instanceof Named)
+			.map(Named.class::cast)
+			.toList();
+		final Set<String> duplicates = findDuplicateChildNames(namedCells);
 		if (!duplicates.isEmpty()) {
 			handler.handle(
 				model,
 				row,
 				row.getId(),
 				row.getName(),
-				duplicates
+				duplicates,
+				findDuplicateChildIds(namedCells, duplicates)
 			);
 		}
 		return super.visitRow(row);
@@ -182,7 +211,8 @@ public class DuplicateNamesDetectionVisitor extends ModelVisitor {
 				panel,
 				panel.getId(),
 				panel.getName(),
-				duplicates
+				duplicates,
+				findDuplicateChildIds(panel.getButton(), duplicates)
 			);
 		}
 		return super.visitButtonPanel(panel);
@@ -199,7 +229,8 @@ public class DuplicateNamesDetectionVisitor extends ModelVisitor {
 					headerFooter,
 					headerFooter.getId(),
 					MAJOR_BUTTONS,
-					majorButtonDuplicates
+					majorButtonDuplicates,
+					findDuplicateChildIds(headerFooter.getMajorButtons().getButton(), majorButtonDuplicates)
 				);
 			}
 		}
@@ -213,11 +244,26 @@ public class DuplicateNamesDetectionVisitor extends ModelVisitor {
 					headerFooter,
 					headerFooter.getId(),
 					MINOR_BUTTONS,
-					minorButtonDuplicates
+					minorButtonDuplicates,
+					findDuplicateChildIds(headerFooter.getMinorButtons().getButton(), minorButtonDuplicates)
 				);
 			}
 		}
 		return super.visitHeaderFooter(headerFooter);
+	}
+
+	/**
+	 * @return the ids of those children that carry one of the given duplicate names, in model order
+	 */
+	public static <T extends Named> Set<String> findDuplicateChildIds(
+		final List<? extends T> children,
+		final Set<String> duplicateNames
+	) {
+		return children.stream()
+			.filter(child -> duplicateNames.contains(child.getName()))
+			.filter(Id.class::isInstance)
+			.map(child -> ((Id) child).getId())
+			.collect(Collectors.toCollection(LinkedHashSet::new));
 	}
 
 	public static <T extends Named> Set<String> findDuplicateChildNames(final List<? extends T> children) {

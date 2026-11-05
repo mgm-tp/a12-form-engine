@@ -56,7 +56,7 @@ public class FormUniqueIdsRule implements ConsistencyRule {
 				final Problem problem = new ConsistencyProblem(
 					model.getHeaderId(),
 					FormModelCategory.FORM_MODEL_DUPLICATE_IDS,
-					new FormModelProblemSource(elem.getId()),
+					FormModelProblemSource.involving(elem.getId()),
 					elem.getId()
 				);
 				problems.add(problem);

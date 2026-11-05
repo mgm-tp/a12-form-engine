@@ -54,7 +54,7 @@ import {
 
 /** @internal  */
 export function MobileValidationBar(props: {
-	messages: EngineStore.Validation.Message[];
+	messages: (EngineStore.Validation.Message | EngineStore.Validation.CustomMessage)[];
 	showModal: boolean;
 	options: FormModelMap.RenderOptions;
 	currentMessageKey?: string;

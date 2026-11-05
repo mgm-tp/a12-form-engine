@@ -34,11 +34,11 @@ import type { ReactElement, RefObject } from "react";
 import { useImperativeHandle, useRef } from "react";
 
 import { ModelSelectors, UiStateSelectors } from "../../../../back-end/store/index.js";
+import { InternalUiStateSelectors } from "../../../../back-end/store/internal/selectors/ui-state.js";
 import { UiId } from "../../../../back-end/utils/internal/generateUiId.js";
 import type { FormModelMap } from "../../configuration/engine-configuration.js";
 import { UtilityClasses } from "../../utilities/css-classes.js";
 import { nmTokensToString } from "../../utilities/nmtokens.js";
-import { InternalUiStateSelectors } from "../../../../back-end/store/internal/selectors/ui-state.js";
 
 import type { ScrollApi } from "../scroll-api.js";
 

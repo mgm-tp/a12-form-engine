@@ -52,6 +52,7 @@ export function DateTextLine(props: DateTextLineProps) {
 	const {
 		addonAfter,
 		ariaDescribedby,
+		breakTooltipsToNewLine,
 		disabled,
 		enableDatePicker,
 		error,
@@ -145,6 +146,7 @@ export function DateTextLine(props: DateTextLineProps) {
 				label={label}
 				addonAfter={addonAfter}
 				ariaDescribedby={ariaDescribedby}
+				breakTooltipsToNewLine={breakTooltipsToNewLine}
 				disabled={disabled}
 				inputRef={inputRef}
 				error={error}

@@ -89,6 +89,10 @@ import type {
 	ValidationBarProps,
 	WarningTooltipProps
 } from "@com.mgmtp.a12.widgets/widgets-core";
+import type {
+	ImageUploadExtensionConfig,
+	MarkdownEditorProps
+} from "@com.mgmtp.a12.widgets/widgets-core/experimental";
 
 /**
  * Set of A12 Widgets that can be replaced by custom components.
@@ -122,6 +126,21 @@ export interface WidgetMap {
 	readonly TimePicker: ComponentType<TimePickerProps>;
 
 	readonly DefaultFileUpload: ComponentType<DefaultFileUploadProps>;
+
+	/**
+	 * @experimental
+	 *
+	 * Widget used to render fields with `isMarkdownEditor: true`.
+	 */
+	readonly MarkdownEditor: ComponentType<MarkdownEditorProps>;
+
+	/**
+	 * @experimental
+	 *
+	 * Extension plugged into {@link WidgetMap.MarkdownEditor} to support uploading images
+	 * embedded in the markdown as attachments.
+	 */
+	readonly ImageUploadPlugin: ComponentType<ImageUploadExtensionConfig>;
 
 	readonly ErrorTooltip: ComponentType<ErrorTooltipProps>;
 	readonly HintTooltip: ComponentType<HintTooltipProps>;

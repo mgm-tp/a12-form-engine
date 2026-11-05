@@ -1,6 +1,6 @@
 {
   "name": "@com.mgmtp.a12.formengine/form-model-generator",
-  "version": "39.0.1",
+  "version": "39.1.1",
   "description": "Form Model Generator",
   "author": "mgm technology partners",
   "license": "(EUPL-1.2 OR LicenseRef-commercial)",
@@ -17,9 +17,9 @@
     "test": "mocha",
     "typescript": "tsc --project ./tsconfig.dev.json",
     "watch": "tsc --project ./tsconfig.dev.json --watch",
-    "lint": "eslint --flag unstable_native_nodejs_ts_config . --cache",
-    "lint:fix": "node --run lint -- --fix",
-    "lint:onlyErrors": "node --run lint -- --quiet"
+    "lint": "pnpm -w exec oxlint generator",
+    "lint:fix": "pnpm -w exec oxlint --fix generator",
+    "lint:onlyErrors": "pnpm -w exec oxlint --quiet generator"
   },
   "devDependencies": {
     "@com.mgmtp.a12.base/base-model-api": "catalog:a12",
@@ -31,7 +31,6 @@
     "@com.mgmtp.a12.utils/utils-logging": "catalog:a12",
     "@types/mocha": "catalog:",
     "@types/node": "catalog:",
-    "eslint": "catalog:",
     "mocha": "catalog:",
     "source-map-support": "catalog:",
     "typescript": "catalog:"

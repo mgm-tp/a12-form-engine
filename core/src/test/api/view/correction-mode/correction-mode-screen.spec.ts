@@ -48,7 +48,6 @@ import { setupModelsFixture } from "../../../utils/setupFixture.js";
 import { createValidationEntry } from "../../../utils/validation.js";
 
 describe("api.view.Correction-Mode-Screen", () => {
-	// eslint-disable-next-line mocha/no-setup-in-describe
 	const models = setupModelsFixture("computation-validation.correctionmode");
 
 	describe("Messages", () => {

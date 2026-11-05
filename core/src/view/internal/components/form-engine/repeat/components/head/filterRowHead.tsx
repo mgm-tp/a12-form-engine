@@ -46,6 +46,7 @@ import type {
 	StringRepeatFilter
 } from "../../../../../../../back-end/store/index.js";
 import { ModelSelectors } from "../../../../../../../back-end/store/index.js";
+import { InternalUiStateSelectors } from "../../../../../../../back-end/store/internal/selectors/ui-state.js";
 import type { FormModel } from "../../../../../../../models/index.js";
 import { isFormModelExpressionOverviewColumn } from "../../../../../../../models/internal/FormModelGuards.js";
 import * as DocumentModelUtils from "../../../../../../../models/internal/utils/document-model-utils.js";
@@ -55,7 +56,6 @@ import {
 	isEnumerationWithStringExposition,
 	isExternalEnumerationWithDefaultExposition
 } from "../../../../../utilities/filtering.js";
-import { InternalUiStateSelectors } from "../../../../../../../back-end/store/internal/selectors/ui-state.js";
 
 import { FilterCellMapContext } from "./filters/filter-cell-map.js";
 

@@ -30,8 +30,8 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import type { Action } from "@com.mgmtp.a12.client/typescript-fsa-redux-5-compat";
 import { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
+import type { Action } from "@com.mgmtp.a12.client/typescript-fsa-redux-5-compat";
 
 import { assertExists } from "../../../../utils/internal/assertions.js";
 import type { Commands } from "../../actions.js";

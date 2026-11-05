@@ -32,8 +32,8 @@
 
 import type { Middleware, MiddlewareAPI } from "redux";
 
-import type { Action } from "@com.mgmtp.a12.client/typescript-fsa-redux-5-compat";
 import { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
+import type { Action } from "@com.mgmtp.a12.client/typescript-fsa-redux-5-compat";
 import type { GroupInstance } from "@com.mgmtp.a12.kernel/kernel-md-facade";
 
 import type { FormModel } from "../../../../../models/index.js";
@@ -45,7 +45,7 @@ import {
 import { Commands, Events } from "../../actions.js";
 import { DataSelectors } from "../../selectors/data.js";
 import { ModelSelectors } from "../../selectors/models.js";
-import { UiStateSelectors } from "../../selectors/ui-state.js";
+import { InternalUiStateSelectors, UiStateSelectors } from "../../selectors/ui-state.js";
 import type { EngineState, EngineStore } from "../../store.js";
 
 import { collapseAllExpandedRowsActions } from "./collapseAllExpandedRows.js";
@@ -144,6 +144,7 @@ function openDetachedRepeatScreen(
 	repeat: FormModel.DetachedRepeat
 ): void {
 	const messages = UiStateSelectors.messages()(state);
+	const customMessages = InternalUiStateSelectors.customMessages()(state);
 	const document = DataSelectors.document()(state) as GroupInstance;
 
 	const currentScreenLocation = UiStateSelectors.currentScreenLocation()(state);
@@ -166,7 +167,9 @@ function openDetachedRepeatScreen(
 
 	collapseAllExpandedRowsActions(api.getState()).forEach(api.dispatch);
 
-	api.dispatch(Commands.pushBackup({ messages: messages, document: document }));
+	api.dispatch(
+		Commands.pushBackup({ messages: messages, document: document, customMessages: customMessages })
+	);
 
 	const touchedRow = action.payload.rowPath[action.payload.rowPath.length - 1].index - 1;
 	const focusedComponent: Partial<EngineStore.FocusedComponent> =

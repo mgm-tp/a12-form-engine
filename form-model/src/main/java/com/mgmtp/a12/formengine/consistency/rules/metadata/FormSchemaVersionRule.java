@@ -76,7 +76,7 @@ public class FormSchemaVersionRule implements ConsistencyRule {
 			violation = new ConsistencyProblem(
 				model.getHeaderId(),
 				FormModelCategory.FORM_MODEL_WRONG_VERSION,
-				new FormModelProblemSource(model.getHeaderId()),
+				FormModelProblemSource.involving(model.getHeaderId()),
 				Severity.ERROR,
 				modelSchemaVersion,
 				minSupportedVersion,

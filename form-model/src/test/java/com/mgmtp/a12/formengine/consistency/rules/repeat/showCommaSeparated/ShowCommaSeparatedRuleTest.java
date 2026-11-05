@@ -44,6 +44,7 @@ import com.mgmtp.a12.model.consistency.ConsistencyProblem;
 import com.mgmtp.a12.model.consistency.Problem;
 
 import com.mgmtp.a12.formengine.consistency.FormModelCategory;
+import com.mgmtp.a12.formengine.consistency.FormModelProblemSource;
 import com.mgmtp.a12.formengine.consistency.general.FileBasedDocumentModelResolver;
 import com.mgmtp.a12.formengine.consistency.rules.ModelLoader;
 import com.mgmtp.a12.formengine.consistency.rules.RuleTestHelper;
@@ -74,6 +75,13 @@ public class ShowCommaSeparatedRuleTest {
 	@Test(dataProvider = "expectedProblems")
 	public void checkExpectedProblem(final Problem expectedProblem) {
 		assertThat(problems, hasItem(hasProperty("message", is(expectedProblem.getMessage()))));
+	}
+
+	@Test(dataProvider = "expectedProblems")
+	public void checkInvolvedElements(final Problem expectedProblem) {
+		assertThat(
+			RuleTestHelper.involvedElementIds(problems, expectedProblem.getMessage()),
+			is(RuleTestHelper.involvedElementIds(expectedProblem)));
 	}
 
 	@DataProvider
@@ -122,6 +130,10 @@ public class ShowCommaSeparatedRuleTest {
 		final String columnId,
 		final String repeatId,
 		final String repeatName) {
-		return new ConsistencyProblem(model.getHeaderId(), category, null, columnId, repeatId, repeatName);
+		// only the row height lives on the repeat, the other two are about the column alone
+		final FormModelProblemSource source = category == FORM_MODEL_REPEAT_SHOW_COMMA_SEPARATED_ROW_HEIGHT_GIVEN
+			? FormModelProblemSource.involving(columnId, repeatId)
+			: FormModelProblemSource.involving(columnId);
+		return new ConsistencyProblem(model.getHeaderId(), category, source, columnId, repeatId, repeatName);
 	}
 }

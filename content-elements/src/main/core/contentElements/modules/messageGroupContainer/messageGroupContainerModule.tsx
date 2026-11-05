@@ -30,8 +30,8 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { useContext, useMemo } from "react";
 import type { JSX } from "react";
+import { useContext, useMemo } from "react";
 
 import { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
 import { KernelMessage } from "@com.mgmtp.a12.client/client-data";
@@ -66,12 +66,21 @@ export const MessageGroupContainerModule: ElementModule<MessageGroupContainerNod
 	id,
 	renderer: MessageGroupContainerRenderer,
 	validator: messageGroupContainerValidator,
+	dataBinding: { role: "condition", getElementReferences: getConfiguredFieldsAndGroups },
 	isInstance: (module: ElementModule): module is ElementModule<MessageGroupContainerNode> =>
 		module.id === id,
 	isNodeInstance: (node: ContentModel.Node): node is MessageGroupContainerNode =>
 		node.namespace === FORM_ELEMENTS_NAMESPACE && node.type === MESSAGE_GROUP_CONTAINER_TYPE,
 	actionCreator: actionCreatorFactory(`${FORM_ELEMENTS_NAMESPACE}/${MESSAGE_GROUP_CONTAINER_TYPE}`)
 };
+
+/**
+ * The fields and groups the Content Model author configured to decide which validation messages
+ * belong to this group. Read to route messages, never displayed or edited.
+ */
+function getConfiguredFieldsAndGroups(node: MessageGroupContainerNode): string[] {
+	return [...(node.props.fields ?? []), ...(node.props.groups ?? [])];
+}
 
 function MessageGroupContainerRenderer(
 	props: NodeRendererProps<MessageGroupContainerNode>

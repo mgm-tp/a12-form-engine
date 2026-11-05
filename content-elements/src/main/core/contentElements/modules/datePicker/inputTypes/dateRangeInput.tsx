@@ -111,7 +111,7 @@ export function DateRangeInput(
 		warnings,
 		infos,
 		tooltips,
-		tooltipsOnTop,
+		breakTooltipsToNewLine,
 		inputProps,
 		ariaDescribedBy
 	} = USE_COMMON_WIDGET_SETTINGS_WRAPPER.useCommonWidgetSettings(commonControlSettings);
@@ -199,8 +199,8 @@ export function DateRangeInput(
 			label={label}
 			readonly={readonly}
 			hideLabel={hideLabel}
-			addonAfter={tooltipsOnTop ? undefined : tooltips}
-			tooltips={tooltipsOnTop ? tooltips : undefined}
+			tooltips={tooltips}
+			breakTooltipsToNewLine={breakTooltipsToNewLine}
 			helperText={helperText}
 			placeholder={placeholder}
 			value={formattedValue}
@@ -224,6 +224,7 @@ export function DateRangeInput(
 		!disableDatePicker && shouldShowPicker ? (
 			isMobile ? (
 				<DatePickerDialog
+					key="picker"
 					{...pickerProps}
 					title={getLocalizedDateString(pickerValue)}
 					onClose={() => {

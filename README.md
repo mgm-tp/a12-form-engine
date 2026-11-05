@@ -72,7 +72,7 @@ The following tools are required in order to build this repository.
 | [JDK]    | `^25`   |
 | [Gradle] | `^9`    |
 | [Node]   | `^24`   |
-| [pnpm]   | `^11`   |
+| [pnpm]   | `^12`   |
 
 #### How to Build
 
@@ -82,7 +82,7 @@ gradle assemble
 
 #### How to Test
 
-`assemble` builds, `check` tests. The two are independent, so `check` runs the tests
+`assemble` compiles, `check` lints and tests. The two are independent, so `check` runs
 against the output of a previous `assemble` rather than building anything itself. On a
 clean checkout, run both:
 
@@ -107,6 +107,11 @@ gradle clean
 ```sh
 gradle nodeVerify
 ```
+
+`nodeVerify` checks formatting and lints, and compiles nothing. The type-aware lint rules
+read each package's declarations out of its `lib`, so run it on an assembled tree —
+`gradle build` puts `assemble` first, and `gradle assemble nodeVerify` does the same on a
+clean checkout.
 
 #### How to Run
 

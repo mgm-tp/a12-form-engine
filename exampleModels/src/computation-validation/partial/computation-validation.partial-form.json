@@ -2,7 +2,7 @@
   "header": {
     "id": "computation-validation.partial-form",
     "modelType": "form",
-    "modelVersion": "39.0.0",
+    "modelVersion": "39.3.0",
     "locales": [
       {
         "code": "en"
@@ -1774,6 +1774,51 @@
                 "groupRef": "group_d3664",
                 "enableAdd": true,
                 "enableRemove": true
+              }
+            ]
+          },
+          {
+            "type": "ControlGrid",
+            "id": "controlgrid_7c1a4",
+            "name": "explainer",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "Undetermined repetition index (-5)"
+                  },
+                  {
+                    "locale": "de",
+                    "text": "Unbestimmter Wiederholungsindex (-5)"
+                  }
+                ]
+              }
+            },
+            "row": [
+              {
+                "type": "Row",
+                "id": "row_7c1a5",
+                "cell": [
+                  {
+                    "type": "TextCell",
+                    "id": "textcell_7c1a6",
+                    "name": "unresolvedIndexText",
+                    "content": {
+                      "text": [
+                        {
+                          "locale": "en",
+                          "text": "<p>Both repeats address their rows by a <i>semantic index</i>. A row is identified by the value of its <b>Index</b> field, not by its position.</p>\n\n<p>The rule <code>unresolvedParallelIteration</code> belongs to Repeat 1. It demands a <b>Number2</b> in the Repeat 2 row that carries the same index value. The reference <code>../repeatableGroup2/numberField</code> is a <i>parallel iteration</i>. The Kernel looks up the partner row by index value, not by position. That lookup can fail.</p>\n\n<p><b>How to trigger it:</b> Set <b>Show repeats</b> to <code>yes</code>. Enter <code>Index 1</code> and <code>1</code> in Repeat 1. Give Repeat 2 a different index, for example <code>Index 2</code>, or leave Repeat 2 empty. Then click <b>Validate</b>. The data instance <code>computation-validation.partial-unresolved-index.json</code> does this for you.</p>\n\n<p>If the lookup finds no partner row, the Kernel still has to name the field. Every repeatable level in a path needs a repetition, and here there is no row number. So the Kernel writes the placeholder <code>IIdentifier.UNKNOWN</code>, which is <code>-5</code>. The referenced field of the message then reads <code>/validation[1]/indexedControls[1]/repeatableGroup2[-5]/numberField[1]</code>.</p>\n\n<p>The message itself belongs to <b>Number1</b> of the Repeat 1 row. That row always exists, because the model compiler rejects a rule whose error field leaves the rule group while the condition iterates. So <code>-5</code> only reaches the Form Engine through the referenced fields. Such a path matches no control. The validation bar therefore offers no link to the issue.</p>"
+                        },
+                        {
+                          "locale": "de",
+                          "text": "<p>Beide Repeats sprechen ihre Zeilen über einen <i>semantischen Index</i> an. Eine Zeile wird über den Wert ihres Feldes <b>Index</b> identifiziert, nicht über ihre Position.</p>\n\n<p>Die Regel <code>unresolvedParallelIteration</code> gehört zu Repeat 1. Sie verlangt eine <b>Number2</b> in der Zeile von Repeat 2, die denselben Indexwert hat. Die Referenz <code>../repeatableGroup2/numberField</code> ist eine <i>parallele Iteration</i>. Der Kernel sucht die Partnerzeile über den Indexwert, nicht über die Position. Diese Suche kann fehlschlagen.</p>\n\n<p><b>So lösen Sie den Fehler aus:</b> Setzen Sie <b>Show repeats</b> auf <code>yes</code>. Tragen Sie in Repeat 1 <code>Index 1</code> und <code>1</code> ein. Geben Sie Repeat 2 einen anderen Index, zum Beispiel <code>Index 2</code>, oder lassen Sie Repeat 2 leer. Klicken Sie danach auf <b>Validate</b>. Die Dateninstanz <code>computation-validation.partial-unresolved-index.json</code> erledigt das für Sie.</p>\n\n<p>Findet die Suche keine Partnerzeile, muss der Kernel das Feld trotzdem benennen. Jede wiederholbare Ebene in einem Pfad braucht eine Wiederholung, und hier gibt es keine Zeilennummer. Der Kernel schreibt deshalb den Platzhalter <code>IIdentifier.UNKNOWN</code>, also <code>-5</code>. Das referenzierte Feld der Meldung lautet dann <code>/validation[1]/indexedControls[1]/repeatableGroup2[-5]/numberField[1]</code>.</p>\n\n<p>Die Meldung selbst gehört zu <b>Number1</b> der Zeile in Repeat 1. Diese Zeile existiert immer, denn der Modell-Compiler weist eine Regel zurück, deren Fehlerfeld die Regelgruppe verlässt, während die Bedingung iteriert. <code>-5</code> erreicht die Form Engine deshalb nur über die referenzierten Felder. Ein solcher Pfad passt zu keinem Control. Die Validierungsleiste bietet daher keinen Link zur Meldung an.</p>"
+                        }
+                      ]
+                    }
+                  }
+                ]
               }
             ]
           }

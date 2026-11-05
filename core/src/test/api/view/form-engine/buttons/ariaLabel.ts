@@ -36,11 +36,11 @@ import type { ButtonProps, MenuItem } from "@com.mgmtp.a12.widgets/widgets-core"
 
 import type { Models } from "../../../../../back-end/store/index.js";
 import type { WidgetMap } from "../../../../../view/index.js";
-import { US_LOCALE } from "../../../../utils/localization.js";
-import { BUTTONS } from "../../../../utils/test-model-helpers/button.form.js";
 import { createDocumentPath } from "../../../../utils/createDocumentPath.js";
 import { createModelPath } from "../../../../utils/createModelPath.js";
+import { US_LOCALE } from "../../../../utils/localization.js";
 import { setupFormEngineRendererWithRtl } from "../../../../utils/setup.js";
+import { BUTTONS } from "../../../../utils/test-model-helpers/button.form.js";
 
 import { triggerProps } from "./trigger.js";
 

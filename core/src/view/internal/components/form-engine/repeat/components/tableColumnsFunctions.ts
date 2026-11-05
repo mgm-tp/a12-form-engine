@@ -47,6 +47,7 @@ import {
 	isFormModelInlineRepeat
 } from "../../../../../../models/internal/FormModelGuards.js";
 import * as DocumentModelUtils from "../../../../../../models/internal/utils/document-model-utils.js";
+import { InternalDocumentPath } from "../../../../../../models/internal/utils/document-utils.js";
 import { FormModelPath } from "../../../../../../models/internal/utils/form-model-path.js";
 import type { FormModelMap } from "../../../../configuration/engine-configuration.js";
 import { DefaultRepeatButtonNames } from "../../../../configuration/engine-configuration.js";
@@ -58,7 +59,6 @@ import {
 import { isReadonly } from "../../../../utilities/enablements/readonly.js";
 import type { Value } from "../../../../utilities/value.js";
 import { getLabel, getLabelWithAsterisk, shouldShowAsterisk } from "../../model-element-labels.js";
-import { InternalDocumentPath } from "../../../../../../models/internal/utils/document-utils.js";
 
 import type { PaginatedRepeatData } from "./repeat-data.js";
 import { showMoveButton } from "./row-actions/standard/showMoveButton.js";

@@ -34,11 +34,11 @@ import type { TableDragDropOptions } from "@com.mgmtp.a12.widgets/widgets-core";
 
 import { UiStateSelectors } from "../../../../../../back-end/store/internal/selectors/ui-state.js";
 import type { FormModel } from "../../../../../../models/internal/form-model.js";
+import { InternalDocumentPath } from "../../../../../../models/internal/utils/document-utils.js";
 import type { FormModelMap } from "../../../../configuration/engine-configuration.js";
 import { DefaultRepeatButtonNames } from "../../../../configuration/engine-configuration.js";
 import { isStandardRowActionDisabled } from "../../../../utilities/enablements/disabled-row-actions.js";
 import { isStandardRowActionHidden } from "../../../../utilities/enablements/hidden-row-actions.js";
-import { InternalDocumentPath } from "../../../../../../models/internal/utils/document-utils.js";
 
 import { showMoveButton } from "./row-actions/standard/showMoveButton.js";
 import type { RepeatRow } from "./tableColumnTypes.js";

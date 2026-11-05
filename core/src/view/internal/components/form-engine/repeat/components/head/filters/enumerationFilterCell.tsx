@@ -41,7 +41,7 @@ import { UiStateSelectors } from "../../../../../../../../back-end/store/interna
 import type { EnumerationRepeatFilter } from "../../../../../../../../back-end/store/internal/store.js";
 import { UiId } from "../../../../../../../../back-end/utils/internal/generateUiId.js";
 import { isObjectEmpty } from "../../../../../../../../back-end/utils/internal/guards.js";
-import { ReadonlyObjectMap } from "../../../../../../../../models/internal/utils/json.js";
+import { ReadonlyObjectMap } from "../../../../../../../../models/internal/utils/ReadonlyObjectMap.js";
 import { WidgetMapContext } from "../../../../../../configuration/widget-map-context.js";
 import { EnumerableHelper } from "../../../../../../utilities/enumerable/enumerableHelper.js";
 

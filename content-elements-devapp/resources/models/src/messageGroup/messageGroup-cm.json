@@ -5339,6 +5339,328 @@
               ]
             }
           ]
+        },
+        {
+          "id": "Box-custom-inputs",
+          "namespace": "com.mgmtp.a12.contentengine",
+          "type": "Box",
+          "props": {
+            "style": {
+              "display": "flex",
+              "width": "100%",
+              "height": "fit-content",
+              "flexDirection": "column",
+              "flexWrap": "nowrap",
+              "padding": "8px",
+              "margin": "0px",
+              "gap": "0px",
+              "backgroundRepeat": "no-repeat",
+              "borderStyle": "solid",
+              "borderColor": "rgb(142, 142, 142)",
+              "borderRadius": "8px"
+            }
+          },
+          "children": [
+            {
+              "id": "Heading-33405ba7",
+              "namespace": "com.mgmtp.a12.contentengine",
+              "type": "Heading",
+              "props": {
+                "tree": {
+                  "root": {
+                    "children": [
+                      {
+                        "children": [
+                          {
+                            "detail": 0,
+                            "format": 0,
+                            "mode": "normal",
+                            "style": "",
+                            "text": "Custom Inputs",
+                            "type": "text",
+                            "version": 1
+                          }
+                        ],
+                        "direction": "ltr",
+                        "format": "",
+                        "indent": 0,
+                        "type": "heading",
+                        "version": 1,
+                        "tag": "h2"
+                      }
+                    ],
+                    "direction": "ltr",
+                    "format": "",
+                    "indent": 0,
+                    "type": "root",
+                    "version": 1
+                  }
+                },
+                "html": "<h2 class=\"editor-heading-h2\" dir=\"ltr\"><span style=\"white-space: pre-wrap;\">Custom Inputs</span></h2>"
+              },
+              "children": []
+            },
+            {
+              "id": "Paragraph-a8e45cad",
+              "namespace": "com.mgmtp.a12.contentengine",
+              "type": "Paragraph",
+              "props": {
+                "style": {
+                  "width": "100%"
+                },
+                "tree": {
+                  "root": {
+                    "children": [
+                      {
+                        "children": [
+                          {
+                            "detail": 0,
+                            "format": 0,
+                            "mode": "normal",
+                            "text": "The message group handles project-specific inputs exactly like a built-in ones. The custom input below is registered under its own namespace and type, but is otherwise a copy of the built-in TextLine input.",
+                            "type": "text",
+                            "version": 1
+                          }
+                        ],
+                        "direction": "ltr",
+                        "format": "",
+                        "indent": 0,
+                        "type": "paragraph",
+                        "version": 1,
+                        "textFormat": 0
+                      },
+                      {
+                        "children": [
+                          {
+                            "detail": 0,
+                            "format": 0,
+                            "mode": "normal",
+                            "text": "Check the Precondition Field switch below, then clear either input to see a single validation message whose jump links address both the built-in and the custom input.",
+                            "type": "text",
+                            "version": 1
+                          }
+                        ],
+                        "direction": "ltr",
+                        "format": "",
+                        "indent": 0,
+                        "type": "paragraph",
+                        "version": 1,
+                        "textFormat": 0
+                      }
+                    ],
+                    "direction": "ltr",
+                    "format": "",
+                    "indent": 0,
+                    "type": "root",
+                    "version": 1
+                  }
+                },
+                "html": "<p class=\"editor-paragraph\" dir=\"ltr\"><span style=\"white-space: pre-wrap;\">The message group handles project-specific inputs exactly like a built-in ones. The custom input below is registered under its own namespace and type, but is otherwise a copy of the built-in TextLine input.</span></p><p class=\"editor-paragraph\" dir=\"ltr\"><span style=\"white-space: pre-wrap;\">Check the Precondition Field switch below, then clear either input to see a single validation message whose jump links address both the built-in and the custom input.</span></p>"
+              },
+              "children": []
+            },
+            {
+              "id": "Grid-6c96d494",
+              "namespace": "com.mgmtp.a12.contentengine",
+              "type": "Grid",
+              "props": {},
+              "children": [
+                {
+                  "id": "GridRow-346e775a",
+                  "namespace": "com.mgmtp.a12.contentengine",
+                  "type": "GridRow",
+                  "props": {
+                    "layoutConfig": {
+                      "layout": {
+                        "lg": [
+                          12
+                        ],
+                        "md": [
+                          12
+                        ]
+                      }
+                    }
+                  },
+                  "children": [
+                    {
+                      "id": "GridColumn-17c4f4ec",
+                      "namespace": "com.mgmtp.a12.contentengine",
+                      "type": "GridColumn",
+                      "props": {},
+                      "children": [
+                        {
+                          "id": "MessageGroupContainer-6faade13",
+                          "namespace": "com.mgmtp.a12.formengine",
+                          "type": "MessageGroupContainer",
+                          "props": {
+                            "fields": [],
+                            "groups": [],
+                            "rules": [],
+                            "ignoreFormalErrors": false,
+                            "autoCollectNodes": true
+                          },
+                          "children": [
+                            {
+                              "id": "Grid-c77b67d8",
+                              "namespace": "com.mgmtp.a12.contentengine",
+                              "type": "Grid",
+                              "props": {},
+                              "children": [
+                                {
+                                  "id": "GridRow-05f8969a",
+                                  "namespace": "com.mgmtp.a12.contentengine",
+                                  "type": "GridRow",
+                                  "props": {
+                                    "layoutConfig": {
+                                      "layout": {
+                                        "lg": [
+                                          12
+                                        ],
+                                        "md": [
+                                          12
+                                        ]
+                                      }
+                                    }
+                                  },
+                                  "children": [
+                                    {
+                                      "id": "GridColumn-8da81ea3",
+                                      "namespace": "com.mgmtp.a12.contentengine",
+                                      "type": "GridColumn",
+                                      "props": {},
+                                      "children": [
+                                        {
+                                          "id": "MessageGroupDisplay-cd8180fb",
+                                          "namespace": "com.mgmtp.a12.formengine",
+                                          "type": "MessageGroupDisplay",
+                                          "props": {},
+                                          "children": []
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "id": "GridRow-c8314954",
+                                  "namespace": "com.mgmtp.a12.contentengine",
+                                  "type": "GridRow",
+                                  "props": {
+                                    "layoutConfig": {
+                                      "layout": {
+                                        "lg": [
+                                          12
+                                        ],
+                                        "md": [
+                                          12
+                                        ]
+                                      }
+                                    }
+                                  },
+                                  "children": [
+                                    {
+                                      "id": "GridColumn-b30a371d",
+                                      "namespace": "com.mgmtp.a12.contentengine",
+                                      "type": "GridColumn",
+                                      "props": {},
+                                      "children": [
+                                        {
+                                          "id": "Switch-80603c45",
+                                          "namespace": "com.mgmtp.a12.formengine",
+                                          "type": "Switch",
+                                          "props": {
+                                            "elementId": "field_b3f61",
+                                            "annotations": [],
+                                            "label": [
+                                              {
+                                                "locale": "en",
+                                                "text": "Precondition Field"
+                                              }
+                                            ]
+                                          }
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "id": "GridRow-21211827",
+                                  "namespace": "com.mgmtp.a12.contentengine",
+                                  "type": "GridRow",
+                                  "props": {
+                                    "layoutConfig": {
+                                      "layout": {
+                                        "lg": [
+                                          6,
+                                          6
+                                        ],
+                                        "md": [
+                                          6,
+                                          6
+                                        ]
+                                      }
+                                    }
+                                  },
+                                  "children": [
+                                    {
+                                      "id": "GridColumn-2437873c",
+                                      "namespace": "com.mgmtp.a12.contentengine",
+                                      "type": "GridColumn",
+                                      "props": {},
+                                      "children": [
+                                        {
+                                          "id": "TextLine-d156e3be",
+                                          "namespace": "com.mgmtp.a12.formengine",
+                                          "type": "TextLine",
+                                          "props": {
+                                            "elementId": "field_9d24a",
+                                            "annotations": [],
+                                            "label": [
+                                              {
+                                                "locale": "en",
+                                                "text": "Built-in Input (TextLine)"
+                                              }
+                                            ]
+                                          }
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "id": "GridColumn-d86b9be2",
+                                      "namespace": "com.mgmtp.a12.contentengine",
+                                      "type": "GridColumn",
+                                      "props": {},
+                                      "children": [
+                                        {
+                                          "id": "CustomInput-76caa5ca",
+                                          "namespace": "com.example.devapp",
+                                          "type": "CustomInput",
+                                          "props": {
+                                            "elementId": "field_2f6b1",
+                                            "annotations": [],
+                                            "label": [
+                                              {
+                                                "locale": "en",
+                                                "text": "Custom Input"
+                                              }
+                                            ]
+                                          },
+                                          "children": []
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
         }
       ]
     }

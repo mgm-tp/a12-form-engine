@@ -57,7 +57,7 @@ describe("core.contentElements.elementConfiguration", () => {
 				hint: "test-hint",
 				helperText: "test-helperText",
 				showMessagesAsTooltip: true,
-				tooltipsOnTop: true,
+				breakTooltipsToNewLine: "above",
 				placeholder: "test-placeholder",
 				autoComplete: "email",
 				autoExpand: true,
@@ -82,10 +82,42 @@ describe("core.contentElements.elementConfiguration", () => {
 			strictEqual(result.current.label, mockControlSettings.label);
 			strictEqual(result.current.hideLabel, mockControlSettings.hideLabel);
 			strictEqual(result.current.helperText, mockControlSettings.helperText);
-			strictEqual(result.current.tooltipsOnTop, mockControlSettings.tooltipsOnTop);
+			strictEqual(
+				result.current.breakTooltipsToNewLine,
+				mockControlSettings.breakTooltipsToNewLine
+			);
 			strictEqual(result.current.uncheckedLabel, mockControlSettings.uncheckedLabel);
 			strictEqual(result.current.checkedLabel, mockControlSettings.checkedLabel);
 			strictEqual(result.current.inline, mockControlSettings.inline);
+		});
+
+		describe("breakTooltipsToNewLine", () => {
+			it('falls back to "above" when only the deprecated tooltipsOnTop is set', () => {
+				const mockControlSettings: BaseControlSettings = {
+					...getMockControlSettings(),
+					// oxlint-disable-next-line typescript/no-deprecated
+					tooltipsOnTop: true
+				};
+
+				const { result } = renderHookWrapper(() =>
+					USE_COMMON_WIDGET_SETTINGS_WRAPPER.useCommonWidgetSettings(mockControlSettings)
+				);
+				strictEqual(result.current.breakTooltipsToNewLine, "above");
+			});
+
+			it("prefers breakTooltipsToNewLine over the deprecated tooltipsOnTop when both are set", () => {
+				const mockControlSettings: BaseControlSettings = {
+					...getMockControlSettings(),
+					// oxlint-disable-next-line typescript/no-deprecated
+					tooltipsOnTop: true,
+					breakTooltipsToNewLine: "below"
+				};
+
+				const { result } = renderHookWrapper(() =>
+					USE_COMMON_WIDGET_SETTINGS_WRAPPER.useCommonWidgetSettings(mockControlSettings)
+				);
+				strictEqual(result.current.breakTooltipsToNewLine, "below");
+			});
 		});
 
 		describe("Suffix", () => {

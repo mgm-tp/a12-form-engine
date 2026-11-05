@@ -47,7 +47,7 @@ import {
 	convertThumbnailResponse,
 	setThumbnails
 } from "@com.mgmtp.a12.client/client-core/a12internal";
-import { Dispatcher, JsonRpc2Response } from "@com.mgmtp.a12.dataservices/dataservices-access";
+import { Dispatcher } from "@com.mgmtp.a12.dataservices/dataservices-access";
 import { DocumentServiceFactory } from "@com.mgmtp.a12.kernel/kernel-md-facade";
 
 import { assertExists } from "../../../../../../back-end/utils/internal/assertions.js";
@@ -62,7 +62,9 @@ import { UniqueConstraintError } from "../UniqueConstraintError.js";
 import { RequestBuilder } from "../utils/requestBuilder.js";
 
 import { DefaultRequestSelectorMap } from "./DefaultRequestSelectorMap.js";
+import { handleServerValidation } from "./handleServerValidation.js";
 import type { RequestSelectorMap } from "./RequestSelectorMap.js";
+import { classifySaveOutcome, reportFailedSave } from "./saveOutcome.js";
 
 /**
  * @experimental
@@ -205,43 +207,22 @@ export function createPlatformSingleDocumentDataProvider(
 							Dispatcher.rpcSettled(language, requestTuple)
 						);
 
-						// check for uniqueness violations
-						if (
-							uniquenessOutcome.status === "fulfilled" &&
-							uniquenessOutcome.value.result.violations.length > 0
-						) {
-							yield* put(
-								saving.failed(
-									UniqueConstraintError.fromViolations(uniquenessOutcome.value.result.violations)
-								)
-							);
+						const outcome = classifySaveOutcome(uniquenessOutcome, saveOutcome, language);
+
+						if (outcome.kind !== "saved") {
+							yield* call(reportFailedSave, config, language, outcome);
 							return;
 						}
 
-						// edge case, unique check does not report violations, but save operation still fails
-						if (saveOutcome.status === "rejected") {
-							if (JsonRpc2Response.uniqueConstraintViolationError.isInstance(saveOutcome.reason)) {
-								const locale = yield* select(LocaleSelectors.locale());
+						const { docRef, validationResults } = outcome;
 
-								yield* put(
-									saving.failed(
-										UniqueConstraintError.fromException(saveOutcome.reason, locale.language)
-									)
-								);
-								return;
-							}
+						yield* call(handleServerValidation, config.activityId, validationResults, language);
 
-							// re-throw other save-related errors
-							throw saveOutcome.reason;
+						let data = oldData;
+						if (instance === NEW_INSTANCE_IDENTIFIER) {
+							assertExists(docRef, "An added document must report its document reference");
+							data = { document: { ...oldData.document, id: docRef } };
 						}
-
-						// save successful
-						const { result } = saveOutcome.value;
-
-						const data =
-							instance === NEW_INSTANCE_IDENTIFIER
-								? { document: { ...oldData.document, id: result.docRef } }
-								: oldData;
 
 						if (datasourceActivityId !== undefined) {
 							yield* put(

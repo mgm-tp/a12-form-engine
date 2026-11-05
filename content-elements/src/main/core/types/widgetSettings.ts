@@ -32,6 +32,8 @@
 
 import type { KernelTypes } from "@com.mgmtp.a12.client/client-data";
 
+import type { TooltipLineBreak } from "./controlProps.js";
+
 // TODO: internal? => useCommonWidgetSettings is currently used in EEP
 export interface BaseWidgetSettings {
 	readonly value: KernelTypes.Value;
@@ -47,7 +49,9 @@ export interface BaseWidgetSettings {
 	readonly hideLabel?: boolean;
 	readonly helperText?: string;
 	readonly tooltips?: React.ReactNode;
+	/** @deprecated use breakTooltipsToNewLine instead. */
 	readonly tooltipsOnTop?: boolean;
+	readonly breakTooltipsToNewLine?: TooltipLineBreak;
 	readonly suffixes?: React.ReactNode;
 	readonly uncheckedLabel?: string;
 	readonly checkedLabel?: string;

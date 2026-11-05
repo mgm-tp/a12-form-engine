@@ -42,7 +42,6 @@ import {
 	InternalUiStateSelectors,
 	UiStateSelectors
 } from "../../../../back-end/store/internal/selectors/ui-state.js";
-import { isObjectEmpty } from "../../../../back-end/utils/internal/guards.js";
 import { ComponentMapContext } from "../../configuration/componentMap/component-map-context.js";
 import { WidgetMapContext } from "../../configuration/widget-map-context.js";
 import { isOnSmallDevice } from "../../utilities/size-context.js";
@@ -123,7 +122,7 @@ function FormScreen(props: {
 
 	const validationBar =
 		UiStateSelectors.validationBarState()(renderOptions.state).visible &&
-		!isObjectEmpty(UiStateSelectors.messages()(renderOptions.state)) ? (
+		InternalUiStateSelectors.hasAnyMessages()(renderOptions.state) ? (
 			<ValidationBar {...config} />
 		) : undefined;
 

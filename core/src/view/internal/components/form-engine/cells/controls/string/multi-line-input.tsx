@@ -69,12 +69,12 @@ export function MultilineInput(
 			const change = result === "" ? null : result;
 			options.eventHandlers.onValueChange(value.path, change, props.formModelPath);
 		},
-		// eslint-disable-next-line react-hooks/exhaustive-deps
+		// oxlint-disable-next-line react/exhaustive-deps
 		[
 			options.eventHandlers,
-			// eslint-disable-next-line react-hooks/exhaustive-deps, react-hooks/use-memo
+			// oxlint-disable-next-line react/exhaustive-deps
 			ModelPath.toString(props.formModelPath),
-			// eslint-disable-next-line react-hooks/exhaustive-deps, react-hooks/use-memo
+			// oxlint-disable-next-line react/exhaustive-deps
 			DocumentPath.toString(value.path)
 		]
 	);

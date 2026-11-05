@@ -67,7 +67,7 @@ export function setupFixtureObject<T extends object>(func: () => T): T {
 	});
 
 	after(() => {
-		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+		// oxlint-disable-next-line typescript/no-non-null-assertion
 		context = undefined!;
 	});
 
@@ -108,7 +108,7 @@ export function setupModelsFixture(
 
 	after(() => {
 		clearObject(context);
-		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+		// oxlint-disable-next-line typescript/no-non-null-assertion
 		context = undefined!;
 	});
 
@@ -116,7 +116,7 @@ export function setupModelsFixture(
 }
 
 function clearObject(obj: any) {
-	// eslint-disable-next-line @typescript-eslint/no-dynamic-delete
+	// oxlint-disable-next-line typescript/no-dynamic-delete
 	Object.keys(obj).forEach(key => delete obj[key]);
 }
 

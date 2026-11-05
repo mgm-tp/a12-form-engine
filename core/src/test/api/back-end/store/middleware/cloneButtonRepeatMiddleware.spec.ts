@@ -34,10 +34,10 @@ import type { Action, Store } from "redux";
 
 import { Commands, Events } from "../../../../../back-end/store/index.js";
 import type { EngineState, EngineStore } from "../../../../../back-end/store/internal/store.js";
-import { MiddlewareHelpers } from "../../../../utils/MiddlewareHelpers.js";
 import { createDocumentPath } from "../../../../utils/createDocumentPath.js";
 import { createModelPath } from "../../../../utils/createModelPath.js";
 import { US_LOCALE } from "../../../../utils/localization.js";
+import { MiddlewareHelpers } from "../../../../utils/MiddlewareHelpers.js";
 import { createTestStore, loadData } from "../../../../utils/setup.js";
 import { setupFixture, setupModelsFixture } from "../../../../utils/setupFixture.js";
 import { DR } from "../../../../utils/test-model-helpers/detached.repeat.js";

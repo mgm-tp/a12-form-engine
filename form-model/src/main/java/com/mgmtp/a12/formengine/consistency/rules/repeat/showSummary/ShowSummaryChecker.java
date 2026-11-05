@@ -65,7 +65,7 @@ public class ShowSummaryChecker extends AbstractRepeatChecker {
 				repeatProblems.add(new ConsistencyProblem(
 					model.getHeaderId(),
 					FORM_MODEL_REPEAT_SHOW_SUMMARY_INVALID_TYPE,
-					new FormModelProblemSource(column.getId()),
+					FormModelProblemSource.involving(column.getId()),
 					column.getId(),
 					repeat.getId(),
 					repeat.getName()

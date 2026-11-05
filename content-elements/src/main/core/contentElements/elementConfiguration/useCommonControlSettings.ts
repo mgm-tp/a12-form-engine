@@ -38,7 +38,6 @@ import type { DataReference } from "@com.mgmtp.a12.client/client-data";
 import {
 	DocumentPath,
 	getDocumentPath,
-	getDocumentPathForRepeatableGroup,
 	isDateRangeArray,
 	isMultiSelectData,
 	isMultiSelectDataEqual,
@@ -51,7 +50,6 @@ import {
 	useDocumentPathContext
 } from "@com.mgmtp.a12.contentengine/contentengine-core";
 import type {
-	DocumentModel,
 	EntityInstancePath,
 	GroupInstance,
 	Message
@@ -67,10 +65,13 @@ import { assertObject } from "../../utils/assertions.js";
 
 import { arraysDeepEqual } from "../arraysDeepEqual.js";
 import { UiId } from "../generateUiId.js";
-import { MessageGroupContext } from "../modules/messageGroupContainer/messageGroupContext.js";
 import type { MessageGroupFilter } from "../modules/messageGroupContainer/messageGroupContext.js";
+import { MessageGroupContext } from "../modules/messageGroupContainer/messageGroupContext.js";
 
+import { getControlDataReference } from "./getControlDataReference.js";
 import { GET_LOCALIZED_MODEL_TEXTS_WRAPPER } from "./getLocalizedModelTexts.js";
+import { isRepeatableGroupLikeElement } from "./isRepeatableGroupLikeElement.js";
+import { toTooltipLineBreak } from "./tooltipLineBreak.js";
 
 /** @internal */
 export const USE_COMMON_CONTROL_SETTINGS_WRAPPER = {
@@ -102,8 +103,9 @@ export function useCommonControlSettings(
 		state => getModelPathById(state, node.props.elementId),
 		(left, right) => ModelPath.equal(left, right)
 	);
-	const elementDocumentPath = getDocumentPath(elementModelPath, dataContext);
-	const initialDataReference = DocumentPath.toString(elementDocumentPath);
+	const initialDataReference = DocumentPath.toString(
+		getDocumentPath(elementModelPath, dataContext)
+	);
 
 	const dmElement = useSelector(state => getElementByPath(state, elementModelPath));
 	assertObject(
@@ -113,11 +115,14 @@ export function useCommonControlSettings(
 
 	const isRepeatableGroupLike = isRepeatableGroupLikeElement(dmElement);
 
-	const dataReference = isRepeatableGroupLike
-		? DocumentPath.toString(
-				getDocumentPathForRepeatableGroup(elementDocumentPath, elementDocumentPath)
-			)
-		: initialDataReference;
+	const dataReference = useSelector(state =>
+		getControlDataReference({
+			getModelPathById: id => getModelPathById(state, id),
+			getElementByPath: path => getElementByPath(state, path),
+			elementId: node.props.elementId,
+			dataContext
+		})
+	);
 
 	const uiId = UiId.generateForControl({
 		controlId: node.id,
@@ -169,6 +174,10 @@ export function useCommonControlSettings(
 
 	const notRelevant = useSelector(state => getNotRelevant(state, dataReference));
 
+	// oxlint-disable-next-line typescript/no-deprecated
+	const tooltipsOnTop = node.props.tooltipsOnTop;
+	const breakTooltipsToNewLine = toTooltipLineBreak(node.props.tooltipPosition, tooltipsOnTop);
+
 	return {
 		uiIdPrefix,
 		uiId,
@@ -182,7 +191,9 @@ export function useCommonControlSettings(
 		notRelevant,
 		hideLabel: node.props.hideLabel,
 		showMessagesAsTooltip: node.props.messageExposition === "TOOLTIP",
-		tooltipsOnTop: node.props.tooltipsOnTop,
+		// oxlint-disable-next-line typescript/no-deprecated
+		tooltipsOnTop,
+		breakTooltipsToNewLine,
 		truncateSuffix: node.props.truncateSuffix,
 		autoComplete: node.props.autoComplete,
 		secret: node.props.secret,
@@ -270,12 +281,6 @@ function useSettingsFromDocumentModel(dataReference: DataReference): {
 		computed,
 		timeZone
 	};
-}
-
-function isRepeatableGroupLikeElement(dmElement?: DocumentModel.Element): boolean {
-	return (
-		dmElement?.type === "Group" && dmElement.repeatability > 1 && dmElement.usageType !== undefined
-	);
 }
 
 /**

@@ -35,10 +35,10 @@ import { deepStrictEqual, strictEqual } from "node:assert/strict";
 import type { Models } from "../../../../../back-end/store/index.js";
 import type { RepeatRow } from "../../../../../view/internal/components/form-engine/repeat/components/tableColumnTypes.js";
 import { filterRows } from "../../../../../view/internal/utilities/filtering.js";
+import { createDocumentPath } from "../../../../utils/createDocumentPath.js";
 import { createModelPath } from "../../../../utils/createModelPath.js";
 import { setupArrayFixture } from "../../../../utils/setupFixture.js";
 import { IR } from "../../../../utils/test-model-helpers/inline.repeat.js";
-import { createDocumentPath } from "../../../../utils/createDocumentPath.js";
 
 import { REPEAT_MODEL_PATH } from "./filter.utils.js";
 

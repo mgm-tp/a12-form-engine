@@ -45,6 +45,7 @@ import {
 	getLocalizedMultiSelectValue,
 	mapSelectedValues
 } from "../../../../../utilities/multi-select-helper.js";
+import { toTooltipLineBreak } from "../../../../../utilities/tooltipPosition.js";
 
 import { useBaseProps } from "../use-input-props.js";
 
@@ -79,7 +80,7 @@ export function MultiSelectInput(props: Inputs.InputProps<DocumentModel.Group>):
 				localizer
 			)}
 			tooltips={addonAfter}
-			breakTooltipsToNewLine={props.modelElement.tooltipsOnTop}
+			breakTooltipsToNewLine={toTooltipLineBreak(props.modelElement.tooltipPosition)}
 			onChange={newItems => {
 				const newInput = enumerationOptions.flatMap(enumerationOption =>
 					newItems.some(item => enumerationOption.value === item.id)

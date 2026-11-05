@@ -186,6 +186,7 @@ describe("api.back-end.store.defaults", () => {
 							}
 						],
 						correctionScreen: { visible: true, showDetailsState: { key2: true } },
+						customMessages: {},
 						dirty: true,
 						disabled: true,
 						messages: { key2: entry },

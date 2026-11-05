@@ -34,13 +34,13 @@ import { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
 
 import { createModelPath } from "../../../../utils/createModelPath.js";
 import { RenderGroupFixture } from "../../../../utils/rtl-render-group.js";
+import { setupFormEngineRendererWithRtlAsync } from "../../../../utils/setup.js";
 import { setupModelsFixture } from "../../../../utils/setupFixture.js";
 import { IR } from "../../../../utils/test-model-helpers/inline.repeat.js";
 import {
 	createDocumentForRepeat,
 	createNestedL6Entry
 } from "../../../../utils/test-model-helpers/repeat.js";
-import { setupFormEngineRendererWithRtlAsync } from "../../../../utils/setup.js";
 
 import { assertButtonEnablement } from "./assertButtonEnablement.js";
 

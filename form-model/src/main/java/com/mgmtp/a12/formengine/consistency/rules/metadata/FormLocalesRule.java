@@ -49,7 +49,6 @@ import com.mgmtp.a12.formengine.model.types.ConfirmationTextsType;
 import com.mgmtp.a12.formengine.model.types.DefaultsType;
 import com.mgmtp.a12.formengine.model.types.FieldConfigurationEntryType;
 import com.mgmtp.a12.formengine.model.types.FieldConfigurationType;
-import com.mgmtp.a12.formengine.model.types.RepeatButtonLabelsType;
 import com.mgmtp.a12.formengine.model.visitor.ModelWalker;
 
 import java.util.List;
@@ -76,7 +75,7 @@ public class FormLocalesRule implements ConsistencyRule {
 		final LocaleModelVisitor visitor = new LocaleModelVisitor(unknownLocaleChecker);
 		new ModelWalker(visitor).acceptScreenGroupRootElement(model.getContent().getScreens());
 		checkHeader(model, unknownLocaleChecker);
-		checkDefaults(model.getContent().getDefaults(), unknownLocaleChecker);
+		checkDefaults(model.getContent().getDefaults(), unknownLocaleChecker, model.getHeaderId());
 		checkFieldConfiguration(model.getContent().getFieldConfiguration(), unknownLocaleChecker);
 
 		return unknownLocaleChecker.getLocaleProblems();
@@ -97,7 +96,7 @@ public class FormLocalesRule implements ConsistencyRule {
 			return Optional.of(new ConsistencyProblem(
 				header.getId(),
 				FormModelCategory.FORM_MODEL_WRONG_LOCALE,
-				new FormModelProblemSource(header.getId()),
+				FormModelProblemSource.involving(header.getId()),
 				"header",
 				label.getText(),
 				LocaleConverter.convert(label.getLocale()),
@@ -109,27 +108,13 @@ public class FormLocalesRule implements ConsistencyRule {
 		return Optional.empty();
 	}
 
-	private void checkDefaults(final DefaultsType defaults, final UnknownLocaleChecker checker) {
-		final RepeatButtonLabelsType buttonLabels = defaults.getButtonLabels();
-		if (buttonLabels != null) {
-			checker.check(FormLocalizationAdapter.adapterFor(buttonLabels.getADD()), "default-button-label");
-			checker.check(FormLocalizationAdapter.adapterFor(buttonLabels.getCOMMIT_ADD()), "default-button-label");
-			checker.check(FormLocalizationAdapter.adapterFor(buttonLabels.getAPPLY()), "default-button-label");
-			checker.check(FormLocalizationAdapter.adapterFor(buttonLabels.getEDIT()), "default-button-label");
-			checker.check(FormLocalizationAdapter.adapterFor(buttonLabels.getREMOVE()), "default-button-label");
-			checker.check(FormLocalizationAdapter.adapterFor(buttonLabels.getVIEW()), "default-button-label");
-			checker.check(FormLocalizationAdapter.adapterFor(buttonLabels.getCANCEL()), "default-button-label");
-			checker.check(FormLocalizationAdapter.adapterFor(buttonLabels.getCONFIRM()), "default-button-label");
-			checker.check(FormLocalizationAdapter.adapterFor(buttonLabels.getRETURN()), "default-button-label");
-			checker.check(FormLocalizationAdapter.adapterFor(buttonLabels.getUP()), "default-button-label");
-			checker.check(FormLocalizationAdapter.adapterFor(buttonLabels.getDOWN()), "default-button-label");
-			checker.check(FormLocalizationAdapter.adapterFor(buttonLabels.getCOPY()), "default-button-label");
-			checker.check(FormLocalizationAdapter.adapterFor(buttonLabels.getCLOSE()), "default-button-label");
-			checker.check(FormLocalizationAdapter.adapterFor(buttonLabels.getDOWNLOAD()), "default-button-label");
-			checker.check(FormLocalizationAdapter.adapterFor(buttonLabels.getSKIP()), "default-button-label");
-			checker.check(FormLocalizationAdapter.adapterFor(buttonLabels.getREPLACE()), "default-button-label");
-			checker.check(FormLocalizationAdapter.adapterFor(buttonLabels.getUPLOAD_AS_COPY()), "default-button-label");
-		}
+	private void checkDefaults(
+		final DefaultsType defaults,
+		final UnknownLocaleChecker checker,
+		final String formModelId
+	) {
+		RepeatButtonLabelsLocaleCheck
+			.checkLocales(checker, defaults.getButtonLabels(), "default-button-label", formModelId);
 
 		final ConfirmationTextsType confirmationTexts = defaults.getConfirmationTexts();
 		if (confirmationTexts != null) {
@@ -138,10 +123,12 @@ public class FormLocalesRule implements ConsistencyRule {
 				final ConfirmationTextType removeConfirmation = confirmationTexts.getREMOVE();
 				checker.check(
 					FormLocalizationAdapter.adapterFor(removeConfirmation.getMessage()),
-					"default-confirmation-message");
+					"default-confirmation-message",
+					formModelId);
 				checker.check(
 					FormLocalizationAdapter.adapterFor(removeConfirmation.getTitle()),
-					"default-confirmation-title");
+					"default-confirmation-title",
+					formModelId);
 			}
 		}
 	}
@@ -151,16 +138,21 @@ public class FormLocalesRule implements ConsistencyRule {
 
 		final List<FieldConfigurationEntryType> fieldConfigurations = fieldConfiguration.getField();
 		for (final FieldConfigurationEntryType fieldConfig : fieldConfigurations) {
-			checker.check(FormLocalizationAdapter.adapterFor(fieldConfig.getHint()), fieldConfig.getElementRef());
+			checker.check(
+				FormLocalizationAdapter.adapterFor(fieldConfig.getHint()),
+				fieldConfig.getElementRef(),
+				fieldConfig.getElementRef());
 			checker
 				.check(
 					FormLocalizationAdapter.adapterFor(
 						fieldConfig.getLabel() != null
 							? fieldConfig.getLabel().getMultilingualText()
 							: null),
+					fieldConfig.getElementRef(),
 					fieldConfig.getElementRef());
 			checker.check(
 				FormLocalizationAdapter.adapterFor(fieldConfig.getPlaceholder()),
+				fieldConfig.getElementRef(),
 				fieldConfig.getElementRef());
 		}
 	}

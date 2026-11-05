@@ -51,7 +51,7 @@ export function DiffProps<PropsType extends Record<string, unknown>>(
 		const prevProps = usePrevious(props);
 		const changedProps = diffingProps(prevProps, props);
 		if (changedProps.length > 0) {
-			// eslint-disable-next-line no-console
+			// oxlint-disable-next-line no-console
 			console.warn(changedProps.join(", "));
 		}
 		return <Target {...props} />;
@@ -78,7 +78,7 @@ export function diffingProps(
  */
 export function usePrevious<T>(value: T): T | undefined {
 	const ref = useRef<T>(undefined);
-	// eslint-disable-next-line useEffectNoDeps/use-effect-no-deps
+	// oxlint-disable-next-line useEffectNoDeps/use-effect-no-deps
 	useEffect(() => {
 		ref.current = value;
 	});

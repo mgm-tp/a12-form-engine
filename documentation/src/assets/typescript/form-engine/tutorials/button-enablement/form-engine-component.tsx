@@ -31,44 +31,28 @@
  */
 
 import type { JSX, ReactNode } from "react";
-import { connect } from "react-redux";
 
-import type {
-	Config,
-	DefaultDispatchProps,
-	DefaultOwnProps,
-	DefaultStateProps,
-	EngineState,
-	ScrollHandlerProps
-} from "@com.mgmtp.a12.formengine/formengine-core";
+import type { Config, DefaultOwnProps } from "@com.mgmtp.a12.formengine/formengine-core";
 import {
-	defaultMapDispatchToProps,
-	defaultMapStateToProps,
 	FormEngineRenderer,
-	ScrollHandler
+	ScrollHandler,
+	useDefaultDispatchProps,
+	useDefaultStateProps,
+	useScrollHandlerProps
 } from "@com.mgmtp.a12.formengine/formengine-core";
 
-const EngineConnected = connect<
-	DefaultStateProps,
-	DefaultDispatchProps,
-	DefaultOwnProps,
-	EngineState
->(
-	defaultMapStateToProps,
-	defaultMapDispatchToProps
-)(FormEngineRenderer);
+function EngineConnected(props: DefaultOwnProps): JSX.Element {
+	const stateProps = useDefaultStateProps(props);
+	const dispatchProps = useDefaultDispatchProps();
 
-const ScrollHandlerConnected = connect<
-	ScrollHandlerProps,
-	{},
-	{ children?: ReactNode },
-	EngineState
->(function mapStateToProps(state) {
-	return {
-		uiState: state.ui,
-		models: state.models
-	};
-})(ScrollHandler);
+	return <FormEngineRenderer {...props} {...stateProps} {...dispatchProps} />;
+}
+
+function ScrollHandlerConnected(props: { children?: ReactNode }): JSX.Element {
+	const stateProps = useScrollHandlerProps();
+
+	return <ScrollHandler {...props} {...stateProps} />;
+}
 
 export function FormEngineComponent(props: { config: Partial<Config> }): JSX.Element {
 	return (

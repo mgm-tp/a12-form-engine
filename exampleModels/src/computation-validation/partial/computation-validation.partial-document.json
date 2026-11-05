@@ -2,7 +2,7 @@
   "header": {
     "id": "computation-validation.partial-document",
     "modelType": "document",
-    "modelVersion": "29.4.0",
+    "modelVersion": "29.8.0",
     "locales": [
       {
         "code": "en"
@@ -1222,6 +1222,27 @@
                                 {
                                   "locale": "de",
                                   "text": "The values of Number1 and Number2 are not equal for index \"$index(indexField).value$\"."
+                                }
+                              ]
+                            }
+                          },
+                          {
+                            "type": "Rule",
+                            "id": "rule_9f1c2",
+                            "name": "unresolvedParallelIteration",
+                            "Rule": {
+                              "errorEntityRelPath": "../numberField",
+                              "errorCode": "Error rule_9f1c2",
+                              "errorCondition": "FieldFilled(numberField)\nAnd FieldNotFilled(../repeatableGroup2/numberField)",
+                              "severity": "ERROR",
+                              "errorMessage": [
+                                {
+                                  "locale": "en",
+                                  "text": "Number 2 is missing for index \"$index(indexField).value$\"."
+                                },
+                                {
+                                  "locale": "de",
+                                  "text": "Number 2 fehlt für den Index \"$index(indexField).value$\"."
                                 }
                               ]
                             }

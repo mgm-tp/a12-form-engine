@@ -93,7 +93,7 @@ public class PlaceholderRule implements ConsistencyRule {
 				problems.add(new ConsistencyProblem(
 					model.getHeaderId(),
 					FormModelCategory.FORM_MODEL_PLACEHOLDER_INVALID_DATATYPE,
-					new FormModelProblemSource(elementRef),
+					FormModelProblemSource.involving(elementRef),
 					elementRef,
 					element.getName()));
 			}

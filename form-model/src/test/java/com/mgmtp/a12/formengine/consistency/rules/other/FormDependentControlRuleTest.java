@@ -32,6 +32,7 @@
 package com.mgmtp.a12.formengine.consistency.rules.other;
 
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.hasItem;
 import static org.hamcrest.Matchers.hasProperty;
@@ -70,6 +71,9 @@ public class FormDependentControlRuleTest {
 
 		assertThat(problems, hasSize(1));
 		assertThat(problems,hasItem(hasProperty("message",equalTo("Dependent control [control_eadf7] refers to screen [section_d6b5c] which is missing in the model."))));
+		assertThat(
+			RuleTestHelper.involvedElementIds(problems.get(0)),
+			contains("control_eadf7", "section_d6b5c"));
 	}
 
 	@Test

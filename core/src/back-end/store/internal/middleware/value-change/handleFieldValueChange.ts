@@ -39,7 +39,7 @@ import type {
 	GroupInstance
 } from "@com.mgmtp.a12.kernel/kernel-md-facade";
 
-import { ReadonlyObjectMap } from "../../../../../models/internal/utils/json.js";
+import { ReadonlyObjectMap } from "../../../../../models/internal/utils/ReadonlyObjectMap.js";
 import { Commands } from "../../actions.js";
 import { validateChangesAndUpdateMessages } from "../../change-validation.js";
 import { collectRelevantFields } from "../../collectRelevantFields.js";

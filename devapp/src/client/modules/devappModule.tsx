@@ -48,6 +48,7 @@ import {
 } from "@com.mgmtp.a12.client/client-core";
 
 import { DevappLayoutNG } from "../components/DevappLayout.js";
+import type { ModelIndex } from "../modelIndex.js";
 
 /**
  * The devapp uses a custom ApplicationFrameLayout
@@ -245,31 +246,5 @@ export const ModelIndexDataLoader: DataLoader = {
 	}
 };
 
-interface FormsListGroup {
-	readonly name: string;
-	readonly forms: readonly string[];
-}
-
-interface FormsList {
-	readonly groups: readonly FormsListGroup[];
-}
-
-/**
- * A "detail" form (e.g. `customization.masterDetailFocus.detail-form`) only exists as another
- * form's MasterDetail detail pane - colocated with its parent example for discoverability, but
- * not meant to show up as its own tile here.
- */
-function isDetailOnlyForm(form: string): boolean {
-	return form === "detail";
-}
-
-const loadIndex = (indexName = "index") =>
-	fetch(`modelIndex/${indexName}.json`)
-		.then(response => response.json() as Promise<FormsList>)
-		.then(formsList => ({
-			...formsList,
-			groups: formsList.groups.map(group => ({
-				...group,
-				forms: group.forms.filter(form => !isDetailOnlyForm(form))
-			}))
-		}));
+const loadIndex = (indexName = "index"): Promise<ModelIndex> =>
+	fetch(`modelIndex/${indexName}.json`).then(response => response.json() as Promise<ModelIndex>);

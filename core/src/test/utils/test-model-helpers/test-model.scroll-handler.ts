@@ -55,7 +55,8 @@ export const FORM_MODEL_PATHS = {
 	INLINE_REPEAT: createModelPath("Screen1", "inline-repeat-repGroup"),
 	DETACHED_REPEAT: createModelPath("Screen1", "detached-repeat-repGroup"),
 	EMBEDDED_REPEAT: createModelPath("Screen1", "embedded-repeat-repGroup"),
-	CG_IN_EMBEDDED_REPEAT: createModelPath("Screen1", "embedded-repeat-repGroup", "cg")
+	CG_IN_EMBEDDED_REPEAT: createModelPath("Screen1", "embedded-repeat-repGroup", "cg"),
+	CUSTOM_ELEMENT: createModelPath("Screen1", "custom1")
 };
 
 export const IDS = {
@@ -70,5 +71,6 @@ export const IDS = {
 	ADD_BUTTON_DETACHED_REPEAT: "a12-add-button-inlinerepeat-84edf",
 	BODY_ROW_INLINE_REPEAT: "a12-inlinerepeat-84edf-bodyrow",
 	EDIT_BUTTON_DETACHED_REPEAT: "a12-edit-button-detachedrepeat-597e9",
-	CORRECTION_SCREEN_MESSAGE_BOX_ID: "a12-correction-screen-bar"
+	CORRECTION_SCREEN_MESSAGE_BOX_ID: "a12-correction-screen-bar",
+	CUSTOM_ELEMENT: "customscreenelement-a91e2"
 };

@@ -66,7 +66,7 @@ class InvalidAllowCustomValuesChecker {
 					problems.add(new ConsistencyProblem(
 						modelName,
 						FormModelCategory.FORM_MODEL_EXTERNAL_ENUM_INVALID_ALLOW_CUSTOM_VALUE,
-						new FormModelProblemSource(fieldConfigurationEntry.getElementRef()),
+						FormModelProblemSource.involving(fieldConfigurationEntry.getElementRef()),
 						fieldConfigurationEntry.getElementRef()
 					));
 				}

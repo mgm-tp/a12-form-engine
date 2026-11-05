@@ -43,8 +43,10 @@ import {
 	CustomWidgetMapForCustomInput
 } from "./custom-input-as-widget.js";
 import { CustomWidgetMap, FormModelMapForWidgetMap } from "./custom-widgets.js";
+import { CustomFormModelMapForCustomScreenElement } from "./CustomScreenElement.js";
 import { MasterDetailFocusDetailEngine, MasterDetailFocusEngine } from "./master-detail-focus.js";
 import { alertInvalidAddRowMiddleware } from "./middlewares/alertInvalidAddRowMiddleware.js";
+import { createCustomServerValidationErrors } from "./middlewares/createCustomValidationErrors.js";
 import { navigationByEventButtonExampleMiddleware } from "./middlewares/navigationByEventButtonExampleMiddleware.js";
 import { uncollapseAllSectionsMiddleware } from "./middlewares/uncollapseAllSectionsMiddleware.js";
 import { writeDirtyStatesInDocumentMiddleware } from "./middlewares/writeDirtyStatesInDocumentMiddleware.js";
@@ -133,6 +135,15 @@ export function registerDevappCustomizations(): void {
 			config: {
 				formModelMap: CustomFormModelMapForCustomInput,
 				widgetMap: CustomWidgetMapForCustomInput
+			}
+		},
+		{
+			formModelName: "customization.custom-screen-element-form",
+			config: {
+				formModelMap: CustomFormModelMapForCustomScreenElement
+			},
+			middlewares() {
+				return [createCustomServerValidationErrors];
 			}
 		}
 	];

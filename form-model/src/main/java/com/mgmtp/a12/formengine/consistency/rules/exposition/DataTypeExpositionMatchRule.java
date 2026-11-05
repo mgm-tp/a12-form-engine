@@ -233,7 +233,7 @@ public class DataTypeExpositionMatchRule implements ConsistencyRule {
 					problemCollection.add(new ConsistencyProblem(
 						model.getHeaderId(),
 						FormModelCategory.FORM_MODEL_EXPOSITION_ONLY_ALLOWED_FOR_COLUMNS,
-						new FormModelProblemSource(sourceElementId),
+						FormModelProblemSource.involving(sourceElementId),
 						element.getId(),
 						element.getName(),
 						exposition.name()
@@ -254,7 +254,7 @@ public class DataTypeExpositionMatchRule implements ConsistencyRule {
 		problemCollection.add(new ConsistencyProblem(
 			model.getHeaderId(),
 			FormModelCategory.FORM_MODEL_DATATYPE_EXPOSITION_MISMATCH,
-			new FormModelProblemSource(sourceElementId),
+			FormModelProblemSource.involving(sourceElementId),
 			element.getId(),
 			element.getName(),
 			exposition.name(),

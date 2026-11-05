@@ -89,7 +89,7 @@ function SwitchRenderer(
 		warnings,
 		infos,
 		tooltips,
-		tooltipsOnTop,
+		breakTooltipsToNewLine,
 		uncheckedLabel,
 		checkedLabel,
 		inputProps,
@@ -117,8 +117,8 @@ function SwitchRenderer(
 			checkedOption={checkedLabel}
 			readonly={readonly}
 			hideLabel={hideLabel}
-			addonAfter={tooltipsOnTop ? undefined : tooltips}
-			tooltips={tooltipsOnTop ? tooltips : undefined}
+			tooltips={tooltips}
+			breakTooltipsToNewLine={breakTooltipsToNewLine}
 			helperText={helperText}
 			error={error}
 			errorMessage={errors}

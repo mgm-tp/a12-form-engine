@@ -99,6 +99,20 @@ export function createValidationEntry(options: {
 	};
 }
 
+export function createCustomValidationMessage(
+	msgPartial: Partial<EngineStore.Validation.CustomMessage>
+): EngineStore.Validation.CustomMessage {
+	return {
+		customFormElement: undefined as unknown as never,
+		dataContext: [],
+		errorCode: "code",
+		errorKey: "key",
+		errorText: [],
+		severity: "ERROR",
+		...msgPartial
+	};
+}
+
 interface ParsingErrorDetailMap {
 	readonly numberContainsIllegalSymbols: {
 		readonly errorText: Localizable[];

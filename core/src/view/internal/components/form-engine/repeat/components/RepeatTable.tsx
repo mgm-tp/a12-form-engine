@@ -47,7 +47,6 @@ import { getTitleLabel } from "../../model-element-labels.js";
 import type { TableWidgetMap } from "../table-widget-map.js";
 import { TableWidgetMapContext } from "../table-widget-map.js";
 
-import type { TableStyleOptions } from "./TableStyleOptions.js";
 import { onBlurTable } from "./body/onBlur.js";
 import { getDndOptions } from "./dndOptions.js";
 import { RepeatUtils } from "./repeat-utils.js";
@@ -56,6 +55,7 @@ import { getSortState, OnSort } from "./sortState.js";
 import type { RepeatRow } from "./tableColumnTypes.js";
 import { RepeatTableColumn } from "./tableColumnTypes.js";
 import { useTableComponentRenderers } from "./tableComponentRenderers.js";
+import type { TableStyleOptions } from "./TableStyleOptions.js";
 
 /** @internal */
 export function RepeatTable(props: RepeatTableProps) {

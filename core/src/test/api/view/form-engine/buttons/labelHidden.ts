@@ -36,8 +36,8 @@ import type { Models } from "../../../../../back-end/store/index.js";
 import type { WidgetMap } from "../../../../../view/index.js";
 import { createDocumentPath } from "../../../../utils/createDocumentPath.js";
 import { createModelPath } from "../../../../utils/createModelPath.js";
-import { BUTTONS } from "../../../../utils/test-model-helpers/button.form.js";
 import { setupFormEngineRendererWithRtl } from "../../../../utils/setup.js";
+import { BUTTONS } from "../../../../utils/test-model-helpers/button.form.js";
 
 import { triggerProps } from "./trigger.js";
 

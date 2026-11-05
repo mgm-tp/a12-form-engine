@@ -33,7 +33,11 @@
 import type { NodeControllerMap } from "@com.mgmtp.a12.contentengine/contentengine-editor";
 import { createStringController, Length } from "@com.mgmtp.a12.contentengine/contentengine-editor";
 
-import { markingOfRequiredFieldsItems, messageExpositionItems } from "../dropdownItems.js";
+import {
+	markingOfRequiredFieldsItems,
+	messageExpositionItems,
+	tooltipPositionItems
+} from "../dropdownItems.js";
 
 import { createAnnotationController } from "./annotationController.js";
 import { createDatePickerConfigController } from "./datePickerConfigController.js";
@@ -56,6 +60,12 @@ export const FormElementControllers: NodeControllerMap = {
 		defaultValue: "DEFAULT"
 	}),
 	tooltipsOnTop: createTrueController(false),
+	tooltipPosition: createOptionalEnumController({
+		keywords: tooltipPositionItems,
+		numericConfigs: [],
+		initialValue: { type: Length.ValueType.KEYWORD, unit: "BESIDE" },
+		defaultValue: "BESIDE"
+	}),
 	markingOfRequiredFields: createOptionalEnumController({
 		keywords: markingOfRequiredFieldsItems,
 		numericConfigs: [],

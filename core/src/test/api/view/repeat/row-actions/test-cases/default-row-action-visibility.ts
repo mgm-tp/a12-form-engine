@@ -37,9 +37,9 @@ import type { ReadonlyObjectMap } from "../../../../../../models/index.js";
 import type { EnablementByRow } from "../../../../../../view/internal/configuration/engine-configuration.js";
 import { DefaultRepeatButtonNames } from "../../../../../../view/internal/configuration/engine-configuration.js";
 import type { RtlRenderWrapper } from "../../../../../rtl-utils/render-wrapper.js";
+import { createModelPath } from "../../../../../utils/createModelPath.js";
 import { setupFixture, setupModelsFixture } from "../../../../../utils/setupFixture.js";
 import { DEFAULT_ROW_ACTION_VISIBILITY } from "../../../../../utils/test-model-helpers/repeat.row-actions.js";
-import { createModelPath } from "../../../../../utils/createModelPath.js";
 
 import { setupForEmbeddedRepeat } from "../row-action-enablement-utils.js";
 import {

@@ -60,7 +60,7 @@ class GroupInGroupReferenceChecker extends AbstractReferenceChecker {
 			problems.add(new ConsistencyProblem(
 				formModel.getHeaderId(),
 				FormModelCategory.MISSING_DM_GROUP_IN_GROUP_CONFIGURATION,
-				new FormModelProblemSource(groupRef),
+				FormModelProblemSource.involving(groupRef),
 				groupRef,
 				documentModelService.getDocumentModelId()
 			));

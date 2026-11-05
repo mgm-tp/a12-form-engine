@@ -1,0 +1,952 @@
+{
+  "header": {
+    "id": "computation-validation.message-position-document",
+    "modelType": "document",
+    "modelVersion": "29.8.0",
+    "locales": [
+      {
+        "code": "en"
+      }
+    ],
+    "labels": [],
+    "annotations": [
+      {
+        "name": "roles",
+        "value": "admin"
+      }
+    ],
+    "modelReferences": []
+  },
+  "content": {
+    "modelInfo": {
+      "name": "computation-validation.message-position-document",
+      "immutable": false
+    },
+    "modelConfig": {
+      "decimalSeparator": ".",
+      "timeZone": "UTC",
+      "conditionLanguage": {
+        "code": "en_US"
+      }
+    },
+    "modelRoot": {
+      "rootGroups": [
+        {
+          "type": "Group",
+          "id": "G1",
+          "name": "Root",
+          "Group": {
+            "repeatability": 1,
+            "elements": [
+              {
+                "type": "Field",
+                "id": "F1",
+                "name": "aString",
+                "Field": {
+                  "fieldType": {
+                    "type": "StringType"
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "aString (required)"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Rule",
+                "id": "rule_a5edf",
+                "name": "aStringRequired",
+                "Rule": {
+                  "errorEntityRelPath": "../aString",
+                  "errorCode": "Error rule_a5edf",
+                  "errorCondition": "FieldNotFilled(aString)",
+                  "severity": "ERROR",
+                  "errorMessage": [
+                    {
+                      "locale": "en",
+                      "text": "aString must be filled"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Field",
+                "id": "F2",
+                "name": "shortString",
+                "Field": {
+                  "fieldType": {
+                    "type": "StringType",
+                    "StringType": {
+                      "maxLength": 5
+                    }
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "shortString (max. 5 chars)"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Field",
+                "id": "F3",
+                "name": "aNumber",
+                "Field": {
+                  "fieldType": {
+                    "type": "NumberType"
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "aNumber (must be >= 18)"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Rule",
+                "id": "rule_3b0d8",
+                "name": "aNumberMin",
+                "Rule": {
+                  "errorEntityRelPath": "../aNumber",
+                  "errorCode": "Error rule_3b0d8",
+                  "errorCondition": "FieldFilled(aNumber) and [aNumber] < 18",
+                  "severity": "ERROR",
+                  "errorMessage": [
+                    {
+                      "locale": "en",
+                      "text": "aNumber must be at least 18"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Field",
+                "id": "F4",
+                "name": "aDate",
+                "Field": {
+                  "fieldType": {
+                    "type": "DateType",
+                    "DateType": {
+                      "format": "yyyy-MM-dd"
+                    }
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "aDate (required)"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Rule",
+                "id": "rule_e3e39",
+                "name": "aDateRequired",
+                "Rule": {
+                  "errorEntityRelPath": "../aDate",
+                  "errorCode": "Error rule_e3e39",
+                  "errorCondition": "FieldNotFilled(aDate)",
+                  "severity": "ERROR",
+                  "errorMessage": [
+                    {
+                      "locale": "en",
+                      "text": "aDate must be filled"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Field",
+                "id": "F5",
+                "name": "anEnum",
+                "Field": {
+                  "fieldType": {
+                    "type": "EnumerationType",
+                    "EnumerationType": {
+                      "values": [
+                        {
+                          "value": "V1",
+                          "label": [
+                            {
+                              "locale": "en",
+                              "text": "red"
+                            }
+                          ]
+                        },
+                        {
+                          "value": "V2",
+                          "label": [
+                            {
+                              "locale": "en",
+                              "text": "green"
+                            }
+                          ]
+                        },
+                        {
+                          "value": "V3",
+                          "label": [
+                            {
+                              "locale": "en",
+                              "text": "blue"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "anEnum (required)"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Rule",
+                "id": "rule_8e713",
+                "name": "anEnumRequired",
+                "Rule": {
+                  "errorEntityRelPath": "../anEnum",
+                  "errorCode": "Error rule_8e713",
+                  "errorCondition": "FieldNotFilled(anEnum)",
+                  "severity": "ERROR",
+                  "errorMessage": [
+                    {
+                      "locale": "en",
+                      "text": "anEnum must be filled"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Field",
+                "id": "F6",
+                "name": "aConfirm",
+                "Field": {
+                  "fieldType": {
+                    "type": "ConfirmType"
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "aConfirm (required)"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Rule",
+                "id": "rule_05d7e",
+                "name": "aConfirmRequired",
+                "Rule": {
+                  "errorEntityRelPath": "../aConfirm",
+                  "errorCode": "Error rule_05d7e",
+                  "errorCondition": "FieldNotFilled(aConfirm)",
+                  "severity": "ERROR",
+                  "errorMessage": [
+                    {
+                      "locale": "en",
+                      "text": "aConfirm must be filled"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Field",
+                "id": "F7",
+                "name": "withWarning",
+                "Field": {
+                  "fieldType": {
+                    "type": "NumberType"
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "withWarning (warning if > 100)"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Rule",
+                "id": "rule_5c453",
+                "name": "withWarningRule",
+                "Rule": {
+                  "errorEntityRelPath": "../withWarning",
+                  "errorCode": "Error rule_5c453",
+                  "errorCondition": "FieldFilled(withWarning) and [withWarning] > 100",
+                  "severity": "WARNING",
+                  "errorMessage": [
+                    {
+                      "locale": "en",
+                      "text": "withWarning is unusually high"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Field",
+                "id": "F8",
+                "name": "withInfo",
+                "Field": {
+                  "fieldType": {
+                    "type": "NumberType"
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "withInfo (info if > 100)"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Rule",
+                "id": "rule_0e5b7",
+                "name": "withInfoRule",
+                "Rule": {
+                  "errorEntityRelPath": "../withInfo",
+                  "errorCode": "Error rule_0e5b7",
+                  "errorCondition": "FieldFilled(withInfo) and [withInfo] > 100",
+                  "severity": "INFO",
+                  "errorMessage": [
+                    {
+                      "locale": "en",
+                      "text": "withInfo is above 100"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Field",
+                "id": "F9",
+                "name": "multipleErrors",
+                "Field": {
+                  "fieldType": {
+                    "type": "NumberType"
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "multipleErrors (two errors)"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Rule",
+                "id": "rule_818ec",
+                "name": "multipleErrorsA",
+                "Rule": {
+                  "errorEntityRelPath": "../multipleErrors",
+                  "errorCode": "Error rule_818ec",
+                  "errorCondition": "FieldFilled(multipleErrors) and [multipleErrors] < 10",
+                  "severity": "ERROR",
+                  "errorMessage": [
+                    {
+                      "locale": "en",
+                      "text": "multipleErrors must be at least 10"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Rule",
+                "id": "rule_6eecb",
+                "name": "multipleErrorsB",
+                "Rule": {
+                  "errorEntityRelPath": "../multipleErrors",
+                  "errorCode": "Error rule_6eecb",
+                  "errorCondition": "FieldFilled(multipleErrors) and [multipleErrors] < 5",
+                  "severity": "ERROR",
+                  "errorMessage": [
+                    {
+                      "locale": "en",
+                      "text": "multipleErrors must really be at least 5 - and this second message is quite long, so that it wraps into several lines within its grid cell"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Field",
+                "id": "F10",
+                "name": "helperString",
+                "Field": {
+                  "fieldType": {
+                    "type": "StringType"
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "helperString (required)"
+                    }
+                  ],
+                  "helperText": [
+                    {
+                      "locale": "en",
+                      "text": "Helper text of helperString"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Rule",
+                "id": "rule_1cd86",
+                "name": "helperStringRequired",
+                "Rule": {
+                  "errorEntityRelPath": "../helperString",
+                  "errorCode": "Error rule_1cd86",
+                  "errorCondition": "FieldNotFilled(helperString)",
+                  "severity": "ERROR",
+                  "errorMessage": [
+                    {
+                      "locale": "en",
+                      "text": "helperString must be filled"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Field",
+                "id": "F11",
+                "name": "helperNumber",
+                "Field": {
+                  "fieldType": {
+                    "type": "NumberType"
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "helperNumber (must be >= 18)"
+                    }
+                  ],
+                  "helperText": [
+                    {
+                      "locale": "en",
+                      "text": "Helper text of helperNumber"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Rule",
+                "id": "rule_4b837",
+                "name": "helperNumberMin",
+                "Rule": {
+                  "errorEntityRelPath": "../helperNumber",
+                  "errorCode": "Error rule_4b837",
+                  "errorCondition": "FieldFilled(helperNumber) and [helperNumber] < 18",
+                  "severity": "ERROR",
+                  "errorMessage": [
+                    {
+                      "locale": "en",
+                      "text": "helperNumber must be at least 18"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Field",
+                "id": "F12",
+                "name": "helperEnum",
+                "Field": {
+                  "fieldType": {
+                    "type": "EnumerationType",
+                    "EnumerationType": {
+                      "values": [
+                        {
+                          "value": "V1",
+                          "label": [
+                            {
+                              "locale": "en",
+                              "text": "red"
+                            }
+                          ]
+                        },
+                        {
+                          "value": "V2",
+                          "label": [
+                            {
+                              "locale": "en",
+                              "text": "green"
+                            }
+                          ]
+                        },
+                        {
+                          "value": "V3",
+                          "label": [
+                            {
+                              "locale": "en",
+                              "text": "blue"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "helperEnum (required)"
+                    }
+                  ],
+                  "helperText": [
+                    {
+                      "locale": "en",
+                      "text": "Helper text of helperEnum"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Rule",
+                "id": "rule_4f7c3",
+                "name": "helperEnumRequired",
+                "Rule": {
+                  "errorEntityRelPath": "../helperEnum",
+                  "errorCode": "Error rule_4f7c3",
+                  "errorCondition": "FieldNotFilled(helperEnum)",
+                  "severity": "ERROR",
+                  "errorMessage": [
+                    {
+                      "locale": "en",
+                      "text": "helperEnum must be filled"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Field",
+                "id": "F13",
+                "name": "tooltipAbove",
+                "Field": {
+                  "fieldType": {
+                    "type": "StringType"
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "tooltipAbove (required)"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Rule",
+                "id": "rule_14d4d",
+                "name": "tooltipAboveRequired",
+                "Rule": {
+                  "errorEntityRelPath": "../tooltipAbove",
+                  "errorCode": "Error rule_14d4d",
+                  "errorCondition": "FieldNotFilled(tooltipAbove)",
+                  "severity": "ERROR",
+                  "errorMessage": [
+                    {
+                      "locale": "en",
+                      "text": "tooltipAbove must be filled"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Field",
+                "id": "F14",
+                "name": "tooltipBeside",
+                "Field": {
+                  "fieldType": {
+                    "type": "StringType"
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "tooltipBeside (required)"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Rule",
+                "id": "rule_de64f",
+                "name": "tooltipBesideRequired",
+                "Rule": {
+                  "errorEntityRelPath": "../tooltipBeside",
+                  "errorCode": "Error rule_de64f",
+                  "errorCondition": "FieldNotFilled(tooltipBeside)",
+                  "severity": "ERROR",
+                  "errorMessage": [
+                    {
+                      "locale": "en",
+                      "text": "tooltipBeside must be filled"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Field",
+                "id": "F15",
+                "name": "tooltipBelow",
+                "Field": {
+                  "fieldType": {
+                    "type": "StringType"
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "tooltipBelow (required)"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Rule",
+                "id": "rule_5d2b8",
+                "name": "tooltipBelowRequired",
+                "Rule": {
+                  "errorEntityRelPath": "../tooltipBelow",
+                  "errorCode": "Error rule_5d2b8",
+                  "errorCondition": "FieldNotFilled(tooltipBelow)",
+                  "severity": "ERROR",
+                  "errorMessage": [
+                    {
+                      "locale": "en",
+                      "text": "tooltipBelow must be filled"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Field",
+                "id": "F16",
+                "name": "messageAsTooltip",
+                "Field": {
+                  "fieldType": {
+                    "type": "StringType"
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "messageAsTooltip (required)"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Rule",
+                "id": "rule_9aa09",
+                "name": "messageAsTooltipRequired",
+                "Rule": {
+                  "errorEntityRelPath": "../messageAsTooltip",
+                  "errorCode": "Error rule_9aa09",
+                  "errorCondition": "FieldNotFilled(messageAsTooltip)",
+                  "severity": "ERROR",
+                  "errorMessage": [
+                    {
+                      "locale": "en",
+                      "text": "messageAsTooltip must be filled"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Group",
+                "id": "G2",
+                "name": "Rows",
+                "Group": {
+                  "repeatability": 5,
+                  "elements": [
+                    {
+                      "type": "Field",
+                      "id": "F20",
+                      "name": "rowString",
+                      "Field": {
+                        "fieldType": {
+                          "type": "StringType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "rowString (required)"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "F21",
+                      "name": "rowNumber",
+                      "Field": {
+                        "fieldType": {
+                          "type": "NumberType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "rowNumber (must be >= 18)"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Rule",
+                      "id": "rule_c1d7e",
+                      "name": "rowNumberMin",
+                      "Rule": {
+                        "errorEntityRelPath": "../rowNumber",
+                        "errorCode": "Error rule_c1d7e",
+                        "errorCondition": "FieldFilled(rowNumber) and [rowNumber] < 18",
+                        "severity": "ERROR",
+                        "errorMessage": [
+                          {
+                            "locale": "en",
+                            "text": "rowNumber must be at least 18"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "F22",
+                      "name": "rowDate",
+                      "Field": {
+                        "fieldType": {
+                          "type": "DateType",
+                          "DateType": {
+                            "format": "yyyy-MM-dd"
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "rowDate"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "F23",
+                      "name": "rowEnum",
+                      "Field": {
+                        "fieldType": {
+                          "type": "EnumerationType",
+                          "EnumerationType": {
+                            "values": [
+                              {
+                                "value": "V1",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "red"
+                                  }
+                                ]
+                              },
+                              {
+                                "value": "V2",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "green"
+                                  }
+                                ]
+                              },
+                              {
+                                "value": "V3",
+                                "label": [
+                                  {
+                                    "locale": "en",
+                                    "text": "blue"
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "rowEnum (warning if blue)"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Rule",
+                      "id": "rule_71412",
+                      "name": "rowEnumWarning",
+                      "Rule": {
+                        "errorEntityRelPath": "../rowEnum",
+                        "errorCode": "Error rule_71412",
+                        "errorCondition": "FieldFilled(rowEnum) and [rowEnum] == \"V3\"",
+                        "severity": "WARNING",
+                        "errorMessage": [
+                          {
+                            "locale": "en",
+                            "text": "blue is discouraged"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "F24",
+                      "name": "rowTooltip",
+                      "Field": {
+                        "fieldType": {
+                          "type": "StringType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "rowTooltip (required, message as tooltip)"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "F25",
+                      "name": "rowTooltipAbove",
+                      "Field": {
+                        "fieldType": {
+                          "type": "StringType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "rowTooltipAbove (required)"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "F26",
+                      "name": "rowTooltipBeside",
+                      "Field": {
+                        "fieldType": {
+                          "type": "StringType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "rowTooltipBeside (required)"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "F27",
+                      "name": "rowTooltipBelow",
+                      "Field": {
+                        "fieldType": {
+                          "type": "StringType"
+                        },
+                        "label": [
+                          {
+                            "locale": "en",
+                            "text": "rowTooltipBelow (required)"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Rule",
+                "id": "rule_57ebb",
+                "name": "rowStringRequired",
+                "Rule": {
+                  "errorEntityRelPath": "../Rows/rowString",
+                  "errorCode": "Error rule_57ebb",
+                  "errorCondition": "GroupFilled(Rows) AND FieldNotFilled(Rows/rowString)",
+                  "severity": "ERROR",
+                  "errorMessage": [
+                    {
+                      "locale": "en",
+                      "text": "rowString must be filled"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Rule",
+                "id": "rule_ceac6",
+                "name": "rowTooltipRequired",
+                "Rule": {
+                  "errorEntityRelPath": "../Rows/rowTooltip",
+                  "errorCode": "Error rule_ceac6",
+                  "errorCondition": "GroupFilled(Rows) AND FieldNotFilled(Rows/rowTooltip)",
+                  "severity": "ERROR",
+                  "errorMessage": [
+                    {
+                      "locale": "en",
+                      "text": "rowTooltip must be filled"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Rule",
+                "id": "rule_5aa24",
+                "name": "rowTooltipAboveRequired",
+                "Rule": {
+                  "errorEntityRelPath": "../Rows/rowTooltipAbove",
+                  "errorCode": "Error rule_5aa24",
+                  "errorCondition": "GroupFilled(Rows) AND FieldNotFilled(Rows/rowTooltipAbove)",
+                  "severity": "ERROR",
+                  "errorMessage": [
+                    {
+                      "locale": "en",
+                      "text": "rowTooltipAbove must be filled"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Rule",
+                "id": "rule_8e269",
+                "name": "rowTooltipBesideRequired",
+                "Rule": {
+                  "errorEntityRelPath": "../Rows/rowTooltipBeside",
+                  "errorCode": "Error rule_8e269",
+                  "errorCondition": "GroupFilled(Rows) AND FieldNotFilled(Rows/rowTooltipBeside)",
+                  "severity": "ERROR",
+                  "errorMessage": [
+                    {
+                      "locale": "en",
+                      "text": "rowTooltipBeside must be filled"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "Rule",
+                "id": "rule_6ee4d",
+                "name": "rowTooltipBelowRequired",
+                "Rule": {
+                  "errorEntityRelPath": "../Rows/rowTooltipBelow",
+                  "errorCode": "Error rule_6ee4d",
+                  "errorCondition": "GroupFilled(Rows) AND FieldNotFilled(Rows/rowTooltipBelow)",
+                  "severity": "ERROR",
+                  "errorMessage": [
+                    {
+                      "locale": "en",
+                      "text": "rowTooltipBelow must be filled"
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

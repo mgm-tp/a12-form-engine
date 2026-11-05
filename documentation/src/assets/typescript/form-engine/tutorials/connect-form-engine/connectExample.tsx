@@ -32,7 +32,8 @@
 
 // tag::content[]
 import type { JSX } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useMemo } from "react";
+import { useDispatch } from "react-redux";
 
 import type { View } from "@com.mgmtp.a12.client/client-core";
 import type {
@@ -42,8 +43,7 @@ import type {
 } from "@com.mgmtp.a12.formengine/formengine-core";
 import {
 	Events,
-	FormEngineActions,
-	FormEngineStateAdapter,
+	FormEngineHooks,
 	FormEngineViews
 } from "@com.mgmtp.a12.formengine/formengine-core";
 
@@ -54,13 +54,11 @@ export type OwnProps = View & Partial<Config>;
 export function CustomFormEngineView(
 	props: StateProps & DefaultDispatchProps & OwnProps
 ): JSX.Element {
-	// default mappings created via helper functions
-	const defaultStateProps = useSelector(state =>
-		FormEngineStateAdapter.mapStateToProps(state, props)
-	);
+	// default mappings read via the provided hooks
+	const defaultStateProps = FormEngineHooks.useStateProps(props);
+	const defaultDispatchProps = FormEngineHooks.useDispatchProps(props);
 
 	const dispatch = useDispatch();
-	const defaultDispatchProps = FormEngineActions.mapDispatchToProps(dispatch, props);
 
 	// customizing the state prop mapping
 	const customStateProps: Partial<DefaultStateProps> = {
@@ -77,24 +75,27 @@ export function CustomFormEngineView(
 	};
 
 	// customizing the dispatch prop mapping
-	const customDispatchProps: Partial<DefaultDispatchProps> = {
-		...defaultDispatchProps,
-		eventHandlers: {
-			...defaultDispatchProps.eventHandlers,
-			onNavigationButton(target: string, validation: "full" | "partial"): void {
-				/**
-				 * Set the validation property always to full instead of taking
-				 * the information from the form model
-				 */
-				dispatch(
-					Events.navigationButton({
-						target,
-						validation: "full"
-					})
-				);
+	const customDispatchProps = useMemo<Partial<DefaultDispatchProps>>(
+		() => ({
+			...defaultDispatchProps,
+			eventHandlers: {
+				...defaultDispatchProps.eventHandlers,
+				onNavigationButton(target: string, validation: "full" | "partial"): void {
+					/**
+					 * Set the validation property always to full instead of taking
+					 * the information from the form model
+					 */
+					dispatch(
+						Events.navigationButton({
+							target,
+							validation: "full"
+						})
+					);
+				}
 			}
-		}
-	};
+		}),
+		[defaultDispatchProps, dispatch]
+	);
 
 	// using the mapped props to connect the form engine template
 	return (

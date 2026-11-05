@@ -111,7 +111,6 @@ function MessageGroupDisplayEditingRenderer(
 					id: "foo",
 					getGroupedValidationMessages: () => [
 						{
-							type: "FieldConstraintError",
 							errorCode: "invalidFieldValue",
 							entityInstance: [
 								{ elementName: "root", index: 1 },
@@ -133,6 +132,7 @@ function MessageGroupDisplayEditingRenderer(
 								]
 							],
 							refOmissionErrorResponsible: [],
+							groupsOfPossiblyCausingEntities: [],
 							rulePath: KernelMessage.FORMAL_VALIDATION,
 							severity: "ERROR"
 						}

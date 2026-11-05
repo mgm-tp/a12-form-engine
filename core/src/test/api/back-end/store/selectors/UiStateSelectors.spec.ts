@@ -35,17 +35,24 @@ import { strictEqual } from "node:assert/strict";
 import type { EntityInstancePath } from "@com.mgmtp.a12.kernel/kernel-md-facade";
 import { defaultLocalizerFactory } from "@com.mgmtp.a12.utils/utils-localization";
 
-import { createEngineStore, UiStateSelectors } from "../../../../../back-end/store/index.js";
+import {
+	createEngineStore,
+	EngineStore,
+	UiStateSelectors
+} from "../../../../../back-end/store/index.js";
 import type { EngineState, Models } from "../../../../../back-end/store/internal/store.js";
 import type { FormModel } from "../../../../../models/index.js";
 import { findElementByFormModelPath } from "../../../../../models/index.js";
 import { DocumentPath } from "../../../../../models/internal/utils/document-utils.js";
-import { DE_LOCALE, US_LOCALE } from "../../../../utils/localization.js";
 import { createModelPath } from "../../../../utils/createModelPath.js";
+import { DE_LOCALE, US_LOCALE } from "../../../../utils/localization.js";
 import { setupRenderConfiguration } from "../../../../utils/setup.js";
 import { setupModelsFixture } from "../../../../utils/setupFixture.js";
 import { BUTTONS } from "../../../../utils/test-model-helpers/button.form.js";
-import { createValidationMessage } from "../../../../utils/validation.js";
+import {
+	createCustomValidationMessage,
+	createValidationMessage
+} from "../../../../utils/validation.js";
 
 function setupValidationTests(models: Models, documentPath: EntityInstancePath): EngineState {
 	const errorMessage = createValidationMessage({ path: documentPath, type: "ERROR" });
@@ -72,6 +79,44 @@ function setupValidationTests(models: Models, documentPath: EntityInstancePath):
 	});
 
 	return store;
+}
+
+const CUSTOM_ELEMENT_MODEL_PATH = createModelPath("CustomElement");
+const CUSTOM_ELEMENT_DATA_CONTEXT: EntityInstancePath = [];
+
+const SEVERITY_CASES = [
+	{ filter: "error", severity: "ERROR", expected: 2 },
+	{ filter: "warning", severity: "WARNING", expected: 2 },
+	{ filter: "info", severity: "INFO", expected: 2 }
+] as const;
+
+function setupCustomValidationTests(models: Models): EngineState {
+	const customFormElement = CUSTOM_ELEMENT_MODEL_PATH;
+	const errorMessage = createCustomValidationMessage({ customFormElement, severity: "ERROR" });
+	const warningMessage = createCustomValidationMessage({ customFormElement, severity: "WARNING" });
+	const infoMessage = createCustomValidationMessage({ customFormElement, severity: "INFO" });
+
+	return createEngineStore({
+		models,
+		locale: US_LOCALE,
+		data: {},
+		ui: {
+			customMessages: {
+				[EngineStore.Validation.customKey(customFormElement, CUSTOM_ELEMENT_DATA_CONTEXT)]: {
+					formModelPath: customFormElement,
+					dataContext: CUSTOM_ELEMENT_DATA_CONTEXT,
+					validationMessages: [
+						errorMessage,
+						errorMessage,
+						warningMessage,
+						warningMessage,
+						infoMessage,
+						infoMessage
+					]
+				}
+			}
+		}
+	});
 }
 
 describe("api.back-end.store.selectors", () => {
@@ -311,6 +356,58 @@ describe("api.back-end.store.selectors", () => {
 						strictEqual(validationMessages.length, 2);
 						validationMessages.forEach(msg => {
 							strictEqual(msg.severity, "ERROR");
+						});
+					});
+				});
+			});
+
+			describe("customMessagesByPath", () => {
+				it("returns an empty array, when the ui state holds no custom messages", () => {
+					const store = createEngineStore({ models, locale: US_LOCALE, data: {} });
+
+					const customMessages = UiStateSelectors.customMessagesByPath(
+						CUSTOM_ELEMENT_MODEL_PATH,
+						CUSTOM_ELEMENT_DATA_CONTEXT
+					)(store);
+
+					strictEqual(customMessages.length, 0);
+				});
+
+				it("returns an empty array, when no entry belongs to the given custom element", () => {
+					const store = setupCustomValidationTests(models);
+
+					const customMessages = UiStateSelectors.customMessagesByPath(
+						createModelPath("AnotherCustomElement"),
+						CUSTOM_ELEMENT_DATA_CONTEXT
+					)(store);
+
+					strictEqual(customMessages.length, 0);
+				});
+
+				it("returns all custom messages of the element, when no filter is given", () => {
+					const store = setupCustomValidationTests(models);
+
+					const customMessages = UiStateSelectors.customMessagesByPath(
+						CUSTOM_ELEMENT_MODEL_PATH,
+						CUSTOM_ELEMENT_DATA_CONTEXT
+					)(store);
+
+					strictEqual(customMessages.length, 6);
+				});
+
+				SEVERITY_CASES.forEach(({ filter, severity, expected }) => {
+					it(`returns all ${severity} messages of the element, when filter === '${filter}'`, () => {
+						const store = setupCustomValidationTests(models);
+
+						const customMessages = UiStateSelectors.customMessagesByPath(
+							CUSTOM_ELEMENT_MODEL_PATH,
+							CUSTOM_ELEMENT_DATA_CONTEXT,
+							filter
+						)(store);
+
+						strictEqual(customMessages.length, expected);
+						customMessages.forEach(msg => {
+							strictEqual(msg.severity, severity);
 						});
 					});
 				});

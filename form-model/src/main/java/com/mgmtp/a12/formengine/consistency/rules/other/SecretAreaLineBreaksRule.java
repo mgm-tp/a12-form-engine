@@ -79,7 +79,28 @@ public class SecretAreaLineBreaksRule implements ConsistencyRule {
 		return new ConsistencyProblem(
 			model.getHeaderId(),
 			FormModelCategory.FORM_MODEL_SECRET_AREA_LINE_BREAKS,
-			new FormModelProblemSource(id),
+			FormModelProblemSource.involving(id),
+			Severity.INFO,
+			id,
+			fieldName);
+	}
+
+	/** Temporary (A12E-3691). */
+	private static Problem markdownEditorProblem(
+            final FormModel model, final FieldBasedInput fieldBasedInput,
+            final String fieldName) {
+
+		String id;
+		if (fieldBasedInput instanceof ControlType) {
+			id = ((ControlType) fieldBasedInput).getId();
+		} else {
+			id = ((RepeatOverviewColumnType) fieldBasedInput).getId();
+		}
+
+		return new ConsistencyProblem(
+			model.getHeaderId(),
+			FormModelCategory.FORM_MODEL_SECRET_MARKDOWN_EDITOR,
+			FormModelProblemSource.involving(id),
 			Severity.INFO,
 			id,
 			fieldName);
@@ -136,16 +157,15 @@ public class SecretAreaLineBreaksRule implements ConsistencyRule {
 		}
 
 		private void checkSecret(final FieldBasedInput fieldBasedInput) {
-			if (isSecretInvalid(fieldBasedInput)) {
-				final Optional<IElement> element =
-					documentModelService.findElementById(fieldBasedInput.getElementRef());
-				final String elementName = element.map(IElement::getName).orElse("");
+			final Optional<IElement> element =
+				documentModelService.findElementById(fieldBasedInput.getElementRef());
+			final String elementName = element.map(IElement::getName).orElse("");
+
+			if (isMarkdownEditor(fieldBasedInput)) {
+				problems.add(markdownEditorProblem(model, fieldBasedInput, elementName));
+			} else if (isExpositionArea(fieldBasedInput) || isLineBreaksPermitted(fieldBasedInput.getElementRef())) {
 				problems.add(problem(model, fieldBasedInput, elementName));
 			}
-		}
-
-		private boolean isSecretInvalid(final FieldBasedInput fieldBasedInput) {
-			return isExpositionArea(fieldBasedInput) || isLineBreaksPermitted(fieldBasedInput.getElementRef());
 		}
 
 		private boolean isExpositionArea(final FieldBasedInput fieldBasedInput) {
@@ -162,6 +182,21 @@ public class SecretAreaLineBreaksRule implements ConsistencyRule {
 
 			if (fieldBasedInput instanceof ControlType) {
 				if (ExpositionPresentationEnumType.AREA.equals(((ControlType) fieldBasedInput).getExposition())) {
+					return true;
+				}
+			}
+
+			return false;
+		}
+
+		/** Temporary (A12E-3691): a markdown editor field's secret masking is as ill-defined as area's. */
+		private boolean isMarkdownEditor(final FieldBasedInput fieldBasedInput) {
+			final List<FieldConfigurationEntryType> fieldConfigEntries =
+				model.getContent().getFieldConfiguration().getField();
+
+			for (final FieldConfigurationEntryType entry : fieldConfigEntries) {
+				if (entry.getElementRef().equals(fieldBasedInput.getElementRef())
+					&& Boolean.TRUE.equals(entry.getIsMarkdownEditor())) {
 					return true;
 				}
 			}

@@ -29,6 +29,7 @@
  * NON-INFRINGEMENT, EXCEPT WHERE SUCH DISCLAIMERS ARE HELD TO BE
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
+
 import { useContext, useMemo } from "react";
 import { useSelector } from "react-redux";
 import { ThemeProvider } from "styled-components";

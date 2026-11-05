@@ -1,0 +1,540 @@
+{
+  "header": {
+    "id": "computation-validation.message-position.default-form",
+    "modelType": "form",
+    "modelVersion": "39.3.0",
+    "locales": [
+      {
+        "code": "en"
+      }
+    ],
+    "annotations": [
+      {
+        "name": "roles",
+        "value": "admin"
+      }
+    ],
+    "modelReferences": [
+      {
+        "alias": "DM",
+        "modelType": "document",
+        "purpose": "data binding",
+        "reference": "computation-validation.message-position-document"
+      }
+    ]
+  },
+  "content": {
+    "subHeaderBox": {
+      "id": "subHeaderBox"
+    },
+    "footerBox": {
+      "id": "footerBox"
+    },
+    "screens": [
+      {
+        "id": "screen1",
+        "name": "Screen1",
+        "title": {
+          "type": "Multilingual",
+          "multilingualText": {
+            "text": [
+              {
+                "locale": "en",
+                "text": "validationMessagePosition: not set (default ABOVE)"
+              }
+            ]
+          }
+        },
+        "screenElements": [
+          {
+            "type": "ControlGrid",
+            "id": "controlgrid-39b5d",
+            "name": "intro",
+            "layout": {
+              "lg": "12"
+            },
+            "row": [
+              {
+                "type": "Row",
+                "id": "row-fdf43",
+                "cell": [
+                  {
+                    "type": "TextCell",
+                    "id": "textcell-a2612",
+                    "name": "text-mp002",
+                    "content": {
+                      "text": [
+                        {
+                          "locale": "en",
+                          "text": "This form does not set content.validationMessagePosition, so the default ABOVE applies: message boxes are shown between the label and the control. Import computation-validation.message-position-data.json (Data > Import from file) and click Validate to see all messages at once, or edit the fields to trigger them one by one."
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "Section",
+            "id": "section-edac2",
+            "name": "severalControls",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "Several controls per row"
+                  }
+                ]
+              }
+            },
+            "screenElements": [
+              {
+                "type": "ControlGrid",
+                "id": "controlgrid-7e6ba",
+                "name": "cg",
+                "layout": {
+                  "lg": "3-3-3-3"
+                },
+                "row": [
+                  {
+                    "type": "Row",
+                    "id": "row-aaf45",
+                    "cell": [
+                      {
+                        "type": "Control",
+                        "id": "control-bf5be",
+                        "elementRef": "F1"
+                      },
+                      {
+                        "type": "Control",
+                        "id": "control-63f61",
+                        "elementRef": "F2"
+                      },
+                      {
+                        "type": "Control",
+                        "id": "control-8b92a",
+                        "elementRef": "F3"
+                      },
+                      {
+                        "type": "Control",
+                        "id": "control-b38e3",
+                        "elementRef": "F4"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "Row",
+                    "id": "row-728b9",
+                    "cell": [
+                      {
+                        "type": "Control",
+                        "id": "control-e1f96",
+                        "elementRef": "F5"
+                      },
+                      {
+                        "type": "Control",
+                        "id": "control-be63a",
+                        "elementRef": "F6"
+                      },
+                      {
+                        "type": "Control",
+                        "id": "control-941e4",
+                        "elementRef": "F7"
+                      },
+                      {
+                        "type": "Control",
+                        "id": "control-08a81",
+                        "elementRef": "F8"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "Row",
+                    "id": "row-5bb1e",
+                    "cell": [
+                      {
+                        "type": "Control",
+                        "id": "control-49230",
+                        "span": {
+                          "lg": 2
+                        },
+                        "elementRef": "F9"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "Section",
+            "id": "section-ec0ea",
+            "name": "helperText",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "Validation messages and helper text"
+                  }
+                ]
+              }
+            },
+            "screenElements": [
+              {
+                "type": "ControlGrid",
+                "id": "controlgrid-5eacd",
+                "name": "cg",
+                "layout": {
+                  "lg": "4-4-4"
+                },
+                "row": [
+                  {
+                    "type": "Row",
+                    "id": "row-58676",
+                    "cell": [
+                      {
+                        "type": "Control",
+                        "id": "control-5fafc",
+                        "elementRef": "F10"
+                      },
+                      {
+                        "type": "Control",
+                        "id": "control-fbf51",
+                        "elementRef": "F11"
+                      },
+                      {
+                        "type": "Control",
+                        "id": "control-ae168",
+                        "elementRef": "F12"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "Section",
+            "id": "section-99425",
+            "name": "tooltips",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "Validation messages as tooltips"
+                  }
+                ]
+              }
+            },
+            "screenElements": [
+              {
+                "type": "ControlGrid",
+                "id": "controlgrid-3925e",
+                "name": "cg",
+                "layout": {
+                  "lg": "3-3-3-3"
+                },
+                "row": [
+                  {
+                    "type": "Row",
+                    "id": "row-b973b",
+                    "cell": [
+                      {
+                        "type": "Control",
+                        "id": "control-d19ab",
+                        "hint": {
+                          "text": [
+                            {
+                              "locale": "en",
+                              "text": "Hint"
+                            }
+                          ]
+                        },
+                        "messageExposition": "TOOLTIP",
+                        "tooltipPosition": "ABOVE",
+                        "elementRef": "F13"
+                      },
+                      {
+                        "type": "Control",
+                        "id": "control-c3de9",
+                        "hint": {
+                          "text": [
+                            {
+                              "locale": "en",
+                              "text": "Hint"
+                            }
+                          ]
+                        },
+                        "messageExposition": "TOOLTIP",
+                        "tooltipPosition": "BESIDE",
+                        "elementRef": "F14"
+                      },
+                      {
+                        "type": "Control",
+                        "id": "control-0492b",
+                        "hint": {
+                          "text": [
+                            {
+                              "locale": "en",
+                              "text": "Hint"
+                            }
+                          ]
+                        },
+                        "messageExposition": "TOOLTIP",
+                        "tooltipPosition": "BELOW",
+                        "elementRef": "F15"
+                      },
+                      {
+                        "type": "Control",
+                        "id": "control-cc06d",
+                        "messageExposition": "TOOLTIP",
+                        "hint": {
+                          "text": [
+                            {
+                              "locale": "en",
+                              "text": "Hint"
+                            }
+                          ]
+                        },
+                        "elementRef": "F16"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "InlineRepeat",
+            "id": "inlinerepeat-85301",
+            "name": "inline-repeat-Rows",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "Inline repeat (tooltip columns: rowTooltip unset, then ABOVE, BESIDE, BELOW)"
+                  }
+                ]
+              }
+            },
+            "repeatOverviewColumn": [
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-fc335",
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "hint": {
+                  "text": [
+                    {
+                      "locale": "en",
+                      "text": "Hint of rowString"
+                    }
+                  ]
+                },
+                "elementRef": "F20"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-77e9e",
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "hint": {
+                  "text": [
+                    {
+                      "locale": "en",
+                      "text": "Hint of rowNumber"
+                    }
+                  ]
+                },
+                "elementRef": "F21"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-7fa06",
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "elementRef": "F22"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-88964",
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "elementRef": "F23"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-ebd78",
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "hint": {
+                  "text": [
+                    {
+                      "locale": "en",
+                      "text": "Hint of rowTooltip"
+                    }
+                  ]
+                },
+                "messageExposition": "TOOLTIP",
+                "elementRef": "F24"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-abf98",
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "hint": {
+                  "text": [
+                    {
+                      "locale": "en",
+                      "text": "Hint of rowTooltipAbove"
+                    }
+                  ]
+                },
+                "messageExposition": "TOOLTIP",
+                "tooltipPosition": "ABOVE",
+                "elementRef": "F25"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-f6181",
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "hint": {
+                  "text": [
+                    {
+                      "locale": "en",
+                      "text": "Hint of rowTooltipBeside"
+                    }
+                  ]
+                },
+                "messageExposition": "TOOLTIP",
+                "tooltipPosition": "BESIDE",
+                "elementRef": "F26"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn-92eb3",
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "hint": {
+                  "text": [
+                    {
+                      "locale": "en",
+                      "text": "Hint of rowTooltipBelow"
+                    }
+                  ]
+                },
+                "messageExposition": "TOOLTIP",
+                "tooltipPosition": "BELOW",
+                "elementRef": "F27"
+              }
+            ],
+            "groupRef": "G2",
+            "enableAdd": true,
+            "enableRemove": true,
+            "enableReorder": false,
+            "enableCopy": false
+          }
+        ]
+      }
+    ],
+    "fieldConfiguration": {},
+    "groupConfiguration": {},
+    "defaults": {
+      "buttonLabels": {
+        "ADD": {
+          "text": [
+            {
+              "locale": "en",
+              "text": "add"
+            }
+          ]
+        },
+        "COMMIT_ADD": {
+          "text": [
+            {
+              "locale": "en",
+              "text": "commit"
+            }
+          ]
+        },
+        "APPLY": {
+          "text": [
+            {
+              "locale": "en",
+              "text": "apply changes"
+            }
+          ]
+        },
+        "EDIT": {
+          "text": [
+            {
+              "locale": "en",
+              "text": "edit"
+            }
+          ]
+        },
+        "REMOVE": {
+          "text": [
+            {
+              "locale": "en",
+              "text": "remove"
+            }
+          ]
+        },
+        "VIEW": {
+          "text": [
+            {
+              "locale": "en",
+              "text": "open"
+            }
+          ]
+        },
+        "CANCEL": {
+          "text": [
+            {
+              "locale": "en",
+              "text": "cancel"
+            }
+          ]
+        },
+        "RETURN": {
+          "text": [
+            {
+              "locale": "en",
+              "text": "return"
+            }
+          ]
+        },
+        "UP": {},
+        "DOWN": {}
+      }
+    }
+  }
+}

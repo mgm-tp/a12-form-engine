@@ -36,18 +36,12 @@ import { useSelector } from "react-redux";
 import { DocumentPath, KernelMessage } from "@com.mgmtp.a12.client/client-data";
 import type { DocumentContext } from "@com.mgmtp.a12.contentengine/contentengine-core";
 import { useDocumentContext } from "@com.mgmtp.a12.contentengine/contentengine-core";
-import type {
-	DocumentModel,
-	EntityInstancePath,
-	Message
-} from "@com.mgmtp.a12.kernel/kernel-md-facade";
+import type { EntityInstancePath, Message } from "@com.mgmtp.a12.kernel/kernel-md-facade";
 import type { Localizer } from "@com.mgmtp.a12.utils/utils-localization";
 import { LocalizerContext } from "@com.mgmtp.a12.utils/utils-localization-react";
 
 import { FormElementContext } from "../../../configuration/formElementContext.js";
 import { getPlainLocalizabledLabel } from "../../elementConfiguration/getLocalizedModelTexts.js";
-import type { FunctionMap } from "../../functionMap/functionMap.js";
-import { FunctionMapContext } from "../../functionMap/functionMapContext.js";
 import { UiId } from "../../generateUiId.js";
 
 import { EditableElementsContext } from "../messageGroupContainer/editableElementsContext.js";
@@ -64,7 +58,6 @@ export function useLinkData(message: Message): LinkDataItem[] {
 	const { contentModelName, config } = useContext(FormElementContext);
 	const editableElements = useContext(EditableElementsContext);
 	const { localizer } = useContext(LocalizerContext);
-	const { computeVirtualNodeId } = useContext(FunctionMapContext);
 	const { getElementByPath, getDocumentModelName } = useDocumentContext(c => c.model);
 
 	const errorFields = KernelMessage.effectiveFieldReferences(message);
@@ -78,8 +71,7 @@ export function useLinkData(message: Message): LinkDataItem[] {
 				contentModelName,
 				localizer,
 				getDocumentModelName,
-				getElementByPath,
-				computeVirtualNodeId
+				getElementByPath
 			}),
 		[
 			editableElements,
@@ -88,8 +80,7 @@ export function useLinkData(message: Message): LinkDataItem[] {
 			contentModelName,
 			localizer,
 			getDocumentModelName,
-			getElementByPath,
-			computeVirtualNodeId
+			getElementByPath
 		]
 	);
 
@@ -105,7 +96,6 @@ export interface LinkDataSelectorOptions {
 	readonly localizer: Localizer;
 	readonly getDocumentModelName: DocumentContext["model"]["getDocumentModelName"];
 	readonly getElementByPath: DocumentContext["model"]["getElementByPath"];
-	readonly computeVirtualNodeId: FunctionMap["computeVirtualNodeId"];
 }
 
 function createLinkDataSelector(
@@ -118,8 +108,7 @@ function createLinkDataSelector(
 		contentModelName,
 		localizer,
 		getDocumentModelName,
-		getElementByPath,
-		computeVirtualNodeId
+		getElementByPath
 	} = options;
 
 	return (state: object): LinkDataItem[] => {
@@ -133,14 +122,10 @@ function createLinkDataSelector(
 				}
 
 				const dmElement = getElementByPath(state, ef);
-				const dataContext = findDataContext(state, ef, getElementByPath);
 
-				const virtualNodeId = computeVirtualNodeId(
-					DocumentPath.toString(dataContext),
-					editableElement.nodeId
-				);
+				// the id the node was rendered with, so the link addresses that very node
 				const uiId = UiId.generateForControl({
-					controlId: virtualNodeId,
+					controlId: editableElement.nodeId,
 					elementPath: editableElement.documentPath,
 					uiIdPrefix
 				});
@@ -159,19 +144,4 @@ function createLinkDataSelector(
 			});
 		});
 	};
-}
-
-function findDataContext(
-	state: object,
-	docPath: EntityInstancePath,
-	getElementByPath: (state: object, path: EntityInstancePath) => DocumentModel.Element
-): EntityInstancePath {
-	for (let i = docPath.length; i >= 1; i--) {
-		const prefix = docPath.slice(0, i);
-		const element = getElementByPath(state, prefix);
-		if (element.type === "Group" && element.repeatability > 1) {
-			return prefix;
-		}
-	}
-	return [];
 }

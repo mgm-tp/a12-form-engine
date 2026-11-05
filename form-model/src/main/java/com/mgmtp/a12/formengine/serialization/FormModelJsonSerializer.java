@@ -41,6 +41,7 @@ import com.mgmtp.a12.model.serialization.ModelSerializationException;
 
 import com.mgmtp.a12.formengine.model.FormModel;
 import com.mgmtp.a12.formengine.model.json.EmptyStringToNullConverter;
+import com.mgmtp.a12.formengine.model.json.JsonMarker;
 import com.mgmtp.a12.formengine.model.json.JsonNumberConverter;
 import com.mgmtp.a12.formengine.model.json.JsonParserCollectionVisitor;
 import com.mgmtp.a12.formengine.model.json.MarkerConverter;
@@ -292,17 +293,17 @@ abstract class RowTypeMixin {
 }
 
 abstract class ControlTypeMixin {
-	@JsonSerialize(converter = MarkerConverter.class)
+	@JsonMarker
 	String readonly;
-	@JsonSerialize(converter = MarkerConverter.class)
+	@JsonMarker
 	String secret;
-	@JsonSerialize(converter = MarkerConverter.class)
+	@JsonMarker
 	String tooltipsOnTop;
-	@JsonSerialize(converter = MarkerConverter.class)
+	@JsonMarker
 	String labelHiddenButRead;
-	@JsonSerialize(converter = MarkerConverter.class)
+	@JsonMarker
 	String autoExpand;
-	@JsonSerialize(converter = MarkerConverter.class)
+	@JsonMarker
 	String truncateSuffix;
 }
 
@@ -320,9 +321,9 @@ abstract class DependentFieldCaseTypeMixin {
 	@JsonInclude(Include.ALWAYS)
 	@JsonSerialize(converter = EmptyStringToNullConverter.class)
 	String masterValue;
-	@JsonSerialize(converter = MarkerConverter.class)
+	@JsonMarker
 	String notRelevant;
-	@JsonSerialize(converter = MarkerConverter.class)
+	@JsonMarker
 	String readonly;
 }
 
@@ -340,9 +341,9 @@ abstract class DependentGroupCaseTypeMixin {
 	@JsonSerialize(converter = EmptyStringToNullConverter.class)
 	@JsonInclude(value = Include.ALWAYS)
 	String masterValue;
-	@JsonSerialize(converter = MarkerConverter.class)
+	@JsonMarker
 	String notRelevant;
-	@JsonSerialize(converter = MarkerConverter.class)
+	@JsonMarker
 	String readonly;
 }
 
@@ -361,7 +362,7 @@ abstract class HideConditionCaseTypeMixin {
 }
 
 abstract class DefaultRowActionTypeMixin {
-	@JsonSerialize(converter = MarkerConverter.class)
+	@JsonMarker
 	String custom;
 }
 
@@ -383,29 +384,29 @@ abstract class EmbeddedRepeatTypeMixin {
 }
 
 abstract class ExternalEnumerationTypeMixin {
-	@JsonSerialize(converter = MarkerConverter.class)
+	@JsonMarker
 	String customValuesAllowed;
-	@JsonSerialize(converter = MarkerConverter.class)
+	@JsonMarker
 	String caseSensitive;
 }
 
 abstract class FieldBasedRepeatOverviewColumnTypeMixin {
-	@JsonSerialize(converter = MarkerConverter.class)
+	@JsonMarker
 	String autoExpand;
-	@JsonSerialize(converter = MarkerConverter.class)
+	@JsonMarker
 	String truncateSuffix;
-	@JsonSerialize(converter = MarkerConverter.class)
+	@JsonMarker
 	String readonly;
-	@JsonSerialize(converter = MarkerConverter.class)
+	@JsonMarker
 	String secret;
 }
 
 abstract class FieldConfigurationEntryTypeMixin {
-	@JsonSerialize(converter = MarkerConverter.class)
+	@JsonMarker
 	String readonly;
-	@JsonSerialize(converter = MarkerConverter.class)
+	@JsonMarker
 	String secret;
-	@JsonSerialize(converter = MarkerConverter.class)
+	@JsonMarker
 	String enableSelectAll;
 }
 
@@ -470,7 +471,7 @@ abstract class ScreenElementTypeMixin {
 	@JsonBackReference(value = "screenElementParentScreen")
 	ScreenType parentScreen;
 
-	@JsonSerialize(converter = MarkerConverter.class)
+	@JsonMarker
 	String readonly;
 
 	@JsonInclude(Include.NON_NULL)
@@ -482,9 +483,9 @@ abstract class SectionTypeMixin {
 	@JsonManagedReference(value = "screenElementParentScreenElement")
 	@JsonProperty("screenElements")
 	List<ScreenElementType> screenElement;
-	@JsonSerialize(converter = MarkerConverter.class)
+	@JsonMarker
 	String collapsible;
-	@JsonSerialize(converter = MarkerConverter.class)
+	@JsonMarker
 	String initiallyCollapsed;
 }
 

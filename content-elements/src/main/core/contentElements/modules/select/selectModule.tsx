@@ -102,7 +102,7 @@ function SelectRenderer(
 		warnings,
 		infos,
 		tooltips,
-		tooltipsOnTop,
+		breakTooltipsToNewLine,
 		inputProps,
 		ariaDescribedBy
 	} = USE_COMMON_WIDGET_SETTINGS_WRAPPER.useCommonWidgetSettings(commonControlSettings);
@@ -160,7 +160,7 @@ function SelectRenderer(
 			readonly={readonly}
 			helperText={helperText}
 			tooltips={tooltips}
-			breakTooltipsToNewLine={tooltipsOnTop}
+			breakTooltipsToNewLine={breakTooltipsToNewLine}
 			error={error}
 			errorMessage={errors}
 			warning={warning}

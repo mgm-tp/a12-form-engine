@@ -32,7 +32,7 @@
 
 import deepEqual from "fast-deep-equal";
 
-import type { ReadonlyObjectMap } from "../../../models/internal/utils/json.js";
+import type { ReadonlyObjectMap } from "../../../models/internal/utils/ReadonlyObjectMap.js";
 
 import type { EngineStore } from "./store.js";
 
@@ -58,22 +58,25 @@ export function messageStateIsEqual(
 	);
 }
 
-function areValidationMessagesEqual({
+/**
+ * Compares two message lists by position, so a different order counts as a different state.
+ * Shared by both validation slices, so they cannot drift apart.
+ */
+function areValidationMessagesEqual<
+	T extends EngineStore.Validation.Message | EngineStore.Validation.CustomMessage
+>({
 	oldMessages,
 	newMessages
 }: {
-	oldMessages: readonly EngineStore.Validation.Message[] | undefined;
-	newMessages: readonly EngineStore.Validation.Message[] | undefined;
+	oldMessages: readonly T[] | undefined;
+	newMessages: readonly T[] | undefined;
 }): boolean {
 	if (oldMessages === undefined || newMessages === undefined) {
 		return oldMessages === newMessages;
 	}
 	return (
 		oldMessages.length === newMessages.length &&
-		oldMessages.every((msg, idx) => {
-			const newMsg = newMessages[idx];
-			return deepEqual(msg, newMsg);
-		})
+		oldMessages.every((msg, idx) => deepEqual(msg, newMessages[idx]))
 	);
 }
 
@@ -88,5 +91,20 @@ function areParseErrorsEqual(
 				oldMessages: pe1?.message ? [pe1?.message] : [],
 				newMessages: pe2?.message ? [pe2?.message] : []
 			}))
+	);
+}
+
+/** @internal */
+export function customMessageStateIsEqual(
+	oldState: ReadonlyObjectMap<EngineStore.Validation.CustomEntry>,
+	newState: ReadonlyObjectMap<EngineStore.Validation.CustomEntry>
+): boolean {
+	return (
+		Object.keys(oldState).length === Object.keys(newState).length &&
+		Object.entries(oldState).every(([key, entry]) => {
+			const oldMessages = entry?.validationMessages;
+			const newMessages = newState[key]?.validationMessages;
+			return areValidationMessagesEqual({ oldMessages, newMessages });
+		})
 	);
 }

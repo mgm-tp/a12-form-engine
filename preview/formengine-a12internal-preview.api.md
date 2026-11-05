@@ -21,7 +21,6 @@ import { EngineState } from '@com.mgmtp.a12.formengine/formengine-core';
 import { FormEngineActions } from '@com.mgmtp.a12.formengine/formengine-core';
 import type { GeneratedCodeRtConfig } from '@com.mgmtp.a12.kernel/kernel-md-facade';
 import type { JSX } from 'react';
-import { JSX as JSX_2 } from 'react/jsx-runtime';
 import { Locale } from '@com.mgmtp.a12.utils/utils-localization';
 import type { Localizable } from '@com.mgmtp.a12.utils/utils-localization';
 import type { MenuItem } from '@com.mgmtp.a12.widgets/widgets-core';

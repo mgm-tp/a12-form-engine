@@ -54,7 +54,7 @@ public class LabelHiddenChecker extends AbstractButtonChecker {
 			problems.add(new ConsistencyProblem(
 				modelName,
 				FormModelCategory.FORM_MODEL_BUTTON_INVALID_LABEL_HIDDEN_SET,
-				new FormModelProblemSource(button.getId()),
+				FormModelProblemSource.involving(button.getId()),
 				button.getName()));
 		}
 	}

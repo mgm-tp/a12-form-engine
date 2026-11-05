@@ -36,10 +36,10 @@ import type { GroupInstance } from "@com.mgmtp.a12.kernel/kernel-md-facade";
 
 import { DataUtils } from "../../../../utils/internal/edit-document-utils.js";
 import { Commands, Events } from "../../actions.js";
-import { messageStateIsEqual } from "../../messageStateIsEqual.js";
+import { customMessageStateIsEqual, messageStateIsEqual } from "../../messageStateIsEqual.js";
 import { DataSelectors } from "../../selectors/data.js";
 import { ModelSelectors } from "../../selectors/models.js";
-import { UiStateSelectors } from "../../selectors/ui-state.js";
+import { InternalUiStateSelectors, UiStateSelectors } from "../../selectors/ui-state.js";
 import type { EngineState } from "../../store.js";
 
 import { updateDataDirtyState } from "../updateDirtyState.js";
@@ -55,6 +55,7 @@ export const moveRepeatRowMiddleware: Middleware<{}, EngineState> = api => next 
 	if (Events.Repeat.moveRowTriggered.match(action)) {
 		const document = DataSelectors.document()(api.getState()) as GroupInstance;
 		const messages = UiStateSelectors.messages()(api.getState());
+		const customMessages = InternalUiStateSelectors.customMessages()(api.getState());
 		const documentModel = ModelSelectors.documentModel()(api.getState());
 
 		const rowIndex = action.payload.rowPath[action.payload.rowPath.length - 1].index;
@@ -67,6 +68,7 @@ export const moveRepeatRowMiddleware: Middleware<{}, EngineState> = api => next 
 			documentPath,
 			action.payload.delta,
 			messages,
+			customMessages,
 			documentModel
 		);
 
@@ -86,6 +88,10 @@ export const moveRepeatRowMiddleware: Middleware<{}, EngineState> = api => next 
 
 		if (!messageStateIsEqual(messages, updateResult.messages)) {
 			api.dispatch(Commands.setMessageState({ messages: updateResult.messages }));
+		}
+
+		if (!customMessageStateIsEqual(customMessages, updateResult.customMessages)) {
+			api.dispatch(Commands.setCustomMessageState({ customMessages: updateResult.customMessages }));
 		}
 		const repeatFormModelPath = action.payload.repeatFormModelPath;
 		const repeatStateEntry = UiStateSelectors.repeatInstanceStateEntry(repeatFormModelPath)(

@@ -91,7 +91,7 @@ public class DependentFieldTypeCompatibilityRule implements ConsistencyRule {
 							problems.add(new ConsistencyProblem(
 								modelName,
 								FormModelCategory.FORM_MODEL_DEPENDENT_FIELD_CASE_INCOMPATIBLE_FIELDTYPE,
-								new FormModelProblemSource(entry.getElementRef()),
+								FormModelProblemSource.involving(entry.getElementRef()),
 								Severity.INFO,
 								entry.getElementRef(),
 								entryField.get().getName(),

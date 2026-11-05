@@ -82,15 +82,15 @@ class ColumnIndexChecker {
 				usedTableColumnsSm += offsetSm + spanSm;
 
 				if (usedTableColumnsLg > numberOfColumns) {
-					addProblem(cell.getId(), "lg", offsetLg, numberOfColumns, checkedElement);
+					addProblem(cell.getId(), "lg", offsetLg, numberOfColumns, checkedElement, controlGrid.getId());
 				}
 
 				if (usedTableColumnsMd > numberOfColumns) {
-					addProblem(cell.getId(), "md", offsetMd, numberOfColumns, checkedElement);
+					addProblem(cell.getId(), "md", offsetMd, numberOfColumns, checkedElement, controlGrid.getId());
 				}
 
 				if (usedTableColumnsSm > numberOfColumns) {
-					addProblem(cell.getId(), "sm", offsetSm, numberOfColumns, checkedElement);
+					addProblem(cell.getId(), "sm", offsetSm, numberOfColumns, checkedElement, controlGrid.getId());
 
 				}
 			}
@@ -102,12 +102,13 @@ class ColumnIndexChecker {
 		final String sizeClass,
 		final int offset,
 		final int columns,
-		final String checkedElement
+		final String checkedElement,
+		final String controlGridId
 	) {
 		layoutProblems.add(new ConsistencyProblem(
 			modelName,
 			FormModelCategory.FORM_MODEL_WRONG_COLUMN_INDEX,
-			new FormModelProblemSource(cellId),
+			FormModelProblemSource.involving(cellId, controlGridId),
 			cellId,
 			sizeClass,
 			offset,

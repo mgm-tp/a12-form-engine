@@ -94,6 +94,7 @@ public class FormDependencyRuleTest {
 			+ "Field [path: /root/g1/Enum3] referenced by Field Dependency -> "
 			+ "Field [path: /root/g1/Enum2] referenced by Field Dependency."
 		))));
+		assertThat(RuleTestHelper.involvedElementIds(problems.get(0)), hasSize(3));
 	}
 
 	/**
@@ -131,6 +132,7 @@ public class FormDependencyRuleTest {
 			+ "Field [path: /root/Boolean1] referenced by Computation [path: /root/Computation2] -> "
 			+ "Field [path: /root/Boolean2] referenced by Computation [path: /root/Computation1]."
 		))));
+		assertThat(RuleTestHelper.involvedElementIds(problems.get(0)), hasSize(2));
 	}
 
 	/**

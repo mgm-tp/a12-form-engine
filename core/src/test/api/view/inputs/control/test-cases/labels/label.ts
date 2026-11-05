@@ -35,6 +35,7 @@ import { strictEqual } from "node:assert/strict";
 import { query } from "@com.mgmtp.a12.devtools/react";
 
 import { getInputMocks } from "../../../../../../rtl-utils/getInputMocks.js";
+import { setupFormEngineRendererWithRtl } from "../../../../../../utils/setup.js";
 import { setupModelsFixture } from "../../../../../../utils/setupFixture.js";
 import {
 	expressionLabelDocument,
@@ -42,7 +43,6 @@ import {
 	formattedExpressionUiState
 } from "../../../../../../utils/test-model-helpers/expression-label.js";
 import { IDS } from "../../../../../../utils/test-model-helpers/tooltips.js";
-import { setupFormEngineRendererWithRtl } from "../../../../../../utils/setup.js";
 
 import { renderStringInput } from "../renderStringInput.js";
 

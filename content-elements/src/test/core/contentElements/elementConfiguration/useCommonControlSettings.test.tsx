@@ -124,7 +124,6 @@ describe("core.contentElements.elementConfiguration", () => {
 
 			const mockNode = getMockNode({
 				hideLabel: true,
-				tooltipsOnTop: true,
 				truncateSuffix: true,
 				autoComplete: "email",
 				secret: true,
@@ -147,7 +146,6 @@ describe("core.contentElements.elementConfiguration", () => {
 			);
 
 			strictEqual(result.current.hideLabel, mockNode.props.hideLabel);
-			strictEqual(result.current.tooltipsOnTop, mockNode.props.tooltipsOnTop);
 			strictEqual(result.current.truncateSuffix, mockNode.props.truncateSuffix);
 			strictEqual(result.current.autoComplete, mockNode.props.autoComplete);
 			strictEqual(result.current.secret, mockNode.props.secret);
@@ -155,6 +153,37 @@ describe("core.contentElements.elementConfiguration", () => {
 			strictEqual(result.current.datePickerConfig, mockNode.props.datePickerConfig);
 			strictEqual(result.current.enableSelectAll, mockNode.props.enableSelectAll);
 			strictEqual(result.current.inline, mockNode.props.inline);
+		});
+
+		it("maps tooltipPosition to widgets' breakTooltipsToNewLine vocabulary", () => {
+			setupMocks();
+
+			const mockNode = getMockNode({ tooltipPosition: "BELOW" });
+
+			const { result } = renderHook(
+				() => USE_COMMON_CONTROL_SETTINGS_WRAPPER.useCommonControlSettings(mockNode),
+				{
+					wrapper: createWrapper()
+				}
+			);
+
+			strictEqual(result.current.breakTooltipsToNewLine, "below");
+		});
+
+		it("falls back to the deprecated tooltipsOnTop when tooltipPosition isn't set", () => {
+			setupMocks();
+
+			// oxlint-disable-next-line typescript/no-deprecated
+			const mockNode = getMockNode({ tooltipsOnTop: true });
+
+			const { result } = renderHook(
+				() => USE_COMMON_CONTROL_SETTINGS_WRAPPER.useCommonControlSettings(mockNode),
+				{
+					wrapper: createWrapper()
+				}
+			);
+
+			strictEqual(result.current.breakTooltipsToNewLine, "above");
 		});
 
 		it("retrieves settings via the DocumentContext", () => {

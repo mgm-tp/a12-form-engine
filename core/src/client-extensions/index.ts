@@ -38,6 +38,7 @@ export {
 	FormEngineActions,
 	formEngineDataReducers,
 	formEngineSagas,
+	FormEngineHooks,
 	FormEngineSelectors,
 	FormEngineStateAdapter,
 	FormEngineViews,

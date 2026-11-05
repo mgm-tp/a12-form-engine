@@ -32,6 +32,7 @@
 
 import type { Header } from "@com.mgmtp.a12.base/base-model-api";
 
+import type { FormModel } from "../../../models/internal/form-model.js";
 import {
 	isFormModelControl,
 	isFormModelExpressionCell,
@@ -39,7 +40,6 @@ import {
 	isFormModelScreen,
 	isFormModelTextCell
 } from "../../../models/internal/FormModelGuards.js";
-import type { FormModel } from "../../../models/internal/form-model.js";
 
 import { assertExists, assertUnreachable } from "./assertions.js";
 

@@ -44,6 +44,7 @@ import { ModelSelectors } from "../../../../../../../back-end/store/internal/sel
 import * as DocumentModelUtils from "../../../../../../../models/internal/utils/document-model-utils.js";
 import type { Inputs } from "../../../../../configuration/engine-configuration.js";
 import { WidgetMapContext } from "../../../../../configuration/widget-map-context.js";
+import { toTooltipLineBreak } from "../../../../../utilities/tooltipPosition.js";
 
 import { useBaseProps } from "../use-input-props.js";
 
@@ -110,7 +111,7 @@ export function StringWithHintListInput(
 			allowAddingNewItem={true}
 			onValueChange={onValueChange}
 			tooltips={addonAfter}
-			breakTooltipsToNewLine={props.modelElement.tooltipsOnTop}
+			breakTooltipsToNewLine={toTooltipLineBreak(props.modelElement.tooltipPosition)}
 			inputPlaceHolder={placeholder}
 			inputProps={htmlInputProps}
 			inputRef={autoCompleteInputRef}

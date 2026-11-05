@@ -64,6 +64,11 @@ export type {
 	DefaultStateProps
 } from "./internal/configuration/Defaults.js";
 export type { DispatchConfiguration } from "./internal/configuration/dispatch-configuration.js";
+export {
+	useDefaultDispatchProps,
+	useDefaultStateProps,
+	useScrollHandlerProps
+} from "./internal/configuration/hooks.js";
 export { DefaultRepeatButtonNames } from "./internal/configuration/engine-configuration.js";
 export type {
 	ClockMode,

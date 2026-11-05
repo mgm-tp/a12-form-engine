@@ -37,13 +37,13 @@ import type { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
 
 import { UiId } from "../../../../../../../../back-end/utils/internal/generateUiId.js";
 import type { FormModel } from "../../../../../../../../models/index.js";
+import { InternalDocumentPath } from "../../../../../../../../models/internal/utils/document-utils.js";
 import type { FormModelMap } from "../../../../../../configuration/engine-configuration.js";
 import { DefaultRepeatButtonNames } from "../../../../../../configuration/engine-configuration.js";
 import { isStandardRowActionDisabled } from "../../../../../../utilities/enablements/disabled-row-actions.js";
 import { isStandardRowActionHidden } from "../../../../../../utilities/enablements/hidden-row-actions.js";
 import { MenuContext } from "../../MenuContext.js";
 import type { RepeatRow } from "../../tableColumnTypes.js";
-import { InternalDocumentPath } from "../../../../../../../../models/internal/utils/document-utils.js";
 
 import type { GetTitle } from "./GetTitle.js";
 import { RowActionButton } from "./RowActionButton.js";

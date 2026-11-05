@@ -34,8 +34,8 @@ import type { Action } from "@com.mgmtp.a12.client/typescript-fsa-redux-5-compat
 
 import { Commands } from "../../../../../back-end/store/index.js";
 import { DocumentPath } from "../../../../../models/internal/utils/document-utils.js";
-import { MiddlewareHelpers } from "../../../../utils/MiddlewareHelpers.js";
 import { createDocumentPath } from "../../../../utils/createDocumentPath.js";
+import { MiddlewareHelpers } from "../../../../utils/MiddlewareHelpers.js";
 import { createTestStore } from "../../../../utils/setup.js";
 import { setupFixture, setupModelsFixture } from "../../../../utils/setupFixture.js";
 

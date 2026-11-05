@@ -46,15 +46,25 @@ import type { EngineState, EngineStore, Models } from "../../../back-end/store/i
 import { fullValidation } from "../../../back-end/store/internal/validation.js";
 import { DocumentUtils } from "../../../models/internal/utils/document-utils.js";
 import type { Config, FormModelMap } from "../../../view/index.js";
-import { getUIIssueReport as getUIIssueReportOriginal } from "../../../view/internal/components/form-engine/correction-mode/utils.js";
-import type { UIIssueReport } from "../../../view/internal/components/form-engine/correction-mode/utils.js";
+import { getUIIssueReport as getUIIssueReportOriginal } from "../../../view/internal/components/form-engine/correction-mode/getUIIssueReport.js";
+import type { UIIssueReport } from "../../../view/internal/components/form-engine/correction-mode/getUIIssueReport.js";
+import { createToValidationBarItem } from "../../../view/internal/components/form-engine/correction-mode/validation-bar-elements.js";
+import type { ValidationBarItem } from "../../../view/internal/components/form-engine/correction-mode/validation-bar-elements.js";
 import { createDocumentPath } from "../../utils/createDocumentPath.js";
 import { createModelPath } from "../../utils/createModelPath.js";
 import { US_LOCALE } from "../../utils/localization.js";
 
 // Re-export for convenience
 export { DocumentUtils, ModelPath, US_LOCALE };
-export type { CorrectionModeItem, EngineState, EngineStore, GroupInstance, Models, UIIssueReport };
+export type {
+	CorrectionModeItem,
+	EngineState,
+	EngineStore,
+	GroupInstance,
+	Models,
+	UIIssueReport,
+	ValidationBarItem
+};
 
 // ============================================================================
 // Base Document
@@ -217,6 +227,24 @@ export function getUIIssueReport(
 	const renderOptions = { state, config } as FormModelMap.RenderOptions;
 
 	return getUIIssueReportOriginal(message, renderOptions, localizer, converter);
+}
+
+export function getValidationBarItem(
+	state: EngineState,
+	message: EngineStore.Validation.Message
+): ValidationBarItem {
+	const dataFormats = defaultDataFormats(US_LOCALE);
+	const converter = defaultValueConversion(dataFormats);
+	const localizer = defaultLocalizerFactory({
+		locale: US_LOCALE,
+		conversion: converter,
+		dataFormats
+	});
+
+	const config = {} as Config;
+	const renderOptions = { state, config } as FormModelMap.RenderOptions;
+
+	return createToValidationBarItem(message, renderOptions, localizer, converter, true);
 }
 
 export function getLinks(

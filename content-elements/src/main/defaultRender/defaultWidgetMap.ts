@@ -59,6 +59,7 @@ import {
 	TimePicker,
 	WarningTooltip
 } from "@com.mgmtp.a12.widgets/widgets-core";
+import { MarkdownEditor } from "@com.mgmtp.a12.widgets/widgets-core/experimental";
 
 import type { WidgetMap } from "../core/index.js";
 
@@ -83,6 +84,8 @@ export const DefaultWidgetMap: WidgetMap = {
 	DatePickerDialog,
 	DateTimePicker,
 	TimePicker,
+
+	MarkdownEditor,
 
 	MessageBox,
 	ErrorTooltip,

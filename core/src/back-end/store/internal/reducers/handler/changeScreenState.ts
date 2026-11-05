@@ -42,7 +42,15 @@ export function handleChangeScreenState(
 	state: EngineStore.UIState,
 	action: Action<Commands.ChangeScreenStatePayload>
 ): EngineStore.UIState {
-	const { focusedComponent, locationPath, path, repeatState, index, dirty } = action.payload;
+	return applyScreenStateChange(state, action.payload);
+}
+
+/** @internal */
+export function applyScreenStateChange(
+	state: EngineStore.UIState,
+	payload: Commands.ChangeScreenStatePayload
+): EngineStore.UIState {
+	const { focusedComponent, locationPath, path, repeatState, index, dirty } = payload;
 	const screenToChange = state.screenLocation[index];
 
 	const splittedRepeatState = repeatState ? splitRepeatState(repeatState) : undefined;

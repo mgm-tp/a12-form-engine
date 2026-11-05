@@ -37,6 +37,7 @@ import static com.mgmtp.a12.formengine.consistency.FormModelCategory.FORM_MODEL_
 import static com.mgmtp.a12.formengine.consistency.FormModelCategory.FORM_MODEL_REPEAT_VIRTUAL_SCROLLING_NO_ROW_HEIGHT;
 import static com.mgmtp.a12.formengine.consistency.FormModelCategory.FORM_MODEL_REPEAT_VIRTUAL_SCROLLING_PAGING;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.Matchers.hasItem;
 import static org.hamcrest.Matchers.hasProperty;
 import static org.hamcrest.Matchers.hasSize;
@@ -74,6 +75,26 @@ public class InfiniteScrollingRuleTest {
 	@Test(dataProvider = "expectedProblems")
 	public void validationModeInButtons(final Problem expectedProblem) {
 		assertThat(problems, hasItem(hasProperty("message", is(expectedProblem.getMessage()))));
+	}
+
+	@Test
+	public void missingRowHeightIsReportedForInfiniteScrollingOnly() {
+		assertThat(
+			problems,
+			hasItem(hasProperty(
+				"message",
+				is("Repeat [id: inlinerepeat-a341x, name: repeat-no-row-height] has infinite scrolling configured, "
+					+ "but no row height. A row height must be set whenever infinite scrolling is used."))));
+	}
+
+	/**
+	 * A row height on its own is a valid configuration, it is only mandatory once infinite scrolling is used.
+	 */
+	@Test
+	public void rowHeightWithoutInfiniteScrollingIsAllowed() {
+		assertThat(
+			problems.stream().map(Problem::getMessage).filter(message -> message.contains("inlinerepeat-a341g")).toList(),
+			is(empty()));
 	}
 
 	@DataProvider

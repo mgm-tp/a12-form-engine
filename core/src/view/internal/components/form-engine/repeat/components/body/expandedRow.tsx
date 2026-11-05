@@ -43,20 +43,20 @@ import { UiId } from "../../../../../../../back-end/utils/internal/generateUiId.
 import type { FormModel } from "../../../../../../../models/index.js";
 import { findElementByFormModelPath } from "../../../../../../../models/index.js";
 import { isFormModelEmbeddedRepeat } from "../../../../../../../models/internal/FormModelGuards.js";
+import { InternalDocumentPath } from "../../../../../../../models/internal/utils/document-utils.js";
 import { DefaultRepeatButtonNames } from "../../../../../configuration/engine-configuration.js";
 import { WidgetMapContext } from "../../../../../configuration/widget-map-context.js";
 import { isStandardRowActionHidden } from "../../../../../utilities/enablements/hidden-row-actions.js";
 import { DataContext } from "../../../data-context.js";
 import { createControlGrid } from "../../../model-components.js";
 import { TableWidgetMapContext } from "../../table-widget-map.js";
-import { InternalDocumentPath } from "../../../../../../../models/internal/utils/document-utils.js";
 
-import { RowActionButtons } from "../row-actions/RowActionButtons.js";
 import { getScreenReaderCellId } from "../row-actions/getScreenReaderCellId.js";
+import { RowActionButtons } from "../row-actions/RowActionButtons.js";
 import type { RowActionButtonsProps } from "../row-actions/standard/StandardRowActionButtons.js";
 
-import type { BodyRowProps } from "./RepeatBodyRow.js";
 import { onBlurRow } from "./onBlur.js";
+import type { BodyRowProps } from "./RepeatBodyRow.js";
 
 /** @internal */
 export function ExpandedRow(props: BodyRowProps): ReactElement {

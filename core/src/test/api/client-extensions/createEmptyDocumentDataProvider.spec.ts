@@ -304,15 +304,16 @@ describe("api.client-extensions.createEmptyDocumentDataProvider", () => {
 		it("should throw an error when the returned ui model is not a form model", async () => {
 			const expectedError = new Error("Loaded ui model is not a form model.");
 
-			uiModelAndDocumentModelLoadedByActivityIdStub.mock.mockImplementationOnce(<
-				T extends ModelAPI
-			>() => () => ({
-				stateChanged: true,
-				returnValue: {
-					uiModel: { header: { modelType: "unknown" } } as T,
-					documentAndValidationModel: {} as Model.DocumentAndValidationModel
-				}
-			}));
+			uiModelAndDocumentModelLoadedByActivityIdStub.mock.mockImplementationOnce(
+				<T extends ModelAPI>() =>
+					() => ({
+						stateChanged: true,
+						returnValue: {
+							uiModel: { header: { modelType: "unknown" } } as T,
+							documentAndValidationModel: {} as Model.DocumentAndValidationModel
+						}
+					})
+			);
 
 			const testPlan = expectSaga(
 				emptyDocumentDataProvider.provideData,

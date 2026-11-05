@@ -97,6 +97,10 @@ import type {
 	ValidationBarProps,
 	WarningTooltipProps
 } from "@com.mgmtp.a12.widgets/widgets-core";
+import type {
+	ImageUploadExtensionConfig,
+	MarkdownEditorProps
+} from "@com.mgmtp.a12.widgets/widgets-core/experimental";
 
 import type { WithDataTestId } from "../../back-end/utils/internal/types.js";
 import { DefaultWidgetMap } from "../../view/index.js";
@@ -136,6 +140,7 @@ import {
 	HIDDEN_TEXT,
 	HINT_TOOLTIP,
 	ICON,
+	IMAGE_UPLOAD_PLUGIN,
 	LAYOUT_GRID,
 	LAYOUT_GRID_COLUMN,
 	LAYOUT_GRID_ROW,
@@ -144,6 +149,7 @@ import {
 	LIST_ITEM_CONTENT,
 	LIST_ITEM_TEXT,
 	LIST_SUBHEADER,
+	MARKDOWN_EDITOR,
 	MESSAGE,
 	MESSAGE_BOX,
 	MOBILE_ACTION,
@@ -205,6 +211,8 @@ function widgetMockMap(): WidgetMap {
 		TimePicker: TimePickerMock,
 
 		DefaultFileUpload: DefaultFileUploadMock,
+		MarkdownEditor: MarkdownEditorMock,
+		ImageUploadPlugin: ImageUploadPluginMock,
 
 		ErrorTooltip: ErrorTooltipMock,
 		WarningTooltip: WarningTooltipMock,
@@ -356,6 +364,20 @@ function DefaultFileUploadMock(props: DefaultFileUploadProps) {
 			{props.errorMessage}
 		</MockComponent>
 	);
+}
+
+function MarkdownEditorMock(props: MarkdownEditorProps) {
+	return (
+		<MockComponent id={props.id} dataRole={MARKDOWN_EDITOR}>
+			{props.errorMessage}
+			{props.warningMessage}
+			{props.infoMessage}
+		</MockComponent>
+	);
+}
+
+function ImageUploadPluginMock(_props: ImageUploadExtensionConfig) {
+	return <MockComponent dataRole={IMAGE_UPLOAD_PLUGIN} />;
 }
 
 function ErrorTooltipMock(props: ErrorTooltipProps) {
@@ -605,7 +627,7 @@ function ButtonMock(props: ButtonProps) {
 
 function QuickAccessButtonMock(props: QuickAccessButtonProps) {
 	// Resolving the deprecation would mean that customizing of the buttons via WidgetMap would no longer be possible.
-	// eslint-disable-next-line @typescript-eslint/no-deprecated
+	// oxlint-disable-next-line typescript/no-deprecated
 	const children = props.children;
 	return (
 		<MockComponent id={props.id} dataRole={QUICK_ACCESS_BUTTON}>
@@ -625,9 +647,9 @@ function ButtonGroupMock(props: ButtonGroupProps) {
 
 function ButtonGroupContainerMock(props: ButtonGroupContainerProps) {
 	const buttons = [
-		// eslint-disable-next-line @typescript-eslint/no-deprecated
+		// oxlint-disable-next-line typescript/no-deprecated
 		...(props.leftSlot ?? []),
-		// eslint-disable-next-line @typescript-eslint/no-deprecated
+		// oxlint-disable-next-line typescript/no-deprecated
 		...(props.rightSlot ?? [])
 	];
 

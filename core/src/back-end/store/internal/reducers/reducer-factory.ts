@@ -46,12 +46,15 @@ import { handleSetValidationBarState } from "./handler/changeValidationBarState.
 import { handleClearUserConfirmation } from "./handler/clearUserConfirmation.js";
 import { handleDropBackup } from "./handler/dropBackup.js";
 import { handleDropScreen } from "./handler/dropScreen.js";
+import { handleFocusValidationBar } from "./handler/focusValidationBar.js";
 import { handlePushBackup } from "./handler/pushBackup.js";
 import { handlePushScreen } from "./handler/pushScreen.js";
 import { handleRestoreCorrectionModeBackup } from "./handler/restoreCorrectionModeBackup.js";
 import { handleSetColumnWidth } from "./handler/setColumnWidth.js";
 import { handleSetCorrectionModeBackup } from "./handler/setCorrectionModeBackup.js";
 import { handleSetCorrectionScreen } from "./handler/setCorrectionScreen.js";
+import { handleSetCustomMessageEntry } from "./handler/setCustomMessageEntry.js";
+import { handleSetCustomMessageState } from "./handler/setCustomMessageState.js";
 import { handleSetDataDirty } from "./handler/setDataDirty.js";
 import { handleSetDisabled } from "./handler/setDisabled.js";
 import { handleSetDocument } from "./handler/setDocument.js";
@@ -99,6 +102,10 @@ export function uiReducer(
 ): EngineStore.UIState {
 	if (Commands.setMessageStateEntry.match(action)) {
 		return handleSetMessageStateEntry(uiState, action);
+	} else if (Commands.setCustomMessageEntry.match(action)) {
+		return handleSetCustomMessageEntry(uiState, action);
+	} else if (Commands.setCustomMessageState.match(action)) {
+		return handleSetCustomMessageState(uiState, action);
 	} else if (Commands.pushBackup.match(action)) {
 		return handlePushBackup(uiState, action);
 	} else if (Commands.pushScreen.match(action)) {
@@ -135,6 +142,8 @@ export function uiReducer(
 		return handleRestoreCorrectionModeBackup(uiState, action);
 	} else if (Commands.changeScreenState.match(action)) {
 		return handleChangeScreenState(uiState, action);
+	} else if (Commands.CorrectionMode.focusValidationBar.match(action)) {
+		return handleFocusValidationBar(uiState);
 	} else if (Commands.setUIDirty.match(action)) {
 		return handleSetUIDirty(uiState, action);
 	} else if (Commands.userConfirmationRequested.match(action)) {

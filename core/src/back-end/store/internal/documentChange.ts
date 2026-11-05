@@ -33,7 +33,7 @@
 import type { EntityInstancePath } from "@com.mgmtp.a12.kernel/kernel-md-facade";
 
 import { DocumentPath } from "../../../models/internal/utils/document-utils.js";
-import type { ReadonlyObjectMap } from "../../../models/internal/utils/json.js";
+import type { ReadonlyObjectMap } from "../../../models/internal/utils/ReadonlyObjectMap.js";
 
 /**
  * Change which was made to the document

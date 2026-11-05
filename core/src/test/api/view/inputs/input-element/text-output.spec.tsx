@@ -32,9 +32,9 @@
 
 import { deepEqual, equal, ok } from "node:assert/strict";
 
-import { within } from "@com.mgmtp.a12.devtools/react";
+import { query, within } from "@com.mgmtp.a12.devtools/react";
 import type { DocumentModel } from "@com.mgmtp.a12.kernel/kernel-md-facade";
-import type { Locale } from "@com.mgmtp.a12.utils/utils-localization";
+import type { Locale, Localizable } from "@com.mgmtp.a12.utils/utils-localization";
 import { defaultLocalizerFactory } from "@com.mgmtp.a12.utils/utils-localization";
 
 import type { Value } from "../../../../../view/index.js";
@@ -43,10 +43,10 @@ import type { Inputs } from "../../../../../view/internal/configuration/engine-c
 import { BULLET_LIST_ITEM, BULLET_LIST_UNORDERED } from "../../../../rtl-utils/data-roles.js";
 import type { RtlRenderWrapper } from "../../../../rtl-utils/render-wrapper.js";
 import { rtlRenderWrapperAsync } from "../../../../rtl-utils/render-wrapper.js";
+import { createDocumentPath } from "../../../../utils/createDocumentPath.js";
 import { DocumentModelHelpers } from "../../../../utils/DocumentModelHelpers.js";
 import { DE_LOCALE, US_LOCALE } from "../../../../utils/localization.js";
 import { setupModelsFixture } from "../../../../utils/setupFixture.js";
-import { createDocumentPath } from "../../../../utils/createDocumentPath.js";
 
 import { inputTest } from "./generic-tests/input-tests.js";
 import type { FieldBasedProps } from "./generic-tests/input-utils.js";
@@ -82,7 +82,15 @@ describe("api.view.inputs", () => {
 				ariaDescribedbyTest: false,
 				helperTextTest: false,
 				labelHiddenButReadTest: false,
-				autoCompleteTest: false
+				autoCompleteTest: false,
+				// Text Output uses widgets' own `tooltipPosition` prop directly, not `breakTooltipsToNewLine` -
+				// see the "Tooltip position" describe block below for its dedicated coverage.
+				tooltipsOnTopTest: false,
+				// Text Output always sets `tooltips` when there is content to show, regardless of
+				// `breakTooltipsToNewLine` (which it doesn't have) - it no longer has an `addonAfter`
+				// prop at all. See the "Validation tooltips" describe block below for its dedicated
+				// coverage.
+				validationTooltipsTest: false
 			});
 		});
 
@@ -92,6 +100,11 @@ describe("api.view.inputs", () => {
 			readonly documentElementDataType: T;
 			readonly value: Value;
 			readonly modelElement?: Partial<Inputs.ModelElement>;
+			readonly validationMessages?: {
+				readonly errors?: Localizable[][];
+				readonly warnings?: Localizable[][];
+				readonly infos?: Localizable[][];
+			};
 		}): Promise<RtlRenderWrapper> {
 			const props = createProps({
 				...baseProps,
@@ -101,7 +114,8 @@ describe("api.view.inputs", () => {
 				documentElementDataType: options.documentElementDataType,
 				value: options.value,
 				path: options.value.path,
-				locale: options.locale
+				locale: options.locale,
+				validationMessages: options.validationMessages
 			});
 			const Component = baseProps.renderFunction as any;
 			return rtlRenderWrapperAsync(<Component {...props} />, {
@@ -109,6 +123,79 @@ describe("api.view.inputs", () => {
 				localizer: options.locale ? defaultLocalizerFactory({ locale: options.locale }) : undefined
 			});
 		}
+
+		/**
+		 * Text Output uses widgets' own `tooltipPosition` prop directly, instead of translating it
+		 * into `breakTooltipsToNewLine` like the other inputs - see toWidgetsTooltipPosition().
+		 * Therefore, the general tooltipsOnTopTest cannot be used here.
+		 */
+		describe("Tooltip position", () => {
+			async function assertTooltipPosition(
+				tooltipPosition: Inputs.ModelElement["tooltipPosition"],
+				expected: "beside" | "above" | "below" | undefined
+			): Promise<void> {
+				const { widgetMap } = await setup({
+					documentElement: Field({ fieldType: { type: "StringType" } }),
+					documentElementDataType: { type: "StringType" },
+					value: { data: "42", ui: "42 ui", path: [] },
+					modelElement: { tooltipPosition }
+				});
+				const props = query(widgetMap.TextOutput).props();
+				equal(props.tooltipPosition, expected);
+			}
+
+			it("maps ABOVE to above", async () => {
+				await assertTooltipPosition("ABOVE", "above");
+			});
+			it("maps BESIDE to beside", async () => {
+				await assertTooltipPosition("BESIDE", "beside");
+			});
+			it("maps BELOW to below", async () => {
+				await assertTooltipPosition("BELOW", "below");
+			});
+			it("maps undefined to undefined", async () => {
+				await assertTooltipPosition(undefined, undefined);
+			});
+		});
+
+		/**
+		 * Text Output has no `addonAfter` prop at all, and always sets `tooltips` when there is
+		 * content to show (independent of `tooltipPosition`, which only controls where it is
+		 * shown). Therefore, the general validationTooltipsTest cannot be used here.
+		 */
+		describe("Validation tooltips", () => {
+			async function assertTooltips(
+				validationMessages: {
+					readonly errors?: Localizable[][];
+					readonly warnings?: Localizable[][];
+					readonly infos?: Localizable[][];
+				},
+				expectDefined: boolean
+			): Promise<void> {
+				const { widgetMap } = await setup({
+					documentElement: Field({ fieldType: { type: "StringType" } }),
+					documentElementDataType: { type: "StringType" },
+					value: { data: "42", ui: "42 ui", path: [] },
+					modelElement: { messageExposition: "TOOLTIP" },
+					validationMessages
+				});
+				const props = query(widgetMap.TextOutput).props();
+				equal(props.tooltips !== undefined, expectDefined);
+			}
+
+			it("sets tooltips when there is an error message", async () => {
+				await assertTooltips({ errors: [[{ key: "foo", defaults: { en: "error1" } }]] }, true);
+			});
+			it("sets tooltips when there is a warning message", async () => {
+				await assertTooltips({ warnings: [[{ key: "foo", defaults: { en: "warning1" } }]] }, true);
+			});
+			it("sets tooltips when there is an info message", async () => {
+				await assertTooltips({ infos: [[{ key: "foo", defaults: { en: "info1" } }]] }, true);
+			});
+			it("does not set tooltips when there is no message", async () => {
+				await assertTooltips({}, false);
+			});
+		});
 
 		/**
 		 * Hide label is not handled in the widget itself, like it is for inputs.

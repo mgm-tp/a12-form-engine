@@ -117,7 +117,15 @@ public class FormOffsetSpanRule implements ConsistencyRule {
 							: 0);
 					}
 
-					checkOffsetsSpans(layoutNumbers, rowSpans, rowOffsets, valueGetter.getSize(), checkedElement, row);
+					checkOffsetsSpans(
+						layoutNumbers,
+						rowSpans,
+						rowOffsets,
+						valueGetter.getSize(),
+						checkedElement,
+						row,
+						controlGrid.getId()
+					);
 				}
 			}
 		}
@@ -128,7 +136,8 @@ public class FormOffsetSpanRule implements ConsistencyRule {
 			final List<Integer> offsets,
 			final String size,
 			final String checkedElement,
-			final RowType row
+			final RowType row,
+			final String controlGridId
 		) {
 			try {
 				int startIndex = 0;
@@ -154,7 +163,7 @@ public class FormOffsetSpanRule implements ConsistencyRule {
 						offsetSpanProblems.add(new ConsistencyProblem(
 							modelName,
 							FormModelCategory.FORM_MODEL_WRONG_LAYOUT_OFFSET_SUM,
-							new FormModelProblemSource(cellId),
+							FormModelProblemSource.involving(cellId, controlGridId),
 							cellId,
 							checkedElement,
 							size
@@ -165,7 +174,7 @@ public class FormOffsetSpanRule implements ConsistencyRule {
 						offsetSpanProblems.add(new ConsistencyProblem(
 							modelName,
 							FormModelCategory.FORM_MODEL_WRONG_LAYOUT_SPAN_SUM,
-							new FormModelProblemSource(cellId),
+							FormModelProblemSource.involving(cellId, controlGridId),
 							cellId,
 							checkedElement,
 							size

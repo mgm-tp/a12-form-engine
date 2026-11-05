@@ -41,9 +41,9 @@ import type { FormModel } from "../../../../../../models/index.js";
 import type { InputMap } from "../../../../../../view/internal/configuration/componentMap/input/input-map.js";
 import type { Inputs } from "../../../../../../view/internal/configuration/engine-configuration.js";
 import { getInputMocks } from "../../../../../rtl-utils/getInputMocks.js";
+import { setupFormEngineRendererWithRtl } from "../../../../../utils/setup.js";
 import { setupModelsFixture } from "../../../../../utils/setupFixture.js";
 import { IDS } from "../../../../../utils/test-model-helpers/validation.required.js";
-import { setupFormEngineRendererWithRtl } from "../../../../../utils/setup.js";
 
 import { setMarkingOfRequiredFieldsInFormModel } from "./labels/setMarkingOfRequiredFieldsInFormModel.js";
 

@@ -38,8 +38,14 @@ tasks.register('copyTestModels', Copy) {
 
 tasks.register('executeMigration', LeadingBuildTask) {
     dependsOn(tasks.named('copyTestModels'), tasks.named('assemble'))
+    // runs migrationTool's compiled cli.js, which nodeAssemble produces; `build` used to order the
+    // two by scheduling luck, which the configuration cache no longer preserves
+    mustRunAfter(rootProject.tasks.named('nodeAssemble'))
+
+    final String modelsPath = tasks.named('copyTestModels', Copy).get().destinationDir.path
+
     doLast {
-        execCommandLine 'node', '../migrationTool/lib/main/cli.js', copyTestModels.destinationDir.path, '--force', '--no-validate-schema'
+        execCommandLine 'node', '../migrationTool/lib/main/cli.js', modelsPath, '--force', '--no-validate-schema'
     }
 }
 

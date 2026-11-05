@@ -38,7 +38,7 @@ import { isObjectEmpty, isRecord } from "../../../utils/internal/guards.js";
 import { Commands } from "../actions.js";
 import { messageStateIsEqual } from "../messageStateIsEqual.js";
 import { ModelSelectors } from "../selectors/models.js";
-import { UiStateSelectors } from "../selectors/ui-state.js";
+import { InternalUiStateSelectors, UiStateSelectors } from "../selectors/ui-state.js";
 import { fullValidation, updateValidationEntries } from "../validation.js";
 
 import type { MiddlewareOptions } from "./middleware-options.js";
@@ -67,6 +67,10 @@ export function validateFullMiddlewareFactory(middlewareOptions: MiddlewareOptio
 
 			if (!messageStateIsEqual(messages, messageState)) {
 				api.dispatch(Commands.setMessageState({ messages: messageState }));
+			}
+
+			if (!isObjectEmpty(InternalUiStateSelectors.customMessages()(state))) {
+				api.dispatch(Commands.setCustomMessageState({ customMessages: {} }));
 			}
 
 			const currentScreenLocationIndex = UiStateSelectors.screenLocationStack()(state).length - 1;

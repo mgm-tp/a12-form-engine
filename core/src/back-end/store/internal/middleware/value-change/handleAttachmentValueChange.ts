@@ -40,7 +40,7 @@ import {
 	DocumentUtils,
 	IndexedControl
 } from "../../../../../models/internal/utils/document-utils.js";
-import { ReadonlyObjectMap } from "../../../../../models/internal/utils/json.js";
+import { ReadonlyObjectMap } from "../../../../../models/internal/utils/ReadonlyObjectMap.js";
 import { isObjectEmpty } from "../../../../utils/internal/guards.js";
 import { Commands } from "../../actions.js";
 import { validateChangesAndUpdateMessages } from "../../change-validation.js";

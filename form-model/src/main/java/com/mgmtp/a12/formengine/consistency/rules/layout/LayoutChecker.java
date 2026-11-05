@@ -122,7 +122,7 @@ class LayoutChecker {
 			layoutProblems.add(new ConsistencyProblem(
 				modelName,
 				FormModelCategory.FORM_MODEL_WRONG_LAYOUT_COLUMNS,
-				new FormModelProblemSource(checkedElementId),
+				FormModelProblemSource.involving(checkedElementId),
 				checkedElement,
 				sizeClass,
 				expectedColumns,
@@ -140,7 +140,7 @@ class LayoutChecker {
 			layoutProblems.add(new ConsistencyProblem(
 				modelName,
 				FormModelCategory.FORM_MODEL_WRONG_LAYOUT_SUM,
-				new FormModelProblemSource(checkedElementId),
+				FormModelProblemSource.involving(checkedElementId),
 				checkedElement,
 				sum
 			));

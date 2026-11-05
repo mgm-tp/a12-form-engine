@@ -34,7 +34,7 @@ import type { DataReference, KernelTypes } from "@com.mgmtp.a12.client/client-da
 import type { DocumentModel, Message } from "@com.mgmtp.a12.kernel/kernel-md-facade";
 import type { ValueConversionConfig } from "@com.mgmtp.a12.utils/utils-localization";
 
-import type { DatePickerConfig } from "./controlProps.js";
+import type { DatePickerConfig, TooltipLineBreak } from "./controlProps.js";
 
 // TODO: internal? => useCommonControlSettings is currently used in EEP
 export interface BaseControlSettings {
@@ -54,7 +54,9 @@ export interface BaseControlSettings {
 	readonly helperText?: string;
 
 	readonly showMessagesAsTooltip?: boolean;
+	/** @deprecated use breakTooltipsToNewLine instead. */
 	readonly tooltipsOnTop?: true;
+	readonly breakTooltipsToNewLine?: TooltipLineBreak;
 
 	// TODO: add inputRef for initiallyFocusedElement?
 	readonly dmElement: DocumentModel.Element;

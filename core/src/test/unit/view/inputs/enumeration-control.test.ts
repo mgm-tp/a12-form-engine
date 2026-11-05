@@ -40,10 +40,10 @@ import type { Models } from "../../../../back-end/store/internal/store.js";
 import * as DocumentModelUtils from "../../../../models/internal/utils/document-model-utils.js";
 import type { EnumerationValue } from "../../../../view/index.js";
 import * as EnumValues from "../../../../view/internal/utilities/enumerable/localizeAndFilterEnumerationValues.js";
+import { createModelPath } from "../../../utils/createModelPath.js";
 import { DE_LOCALE, US_LOCALE } from "../../../utils/localization.js";
 import { setupRenderConfiguration } from "../../../utils/setup.js";
 import { setupModelsFixture } from "../../../utils/setupFixture.js";
-import { createModelPath } from "../../../utils/createModelPath.js";
 
 import { externalEnumerationProvider } from "../configurable_externalenumeration.js";
 

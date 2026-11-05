@@ -40,10 +40,10 @@ import type { EngineStore } from "../../../../../back-end/store/index.js";
 import { DocumentPath } from "../../../../../models/internal/utils/document-utils.js";
 import { AttachmentInput } from "../../../../../view/internal/components/form-engine/cells/controls/attachment/attachment-input.js";
 import { createDocumentPath } from "../../../../utils/createDocumentPath.js";
+import { DocumentModelHelpers } from "../../../../utils/DocumentModelHelpers.js";
 import { setupFormEngineRendererWithRtlAsync } from "../../../../utils/setup.js";
 import { setupFixtureObject, setupModelsFixture } from "../../../../utils/setupFixture.js";
 import { ATTACHMENT } from "../../../../utils/test-model-helpers/attachment.js";
-import { DocumentModelHelpers } from "../../../../utils/DocumentModelHelpers.js";
 
 import { inputTest } from "./generic-tests/input-tests.js";
 import type { GroupBasedProps } from "./generic-tests/input-utils.js";

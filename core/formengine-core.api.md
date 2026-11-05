@@ -60,6 +60,7 @@ import type { HintTooltipProps } from '@com.mgmtp.a12.widgets/widgets-core';
 import type { IconProps } from '@com.mgmtp.a12.widgets/widgets-core';
 import type { IconTheme } from '@com.mgmtp.a12.widgets/widgets-core';
 import type { IGeneratedCodeAccessor } from '@com.mgmtp.a12.kernel/kernel-md-facade';
+import type { ImageUploadExtensionConfig } from '@com.mgmtp.a12.widgets/widgets-core/experimental';
 import type { IndeterminateCheckboxProps } from '@com.mgmtp.a12.widgets/widgets-core';
 import type { JSX } from 'react';
 import type { LayoutGridProps } from '@com.mgmtp.a12.widgets/widgets-core';
@@ -70,6 +71,7 @@ import type { Locale } from '@com.mgmtp.a12.utils/utils-localization';
 import type { Localizable } from '@com.mgmtp.a12.utils/utils-localization';
 import type { LocalizedModelText } from '@com.mgmtp.a12.utils/utils-localization';
 import type { Localizer } from '@com.mgmtp.a12.utils/utils-localization';
+import type { MarkdownEditorProps } from '@com.mgmtp.a12.widgets/widgets-core/experimental';
 import type { MessageBoxProps } from '@com.mgmtp.a12.widgets/widgets-core';
 import type { MessageProps } from '@com.mgmtp.a12.widgets/widgets-core';
 import type { Middleware } from 'redux';
@@ -190,7 +192,7 @@ export namespace Commands {
     export interface ChangeScreenPayload {
         readonly screenName: string;
     }
-    const setSectionsCollapsed: ActionCreator<SetSectionsCollapsedPayload>;
+    const setCustomMessageState: ActionCreator<SetCustomMessageStatePayload>;
     export interface ChangeScreenStatePayload {
         readonly dirty?: boolean;
         readonly focusedComponent?: EngineStore.FocusedComponent;
@@ -199,9 +201,10 @@ export namespace Commands {
         readonly path?: EntityInstancePath;
         readonly repeatState?: ReadonlyObjectMap<EngineStore.Repeat.Entry>;
     }
-    const setLocationStack: ActionCreator<SetLocationStackPayload>;
+    const setCustomMessageEntry: ActionCreator<SetCustomMessageEntryPayload>;
     export namespace CorrectionMode {
         const setValidationBarState: ActionCreator<SetValidationBarStatePayload>;
+        const focusValidationBar: ActionCreator<void>;
         export interface RestoreCorrectionModeBackupPayload {
             readonly backup: EngineStore.CorrectionModeBackup;
         }
@@ -218,29 +221,38 @@ export namespace Commands {
             readonly validationBar: Partial<EngineStore.ValidationBarState>;
         }
     }
-    const changeScreen: ActionCreator<ChangeScreenPayload>;
+    const setSectionsCollapsed: ActionCreator<SetSectionsCollapsedPayload>;
     export interface DropBackupPayload {
         readonly trigger: "cancel" | "apply";
     }
-    const changeScreenState: ActionCreator<ChangeScreenStatePayload>;
+    const setLocationStack: ActionCreator<SetLocationStackPayload>;
     export interface PushBackupPayload {
         readonly document: object;
         readonly messages: ReadonlyObjectMap<EngineStore.Validation.Entry>;
+    }
+    const changeScreen: ActionCreator<ChangeScreenPayload>;
+    export interface PushScreenPayload {
+        readonly locationPath: ModelPath;
+        readonly path: EntityInstancePath;
+        readonly repeatState?: ReadonlyObjectMap<EngineStore.Repeat.Entry>;
+    }
+    const changeScreenState: ActionCreator<ChangeScreenStatePayload>;
+    export interface SetColumnWidthPayload {
+        readonly columnPath: ModelPath;
+        readonly width: number;
     }
     const setDisabled: ActionCreator<boolean>;
     const setReadonly: ActionCreator<boolean>;
     const setDataDirty: ActionCreator<boolean>;
     const setUIDirty: ActionCreator<boolean>;
     const setColumnWidth: ActionCreator<SetColumnWidthPayload>;
-    export interface PushScreenPayload {
-        readonly locationPath: ModelPath;
-        readonly path: EntityInstancePath;
-        readonly repeatState?: ReadonlyObjectMap<EngineStore.Repeat.Entry>;
+    export interface SetCustomMessageEntryPayload {
+        readonly entry: EngineStore.Validation.CustomEntry;
     }
     const setLocale: ActionCreator<SetLocalePayload>;
-    export interface SetColumnWidthPayload {
-        readonly columnPath: ModelPath;
-        readonly width: number;
+    export interface SetCustomMessageStatePayload {
+        // (undocumented)
+        readonly customMessages: ReadonlyObjectMap<EngineStore.Validation.CustomEntry>;
     }
     const setModels: ActionCreator<Models>;
     const dropBackup: ActionCreator<DropBackupPayload>;
@@ -685,6 +697,15 @@ export namespace EngineStore {
         readonly validationBar: ValidationBarState;
     }
     export namespace Validation {
+        export interface CustomEntry {
+            readonly dataContext: EntityInstancePath;
+            readonly formModelPath: ModelPath;
+            readonly validationMessages: readonly CustomMessage[];
+        }
+        export interface CustomMessage extends Omit<Message, "element" | "referencedFields"> {
+            readonly customFormElement: ModelPath;
+            readonly dataContext: EntityInstancePath;
+        }
         export interface Entry {
             // (undocumented)
             readonly parseError?: ParseError;
@@ -700,6 +721,7 @@ export namespace EngineStore {
             readonly errorCode: string;
             readonly errorKey: string;
             readonly errorText: Localizable[];
+            readonly origin?: "server";
             readonly referencedFields: ReadonlyArray<EntityInstancePath>;
             // (undocumented)
             readonly severity: MessageSeverity;
@@ -1021,6 +1043,12 @@ export namespace FormEngineActions {
 export const formEngineDataReducers: ActivityReducers.DataReducer[];
 
 // @public
+export const FormEngineHooks: {
+    useStateProps(ownProps: FormEngineProps): FormEngineStateAdapter.StateProps;
+    useDispatchProps(ownProps: Pick<View, "activityId">): DefaultDispatchProps;
+};
+
+// @public
 export const FormEngineRenderer: ComponentType<FormEngineRendererPropsType>;
 
 // @public
@@ -1054,7 +1082,6 @@ export namespace FormEngineSelectors {
 
 // @public
 export namespace FormEngineStateAdapter {
-    // Warning: (ae-forgotten-export) The symbol "FormEngineProps" needs to be exported by the entry point index.d.ts
     export function mapStateToProps(clientState: object, ownProps: FormEngineProps): StateProps;
     // (undocumented)
     export type StateProps = Partial<DefaultStateProps>;
@@ -1182,6 +1209,7 @@ export namespace FormModel {
         readonly styles?: ReadonlyArray<FormModel.Style>;
         readonly subHeaderBox: FormModel.HeaderFooterType;
         readonly subtitle?: FormModel.Label;
+        readonly validationMessagePosition?: FormModel.MessagePosition;
     }
     export interface Control extends Cell, Stylable, FieldBasedInput {
         readonly dependentControls?: DependentControls;
@@ -1191,6 +1219,7 @@ export namespace FormModel {
         readonly labelHiddenButRead?: boolean;
         readonly occurrence: number;
         readonly readonlyPresentation?: ReadonlyPresentation;
+        // @deprecated
         readonly tooltipsOnTop?: boolean;
         // (undocumented)
         readonly type: "Control";
@@ -1373,6 +1402,7 @@ export namespace FormModel {
         readonly messageExposition?: MessageExpositionPresentation;
         readonly readonly?: boolean;
         readonly secret?: boolean;
+        readonly tooltipPosition?: TooltipPosition;
         readonly truncateSuffix?: boolean;
         // (undocumented)
         readonly type: "Control" | "FieldBasedRepeatOverviewColumn";
@@ -1396,8 +1426,11 @@ export namespace FormModel {
         readonly icon?: Icon;
         readonly initialValue?: string;
         readonly initialValueTyped?: FieldInstanceValue;
+        readonly isMarkdownEditor?: boolean;
         readonly label?: Label;
         readonly labelPlacement?: LabelPlacement;
+        readonly markdownAttachmentRepeat?: string;
+        readonly markdownAttachmentRepeatPath?: ModelPath;
         readonly placeholder?: MultilingualText;
         readonly readonly?: boolean;
         readonly secret?: boolean;
@@ -1473,6 +1506,8 @@ export namespace FormModel {
     export type MarkingOfRequiredFields = "NONE" | "REQUIRED" | "ALWAYS";
     // (undocumented)
     export type MessageExpositionPresentation = "TOOLTIP";
+    // (undocumented)
+    export type MessagePosition = "ABOVE" | "BELOW";
     export interface MultiColumnSection extends BasicScreenElement {
         readonly collapsible?: boolean;
         readonly initiallyCollapsed?: boolean;
@@ -1683,6 +1718,8 @@ export namespace FormModel {
     // (undocumented)
     export type TitledComponent = Screen | ButtonPanel | Section | MultiColumnSection | ControlGrid | Row | Repeat | CustomScreenElement;
     // (undocumented)
+    export type TooltipPosition = "ABOVE" | "BESIDE" | "BELOW";
+    // (undocumented)
     export type TypedComponent = Screen | FieldOverviewColumn | Cell | Section | MultiColumnSection | ControlGrid | Control | ButtonType | ExpressionCell | InlineRepeat | DetachedRepeat | EmbeddedRepeat | RepeatOverviewColumn | ScreenElement;
     // (undocumented)
     export type VerticalAlignment = "top" | "middle" | "bottom";
@@ -1690,6 +1727,9 @@ export namespace FormModel {
 
 // @public (undocumented)
 export namespace FormModelMap {
+    export interface CustomScreenElementProps {
+        readonly uiId?: string;
+    }
     export interface FormModelComponentProps<T> {
         readonly config: FormModelMap.RenderConfiguration;
         readonly modelElement: T;
@@ -1718,7 +1758,7 @@ export interface FormModelMap {
     readonly Control: FormModelMap.FormModelMapEntry<FormModel.Control>;
     readonly ControlGrid: FormModelMap.FormModelMapEntry<FormModel.ControlGrid>;
     readonly CustomCell: FormModelMap.FormModelMapEntry<FormModel.CustomCell>;
-    readonly CustomScreenElement: FormModelMap.FormModelMapEntry<FormModel.CustomScreenElement>;
+    readonly CustomScreenElement: FormModelMap.FormModelMapEntry<FormModel.CustomScreenElement, FormModelMap.CustomScreenElementProps>;
     readonly DetachedRepeat: FormModelMap.FormModelMapEntry<FormModel.DetachedRepeat>;
     readonly EmbeddedRepeat: FormModelMap.FormModelMapEntry<FormModel.EmbeddedRepeat>;
     readonly EventButton: FormModelMap.FormModelMapEntry<FormModel.EventButton>;
@@ -2401,6 +2441,7 @@ export const UiStateSelectors: {
     };
     messages(): Selector<ReadonlyObjectMap<EngineStore.Validation.Entry>>;
     messagesByPath(documentPath: EntityInstancePath, _formModelPath: ModelPath, filter?: Lowercase<EngineStore.Validation.MessageSeverity>): Selector<EngineStore.Validation.Message[]>;
+    customMessagesByPath(modelPath: ModelPath, dataContext: EntityInstancePath, filter?: Lowercase<EngineStore.Validation.MessageSeverity>): Selector<EngineStore.Validation.CustomMessage[]>;
     readonly(): Selector<boolean>;
     repeatInstanceState(): Selector<ReadonlyObjectMap<EngineStore.Repeat.InstanceState> | undefined>;
     repeatInstanceStateEntry(identifier: ModelPath): Selector<EngineStore.Repeat.InstanceState | undefined>;
@@ -2415,7 +2456,16 @@ export const UiStateSelectors: {
 export function unmarshallFormModel(formModelJson: object, documentModel: DocumentModel, valueParser: ValueParser): FormModel;
 
 // @public
+export function useDefaultDispatchProps(): DefaultDispatchProps;
+
+// @public
+export function useDefaultStateProps(ownProps: DefaultOwnProps): DefaultStateProps;
+
+// @public
 export function useDocumentPathForInput(documentModelPath: ModelPath, documentModel: DocumentModel): EntityInstancePath;
+
+// @public
+export function useScrollHandlerProps(): Pick<ScrollHandlerProps, "uiState" | "models">;
 
 // @public
 export function ValidationMessages(props: ValidationMessagesProps): JSX.Element | null;
@@ -2510,6 +2560,7 @@ export interface WidgetMap {
     readonly HintTooltip: ComponentType<HintTooltipProps>;
     // (undocumented)
     readonly Icon: ComponentType<IconProps>;
+    readonly ImageUploadPlugin: ComponentType<ImageUploadExtensionConfig>;
     // (undocumented)
     readonly LayoutGrid: ComponentType<LayoutGridProps.LayoutGridProps>;
     // (undocumented)
@@ -2522,6 +2573,7 @@ export interface WidgetMap {
     readonly ListItem: ComponentType<ListItemProps>;
     // (undocumented)
     readonly ListSubHeader: ComponentType<ListSubHeaderProps>;
+    readonly MarkdownEditor: ComponentType<MarkdownEditorProps>;
     // (undocumented)
     readonly Message: ComponentType<MessageProps>;
     // (undocumented)
@@ -2609,6 +2661,10 @@ export const withFormEngineView: <T extends ApplicationWithFormEngineConfig>(cfg
 
 // @public (undocumented)
 export const withFormModelSupport: <T extends ApplicationWithFormEngineConfig>(cfg: T) => T;
+
+// Warnings were encountered during analysis:
+//
+// src/client-extensions/internal/extensions/form-engine/internal/hooks.ts:66:2 - (ae-forgotten-export) The symbol "FormEngineProps" needs to be exported by the entry point index.d.ts
 
 // (No @packageDocumentation comment for this package)
 

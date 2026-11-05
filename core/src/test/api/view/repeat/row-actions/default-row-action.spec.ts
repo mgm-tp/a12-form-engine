@@ -40,13 +40,13 @@ import type { WidgetMap } from "../../../../../view/index.js";
 import type { TableWidgetMap } from "../../../../../view/internal/components/form-engine/repeat/table-widget-map.js";
 import { mouseEventMock } from "../../../../rtl-utils/mock-utils.js";
 import type { RtlRenderWrapper } from "../../../../rtl-utils/render-wrapper.js";
+import { createModelPath } from "../../../../utils/createModelPath.js";
 import { findClickConfirm } from "../../../../utils/row-action-buttons.js";
 import type { Context } from "../../../../utils/rtl-render-group.js";
 import { RenderGroupFixture } from "../../../../utils/rtl-render-group.js";
+import { loadData, setupFormEngineRendererWithRtlAsync } from "../../../../utils/setup.js";
 import { setupFixture, setupModelsFixture } from "../../../../utils/setupFixture.js";
 import { IDS } from "../../../../utils/test-model-helpers/repeat.row-actions.js";
-import { createModelPath } from "../../../../utils/createModelPath.js";
-import { loadData, setupFormEngineRendererWithRtlAsync } from "../../../../utils/setup.js";
 
 import {
 	stubbedDispatchConfig as dispatchConfig,

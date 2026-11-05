@@ -93,6 +93,7 @@ Each `Control` is rendered using Widgets, depending on the field data type and c
 |String |secret |TextLine (password)
 |String |linebreaksPermitted |TextArea
 |String |suggestions |Autocomplete
+|String |isMarkdownEditor |MarkdownEditor (Experimental)
 |Number | |TextLine
 |Date | |TextLine + DatePicker
 |DateTime | |TextLine + DateTimePicker
@@ -147,6 +148,66 @@ An additional value is written to the document without conversion. It is your re
 
 To determine, if the entered value is a custom value or one of the provided values, the values are compared, ignoring the case by default. There is a second configuration option available in the Form Model to make this comparison case-sensitive.
 
+==== Markdown
+
+[NOTE]
+====
+Markdown support is experimental, matching the underlying `MarkdownEditor` widget.
+====
+
+A `String` field with `isMarkdownEditor` set to `true` is rendered using the `MarkdownEditor` widget instead of `TextArea`. The field's value is interpreted as CommonMark/GFM markdown rather than as a literal string. `isMarkdownEditor` is mutually exclusive with `exposition`, which must be left unset on the same field.
+
+By default, the field offers all three of the widget's editing modes - `edit` (rich text, the default), `source` (raw markdown text) and `view` (read-only rendering) - selectable from a mode menu in the toolbar. A readonly field is always shown in `view` mode, regardless of the offered modes.
+
+===== Image Attachments
+
+The `MarkdownEditor` widget always lets a user insert an image by URL through its own toolbar, independent of any attachment configuration. In addition, a `Control` can be configured with `markdownAttachmentRepeat`, a reference to an `InlineRepeat` or `EmbeddedRepeat` with `multiFileUpload` enabled (the same feature used for repeat-level multi-file attachment repeats). When set, images pasted or dropped into the editor are uploaded through the existing <<form-engine_attachments,AttachmentLoader>> and stored as attachments in that repeat.
+
+The image inserted into the markdown shows the attachment's thumbnail as returned by the `AttachmentLoader` on upload. An upload whose attachment never gets a thumbnail fails once it times out. With Data Services, thumbnail generation must be enabled; the image is shown at the configured thumbnail size, see link:/docs/DATA_SERVICES/dataservices-documentation-src/index.html#attachment-properties[Attachment Properties].
+
+The inserted thumbnail link stays valid as long as the thumbnail exists under the same URL. With Data Services, it breaks when:
+
+* the URL of the content store or of its thumbnails changes, see link:/docs/DATA_SERVICES/dataservices-documentation-src/index.html#content-store-configuration[Content Store Configuration] and link:/docs/DATA_SERVICES/dataservices-documentation-src/index.html#attachment-properties[Attachment Properties];
+* the attachment is deleted as dirty after its row was removed, since the markdown image does not reference it, see link:/docs/DATA_SERVICES/dataservices-documentation-src/index.html#Attachment-Deletion[Attachment Deletion] and link:/docs/DATA_SERVICES/dataservices-documentation-src/index.html#jobs-configuration[Jobs Configurations];
+* all data is deleted, as by SME workspace initialization, import or clear - a re-import regenerates thumbnails under new ids, see link:/docs/DATA_SERVICES/dataservices-documentation-src/index.html#sme-workspace[SME Workspace];
+* the database does not survive a restart, as with an embedded Postgres whose data directory is cleaned or temporary.
+
+The repeat referenced by `markdownAttachmentRepeat` may be shared between several markdown fields, or with a regular attachment `Control`, without ambiguity: each upload is matched back by a per-upload id embedded in its filename, not by which field or `Repeat` it originated from. What counts is the Document Model, not where the `Repeat` is placed in the Form Model: the `Repeat`'s group must not lie inside another repeatable group, and the markdown field must not lie inside the `Repeat`'s group - regardless of which `Repeat`, if any, renders the field.
+
+===== Customization
+
+`MarkdownEditor` and `ImageUploadPlugin` are each listed in `WidgetMap` individually, like every other widget, and can be overridden independently - `WidgetMap.MarkdownEditor` to swap the editor itself, `WidgetMap.ImageUploadPlugin` to swap the upload UI it renders when there is one.
+
+Whether the attachment image plugin gets wired in at all is decided internally, based on the field's `markdownAttachmentRepeatPath`, not by a `WidgetMap` override - the same way a host can swap `WidgetMap.DatePicker` without taking over whether a `Control` decides to show one at all. When it is wired in, `WidgetMap.MarkdownEditor` still receives the resulting `extensions`/`plugins` as ordinary props, so a custom editor only needs to combine them with its own, not reconstruct the decision itself:
+
+[source,tsx]
+----
+// `extensions` must be a stable reference: a new array recreates the editor and discards its
+// content. Unlike replacing the whole default (where every combination is known ahead of time
+// and can be a module-level constant), combining an incoming `extensions` prop with your own
+// addition doesn't control that incoming reference, so the combination is memoized instead - it
+// recomputes only when the incoming array's reference actually changes.
+function MyMarkdownEditor({ extensions, plugins, ...props }: MarkdownEditorProps) {
+	const combinedExtensions = useMemo(
+		() => [...(extensions ?? []), MyCustomExtension],
+		[extensions]
+	);
+
+	return (
+		<MarkdownEditor
+			{...props}
+			extensions={combinedExtensions}
+			plugins={
+				<>
+					{plugins}
+					<MyCustomPlugin />
+				</>
+			}
+		/>
+	);
+}
+----
+
 === Repeats
 
 Overview tables of `Detached Repeats`, `Inline Repeats` and `Embedded Repeats` are rendered using the `Table` widget.
@@ -200,4 +261,11 @@ Controls and columns will only be focussed if their underlying HTML element (tha
 * a `div` element with the `data-role` attribute set to `"text-output"`
 
 When customizing inputs, make sure to pass the `uiID` property to an element that fulfills these constraints. Otherwise, the focus behavior will not work correctly for these elements (for example when trying to "jump" to an error field from the validation bar).
+====
+
+[NOTE]
+====
+When using Custom Screen Elements together with custom errors in the validation state, make sure to pass the `uiId` prop the Form Engine hands to your component to the `id` attribute of your rendered HTML element. This is necessary for the focus behavior to work (for example when trying to "jump" to your Custom Screen Element from the validation bar).
+
+The `uiId` already contains the configured `uiIdPrefix`, so several Form Engines on one page keep distinct HTML ids. Rendering the raw `modelElement.id` instead leaves the element unreachable from the validation bar, and produces duplicate ids as soon as a second Form Engine renders the same model.
 ====

@@ -33,9 +33,9 @@
 import type { Middleware } from "redux";
 
 import { NotificationActions } from "@com.mgmtp.a12.client/client-core";
+import { Events, FormEngineActions } from "@com.mgmtp.a12.formengine/formengine-core";
 import type { LocalizableArgs } from "@com.mgmtp.a12.utils/utils-localization";
 import { localizableFromLocalizationTreeMap } from "@com.mgmtp.a12.utils/utils-localization";
-import { Events, FormEngineActions } from "@com.mgmtp.a12.formengine/formengine-core";
 
 import { DEFAULT_PREVIEW_TRANSLATIONS } from "../resources/defaultTranslations.js";
 

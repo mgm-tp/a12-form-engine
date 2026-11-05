@@ -42,6 +42,7 @@ import type { Inputs } from "../../../../../configuration/engine-configuration.j
 import { WidgetMapContext } from "../../../../../configuration/widget-map-context.js";
 import { EnumerableHelper } from "../../../../../utilities/enumerable/enumerableHelper.js";
 import { mapSelectedValues } from "../../../../../utilities/multi-select-helper.js";
+import { toTooltipLineBreak } from "../../../../../utilities/tooltipPosition.js";
 
 import { useBaseProps } from "../use-input-props.js";
 
@@ -143,7 +144,7 @@ export function CheckboxGroupInput(props: Inputs.InputProps<DocumentModel.Group>
 			}}
 			inline={props.modelElement.exposition === "INLINE"}
 			tooltips={addonAfter}
-			breakTooltipsToNewLine={props.modelElement.tooltipsOnTop}
+			breakTooltipsToNewLine={toTooltipLineBreak(props.modelElement.tooltipPosition)}
 			{...inputProps}
 		>
 			{checkboxGroupChildren}

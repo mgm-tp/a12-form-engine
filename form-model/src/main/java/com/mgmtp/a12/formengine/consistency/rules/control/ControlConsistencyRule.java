@@ -99,7 +99,7 @@ public class ControlConsistencyRule implements ConsistencyRule {
 				problems.add(new ConsistencyProblem(
 					model.getHeader().getId(),
 					FormModelCategory.FORM_MODEL_UNKNOWN_ELEMENTREF,
-					new FormModelProblemSource(control.getId()),
+					FormModelProblemSource.involving(control.getId()),
 					control.getId(),
 					"control",
 					elementRef
@@ -167,7 +167,7 @@ public class ControlConsistencyRule implements ConsistencyRule {
 				problems.add(new ConsistencyProblem(
 					model.getHeader().getId(),
 					FormModelCategory.FORM_MODEL_AUTOCOMPLETE_ONLY_ALLOWED_FOR_STRING_FIELDS,
-					new FormModelProblemSource(control.getId()),
+					FormModelProblemSource.involving(control.getId()),
 					fieldName,
 					control.getId(),
 					control.getElementRef()
@@ -184,7 +184,7 @@ public class ControlConsistencyRule implements ConsistencyRule {
 				problems.add(new ConsistencyProblem(
 					model.getHeader().getId(),
 					FormModelCategory.FORM_MODEL_CONTROL_ROOT_CONTEXT_WRONG,
-					new FormModelProblemSource(control.getId()),
+					FormModelProblemSource.involving(control.getId()),
 					control.getId(),
 					element.getId(),
 					element.getName()
@@ -202,7 +202,7 @@ public class ControlConsistencyRule implements ConsistencyRule {
 				problems.add(new ConsistencyProblem(
 					model.getHeader().getId(),
 					FormModelCategory.FORM_MODEL_CONTROL_REPEAT_CONTEXT_WRONG,
-					new FormModelProblemSource(control.getId()),
+					FormModelProblemSource.involving(control.getId(), repeat.getId()),
 					repeat.getId(),
 					repeat.getName(),
 					control.getId(),
@@ -221,14 +221,14 @@ public class ControlConsistencyRule implements ConsistencyRule {
 				problems.add(new ConsistencyProblem(
 					model.getHeader().getId(),
 					FormModelCategory.FORM_MODEL_CONTROL_INDEX_MISSING,
-					new FormModelProblemSource(control.getId()),
+					FormModelProblemSource.involving(control.getId()),
 					control.getId()
 				));
 			} else if (granularity < 1 && control.isIndexSet()) {
 				problems.add(new ConsistencyProblem(
 					model.getHeader().getId(),
 					FormModelCategory.FORM_MODEL_CONTROL_INDEX_EXISTS,
-					new FormModelProblemSource(control.getId()),
+					FormModelProblemSource.involving(control.getId()),
 					control.getId()
 				));
 			} else if (granularity == 1 && control.isIndexSet()) {
@@ -239,7 +239,7 @@ public class ControlConsistencyRule implements ConsistencyRule {
 						problems.add(new ConsistencyProblem(
 							model.getHeader().getId(),
 							FormModelCategory.FORM_MODEL_CONTROL_INDEX_NUMERIC_VALUE_NOT_INT,
-							new FormModelProblemSource(control.getId()),
+							FormModelProblemSource.involving(control.getId()),
 							control.getId()
 						));
 					}
@@ -254,7 +254,7 @@ public class ControlConsistencyRule implements ConsistencyRule {
 							problems.add(new ConsistencyProblem(
 								model.getHeader().getId(),
 								FormModelCategory.FORM_MODEL_CONTROL_INDEX_SEMANTIC_VALUE_NO_INDEX_FIELD,
-								new FormModelProblemSource(control.getId()),
+								FormModelProblemSource.involving(control.getId()),
 								control.getId(),
 								group.getId(),
 								group.getName()

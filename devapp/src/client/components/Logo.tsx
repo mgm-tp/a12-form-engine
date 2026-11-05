@@ -30,19 +30,15 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { useContext } from "react";
 import type { JSX } from "react";
 import { useDispatch } from "react-redux";
 
 import { ActivityActions, ApplicationActions } from "@com.mgmtp.a12.client/client-core";
 
 import { INDEX_DESCRIPTOR } from "../modules/devappModule.js";
-import { DevappThemeContext } from "../ThemeContextProvider.js";
 
 export function Logo(): JSX.Element {
-	const { theme } = useContext(DevappThemeContext);
-	const suffix = theme.includes("base") ? "_base" : "";
-	const logoURL = `./images/a12_logo${suffix}.svg`;
+	const logoURL = "./images/a12_logo_base.svg";
 
 	const dispatch = useDispatch();
 

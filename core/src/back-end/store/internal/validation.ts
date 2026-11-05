@@ -47,11 +47,11 @@ import {
 	DocumentPath,
 	InternalDocumentPath
 } from "../../../models/internal/utils/document-utils.js";
-import { ReadonlyObjectMap } from "../../../models/internal/utils/json.js";
+import { ReadonlyObjectMap } from "../../../models/internal/utils/ReadonlyObjectMap.js";
 import { assertExists } from "../../utils/internal/assertions.js";
 
 import { collectRelevantFields } from "./collectRelevantFields.js";
-import { isFieldGlobal, mapMessageTypes } from "./kernel-adapter.js";
+import { FORMAL_VALIDATION_RULE_PATH, isFieldGlobal, mapMessageTypes } from "./kernel-adapter.js";
 import { DataSelectors } from "./selectors/data.js";
 import { ModelSelectors } from "./selectors/models.js";
 import type { Selector } from "./selectors/selectors.js";
@@ -274,7 +274,7 @@ function filterAndMapMessageType(
 	const isNotExistingFormalError = (message: Message) => {
 		return !(
 			fieldsWithParseErrors.includes(DocumentPath.toString(message.entityInstance)) &&
-			message.rulePath === "formalePruefung"
+			message.rulePath === FORMAL_VALIDATION_RULE_PATH
 		);
 	};
 

@@ -107,7 +107,7 @@ export function createFormModelElement(
 		return createCustomCell(element, renderConfiguration);
 	}
 
-	// eslint-disable-next-line no-console
+	// oxlint-disable-next-line no-console
 	console.warn("Unknown FormModel Element! ", element);
 	return null;
 }
@@ -367,5 +367,5 @@ export function createCustomScreenElement(
 		element: element,
 		uiIdPrefix: renderConfiguration.renderOptions.config.uiIdPrefix
 	});
-	return <Component key={id} modelElement={element} config={renderConfiguration} />;
+	return <Component key={id} modelElement={element} config={renderConfiguration} uiId={id} />;
 }

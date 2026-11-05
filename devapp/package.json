@@ -1,6 +1,6 @@
 {
   "name": "@com.mgmtp.a12.formengine/formengine-devapp",
-  "version": "39.0.1",
+  "version": "39.1.1",
   "description": "Form Engine Devapp",
   "author": "mgm technology partners",
   "license": "(EUPL-1.2 OR LicenseRef-commercial)",
@@ -13,16 +13,16 @@
     "clean": "git clean -fdX -- dist",
     "build": "node --run compile && rsbuild build -c rsbuild/rsbuild.config.ts",
     "compile": "tsc",
-    "lint": "eslint --flag unstable_native_nodejs_ts_config . --cache",
-    "lint:fix": "node --run lint -- --fix",
-    "lint:onlyErrors": "node --run lint -- --quiet",
     "start": "node --run start:mock",
     "start:mock": "rsbuild dev --env-mode mock -c rsbuild/rsbuild.config.ts",
     "start:services": "pnpm run \"/^start:services:.*/\"",
-    "start:services:server": "gradle -b ./resources/server/build.gradle --console=plain clean runJar",
+    "start:services:server": "gradle -p ./resources/server --console=plain clean runJar",
     "start:services:app": "rsbuild dev --env-mode services -c rsbuild/rsbuild.config.ts",
     "analyze": "rsbuild build --env-mode analyze -c rsbuild/rsbuild.config.ts",
-    "preview": "rsbuild preview -c rsbuild/rsbuild.config.ts"
+    "preview": "rsbuild preview -c rsbuild/rsbuild.config.ts",
+    "lint": "pnpm -w exec oxlint devapp",
+    "lint:fix": "pnpm -w exec oxlint --fix devapp",
+    "lint:onlyErrors": "pnpm -w exec oxlint --quiet devapp"
   },
   "//": "All regular devapp deps are listed as dev deps to skip them during workspace pnpm audit",
   "devDependencies": {
@@ -52,7 +52,6 @@
     "@types/semver": "catalog:",
     "cpy-cli": "catalog:",
     "date-fns": "catalog:",
-    "eslint": "catalog:",
     "fp-ts": "catalog:",
     "picocolors": "catalog:",
     "react": "catalog:",

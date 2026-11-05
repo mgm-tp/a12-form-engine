@@ -48,6 +48,7 @@ export function DateRangeTextLine(props: DateRangeTextLineProps) {
 	const {
 		addonAfter,
 		ariaDescribedby,
+		breakTooltipsToNewLine,
 		clearLabel,
 		disabled,
 		enableDatePicker,
@@ -139,6 +140,7 @@ export function DateRangeTextLine(props: DateRangeTextLineProps) {
 				label={label}
 				addonAfter={addonAfter}
 				ariaDescribedby={ariaDescribedby}
+				breakTooltipsToNewLine={breakTooltipsToNewLine}
 				disabled={disabled}
 				inputRef={inputRef}
 				error={error}

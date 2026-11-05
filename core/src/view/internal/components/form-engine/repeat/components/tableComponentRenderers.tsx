@@ -55,6 +55,7 @@ import {
 	stylableToClassName,
 	styleToClassName
 } from "../../../../../../models/internal/stylableToClassName.js";
+import { InternalDocumentPath } from "../../../../../../models/internal/utils/document-utils.js";
 import { ComponentMapContext } from "../../../../configuration/componentMap/component-map-context.js";
 import { DefaultRepeatButtonNames } from "../../../../configuration/engine-configuration.js";
 import { WidgetMapContext } from "../../../../configuration/widget-map-context.js";
@@ -65,7 +66,6 @@ import {
 import { DataContext } from "../../data-context.js";
 import { createExpressionColumn } from "../../model-components.js";
 import { getLabelAsHtml } from "../../model-element-labels.js";
-import { InternalDocumentPath } from "../../../../../../models/internal/utils/document-utils.js";
 
 import type { TableWidgetMap } from "../table-widget-map.js";
 import { TableWidgetMapContext } from "../table-widget-map.js";

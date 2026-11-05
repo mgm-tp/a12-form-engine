@@ -69,7 +69,7 @@ import type { PlatformSingleDocumentDataProviderOptions } from "../../extensions
 import { createPlatformSingleDocumentDataProvider } from "../../extensions/platform-server-connectors/internal/providers/PlatformSingleDocumentDataProvider.js";
 
 const MODEL_TYPE = "form";
-const SUPPORTED_MODEL_VERSIONS = ">=39.0.0 <=39.0.0";
+const SUPPORTED_MODEL_VERSIONS = ">=39.0.0 <=39.3.0";
 
 // we use module augmentation to extend the A12ApplicationConfig type with more options
 // for users, this is applied once they import anything from this file
@@ -99,7 +99,7 @@ export type ApplicationWithFormEngineConfig = RequireFeatures<
  * @experimental
  */
 export const withFormEngineDataHandlers = <T extends ApplicationWithFormEngineConfig>(cfg: T) =>
-	addDataHandlers<T>(
+	addDataHandlers(
 		createEmptyDocumentDataProvider(cfg.formEngine?.emptyDocument),
 		createPlatformSingleDocumentDataProvider(cfg.formEngine?.singleDocument)
 	)(cfg);
@@ -108,13 +108,13 @@ export const withFormEngineDataHandlers = <T extends ApplicationWithFormEngineCo
  * @experimental
  */
 export const withFormEngineDataReducers = <T extends ApplicationWithFormEngineConfig>(cfg: T) =>
-	addDataReducers<T>(...formEngineDataReducers)(cfg);
+	addDataReducers(...formEngineDataReducers)(cfg);
 
 /**
  * @experimental
  */
 export const withFormEngineSagas = <T extends ApplicationWithFormEngineConfig>(cfg: T) =>
-	addCustomSagas<T>(
+	addCustomSagas(
 		...formEngineSagas({
 			...cfg.formEngine?.sagas,
 			attachmentLoader: cfg.formEngine?.sagas?.attachmentLoader ?? platformAttachmentLoader
@@ -125,13 +125,13 @@ export const withFormEngineSagas = <T extends ApplicationWithFormEngineConfig>(c
  * @experimental
  */
 export const withFormEngineMiddlewares = <T extends ApplicationWithFormEngineConfig>(cfg: T) =>
-	addAdditionalMiddlewares<T>(...createFormEngineMiddlewares(cfg.formEngine?.middlewares))(cfg);
+	addAdditionalMiddlewares(...createFormEngineMiddlewares(cfg.formEngine?.middlewares))(cfg);
 
 /**
  * @experimental
  */
 export const withFormEngineView = <T extends ApplicationWithFormEngineConfig>(cfg: T) => {
-	return addView<T>("FormEngine", FormEngineViews.FormEngine)(cfg);
+	return addView("FormEngine", FormEngineViews.FormEngine)(cfg);
 };
 
 /**
@@ -141,7 +141,7 @@ export const withConfiguredFormEngine = <T extends ApplicationWithFormEngineConf
 	if (!cfg.formEngine?.viewConfig) {
 		return cfg;
 	}
-	return modifyView<T>("FormEngine", Component => {
+	return modifyView("FormEngine", Component => {
 		return props => <Component {...props} {...cfg.formEngine?.viewConfig} />;
 	})(cfg);
 };

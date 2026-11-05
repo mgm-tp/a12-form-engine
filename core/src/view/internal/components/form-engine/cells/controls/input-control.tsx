@@ -149,6 +149,7 @@ export function FieldOverviewColumn(props: {
 		...fieldBasedInputOptions,
 		modelElement: {
 			...fieldBasedInputOptions.modelElement,
+			tooltipPosition: fieldBasedInputOptions.modelElement.tooltipPosition ?? "BESIDE",
 			labelHiddenButRead: true
 		}
 	};
@@ -289,7 +290,10 @@ export function Control(props: {
 			hintText: localizer(...hintLocalizables),
 			secret: control.secret || fce?.secret,
 			enableSelectAll: fce?.enableSelectAll,
-			tooltipsOnTop: control.tooltipsOnTop,
+			tooltipPosition:
+				fieldBasedInputOptions.modelElement.tooltipPosition ??
+				// eslint-disable-next-line @typescript-eslint/no-deprecated
+				(control.tooltipsOnTop ? "ABOVE" : "BESIDE"),
 			labelHiddenButRead: control.labelHiddenButRead,
 			labelPlacement: fce?.labelPlacement,
 			helperText: localizer(...helperTextLocalizables),
@@ -442,11 +446,13 @@ function calculateFieldBasedInputOptions(options: {
 			elementPath: input.elementPath,
 			label: labelAsHtml,
 			exposition,
+			isMarkdownEditor: fce?.isMarkdownEditor,
 			enableSelectAll: fce?.enableSelectAll,
 			readonly,
 			secret: input.secret || fce?.secret,
 			datePickerConfig: input.datePickerConfig,
 			messageExposition: input.messageExposition,
+			tooltipPosition: input.tooltipPosition,
 			autoExpand: input.autoExpand,
 			disabled,
 			suffix: suffixText,
@@ -456,6 +462,7 @@ function calculateFieldBasedInputOptions(options: {
 			specificHorizontalAlignment,
 			specificVerticalAlignment,
 			attachmentConfig: fce?.attachmentConfig,
+			markdownAttachmentRepeatPath: fce?.markdownAttachmentRepeatPath,
 			showCommaSeparated,
 			timeZone,
 			style: input.style,

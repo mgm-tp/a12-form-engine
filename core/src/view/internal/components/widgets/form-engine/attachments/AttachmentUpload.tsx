@@ -46,6 +46,7 @@ import {
 import { UiId } from "../../../../../../back-end/utils/internal/generateUiId.js";
 import { ComponentMapContext } from "../../../../configuration/componentMap/component-map-context.js";
 import { WidgetMapContext } from "../../../../configuration/widget-map-context.js";
+import { toTooltipLineBreak } from "../../../../utilities/tooltipPosition.js";
 
 import type { AttachmentUploadProps } from "./attachmentUploadProps.js";
 import { hasSupportedType, isFilled } from "./attachmentUtils.js";
@@ -204,7 +205,7 @@ function useFileUploadProps(
 		warningMessage: !showValidationMessagesAsTooltips ? warningMessage?.content : warning,
 		infoMessage: !showValidationMessagesAsTooltips ? infoMessage?.content : info,
 		tooltips,
-		breakTooltipsToNewLine: modelElement.tooltipsOnTop,
+		breakTooltipsToNewLine: toTooltipLineBreak(modelElement.tooltipPosition),
 		readOnly: readonly,
 		disabled,
 		loading,

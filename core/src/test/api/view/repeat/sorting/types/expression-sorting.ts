@@ -37,10 +37,10 @@ import type { Locale } from "@com.mgmtp.a12.utils/utils-localization";
 import type { Models } from "../../../../../../back-end/store/internal/store.js";
 import type { RepeatRow } from "../../../../../../view/internal/components/form-engine/repeat/components/tableColumnTypes.js";
 import { sort } from "../../../../../../view/internal/utilities/sorting.js";
-import { setupArrayFixture, setupFixture } from "../../../../../utils/setupFixture.js";
-import { REPEAT_MODEL_PATH } from "../../filter/filter.utils.js";
 import { createModelPath } from "../../../../../utils/createModelPath.js";
 import { loadData } from "../../../../../utils/setup.js";
+import { setupArrayFixture, setupFixture } from "../../../../../utils/setupFixture.js";
+import { REPEAT_MODEL_PATH } from "../../filter/filter.utils.js";
 
 import { getData, getRows } from "./utils.js";
 

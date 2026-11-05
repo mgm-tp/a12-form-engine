@@ -52,7 +52,7 @@ import {
 
 /** @internal  */
 export function DesktopValidationBar(props: {
-	messages: EngineStore.Validation.Message[];
+	messages: (EngineStore.Validation.Message | EngineStore.Validation.CustomMessage)[];
 	expanded: boolean;
 	currentMessageKey?: string;
 	options: FormModelMap.RenderOptions;

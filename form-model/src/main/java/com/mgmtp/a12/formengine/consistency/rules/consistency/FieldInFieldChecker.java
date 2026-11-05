@@ -61,7 +61,7 @@ class FieldInFieldChecker extends AbstractReferenceChecker {
 			problems.add(new ConsistencyProblem(
 				formModel.getHeaderId(),
 				FormModelCategory.MISSING_DM_ELEMENT_IN_FIELD_CONFIGURATION,
-				new FormModelProblemSource(elementRef),
+				FormModelProblemSource.involving(elementRef),
 				elementRef,
 				documentModelService.getDocumentModelId()
 			));

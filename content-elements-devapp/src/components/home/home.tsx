@@ -44,7 +44,7 @@ import {
 
 const { Grid, Row, Column } = LayoutGrid;
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
+// oxlint-disable-next-line no-unused-vars
 export function Home(props: ViewNGProps): React.JSX.Element {
 	const dispatch = useDispatch();
 	const activity = useSelector(ActivitySelectors.latestActivity());

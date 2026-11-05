@@ -114,6 +114,8 @@ link:assets/typedoc/modules/back-end_store.Commands.html[API documentation].
 |setDocument|sets the current document|"document" in the "data" slice
 |setMessageState|localizes and sets all validation messages|"messages" in the "ui" slice
 |setMessageStateEntry|sets a validation message for a specific element identified by a document path|"messages" at "path" in the "ui" slice
+|setCustomMessageState|sets all custom validation messages for Custom Screen Elements|"customMessages" in the "ui" slice
+|setCustomMessageEntry|sets a custom validation entry for a specific Custom Screen Element identified by `(formModelPath, dataContext)`; an empty entry removes the slot|"customMessages" at "customKey(formModelPath, dataContext)" in the "ui" slice
 |setSectionsCollapsed|sets collapsed state of all sections|"sectionState" in the "ui" slice
 |setLocationStack|sets all screen locations at once|"screenLocation" in the "ui" slice
 |changeScreen|change to a screen by name|"screenLocation" and "repeatStaticState" in the "ui" slice
@@ -136,6 +138,7 @@ link:assets/typedoc/modules/back-end_store.Commands.html[API documentation].
 |setRepeatStaticState|sets the whole data-independent state of all repeats|"repeatStaticState" in the "ui" slice
 3+|*Commands.CorrectionMode*
 |setValidationBarState|sets the messages and UI state of the validation bar|"validationBar" in the "ui" slice
+|focusValidationBar|moves the focus to the validation bar of the current screen (it has to be visible already)|"focusedComponent" of the current screen in the "ui" slice
 |setCorrectionScreenState|sets the UI state of the correction screen|"correctionScreen" in the "ui" slice
 |setCorrectionModeBackup|backup the screen state before entering the correction mode|"correctionModeBackup" in the "ui" slice
 |restoreCorrectionModeBackup|restore the correction mode backup|almost all properties in the "ui" slice

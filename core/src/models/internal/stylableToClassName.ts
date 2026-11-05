@@ -28,7 +28,9 @@
  * OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
  * NON-INFRINGEMENT, EXCEPT WHERE SUCH DISCLAIMERS ARE HELD TO BE
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
- */ import { nmTokensToString } from "../../view/internal/utilities/nmtokens.js";
+ */
+
+import { nmTokensToString } from "../../view/internal/utilities/nmtokens.js";
 
 import type { FormModel } from "./form-model.js";
 

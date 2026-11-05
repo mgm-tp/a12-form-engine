@@ -48,13 +48,13 @@ import {
 	DocumentUtils,
 	InternalDocumentPath
 } from "../../../../../models/internal/utils/document-utils.js";
-import { ReadonlyObjectMap } from "../../../../../models/internal/utils/json.js";
 import { createGroupInstance } from "../../../../../models/internal/utils/model-utils.js";
+import { ReadonlyObjectMap } from "../../../../../models/internal/utils/ReadonlyObjectMap.js";
 import { Commands, Events } from "../../actions.js";
 import { KernelComputation } from "../../computation.js";
 import { DataSelectors } from "../../selectors/data.js";
 import { ModelSelectors } from "../../selectors/models.js";
-import { UiStateSelectors } from "../../selectors/ui-state.js";
+import { InternalUiStateSelectors, UiStateSelectors } from "../../selectors/ui-state.js";
 import type { EngineStore } from "../../store.js";
 
 import type { Conversion, Localization, MiddlewareOptions } from "../middleware-options.js";
@@ -90,6 +90,7 @@ export function addButtonRepeatMiddlewareFactory(
 		if (Events.Repeat.addRow.match(action)) {
 			const state = api.getState();
 			const messages = UiStateSelectors.messages()(state);
+			const customMessages = InternalUiStateSelectors.customMessages()(state);
 			const document = DataSelectors.document()(state) as GroupInstance;
 			const formModel = ModelSelectors.formModel()(state);
 			const documentModel = ModelSelectors.documentModel()(state);
@@ -122,7 +123,13 @@ export function addButtonRepeatMiddlewareFactory(
 			const rows = DocumentUtils.getRows(newDocument, documentPath);
 			const rowCount = rows !== undefined ? rows.length : 0;
 			if (isFormModelDetachedRepeat(repeat)) {
-				api.dispatch(Commands.pushBackup({ messages: messages, document: document }));
+				api.dispatch(
+					Commands.pushBackup({
+						messages: messages,
+						document: document,
+						customMessages: customMessages
+					})
+				);
 			}
 
 			const newRowPath = [

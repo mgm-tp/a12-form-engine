@@ -97,7 +97,7 @@ public class DefaultRowActionRule implements ConsistencyRule {
 				final Problem missingDefaultRowAction = new ConsistencyProblem(
 					modelName,
 					FormModelCategory.FORM_MODEL_DEFAULT_ROW_ACTION_MISSING_CUSTOM_EVENT,
-					new FormModelProblemSource(repeat.getId()),
+					FormModelProblemSource.involving(repeat.getId()),
 					Severity.INFO,
 					repeat.getId(),
 					repeat.getName(),
@@ -113,7 +113,7 @@ public class DefaultRowActionRule implements ConsistencyRule {
 						problems.add(new ConsistencyProblem(
 							modelName,
 							FormModelCategory.FORM_MODEL_DEFAULT_ROW_ACTION_WITH_CONFIRMATION,
-							new FormModelProblemSource(repeat.getId()),
+							FormModelProblemSource.involving(repeat.getId()),
 							Severity.INFO,
 							repeat.getId(),
 							repeat.getName(),
@@ -133,7 +133,7 @@ public class DefaultRowActionRule implements ConsistencyRule {
 						problems.add(new ConsistencyProblem(
 							modelName,
 							FormModelCategory.FORM_MODEL_DEFAULT_ROW_ACTION_UNSUPPORTED_EVENT,
-							new FormModelProblemSource(repeat.getId()),
+							FormModelProblemSource.involving(repeat.getId()),
 							Severity.INFO,
 							repeat.getId(),
 							repeat.getName(),
@@ -146,7 +146,7 @@ public class DefaultRowActionRule implements ConsistencyRule {
 					problems.add(new ConsistencyProblem(
 						modelName,
 						FormModelCategory.FORM_MODEL_DEFAULT_ROW_ACTION_UNSUPPORTED_EVENT,
-						new FormModelProblemSource(repeat.getId()),
+						FormModelProblemSource.involving(repeat.getId()),
 						Severity.INFO,
 						repeat.getId(),
 						repeat.getName(),

@@ -110,7 +110,7 @@ export function DateTimeInput(
 		warnings,
 		infos,
 		tooltips,
-		tooltipsOnTop,
+		breakTooltipsToNewLine,
 		inputProps,
 		ariaDescribedBy
 	} = USE_COMMON_WIDGET_SETTINGS_WRAPPER.useCommonWidgetSettings(commonControlSettings);
@@ -239,8 +239,8 @@ export function DateTimeInput(
 			label={label}
 			readonly={readonly}
 			hideLabel={hideLabel}
-			addonAfter={tooltipsOnTop ? undefined : tooltips}
-			tooltips={tooltipsOnTop ? tooltips : undefined}
+			tooltips={tooltips}
+			breakTooltipsToNewLine={breakTooltipsToNewLine}
 			helperText={helperText}
 			placeholder={placeholder}
 			value={formattedValue}

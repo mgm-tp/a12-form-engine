@@ -1,6 +1,6 @@
 {
   "name": "@com.mgmtp.a12.formengine/formengine-model-migration",
-  "version": "39.0.1",
+  "version": "39.1.1",
   "description": "form model migration CLI tool",
   "author": "mgm technology partners",
   "license": "(EUPL-1.2 OR LicenseRef-commercial)",
@@ -9,21 +9,18 @@
     "clean": "git clean -fdX -- target lib cyclonedx.json",
     "build": "node --run compile",
     "compile": "pnpm run \"/^compile:[a-z]*$/\"",
-    "compile:typescript": "devtools per-env",
-    "compile:typescript:production": "migration-tool-utils compile",
-    "compile:typescript:development": "migration-tool-utils compile --no-schema",
+    "compile:typescript": "migration-tool-utils compile",
     "test:coverage": "c8 mocha",
     "test": "mocha",
     "typescript": "tsc --project ./tsconfig.dev.json",
     "watch": "tsc --project ./tsconfig.dev.json --watch",
-    "lint": "eslint --flag unstable_native_nodejs_ts_config . --cache",
-    "lint:fix": "node --run lint -- --fix",
-    "lint:onlyErrors": "node --run lint -- --quiet"
+    "lint": "pnpm -w exec oxlint migrationTool",
+    "lint:fix": "pnpm -w exec oxlint --fix migrationTool",
+    "lint:onlyErrors": "pnpm -w exec oxlint --quiet migrationTool"
   },
   "bin": "lib/main/cli.js",
   "devDependencies": {
     "@com.mgmtp.a12.base/base-model-api": "catalog:a12",
-    "@com.mgmtp.a12.devtools/build-tools": "catalog:a12",
     "@com.mgmtp.a12.devtools/tsconfig": "catalog:a12",
     "@com.mgmtp.a12.migrationtool/migrationtool-utils": "catalog:a12",
     "@com.mgmtp.a12.utils/utils-localization": "catalog:a12",
@@ -31,7 +28,6 @@
     "@types/node": "catalog:",
     "mocha": "catalog:",
     "c8": "catalog:",
-    "eslint": "catalog:",
     "source-map-support": "catalog:",
     "typescript": "catalog:"
   },

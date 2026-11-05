@@ -32,6 +32,7 @@
 
 import { constants } from "node:buffer";
 import { execSync } from "node:child_process";
+import { env as processEnv } from "node:process";
 
 import pkg from "../package.json" with { type: "json" };
 import type { DependencyTreeTableNode } from "../src/client/components/DependencyTreeTable.ts";
@@ -40,22 +41,31 @@ interface DependencyTree {
 	readonly name: string;
 	readonly version: string;
 	readonly dependencies?: Record<string, Omit<DependencyTree, "name">>;
+	readonly devDependencies?: Record<string, Omit<DependencyTree, "name">>;
 }
 
+// package.json is not stamped until publish, so the build version has to come from gradle
+const rootVersion = processEnv.RELEASE_VERSION ?? pkg.version;
+
 export function createDependencyTreeRoot(): DependencyTreeTableNode {
-	const dependencyTree = JSON.parse(
-		execSync("pnpm list --prod --json", {
+	const projects = JSON.parse(
+		execSync("pnpm list --json", {
 			maxBuffer: constants.MAX_LENGTH,
 			encoding: "utf8"
 		})
-	)[0] as DependencyTree;
+	) as DependencyTree[];
+
+	// pnpm lists every workspace project, and the devapp declares all of its
+	// dependencies as dev ones because it is only ever bundled, never installed
+	const devapp = projects.find(({ name }) => name === pkg.name);
+	const dependencies = { ...devapp?.dependencies, ...devapp?.devDependencies };
 
 	const rootId = "root";
 
 	return {
 		id: rootId,
-		children: createNodes(rootId, dependencyTree.dependencies),
-		data: [dependencyTree.name, dependencyTree.version]
+		children: createNodes(rootId, dependencies),
+		data: [pkg.name, rootVersion]
 	};
 }
 
@@ -66,7 +76,7 @@ function createNodes(
 	return deps
 		? Object.entries(deps).map(([name, { version, dependencies }]) => {
 				// because of workspaces, the version of formengine/core is just a link
-				const actualVersion = version.startsWith("link:") ? pkg.version : version;
+				const actualVersion = version.startsWith("link:") ? rootVersion : version;
 
 				const id = `${parent}-${name}-${actualVersion}`;
 				return {

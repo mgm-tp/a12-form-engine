@@ -97,7 +97,7 @@ class RepeatThumbnailColumnChecker extends AbstractRepeatChecker {
 					repeatProblems.add(new ConsistencyProblem(
 						modelName,
 						FormModelCategory.FORM_MODEL_REPEAT_THUMBNAIL_COLUMN_INVALID_ELEMENT,
-						new FormModelProblemSource(fieldColumn.getId()),
+						FormModelProblemSource.involving(fieldColumn.getId()),
 						fieldColumn.getId(),
 						repeat.getId(),
 						repeat.getName()

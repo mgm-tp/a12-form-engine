@@ -77,10 +77,10 @@ describe("api.view.content-box", () => {
 
 			const buttonGroupProps = query(widgetMap.ButtonGroupContainer).props();
 
-			// eslint-disable-next-line @typescript-eslint/no-deprecated
+			// oxlint-disable-next-line typescript/no-deprecated
 			strictEqual(buttonGroupProps.leftSlot?.length, 4);
 
-			// eslint-disable-next-line @typescript-eslint/no-deprecated
+			// oxlint-disable-next-line typescript/no-deprecated
 			strictEqual(buttonGroupProps.rightSlot?.length, 4);
 			strictEqual(buttonGroupProps.responsive, true);
 		});

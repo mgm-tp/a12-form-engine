@@ -45,6 +45,7 @@ export function getMockMessage(options?: Partial<Message>): Message {
 		referencedFields: options?.referencedFields ?? [],
 		rulePath: "/test/rule",
 		refOmissionErrorResponsible: [],
+		groupsOfPossiblyCausingEntities: [],
 		...options
 	};
 }

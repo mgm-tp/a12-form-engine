@@ -211,6 +211,7 @@ describe("api.view.ScrollHandler", () => {
 	 * ScrollHandler.scrollToElement is called with the SizeContainer, but
 	 * because that is not focusable, the focus() call has no effect.
 	 */
+
 	function widgetMap(): WidgetMap {
 		return DisableMockComponents.components(() => DefaultWidgetMap)(() => ({
 			...getWidgetMocks(),
@@ -671,6 +672,67 @@ describe("api.view.ScrollHandler", () => {
 							},
 							checkActiveElement: false
 						})
+					);
+				});
+			});
+
+			describe("a custom screen element", () => {
+				it(
+					"scrolls to the element by the uiId the engine hands to it",
+					createTestForScrollingBehavior({
+						actions: [
+							Commands.setLocationStack({
+								locationStack: [
+									{
+										path: [],
+										locationPath: [{ elementName: "Screen1" }],
+										focusedComponent: { formModelPath: FORM_MODEL_PATHS.CUSTOM_ELEMENT }
+									}
+								]
+							})
+						],
+						options: { uiConfig: { uiIdPrefix } },
+						scrollIntoView: { id: `a12-${IDS.CUSTOM_ELEMENT}`, position: "center" },
+						checkActiveElement: false
+					})
+				);
+
+				it("does not scroll to it again on an unrelated update", async () => {
+					const scrollIntoViewSpy = mock.method(Element.prototype, "scrollIntoView");
+
+					const wrapper = await setupConnectedFormEngineWithRtlAsync({
+						config: { uiIdPrefix, widgetMap: widgetMap() },
+						withWidgets: true,
+						withScrollHandler: true,
+						models,
+						locale,
+						data: { document: fixture.dataDocument }
+					});
+
+					await act(() => {
+						wrapper.store.dispatch(
+							Commands.setLocationStack({
+								locationStack: [
+									{
+										path: [],
+										locationPath: [{ elementName: "Screen1" }],
+										focusedComponent: { formModelPath: FORM_MODEL_PATHS.CUSTOM_ELEMENT }
+									}
+								]
+							})
+						);
+					});
+
+					scrollIntoViewSpy.mock.resetCalls();
+
+					await act(() => {
+						wrapper.store.dispatch(Commands.setUIDirty(true));
+					});
+
+					strictEqual(
+						scrollIntoViewSpy.mock.callCount(),
+						0,
+						"the focus request must leave the scroll queue, so later updates do not scroll again"
 					);
 				});
 			});

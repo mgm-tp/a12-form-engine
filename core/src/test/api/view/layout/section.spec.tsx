@@ -46,6 +46,7 @@ import { mouseEventMock } from "../../../rtl-utils/mock-utils.js";
 import type { RtlRenderWrapper, SetupWithRtlOptions } from "../../../rtl-utils/render-wrapper.js";
 import { createModelPath } from "../../../utils/createModelPath.js";
 import { RenderGroupFixture } from "../../../utils/rtl-render-group.js";
+import { setupFormEngineRendererWithRtlAsync } from "../../../utils/setup.js";
 import { setupModelsFixture } from "../../../utils/setupFixture.js";
 import { IDS as TitleIds } from "../../../utils/test-model-helpers/aria-level.js";
 import { FORM_MODEL, IDS } from "../../../utils/test-model-helpers/collapsible-section.js";
@@ -54,7 +55,6 @@ import {
 	IDS as ExpressionLabelIds,
 	formattedExpressionUiState
 } from "../../../utils/test-model-helpers/expression-label.js";
-import { setupFormEngineRendererWithRtlAsync } from "../../../utils/setup.js";
 
 import { TypographyHeadline } from "./typography-headline-mock.js";
 

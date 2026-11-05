@@ -65,7 +65,10 @@ export function ContentEditorView(props: ViewNGProps): JSX.Element | null {
 function Menu(props: { activityId: string }): JSX.Element {
 	return (
 		<MenuTemplate.Menu
-			rightSlots={[<DefaultComponentMap.ToggleSettingPanelButton key="toggle-setting" />]}
+			rightSlots={[
+				<DefaultComponentMap.SettingsPortal key="settings-portal" />,
+				<DefaultComponentMap.ToggleSettingPanelButton key="toggle-setting" />
+			]}
 			leftSlots={[
 				<DefaultComponentMap.ToggleComponentPanelButton key="toggle-component" />,
 				<EditorSettingsButton key="editor-settings-button" activityId={props.activityId} />

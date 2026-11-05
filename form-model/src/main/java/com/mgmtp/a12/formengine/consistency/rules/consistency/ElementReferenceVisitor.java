@@ -85,7 +85,7 @@ class ElementReferenceVisitor extends ModelVisitor {
 				new ConsistencyProblem(
 					modelId,
 					FormModelCategory.MISSING_DM_ELEMENT_IN_CONTROL,
-					new FormModelProblemSource(control.getId()),
+					FormModelProblemSource.involving(control.getId()),
 					elementRef,
 					control.getId(),
 					documentModelService.getDocumentModelId()
@@ -136,7 +136,7 @@ class ElementReferenceVisitor extends ModelVisitor {
 					problems.add(new ConsistencyProblem(
 						modelId,
 						FormModelCategory.MISSING_DM_ELEMENT_IN_OVERVIEW_COLUMN,
-						new FormModelProblemSource(repeatOverviewColumn.getId()),
+						FormModelProblemSource.involving(repeatOverviewColumn.getId()),
 						elementRef,
 						repeatId,
 						documentModelService.getDocumentModelId()
@@ -154,7 +154,7 @@ class ElementReferenceVisitor extends ModelVisitor {
 			problems.add(new ConsistencyProblem(
 				modelId,
 				FormModelCategory.FORM_MODEL_INVALID_GROUP_REF,
-				new FormModelProblemSource(repeatId),
+				FormModelProblemSource.involving(repeatId),
 				groupRef,
 				documentModelService.getDocumentModelId()
 			));

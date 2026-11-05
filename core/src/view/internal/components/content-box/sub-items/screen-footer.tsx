@@ -111,7 +111,7 @@ export function ScreenFooter({ element, config }: ScreenFooterProps): ReactEleme
 		<ContentBoxFooter>
 			<ButtonGroupContainer
 				responsive
-				// eslint-disable-next-line @typescript-eslint/no-deprecated
+				// oxlint-disable-next-line typescript/no-deprecated
 				leftSlot={minorButtons.length > 0 ? minorButtons : undefined}
 				leftSlotProps={
 					minorButtons.length > 0
@@ -124,7 +124,7 @@ export function ScreenFooter({ element, config }: ScreenFooterProps): ReactEleme
 							}
 						: undefined
 				}
-				// eslint-disable-next-line @typescript-eslint/no-deprecated
+				// oxlint-disable-next-line typescript/no-deprecated
 				rightSlot={majorButtons.length > 0 ? majorButtons : undefined}
 				rightSlotProps={
 					majorButtons.length > 0

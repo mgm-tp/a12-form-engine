@@ -84,10 +84,12 @@ export function OnSort(
 	}
 	return params => {
 		const sortColumn = params.column;
-		if (!(
-			RepeatTableColumn.isFieldColumn(sortColumn) ||
-			RepeatTableColumn.isExpressionColumn(sortColumn)
-		)) {
+		if (
+			!(
+				RepeatTableColumn.isFieldColumn(sortColumn) ||
+				RepeatTableColumn.isExpressionColumn(sortColumn)
+			)
+		) {
 			return;
 		}
 
@@ -102,10 +104,12 @@ export function OnSort(
 		let sorting: SortingOrder;
 		if (currentSortingState) {
 			const currentSortingStateColumn = currentSortingState.column;
-			if (!(
-				RepeatTableColumn.isFieldColumn(currentSortingStateColumn) ||
-				RepeatTableColumn.isExpressionColumn(currentSortingStateColumn)
-			)) {
+			if (
+				!(
+					RepeatTableColumn.isFieldColumn(currentSortingStateColumn) ||
+					RepeatTableColumn.isExpressionColumn(currentSortingStateColumn)
+				)
+			) {
 				return;
 			}
 			sorting = ModelPath.equal(currentSortingStateColumn.modelPath, sortColumn.modelPath)

@@ -50,6 +50,8 @@ import {
 import { FormElementsLibrary } from "@com.mgmtp.a12.formengine/formengine-content-elements";
 import { FormElementsEditorLibrary } from "@com.mgmtp.a12.formengine/formengine-content-elements-editor";
 
+import { customInputEditorModule } from "./components/customization/customInput/customInputEditorModule.js";
+import { customInputModule } from "./components/customization/customInput/customInputModule.js";
 import { enableReduxDevTools } from "./enableReduxDevTools.js";
 import { MockContentEngineDataLoader } from "./mock/dataLoader.js";
 import { contentEditorModule } from "./modules/contentEditor/contentEditorModule.js";
@@ -93,7 +95,7 @@ function setupContentLibraries() {
 	const defaultLibrary = DefaultElementLibrary.get();
 	const elementLibrary = {
 		...defaultLibrary,
-		modules: [...defaultLibrary.modules, ...FormElementsLibrary.modules]
+		modules: [...defaultLibrary.modules, ...FormElementsLibrary.modules, customInputModule]
 	};
 	ElementLibraryRegistry.get().addEntry(elementLibrary);
 
@@ -101,7 +103,11 @@ function setupContentLibraries() {
 	const defaultEditorLibrary = DefaultEditorElementLibrary.get();
 	const editorLibrary = {
 		...defaultEditorLibrary,
-		modules: [...defaultEditorLibrary.modules, ...FormElementsEditorLibrary.modules]
+		modules: [
+			...defaultEditorLibrary.modules,
+			...FormElementsEditorLibrary.modules,
+			customInputEditorModule
+		]
 	};
 	EditorElementLibraryRegistry.get().addEntry(editorLibrary);
 }

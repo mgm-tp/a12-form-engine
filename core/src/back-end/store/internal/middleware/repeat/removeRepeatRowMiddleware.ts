@@ -37,15 +37,18 @@ import type { GroupInstance } from "@com.mgmtp.a12.kernel/kernel-md-facade";
 import { findElementByFormModelPath } from "../../../../../models/index.js";
 import { isFormModelRepeat } from "../../../../../models/internal/FormModelGuards.js";
 import { DocumentUtils } from "../../../../../models/internal/utils/document-utils.js";
-import { ReadonlyObjectMap } from "../../../../../models/internal/utils/json.js";
+import { ReadonlyObjectMap } from "../../../../../models/internal/utils/ReadonlyObjectMap.js";
 import { DataUtils } from "../../../../utils/internal/edit-document-utils.js";
 import { Commands, Events } from "../../actions.js";
-import { removeRowEntriesInMessages } from "../../change-validation.js";
+import {
+	removeRowEntriesInCustomMessages,
+	removeRowEntriesInMessages
+} from "../../change-validation.js";
 import { KernelComputation } from "../../computation.js";
-import { messageStateIsEqual } from "../../messageStateIsEqual.js";
+import { customMessageStateIsEqual, messageStateIsEqual } from "../../messageStateIsEqual.js";
 import { DataSelectors } from "../../selectors/data.js";
 import { ModelSelectors } from "../../selectors/models.js";
-import { UiStateSelectors } from "../../selectors/ui-state.js";
+import { InternalUiStateSelectors, UiStateSelectors } from "../../selectors/ui-state.js";
 
 import type { Conversion, Localization } from "../middleware-options.js";
 import { updateDataDirtyState } from "../updateDirtyState.js";
@@ -66,6 +69,7 @@ export function removeRepeatRowMiddleware(
 		if (Events.Repeat.removeRow.match(action)) {
 			const document = DataSelectors.document()(api.getState()) as GroupInstance;
 			const messages = UiStateSelectors.messages()(api.getState());
+			const customMessages = InternalUiStateSelectors.customMessages()(api.getState());
 			const formModel = ModelSelectors.formModel()(api.getState());
 			const documentModel = ModelSelectors.documentModel()(api.getState());
 
@@ -73,6 +77,11 @@ export function removeRepeatRowMiddleware(
 
 			const { document: newDocument } = DataUtils.removeRow(documentPath, document, documentModel);
 			const newMessages = removeRowEntriesInMessages(documentPath, messages, documentModel);
+			const newCustomMessages = removeRowEntriesInCustomMessages(
+				documentPath,
+				customMessages,
+				documentModel
+			);
 
 			const updatedResult = KernelComputation.internalComputeThenValidate({
 				document: newDocument,
@@ -93,8 +102,13 @@ export function removeRepeatRowMiddleware(
 
 			if (api.getState().ui.validationBar.visible) {
 				api.dispatch(Commands.validateFull());
-			} else if (!messageStateIsEqual(messages, updatedResult.messages)) {
-				api.dispatch(Commands.setMessageState({ messages: updatedResult.messages }));
+			} else {
+				if (!customMessageStateIsEqual(customMessages, newCustomMessages)) {
+					api.dispatch(Commands.setCustomMessageState({ customMessages: newCustomMessages }));
+				}
+				if (!messageStateIsEqual(messages, updatedResult.messages)) {
+					api.dispatch(Commands.setMessageState({ messages: updatedResult.messages }));
+				}
 			}
 
 			updateDataDirtyState(api.dispatch, api.getState());

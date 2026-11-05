@@ -42,6 +42,7 @@ import type { Mutable } from "../../../../../back-end/utils/internal/types.js";
 import type { FormModel } from "../../../../../models/index.js";
 import type { Config } from "../../../../../view/index.js";
 import type { RtlRenderWrapper } from "../../../../rtl-utils/render-wrapper.js";
+import { createModelPath } from "../../../../utils/createModelPath.js";
 import { RenderGroupFixture } from "../../../../utils/rtl-render-group.js";
 import {
 	loadData,
@@ -50,7 +51,6 @@ import {
 } from "../../../../utils/setup.js";
 import { setupFixture, setupModelsFixture } from "../../../../utils/setupFixture.js";
 import { FORM_MODEL } from "../../../../utils/test-model-helpers/repeat.infinite-scrolling.js";
-import { createModelPath } from "../../../../utils/createModelPath.js";
 
 import { IdEquals } from "../query-predicates.js";
 

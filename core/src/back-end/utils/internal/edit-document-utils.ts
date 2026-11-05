@@ -37,7 +37,7 @@ import type {
 } from "@com.mgmtp.a12.kernel/kernel-md-facade";
 
 import { DocumentUtils } from "../../../models/internal/utils/document-utils.js";
-import type { ReadonlyObjectMap } from "../../../models/internal/utils/json.js";
+import type { ReadonlyObjectMap } from "../../../models/internal/utils/ReadonlyObjectMap.js";
 import type { DetailedUpdateResult } from "../../store/internal/DetailedUpdateResult.js";
 import type { Change } from "../../store/internal/documentChange.js";
 import { ChangeMapCreators } from "../../store/internal/documentChange.js";
@@ -47,6 +47,11 @@ import { EngineStore } from "../../store/internal/store.js";
 export interface UpdateResult {
 	readonly document: GroupInstance;
 	readonly messages: ReadonlyObjectMap<EngineStore.Validation.Entry>;
+}
+
+/** @internal */
+export interface MoveRowResult extends UpdateResult {
+	readonly customMessages: ReadonlyObjectMap<EngineStore.Validation.CustomEntry>;
 }
 
 /**
@@ -59,19 +64,26 @@ export const DataUtils = {
 	 *
 	 * Function to move a row in a repeatable group.
 	 * The row instance has to be moved in the document and
-	 * the errors-messages have to be updated.
+	 * the errors-messages of both validation slices have to be updated.
 	 */
 	moveRow(
 		json: GroupInstance,
 		rowPath: EntityInstancePath,
 		delta: number,
 		messages: ReadonlyObjectMap<EngineStore.Validation.Entry>,
+		customMessages: ReadonlyObjectMap<EngineStore.Validation.CustomEntry>,
 		documentModel: DocumentModel
-	): UpdateResult {
+	): MoveRowResult {
 		const newDocument = DocumentUtils.moveRow(json, rowPath, delta, documentModel);
 		const newMessages: ReadonlyObjectMap<EngineStore.Validation.Entry> =
 			EngineStore.Validation.Message.updateMessagesPaths(messages, rowPath, documentModel, delta);
-		return { document: newDocument, messages: newMessages };
+		const newCustomMessages = EngineStore.Validation.Message.updateCustomMessagesPaths(
+			customMessages,
+			rowPath,
+			documentModel,
+			delta
+		);
+		return { document: newDocument, messages: newMessages, customMessages: newCustomMessages };
 	},
 
 	/**

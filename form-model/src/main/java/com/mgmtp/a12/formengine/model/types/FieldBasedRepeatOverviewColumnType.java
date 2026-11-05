@@ -51,6 +51,7 @@ public class FieldBasedRepeatOverviewColumnType extends RepeatOverviewColumnType
 	protected String secret;
 	protected DatePickerConfigurationType datePickerConfig;
 	protected MessageExpositionEnumType messageExposition;
+	protected TooltipPositionEnumType tooltipPosition;
 	protected String autoExpand;
 	protected String truncateSuffix;
 	protected String elementRef;
@@ -100,6 +101,18 @@ public class FieldBasedRepeatOverviewColumnType extends RepeatOverviewColumnType
 
 	public boolean isMessageExpositionSet() {
 		return (this.messageExposition != null);
+	}
+
+	public TooltipPositionEnumType getTooltipPosition() {
+		return tooltipPosition;
+	}
+
+	public void setTooltipPosition(final TooltipPositionEnumType value) {
+		this.tooltipPosition = value;
+	}
+
+	public boolean isTooltipPositionSet() {
+		return (this.tooltipPosition != null);
 	}
 
 	public String getAutoExpand() {
@@ -284,6 +297,11 @@ public class FieldBasedRepeatOverviewColumnType extends RepeatOverviewColumnType
 
 	public FieldBasedRepeatOverviewColumnType withMessageExposition(final MessageExpositionEnumType value) {
 		setMessageExposition(value);
+		return this;
+	}
+
+	public FieldBasedRepeatOverviewColumnType withTooltipPosition(final TooltipPositionEnumType value) {
+		setTooltipPosition(value);
 		return this;
 	}
 

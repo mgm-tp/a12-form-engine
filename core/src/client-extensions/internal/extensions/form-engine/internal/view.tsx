@@ -39,28 +39,29 @@
 import deepEqual from "fast-deep-equal";
 import type { JSX } from "react";
 import { memo, useMemo, useRef } from "react";
-import { connect, shallowEqual } from "react-redux";
+import { shallowEqual, useStore } from "react-redux";
 
 import type { View } from "@com.mgmtp.a12.client/client-core";
 import { ActivitySelectors, ViewViews } from "@com.mgmtp.a12.client/client-core";
 
+import { assertExists } from "../../../../../back-end/utils/internal/assertions.js";
 import type { PickOptional } from "../../../../../back-end/utils/internal/types.js";
 import type {
 	Config,
-	DefaultDispatchProps,
 	DefaultStateProps,
 	FormEngineRendererPropsType,
 	ScrollApi,
 	ScrollHandlerProps
 } from "../../../../../view/index.js";
 import { FormEngineRenderer, ScrollHandler } from "../../../../../view/index.js";
+import { EngineStoreContext } from "../../../../../view/internal/configuration/engine-store-context.js";
 import {
 	createRenderGuardComponent,
 	Placeholder
 } from "../../../core/view/internal/components/createRenderGuardComponent.js";
 
-import { FormEngineActions } from "./actions.js";
-import { FormEngineStateAdapter } from "./state.js";
+import { FormEngineHooks } from "./hooks.js";
+import { FormEngineSelectors } from "./selectors.js";
 import { useScrollBehavior } from "./useScrollBehavior.js";
 
 export type EngineCompositionProps = Pick<View, "activityId" | "ariaLevel"> &
@@ -97,22 +98,41 @@ function EngineComposition(props: EngineCompositionProps): JSX.Element | null {
 		[props.activityId]
 	);
 
+	// `props.state` is a snapshot re-supplied on every relevant re-render - fine for rendering,
+	// but not a substitute for a true `subscribe` (see `EngineStoreContext`'s own doc comment).
+	// `useStore` here reads from the same host `<Provider>` this component's own `connect()`
+	// (further up, in `FormEngineView`) already resolves against.
+	const hostStore = useStore<object>();
+	const engineStoreAccessor = useMemo(
+		() => ({
+			getState: () => {
+				const state = FormEngineSelectors.engineState(activityId)(hostStore.getState());
+				assertExists(state, "Expected the engine state to be available.");
+				return state;
+			},
+			subscribe: (listener: () => void) => hostStore.subscribe(listener)
+		}),
+		[activityId, hostStore]
+	);
+
 	return (
 		<ViewViews.ActivityContext.Provider value={activityContextValue}>
-			<ScrollHandler
-				models={props.state.models}
-				uiState={props.state.ui}
-				disableRepeatBehavior={props.disableRepeatBehavior}
-				disableScrollToTopLevelScreen={props.disableScrollToTopLevelScreen}
-				uiIdPrefix={props.uiIdPrefix}
-			>
-				<FormEngineRenderer
-					config={props.config}
-					eventHandlers={props.eventHandlers}
-					state={props.state}
-					scrollRef={scrollRef}
-				/>
-			</ScrollHandler>
+			<EngineStoreContext.Provider value={engineStoreAccessor}>
+				<ScrollHandler
+					models={props.state.models}
+					uiState={props.state.ui}
+					disableRepeatBehavior={props.disableRepeatBehavior}
+					disableScrollToTopLevelScreen={props.disableScrollToTopLevelScreen}
+					uiIdPrefix={props.uiIdPrefix}
+				>
+					<FormEngineRenderer
+						config={props.config}
+						eventHandlers={props.eventHandlers}
+						state={props.state}
+						scrollRef={scrollRef}
+					/>
+				</ScrollHandler>
+			</EngineStoreContext.Provider>
 		</ViewViews.ActivityContext.Provider>
 	);
 }
@@ -126,16 +146,18 @@ export const FormEngineViewTpl = createRenderGuardComponent(
 	false
 );
 
-/** @internal */
-export const FormEngineView = connect<
-	Partial<DefaultStateProps>,
-	DefaultDispatchProps,
-	FormEngineProps,
-	object
->(
-	FormEngineStateAdapter.mapStateToProps,
-	FormEngineActions.mapDispatchToProps
-)(FormEngineViewTpl);
+/**
+ * No `memo` needed here: the hooks below only re-render this component when the
+ * mapped props changed, and `FormEngineViewTpl` memoizes the actual rendering.
+ *
+ * @internal
+ */
+export function FormEngineView(ownProps: FormEngineProps): JSX.Element | null {
+	const stateProps = FormEngineHooks.useStateProps(ownProps);
+	const dispatchProps = FormEngineHooks.useDispatchProps(ownProps);
+
+	return <FormEngineViewTpl {...ownProps} {...stateProps} {...dispatchProps} />;
+}
 
 function propsAreComplete(
 	props: Partial<Pick<EngineCompositionProps, "config" | "state">>
@@ -158,8 +180,13 @@ function shouldComponentUpdate(state: object, props: EngineCompositionProps): bo
  * `FormEngineStateAdapter.mapStateToProps` (and possibly also
  * `defaultMapStateToProps`). Therefore, we need to navigate down in the state
  * props objects until we have some stable props.
+ *
+ * This is what keeps the Form Engine from re-rendering on every dispatched
+ * action - the props it is given are never referentially equal.
+ *
+ * @internal
  */
-function areStatePropsEqual(
+export function areStatePropsEqual(
 	prevProps: Partial<DefaultStateProps>,
 	curProps: Partial<DefaultStateProps>
 ): boolean {

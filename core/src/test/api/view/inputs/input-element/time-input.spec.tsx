@@ -70,7 +70,8 @@ describe("api.view.inputs", () => {
 			documentElementDataType,
 			component: "TimePicker",
 			renderFunction: TimeInput,
-			formModelPath: createModelPath("foo", "bar")
+			formModelPath: createModelPath("foo", "bar"),
+			breakTooltipsToNewLine: true
 		} as const;
 
 		const datePath = createDocumentPath(["A12T_DmTypes"], ["DateAndDateTime"], ["Time01"]);

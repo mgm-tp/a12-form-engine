@@ -2,7 +2,7 @@
   "header": {
     "id": "customization.custom-screen-element-form",
     "modelType": "form",
-    "modelVersion": "39.0.0",
+    "modelVersion": "39.3.0",
     "locales": [
       {
         "code": "en"
@@ -29,7 +29,7 @@
     ],
     "modelReferences": [
       {
-        "alias": "customization.custom-element-document",
+        "alias": "customization.custom-screen-element-document",
         "modelType": "document",
         "purpose": "data binding",
         "reference": "customization.custom-screen-element-document"
@@ -38,7 +38,137 @@
   },
   "content": {
     "subHeaderBox": {
-      "id": "subHeaderBox1"
+      "id": "subHeaderBox1",
+      "minorButtons": {
+        "button": [
+          {
+            "type": "EVENT",
+            "id": "button_c7260",
+            "name": "createCustomError",
+            "buttonStyling": {
+              "label": {
+                "type": "Multilingual",
+                "multilingualText": {
+                  "text": [
+                    {
+                      "locale": "en",
+                      "text": "Create custom errors"
+                    }
+                  ]
+                }
+              }
+            },
+            "event": "createCustomError",
+            "scope": "HIDDEN_IN_READONLY_MODE"
+          }
+        ]
+      },
+      "majorButtons": {
+        "button": [
+          {
+            "type": "NAVIGATION",
+            "id": "button_0f306",
+            "name": "toScreen2NoValidation",
+            "buttonStyling": {
+              "label": {
+                "type": "Multilingual",
+                "multilingualText": {
+                  "text": [
+                    {
+                      "locale": "en",
+                      "text": "Screen 2 (no validation)"
+                    }
+                  ]
+                }
+              }
+            },
+            "target": "screen_1e044",
+            "scope": "HIDDEN_IN_READONLY_MODE"
+          },
+          {
+            "type": "NAVIGATION",
+            "id": "button_3e733",
+            "name": "toScreen2PartialValidation",
+            "buttonStyling": {
+              "label": {
+                "type": "Multilingual",
+                "multilingualText": {
+                  "text": [
+                    {
+                      "locale": "en",
+                      "text": "Screen 2 (partial validation)"
+                    }
+                  ]
+                }
+              }
+            },
+            "target": "screen_1e044",
+            "validation": "partial",
+            "scope": "HIDDEN_IN_READONLY_MODE"
+          },
+          {
+            "type": "NAVIGATION",
+            "id": "button_3b597",
+            "name": "toScreen2FullValidation",
+            "buttonStyling": {
+              "label": {
+                "type": "Multilingual",
+                "multilingualText": {
+                  "text": [
+                    {
+                      "locale": "en",
+                      "text": "Screen 2 (full validation, clears custom errors)"
+                    }
+                  ]
+                }
+              }
+            },
+            "target": "screen_1e044",
+            "validation": "full",
+            "scope": "HIDDEN_IN_READONLY_MODE"
+          },
+          {
+            "type": "NAVIGATION",
+            "id": "button_8deed",
+            "name": "toScreen1",
+            "buttonStyling": {
+              "label": {
+                "type": "Multilingual",
+                "multilingualText": {
+                  "text": [
+                    {
+                      "locale": "en",
+                      "text": "Screen 1"
+                    }
+                  ]
+                }
+              }
+            },
+            "target": "screen_3c746",
+            "scope": "HIDDEN_IN_READONLY_MODE"
+          },
+          {
+            "type": "NAVIGATION",
+            "id": "button_2166c",
+            "name": "toScreen3",
+            "buttonStyling": {
+              "label": {
+                "type": "Multilingual",
+                "multilingualText": {
+                  "text": [
+                    {
+                      "locale": "en",
+                      "text": "Screen 3"
+                    }
+                  ]
+                }
+              }
+            },
+            "target": "screen_a58ae",
+            "scope": "HIDDEN_IN_READONLY_MODE"
+          }
+        ]
+      }
     },
     "footerBox": {
       "id": "footerBox1"
@@ -46,48 +176,365 @@
     "screens": [
       {
         "id": "screen_3c746",
-        "name": "Screen 1",
+        "name": "Screen1",
         "screenElements": [
           {
-            "type": "CustomScreenElement",
-            "id": "customScreenElement-08e23",
-            "name": "customScreenElementTestName",
+            "type": "ControlGrid",
+            "id": "controlgrid_3f21c",
+            "name": "explanationGrid",
             "title": {
               "type": "Multilingual",
               "multilingualText": {
                 "text": [
                   {
                     "locale": "en",
-                    "text": "Custom Screen Element With Default Height"
-                  },
-                  {
-                    "locale": "de",
-                    "text": "Benutzerdefinierter Screen Element Mit Standardhöhe"
-                  }
-                ]
-              }
-            }
-          },
-          {
-            "type": "CustomScreenElement",
-            "id": "customScreenElement-08e24",
-            "name": "Custom Screen Element",
-            "title": {
-              "type": "Multilingual",
-              "multilingualText": {
-                "text": [
-                  {
-                    "locale": "en",
-                    "text": "Custom Screen Element Title"
-                  },
-                  {
-                    "locale": "de",
-                    "text": "Benutzerdefinierter Screen Element Titel"
+                    "text": "Information"
                   }
                 ]
               }
             },
-            "height": 150
+            "row": [
+              {
+                "type": "Row",
+                "id": "row_3f21d",
+                "cell": [
+                  {
+                    "type": "TextCell",
+                    "id": "textcell_3f21b",
+                    "name": "explanation",
+                    "offset": {
+                      "lg": 0
+                    },
+                    "span": {
+                      "lg": 1
+                    },
+                    "content": {
+                      "text": [
+                        {
+                          "locale": "en",
+                          "text": "This model shows validation errors on Custom Screen Elements, which projects report themselves instead of letting the Form Engine compute them.\n<br/>\n\"Create custom errors\" raises one error on a field and one on each Custom Screen Element, including the one inside the detached repeat on screen 3. They all appear in the same validation bar, and \"Go to Issue\" jumps to the custom element - which works because the devapp renders the <code>uiId</code> the Form Engine passes to it.\n<br/>\nControl2 carries a real validation rule (3 to 6 characters), so you can see a computed error next to the custom ones. On screen 3 you can move, copy and delete repeat rows to watch the custom errors follow their row or disappear with it.\n<br/>\nThe navigation buttons show how validation interacts with them: leaving a screen without validation or with a partial one keeps the custom errors, a full validation clears them."
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "CustomScreenElement",
+            "id": "customscreenelement_2bf9e",
+            "name": "customElm1",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "Custom Element 1"
+                  }
+                ]
+              }
+            },
+            "annotations": [
+              {
+                "name": "custom",
+                "value": "1"
+              }
+            ]
+          },
+          {
+            "type": "Section",
+            "id": "section_4a13f",
+            "name": "ControlsAndCustomElement",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "Controls and custom element"
+                  }
+                ]
+              }
+            },
+            "screenElements": [
+              {
+                "type": "ControlGrid",
+                "id": "controlgrid_d441e",
+                "name": "Controls",
+                "row": [
+                  {
+                    "type": "Row",
+                    "id": "row_b464b",
+                    "cell": [
+                      {
+                        "type": "Control",
+                        "id": "control_84d0c",
+                        "label": {
+                          "type": "Multilingual",
+                          "multilingualText": {
+                            "text": [
+                              {
+                                "locale": "en",
+                                "text": "Control1"
+                              }
+                            ]
+                          }
+                        },
+                        "elementRef": "field_d0694"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "Row",
+                    "id": "row_1ae73",
+                    "cell": [
+                      {
+                        "type": "Control",
+                        "id": "control_dec56",
+                        "label": {
+                          "type": "Multilingual",
+                          "multilingualText": {
+                            "text": [
+                              {
+                                "locale": "en",
+                                "text": "Control2"
+                              }
+                            ]
+                          }
+                        },
+                        "elementRef": "field_89bd3"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "CustomScreenElement",
+                "id": "customscreenelement_87ff7",
+                "name": "customElm2",
+                "title": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "Custom Element 2"
+                      }
+                    ]
+                  }
+                },
+                "annotations": [
+                  {
+                    "name": "custom",
+                    "value": "2"
+                  }
+                ],
+                "height": 100
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "screen_1e044",
+        "name": "Screen2",
+        "title": {
+          "type": "Multilingual",
+          "multilingualText": {
+            "text": [
+              {
+                "locale": "en",
+                "text": "Screen2"
+              }
+            ]
+          }
+        },
+        "screenElements": [
+          {
+            "type": "MultiColumnSection",
+            "id": "multicolumnsection_11d19",
+            "name": "Columns",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "Custom element in columns"
+                  }
+                ]
+              }
+            },
+            "layout": {
+              "lg": "12"
+            },
+            "screenElements": [
+              {
+                "type": "CustomScreenElement",
+                "id": "customscreenelement_2d217",
+                "name": "customElm3",
+                "title": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "Custom Element 3"
+                      }
+                    ]
+                  }
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "screen_a58ae",
+        "name": "Screen3",
+        "title": {
+          "type": "Multilingual",
+          "multilingualText": {
+            "text": [
+              {
+                "locale": "en",
+                "text": "CustomElementInRepeat"
+              }
+            ]
+          }
+        },
+        "screenElements": [
+          {
+            "type": "DetachedRepeat",
+            "id": "detachedrepeat_3e14c",
+            "name": "Rows",
+            "title": {
+              "type": "Multilingual",
+              "multilingualText": {
+                "text": [
+                  {
+                    "locale": "en",
+                    "text": "Detached repeat"
+                  }
+                ]
+              }
+            },
+            "repeatOverviewColumn": [
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn_f401a",
+                "label": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "Column for f3"
+                      }
+                    ]
+                  }
+                },
+                "width": 1,
+                "elementRef": "field_1ab5a"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "fieldbasedrepeatoverviewcolumn_8947a",
+                "label": {
+                  "type": "Multilingual",
+                  "multilingualText": {
+                    "text": [
+                      {
+                        "locale": "en",
+                        "text": "Column for f4"
+                      }
+                    ]
+                  }
+                },
+                "width": 1,
+                "elementRef": "field_c1f73"
+              }
+            ],
+            "groupRef": "group_8e274",
+            "enableAdd": true,
+            "enableRemove": true,
+            "enableCopy": true,
+            "enableReorder": true,
+            "detailScreen": {
+              "id": "screen_dbc04",
+              "name": "Details",
+              "screenElements": [
+                {
+                  "type": "ControlGrid",
+                  "id": "controlgrid_b7faf",
+                  "name": "rep_Controls",
+                  "row": [
+                    {
+                      "type": "Row",
+                      "id": "row_82939",
+                      "cell": [
+                        {
+                          "type": "Control",
+                          "id": "control_25966",
+                          "label": {
+                            "type": "Multilingual",
+                            "multilingualText": {
+                              "text": [
+                                {
+                                  "locale": "en",
+                                  "text": "control3"
+                                }
+                              ]
+                            }
+                          },
+                          "elementRef": "field_1ab5a"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "Row",
+                      "id": "row_68042",
+                      "cell": [
+                        {
+                          "type": "Control",
+                          "id": "control_4d7e3",
+                          "label": {
+                            "type": "Multilingual",
+                            "multilingualText": {
+                              "text": [
+                                {
+                                  "locale": "en",
+                                  "text": "control4"
+                                }
+                              ]
+                            }
+                          },
+                          "elementRef": "field_c1f73"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "CustomScreenElement",
+                  "id": "customscreenelement_6016c",
+                  "name": "customElm4",
+                  "title": {
+                    "type": "Multilingual",
+                    "multilingualText": {
+                      "text": [
+                        {
+                          "locale": "en",
+                          "text": "Custom Element 4"
+                        }
+                      ]
+                    }
+                  }
+                }
+              ]
+            }
           }
         ]
       }

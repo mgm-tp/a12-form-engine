@@ -97,7 +97,7 @@ class DependentControlReferenceChecker {
 			return new ConsistencyProblem(
 				modelName,
 				FormModelCategory.FORM_MODEL_DEPENDENT_CONTROL_REFERENCE,
-				new FormModelProblemSource(controlId),
+				FormModelProblemSource.involving(controlId, screenElementRef),
 				controlId,
 				screenElementRef
 			);
@@ -107,7 +107,7 @@ class DependentControlReferenceChecker {
 			return new ConsistencyProblem(
 				modelName,
 				FormModelCategory.FORM_MODEL_DEPENDENT_CONTROL_PARENT,
-				new FormModelProblemSource(controlId),
+				FormModelProblemSource.involving(controlId, screenElementRef),
 				controlId,
 				screenElementRef
 			);
@@ -128,7 +128,7 @@ class DependentControlReferenceChecker {
 			return new ConsistencyProblem(
 				modelName,
 				FormModelCategory.FORM_MODEL_DEPENDENT_CONTROL_DIFFERENT_TOP_LEVEL_SCREEN,
-				new FormModelProblemSource(controlId),
+				FormModelProblemSource.involving(controlId, screenElementRef),
 				controlId,
 				screenElementRef
 			);
@@ -141,7 +141,7 @@ class DependentControlReferenceChecker {
 			return new ConsistencyProblem(
 				modelName,
 				FormModelCategory.FORM_MODEL_DEPENDENT_CONTROL_INDEXED_DIFFERENT_SCREEN,
-				new FormModelProblemSource(controlId),
+				FormModelProblemSource.involving(controlId, screenElementRef),
 				controlId,
 				screenElementRef
 			);
@@ -155,7 +155,7 @@ class DependentControlReferenceChecker {
 			return new ConsistencyProblem(
 				modelName,
 				FormModelCategory.FORM_MODEL_DEPENDENT_CONTROL_INCOMPATIBLE_CONTEXT,
-				new FormModelProblemSource(controlId),
+				FormModelProblemSource.involving(controlId, screenElementRef),
 				controlId,
 				screenElementRef
 			);

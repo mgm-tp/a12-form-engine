@@ -53,7 +53,7 @@ global.window.Element.prototype.scrollIntoView = () => {};
 delete global.window.ontouchstart;
 
 // Due to newer version of react-resize-detector using native ResizeObserver that is not available in jsdom
-window.ResizeObserver = class ResizeObserver {
+global.ResizeObserver = class ResizeObserver {
 	observe() {}
 	unobserve() {}
 	disconnect() {}

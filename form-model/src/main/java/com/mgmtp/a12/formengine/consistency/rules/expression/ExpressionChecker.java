@@ -31,80 +31,90 @@
  */
 package com.mgmtp.a12.formengine.consistency.rules.expression;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
-import javax.script.ScriptContext;
-import javax.script.ScriptEngine;
-import javax.script.ScriptException;
-import javax.script.SimpleScriptContext;
+import java.util.ArrayList;
+import java.util.List;
 
-import org.apache.commons.io.IOUtils;
-import org.openjdk.nashorn.api.scripting.NashornScriptEngine;
-import org.openjdk.nashorn.api.scripting.NashornScriptEngineFactory;
-import org.openjdk.nashorn.api.scripting.ScriptObjectMirror;
+import com.mgmtp.a12.expression.parser.ExpressionNode.CaseNode;
+import com.mgmtp.a12.expression.parser.ExpressionNode.FieldNode;
+import com.mgmtp.a12.expression.parser.ExpressionNode.GroupNode;
+import com.mgmtp.a12.expression.parser.ExpressionNode.MultilingualTextNode;
+import com.mgmtp.a12.expression.parser.ExpressionNode.RootNode;
+import com.mgmtp.a12.expression.parser.ExpressionNode.StringNode;
+import com.mgmtp.a12.expression.parser.ExpressionNode.TextNode;
+import com.mgmtp.a12.expression.parser.ExpressionNode.TokenNode;
+import com.mgmtp.a12.expression.parser.ExpressionNode.TokenType;
+import com.mgmtp.a12.expression.parser.ExpressionParseResult;
+import com.mgmtp.a12.expression.parser.NativeExpressionParser;
 
+/**
+ * Kept for external consumers of the published API, translating the {@code expression-parser}
+ * artifact's typed AST back into the flat {@link ExpressionNode} shape this class has always
+ * returned. {@link ExpressionReferenceChecker} no longer uses this class; it walks the artifact's
+ * AST directly, which is why the artifact's types never need to appear in this class's own
+ * signature.
+ */
 public class ExpressionChecker {
-	private static final ScriptEngine engine = new NashornScriptEngineFactory().getScriptEngine();
 
-	private final ScriptContext scriptContext;
-
-	public ExpressionChecker() {
-		scriptContext = new SimpleScriptContext();
-
-		try (final InputStream is = getClass().getClassLoader().getResourceAsStream("resources/parser.js")) {
-			assert is != null : "Could not create input stream for expression parser library.";
-
-			final String expressionsLib = IOUtils.toString(is, StandardCharsets.UTF_8);
-
-			engine.eval("var console = {log: print, error: print};" + expressionsLib, scriptContext);
-
-		} catch (final IOException | ScriptException e) {
-			throw new RuntimeException("Error when evaluating JavaScript Expressions Library: " + e);
-		}
-	}
+	private static final NativeExpressionParser parser = new NativeExpressionParser();
 
 	public ExpressionResult parse(final String input) {
 		final ExpressionResult result = new ExpressionResult();
-		try {
-			final String varInitialization = """
-				var input = undefined;
-				var result = undefined;
-				var error = undefined;
-				""";
-			engine.eval(varInitialization, scriptContext);
-
-			getContextObject(scriptContext).put("input", input);
-
-			final String tryCatchBlock = """
-				try {
-					result = Parser.parse(input);
-				} catch (e) {
-					error = e.message;
-				}
-				""";
-			engine.eval(tryCatchBlock, scriptContext);
-
-			if (getContextObject(scriptContext).get("error") != null) {
-
-				result.setErrorMessage((String) getContextObject(scriptContext).get("error"));
-			} else {
-				result.setNode(ExpressionUtil.convertToNode(getContextObject(scriptContext).get("result")));
-			}
-		} catch (final ScriptException e) {
-			result.setErrorMessage(e.getMessage());
+		final ExpressionParseResult parseResult = parser.parse(input);
+		if (parseResult.hasError()) {
+			result.setErrorMessage(parseResult.errorMessage());
+		} else {
+			result.setNode(convertToNode(parseResult.node()));
 		}
 		return result;
 	}
 
-	/**
-	 * Returns the object from the script context into which the nashorn engine writes its
-	 * evaluation results
-	 */
-	private ScriptObjectMirror getContextObject(final ScriptContext scriptContext) {
-		return ((ScriptObjectMirror) scriptContext
-			.getBindings(ScriptContext.ENGINE_SCOPE)
-			.get(NashornScriptEngine.NASHORN_GLOBAL));
+	private static ExpressionNode convertToNode(final com.mgmtp.a12.expression.parser.ExpressionNode node) {
+		return switch (node) {
+			case RootNode(final List<com.mgmtp.a12.expression.parser.ExpressionNode> children) ->
+				new ExpressionNode("root", null, null, convertChildren(children));
+			case FieldNode(final String name) ->
+				new ExpressionNode("field", name, null, List.of());
+			case StringNode(final String content) ->
+				new ExpressionNode("string", null, content, List.of());
+			case GroupNode(
+				final String name, final var delimiter,
+				final List<com.mgmtp.a12.expression.parser.ExpressionNode> children
+			) -> new ExpressionNode("group", name, null, convertChildren(children));
+			case CaseNode(
+				final String name, final var operation, final String content,
+				final List<com.mgmtp.a12.expression.parser.ExpressionNode> children
+			) -> new ExpressionNode("case", name, content, convertChildren(children));
+			case MultilingualTextNode(final List<TextNode> children) ->
+				new ExpressionNode("multilingualtext", null, null, convertTextChildren(children));
+			case TextNode ignored ->
+				new ExpressionNode("text", null, null, List.of());
+			case TokenNode(final TokenType name) ->
+				new ExpressionNode("token", tokenName(name), null, List.of());
+		};
 	}
 
+	private static List<ExpressionNode> convertChildren(
+		final List<com.mgmtp.a12.expression.parser.ExpressionNode> children
+	) {
+		final List<ExpressionNode> result = new ArrayList<>();
+		for (final com.mgmtp.a12.expression.parser.ExpressionNode child : children) {
+			result.add(convertToNode(child));
+		}
+		return result;
+	}
+
+	private static List<ExpressionNode> convertTextChildren(final List<TextNode> children) {
+		final List<ExpressionNode> result = new ArrayList<>();
+		for (final TextNode child : children) {
+			result.add(convertToNode(child));
+		}
+		return result;
+	}
+
+	private static String tokenName(final TokenType type) {
+		return switch (type) {
+			case NEW_LINE -> "newline";
+			case NEW_PARAGRAPH -> "newparagraph";
+		};
+	}
 }

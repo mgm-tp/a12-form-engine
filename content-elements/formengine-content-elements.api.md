@@ -33,6 +33,7 @@ import type { KernelTypes } from '@com.mgmtp.a12.client/client-data';
 import type { ListItemProps } from '@com.mgmtp.a12.widgets/widgets-core';
 import type { ListProps } from '@com.mgmtp.a12.widgets/widgets-core';
 import type { LocalizedModelText } from '@com.mgmtp.a12.utils/utils-localization';
+import type { MarkdownEditorProps } from '@com.mgmtp.a12.widgets/widgets-core/experimental';
 import type { Message } from '@com.mgmtp.a12.kernel/kernel-md-facade';
 import type { MessageBoxProps } from '@com.mgmtp.a12.widgets/widgets-core';
 import type { ModalOverlayProps } from '@com.mgmtp.a12.widgets/widgets-core';
@@ -103,6 +104,8 @@ export interface BaseControlProps {
     // (undocumented)
     readonly suffix?: LocalizedModelText;
     // (undocumented)
+    readonly tooltipPosition?: TooltipPosition;
+    // @deprecated (undocumented)
     readonly tooltipsOnTop?: true;
     // (undocumented)
     readonly truncateSuffix?: true;
@@ -116,6 +119,8 @@ export interface BaseControlSettings {
     readonly autoComplete?: string;
     // (undocumented)
     readonly autoExpand?: true;
+    // (undocumented)
+    readonly breakTooltipsToNewLine?: TooltipLineBreak;
     // (undocumented)
     readonly checkedLabel?: string;
     // (undocumented)
@@ -159,7 +164,7 @@ export interface BaseControlSettings {
     readonly suffix?: string;
     // (undocumented)
     readonly timeZone?: string;
-    // (undocumented)
+    // @deprecated (undocumented)
     readonly tooltipsOnTop?: true;
     // (undocumented)
     readonly truncateSuffix?: true;
@@ -179,6 +184,8 @@ export interface BaseControlSettings {
 export interface BaseWidgetSettings {
     // (undocumented)
     readonly ariaDescribedBy: string[];
+    // (undocumented)
+    readonly breakTooltipsToNewLine?: TooltipLineBreak;
     // (undocumented)
     readonly checkedLabel?: string;
     // (undocumented)
@@ -211,7 +218,7 @@ export interface BaseWidgetSettings {
     readonly suffixes?: React.ReactNode;
     // (undocumented)
     readonly tooltips?: React.ReactNode;
-    // (undocumented)
+    // @deprecated (undocumented)
     readonly tooltipsOnTop?: boolean;
     // (undocumented)
     readonly uncheckedLabel?: string;
@@ -289,9 +296,11 @@ export interface DynamicAmountSuffix {
 }
 
 // @public (undocumented)
-export interface EditableElement extends Omit<EditableModelElement, "elementId"> {
+export interface EditableElement {
     // (undocumented)
     readonly documentPath: EntityInstancePath;
+    readonly label?: LocalizedModelText;
+    readonly nodeId: string;
 }
 
 // @public
@@ -299,19 +308,6 @@ export type EditableElementList = EditableElement[];
 
 // @public
 export const EditableElementsContext: Context<EditableElementList>;
-
-// @public (undocumented)
-export interface EditableModelElement {
-    // (undocumented)
-    readonly elementId: string;
-    // (undocumented)
-    readonly label?: LocalizedModelText;
-    // (undocumented)
-    readonly nodeId: string;
-}
-
-// @public
-export type EditableModelElementExtractor = (node: ContentModel.Node) => EditableModelElement | null;
 
 // @public (undocumented)
 export type EnumerationItem = {
@@ -364,6 +360,7 @@ export const FormElementsModules: {
     Checkbox: ElementModule<CheckboxNode>;
     CheckboxGroup: ElementModule<CheckboxGroupNode>;
     DatePicker: ElementModule<DatePickerNode>;
+    Markdown: ElementModule<MarkdownNode>;
     MessageGroupContainer: ElementModule<MessageGroupContainerNode>;
     MessageGroupDisplay: ElementModule<MessageGroupDisplayNode>;
     MultiSelect: ElementModule<MultiSelectNode>;
@@ -376,6 +373,17 @@ export const FormElementsModules: {
 
 // @public (undocumented)
 export const FormElementsValidators: Record<string, (context: NodeValidationContext) => ValidationMessage[]>;
+
+// @public (undocumented)
+export const MARKDOWN_TYPE = "Markdown";
+
+// @public (undocumented)
+export interface MarkdownNode extends ContentModel.Node<BaseControlProps> {
+    // (undocumented)
+    readonly namespace: typeof FORM_ELEMENTS_NAMESPACE;
+    // (undocumented)
+    readonly type: typeof MARKDOWN_TYPE;
+}
 
 // @public (undocumented)
 export type MarkingOfRequiredFields = "NONE" | "REQUIRED" | "ALWAYS";
@@ -557,10 +565,19 @@ export interface TextLineNode extends ContentModel.Node<BaseControlProps> {
 }
 
 // @public
+export type TooltipLineBreak = false | "above" | "below";
+
+// @public (undocumented)
+export type TooltipPosition = "ABOVE" | "BESIDE" | "BELOW";
+
+// @public
 export function useCollectDocumentElementIds(node?: ContentModel.Node): CollectedDocumentElementIds;
 
 // @public
-export function useCollectEditableElements(node: MessageGroupContainerNode, additionalExtractor?: EditableModelElementExtractor): EditableElementList;
+export function useCollectDocumentElementIdsFromLibrary(library: ElementLibrary, node?: ContentModel.Node): CollectedDocumentElementIds;
+
+// @public
+export function useCollectEditableElements(node: MessageGroupContainerNode): EditableElementList;
 
 // @public
 export function useCommonControlSettings(node: ContentModel.Node<BaseControlProps>): BaseControlSettings;
@@ -612,6 +629,8 @@ export interface WidgetMap {
     readonly List: ComponentType<ListProps>;
     // (undocumented)
     readonly ListItem: ComponentType<ListItemProps>;
+    // (undocumented)
+    readonly MarkdownEditor: ComponentType<MarkdownEditorProps>;
     // (undocumented)
     readonly MessageBox: ComponentType<MessageBoxProps>;
     // (undocumented)

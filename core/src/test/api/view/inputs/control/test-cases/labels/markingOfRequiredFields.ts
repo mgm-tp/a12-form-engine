@@ -39,6 +39,7 @@ import { query } from "@com.mgmtp.a12.devtools/react";
 import type { FormModel } from "../../../../../../../models/index.js";
 import { getComponentMocks } from "../../../../../../rtl-utils/getComponentMocks.js";
 import { isReactElement } from "../../../../../../rtl-utils/mock-utils.js";
+import { setupFormEngineRendererWithRtl } from "../../../../../../utils/setup.js";
 import { setupModelsFixture } from "../../../../../../utils/setupFixture.js";
 import {
 	IDS as ExpressionLabelIds,
@@ -47,7 +48,6 @@ import {
 } from "../../../../../../utils/test-model-helpers/expression-label.js";
 import { IDS } from "../../../../../../utils/test-model-helpers/tooltips.js";
 import { IDS as MarkingIds } from "../../../../../../utils/test-model-helpers/validation.required.markingOfRequiredFields.js";
-import { setupFormEngineRendererWithRtl } from "../../../../../../utils/setup.js";
 
 import { renderStringInput } from "../renderStringInput.js";
 

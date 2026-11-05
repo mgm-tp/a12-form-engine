@@ -34,9 +34,9 @@ import type { ComponentType } from "react";
 
 import type { DocumentModel } from "@com.mgmtp.a12.kernel/kernel-md-facade";
 
+import type { StringValueDataType } from "../../../../../models/internal/utils/document-model-utils.js";
 import type { BooleanOrConfirmInputProps } from "../../../components/form-engine/cells/controls/boolean/types.js";
 import type { Inputs } from "../../engine-configuration.js";
-import type { StringValueDataType } from "../../../../../models/internal/utils/document-model-utils.js";
 
 import type { InputPropsType } from "./input.js";
 
@@ -63,6 +63,7 @@ export interface InputMap {
 	readonly MultiSelectInput: ComponentType<Inputs.InputProps<DocumentModel.Group>>;
 	readonly NumberInput: ComponentType<Inputs.InputProps<DocumentModel.NumberType>>;
 	readonly MultilineInput: ComponentType<Inputs.InputProps<DocumentModel.StringType>>;
+	readonly MarkdownInput: ComponentType<Inputs.InputProps<DocumentModel.StringType>>;
 	readonly StringWithHintListInput: ComponentType<Inputs.InputProps<DocumentModel.StringType>>;
 	readonly StringInput: ComponentType<
 		Inputs.InputProps<DocumentModel.StringType | DocumentModel.CustomFieldType>

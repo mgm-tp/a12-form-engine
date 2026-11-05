@@ -42,12 +42,12 @@ import { localizableFromLocalizationTreeMap } from "@com.mgmtp.a12.utils/utils-l
 
 import { DEVAPP_MODE, sleep } from "../config/mode.js";
 
-import { embeddedAttachmentLoader } from "./embeddedAttachmentLoader.js";
+import { inMemoryAttachmentLoader } from "./inMemoryAttachmentLoader.js";
 
 const defaultLoader = ((): AttachmentLoader => {
 	switch (DEVAPP_MODE) {
 		case "mock":
-			return embeddedAttachmentLoader;
+			return inMemoryAttachmentLoader;
 		case "services":
 			return platformAttachmentLoader;
 	}

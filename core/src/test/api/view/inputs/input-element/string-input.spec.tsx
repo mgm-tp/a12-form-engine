@@ -44,10 +44,10 @@ import type { ComponentMap } from "../../../../../view/internal/configuration/co
 import { getComponentMocks } from "../../../../rtl-utils/getComponentMocks.js";
 import type { RtlRenderWrapper } from "../../../../rtl-utils/render-wrapper.js";
 import { rtlRenderWrapperAsync } from "../../../../rtl-utils/render-wrapper.js";
+import { createDocumentPath } from "../../../../utils/createDocumentPath.js";
 import { createModelPath } from "../../../../utils/createModelPath.js";
 import { DocumentModelHelpers } from "../../../../utils/DocumentModelHelpers.js";
 import { setupModelsFixture } from "../../../../utils/setupFixture.js";
-import { createDocumentPath } from "../../../../utils/createDocumentPath.js";
 
 import { inputTest } from "./generic-tests/input-tests.js";
 import { createProps } from "./generic-tests/input-utils.js";
@@ -68,7 +68,8 @@ describe("api.view.inputs", () => {
 			renderFunction: StringInput,
 			component: "BufferedTextLine",
 			path: createDocumentPath(["A12T_DmTypes"], ["String"], ["String01"]),
-			formModelPath: createModelPath("foo", "bar")
+			formModelPath: createModelPath("foo", "bar"),
+			breakTooltipsToNewLine: true
 		} as const;
 
 		/** General test which are similar for all inputs */

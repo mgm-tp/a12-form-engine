@@ -72,7 +72,8 @@ export function getCustomization(currentForm?: string) {
 	return ModuleRegistryProvider.getInstance()
 		.getAllModules()
 		.find(mod => "formModelName" in mod && currentForm === mod.formModelName) as
-		DevappCustomization | undefined;
+		| DevappCustomization
+		| undefined;
 }
 
 /**

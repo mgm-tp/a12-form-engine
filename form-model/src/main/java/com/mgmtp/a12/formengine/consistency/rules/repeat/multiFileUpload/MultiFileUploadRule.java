@@ -98,7 +98,7 @@ public class MultiFileUploadRule extends AbstractRepeatRule {
 					new ConsistencyProblem(
 						modelName,
 						FORM_MODEL_REPEAT_MULTI_FILE_UPLOAD_NO_ATTACHMENT_COLLECTION,
-						new FormModelProblemSource(repeat.getId()),
+						FormModelProblemSource.involving(repeat.getId()),
 						repeat.getId(),
 						repeat.getName(),
 						repeat.getGroupRef()));
@@ -108,7 +108,7 @@ public class MultiFileUploadRule extends AbstractRepeatRule {
 					new ConsistencyProblem(
 						modelName,
 						FORM_MODEL_REPEAT_MULTI_FILE_UPLOAD_UNUSED_OPTIONS,
-						new FormModelProblemSource(repeat.getId()),
+						FormModelProblemSource.involving(repeat.getId()),
 						repeat.getId(),
 						repeat.getName()));
 			}
@@ -117,7 +117,7 @@ public class MultiFileUploadRule extends AbstractRepeatRule {
 					new ConsistencyProblem(
 						modelName,
 						FORM_MODEL_REPEAT_MULTI_FILE_UPLOAD_NO_ELEMENT_REF,
-						new FormModelProblemSource(repeat.getId()),
+						FormModelProblemSource.involving(repeat.getId()),
 						repeat.getId(),
 						repeat.getName()));
 			}

@@ -69,7 +69,7 @@ public class LocaleCompatibilityRule implements ConsistencyRule {
 			problems.add(new ConsistencyProblem(
 				model.getHeaderId(),
 				FormModelCategory.FORM_MODEL_INCOMPATIBLE_LOCALES,
-				new FormModelProblemSource(model.getHeaderId()),
+				FormModelProblemSource.involving(model.getHeaderId()),
 				missingLocales
 			));
 		}

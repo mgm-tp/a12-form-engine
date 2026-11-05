@@ -32,7 +32,7 @@ LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
 
 = Breaking Change Management
 
-The Form Engine library follows the general link:/docs/overall/breaking_change_management[A12 breaking change interpretation], but has the following exceptions:
+The Form Engine library follows the general link:/docs/overall/breaking_change_management/index.html[A12 breaking change interpretation], but has the following exceptions:
 
 - Adding new keys to the localization resource key objects is not considered a breaking change.
 +
@@ -40,7 +40,7 @@ Otherwise, it would not be possible to provide overridable default translations 
 +
 Compile errors resulting from this should point consumers to missing translations in locales without default translations.
 
-- Adding new mandatory properties to the type DispatchConfiguration is not considered a breaking change, as it is expected that consumers customizing the dispatch configuration always spread the properties of the DispatchConfiguration returned by calling defaultMapDispatchToProps, which would include the new properties.
+- Adding new mandatory properties to the type DispatchConfiguration is not considered a breaking change, as it is expected that consumers customizing the dispatch configuration always spread the properties of the DispatchConfiguration returned by `useDefaultDispatchProps` or `defaultMapDispatchToProps`, which would include the new properties.
 
 - Adding new mandatory properties to the types `FormModelMap`, `WidgetMap`, or `SelectorMap` is not considered a breaking change, as it is expected that consumers creating custom maps of these types always first spread the corresponding default map (`DefaultFormModelMap`, `DefaultWidgetMap`, or `DefaultSelectorMap`), which would include the new properties.
 

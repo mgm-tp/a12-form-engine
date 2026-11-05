@@ -94,7 +94,7 @@ class RepeatColumnAutoCompleteChecker extends AbstractRepeatChecker {
 				.ifPresent(field -> repeatProblems.add(new ConsistencyProblem(
 					modelName,
 					FormModelCategory.FORM_MODEL_AUTOCOMPLETE_ONLY_ALLOWED_FOR_STRING_FIELDS,
-					new FormModelProblemSource(fieldColumn.getId()),
+					FormModelProblemSource.involving(fieldColumn.getId()),
 					field.getName(),
 					fieldColumn.getId(),
 					fieldColumn.getElementRef())));

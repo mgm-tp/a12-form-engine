@@ -30,12 +30,12 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import type { Action } from "@com.mgmtp.a12.client/typescript-fsa-redux-5-compat";
 import type { Activity, ActivityReducers } from "@com.mgmtp.a12.client/client-core";
 import {
 	NEW_INSTANCE_IDENTIFIER,
 	extractModelsInScenePayload
 } from "@com.mgmtp.a12.client/client-core";
+import type { Action } from "@com.mgmtp.a12.client/typescript-fsa-redux-5-compat";
 import { createEmptyDocument } from "@com.mgmtp.a12.formengine/formengine-core";
 
 import type { NewDocumentRequestedPayload } from "./actions.js";

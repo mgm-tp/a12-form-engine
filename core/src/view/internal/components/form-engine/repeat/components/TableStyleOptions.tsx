@@ -30,11 +30,11 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
+import type { FormModel } from "../../../../../../models/internal/form-model.js";
 import {
 	isFormModelDetachedRepeat,
 	isFormModelInlineRepeat
 } from "../../../../../../models/internal/FormModelGuards.js";
-import type { FormModel } from "../../../../../../models/internal/form-model.js";
 
 /** @internal */
 export interface TableStyleOptions {

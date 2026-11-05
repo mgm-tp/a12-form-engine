@@ -100,7 +100,7 @@ function CheckboxGroupRenderer(
 		warnings,
 		infos,
 		tooltips,
-		tooltipsOnTop,
+		breakTooltipsToNewLine,
 		inline,
 		ariaDescribedBy
 	} = USE_COMMON_WIDGET_SETTINGS_WRAPPER.useCommonWidgetSettings(commonControlSettings);
@@ -193,7 +193,7 @@ function CheckboxGroupRenderer(
 			readonly={readonly}
 			helperText={helperText}
 			tooltips={tooltips}
-			breakTooltipsToNewLine={tooltipsOnTop}
+			breakTooltipsToNewLine={breakTooltipsToNewLine}
 			error={error}
 			errorMessage={errors}
 			warning={warning}

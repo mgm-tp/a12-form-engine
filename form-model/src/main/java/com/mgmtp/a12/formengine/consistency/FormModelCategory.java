@@ -159,6 +159,14 @@ public enum FormModelCategory implements ConsistencyCategory {
 		FORM_MODEL_AMOUNT_SUFFIX_FIELD_MISSING("problem.form.amountSuffix.missingField"),
 		FORM_MODEL_HIDE_CONDITION_NO_CASES("problem.form.hideCondition.noCases"),
 		FORM_MODEL_HIDE_CONDITION_INVALID_MASTER_FIELD_GRANULARITY("problem.form.hideCondition.invalidMasterFieldGranularity"),
+		FORM_MODEL_MARKDOWN_EDITOR_WITH_EXPOSITION("problem.form.markdownEditor.withExposition"),
+		FORM_MODEL_MARKDOWN_EDITOR_INVALID_DATATYPE("problem.form.markdownEditor.invalidDatatype"),
+		FORM_MODEL_MARKDOWN_ATTACHMENT_REPEAT_WITHOUT_MARKDOWN_EDITOR("problem.form.markdownEditor.attachmentRepeatWithoutFlag"),
+		FORM_MODEL_MARKDOWN_ATTACHMENT_REPEAT_NOT_FOUND("problem.form.markdownEditor.attachmentRepeatNotFound"),
+		FORM_MODEL_MARKDOWN_ATTACHMENT_REPEAT_NOT_MULTI_FILE_UPLOAD("problem.form.markdownEditor.attachmentRepeatNotMultiFileUpload"),
+		FORM_MODEL_MARKDOWN_ATTACHMENT_REPEAT_SELF_NESTED("problem.form.markdownEditor.attachmentRepeatSelfNested"),
+		FORM_MODEL_MARKDOWN_ATTACHMENT_REPEAT_NESTED("problem.form.markdownEditor.attachmentRepeatNested"),
+		FORM_MODEL_SECRET_MARKDOWN_EDITOR("problem.form.secret.markdownEditor"),
 		MODEL_COULD_NOT_BE_RESOLVED("problem.model.failedToResolve");
 	private String keyValue;
 

@@ -380,7 +380,14 @@ export namespace FormModel {
 	}
 
 	export type PlaceholderIconType =
-		"default" | "image" | "text" | "spreadsheet" | "pdf" | "video" | "sound" | "none";
+		| "default"
+		| "image"
+		| "text"
+		| "spreadsheet"
+		| "pdf"
+		| "video"
+		| "sound"
+		| "none";
 
 	export type AttachmentDefaultActionType = "replace" | "download";
 
@@ -432,8 +439,14 @@ export namespace FormModel {
 	 * Data structure for a custom screen element.
 	 * A custom screen element is a placeholder.
 	 */
-	export interface CustomScreenElement extends BasicScreenElement, Referencing {
+	export interface CustomScreenElement extends Omit<BasicScreenElement, "name">, Referencing {
 		readonly type: "CustomScreenElement";
+		/**
+		 * Optional only in this step, so that relationship UI placeholders written without
+		 * a name can still be migrated. The next step fills it in and requires it again.
+		 * See A12E-3719.
+		 */
+		readonly name?: string;
 		readonly height?: number;
 	}
 
@@ -609,8 +622,14 @@ export namespace FormModel {
 	 * To edit/view the data a detached repeat detail screen
 	 * is shown.
 	 */
-	export interface DetachedRepeat extends Repeat {
+	export interface DetachedRepeat extends Omit<Repeat, "name"> {
 		readonly type: "DetachedRepeat";
+		/**
+		 * Optional only up to step 39.0.1, so that relationship UI element repeats written without
+		 * a name can still be migrated. Step 39.0.2 fills it in and requires it again.
+		 * See A12E-3765.
+		 */
+		readonly name?: string;
 		/** The detail screen which is shown for the data. */
 		readonly detailScreen: Screen;
 		/** The row action that is triggered on row click */
@@ -1489,7 +1508,11 @@ export namespace FormModel {
 		| CustomScreenElement;
 
 	export type LabeledComponent =
-		ButtonType | RowAction | FieldBasedInput | ExpressionCell | ExpressionOverviewColumn;
+		| ButtonType
+		| RowAction
+		| FieldBasedInput
+		| ExpressionCell
+		| ExpressionOverviewColumn;
 
 	export type ComponentWithDescription = ButtonType | RowAction;
 }

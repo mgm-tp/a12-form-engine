@@ -38,6 +38,8 @@ import { LocalizerContext } from "@com.mgmtp.a12.utils/utils-localization-react"
 
 import type { LocalizableFactory } from "../../../../../../../../back-end/localization/internal/localization.js";
 import { UiId } from "../../../../../../../../back-end/utils/internal/generateUiId.js";
+import { isFormModelRepeat } from "../../../../../../../../models/index.js";
+import type { FormModel } from "../../../../../../../../models/internal/form-model.js";
 import { InternalDocumentPath } from "../../../../../../../../models/internal/utils/document-utils.js";
 import { ComponentMapContext } from "../../../../../../configuration/componentMap/component-map-context.js";
 import { DefaultRepeatButtonNames } from "../../../../../../configuration/engine-configuration.js";
@@ -47,8 +49,6 @@ import { isStandardRowActionDisabled } from "../../../../../../utilities/enablem
 import { isStandardRowActionHidden } from "../../../../../../utilities/enablements/hidden-row-actions.js";
 import { MenuContext } from "../../MenuContext.js";
 import type { RepeatRow } from "../../tableColumnTypes.js";
-import { isFormModelRepeat } from "../../../../../../../../models/index.js";
-import type { FormModel } from "../../../../../../../../models/internal/form-model.js";
 
 import { getScreenReaderCellId } from "../getScreenReaderCellId.js";
 

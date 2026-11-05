@@ -40,8 +40,9 @@ import { findElementByFormModelPath } from "../../../../../models/index.js";
 import { isFormModelRepeat } from "../../../../../models/internal/FormModelGuards.js";
 import { Commands, Events } from "../../actions.js";
 import { collectRelevantFields } from "../../collectRelevantFields.js";
+import { customMessageStateIsEqual } from "../../messageStateIsEqual.js";
 import { ModelSelectors } from "../../selectors/models.js";
-import { UiStateSelectors } from "../../selectors/ui-state.js";
+import { InternalUiStateSelectors, UiStateSelectors } from "../../selectors/ui-state.js";
 import type { EngineStore } from "../../store.js";
 import { valid } from "../../validation.js";
 
@@ -181,6 +182,16 @@ function cancelScreenChanges(params: { api: MiddlewareAPI; repeatFormModelPath: 
 	}
 	if (backup.messages !== api.getState().ui.messages) {
 		api.dispatch(Commands.setMessageState({ messages: backup.messages }));
+	}
+	// compared by value, because the customMessages selector normalizes an empty slice to a new object
+	const backedUpCustomMessages = backup.customMessages ?? {};
+	if (
+		!customMessageStateIsEqual(
+			backedUpCustomMessages,
+			InternalUiStateSelectors.customMessages()(api.getState())
+		)
+	) {
+		api.dispatch(Commands.setCustomMessageState({ customMessages: backedUpCustomMessages }));
 	}
 
 	api.dispatch(

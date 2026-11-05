@@ -67,12 +67,19 @@ After that you can create and initialize your store with your models:
 include::assets/typescript/form-engine/minimal.tsx[tags=createStore]
 ----
 
-At last you need to connect the components and render your engine
+At last you need to wire the components to your store and render your engine.
+The `useDefaultStateProps`, `useDefaultDispatchProps` and `useScrollHandlerProps` hooks read the respective props from the store and already take care of the memoization, so the components only re-render when the props actually changed.
 
 [source,tsx]
 ----
 include::assets/typescript/form-engine/minimal.tsx[tags="connect,render"]
 ----
+
+[NOTE]
+====
+The hooks prevent the re-renders caused by dispatched actions, but the component still re-renders whenever its parent re-renders.
+Where a re-rendering parent causes problems, consider wrapping the component in `memo`.
+====
 
 The whole code should then look like this:
 

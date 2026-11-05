@@ -32,9 +32,9 @@
 
 import { strictEqual } from "node:assert/strict";
 
-import { setupModelsFixture } from "../../utils/setupFixture.js";
 import { createDocumentPath } from "../../utils/createDocumentPath.js";
 import { createModelPath } from "../../utils/createModelPath.js";
+import { setupModelsFixture } from "../../utils/setupFixture.js";
 
 import {
 	assertLink,

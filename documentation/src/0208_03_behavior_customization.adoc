@@ -38,12 +38,18 @@ This part shows a small example for the first two options.
 
 == Customizing DispatchConfiguration
 
-Every UI-Event is handled by the `DispatchConfiguration`, which dispatches an event-action. You can overwrite parts of this configuration. It is mandatory to spread the `defaultMapDispatchToProps` into the map object. The following example will modify the default behavior for the `onNavigationButton` event. In this code the event-action `navigationButton` is always called with `validate = true` and `options = { validation: "full" }`, independent of the modelled button.
+Every UI-Event is handled by the `DispatchConfiguration`, which dispatches an event-action. You can overwrite parts of this configuration. It is mandatory to spread the event handlers returned by `useDefaultDispatchProps` into the map object. The following example will modify the default behavior for the `onNavigationButton` event. In this code the event-action `navigationButton` is always called with `validate = true` and `options = { validation: "full" }`, independent of the modelled button.
 
 [source,tsx]
 ----
-include::assets/typescript/form-engine/tutorials/customDispatchConfiguration.ts[tags=content]
+include::assets/typescript/form-engine/tutorials/customDispatchConfiguration.tsx[tags=content]
 ----
+
+[NOTE]
+====
+The hooks prevent the re-renders caused by dispatched actions, but the component still re-renders whenever its parent re-renders.
+Where a re-rendering parent causes problems, consider wrapping the component in `memo`.
+====
 
 == Custom Middleware
 

@@ -307,7 +307,10 @@ export async function mountAndAssertTooltipPositionForTextLines<
 		documentElementDataType,
 		documentElement: options.documentElement,
 		path,
-		modelElement: { messageExposition: "TOOLTIP", tooltipsOnTop },
+		modelElement: {
+			messageExposition: "TOOLTIP",
+			tooltipPosition: tooltipsOnTop === undefined ? undefined : tooltipsOnTop ? "ABOVE" : "BESIDE"
+		},
 		models,
 		formModelPath,
 		ui: {

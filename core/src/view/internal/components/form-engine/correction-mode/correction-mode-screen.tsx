@@ -46,6 +46,7 @@ import { UiId } from "../../../../../back-end/utils/internal/generateUiId.js";
 import { findElementByFormModelPath } from "../../../../../models/index.js";
 import {
 	isFormModelControl,
+	isFormModelCustomScreenElement,
 	isFormModelFieldOverviewColumn
 } from "../../../../../models/internal/FormModelGuards.js";
 import { ComponentMapContext } from "../../../configuration/componentMap/component-map-context.js";
@@ -55,7 +56,8 @@ import { WidgetMapContext } from "../../../configuration/widget-map-context.js";
 import { getCountsByMessageSeverity } from "../../../utilities/getCountsByMessageSeverity.js";
 import { AriaLevelContext, DEFAULT_ARIA_LEVEL } from "../../content-box/AriaLevelContext.js";
 
-import { getUIIssueReport } from "./utils.js";
+import { collectValidationMessages } from "./collectValidationMessages.js";
+import { getUIIssueReport } from "./getUIIssueReport.js";
 import { getValidationMessageKey, localizeLocationStack } from "./validation-bar-elements.js";
 
 /** @internal  */
@@ -69,18 +71,7 @@ export function CorrectionModeScreen(config: FormModelMap.RenderConfiguration): 
 	const ariaLevel = options.config.ariaLevel ?? DEFAULT_ARIA_LEVEL;
 	const headingElements = <ContentBoxHeader title={titleText ?? ""} ariaLevel={ariaLevel} />;
 
-	const messages = UiStateSelectors.messages()(options.state);
-	const messagesArray = Object.keys(messages).reduce<EngineStore.Validation.Message[]>(
-		(acc, message) => {
-			const realMessage = messages[message];
-			return [
-				...acc,
-				...(realMessage?.validationMessages ?? []),
-				...(realMessage?.parseError ? [realMessage.parseError.message] : [])
-			];
-		},
-		[]
-	);
+	const messagesArray = collectValidationMessages(options.state);
 
 	const sortedMessages = [...messagesArray].sort(
 		// keep message order but sort by severity, starting with errors
@@ -154,7 +145,7 @@ export function CorrectionModeScreen(config: FormModelMap.RenderConfiguration): 
 }
 
 function ValidationMessage(props: {
-	validationMessage: EngineStore.Validation.Message;
+	validationMessage: EngineStore.Validation.Message | EngineStore.Validation.CustomMessage;
 	renderOptions: FormModelMap.RenderOptions;
 	listIndex: number;
 }): ReactElement {
@@ -245,7 +236,7 @@ function ValidationMessage(props: {
 const ARIA_LINK: React.HTMLAttributes<HTMLButtonElement> = { role: "link" };
 
 function CorrectionModeItemComponent(props: {
-	readonly validationMessage: EngineStore.Validation.Message;
+	readonly validationMessage: EngineStore.Validation.Message | EngineStore.Validation.CustomMessage;
 	readonly item: CorrectionModeItem;
 	readonly index: number;
 	readonly options: FormModelMap.RenderOptions;
@@ -273,7 +264,9 @@ function CorrectionModeItemComponent(props: {
 		? localizer(...localizableFactory.inputLabel(element, formModelPath))
 		: isFormModelFieldOverviewColumn(element)
 			? localizer(...localizableFactory.repeatOverviewColumnTitle(element, formModelPath))
-			: undefined;
+			: isFormModelCustomScreenElement(element)
+				? localizer(...localizableFactory.componentTitle(element, formModelPath))
+				: undefined;
 
 	const locationLabels = localizeLocationStack(options, locationStack).map(
 		localizables => localizer(...localizables) ?? ""

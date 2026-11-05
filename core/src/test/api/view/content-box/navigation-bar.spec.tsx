@@ -36,9 +36,9 @@ import { query } from "@com.mgmtp.a12.devtools/react";
 
 import { createDocumentPath } from "../../../utils/createDocumentPath.js";
 import { createModelPath } from "../../../utils/createModelPath.js";
+import type { ButtonDef } from "../../../utils/FormModelHelpers.js";
 import { setupModelsFixture } from "../../../utils/setupFixture.js";
 import { BUTTONS } from "../../../utils/test-model-helpers/button.form.js";
-import type { ButtonDef } from "../../../utils/FormModelHelpers.js";
 
 import { setupForButtonTests, setupSubheaderButtonTests } from "./utils.js";
 

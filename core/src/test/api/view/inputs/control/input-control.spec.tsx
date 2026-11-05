@@ -44,7 +44,7 @@ import { executeTestsForRendering } from "./test-cases/rendering.js";
 import { executeTestRequired } from "./test-cases/required.js";
 import { executeTestForSecret } from "./test-cases/secret.js";
 import { executeTestForSuffix } from "./test-cases/suffix.js";
-import { executeTestForTooltipsOnTop } from "./test-cases/tooltipsOnTop.js";
+import { executeTestForTooltipPosition } from "./test-cases/tooltipPosition.js";
 import { executeTestForTruncateSuffix } from "./test-cases/truncateSuffix.js";
 import { executeTestForValue } from "./test-cases/value.js";
 
@@ -62,8 +62,8 @@ describe("api.view.inputs", () => {
 			executeTestForMessageExposition();
 		});
 
-		describe("tooltipsOnTop", () => {
-			executeTestForTooltipsOnTop();
+		describe("tooltip position", () => {
+			executeTestForTooltipPosition();
 		});
 
 		describe("auto expand", () => {

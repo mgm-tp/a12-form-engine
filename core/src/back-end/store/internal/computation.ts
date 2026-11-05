@@ -32,7 +32,7 @@
 
 import type { GeneratedCodeRtConfig, GroupInstance } from "@com.mgmtp.a12.kernel/kernel-md-facade";
 
-import type { ReadonlyObjectMap } from "../../../models/internal/utils/json.js";
+import type { ReadonlyObjectMap } from "../../../models/internal/utils/ReadonlyObjectMap.js";
 
 import { validateChangesAndUpdateMessages } from "./change-validation.js";
 import type { DetailedUpdateResult } from "./DetailedUpdateResult.js";

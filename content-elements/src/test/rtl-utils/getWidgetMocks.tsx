@@ -63,6 +63,7 @@ import type {
 	TimePickerProps,
 	WarningTooltipProps
 } from "@com.mgmtp.a12.widgets/widgets-core";
+import type { MarkdownEditorProps } from "@com.mgmtp.a12.widgets/widgets-core/experimental";
 
 import type { WidgetMap } from "../../main/core/index.js";
 import { DefaultWidgetMap } from "../../main/defaultRender/defaultWidgetMap.js";
@@ -86,6 +87,7 @@ import {
 	ICON,
 	LIST,
 	LIST_ITEM,
+	MARKDOWN_EDITOR,
 	MESSAGE_BOX,
 	MODAL_OVERLAY,
 	MULTI_SELECT,
@@ -122,6 +124,7 @@ export function getWidgetMocks(): WidgetMap {
 		DatePickerDialog: mock.fn(DatePickerDialogMock),
 		DateTimePicker: mock.fn(DateTimePickerMock),
 		TimePicker: mock.fn(TimePickerMock),
+		MarkdownEditor: mock.fn(MarkdownEditorMock),
 		MessageBox: mock.fn(MessageBoxMock),
 		ErrorTooltip: mock.fn(ErrorTooltipMock),
 		WarningTooltip: mock.fn(WarningTooltipMock),
@@ -230,6 +233,10 @@ function DateTimePickerMock(props: DateTimePickerProps) {
 
 function TimePickerMock(props: TimePickerProps) {
 	return <MockComponent id={props.id} dataRole={TIME_PICKER} />;
+}
+
+function MarkdownEditorMock(props: MarkdownEditorProps) {
+	return <MockComponent id={props.id} dataRole={MARKDOWN_EDITOR} />;
 }
 
 function MessageBoxMock(props: MessageBoxProps) {

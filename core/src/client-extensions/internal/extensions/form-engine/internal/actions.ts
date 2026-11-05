@@ -84,6 +84,14 @@ export namespace FormEngineActions {
 
 	/**
 	 * Creates the default dispatch props mapping.
+	 *
+	 * Prefer {@link FormEngineHooks.useDispatchProps} inside a component - it
+	 * wraps this mapping and keeps the event handlers stable across renders. Use
+	 * this function where a hook cannot be called, for example in tests.
+	 *
+	 * @param dispatch The Client dispatcher
+	 * @param ownProps Props holding the activity that holds the Form Engine state
+	 * @returns the respective Form Engine dispatch props
 	 */
 	export function mapDispatchToProps(
 		dispatch: Dispatch,

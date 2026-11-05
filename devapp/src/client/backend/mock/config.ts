@@ -58,7 +58,7 @@ export async function loadLocalModelGraph({ dispatch }: Store) {
 
 		dispatch(ModelActions.setModelGraph(modelGraph));
 	} catch (error) {
-		// eslint-disable-next-line no-console
+		// oxlint-disable-next-line no-console
 		console.error(`Failed to set model graph, try running "gradle generateModelGraph"\n`, error);
 	}
 }

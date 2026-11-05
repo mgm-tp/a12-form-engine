@@ -39,9 +39,9 @@ import type { EntityInstancePath } from "@com.mgmtp.a12.kernel/kernel-md-facade"
 import type { EngineState, EngineStore } from "../../../../../back-end/store/index.js";
 import { Commands, Events } from "../../../../../back-end/store/index.js";
 import { DocumentPath } from "../../../../../models/index.js";
-import { MiddlewareHelpers } from "../../../../utils/MiddlewareHelpers.js";
 import { createDocumentPath } from "../../../../utils/createDocumentPath.js";
 import { createModelPath } from "../../../../utils/createModelPath.js";
+import { MiddlewareHelpers } from "../../../../utils/MiddlewareHelpers.js";
 import {
 	createRepeatInstanceStateEntry,
 	createRepeatStaticStateEntry,

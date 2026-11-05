@@ -49,6 +49,7 @@ import com.mgmtp.a12.formengine.consistency.rules.dependency.ExternalEnumeration
 import com.mgmtp.a12.formengine.consistency.rules.dependency.FormDependencyRule;
 import com.mgmtp.a12.formengine.consistency.rules.enableSelectAll.EnableSelectAllRule;
 import com.mgmtp.a12.formengine.consistency.rules.exposition.DataTypeExpositionMatchRule;
+import com.mgmtp.a12.formengine.consistency.rules.exposition.MarkdownEditorExpositionRule;
 import com.mgmtp.a12.formengine.consistency.rules.layout.FormColumnIndexRule;
 import com.mgmtp.a12.formengine.consistency.rules.layout.FormLayoutRule;
 import com.mgmtp.a12.formengine.consistency.rules.layout.FormOffsetSpanRule;
@@ -117,6 +118,7 @@ public class FormModelValidator extends ConsistencyValidator<FormModel> {
 		formModelRules.add(new LocaleCompatibilityRule());
 		formModelRules.add(new PlaceholderRule());
 		formModelRules.add(new DataTypeExpositionMatchRule());
+		formModelRules.add(new MarkdownEditorExpositionRule());
 		formModelRules.add(new EnableSelectAllRule());
 		formModelRules.add(new InfiniteScrollingRule());
 		formModelRules.add(new NumberOfInitialRowsRule());
@@ -154,7 +156,7 @@ public class FormModelValidator extends ConsistencyValidator<FormModel> {
 			return List.of(new ConsistencyProblem(
 				model.getHeaderId(),
 				FormModelCategory.MODEL_COULD_NOT_BE_RESOLVED,
-				new FormModelProblemSource(model.getHeaderId()),
+				FormModelProblemSource.involving(model.getHeaderId()),
 				documentModelName));
 		}
 

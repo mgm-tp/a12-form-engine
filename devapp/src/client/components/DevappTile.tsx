@@ -32,76 +32,57 @@
 
 import type { JSX } from "react";
 import { useDispatch } from "react-redux";
+import { styled } from "styled-components";
 
 import { ActivityActions, NEW_INSTANCE_IDENTIFIER } from "@com.mgmtp.a12.client/client-core";
-import { Tile, Link } from "@com.mgmtp.a12.widgets/widgets-core";
+import { Link, Tile } from "@com.mgmtp.a12.widgets/widgets-core";
 
-export interface Group {
-	name: string;
-	forms: string[];
-}
+import type { FormEntry, ModelTile } from "../modelIndex.js";
 
 interface DevappTileProps {
-	readonly title?: string;
-	readonly ariaLevel?: number;
+	readonly tile: ModelTile;
 	readonly color?: string;
-	readonly icon?: string;
-	readonly list: Record<string, { name: string; group: Group[] }>;
-	readonly index: number;
-	readonly removeBaseName?: boolean;
+	readonly ariaLevel?: number;
 }
 
-export function DevappTile(props: DevappTileProps): JSX.Element {
-	const dispatch = useDispatch();
-	const { list, index, title, color } = props;
-	const keys = Object.keys(list);
-
-	const forms: { formName: string; form: string; group: string }[] = [];
-	const groups = list[keys[index]].group;
-
-	for (let i = 0; i < groups.length; i++) {
-		const gName = props.removeBaseName
-			? groups[i].name.split(".").slice(1).join(".")
-			: groups[i].name;
-		for (let j = 0; j < groups[i].forms.length; j++) {
-			const form = groups[i].forms[j];
-			const formName =
-				(gName === "debug" ? form : `${gName}${gName !== "" && form !== "" ? "." : ""}${form}`) ||
-				groups[i].name;
-			forms.push({ formName, form, group: groups[i].name });
-		}
-	}
-
-	forms.sort((f1, f2) => (f1.formName < f2.formName ? -1 : 1));
-
+export function DevappTile({ tile, color, ariaLevel }: DevappTileProps): JSX.Element {
 	return (
-		<Tile title={title ?? list[keys[index]].name} color={color}>
-			{forms.map((f, i) => {
-				return (
-					<div key={i}>
-						<Link
-							onClick={() =>
-								dispatch(
-									ActivityActions.create({
-										activityDescriptor: {
-											instance: NEW_INSTANCE_IDENTIFIER,
-											formName: getFormModelId(f.group, f.form)
-										}
-									})
-								)
-							}
-						>
-							{f.formName}
-						</Link>
-						<br />
-					</div>
-				);
-			})}
+		<Tile title={tile.name} color={color} ariaLevel={ariaLevel}>
+			{tile.forms.map(form => (
+				<FormEntryLink key={form.modelId} form={form} />
+			))}
 			<br />
 		</Tile>
 	);
 }
 
-function getFormModelId(group: string, form?: string): string {
-	return group !== "debug" ? `${group}${form ? "." + form : ""}-form` : (form ?? "");
+interface FormEntryLinkProps {
+	readonly form: FormEntry;
 }
+
+function FormEntryLink({ form }: FormEntryLinkProps): JSX.Element {
+	const dispatch = useDispatch();
+
+	return (
+		<BlockLink
+			onClick={() =>
+				dispatch(
+					ActivityActions.create({
+						activityDescriptor: {
+							instance: NEW_INSTANCE_IDENTIFIER,
+							formName: form.modelId
+						}
+					})
+				)
+			}
+		>
+			{form.label}
+		</BlockLink>
+	);
+}
+
+/** widgets renders Link inline; block stacks the entries, fit-content keeps the hit area on the text */
+const BlockLink = styled(Link)`
+	display: block;
+	width: fit-content;
+`;

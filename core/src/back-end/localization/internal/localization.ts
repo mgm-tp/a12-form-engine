@@ -38,6 +38,7 @@ import {
 	localizableKeyFromSegments
 } from "@com.mgmtp.a12.utils/utils-localization";
 
+import type { FormModel } from "../../../models/internal/form-model.js";
 import {
 	isFormModelButtonType,
 	isFormModelControl,
@@ -46,7 +47,6 @@ import {
 	isFormModelInlineRepeat,
 	isFormModelRowAction
 } from "../../../models/internal/FormModelGuards.js";
-import type { FormModel } from "../../../models/internal/form-model.js";
 import * as DocumentModelUtils from "../../../models/internal/utils/document-model-utils.js";
 import { FormModelUtils } from "../../../models/internal/utils/form-model-utils.js";
 
@@ -169,7 +169,7 @@ class DocumentModelLocalizableFactory implements IDocumentModelLocalizableFactor
 }
 
 /** @internal */
-// eslint-disable-next-line @typescript-eslint/no-unsafe-declaration-merging
+// oxlint-disable-next-line typescript/no-unsafe-declaration-merging
 export interface LocalizableFactory extends IDocumentModelLocalizableFactory {
 	modelLabel(model: FormModel): Localizable[];
 	modelSubtitle(model: FormModel): Localizable[];
@@ -217,7 +217,6 @@ export interface LocalizableFactory extends IDocumentModelLocalizableFactory {
 }
 
 /** @internal */
-// eslint-disable-next-line @typescript-eslint/no-unsafe-declaration-merging
 export class LocalizableFactory
 	extends DocumentModelLocalizableFactory
 	implements LocalizableFactory

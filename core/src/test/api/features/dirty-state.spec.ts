@@ -77,9 +77,7 @@ import {
 
 describe("api.features", () => {
 	describe("dirty-states", () => {
-		// eslint-disable-next-line mocha/no-setup-in-describe
 		const models = setupModelsFixture("controls.dirty-states");
-		// eslint-disable-next-line mocha/no-setup-in-describe
 		const user = userEvent.setup();
 
 		function setup(options: {
@@ -149,7 +147,6 @@ describe("api.features", () => {
 			}
 
 			describe("will turn true if a value changes on a top-level screen.", () => {
-				// eslint-disable-next-line mocha/no-setup-in-describe
 				testDataDirtyState({
 					stateToBeTested: "data",
 					createScreenLocation: createScreenLocationMock,
@@ -161,7 +158,6 @@ describe("api.features", () => {
 				"will not turn true if a value changes on a detached repeat detail screen, " +
 					"but the screen's dirty-state will turn true.",
 				() => {
-					// eslint-disable-next-line mocha/no-setup-in-describe
 					testDataDirtyState({
 						stateToBeTested: "screen",
 						createScreenLocation: () => [createRootScreenState(), createDetailScreenState()],

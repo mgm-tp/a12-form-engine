@@ -53,8 +53,6 @@ describe("migration", () => {
 
 	const paramsForTest: MigrationParameters & { force: boolean; nextOnly: boolean } = {
 		...MIGRATION_PARAMETERS,
-		// emulate --no-validate-schema by forcing valid schema for all
-		migrationSteps: MIGRATION_PARAMETERS.migrationSteps.map(step => ({ ...step, schema: true })),
 		// not part of the public type
 		force: true,
 		nextOnly: true

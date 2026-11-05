@@ -33,6 +33,7 @@ package com.mgmtp.a12.formengine.consistency.rules.metadata;
 
 import com.mgmtp.a12.formengine.consistency.rules.common.metadata.UnknownLocaleChecker;
 import com.mgmtp.a12.formengine.consistency.rules.language.FormLocalizationAdapter;
+import com.mgmtp.a12.formengine.consistency.rules.language.LocalizedTextAdapter;
 import com.mgmtp.a12.formengine.model.types.ButtonPanelType;
 import com.mgmtp.a12.formengine.model.types.ButtonType;
 import com.mgmtp.a12.formengine.model.types.ConfirmationTextType;
@@ -45,7 +46,7 @@ import com.mgmtp.a12.formengine.model.types.EmbeddedRepeatType;
 import com.mgmtp.a12.formengine.model.types.ExpressionCellType;
 import com.mgmtp.a12.formengine.model.types.FieldBasedRepeatOverviewColumnType;
 import com.mgmtp.a12.formengine.model.types.InlineRepeatType;
-import com.mgmtp.a12.formengine.model.types.RepeatButtonLabelsType;
+import com.mgmtp.a12.formengine.model.types.Named;
 import com.mgmtp.a12.formengine.model.types.RepeatOverviewColumnType;
 import com.mgmtp.a12.formengine.model.types.RepeatType;
 import com.mgmtp.a12.formengine.model.types.RowActionType;
@@ -56,6 +57,8 @@ import com.mgmtp.a12.formengine.model.types.TextCellType;
 import com.mgmtp.a12.formengine.model.visitor.ModelVisitor;
 
 import java.util.List;
+
+import org.apache.commons.lang3.StringUtils;
 
 class LocaleModelVisitor extends ModelVisitor {
 
@@ -68,44 +71,41 @@ class LocaleModelVisitor extends ModelVisitor {
 	@Override
 	public boolean visitControl(final ControlType control) {
 		final String id = control.getId();
-		unknownLocaleChecker.check(FormLocalizationAdapter.adapterFor(control.getHint()), id);
-		unknownLocaleChecker
-			.check(
+		check(FormLocalizationAdapter.adapterFor(control.getHint()), id, id);
+		check(
 				FormLocalizationAdapter
 					.adapterFor(control.getLabel() != null ? control.getLabel().getMultilingualText() : null),
+				id,
 				id);
 		return true;
 	}
 
 	@Override
 	public boolean visitButton(final ButtonType button) {
-		unknownLocaleChecker
-			.check(
+		check(
 				FormLocalizationAdapter
 					.adapterFor(button.isButtonStylingSet() && button.getButtonStyling().getLabel() != null
 						? button.getButtonStyling().getLabel().getMultilingualText()
 						: null),
-				button.getName());
+				button.getName(), button.getId());
 		return true;
 	}
 
 	@Override
 	public boolean visitButtonPanel(final ButtonPanelType panel) {
-		unknownLocaleChecker
-			.check(
+		check(
 				FormLocalizationAdapter
 					.adapterFor(panel.getTitle() != null ? panel.getTitle().getMultilingualText() : null),
-				panel.getName());
+				panel.getName(), panel.getId());
 		return true;
 	}
 
 	@Override
 	public boolean visitControlGrid(final ControlGridType grid) {
-		unknownLocaleChecker
-			.check(
+		check(
 				FormLocalizationAdapter
 					.adapterFor(grid.getTitle() != null ? grid.getTitle().getMultilingualText() : null),
-				grid.getName());
+				grid.getName(), grid.getId());
 		return true;
 	}
 
@@ -129,128 +129,139 @@ class LocaleModelVisitor extends ModelVisitor {
 
 	@Override
 	public boolean visitRow(final RowType row) {
-		unknownLocaleChecker
-			.check(
+		check(
 				FormLocalizationAdapter
 					.adapterFor(row.getTitle() != null ? row.getTitle().getMultilingualText() : null),
-				row.getName());
+				row.getName(), row.getId());
 		return true;
 	}
 
 	@Override
 	public boolean visitScreen(final ScreenType screen) {
-		final String id = screen.getName();
-		unknownLocaleChecker
-			.check(
+		final String name = screen.getName();
+		final String id = screen.getId();
+		check(
 				FormLocalizationAdapter
 					.adapterFor(screen.getTitle() != null ? screen.getTitle().getMultilingualText() : null),
+				name,
 				id);
 		return true;
 	}
 
 	@Override
 	public boolean visitSection(final SectionType section) {
-		final String id = section.getName();
-		unknownLocaleChecker
-			.check(
+		final String name = section.getName();
+		final String id = section.getId();
+		check(
 				FormLocalizationAdapter
 					.adapterFor(section.getTitle() != null ? section.getTitle().getMultilingualText() : null),
+				name,
 				id);
 		return true;
 	}
 
 	@Override
 	public boolean visitCustomScreenElement(final CustomScreenElementType customScreenElement) {
-		final String id = customScreenElement.getName();
-		unknownLocaleChecker
-				.check(
+		final String name = customScreenElement.getName();
+		final String id = customScreenElement.getId();
+		check(
 						FormLocalizationAdapter
 								.adapterFor(customScreenElement.getTitle() != null ? customScreenElement.getTitle().getMultilingualText() : null),
+						name,
 						id);
 		return true;
 	}
 
 	@Override
 	public boolean visitTextCell(final TextCellType textCell) {
-		unknownLocaleChecker.check(FormLocalizationAdapter.adapterFor(textCell.getContent()), textCell.getName());
+		check(
+			FormLocalizationAdapter.adapterFor(textCell.getContent()),
+			textCell.getName(),
+			textCell.getId());
 		return true;
 	}
 
 	@Override
 	public boolean visitExpressionCell(final ExpressionCellType expressionCell) {
-		unknownLocaleChecker
-			.check(
+		check(
 				FormLocalizationAdapter
 				.adapterFor(
 					expressionCell.getLabel() != null ? expressionCell.getLabel().getMultilingualText() : null),
-				expressionCell.getName());
+				expressionCell.getName(), expressionCell.getId());
 
 		return true;
 	}
 
-	private void checkRepeat(final RepeatType repeat) {
-		final String id = repeat.getName();
+	/**
+	 * Checks the locales of the given texts, naming the element that holds them by its id where it has no name.
+	 */
+	private void check(final LocalizedTextAdapter texts, final String name, final String id) {
+		unknownLocaleChecker.check(texts, elementName(name, id), id);
+	}
 
-		unknownLocaleChecker
-			.check(
+	private static String elementName(final String name, final String id) {
+		return StringUtils.defaultIfBlank(name, id);
+	}
+
+	private void checkRepeat(final RepeatType repeat) {
+		final String name = repeat.getName();
+		final String id = repeat.getId();
+
+		check(
 				FormLocalizationAdapter
 					.adapterFor(repeat.getTitle() != null ? repeat.getTitle().getMultilingualText() : null),
+				name,
 				id);
 
 		final List<RepeatOverviewColumnType> repeatOverviewColumns = repeat.getRepeatOverviewColumn();
 		for (final RepeatOverviewColumnType repeatOverviewColumn : repeatOverviewColumns) {
-			unknownLocaleChecker
-				.check(
+			// the column owns its texts, so they are reported for the column and not for the repeat around it
+			final String columnName = repeatOverviewColumn instanceof Named named ? named.getName() : null;
+			check(
 					FormLocalizationAdapter.adapterFor(
 						repeatOverviewColumn.getLabel() != null ? repeatOverviewColumn.getLabel().getMultilingualText()
 							: null),
-					id);
+					columnName,
+					repeatOverviewColumn.getId());
 
 			if (repeatOverviewColumn instanceof FieldBasedRepeatOverviewColumnType) {
 				final FieldBasedRepeatOverviewColumnType fieldBasedColumn =
 					(FieldBasedRepeatOverviewColumnType) repeatOverviewColumn;
-				unknownLocaleChecker.check(FormLocalizationAdapter.adapterFor(fieldBasedColumn.getHint()), id);
-
+				check(
+					FormLocalizationAdapter.adapterFor(fieldBasedColumn.getHint()),
+					columnName,
+					fieldBasedColumn.getId());
 			}
 		}
 
-		final RepeatButtonLabelsType buttonLabels = repeat.getButtonLabels();
-		if (buttonLabels != null) {
-			unknownLocaleChecker.check(FormLocalizationAdapter.adapterFor(buttonLabels.getADD()), id);
-			unknownLocaleChecker.check(FormLocalizationAdapter.adapterFor(buttonLabels.getCOMMIT_ADD()), id);
-			unknownLocaleChecker.check(FormLocalizationAdapter.adapterFor(buttonLabels.getAPPLY()), id);
-			unknownLocaleChecker.check(FormLocalizationAdapter.adapterFor(buttonLabels.getEDIT()), id);
-			unknownLocaleChecker.check(FormLocalizationAdapter.adapterFor(buttonLabels.getREMOVE()), id);
-			unknownLocaleChecker.check(FormLocalizationAdapter.adapterFor(buttonLabels.getVIEW()), id);
-			unknownLocaleChecker.check(FormLocalizationAdapter.adapterFor(buttonLabels.getCANCEL()), id);
-			unknownLocaleChecker.check(FormLocalizationAdapter.adapterFor(buttonLabels.getRETURN()), id);
-			unknownLocaleChecker.check(FormLocalizationAdapter.adapterFor(buttonLabels.getUP()), id);
-			unknownLocaleChecker.check(FormLocalizationAdapter.adapterFor(buttonLabels.getDOWN()), id);
-			unknownLocaleChecker.check(FormLocalizationAdapter.adapterFor(buttonLabels.getCOPY()), id);
-			unknownLocaleChecker.check(FormLocalizationAdapter.adapterFor(buttonLabels.getCLOSE()), id);
-		}
+		RepeatButtonLabelsLocaleCheck
+			.checkLocales(unknownLocaleChecker, repeat.getButtonLabels(), elementName(name, id), id);
 
 		final ConfirmationTextsType confirmationTexts = repeat.getConfirmationTexts();
 		if (confirmationTexts != null) {
 			if (confirmationTexts.isREMOVESet()) {
 				final ConfirmationTextType removeConfirmation = confirmationTexts.getREMOVE();
-				unknownLocaleChecker.check(FormLocalizationAdapter.adapterFor(removeConfirmation
-					.getMessage()), id);
-				unknownLocaleChecker.check(
+				check(FormLocalizationAdapter.adapterFor(removeConfirmation
+					.getMessage()), name, id);
+				check(
 					FormLocalizationAdapter.adapterFor(removeConfirmation.getTitle()),
+					name,
 					id);
 			}
 		}
 
 		if (repeat.getRowActionGroup() != null) {
 			for (final RowActionType rowActionType : repeat.getRowActionGroup().getAction()) {
-				unknownLocaleChecker.check(FormLocalizationAdapter.adapterFor(rowActionType.getConfirmation()), id);
-				unknownLocaleChecker
-					.check(
+				check(
+					FormLocalizationAdapter.adapterFor(rowActionType.getConfirmation()),
+					name,
+					id);
+				check(
 						FormLocalizationAdapter.adapterFor(
 								rowActionType.isButtonStylingSet() && rowActionType.getButtonStyling().getLabel() != null
 								? rowActionType.getButtonStyling().getLabel().getMultilingualText()
 								: null),
+						name,
 						id);
 			}
 		}

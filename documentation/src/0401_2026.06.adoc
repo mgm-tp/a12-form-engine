@@ -743,6 +743,14 @@ const config: Partial<Config> = {
 The Form Engine no longer derives the time mode from the active locale (previously `en_US` defaulted to `12h` and other locales to `24h`). If locale-based time mode handling is required, it must now be implemented by the consumer by computing the `timeMode` value passed to the `DateTimeContext.Provider` based on the current locale.
 ====
 
+=== Year Selector Presentation in Date Pickers Changed
+
+The year selector of the Date, Date Time and Date Range pickers is now by default rendering a plain numeric text box. Previously it always rendered a dropdown, listing a range around the current year (when no Date Config was modeled on the respective Control). Refer to the Widgets https://www.mgm-tp.com/a12.htmlshowcase/#/get-started/migration-instructions/migration-notes#year-selector[Year Selector migration notes,role=external,window=_blank] for details.
+
+Required:: Only when wanting to keep the year selector as a dropdown.
+Migration:: Manual, no codemod available. Either configure `minYear` and `maxYear` in the Date Config of the Control, or replace `DateTimePickerHeader` in the widget map with an implementation that sets `yearSelectorVariant` explicitly, to keep the dropdown.
+Result:: Default presentation of the year selector changes to an input field.
+
 === Removal of unused FormEngine/FormEngineTpl/ScrollHandler props
 
 Some props of View Components in `FormEngineViews` were unused by the Form Engine and were removed. Remove the following props from usage sites.

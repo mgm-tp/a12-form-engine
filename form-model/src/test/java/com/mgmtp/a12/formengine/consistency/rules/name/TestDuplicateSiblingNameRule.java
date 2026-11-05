@@ -37,6 +37,7 @@ import static org.hamcrest.Matchers.*;
 import com.mgmtp.a12.model.consistency.Problem;
 
 import com.mgmtp.a12.formengine.consistency.rules.ModelLoader;
+import com.mgmtp.a12.formengine.consistency.rules.RuleTestHelper;
 import com.mgmtp.a12.formengine.model.FormModel;
 
 import java.util.Arrays;
@@ -80,6 +81,24 @@ public class TestDuplicateSiblingNameRule {
 
 		EXPECTED_MESSAGES.forEach(message -> assertThat(problems, hasItem(hasProperty("message", equalTo(message)))));
 
+	}
+
+	@Test
+	public void verifyInvolvedElements() throws Exception {
+		final FormModel productForm =
+			ModelLoader.loadModel("com/mgmtp/a12/formengine/consistency/rules/name/DuplicateNamesModel.json");
+		final List<Problem> problems = duplicateSiblingNameRule.execute(productForm, null);
+
+		assertThat(
+			RuleTestHelper.involvedElementIds(problems, EXPECTED_MESSAGES.get(3)),
+			contains("row-aeb39", "expressioncell-0dad3", "textcell-f03daf"));
+		assertThat(
+			RuleTestHelper.involvedElementIds(problems, EXPECTED_MESSAGES.get(5)),
+			contains("buttonpanel-b0683", "button-b229c", "button-0b734"));
+		// the list of screens has no id of its own, so the problem is reported for the form itself
+		assertThat(
+			RuleTestHelper.involvedElementIds(problems, EXPECTED_MESSAGES.get(9)),
+			contains("DuplicateNamesModel", "screen1", "screen-097fd", "screen-315ed"));
 	}
 
 	@Test

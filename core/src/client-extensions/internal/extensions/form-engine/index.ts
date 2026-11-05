@@ -41,7 +41,6 @@ import type { Middleware } from "redux";
 import type { MiddlewareOptions } from "../../../../back-end/store/index.js";
 import { createEngineMiddlewares } from "../../../../back-end/store/index.js";
 
-import { FormEngineActions } from "./internal/actions.js";
 import { attachmentReducer } from "./internal/attachments/reducer/attachmentReducer.js";
 import { deleteSaga } from "./internal/attachments/sagas/deleteSaga.js";
 import { downloadSaga } from "./internal/attachments/sagas/downloadSaga.js";
@@ -51,8 +50,6 @@ import { resetUiDirtyStateOnSave } from "./internal/formEngineSaga.js";
 import type { FormEngineSagaOptions } from "./internal/sagaOptions.js";
 import type { FormEngineScrollHandlerProps as FormEngineScrollHandlerPropsInternal } from "./internal/scrollHandler.js";
 import { FormEngineScrollHandler } from "./internal/scrollHandler.js";
-import { FormEngineSelectors } from "./internal/selectors.js";
-import { FormEngineStateAdapter } from "./internal/state.js";
 import { uiStateReducer } from "./internal/uiStateReducer.js";
 import type {
 	FormEngineProps as FormEnginePropsInternal,
@@ -77,6 +74,7 @@ export { FormEngineActions } from "./internal/actions.js";
 export { computeDocument } from "./internal/computeDocument.js";
 export { createEmptyDocumentDataProvider } from "./internal/createEmptyDocumentDataProvider.js";
 export type { EmptyDocumentDataProviderOptions } from "./internal/createEmptyDocumentDataProvider.js";
+export { FormEngineHooks } from "./internal/hooks.js";
 export { FormEngineSelectors } from "./internal/selectors.js";
 export { FormEngineStateAdapter } from "./internal/state.js";
 
@@ -138,9 +136,13 @@ export const formEngineDataReducers = [uiStateReducer, attachmentReducer];
  *
  * If you want to change other props like data or models, please use
  * `FormEngineViews.FormEngineTpl` or the components of the formengine
- * package and connect them to the store yourself. Most likely you want to
- * compose your connect functions from {@link FormEngineStateAdapter.mapStateToProps}
- * and {@link FormEngineActions.mapDispatchToProps}.
+ * package and wire them to the store yourself. Most likely you want to build on
+ * the props read by `FormEngineHooks.useStateProps` and
+ * `FormEngineHooks.useDispatchProps`, which already handle the memoization. The
+ * underlying mappings are available as
+ * {@link FormEngineStateAdapter.mapStateToProps} and
+ * {@link FormEngineActions.mapDispatchToProps} for the places where a hook
+ * cannot be called.
  *
  * ## Custom behavior (low level)
  *

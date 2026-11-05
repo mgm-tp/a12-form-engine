@@ -29,6 +29,7 @@
  * NON-INFRINGEMENT, EXCEPT WHERE SUCH DISCLAIMERS ARE HELD TO BE
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
+
 import { last } from "fp-ts/lib/NonEmptyArray.js";
 import type { NonEmptyArray } from "fp-ts/lib/NonEmptyArray.js";
 

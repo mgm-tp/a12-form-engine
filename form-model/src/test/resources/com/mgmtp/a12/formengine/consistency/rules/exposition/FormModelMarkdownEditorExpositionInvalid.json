@@ -1,0 +1,176 @@
+{
+  "header": {
+    "id": "FormModelMarkdownEditorExpositionInvalid",
+    "modelType": "form",
+    "modelVersion": "39.3.0",
+    "locales": [
+      {
+        "code": "en"
+      }
+    ],
+    "annotations": [
+      {
+        "name": "roles",
+        "value": "admin"
+      }
+    ],
+    "modelReferences": [
+      {
+        "alias": "DM",
+        "modelType": "document",
+        "purpose": "data binding",
+        "reference": "DocumentModelMarkdownEditorExposition"
+      }
+    ]
+  },
+  "content": {
+    "subHeaderBox": {
+      "id": "subHeaderBox1"
+    },
+    "footerBox": {
+      "id": "footerBox1"
+    },
+    "screens": [
+      {
+        "id": "screen1",
+        "name": "Screen1",
+        "screenElements": [
+          {
+            "type": "InlineRepeat",
+            "id": "repeat_self",
+            "name": "repeat-self",
+            "repeatOverviewColumn": [
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "column_repeat_self",
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "elementRef": "field_3"
+              }
+            ],
+            "groupRef": "group_rep",
+            "enableAdd": true,
+            "enableRemove": true,
+            "multiFileUpload": true,
+            "multiFileUploadOptions": {
+              "elementRef": "field_3"
+            }
+          },
+          {
+            "type": "InlineRepeat",
+            "id": "repeat_no_multi_file",
+            "name": "repeat-no-multi-file",
+            "repeatOverviewColumn": [
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "column_repeat_no_multi_file",
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "elementRef": "field_3"
+              },
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "column_repeat_no_multi_file_field_8",
+                "width": 1,
+                "sortable": false,
+                "filterable": false,
+                "preferredSorting": "ASC",
+                "elementRef": "field_8"
+              }
+            ],
+            "groupRef": "group_rep",
+            "enableAdd": true,
+            "enableRemove": true
+          },
+          {
+            "type": "DetachedRepeat",
+            "id": "repeat_parent",
+            "name": "repeat-parent",
+            "repeatOverviewColumn": [
+              {
+                "type": "FieldBasedRepeatOverviewColumn",
+                "id": "column_repeat_parent",
+                "elementRef": "field_3"
+              }
+            ],
+            "groupRef": "group_rep",
+            "enableAdd": true,
+            "enableRemove": true,
+            "detailScreen": {
+              "id": "repeat_parent_screen",
+              "name": "repeat-parent-screen",
+              "screenElements": [
+                {
+                  "type": "InlineRepeat",
+                  "id": "repeat_nested",
+                  "name": "repeat-nested",
+                  "repeatOverviewColumn": [
+                    {
+                      "type": "FieldBasedRepeatOverviewColumn",
+                      "id": "column_repeat_nested",
+                      "width": 1,
+                      "sortable": false,
+                      "filterable": false,
+                      "preferredSorting": "ASC",
+                      "elementRef": "field_7"
+                    }
+                  ],
+                  "groupRef": "group_rep_nested",
+                  "enableAdd": true,
+                  "enableRemove": true,
+                  "multiFileUpload": true,
+                  "multiFileUploadOptions": {
+                    "elementRef": "field_7"
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "fieldConfiguration": {
+      "field": [
+        {
+          "isMarkdownEditor": true,
+          "exposition": "AREA",
+          "elementRef": "field_1"
+        },
+        {
+          "markdownAttachmentRepeat": "someRepeat",
+          "elementRef": "field_2"
+        },
+        {
+          "isMarkdownEditor": true,
+          "markdownAttachmentRepeat": "repeat_self",
+          "elementRef": "field_3"
+        },
+        {
+          "isMarkdownEditor": true,
+          "markdownAttachmentRepeat": "repeat_no_multi_file",
+          "elementRef": "field_4"
+        },
+        {
+          "isMarkdownEditor": true,
+          "markdownAttachmentRepeat": "repeat_nested",
+          "elementRef": "field_5"
+        },
+        {
+          "isMarkdownEditor": true,
+          "elementRef": "field_6"
+        },
+        {
+          "isMarkdownEditor": true,
+          "markdownAttachmentRepeat": "repeat_self",
+          "elementRef": "field_8"
+        }
+      ]
+    },
+    "groupConfiguration": {},
+    "defaults": {}
+  }
+}

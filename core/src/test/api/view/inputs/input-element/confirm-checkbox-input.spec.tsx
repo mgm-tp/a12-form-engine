@@ -45,10 +45,10 @@ import type { Inputs } from "../../../../../view/internal/configuration/engine-c
 import { changeEventMock } from "../../../../rtl-utils/mock-utils.js";
 import type { RtlRenderWrapper } from "../../../../rtl-utils/render-wrapper.js";
 import { rtlRenderWrapperAsync } from "../../../../rtl-utils/render-wrapper.js";
+import { createDocumentPath } from "../../../../utils/createDocumentPath.js";
 import { createModelPath } from "../../../../utils/createModelPath.js";
 import { DocumentModelHelpers } from "../../../../utils/DocumentModelHelpers.js";
 import { setupModelsFixture } from "../../../../utils/setupFixture.js";
-import { createDocumentPath } from "../../../../utils/createDocumentPath.js";
 
 import { inputTest } from "./generic-tests/input-tests.js";
 import { createProps } from "./generic-tests/input-utils.js";

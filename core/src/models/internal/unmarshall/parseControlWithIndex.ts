@@ -40,7 +40,7 @@ import { computeGranularity, findByPath } from "../utils/document-model-utils.js
 import { IndexedControl } from "../utils/document-utils.js";
 import { ModelWalker } from "../utils/form-model-walker.js";
 import type { ModelVisitor, VisitProcess } from "../utils/form-model-walker.js";
-import type { ReadonlyObjectMap } from "../utils/json.js";
+import type { ReadonlyObjectMap } from "../utils/ReadonlyObjectMap.js";
 
 import type { ValueParser } from "./unmarshallFormModel.js";
 

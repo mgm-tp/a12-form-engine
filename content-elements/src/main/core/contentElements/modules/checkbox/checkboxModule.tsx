@@ -94,7 +94,7 @@ function CheckboxRenderer(
 		warnings,
 		infos,
 		tooltips,
-		tooltipsOnTop,
+		breakTooltipsToNewLine,
 		inputProps,
 		ariaDescribedBy
 	} = USE_COMMON_WIDGET_SETTINGS_WRAPPER.useCommonWidgetSettings(commonControlSettings);
@@ -128,7 +128,7 @@ function CheckboxRenderer(
 			readonly={readonly}
 			hideLabel={hideLabel}
 			tooltips={tooltips}
-			breakTooltipsToNewLine={tooltipsOnTop}
+			breakTooltipsToNewLine={breakTooltipsToNewLine}
 			helperText={helperText}
 			error={error}
 			errorMessage={errors}

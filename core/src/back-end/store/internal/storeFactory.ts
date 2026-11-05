@@ -94,6 +94,7 @@ export function createUIState(
 		screenLocation: uiState.screenLocation,
 		sectionState: uiState.sectionState || {},
 		messages: uiState.messages || {},
+		customMessages: uiState.customMessages || {},
 		disabled: uiState.disabled === true,
 		readonly: uiState.readonly === true,
 		correctionScreen: uiState.correctionScreen || { visible: false, showDetailsState: {} },

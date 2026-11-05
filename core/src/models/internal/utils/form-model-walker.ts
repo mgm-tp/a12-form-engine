@@ -157,7 +157,7 @@ export class ModelWalker {
 				if ("Stop" === this.visitor.visitContent(content)) {
 					return;
 				}
-				// eslint-disable-next-line no-empty
+				// oxlint-disable-next-line no-empty
 			} finally {
 			}
 		}
@@ -214,7 +214,7 @@ export class ModelWalker {
 				process = this.visitor.visitFieldConfigurationEntry(fce);
 			}
 			return "Stop" !== process;
-			// eslint-disable-next-line no-empty
+			// oxlint-disable-next-line no-empty
 		} finally {
 		}
 	}
@@ -460,7 +460,7 @@ export class ModelWalker {
 				process = this.visitor.visitRowAction(action);
 			}
 			return "Stop" !== process;
-			// eslint-disable-next-line no-empty
+			// oxlint-disable-next-line no-empty
 		} finally {
 		}
 	}

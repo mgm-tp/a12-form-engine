@@ -36,7 +36,7 @@ import { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
 import { within } from "@com.mgmtp.a12.devtools/react";
 
 import type { EngineStore } from "../../../../../back-end/store/internal/store.js";
-import type { ReadonlyObjectMap } from "../../../../../models/internal/utils/json.js";
+import type { ReadonlyObjectMap } from "../../../../../models/internal/utils/ReadonlyObjectMap.js";
 import { BODY_CELL, BODY_ROW, MESSAGE, TABLE_BODY } from "../../../../rtl-utils/data-roles.js";
 import { createDocumentPath } from "../../../../utils/createDocumentPath.js";
 import { createModelPath } from "../../../../utils/createModelPath.js";

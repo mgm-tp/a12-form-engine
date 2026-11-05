@@ -58,7 +58,7 @@ class CustomRowActionsChecker extends AbstractRepeatChecker {
 				repeatProblems.add(new ConsistencyProblem(
 					modelName,
 					FormModelCategory.FORM_MODEL_CUSTOM_ROW_ACTIONS_MISSING_EVENT,
-					new FormModelProblemSource(repeat.getId()),
+					FormModelProblemSource.involving(repeat.getId()),
 					checkedElement
 				));
 

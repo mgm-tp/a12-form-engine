@@ -83,7 +83,7 @@ class StyleChecker {
 			final Problem problem = new ConsistencyProblem(
 				modelName,
 				FormModelCategory.FORM_MODEL_WRONG_STYLE,
-				new FormModelProblemSource(checkedElementId),
+				FormModelProblemSource.involving(checkedElementId),
 				checkedElement,
 				actualStyle.getName(),
 				expectedStyleNames);

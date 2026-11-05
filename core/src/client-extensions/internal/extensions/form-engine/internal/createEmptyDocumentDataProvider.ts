@@ -43,9 +43,9 @@ import {
 import type { DataProvider } from "@com.mgmtp.a12.client/client-core";
 
 import type { KernelOptionsProvider } from "../../../../../back-end/store/index.js";
+import { isFormModel } from "../../../../../models/internal/FormModelGuards.js";
 import { EmptyDocument } from "../../../../../models/internal/utils/document-utils.js";
 import { InternalModelSelectors } from "../../../core/view/internal/components/selectors.js";
-import { isFormModel } from "../../../../../models/internal/FormModelGuards.js";
 
 import { PreProcessor } from "./preProcessDocument.js";
 import { referencesDirectFormModelInScene } from "./referencesDirectFormModelInScene.js";

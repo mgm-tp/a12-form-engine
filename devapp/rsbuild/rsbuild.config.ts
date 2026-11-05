@@ -31,14 +31,14 @@
  */
 
 import { execSync } from "node:child_process";
-import process from "node:process";
+import { env as processEnv } from "node:process";
 
 import type { ProxyConfig } from "@rsbuild/core";
 import { defineConfig, rspack } from "@rsbuild/core";
 import { pluginReact } from "@rsbuild/plugin-react";
 import { RsdoctorRspackPlugin } from "@rsdoctor/rspack-plugin";
 
-// eslint-disable-next-line workspaces/no-relative-imports
+// oxlint-disable-next-line workspaces/no-relative-imports
 import corePkg from "../../core/package.json" with { type: "json" };
 
 import packageJson from "../package.json" with { type: "json" };
@@ -54,7 +54,7 @@ const commitHash = execSync("git rev-parse HEAD || exit 0", {
 function setupProxy(envMode: string): ProxyConfig | undefined {
 	switch (envMode) {
 		case "services": {
-			const serverPort = process.env.SERVER_PORT ?? "14001";
+			const serverPort = processEnv.SERVER_PORT ?? "14001";
 			return {
 				"/api": {
 					target: `http://localhost:${serverPort}`,
@@ -83,7 +83,7 @@ function setupProxy(envMode: string): ProxyConfig | undefined {
 export default defineConfig(({ envMode, env }) => {
 	// for deployments we always use mock mode
 	const devappMode = env === "production" ? "mock" : (envMode ?? "mock");
-	const version = `${packageJson.version} [${devappMode.toUpperCase()}]`;
+	const version = `${processEnv.RELEASE_VERSION ?? packageJson.version} [${devappMode.toUpperCase()}]`;
 
 	return {
 		server: {
@@ -120,7 +120,8 @@ export default defineConfig(({ envMode, env }) => {
 				__A12_MODEL_VERSIONS__: JSON.stringify({
 					[corePkg.modelType]: corePkg.modelVersion
 				}),
-				__DEVAPP_MODE__: JSON.stringify(devappMode)
+				__DEVAPP_MODE__: JSON.stringify(devappMode),
+				__DOCS_AVAILABLE__: JSON.stringify(env === "production")
 			}
 		},
 		resolve: {

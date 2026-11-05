@@ -42,6 +42,7 @@ import type { Models } from "../../../../back-end/store/internal/store.js";
 import type { FormModel } from "../../../../models/index.js";
 import type { TableWidgetMap } from "../../../../view/internal/components/form-engine/repeat/table-widget-map.js";
 import type { RtlRenderWrapper } from "../../../rtl-utils/render-wrapper.js";
+import { createModelPath } from "../../../utils/createModelPath.js";
 import { RenderGroupFixture } from "../../../utils/rtl-render-group.js";
 import { setupFormEngineRendererWithRtlAsync } from "../../../utils/setup.js";
 import { setupModelsFixture } from "../../../utils/setupFixture.js";
@@ -50,7 +51,6 @@ import {
 	createDocumentForRepeat,
 	createNestedL1Entry
 } from "../../../utils/test-model-helpers/repeat.js";
-import { createModelPath } from "../../../utils/createModelPath.js";
 
 import { ModelElementIdEquals } from "./query-predicates.js";
 
@@ -61,9 +61,13 @@ describe("api.view.repeat", () => {
 			colCount: number;
 			alignment: "specificHorizontalAlignment" | "specificVerticalAlignment";
 			expectedAlignmentHead?:
-				FormModel.HorizontalAlignment | FormModel.VerticalAlignment | "default";
+				| FormModel.HorizontalAlignment
+				| FormModel.VerticalAlignment
+				| "default";
 			expectedAlignmentBody:
-				FormModel.HorizontalAlignment | FormModel.VerticalAlignment | "default";
+				| FormModel.HorizontalAlignment
+				| FormModel.VerticalAlignment
+				| "default";
 		}
 
 		function setup(models: Models, screenName: string): Promise<RtlRenderWrapper> {

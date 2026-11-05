@@ -95,8 +95,8 @@ describe("core.contentElements", () => {
 		});
 
 		describe("Tooltips", () => {
-			it("sets tooltips in addOnAfter if tooltipsOnTop is not set", () => {
-				const mockWidgetSettings = getMockWidgetSettings();
+			it("forwards tooltips and breakTooltipsToNewLine to the widget", () => {
+				const mockWidgetSettings = getMockWidgetSettings({ breakTooltipsToNewLine: "below" });
 
 				const { componentMap } = setup({
 					widgetSettings: mockWidgetSettings
@@ -104,21 +104,8 @@ describe("core.contentElements", () => {
 
 				const props = query(componentMap.BufferedTextLine).props();
 
-				strictEqual(props.addonAfter, mockWidgetSettings.tooltips);
-				strictEqual(props.tooltips, undefined);
-			});
-
-			it("sets tooltips in tooltips prop if tooltipsOnTop is set", () => {
-				const mockWidgetSettings = getMockWidgetSettings({ tooltipsOnTop: true });
-
-				const { componentMap } = setup({
-					widgetSettings: mockWidgetSettings
-				});
-
-				const props = query(componentMap.BufferedTextLine).props();
-
-				strictEqual(props.addonAfter, undefined);
 				strictEqual(props.tooltips, mockWidgetSettings.tooltips);
+				strictEqual(props.breakTooltipsToNewLine, "below");
 			});
 		});
 
@@ -367,7 +354,7 @@ function getMockWidgetSettings(options?: Partial<BaseWidgetSettings>): BaseWidge
 		warnings: "WARNINGS",
 		infos: "INFOS",
 		tooltips: "TOOLTIPS",
-		tooltipsOnTop: options?.tooltipsOnTop,
+		breakTooltipsToNewLine: options?.breakTooltipsToNewLine,
 		suffixes: "SUFFIXES",
 		inputProps: { "aria-required": true },
 		ariaDescribedBy: [],

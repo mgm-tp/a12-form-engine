@@ -31,7 +31,8 @@ import java.nio.file.Paths
 
 /** Define a proper version in build */
 String globalVersion = Helper.getVersion(
-    file('package.json'),
+    providers,
+    layout.projectDirectory.file('package.json'),
     project.findProperty('version') as String,
     project.findProperty('use') as String
 )
@@ -59,19 +60,6 @@ node {
     enableTaskRules = false
 }
 
-void verifyPnpmOnPath() {
-    final String executable = Os.isFamily(Os.FAMILY_WINDOWS) ? 'pnpm.cmd' : 'pnpm'
-    final boolean available = (System.getenv('PATH') ?: '')
-        .split(File.pathSeparator)
-        .any { new File(it, executable).canExecute() }
-
-    if (!available) {
-        throw new GradleException(
-            "pnpm is not installed on your system. Please install with 'npm install -g pnpm@${getPnpmVersion()}'"
-        )
-    }
-}
-
 if (System.getenv('CI')) {
     final String resolvedPnpmVersion = getPnpmVersion()
     final String resolvedPnpmCommand = getPnpmCommand()
@@ -90,7 +78,20 @@ tasks.named('pnpmInstall') {
     mustRunAfter(tasks.named('setVersion'))
 
     if (!System.getenv('CI')) {
-        doFirst { verifyPnpmOnPath() }
+        final String requiredPnpmVersion = pnpmVersion
+
+        doFirst {
+            final String executable = Os.isFamily(Os.FAMILY_WINDOWS) ? 'pnpm.cmd' : 'pnpm'
+            final boolean available = (System.getenv('PATH') ?: '')
+                .split(File.pathSeparator)
+                .any { new File(it, executable).canExecute() }
+
+            if (!available) {
+                throw new GradleException(
+                    "pnpm is not installed on your system. Please install with 'npm install -g pnpm@${requiredPnpmVersion}'"
+                )
+            }
+        }
     }
 }
 
@@ -147,6 +148,8 @@ if (file('publish/build.gradle').exists()) {
     apply from: 'publish/build.gradle'
 }
 
+final def dataservicesBom = libs.dataservices.bom
+
 // Shared configuration for Java library projects
 subprojects {
     if (
@@ -187,7 +190,7 @@ subprojects {
 
                 // A12 Data Services platform used for centralized version management for all subprojects
                 dependencies {
-                    api platform(libs.dataservices.bom)
+                    api platform(dataservicesBom)
                 }
 
                 tasks.withType(JavaCompile).configureEach {
@@ -385,12 +388,20 @@ project(':documentation') {
 
 tasks.register('nodeVerify', PnpmTask) {
     dependsOn(tasks.named('pnpmInstall'))
+
+    // oxlint's type-aware rules read the sibling packages' declarations out of their `lib`, so the
+    // linting only sees the whole workspace once the assembly has produced it.
+    mustRunAfter(tasks.named('nodeAssemble'))
+
     pnpmCommand.set(['verify'])
 }
 
 tasks.register('nodeAssemble', PnpmTask) {
-    dependsOn(tasks.named('nodeVerify'))
+    dependsOn(tasks.named('pnpmInstall'))
     dependsOn(project(':modelGraph').tasks.named('assemble'))
+    // the devapp bundles bake the version in at build time and package.json is not stamped
+    // until publish, so the value has to come from gradle
+    environment.put('RELEASE_VERSION', globalVersion)
     pnpmCommand.set(['build'])
 }
 
@@ -420,7 +431,7 @@ tasks.register('nodeTest', PnpmTask) {
     // `build` depends on both `assemble` and `check` but does not order them, so this constraint is
     // what actually makes `gradle build` run the assembly first. It only applies when both branches
     // are in the task graph, which leaves `gradle check` free to fail fast on a clean checkout.
-    mustRunAfter(tasks.named('nodeAssemble'))
+    mustRunAfter(tasks.named('nodeAssemble'), tasks.named('nodeVerify'))
 
     pnpmCommand.set(['test'])
     environment.put('NODE_ENV', 'test')
@@ -440,7 +451,12 @@ tasks.named('clean') {
     dependsOn(tasks.named('nodeClean'))
 }
 
+// review builds resolve to the plain -SNAPSHOT version, so stamping would rewrite all
+// workspace package.json files to what they already contain
+final boolean stampVersion = project.hasProperty('use')
+
 tasks.register('setVersion', PackageJsonModifierTask) {
+    onlyIf { stampVersion }
     packageDirs = new YamlSlurper().parse(file('./pnpm-workspace.yaml')).packages
         .collect({ file(it) }) + file('.')
     change = Helper.createSetVersion(version)

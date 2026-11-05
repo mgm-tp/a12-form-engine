@@ -33,8 +33,10 @@
 import { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
 import type * as Collections from "@com.mgmtp.a12.kernel/kernel-core-runtime-api-ts/a12internal";
 import type {
+	ICause,
 	IMetaField,
-	IResult
+	IResult,
+	SeverityType
 } from "@com.mgmtp.a12.kernel/kernel-core-runtime-api-ts/a12internal";
 import {
 	ErrorType,
@@ -55,7 +57,7 @@ import type { ExternalComputation } from "@com.mgmtp.a12.kernel/kernel-md-facade
 import type { Localizable } from "@com.mgmtp.a12.utils/utils-localization";
 
 import { DocumentPath } from "../../../models/internal/utils/document-utils.js";
-import type { ReadonlyObjectMap } from "../../../models/internal/utils/json.js";
+import type { ReadonlyObjectMap } from "../../../models/internal/utils/ReadonlyObjectMap.js";
 
 import type { DetailedUpdateResult } from "./DetailedUpdateResult.js";
 import type { Change } from "./documentChange.js";
@@ -216,12 +218,20 @@ export function convertComputedFieldsWithErrorsToValidationMessages(
 	);
 }
 
+/**
+ * @internal
+ * The rule path the kernel reports for a formal error, and the key a message without a rule path
+ * is identified by. Messages are deduplicated on their key, so a server-reported message has to
+ * use the same one.
+ */
+export const FORMAL_VALIDATION_RULE_PATH = "formalePruefung";
+
 /** @internal */
 export function mapMessageTypes(kernelMessage: Message): EngineStore.Validation.Message {
 	return {
 		element: kernelMessage.entityInstance,
 		errorCode: kernelMessage.errorCode,
-		errorKey: kernelMessage.rulePath ?? "formalePruefung",
+		errorKey: kernelMessage.rulePath ?? FORMAL_VALIDATION_RULE_PATH,
 		errorText: kernelMessage.errorText,
 		referencedFields:
 			kernelMessage.messageType === "OMISSION_ERROR"
@@ -231,8 +241,8 @@ export function mapMessageTypes(kernelMessage: Message): EngineStore.Validation.
 	};
 }
 
-// makes sure that duplicates are removed from the given list of document paths
-function computeUniqueDocumentPaths(input: EntityInstancePath[]): EntityInstancePath[] {
+/** @internal */
+export function computeUniqueDocumentPaths(input: EntityInstancePath[]): EntityInstancePath[] {
 	const result: EntityInstancePath[] = [];
 	const visited: { [key: string]: true | undefined } = {};
 	input.forEach(path => {
@@ -261,7 +271,8 @@ export function isFieldRequired(
 ): boolean {
 	const id = ModelPath.toString(fieldPath);
 	const metaField = validatorProvider?.getMetaModel().getValue(IMetaKeys.MODEL_META_FIELD, id) as
-		IMetaField | undefined;
+		| IMetaField
+		| undefined;
 
 	// Attachment/MultiSelect can never be required
 	if (metaField === undefined) {
@@ -376,6 +387,20 @@ export class ValidationResult implements IResult {
 			"INFO"
 		);
 	}
+
+	/**
+	 * The runtime reports every message through `addError`/`addHint`/`addInfo` as well, and those
+	 * carry the error field this store keys a message by, which `possiblyCausingEntities` does not.
+	 * Collecting here too would record each message twice.
+	 */
+	addMessageV2(
+		_ruleName: string,
+		_errorCode: string,
+		_message: Localizable[],
+		_type: ErrorType,
+		_severity: SeverityType,
+		_possiblyCausingEntities: ICause
+	): void {}
 
 	private addMessage(
 		ruleName: string,

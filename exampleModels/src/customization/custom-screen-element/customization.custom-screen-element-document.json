@@ -2,7 +2,7 @@
   "header": {
     "id": "customization.custom-screen-element-document",
     "modelType": "document",
-    "modelVersion": "29.4.0",
+    "modelVersion": "29.8.0",
     "locales": [
       {
         "code": "en"
@@ -25,8 +25,8 @@
       "name": "customization.custom-screen-element-document"
     },
     "modelConfig": {
-      "decimalSeparator": ".",
       "timeZone": "UTC",
+      "decimalSeparator": ".",
       "conditionLanguage": {
         "code": "en_US"
       }
@@ -36,14 +36,14 @@
         {
           "type": "Group",
           "id": "group_44819",
-          "name": "properties",
+          "name": "g",
           "Group": {
             "repeatability": 1,
             "elements": [
               {
                 "type": "Field",
-                "id": "field_e66fb",
-                "name": "type",
+                "id": "field_d0694",
+                "name": "f1",
                 "Field": {
                   "fieldType": {
                     "type": "StringType"
@@ -51,64 +51,63 @@
                   "label": [
                     {
                       "locale": "en",
-                      "text": "Type"
+                      "text": "Field1"
                     }
                   ]
                 }
               },
               {
                 "type": "Field",
-                "id": "field_b2f31",
-                "name": "id",
+                "id": "field_89bd3",
+                "name": "f2",
                 "Field": {
                   "fieldType": {
-                    "type": "StringType"
+                    "type": "StringType",
+                    "StringType": {
+                      "minLength": 3,
+                      "maxLength": 6
+                    }
                   },
                   "label": [
                     {
                       "locale": "en",
-                      "text": "Id"
+                      "text": "Field2"
                     }
-                  ],
-                  "requirednessConfig": {
-                    "mode": "absoluteOrRelativeToNextRepAncestor"
-                  }
+                  ]
                 }
               },
               {
-                "type": "Field",
-                "id": "field_c6c18",
-                "name": "name",
-                "Field": {
-                  "fieldType": {
-                    "type": "StringType"
-                  },
+                "type": "Group",
+                "id": "group_8e274",
+                "name": "rep",
+                "Group": {
                   "label": [
                     {
                       "locale": "en",
-                      "text": "Name"
+                      "text": "rep group"
                     }
                   ],
-                  "requirednessConfig": {
-                    "mode": "absoluteOrRelativeToNextRepAncestor"
-                  }
-                }
-              },
-              {
-                "type": "Field",
-                "id": "field_e4ad2",
-                "name": "height",
-                "Field": {
-                  "fieldType": {
-                    "type": "NumberType",
-                    "NumberType": {
-                      "trait": "amount"
-                    }
-                  },
-                  "label": [
+                  "repeatability": 5,
+                  "elements": [
                     {
-                      "locale": "en",
-                      "text": "Height [px]"
+                      "type": "Field",
+                      "id": "field_1ab5a",
+                      "name": "f3",
+                      "Field": {
+                        "fieldType": {
+                          "type": "StringType"
+                        }
+                      }
+                    },
+                    {
+                      "type": "Field",
+                      "id": "field_c1f73",
+                      "name": "f4",
+                      "Field": {
+                        "fieldType": {
+                          "type": "StringType"
+                        }
+                      }
                     }
                   ]
                 }

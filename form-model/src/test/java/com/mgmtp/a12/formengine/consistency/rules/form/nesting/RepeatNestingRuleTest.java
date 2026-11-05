@@ -67,12 +67,16 @@ public class RepeatNestingRuleTest {
 	}
 
 	@Test(dataProvider = "testData")
-	public void checkRuleFindings(final String expectedMessage, final ConsistencyCategory expectedCategory)
-		throws Exception {
+	public void checkRuleFindings(
+		final String expectedMessage,
+		final ConsistencyCategory expectedCategory,
+		final List<String> expectedInvolvedElementIds
+	) throws Exception {
 		final Optional<Problem> problem =
 			problems.stream().filter(p -> p.getMessage().equals(expectedMessage)).findAny();
 		Assert.assertTrue(problem.isPresent());
 		Assert.assertEquals(problem.get().getCategory(), expectedCategory);
+		Assert.assertEquals(RuleTestHelper.involvedElementIds(problem.get()), expectedInvolvedElementIds);
 	}
 
 	@DataProvider
@@ -80,26 +84,33 @@ public class RepeatNestingRuleTest {
 		return new Object[][] {
 			{
 				"The repeat is bound to a group [id: G1337] that does not exist in the document model.",
-				FormModelCategory.FORM_MODEL_INVALID_GROUP_REF
+				FormModelCategory.FORM_MODEL_INVALID_GROUP_REF,
+				List.of("ir-0")
 			}, {
 				"Repeat [id: ir-1] is bound to a non-repeatable group [id: G2, name: base].",
-				FormModelCategory.FORM_MODEL_NON_REPEATABLE_REPEAT_GROUP
+				FormModelCategory.FORM_MODEL_NON_REPEATABLE_REPEAT_GROUP,
+				List.of("ir-1")
 			}, {
 				"Repeat [id: ir-2] is bound to a non-repeatable group [id: G6, name: no_rep1].",
-				FormModelCategory.FORM_MODEL_NON_REPEATABLE_REPEAT_GROUP
+				FormModelCategory.FORM_MODEL_NON_REPEATABLE_REPEAT_GROUP,
+				List.of("ir-2")
 			}, {
 				"Invalid nesting: The repeat [id: ir-3] is not bound to a (direct or indirect) child group of its "
 				+ "parent's repeat group [id: G7, name: rep2_1].",
-				FormModelCategory.FORM_MODEL_INVALID_NESTING_PARENT
+				FormModelCategory.FORM_MODEL_INVALID_NESTING_PARENT,
+				List.of("ir-3", "dr-2")
 			}, {
 				"Invalid nesting: The repeat [id: ir-4] is not bound to the next repeatable child group of its "
 				+ "parent's "
-				+ "repeat group [id: G4, name: rep].", FormModelCategory.FORM_MODEL_INVALID_NESTING_REPEATABLE_BETWEEN
+				+ "repeat group [id: G4, name: rep].",
+				FormModelCategory.FORM_MODEL_INVALID_NESTING_REPEATABLE_BETWEEN,
+				List.of("ir-4", "dr-1")
 			}, {
 				"Repeat [id: dr-3] is not nested into another repeat and therefore must be bound to a repeatable "
 				+ "group "
 				+ "that is also not a child (directly or indirectly) of another repeatable group.",
-				FormModelCategory.FORM_MODEL_INVALID_NESTING_REPEATABLE_PARENT
+				FormModelCategory.FORM_MODEL_INVALID_NESTING_REPEATABLE_PARENT,
+				List.of("dr-3")
 			}
 		};
 	}

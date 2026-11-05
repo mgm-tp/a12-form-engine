@@ -33,10 +33,10 @@
 import { strictEqual } from "node:assert/strict";
 
 import type { EngineStore, Models } from "../../../../../../../back-end/store/index.js";
+import { loadModels } from "../../../../../../utils/setup.js";
 import { setupModelsFixture } from "../../../../../../utils/setupFixture.js";
 import { IDS as ReadonlyIds } from "../../../../../../utils/test-model-helpers/enablement.no-asterisks.js";
 import { IDS } from "../../../../../../utils/test-model-helpers/tooltips.js";
-import { loadModels } from "../../../../../../utils/setup.js";
 
 import { renderStringInput } from "../renderStringInput.js";
 

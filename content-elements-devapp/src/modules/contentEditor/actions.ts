@@ -30,8 +30,8 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { actionCreatorFactory } from "@com.mgmtp.a12.client/typescript-fsa-redux-5-compat";
 import type { ActivityActions } from "@com.mgmtp.a12.client/client-core";
+import { actionCreatorFactory } from "@com.mgmtp.a12.client/typescript-fsa-redux-5-compat";
 import type { ContentModel } from "@com.mgmtp.a12.contentengine/contentengine-core";
 import type { DocumentModel } from "@com.mgmtp.a12.kernel/kernel-md-facade";
 

@@ -35,7 +35,7 @@ import type { Action } from "@com.mgmtp.a12.client/typescript-fsa-redux-5-compat
 import { Events } from "../../../../../../../back-end/store/internal/actions.js";
 import type { EngineStore } from "../../../../../../../back-end/store/internal/store.js";
 import { DocumentPath } from "../../../../../../../models/internal/utils/document-utils.js";
-import type { ReadonlyObjectMap } from "../../../../../../../models/internal/utils/json.js";
+import type { ReadonlyObjectMap } from "../../../../../../../models/internal/utils/ReadonlyObjectMap.js";
 import { extractModelsFromPayload } from "../../../extractModelsFromPayload.js";
 import { FormEngineActions } from "../../actions.js";
 import { resolveUiState } from "../../resolveUiState.js";

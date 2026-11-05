@@ -101,7 +101,7 @@ function RadioRenderer(
 		warnings,
 		infos,
 		tooltips,
-		tooltipsOnTop,
+		breakTooltipsToNewLine,
 		inline,
 		inputProps,
 		ariaDescribedBy
@@ -162,7 +162,7 @@ function RadioRenderer(
 			readonly={readonly}
 			helperText={helperText}
 			tooltips={tooltips}
-			breakTooltipsToNewLine={tooltipsOnTop}
+			breakTooltipsToNewLine={breakTooltipsToNewLine}
 			error={error}
 			errorMessage={errors}
 			warning={warning}

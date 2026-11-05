@@ -34,7 +34,7 @@ import type { Middleware } from "redux";
 
 import type { ActionCreator } from "@com.mgmtp.a12.client/typescript-fsa-redux-5-compat";
 
-import { ReadonlyObjectMap } from "../../../../../models/internal/utils/json.js";
+import { ReadonlyObjectMap } from "../../../../../models/internal/utils/ReadonlyObjectMap.js";
 import { Commands, Events } from "../../actions.js";
 import { UiStateSelectors } from "../../selectors/ui-state.js";
 import type { EngineState, EngineStore } from "../../store.js";

@@ -30,8 +30,7 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-/* eslint-disable mocha/no-setup-in-describe */
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
+/* oxlint-disable typescript/no-non-null-assertion */
 
 import { strictEqual } from "node:assert/strict";
 

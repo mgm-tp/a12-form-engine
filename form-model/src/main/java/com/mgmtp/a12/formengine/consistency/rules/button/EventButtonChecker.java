@@ -57,7 +57,7 @@ class EventButtonChecker extends AbstractButtonChecker {
 			problems.add(new ConsistencyProblem(
 				modelName,
 				FormModelCategory.FORM_MODEL_EVENT_BUTTON_TARGET_SET,
-				new FormModelProblemSource(button.getId()),
+				FormModelProblemSource.involving(button.getId()),
 				button.getName()));
 		}
 	}

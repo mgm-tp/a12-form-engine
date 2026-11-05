@@ -32,6 +32,7 @@
 package com.mgmtp.a12.formengine.consistency.rules.layout;
 
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.hasItem;
 import static org.hamcrest.Matchers.hasProperty;
@@ -40,6 +41,7 @@ import static org.hamcrest.Matchers.hasSize;
 import com.mgmtp.a12.model.consistency.Problem;
 
 import com.mgmtp.a12.formengine.consistency.rules.ModelLoader;
+import com.mgmtp.a12.formengine.consistency.rules.RuleTestHelper;
 import com.mgmtp.a12.formengine.model.FormModel;
 
 import java.util.List;
@@ -67,6 +69,25 @@ public class FormOffsetSpanRuleTest {
 		assertThat(problems, hasItem(hasProperty("message",equalTo("The element control-52eb8 in Control Grid cg3 has an invalid span configuration for size md, since the resulting width taken up by the element exceeds 12 based on the given layout."))));
 		assertThat(problems, hasItem(hasProperty("message",equalTo("The element control-52eb8 in Control Grid cg3 has an invalid offset configuration for size sm, since the width taken up by the offset exceeds 12 based on the given layout."))));
 		assertThat(problems, hasItem(hasProperty("message",equalTo("The element control-52eb8 in Control Grid cg3 has an invalid span configuration for size sm, since the resulting width taken up by the element exceeds 12 based on the given layout."))));
+	}
+
+	@Test
+	public void checkInvolvedElements() {
+		final FormModel productForm = ModelLoader.loadModel(
+                "com/mgmtp/a12/formengine/consistency/rules/layout/formOffsetSpanRuleTestInvalidFormModel.json");
+		final List<Problem> problems = formOffsetSpanRule.execute(productForm, null);
+
+		// the cell carries the invalid configuration, the layout it exceeds belongs to the control grid
+		assertThat(
+			RuleTestHelper.involvedElementIds(
+				problems,
+				"The element control-52eb8 in Control Grid cg3 has an invalid offset configuration for size sm, since the width taken up by the offset exceeds 12 based on the given layout."),
+			contains("control-52eb8", "controlgrid-a76fd"));
+		assertThat(
+			RuleTestHelper.involvedElementIds(
+				problems,
+				"The element control-fb979 in Control Grid cg has an invalid span configuration for size md, since the resulting width taken up by the element exceeds 12 based on the given layout."),
+			contains("control-fb979", "controlgrid-a76ff"));
 	}
 
 	@Test

@@ -41,7 +41,7 @@ import type {
 import type { FormModel } from "../../../models/index.js";
 import * as DocumentModelUtils from "../../../models/internal/utils/document-model-utils.js";
 import { DocumentPath } from "../../../models/internal/utils/document-utils.js";
-import { ReadonlyObjectMap } from "../../../models/internal/utils/json.js";
+import { ReadonlyObjectMap } from "../../../models/internal/utils/ReadonlyObjectMap.js";
 import { ElementStateUtil } from "../../../view/internal/utilities/elementState.js";
 
 import { Change } from "./documentChange.js";
@@ -262,6 +262,25 @@ export function removeRowEntriesInMessages(
 
 	return EngineStore.Validation.Message.updateMessagesPaths(
 		messagesWithoutRemoved,
+		rowPath,
+		documentModel
+	);
+}
+
+/** @internal */
+export function removeRowEntriesInCustomMessages(
+	rowPath: EntityInstancePath,
+	customMessages: ReadonlyObjectMap<EngineStore.Validation.CustomEntry>,
+	documentModel: DocumentModel
+): ReadonlyObjectMap<EngineStore.Validation.CustomEntry> {
+	const rowPathString = DocumentPath.toString(rowPath);
+	const remaining = Object.fromEntries(
+		Object.entries(customMessages).filter(
+			([, entry]) => entry && !DocumentPath.toString(entry.dataContext).startsWith(rowPathString)
+		)
+	);
+	return EngineStore.Validation.Message.updateCustomMessagesPaths(
+		remaining,
 		rowPath,
 		documentModel
 	);

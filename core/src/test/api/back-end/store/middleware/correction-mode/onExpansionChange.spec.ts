@@ -30,6 +30,7 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
+import { deepStrictEqual } from "node:assert/strict";
 import { mock } from "node:test";
 
 import type { Action, Store } from "redux";
@@ -37,7 +38,7 @@ import type { Action, Store } from "redux";
 import { provider } from "@com.mgmtp.a12.widgets/widgets-core";
 
 import type { EngineState } from "../../../../../../back-end/store/index.js";
-import { Commands, Events } from "../../../../../../back-end/store/index.js";
+import { Commands, Events, UiStateSelectors } from "../../../../../../back-end/store/index.js";
 import { MiddlewareHelpers } from "../../../../../utils/MiddlewareHelpers.js";
 import { createTestStore } from "../../../../../utils/setup.js";
 import { setupFixture, setupModelsFixture } from "../../../../../utils/setupFixture.js";
@@ -106,7 +107,7 @@ describe("api.back-end.store.middleware", () => {
 			});
 
 			describe("given expanded=false and the current device is a phone", () => {
-				it("dispatches Commands.changeScreenState with `validation-bar` as focusPart", () => {
+				it("dispatches Commands.CorrectionMode.focusValidationBar and focuses the bar", () => {
 					mock.method(provider, "get", () => "phone");
 
 					const action = Events.CorrectionMode.ValidationBar.expand({
@@ -114,15 +115,17 @@ describe("api.back-end.store.middleware", () => {
 						resetCurrentMessage: false
 					});
 
-					setupStore().dispatch(action);
-					const expectedCommand = Commands.changeScreenState({
-						index: 0,
-						focusedComponent: {
-							formModelPath: [],
-							subElement: "validation-bar"
-						}
-					});
-					MiddlewareHelpers.assertAction(middlewareSpy.spy, expectedCommand);
+					const store = setupStore();
+					store.dispatch(action);
+
+					MiddlewareHelpers.assertAction(
+						middlewareSpy.spy,
+						Commands.CorrectionMode.focusValidationBar()
+					);
+					deepStrictEqual(
+						UiStateSelectors.currentScreenLocation()(store.getState()).focusedComponent,
+						{ formModelPath: [], subElement: "validation-bar" }
+					);
 				});
 			});
 

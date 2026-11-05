@@ -76,7 +76,7 @@ public class LabelConsistencyChecker {
 				problems.add(new ConsistencyProblem(
 					modelName,
 					FormModelCategory.FORM_MODEL_MISSING_LABEL_TYPE,
-					new FormModelProblemSource(typeOrId),
+					FormModelProblemSource.involving(modelElementInfo.getId()),
 					typeOrId
 				));
 			}
@@ -86,7 +86,7 @@ public class LabelConsistencyChecker {
 				problems.add(new ConsistencyProblem(
 					modelName,
 					FormModelCategory.FORM_MODEL_MISSING_LABEL_TEXT,
-					new FormModelProblemSource(typeOrId),
+					FormModelProblemSource.involving(modelElementInfo.getId()),
 					typeOrId
 				));
 			}
@@ -103,7 +103,7 @@ public class LabelConsistencyChecker {
 				problems.add(new ConsistencyProblem(
 					modelName,
 					FormModelCategory.FORM_MODEL_WRONG_LABEL_TYPE,
-					new FormModelProblemSource(typeOrId),
+					FormModelProblemSource.involving(modelElementInfo.getId()),
 					typeOrId,
 					text,
 					type.getValue()
@@ -115,7 +115,7 @@ public class LabelConsistencyChecker {
 				problems.add(new ConsistencyProblem(
 					modelName,
 					FormModelCategory.FORM_MODEL_MULTILINGUAL_AND_EXPRESSION_LABEL_SET,
-					new FormModelProblemSource(typeOrId),
+					FormModelProblemSource.involving(modelElementInfo.getId()),
 					typeOrId
 				));
 			}

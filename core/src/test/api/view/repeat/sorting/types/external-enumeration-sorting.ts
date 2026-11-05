@@ -35,12 +35,12 @@ import { deepStrictEqual } from "node:assert/strict";
 import type { Models } from "../../../../../../back-end/store/internal/store.js";
 import { sort } from "../../../../../../view/internal/utilities/sorting.js";
 import { externalEnumerationProvider } from "../../../../../unit/view/configurable_externalenumeration.js";
-import { US_LOCALE } from "../../../../../utils/localization.js";
 import { createModelPath } from "../../../../../utils/createModelPath.js";
+import { US_LOCALE } from "../../../../../utils/localization.js";
+import { loadData } from "../../../../../utils/setup.js";
 import { setupArrayFixture, setupFixture } from "../../../../../utils/setupFixture.js";
 import { IR } from "../../../../../utils/test-model-helpers/inline.repeat.js";
 import { REPEAT_MODEL_PATH } from "../../filter/filter.utils.js";
-import { loadData } from "../../../../../utils/setup.js";
 
 import { getData, getRows } from "./utils.js";
 

@@ -41,7 +41,7 @@ import Mocha from "mocha";
 import { hideBin } from "yargs/helpers";
 import yargs from "yargs/yargs";
 
-// eslint-disable-next-line no-restricted-imports
+// oxlint-disable-next-line no-restricted-imports
 import { mochaHooks } from "../../lib/test/utils/hooks.js";
 
 import { heapSnapshot } from "../debug/heapsnapshot.js";

@@ -32,11 +32,11 @@
 
 import type { RefObject } from "react";
 
+// oxlint-disable-next-line no-unused-vars -- the import is what lets TypeDoc resolve {@link Events}
 import type { Events } from "../../../../back-end/store/internal/actions.js";
 import type { EngineState } from "../../../../back-end/store/internal/store.js";
 import type { DispatchConfiguration } from "../../configuration/dispatch-configuration.js";
 import type { Config } from "../../configuration/engine-configuration.js";
-import type { defaultMapDispatchToProps } from "../../configuration/Defaults.js";
 
 import type { ScrollApi } from "../scroll-api.js";
 

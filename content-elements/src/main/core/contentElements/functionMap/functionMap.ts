@@ -33,8 +33,7 @@
 import type {
 	publishFocusFieldEvent,
 	useFocusField,
-	useFocusFirstError,
-	VirtualNode
+	useFocusFirstError
 } from "@com.mgmtp.a12.contentengine/contentengine-core";
 
 import type { publishFocusInputEvent, useFocusInput } from "../focus.js";
@@ -44,7 +43,6 @@ import type { useLinkData } from "../modules/messageGroupDisplay/useLinkData.js"
 
 /** @internal */
 export interface FunctionMap {
-	computeVirtualNodeId: typeof VirtualNode.computeId;
 	publishFocusFieldEvent: typeof publishFocusFieldEvent;
 	publishFocusInputEvent: typeof publishFocusInputEvent;
 	useCollectDocumentElementIds: typeof useCollectDocumentElementIds;

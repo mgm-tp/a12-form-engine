@@ -301,7 +301,7 @@ describe("api.back-end.localization", () => {
 							for (const msg of Object.entries(dummyConfirmationTexts)) {
 								ok(
 									modalOverlay.textContent?.includes(
-										// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+										// oxlint-disable-next-line typescript/no-non-null-assertion
 										msg[1].find(entry => entry.locale === locale.language)!.text
 									),
 									msg[0]

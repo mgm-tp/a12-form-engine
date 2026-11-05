@@ -77,7 +77,7 @@ class DependentEnumerationChecker extends AbstractReferenceChecker {
 					problems.add(new ConsistencyProblem(
 						formModel.getHeaderId(),
 						FormModelCategory.DEPENDENT_ENUM_MASTER_FIELD_INVALID_TYPE,
-						new FormModelProblemSource(fieldConfigurationEntry.getElementRef()),
+						FormModelProblemSource.involving(fieldConfigurationEntry.getElementRef()),
 						masterFieldRef,
 						documentModelService.getDocumentModelId(),
 						DocumentModelHelper.getFieldTypeString(masterFieldEffectiveDataType)
@@ -99,7 +99,7 @@ class DependentEnumerationChecker extends AbstractReferenceChecker {
 					new ConsistencyProblem(
 						formModel.getHeaderId(),
 						FormModelCategory.MISSING_DM_FIELD_IN_DEPENDENT_ENUMERATION_MASTER,
-						new FormModelProblemSource(fieldConfigurationEntry.getElementRef()),
+						FormModelProblemSource.involving(fieldConfigurationEntry.getElementRef()),
 						masterFieldRef,
 						documentModelService.getDocumentModelId()));
 			}
@@ -127,7 +127,7 @@ class DependentEnumerationChecker extends AbstractReferenceChecker {
 				problems.add(new ConsistencyProblem(
 					formModel.getHeaderId(),
 					FormModelCategory.DEPENDENT_ENUM_INVALID_MASTER_ENUMERATION_VALUE,
-					new FormModelProblemSource(fieldConfigurationEntry.getElementRef()),
+					FormModelProblemSource.involving(fieldConfigurationEntry.getElementRef()),
 					masterFieldRef,
 					documentModelService.getDocumentModelId(),
 					constraint.getMasterValue()
@@ -149,7 +149,7 @@ class DependentEnumerationChecker extends AbstractReferenceChecker {
 			problems.add(new ConsistencyProblem(
 				formModel.getHeaderId(),
 				FormModelCategory.MISSING_DM_FIELD_IN_DEPENDENT_ENUMERATION,
-				new FormModelProblemSource(fieldConfigurationEntry.getElementRef()),
+				FormModelProblemSource.involving(fieldConfigurationEntry.getElementRef()),
 				fieldConfigurationEntry.getElementRef(),
 				documentModelService.getDocumentModelId()
 			));
@@ -162,7 +162,7 @@ class DependentEnumerationChecker extends AbstractReferenceChecker {
 				new ConsistencyProblem(
 					formModel.getHeaderId(),
 					FormModelCategory.DEPENDENT_ENUM_DEPENDENT_FIELD_INVALID_TYPE,
-					new FormModelProblemSource(fieldConfigurationEntry.getElementRef()),
+					FormModelProblemSource.involving(fieldConfigurationEntry.getElementRef()),
 					dependentEnumerationField.get().getId(),
 					documentModelService.getDocumentModelId(),
 					DocumentModelHelper.getFieldTypeString(dependentFieldDataType.get())));
@@ -196,7 +196,7 @@ class DependentEnumerationChecker extends AbstractReferenceChecker {
 					problems.add(new ConsistencyProblem(
 						formModel.getHeaderId(),
 						FormModelCategory.DEPENDENT_ENUM_INVALID_DEPENDENT_ENUMERATION_VALUE,
-						new FormModelProblemSource(fieldConfigurationEntry.getElementRef()),
+						FormModelProblemSource.involving(fieldConfigurationEntry.getElementRef()),
 						dependentEnumerationField.getId(),
 						documentModelService.getDocumentModelId(),
 						constraintValue.getValue()
@@ -235,7 +235,7 @@ class DependentEnumerationChecker extends AbstractReferenceChecker {
 				problems.add(new ConsistencyProblem(
 					formModel.getHeaderId(),
 					FormModelCategory.DEPENDENT_ENUM_INVALID_VALUE_FOR_MASTER_CHANGE_ENUMERATION_VALUE,
-					new FormModelProblemSource(fieldConfigurationEntry.getElementRef()),
+					FormModelProblemSource.involving(fieldConfigurationEntry.getElementRef()),
 					dependentEnumerationField.get().getId(),
 					documentModelService.getDocumentModelId(),
 					constraintValue

@@ -30,27 +30,4 @@ NON-INFRINGEMENT, EXCEPT WHERE SUCH DISCLAIMERS ARE HELD TO BE
 LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
 ////
 
-= Form Engine
-
-The A12 Form Engine is an interpreter of A12 Form Models, which in turn rely on A12 Document Models.
-
-Engine behavior can be customized by the application using configuration parameters, provider code, and custom widgets (React components).
-
-Project custom widgets are treated the same as existing internal widgets. They have full access to the internal runtime model of the engine.
-
-The provided npm packages contain plain JavaScript code, but all sources as well as source maps for TypeScript are provided in order to enable a good debugging experience of the engine code. None of the code is obfuscated and therefore human-readable.
-
-== Artifacts
-
-The public API of the Form Engine library is provided via the following artifacts:
-
-npm packages:
-
-- @com.mgmtp.a12.formengine/formengine-core: Contains the core functionality of the Form Engine
-- @com.mgmtp.a12.formengine/formengine-content-elements: Experimental package providing form related content elements for content models
-- @com.mgmtp.a12.formengine/formengine-content-elements-editor: Experimental package providing editor UI components for the content elements
-- @com.mgmtp.a12.formengine/formengine-model-migration: Provides the Form Model migration tool
-
-Java artifacts:
-
-- com.mgmtp.a12.formengine:formengine-model: Contains the Java representation of the Form Model, as well as serialization and validation functionality for Form Models
+= Concepts and Integration

@@ -107,7 +107,7 @@ public class NumberOfInitialRowsRule extends AbstractRepeatRule {
 							new ConsistencyProblem(
 								modelName,
 								FORM_MODEL_REPEAT_NUMBER_OF_INITIAL_ROWS_TOO_BIG,
-								new FormModelProblemSource(repeat.getId()),
+								FormModelProblemSource.involving(repeat.getId()),
 								repeat.getId(),
 								repeat.getName()));
 					}
@@ -116,7 +116,7 @@ public class NumberOfInitialRowsRule extends AbstractRepeatRule {
 						new ConsistencyProblem(
 							modelName,
 							FORM_MODEL_REPEAT_NUMBER_OF_INITIAL_ROWS_INVALID,
-							new FormModelProblemSource(repeat.getId()),
+							FormModelProblemSource.involving(repeat.getId()),
 							repeat.getId(),
 							repeat.getName()));
 				}

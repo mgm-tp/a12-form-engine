@@ -78,6 +78,12 @@ public interface FieldBasedInput extends Serializable {
 
 	public boolean isMessageExpositionSet();
 
+	public TooltipPositionEnumType getTooltipPosition();
+
+	public void setTooltipPosition(final TooltipPositionEnumType value);
+
+	public boolean isTooltipPositionSet();
+
 	public String getAutoExpand();
 
 	public void setAutoExpand(final String value);

@@ -39,6 +39,7 @@ import type {
 	MultiAttachmentUploadProps
 } from "../../view/internal/components/widgets/form-engine/attachments/attachmentUploadProps.js";
 import type { BufferedTextAreaProps } from "../../view/internal/components/widgets/form-engine/buffered-text-area.js";
+import type { BufferedTextLineProps } from "../../view/internal/components/widgets/form-engine/buffered-text-line.js";
 import type {
 	DateRangeTextLineProps,
 	DateTextLineProps,
@@ -52,7 +53,6 @@ import type { ValidationMessagesProps } from "../../view/internal/components/wid
 import type { ComponentMap } from "../../view/internal/configuration/componentMap/component-map.js";
 import { DefaultComponentMap } from "../../view/internal/configuration/componentMap/DefaultComponentMap.js";
 import type { ContentWithNewLinesProps } from "../../view/internal/utilities/contentWithNewLines.js";
-import type { BufferedTextLineProps } from "../../view/internal/components/widgets/form-engine/buffered-text-line.js";
 
 import {
 	ACTION_BUTTONS,

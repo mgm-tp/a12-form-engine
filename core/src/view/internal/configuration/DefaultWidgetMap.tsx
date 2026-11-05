@@ -82,6 +82,10 @@ import {
 	ValidationBar,
 	WarningTooltip
 } from "@com.mgmtp.a12.widgets/widgets-core";
+import {
+	ImageUploadPlugin,
+	MarkdownEditor
+} from "@com.mgmtp.a12.widgets/widgets-core/experimental";
 
 import type { WidgetMap } from "./widget-map.js";
 
@@ -112,6 +116,8 @@ export const DefaultWidgetMap: WidgetMap = {
 	TimePicker,
 
 	DefaultFileUpload,
+	MarkdownEditor,
+	ImageUploadPlugin,
 
 	ErrorTooltip,
 	HintTooltip,

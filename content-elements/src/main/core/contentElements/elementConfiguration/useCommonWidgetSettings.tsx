@@ -77,7 +77,9 @@ export function useCommonWidgetSettings(
 		hint,
 		helperText,
 		showMessagesAsTooltip,
+		// oxlint-disable-next-line typescript/no-deprecated
 		tooltipsOnTop,
+		breakTooltipsToNewLine: rawBreakTooltipsToNewLine,
 		suffix,
 		truncateSuffix,
 		autoComplete,
@@ -86,6 +88,10 @@ export function useCommonWidgetSettings(
 		secret,
 		inline
 	} = commonControlSettings;
+
+	// Falls back to the deprecated tooltipsOnTop in case a caller of useCommonWidgetSettings
+	// still only sets it, without setting breakTooltipsToNewLine.
+	const breakTooltipsToNewLine = rawBreakTooltipsToNewLine ?? (tooltipsOnTop ? "above" : undefined);
 
 	const groupedValidationMessages = rawGroupedValidationMessages.map(MessageTransformers.transform);
 	const ungroupedValidationMessages = rawUngroupedValidationMessages.map(
@@ -207,7 +213,9 @@ export function useCommonWidgetSettings(
 		hideLabel,
 		helperText,
 		tooltips,
+		// oxlint-disable-next-line typescript/no-deprecated
 		tooltipsOnTop,
+		breakTooltipsToNewLine,
 		suffixes,
 		uncheckedLabel,
 		checkedLabel,

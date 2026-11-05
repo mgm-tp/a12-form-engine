@@ -62,15 +62,15 @@ public class FormCheckStyleRuleTest {
 		final List<Problem> problems = formCheckStylesRule.execute(productForm, null);
 
 		assertThat(problems, hasSize(9));
-		assertThat(problems,hasItem(hasProperty("message",equalTo("Form model field [<Section>Notes] contains unexpected style [hans]. Expected styles are [[foo, bar]]."))));
-		assertThat(problems,hasItem(hasProperty("message",equalTo("Form model field [<CustomScreenElement>Notes] contains unexpected style [hans]. Expected styles are [[foo, bar]]."))));
-		assertThat(problems,hasItem(hasProperty("message",equalTo("Form model field [<Grid>DescriptionAndDate] contains unexpected style [hans]. Expected styles are [[foo, bar]]."))));
-		assertThat(problems,hasItem(hasProperty("message",equalTo("Form model field [control-3b2b9] contains unexpected style [hans]. Expected styles are [[foo, bar]]."))));
-		assertThat(problems,hasItem(hasProperty("message",equalTo("Form model field [<Button>BasicInformation] contains unexpected style [hans]. Expected styles are [[foo, bar]]."))));
-		assertThat(problems,hasItem(hasProperty("message",equalTo("Form model field [Footer Button] contains unexpected style [hans]. Expected styles are [[foo, bar]]."))));
-		assertThat(problems,hasItem(hasProperty("message",equalTo("Form model field [Notes Repeat/event] contains unexpected style [hans]. Expected styles are [[foo, bar]]."))));
-		assertThat(problems,hasItem(hasProperty("message",equalTo("Form model field [InlineRepeat/test] contains unexpected style [WWW]. Expected styles are [[foo, bar]]."))));
-		assertThat(problems,hasItem(hasProperty("message",equalTo("Form model field [fieldOverviewColumn-1] contains unexpected style [hans]. Expected styles are [[foo, bar]]."))));
+		assertThat(problems,hasItem(hasProperty("message",equalTo("Form Model element [<Section>Notes] contains unexpected style [hans]. Expected styles are [[foo, bar]]."))));
+		assertThat(problems,hasItem(hasProperty("message",equalTo("Form Model element [<CustomScreenElement>Notes] contains unexpected style [hans]. Expected styles are [[foo, bar]]."))));
+		assertThat(problems,hasItem(hasProperty("message",equalTo("Form Model element [<Grid>DescriptionAndDate] contains unexpected style [hans]. Expected styles are [[foo, bar]]."))));
+		assertThat(problems,hasItem(hasProperty("message",equalTo("Form Model element [control-3b2b9] contains unexpected style [hans]. Expected styles are [[foo, bar]]."))));
+		assertThat(problems,hasItem(hasProperty("message",equalTo("Form Model element [<Button>BasicInformation] contains unexpected style [hans]. Expected styles are [[foo, bar]]."))));
+		assertThat(problems,hasItem(hasProperty("message",equalTo("Form Model element [Footer Button] contains unexpected style [hans]. Expected styles are [[foo, bar]]."))));
+		assertThat(problems,hasItem(hasProperty("message",equalTo("Form Model element [Notes Repeat/event] contains unexpected style [hans]. Expected styles are [[foo, bar]]."))));
+		assertThat(problems,hasItem(hasProperty("message",equalTo("Form Model element [InlineRepeat/test] contains unexpected style [WWW]. Expected styles are [[foo, bar]]."))));
+		assertThat(problems,hasItem(hasProperty("message",equalTo("Form Model element [fieldOverviewColumn-1] contains unexpected style [hans]. Expected styles are [[foo, bar]]."))));
 	}
 
 }

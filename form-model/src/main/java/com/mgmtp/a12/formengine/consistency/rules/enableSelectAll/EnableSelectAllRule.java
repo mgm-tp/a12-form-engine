@@ -77,14 +77,14 @@ public class EnableSelectAllRule implements ConsistencyRule {
 					problems.add(new ConsistencyProblem(
 						model.getHeaderId(),
 						FormModelCategory.FORM_MODEL_ENABLE_SELECT_ALL_INVALID_DATATYPE,
-						new FormModelProblemSource(fieldConfig.getElementRef()),
+						FormModelProblemSource.involving(fieldConfig.getElementRef()),
 						elementRef,
 						element.getName()));
 				} else if (!isValidExposition(fieldConfig)) {
 					problems.add(new ConsistencyProblem(
 						model.getHeaderId(),
 						FormModelCategory.FORM_MODEL_ENABLE_SELECT_ALL_INVALID_EXPOSITION,
-						new FormModelProblemSource(fieldConfig.getElementRef()),
+						FormModelProblemSource.involving(fieldConfig.getElementRef()),
 						elementRef,
 						element.getName()));
 				}

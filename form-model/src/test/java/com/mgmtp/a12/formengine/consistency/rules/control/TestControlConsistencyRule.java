@@ -85,6 +85,20 @@ public class TestControlConsistencyRule {
 	}
 
 	@Test
+	public void testIndexCheckInvolvedElements() {
+		final FormModel productForm = ModelLoader.loadModel(TEST_PACKAGE + "TestFormWrongIndex.json");
+		final FileBasedDocumentModelResolver modelResolver = new FileBasedDocumentModelResolver(TEST_PACKAGE);
+		final List<Problem> problems = rule.execute(productForm, RuleTestHelper.createDocumentModelAccess(modelResolver, productForm));
+
+		// the control carries the incompatible granularity, the repeat provides the context it clashes with
+		assertThat(
+			RuleTestHelper.involvedElementIds(
+				problems,
+				"Repeat [id: detachedrepeat-d625c, name: detached-repeat-repeat] references a control [id: control-ddec2] with the field [id: field_c2fe7, name: field4] with incompatible granularity."),
+			contains("control-ddec2", "detachedrepeat-d625c"));
+	}
+
+	@Test
 	public void testGranularityCheck() {
 		final FormModel productForm = ModelLoader.loadModel(TEST_PACKAGE + "TestFormWrongGranularity.json");
 		final FileBasedDocumentModelResolver modelResolver = new FileBasedDocumentModelResolver(TEST_PACKAGE);

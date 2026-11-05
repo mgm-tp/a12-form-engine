@@ -62,7 +62,10 @@ class AbstractReferenceChecker {
 	}
 
 	protected List<Problem> checkDmFieldInDependentType(
-		final String fieldRef, final boolean isMasterField, final ConsistencyCategory problemCategory
+		final String fieldRef,
+		final String configuredElementRef,
+		final boolean isMasterField,
+		final ConsistencyCategory problemCategory
 	) {
 		final List<Problem> problems = new ArrayList<>();
 		if (fieldRef != null) {
@@ -78,7 +81,7 @@ class AbstractReferenceChecker {
 							new ConsistencyProblem(
 								formModel.getHeaderId(),
 								FormModelCategory.DEPENDENT_TYPE_MASTER_FIELD_INVALID_TYPE,
-								new FormModelProblemSource(fieldRef),
+								FormModelProblemSource.involving(configuredElementRef),
 								fieldRef,
 								this.documentModelService.getDocumentModelId(),
 								DocumentModelHelper.getFieldTypeString(effectiveDataType)));
@@ -89,7 +92,7 @@ class AbstractReferenceChecker {
 					new ConsistencyProblem(
 						formModel.getHeaderId(),
 						problemCategory,
-						new FormModelProblemSource(fieldRef),
+						FormModelProblemSource.involving(configuredElementRef),
 						fieldRef,
 						this.documentModelService.getDocumentModelId()));
 			}

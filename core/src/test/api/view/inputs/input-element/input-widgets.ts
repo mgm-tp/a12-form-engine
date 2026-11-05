@@ -51,5 +51,6 @@ export const Input_Widgets: (keyof WidgetMap)[] = [
 	"DateTimePicker",
 	"TimePicker",
 
-	"DefaultFileUpload"
+	"DefaultFileUpload",
+	"MarkdownEditor"
 ];

@@ -31,11 +31,16 @@
  */
 
 import type { JSX } from "react";
+import { useContext } from "react";
 import { useSelector } from "react-redux";
 import { styled } from "styled-components";
 
 import type { View } from "@com.mgmtp.a12.client/client-core";
-import { ActivitySelectors, ViewViews } from "@com.mgmtp.a12.client/client-core";
+import {
+	ActivitySelectors,
+	ClientWidgetMapContext,
+	ViewViews
+} from "@com.mgmtp.a12.client/client-core";
 import { ProgressIndicator } from "@com.mgmtp.a12.widgets/widgets-core";
 import type { ProgressIndicatorProps } from "@com.mgmtp.a12.widgets/widgets-core";
 
@@ -54,14 +59,14 @@ export function ProgressComponent({
 	children
 }: View.ProgressComponentProvider.PropsType): JSX.Element {
 	const isBusy = useSelector(ActivitySelectors.busy(activityId));
+	const defaultClientWidgetMap = useContext(ClientWidgetMapContext);
+	const clientWidgetMap = { ...defaultClientWidgetMap, ProgressIndicator: CustomIndicator };
 
 	return (
-		<StyledIndicator
-			delay={0}
-			progress={isBusy ? "loading" : "none"}
-			ProgressIndicatorComponent={CustomIndicator}
-		>
-			{children}
-		</StyledIndicator>
+		<ClientWidgetMapContext.Provider value={clientWidgetMap}>
+			<StyledIndicator delay={0} progress={isBusy ? "loading" : "none"}>
+				{children}
+			</StyledIndicator>
+		</ClientWidgetMapContext.Provider>
 	);
 }

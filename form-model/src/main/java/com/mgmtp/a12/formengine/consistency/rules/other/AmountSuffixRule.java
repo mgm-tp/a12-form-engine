@@ -71,7 +71,7 @@ public class AmountSuffixRule implements ConsistencyRule {
 							new ConsistencyProblem(
 								model.getHeaderId(),
 								FormModelCategory.FORM_MODEL_AMOUNT_SUFFIX_INVALID_TYPE,
-								new FormModelProblemSource(model.getHeaderId())
+								FormModelProblemSource.involving(model.getHeaderId())
 							)
 						);
 					}
@@ -80,7 +80,7 @@ public class AmountSuffixRule implements ConsistencyRule {
 						new ConsistencyProblem(
 							model.getHeaderId(),
 							FormModelCategory.FORM_MODEL_AMOUNT_SUFFIX_FIELD_MISSING,
-							new FormModelProblemSource(model.getHeaderId()),
+							FormModelProblemSource.involving(model.getHeaderId()),
 							fieldRef,
 							documentModelAccess.getDocumentModelId()
 						)

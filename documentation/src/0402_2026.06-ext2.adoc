@@ -1,0 +1,101 @@
+////
+SPDX-License-Identifier: EUPL-1.2 OR LicenseRef-commercial
+
+Copyright (c) 2012-2026 mgm technology partners GmbH
+
+Dual License
+------------
+This source file is part of the mgm A12 Platform and available under
+a choice of two different licenses:
+
+1. Open-Source License - EUPL v1.2
+   You may redistribute and/or modify this file under the terms of the
+   European Union Public License, version 1.2 - see https://eupl.eu/.
+
+2. Commercial License
+   Alternatively, you may obtain a commercial license from
+   mgm technology partners GmbH, that permits use of this software
+   under different terms (including support and maintenance services).
+
+   Please contact a12-license@mgm-tp.com for more information.
+
+You must select and comply with exactly one of the above license options.
+
+Warranty Disclaimer (applies to either option)
+----------------------------------------------
+THIS SOFTWARE IS PROVIDED "AS IS" AND WITHOUT WARRANTY OF ANY KIND,
+WHETHER EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NON-INFRINGEMENT, EXCEPT WHERE SUCH DISCLAIMERS ARE HELD TO BE
+LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
+////
+
+= 2026.06-ext2
+
+== Breaking Changes
+
+=== Removal of Nashorn Dependency from `formengine-model`
+
+A12 expressions are now parsed with a native, ANTLR-based Java parser instead of using the Nashorn JavaScript engine. As part of this, the `org.openjdk.nashorn:nashorn-core` dependency has been removed entirely. Nashorn was accidentally exported as a dependency. Consumers that relied on `nashorn-core` being transitively available on their classpath through `formengine-model`, without declaring it themselves, are affected.
+
+`ExpressionUtil` was also deleted as part of this change, as it was never intended for external consumers and could not be meaningfully used.
+
+Required:: Depending on whether you relied on `nashorn-core` being transitively available via `formengine-model`.
+Migration:: Manual, no codemod available.
+Result::
++
+If your build fails with missing Nashorn classes, add the `org.openjdk.nashorn:nashorn-core` dependency directly to your own module instead of relying on it being pulled in transitively by `formengine-model`.
+
+== Deprecations
+
+=== `tooltipsOnTop` deprecated in favor of `tooltipPosition` on `Control`
+
+The `tooltipsOnTop` property on `Control` (Form Model) and `BaseControlProps` (content elements) is deprecated in favor of the new `tooltipPosition` property, which supports `"ABOVE"`, `"BESIDE"` and `"BELOW"` instead of only a boolean above/inline choice.
+
+`tooltipPosition` can also be set on a `FieldBasedRepeatOverviewColumn` to position the tooltips of an inline repeat's cell inputs. A column without `tooltipPosition` shows its tooltips beside the input.
+
+`tooltipsOnTop` continues to work as a fallback: it is only consulted when `tooltipPosition` is not set. Existing inlined `FormModel` objects (e.g. models constructed in code rather than loaded from JSON) do not need to be changed immediately, but should be migrated to `tooltipPosition` when convenient. Form Models loaded from JSON files are migrated automatically by the migration tool, see the link:#migration_form-model[Form Model Migration] chapter; the migration tool does not rewrite existing `tooltipsOnTop` usages, since it remains a valid, supported fallback.
+
+Required:: No.
+Migration:: Manual, no codemod available.
+Result::
++
+[source,typescript]
+----
+// Old
+const control: FormModel.Control = {
+    // ...
+    tooltipsOnTop: true
+};
+
+// New
+const control: FormModel.Control = {
+    // ...
+    tooltipPosition: "ABOVE"
+};
+----
+
+=== `tooltipsOnTop` deprecated in favor of `breakTooltipsToNewLine` on content elements' `BaseControlSettings`/`BaseWidgetSettings`
+
+Separately, the `tooltipsOnTop` property on content elements' `BaseControlSettings` and `BaseWidgetSettings` (the computed settings passed to widgets, as returned by `useCommonControlSettings`/`useCommonWidgetSettings`) is deprecated in favor of `breakTooltipsToNewLine` - the vocabulary widgets' own `breakTooltipsToNewLine` prop uses. This is unrelated to the `tooltipPosition` property above: it is a different pair of properties, one level further down, with a different replacement.
+
+`tooltipsOnTop` continues to be passed through unchanged, for consumers that still read it directly; conversely, `breakTooltipsToNewLine` falls back to it when only `tooltipsOnTop` is set.
+
+Required:: No.
+Migration:: Manual, no codemod available.
+Result::
++
+[source,typescript]
+----
+// Old
+const widgetSettings: Partial<BaseWidgetSettings> = {
+    // ...
+    tooltipsOnTop: true
+};
+
+// New
+const widgetSettings: Partial<BaseWidgetSettings> = {
+    // ...
+    breakTooltipsToNewLine: "above"
+};
+----

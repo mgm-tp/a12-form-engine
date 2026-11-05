@@ -33,8 +33,7 @@
 import {
 	publishFocusFieldEvent,
 	useFocusField,
-	useFocusFirstError,
-	VirtualNode
+	useFocusFirstError
 } from "@com.mgmtp.a12.contentengine/contentengine-core";
 
 import { publishFocusInputEvent, useFocusInput } from "../focus.js";
@@ -43,7 +42,6 @@ import { useCollectEditableElements } from "../modules/messageGroupContainer/use
 import { useLinkData } from "../modules/messageGroupDisplay/useLinkData.js";
 
 export const DefaultFunctionMap = {
-	computeVirtualNodeId: VirtualNode.computeId,
 	publishFocusFieldEvent,
 	publishFocusInputEvent,
 	useCollectDocumentElementIds,

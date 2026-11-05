@@ -38,6 +38,7 @@ import type {
 } from "@com.mgmtp.a12.kernel/kernel-md-facade";
 import type { ValueConversionParseError } from "@com.mgmtp.a12.utils/utils-localization";
 
+// oxlint-disable-next-line no-unused-vars -- the import is what lets TypeDoc resolve {@link Events}
 import type { Events } from "../../../back-end/store/internal/actions.js";
 import type { CorrectionModeItem } from "../../../back-end/store/internal/CorrectionModeItem.js";
 import type {
@@ -52,8 +53,6 @@ import type {
 import type { ExistingFile } from "../../../client-extensions/internal/extensions/form-engine/internal/attachments/utils.js";
 import type { FormModel } from "../../../models/index.js";
 import type { MultiSelectData } from "../../../models/internal/utils/document-model-utils.js";
-
-import type { defaultMapDispatchToProps } from "./Defaults.js";
 
 /**
  * Interface for the UI-event callback functions.

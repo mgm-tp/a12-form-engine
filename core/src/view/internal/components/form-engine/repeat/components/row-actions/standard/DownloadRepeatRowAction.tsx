@@ -36,8 +36,14 @@ import { useContext } from "react";
 import type { GroupInstance } from "@com.mgmtp.a12.kernel/kernel-md-facade";
 
 import { DataSelectors, ModelSelectors } from "../../../../../../../../back-end/store/index.js";
+import { AttachmentDataSelectors } from "../../../../../../../../back-end/store/internal/selectors/data.js";
 import { UiId } from "../../../../../../../../back-end/utils/internal/generateUiId.js";
 import { getDocumentPath } from "../../../../../../../../back-end/utils/internal/path.js";
+import {
+	isFormModelEmbeddedRepeat,
+	isFormModelInlineRepeat
+} from "../../../../../../../../models/index.js";
+import type { FormModel } from "../../../../../../../../models/index.js";
 import {
 	DocumentUtils,
 	InternalDocumentPath
@@ -49,12 +55,6 @@ import { isStandardRowActionHidden } from "../../../../../../utilities/enablemen
 import { DataContext } from "../../../../data-context.js";
 import { MenuContext } from "../../MenuContext.js";
 import type { RepeatRow } from "../../tableColumnTypes.js";
-import { AttachmentDataSelectors } from "../../../../../../../../back-end/store/internal/selectors/data.js";
-import {
-	isFormModelEmbeddedRepeat,
-	isFormModelInlineRepeat
-} from "../../../../../../../../models/index.js";
-import type { FormModel } from "../../../../../../../../models/index.js";
 
 import type { GetTitle } from "./GetTitle.js";
 import { RowActionButton } from "./RowActionButton.js";

@@ -33,12 +33,16 @@
 import type { JSX, PropsWithChildren } from "react";
 import { useContext } from "react";
 
+import { FieldDefaultConfigProvider } from "@com.mgmtp.a12.widgets/widgets-core";
+
+import { ModelSelectors } from "../../../../back-end/store/internal/selectors/models.js";
 import { ComponentMapContext } from "../../configuration/componentMap/component-map-context.js";
 import { DefaultComponentMap } from "../../configuration/componentMap/DefaultComponentMap.js";
 import { DefaultWidgetMap } from "../../configuration/DefaultWidgetMap.js";
 import type { FormModelMap } from "../../configuration/engine-configuration.js";
 import { DefaultSelectorMap, SelectorContext } from "../../configuration/selectorContext.js";
 import { WidgetMapContext } from "../../configuration/widget-map-context.js";
+import { toWidgetsMessagePosition } from "../../utilities/tooltipPosition.js";
 
 import type { FormEngineRendererPropsType } from "../form-engine/form-engine-props.js";
 
@@ -72,11 +76,18 @@ export function FormEngineContentBoxRenderer(
 	const widgetMap = initialConfig.renderOptions.config.widgetMap ?? DefaultWidgetMap;
 	const selectorMap = initialConfig.renderOptions.config.selectorMap ?? DefaultSelectorMap;
 
+	const validationMessagePosition = ModelSelectors.formModel()(props.state).content
+		.validationMessagePosition;
+
 	return (
 		<ComponentMapContext.Provider value={componentMap}>
 			<WidgetMapContext.Provider value={widgetMap}>
 				<SelectorContext.Provider value={selectorMap}>
-					<ContentBox config={initialConfig}>{props.children}</ContentBox>
+					<FieldDefaultConfigProvider
+						messagePosition={toWidgetsMessagePosition(validationMessagePosition)}
+					>
+						<ContentBox config={initialConfig}>{props.children}</ContentBox>
+					</FieldDefaultConfigProvider>
 				</SelectorContext.Provider>
 			</WidgetMapContext.Provider>
 		</ComponentMapContext.Provider>

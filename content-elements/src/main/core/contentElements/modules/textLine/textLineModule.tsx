@@ -47,8 +47,8 @@ import { createElementModule } from "../../createElementModule.js";
 import { createParseError } from "../../createParseError.js";
 import { USE_COMMON_CONTROL_SETTINGS_WRAPPER } from "../../elementConfiguration/useCommonControlSettings.js";
 import { USE_COMMON_WIDGET_SETTINGS_WRAPPER } from "../../elementConfiguration/useCommonWidgetSettings.js";
-import { nmTokensToString } from "../../nmtokens.js";
 import { useFocus } from "../../focus.js";
+import { nmTokensToString } from "../../nmtokens.js";
 
 import type { TextLineNode } from "./textLineNode.js";
 import { TEXT_LINE_TYPE } from "./textLineNode.js";
@@ -106,7 +106,7 @@ export function TextLineRenderer(
 		warnings,
 		infos,
 		tooltips,
-		tooltipsOnTop,
+		breakTooltipsToNewLine,
 		suffixes,
 		inputProps,
 		ariaDescribedBy
@@ -144,8 +144,8 @@ export function TextLineRenderer(
 			label={label}
 			readonly={readonly}
 			hideLabel={hideLabel}
-			addonAfter={tooltipsOnTop ? undefined : tooltips}
-			tooltips={tooltipsOnTop ? tooltips : undefined}
+			tooltips={tooltips}
+			breakTooltipsToNewLine={breakTooltipsToNewLine}
 			helperText={helperText}
 			placeholder={placeholder}
 			suffixes={suffixes}

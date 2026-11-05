@@ -36,10 +36,10 @@ import { mock } from "node:test";
 import { DataReference } from "@com.mgmtp.a12.client/client-data";
 import { DocumentContext } from "@com.mgmtp.a12.contentengine/contentengine-core";
 import { query } from "@com.mgmtp.a12.devtools/react";
+import type { Message } from "@com.mgmtp.a12.kernel/kernel-md-facade";
 import { LocalizerContext } from "@com.mgmtp.a12.utils/utils-localization-react";
 import { provider as deviceDetector } from "@com.mgmtp.a12.widgets/widgets-core";
 import type { MultiselectProps } from "@com.mgmtp.a12.widgets/widgets-core";
-import type { Message } from "@com.mgmtp.a12.kernel/kernel-md-facade";
 
 import type { EnumerationItem } from "../../../../main/core/contentElements/elementConfiguration/useLocalizedEnumerationValues.js";
 import { MultiSelectModule } from "../../../../main/core/contentElements/modules/multiSelect/multiSelectModule.js";
@@ -81,7 +81,7 @@ describe("core.contentElements", () => {
 			strictEqual(props.readonly, mockWidgetSettings.readonly);
 			strictEqual(props.helperText, mockWidgetSettings.helperText);
 			strictEqual(props.tooltips, mockWidgetSettings.tooltips);
-			strictEqual(props.breakTooltipsToNewLine, mockWidgetSettings.tooltipsOnTop);
+			strictEqual(props.breakTooltipsToNewLine, mockWidgetSettings.breakTooltipsToNewLine);
 			strictEqual(props.hintTemplate, RESOURCE_KEYS.multiSelect.hintTemplate);
 			strictEqual(props.selectAllText, RESOURCE_KEYS.multiSelect.selectAllText);
 			strictEqual(props.mobileHeadingTitle, RESOURCE_KEYS.multiSelect.mobileHeadingText);
@@ -345,7 +345,7 @@ function getMockWidgetSettings(options?: Partial<BaseWidgetSettings>): BaseWidge
 		warnings: "WARNINGS",
 		infos: "INFOS",
 		tooltips: "TOOLTIPS",
-		tooltipsOnTop: true,
+		breakTooltipsToNewLine: "above",
 		suffixes: "SUFFIXES",
 		inputProps: { "aria-required": true },
 		ariaDescribedBy: [],

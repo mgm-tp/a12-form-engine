@@ -139,7 +139,8 @@ describe("api.view.inputs", () => {
 					...baseProps,
 					component: "TextField",
 					path: createDocumentPath(["A12T_DmTypes"], ["DateAndDateTime"], ["DateTime01"]),
-					placeholder: true
+					placeholder: true,
+					breakTooltipsToNewLine: true
 				},
 				{ autoCompleteTest: false }
 			);

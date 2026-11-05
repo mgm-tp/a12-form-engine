@@ -37,6 +37,7 @@ import { AutoCompleteEditorModule } from "./autocomplete.js";
 import { CheckboxEditorModule } from "./checkbox.js";
 import { CheckboxGroupEditorModule } from "./checkboxGroup.js";
 import { DatePickerEditorModule } from "./datePicker.js";
+import { MarkdownEditorModule } from "./markdown.js";
 import { MessageGroupContainerModule } from "./messageGroupContainer.js";
 import { MessageGroupDisplayModule } from "./messageGroupDisplay.js";
 import { MultiSelectEditorModule } from "./multiSelect.js";
@@ -51,6 +52,7 @@ export const FormElementsEditorLibrary: EditorElementLibrary = {
 	modules: [
 		TextLineEditorModule,
 		TextAreaEditorModule,
+		MarkdownEditorModule,
 		CheckboxEditorModule,
 		SwitchEditorModule,
 		DatePickerEditorModule,

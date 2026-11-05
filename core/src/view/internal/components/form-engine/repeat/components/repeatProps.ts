@@ -37,13 +37,13 @@ import type { InfiniteScrollOptions } from "@com.mgmtp.a12.widgets/widgets-core"
 
 import type { RepeatProps } from "../RepeatProps.js";
 
-import type { TableStyleOptions } from "./TableStyleOptions.js";
-import type { BodyRowProps } from "./body/RepeatBodyRow.js";
 import type { BodyContentCellProps } from "./body/overviewBodyContentCell.js";
+import type { BodyRowProps } from "./body/RepeatBodyRow.js";
 import type { PaginatedRepeatData } from "./repeat-data.js";
 import type { DefaultRowActionResult } from "./row-actions/DefaultRowActionResult.js";
 import type { RowActionButtonsProps } from "./row-actions/standard/StandardRowActionButtons.js";
 import type { RepeatTableColumn } from "./tableColumnTypes.js";
+import type { TableStyleOptions } from "./TableStyleOptions.js";
 
 /** @internal */
 export interface RepeatTemplateProps extends RepeatProps {

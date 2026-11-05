@@ -86,7 +86,7 @@ async function copyToClipboard(text: string) {
 		alert(`Copying to clipboard succeeded!`);
 	} catch (error) {
 		alert(`Copying to clipboard failed!`);
-		// eslint-disable-next-line no-console
+		// oxlint-disable-next-line no-console
 		console.error("Could not copy text: ", error);
 	}
 }

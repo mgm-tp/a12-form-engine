@@ -82,7 +82,11 @@ export function reduceAttachmentState(
 			: state?.unassigned;
 
 	return state?.loading !== nextLoading || state?.unassigned !== nextUnassigned
-		? { ...state, loading: nextLoading, unassigned: nextUnassigned }
+		? {
+				...state,
+				loading: nextLoading,
+				unassigned: nextUnassigned
+			}
 		: state;
 }
 

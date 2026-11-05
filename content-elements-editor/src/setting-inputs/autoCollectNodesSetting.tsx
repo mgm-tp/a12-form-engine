@@ -35,20 +35,21 @@ import { useSelector } from "react-redux";
 
 import { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
 import { useDocumentContext } from "@com.mgmtp.a12.contentengine/contentengine-core";
+import type { BooleanSettingState } from "@com.mgmtp.a12.contentengine/contentengine-editor";
 import {
 	SettingTemplate,
 	UIStateSelector,
 	useContentEditorState,
+	useEditorElementLibrary,
 	useSettingState
 } from "@com.mgmtp.a12.contentengine/contentengine-editor";
-import type { BooleanSettingState } from "@com.mgmtp.a12.contentengine/contentengine-editor";
-import { useCollectDocumentElementIds } from "@com.mgmtp.a12.formengine/formengine-content-elements";
-import { DefaultTableComponentRenderers, Table } from "@com.mgmtp.a12.widgets/widgets-core";
+import { useCollectDocumentElementIdsFromLibrary } from "@com.mgmtp.a12.formengine/formengine-content-elements";
 import type {
 	BaseColumnType,
 	TableComponentRenderers,
 	TableRenderPropsType
 } from "@com.mgmtp.a12.widgets/widgets-core";
+import { DefaultTableComponentRenderers, Table } from "@com.mgmtp.a12.widgets/widgets-core";
 
 import { SwitchSetting } from "./switchSetting.js";
 
@@ -69,7 +70,9 @@ export function AutoCollectNodesSetting(): JSX.Element {
 function ContainedNodeIdsList(): JSX.Element {
 	const { getModelPathById } = useDocumentContext(c => c.model);
 	const selectedNode = useContentEditorState(UIStateSelector.selectedNode());
-	const result = useCollectDocumentElementIds(selectedNode);
+
+	const library = useEditorElementLibrary();
+	const result = useCollectDocumentElementIdsFromLibrary(library, selectedNode);
 
 	const fieldPathStrings = useSelector(state => getPaths(state, result.fieldIds, getModelPathById));
 	const groupPathStrings = useSelector(state => getPaths(state, result.groupIds, getModelPathById));

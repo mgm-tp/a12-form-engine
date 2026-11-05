@@ -34,7 +34,7 @@ import type { EngineStore } from "../../../back-end/store/internal/store.js";
 
 /** @internal */
 export function getCountsByMessageSeverity(
-	messages: EngineStore.Validation.Message[]
+	messages: (EngineStore.Validation.Message | EngineStore.Validation.CustomMessage)[]
 ): Record<EngineStore.Validation.MessageSeverity, number> {
 	const grouped = Object.groupBy(messages, e => e.severity);
 	return {

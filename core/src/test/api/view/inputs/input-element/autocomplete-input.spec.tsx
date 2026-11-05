@@ -44,11 +44,11 @@ import { defaultMapDispatchToProps } from "../../../../../view/index.js";
 import { AutoCompleteInput } from "../../../../../view/internal/components/form-engine/cells/controls/enumeration/autocomplete-input.js";
 import type { RtlRenderWrapper } from "../../../../rtl-utils/render-wrapper.js";
 import { rtlRenderWrapperAsync } from "../../../../rtl-utils/render-wrapper.js";
+import { createDocumentPath } from "../../../../utils/createDocumentPath.js";
 import { createModelPath } from "../../../../utils/createModelPath.js";
 import { DocumentModelHelpers } from "../../../../utils/DocumentModelHelpers.js";
 import { DE_LOCALE, US_LOCALE } from "../../../../utils/localization.js";
 import { setupModelsFixture } from "../../../../utils/setupFixture.js";
-import { createDocumentPath } from "../../../../utils/createDocumentPath.js";
 
 import { inputTest } from "./generic-tests/input-tests.js";
 import { createProps } from "./generic-tests/input-utils.js";

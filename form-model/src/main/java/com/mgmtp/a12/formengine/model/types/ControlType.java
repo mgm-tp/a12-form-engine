@@ -60,6 +60,7 @@ public class ControlType extends CellType implements FieldBasedInput {
 
 	// Other properties
 	protected String tooltipsOnTop;
+	protected TooltipPositionEnumType tooltipPosition;
 	protected String labelHiddenButRead;
 	protected ReadonlyPresentationEnumType readonlyPresentation;
 	protected ExpositionPresentationEnumType exposition;
@@ -174,6 +175,18 @@ public class ControlType extends CellType implements FieldBasedInput {
 
 	public boolean isTooltipsOnTopSet() {
 		return (this.tooltipsOnTop != null);
+	}
+
+	public TooltipPositionEnumType getTooltipPosition() {
+		return tooltipPosition;
+	}
+
+	public void setTooltipPosition(final TooltipPositionEnumType value) {
+		this.tooltipPosition = value;
+	}
+
+	public boolean isTooltipPositionSet() {
+		return (this.tooltipPosition != null);
 	}
 
 	public String getLabelHiddenButRead() {
@@ -335,6 +348,11 @@ public class ControlType extends CellType implements FieldBasedInput {
 
 	public ControlType withMessageExposition(final MessageExpositionEnumType value) {
 		setMessageExposition(value);
+		return this;
+	}
+
+	public ControlType withTooltipPosition(final TooltipPositionEnumType value) {
+		setTooltipPosition(value);
 		return this;
 	}
 

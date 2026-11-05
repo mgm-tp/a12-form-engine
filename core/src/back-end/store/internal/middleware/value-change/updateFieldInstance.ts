@@ -44,7 +44,7 @@ import {
 	DocumentUtils,
 	IndexedControl
 } from "../../../../../models/internal/utils/document-utils.js";
-import type { ReadonlyObjectMap } from "../../../../../models/internal/utils/json.js";
+import type { ReadonlyObjectMap } from "../../../../../models/internal/utils/ReadonlyObjectMap.js";
 import type { UpdateResult } from "../../../../utils/internal/edit-document-utils.js";
 import { validateChangesAndUpdateMessages } from "../../change-validation.js";
 import type { Change } from "../../documentChange.js";

@@ -1,9 +1,10 @@
 # Run gradle versionCatalogUpdate --interactive to update this file
 [versions]
-build-utilities = "0.4.2"
-dataservices = "39.0.3"
-integration = "0.1.8"
-prepare-models = "0.10.0"
+build-utilities = "0.7.0"
+dataservices = "39.1.1"
+integration = "0.1.11"
+prepare-models = "0.12.0"
+expression-parser = "3.1.0"
 # Gradle plugins (third-party)
 cyclonedx = "3.2.4"
 docker = "10.0.0"
@@ -24,7 +25,6 @@ jsonassert = "1.5.3"
 logback-classic = "1.5.34"
 lombok = "1.18.46"
 metainf-services = "1.11"
-nashorn-core = "15.7"
 slf4j = "2.0.18"
 testng = "7.12.0"
 
@@ -42,6 +42,8 @@ dataservices-modelgraph = { module = "com.mgmtp.a12.dataservices:dataservices-mo
 dataservices-server-app = { module = "com.mgmtp.a12.dataservices:dataservices-server-app" }
 kernel-md-facade = { module = "com.mgmtp.a12.kernel:kernel-md-facade" }
 rmc-conversion = { module = "com.mgmtp.a12.rmc:conversion" }
+# --- A12 Expression Parser ---
+expression-parser = { module = "com.mgmtp.a12.expression:expression-parser", version.ref = "expression-parser" }
 # --- Jackson (versions from the dataservices BOM) ---
 jackson-annotations = { module = "com.fasterxml.jackson.core:jackson-annotations" }
 jackson-core = { module = "tools.jackson.core:jackson-core" }
@@ -64,7 +66,6 @@ groovy-yaml = { module = "org.apache.groovy:groovy-yaml", version.ref = "groovy-
 gson = { module = "com.google.code.gson:gson", version.ref = "gson" }
 lombok = { module = "org.projectlombok:lombok", version.ref = "lombok" }
 metainf-services = { module = "org.kohsuke.metainf-services:metainf-services", version.ref = "metainf-services" }
-nashorn-core = { module = "org.openjdk.nashorn:nashorn-core", version.ref = "nashorn-core" }
 
 [plugins]
 cyclonedx = { id = "org.cyclonedx.bom", version.ref = "cyclonedx" }

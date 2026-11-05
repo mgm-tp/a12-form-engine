@@ -41,10 +41,10 @@ import { DefaultWidgetMap } from "../../../../../view/index.js";
 import { NumberInput } from "../../../../../view/internal/components/form-engine/cells/controls/number/number-input.js";
 import { DefaultComponentMap } from "../../../../../view/internal/configuration/componentMap/DefaultComponentMap.js";
 import { rtlRenderWrapperAsync } from "../../../../rtl-utils/render-wrapper.js";
+import { createDocumentPath } from "../../../../utils/createDocumentPath.js";
 import { createModelPath } from "../../../../utils/createModelPath.js";
 import { DocumentModelHelpers } from "../../../../utils/DocumentModelHelpers.js";
 import { setupModelsFixture } from "../../../../utils/setupFixture.js";
-import { createDocumentPath } from "../../../../utils/createDocumentPath.js";
 
 import { createProps } from "./generic-tests/input-utils.js";
 

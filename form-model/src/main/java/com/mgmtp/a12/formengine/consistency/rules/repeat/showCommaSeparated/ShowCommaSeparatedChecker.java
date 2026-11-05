@@ -74,7 +74,8 @@ public class ShowCommaSeparatedChecker extends AbstractRepeatChecker {
 				repeatProblems.add(new ConsistencyProblem(
 					model.getHeaderId(),
 					FORM_MODEL_REPEAT_SHOW_COMMA_SEPARATED_ROW_HEIGHT_GIVEN,
-					new FormModelProblemSource(repeat.getId()),
+					// the row height that makes the column's setting invalid belongs to the repeat
+					FormModelProblemSource.involving(column.getId(), repeat.getId()),
 					column.getId(),
 					repeat.getId(),
 					repeat.getName()
@@ -88,7 +89,7 @@ public class ShowCommaSeparatedChecker extends AbstractRepeatChecker {
 					repeatProblems.add(new ConsistencyProblem(
 						model.getHeaderId(),
 						FORM_MODEL_REPEAT_SHOW_COMMA_SEPARATED_UNNECESSARY,
-						new FormModelProblemSource(column.getId()),
+						FormModelProblemSource.involving(column.getId()),
 						column.getId(),
 						repeat.getId(),
 						repeat.getName()
@@ -102,7 +103,7 @@ public class ShowCommaSeparatedChecker extends AbstractRepeatChecker {
 			.forEach((column) -> repeatProblems.add(new ConsistencyProblem(
 				model.getHeaderId(),
 				FORM_MODEL_REPEAT_SHOW_COMMA_SEPARATED_NO_MULTI_SELECT_COLUMN,
-				new FormModelProblemSource(column.getId()),
+				FormModelProblemSource.involving(column.getId()),
 				column.getId(),
 				repeat.getId(),
 				repeat.getName()

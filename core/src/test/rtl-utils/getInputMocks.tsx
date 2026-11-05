@@ -58,6 +58,7 @@ export function getInputMocks(): InputMap {
 		MultiSelectInput: mock.fn(createControlInputMock("MultiSelectInput")),
 		NumberInput: mock.fn(createControlInputMock("NumberInput")),
 		MultilineInput: mock.fn(createControlInputMock("MultilineInput")),
+		MarkdownInput: mock.fn(createControlInputMock("MarkdownInput")),
 		StringWithHintListInput: mock.fn(createControlInputMock("StringWithHintListInput")),
 		StringInput: mock.fn(createControlInputMock("StringInput"))
 	};

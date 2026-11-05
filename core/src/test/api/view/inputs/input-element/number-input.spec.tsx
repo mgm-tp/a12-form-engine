@@ -70,7 +70,8 @@ describe("api.view.inputs", () => {
 			documentElementDataType,
 			component: "TextField",
 			renderFunction: NumberInput,
-			formModelPath: createModelPath("foo", "bar")
+			formModelPath: createModelPath("foo", "bar"),
+			breakTooltipsToNewLine: true
 		};
 
 		/** General test which are similar for all inputs */

@@ -33,8 +33,8 @@
 import type { JSX } from "react";
 import { useCallback, useContext, useEffect, useRef } from "react";
 import { flushSync } from "react-dom";
-import type { Dispatch } from "redux";
 import { useDispatch, useSelector, useStore } from "react-redux";
+import type { Dispatch } from "redux";
 
 import {
 	ActivityActions,
@@ -45,9 +45,8 @@ import {
 import type { createHttpModelLoader } from "@com.mgmtp.a12.client/client-core/modelLoader";
 import type { DefaultDispatchProps, ScrollApi } from "@com.mgmtp.a12.formengine/formengine-core";
 import {
-	FormEngineActions,
+	FormEngineHooks,
 	FormEngineSelectors,
-	FormEngineStateAdapter,
 	FormEngineViews
 } from "@com.mgmtp.a12.formengine/formengine-core";
 import type { EntityInstancePath, GroupInstance } from "@com.mgmtp.a12.kernel/kernel-md-facade";
@@ -184,7 +183,7 @@ export function MasterDetailFocusEngine(props: FormEngineViews.FormEngineProps):
 	useEffect(() => {
 		setMasterDetailAnimationDurationMs(DEFAULT_ANIMATION_DURATION_MS);
 		return () => setMasterDetailAnimationDurationMs(undefined);
-		// eslint-disable-next-line react-hooks/exhaustive-deps
+		// oxlint-disable-next-line react/exhaustive-deps
 	}, []);
 
 	const document = FormEngineSelectors.dataState(props.activityId)(state).document as GroupInstance;
@@ -207,7 +206,7 @@ export function MasterDetailFocusEngine(props: FormEngineViews.FormEngineProps):
 		}
 	};
 
-	const stateProps = FormEngineStateAdapter.mapStateToProps(state, propsWithEnablements);
+	const stateProps = FormEngineHooks.useStateProps(propsWithEnablements);
 
 	const currentDetailActivityId = useRef<string>(undefined);
 	const detailIdCounter = useRef(0);
@@ -318,7 +317,7 @@ export function MasterDetailFocusEngine(props: FormEngineViews.FormEngineProps):
 		}, 100);
 	}
 
-	const defaultDispatchProps = FormEngineActions.mapDispatchToProps(dispatch, props);
+	const defaultDispatchProps = FormEngineHooks.useDispatchProps(props);
 	const dispatchProps: DefaultDispatchProps = {
 		...defaultDispatchProps,
 		eventHandlers: {
@@ -336,10 +335,9 @@ export function MasterDetailFocusEngine(props: FormEngineViews.FormEngineProps):
  * and "return-to-index" buttons.
  */
 export function MasterDetailFocusDetailEngine(props: FormEngineViews.FormEngineProps): JSX.Element {
-	const state = useSelector(state => state);
 	const dispatch = useDispatch();
 
-	const stateProps = FormEngineStateAdapter.mapStateToProps(state, props);
+	const stateProps = FormEngineHooks.useStateProps(props);
 
 	const scrollRef = useRef<ScrollApi>(null);
 
@@ -360,7 +358,7 @@ export function MasterDetailFocusDetailEngine(props: FormEngineViews.FormEngineP
 		[dispatch, masterActivityId, props.activityId]
 	);
 
-	const defaultDispatchProps = FormEngineActions.mapDispatchToProps(dispatch, props);
+	const defaultDispatchProps = FormEngineHooks.useDispatchProps(props);
 	const dispatchProps: DefaultDispatchProps = {
 		...defaultDispatchProps,
 		eventHandlers: {

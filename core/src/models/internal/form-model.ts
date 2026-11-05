@@ -37,7 +37,7 @@ import type { LocalizedModelText } from "@com.mgmtp.a12.utils/utils-localization
 import type { IconTheme } from "@com.mgmtp.a12.widgets/widgets-core";
 
 import type * as RepeatExpressionFilter from "./jison/repeatfilter.cjs";
-import type { ReadonlyObjectMap } from "./utils/json.js";
+import type { ReadonlyObjectMap } from "./utils/ReadonlyObjectMap.js";
 
 /**
  * This set of interfaces provides typings for form models.
@@ -168,6 +168,14 @@ export namespace FormModel {
 		 * which are readonly
 		 */
 		readonly readonlyPresentation?: FormModel.ReadonlyPresentation;
+
+		/**
+		 * Where the error, warning and info message boxes of every input are rendered relative
+		 * to the input control.
+		 * - `"ABOVE"` (default): between the label and the control
+		 * - `"BELOW"`: directly under the control
+		 */
+		readonly validationMessagePosition?: FormModel.MessagePosition;
 
 		/**
 		 * Whether fields should be marked with an asterisk or not.
@@ -403,6 +411,35 @@ export namespace FormModel {
 
 		/** Configuration for an attachment */
 		readonly attachmentConfig?: AttachmentConfig;
+
+		/**
+		 * @experimental
+		 *
+		 * Temporary flag (A12E-3691) to render this field with the `WidgetMap.MarkdownEditor`
+		 * widget instead of using `exposition`. Mutually exclusive with `exposition`, which
+		 * must be left unset when this is `true`.
+		 */
+		readonly isMarkdownEditor?: boolean;
+
+		/**
+		 * @experimental
+		 *
+		 * For a field with `isMarkdownEditor: true`: the elementRef of a {@link Repeat}
+		 * configured with {@link Repeat.multiFileUploadOptions}, used to store images embedded
+		 * in the markdown as attachments. This repeat may be shared with other markdown fields,
+		 * or even a regular attachment control, without ambiguity - each upload is matched back
+		 * by a per-upload id, not by which field or repeat it came from. Sharing one just means
+		 * their uploaded images accumulate together as rows in that repeat, which matters only
+		 * if the repeat is also rendered as a visible attachment list somewhere.
+		 */
+		readonly markdownAttachmentRepeat?: string;
+
+		/**
+		 * @experimental
+		 *
+		 * Runtime-only JS typed version of `markdownAttachmentRepeat`
+		 */
+		readonly markdownAttachmentRepeatPath?: ModelPath;
 	}
 
 	export interface AttachmentConfig {
@@ -427,7 +464,14 @@ export namespace FormModel {
 	}
 
 	export type PlaceholderIconType =
-		"default" | "image" | "text" | "spreadsheet" | "pdf" | "video" | "sound" | "none";
+		| "default"
+		| "image"
+		| "text"
+		| "spreadsheet"
+		| "pdf"
+		| "video"
+		| "sound"
+		| "none";
 
 	export type AttachmentDefaultActionType = "replace" | "download";
 
@@ -1128,6 +1172,9 @@ export namespace FormModel {
 		 */
 		readonly messageExposition?: MessageExpositionPresentation;
 
+		/** Defines where the tooltips should be in relation to the input field. */
+		readonly tooltipPosition?: TooltipPosition;
+
 		/** Defines if a text-area should be auto expandable */
 		readonly autoExpand?: boolean;
 
@@ -1170,7 +1217,9 @@ export namespace FormModel {
 		 */
 		readonly occurrence: number;
 
-		/** Defines if tooltips should be displayed above the input field. */
+		/** Defines if tooltips should be displayed above the input field.
+		 * @deprecated use tooltipPosition instead.
+		 */
 		readonly tooltipsOnTop?: boolean;
 
 		/**
@@ -1589,6 +1638,8 @@ export namespace FormModel {
 		readonly values: (string | boolean | null)[];
 	}
 
+	export type TooltipPosition = "ABOVE" | "BESIDE" | "BELOW";
+	export type MessagePosition = "ABOVE" | "BELOW";
 	export type LabelPlacement = "TOP" | "LEFT" | "RIGHT";
 	export type ExpositionPresentation =
 		| "AREA"
@@ -1636,7 +1687,11 @@ export namespace FormModel {
 		| CustomScreenElement;
 
 	export type LabeledComponent =
-		ButtonType | RowAction | FieldBasedInput | ExpressionCell | ExpressionOverviewColumn;
+		| ButtonType
+		| RowAction
+		| FieldBasedInput
+		| ExpressionCell
+		| ExpressionOverviewColumn;
 
 	export type ComponentWithDescription = ButtonType | RowAction;
 }

@@ -36,6 +36,7 @@ import { query, within } from "@com.mgmtp.a12.devtools/react";
 import { DataRoles } from "@com.mgmtp.a12.widgets/widgets-core";
 
 import type { WidgetMap } from "../../../../view/index.js";
+import { setupFormEngineRendererWithRtlAsync } from "../../../utils/setup.js";
 import { setupModelsFixture } from "../../../utils/setupFixture.js";
 import { IDS } from "../../../utils/test-model-helpers/aria-level.js";
 import {
@@ -44,7 +45,6 @@ import {
 	formattedExpressionUiState
 } from "../../../utils/test-model-helpers/expression-label.js";
 import { IDS as ResponsiveIds } from "../../../utils/test-model-helpers/responsive-grid.js";
-import { setupFormEngineRendererWithRtlAsync } from "../../../utils/setup.js";
 
 import { TypographyHeadline } from "./typography-headline-mock.js";
 

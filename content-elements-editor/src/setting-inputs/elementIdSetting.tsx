@@ -32,9 +32,9 @@
 
 import { useCallback, useMemo } from "react";
 
-import type { Action } from "@com.mgmtp.a12.client/typescript-fsa-redux-5-compat";
 import { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
 import { computeGranularity, granularityDistance } from "@com.mgmtp.a12.client/client-data";
+import type { Action } from "@com.mgmtp.a12.client/typescript-fsa-redux-5-compat";
 import type {
 	DocumentElementReference,
 	DocumentModelService

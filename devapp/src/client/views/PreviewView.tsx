@@ -57,6 +57,7 @@ import { DefaultLocalizerContextProvider } from "@com.mgmtp.a12.utils/utils-loca
 import { ApplicationHeader, ContentBoxElements } from "@com.mgmtp.a12.widgets/widgets-core";
 import type { Container, DefaultThemeType } from "@com.mgmtp.a12.widgets/widgets-core";
 
+import { embedUploadedAttachments } from "../backend/inMemoryAttachmentLoader.js";
 import { VersionHeaderInfo } from "../components/VersionHeaderInfo.js";
 import { devappTranslationSource } from "../config/devappTranslationSource.js";
 
@@ -123,7 +124,8 @@ export default function CustomPreviewApp(props: PreviewProps): JSX.Element {
 			state =>
 				(
 					ActivitySelectors.data(activityId)(state) as
-						FormActivity.Data.SingleDocumentData | undefined
+						| FormActivity.Data.SingleDocumentData
+						| undefined
 				)?.document
 		) ?? {};
 
@@ -156,7 +158,10 @@ export default function CustomPreviewApp(props: PreviewProps): JSX.Element {
 	}
 
 	function handleOnSaveData(data: object, documentModel: DocumentModel): string {
-		const formattedData = documentService.formatDates(data, documentModel);
+		const formattedData = documentService.formatDates(
+			embedUploadedAttachments(data),
+			documentModel
+		);
 		const dataJson = JSON.stringify(formattedData, null, 2);
 		return dataJson;
 	}

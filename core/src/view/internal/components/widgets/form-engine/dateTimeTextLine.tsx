@@ -48,6 +48,7 @@ export function DateTimeTextLine(props: DateTimeTextLineProps) {
 		addonAfter,
 		ariaDescribedby,
 		backLabel,
+		breakTooltipsToNewLine,
 		clearLabel,
 		disabled,
 		editTimeLabel,
@@ -139,6 +140,7 @@ export function DateTimeTextLine(props: DateTimeTextLineProps) {
 				label={label}
 				addonAfter={addonAfter}
 				ariaDescribedby={ariaDescribedby}
+				breakTooltipsToNewLine={breakTooltipsToNewLine}
 				disabled={disabled}
 				inputRef={inputRef}
 				error={error}

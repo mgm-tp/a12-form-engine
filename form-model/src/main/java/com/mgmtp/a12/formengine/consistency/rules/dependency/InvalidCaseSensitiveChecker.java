@@ -66,7 +66,7 @@ class InvalidCaseSensitiveChecker {
 					problems.add(new ConsistencyProblem(
 						modelName,
 						FormModelCategory.FORM_MODEL_EXTERNAL_ENUM_INVALID_CASE_SENSITIVE,
-						new FormModelProblemSource(fieldConfigurationEntry.getElementRef()),
+						FormModelProblemSource.involving(fieldConfigurationEntry.getElementRef()),
 						fieldConfigurationEntry.getElementRef()
 					));
 				}

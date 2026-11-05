@@ -41,9 +41,9 @@ import type { GroupInstance } from "@com.mgmtp.a12.kernel/kernel-md-facade";
 import type { EngineState, EngineStore } from "../../../../../back-end/store/index.js";
 import { Commands, Events } from "../../../../../back-end/store/index.js";
 import type { Models } from "../../../../../back-end/store/internal/store.js";
-import { MiddlewareHelpers } from "../../../../utils/MiddlewareHelpers.js";
 import { createDocumentPath } from "../../../../utils/createDocumentPath.js";
 import { createModelPath } from "../../../../utils/createModelPath.js";
+import { MiddlewareHelpers } from "../../../../utils/MiddlewareHelpers.js";
 import { createTestStore } from "../../../../utils/setup.js";
 import { setupFixture, setupModelsFixture } from "../../../../utils/setupFixture.js";
 import { DR } from "../../../../utils/test-model-helpers/detached.repeat.js";
@@ -98,7 +98,11 @@ describe("api.back-end.store.middleware", () => {
 							index: 0
 						}
 					}),
-					pushBackup: Commands.pushBackup({ messages: {}, document: documentBefore }),
+					pushBackup: Commands.pushBackup({
+						messages: {},
+						document: documentBefore,
+						customMessages: {}
+					}),
 					changeScreenState: Commands.changeScreenState({
 						index: 1,
 						focusedComponent: { formModelPath: [], subElement: "current-screen" }

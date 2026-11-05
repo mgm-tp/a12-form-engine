@@ -93,7 +93,7 @@ public class InfiniteScrollingRule extends AbstractRepeatRule {
 					new ConsistencyProblem(
 						modelName,
 						FORM_MODEL_REPEAT_VIRTUAL_SCROLLING_PAGING,
-						new FormModelProblemSource(repeat.getId()),
+						FormModelProblemSource.involving(repeat.getId()),
 						repeat.getId(),
 						repeat.getName()));
 			} else if (isVirtualScrolling(virtualScrolling) ^ tableHeightSet) { // ^ -> xor
@@ -102,7 +102,7 @@ public class InfiniteScrollingRule extends AbstractRepeatRule {
 					new ConsistencyProblem(
 						modelName,
 						FORM_MODEL_REPEAT_VIRTUAL_SCROLLING_CONFIG,
-						new FormModelProblemSource(repeat.getId()),
+						FormModelProblemSource.involving(repeat.getId()),
 						repeat.getId(),
 						repeat.getName()));
 			}
@@ -112,7 +112,7 @@ public class InfiniteScrollingRule extends AbstractRepeatRule {
 					new ConsistencyProblem(
 						modelName,
 						FORM_MODEL_REPEAT_VIRTUAL_SCROLLING_NO_ROW_HEIGHT,
-						new FormModelProblemSource(repeat.getId()),
+						FormModelProblemSource.involving(repeat.getId()),
 						repeat.getId(),
 						repeat.getName()));
 			}
@@ -130,7 +130,7 @@ public class InfiniteScrollingRule extends AbstractRepeatRule {
 					repeatProblems.add(new ConsistencyProblem(
 						modelName,
 						errorMessage,
-						new FormModelProblemSource(repeat.getId()),
+						FormModelProblemSource.involving(repeat.getId()),
 						repeat.getId(),
 						repeat.getName()));
 				}

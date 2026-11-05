@@ -52,12 +52,14 @@ interface SelectSettingsProps {
 	readonly settingPath: SettingPath;
 	readonly items: string[] | DropdownItemProps[];
 	readonly width?: number;
+	/** Overrides the displayed value, e.g. when it is derived from more than this setting. */
+	readonly displayedValue?: string;
 	onValueChanged?: (newValue: string) => void;
 }
 
 /** @internal */
 export function SelectSetting(props: SelectSettingsProps): JSX.Element {
-	const { label, settingPath, items, width, onValueChanged } = props;
+	const { label, settingPath, items, width, displayedValue, onValueChanged } = props;
 	const [settingState, dispatch] = useSettingState<KeywordLengthSettingState>(settingPath);
 
 	const selectItems: SelectItem[] = useMemo(() => {
@@ -82,7 +84,7 @@ export function SelectSetting(props: SelectSettingsProps): JSX.Element {
 			label={label}
 			suffix={
 				<StyledSelect
-					value={settingState.dropdownProps.value}
+					value={displayedValue ?? settingState.dropdownProps.value}
 					items={selectItems}
 					$width={width}
 					onValueChanged={onValueChanged ?? defaultOnValueChanged}

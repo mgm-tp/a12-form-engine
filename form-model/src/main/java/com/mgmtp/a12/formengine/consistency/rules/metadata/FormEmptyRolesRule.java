@@ -70,7 +70,7 @@ public class FormEmptyRolesRule implements ConsistencyRule {
 			problems.add(new ConsistencyProblem(
 				model.getHeaderId(),
 				FormModelCategory.FORM_MODEL_SETTINGS_ROLES_MISSING,
-				new FormModelProblemSource(model.getHeaderId()),
+				FormModelProblemSource.involving(model.getHeaderId()),
 				Severity.INFO));
 		}
 

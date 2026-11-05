@@ -47,15 +47,15 @@ import { findElementByFormModelPath } from "../../../../../../models/internal/fi
 import type { FormModel } from "../../../../../../models/internal/form-model.js";
 import type { RepeatRow } from "../../../../../../view/internal/components/form-engine/repeat/components/tableColumnTypes.js";
 import { sort } from "../../../../../../view/internal/utilities/sorting.js";
+import { createDocumentPath } from "../../../../../utils/createDocumentPath.js";
 import { createModelPath } from "../../../../../utils/createModelPath.js";
+import { loadData } from "../../../../../utils/setup.js";
 import {
 	setupArrayFixture,
 	setupFixture,
 	setupModelsFixture
 } from "../../../../../utils/setupFixture.js";
 import { REPEAT_MODEL_PATH } from "../../filter/filter.utils.js";
-import { createDocumentPath } from "../../../../../utils/createDocumentPath.js";
-import { loadData } from "../../../../../utils/setup.js";
 
 import { createRow } from "./utils.js";
 

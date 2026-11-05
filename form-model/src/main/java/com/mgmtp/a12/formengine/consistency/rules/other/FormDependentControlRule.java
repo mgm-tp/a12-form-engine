@@ -86,7 +86,7 @@ public class FormDependentControlRule implements ConsistencyRule {
 						problems.add(new ConsistencyProblem(
 							model.getHeader().getId(),
 							FormModelCategory.FORM_MODEL_DEPENDENT_CONTROL_NO_SCREEN_ELEMENT,
-							new FormModelProblemSource(control.getId()),
+							FormModelProblemSource.involving(control.getId()),
 							control.getId()));
 					}
 

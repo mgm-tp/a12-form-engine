@@ -19,6 +19,7 @@ dependencies {
     api libs.kernel.md.facade
 
     api libs.rmc.conversion
+    implementation libs.expression.parser
 
     // THIRD PARTY LIBRARIES
     api libs.jackson.core
@@ -31,7 +32,6 @@ dependencies {
     api libs.metainf.services
     annotationProcessor libs.metainf.services
     api libs.commons.cli
-    api libs.nashorn.core
     compileOnly libs.lombok
     annotationProcessor libs.lombok
 
@@ -93,12 +93,13 @@ tasks.register('validatePatches') {
     group = 'verification'
 
     def sourceDir = patchSourceDir.asFile
-    inputs.files(fileTree(dir: sourceDir, include: '**/*.json.patch'))
+    def patchFiles = fileTree(dir: sourceDir, include: '**/*.json.patch')
+    inputs.files(patchFiles)
 
     doLast {
         def execOps = services.get(ExecOperations)
         def failingPatches = []
-        fileTree(dir: sourceDir, include: '**/*.json.patch').each { patchFile ->
+        patchFiles.each { patchFile ->
             def result = execOps.exec {
                 workingDir = sourceDir
                 environment 'GIT_DIR', ''
@@ -132,7 +133,7 @@ tasks.register('applyTestPatches') {
         def execOps = services.get(ExecOperations)
         def outDir = patchedOutputDir.get().asFile
         outDir.deleteDir()
-        fileTree(dir: sourceDir, include: '**/*.json.patch').each { patchFile ->
+        patchFiles.each { patchFile ->
             def relJson = sourceDir.toPath().relativize(patchFile.toPath()).toString().replace('.json.patch', '.json')
             def outFile = new File(outDir, relJson)
             outFile.parentFile.mkdirs()
@@ -161,19 +162,6 @@ tasks.named('check') {
 tasks.named('test') {
     dependsOn(tasks.named('applyTestPatches'))
     classpath = files(patchedOutputDir) + classpath
-}
-
-// Copy expression parser JS file during resource processing
-tasks.register('copyExpressionParser', Copy) {
-    dependsOn(rootProject.tasks.named('pnpmInstall'))
-    mustRunAfter(rootProject.tasks.named('copyLicenseFilesTocore'))
-
-    from layout.projectDirectory.file('../core/node_modules/@com.mgmtp.a12.expression/expression-core/dist/parser.js')
-    into layout.buildDirectory.dir('resources/main/resources')
-}
-
-tasks.named('processResources') {
-    dependsOn(tasks.named('copyExpressionParser'))
 }
 
 description = 'interfaces and classes for JSON-based form model'

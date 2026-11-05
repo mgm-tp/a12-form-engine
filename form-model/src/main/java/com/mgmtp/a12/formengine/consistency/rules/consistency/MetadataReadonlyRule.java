@@ -69,7 +69,7 @@ public class MetadataReadonlyRule implements ConsistencyRule {
 				problems.add(new ConsistencyProblem(
 					model.getHeaderId(),
 					FormModelCategory.FORM_MODEL_DEPENDENT_FIELD_ON_METADATA,
-					new FormModelProblemSource(field.getElementRef()),
+					FormModelProblemSource.involving(field.getElementRef()),
 					field.getElementRef(),
 					element.get().getName()
 				));
@@ -77,7 +77,7 @@ public class MetadataReadonlyRule implements ConsistencyRule {
 				problems.add(new ConsistencyProblem(
 					model.getHeaderId(),
 					FormModelCategory.FORM_MODEL_EXTERNAL_ENUM_ON_METADATA,
-					new FormModelProblemSource(field.getElementRef()),
+					FormModelProblemSource.involving(field.getElementRef()),
 					field.getElementRef(),
 					element.get().getName()
 				));

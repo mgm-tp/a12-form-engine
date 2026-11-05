@@ -32,9 +32,8 @@
 
 import type { Middleware } from "redux";
 
-import { isObjectEmpty } from "../../../../utils/internal/guards.js";
 import { Commands, Events } from "../../actions.js";
-import { UiStateSelectors } from "../../selectors/ui-state.js";
+import { InternalUiStateSelectors, UiStateSelectors } from "../../selectors/ui-state.js";
 import type { EngineState } from "../../store.js";
 
 /**
@@ -70,18 +69,11 @@ export const onSetCorrectionScreenStateTriggeredMiddleware: Middleware<{}, Engin
 				return result;
 			}
 
-			const messages = UiStateSelectors.messages()(api.getState());
-			if (isObjectEmpty(messages)) {
+			if (!InternalUiStateSelectors.hasAnyMessages()(api.getState())) {
 				return result;
 			}
 
-			const screenLocationStack = UiStateSelectors.screenLocationStack()(api.getState());
-			api.dispatch(
-				Commands.changeScreenState({
-					index: screenLocationStack.length - 1,
-					focusedComponent: { formModelPath: [], subElement: "validation-bar" }
-				})
-			);
+			api.dispatch(Commands.CorrectionMode.focusValidationBar());
 		}
 		return result;
 	};

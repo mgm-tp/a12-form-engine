@@ -56,6 +56,7 @@ import { DropDownInput } from "../../../components/form-engine/cells/controls/en
 import { CheckboxGroupInput } from "../../../components/form-engine/cells/controls/multi-select/checkbox-group-input.js";
 import { MultiSelectInput } from "../../../components/form-engine/cells/controls/multi-select/multi-select-input.js";
 import { NumberInput } from "../../../components/form-engine/cells/controls/number/number-input.js";
+import { MarkdownInput } from "../../../components/form-engine/cells/controls/string/markdown-input.js";
 import { MultilineInput } from "../../../components/form-engine/cells/controls/string/multi-line-input.js";
 import { StringWithHintListInput } from "../../../components/form-engine/cells/controls/string/string-hintlist-input.js";
 import { StringInput } from "../../../components/form-engine/cells/controls/string/string-input.js";
@@ -89,6 +90,7 @@ export const DefaultInputMap: InputMap = {
 	MultiSelectInput,
 	NumberInput,
 	MultilineInput,
+	MarkdownInput,
 	StringWithHintListInput,
 	StringInput
 };
@@ -242,7 +244,7 @@ function createStringDataTypeInput(
 	inputMap: InputMap,
 	props: Inputs.InputProps<DocumentModel.StringType>
 ): ReactElement | null {
-	const { MultilineInput, StringInput } = inputMap;
+	const { MarkdownInput, MultilineInput, StringInput } = inputMap;
 	const { modelElement, renderConfiguration, documentElement } = props;
 	if (documentElement.type === "Field") {
 		if (
@@ -254,9 +256,10 @@ function createStringDataTypeInput(
 		) {
 			return createEnumerationInput(inputMap, createStringPropsFromEnumPropsForExtEnum(props));
 		} else {
-			const Component =
-				props.documentElementDataType.lineBreaksPermitted ||
-				props.modelElement.exposition === "AREA"
+			const Component = props.modelElement.isMarkdownEditor
+				? MarkdownInput
+				: props.documentElementDataType.lineBreaksPermitted ||
+					  props.modelElement.exposition === "AREA"
 					? MultilineInput
 					: StringInput;
 			return <Component {...props} />;

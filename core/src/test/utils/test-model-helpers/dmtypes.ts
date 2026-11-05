@@ -43,6 +43,7 @@ import { setupFormEngineRendererWithRtl } from "../setup.js";
 export const DM_TYPES = {
 	SECTION_STRING: "a12-section-fc723",
 	STRING_05: "a12-String05-fieldimpl_575a4",
+	STRING_06_MARKDOWN: "a12-String06-fieldimpl_6a3c1",
 	STRING_01: "a12-String01-id3948",
 	STRING_01_SECRET: "a12-String01-id3948-2",
 	STRING_04: "a12-String04-id6147",

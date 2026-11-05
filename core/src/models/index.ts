@@ -47,4 +47,4 @@ export type { ValueParser } from "./internal/unmarshall/unmarshallFormModel.js";
 export type { MultiSelectData } from "./internal/utils/document-model-utils.js";
 export { createEmptyDocument, DocumentPath } from "./internal/utils/document-utils.js";
 export { FormModelPath } from "./internal/utils/form-model-path.js";
-export { ReadonlyObjectMap } from "./internal/utils/json.js";
+export { ReadonlyObjectMap } from "./internal/utils/ReadonlyObjectMap.js";

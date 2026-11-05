@@ -32,12 +32,12 @@
 
 import type { Middleware } from "redux";
 
+import { findElementByFormModelPath } from "../../../../../models/internal/findElementByFormModelPath.js";
 import {
 	isFormModelEmbeddedRepeat,
 	isFormModelInlineRepeat,
 	isFormModelRepeat
 } from "../../../../../models/internal/FormModelGuards.js";
-import { findElementByFormModelPath } from "../../../../../models/internal/findElementByFormModelPath.js";
 import { FormModelPath } from "../../../../../models/internal/utils/form-model-path.js";
 import { Events } from "../../actions.js";
 import { collectRelevantFields } from "../../collectRelevantFields.js";

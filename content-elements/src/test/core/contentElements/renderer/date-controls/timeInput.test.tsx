@@ -107,8 +107,8 @@ describe("core.contentElements", () => {
 		});
 
 		describe("Tooltips", () => {
-			it("sets tooltips in addOnAfter if tooltipsOnTop is not set", () => {
-				const mockWidgetSettings = getMockWidgetSettings();
+			it("forwards tooltips and breakTooltipsToNewLine to the widget", () => {
+				const mockWidgetSettings = getMockWidgetSettings({ breakTooltipsToNewLine: "below" });
 
 				const { widgetMap } = setup({
 					widgetSettings: mockWidgetSettings
@@ -116,21 +116,8 @@ describe("core.contentElements", () => {
 
 				const props = query(widgetMap.TimePicker).props();
 
-				strictEqual(props.addonAfter, mockWidgetSettings.tooltips);
-				strictEqual(props.tooltips, undefined);
-			});
-
-			it("sets tooltips in tooltips prop if tooltipsOnTop is set", () => {
-				const mockWidgetSettings = getMockWidgetSettings({ tooltipsOnTop: true });
-
-				const { widgetMap } = setup({
-					widgetSettings: mockWidgetSettings
-				});
-
-				const props = query(widgetMap.TimePicker).props();
-
-				strictEqual(props.addonAfter, undefined);
 				strictEqual(props.tooltips, mockWidgetSettings.tooltips);
+				strictEqual(props.breakTooltipsToNewLine, "below");
 			});
 		});
 

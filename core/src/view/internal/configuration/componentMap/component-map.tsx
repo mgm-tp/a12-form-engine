@@ -44,6 +44,7 @@ import type {
 	AttachmentUploadProps,
 	MultiAttachmentUploadProps
 } from "../../components/widgets/form-engine/attachments/attachmentUploadProps.js";
+import type { MarkdownEditorFieldProps } from "../../components/widgets/form-engine/attachments/MarkdownEditorField.js";
 import type { BufferedTextAreaProps } from "../../components/widgets/form-engine/buffered-text-area.js";
 import type { BufferedTextLineProps } from "../../components/widgets/form-engine/buffered-text-line.js";
 import type { ConfirmationButtonProps } from "../../components/widgets/form-engine/confirmationButton.js";
@@ -69,6 +70,7 @@ export interface ComponentMap {
 	readonly DateTimeTextLine: ComponentType<DateTimeTextLineProps>;
 	readonly AttachmentUpload: ComponentType<AttachmentUploadProps>;
 	readonly MultiAttachmentUpload: ComponentType<MultiAttachmentUploadProps>;
+	readonly MarkdownEditorField: ComponentType<MarkdownEditorFieldProps>;
 
 	// Control Elements
 	readonly BufferedTextLine: ComponentType<BufferedTextLineProps>;

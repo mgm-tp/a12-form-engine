@@ -44,6 +44,7 @@ import com.mgmtp.a12.formengine.model.internal.DocumentModelAccess;
 import com.mgmtp.a12.formengine.model.types.HeaderFooterType;
 import com.mgmtp.a12.formengine.model.types.Id;
 import com.mgmtp.a12.formengine.model.types.Named;
+import com.mgmtp.a12.formengine.model.types.ScreenType;
 import com.mgmtp.a12.formengine.model.visitor.ModelWalker;
 
 import java.util.ArrayList;
@@ -63,28 +64,38 @@ public class DuplicateSiblingNameRule implements ConsistencyRule {
 	private static <T extends Named> Problem problemFromNamed(
 		final FormModel model,
 		final T element,
-		final Collection<String> childNames
+		final Collection<String> childNames,
+		final Collection<String> childIds
 	) {
 		return problem(
 			model,
 			element,
 			element instanceof Id ? ((Id) element).getId() : "-",
 			element.getName(),
-			childNames
+			childNames,
+			childIds
 		);
 	}
 
+	/**
+	 * The element carrying the duplicate names is the primary involved element, the children carrying them follow.
+	 * Elements without an own id are reported for the form itself.
+	 */
 	private static Problem problem(
 		final FormModel model,
 		final Object element,
 		final String elementId,
 		final String elementName,
-		final Collection<String> childNames
+		final Collection<String> childNames,
+		final Collection<String> childIds
 	) {
 		return new ConsistencyProblem(
 			model.getHeaderId(),
 			FormModelCategory.FORM_MODEL_DUPLICATE_ELEMENT_NAME,
-			new FormModelProblemSource(elementId),
+			FormModelProblemSource.involving(
+				element instanceof Id id ? id.getId() : model.getHeaderId(),
+				childIds.toArray(String[]::new)
+			),
 			Severity.INFO,
 			elementId,
 			elementName,
@@ -106,9 +117,27 @@ public class DuplicateSiblingNameRule implements ConsistencyRule {
 				final String elementName,
 				final Set<String> duplicateChildNames
 			) {
+				handle(model, modelElement, modelElementId, elementName, duplicateChildNames, Set.of());
+			}
+
+			@Override
+			public void handle(
+				final FormModel model,
+				final Object modelElement,
+				final String modelElementId,
+				final String elementName,
+				final Set<String> duplicateChildNames,
+				final Set<String> duplicateChildIds
+			) {
 				final Problem problem = modelElement instanceof HeaderFooterType
-					? problem(model, modelElement, modelElementId, elementName, duplicateChildNames)
-					: problemFromNamed(model, (Named) modelElement, duplicateChildNames);
+					? problem(
+						model,
+						modelElement,
+						modelElementId,
+						elementName,
+						duplicateChildNames,
+						duplicateChildIds)
+					: problemFromNamed(model, (Named) modelElement, duplicateChildNames, duplicateChildIds);
 				problemCollection.add(problem);
 			}
 		};
@@ -121,6 +150,7 @@ public class DuplicateSiblingNameRule implements ConsistencyRule {
 	}
 
 	private void addDuplicateScreenNames(final FormModel model, final List<Problem> problemCollection) {
+		final List<ScreenType> screens = model.getContent().getScreens();
 		final List<String> duplicateScreenNames =
 			model.getContent()
 				.getScreens()
@@ -136,10 +166,13 @@ public class DuplicateSiblingNameRule implements ConsistencyRule {
 			problemCollection.add(
 				problem(
 					model,
-					model.getContent().getScreens(),
+					screens,
 					"-",
 					"screens",
-					duplicateScreenNames
+					duplicateScreenNames,
+					DuplicateNamesDetectionVisitor.findDuplicateChildIds(
+						screens,
+						Set.copyOf(duplicateScreenNames))
 				));
 		}
 	}

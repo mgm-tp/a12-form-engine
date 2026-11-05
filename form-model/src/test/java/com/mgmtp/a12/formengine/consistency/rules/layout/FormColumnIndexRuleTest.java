@@ -37,6 +37,7 @@ import static org.hamcrest.Matchers.*;
 import com.mgmtp.a12.model.consistency.Problem;
 
 import com.mgmtp.a12.formengine.consistency.rules.ModelLoader;
+import com.mgmtp.a12.formengine.consistency.rules.RuleTestHelper;
 import com.mgmtp.a12.formengine.model.FormModel;
 
 import java.util.List;
@@ -58,6 +59,25 @@ public class FormColumnIndexRuleTest {
 		assertThat(problems,hasItem(hasProperty("message",equalTo("The element [control-191f1] exceeds for layout lg with offset [1] the defined maximum index [4] for the control grid [<Grid>HQAddress]."))));
 		assertThat(problems,hasItem(hasProperty("message",equalTo("The element [control-ca162] exceeds for layout lg with offset [0] the defined maximum index [2] for the control grid [<Grid>SiteDescription]."))));
 		assertThat(problems,hasItem(hasProperty("message",equalTo("The element [control-95e49] exceeds for layout lg with offset [0] the defined maximum index [4] for the control grid [<Grid>SiteAddress]."))));
+	}
+
+	@Test
+	public void checkInvolvedElements() throws Exception {
+		final FormModel productForm = ModelLoader.loadModel(
+                "com/mgmtp/a12/formengine/consistency/rules/layout/CompanyWithWrongControlGridColumn.json");
+		final List<Problem> problems = formColumnIndexRule.execute(productForm, null);
+
+		// the cell exceeds the index, but the number of columns it exceeds belongs to the control grid
+		assertThat(
+			RuleTestHelper.involvedElementIds(
+				problems,
+				"The element [control-3b2b9] exceeds for layout lg with offset [1] the defined maximum index [2] for the control grid [<Grid>DescriptionAndDate]."),
+			contains("control-3b2b9", "controlgrid-c62a2"));
+		assertThat(
+			RuleTestHelper.involvedElementIds(
+				problems,
+				"The element [control-95e49] exceeds for layout lg with offset [0] the defined maximum index [4] for the control grid [<Grid>SiteAddress]."),
+			contains("control-95e49", "controlgrid-969dc"));
 	}
 
 }

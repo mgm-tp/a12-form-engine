@@ -64,7 +64,7 @@ public class AutoExpandAreaRule implements ConsistencyRule {
 		return new ConsistencyProblem(
 			model.getHeaderId(),
 			FormModelCategory.FORM_MODEL_AUTO_EXPAND_INVALID,
-			new FormModelProblemSource(id),
+			FormModelProblemSource.involving(id),
 			Severity.INFO,
 			id,
 			fieldName

@@ -30,7 +30,9 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { Commands, Events } from "../../../../../back-end/store/index.js";
+import { deepStrictEqual } from "node:assert/strict";
+
+import { Commands, Events, UiStateSelectors } from "../../../../../back-end/store/index.js";
 import { MiddlewareHelpers } from "../../../../utils/MiddlewareHelpers.js";
 import { createTestStore } from "../../../../utils/setup.js";
 import { setupFixture, setupModelsFixture } from "../../../../utils/setupFixture.js";
@@ -91,22 +93,22 @@ describe("api.back-end.store.middleware", () => {
 					MiddlewareHelpers.assertAction(middlewareSpy.spy, expectedCommands);
 				});
 
-				it(`dispatches a Commands.changeScreenState action with the focusedComponent containing the focusPart="validation-bar"`, () => {
-					setupStore().dispatch(
+				it("dispatches a Commands.CorrectionMode.focusValidationBar action and focuses the bar", () => {
+					const store = setupStore();
+					store.dispatch(
 						Events.CorrectionMode.CorrectionView.show({
 							show: false
 						})
 					);
 
-					const expectedCommand = Commands.changeScreenState({
-						index: 0,
-						focusedComponent: {
-							formModelPath: [],
-							subElement: "validation-bar"
-						}
-					});
-
-					MiddlewareHelpers.assertAction(middlewareSpy.spy, expectedCommand);
+					MiddlewareHelpers.assertAction(
+						middlewareSpy.spy,
+						Commands.CorrectionMode.focusValidationBar()
+					);
+					deepStrictEqual(
+						UiStateSelectors.currentScreenLocation()(store.getState()).focusedComponent,
+						{ formModelPath: [], subElement: "validation-bar" }
+					);
 				});
 			});
 

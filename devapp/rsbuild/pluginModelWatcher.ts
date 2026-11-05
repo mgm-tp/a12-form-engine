@@ -42,12 +42,12 @@ import pc from "picocolors";
 const SUCCESS = /^(BUILD SUCCESSFUL)/;
 const INFO = /^(Change detected|new file:|modified:|deleted:)/;
 
-/* eslint-disable no-console */
+/* oxlint-disable no-console */
 const success = (msg: string) =>
 	console.log(`${pc.bold(pc.greenBright("[model-watcher]"))} ${msg}`);
 const info = (msg: string) => console.log(`${pc.bold(pc.cyanBright("[model-watcher]"))} ${msg}`);
 const error = (msg: string) => console.log(`${pc.bold(pc.redBright("[model-watcher]"))} ${msg}`);
-/* eslint-enable no-console */
+/* oxlint-enable no-console */
 
 /**
  * Dev-only plugin: runs Gradle continuous build so that model edits under

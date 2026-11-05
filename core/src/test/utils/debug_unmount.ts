@@ -34,10 +34,10 @@ import { useEffect } from "react";
 
 export function useDebugUnmount(id: string): void {
 	useEffect(() => {
-		// eslint-disable-next-line no-console
+		// oxlint-disable-next-line no-console
 		console.log("mount: " + id);
 		return () => {
-			// eslint-disable-next-line no-console
+			// oxlint-disable-next-line no-console
 			console.log("unmount: " + id);
 		};
 	}, [id]);

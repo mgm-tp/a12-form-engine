@@ -34,8 +34,8 @@ import { notStrictEqual, ok, strictEqual } from "node:assert/strict";
 
 import { query, screen } from "@com.mgmtp.a12.devtools/react";
 
-import { setupModelsFixture } from "../../../utils/setupFixture.js";
 import type { ButtonDef } from "../../../utils/FormModelHelpers.js";
+import { setupModelsFixture } from "../../../utils/setupFixture.js";
 
 import { setupForButtonTests, setupSubheaderButtonTests } from "./utils.js";
 
@@ -52,9 +52,9 @@ describe("api.view.content-box", () => {
 
 			const { widgetMap } = setupSubheaderButtonTests({ models, buttons });
 			const buttonGroupProps = query(widgetMap.ButtonGroupContainer).props();
-			// eslint-disable-next-line @typescript-eslint/no-deprecated
+			// oxlint-disable-next-line typescript/no-deprecated
 			strictEqual(buttonGroupProps.leftSlot?.length, 4);
-			// eslint-disable-next-line @typescript-eslint/no-deprecated
+			// oxlint-disable-next-line typescript/no-deprecated
 			strictEqual(buttonGroupProps.rightSlot?.length, 4);
 			const buttonProps = query(widgetMap.Button).propsHistory();
 			strictEqual(
@@ -408,9 +408,9 @@ describe("api.view.content-box", () => {
 
 				const props = query(widgetMap.ButtonGroupContainer).props();
 				strictEqual(props.responsive, true);
-				// eslint-disable-next-line @typescript-eslint/no-deprecated
+				// oxlint-disable-next-line typescript/no-deprecated
 				strictEqual(props.leftSlot?.length, 2);
-				// eslint-disable-next-line @typescript-eslint/no-deprecated
+				// oxlint-disable-next-line typescript/no-deprecated
 				strictEqual(props.rightSlot?.length, 2);
 			});
 		});
@@ -432,9 +432,9 @@ describe("api.view.content-box", () => {
 
 				const props = query(widgetMap.ButtonGroupContainer).props();
 				strictEqual(props.responsive, true);
-				// eslint-disable-next-line @typescript-eslint/no-deprecated
+				// oxlint-disable-next-line typescript/no-deprecated
 				strictEqual(props.leftSlot?.length, 0);
-				// eslint-disable-next-line @typescript-eslint/no-deprecated
+				// oxlint-disable-next-line typescript/no-deprecated
 				strictEqual(props.rightSlot?.length, 2);
 			});
 		});
@@ -455,9 +455,9 @@ describe("api.view.content-box", () => {
 				});
 				const props = query(widgetMap.ButtonGroupContainer).props();
 				strictEqual(props.responsive, true);
-				// eslint-disable-next-line @typescript-eslint/no-deprecated
+				// oxlint-disable-next-line typescript/no-deprecated
 				strictEqual(props.leftSlot?.length, 2);
-				// eslint-disable-next-line @typescript-eslint/no-deprecated
+				// oxlint-disable-next-line typescript/no-deprecated
 				strictEqual(props.rightSlot?.length, 0);
 			});
 		});

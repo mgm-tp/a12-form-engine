@@ -29,6 +29,7 @@
  * NON-INFRINGEMENT, EXCEPT WHERE SUCH DISCLAIMERS ARE HELD TO BE
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
+
 import type { Action } from "redux";
 
 import { isObjectEmpty } from "../../../../../../../back-end/utils/internal/guards.js";

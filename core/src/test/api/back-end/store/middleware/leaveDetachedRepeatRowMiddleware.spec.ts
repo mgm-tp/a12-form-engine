@@ -39,9 +39,9 @@ import { Commands, Events } from "../../../../../back-end/store/index.js";
 import { Middlewares } from "../../../../../back-end/store/internal/middleware/index.js";
 import type { EngineState, EngineStore } from "../../../../../back-end/store/internal/store.js";
 import type { ReadonlyObjectMap } from "../../../../../models/index.js";
-import { MiddlewareHelpers } from "../../../../utils/MiddlewareHelpers.js";
 import { createDocumentPath } from "../../../../utils/createDocumentPath.js";
 import { createModelPath } from "../../../../utils/createModelPath.js";
+import { MiddlewareHelpers } from "../../../../utils/MiddlewareHelpers.js";
 import {
 	createRepeatInstanceStateEntry,
 	createRepeatStaticStateEntry,

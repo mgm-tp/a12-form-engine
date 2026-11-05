@@ -119,7 +119,7 @@ const TableContent: TableWidgetMap["Table"] = props => {
 const headCellDataTypeAttr = (col: BaseColumnType) => (col.actionColumn ? ACTION_CELL : undefined);
 
 export const headCellRenderer: TableWidgetMap["headCellRenderer"] = props => {
-	// eslint-disable-next-line react-hooks/rules-of-hooks
+	// oxlint-disable-next-line react/rules-of-hooks
 	const { headContentRenderer } = use(TableRenderContext);
 
 	const { column } = props;
@@ -145,7 +145,7 @@ export const headCellRenderer: TableWidgetMap["headCellRenderer"] = props => {
 };
 
 const headFilterCellRenderer: TableWidgetMap["headFilterCellRenderer"] = props => {
-	// eslint-disable-next-line react-hooks/rules-of-hooks
+	// oxlint-disable-next-line react/rules-of-hooks
 	const { headFilterContentRenderer } = use(TableRenderContext);
 
 	const { column } = props;

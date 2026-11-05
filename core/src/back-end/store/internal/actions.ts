@@ -49,7 +49,7 @@ import type {
 import type { ExistingFile } from "../../../client-extensions/internal/extensions/form-engine/internal/attachments/utils.js";
 import type { FormModel } from "../../../models/index.js";
 import type { MultiSelectData } from "../../../models/internal/utils/document-model-utils.js";
-import type { ReadonlyObjectMap } from "../../../models/internal/utils/json.js";
+import type { ReadonlyObjectMap } from "../../../models/internal/utils/ReadonlyObjectMap.js";
 
 import type { CorrectionModeItem } from "./CorrectionModeItem.js";
 import type { Change } from "./documentChange.js";
@@ -734,6 +734,40 @@ export namespace Commands {
 		readonly messageStateEntry: EngineStore.Validation.Entry;
 	}
 
+	/**
+	 * @experimental
+	 * Temporary API for A12-15373. Replaced by the unified validation state in 2027.06 (breaking).
+	 */
+	export const setCustomMessageState = command<SetCustomMessageStatePayload>(
+		"SET_CUSTOM_MESSAGE_STATE"
+	);
+
+	/**
+	 * @experimental Payload for the `setCustomMessageState` action.
+	 * Temporary API for A12-15373. Replaced by the unified validation state in 2027.06 (breaking).
+	 */
+	export interface SetCustomMessageStatePayload {
+		readonly customMessages: ReadonlyObjectMap<EngineStore.Validation.CustomEntry>;
+	}
+
+	/**
+	 * @experimental
+	 * Temporary API for A12-15373. Replaced by the unified validation state in 2027.06 (breaking).
+	 */
+	export const setCustomMessageEntry = command<SetCustomMessageEntryPayload>(
+		"SET_CUSTOM_MESSAGE_ENTRY"
+	);
+
+	/**
+	 * @experimental Payload for the `setCustomMessageEntry` action. An entry without messages
+	 * removes the slot.
+	 * Temporary API for A12-15373. Replaced by the unified validation state in 2027.06 (breaking).
+	 */
+	export interface SetCustomMessageEntryPayload {
+		/** The entry identifies its own slot through its `formModelPath` and `dataContext`. */
+		readonly entry: EngineStore.Validation.CustomEntry;
+	}
+
 	/** Action to set the section state */
 	export const setSectionsCollapsed =
 		command<SetSectionsCollapsedPayload>("SET_SECTIONS_COLLAPSED");
@@ -848,6 +882,8 @@ export namespace Commands {
 		readonly document: object;
 		/** The current validation messages. */
 		readonly messages: ReadonlyObjectMap<EngineStore.Validation.Entry>;
+		/** @internal The current custom-element validation messages. */
+		readonly customMessages?: ReadonlyObjectMap<EngineStore.Validation.CustomEntry>;
 	}
 
 	/** Action to execute a full validation */
@@ -943,6 +979,13 @@ export namespace Commands {
 		export const setValidationBarState = command<SetValidationBarStatePayload>(
 			"SET_VALIDATION_BAR_STATE"
 		);
+
+		/**
+		 * Action to move the focus to the validation bar. The Form Engine resolves the screen
+		 * itself, so dispatching this does not require knowledge of the screen stack.
+		 * Use {@link setValidationBarState} to make the bar visible in the first place.
+		 */
+		export const focusValidationBar = command("FOCUS_VALIDATION_BAR");
 
 		/** Payload for the {@link setValidationBarState} action */
 		export interface SetValidationBarStatePayload {

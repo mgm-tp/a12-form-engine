@@ -35,10 +35,10 @@ import { doesNotMatch, equal } from "node:assert/strict";
 import { query } from "@com.mgmtp.a12.devtools/react";
 
 import type { FormModel } from "../../../../../models/index.js";
+import { setupFormEngineRendererWithRtlAsync } from "../../../../utils/setup.js";
 import { setupModelsFixture } from "../../../../utils/setupFixture.js";
 import { IDS as ReadonlyIds } from "../../../../utils/test-model-helpers/enablement.no-asterisks.js";
 import { IDS as MarkingIds } from "../../../../utils/test-model-helpers/validation.required.markingOfRequiredFields.js";
-import { setupFormEngineRendererWithRtlAsync } from "../../../../utils/setup.js";
 
 import { ModelElementIdEquals } from "../query-predicates.js";
 

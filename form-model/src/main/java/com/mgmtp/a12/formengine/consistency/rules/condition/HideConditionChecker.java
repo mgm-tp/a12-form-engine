@@ -94,7 +94,7 @@ public class HideConditionChecker {
 			problems.add(new ConsistencyProblem(
 				formModel.getHeaderId(),
 				FormModelCategory.MISSING_DM_FIELD_IN_HIDE_CONDITION_MASTER,
-				new FormModelProblemSource(elementId),
+				FormModelProblemSource.involving(elementId),
 				fieldRef,
 				elementName,
 				this.documentModelService.getDocumentModelId()));
@@ -113,7 +113,7 @@ public class HideConditionChecker {
 			problems.add(new ConsistencyProblem(
 				formModel.getHeaderId(),
 				FormModelCategory.HIDE_CONDITION_MASTER_FIELD_INVALID_TYPE,
-				new FormModelProblemSource(elementId),
+				FormModelProblemSource.involving(elementId),
 				fieldRef,
 				elementName,
 				this.documentModelService.getDocumentModelId(),
@@ -131,7 +131,7 @@ public class HideConditionChecker {
 					problems.add(new ConsistencyProblem(
 						formModel.getHeaderId(),
 						FormModelCategory.HIDE_CONDITION_INVALID_MASTER_VALUE,
-						new FormModelProblemSource(elementId),
+						FormModelProblemSource.involving(elementId),
 						elementName,
 						fieldRef,
 						this.documentModelService.getDocumentModelId(),
@@ -146,7 +146,7 @@ public class HideConditionChecker {
 			problems.add(new ConsistencyProblem(
 				formModel.getHeaderId(),
 				FormModelCategory.FORM_MODEL_HIDE_CONDITION_NO_CASES,
-				new FormModelProblemSource(elementId),
+				FormModelProblemSource.involving(elementId),
 				elementName));
 		}
 
@@ -158,7 +158,7 @@ public class HideConditionChecker {
 			problems.add(new ConsistencyProblem(
 				formModel.getHeaderId(),
 				FormModelCategory.FORM_MODEL_HIDE_CONDITION_INVALID_MASTER_FIELD_GRANULARITY,
-				new FormModelProblemSource(elementId),
+				FormModelProblemSource.involving(elementId),
 				elementName,
 				fieldRef,
 				this.documentModelService.getDocumentModelId()));

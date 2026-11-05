@@ -33,13 +33,14 @@
 import { executeTestForFieldOverviewColumnAutoExpand } from "./test-cases/auto-expand.js";
 import { executeTestForFieldOverviewColumnDisabled } from "./test-cases/disabled.js";
 import { executeTestForFieldOverviewColumnHidden } from "./test-cases/hidden.js";
-import { executeTestForFieldOverviewColumnSwitchIcon } from "./test-cases/switchIcon.js";
 import { executeTestForFieldOverviewColumnLabel } from "./test-cases/label.js";
 import { executeTestForFieldOverviewColumnMessages } from "./test-cases/messages.js";
 import { executeTestsForFieldOverviewColumnPlaceholder } from "./test-cases/placeholder.js";
 import { executeTestForFieldOverviewColumnReadOnly } from "./test-cases/read-only.js";
 import { executeTestsForFieldOverviewColumnRendering } from "./test-cases/rendering.js";
 import { executeTestForFieldOverviewColumnSuffix } from "./test-cases/suffix.js";
+import { executeTestForFieldOverviewColumnSwitchIcon } from "./test-cases/switchIcon.js";
+import { executeTestForFieldOverviewColumnTooltipPosition } from "./test-cases/tooltip-position.js";
 import { executeTestForFieldOverviewColumnValue } from "./test-cases/value.js";
 
 describe("api.view.inputs", () => {
@@ -86,6 +87,10 @@ describe("api.view.inputs", () => {
 
 		describe("icon", () => {
 			executeTestForFieldOverviewColumnSwitchIcon();
+		});
+
+		describe("tooltip position", () => {
+			executeTestForFieldOverviewColumnTooltipPosition();
 		});
 	});
 });

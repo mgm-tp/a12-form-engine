@@ -30,8 +30,8 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import type { Action } from "@com.mgmtp.a12.client/typescript-fsa-redux-5-compat";
 import { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
+import type { Action } from "@com.mgmtp.a12.client/typescript-fsa-redux-5-compat";
 import type {
 	DocumentModel,
 	EntityInstancePath,
@@ -47,11 +47,7 @@ import type {
 import type { FormModel } from "../../../models/internal/form-model.js";
 import * as DocumentModelUtils from "../../../models/internal/utils/document-model-utils.js";
 import { DocumentPath } from "../../../models/internal/utils/document-utils.js";
-import { ReadonlyObjectMap } from "../../../models/internal/utils/json.js";
-
-import type { DataSelectors } from "./selectors/data.js";
-import type { ModelSelectors } from "./selectors/models.js";
-import type { UiStateSelectors } from "./selectors/ui-state.js";
+import { ReadonlyObjectMap } from "../../../models/internal/utils/ReadonlyObjectMap.js";
 
 /**
  * This type declares the slices used by the Engine.
@@ -190,6 +186,13 @@ export namespace EngineStore {
 		 * to the validation entry that contains the (error) messages.
 		 */
 		readonly messages: ReadonlyObjectMap<Validation.Entry>;
+
+		/**
+		 * @internal
+		 * Validation messages related to custom form elements, keyed by
+		 * {@link Validation.customKey}. Wiped on every full validation.
+		 */
+		readonly customMessages?: ReadonlyObjectMap<Validation.CustomEntry>;
 
 		/** Current width of repeat columns */
 		readonly columnWidths?: { [modelPath: string]: number | undefined };
@@ -359,6 +362,13 @@ export namespace EngineStore {
 			readonly errorCode: string;
 
 			readonly severity: MessageSeverity;
+
+			/**
+			 * Set when the message stems from a server-side validation result instead of the
+			 * client-side validation. Each server response validates the whole document, so these
+			 * messages are replaced as a set rather than accumulated.
+			 */
+			readonly origin?: "server";
 		}
 
 		export type MessageSeverity = "ERROR" | "WARNING" | "INFO";
@@ -442,6 +452,43 @@ export namespace EngineStore {
 					newMessages = { ...newMessages, [DocumentPath.toString(newPath)]: newEntry };
 				}
 				return newMessages;
+			}
+
+			/**
+			 * @internal — row remove/move counterpart of updateMessagesPaths for the custom slice
+			 */
+			export function updateCustomMessagesPaths(
+				customMessages: ReadonlyObjectMap<EngineStore.Validation.CustomEntry>,
+				repeatableGroupInstancePath: EntityInstancePath,
+				documentModel: DocumentModel,
+				delta?: number
+			): ReadonlyObjectMap<EngineStore.Validation.CustomEntry> {
+				const result: { [key: string]: EngineStore.Validation.CustomEntry } = {};
+				for (const entry of Object.values(customMessages)) {
+					if (!entry) {
+						continue;
+					}
+					const newDataContext = calculateNewPathForElementIfNeeded(
+						documentModel,
+						repeatableGroupInstancePath,
+						entry.dataContext,
+						delta
+					);
+					result[EngineStore.Validation.customKey(entry.formModelPath, newDataContext)] = {
+						...entry,
+						dataContext: newDataContext,
+						validationMessages: entry.validationMessages.map(msg => ({
+							...msg,
+							dataContext: calculateNewPathForElementIfNeeded(
+								documentModel,
+								repeatableGroupInstancePath,
+								msg.dataContext,
+								delta
+							)
+						}))
+					};
+				}
+				return result;
 			}
 
 			/**
@@ -657,6 +704,61 @@ export namespace EngineStore {
 			readonly message: EngineStore.Validation.Message;
 			readonly value: string;
 		}
+
+		/**
+		 * @experimental
+		 * A validation message for a custom form element.
+		 * NOTE: only CustomScreenElement is supported.
+		 *
+		 * Temporary API for A12-15373. Replaced by the unified validation state in 2027.06 (breaking).
+		 */
+		export interface CustomMessage extends Omit<Message, "element" | "referencedFields"> {
+			/** Path to the Custom Screen Element this message reports on. */
+			readonly customFormElement: ModelPath;
+			/** Instance the element belongs to, empty unless it sits inside a repeat row. */
+			readonly dataContext: EntityInstancePath;
+		}
+
+		/**
+		 * @experimental
+		 * Same as {@link EngineStore.Validation.Entry} but for custom form elements.
+		 * Entries are self-describing: `formModelPath` and `dataContext` carry the identity.
+		 * Storage keys (see {@link customKey}) are opaque — never parse them.
+		 *
+		 * Temporary API for A12-15373. Replaced by the unified validation state in 2027.06 (breaking).
+		 */
+		export interface CustomEntry {
+			/** Path to the Custom Screen Element in the form model. */
+			readonly formModelPath: ModelPath;
+			/** Instance the element belongs to, empty unless it sits inside a repeat row. */
+			readonly dataContext: EntityInstancePath;
+			/** All messages reported for that element; an empty array removes the entry. */
+			readonly validationMessages: readonly CustomMessage[];
+		}
+
+		/** @internal */
+		export namespace CustomEntry {
+			export function isEmpty(entry: CustomEntry): boolean {
+				return entry.validationMessages.length === 0;
+			}
+		}
+
+		/**
+		 * @internal
+		 * Storage key for a custom-element entry. Opaque — do not parse. Changing the key
+		 * generation is not considered a breaking change.
+		 */
+		export function customKey(formModelPath: ModelPath, dataContext: EntityInstancePath): string {
+			return `${ModelPath.toString(formModelPath)}|${DocumentPath.toString(dataContext)}`;
+		}
+
+		/**
+		 * @internal
+		 * Whether a message reports on a custom form element rather than on a document element.
+		 */
+		export function isCustomMessage(message: Message | CustomMessage): message is CustomMessage {
+			return "customFormElement" in message;
+		}
 	}
 
 	export namespace Repeat {
@@ -731,6 +833,13 @@ export namespace EngineStore {
 	export interface BackupEntry {
 		readonly document: object;
 		readonly messages: ReadonlyObjectMap<Validation.Entry>;
+
+		/**
+		 * @internal
+		 * Validation messages related to custom form elements, keyed by
+		 * {@link Validation.customKey}.
+		 */
+		readonly customMessages?: ReadonlyObjectMap<Validation.CustomEntry>;
 	}
 }
 

@@ -37,6 +37,7 @@ import { provider as DeviceDetector } from "@com.mgmtp.a12.widgets/widgets-core"
 import { UiStateSelectors } from "../../../../../back-end/store/internal/selectors/ui-state.js";
 import type { FormModelMap } from "../../../configuration/engine-configuration.js";
 
+import { collectValidationMessages } from "./collectValidationMessages.js";
 import { DesktopValidationBar } from "./desktop/desktop-validation-bar.js";
 import { MobileValidationBar } from "./mobile/mobile-validation-bar.js";
 
@@ -45,15 +46,9 @@ export function ValidationBar(config: FormModelMap.RenderConfiguration): ReactEl
 	const { renderOptions } = config;
 	const validationBar = UiStateSelectors.validationBarState()(renderOptions.state);
 	const expanded = validationBar.expanded;
-	const messages = UiStateSelectors.messages()(renderOptions.state);
 	const currentMessageKey = validationBar.currentMessageKey;
 
-	const messagesArray = Object.values(messages).flatMap(message => {
-		return [
-			...(message?.validationMessages ?? []),
-			...(message?.parseError ? [message.parseError.message] : [])
-		];
-	});
+	const messagesArray = collectValidationMessages(renderOptions.state);
 
 	const sortedMessages = [...messagesArray].sort(
 		// Do not change the order of the messages except that at first error should be listed and afterwards warnings

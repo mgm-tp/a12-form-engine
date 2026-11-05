@@ -29,6 +29,7 @@
  * NON-INFRINGEMENT, EXCEPT WHERE SUCH DISCLAIMERS ARE HELD TO BE
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
+
 import type {
 	ElementLibrary,
 	NodeValidationContext,
@@ -45,6 +46,8 @@ import { CheckboxGroupModule } from "./modules/checkboxGroup/checkboxGroupModule
 import { checkboxGroupValidator } from "./modules/checkboxGroup/checkboxGroupValidator.js";
 import { DatePickerModule } from "./modules/datePicker/datePickerModule.js";
 import { datePickerValidator } from "./modules/datePicker/datePickerValidator.js";
+import { MarkdownModule } from "./modules/markdown/markdownModule.js";
+import { markdownValidator } from "./modules/markdown/markdownValidator.js";
 import { MessageGroupContainerModule } from "./modules/messageGroupContainer/messageGroupContainerModule.js";
 import { messageGroupContainerValidator } from "./modules/messageGroupContainer/messageGroupContainerValidator.js";
 import { MessageGroupDisplayModule } from "./modules/messageGroupDisplay/messageGroupDisplayModule.js";
@@ -68,6 +71,7 @@ export * from "./modules/autoComplete/autocompleteNode.js";
 export * from "./modules/checkbox/checkboxNode.js";
 export * from "./modules/checkboxGroup/checkboxGroupNode.js";
 export * from "./modules/datePicker/datePickerNode.js";
+export * from "./modules/markdown/markdownNode.js";
 export * from "./modules/messageGroupContainer/messageGroupContainerNode.js";
 export * from "./modules/messageGroupDisplay/messageGroupDisplayNode.js";
 export * from "./modules/multiSelect/multiSelectNode.js";
@@ -91,6 +95,7 @@ export const FormElementsModules = {
 	Checkbox: CheckboxModule,
 	CheckboxGroup: CheckboxGroupModule,
 	DatePicker: DatePickerModule,
+	Markdown: MarkdownModule,
 	MessageGroupContainer: MessageGroupContainerModule,
 	MessageGroupDisplay: MessageGroupDisplayModule,
 	MultiSelect: MultiSelectModule,
@@ -109,6 +114,7 @@ export const FormElementsValidators: Record<
 	Checkbox: checkboxValidator,
 	CheckboxGroup: checkboxGroupValidator,
 	DatePicker: datePickerValidator,
+	Markdown: markdownValidator,
 	MessageGroupContainer: messageGroupContainerValidator,
 	MessageGroupDisplay: messageGroupDisplayValidator,
 	MultiSelect: multiSelectValidator,
@@ -126,6 +132,7 @@ export const FormElementsLibrary: ElementLibrary = {
 		CheckboxModule,
 		CheckboxGroupModule,
 		DatePickerModule,
+		MarkdownModule,
 		MessageGroupContainerModule,
 		MessageGroupDisplayModule,
 		MultiSelectModule,

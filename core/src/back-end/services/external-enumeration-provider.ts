@@ -30,7 +30,7 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import type { ReadonlyObjectMap } from "../../models/internal/utils/json.js";
+import type { ReadonlyObjectMap } from "../../models/internal/utils/ReadonlyObjectMap.js";
 
 /**
  * Provider returns a list of enumeration values for a specific source

@@ -31,8 +31,8 @@
  */
 
 import type { ComponentType, FunctionComponent, JSX, ReactNode } from "react";
-import { Component as ReactComponent } from "react";
-import { connect } from "react-redux";
+import { Component as ReactComponent, memo } from "react";
+import { shallowEqual, useSelector } from "react-redux";
 
 import { addPrefix } from "@com.mgmtp.a12.widgets/widgets-core";
 
@@ -143,12 +143,17 @@ export function createRenderGuardComponent<
 	}
 
 	/**
-	 * The connected component maps all `ownProps` to the property `componentProps`
+	 * The returned component maps all `ownProps` to the property `componentProps`
 	 * in order to prevent issues with the internally used props `propsAreComplete`
 	 * and `stateIsComplete`.
+	 *
+	 * It is wrapped in `memo` so that a re-rendering parent does not re-render the
+	 * guard when the own props are shallow equal - `connect` did the same.
 	 */
-	return connect(
-		function mapStateToProps(state: object, ownProps: PickOptional<T, OptionalProps>) {
+	return memo(function FunctionalRenderGuard(
+		ownProps: PickOptional<T, OptionalProps>
+	): JSX.Element | null {
+		const guardProps = useSelector(state => {
 			return propsAreComplete(ownProps)
 				? {
 						propsAreComplete: true,
@@ -156,13 +161,8 @@ export function createRenderGuardComponent<
 					}
 				: // `stateIsComplete` is only relevant if `propsAreComplete` is `true`
 					{ propsAreComplete: false, stateIsComplete: false };
-		},
-		undefined,
-		function mergeProps(stateProps, _, ownProps): RenderGuardProps {
-			return { ...stateProps, componentProps: ownProps };
-		}
-	)(function FunctionalRenderGuard(props: RenderGuardProps): JSX.Element | null {
-		// RenderGuard needs to be wrapped inside a function component in order to prevent a typing inferring issue!
-		return <RenderGuard {...props} />;
+		}, shallowEqual);
+
+		return <RenderGuard {...guardProps} componentProps={ownProps} />;
 	});
 }

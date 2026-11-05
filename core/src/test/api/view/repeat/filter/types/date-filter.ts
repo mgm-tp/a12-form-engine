@@ -47,12 +47,12 @@ import { filterRows } from "../../../../../../view/internal/utilities/filtering.
 import { createDocumentPath } from "../../../../../utils/createDocumentPath.js";
 import { createModelPath } from "../../../../../utils/createModelPath.js";
 import { US_LOCALE } from "../../../../../utils/localization.js";
+import { loadData } from "../../../../../utils/setup.js";
 import {
 	setupArrayFixture,
 	setupFixture,
 	setupModelsFixture
 } from "../../../../../utils/setupFixture.js";
-import { loadData } from "../../../../../utils/setup.js";
 
 import { emptySwitchFunctions } from "../filter-functions/empty-switch.js";
 import { textLineRangeFunctions } from "../filter-functions/textline-range-filter.js";

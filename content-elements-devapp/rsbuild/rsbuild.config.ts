@@ -31,6 +31,7 @@
  */
 
 import { execSync } from "node:child_process";
+import { env as processEnv } from "node:process";
 
 import { defineConfig, rspack } from "@rsbuild/core";
 import { pluginReact } from "@rsbuild/plugin-react";
@@ -46,7 +47,7 @@ const commitHash = execSync("git rev-parse HEAD || exit 0", {
 export default defineConfig(({ envMode, env }) => {
 	// for deployments we always use mock mode
 	const devappMode = env === "production" ? "mock" : (envMode ?? "mock");
-	const version = `${packageJson.version} [${devappMode.toUpperCase()}]`;
+	const version = `${processEnv.RELEASE_VERSION ?? packageJson.version} [${devappMode.toUpperCase()}]`;
 
 	return {
 		server: {

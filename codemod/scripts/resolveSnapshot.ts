@@ -29,10 +29,13 @@
  * NON-INFRINGEMENT, EXCEPT WHERE SUCH DISCLAIMERS ARE HELD TO BE
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
+
 import { snapshot } from "node:test";
 
 snapshot.setResolveSnapshotPath(fileName => {
-	const toSrcDir = fileName?.replace("lib", "src");
+	// anchored on the path segment, either separator: a plain replace("lib", "src") rewrites
+	// the first "lib" anywhere in the absolute path, e.g. a checkout directory "...-libs-hoist"
+	const toSrcDir = fileName?.replace(/([\\/])lib\1/, "$1src$1");
 
 	return `${toSrcDir}.snapshot`;
 });

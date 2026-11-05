@@ -146,6 +146,22 @@ The second category uses a two-pass comparison: the Form Engine validates the ne
 
 Fields that are not affected by the attachment field values themselves - for example required fields the user has not yet had a chance to fill in, fields with initial values set only because a new row was created, or computed fields not related to attachment field values - are validated only once the Repeat row or the Repeat table is left.
 
+==== Custom Errors
+
+The validation state also holds custom entries for Custom Screen Elements, in the `customMessages` slice next to the regular field/group `messages`. Since the Form Engine cannot know the cause of these errors, they are ignored by the validation types described above, which react to changes made in the document.
+
+Custom entries are therefore removed by a Full Validation. Two triggers can cause this:
+
+* The application triggers a Full Validation itself, and
+* a Repeat row is removed *while the validation bar is visible*, because that triggers a Full Validation implicitly. With the bar hidden the entries survive, and their data contexts are shifted to follow the rows that moved up.
+
+Custom entries also take no part in the checks that gate a screen or row transition. The apply of a Detached Repeat row validates the row's document fields only, so a custom `ERROR` on a Custom Screen Element inside a detail screen does not prevent the row from being applied. An application that needs to block the transition has to check `customMessagesByPath` itself before allowing it.
+
+[NOTE]
+====
+The `customMessages` slice is an interim solution: it exists next to `messages` so that the feature can ship without a breaking change. Both slices are planned to be merged into one validation state in 2027.06, which will be a breaking change for the API described here.
+====
+
 ==== Usage of the Kernel API
 
 The following table describes how the Kernel API is used and which parameters are provided by the Form Engine.
@@ -164,6 +180,26 @@ The following table describes how the Kernel API is used and which parameters ar
 ====
 It is essential that applications perform a full validation of the data (preferably on the server) at some point in the application process, because the Form Engine does not enforce it.
 ====
+
+==== Errors From the Server
+
+Saving a document through the `platformSingleDocumentDataProvider` can produce errors that the client-side validation does not know about.
+
+===== Validation Results
+
+Data Services validates the whole document when it is saved and returns its validation results. The Form Engine merges them into the validation state, so they are shown in the validation bar like the messages of a client-side validation. Warnings and infos are returned as well, also when the save itself was successful.
+
+Since the results always cover the whole document, every save replaces the results of the previous one. The next client-side validation removes them again, because the Form Engine cannot know whether a server-side condition still applies - a Full Validation therefore only shows the messages the client can compute itself.
+
+A server can validate only the fields that are set, or skip validation for a Document Model entirely, through the `mgmtp.a12.dataservices.documents.validation` properties (see link:/docs/DATA_SERVICES/dataservices-documentation-src/index.html#validation-results-on-save[Validation Results on Save] in the Data Services documentation). The Form Engine reads an empty result set as a valid document and replaces the previous results with it, so on such a model the validation bar reflects what the server chose to validate.
+
+The messages are localized with the key returned by Data Services. The key is a best-effort approximation: fallback keys are omitted, and for some formal errors it names an adjacent format variant, so a customization can resolve to a different text. If there is no text for the key, the text of the server is used, which is in the language of the save request.
+
+===== Unique Constraints
+
+Document Uniqueness Criteria are checked by Data Services and not by the Kernel validation. If a criterion is violated, the document is not saved and the error message defined for the criterion in the Document Model is reported as an error of the save operation. These violations are not part of the validation state, i.e. they are not shown in the validation bar, because a criterion can span several fields while a validation message always belongs to a single one.
+
+Data Services validates the document before it checks the criteria, so a save reports either its validation results or the violation. The Form Engine therefore checks the criteria in a separate request next to the save and reports both, so the user can correct everything in one pass.
 
 === API
 

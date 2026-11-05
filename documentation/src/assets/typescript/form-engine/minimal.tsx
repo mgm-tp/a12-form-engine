@@ -32,30 +32,24 @@
 
 // tag::content[]
 // tag::marker0[]
-import type { ReactNode } from "react";
+import type { JSX, ReactNode } from "react";
 import { createRoot } from "react-dom/client";
-import { connect, Provider } from "react-redux";
+import { Provider } from "react-redux";
 import { applyMiddleware, legacy_createStore as createStore } from "redux";
 
-import type {
-	DefaultDispatchProps,
-	DefaultOwnProps,
-	DefaultStateProps,
-	EngineState,
-	FormModel,
-	ScrollHandlerProps
-} from "@com.mgmtp.a12.formengine/formengine-core";
+import type { DefaultOwnProps, FormModel } from "@com.mgmtp.a12.formengine/formengine-core";
 import {
 	createCombinedReducer,
 	createEmptyDocument,
 	createEngineMiddlewares,
 	createEngineStore,
-	defaultMapDispatchToProps,
-	defaultMapStateToProps,
 	defaultValueParser,
 	FormEngineRenderer,
 	ScrollHandler,
-	unmarshallFormModel
+	unmarshallFormModel,
+	useDefaultDispatchProps,
+	useDefaultStateProps,
+	useScrollHandlerProps
 } from "@com.mgmtp.a12.formengine/formengine-core";
 import {
 	DocumentServiceFactory,
@@ -122,27 +116,18 @@ loadModels().then(({ formModelAsJson, documentModelAsString, validationCode }) =
 });
 // end::marker1[]
 // tag::connect[]
-const EngineConnected = connect<
-	DefaultStateProps,
-	DefaultDispatchProps,
-	DefaultOwnProps,
-	EngineState
->(
-	defaultMapStateToProps,
-	defaultMapDispatchToProps
-)(FormEngineRenderer);
+function EngineConnected(props: DefaultOwnProps): JSX.Element {
+	const stateProps = useDefaultStateProps(props);
+	const dispatchProps = useDefaultDispatchProps();
 
-const ScrollHandlerConnected = connect<
-	ScrollHandlerProps,
-	{},
-	{ children?: ReactNode },
-	EngineState
->(function mapStateToProps(state) {
-	return {
-		uiState: state.ui,
-		models: state.models
-	};
-})(ScrollHandler);
+	return <FormEngineRenderer {...props} {...stateProps} {...dispatchProps} />;
+}
+
+function ScrollHandlerConnected(props: { children?: ReactNode }): JSX.Element {
+	const stateProps = useScrollHandlerProps();
+
+	return <ScrollHandler {...props} {...stateProps} />;
+}
 // end::connect[]
 
 // tag::loadModels[]

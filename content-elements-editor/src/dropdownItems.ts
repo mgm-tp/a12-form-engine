@@ -39,6 +39,13 @@ export const messageExpositionItems: DropdownItemProps[] = [
 ];
 
 /** @internal */
+export const tooltipPositionItems: DropdownItemProps[] = [
+	{ value: "BESIDE", label: "Beside" },
+	{ value: "ABOVE", label: "Above" },
+	{ value: "BELOW", label: "Below" }
+];
+
+/** @internal */
 export const markingOfRequiredFieldsItems: DropdownItemProps[] = [
 	{ value: "REQUIRED", label: "If required" },
 	{ value: "NONE", label: "Never" },

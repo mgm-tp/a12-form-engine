@@ -106,7 +106,7 @@ class MultiSelectVisitor extends ModelVisitor {
 					new ConsistencyProblem(
 						modelId,
 						FormModelCategory.FORM_MODEL_STRING_VALUE_MULTI_SELECT_NO_EXTERNAL_ENUM_SET,
-						new FormModelProblemSource(formModelElementRef),
+						FormModelProblemSource.involving(formModelElementRef),
 						formModelElementRef,
 						element.getId(),
 						element.getName()

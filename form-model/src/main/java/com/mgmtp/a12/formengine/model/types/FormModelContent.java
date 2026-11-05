@@ -50,6 +50,7 @@ public class FormModelContent implements Serializable, com.mgmtp.a12.model.Conte
 	protected DefaultsType defaults;
 	protected ReadonlyPresentationEnumType readonlyPresentation;
 	protected ReadonlyPresentationEnumType inlineRepeatReadonlyPresentation;
+	protected MessagePositionEnumType validationMessagePosition;
 	protected MarkingOfRequiredFieldsEnumType markingOfRequiredFields;
 	protected DisableRuleConfirmationEnumType disableRuleConfirmation;
 	protected Boolean hideConfirmationSummary;
@@ -192,6 +193,18 @@ public class FormModelContent implements Serializable, com.mgmtp.a12.model.Conte
 		return (this.inlineRepeatReadonlyPresentation != null);
 	}
 
+	public MessagePositionEnumType getValidationMessagePosition() {
+		return validationMessagePosition;
+	}
+
+	public void setValidationMessagePosition(final MessagePositionEnumType value) {
+		this.validationMessagePosition = value;
+	}
+
+	public boolean isValidationMessagePositionSet() {
+		return (this.validationMessagePosition != null);
+	}
+
 	public MarkingOfRequiredFieldsEnumType getMarkingOfRequiredFields() {
 		return markingOfRequiredFields;
 	}
@@ -315,6 +328,11 @@ public class FormModelContent implements Serializable, com.mgmtp.a12.model.Conte
 
 	public FormModelContent withInlineRepeatReadonlyPresentation(final ReadonlyPresentationEnumType value) {
 		setInlineRepeatReadonlyPresentation(value);
+		return this;
+	}
+
+	public FormModelContent withValidationMessagePosition(final MessagePositionEnumType value) {
+		setValidationMessagePosition(value);
 		return this;
 	}
 

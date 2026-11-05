@@ -62,6 +62,7 @@ public class DependentGroupReferenceChecker extends AbstractReferenceChecker {
 		if (dependentGroup != null) {
 			problems.addAll(checkDmFieldInDependentType(
 				dependentGroup.getMasterField(),
+				groupConfiguration.getGroupRef(),
 				true,
 				FormModelCategory.MISSING_DM_FIELD_IN_DEPENDENT_GROUP_MASTER
 			));

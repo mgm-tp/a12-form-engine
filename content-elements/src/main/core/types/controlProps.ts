@@ -37,6 +37,11 @@ export type MessageExpositionEnum = "TOOLTIP";
 
 export type MarkingOfRequiredFields = "NONE" | "REQUIRED" | "ALWAYS";
 
+export type TooltipPosition = "ABOVE" | "BESIDE" | "BELOW";
+
+/** The vocabulary widgets' own `breakTooltipsToNewLine` prop uses. Form Engine never produces `true`. */
+export type TooltipLineBreak = false | "above" | "below";
+
 export interface DatePickerConfig {
 	readonly minYear?: number;
 	readonly maxYear?: number;
@@ -51,7 +56,9 @@ export interface BaseControlProps {
 	readonly hint?: LocalizedModelText;
 	readonly readonly?: true;
 	readonly messageExposition?: MessageExpositionEnum;
+	/** @deprecated use tooltipPosition instead. */
 	readonly tooltipsOnTop?: true;
+	readonly tooltipPosition?: TooltipPosition;
 	readonly markingOfRequiredFields?: MarkingOfRequiredFields;
 	readonly annotations?: Annotation[];
 

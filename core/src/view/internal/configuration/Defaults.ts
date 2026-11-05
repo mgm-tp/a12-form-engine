@@ -91,6 +91,11 @@ import { DefaultSelectorMap } from "./selectorContext.js";
 /**
  * Creates the default DispatchConfiguration.
  * For each UI-event a {@link Events} action will be dispatched.
+ *
+ * Prefer {@link useDefaultDispatchProps} inside a component - it wraps this
+ * mapping and keeps the result stable across renders. Use this function where a
+ * hook cannot be called, for example in tests or in a shared configuration.
+ *
  * @param dispatch The Redux dispatcher
  */
 export function defaultMapDispatchToProps(dispatch: Dispatch): DefaultDispatchProps {
@@ -313,6 +318,10 @@ export interface DefaultOwnProps {
  * Function to map the state to the state props which are needed to
  * render the view.
  * The default implementation maps the state directly to the props.
+ *
+ * Prefer {@link useDefaultStateProps} inside a component - it wraps this mapping
+ * and only re-renders on an actual state change. Use this function where a hook
+ * cannot be called, for example in tests.
  */
 export function defaultMapStateToProps(
 	state: EngineState,

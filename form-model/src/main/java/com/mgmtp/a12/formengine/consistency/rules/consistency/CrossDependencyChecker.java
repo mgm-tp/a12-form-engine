@@ -69,7 +69,7 @@ public class CrossDependencyChecker extends AbstractReferenceChecker {
 				dependentEnumerationField.ifPresent(iField -> problems.add(new ConsistencyProblem(
 					formModel.getHeaderId(),
 					FormModelCategory.DEPENDENT_COMBINATION_ENUM_FIELD,
-					new FormModelProblemSource(fieldConfigurationEntry.getElementRef()),
+					FormModelProblemSource.involving(fieldConfigurationEntry.getElementRef()),
 					iField.getId()
 				)));
 			}

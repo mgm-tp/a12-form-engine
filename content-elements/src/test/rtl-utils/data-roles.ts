@@ -65,6 +65,7 @@ export const DATE_PICKER_DIALOG = "date-picker-dialog";
 export const DATE_TIME_PICKER = "date-time-picker";
 export const TIME_PICKER = "time-picker";
 export const DEFAULT_FILE_UPLOAD = "default-file-upload";
+export const MARKDOWN_EDITOR = "markdown-editor";
 export const TEXT_AFFIX = "text-affix";
 export const MESSAGE_BOX = "messagebox";
 export const ERROR_TOOLTIP = "error-tooltip";

@@ -89,7 +89,7 @@ function TextAreaRenderer(
 		warnings,
 		infos,
 		tooltips,
-		tooltipsOnTop,
+		breakTooltipsToNewLine,
 		inputProps,
 		ariaDescribedBy
 	} = USE_COMMON_WIDGET_SETTINGS_WRAPPER.useCommonWidgetSettings(commonControlSettings);
@@ -112,8 +112,8 @@ function TextAreaRenderer(
 			placeholder={placeholder}
 			readonly={readonly}
 			hideLabel={hideLabel}
-			addonAfter={tooltipsOnTop ? undefined : tooltips}
-			tooltips={tooltipsOnTop ? tooltips : undefined}
+			tooltips={tooltips}
+			breakTooltipsToNewLine={breakTooltipsToNewLine}
 			helperText={helperText}
 			value={formattedValue}
 			error={error}

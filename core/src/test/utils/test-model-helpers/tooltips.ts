@@ -34,7 +34,7 @@ import type { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
 import type { GroupInstance } from "@com.mgmtp.a12.kernel/kernel-md-facade";
 
 import type { EngineStore, Models } from "../../../back-end/store/internal/store.js";
-import type { ReadonlyObjectMap } from "../../../models/internal/utils/json.js";
+import type { ReadonlyObjectMap } from "../../../models/internal/utils/ReadonlyObjectMap.js";
 import type { Config } from "../../../view/internal/configuration/engine-configuration.js";
 
 import { createDocumentPath } from "../createDocumentPath.js";
@@ -51,7 +51,9 @@ export const IDS = {
 	NUMBER_INPUT: "a12-NumberType-F4",
 	STRING_INPUT: "a12-StringType-F3",
 	NUMBER_INPUT_TOOLTIP_ON_TOP: "a12-NumberType-F4-3",
+	WARNING_INPUT_TOOLTIP_POSITION_BELOW: "a12-Warnings-F47-2",
 	NUMBER_INPUT_INLINE_REPEAT: "a12-fieldbasedrepeatoverviewcolumn-1e8bf-cell-0",
+	STRING_INPUT_INLINE_REPEAT: "a12-fieldbasedrepeatoverviewcolumn-58944-cell-0",
 
 	NUMBER_TYPE_VALUE_BACKUP: 100,
 	NUMBER_TYPE_VALUE: 200,

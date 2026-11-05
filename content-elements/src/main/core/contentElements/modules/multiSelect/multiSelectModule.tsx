@@ -93,7 +93,7 @@ function MultiSelectRenderer(
 		warnings,
 		infos,
 		tooltips,
-		tooltipsOnTop,
+		breakTooltipsToNewLine,
 		inputProps,
 		ariaDescribedBy
 	} = USE_COMMON_WIDGET_SETTINGS_WRAPPER.useCommonWidgetSettings(commonControlSettings);
@@ -162,7 +162,7 @@ function MultiSelectRenderer(
 			readonly={readonly}
 			helperText={helperText}
 			tooltips={tooltips}
-			breakTooltipsToNewLine={tooltipsOnTop}
+			breakTooltipsToNewLine={breakTooltipsToNewLine}
 			hintTemplate={hintTemplate ?? ""}
 			selectAllText={selectAllText}
 			mobileHeadingTitle={mobileHeadingTitle}

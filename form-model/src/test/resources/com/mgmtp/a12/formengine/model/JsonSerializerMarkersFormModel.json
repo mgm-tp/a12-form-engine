@@ -1,0 +1,139 @@
+{
+  "header": {
+    "id": "JsonSerializerMarkersFormModel",
+    "modelType": "form",
+    "modelVersion": "39.2.0",
+    "locales": [
+      {
+        "code": "en"
+      }
+    ],
+    "modelReferences": [
+      {
+        "alias": "DM",
+        "modelType": "document",
+        "purpose": "data binding",
+        "reference": "JsonSerializerDocumentModel"
+      }
+    ]
+  },
+  "content": {
+    "subHeaderBox": {
+      "id": "subHeaderBox1"
+    },
+    "footerBox": {
+      "id": "footerBox1"
+    },
+    "screens": [
+      {
+        "id": "screen1",
+        "name": "Screen1",
+        "screenElements": [
+          {
+            "type": "Section",
+            "id": "section1",
+            "name": "section1",
+            "readonly": true,
+            "collapsible": true,
+            "initiallyCollapsed": true,
+            "screenElements": [
+              {
+                "type": "ControlGrid",
+                "id": "controlgrid1",
+                "name": "controlgrid1",
+                "row": [
+                  {
+                    "type": "Row",
+                    "id": "row1",
+                    "cell": [
+                      {
+                        "type": "Control",
+                        "id": "control1",
+                        "readonly": true,
+                        "secret": true,
+                        "tooltipsOnTop": true,
+                        "labelHiddenButRead": true,
+                        "autoExpand": true,
+                        "truncateSuffix": true,
+                        "elementRef": "field1"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "DetachedRepeat",
+                "id": "detachedrepeat1",
+                "name": "detachedrepeat1",
+                "repeatOverviewColumn": [
+                  {
+                    "type": "FieldBasedRepeatOverviewColumn",
+                    "id": "column1",
+                    "autoExpand": true,
+                    "truncateSuffix": true,
+                    "readonly": true,
+                    "secret": true,
+                    "elementRef": "field2"
+                  }
+                ],
+                "groupRef": "group1",
+                "detailScreen": {
+                  "id": "detailscreen1",
+                  "name": "detailscreen1",
+                  "screenElements": []
+                },
+                "defaultRowAction": {
+                  "custom": true,
+                  "event": "customEvent"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "fieldConfiguration": {
+      "field": [
+        {
+          "readonly": true,
+          "secret": true,
+          "enableSelectAll": true,
+          "externalEnumeration": {
+            "customValuesAllowed": true,
+            "caseSensitive": true,
+            "src": "https://my.example.com"
+          },
+          "dependentField": {
+            "masterField": "field3",
+            "case": [
+              {
+                "masterValue": "a",
+                "notRelevant": true,
+                "readonly": true
+              }
+            ]
+          },
+          "elementRef": "field1"
+        }
+      ]
+    },
+    "groupConfiguration": {
+      "group": [
+        {
+          "dependentGroup": {
+            "masterField": "field3",
+            "case": [
+              {
+                "masterValue": "a",
+                "notRelevant": true,
+                "readonly": true
+              }
+            ]
+          },
+          "groupRef": "group1"
+        }
+      ]
+    },
+    "defaults": {}
+  }
+}

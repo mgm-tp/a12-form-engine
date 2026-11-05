@@ -105,7 +105,7 @@ public class FieldColumnReferenceRule extends AbstractRepeatRule {
 					repeatProblems.add(new ConsistencyProblem(
 						modelName,
 						FormModelCategory.FORM_MODEL_UNKNOWN_ELEMENTREF,
-						new FormModelProblemSource(fieldColumn.getId()),
+						FormModelProblemSource.involving(fieldColumn.getId()),
 						fieldColumn.getId(),
 						"field based column",
 						fieldColumn.getElementRef()
@@ -121,7 +121,7 @@ public class FieldColumnReferenceRule extends AbstractRepeatRule {
 					repeatProblems.add(new ConsistencyProblem(
 						modelName,
 						FormModelCategory.FORM_MODEL_FIELD_COLUMN_ELEMENTREF,
-						new FormModelProblemSource(fieldColumn.getId()),
+						FormModelProblemSource.involving(fieldColumn.getId()),
 						fieldColumn.getId(),
 						repeat.getId(),
 						repeat.getName(),

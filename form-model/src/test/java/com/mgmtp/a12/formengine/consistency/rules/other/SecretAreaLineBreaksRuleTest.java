@@ -90,6 +90,22 @@ public class SecretAreaLineBreaksRuleTest {
 	}
 
 	@Test
+	public void verifySecretInvalidMarkdownEditor() throws Exception {
+
+		final FormModel productForm =
+			ModelLoader
+				.loadModel("com/mgmtp/a12/formengine/consistency/rules/other/FormModelSecretInvalidMarkdownEditor.json");
+		final FileBasedDocumentModelResolver modelResolver = new FileBasedDocumentModelResolver("com/mgmtp/a12/formengine/consistency/rules/other/");
+		final List<Problem> problems = secretAreaLineBreaksRule.execute(productForm, RuleTestHelper.createDocumentModelAccess(modelResolver, productForm));
+
+		assertThat(problems, hasSize(2));
+		assertThat(problems, hasItem(hasProperty("message", equalTo(
+			"For the form model element [id: control-c6715, name: stringNoLineBreaks] 'secret' is set. This is not permitted for markdown editor fields ('isMarkdownEditor' is set)."))));
+		assertThat(problems, hasItem(hasProperty("message", equalTo(
+			"For the form model element [id: fieldbasedrepeatoverviewcolumn-e5c62, name: stringNoLineBreaks] 'secret' is set. This is not permitted for markdown editor fields ('isMarkdownEditor' is set)."))));
+	}
+
+	@Test
 	public void verifySecretValid() throws Exception {
 
 		final FormModel productForm =

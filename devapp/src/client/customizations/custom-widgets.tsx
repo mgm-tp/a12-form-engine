@@ -214,13 +214,13 @@ function TextLineWithClearButton(props: TextFieldProps): JSX.Element | null {
 	const activityId = useContext(ViewViews.ActivityContext)?.activityId;
 
 	// Assuming the layout correctly sets the ActivityContext and the TextLine would never be rendered without activity
-	// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+	// oxlint-disable-next-line typescript/no-non-null-assertion
 	const documentModel = useSelector(FormEngineSelectors.models(activityId!))?.documentModel;
 
 	return documentModel ? (
 		<TextLineWithClearButtonInternal
 			{...props}
-			// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+			// oxlint-disable-next-line typescript/no-non-null-assertion
 			activityId={activityId!}
 			documentModel={documentModel}
 		/>

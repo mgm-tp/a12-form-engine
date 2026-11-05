@@ -63,6 +63,7 @@ import type {
 	TimePickerProps,
 	WarningTooltipProps
 } from "@com.mgmtp.a12.widgets/widgets-core";
+import type { MarkdownEditorProps } from "@com.mgmtp.a12.widgets/widgets-core/experimental";
 
 /**
  * Set of A12 Widgets that can be replaced by custom components.
@@ -93,6 +94,7 @@ export interface WidgetMap {
 	readonly TimePicker: ComponentType<TimePickerProps>;
 
 	// readonly DefaultFileUpload: ComponentType<DefaultFileUploadProps>;
+	readonly MarkdownEditor: ComponentType<MarkdownEditorProps>;
 
 	readonly MessageBox: ComponentType<MessageBoxProps>;
 	readonly ErrorTooltip: ComponentType<ErrorTooltipProps>;

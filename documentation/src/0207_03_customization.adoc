@@ -93,10 +93,20 @@ The Client stores the needed information for the Form Engine in a different stru
 
 In a `mapDispatchToProps` mapping the UI events occurring in the Form Engine need to be mapped to the respective redux actions.
 
-To connect the component, which means creating and using the mapped props, two helper functions are provided:
+To connect the component, which means creating and using the mapped props, two hooks are provided:
 
-* `FormEngineStateAdapter.mapStateToProps` to map the state props.
-* `FormEngineActions.mapDispatchToProps` to map the dispatch props. This function internally already uses a dispatch adapter which takes an event-action from the Form Engine and creates a Client wrapper action which includes the activity id next to the event-action.
+* `FormEngineHooks.useStateProps` to read the state props from the store.
+* `FormEngineHooks.useDispatchProps` to create the dispatch props. It internally already uses a dispatch adapter which takes an event-action from the Form Engine and creates a Client wrapper action which includes the activity id next to the event-action.
+
+Both hooks take care of the memoization, so the component only re-renders when the mapped props actually changed.
+They wrap the `FormEngineStateAdapter.mapStateToProps` and `FormEngineActions.mapDispatchToProps` mappings, which re-create their result on every call and therefore re-render the component on every dispatched action when called directly.
+Use the mappings only where a hook cannot be called, for example in tests or in a class component.
+
+[NOTE]
+====
+These hooks read the Form Engine state from the Client store, so they need the Form Engine state to be held by an Activity.
+If you keep the Form Engine state in a store of your own, use `useDefaultStateProps`, `useDefaultDispatchProps` and `useScrollHandlerProps` instead - see <<form-engine_integration_non-redux, Non-Redux Applications>>.
+====
 
 Connecting is only necessary if you want to adjust the mapping of state props or if you want to adjust the handling of UI events.
 
@@ -115,6 +125,12 @@ When using validation, the versions of the generated validation code and the val
 ----
 include::assets/typescript/form-engine/tutorials/connect-form-engine/connectExample.tsx[tags=content]
 ----
+
+[NOTE]
+====
+The hooks prevent the re-renders caused by dispatched actions, but the component still re-renders whenever its parent re-renders.
+Where a re-rendering parent causes problems, consider wrapping the component in `memo`.
+====
 
 === Config
 

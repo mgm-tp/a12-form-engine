@@ -35,8 +35,8 @@ import { deepStrictEqual } from "node:assert/strict";
 import type { Models } from "../../../../../../back-end/store/internal/store.js";
 import type { RepeatRow } from "../../../../../../view/internal/components/form-engine/repeat/components/tableColumnTypes.js";
 import { filterRows } from "../../../../../../view/internal/utilities/filtering.js";
-import { setupArrayFixture } from "../../../../../utils/setupFixture.js";
 import { createModelPath } from "../../../../../utils/createModelPath.js";
+import { setupArrayFixture } from "../../../../../utils/setupFixture.js";
 
 import { emptySwitchFunctions } from "../filter-functions/empty-switch.js";
 import { textLineFunctions } from "../filter-functions/textline-filter.js";

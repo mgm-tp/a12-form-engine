@@ -47,14 +47,14 @@ import { ATTACHMENT_ERROR_CODE } from "../../../../../client-extensions/internal
 import type { ExistingFile } from "../../../../../client-extensions/internal/extensions/form-engine/internal/attachments/utils.js";
 import { findElementByFormModelPath } from "../../../../../models/internal/findElementByFormModelPath.js";
 import { RepeatUtils } from "../../../../../view/internal/components/form-engine/repeat/components/repeat-utils.js";
-import { MultiAttachmentUpload } from "../../../../../view/internal/components/widgets/form-engine/attachments/MultiAttachmentUpload.js";
 import type { RepeatWithMultiFileUpload } from "../../../../../view/internal/components/widgets/form-engine/attachments/attachmentUtils.js";
+import { MultiAttachmentUpload } from "../../../../../view/internal/components/widgets/form-engine/attachments/MultiAttachmentUpload.js";
 import { getComponentMocks } from "../../../../rtl-utils/getComponentMocks.js";
 import { mouseEventMock } from "../../../../rtl-utils/mock-utils.js";
 import type { RtlRenderWrapper } from "../../../../rtl-utils/render-wrapper.js";
 import { rtlRenderWrapperAsync } from "../../../../rtl-utils/render-wrapper.js";
-import { MiddlewareHelpers } from "../../../../utils/MiddlewareHelpers.js";
 import { US_LOCALE } from "../../../../utils/localization.js";
+import { MiddlewareHelpers } from "../../../../utils/MiddlewareHelpers.js";
 import {
 	setupConnectedFormEngineWithRtlAsync,
 	setupFormEngineRendererWithRtlAsync

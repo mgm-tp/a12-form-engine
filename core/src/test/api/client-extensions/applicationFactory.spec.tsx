@@ -35,7 +35,7 @@ import { mock } from "node:test";
 
 import { Fragment } from "react";
 
-import type { A12ApplicationConfig } from "@com.mgmtp.a12.client/client-core";
+import type { A12ApplicationConfig, ViewModification } from "@com.mgmtp.a12.client/client-core";
 import { render } from "@com.mgmtp.a12.devtools/react";
 
 import {
@@ -50,6 +50,10 @@ import {
 	withFormEngine
 } from "../../../client-extensions/internal/core/index.js";
 
+function isFormEngineModification(modification: ViewModification) {
+	return modification.name === "FormEngine";
+}
+
 describe("api.client-extensions.applicationFactory", () => {
 	it("withConfiguredFormEngine", () => {
 		const baseConfig: A12ApplicationConfig = {
@@ -62,7 +66,9 @@ describe("api.client-extensions.applicationFactory", () => {
 		const result = withConfiguredFormEngine(baseConfig);
 
 		const TestComponent = mock.fn();
-		const NewView = result.config.viewModifications?.("FormEngine")?.(TestComponent) ?? Fragment;
+		const NewView =
+			result.config.viewModifications?.find(isFormEngineModification)?.modify(TestComponent) ??
+			Fragment;
 		render(<NewView name={"Test"} activityId={"1"} />);
 		deepEqual(TestComponent.mock.calls[0].arguments[0], {
 			name: "Test",
@@ -81,7 +87,7 @@ describe("api.client-extensions.applicationFactory", () => {
 		deepEqual(result.config.dataReducers, formEngineDataReducers);
 		equal(result.config.additionalMiddlewares?.length, createFormEngineMiddlewares().length);
 		equal(result.config.customSagas?.length, formEngineSagas().length);
-		equal(result.config.views?.("FormEngine"), FormEngineViews.FormEngine);
+		equal(result.config.views?.["FormEngine"], FormEngineViews.FormEngine);
 		deepEqual(result.modelLoader?.modelProcessors, [FormModelProcessor]);
 		notEqual(result.modelLoader.supportedModelVersions?.form, undefined);
 	});

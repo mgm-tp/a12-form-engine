@@ -2,7 +2,7 @@
   "header": {
     "id": "fieldTypes-dm",
     "modelType": "document",
-    "modelVersion": "29.4.0",
+    "modelVersion": "29.8.0",
     "locales": [
       {
         "code": "en"
@@ -67,6 +67,28 @@
                     {
                       "locale": "en",
                       "text": "textField"
+                    }
+                  ],
+                  "requirednessConfig": {
+                    "mode": "absoluteOrRelativeToNextRepAncestor"
+                  }
+                }
+              },
+              {
+                "type": "Field",
+                "id": "field_9a4d1",
+                "name": "markdownField",
+                "Field": {
+                  "fieldType": {
+                    "type": "StringType",
+                    "StringType": {
+                      "lineBreaksPermitted": true
+                    }
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "markdownField"
                     }
                   ],
                   "requirednessConfig": {

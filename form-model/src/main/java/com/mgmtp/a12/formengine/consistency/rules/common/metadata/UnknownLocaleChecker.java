@@ -64,12 +64,36 @@ public class UnknownLocaleChecker {
 		this.problemCategory = problemCategory;
 	}
 
+	/**
+	 * Checks the locales of the given texts, reporting the problems for the name of the checked element.
+	 *
+	 * @param localizedTextAdapter the texts to check, may be {@code null}
+	 * @param checkedElement how the checked element is named in the problem message
+	 * @deprecated use {@link #check(LocalizedTextAdapter, String, String)}, which reports the problems for the id of
+	 * 	the checked element rather than for its name
+	 */
+	@Deprecated(forRemoval = true)
 	public void check(final LocalizedTextAdapter localizedTextAdapter, final String checkedElement) {
+		check(localizedTextAdapter, checkedElement, checkedElement);
+	}
+
+	/**
+	 * Checks the locales of the given texts.
+	 *
+	 * @param localizedTextAdapter the texts to check, may be {@code null}
+	 * @param checkedElement how the checked element is named in the problem message
+	 * @param checkedElementId id of the element the texts belong to
+	 */
+	public void check(
+		final LocalizedTextAdapter localizedTextAdapter,
+		final String checkedElement,
+		final String checkedElementId
+	) {
 		if (localizedTextAdapter == null) {
 			return;
 		}
 		for (final LocalizedTextValue language : localizedTextAdapter.getLocalizedTexts()) {
-			checkTextTypeLocale(language, checkedElement);
+			checkTextTypeLocale(language, checkedElement, checkedElementId);
 		}
 	}
 
@@ -77,13 +101,17 @@ public class UnknownLocaleChecker {
 		return localeProblems;
 	}
 
-	private void checkTextTypeLocale(final LocalizedTextValue localizedTextValue, final String checkedElement) {
+	private void checkTextTypeLocale(
+		final LocalizedTextValue localizedTextValue,
+		final String checkedElement,
+		final String checkedElementId
+	) {
 		final String locale = localizedTextValue.getLocale();
 		if (!expectedLocales.contains(locale)) {
 			final Problem problem = new ConsistencyProblem(
 				modelName,
 				problemCategory,
-				new FormModelProblemSource(checkedElement),
+				FormModelProblemSource.involving(checkedElementId),
 				checkedElement,
 				localizedTextValue.getText(),
 				localizedTextValue.getLocale(),

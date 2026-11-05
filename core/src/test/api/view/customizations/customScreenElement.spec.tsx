@@ -53,7 +53,7 @@ describe("api.view.customizations", () => {
 			it("should render a CustomScreenElement with data-role 'custom-screen-element' on the outmost div", () => {
 				const { formModel } = customScreenElementModels;
 
-				const customScreenElementPath = createModelPath("Screen 1", "customScreenElementTestName");
+				const customScreenElementPath = createModelPath("Screen1", "customElm1");
 
 				const customScreenElement = findElementByFormModelPath(formModel, customScreenElementPath);
 				assertExists(customScreenElement);
@@ -61,7 +61,7 @@ describe("api.view.customizations", () => {
 
 				const renderConfiguration = setupRenderConfiguration({
 					models: customScreenElementModels,
-					parentPath: createModelPath("Screen 1")
+					parentPath: createModelPath("Screen1")
 				});
 
 				rtlRenderWrapper(

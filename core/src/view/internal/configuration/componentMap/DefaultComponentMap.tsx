@@ -39,6 +39,7 @@ import { ContentBoxHeader } from "../../components/widgets/content-box/header.js
 import { ContentBoxNavigationBar } from "../../components/widgets/content-box/navigation-bar.js";
 import { AttachmentPreview } from "../../components/widgets/form-engine/attachments/AttachmentPreview.js";
 import { AttachmentUpload } from "../../components/widgets/form-engine/attachments/AttachmentUpload.js";
+import { MarkdownEditorField } from "../../components/widgets/form-engine/attachments/MarkdownEditorField.js";
 import { MultiAttachmentUpload } from "../../components/widgets/form-engine/attachments/MultiAttachmentUpload.js";
 import { BufferedTextArea } from "../../components/widgets/form-engine/buffered-text-area.js";
 import { BufferedTextLine } from "../../components/widgets/form-engine/buffered-text-line.js";
@@ -73,6 +74,7 @@ export const DefaultComponentMap: ComponentMap = {
 	DateTimeTextLine,
 	AttachmentUpload,
 	MultiAttachmentUpload,
+	MarkdownEditorField,
 
 	// Control Elements
 	BufferedTextLine,

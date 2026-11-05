@@ -33,34 +33,57 @@ package com.mgmtp.a12.formengine.model;
 
 import com.mgmtp.a12.formengine.serialization.FormModelJsonSerializer;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 
 import org.apache.commons.io.IOUtils;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.testng.annotations.Test;
+import tools.jackson.core.JacksonException;
 
 public class FormModelJsonSerializerTest {
 
 	@Test
 	public void testRoundtrip() throws Exception {
-		final String inputFileName = "JsonSerializerFormModel.json";
-		try (final InputStream inputStream = FormModelJsonSerializerTest.class.getResourceAsStream(inputFileName)) {
-			final String jsonString = IOUtils.toString(inputStream, StandardCharsets.UTF_8);
-			final FormModelJsonSerializer serializer = new FormModelJsonSerializer();
-			final FormModel model = serializer.fromJsonString(jsonString);
-			JSONAssert.assertEquals(jsonString, serializer.serialize(model), true);
-		}
+		final String jsonString = readResource("JsonSerializerFormModel.json");
+		assertReserializesTo(jsonString, jsonString);
 	}
 
 	@Test
 	public void testEmptyModelLabel() throws Exception {
-		final String inputFileName = "JsonSerializerEmptyLabelFormModel.json";
-		try (final InputStream inputStream = FormModelJsonSerializerTest.class.getResourceAsStream(inputFileName)) {
-			final String jsonString = IOUtils.toString(inputStream, StandardCharsets.UTF_8);
-			final FormModelJsonSerializer serializer = new FormModelJsonSerializer();
-			final FormModel model = serializer.fromJsonString(jsonString);
-			JSONAssert.assertEquals(jsonString, serializer.serialize(model), true);
+		final String jsonString = readResource("JsonSerializerEmptyLabelFormModel.json");
+		assertReserializesTo(jsonString, jsonString);
+	}
+
+	@Test
+	public void testTrueMarkersRoundtrip() throws Exception {
+		final String jsonString = readResource("JsonSerializerMarkersFormModel.json");
+		assertReserializesTo(jsonString, jsonString);
+	}
+
+	@Test
+	public void testFalseMarkersAreDropped() throws Exception {
+		final String jsonString = readResource("JsonSerializerMarkersFormModel.json").replace(": true", ": false");
+		assertReserializesTo(jsonString, readResource("JsonSerializerUnsetMarkersFormModel.json"));
+	}
+
+	@Test(expectedExceptions = JacksonException.class)
+	public void testNonBooleanMarkerIsRejected() throws Exception {
+		final String jsonString = readResource("JsonSerializerMarkersFormModel.json")
+			.replace("\"collapsible\": true", "\"collapsible\": \"x\"");
+		new FormModelJsonSerializer().fromJsonString(jsonString);
+	}
+
+	private static void assertReserializesTo(final String inputJson, final String expectedJson) throws Exception {
+		final FormModelJsonSerializer serializer = new FormModelJsonSerializer();
+		final FormModel model = serializer.fromJsonString(inputJson);
+		JSONAssert.assertEquals(expectedJson, serializer.serialize(model), true);
+	}
+
+	private static String readResource(final String fileName) throws IOException {
+		try (final InputStream inputStream = FormModelJsonSerializerTest.class.getResourceAsStream(fileName)) {
+			return IOUtils.toString(inputStream, StandardCharsets.UTF_8);
 		}
 	}
 }

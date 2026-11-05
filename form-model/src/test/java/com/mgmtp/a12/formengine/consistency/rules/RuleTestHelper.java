@@ -32,15 +32,18 @@
 package com.mgmtp.a12.formengine.consistency.rules;
 
 import com.mgmtp.a12.model.Model;
+import com.mgmtp.a12.model.consistency.Problem;
 import com.mgmtp.a12.model.data.document.ModelResolver;
 
 import com.mgmtp.a12.kernel.md.model.api.IDocumentModel;
 
+import com.mgmtp.a12.formengine.consistency.FormModelProblemSource;
 import com.mgmtp.a12.formengine.consistency.rules.consistency.DocumentModelMetaDataEnricher;
 import com.mgmtp.a12.formengine.model.FormModel;
 import com.mgmtp.a12.formengine.model.FormModelUtil;
 import com.mgmtp.a12.formengine.model.internal.DocumentModelAccess;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -65,5 +68,30 @@ public class RuleTestHelper {
 			);
 		}
 		return null;
+	}
+
+	/**
+	 * Returns the ids of all elements involved in the given problem, in the order the rule reported them.
+	 *
+	 * @param problem a problem reported by a form model consistency rule
+	 * @return the involved element ids
+	 */
+	public static List<String> involvedElementIds(final Problem problem) {
+		return ((FormModelProblemSource) problem.getSource()).involvedElementIds();
+	}
+
+	/**
+	 * Returns the ids of all elements involved in the single problem carrying the given message.
+	 *
+	 * @param problems the problems reported by a form model consistency rule
+	 * @param message the message identifying the problem to look at
+	 * @return the involved element ids
+	 */
+	public static List<String> involvedElementIds(final List<Problem> problems, final String message) {
+		return problems.stream()
+			.filter(problem -> message.equals(problem.getMessage()))
+			.map(RuleTestHelper::involvedElementIds)
+			.findFirst()
+			.orElseThrow(() -> new AssertionError("no problem reported with message: " + message));
 	}
 }

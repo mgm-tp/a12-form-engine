@@ -98,7 +98,7 @@ export function TimeInput(
 		warnings,
 		infos,
 		tooltips,
-		tooltipsOnTop,
+		breakTooltipsToNewLine,
 		inputProps,
 		ariaDescribedBy
 	} = USE_COMMON_WIDGET_SETTINGS_WRAPPER.useCommonWidgetSettings(commonControlSettings);
@@ -138,8 +138,8 @@ export function TimeInput(
 			readonly={readonly}
 			placeholder={placeholder}
 			helperText={helperText}
-			addonAfter={tooltipsOnTop ? undefined : tooltips}
-			tooltips={tooltipsOnTop ? tooltips : undefined}
+			tooltips={tooltips}
+			breakTooltipsToNewLine={breakTooltipsToNewLine}
 			error={error}
 			errorMessage={errors}
 			warning={warning}

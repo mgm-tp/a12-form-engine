@@ -33,11 +33,13 @@
 import { useMemo } from "react";
 import { useSelector } from "react-redux";
 
-import type { ContentModel } from "@com.mgmtp.a12.contentengine/contentengine-core";
-import { useDocumentContext } from "@com.mgmtp.a12.contentengine/contentengine-core";
+import type { ContentModel, ElementLibrary } from "@com.mgmtp.a12.contentengine/contentengine-core";
+import {
+	ElementModule,
+	useDocumentContext,
+	useElementLibrary
+} from "@com.mgmtp.a12.contentengine/contentengine-core";
 import type { DocumentModel } from "@com.mgmtp.a12.kernel/kernel-md-facade";
-
-import { FORM_ELEMENTS_NAMESPACE } from "../../../namespace.js";
 
 import { MESSAGE_GROUP_DISPLAY_TYPE } from "../messageGroupDisplay/messageGroupDisplayNode.js";
 
@@ -54,105 +56,134 @@ export const USE_COLLECT_DOCUMENT_ELEMENT_IDS_WRAPPER = {
 };
 
 /**
- * Collects all of the DocumentElementIds of fields and groups that are referenced by some form element in the given MessageGroupContainerNode.
+ * Collects all of the DocumentElementIds of fields and groups that are referenced by some input
+ * element in the given MessageGroupContainerNode.
  * Does not collect DocumentElementIds that are nested in another MessageGroupContainerNode.
+ *
+ * Any element of the element library the node is rendered with is collected that declares itself as
+ * editing the data it references, so project-specific elements are included without this hook having
+ * to know them.
+ *
+ * Precondition: called while rendering a Content Engine, which is where the element library comes
+ * from. Callers outside of one — the Content Editor's setting panel, for example — pass their
+ * library to {@link useCollectDocumentElementIdsFromLibrary} instead.
  */
 export function useCollectDocumentElementIds(
 	node?: ContentModel.Node
 ): CollectedDocumentElementIds {
-	const { getElementById: getDocumentElementById } = useDocumentContext(c => c.model);
+	const library = useElementLibrary();
 
-	const getElementByIdFromState = useMemo(() => {
-		return (state: object) => (elementId: string) => getDocumentElementById(state, elementId);
-	}, [getDocumentElementById]);
-
-	const getElementById = useSelector(getElementByIdFromState);
-
-	const documentElementIds = useMemo(() => {
-		return collectDocumentElementIds(getElementById, node);
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [node]);
-
-	return documentElementIds;
+	return useCollectDocumentElementIdsFromLibrary(library, node);
 }
 
-function collectDocumentElementIds(
-	getDocumentElementById: (id: string) => DocumentModel.Element,
+/**
+ * Collects all of the DocumentElementIds of fields and groups that are referenced by some input element of
+ * the given element library in the given MessageGroupContainerNode, the way
+ * {@link useCollectDocumentElementIds} does for a node being rendered.
+ */
+export function useCollectDocumentElementIdsFromLibrary(
+	library: ElementLibrary,
 	node?: ContentModel.Node
 ): CollectedDocumentElementIds {
-	const hasChildren = node?.children && node.children.length > 0;
+	const { getElementById: getDocumentElementById } = useDocumentContext(c => c.model);
 
-	if (!hasChildren || !isMessageGroupContainerNode(node)) {
-		return { fieldIds: [], groupIds: [] };
-	}
+	// read the referenced element ids from the content model only once
+	const referencedElementIds = useMemo(
+		() => collectReferencedElementIds(library, node),
+		[library, node]
+	);
 
-	return collectDocumentElementIdsRecursive(node.children, getDocumentElementById);
-}
-
-function collectDocumentElementIdsRecursive(
-	childNodes: ContentModel.Node[],
-	getDocumentElementById: (id: string) => DocumentModel.Element
-): CollectedDocumentElementIds {
-	return childNodes.reduce<CollectedDocumentElementIds>(
-		(collectedIds, childNode) => {
-			if (!isTraversableNode(childNode.type)) {
-				return collectedIds;
-			}
-
-			const dmElementId = collectDocumentElementId(childNode, getDocumentElementById);
-			const childIds = collectDocumentElementIdsRecursive(
-				childNode.children ?? [],
-				getDocumentElementById
-			);
-
-			return {
-				fieldIds: [...collectedIds.fieldIds, ...dmElementId.fieldIds, ...childIds.fieldIds],
-				groupIds: [...collectedIds.groupIds, ...dmElementId.groupIds, ...childIds.groupIds]
-			};
-		},
-		{ fieldIds: [], groupIds: [] }
+	// look the referenced elements up in the document model of the current state
+	return useSelector(
+		(state: object) =>
+			groupIdsByElementType(referencedElementIds, id => getDocumentElementById(state, id)),
+		areCollectedDocumentElementIdsEqual
 	);
 }
 
-function collectDocumentElementId(
-	node: ContentModel.Node,
+/**
+ * @internal
+ * Exported for testing.
+ */
+export function collectReferencedElementIds(
+	library: ElementLibrary,
+	node?: ContentModel.Node
+): string[] {
+	const hasChildren = node?.children && node.children.length > 0;
+
+	if (!hasChildren || !isMessageGroupContainerNode(node)) {
+		return [];
+	}
+
+	return collectReferencedElementIdsRecursive(library, node.children);
+}
+
+function collectReferencedElementIdsRecursive(
+	library: ElementLibrary,
+	childNodes: ContentModel.Node[]
+): string[] {
+	function collectFromNodeAndItsChildren(node: ContentModel.Node): string[] {
+		return [
+			...getEditedElementReferences(library, node),
+			...collectReferencedElementIdsRecursive(library, node.children ?? [])
+		];
+	}
+
+	return childNodes.filter(isTraversableNode).flatMap(collectFromNodeAndItsChildren);
+}
+
+/**
+ * The ids of the data elements the given node lets the user edit, in the order the node references
+ * them. Empty for a node that edits no data at all, and for one whose data element the Content
+ * Model author has not configured yet.
+ */
+function getEditedElementReferences(
+	library: ElementLibrary,
+	node: ContentModel.Node
+): readonly string[] {
+	const dataBinding = ElementModule.getDataBinding(library, node);
+
+	return dataBinding?.role === "input" ? dataBinding.getElementReferences(node) : [];
+}
+
+/**
+ * @internal
+ * Exported for testing.
+ */
+export function groupIdsByElementType(
+	elementIds: readonly string[],
 	getDocumentElementById: (id: string) => DocumentModel.Element
 ): CollectedDocumentElementIds {
-	if (!isCollectableFormElementNode(node)) {
-		return { fieldIds: [], groupIds: [] };
-	}
+	const documentElements = elementIds.map(getDocumentElementById);
 
-	const documentElement = getDocumentElementById(node.props.elementId);
+	return {
+		fieldIds: documentElements.filter(isFieldElement).map(element => element.id),
+		groupIds: documentElements.filter(isGroupElement).map(element => element.id)
+	};
+}
 
-	if (documentElement.type === "Group") {
-		return { fieldIds: [], groupIds: [documentElement.id] };
-	}
+function isFieldElement(element: DocumentModel.Element): element is DocumentModel.Field {
+	return element.type === "Field";
+}
 
-	if (documentElement.type === "Field") {
-		return { fieldIds: [documentElement.id], groupIds: [] };
-	}
-
-	return { fieldIds: [], groupIds: [] };
+function isGroupElement(element: DocumentModel.Element): element is DocumentModel.Group {
+	return element.type === "Group";
 }
 
 /**
  * Elements nested in another MessageGroupContainer are not shown in the parent container.
  */
-function isTraversableNode(nodeType: string): boolean {
-	return nodeType !== MESSAGE_GROUP_CONTAINER_TYPE && nodeType !== MESSAGE_GROUP_DISPLAY_TYPE;
+function isTraversableNode(node: ContentModel.Node): boolean {
+	return node.type !== MESSAGE_GROUP_CONTAINER_TYPE && node.type !== MESSAGE_GROUP_DISPLAY_TYPE;
 }
 
-/**
- * Type guard to check if a node is a form element node with an elementId.
- */
-function isCollectableFormElementNode(
-	node: ContentModel.Node
-): node is ContentModel.Node<{ elementId: string }> {
-	return (
-		isTraversableNode(node.type) &&
-		node.namespace === FORM_ELEMENTS_NAMESPACE &&
-		typeof node.props === "object" &&
-		node.props !== null &&
-		"elementId" in node.props
-	);
+function areCollectedDocumentElementIdsEqual(
+	a: CollectedDocumentElementIds,
+	b: CollectedDocumentElementIds
+): boolean {
+	return areIdListsEqual(a.fieldIds, b.fieldIds) && areIdListsEqual(a.groupIds, b.groupIds);
+}
+
+function areIdListsEqual(a: string[], b: string[]): boolean {
+	return a.length === b.length && a.every((id, index) => id === b[index]);
 }

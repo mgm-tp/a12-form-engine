@@ -77,7 +77,7 @@ public class RepeatNestingRule extends AbstractRepeatRule {
 				repeatProblems.add(new ConsistencyProblem(
 					modelName,
 					FormModelCategory.FORM_MODEL_INVALID_GROUP_REF,
-					new FormModelProblemSource(repeat.getId()),
+					FormModelProblemSource.involving(repeat.getId()),
 					repeat.getGroupRef()
 				));
 				return;
@@ -88,7 +88,7 @@ public class RepeatNestingRule extends AbstractRepeatRule {
 				repeatProblems.add(new ConsistencyProblem(
 					modelName,
 					FormModelCategory.FORM_MODEL_NON_REPEATABLE_REPEAT_GROUP,
-					new FormModelProblemSource(group.getId()),
+					FormModelProblemSource.involving(repeat.getId()),
 					repeat.getId(),
 					group.getId(),
 					group.getName()
@@ -105,20 +105,20 @@ public class RepeatNestingRule extends AbstractRepeatRule {
 					repeatProblems.add(new ConsistencyProblem(
 						modelName,
 						FormModelCategory.FORM_MODEL_INVALID_GROUP_REF,
-						new FormModelProblemSource(parentRepeat.get().getId()),
+						FormModelProblemSource.involving(parentRepeat.get().getId()),
 						parentRepeatGroupRef
 					));
 					return;
 				}
 
-				repeatProblems.addAll(verifyCorrectNesting(repeat, group, parentRepeatGroup.get()));
+				repeatProblems.addAll(verifyCorrectNesting(repeat, group, parentRepeatGroup.get(), parentRepeat.get().getId()));
 
 			} else {
 				if (hasRepeatableAncestor(group)) {
 					repeatProblems.add(new ConsistencyProblem(
 						modelName,
 						FormModelCategory.FORM_MODEL_INVALID_NESTING_REPEATABLE_PARENT,
-						new FormModelProblemSource(repeat.getId()),
+						FormModelProblemSource.involving(repeat.getId()),
 						repeat.getId()
 					));
 				}
@@ -144,13 +144,14 @@ public class RepeatNestingRule extends AbstractRepeatRule {
 		private Collection<? extends Problem> verifyCorrectNesting(
 			final RepeatType repeat,
 			final IGroup boundGroup,
-			final IGroup parentRepeatBoundGroup
+			final IGroup parentRepeatBoundGroup,
+			final String parentRepeatId
 		) {
 			if (!isParent(parentRepeatBoundGroup, boundGroup)) {
 				return Collections.singletonList(new ConsistencyProblem(
 					modelName,
 					FormModelCategory.FORM_MODEL_INVALID_NESTING_PARENT,
-					new FormModelProblemSource(repeat.getId()),
+					FormModelProblemSource.involving(repeat.getId(), parentRepeatId),
 					repeat.getId(),
 					parentRepeatBoundGroup.getId(),
 					parentRepeatBoundGroup.getName()
@@ -160,7 +161,7 @@ public class RepeatNestingRule extends AbstractRepeatRule {
 				return Collections.singletonList(new ConsistencyProblem(
 					modelName,
 					FormModelCategory.FORM_MODEL_INVALID_NESTING_REPEATABLE_BETWEEN,
-					new FormModelProblemSource(repeat.getId()),
+					FormModelProblemSource.involving(repeat.getId(), parentRepeatId),
 					repeat.getId(),
 					parentRepeatBoundGroup.getId(),
 					parentRepeatBoundGroup.getName()

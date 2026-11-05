@@ -30,172 +30,89 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { useMemo } from "react";
 import { useSelector } from "react-redux";
 
-import { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
 import { DocumentPath } from "@com.mgmtp.a12.client/client-data";
 import type { ContentModel } from "@com.mgmtp.a12.contentengine/contentengine-core";
 import {
+	createRuntimeTreeContext,
+	expandTree,
+	RuntimeNodeId,
+	useContentEngineContext,
 	useDocumentContext,
-	useDocumentPathContext
+	useDocumentPathContext,
+	useElementLibrary
 } from "@com.mgmtp.a12.contentengine/contentengine-core";
-import type { DocumentModel, EntityInstancePath } from "@com.mgmtp.a12.kernel/kernel-md-facade";
+import type { EntityInstancePath } from "@com.mgmtp.a12.kernel/kernel-md-facade";
 import type { LocalizedModelText } from "@com.mgmtp.a12.utils/utils-localization";
 
-import type { BaseControlProps } from "../../../index.js";
-import { FORM_ELEMENTS_NAMESPACE } from "../../../namespace.js";
-
-import { MESSAGE_GROUP_DISPLAY_TYPE } from "../messageGroupDisplay/messageGroupDisplayNode.js";
-
-import { MESSAGE_GROUP_CONTAINER_TYPE } from "./messageGroupContainerNode.js";
+import { collectEditableRuntimeNodes } from "./collectEditableRuntimeNodes.js";
 import type { MessageGroupContainerNode } from "./messageGroupContainerNode.js";
+import type { ResolveDocumentPath } from "./toEditableElements.js";
+import { toEditableElements } from "./toEditableElements.js";
 
-export interface EditableModelElement {
+export interface EditableElement {
+	/**
+	 * The id the node was rendered with, combining the Content Model node and the data context it
+	 * rendered in. Equal to the id the node itself derives its HTML id from, which is what lets a
+	 * link focus it.
+	 */
 	readonly nodeId: string;
-	readonly elementId: string;
-	readonly label?: LocalizedModelText;
-}
 
-export interface EditableElement extends Omit<EditableModelElement, "elementId"> {
+	/**
+	 * The label the Content Model author gave the node, still to be localized. Undefined when they
+	 * gave none, leaving the caller to fall back to the label of the referenced data element.
+	 */
+	readonly label?: LocalizedModelText;
+
 	readonly documentPath: EntityInstancePath;
 }
 
 /**
- * List of document element node references in the order they appear in the Content Model.
+ * List of document element node references in the order they are rendered.
  */
 export type EditableElementList = EditableElement[];
 
 /**
- * A callback that extracts an {@link EditableModelElement} from a custom content node.
- * Return `null` for nodes that should not be collected.
- */
-export type EditableModelElementExtractor = (
-	node: ContentModel.Node
-) => EditableModelElement | null;
-
-/**
- * Collects a list of document element node references (fields and groups) in the order
- * they appear in the Content Model, traversing all nested MessageGroupContainerNodes.
+ * Collects a list of document element node references (fields and groups) in the order they are
+ * rendered, traversing all nested MessageGroupContainerNodes.
  *
- * @param additionalExtractor - Optional extractor for custom content nodes not recognized
- *   by the built-in form elements. Pass a {@link EditableModelElementExtractor} to include
- *   project-specific nodes in the collected list.
- *   Make sure to pass a stable function here to avoid unnecessary recomputation.
+ * Any element of the installed Content Engine element libraries is collected that declares itself
+ * as an input, so project-specific elements are included without this hook having to know them.
  */
-export function useCollectEditableElements(
-	node: MessageGroupContainerNode,
-	additionalExtractor?: EditableModelElementExtractor
-): EditableElementList {
-	const dataContextString = useDocumentPathContext(c => c.groupPath);
-
-	const { getGroupInstanceRepeatability, getNotRelevant } = useDocumentContext(c => c.document);
+export function useCollectEditableElements(node: MessageGroupContainerNode): EditableElementList {
+	const baseDataContext = useDocumentPathContext(c => c.groupPath);
+	const documentContext = useDocumentContext(c => c);
 	const { getModelPathById, getElementByPath } = useDocumentContext(c => c.model);
+	const size = useContentEngineContext(c => c.size);
 
-	// collect model elements only once
-	const editableModelElements = useMemo(
-		() => collectEditableModelElements(node, additionalExtractor),
-		[node, additionalExtractor]
-	);
+	const library = useElementLibrary();
 
-	// expand model elements to runtime elements based on the current state
 	return useSelector((state: object) => {
-		const dataContext = DocumentPath.fromString(dataContextString);
-		return editableModelElements.flatMap(e => {
-			const documentPaths = getRelevantPathsInContext({
-				elementId: e.elementId,
-				dataContext,
-				getModelPathById: id => getModelPathById(state, id),
-				getElementByPath: path => getElementByPath(state, path),
-				getRowCount: ref => getGroupInstanceRepeatability(state, ref),
-				getNotRelevant: ref => getNotRelevant(state, ref)
-			});
-
-			return documentPaths.map(documentPath => ({ ...e, documentPath }));
+		const context = createRuntimeTreeContext({
+			state,
+			documentContext,
+			baseDataContext,
+			environment: "runtime",
+			size,
+			modelService: {
+				getPathById: id => getModelPathById(state, id),
+				getElementByPath: path => getElementByPath(state, path)
+			}
 		});
-	}, isEditableElementListEqual);
-}
 
-/**
- * @internal
- * Exported for testing.
- */
-export function collectEditableModelElements(
-	node?: ContentModel.Node,
-	additionalExtractor?: EditableModelElementExtractor
-): EditableModelElement[] {
-	const hasChildren = node?.children && node.children.length > 0;
+		const resolveDocumentPath: ResolveDocumentPath = (dataContext, elementId) =>
+			DocumentPath.fromString(context.resolveDataContext(dataContext, elementId, 0));
 
-	if (!hasChildren) {
-		return [];
-	}
-
-	return collectEditableModelElementsRecursive(node.children, additionalExtractor);
-}
-
-function collectEditableModelElementsRecursive(
-	childNodes: ContentModel.Node[],
-	additionalExtractor?: EditableModelElementExtractor
-): EditableModelElement[] {
-	const nodeReferences: EditableModelElement[] = [];
-
-	for (const childNode of childNodes) {
-		if (!isTraversableNode(childNode.type)) {
-			continue;
-		}
-
-		// Add current node reference if it's a collectable form element
-		const nodeRef = createEditableModelElementIfCollectable(childNode, additionalExtractor);
-		if (nodeRef) {
-			nodeReferences.push(nodeRef);
-		}
-
-		// Recursively collect from children and maintain order
-		const childReferences = collectEditableModelElementsRecursive(
-			childNode.children ?? [],
-			additionalExtractor
+		const editableNodes = collectEditableRuntimeNodes(
+			library,
+			expandTree(library, toModelNode(node), context)
 		);
-		nodeReferences.push(...childReferences);
-	}
 
-	return nodeReferences;
-}
-
-function createEditableModelElementIfCollectable(
-	node: ContentModel.Node,
-	additionalExtractor?: EditableModelElementExtractor
-): EditableModelElement | null {
-	if (isCollectableFormElementNode(node)) {
-		return {
-			nodeId: node.id,
-			elementId: node.props.elementId,
-			label: node.props.label
-		};
-	}
-
-	return additionalExtractor?.(node) ?? null;
-}
-
-/**
- * Elements nested in a MessageGroupDisplay are never traversed.
- */
-function isTraversableNode(nodeType: string): boolean {
-	return nodeType !== MESSAGE_GROUP_DISPLAY_TYPE;
-}
-
-/**
- * Type guard to check if a node is a form element node with an elementId.
- */
-function isCollectableFormElementNode(
-	node: ContentModel.Node
-): node is ContentModel.Node<BaseControlProps> {
-	return (
-		node.type !== MESSAGE_GROUP_CONTAINER_TYPE &&
-		node.namespace === FORM_ELEMENTS_NAMESPACE &&
-		typeof node.props === "object" &&
-		node.props !== null &&
-		"elementId" in node.props
-	);
+		return editableNodes.flatMap(runtimeNode =>
+			toEditableElements(library, runtimeNode, resolveDocumentPath)
+		);
+	}, isEditableElementListEqual);
 }
 
 function isEditableElementListEqual(a: EditableElementList, b: EditableElementList): boolean {
@@ -211,94 +128,11 @@ function isEditableElementListEqual(a: EditableElementList, b: EditableElementLi
 }
 
 /**
- * @internal
- * Exported for testing.
+ * Replaces the runtime id of a node by the model id.
  */
-export function getRelevantPathsInContext(options: {
-	elementId: string;
-	dataContext: EntityInstancePath;
-	getModelPathById: (id: string) => ModelPath;
-	getElementByPath: (path: ModelPath) => DocumentModel.Element;
-	getRowCount: (dataRef: string) => number;
-	getNotRelevant: (dataRef: string) => boolean;
-}): EntityInstancePath[] {
-	const {
-		elementId,
-		dataContext,
-		getModelPathById,
-		getElementByPath,
-		getRowCount,
-		getNotRelevant
-	} = options;
-
-	const modelPath = getModelPathById(elementId);
-
-	// Start with one empty path; each segment either extends all current paths
-	// or fans them out across all row indices of a repeatable group.
-	let results: EntityInstancePath[] = [[]];
-
-	for (let idx = 0; idx < modelPath.length; idx++) {
-		const segment = modelPath[idx];
-		const pathUpToSegment = modelPath.slice(0, idx + 1);
-
-		const dmElement = getElementByPath(pathUpToSegment);
-
-		const isExpandable = isExpandableSegment(pathUpToSegment, dmElement, dataContext);
-
-		if (isExpandable) {
-			results = results.flatMap(currentPath => {
-				const probe = DocumentPath.toString([
-					...currentPath,
-					{ elementName: segment.elementName, index: 0 }
-				]);
-				const numberOfRows = getRowCount(probe);
-
-				return Array.from({ length: numberOfRows }, (_, i) => [
-					...currentPath,
-					{ ...segment, index: i + 1 }
-				]);
-			});
-		} else {
-			const indexForSegment = getIndex(pathUpToSegment, dmElement, dataContext);
-			results.forEach(path => path.push({ ...segment, index: indexForSegment }));
-		}
-	}
-
-	return results.filter(path => !getNotRelevant(DocumentPath.toString(path)));
-}
-
-/**
- * FIXME: This function assumes that repeatable groups (except multi-selects) should
- * always be expanded. However, this would break once the Group node allows to set
- * specific numeric or semantic indices instead of iterating over the entire group.
- * To fix this, we would need to introduce a dependency to the default content
- * elements, so that we can consider the Group node's settings here.
- */
-function isExpandableSegment(
-	pathUpToSegment: ModelPath,
-	dmElement: DocumentModel.Element,
-	dataContext: EntityInstancePath
-): boolean {
-	const isInContext =
-		!ModelPath.equal(pathUpToSegment, dataContext) &&
-		ModelPath.contains(pathUpToSegment, dataContext);
-	const isRepeatableGroup = dmElement?.type === "Group" && dmElement.repeatability > 1;
-	const isMultiSelect = dmElement?.type === "Group" && dmElement.usageType === "multi-select";
-
-	return isInContext && isRepeatableGroup && !isMultiSelect;
-}
-
-function getIndex(
-	pathUpToSegment: ModelPath,
-	dmElement: DocumentModel.Element,
-	dataContext: EntityInstancePath
-): number {
-	const isPrefixOfContext = ModelPath.contains(dataContext, pathUpToSegment);
-	const indexOfContextSegment = isPrefixOfContext
-		? dataContext.at(pathUpToSegment.length - 1)?.index
-		: undefined;
-
-	const isMultiSelect = dmElement?.type === "Group" && dmElement.usageType === "multi-select";
-
-	return indexOfContextSegment !== undefined ? indexOfContextSegment : isMultiSelect ? 0 : 1;
+function toModelNode(node: ContentModel.Node): ContentModel.Node {
+	return {
+		...node,
+		id: RuntimeNodeId.getModelNodeId(node.id)
+	};
 }

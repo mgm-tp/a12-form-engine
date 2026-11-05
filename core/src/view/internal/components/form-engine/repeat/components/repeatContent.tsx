@@ -197,8 +197,8 @@ export function useShowValidationColumn(
 	const ref = useRef(showValidationColumn);
 	useEffect(() => {
 		ref.current = showValidationColumn;
-		// eslint warns about showValidationColumn being stale, but this is what we want here
-		// eslint-disable-next-line react-hooks/exhaustive-deps
+		// oxlint warns about showValidationColumn being stale, but this is what we want here
+		// oxlint-disable-next-line react/exhaustive-deps
 	}, [entry?.expandedRowPath]);
 
 	return entry?.expandedRowPath !== undefined ? ref.current : showValidationColumn;

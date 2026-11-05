@@ -37,11 +37,11 @@ import type { Models } from "../../../../back-end/store/index.js";
 import { Commands } from "../../../../back-end/store/index.js";
 import type { FormModel } from "../../../../models/index.js";
 import { assertUniqueId } from "../../../utils/assertions.js";
+import { createModelPath } from "../../../utils/createModelPath.js";
 import { US_LOCALE } from "../../../utils/localization.js";
 import { RenderGroupFixture } from "../../../utils/rtl-render-group.js";
 import { loadModels, setupConnectedFormEngineWithRtlAsync } from "../../../utils/setup.js";
 import type { ConnectedRtlWrapper } from "../../../utils/setup.js";
-import { createModelPath } from "../../../utils/createModelPath.js";
 
 import { widgetMocksForInputTests } from "../inputs/input-element/inputTestWidgetMocks.js";
 

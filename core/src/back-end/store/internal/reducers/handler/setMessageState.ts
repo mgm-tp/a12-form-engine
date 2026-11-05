@@ -30,9 +30,9 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import type { Action } from "@com.mgmtp.a12.client/typescript-fsa-redux-5-compat";
 import type { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
 import type { Modifier } from "@com.mgmtp.a12.client/client-core";
+import type { Action } from "@com.mgmtp.a12.client/typescript-fsa-redux-5-compat";
 import type { LocalizablePlaceholder } from "@com.mgmtp.a12.utils/utils-localization";
 import { segmentsFromLocalizableKey } from "@com.mgmtp.a12.utils/utils-localization";
 import type { Localizable, Placeholder } from "@com.mgmtp.a12.utils/utils-localization";

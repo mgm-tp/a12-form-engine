@@ -59,7 +59,7 @@ export const mochaHooks: Mocha.RootHookObject = {
 	},
 
 	afterEach(this: Context) {
-		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+		// oxlint-disable-next-line typescript/no-non-null-assertion
 		RtlCleanupContext.cleanup(this.currentTest!);
 		mock.reset();
 	}

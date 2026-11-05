@@ -39,6 +39,7 @@ import com.mgmtp.a12.kernel.md.model.api.IField;
 import com.mgmtp.a12.kernel.md.model.api.IGroup;
 
 import com.mgmtp.a12.formengine.consistency.FormModelCategory;
+import com.mgmtp.a12.formengine.consistency.FormModelProblemSource;
 import com.mgmtp.a12.formengine.model.internal.DocumentModelAccess;
 
 import java.util.ArrayList;
@@ -46,7 +47,21 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.mgmtp.a12.expression.parser.ExpressionNode;
+import com.mgmtp.a12.expression.parser.ExpressionNode.CaseNode;
+import com.mgmtp.a12.expression.parser.ExpressionNode.FieldNode;
+import com.mgmtp.a12.expression.parser.ExpressionNode.GroupNode;
+import com.mgmtp.a12.expression.parser.ExpressionNode.MultilingualTextNode;
+import com.mgmtp.a12.expression.parser.ExpressionNode.RootNode;
+import com.mgmtp.a12.expression.parser.ExpressionNode.StringNode;
+import com.mgmtp.a12.expression.parser.ExpressionNode.TextNode;
+import com.mgmtp.a12.expression.parser.ExpressionNode.TokenNode;
+import com.mgmtp.a12.expression.parser.ExpressionParseResult;
+import com.mgmtp.a12.expression.parser.NativeExpressionParser;
+
 public final class ExpressionReferenceChecker {
+
+	private static final NativeExpressionParser PARSER = new NativeExpressionParser();
 
 	private enum Type {
 		FIELD, GROUP
@@ -56,87 +71,63 @@ public final class ExpressionReferenceChecker {
 	}
 
 	public static List<Problem> checkExpression(
-		final String modelId,
-		final DocumentModelAccess documentModelService,
-		final ModelElementInfo modelElementInfo,
-		final boolean isLabel,
-		final String expression,
-		final String contextPath
-	) {
+			final String modelId,
+			final DocumentModelAccess documentModelService,
+			final ModelElementInfo modelElementInfo,
+			final boolean isLabel,
+			final String expression,
+			final String contextPath) {
 		final String expressionRef = isLabel
-			? modelElementInfo.getType() + " expression label"
-			: modelElementInfo.getType();
+				? modelElementInfo.getType() + " expression label"
+				: modelElementInfo.getType();
 
 		final String dataContext = contextPath.endsWith("/")
-			? contextPath
-			: contextPath + "/";
+				? contextPath
+				: contextPath + "/";
 
 		final List<Problem> problems = new ArrayList<>();
 
-		final ExpressionChecker expressionChecker = new ExpressionChecker();
-		final ExpressionResult expressionResult = expressionChecker.parse(expression);
+		final ExpressionParseResult expressionResult = PARSER.parse(expression);
 		if (expressionResult.hasError()) {
-			problems.add(new ConsistencyProblem(
-				modelId,
-				FormModelCategory.FORM_MODEL_EXPRESSION_SYNTAX,
-				modelElementInfo.getId(),
-				expressionRef,
-				modelElementInfo.getId(),
-				modelElementInfo.getName(),
-				expressionResult.getErrorMessage()
-			));
+			problems.add(createProblem(modelId,
+										FormModelCategory.FORM_MODEL_EXPRESSION_SYNTAX,
+										modelElementInfo,
+										expressionRef,
+										expressionResult.errorMessage()));
 		} else {
 			final Map<String, Problem> problemByPath = new HashMap<>();
-			final List<ExpressionReference>
-				references =
-				extractExpressionReferences(expressionResult.getNode(), dataContext);
+			final List<ExpressionReference> references = extractExpressionReferences(expressionResult.node(),
+					dataContext);
 			references.forEach(ref -> {
 				final IElement referencedElement = documentModelService.findElementByPath(ref.path).orElse(null);
+				FormModelCategory category = null;
+				String errorMessage = null;
 				if (ref.type == Type.FIELD) {
 					if (referencedElement instanceof IGroup && ((IGroup) referencedElement)
-						.getUsageType()
-						.isPresent()) {
-						problemByPath.put(
-							ref.path,
-							new ConsistencyProblem(
-								modelId,
-								FormModelCategory.FORM_MODEL_EXPRESSION_FIELDREF_TO_GROUP,
-								modelElementInfo.getId(),
-								expressionRef,
-								modelElementInfo.getId(),
-								modelElementInfo.getName(),
-								ref.path,
-								((IGroup) referencedElement).getUsageType().get()
-							));
+							.getUsageType()
+							.isPresent()) {
+						category = FormModelCategory.FORM_MODEL_EXPRESSION_FIELDREF_TO_GROUP;
+						errorMessage = ((IGroup) referencedElement).getUsageType().get();
 					} else if (!(referencedElement instanceof IField)) {
-						problemByPath.put(
-							ref.path,
-							new ConsistencyProblem(
-								modelId,
-								FormModelCategory.FORM_MODEL_EXPRESSION_FIELDREF,
-								modelElementInfo.getId(),
-								expressionRef,
-								modelElementInfo.getId(),
-								modelElementInfo.getName(),
-								ref.path,
-								dataContext
-							));
+						category = FormModelCategory.FORM_MODEL_EXPRESSION_FIELDREF;
+						errorMessage = dataContext;
 					}
 				} else if (ref.type == Type.GROUP) {
 					if (referencedElement == null) {
-						problemByPath.put(
-							ref.path,
-							new ConsistencyProblem(
-								modelId,
-								FormModelCategory.FORM_MODEL_EXPRESSION_INVALID_GROUP_REF,
-								modelElementInfo.getId(),
-								expressionRef,
-								modelElementInfo.getId(),
-								modelElementInfo.getName(),
-								ref.path,
-								dataContext
-							));
+						category = FormModelCategory.FORM_MODEL_EXPRESSION_INVALID_GROUP_REF;
+						errorMessage = dataContext;
 					}
+				}
+
+				if (category != null && errorMessage != null) {
+					problemByPath.put(
+								ref.path,
+								createProblem(modelId,
+										category,
+										modelElementInfo,
+										expressionRef,
+										ref.path,
+										errorMessage));
 				}
 			});
 			for (final Map.Entry<String, Problem> entry : problemByPath.entrySet()) {
@@ -148,32 +139,58 @@ public final class ExpressionReferenceChecker {
 		return problems;
 	}
 
+	private static ConsistencyProblem createProblem(final String modelId, final FormModelCategory category, final ModelElementInfo modelElementInfo, final String expressionRef, final Object... parameters) {
+		final Object[] allParameters = new Object[3 + parameters.length];
+		allParameters[0] = expressionRef;
+		allParameters[1] = modelElementInfo.getId();
+		allParameters[2] = modelElementInfo.getName();
+		System.arraycopy(parameters, 0, allParameters, 3, parameters.length);
+		return new ConsistencyProblem(modelId, category, FormModelProblemSource.involving(modelElementInfo.getId()), allParameters);
+	}
+
 	private static List<ExpressionReference> extractExpressionReferences(
-		final ExpressionNode node,
-		final String currentPath
-	) {
+			final ExpressionNode node,
+			final String currentPath) {
 		final String context = currentPath.endsWith("/")
-			? currentPath
-			: currentPath + "/";
+				? currentPath
+				: currentPath + "/";
 		final List<ExpressionReference> references = new ArrayList<>();
-		if ("field".equals(node.getType()) || "case".equals(node.getType())) {
-			references.add(new ExpressionReference(Type.FIELD, context + node.getName()));
-		} else if ("group".equals(node.getType())) {
-			references.add(new ExpressionReference(Type.GROUP, context + node.getName()));
-		}
-		final String childPath = "group".equals(node.getType())
-			? context + node.getName()
-			: context;
-		for (final ExpressionNode childNode : node.getChildren()) {
-			references.addAll(extractExpressionReferences(childNode, childPath));
+		switch (node) {
+			case FieldNode(String name) -> references.add(new ExpressionReference(Type.FIELD, context + name));
+			case CaseNode(String name, var operation, var content, List<ExpressionNode> children) -> {
+				references.add(new ExpressionReference(Type.FIELD, context + name));
+				for (final ExpressionNode child : children) {
+					references.addAll(extractExpressionReferences(child, context));
+				}
+			}
+			case GroupNode(String name, var delimiter, List<ExpressionNode> children) -> {
+				references.add(new ExpressionReference(Type.GROUP, context + name));
+				final String childPath = context + name;
+				for (final ExpressionNode child : children) {
+					references.addAll(extractExpressionReferences(child, childPath));
+				}
+			}
+			case RootNode(List<ExpressionNode> children) -> {
+				for (final ExpressionNode child : children) {
+					references.addAll(extractExpressionReferences(child, context));
+				}
+			}
+			case MultilingualTextNode ignored -> {
+				// TextNode children only carry locale/text strings, no nested references
+			}
+			case StringNode ignored -> {
+			}
+			case TokenNode ignored -> {
+			}
+			case TextNode ignored -> {
+			}
 		}
 		return references;
 	}
 
 	private static boolean isLeastSpecificReference(
-		final String current,
-		final Iterable<String> references
-	) {
+			final String current,
+			final Iterable<String> references) {
 		for (final String reference : references) {
 			if (!current.equals(reference) && current.startsWith(reference)) {
 				return false;

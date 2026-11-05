@@ -66,14 +66,18 @@ Object.entries(tomlVersions).forEach(([tomlDep, tomlVersion]) => {
 	const a12dep = a12Keys.find(key => key.includes(tomlDep));
 	const range = a12dep && a12[a12dep];
 
-	if (!a12dep || typeof range !== "string" || typeof tomlVersion !== "string") {return;}
+	if (!a12dep || typeof range !== "string" || typeof tomlVersion !== "string") {
+		return;
+	}
 
 	if (semver.prerelease(tomlVersion)) {
 		if (tomlVersion !== range) {
 			errors.push(`${tomlDep}@${tomlVersion} is a pre-release, the range should exactly match it.`);
 		}
 	} else if (semver.prerelease(range)) {
-		errors.push(`${tomlDep}@${tomlVersion} is not a pre-release, the range must not be one as well`);
+		errors.push(
+			`${tomlDep}@${tomlVersion} is not a pre-release, the range must not be one as well`
+		);
 	} else if (!semver.satisfies(tomlVersion, range)) {
 		errors.push(
 			`Gradle libs dependency ${tomlDep}@${tomlVersion} does not satisfy its workspace range ${a12dep}@${range}`
@@ -82,7 +86,7 @@ Object.entries(tomlVersions).forEach(([tomlDep, tomlVersion]) => {
 });
 
 if (errors.length > 0) {
-	// eslint-disable-next-line no-console
+	// oxlint-disable-next-line no-console
 	console.error(errors.join("\n"));
 	process.exitCode = errors.length;
 }

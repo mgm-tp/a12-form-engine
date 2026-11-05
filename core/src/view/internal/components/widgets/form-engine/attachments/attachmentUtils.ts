@@ -35,11 +35,11 @@ import { useMemo } from "react";
 
 import type { Attachment } from "@com.mgmtp.a12.dataservices/dataservices-access";
 
+import type { FormModel } from "../../../../../../models/internal/form-model.js";
 import {
 	isFormModelEmbeddedRepeat,
 	isFormModelInlineRepeat
 } from "../../../../../../models/internal/FormModelGuards.js";
-import type { FormModel } from "../../../../../../models/internal/form-model.js";
 
 /**@internal */
 export function getFileExtension(attachment: Attachment): string | undefined {

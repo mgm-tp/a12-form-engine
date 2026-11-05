@@ -32,8 +32,8 @@
 
 import type { Store } from "redux";
 
-import type { Action } from "@com.mgmtp.a12.client/typescript-fsa-redux-5-compat";
 import { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
+import type { Action } from "@com.mgmtp.a12.client/typescript-fsa-redux-5-compat";
 
 import type { MiddlewareOptions } from "../../../../../back-end/store/index.js";
 import { Commands, Events } from "../../../../../back-end/store/index.js";
@@ -43,9 +43,9 @@ import type {
 	Models
 } from "../../../../../back-end/store/internal/store.js";
 import type { ReadonlyObjectMap } from "../../../../../models/index.js";
-import { MiddlewareHelpers } from "../../../../utils/MiddlewareHelpers.js";
 import { createDocumentPath } from "../../../../utils/createDocumentPath.js";
 import { createModelPath } from "../../../../utils/createModelPath.js";
+import { MiddlewareHelpers } from "../../../../utils/MiddlewareHelpers.js";
 import {
 	createRepeatInstanceStateEntry,
 	createRepeatStaticStateEntry,

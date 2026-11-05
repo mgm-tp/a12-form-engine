@@ -55,14 +55,14 @@ public class FormLayoutRuleTest {
 
 
 		assertThat(problems, hasSize(8));
-		assertThat(problems, hasItem(hasProperty("message",equalTo("Form model field [cg] contains a wrong number of columns for layout lg. The expected number of columns is 2 but there are 3 defined columns."))));
-		assertThat(problems, hasItem(hasProperty("message",equalTo("Form model field [cg] contains a wrong column sum. The actual sum is 13 but only a maximum sum of 12 is allowed for layout lg."))));
-		assertThat(problems, hasItem(hasProperty("message",equalTo("Form model field [cg] contains a wrong number of columns for layout md. The expected number of columns is 2 but there are 1 defined columns."))));
-		assertThat(problems, hasItem(hasProperty("message",equalTo("Form model field [cg] contains a wrong number of columns for layout sm. The expected number of columns is 2 but there are 3 defined columns."))));
-		assertThat(problems, hasItem(hasProperty("message",equalTo("Form model field [mcs] contains a wrong number of columns for layout lg. The expected number of columns is 2 but there are 3 defined columns."))));
-		assertThat(problems, hasItem(hasProperty("message",equalTo("Form model field [mcs] contains a wrong column sum. The actual sum is 14 but only a maximum sum of 12 is allowed for layout lg."))));
-		assertThat(problems, hasItem(hasProperty("message",equalTo("Form model field [mcs] contains a wrong number of columns for layout md. The expected number of columns is 2 but there are 1 defined columns."))));
-		assertThat(problems, hasItem(hasProperty("message",equalTo("Form model field [mcs] contains a wrong number of columns for layout sm. The expected number of columns is 2 but there are 3 defined columns."))));
+		assertThat(problems, hasItem(hasProperty("message",equalTo("Form Model element [cg] contains a wrong number of columns for layout lg. The expected number of columns is 2 but there are 3 defined columns."))));
+		assertThat(problems, hasItem(hasProperty("message",equalTo("Form Model element [cg] contains a wrong column sum. The actual sum is 13 but only a maximum sum of 12 is allowed for layout lg."))));
+		assertThat(problems, hasItem(hasProperty("message",equalTo("Form Model element [cg] contains a wrong number of columns for layout md. The expected number of columns is 2 but there are 1 defined columns."))));
+		assertThat(problems, hasItem(hasProperty("message",equalTo("Form Model element [cg] contains a wrong number of columns for layout sm. The expected number of columns is 2 but there are 3 defined columns."))));
+		assertThat(problems, hasItem(hasProperty("message",equalTo("Form Model element [mcs] contains a wrong number of columns for layout lg. The expected number of columns is 2 but there are 3 defined columns."))));
+		assertThat(problems, hasItem(hasProperty("message",equalTo("Form Model element [mcs] contains a wrong column sum. The actual sum is 14 but only a maximum sum of 12 is allowed for layout lg."))));
+		assertThat(problems, hasItem(hasProperty("message",equalTo("Form Model element [mcs] contains a wrong number of columns for layout md. The expected number of columns is 2 but there are 1 defined columns."))));
+		assertThat(problems, hasItem(hasProperty("message",equalTo("Form Model element [mcs] contains a wrong number of columns for layout sm. The expected number of columns is 2 but there are 3 defined columns."))));
 	}
 
 	@Test

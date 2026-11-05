@@ -35,6 +35,7 @@ import { strictEqual } from "node:assert/strict";
 import { within } from "@com.mgmtp.a12.devtools/react";
 import { DataRoles } from "@com.mgmtp.a12.widgets/widgets-core";
 
+import { setupFormEngineRendererWithRtlAsync } from "../../../utils/setup.js";
 import { setupModelsFixture } from "../../../utils/setupFixture.js";
 import { IDS } from "../../../utils/test-model-helpers/aria-level.js";
 import {
@@ -42,7 +43,6 @@ import {
 	expressionLabelDocument,
 	formattedExpressionUiState
 } from "../../../utils/test-model-helpers/expression-label.js";
-import { setupFormEngineRendererWithRtlAsync } from "../../../utils/setup.js";
 
 import { TypographyHeadline } from "./typography-headline-mock.js";
 

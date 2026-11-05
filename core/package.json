@@ -1,6 +1,6 @@
 {
   "name": "@com.mgmtp.a12.formengine/formengine-core",
-  "version": "39.0.1",
+  "version": "39.1.1",
   "description": "Form-Engine",
   "author": "mgm technology partners",
   "license": "(EUPL-1.2 OR LicenseRef-commercial)",
@@ -17,20 +17,20 @@
     "copyJison": "node ./scripts/initialize/jison.js",
     "compile:typescript": "tsc",
     "compile:detect-cycles": "devtools detect-cycles \"./src/**/*.@(ts|tsx|d.ts|d.cts|d.mts)\" --ignore-type-imports",
-    "lint": "eslint --flag unstable_native_nodejs_ts_config . --cache",
-    "lint:fix": "node --run lint -- --fix",
-    "lint:onlyErrors": "node --run lint -- --quiet",
     "validate:tsc": "devtools verify-ts-compat ./tsconfig.lib.json -p",
     "validate:api": "api-extractor run --verbose",
     "update:api": "api-extractor run --local",
-    "test": "node --run mocha",
+    "test": "mocha --parallel --jobs 3 --no-sort",
     "test:coverage": "c8 node --run mocha",
     "typedoc": "typedoc",
     "typescript": "tsc --project ./tsconfig.dev.json",
     "watch": "tsc --project ./tsconfig.dev.json --watch",
     "mocha": "node --expose-gc --max-old-space-size=2048 scripts/mocha/runner.js -i \"./lib/test/**/*.@(test|spec).js\"",
     "dev:mocha": "node --expose-gc --max-old-space-size=2048 scripts/mocha/runner.js --reporter=.mocha-dev-reporter.json",
-    "dev:unused-exports": "ts-unused-exports ./tsconfig.json $(find ./src/test -name *.ts -or -name *.tsx)"
+    "dev:unused-exports": "ts-unused-exports ./tsconfig.json $(find ./src/test -name *.ts -or -name *.tsx)",
+    "lint": "pnpm -w exec oxlint core",
+    "lint:fix": "pnpm -w exec oxlint --fix core",
+    "lint:onlyErrors": "pnpm -w exec oxlint --quiet core"
   },
   "dependencies": {
     "@com.mgmtp.a12.client/typescript-fsa-redux-5-compat": "catalog:a12",
@@ -54,9 +54,11 @@
     "@com.mgmtp.a12.utils/utils-localization-react": "catalog:a12",
     "@com.mgmtp.a12.utils/utils-logging": "catalog:a12",
     "@com.mgmtp.a12.widgets/widgets-core": "catalog:a12",
+    "@effect/typeclass": "catalog:",
     "@fp-ts/optic": "catalog:",
-    "@jambit/eslint-plugin-typed-redux-saga": "catalog:",
     "@microsoft/api-extractor": "catalog:",
+    "@redux-saga/is": "catalog:",
+    "@redux-saga/symbols": "catalog:",
     "@testing-library/dom": "catalog:",
     "@testing-library/react": "catalog:",
     "@testing-library/user-event": "catalog:",
@@ -66,8 +68,7 @@
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
     "c8": "catalog:",
-    "eslint": "catalog:",
-    "eslint-plugin-mocha": "catalog:",
+    "effect": "catalog:",
     "glob": "catalog:",
     "global-jsdom": "catalog:",
     "jison": "catalog:",
@@ -113,5 +114,5 @@
     "licenses"
   ],
   "modelType": "form",
-  "modelVersion": ">=39.0.0 <=39.0.0"
+  "modelVersion": ">=39.0.0 <=39.3.0"
 }

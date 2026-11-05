@@ -67,7 +67,8 @@ describe("api.view.inputs", () => {
 			component: "Switch",
 			renderFunction: SwitchInput,
 			path: createDocumentPath(["A12T_DmTypes"], ["Boolean"], ["Boolean03"]),
-			formModelPath: createModelPath("foo", "bar")
+			formModelPath: createModelPath("foo", "bar"),
+			breakTooltipsToNewLine: true
 		} as const;
 
 		/** General test which are similar for all inputs */

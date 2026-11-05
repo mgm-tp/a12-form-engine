@@ -91,7 +91,7 @@ class RepeatColumnWidthChecker extends AbstractRepeatChecker {
 				repeatProblems.add(new ConsistencyProblem(
 					modelName,
 					errorMessage,
-					new FormModelProblemSource(fieldColumn.getId()),
+					FormModelProblemSource.involving(fieldColumn.getId()),
 					fieldColumn.getId(),
 					repeat.getId(),
 					repeat.getName()

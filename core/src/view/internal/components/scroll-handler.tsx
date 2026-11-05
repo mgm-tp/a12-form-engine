@@ -42,6 +42,7 @@ import { UiId } from "../../../back-end/utils/internal/generateUiId.js";
 import type { FormModel } from "../../../models/index.js";
 import { findElementByFormModelPath } from "../../../models/index.js";
 import {
+	isFormModelCustomScreenElement,
 	isFormModelDetachedRepeat,
 	isFormModelEmbeddedRepeat,
 	isFormModelFieldBasedInputType,
@@ -332,6 +333,14 @@ export class ScrollHandler extends Component<ScrollHandlerProps> {
 				element,
 				focusedComponent.index
 			);
+		} else if (isFormModelCustomScreenElement(element)) {
+			// custom elements render arbitrary html and are never guaranteed to be focusable,
+			// so scrolling alone counts as success
+			return this.scrollToElementAndFocus({
+				uiId: UiId.generate({ element, uiIdPrefix: this.props.uiIdPrefix }),
+				verticalPosition: "center",
+				allowSuccessWithoutFocus: true
+			});
 		}
 
 		return false;

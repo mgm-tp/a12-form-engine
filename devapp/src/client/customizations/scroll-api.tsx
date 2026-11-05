@@ -32,20 +32,12 @@
 
 import type { JSX } from "react";
 import { useCallback, useRef } from "react";
-import { useDispatch, useSelector } from "react-redux";
 
 import type { DefaultDispatchProps, ScrollApi } from "@com.mgmtp.a12.formengine/formengine-core";
-import {
-	FormEngineActions,
-	FormEngineStateAdapter,
-	FormEngineViews
-} from "@com.mgmtp.a12.formengine/formengine-core";
+import { FormEngineHooks, FormEngineViews } from "@com.mgmtp.a12.formengine/formengine-core";
 
 export function ScrollApiEngine(props: FormEngineViews.FormEngineProps): JSX.Element {
-	const state = useSelector(state => state);
-	const dispatch = useDispatch();
-
-	const stateProps = FormEngineStateAdapter.mapStateToProps(state, props);
+	const stateProps = FormEngineHooks.useStateProps(props);
 
 	const scrollRef = useRef<ScrollApi>(null);
 
@@ -53,7 +45,7 @@ export function ScrollApiEngine(props: FormEngineViews.FormEngineProps): JSX.Ele
 		scrollRef.current?.scrollToTop();
 	}, []);
 
-	const defaultDispatchProps = FormEngineActions.mapDispatchToProps(dispatch, props);
+	const defaultDispatchProps = FormEngineHooks.useDispatchProps(props);
 	const dispatchProps: DefaultDispatchProps = {
 		...defaultDispatchProps,
 		eventHandlers: {

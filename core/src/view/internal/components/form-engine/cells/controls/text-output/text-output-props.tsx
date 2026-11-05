@@ -105,7 +105,7 @@ export function useTextOutputProps(
 	return {
 		id: inputProps.uiId,
 		label: inputProps.modelElement.label,
-		addonAfter: tooltips,
+		tooltips,
 		errorMessage: !showMessagesAsTooltip ? errorMessage?.content : undefined,
 		warningMessage: !showMessagesAsTooltip ? warningMessage?.content : undefined,
 		infoMessage: !showMessagesAsTooltip ? infoMessage?.content : undefined

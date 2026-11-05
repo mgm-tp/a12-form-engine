@@ -46,11 +46,12 @@ import { createLocalizableFactory } from "../../../../../back-end/localization/i
 import { getLocalizedResource } from "../../../../../back-end/localization/internal/localize.js";
 import type { CorrectionModeItem } from "../../../../../back-end/store/internal/CorrectionModeItem.js";
 import { ModelSelectors } from "../../../../../back-end/store/internal/selectors/models.js";
-import type { EngineStore } from "../../../../../back-end/store/internal/store.js";
+import { EngineStore } from "../../../../../back-end/store/internal/store.js";
 import type { FormModel } from "../../../../../models/index.js";
 import { findElementByFormModelPath } from "../../../../../models/index.js";
 import {
 	isFormModelControl,
+	isFormModelCustomScreenElement,
 	isFormModelDetachedRepeat,
 	isFormModelFieldOverviewColumn,
 	isFormModelInlineRepeat,
@@ -60,7 +61,7 @@ import { DocumentPath } from "../../../../../models/internal/utils/document-util
 import type { FormModelMap } from "../../../configuration/engine-configuration.js";
 import { WidgetMapContext } from "../../../configuration/widget-map-context.js";
 
-import { getUIIssueReport } from "./utils.js";
+import { getUIIssueReport } from "./getUIIssueReport.js";
 
 /**
  * Type alias for convenience
@@ -73,13 +74,14 @@ import { getUIIssueReport } from "./utils.js";
 export type LocationLabel = Localizable[][];
 
 /** @internal  */
-export function getValidationMessageKey(message: EngineStore.Validation.Message): string {
-	return [
-		message.severity,
-		DocumentPath.toString(message.element),
-		message.errorKey,
-		message.errorCode
-	].join(":");
+export function getValidationMessageKey(
+	message: EngineStore.Validation.Message | EngineStore.Validation.CustomMessage
+): string {
+	const identifier = EngineStore.Validation.isCustomMessage(message)
+		? EngineStore.Validation.customKey(message.customFormElement, message.dataContext)
+		: DocumentPath.toString(message.element);
+
+	return [message.severity, identifier, message.errorKey, message.errorCode].join(":");
 }
 
 /** @internal */
@@ -106,7 +108,7 @@ export function mostSeriousMessageSeverity(
 
 /** @internal */
 export function createToValidationBarItem(
-	message: EngineStore.Validation.Message,
+	message: EngineStore.Validation.Message | EngineStore.Validation.CustomMessage,
 	renderOptions: FormModelMap.RenderOptions,
 	localizer: Localizer,
 	converter: ValueConversion,
@@ -253,6 +255,8 @@ function localizeEditableComponent(
 
 	if (isFormModelControl(formModelElement)) {
 		return localizableFactory.inputLabel(formModelElement, formModelPath);
+	} else if (isFormModelCustomScreenElement(formModelElement)) {
+		return localizableFactory.componentTitle(formModelElement, formModelPath);
 	} else {
 		const repeat = findElementByFormModelPath(
 			ModelSelectors.formModel()(renderOptions.state),

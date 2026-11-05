@@ -38,7 +38,6 @@ import com.mgmtp.a12.kernel.core.tool.a12internal.api.error.ProblemException;
 import com.mgmtp.a12.kernel.core.tool.a12internal.api.services.ICalculationService;
 import com.mgmtp.a12.kernel.core.tool.a12internal.api.services.ICalculationService.IRefType;
 import com.mgmtp.a12.kernel.core.tool.a12internal.api.services.ICalculationService.IRuleRef;
-import com.mgmtp.a12.kernel.md.model.api.IElement;
 import com.mgmtp.a12.kernel.md.model.api.IIdNamed;
 
 import com.mgmtp.a12.formengine.consistency.FormModelCategory;
@@ -219,10 +218,20 @@ class DependencyCycleChecker {
 		return String.format("name: %s", link.getLeft());
 	}
 
+	private Optional<String> findElementIdByPath(final String elementPath) {
+		return dmAccess.findElementByPath(elementPath).map(IIdNamed::getId);
+	}
+
 	private Optional<String> findFirstCycleElementId(final List<Pair<String, IRefType>> cycleSegments) {
-		final String firstCycleElementPath = cycleSegments.getFirst().getLeft();
-		final Optional<IElement> firstCycleElement = dmAccess.findElementByPath(firstCycleElementPath);
-		return firstCycleElement.map(IIdNamed::getId);
+		return findElementIdByPath(cycleSegments.getFirst().getLeft());
+	}
+
+	private List<String> resolveCycleElementIds(final List<Pair<String, IRefType>> cycleSegments) {
+		return cycleSegments.stream()
+			.map(Pair::getLeft)
+			.map(this::findElementIdByPath)
+			.flatMap(Optional::stream)
+			.toList();
 	}
 
 	private Problem mapCycleToProblem(
@@ -232,7 +241,10 @@ class DependencyCycleChecker {
 		return new ConsistencyProblem(
 			modelName,
 			FormModelCategory.FORM_MODEL_FIELD_CYCLE_REFERENCE,
-			new FormModelProblemSource(firstCycleElementId),
+			FormModelProblemSource.involving(
+				firstCycleElementId,
+				resolveCycleElementIds(cycleSegments).toArray(String[]::new)
+			),
 			constructCyclePath(cycleSegments, formModelDependencies));
 	}
 

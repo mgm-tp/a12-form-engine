@@ -41,10 +41,10 @@ import type { FormModelMap } from "../../../../../view/index.js";
 import { DefaultFormModelMap } from "../../../../../view/index.js";
 import { createDocumentPath } from "../../../../utils/createDocumentPath.js";
 import { createModelPath } from "../../../../utils/createModelPath.js";
+import { setupFormEngineRendererWithRtlAsync } from "../../../../utils/setup.js";
 import { setupModelsFixture } from "../../../../utils/setupFixture.js";
 import { REPEAT } from "../../../../utils/test-model-helpers/repeat.js";
 import { createValidationEntry } from "../../../../utils/validation.js";
-import { setupFormEngineRendererWithRtlAsync } from "../../../../utils/setup.js";
 
 import { messageKeysForTooltip } from "../tooltip-message-keys.js";
 

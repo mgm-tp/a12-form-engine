@@ -48,10 +48,10 @@ import type { RtlRenderWrapper } from "../../../../rtl-utils/render-wrapper.js";
 import { rtlRenderWrapperAsync } from "../../../../rtl-utils/render-wrapper.js";
 import { createDocumentPath } from "../../../../utils/createDocumentPath.js";
 import { createModelPath } from "../../../../utils/createModelPath.js";
+import { DocumentModelHelpers } from "../../../../utils/DocumentModelHelpers.js";
 import { DE_LOCALE, US_LOCALE } from "../../../../utils/localization.js";
 import { setupFormEngineRendererWithRtlAsync } from "../../../../utils/setup.js";
 import { setupModelsFixture } from "../../../../utils/setupFixture.js";
-import { DocumentModelHelpers } from "../../../../utils/DocumentModelHelpers.js";
 
 import { inputTest } from "./generic-tests/input-tests.js";
 import { createProps } from "./generic-tests/input-utils.js";
@@ -139,7 +139,8 @@ describe("api.view.inputs", () => {
 				...getBaseProps(),
 				component: "TextField",
 				path: createDocumentPath(["A12T_DmTypes"], ["DateAndDateTime"], ["DateFragment01"]),
-				placeholder: true
+				placeholder: true,
+				breakTooltipsToNewLine: true
 			});
 		});
 

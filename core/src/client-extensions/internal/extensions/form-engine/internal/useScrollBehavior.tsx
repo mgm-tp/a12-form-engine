@@ -29,6 +29,7 @@
  * NON-INFRINGEMENT, EXCEPT WHERE SUCH DISCLAIMERS ARE HELD TO BE
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
+
 import type { RefObject } from "react";
 import { useEffect, useEffectEvent, useRef } from "react";
 import { useSelector } from "react-redux";

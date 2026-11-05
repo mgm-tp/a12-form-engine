@@ -46,8 +46,8 @@ import { filterRows } from "../../../../../../view/internal/utilities/filtering.
 import { createDocumentPath } from "../../../../../utils/createDocumentPath.js";
 import { createModelPath } from "../../../../../utils/createModelPath.js";
 import { US_LOCALE } from "../../../../../utils/localization.js";
-import { setupArrayFixture, setupFixture } from "../../../../../utils/setupFixture.js";
 import { loadData } from "../../../../../utils/setup.js";
+import { setupArrayFixture, setupFixture } from "../../../../../utils/setupFixture.js";
 
 import { emptySwitchFunctions } from "../filter-functions/empty-switch.js";
 import { textLineFunctions } from "../filter-functions/textline-filter.js";

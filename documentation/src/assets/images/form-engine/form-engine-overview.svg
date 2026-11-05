@@ -1,0 +1,497 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+  Form Engine — introduction overview diagram (container level, hand-authored SVG).
+  Target location on publication: form-engine/documentation/src/assets/images/form-engine/form-engine-overview.svg
+  Embedded from the introduction as image::assets/images/form-engine/form-engine-overview.svg[…]
+
+  Deliberately complementary to the existing architecture chapter, which already shows the internal
+  Redux flow (Redux.svg, Architecture.svg): this one answers where the engine sits, what runs
+  alongside it in the browser, what it interprets, and what the project supplies.
+  Everything the engine needs runs in the one browser process; nothing here is a service.
+  Composition and context only — no internal call flow.
+-->
+
+<svg
+   viewBox="0 0 1000 600"
+   width="1000"
+   height="600"
+   role="img"
+   aria-labelledby="t d"
+   font-family="'Segoe UI', Inter, system-ui, sans-serif"
+   version="1.1"
+   id="svg37"
+   sodipodi:docname="form-engine-overview.svg"
+   inkscape:version="1.4.4 (dcaf3e7, 2026-05-05)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <sodipodi:namedview
+     id="namedview37"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     showguides="true"
+     inkscape:zoom="0.97777778"
+     inkscape:cx="450.51136"
+     inkscape:cy="433.63636"
+     inkscape:window-width="1883"
+     inkscape:window-height="1027"
+     inkscape:window-x="37"
+     inkscape:window-y="25"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg37" />
+  <title
+     id="t">Form Engine overview</title>
+  <desc
+     id="d">The Form Engine is a library inside an A12 client application — one browser process built by the project. Its own parts are the behavior (a Redux middleware), the view (a connected React component), and the renderer, which is customized through the FormModelMap and the WidgetMap. In the same process run the A12 libraries it builds on — Client for the application frame and activities, Kernel for validation and computation, Widgets for the form controls, and further A12 libraries listed under Artifacts — and the third-party libraries React and Redux, which the application provides as peer dependencies. The project's own code — custom widgets, provider code, and configuration — runs there too. The engine works on three inputs: a Document Model, which defines structure and the validation and computation rules; a Form Model, which defines the layout and behavior of the form for that Document Model; and the document itself, the data owned by the activity. Both models are authored with the SME.</desc>
+  <defs
+     id="defs1">
+    <marker
+       id="arw"
+       viewBox="0 0 10 10"
+       refX="9"
+       refY="5"
+       markerWidth="7"
+       markerHeight="7"
+       orient="auto-start-reverse">
+      <path
+         d="M 0,1 9,5 0,9 Z"
+         fill="#64748b"
+         id="path1" />
+    </marker>
+    <style
+       id="style1">
+      .zone  { font-size:11px; font-weight:600; letter-spacing:.09em; fill:#94a3b8 }
+      .card  { fill:#f8fafc; stroke:#cbd5e1; stroke-width:1 }
+      .block { fill:#ffffff; stroke:#cbd5e1; stroke-width:1 }
+      .lib   { fill:#eef4ff; stroke:#93b4e8; stroke-width:1 }
+      .tp    { fill:#f1f2f4; stroke:#a9b1bd; stroke-width:1 }
+      .own   { fill:#fffdf5; stroke:#d6b877; stroke-width:1; stroke-dasharray:5 3 }
+      .name  { font-size:14px; fill:#0f172a }
+      .libnm { font-size:14px; fill:#1e3a8a }
+      .tpnm  { font-size:14px; fill:#334155 }
+      .lead  { font-size:15px; font-weight:600; fill:#0f172a }
+      .sub   { font-size:12px; fill:#64748b }
+      .cap   { font-size:11px; fill:#64748b; font-style:italic }
+      .libcp { font-size:11px; fill:#3b6bb5; font-style:italic }
+      .band  { font-size:11px; font-weight:600; letter-spacing:.06em; fill:#94a3b8 }
+      .edge  { stroke:#64748b; stroke-width:1.4; fill:none; marker-end:url(#arw) }
+    </style>
+  </defs>
+  <!-- ── what it works on ────────────────────────────────────── -->
+  <text
+     class="zone"
+     x="24"
+     y="104"
+     id="text1">WORKS ON</text>
+  <g
+     class="card"
+     id="g1"
+     transform="matrix(1.0886992,0,0,0.99917353,-2.1072936,0.11901116)">
+    <rect
+       x="24"
+       y="118"
+       width="184"
+       height="52"
+       rx="8"
+       id="rect1" />
+  </g>
+  <text
+     class="name"
+     x="42"
+     y="142"
+     id="text2">Document Model</text>
+  <text
+     class="cap"
+     x="42"
+     y="160"
+     id="text3">structure and rules</text>
+  <g
+     class="card"
+     id="g3"
+     transform="matrix(1.0886992,0,0,0.99917353,-2.1072936,0.16694622)">
+    <rect
+       x="24"
+       y="176"
+       width="184"
+       height="52"
+       rx="8"
+       id="rect3" />
+  </g>
+  <text
+     class="name"
+     x="42"
+     y="200"
+     id="text4">Form Model</text>
+  <text
+     class="cap"
+     x="42"
+     y="218"
+     id="text5">layout and behavior of the form</text>
+  <g
+     class="card"
+     id="g5"
+     transform="matrix(1.088697,0,0,0.99917348,-2.1070355,47.260349)">
+    <rect
+       x="24"
+       y="234"
+       width="184"
+       height="52"
+       rx="8"
+       id="rect5" />
+  </g>
+  <text
+     class="name"
+     x="43.022728"
+     y="305.04547"
+     id="text6">Document</text>
+  <text
+     class="cap"
+     x="43.022728"
+     y="323.04547"
+     id="text7">the data, owned by the activity</text>
+  <text
+     class="cap"
+     x="28.090908"
+     y="243.61363"
+     id="text8">Both models are authored with the SME.</text>
+  <path
+     class="edge"
+     d="m 224.36364,144 c 32,0 48.45455,37.02273 76.45455,37.02273"
+     id="path8"
+     sodipodi:nodetypes="cc" />
+  <path
+     class="edge"
+     d="m 224.36364,202 h 76.45455"
+     id="path9"
+     sodipodi:nodetypes="cc" />
+  <path
+     class="edge"
+     d="m 224.36364,311.13636 c 32,0 47.43182,-50.31818 75.43182,-50.31818"
+     id="path10"
+     sodipodi:nodetypes="cc" />
+  <!-- ── the browser process ─────────────────────────────────── -->
+  <rect
+     x="300.74881"
+     y="72.021561"
+     width="647.75232"
+     height="449.95688"
+     rx="14.817864"
+     fill="#fcfdfe"
+     stroke="#94a3b8"
+     stroke-width="1.54312"
+     id="rect10" />
+  <text
+     class="lead"
+     x="324.72726"
+     y="106"
+     id="text10">A12 Client based application</text>
+  <text
+     class="sub"
+     x="324.72726"
+     y="126"
+     id="text11">built by the project, with the Form Engine as a library</text>
+  <text
+     class="band"
+     x="324.72726"
+     y="156"
+     id="text12">FORM ENGINE</text>
+  <g
+     class="block"
+     id="g12"
+     transform="translate(32.727273)">
+    <rect
+       x="292"
+       y="164"
+       width="176"
+       height="56"
+       rx="8"
+       id="rect12" />
+  </g>
+  <text
+     class="name"
+     x="342.72726"
+     y="188"
+     id="text13">Behavior</text>
+  <text
+     class="cap"
+     x="342.72726"
+     y="205"
+     id="text14">Redux middlewares</text>
+  <g
+     class="block"
+     id="g14"
+     transform="matrix(1.1100979,0,0,0.99905134,-19.510118,0.18214214)">
+    <rect
+       x="484"
+       y="164"
+       width="176"
+       height="56"
+       rx="8"
+       id="rect14" />
+  </g>
+  <text
+     class="name"
+     x="535.75006"
+     y="188"
+     id="text15">View</text>
+  <text
+     class="cap"
+     x="535.75006"
+     y="205"
+     id="text16">connected React component</text>
+  <g
+     class="block"
+     id="g16"
+     transform="matrix(1.1216874,0,0,0.99895431,-25.980571,-0.82195435)">
+    <rect
+       x="676"
+       y="164"
+       width="176"
+       height="56"
+       rx="8"
+       id="rect16" />
+  </g>
+  <text
+     class="name"
+     x="733.30981"
+     y="191.52539"
+     id="text17"
+     transform="scale(1.0243148,0.97626239)"
+     style="stroke-width:1.02386">Renderer</text>
+  <text
+     class="cap"
+     x="733.30981"
+     y="208.93106"
+     id="text18"
+     transform="scale(1.0243148,0.97626239)"
+     style="stroke-width:1.02386">FormModelMap, WidgetMap</text>
+  <text
+     class="band"
+     x="324.72726"
+     y="254"
+     id="text19">IN THE SAME PROCESS</text>
+  <g
+     class="lib"
+     id="g19"
+     transform="translate(32.727273)">
+    <rect
+       x="292"
+       y="262"
+       width="176"
+       height="56"
+       rx="8"
+       id="rect19" />
+  </g>
+  <text
+     class="libnm"
+     x="342.72726"
+     y="288"
+     id="text20">Client</text>
+  <text
+     class="libcp"
+     x="342.72726"
+     y="305"
+     id="text21">application frame, activities</text>
+  <g
+     class="lib"
+     id="g21"
+     transform="matrix(1.1043108,0,0,0.9991002,-17.733963,0.26094326)">
+    <rect
+       x="484"
+       y="262"
+       width="176"
+       height="56"
+       rx="8"
+       id="rect21" />
+  </g>
+  <text
+     class="libnm"
+     x="534.72729"
+     y="288"
+     id="text22">Kernel</text>
+  <text
+     class="libcp"
+     x="534.72729"
+     y="305"
+     id="text23">validation and computation</text>
+  <g
+     class="lib"
+     id="g23"
+     transform="matrix(1.1274924,0,0,0.99890618,-30.926925,0.31720817)">
+    <rect
+       x="676"
+       y="262"
+       width="176"
+       height="56"
+       rx="8"
+       id="rect23" />
+  </g>
+  <text
+     class="libnm"
+     x="749.22729"
+     y="288"
+     id="text24">Widgets</text>
+  <text
+     class="libcp"
+     x="749.22729"
+     y="305"
+     id="text25">the form controls</text>
+  <g
+     class="lib"
+     id="g25"
+     transform="matrix(1.0499583,0,0,0.99956338,18.151686,0.15543841)">
+    <rect
+       x="292"
+       y="328"
+       width="368"
+       height="56"
+       rx="8"
+       id="rect25" />
+  </g>
+  <text
+     class="libnm"
+     x="342.72726"
+     y="354"
+     id="text26">Further A12 libraries</text>
+  <text
+     class="libcp"
+     x="342.72726"
+     y="371"
+     id="text27">the full platform context is listed under Artifacts</text>
+  <g
+     class="tp"
+     id="g27"
+     transform="matrix(1.1332784,0,0,0.9988578,-35.858779,0.40662256)">
+    <rect
+       x="676"
+       y="328"
+       width="176"
+       height="56"
+       rx="8"
+       id="rect27" />
+  </g>
+  <text
+     class="tpnm"
+     x="748.20459"
+     y="354"
+     id="text28">React, Redux</text>
+  <text
+     class="cap"
+     x="748.20459"
+     y="371"
+     id="text29">provided as peer dependencies</text>
+  <g
+     class="own"
+     id="g29"
+     transform="matrix(1.0821088,0,0,0.99932872,8.7726119,0.29133235)">
+    <rect
+       x="292"
+       y="404"
+       width="560"
+       height="60"
+       rx="8"
+       id="rect29" />
+  </g>
+  <text
+     class="name"
+     x="342.72726"
+     y="430"
+     id="text30">Your project code</text>
+  <text
+     class="cap"
+     x="342.72726"
+     y="449"
+     id="text31">configuration, provider code, custom components and widgets</text>
+  <text
+     class="cap"
+     x="324.72726"
+     y="490"
+     id="text32">Composition and context only: which part calls which is not shown.</text>
+  <!-- ── legend ──────────────────────────────────────────────── -->
+  <g
+     class="block"
+     id="g33"
+     transform="translate(32.727273)">
+    <rect
+       x="268"
+       y="558"
+       width="14"
+       height="14"
+       rx="3"
+       id="rect33" />
+  </g>
+  <text
+     class="cap"
+     x="322.72726"
+     y="569"
+     id="text34">Form Engine</text>
+  <g
+     class="lib"
+     id="g34"
+     transform="translate(32.727273)">
+    <rect
+       x="376"
+       y="558"
+       width="14"
+       height="14"
+       rx="3"
+       id="rect34" />
+  </g>
+  <text
+     class="cap"
+     x="430.72726"
+     y="569"
+     id="text35">A12 libraries it builds on</text>
+  <g
+     class="tp"
+     id="g35"
+     transform="translate(32.727273)">
+    <rect
+       x="546"
+       y="558"
+       width="14"
+       height="14"
+       rx="3"
+       id="rect35" />
+  </g>
+  <text
+     class="cap"
+     x="600.72729"
+     y="569"
+     id="text36">third-party libraries</text>
+  <g
+     class="own"
+     id="g36"
+     transform="translate(32.727273)">
+    <rect
+       x="700"
+       y="558"
+       width="14"
+       height="14"
+       rx="3"
+       id="rect36" />
+  </g>
+  <text
+     class="cap"
+     x="754.72729"
+     y="569"
+     id="text37">the project's own code</text>
+  <metadata
+     id="metadata37">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:title>Form Engine overview</dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+</svg>

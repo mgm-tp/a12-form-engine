@@ -34,9 +34,9 @@ import { strictEqual } from "node:assert/strict";
 
 import type { EntityInstancePath } from "@com.mgmtp.a12.kernel/kernel-md-facade";
 
-import { setupModelsFixture } from "../../utils/setupFixture.js";
 import { createDocumentPath } from "../../utils/createDocumentPath.js";
 import { createModelPath } from "../../utils/createModelPath.js";
+import { setupModelsFixture } from "../../utils/setupFixture.js";
 
 import type {
 	CorrectionModeItem,

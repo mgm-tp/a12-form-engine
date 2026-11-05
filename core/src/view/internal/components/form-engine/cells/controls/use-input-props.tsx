@@ -42,6 +42,7 @@ import { createResourceLocalizable } from "../../../../../../back-end/localizati
 import { ModelSelectors } from "../../../../../../back-end/store/internal/selectors/models.js";
 import { UiStateSelectors } from "../../../../../../back-end/store/internal/selectors/ui-state.js";
 import { UiId } from "../../../../../../back-end/utils/internal/generateUiId.js";
+import { isFormModelRepeat } from "../../../../../../models/index.js";
 import { findElementByFormModelPath } from "../../../../../../models/internal/findElementByFormModelPath.js";
 import type { StringValueDataType } from "../../../../../../models/internal/utils/document-model-utils.js";
 import { ComponentMapContext } from "../../../../configuration/componentMap/component-map-context.js";
@@ -52,9 +53,10 @@ import {
 } from "../../../../utilities/enumerable/enumerableHelper.js";
 import type { EnumerationValue } from "../../../../utilities/enumerable/enumValue.js";
 import { nmTokensToString } from "../../../../utilities/nmtokens.js";
+import type { TooltipLineBreak } from "../../../../utilities/tooltipPosition.js";
+import { toTooltipLineBreak } from "../../../../utilities/tooltipPosition.js";
 import type { Value } from "../../../../utilities/value.js";
 import { getScreenReaderCellId } from "../../repeat/components/row-actions/getScreenReaderCellId.js";
-import { isFormModelRepeat } from "../../../../../../models/index.js";
 
 import type { ControlProps } from "./input-props.js";
 
@@ -195,6 +197,7 @@ export function useBaseProps(
 export interface TextInputProps extends ControlProps {
 	readonly value: string;
 	readonly tooltips?: ReactNode;
+	readonly breakTooltipsToNewLine?: TooltipLineBreak;
 }
 
 /**
@@ -211,8 +214,8 @@ export function useBasePropsForTextInputs(
 	return {
 		...inputProps,
 		value: props.value.ui,
-		addonAfter: props.modelElement.tooltipsOnTop !== true ? addonAfter : undefined,
-		tooltips: props.modelElement.tooltipsOnTop ? addonAfter : undefined
+		tooltips: addonAfter,
+		breakTooltipsToNewLine: toTooltipLineBreak(props.modelElement.tooltipPosition)
 	};
 }
 
@@ -229,7 +232,7 @@ export interface BooleanSelectInputProps extends Pick<
 > {
 	readonly booleanOptions: BooleanOption[];
 	readonly tooltips: React.ReactNode;
-	readonly breakTooltipsToNewLine?: boolean;
+	readonly breakTooltipsToNewLine?: TooltipLineBreak;
 	readonly selectedValue?: BooleanOption;
 }
 
@@ -267,7 +270,7 @@ export function useBasePropsForBooleanSelect(
 		selectedValue,
 		booleanOptions,
 		tooltips: addonAfter,
-		breakTooltipsToNewLine: props.modelElement.tooltipsOnTop
+		breakTooltipsToNewLine: toTooltipLineBreak(props.modelElement.tooltipPosition)
 	};
 }
 
@@ -277,7 +280,7 @@ export interface CheckboxInputProps extends Pick<
 	Exclude<keyof ControlProps, "addonAfter" | "suffixes" | "truncateSuffix" | "placeholder">
 > {
 	readonly tooltips: ReactNode;
-	readonly breakTooltipsToNewLine?: boolean;
+	readonly breakTooltipsToNewLine?: TooltipLineBreak;
 	readonly checked: boolean;
 }
 
@@ -307,7 +310,7 @@ export function useBasePropsForCheckbox(
 	return {
 		...inputProps,
 		tooltips: addonAfter,
-		breakTooltipsToNewLine: props.modelElement.tooltipsOnTop,
+		breakTooltipsToNewLine: toTooltipLineBreak(props.modelElement.tooltipPosition),
 		checked: props.value.data === true,
 		htmlInputProps: {
 			...inputProps.htmlInputProps,
@@ -325,6 +328,7 @@ export interface SwitchInputProps extends Pick<
 > {
 	readonly checked: boolean;
 	readonly tooltips?: ReactNode;
+	readonly breakTooltipsToNewLine?: TooltipLineBreak;
 }
 
 /**
@@ -340,8 +344,8 @@ export function useBasePropsForSwitch(
 
 	return {
 		...inputProps,
-		addonAfter: props.modelElement.tooltipsOnTop !== true ? addonAfter : undefined,
-		tooltips: props.modelElement.tooltipsOnTop ? addonAfter : undefined,
+		tooltips: addonAfter,
+		breakTooltipsToNewLine: toTooltipLineBreak(props.modelElement.tooltipPosition),
 		checked: props.value.data === true
 	};
 }
@@ -353,7 +357,7 @@ export interface RadioInputProps extends Pick<
 > {
 	readonly checked: boolean | null;
 	readonly tooltips: ReactNode;
-	readonly breakTooltipsToNewLine?: boolean;
+	readonly breakTooltipsToNewLine?: TooltipLineBreak;
 }
 
 /**
@@ -370,7 +374,7 @@ export function useBasePropsForBooleanRadio(
 		...inputProps,
 		checked: props.value.data === true ? true : props.value.data === false ? false : null,
 		tooltips: addonAfter,
-		breakTooltipsToNewLine: props.modelElement.tooltipsOnTop
+		breakTooltipsToNewLine: toTooltipLineBreak(props.modelElement.tooltipPosition)
 	};
 }
 
@@ -381,7 +385,7 @@ export interface EnumerationBaseProps extends Pick<
 > {
 	readonly enumerationOptions: EnumerationValue[];
 	readonly tooltips: ReactNode;
-	readonly breakTooltipsToNewLine?: boolean;
+	readonly breakTooltipsToNewLine?: TooltipLineBreak;
 	readonly selectedValue?: EnumerationValue;
 }
 
@@ -415,7 +419,7 @@ export function useEnumerationBaseProps(
 		selectedValue,
 		enumerationOptions: newOptions,
 		tooltips: addonAfter,
-		breakTooltipsToNewLine: props.modelElement.tooltipsOnTop
+		breakTooltipsToNewLine: toTooltipLineBreak(props.modelElement.tooltipPosition)
 	};
 }
 
