@@ -16,13 +16,6 @@ dependencies {
     implementation libs.dataservices.server.app
 }
 
-layout.buildDirectory = file('../../../dist/server')
-
-tasks.register("_clean", Delete) {
-    delete layout.buildDirectory
-}
-clean.dependsOn(tasks.named('_clean'))
-
 springBoot {
     mainClass = 'com.mgmtp.a12.formengine.devapp.FormEngineDevappServerApplication'
 }

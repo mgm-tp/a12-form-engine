@@ -18,11 +18,6 @@ plugins {
     alias(libs.plugins.prepare.models)
 }
 
-tasks.named('clean') {
-    delete layout.buildDirectory
-    delete layout.projectDirectory.dir('../../target')
-}
-
 tasks.register('generateModelGraph', JavaExec) {
     dependsOn(tasks.named('prepareModels'))
 

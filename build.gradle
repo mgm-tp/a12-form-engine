@@ -66,11 +66,8 @@ spotless {
     format 'asciidoc', {
         target '**/*.adoc'
         targetExclude("**/node_modules/**", "**/lib/**", "**/build/**")
-        licenseHeaderFile(rootProject.file('license_header.txt'), '^[=\\[]')
-        // transform C-style header to asciidoc block comments
-        replaceRegex 'Convert C-style block start to asciidoc block comment start', '^/\\*', '////'
-        replaceRegex 'Convert C-style block end to asciidoc block comment end', '^ \\*/', '////\n'
-        replaceRegex 'Remove asterisk prefixes', '^ \\* ?', ''
+        def headerLines = rootProject.file('license_header.txt').readLines().collect { it.replaceFirst(~/^\/\/ ?/, '') }
+        licenseHeader("////\n${headerLines.join('\n')}\n////\n\n", '^[=\\[]')
     }
 }
 
@@ -158,12 +155,8 @@ subprojects {
                     target 'src/**/*.java'
                 }
                 format('properties') {
-                    licenseHeaderFile(rootProject.file('license_header.txt'), '(^[a-zA-Z])')
-
-                    // transform C-style header in `*.properties` to `#`-comments
-                    replaceRegex('Convert C-style block start to properties comment', '(?m)^\\s*/\\*', '##')
-                    replaceRegex('Remove C-style block end in properties files', '(?m)^\\s*\\Q*/\\E\\s*$', '##')
-                    replaceRegex('Convert C-style block asterisk lines to properties comment', '(?m)^\\s*\\* ?', '# ')
+                    def headerLines = rootProject.file('license_header.txt').readLines().collect { it.replaceFirst(~/^\/\/ ?/, '') }
+                    licenseHeader("##\n${headerLines.collect { "# $it" }.join('\n')}\n##\n\n", '(^[a-zA-Z])')
 
                     target('src/**/*.properties')
                 }
@@ -294,19 +287,24 @@ tasks.register('configurePnpm', LeadingBuildTask) {
     }
 }
 
-tasks.register('installDependencies', LeadingBuildTask) {
+tasks.register('pnpmInstall', LeadingBuildTask) {
     dependsOn(tasks.named('configurePnpm'))
     mustRunAfter(tasks.named('setVersion'))
     doLast { execCommandLine 'pnpm', 'install' }
 }
 
 tasks.register('verify', LeadingBuildTask) {
-    dependsOn(tasks.named('installDependencies'))
+    dependsOn(tasks.named('pnpmInstall'))
+
+    // oxlint's type-aware rules read the sibling packages' declarations out of their `lib`, so the
+    // linting only sees the whole workspace once the assembly has produced it. Named as a String
+    // because '_assemble' is registered further down.
+    mustRunAfter('_assemble')
+
     doLast { execCommandLine 'node', '--run', 'verify' }
 }
 
 tasks.register('_clean', LeadingBuildTask) {
-    dependsOn(tasks.named('installDependencies'))
     doLast { execCommandLine 'node', '--run', 'clean' }
 }
 
@@ -314,8 +312,13 @@ tasks.named('clean') {
     dependsOn(tasks.named('_clean'))
 }
 
+// the clean scripts also remove node_modules
+tasks.named('pnpmInstall') {
+    mustRunAfter(tasks.named('_clean'))
+}
+
 tasks.register('_assemble', LeadingBuildTask) {
-    dependsOn(tasks.named('verify'), project(':modelGraph').tasks.named('assemble'))
+    dependsOn(tasks.named('pnpmInstall'), project(':modelGraph').tasks.named('assemble'))
     // the devapp bundles bake the version in at build time and package.json is not stamped
     // until publish, so the value has to come from gradle
     doLast { execCommandLine(['node', '--run', 'build']) { environment 'RELEASE_VERSION', globalVersion } }
@@ -326,7 +329,9 @@ tasks.named('assemble') {
 }
 
 tasks.register('_check', LeadingBuildTask) {
-    mustRunAfter(tasks.named('assemble'))
+    // `build` depends on both `assemble` and `check` but does not order them, so this constraint is
+    // what actually makes `gradle build` run the assembly first.
+    mustRunAfter(tasks.named('assemble'), tasks.named('verify'))
 
     doLast {
         execCommandLine(['node', '--run', 'test']) {
@@ -336,7 +341,8 @@ tasks.register('_check', LeadingBuildTask) {
 }
 
 tasks.named('check') {
-    dependsOn(tasks.named('_check'))
+    // verify used to be reached transitively via _assemble
+    dependsOn(tasks.named('_check'), tasks.named('verify'))
 }
 
 // review builds resolve to the plain -SNAPSHOT version, so stamping would rewrite all

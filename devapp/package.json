@@ -1,6 +1,6 @@
 {
   "name": "@com.mgmtp.a12.formengine/formengine-devapp",
-  "version": "38.4.3",
+  "version": "38.4.4",
   "description": "Form Engine Devapp",
   "author": "mgm technology partners",
   "license": "(EUPL-1.2 OR LicenseRef-commercial)",
@@ -10,7 +10,7 @@
     "./src/client/config/index.ts"
   ],
   "scripts": {
-    "clean": "rimraf ./dist",
+    "clean": "git clean -fx -e build .",
     "init": "pnpm run \"/^copy:.*/\"",
     "copy:exampleModels": "cpy \"../exampleModels/build/**/*\" dist --cwd=. --parents",
     "copy:modelGraph": "cpy \"../modelGraph/build/modelGraph.json\" dist/modelIndex --cwd=. --parents",
@@ -56,7 +56,6 @@
     "react-redux": "catalog:",
     "redux": "catalog:",
     "redux-saga": "catalog:",
-    "rimraf": "catalog:",
     "semver": "catalog:",
     "source-map-loader": "catalog:",
     "styled-components": "catalog:",

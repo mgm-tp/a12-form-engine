@@ -2409,7 +2409,7 @@ export namespace UiStateSelectors {
     // (undocumented)
     export function messages(): Selector<ReadonlyObjectMap<EngineStore.Validation.Entry>>;
     // (undocumented)
-    export function messagesByPath(documentPath: EntityInstancePath, formModelPath: ModelPath, filter?: Lowercase<EngineStore.Validation.MessageSeverity>): Selector<EngineStore.Validation.Message[]>;
+    export function messagesByPath(documentPath: EntityInstancePath, _formModelPath: ModelPath, filter?: Lowercase<EngineStore.Validation.MessageSeverity>): Selector<EngineStore.Validation.Message[]>;
     // (undocumented)
     export function readonly(): Selector<boolean>;
     // (undocumented)
@@ -2629,9 +2629,9 @@ export const withFormModelSupport: <T extends ApplicationWithFormEngineConfig>(c
 
 // Warnings were encountered during analysis:
 //
-// src/view/internal/utilities/enablements/index.ts:37:25 - (ae-forgotten-export) The symbol "isHidden" needs to be exported by the entry point index.d.ts
-// src/view/internal/utilities/enablements/index.ts:37:25 - (ae-forgotten-export) The symbol "isReadonly" needs to be exported by the entry point index.d.ts
-// src/view/internal/utilities/enablements/index.ts:37:25 - (ae-forgotten-export) The symbol "isDisabled" needs to be exported by the entry point index.d.ts
+// src/view/internal/utilities/enablements/index.ts:9:25 - (ae-forgotten-export) The symbol "isHidden" needs to be exported by the entry point index.d.ts
+// src/view/internal/utilities/enablements/index.ts:9:25 - (ae-forgotten-export) The symbol "isReadonly" needs to be exported by the entry point index.d.ts
+// src/view/internal/utilities/enablements/index.ts:9:25 - (ae-forgotten-export) The symbol "isDisabled" needs to be exported by the entry point index.d.ts
 
 // (No @packageDocumentation comment for this package)
 

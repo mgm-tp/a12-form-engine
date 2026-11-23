@@ -1,13 +1,13 @@
 {
   "name": "@com.mgmtp.a12.formengine/formengine-content-elements",
-  "version": "38.4.3",
+  "version": "38.4.4",
   "description": "Experimental form content elements to be used in content models",
   "author": "mgm technology partners",
   "license": "(EUPL-1.2 OR LicenseRef-commercial)",
   "type": "module",
   "sideEffects": false,
   "scripts": {
-    "clean": "rimraf ./lib ./target cyclonedx.json",
+    "clean": "git clean -fx -e build .",
     "build": "node --run compile && pnpm \"/^validate:.+/\"",
     "test": "mocha",
     "compile": "pnpm run \"/^compile:.*/\"",
@@ -30,8 +30,6 @@
     "@com.mgmtp.a12.contentengine/contentengine-core": "catalog:a12",
     "@com.mgmtp.a12.devtools/build-tools": "catalog:a12",
     "@com.mgmtp.a12.devtools/tsconfig": "catalog:a12",
-    "@com.mgmtp.a12.devtools/eslint-config": "catalog:a12",
-    "@com.mgmtp.a12.devtools/prettier-config": "catalog:a12",
     "@com.mgmtp.a12.devtools/react": "catalog:a12",
     "@com.mgmtp.a12.kernel/kernel-md-facade": "catalog:a12",
     "@com.mgmtp.a12.kernel/kernel-core-runtime-api-ts": "catalog:a12",
@@ -51,7 +49,6 @@
     "react-dnd": "catalog:",
     "react-redux": "catalog:",
     "redux": "catalog:",
-    "rimraf": "catalog:",
     "source-map-support": "catalog:",
     "typescript": "catalog:"
   },

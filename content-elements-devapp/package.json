@@ -1,11 +1,11 @@
 {
   "name": "content-elements-devapp",
-  "version": "38.4.3",
+  "version": "38.4.4",
   "description": "Devapp for form content elements",
   "private": true,
   "type": "module",
   "scripts": {
-    "clean": "rimraf ./lib ./target",
+    "clean": "git clean -fx -e build .",
     "build": "node --run compile",
     "compile": "pnpm run \"/^compile:.*/\"",
     "compile:typescript": "tsc",
@@ -45,7 +45,6 @@
     "@types/react-dom": "catalog:",
     "@types/react-redux": "catalog:",
     "date-fns": "catalog:",
-    "rimraf": "catalog:",
     "react": "catalog:",
     "react-dnd": "catalog:",
     "react-dom": "catalog:",

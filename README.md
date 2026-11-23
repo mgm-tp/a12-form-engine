@@ -72,7 +72,7 @@ The following tools are required in order to build this repository.
 | [JDK]    | `^21`   |
 | [Gradle] | `^8.11.0` |
 | [Node]   | `^24`   |
-| [pnpm]   | `^11`   |
+| [pnpm]   | `^12`   |
 
 #### How to Build
 

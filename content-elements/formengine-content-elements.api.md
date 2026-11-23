@@ -42,7 +42,7 @@ import type { NodeValidationContext } from '@com.mgmtp.a12.contentengine/content
 import type { PropsWithChildren } from 'react';
 import type { RadioItemProps } from '@com.mgmtp.a12.widgets/widgets-core/lib/input/radio/main/radio.api.js';
 import type { RadioProps } from '@com.mgmtp.a12.widgets/widgets-core/lib/input/radio/main/radio.api.js';
-import { RefObject } from 'react';
+import type { RefObject } from 'react';
 import type { SelectProps } from '@com.mgmtp.a12.widgets/widgets-core/lib/input/select/main/select.api.js';
 import type { SwitchProps } from '@com.mgmtp.a12.widgets/widgets-core/lib/input/switch/main/switch.api.js';
 import type { TextAffixProps } from '@com.mgmtp.a12.widgets/widgets-core/lib/input/text-line/main/template/text-line.tpl.api.js';

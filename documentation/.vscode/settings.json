@@ -55,9 +55,19 @@
 	"typescript.tsdk": "./node_modules/typescript/lib",
 	"typescript.validate.enable": true,
 	"typescript.preferences.importModuleSpecifierEnding": "js",
-	"[typescript][typescriptreact][jsonc]": {
+	"[typescript]": {
 		"editor.formatOnSave": true,
-		"editor.defaultFormatter": "esbenp.prettier-vscode"
+		"editor.defaultFormatter": "oxc.oxc-vscode"
 	},
-	"editor.codeActionsOnSave": ["source.organizeImports", "source.fixAll.eslint"]
+	"[typescriptreact]": {
+		"editor.formatOnSave": true,
+		"editor.defaultFormatter": "oxc.oxc-vscode"
+	},
+	"[jsonc]": {
+		"editor.formatOnSave": true,
+		"editor.defaultFormatter": "oxc.oxc-vscode"
+	},
+	"editor.codeActionsOnSave": {
+		"source.fixAll.oxc": "explicit"
+	}
 }

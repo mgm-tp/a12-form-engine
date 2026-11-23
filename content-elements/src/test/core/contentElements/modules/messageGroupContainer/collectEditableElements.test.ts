@@ -1,57 +1,25 @@
-/*
- * SPDX-License-Identifier: EUPL-1.2 OR LicenseRef-commercial
- *
- * Copyright (c) 2012-2026 mgm technology partners GmbH
- *
- * Dual License
- * ------------
- * This source file is part of the mgm A12 Platform and available under
- * a choice of two different licenses:
- *
- * 1. Open-Source License - EUPL v1.2
- *    You may redistribute and/or modify this file under the terms of the
- *    European Union Public License, version 1.2 - see https://eupl.eu/.
- *
- * 2. Commercial License
- *    Alternatively, you may obtain a commercial license from
- *    mgm technology partners GmbH, that permits use of this software
- *    under different terms (including support and maintenance services).
- *
- *    Please contact a12-license@mgm-tp.com for more information.
- *
- * You must select and comply with exactly one of the above license options.
- *
- * Warranty Disclaimer (applies to either option)
- * ----------------------------------------------
- * THIS SOFTWARE IS PROVIDED "AS IS" AND WITHOUT WARRANTY OF ANY KIND,
- * WHETHER EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
- * OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
- * NON-INFRINGEMENT, EXCEPT WHERE SUCH DISCLAIMERS ARE HELD TO BE
- * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
- */
+// SPDX-License-Identifier: EUPL-1.2 OR LicenseRef-commercial
+// Copyright (c) 2012-2026 mgm technology partners GmbH
+// See LICENSE file for details. For commercial licensing: a12-license@mgm-tp.com
 
 import { deepStrictEqual } from "node:assert/strict";
 
 import { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
 import { DocumentPath } from "@com.mgmtp.a12.client/client-data";
 import type { ContentModel } from "@com.mgmtp.a12.contentengine/contentengine-core";
-import type { LocalizedModelText } from "@com.mgmtp.a12.utils/utils-localization/lib/main/index.js";
 import type { DocumentModel } from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
+import type { LocalizedModelText } from "@com.mgmtp.a12.utils/utils-localization/lib/main/index.js";
 
 import { CHECKBOX_TYPE } from "../../../../../main/core/contentElements/modules/checkbox/checkboxNode.js";
-import {
-	MESSAGE_GROUP_CONTAINER_TYPE,
-	type MessageGroupContainerNode
-} from "../../../../../main/core/contentElements/modules/messageGroupContainer/messageGroupContainerNode.js";
+import { MESSAGE_GROUP_CONTAINER_TYPE } from "../../../../../main/core/contentElements/modules/messageGroupContainer/messageGroupContainerNode.js";
+import type { MessageGroupContainerNode } from "../../../../../main/core/contentElements/modules/messageGroupContainer/messageGroupContainerNode.js";
 import {
 	collectEditableModelElements,
-	getRelevantPathsInContext,
-	type EditableModelElementExtractor
+	getRelevantPathsInContext
 } from "../../../../../main/core/contentElements/modules/messageGroupContainer/useCollectEditableElements.js";
-import {
-	MESSAGE_GROUP_DISPLAY_TYPE,
-	type MessageGroupDisplayNode
-} from "../../../../../main/core/contentElements/modules/messageGroupDisplay/messageGroupDisplayNode.js";
+import type { EditableModelElementExtractor } from "../../../../../main/core/contentElements/modules/messageGroupContainer/useCollectEditableElements.js";
+import { MESSAGE_GROUP_DISPLAY_TYPE } from "../../../../../main/core/contentElements/modules/messageGroupDisplay/messageGroupDisplayNode.js";
+import type { MessageGroupDisplayNode } from "../../../../../main/core/contentElements/modules/messageGroupDisplay/messageGroupDisplayNode.js";
 import { TEXT_LINE_TYPE } from "../../../../../main/core/contentElements/modules/textLine/textLineNode.js";
 import type { BaseControlProps } from "../../../../../main/core/index.js";
 import { FORM_ELEMENTS_NAMESPACE } from "../../../../../main/core/namespace.js";

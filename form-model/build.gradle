@@ -167,7 +167,7 @@ tasks.named('test') {
 
 // Copy expression parser JS file during resource processing
 tasks.register('copyExpressionParser', Copy) {
-    dependsOn(rootProject.tasks.named('installDependencies'))
+    dependsOn(rootProject.tasks.named('pnpmInstall'))
 
     from layout.projectDirectory.file('../core/node_modules/@com.mgmtp.a12.expression/expression-core/dist/parser.js')
     into layout.buildDirectory.dir('resources/main/resources')

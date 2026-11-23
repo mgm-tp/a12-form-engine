@@ -1,6 +1,6 @@
 {
   "name": "@com.mgmtp.a12.formengine/formengine-core",
-  "version": "38.4.3",
+  "version": "38.4.4",
   "description": "Form-Engine",
   "author": "mgm technology partners",
   "license": "(EUPL-1.2 OR LicenseRef-commercial)",
@@ -9,7 +9,7 @@
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "scripts": {
-    "clean": "rimraf ./lib ./target cyclonedx.json",
+    "clean": "git clean -fx -e build .",
     "build": "node --run compile && node --run typedoc && pnpm \"/^validate:.+/\"",
     "compile": "node --run copyJison && pnpm \"/^compile:.+/\"",
     "copyJison": "node ./scripts/initialize/jison.js",
@@ -73,7 +73,6 @@
     "redux": "catalog:",
     "redux-saga": "catalog:",
     "redux-saga-test-plan": "catalog:",
-    "rimraf": "catalog:",
     "source-map-support": "catalog:",
     "styled-components": "catalog:",
     "ts-unused-exports": "catalog:",

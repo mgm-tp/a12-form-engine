@@ -1,36 +1,8 @@
-/*
- * SPDX-License-Identifier: EUPL-1.2 OR LicenseRef-commercial
- *
- * Copyright (c) 2012-2026 mgm technology partners GmbH
- *
- * Dual License
- * ------------
- * This source file is part of the mgm A12 Platform and available under
- * a choice of two different licenses:
- *
- * 1. Open-Source License - EUPL v1.2
- *    You may redistribute and/or modify this file under the terms of the
- *    European Union Public License, version 1.2 - see https://eupl.eu/.
- *
- * 2. Commercial License
- *    Alternatively, you may obtain a commercial license from
- *    mgm technology partners GmbH, that permits use of this software
- *    under different terms (including support and maintenance services).
- *
- *    Please contact a12-license@mgm-tp.com for more information.
- *
- * You must select and comply with exactly one of the above license options.
- *
- * Warranty Disclaimer (applies to either option)
- * ----------------------------------------------
- * THIS SOFTWARE IS PROVIDED "AS IS" AND WITHOUT WARRANTY OF ANY KIND,
- * WHETHER EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
- * OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
- * NON-INFRINGEMENT, EXCEPT WHERE SUCH DISCLAIMERS ARE HELD TO BE
- * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
- */
+// SPDX-License-Identifier: EUPL-1.2 OR LicenseRef-commercial
+// Copyright (c) 2012-2026 mgm technology partners GmbH
+// See LICENSE file for details. For commercial licensing: a12-license@mgm-tp.com
 
-import { deepStrictEqual, ok, strictEqual } from "node:assert/strict";
+import { deepStrictEqual, strictEqual } from "node:assert/strict";
 import type { Mock } from "node:test";
 
 import { fireEvent } from "@testing-library/react";
@@ -64,11 +36,15 @@ export async function findClickAndAssert<F extends (...args: never) => unknown>(
 async function clickRowActionWithConfirmationAndRespond(
 	wrapper: RtlRenderWrapper,
 	buttonId: string,
-	response: "confirm" | "cancel"
+	response: "confirm" | "cancel",
+	expectedOverlays: number
 ): Promise<void> {
 	await clickRowAction(wrapper, buttonId);
 
-	ok(within(wrapper.baseElement).queryByDataRole(MODAL_OVERLAY));
+	strictEqual(
+		within(wrapper.baseElement).queryAllByDataRole(MODAL_OVERLAY).length,
+		expectedOverlays
+	);
 
 	const endsWith = (suffix: string) => (value: unknown) =>
 		typeof value === "string" && value.endsWith(suffix);
@@ -79,25 +55,27 @@ async function clickRowActionWithConfirmationAndRespond(
 }
 
 export async function findClickConfirm(wrapper: RtlRenderWrapper, buttonId: string): Promise<void> {
-	await clickRowActionWithConfirmationAndRespond(wrapper, buttonId, "confirm");
+	await clickRowActionWithConfirmationAndRespond(wrapper, buttonId, "confirm", 1);
 }
 
 export async function findClickConfirmAndAssert<F extends (...args: never[]) => unknown>(
 	wrapper: RtlRenderWrapper,
 	buttonId: string,
 	func: Mock<F>,
-	expectedParameters: Parameters<F>
+	expectedParameters: Parameters<F>,
+	expectedOverlays = 1
 ): Promise<void> {
-	await clickRowActionWithConfirmationAndRespond(wrapper, buttonId, "confirm");
+	await clickRowActionWithConfirmationAndRespond(wrapper, buttonId, "confirm", expectedOverlays);
 	verifyCallAndParameters(func, 1, expectedParameters);
 }
 
 export async function findClickCancelAndAssert(
 	wrapper: RtlRenderWrapper,
 	buttonId: string,
-	func: Mock<(...args: never[]) => unknown>
+	func: Mock<(...args: never[]) => unknown>,
+	expectedOverlays = 1
 ): Promise<void> {
-	await clickRowActionWithConfirmationAndRespond(wrapper, buttonId, "cancel");
+	await clickRowActionWithConfirmationAndRespond(wrapper, buttonId, "cancel", expectedOverlays);
 	verifyCallAndParameters(func, 0, []);
 }
 
@@ -112,7 +90,7 @@ export async function findClickAndAssertInContextMenu<F extends (...args: never[
 	const cell = within(wrapper.baseElement).getById(cellId);
 	await act(() => fireEvent.contextMenu(cell));
 
-	findClickAndAssert(wrapper, listItemId, func, expectedParameters);
+	await findClickAndAssert(wrapper, listItemId, func, expectedParameters);
 }
 
 export async function findClickConfirmAndAssertInContextMenu<
@@ -128,7 +106,8 @@ export async function findClickConfirmAndAssertInContextMenu<
 	const cell = within(wrapper.baseElement).getById(cellId);
 	await act(() => fireEvent.contextMenu(cell));
 
-	findClickConfirmAndAssert(wrapper, listItemId, func, expectedParameters);
+	// the confirmation opens inside the context menu's overlay
+	await findClickConfirmAndAssert(wrapper, listItemId, func, expectedParameters, 2);
 }
 
 export async function findClickCancelAndAssertInContextMenu(
@@ -141,7 +120,7 @@ export async function findClickCancelAndAssertInContextMenu(
 	const cell = within(wrapper.baseElement).getById(cellId);
 	await act(() => fireEvent.contextMenu(cell));
 
-	findClickCancelAndAssert(wrapper, listItemId, func);
+	await findClickCancelAndAssert(wrapper, listItemId, func, 2);
 }
 
 function verifyCallAndParameters<F extends (...args: never[]) => unknown>(

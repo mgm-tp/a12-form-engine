@@ -1,6 +1,6 @@
 {
   "name": "@com.mgmtp.a12.formengine/root",
-  "version": "38.4.3",
+  "version": "38.4.4",
   "a12ReleaseLine": "2025.06",
   "description": "Form Engine Workspaces Root",
   "author": "mgm technology partners",
@@ -8,43 +8,37 @@
   "license": "(EUPL-1.2 OR LicenseRef-commercial)",
   "engines": {
     "node": "^24",
-    "pnpm": "^11"
+    "pnpm": "^12"
   },
   "private": true,
   "scripts": {
-    "clean": "pnpm run -r --parallel clean",
+    "clean": "pnpm run -r --parallel clean && git clean -fx node_modules",
     "verify": "pnpm run \"/^(format|lint:onlyErrors|spellcheck)$/\"",
     "verify:fix": "pnpm run \"/^(format:fix|lint:fix)$/\"",
     "build": "pnpm run -r build",
     "compile": "pnpm run -r compile",
     "watch": "pnpm run -r --parallel watch",
     "test": "pnpm run -r test",
-    "format": "prettier \"**/src/**/*.{ts,tsx}\" --check --cache --cache-strategy metadata",
-    "format:fix": "prettier \"**/src/**/*.{ts,tsx}\" --check -w",
-    "lint": "node --run eslint -- --cache",
-    "lint:onlyErrors": "node --run eslint -- --quiet",
-    "lint:inspect": "pnpm dlx @eslint/config-inspector",
-    "lint:fix": "node --run eslint -- --fix",
-    "eslint": "node --max-old-space-size=4096 ./node_modules/eslint/bin/eslint.js --flag unstable_native_nodejs_ts_config .",
+    "format": "oxfmt --check \"**/src/**/*.{ts,tsx}\" \"*.ts\"",
+    "format:fix": "oxfmt --write \"**/src/**/*.{ts,tsx}\" \"*.ts\"",
+    "lint": "oxlint .",
+    "lint:fix": "oxlint --fix .",
+    "lint:onlyErrors": "oxlint --quiet .",
     "spellcheck": "pnpm run -r --parallel spellcheck"
   },
   "devDependencies": {
-    "@com.mgmtp.a12.devtools/eslint-config": "catalog:a12",
-    "@com.mgmtp.a12.devtools/prettier-config": "catalog:a12",
     "@jambit/eslint-plugin-typed-redux-saga": "catalog:",
+    "@tony.ganchev/eslint-plugin-header": "catalog:",
     "@types/node": "catalog:",
     "@types/semver": "catalog:",
-    "eslint": "catalog:",
-    "eslint-plugin-jsdoc": "catalog:",
-    "eslint-plugin-mocha": "catalog:",
-    "eslint-plugin-notice": "catalog:",
     "eslint-plugin-use-effect-no-deps": "catalog:",
     "eslint-plugin-workspaces": "catalog:",
-    "prettier": "catalog:",
-    "react": "catalog:",
+    "oxfmt": "catalog:",
+    "oxlint": "catalog:",
+    "oxlint-tsgolint": "catalog:",
     "semver": "catalog:",
     "smol-toml": "catalog:",
     "yaml": "catalog:"
   },
-  "packageManager": "pnpm@11.17.0"
+  "packageManager": "pnpm@12.12.1"
 }

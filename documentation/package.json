@@ -1,10 +1,10 @@
 {
   "name": "@com.mgmtp.a12.formengine/formengine-dev-documentation",
-  "version": "38.4.3",
+  "version": "38.4.4",
   "description": "AsciiDoc documentation for @com.mgmtp.a12.formengine/formengine-core",
   "type": "module",
   "scripts": {
-    "clean": "rimraf ./build",
+    "clean": "git clean -fx -e build .",
     "build": "docu",
     "compile": "tsc",
     "spellcheck": "cspell .",
@@ -31,7 +31,6 @@
     "@types/react-redux": "catalog:",
     "cspell": "catalog:",
     "redux": "catalog:",
-    "rimraf": "catalog:",
     "typed-redux-saga": "catalog:",
     "typescript": "catalog:",
     "typescript-fsa": "catalog:"

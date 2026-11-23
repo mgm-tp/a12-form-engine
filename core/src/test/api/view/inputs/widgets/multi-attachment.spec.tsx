@@ -1,34 +1,6 @@
-/*
- * SPDX-License-Identifier: EUPL-1.2 OR LicenseRef-commercial
- *
- * Copyright (c) 2012-2026 mgm technology partners GmbH
- *
- * Dual License
- * ------------
- * This source file is part of the mgm A12 Platform and available under
- * a choice of two different licenses:
- *
- * 1. Open-Source License - EUPL v1.2
- *    You may redistribute and/or modify this file under the terms of the
- *    European Union Public License, version 1.2 - see https://eupl.eu/.
- *
- * 2. Commercial License
- *    Alternatively, you may obtain a commercial license from
- *    mgm technology partners GmbH, that permits use of this software
- *    under different terms (including support and maintenance services).
- *
- *    Please contact a12-license@mgm-tp.com for more information.
- *
- * You must select and comply with exactly one of the above license options.
- *
- * Warranty Disclaimer (applies to either option)
- * ----------------------------------------------
- * THIS SOFTWARE IS PROVIDED "AS IS" AND WITHOUT WARRANTY OF ANY KIND,
- * WHETHER EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
- * OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
- * NON-INFRINGEMENT, EXCEPT WHERE SUCH DISCLAIMERS ARE HELD TO BE
- * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
- */
+// SPDX-License-Identifier: EUPL-1.2 OR LicenseRef-commercial
+// Copyright (c) 2012-2026 mgm technology partners GmbH
+// See LICENSE file for details. For commercial licensing: a12-license@mgm-tp.com
 
 import { deepStrictEqual, notStrictEqual, strictEqual } from "node:assert/strict";
 
@@ -47,8 +19,8 @@ import { ATTACHMENT_ERROR_CODE } from "../../../../../client-extensions/internal
 import type { ExistingFile } from "../../../../../client-extensions/internal/extensions/form-engine/internal/attachments/utils.js";
 import { findElementByFormModelPath } from "../../../../../models/internal/findElementByFormModelPath.js";
 import { RepeatUtils } from "../../../../../view/internal/components/form-engine/repeat/components/repeat-utils.js";
-import { MultiAttachmentUpload } from "../../../../../view/internal/components/widgets/form-engine/attachments/MultiAttachmentUpload.js";
 import type { RepeatWithMultiFileUpload } from "../../../../../view/internal/components/widgets/form-engine/attachments/attachmentUtils.js";
+import { MultiAttachmentUpload } from "../../../../../view/internal/components/widgets/form-engine/attachments/MultiAttachmentUpload.js";
 import { getComponentMocks } from "../../../../rtl-utils/getComponentMocks.js";
 import { mouseEventMock } from "../../../../rtl-utils/mock-utils.js";
 import type { RtlRenderWrapper } from "../../../../rtl-utils/render-wrapper.js";
@@ -475,6 +447,7 @@ describe("api.view.inputs", () => {
 								)
 							})),
 							formModelElementPath: FORM_MODEL.IR.repeatFormModelPath,
+							// oxlint-disable-next-line typescript/no-deprecated -- formModelRepeatPath is deprecated but still carried on this release line; master drops the parameter, which is a breaking change 38.x cannot take
 							formModelRepeatPath: FORM_MODEL.IR.repeatFormModelPath,
 							pathToRepeatGroup: DOCUMENT_MODEL.getAttachmentCollectionDocPath(0),
 							duplicateStrategy: testCase.strategy,
